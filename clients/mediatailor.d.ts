@@ -69,6 +69,12 @@ declare class MediaTailor extends Service {
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace MediaTailor {
+  export interface AdMarkerPassthrough {
+    /**
+     * For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest.No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.
+     */
+    Enabled?: __boolean;
+  }
   export interface AvailSuppression {
     /**
      * Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.
@@ -167,6 +173,10 @@ declare namespace MediaTailor {
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
+     * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
+     */
+    ManifestProcessingRules?: ManifestProcessingRules;
+    /**
      * The identifier for the playback configuration.
      */
     Name?: __string;
@@ -247,6 +257,9 @@ declare namespace MediaTailor {
     Tags?: __mapOf__string;
   }
   export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
+  export interface ManifestProcessingRules {
+    AdMarkerPassthrough?: AdMarkerPassthrough;
+  }
   export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
   export interface PlaybackConfiguration {
     /**
@@ -273,6 +286,10 @@ declare namespace MediaTailor {
      * The configuration for HLS content. 
      */
     HlsConfiguration?: HlsConfiguration;
+    /**
+     * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
+     */
+    ManifestProcessingRules?: ManifestProcessingRules;
     /**
      * The identifier for the playback configuration.
      */
@@ -346,6 +363,10 @@ declare namespace MediaTailor {
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
+     * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
+     */
+    ManifestProcessingRules?: ManifestProcessingRules;
+    /**
      * The identifier for the playback configuration.
      */
     Name?: __string;
@@ -399,6 +420,10 @@ declare namespace MediaTailor {
      * The configuration for pre-roll ad insertion.
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
+    /**
+     * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
+     */
+    ManifestProcessingRules?: ManifestProcessingRules;
     /**
      * The identifier for the playback configuration.
      */
@@ -461,6 +486,7 @@ declare namespace MediaTailor {
      */
     TagKeys: __listOf__string;
   }
+  export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin1 = number;
   export type __integerMin1Max100 = number;

@@ -1084,6 +1084,13 @@ declare namespace QuickSight {
   export type ClusterId = string;
   export type ColorList = HexColor[];
   export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
+  export interface ColumnDescription {
+    /**
+     * The text of a description for a column.
+     */
+    Text?: ColumnDescriptiveText;
+  }
+  export type ColumnDescriptiveText = string;
   export interface ColumnGroup {
     /**
      * Geospatial column group that denotes a hierarchy.
@@ -1133,6 +1140,10 @@ declare namespace QuickSight {
      * A geospatial role for a column.
      */
     ColumnGeographicRole?: GeoSpatialDataRole;
+    /**
+     * A description for a column.
+     */
+    ColumnDescription?: ColumnDescription;
   }
   export type ColumnTagList = ColumnTag[];
   export type CopySourceArn = string;
@@ -1836,7 +1847,7 @@ declare namespace QuickSight {
      */
     Password: Password;
     /**
-     * A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the DataSourceParameters structure that's in the request with the structures in the AlternateDataSourceParameters allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the AlternateDataSourceParameters list is null, the DataSourceParameters originally used with these Credentials is automatically allowed.
+     * A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the DataSourceParameters structure that's in the request with the structures in the AlternateDataSourceParameters allow list. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the AlternateDataSourceParameters list is null, the DataSourceParameters originally used with these Credentials is automatically allowed.
      */
     AlternateDataSourceParameters?: DataSourceParametersList;
   }
@@ -2214,7 +2225,7 @@ declare namespace QuickSight {
      */
     DataSourceParameters?: DataSourceParameters;
     /**
-     * A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the DataSourceParameters structure that's in the request with the structures in the AlternateDataSourceParameters allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the AlternateDataSourceParameters list is null, the Credentials originally used with this DataSourceParameters are automatically allowed.
+     * A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the DataSourceParameters structure that's in the request with the structures in the AlternateDataSourceParameters allow list. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the AlternateDataSourceParameters list is null, the Credentials originally used with this DataSourceParameters are automatically allowed.
      */
     AlternateDataSourceParameters?: DataSourceParametersList;
     /**
@@ -4522,6 +4533,10 @@ declare namespace QuickSight {
      */
     Name?: ColumnName;
     /**
+     * A description for a column.
+     */
+    Description?: ColumnDescriptiveText;
+    /**
      * Type.
      */
     Type?: ColumnDataType;
@@ -4730,7 +4745,7 @@ declare namespace QuickSight {
   export type ResourceName = string;
   export interface ResourcePermission {
     /**
-     * The Amazon Resource Name (ARN) of the principal. This can be one of the following:   The ARN of an Amazon QuickSight user, group, or namespace. (This is most common.)   The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.)   
+     * The Amazon Resource Name (ARN) of the principal. This can be one of the following:   The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)   The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)   The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.)   
      */
     Principal: Principal;
     /**
@@ -4903,7 +4918,7 @@ declare namespace QuickSight {
      */
     SheetId?: RestrictiveResourceId;
     /**
-     * The name of a sheet. This is displayed on the sheet's tab in the QuickSight console.
+     * The name of a sheet. This name is displayed on the sheet's tab in the QuickSight console.
      */
     Name?: NonEmptyString;
   }

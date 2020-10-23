@@ -836,7 +836,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Disables an account as a delegated administrator of Amazon Macie for an AWS organization.</p>"
+      "documentation": "<p>Disables an account as the delegated Amazon Macie administrator account for an AWS organization.</p>"
     },
     "DisassociateFromMasterAccount": {
       "name": "DisassociateFromMasterAccount",
@@ -1020,7 +1020,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Enables an account as a delegated administrator of Amazon Macie for an AWS organization.</p>"
+      "documentation": "<p>Designates an account as the delegated Amazon Macie administrator account for an AWS organization.</p>"
     },
     "GetBucketStatistics": {
       "name": "GetBucketStatistics",
@@ -1894,7 +1894,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves information about the account that's designated as the delegated administrator of Amazon Macie for an AWS organization.</p>"
+      "documentation": "<p>Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -2267,7 +2267,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Updates Amazon Macie configuration settings for an AWS organization.</p>"
+      "documentation": "<p>Updates the Amazon Macie configuration settings for an AWS organization.</p>"
     }
   },
   "shapes": {
@@ -2355,11 +2355,11 @@
           "documentation": "<p>The current status of the account as a delegated administrator of Amazon Macie for the organization.</p>"
         }
       },
-      "documentation": "<p>Provides information about an account that's designated as a delegated administrator of Amazon Macie for an AWS organization.</p>"
+      "documentation": "<p>Provides information about the delegated Amazon Macie administrator account for an AWS organization.</p>"
     },
     "AdminStatus": {
       "type": "string",
-      "documentation": "<p>The current status of an account as a delegated administrator of Amazon Macie for an AWS organization.</p>",
+      "documentation": "<p>The current status of an account as the delegated Amazon Macie administrator account for an AWS organization.</p>",
       "enum": [
         "ENABLED",
         "DISABLING_IN_PROGRESS"
@@ -3335,7 +3335,7 @@
           "documentation": "<p>The total number of occurrences of the data that was detected by the custom data identifiers and produced the finding.</p>"
         }
       },
-      "documentation": "<p>Provides information about the number of occurrences of the data that produced a sensitive data finding, and the custom data identifiers that detected the data for the finding.</p>"
+      "documentation": "<p>Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that they detected for the finding.</p>"
     },
     "CustomDetection": {
       "type": "structure",
@@ -3675,7 +3675,7 @@
         "maxAccountLimitReached": {
           "shape": "__boolean",
           "locationName": "maxAccountLimitReached",
-          "documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are already associated with the AWS organization.</p>"
+          "documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.</p>"
         }
       }
     },
@@ -3781,7 +3781,7 @@
         "adminAccountId": {
           "shape": "__string",
           "locationName": "adminAccountId",
-          "documentation": "<p>The AWS account ID for the account.</p>"
+          "documentation": "<p>The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.</p>"
         },
         "clientToken": {
           "shape": "__string",
@@ -4797,7 +4797,7 @@
     },
     "JobStatus": {
       "type": "string",
-      "documentation": "<p>The current status of a classification job. Possible values are:</p>",
+      "documentation": "<p>The status of a classification job. Possible values are:</p>",
       "enum": [
         "RUNNING",
         "PAUSED",
@@ -5187,7 +5187,7 @@
         "adminAccounts": {
           "shape": "__listOfAdminAccount",
           "locationName": "adminAccounts",
-          "documentation": "<p>An array of objects, one for each account that's designated as a delegated administrator of Amazon Macie for the AWS organization. Of those accounts, only one can have a status of ENABLED.</p>"
+          "documentation": "<p>An array of objects, one for each delegated Amazon Macie administrator account for the organization. Only one of these accounts can have a status of ENABLED.</p>"
         },
         "nextToken": {
           "shape": "__string",
@@ -5353,7 +5353,7 @@
         "offsetRanges": {
           "shape": "Ranges",
           "locationName": "offsetRanges",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the start of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>"
         },
         "pages": {
           "shape": "Pages",
@@ -5386,7 +5386,7 @@
         "offsetRange": {
           "shape": "Range",
           "locationName": "offsetRange",
-          "documentation": "<p>The position of the data on the page, relative to the start and end of the page.</p>"
+          "documentation": "<p>The position of the data on the page, relative to the beginning of the page.</p>"
         },
         "pageNumber": {
           "shape": "__long",
@@ -5448,12 +5448,12 @@
         "end": {
           "shape": "__long",
           "locationName": "end",
-          "documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the end of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the end of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the end of the page.</p></li></ul>"
+          "documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.</p></li></ul>"
         },
         "start": {
           "shape": "__long",
           "locationName": "start",
-          "documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the start of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the start of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the start of the page.</p></li></ul>"
+          "documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.</p></li></ul>"
         },
         "startColumn": {
           "shape": "__long",

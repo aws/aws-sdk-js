@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.777.0-->
+<!--LATEST=2.778.0-->
 <!--ENTRYINSERT-->
+
+## 2.778.0
+* feature: MediaTailor: MediaTailor now supports ad marker passthrough for HLS. Use AdMarkerPassthrough to pass EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 from origin manifests into personalized manifests.
+* feature: QuickSight: Support description on columns.
 
 ## 2.777.0
 * feature: Appflow: Salesforce connector creation with customer provided client id and client secret, incremental pull configuration, salesforce upsert write operations and execution ID when on-demand flows are executed.

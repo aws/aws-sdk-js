@@ -4055,6 +4055,21 @@
         "DATETIME"
       ]
     },
+    "ColumnDescription": {
+      "type": "structure",
+      "members": {
+        "Text": {
+          "shape": "ColumnDescriptiveText",
+          "documentation": "<p>The text of a description for a column.</p>"
+        }
+      },
+      "documentation": "<p>Metadata that contains a description for a column.</p>"
+    },
+    "ColumnDescriptiveText": {
+      "type": "string",
+      "max": 500,
+      "min": 0
+    },
     "ColumnGroup": {
       "type": "structure",
       "members": {
@@ -4165,6 +4180,10 @@
         "ColumnGeographicRole": {
           "shape": "GeoSpatialDataRole",
           "documentation": "<p>A geospatial role for a column.</p>"
+        },
+        "ColumnDescription": {
+          "shape": "ColumnDescription",
+          "documentation": "<p>A description for a column.</p>"
         }
       },
       "documentation": "<p>A tag for a column in a <a>TagColumnOperation</a> structure. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
@@ -5135,7 +5154,7 @@
         },
         "AlternateDataSourceParameters": {
           "shape": "DataSourceParametersList",
-          "documentation": "<p>A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.</p>"
+          "documentation": "<p>A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.</p>"
         }
       },
       "documentation": "<p>The combination of user name and password that are used as credentials.</p>"
@@ -5482,7 +5501,7 @@
           "documentation": "<p>The hexadecimal code of a color that applies to charts where a lack of data is highlighted.</p>"
         }
       },
-      "documentation": "<p>The theme colors that are used for data colors in charts. The colors description is a hexidecimal color code that consists of six alphanumerical characters, prefixed with <code>#</code>, for example #37BFF5. </p>"
+      "documentation": "<p>The theme colors that are used for data colors in charts. The colors description is a hexadecimal color code that consists of six alphanumerical characters, prefixed with <code>#</code>, for example #37BFF5. </p>"
     },
     "DataSet": {
       "type": "structure",
@@ -5694,7 +5713,7 @@
         },
         "AlternateDataSourceParameters": {
           "shape": "DataSourceParametersList",
-          "documentation": "<p>A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.</p>"
+          "documentation": "<p>A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.</p>"
         },
         "VpcConnectionProperties": {
           "shape": "VpcConnectionProperties",
@@ -9584,6 +9603,10 @@
           "shape": "ColumnName",
           "documentation": "<p>A display name for the dataset.</p>"
         },
+        "Description": {
+          "shape": "ColumnDescriptiveText",
+          "documentation": "<p>A description for a column.</p>"
+        },
         "Type": {
           "shape": "ColumnDataType",
           "documentation": "<p>Type.</p>"
@@ -9956,7 +9979,7 @@
       "members": {
         "Principal": {
           "shape": "Principal",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the following:</p> <ul> <li> <p>The ARN of an Amazon QuickSight user, group, or namespace. (This is most common.)</p> </li> <li> <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.) </p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the following:</p> <ul> <li> <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p> </li> <li> <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p> </li> <li> <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.) </p> </li> </ul>"
         },
         "Actions": {
           "shape": "ActionList",
@@ -10263,10 +10286,10 @@
         },
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of a sheet. This is displayed on the sheet's tab in the QuickSight console.</p>"
+          "documentation": "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight console.</p>"
         }
       },
-      "documentation": "<p>A sheet is an object that contains a set of visuals that are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard contains at least one sheet. Each sheet contains at least one visualization widget, for example a chart, pivot table, or narrative insight. Sheets can be associated with other components, such as controls, filters, and so on.</p>"
+      "documentation": "<p>A <i>sheet</i>, which is an object that contains a set of visuals that are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard contains at least one sheet. Each sheet contains at least one visualization widget, for example a chart, pivot table, or narrative insight. Sheets can be associated with other components, such as controls, filters, and so on.</p>"
     },
     "SheetControlsOption": {
       "type": "structure",
@@ -11178,7 +11201,7 @@
           "documentation": "<p>The foreground color that applies to any text or other elements that appear over the measure color.</p>"
         }
       },
-      "documentation": "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors description is a hexidecimal color code that consists of six alphanumerical characters, prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide.</i> </p>"
+      "documentation": "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors description is a hexadecimal color code that consists of six alphanumerical characters, prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide.</i> </p>"
     },
     "UntagResourceRequest": {
       "type": "structure",

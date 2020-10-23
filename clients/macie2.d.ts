@@ -148,11 +148,11 @@ declare class Macie2 extends Service {
    */
   disableMacie(callback?: (err: AWSError, data: Macie2.Types.DisableMacieResponse) => void): Request<Macie2.Types.DisableMacieResponse, AWSError>;
   /**
-   * Disables an account as a delegated administrator of Amazon Macie for an AWS organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an AWS organization.
    */
   disableOrganizationAdminAccount(params: Macie2.Types.DisableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disables an account as a delegated administrator of Amazon Macie for an AWS organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an AWS organization.
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class Macie2 extends Service {
    */
   enableMacie(callback?: (err: AWSError, data: Macie2.Types.EnableMacieResponse) => void): Request<Macie2.Types.EnableMacieResponse, AWSError>;
   /**
-   * Enables an account as a delegated administrator of Amazon Macie for an AWS organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
    */
   enableOrganizationAdminAccount(params: Macie2.Types.EnableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Enables an account as a delegated administrator of Amazon Macie for an AWS organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class Macie2 extends Service {
    */
   listMembers(callback?: (err: AWSError, data: Macie2.Types.ListMembersResponse) => void): Request<Macie2.Types.ListMembersResponse, AWSError>;
   /**
-   * Retrieves information about the account that's designated as the delegated administrator of Amazon Macie for an AWS organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.
    */
   listOrganizationAdminAccounts(params: Macie2.Types.ListOrganizationAdminAccountsRequest, callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Retrieves information about the account that's designated as the delegated administrator of Amazon Macie for an AWS organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class Macie2 extends Service {
    */
   updateMemberSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
-   * Updates Amazon Macie configuration settings for an AWS organization.
+   * Updates the Amazon Macie configuration settings for an AWS organization.
    */
   updateOrganizationConfiguration(params: Macie2.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Updates Amazon Macie configuration settings for an AWS organization.
+   * Updates the Amazon Macie configuration settings for an AWS organization.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
 }
@@ -1311,7 +1311,7 @@ declare namespace Macie2 {
      */
     autoEnable?: __boolean;
     /**
-     * Specifies whether the maximum number of Amazon Macie member accounts are already associated with the AWS organization.
+     * Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.
      */
     maxAccountLimitReached?: __boolean;
   }
@@ -1364,7 +1364,7 @@ declare namespace Macie2 {
   }
   export interface EnableOrganizationAdminAccountRequest {
     /**
-     * The AWS account ID for the account.
+     * The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.
      */
     adminAccountId: __string;
     /**
@@ -2227,7 +2227,7 @@ declare namespace Macie2 {
   }
   export interface ListOrganizationAdminAccountsResponse {
     /**
-     * An array of objects, one for each account that's designated as a delegated administrator of Amazon Macie for the AWS organization. Of those accounts, only one can have a status of ENABLED.
+     * An array of objects, one for each delegated Amazon Macie administrator account for the organization. Only one of these accounts can have a status of ENABLED.
      */
     adminAccounts?: __listOfAdminAccount;
     /**
@@ -2331,7 +2331,7 @@ declare namespace Macie2 {
      */
     lineRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the start of the file. This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
+     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file. This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
      */
     offsetRanges?: Ranges;
     /**
@@ -2350,7 +2350,7 @@ declare namespace Macie2 {
      */
     lineRange?: Range;
     /**
-     * The position of the data on the page, relative to the start and end of the page.
+     * The position of the data on the page, relative to the beginning of the page.
      */
     offsetRange?: Range;
     /**
@@ -2383,11 +2383,11 @@ declare namespace Macie2 {
   }
   export interface Range {
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the end of the file. In an Occurrences.offsetRanges array, the number of characters from the end of the file. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the end of the page.
+     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.
      */
     end?: __long;
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the start of the file. In an Occurrences.offsetRanges array, the number of characters from the start of the file. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the start of the page.
+     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.
      */
     start?: __long;
     /**
