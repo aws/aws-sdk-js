@@ -8,7 +8,7 @@ export class CredentialProviderChain {
     /**
      * Resolves the provider chain by searching for the first set of credentials in providers.
      */
-    resolve(callback:(err: AWSError, credentials: Credentials) => void): CredentialProviderChain;
+    resolve(callback:(err: AWSError|null, credentials?: Credentials) => void): CredentialProviderChain;
     /**
      * Return a Promise on resolve() function
      */
@@ -16,7 +16,7 @@ export class CredentialProviderChain {
     /**
      * Returns a list of credentials objects or functions that return credentials objects. If the provider is a function, the function will be executed lazily when the provider needs to be checked for valid credentials. By default, this object will be set to the defaultProviders.
      */
-    providers: Credentials[]|provider[];
+    providers: Array<Credentials|provider>;
 
     static defaultProviders: provider[]
 }
