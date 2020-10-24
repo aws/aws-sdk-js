@@ -54,7 +54,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request is being validated.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "validate", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    on(event: "validate", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the request payload is being built.
      *
@@ -62,7 +62,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request's payload is being built.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "build", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    on(event: "build", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is being signed.
      *
@@ -70,7 +70,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request is being signed.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    on(event: "sign", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    on(event: "sign", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is ready to be sent.
      *
@@ -190,7 +190,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request is being validated.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    onAsync(event: "validate", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    onAsync(event: "validate", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when the request payload is being built.
      *
@@ -198,7 +198,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request's payload is being built.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    onAsync(event: "build", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    onAsync(event: "build", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is being signed.
      *
@@ -206,7 +206,7 @@ export class Request<D, E> {
      * @param {function} listener - Callback to run when the request is being signed.
      * @param {boolean} prepend - If set, prepends listener instead of appending.
      */
-    onAsync(event: "sign", listener: (request: Request<D, E>) => void, prepend?: boolean): Request<D, E>;
+    onAsync(event: "sign", listener: (request: Request<D, E>, doneCallback?: () => void) => void, prepend?: boolean): Request<D, E>;
     /**
      * Adds a listener that is triggered when a request is ready to be sent.
      *
