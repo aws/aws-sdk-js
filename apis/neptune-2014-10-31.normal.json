@@ -252,6 +252,41 @@
       ],
       "documentation": "<p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p> <p>Note that when you create a new cluster using <code>CreateDBCluster</code> directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its <code>DeletionProtection</code> field is set to <code>false</code>.</p>"
     },
+    "CreateDBClusterEndpoint": {
+      "name": "CreateDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "CreateDBClusterEndpointOutput",
+        "resultWrapper": "CreateDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterEndpointQuotaExceededFault"
+        },
+        {
+          "shape": "DBClusterEndpointAlreadyExistsFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.</p>"
+    },
     "CreateDBClusterParameterGroup": {
       "name": "CreateDBClusterParameterGroup",
       "http": {
@@ -503,6 +538,32 @@
       ],
       "documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its <code>DeletionProtection</code> field to <code>False</code>.</p>"
     },
+    "DeleteDBClusterEndpoint": {
+      "name": "DeleteDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "DeleteDBClusterEndpointOutput",
+        "resultWrapper": "DeleteDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBClusterEndpointStateFault"
+        },
+        {
+          "shape": "DBClusterEndpointNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.</p>"
+    },
     "DeleteDBClusterParameterGroup": {
       "name": "DeleteDBClusterParameterGroup",
       "http": {
@@ -640,6 +701,26 @@
         }
       ],
       "documentation": "<p>Deletes an event notification subscription.</p>"
+    },
+    "DescribeDBClusterEndpoints": {
+      "name": "DescribeDBClusterEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBClusterEndpointsMessage"
+      },
+      "output": {
+        "shape": "DBClusterEndpointMessage",
+        "resultWrapper": "DescribeDBClusterEndpointsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about endpoints for an Amazon Neptune DB cluster.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>"
     },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
@@ -1075,6 +1156,38 @@
         }
       ],
       "documentation": "<p>Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.</p>"
+    },
+    "ModifyDBClusterEndpoint": {
+      "name": "ModifyDBClusterEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBClusterEndpointMessage"
+      },
+      "output": {
+        "shape": "ModifyDBClusterEndpointOutput",
+        "resultWrapper": "ModifyDBClusterEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterEndpointStateFault"
+        },
+        {
+          "shape": "DBClusterEndpointNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Modifies the properties of an endpoint in an Amazon Neptune DB cluster.</p>"
     },
     "ModifyDBClusterParameterGroup": {
       "name": "ModifyDBClusterParameterGroup",
@@ -1646,6 +1759,10 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the Neptune DB cluster that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
         }
       }
     },
@@ -1903,6 +2020,86 @@
         }
       }
     },
+    "CreateDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier",
+        "DBClusterEndpointIdentifier",
+        "EndpointType"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier to use for the new endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to be assigned to the Amazon Neptune resource.</p>"
+        }
+      }
+    },
+    "CreateDBClusterEndpointOutput": {
+      "type": "structure",
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The DNS address of the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.</p>"
+        },
+        "CustomEndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "DBClusterEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon Neptune DB instance endpoints, see <code>Endpoint</code>.</p>"
+    },
     "CreateDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -1948,7 +2145,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version number of the database engine to use. Currently, setting this parameter has no effect.</p> <p>Example: <code>1.0.1</code> </p>"
+          "documentation": "<p>The version number of the database engine to use for the new DB cluster.</p> <p>Example: <code>1.0.2.1</code> </p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -1996,7 +2193,7 @@
         },
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+          "documentation": "<p>Not supported by Neptune.</p>"
         },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
@@ -2538,6 +2735,72 @@
       "documentation": "<p>Contains the details of an Amazon Neptune DB cluster.</p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
       "wrapper": true
     },
+    "DBClusterEndpoint": {
+      "type": "structure",
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The DNS address of the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.</p>"
+        },
+        "CustomEndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "DBClusterEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon Neptune DB instance endpoints, see <code>Endpoint</code>.</p>"
+    },
+    "DBClusterEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "DBClusterEndpoint",
+        "locationName": "DBClusterEndpointList"
+      }
+    },
+    "DBClusterEndpointMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "DBClusterEndpoints": {
+          "shape": "DBClusterEndpointList",
+          "documentation": "<p>Contains the details of the endpoints associated with the cluster and matching any filter conditions.</p>"
+        }
+      }
+    },
     "DBClusterList": {
       "type": "list",
       "member": {
@@ -2684,6 +2947,10 @@
         "Status": {
           "shape": "String",
           "documentation": "<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see <a>DBEngineVersion</a>. </p>"
         }
       },
       "documentation": "<p>Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.</p>"
@@ -3346,6 +3613,64 @@
         "locationName": "DBSubnetGroup"
       }
     },
+    "DeleteDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterEndpointIdentifier"
+      ],
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.</p>"
+        }
+      }
+    },
+    "DeleteDBClusterEndpointOutput": {
+      "type": "structure",
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The DNS address of the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.</p>"
+        },
+        "CustomEndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "DBClusterEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon RDS DB instance endpoints, see <code>Endpoint</code>.</p>"
+    },
     "DeleteDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -3475,6 +3800,31 @@
       "members": {
         "EventSubscription": {
           "shape": "EventSubscription"
+        }
+      }
+    },
+    "DescribeDBClusterEndpointsMessage": {
+      "type": "structure",
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the endpoint to describe. This parameter is stored as a lowercase string.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>. <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>. <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>. <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>. <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
         }
       }
     },
@@ -4029,7 +4379,7 @@
           "documentation": "<p>Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.</p>"
         }
       },
-      "documentation": "<p>Specifies a connection endpoint.</p>"
+      "documentation": "<p>Specifies a connection endpoint.</p> <p>For the data structure that represents Amazon Neptune DB cluster endpoints, see <code>DBClusterEndpoint</code>.</p>"
     },
     "EngineDefaults": {
       "type": "structure",
@@ -4292,6 +4642,76 @@
         "shape": "String"
       }
     },
+    "ModifyDBClusterEndpointMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterEndpointIdentifier"
+      ],
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the endpoint to modify. This parameter is stored as a lowercase string.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        }
+      }
+    },
+    "ModifyDBClusterEndpointOutput": {
+      "type": "structure",
+      "members": {
+        "DBClusterEndpointIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.</p>"
+        },
+        "DBClusterEndpointResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The DNS address of the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.</p>"
+        },
+        "EndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.</p>"
+        },
+        "CustomEndpointType": {
+          "shape": "String",
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
+        },
+        "StaticMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that are part of the custom endpoint group.</p>"
+        },
+        "ExcludedMembers": {
+          "shape": "StringList",
+          "documentation": "<p>List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.</p>"
+        },
+        "DBClusterEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>This data type represents the information you need to connect to an Amazon Aurora DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon RDS DB instance endpoints, see <code>Endpoint</code>.</p>"
+    },
     "ModifyDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -4352,7 +4772,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the <a>ApplyPendingMaintenanceAction</a> API.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>"
+          "documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to true.</p> <p>For a list of valid engine versions, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html\">Engine Releases for Amazon Neptune</a>, or call <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions\">DescribeDBEngineVersions</a>.</p>"
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
@@ -5083,6 +5503,10 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
         }
       }
     },
@@ -5402,6 +5826,12 @@
     },
     "String": {
       "type": "string"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
     },
     "Subnet": {
       "type": "structure",

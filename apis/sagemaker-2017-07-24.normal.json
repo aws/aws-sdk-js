@@ -86,6 +86,25 @@
       ],
       "documentation": "<p>Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.</p>"
     },
+    "CreateAppImageConfig": {
+      "name": "CreateAppImageConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateAppImageConfigRequest"
+      },
+      "output": {
+        "shape": "CreateAppImageConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Creates a configuration for running an Amazon SageMaker image as a KernelGateway app.</p>"
+    },
     "CreateAutoMLJob": {
       "name": "CreateAutoMLJob",
       "http": {
@@ -164,7 +183,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.</p> <p>When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.</p> <p> <b>VPC configuration</b> </p> <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code> parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you choose when you onboard to Studio. The following options are available:</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway.</p> <p>When internet access is disabled, you won't be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.</p> </li> </ul> <p> <b> <code>VpcOnly</code> network access type</b> </p> <p>When you choose <code>VpcOnly</code>, you must specify the following:</p> <ul> <li> <p>Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume</p> </li> <li> <p>Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps</p> </li> <li> <p>Interface endpoints to access the SageMaker API and SageMaker runtime</p> </li> </ul> <p>For more information, see:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security groups for your VPC</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html\">VPC with public and private subnets (NAT)</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/interface-vpc-endpoint.html\">Connect to SageMaker through a VPC interface endpoint</a> </p> </li> </ul>"
+      "documentation": "<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.</p> <p>When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.</p> <p> <b>VPC configuration</b> </p> <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code> parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you choose when you onboard to Studio. The following options are available:</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway.</p> <p>When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect SageMaker Studio Notebooks to Resources in a VPC</a>.</p>"
     },
     "CreateEndpoint": {
       "name": "CreateEndpoint",
@@ -289,6 +308,53 @@
       ],
       "documentation": "<p>Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.</p>"
     },
+    "CreateImage": {
+      "name": "CreateImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateImageRequest"
+      },
+      "output": {
+        "shape": "CreateImageResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Creates a SageMaker <code>Image</code>. A SageMaker image represents a set of container images. Each of these container images is represented by a SageMaker <code>ImageVersion</code>.</p>"
+    },
+    "CreateImageVersion": {
+      "name": "CreateImageVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateImageVersionRequest"
+      },
+      "output": {
+        "shape": "CreateImageVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        },
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Creates a version of the SageMaker image specified by <code>ImageName</code>. The version represents the Amazon Container Registry (ECR) container image specified by <code>BaseImage</code>.</p>"
+    },
     "CreateLabelingJob": {
       "name": "CreateLabelingJob",
       "http": {
@@ -342,6 +408,14 @@
       "output": {
         "shape": "CreateModelPackageOutput"
       },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
       "documentation": "<p>Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker.</p> <p>To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for <code>InferenceSpecification</code>. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for <code>SourceAlgorithmSpecification</code>.</p>"
     },
     "CreateMonitoringSchedule": {
@@ -641,6 +715,22 @@
       ],
       "documentation": "<p>Used to stop and delete an app.</p>"
     },
+    "DeleteAppImageConfig": {
+      "name": "DeleteAppImageConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteAppImageConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Deletes an AppImageConfig.</p>"
+    },
     "DeleteCodeRepository": {
       "name": "DeleteCodeRepository",
       "http": {
@@ -753,6 +843,50 @@
       ],
       "documentation": "<p>Use this operation to delete a human task user interface (worker task template).</p> <p> To see a list of human task user interfaces (work task templates) in your account, use . When you delete a worker task template, it no longer appears when you call <code>ListHumanTaskUis</code>.</p>"
     },
+    "DeleteImage": {
+      "name": "DeleteImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteImageRequest"
+      },
+      "output": {
+        "shape": "DeleteImageResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Deletes a SageMaker image and all versions of the image. The container images aren't deleted.</p>"
+    },
+    "DeleteImageVersion": {
+      "name": "DeleteImageVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteImageVersionRequest"
+      },
+      "output": {
+        "shape": "DeleteImageVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Deletes a version of a SageMaker image. The container image the version represents isn't deleted.</p>"
+    },
     "DeleteModel": {
       "name": "DeleteModel",
       "http": {
@@ -773,6 +907,11 @@
       "input": {
         "shape": "DeleteModelPackageInput"
       },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        }
+      ],
       "documentation": "<p>Deletes a model package.</p> <p>A model package is used to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker.</p>"
     },
     "DeleteMonitoringSchedule": {
@@ -950,6 +1089,25 @@
       ],
       "documentation": "<p>Describes the app.</p>"
     },
+    "DescribeAppImageConfig": {
+      "name": "DescribeAppImageConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAppImageConfigRequest"
+      },
+      "output": {
+        "shape": "DescribeAppImageConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Describes an AppImageConfig.</p>"
+    },
     "DescribeAutoMLJob": {
       "name": "DescribeAutoMLJob",
       "http": {
@@ -1124,6 +1282,44 @@
         }
       ],
       "documentation": "<p>Gets a description of a hyperparameter tuning job.</p>"
+    },
+    "DescribeImage": {
+      "name": "DescribeImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeImageRequest"
+      },
+      "output": {
+        "shape": "DescribeImageResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Describes a SageMaker image.</p>"
+    },
+    "DescribeImageVersion": {
+      "name": "DescribeImageVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeImageVersionRequest"
+      },
+      "output": {
+        "shape": "DescribeImageVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Describes a version of a SageMaker image.</p>"
     },
     "DescribeLabelingJob": {
       "name": "DescribeLabelingJob",
@@ -1422,6 +1618,20 @@
       },
       "documentation": "<p>Lists the machine learning algorithms that have been created.</p>"
     },
+    "ListAppImageConfigs": {
+      "name": "ListAppImageConfigs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListAppImageConfigsRequest"
+      },
+      "output": {
+        "shape": "ListAppImageConfigsResponse"
+      },
+      "documentation": "<p>Lists the AppImageConfigs in your account and their properties. The list can be filtered by creation time or modified time, and whether the AppImageConfig name contains a specified string.</p>"
+    },
     "ListApps": {
       "name": "ListApps",
       "http": {
@@ -1594,6 +1804,39 @@
         "shape": "ListHyperParameterTuningJobsResponse"
       },
       "documentation": "<p>Gets a list of <a>HyperParameterTuningJobSummary</a> objects that describe the hyperparameter tuning jobs launched in your account.</p>"
+    },
+    "ListImageVersions": {
+      "name": "ListImageVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListImageVersionsRequest"
+      },
+      "output": {
+        "shape": "ListImageVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Lists the versions of a specified image and their properties. The list can be filtered by creation time or modified time.</p>"
+    },
+    "ListImages": {
+      "name": "ListImages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListImagesRequest"
+      },
+      "output": {
+        "shape": "ListImagesResponse"
+      },
+      "documentation": "<p>Lists the images in your account and their properties. The list can be filtered by creation time or modified time, and whether the image name contains a specified string.</p>"
     },
     "ListLabelingJobs": {
       "name": "ListLabelingJobs",
@@ -2085,6 +2328,25 @@
       ],
       "documentation": "<p>Stops a transform job.</p> <p>When Amazon SageMaker receives a <code>StopTransformJob</code> request, the status of the job changes to <code>Stopping</code>. After Amazon SageMaker stops the job, the status is set to <code>Stopped</code>. When you stop a transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.</p>"
     },
+    "UpdateAppImageConfig": {
+      "name": "UpdateAppImageConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateAppImageConfigRequest"
+      },
+      "output": {
+        "shape": "UpdateAppImageConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the properties of an AppImageConfig.</p>"
+    },
     "UpdateCodeRepository": {
       "name": "UpdateCodeRepository",
       "http": {
@@ -2183,6 +2445,28 @@
         }
       ],
       "documentation": "<p>Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.</p>"
+    },
+    "UpdateImage": {
+      "name": "UpdateImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateImageRequest"
+      },
+      "output": {
+        "shape": "UpdateImageResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the properties of a SageMaker image. To change the image's tags, use the <a>AddTags</a> and <a>DeleteTags</a> APIs.</p>"
     },
     "UpdateMonitoringSchedule": {
       "name": "UpdateMonitoringSchedule",
@@ -2621,7 +2905,57 @@
           "documentation": "<p>The creation time.</p>"
         }
       },
-      "documentation": "<p>The app's details.</p>"
+      "documentation": "<p>Details about an Amazon SageMaker app.</p>"
+    },
+    "AppImageConfigArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*"
+    },
+    "AppImageConfigDetails": {
+      "type": "structure",
+      "members": {
+        "AppImageConfigArn": {
+          "shape": "AppImageConfigArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AppImageConfig.</p>"
+        },
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the AppImageConfig was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the AppImageConfig was last modified.</p>"
+        },
+        "KernelGatewayImageConfig": {
+          "shape": "KernelGatewayImageConfig",
+          "documentation": "<p>The KernelGateway app.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for running an Amazon SageMaker image as a KernelGateway app.</p>"
+    },
+    "AppImageConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "AppImageConfigDetails"
+      }
+    },
+    "AppImageConfigName": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "AppImageConfigSortKey": {
+      "type": "string",
+      "enum": [
+        "CreationTime",
+        "LastModifiedTime",
+        "Name"
+      ]
     },
     "AppInstanceType": {
       "type": "string",
@@ -3505,6 +3839,12 @@
       "pattern": "[\\w+=/-]+",
       "sensitive": true
     },
+    "ClientToken": {
+      "type": "string",
+      "max": 36,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
     "CodeRepositoryArn": {
       "type": "string",
       "max": 2048,
@@ -3753,8 +4093,8 @@
     "CompilerOptions": {
       "type": "string",
       "max": 1024,
-      "min": 7,
-      "pattern": "^\\{.+\\}$"
+      "min": 3,
+      "pattern": ".*"
     },
     "CompressionType": {
       "type": "string",
@@ -3821,7 +4161,7 @@
           "documentation": "<p>The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. </p>"
         },
         "ModelPackageName": {
-          "shape": "ArnOrName",
+          "shape": "VersionedArnOrName",
           "documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to use to create the model.</p>"
         }
       },
@@ -3987,6 +4327,35 @@
         }
       }
     },
+    "CreateAppImageConfigRequest": {
+      "type": "structure",
+      "required": [
+        "AppImageConfigName"
+      ],
+      "members": {
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig. Must be unique to your account.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags to apply to the AppImageConfig.</p>"
+        },
+        "KernelGatewayImageConfig": {
+          "shape": "KernelGatewayImageConfig",
+          "documentation": "<p>The KernelGatewayImageConfig.</p>"
+        }
+      }
+    },
+    "CreateAppImageConfigResponse": {
+      "type": "structure",
+      "members": {
+        "AppImageConfigArn": {
+          "shape": "AppImageConfigArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AppImageConfig.</p>"
+        }
+      }
+    },
     "CreateAppRequest": {
       "type": "structure",
       "required": [
@@ -4027,7 +4396,7 @@
       "members": {
         "AppArn": {
           "shape": "AppArn",
-          "documentation": "<p>The App's Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the app.</p>"
         }
       }
     },
@@ -4148,6 +4517,10 @@
         "StoppingCondition": {
           "shape": "StoppingCondition",
           "documentation": "<p>Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of key-value pairs that you want to use to organize and track your AWS resource costs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
         }
       }
     },
@@ -4197,13 +4570,13 @@
           "shape": "TagList",
           "documentation": "<p>Tags to associated with the Domain. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the <a>Search</a> API.</p>"
         },
-        "HomeEfsFileSystemKmsKeyId": {
-          "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.</p>"
-        },
         "AppNetworkAccessType": {
           "shape": "AppNetworkAccessType",
           "documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>"
+        },
+        "HomeEfsFileSystemKmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.</p>"
         }
       }
     },
@@ -4269,7 +4642,7 @@
       "members": {
         "EndpointName": {
           "shape": "EndpointName",
-          "documentation": "<p>The name of the endpoint. The name must be unique within an AWS Region in your AWS account.</p>"
+          "documentation": "<p>The name of the endpoint.The name must be unique within an AWS Region in your AWS account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is preserved and must be matched in .</p>"
         },
         "EndpointConfigName": {
           "shape": "EndpointConfigName",
@@ -4418,7 +4791,7 @@
       "members": {
         "HyperParameterTuningJobName": {
           "shape": "HyperParameterTuningJobName",
-          "documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.</p>"
+          "documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.</p>"
         },
         "HyperParameterTuningJobConfig": {
           "shape": "HyperParameterTuningJobConfig",
@@ -4451,6 +4824,76 @@
         "HyperParameterTuningJobArn": {
           "shape": "HyperParameterTuningJobArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker assigns an ARN to a hyperparameter tuning job when you create it.</p>"
+        }
+      }
+    },
+    "CreateImageRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName",
+        "RoleArn"
+      ],
+      "members": {
+        "Description": {
+          "shape": "ImageDescription",
+          "documentation": "<p>The description of the image.</p>"
+        },
+        "DisplayName": {
+          "shape": "ImageDisplayName",
+          "documentation": "<p>The display name of the image. When the image is added to a domain, <code>DisplayName</code> must be unique to the domain.</p>"
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image. Must be unique to your account.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags to apply to the image.</p>"
+        }
+      }
+    },
+    "CreateImageResponse": {
+      "type": "structure",
+      "members": {
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+        }
+      }
+    },
+    "CreateImageVersionRequest": {
+      "type": "structure",
+      "required": [
+        "BaseImage",
+        "ClientToken",
+        "ImageName"
+      ],
+      "members": {
+        "BaseImage": {
+          "shape": "ImageBaseImage",
+          "documentation": "<p>The registry path of the container image to use as the starting point for this version. The path is an Amazon Container Registry (ECR) URI in the following format:</p> <p> <code>&lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name[:tag] or [@digest]&gt;</code> </p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the SDK for Python (Boto3), add a unique value to the call.</p>",
+          "idempotencyToken": true
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The <code>ImageName</code> of the <code>Image</code> to create a version of.</p>"
+        }
+      }
+    },
+    "CreateImageVersionResponse": {
+      "type": "structure",
+      "members": {
+        "ImageVersionArn": {
+          "shape": "ImageVersionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image version.</p>"
         }
       }
     },
@@ -4487,7 +4930,7 @@
         },
         "LabelCategoryConfigS3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p>The S3 URL of the file that defines the categories used to label the data objects.</p> <p>For 3D point cloud task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html\">Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p> <p>For all other <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task types</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html\">custom tasks</a>, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing <code>label_1</code>, <code>label_2</code>,<code>...</code>,<code>label_n</code> with your label categories.</p> <p> <code>{</code> </p> <p> <code> \"document-version\": \"2018-11-28\"</code> </p> <p> <code> \"labels\": [</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_1</i>\"</code> </p> <p> <code> },</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_2</i>\"</code> </p> <p> <code> },</code> </p> <p> <code> ...</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_n</i>\"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code>}</code> </p>"
+          "documentation": "<p>The S3 URI of the file that defines the categories used to label the data objects.</p> <p>For 3D point cloud task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html\">Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p> <p>For all other <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task types</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html\">custom tasks</a>, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing <code>label_1</code>, <code>label_2</code>,<code>...</code>,<code>label_n</code> with your label categories.</p> <p> <code>{</code> </p> <p> <code> \"document-version\": \"2018-11-28\"</code> </p> <p> <code> \"labels\": [</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_1</i>\"</code> </p> <p> <code> },</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_2</i>\"</code> </p> <p> <code> },</code> </p> <p> <code> ...</code> </p> <p> <code> {</code> </p> <p> <code> \"label\": \"<i>label_n</i>\"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code>}</code> </p>"
         },
         "StoppingConditions": {
           "shape": "LabelingJobStoppingConditions",
@@ -4570,9 +5013,6 @@
     },
     "CreateModelPackageInput": {
       "type": "structure",
-      "required": [
-        "ModelPackageName"
-      ],
       "members": {
         "ModelPackageName": {
           "shape": "EntityName",
@@ -5267,6 +5707,36 @@
       "max": 10,
       "min": 1
     },
+    "CustomImage": {
+      "type": "structure",
+      "required": [
+        "ImageName",
+        "AppImageConfigName"
+      ],
+      "members": {
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the CustomImage. Must be unique to your account.</p>"
+        },
+        "ImageVersionNumber": {
+          "shape": "ImageVersionNumber",
+          "documentation": "<p>The version number of the CustomImage.</p>",
+          "box": true
+        },
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig.</p>"
+        }
+      },
+      "documentation": "<p>A custom image.</p>"
+    },
+    "CustomImages": {
+      "type": "list",
+      "member": {
+        "shape": "CustomImage"
+      },
+      "max": 30
+    },
     "DataCaptureConfig": {
       "type": "structure",
       "required": [
@@ -5482,6 +5952,16 @@
       "max": 20,
       "min": 0
     },
+    "DefaultGid": {
+      "type": "integer",
+      "max": 65535,
+      "min": 0
+    },
+    "DefaultUid": {
+      "type": "integer",
+      "max": 65535,
+      "min": 0
+    },
     "DeleteAlgorithmInput": {
       "type": "structure",
       "required": [
@@ -5491,6 +5971,18 @@
         "AlgorithmName": {
           "shape": "EntityName",
           "documentation": "<p>The name of the algorithm to delete.</p>"
+        }
+      }
+    },
+    "DeleteAppImageConfigRequest": {
+      "type": "structure",
+      "required": [
+        "AppImageConfigName"
+      ],
+      "members": {
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig to delete.</p>"
         }
       }
     },
@@ -5626,6 +6118,43 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteImageRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName"
+      ],
+      "members": {
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image to delete.</p>"
+        }
+      }
+    },
+    "DeleteImageResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteImageVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName",
+        "Version"
+      ],
+      "members": {
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image.</p>"
+        },
+        "Version": {
+          "shape": "ImageVersionNumber",
+          "documentation": "<p>The version to delete.</p>"
+        }
+      }
+    },
+    "DeleteImageVersionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteModelInput": {
       "type": "structure",
       "required": [
@@ -5645,7 +6174,7 @@
       ],
       "members": {
         "ModelPackageName": {
-          "shape": "EntityName",
+          "shape": "VersionedArnOrName",
           "documentation": "<p>The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>"
         }
       }
@@ -5899,6 +6428,43 @@
         }
       }
     },
+    "DescribeAppImageConfigRequest": {
+      "type": "structure",
+      "required": [
+        "AppImageConfigName"
+      ],
+      "members": {
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig to describe.</p>"
+        }
+      }
+    },
+    "DescribeAppImageConfigResponse": {
+      "type": "structure",
+      "members": {
+        "AppImageConfigArn": {
+          "shape": "AppImageConfigArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AppImageConfig.</p>"
+        },
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the AppImageConfig was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the AppImageConfig was last modified.</p>"
+        },
+        "KernelGatewayImageConfig": {
+          "shape": "KernelGatewayImageConfig",
+          "documentation": "<p>The KernelGateway app.</p>"
+        }
+      }
+    },
     "DescribeAppRequest": {
       "type": "structure",
       "required": [
@@ -5931,7 +6497,7 @@
       "members": {
         "AppArn": {
           "shape": "AppArn",
-          "documentation": "<p>The app's Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the app.</p>"
         },
         "AppType": {
           "shape": "AppType",
@@ -6259,6 +6825,10 @@
           "shape": "UserSettings",
           "documentation": "<p>Settings which are applied to all UserProfile in this domain, if settings are not explicitly specified in a given UserProfile. </p>"
         },
+        "AppNetworkAccessType": {
+          "shape": "AppNetworkAccessType",
+          "documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>"
+        },
         "HomeEfsFileSystemKmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The AWS Key Management Service encryption key ID.</p>"
@@ -6274,10 +6844,6 @@
         "VpcId": {
           "shape": "VpcId",
           "documentation": "<p>The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p>"
-        },
-        "AppNetworkAccessType": {
-          "shape": "AppNetworkAccessType",
-          "documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>"
         }
       }
     },
@@ -6634,6 +7200,116 @@
         }
       }
     },
+    "DescribeImageRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName"
+      ],
+      "members": {
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image to describe.</p>"
+        }
+      }
+    },
+    "DescribeImageResponse": {
+      "type": "structure",
+      "members": {
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the image was created.</p>"
+        },
+        "Description": {
+          "shape": "ImageDescription",
+          "documentation": "<p>The description of the image.</p>"
+        },
+        "DisplayName": {
+          "shape": "ImageDisplayName",
+          "documentation": "<p>The name of the image as displayed.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>When a create, update, or delete operation fails, the reason for the failure.</p>"
+        },
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image.</p>"
+        },
+        "ImageStatus": {
+          "shape": "ImageStatus",
+          "documentation": "<p>The status of the image.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the image was last modified.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
+        }
+      }
+    },
+    "DescribeImageVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName"
+      ],
+      "members": {
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image.</p>"
+        },
+        "Version": {
+          "shape": "ImageVersionNumber",
+          "documentation": "<p>The version of the image. If not specified, the latest version is described.</p>"
+        }
+      }
+    },
+    "DescribeImageVersionResponse": {
+      "type": "structure",
+      "members": {
+        "BaseImage": {
+          "shape": "ImageBaseImage",
+          "documentation": "<p>The registry path of the container image on which this image version is based.</p>"
+        },
+        "ContainerImage": {
+          "shape": "ImageContainerImage",
+          "documentation": "<p>The registry path of the container image that contains this image version.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the version was created.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>When a create or delete operation fails, the reason for the failure.</p>"
+        },
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image the version is based on.</p>"
+        },
+        "ImageVersionArn": {
+          "shape": "ImageVersionArn",
+          "documentation": "<p>The ARN of the version.</p>"
+        },
+        "ImageVersionStatus": {
+          "shape": "ImageVersionStatus",
+          "documentation": "<p>The status of the version.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the version was last modified.</p>"
+        },
+        "Version": {
+          "shape": "ImageVersionNumber",
+          "documentation": "<p>The version number.</p>"
+        }
+      }
+    },
     "DescribeLabelingJobRequest": {
       "type": "structure",
       "required": [
@@ -6798,7 +7474,7 @@
       ],
       "members": {
         "ModelPackageName": {
-          "shape": "ArnOrName",
+          "shape": "VersionedArnOrName",
           "documentation": "<p>The name of the model package to describe.</p>"
         }
       }
@@ -7865,7 +8541,10 @@
         "Deleting",
         "Failed",
         "InService",
-        "Pending"
+        "Pending",
+        "Updating",
+        "Update_Failed",
+        "Delete_Failed"
       ]
     },
     "DoubleParameterValue": {
@@ -8154,7 +8833,7 @@
     },
     "ExperimentEntityName": {
       "type": "string",
-      "max": 82,
+      "max": 120,
       "min": 1,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
@@ -8225,6 +8904,26 @@
         "rw",
         "ro"
       ]
+    },
+    "FileSystemConfig": {
+      "type": "structure",
+      "members": {
+        "MountPath": {
+          "shape": "MountPath",
+          "documentation": "<p>The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to <i>/home/sagemaker-user</i>.</p>"
+        },
+        "DefaultUid": {
+          "shape": "DefaultUid",
+          "documentation": "<p>The default POSIX user ID. If not specified, defaults to <code>1000</code>.</p>",
+          "box": true
+        },
+        "DefaultGid": {
+          "shape": "DefaultGid",
+          "documentation": "<p>The default POSIX group ID. If not specified, defaults to <code>100</code>.</p>",
+          "box": true
+        }
+      },
+      "documentation": "<p>The Amazon Elastic File System (EFS) storage configuration for an image.</p>"
     },
     "FileSystemDataSource": {
       "type": "structure",
@@ -8481,7 +9180,8 @@
         "ONNX",
         "PYTORCH",
         "XGBOOST",
-        "TFLITE"
+        "TFLITE",
+        "DARKNET"
       ]
     },
     "GenerateCandidateDefinitionsOnly": {
@@ -8800,6 +9500,11 @@
       },
       "documentation": "<p>Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.</p>"
     },
+    "HyperParameterKey": {
+      "type": "string",
+      "max": 256,
+      "pattern": ".*"
+    },
     "HyperParameterScalingType": {
       "type": "string",
       "enum": [
@@ -8841,7 +9546,7 @@
           "documentation": "<p>Indicates whether this hyperparameter is required.</p>"
         },
         "DefaultValue": {
-          "shape": "ParameterValue",
+          "shape": "HyperParameterValue",
           "documentation": "<p>The default value for this hyperparameter. If a default value is specified, a hyperparameter cannot be required.</p>"
         }
       },
@@ -9194,21 +9899,77 @@
         "TransferLearning"
       ]
     },
+    "HyperParameterValue": {
+      "type": "string",
+      "max": 2500,
+      "pattern": ".*"
+    },
     "HyperParameters": {
       "type": "map",
       "key": {
-        "shape": "ParameterKey"
+        "shape": "HyperParameterKey"
       },
       "value": {
-        "shape": "ParameterValue"
+        "shape": "HyperParameterValue"
       },
       "max": 100,
       "min": 0
+    },
+    "Image": {
+      "type": "structure",
+      "required": [
+        "CreationTime",
+        "ImageArn",
+        "ImageName",
+        "ImageStatus",
+        "LastModifiedTime"
+      ],
+      "members": {
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the image was created.</p>"
+        },
+        "Description": {
+          "shape": "ImageDescription",
+          "documentation": "<p>The description of the image.</p>"
+        },
+        "DisplayName": {
+          "shape": "ImageDisplayName",
+          "documentation": "<p>The name of the image as displayed.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>When a create, update, or delete operation fails, the reason for the failure.</p>"
+        },
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image.</p>"
+        },
+        "ImageStatus": {
+          "shape": "ImageStatus",
+          "documentation": "<p>The status of the image.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the image was last modified.</p>"
+        }
+      },
+      "documentation": "<p>A SageMaker image. A SageMaker image represents a set of container images that are derived from a common base container image. Each of these container images is represented by a SageMaker <code>ImageVersion</code>.</p>"
     },
     "ImageArn": {
       "type": "string",
       "max": 256,
       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
+    },
+    "ImageBaseImage": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": ".*"
     },
     "ImageConfig": {
       "type": "structure",
@@ -9223,15 +9984,171 @@
       },
       "documentation": "<p>Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).</p>"
     },
+    "ImageContainerImage": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "ImageDeleteProperty": {
+      "type": "string",
+      "max": 11,
+      "min": 1,
+      "pattern": "(^DisplayName$)|(^Description$)"
+    },
+    "ImageDeletePropertyList": {
+      "type": "list",
+      "member": {
+        "shape": "ImageDeleteProperty"
+      },
+      "max": 2
+    },
+    "ImageDescription": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
     "ImageDigest": {
       "type": "string",
       "max": 72,
       "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"
     },
+    "ImageDisplayName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "ImageName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$"
+    },
+    "ImageNameContains": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-zA-Z0-9\\-.]+$"
+    },
+    "ImageSortBy": {
+      "type": "string",
+      "enum": [
+        "CREATION_TIME",
+        "LAST_MODIFIED_TIME",
+        "IMAGE_NAME"
+      ]
+    },
+    "ImageSortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING"
+      ]
+    },
+    "ImageStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATED",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
     "ImageUri": {
       "type": "string",
       "max": 255,
       "pattern": ".*"
+    },
+    "ImageVersion": {
+      "type": "structure",
+      "required": [
+        "CreationTime",
+        "ImageArn",
+        "ImageVersionArn",
+        "ImageVersionStatus",
+        "LastModifiedTime",
+        "Version"
+      ],
+      "members": {
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the version was created.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>When a create or delete operation fails, the reason for the failure.</p>"
+        },
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image the version is based on.</p>"
+        },
+        "ImageVersionArn": {
+          "shape": "ImageVersionArn",
+          "documentation": "<p>The ARN of the version.</p>"
+        },
+        "ImageVersionStatus": {
+          "shape": "ImageVersionStatus",
+          "documentation": "<p>The status of the version.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the version was last modified.</p>"
+        },
+        "Version": {
+          "shape": "ImageVersionNumber",
+          "documentation": "<p>The version number.</p>"
+        }
+      },
+      "documentation": "<p>A version of a SageMaker <code>Image</code>. A version represents an existing container image.</p>"
+    },
+    "ImageVersionArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+    },
+    "ImageVersionNumber": {
+      "type": "integer",
+      "min": 0
+    },
+    "ImageVersionSortBy": {
+      "type": "string",
+      "enum": [
+        "CREATION_TIME",
+        "LAST_MODIFIED_TIME",
+        "VERSION"
+      ]
+    },
+    "ImageVersionSortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING"
+      ]
+    },
+    "ImageVersionStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATED",
+        "CREATE_FAILED",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
+    "ImageVersions": {
+      "type": "list",
+      "member": {
+        "shape": "ImageVersion"
+      }
+    },
+    "Images": {
+      "type": "list",
+      "member": {
+        "shape": "Image"
+      }
     },
     "InferenceSpecification": {
       "type": "structure",
@@ -9457,15 +10374,69 @@
       },
       "documentation": "<p>Jupyter server's app settings.</p>"
     },
+    "KernelDisplayName": {
+      "type": "string",
+      "max": 1024
+    },
     "KernelGatewayAppSettings": {
       "type": "structure",
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
+          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.</p>"
+        },
+        "CustomImages": {
+          "shape": "CustomImages",
+          "documentation": "<p>A list of custom images that are configured to run as a KernelGateway app.</p>"
         }
       },
-      "documentation": "<p>The kernel gateway app settings.</p>"
+      "documentation": "<p>The KernelGateway app settings.</p>"
+    },
+    "KernelGatewayImageConfig": {
+      "type": "structure",
+      "required": [
+        "KernelSpecs"
+      ],
+      "members": {
+        "KernelSpecs": {
+          "shape": "KernelSpecs",
+          "documentation": "<p>Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.</p>"
+        },
+        "FileSystemConfig": {
+          "shape": "FileSystemConfig",
+          "documentation": "<p>The file system configuration.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for an Amazon SageMaker KernelGateway app.</p>"
+    },
+    "KernelName": {
+      "type": "string",
+      "max": 1024
+    },
+    "KernelSpec": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "KernelName",
+          "documentation": "<p>The name of the kernel. Must be unique to your account.</p>"
+        },
+        "DisplayName": {
+          "shape": "KernelDisplayName",
+          "documentation": "<p>The display name of the kernel.</p>"
+        }
+      },
+      "documentation": "<p>Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.</p>"
+    },
+    "KernelSpecs": {
+      "type": "list",
+      "member": {
+        "shape": "KernelSpec"
+      },
+      "max": 1,
+      "min": 1
     },
     "KmsKeyId": {
       "type": "string",
@@ -9868,6 +10839,60 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.</p>"
+        }
+      }
+    },
+    "ListAppImageConfigsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of AppImageConfigs to return in the response. The default value is 10. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous call to <code>ListImages</code> didn't return the full set of AppImageConfigs, the call returns a token for getting the next set of AppImageConfigs.</p>"
+        },
+        "NameContains": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>A filter that returns only AppImageConfigs whose name contains the specified string.</p>"
+        },
+        "CreationTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only AppImageConfigs created on or before the specified time.</p>"
+        },
+        "CreationTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only AppImageConfigs created on or after the specified time.</p>"
+        },
+        "ModifiedTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only AppImageConfigs modified on or before the specified time.</p>"
+        },
+        "ModifiedTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only AppImageConfigs modified on or after the specified time.</p>"
+        },
+        "SortBy": {
+          "shape": "AppImageConfigSortKey",
+          "documentation": "<p>The property used to sort results. The default value is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>The sort order. The default value is <code>Descending</code>.</p>"
+        }
+      }
+    },
+    "ListAppImageConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of AppImageConfigs, if there are any.</p>"
+        },
+        "AppImageConfigs": {
+          "shape": "AppImageConfigList",
+          "documentation": "<p>A list of AppImageConfigs and their properties.</p>"
         }
       }
     },
@@ -10476,6 +11501,117 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If the result of this <code>ListHyperParameterTuningJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of tuning jobs, use the token in the next request.</p>"
+        }
+      }
+    },
+    "ListImageVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName"
+      ],
+      "members": {
+        "CreationTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only versions created on or after the specified time.</p>"
+        },
+        "CreationTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only versions created on or before the specified time.</p>"
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image to list the versions of.</p>"
+        },
+        "LastModifiedTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only versions modified on or after the specified time.</p>"
+        },
+        "LastModifiedTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only versions modified on or before the specified time.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of versions to return in the response. The default value is 10. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous call to <code>ListImageVersions</code> didn't return the full set of versions, the call returns a token for getting the next set of versions.</p>"
+        },
+        "SortBy": {
+          "shape": "ImageVersionSortBy",
+          "documentation": "<p>The property used to sort results. The default value is <code>CREATION_TIME</code>.</p>"
+        },
+        "SortOrder": {
+          "shape": "ImageVersionSortOrder",
+          "documentation": "<p>The sort order. The default value is <code>DESCENDING</code>.</p>"
+        }
+      }
+    },
+    "ListImageVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "ImageVersions": {
+          "shape": "ImageVersions",
+          "documentation": "<p>A list of versions and their properties.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of versions, if there are any.</p>"
+        }
+      }
+    },
+    "ListImagesRequest": {
+      "type": "structure",
+      "members": {
+        "CreationTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only images created on or after the specified time.</p>"
+        },
+        "CreationTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only images created on or before the specified time.</p>"
+        },
+        "LastModifiedTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only images modified on or after the specified time.</p>"
+        },
+        "LastModifiedTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only images modified on or before the specified time.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of images to return in the response. The default value is 10. </p>"
+        },
+        "NameContains": {
+          "shape": "ImageNameContains",
+          "documentation": "<p>A filter that returns only images whose name contains the specified string.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous call to <code>ListImages</code> didn't return the full set of images, the call returns a token for getting the next set of images.</p>"
+        },
+        "SortBy": {
+          "shape": "ImageSortBy",
+          "documentation": "<p>The property used to sort results. The default value is <code>CREATION_TIME</code>.</p>"
+        },
+        "SortOrder": {
+          "shape": "ImageSortOrder",
+          "documentation": "<p>The sort order. The default value is <code>DESCENDING</code>.</p>"
+        }
+      }
+    },
+    "ListImagesResponse": {
+      "type": "structure",
+      "members": {
+        "Images": {
+          "shape": "Images",
+          "documentation": "<p>A list of images and their properties.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of images, if there are any.</p>"
         }
       }
     },
@@ -11572,7 +12708,7 @@
     "MediaType": {
       "type": "string",
       "max": 64,
-      "pattern": "^[\\w]+\\/[\\w+]+$"
+      "pattern": "^[-\\w]+\\/[-\\w+]+$"
     },
     "MemberDefinition": {
       "type": "structure",
@@ -12333,6 +13469,11 @@
       },
       "documentation": "<p>A time limit for how long the monitoring job is allowed to run before stopping.</p>"
     },
+    "MountPath": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "^\\/.*"
+    },
     "NameContains": {
       "type": "string",
       "max": 63,
@@ -12803,7 +13944,7 @@
         },
         "CompilerOptions": {
           "shape": "CompilerOptions",
-          "documentation": "<p>Specifies additional parameters for compiler options in JSON format. The compiler options are <code>TargetPlatform</code> specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify <code>CompilerOptions.</code> </p> <ul> <li> <p> <code>CPU</code>: Compilation for CPU supports the following compiler options.</p> <ul> <li> <p> <code>mcpu</code>: CPU micro-architecture. For example, <code>{'mcpu': 'skylake-avx512'}</code> </p> </li> <li> <p> <code>mattr</code>: CPU flags. For example, <code>{'mattr': ['+neon', '+vfpv4']}</code> </p> </li> </ul> </li> <li> <p> <code>ARM</code>: Details of ARM CPU compilations.</p> <ul> <li> <p> <code>NEON</code>: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors.</p> <p>For example, add <code>{'mattr': ['+neon']}</code> to the compiler options if compiling for ARM 32-bit platform with the NEON support.</p> </li> </ul> </li> <li> <p> <code>NVIDIA</code>: Compilation for NVIDIA GPU supports the following compiler options.</p> <ul> <li> <p> <code>gpu_code</code>: Specifies the targeted architecture.</p> </li> <li> <p> <code>trt-ver</code>: Specifies the TensorRT versions in x.y.z. format.</p> </li> <li> <p> <code>cuda-ver</code>: Specifies the CUDA version in x.y format.</p> </li> </ul> <p>For example, <code>{'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}</code> </p> </li> <li> <p> <code>ANDROID</code>: Compilation for the Android OS supports the following compiler options:</p> <ul> <li> <p> <code>ANDROID_PLATFORM</code>: Specifies the Android API levels. Available levels range from 21 to 29. For example, <code>{'ANDROID_PLATFORM': 28}</code>.</p> </li> <li> <p> <code>mattr</code>: Add <code>{'mattr': ['+neon']}</code> to compiler options if compiling for ARM 32-bit platform with NEON support.</p> </li> </ul> </li> <li> <p> <code>CoreML</code>: Compilation for the CoreML <a>OutputConfig$TargetDevice</a> supports the following compiler options:</p> <ul> <li> <p> <code>class_labels</code>: Specifies the classification labels file name inside input tar.gz file. For example, <code>{\"class_labels\": \"imagenet_labels_1000.txt\"}</code>. Labels inside the txt file should be separated by newlines.</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>Specifies additional parameters for compiler options in JSON format. The compiler options are <code>TargetPlatform</code> specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify <code>CompilerOptions.</code> </p> <ul> <li> <p> <code>CPU</code>: Compilation for CPU supports the following compiler options.</p> <ul> <li> <p> <code>mcpu</code>: CPU micro-architecture. For example, <code>{'mcpu': 'skylake-avx512'}</code> </p> </li> <li> <p> <code>mattr</code>: CPU flags. For example, <code>{'mattr': ['+neon', '+vfpv4']}</code> </p> </li> </ul> </li> <li> <p> <code>ARM</code>: Details of ARM CPU compilations.</p> <ul> <li> <p> <code>NEON</code>: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors.</p> <p>For example, add <code>{'mattr': ['+neon']}</code> to the compiler options if compiling for ARM 32-bit platform with the NEON support.</p> </li> </ul> </li> <li> <p> <code>NVIDIA</code>: Compilation for NVIDIA GPU supports the following compiler options.</p> <ul> <li> <p> <code>gpu_code</code>: Specifies the targeted architecture.</p> </li> <li> <p> <code>trt-ver</code>: Specifies the TensorRT versions in x.y.z. format.</p> </li> <li> <p> <code>cuda-ver</code>: Specifies the CUDA version in x.y format.</p> </li> </ul> <p>For example, <code>{'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}</code> </p> </li> <li> <p> <code>ANDROID</code>: Compilation for the Android OS supports the following compiler options:</p> <ul> <li> <p> <code>ANDROID_PLATFORM</code>: Specifies the Android API levels. Available levels range from 21 to 29. For example, <code>{'ANDROID_PLATFORM': 28}</code>.</p> </li> <li> <p> <code>mattr</code>: Add <code>{'mattr': ['+neon']}</code> to compiler options if compiling for ARM 32-bit platform with NEON support.</p> </li> </ul> </li> <li> <p> <code>INFERENTIA</code>: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, <code>\"CompilerOptions\": \"\\\"--verbose 1 --num-neuroncores 2 -O2\\\"\"</code>. </p> <p>For information about supported compiler options, see <a href=\"https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md\"> Neuron Compiler CLI</a>. </p> </li> <li> <p> <code>CoreML</code>: Compilation for the CoreML <a>OutputConfig$TargetDevice</a> supports the following compiler options:</p> <ul> <li> <p> <code>class_labels</code>: Specifies the classification labels file name inside input tar.gz file. For example, <code>{\"class_labels\": \"imagenet_labels_1000.txt\"}</code>. Labels inside the txt file should be separated by newlines.</p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Contains information about the output location for the compiled model and the target device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code> are mutually exclusive, so you need to choose one between the two to specify your target device or platform. If you cannot find your device you want to use from the <code>TargetDevice</code> list, use <code>TargetPlatform</code> to describe the platform of your edge device and <code>CompilerOptions</code> if there are specific settings that are required or recommended to use for particular TargetPlatform.</p>"
@@ -13807,14 +14948,18 @@
       "members": {
         "SageMakerImageArn": {
           "shape": "ImageArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
+          "documentation": "<p>The ARN of the SageMaker image that the image version belongs to.</p>"
+        },
+        "SageMakerImageVersionArn": {
+          "shape": "ImageVersionArn",
+          "documentation": "<p>The ARN of the image version created on the instance.</p>"
         },
         "InstanceType": {
           "shape": "AppInstanceType",
-          "documentation": "<p>The instance type.</p>"
+          "documentation": "<p>The instance type that the image version runs on.</p>"
         }
       },
-      "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. The ARN is stored as metadata in SageMaker Studio notebooks.</p>"
+      "documentation": "<p>Specifies the ARN's of a SageMaker image and SageMaker image version, and the instance type that the version runs on.</p>"
     },
     "ResourceType": {
       "type": "string",
@@ -14198,7 +15343,7 @@
     "SnsTopicArn": {
       "type": "string",
       "max": 2048,
-      "pattern": "arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*"
+      "pattern": "arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+"
     },
     "SortBy": {
       "type": "string",
@@ -14808,6 +15953,7 @@
         "ml.p3.8xlarge",
         "ml.p3.16xlarge",
         "ml.p3dn.24xlarge",
+        "ml.p4d.24xlarge",
         "ml.c5.xlarge",
         "ml.c5.2xlarge",
         "ml.c5.4xlarge",
@@ -16049,6 +17195,31 @@
       },
       "documentation": "<p>Container for user interface template information.</p>"
     },
+    "UpdateAppImageConfigRequest": {
+      "type": "structure",
+      "required": [
+        "AppImageConfigName"
+      ],
+      "members": {
+        "AppImageConfigName": {
+          "shape": "AppImageConfigName",
+          "documentation": "<p>The name of the AppImageConfig to update.</p>"
+        },
+        "KernelGatewayImageConfig": {
+          "shape": "KernelGatewayImageConfig",
+          "documentation": "<p>The new KernelGateway app to run on the image.</p>"
+        }
+      }
+    },
+    "UpdateAppImageConfigResponse": {
+      "type": "structure",
+      "members": {
+        "AppImageConfigArn": {
+          "shape": "AppImageConfigArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the AppImageConfig.</p>"
+        }
+      }
+    },
     "UpdateCodeRepositoryInput": {
       "type": "structure",
       "required": [
@@ -16194,6 +17365,43 @@
         "ExperimentArn": {
           "shape": "ExperimentArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the experiment.</p>"
+        }
+      }
+    },
+    "UpdateImageRequest": {
+      "type": "structure",
+      "required": [
+        "ImageName"
+      ],
+      "members": {
+        "DeleteProperties": {
+          "shape": "ImageDeletePropertyList",
+          "documentation": "<p>A list of properties to delete. Only the <code>Description</code> and <code>DisplayName</code> properties can be deleted.</p>"
+        },
+        "Description": {
+          "shape": "ImageDescription",
+          "documentation": "<p>The new description for the image.</p>"
+        },
+        "DisplayName": {
+          "shape": "ImageDisplayName",
+          "documentation": "<p>The new display name for the image.</p>"
+        },
+        "ImageName": {
+          "shape": "ImageName",
+          "documentation": "<p>The name of the image to update.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The new Amazon Resource Name (ARN) for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
+        }
+      }
+    },
+    "UpdateImageResponse": {
+      "type": "structure",
+      "members": {
+        "ImageArn": {
+          "shape": "ImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
         }
       }
     },
@@ -16576,7 +17784,10 @@
         "Deleting",
         "Failed",
         "InService",
-        "Pending"
+        "Pending",
+        "Updating",
+        "Update_Failed",
+        "Delete_Failed"
       ]
     },
     "UserSettings": {
@@ -16588,7 +17799,7 @@
         },
         "SecurityGroups": {
           "shape": "SecurityGroupIds",
-          "documentation": "<p>The security groups.</p>"
+          "documentation": "<p>The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p> <p>Optional when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>PublicInternetOnly</code>.</p> <p>Required when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>VpcOnly</code>.</p>"
         },
         "SharingSettings": {
           "shape": "SharingSettings",
@@ -16646,6 +17857,12 @@
     "VariantWeight": {
       "type": "float",
       "min": 0
+    },
+    "VersionedArnOrName": {
+      "type": "string",
+      "max": 176,
+      "min": 1,
+      "pattern": "(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,5})?$"
     },
     "VolumeSizeInGB": {
       "type": "integer",

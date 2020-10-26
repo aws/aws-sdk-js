@@ -45,6 +45,14 @@ declare class SageMaker extends Service {
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
+   * Creates a configuration for running an Amazon SageMaker image as a KernelGateway app.
+   */
+  createAppImageConfig(params: SageMaker.Types.CreateAppImageConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
+  /**
+   * Creates a configuration for running an Amazon SageMaker image as a KernelGateway app.
+   */
+  createAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
+  /**
    * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
@@ -69,11 +77,11 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.     VpcOnly network access type  When you choose VpcOnly, you must specify the following:   Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume   Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps   Interface endpoints to access the SageMaker API and SageMaker runtime   For more information, see:    Security groups for your VPC     VPC with public and private subnets (NAT)     Connect to SageMaker through a VPC interface endpoint   
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.     VpcOnly network access type  When you choose VpcOnly, you must specify the following:   Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume   Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps   Interface endpoints to access the SageMaker API and SageMaker runtime   For more information, see:    Security groups for your VPC     VPC with public and private subnets (NAT)     Connect to SageMaker through a VPC interface endpoint   
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
@@ -124,6 +132,22 @@ declare class SageMaker extends Service {
    * Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.
    */
   createHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.CreateHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.CreateHyperParameterTuningJobResponse, AWSError>;
+  /**
+   * Creates a SageMaker Image. A SageMaker image represents a set of container images. Each of these container images is represented by a SageMaker ImageVersion.
+   */
+  createImage(params: SageMaker.Types.CreateImageRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateImageResponse) => void): Request<SageMaker.Types.CreateImageResponse, AWSError>;
+  /**
+   * Creates a SageMaker Image. A SageMaker image represents a set of container images. Each of these container images is represented by a SageMaker ImageVersion.
+   */
+  createImage(callback?: (err: AWSError, data: SageMaker.Types.CreateImageResponse) => void): Request<SageMaker.Types.CreateImageResponse, AWSError>;
+  /**
+   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon Container Registry (ECR) container image specified by BaseImage.
+   */
+  createImageVersion(params: SageMaker.Types.CreateImageVersionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
+  /**
+   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon Container Registry (ECR) container image specified by BaseImage.
+   */
+  createImageVersion(callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
    * Creates a job that uses workers to label the data objects in your input dataset. You can use the labeled data to train machine learning models. You can select your workforce from one of three providers:   A private workforce that you create. It can include employees, contractors, and outside experts. Use a private workforce when want the data to stay within your organization or when a specific set of skills is required.   One or more vendors that you select from the AWS Marketplace. Vendors provide expertise in specific areas.    The Amazon Mechanical Turk workforce. This is the largest workforce, but it should only be used for public data or data that has been stripped of any personally identifiable information.   You can also use automated data labeling to reduce the number of data objects that need to be labeled by a human. Automated data labeling uses active learning to determine if a data object can be labeled by machine or if it needs to be sent to a human worker. For more information, see Using Automated Data Labeling. The data objects to be labeled are contained in an Amazon S3 bucket. You create a manifest file that describes the location of each object. For more information, see Using Input and Output Data. The output can be used as the manifest file for another labeling job or as training data for your machine learning models.
    */
@@ -269,6 +293,14 @@ declare class SageMaker extends Service {
    */
   deleteApp(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an AppImageConfig.
+   */
+  deleteAppImageConfig(params: SageMaker.Types.DeleteAppImageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an AppImageConfig.
+   */
+  deleteAppImageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified Git repository from your account.
    */
   deleteCodeRepository(params: SageMaker.Types.DeleteCodeRepositoryInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -324,6 +356,22 @@ declare class SageMaker extends Service {
    * Use this operation to delete a human task user interface (worker task template).  To see a list of human task user interfaces (work task templates) in your account, use . When you delete a worker task template, it no longer appears when you call ListHumanTaskUis.
    */
   deleteHumanTaskUi(callback?: (err: AWSError, data: SageMaker.Types.DeleteHumanTaskUiResponse) => void): Request<SageMaker.Types.DeleteHumanTaskUiResponse, AWSError>;
+  /**
+   * Deletes a SageMaker image and all versions of the image. The container images aren't deleted.
+   */
+  deleteImage(params: SageMaker.Types.DeleteImageRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteImageResponse) => void): Request<SageMaker.Types.DeleteImageResponse, AWSError>;
+  /**
+   * Deletes a SageMaker image and all versions of the image. The container images aren't deleted.
+   */
+  deleteImage(callback?: (err: AWSError, data: SageMaker.Types.DeleteImageResponse) => void): Request<SageMaker.Types.DeleteImageResponse, AWSError>;
+  /**
+   * Deletes a version of a SageMaker image. The container image the version represents isn't deleted.
+   */
+  deleteImageVersion(params: SageMaker.Types.DeleteImageVersionRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteImageVersionResponse) => void): Request<SageMaker.Types.DeleteImageVersionResponse, AWSError>;
+  /**
+   * Deletes a version of a SageMaker image. The container image the version represents isn't deleted.
+   */
+  deleteImageVersion(callback?: (err: AWSError, data: SageMaker.Types.DeleteImageVersionResponse) => void): Request<SageMaker.Types.DeleteImageVersionResponse, AWSError>;
   /**
    * Deletes a model. The DeleteModel API deletes only the model entry that was created in Amazon SageMaker when you called the CreateModel API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. 
    */
@@ -429,6 +477,14 @@ declare class SageMaker extends Service {
    */
   describeApp(callback?: (err: AWSError, data: SageMaker.Types.DescribeAppResponse) => void): Request<SageMaker.Types.DescribeAppResponse, AWSError>;
   /**
+   * Describes an AppImageConfig.
+   */
+  describeAppImageConfig(params: SageMaker.Types.DescribeAppImageConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAppImageConfigResponse) => void): Request<SageMaker.Types.DescribeAppImageConfigResponse, AWSError>;
+  /**
+   * Describes an AppImageConfig.
+   */
+  describeAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeAppImageConfigResponse) => void): Request<SageMaker.Types.DescribeAppImageConfigResponse, AWSError>;
+  /**
    * Returns information about an Amazon SageMaker job.
    */
   describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
@@ -508,6 +564,22 @@ declare class SageMaker extends Service {
    * Gets a description of a hyperparameter tuning job.
    */
   describeHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.DescribeHyperParameterTuningJobResponse, AWSError>;
+  /**
+   * Describes a SageMaker image.
+   */
+  describeImage(params: SageMaker.Types.DescribeImageRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeImageResponse) => void): Request<SageMaker.Types.DescribeImageResponse, AWSError>;
+  /**
+   * Describes a SageMaker image.
+   */
+  describeImage(callback?: (err: AWSError, data: SageMaker.Types.DescribeImageResponse) => void): Request<SageMaker.Types.DescribeImageResponse, AWSError>;
+  /**
+   * Describes a version of a SageMaker image.
+   */
+  describeImageVersion(params: SageMaker.Types.DescribeImageVersionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeImageVersionResponse) => void): Request<SageMaker.Types.DescribeImageVersionResponse, AWSError>;
+  /**
+   * Describes a version of a SageMaker image.
+   */
+  describeImageVersion(callback?: (err: AWSError, data: SageMaker.Types.DescribeImageVersionResponse) => void): Request<SageMaker.Types.DescribeImageVersionResponse, AWSError>;
   /**
    * Gets information about a labeling job.
    */
@@ -653,6 +725,14 @@ declare class SageMaker extends Service {
    */
   listAlgorithms(callback?: (err: AWSError, data: SageMaker.Types.ListAlgorithmsOutput) => void): Request<SageMaker.Types.ListAlgorithmsOutput, AWSError>;
   /**
+   * Lists the AppImageConfigs in your account and their properties. The list can be filtered by creation time or modified time, and whether the AppImageConfig name contains a specified string.
+   */
+  listAppImageConfigs(params: SageMaker.Types.ListAppImageConfigsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAppImageConfigsResponse) => void): Request<SageMaker.Types.ListAppImageConfigsResponse, AWSError>;
+  /**
+   * Lists the AppImageConfigs in your account and their properties. The list can be filtered by creation time or modified time, and whether the AppImageConfig name contains a specified string.
+   */
+  listAppImageConfigs(callback?: (err: AWSError, data: SageMaker.Types.ListAppImageConfigsResponse) => void): Request<SageMaker.Types.ListAppImageConfigsResponse, AWSError>;
+  /**
    * Lists apps.
    */
   listApps(params: SageMaker.Types.ListAppsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAppsResponse) => void): Request<SageMaker.Types.ListAppsResponse, AWSError>;
@@ -748,6 +828,22 @@ declare class SageMaker extends Service {
    * Gets a list of HyperParameterTuningJobSummary objects that describe the hyperparameter tuning jobs launched in your account.
    */
   listHyperParameterTuningJobs(callback?: (err: AWSError, data: SageMaker.Types.ListHyperParameterTuningJobsResponse) => void): Request<SageMaker.Types.ListHyperParameterTuningJobsResponse, AWSError>;
+  /**
+   * Lists the versions of a specified image and their properties. The list can be filtered by creation time or modified time.
+   */
+  listImageVersions(params: SageMaker.Types.ListImageVersionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListImageVersionsResponse) => void): Request<SageMaker.Types.ListImageVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a specified image and their properties. The list can be filtered by creation time or modified time.
+   */
+  listImageVersions(callback?: (err: AWSError, data: SageMaker.Types.ListImageVersionsResponse) => void): Request<SageMaker.Types.ListImageVersionsResponse, AWSError>;
+  /**
+   * Lists the images in your account and their properties. The list can be filtered by creation time or modified time, and whether the image name contains a specified string.
+   */
+  listImages(params: SageMaker.Types.ListImagesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListImagesResponse) => void): Request<SageMaker.Types.ListImagesResponse, AWSError>;
+  /**
+   * Lists the images in your account and their properties. The list can be filtered by creation time or modified time, and whether the image name contains a specified string.
+   */
+  listImages(callback?: (err: AWSError, data: SageMaker.Types.ListImagesResponse) => void): Request<SageMaker.Types.ListImagesResponse, AWSError>;
   /**
    * Gets a list of labeling jobs.
    */
@@ -1005,6 +1101,14 @@ declare class SageMaker extends Service {
    */
   stopTransformJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the properties of an AppImageConfig.
+   */
+  updateAppImageConfig(params: SageMaker.Types.UpdateAppImageConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateAppImageConfigResponse) => void): Request<SageMaker.Types.UpdateAppImageConfigResponse, AWSError>;
+  /**
+   * Updates the properties of an AppImageConfig.
+   */
+  updateAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateAppImageConfigResponse) => void): Request<SageMaker.Types.UpdateAppImageConfigResponse, AWSError>;
+  /**
    * Updates the specified Git repository with the specified values.
    */
   updateCodeRepository(params: SageMaker.Types.UpdateCodeRepositoryInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateCodeRepositoryOutput) => void): Request<SageMaker.Types.UpdateCodeRepositoryOutput, AWSError>;
@@ -1044,6 +1148,14 @@ declare class SageMaker extends Service {
    * Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.
    */
   updateExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
+  /**
+   * Updates the properties of a SageMaker image. To change the image's tags, use the AddTags and DeleteTags APIs.
+   */
+  updateImage(params: SageMaker.Types.UpdateImageRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
+  /**
+   * Updates the properties of a SageMaker image. To change the image's tags, use the AddTags and DeleteTags APIs.
+   */
+  updateImage(callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
   /**
    * Updates a previously created schedule.
    */
@@ -1325,6 +1437,32 @@ declare namespace SageMaker {
      */
     CreationTime?: CreationTime;
   }
+  export type AppImageConfigArn = string;
+  export interface AppImageConfigDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     */
+    AppImageConfigArn?: AppImageConfigArn;
+    /**
+     * The name of the AppImageConfig.
+     */
+    AppImageConfigName?: AppImageConfigName;
+    /**
+     * When the AppImageConfig was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the AppImageConfig was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The KernelGateway app.
+     */
+    KernelGatewayImageConfig?: KernelGatewayImageConfig;
+  }
+  export type AppImageConfigList = AppImageConfigDetails[];
+  export type AppImageConfigName = string;
+  export type AppImageConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
   export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|string;
   export type AppList = AppDetails[];
   export type AppName = string;
@@ -1706,6 +1844,7 @@ declare namespace SageMaker {
   export type Cidrs = Cidr[];
   export type ClientId = string;
   export type ClientSecret = string;
+  export type ClientToken = string;
   export type CodeRepositoryArn = string;
   export type CodeRepositoryContains = string;
   export type CodeRepositoryNameContains = string;
@@ -1858,7 +1997,7 @@ declare namespace SageMaker {
     /**
      * The name or Amazon Resource Name (ARN) of the model package to use to create the model.
      */
-    ModelPackageName?: ArnOrName;
+    ModelPackageName?: VersionedArnOrName;
   }
   export type ContainerDefinitionList = ContainerDefinition[];
   export type ContainerEntrypoint = ContainerEntrypointString[];
@@ -1931,6 +2070,26 @@ declare namespace SageMaker {
      */
     AlgorithmArn: AlgorithmArn;
   }
+  export interface CreateAppImageConfigRequest {
+    /**
+     * The name of the AppImageConfig. Must be unique to your account.
+     */
+    AppImageConfigName: AppImageConfigName;
+    /**
+     * A list of tags to apply to the AppImageConfig.
+     */
+    Tags?: TagList;
+    /**
+     * The KernelGatewayImageConfig.
+     */
+    KernelGatewayImageConfig?: KernelGatewayImageConfig;
+  }
+  export interface CreateAppImageConfigResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     */
+    AppImageConfigArn?: AppImageConfigArn;
+  }
   export interface CreateAppRequest {
     /**
      * The domain ID.
@@ -1959,7 +2118,7 @@ declare namespace SageMaker {
   }
   export interface CreateAppResponse {
     /**
-     * The App's Amazon Resource Name (ARN).
+     * The Amazon Resource Name (ARN) of the app.
      */
     AppArn?: AppArn;
   }
@@ -2044,6 +2203,10 @@ declare namespace SageMaker {
      * Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.
      */
     StoppingCondition: StoppingCondition;
+    /**
+     * An array of key-value pairs that you want to use to organize and track your AWS resource costs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
+     */
+    Tags?: TagList;
   }
   export interface CreateCompilationJobResponse {
     /**
@@ -2077,13 +2240,13 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
-     */
-    HomeEfsFileSystemKmsKeyId?: KmsKeyId;
-    /**
      * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All Studio traffic is through the specified VPC and subnets  
      */
     AppNetworkAccessType?: AppNetworkAccessType;
+    /**
+     * The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
+     */
+    HomeEfsFileSystemKmsKeyId?: KmsKeyId;
   }
   export interface CreateDomainResponse {
     /**
@@ -2122,7 +2285,7 @@ declare namespace SageMaker {
   }
   export interface CreateEndpointInput {
     /**
-     * The name of the endpoint. The name must be unique within an AWS Region in your AWS account.
+     * The name of the endpoint.The name must be unique within an AWS Region in your AWS account. The name is case-insensitive in CreateEndpoint, but the case is preserved and must be matched in .
      */
     EndpointName: EndpointName;
     /**
@@ -2219,7 +2382,7 @@ declare namespace SageMaker {
   }
   export interface CreateHyperParameterTuningJobRequest {
     /**
-     * The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.
+     * The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
     /**
@@ -2249,6 +2412,54 @@ declare namespace SageMaker {
      */
     HyperParameterTuningJobArn: HyperParameterTuningJobArn;
   }
+  export interface CreateImageRequest {
+    /**
+     * The description of the image.
+     */
+    Description?: ImageDescription;
+    /**
+     * The display name of the image. When the image is added to a domain, DisplayName must be unique to the domain.
+     */
+    DisplayName?: ImageDisplayName;
+    /**
+     * The name of the image. Must be unique to your account.
+     */
+    ImageName: ImageName;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    /**
+     * A list of tags to apply to the image.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateImageResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the image.
+     */
+    ImageArn?: ImageArn;
+  }
+  export interface CreateImageVersionRequest {
+    /**
+     * The registry path of the container image to use as the starting point for this version. The path is an Amazon Container Registry (ECR) URI in the following format:  &lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name[:tag] or [@digest]&gt; 
+     */
+    BaseImage: ImageBaseImage;
+    /**
+     * A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the SDK for Python (Boto3), add a unique value to the call.
+     */
+    ClientToken: ClientToken;
+    /**
+     * The ImageName of the Image to create a version of.
+     */
+    ImageName: ImageName;
+  }
+  export interface CreateImageVersionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the image version.
+     */
+    ImageVersionArn?: ImageVersionArn;
+  }
   export interface CreateLabelingJobRequest {
     /**
      * The name of the labeling job. This name is used to identify the job in a list of labeling jobs.
@@ -2271,7 +2482,7 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     * The S3 URL of the file that defines the categories used to label the data objects. For 3D point cloud task types, see Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs.  For all other built-in task types and custom tasks, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing label_1, label_2,...,label_n with your label categories.  {    "document-version": "2018-11-28"    "labels": [    {    "label": "label_1"    },    {    "label": "label_2"    },    ...    {    "label": "label_n"    }    ]   } 
+     * The S3 URI of the file that defines the categories used to label the data objects. For 3D point cloud task types, see Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs.  For all other built-in task types and custom tasks, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing label_1, label_2,...,label_n with your label categories.  {    "document-version": "2018-11-28"    "labels": [    {    "label": "label_1"    },    {    "label": "label_2"    },    ...    {    "label": "label_n"    }    ]   } 
      */
     LabelCategoryConfigS3Uri?: S3Uri;
     /**
@@ -2337,7 +2548,7 @@ declare namespace SageMaker {
     /**
      * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
-    ModelPackageName: EntityName;
+    ModelPackageName?: EntityName;
     /**
      * A description of the model package.
      */
@@ -2842,6 +3053,21 @@ declare namespace SageMaker {
   export type CreationTime = Date;
   export type CsvContentType = string;
   export type CsvContentTypes = CsvContentType[];
+  export interface CustomImage {
+    /**
+     * The name of the CustomImage. Must be unique to your account.
+     */
+    ImageName: ImageName;
+    /**
+     * The version number of the CustomImage.
+     */
+    ImageVersionNumber?: ImageVersionNumber;
+    /**
+     * The name of the AppImageConfig.
+     */
+    AppImageConfigName: AppImageConfigName;
+  }
+  export type CustomImages = CustomImage[];
   export interface DataCaptureConfig {
     /**
      * 
@@ -2988,11 +3214,19 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
   }
   export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
+  export type DefaultGid = number;
+  export type DefaultUid = number;
   export interface DeleteAlgorithmInput {
     /**
      * The name of the algorithm to delete.
      */
     AlgorithmName: EntityName;
+  }
+  export interface DeleteAppImageConfigRequest {
+    /**
+     * The name of the AppImageConfig to delete.
+     */
+    AppImageConfigName: AppImageConfigName;
   }
   export interface DeleteAppRequest {
     /**
@@ -3068,6 +3302,26 @@ declare namespace SageMaker {
   }
   export interface DeleteHumanTaskUiResponse {
   }
+  export interface DeleteImageRequest {
+    /**
+     * The name of the image to delete.
+     */
+    ImageName: ImageName;
+  }
+  export interface DeleteImageResponse {
+  }
+  export interface DeleteImageVersionRequest {
+    /**
+     * The name of the image.
+     */
+    ImageName: ImageName;
+    /**
+     * The version to delete.
+     */
+    Version: ImageVersionNumber;
+  }
+  export interface DeleteImageVersionResponse {
+  }
   export interface DeleteModelInput {
     /**
      * The name of the model to delete.
@@ -3078,7 +3332,7 @@ declare namespace SageMaker {
     /**
      * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
-    ModelPackageName: EntityName;
+    ModelPackageName: VersionedArnOrName;
   }
   export interface DeleteMonitoringScheduleRequest {
     /**
@@ -3231,6 +3485,34 @@ declare namespace SageMaker {
      */
     CertifyForMarketplace?: CertifyForMarketplace;
   }
+  export interface DescribeAppImageConfigRequest {
+    /**
+     * The name of the AppImageConfig to describe.
+     */
+    AppImageConfigName: AppImageConfigName;
+  }
+  export interface DescribeAppImageConfigResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     */
+    AppImageConfigArn?: AppImageConfigArn;
+    /**
+     * The name of the AppImageConfig.
+     */
+    AppImageConfigName?: AppImageConfigName;
+    /**
+     * When the AppImageConfig was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the AppImageConfig was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The KernelGateway app.
+     */
+    KernelGatewayImageConfig?: KernelGatewayImageConfig;
+  }
   export interface DescribeAppRequest {
     /**
      * The domain ID.
@@ -3251,7 +3533,7 @@ declare namespace SageMaker {
   }
   export interface DescribeAppResponse {
     /**
-     * The app's Amazon Resource Name (ARN).
+     * The Amazon Resource Name (ARN) of the app.
      */
     AppArn?: AppArn;
     /**
@@ -3515,6 +3797,10 @@ declare namespace SageMaker {
      */
     DefaultUserSettings?: UserSettings;
     /**
+     * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All Studio traffic is through the specified VPC and subnets  
+     */
+    AppNetworkAccessType?: AppNetworkAccessType;
+    /**
      * The AWS Key Management Service encryption key ID.
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
@@ -3530,10 +3816,6 @@ declare namespace SageMaker {
      * The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
      */
     VpcId?: VpcId;
-    /**
-     * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All Studio traffic is through the specified VPC and subnets  
-     */
-    AppNetworkAccessType?: AppNetworkAccessType;
   }
   export interface DescribeEndpointConfigInput {
     /**
@@ -3790,6 +4072,98 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
   }
+  export interface DescribeImageRequest {
+    /**
+     * The name of the image to describe.
+     */
+    ImageName: ImageName;
+  }
+  export interface DescribeImageResponse {
+    /**
+     * When the image was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The description of the image.
+     */
+    Description?: ImageDescription;
+    /**
+     * The name of the image as displayed.
+     */
+    DisplayName?: ImageDisplayName;
+    /**
+     * When a create, update, or delete operation fails, the reason for the failure.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the image.
+     */
+    ImageArn?: ImageArn;
+    /**
+     * The name of the image.
+     */
+    ImageName?: ImageName;
+    /**
+     * The status of the image.
+     */
+    ImageStatus?: ImageStatus;
+    /**
+     * When the image was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     */
+    RoleArn?: RoleArn;
+  }
+  export interface DescribeImageVersionRequest {
+    /**
+     * The name of the image.
+     */
+    ImageName: ImageName;
+    /**
+     * The version of the image. If not specified, the latest version is described.
+     */
+    Version?: ImageVersionNumber;
+  }
+  export interface DescribeImageVersionResponse {
+    /**
+     * The registry path of the container image on which this image version is based.
+     */
+    BaseImage?: ImageBaseImage;
+    /**
+     * The registry path of the container image that contains this image version.
+     */
+    ContainerImage?: ImageContainerImage;
+    /**
+     * When the version was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When a create or delete operation fails, the reason for the failure.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the image the version is based on.
+     */
+    ImageArn?: ImageArn;
+    /**
+     * The ARN of the version.
+     */
+    ImageVersionArn?: ImageVersionArn;
+    /**
+     * The status of the version.
+     */
+    ImageVersionStatus?: ImageVersionStatus;
+    /**
+     * When the version was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The version number.
+     */
+    Version?: ImageVersionNumber;
+  }
   export interface DescribeLabelingJobRequest {
     /**
      * The name of the labeling job to return information for.
@@ -3914,7 +4288,7 @@ declare namespace SageMaker {
     /**
      * The name of the model package to describe.
      */
-    ModelPackageName: ArnOrName;
+    ModelPackageName: VersionedArnOrName;
   }
   export interface DescribeModelPackageOutput {
     /**
@@ -4711,7 +5085,7 @@ declare namespace SageMaker {
   export type DomainId = string;
   export type DomainList = DomainDetails[];
   export type DomainName = string;
-  export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|string;
+  export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
   export type EfsUid = string;
   export type EnableCapture = boolean;
@@ -4874,6 +5248,20 @@ declare namespace SageMaker {
   }
   export type FailureReason = string;
   export type FileSystemAccessMode = "rw"|"ro"|string;
+  export interface FileSystemConfig {
+    /**
+     * The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
+     */
+    MountPath?: MountPath;
+    /**
+     * The default POSIX user ID. If not specified, defaults to 1000.
+     */
+    DefaultUid?: DefaultUid;
+    /**
+     * The default POSIX group ID. If not specified, defaults to 100.
+     */
+    DefaultGid?: DefaultGid;
+  }
   export interface FileSystemDataSource {
     /**
      * The file system id.
@@ -4983,7 +5371,7 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
-  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|string;
+  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|string;
   export type GenerateCandidateDefinitionsOnly = boolean;
   export interface GetSearchSuggestionsRequest {
     /**
@@ -5165,6 +5553,7 @@ declare namespace SageMaker {
      */
     MetricDefinitions?: MetricDefinitionList;
   }
+  export type HyperParameterKey = string;
   export type HyperParameterScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"|string;
   export interface HyperParameterSpecification {
     /**
@@ -5194,7 +5583,7 @@ declare namespace SageMaker {
     /**
      * The default value for this hyperparameter. If a default value is specified, a hyperparameter cannot be required.
      */
-    DefaultValue?: ParameterValue;
+    DefaultValue?: HyperParameterValue;
   }
   export type HyperParameterSpecifications = HyperParameterSpecification[];
   export interface HyperParameterTrainingJobDefinition {
@@ -5400,16 +5789,99 @@ declare namespace SageMaker {
     WarmStartType: HyperParameterTuningJobWarmStartType;
   }
   export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
-  export type HyperParameters = {[key: string]: ParameterValue};
+  export type HyperParameterValue = string;
+  export type HyperParameters = {[key: string]: HyperParameterValue};
+  export interface Image {
+    /**
+     * When the image was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The description of the image.
+     */
+    Description?: ImageDescription;
+    /**
+     * The name of the image as displayed.
+     */
+    DisplayName?: ImageDisplayName;
+    /**
+     * When a create, update, or delete operation fails, the reason for the failure.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the image.
+     */
+    ImageArn: ImageArn;
+    /**
+     * The name of the image.
+     */
+    ImageName: ImageName;
+    /**
+     * The status of the image.
+     */
+    ImageStatus: ImageStatus;
+    /**
+     * When the image was last modified.
+     */
+    LastModifiedTime: Timestamp;
+  }
   export type ImageArn = string;
+  export type ImageBaseImage = string;
   export interface ImageConfig {
     /**
      * Set this to one of the following values:    Platform - The model image is hosted in Amazon ECR.    Vpc - The model image is hosted in a private Docker registry in your VPC.  
      */
     RepositoryAccessMode: RepositoryAccessMode;
   }
+  export type ImageContainerImage = string;
+  export type ImageDeleteProperty = string;
+  export type ImageDeletePropertyList = ImageDeleteProperty[];
+  export type ImageDescription = string;
   export type ImageDigest = string;
+  export type ImageDisplayName = string;
+  export type ImageName = string;
+  export type ImageNameContains = string;
+  export type ImageSortBy = "CREATION_TIME"|"LAST_MODIFIED_TIME"|"IMAGE_NAME"|string;
+  export type ImageSortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type ImageStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
   export type ImageUri = string;
+  export interface ImageVersion {
+    /**
+     * When the version was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * When a create or delete operation fails, the reason for the failure.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the image the version is based on.
+     */
+    ImageArn: ImageArn;
+    /**
+     * The ARN of the version.
+     */
+    ImageVersionArn: ImageVersionArn;
+    /**
+     * The status of the version.
+     */
+    ImageVersionStatus: ImageVersionStatus;
+    /**
+     * When the version was last modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The version number.
+     */
+    Version: ImageVersionNumber;
+  }
+  export type ImageVersionArn = string;
+  export type ImageVersionNumber = number;
+  export type ImageVersionSortBy = "CREATION_TIME"|"LAST_MODIFIED_TIME"|"VERSION"|string;
+  export type ImageVersionSortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type ImageVersionStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export type ImageVersions = ImageVersion[];
+  export type Images = Image[];
   export interface InferenceSpecification {
     /**
      * The Amazon ECR registry path of the Docker image that contains the inference code.
@@ -5492,12 +5964,39 @@ declare namespace SageMaker {
      */
     DefaultResourceSpec?: ResourceSpec;
   }
+  export type KernelDisplayName = string;
   export interface KernelGatewayAppSettings {
     /**
-     * The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+     * The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.
      */
     DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A list of custom images that are configured to run as a KernelGateway app.
+     */
+    CustomImages?: CustomImages;
   }
+  export interface KernelGatewayImageConfig {
+    /**
+     * Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.
+     */
+    KernelSpecs: KernelSpecs;
+    /**
+     * The file system configuration.
+     */
+    FileSystemConfig?: FileSystemConfig;
+  }
+  export type KernelName = string;
+  export interface KernelSpec {
+    /**
+     * The name of the kernel. Must be unique to your account.
+     */
+    Name: KernelName;
+    /**
+     * The display name of the kernel.
+     */
+    DisplayName?: KernelDisplayName;
+  }
+  export type KernelSpecs = KernelSpec[];
   export type KmsKeyId = string;
   export type LabelAttributeName = string;
   export type LabelCounter = number;
@@ -5752,6 +6251,54 @@ declare namespace SageMaker {
      * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.
      */
     NextToken?: NextToken;
+  }
+  export interface ListAppImageConfigsRequest {
+    /**
+     * The maximum number of AppImageConfigs to return in the response. The default value is 10. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListImages didn't return the full set of AppImageConfigs, the call returns a token for getting the next set of AppImageConfigs.
+     */
+    NextToken?: NextToken;
+    /**
+     * A filter that returns only AppImageConfigs whose name contains the specified string.
+     */
+    NameContains?: AppImageConfigName;
+    /**
+     * A filter that returns only AppImageConfigs created on or before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only AppImageConfigs created on or after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only AppImageConfigs modified on or before the specified time.
+     */
+    ModifiedTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only AppImageConfigs modified on or after the specified time.
+     */
+    ModifiedTimeAfter?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: AppImageConfigSortKey;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListAppImageConfigsResponse {
+    /**
+     * A token for getting the next set of AppImageConfigs, if there are any.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of AppImageConfigs and their properties.
+     */
+    AppImageConfigs?: AppImageConfigList;
   }
   export interface ListAppsRequest {
     /**
@@ -6243,6 +6790,102 @@ declare namespace SageMaker {
     HyperParameterTuningJobSummaries: HyperParameterTuningJobSummaries;
     /**
      * If the result of this ListHyperParameterTuningJobs request was truncated, the response includes a NextToken. To retrieve the next set of tuning jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListImageVersionsRequest {
+    /**
+     * A filter that returns only versions created on or after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only versions created on or before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * The name of the image to list the versions of.
+     */
+    ImageName: ImageName;
+    /**
+     * A filter that returns only versions modified on or after the specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only versions modified on or before the specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * The maximum number of versions to return in the response. The default value is 10. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListImageVersions didn't return the full set of versions, the call returns a token for getting the next set of versions.
+     */
+    NextToken?: NextToken;
+    /**
+     * The property used to sort results. The default value is CREATION_TIME.
+     */
+    SortBy?: ImageVersionSortBy;
+    /**
+     * The sort order. The default value is DESCENDING.
+     */
+    SortOrder?: ImageVersionSortOrder;
+  }
+  export interface ListImageVersionsResponse {
+    /**
+     * A list of versions and their properties.
+     */
+    ImageVersions?: ImageVersions;
+    /**
+     * A token for getting the next set of versions, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListImagesRequest {
+    /**
+     * A filter that returns only images created on or after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only images created on or before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only images modified on or after the specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only images modified on or before the specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * The maximum number of images to return in the response. The default value is 10. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A filter that returns only images whose name contains the specified string.
+     */
+    NameContains?: ImageNameContains;
+    /**
+     * If the previous call to ListImages didn't return the full set of images, the call returns a token for getting the next set of images.
+     */
+    NextToken?: NextToken;
+    /**
+     * The property used to sort results. The default value is CREATION_TIME.
+     */
+    SortBy?: ImageSortBy;
+    /**
+     * The sort order. The default value is DESCENDING.
+     */
+    SortOrder?: ImageSortOrder;
+  }
+  export interface ListImagesResponse {
+    /**
+     * A list of images and their properties.
+     */
+    Images?: Images;
+    /**
+     * A token for getting the next set of images, if there are any.
      */
     NextToken?: NextToken;
   }
@@ -7504,6 +8147,7 @@ declare namespace SageMaker {
      */
     MaxRuntimeInSeconds: MonitoringMaxRuntimeInSeconds;
   }
+  export type MountPath = string;
   export type NameContains = string;
   export interface NestedFilters {
     /**
@@ -7729,7 +8373,7 @@ declare namespace SageMaker {
      */
     TargetPlatform?: TargetPlatform;
     /**
-     * Specifies additional parameters for compiler options in JSON format. The compiler options are TargetPlatform specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify CompilerOptions.     CPU: Compilation for CPU supports the following compiler options.    mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}       ARM: Details of ARM CPU compilations.    NEON: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.      NVIDIA: Compilation for NVIDIA GPU supports the following compiler options.    gpu_code: Specifies the targeted architecture.    trt-ver: Specifies the TensorRT versions in x.y.z. format.    cuda-ver: Specifies the CUDA version in x.y format.   For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}     ANDROID: Compilation for the Android OS supports the following compiler options:    ANDROID_PLATFORM: Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.    mattr: Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.      CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the following compiler options:    class_labels: Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by newlines.    
+     * Specifies additional parameters for compiler options in JSON format. The compiler options are TargetPlatform specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify CompilerOptions.     CPU: Compilation for CPU supports the following compiler options.    mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}       ARM: Details of ARM CPU compilations.    NEON: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.      NVIDIA: Compilation for NVIDIA GPU supports the following compiler options.    gpu_code: Specifies the targeted architecture.    trt-ver: Specifies the TensorRT versions in x.y.z. format.    cuda-ver: Specifies the CUDA version in x.y format.   For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}     ANDROID: Compilation for the Android OS supports the following compiler options:    ANDROID_PLATFORM: Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.    mattr: Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.      INFERENTIA: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"".  For information about supported compiler options, see  Neuron Compiler CLI.     CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the following compiler options:    class_labels: Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by newlines.    
      */
     CompilerOptions?: CompilerOptions;
   }
@@ -8189,11 +8833,15 @@ declare namespace SageMaker {
   export type ResourcePropertyName = string;
   export interface ResourceSpec {
     /**
-     * The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+     * The ARN of the SageMaker image that the image version belongs to.
      */
     SageMakerImageArn?: ImageArn;
     /**
-     * The instance type.
+     * The ARN of the image version created on the instance.
+     */
+    SageMakerImageVersionArn?: ImageVersionArn;
+    /**
+     * The instance type that the image version runs on.
      */
     InstanceType?: AppInstanceType;
   }
@@ -8574,7 +9222,7 @@ declare namespace SageMaker {
   export type Timestamp = Date;
   export type TrainingInputMode = "Pipe"|"File"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
   export type TrainingInstanceTypes = TrainingInstanceType[];
   export interface TrainingJob {
     /**
@@ -9377,6 +10025,22 @@ declare namespace SageMaker {
      */
     ContentSha256?: TemplateContentSha256;
   }
+  export interface UpdateAppImageConfigRequest {
+    /**
+     * The name of the AppImageConfig to update.
+     */
+    AppImageConfigName: AppImageConfigName;
+    /**
+     * The new KernelGateway app to run on the image.
+     */
+    KernelGatewayImageConfig?: KernelGatewayImageConfig;
+  }
+  export interface UpdateAppImageConfigResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the AppImageConfig.
+     */
+    AppImageConfigArn?: AppImageConfigArn;
+  }
   export interface UpdateCodeRepositoryInput {
     /**
      * The name of the Git repository to update.
@@ -9468,6 +10132,34 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the experiment.
      */
     ExperimentArn?: ExperimentArn;
+  }
+  export interface UpdateImageRequest {
+    /**
+     * A list of properties to delete. Only the Description and DisplayName properties can be deleted.
+     */
+    DeleteProperties?: ImageDeletePropertyList;
+    /**
+     * The new description for the image.
+     */
+    Description?: ImageDescription;
+    /**
+     * The new display name for the image.
+     */
+    DisplayName?: ImageDisplayName;
+    /**
+     * The name of the image to update.
+     */
+    ImageName: ImageName;
+    /**
+     * The new Amazon Resource Name (ARN) for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     */
+    RoleArn?: RoleArn;
+  }
+  export interface UpdateImageResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the image.
+     */
+    ImageArn?: ImageArn;
   }
   export interface UpdateMonitoringScheduleRequest {
     /**
@@ -9730,14 +10422,14 @@ declare namespace SageMaker {
   export type UserProfileList = UserProfileDetails[];
   export type UserProfileName = string;
   export type UserProfileSortKey = "CreationTime"|"LastModifiedTime"|string;
-  export type UserProfileStatus = "Deleting"|"Failed"|"InService"|"Pending"|string;
+  export type UserProfileStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export interface UserSettings {
     /**
      * The execution role for the user.
      */
     ExecutionRole?: RoleArn;
     /**
-     * The security groups.
+     * The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication. Optional when the CreateDomain.AppNetworkAccessType parameter is set to PublicInternetOnly. Required when the CreateDomain.AppNetworkAccessType parameter is set to VpcOnly.
      */
     SecurityGroups?: SecurityGroupIds;
     /**
@@ -9767,6 +10459,7 @@ declare namespace SageMaker {
   export type VariantPropertyList = VariantProperty[];
   export type VariantPropertyType = "DesiredInstanceCount"|"DesiredWeight"|"DataCaptureConfig"|string;
   export type VariantWeight = number;
+  export type VersionedArnOrName = string;
   export type VolumeSizeInGB = number;
   export interface VpcConfig {
     /**

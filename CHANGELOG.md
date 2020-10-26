@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.778.0-->
+<!--LATEST=2.779.0-->
 <!--ENTRYINSERT-->
+
+## 2.779.0
+* feature: Kendra: Amazon Kendra now supports indexing data from Confluence Server.
+* feature: Neptune: This feature enables custom endpoints for Amazon Neptune clusters. Custom endpoints simplify connection management when clusters contain instances with different capacities and configuration settings.
+* feature: SageMaker: This release enables customers to bring custom images for use with SageMaker Studio notebooks.
 
 ## 2.778.0
 * feature: MediaTailor: MediaTailor now supports ad marker passthrough for HLS. Use AdMarkerPassthrough to pass EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 from origin manifests into personalized manifests.

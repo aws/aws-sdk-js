@@ -77,6 +77,14 @@ declare class Neptune extends Service {
    */
   createDBCluster(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
+   * Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
+   */
+  createDBClusterEndpoint(params: Neptune.Types.CreateDBClusterEndpointMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterEndpointOutput) => void): Request<Neptune.Types.CreateDBClusterEndpointOutput, AWSError>;
+  /**
+   * Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
+   */
+  createDBClusterEndpoint(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterEndpointOutput) => void): Request<Neptune.Types.CreateDBClusterEndpointOutput, AWSError>;
+  /**
    * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   createDBClusterParameterGroup(params: Neptune.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
@@ -133,6 +141,14 @@ declare class Neptune extends Service {
    */
   deleteDBCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
+   * Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
+   */
+  deleteDBClusterEndpoint(params: Neptune.Types.DeleteDBClusterEndpointMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterEndpointOutput) => void): Request<Neptune.Types.DeleteDBClusterEndpointOutput, AWSError>;
+  /**
+   * Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
+   */
+  deleteDBClusterEndpoint(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterEndpointOutput) => void): Request<Neptune.Types.DeleteDBClusterEndpointOutput, AWSError>;
+  /**
    * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
    */
   deleteDBClusterParameterGroup(params: Neptune.Types.DeleteDBClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -180,6 +196,14 @@ declare class Neptune extends Service {
    * Deletes an event notification subscription.
    */
   deleteEventSubscription(callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Returns information about endpoints for an Amazon Neptune DB cluster.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
+   */
+  describeDBClusterEndpoints(params: Neptune.Types.DescribeDBClusterEndpointsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterEndpointMessage) => void): Request<Neptune.Types.DBClusterEndpointMessage, AWSError>;
+  /**
+   * Returns information about endpoints for an Amazon Neptune DB cluster.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
+   */
+  describeDBClusterEndpoints(callback?: (err: AWSError, data: Neptune.Types.DBClusterEndpointMessage) => void): Request<Neptune.Types.DBClusterEndpointMessage, AWSError>;
   /**
    *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group.
    */
@@ -349,6 +373,14 @@ declare class Neptune extends Service {
    */
   modifyDBCluster(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
   /**
+   * Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
+   */
+  modifyDBClusterEndpoint(params: Neptune.Types.ModifyDBClusterEndpointMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterEndpointOutput) => void): Request<Neptune.Types.ModifyDBClusterEndpointOutput, AWSError>;
+  /**
+   * Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
+   */
+  modifyDBClusterEndpoint(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterEndpointOutput) => void): Request<Neptune.Types.ModifyDBClusterEndpointOutput, AWSError>;
+  /**
    *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   modifyDBClusterParameterGroup(params: Neptune.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
@@ -511,6 +543,10 @@ declare namespace Neptune {
      * The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole.
      */
     RoleArn: String;
+    /**
+     * The name of the feature for the Neptune DB cluster that the IAM role is to be associated with. For the list of supported feature names, see DBEngineVersion.
+     */
+    FeatureName?: String;
   }
   export interface AddSourceIdentifierToSubscriptionMessage {
     /**
@@ -655,6 +691,74 @@ declare namespace Neptune {
   export interface CopyDBParameterGroupResult {
     DBParameterGroup?: DBParameterGroup;
   }
+  export interface CreateDBClusterEndpointMessage {
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+    /**
+     * The identifier to use for the new endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, ANY.
+     */
+    EndpointType: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The tags to be assigned to the Amazon Neptune resource.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDBClusterEndpointOutput {
+    /**
+     * The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+     */
+    DBClusterEndpointResourceIdentifier?: String;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Endpoint?: String;
+    /**
+     * The current status of the endpoint. One of: creating, available, deleting, inactive, modifying. The inactive state applies to an endpoint that cannot be used for a certain kind of cluster, such as a writer endpoint for a read-only secondary cluster in a global database.
+     */
+    Status?: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, CUSTOM.
+     */
+    EndpointType?: String;
+    /**
+     * The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+     */
+    CustomEndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The Amazon Resource Name (ARN) for the endpoint.
+     */
+    DBClusterEndpointArn?: String;
+  }
   export interface CreateDBClusterMessage {
     /**
      * A list of EC2 Availability Zones that instances in the DB cluster can be created in.
@@ -693,7 +797,7 @@ declare namespace Neptune {
      */
     Engine: String;
     /**
-     * The version number of the database engine to use. Currently, setting this parameter has no effect. Example: 1.0.1 
+     * The version number of the database engine to use for the new DB cluster. Example: 1.0.2.1 
      */
     EngineVersion?: String;
     /**
@@ -741,7 +845,7 @@ declare namespace Neptune {
      */
     PreSignedUrl?: String;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
+     * Not supported by Neptune.
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -1196,6 +1300,59 @@ declare namespace Neptune {
      */
     DeletionProtection?: BooleanOptional;
   }
+  export interface DBClusterEndpoint {
+    /**
+     * The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+     */
+    DBClusterEndpointResourceIdentifier?: String;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Endpoint?: String;
+    /**
+     * The current status of the endpoint. One of: creating, available, deleting, inactive, modifying. The inactive state applies to an endpoint that cannot be used for a certain kind of cluster, such as a writer endpoint for a read-only secondary cluster in a global database.
+     */
+    Status?: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, CUSTOM.
+     */
+    EndpointType?: String;
+    /**
+     * The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+     */
+    CustomEndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The Amazon Resource Name (ARN) for the endpoint.
+     */
+    DBClusterEndpointArn?: String;
+  }
+  export type DBClusterEndpointList = DBClusterEndpoint[];
+  export interface DBClusterEndpointMessage {
+    /**
+     *  An optional pagination token provided by a previous DescribeDBClusterEndpoints request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * Contains the details of the endpoints associated with the cluster and matching any filter conditions.
+     */
+    DBClusterEndpoints?: DBClusterEndpointList;
+  }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
     /**
@@ -1291,6 +1448,10 @@ declare namespace Neptune {
      * Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB cluster.    INVALID - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.  
      */
     Status?: String;
+    /**
+     * The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion. 
+     */
+    FeatureName?: String;
   }
   export type DBClusterRoles = DBClusterRole[];
   export interface DBClusterSnapshot {
@@ -1817,6 +1978,54 @@ declare namespace Neptune {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
+  export interface DeleteDBClusterEndpointMessage {
+    /**
+     * The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+  }
+  export interface DeleteDBClusterEndpointOutput {
+    /**
+     * The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+     */
+    DBClusterEndpointResourceIdentifier?: String;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Endpoint?: String;
+    /**
+     * The current status of the endpoint. One of: creating, available, deleting, inactive, modifying. The inactive state applies to an endpoint that cannot be used for a certain kind of cluster, such as a writer endpoint for a read-only secondary cluster in a global database.
+     */
+    Status?: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, CUSTOM.
+     */
+    EndpointType?: String;
+    /**
+     * The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+     */
+    CustomEndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The Amazon Resource Name (ARN) for the endpoint.
+     */
+    DBClusterEndpointArn?: String;
+  }
   export interface DeleteDBClusterMessage {
     /**
      * The DB cluster identifier for the DB cluster to be deleted. This parameter isn't case-sensitive. Constraints:   Must match an existing DBClusterIdentifier.  
@@ -1886,6 +2095,28 @@ declare namespace Neptune {
   }
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface DescribeDBClusterEndpointsMessage {
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * The identifier of the endpoint to describe. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format Name=endpoint_type,Values=endpoint_type1,endpoint_type2,.... Name can be one of: db-cluster-endpoint-type, db-cluster-endpoint-custom-type, db-cluster-endpoint-id, db-cluster-endpoint-status. Values for the  db-cluster-endpoint-type filter can be one or more of: reader, writer, custom. Values for the db-cluster-endpoint-custom-type filter can be one or more of: reader, any. Values for the db-cluster-endpoint-status filter can be one or more of: available, creating, deleting, inactive, modifying. 
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous DescribeDBClusterEndpoints request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
   }
   export interface DescribeDBClusterParameterGroupsMessage {
     /**
@@ -2478,6 +2709,66 @@ declare namespace Neptune {
     Filters?: FilterList;
   }
   export type LogTypeList = String[];
+  export interface ModifyDBClusterEndpointMessage {
+    /**
+     * The identifier of the endpoint to modify. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, ANY.
+     */
+    EndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+  }
+  export interface ModifyDBClusterEndpointOutput {
+    /**
+     * The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterEndpointIdentifier?: String;
+    /**
+     * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+     */
+    DBClusterEndpointResourceIdentifier?: String;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Endpoint?: String;
+    /**
+     * The current status of the endpoint. One of: creating, available, deleting, inactive, modifying. The inactive state applies to an endpoint that cannot be used for a certain kind of cluster, such as a writer endpoint for a read-only secondary cluster in a global database.
+     */
+    Status?: String;
+    /**
+     * The type of the endpoint. One of: READER, WRITER, CUSTOM.
+     */
+    EndpointType?: String;
+    /**
+     * The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+     */
+    CustomEndpointType?: String;
+    /**
+     * List of DB instance identifiers that are part of the custom endpoint group.
+     */
+    StaticMembers?: StringList;
+    /**
+     * List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+     */
+    ExcludedMembers?: StringList;
+    /**
+     * The Amazon Resource Name (ARN) for the endpoint.
+     */
+    DBClusterEndpointArn?: String;
+  }
   export interface ModifyDBClusterMessage {
     /**
      * The DB cluster identifier for the cluster being modified. This parameter is not case-sensitive. Constraints:   Must match the identifier of an existing DBCluster.  
@@ -2532,7 +2823,7 @@ declare namespace Neptune {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the ApplyPendingMaintenanceAction API. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
+     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see Engine Releases for Amazon Neptune, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
     /**
@@ -3081,6 +3372,10 @@ declare namespace Neptune {
      * The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole.
      */
     RoleArn: String;
+    /**
+     * The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see DBEngineVersion.
+     */
+    FeatureName?: String;
   }
   export interface RemoveSourceIdentifierFromSubscriptionMessage {
     /**
@@ -3298,6 +3593,7 @@ declare namespace Neptune {
     DBCluster?: DBCluster;
   }
   export type String = string;
+  export type StringList = String[];
   export interface Subnet {
     /**
      * Specifies the identifier of the subnet.
