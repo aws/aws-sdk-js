@@ -244,19 +244,19 @@ declare class Glue extends Service {
    */
   deleteClassifier(callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
   /**
-   * Delete the partition column statistics of a column.
+   * Delete the partition column statistics of a column. The Identity and Access Management (IAM) permission required for this operation is DeletePartition.
    */
   deleteColumnStatisticsForPartition(params: Glue.Types.DeleteColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Delete the partition column statistics of a column.
+   * Delete the partition column statistics of a column. The Identity and Access Management (IAM) permission required for this operation is DeletePartition.
    */
   deleteColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Retrieves table statistics of columns.
+   * Retrieves table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is DeleteTable.
    */
   deleteColumnStatisticsForTable(params: Glue.Types.DeleteColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForTableResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForTableResponse, AWSError>;
   /**
-   * Retrieves table statistics of columns.
+   * Retrieves table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is DeleteTable.
    */
   deleteColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForTableResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForTableResponse, AWSError>;
   /**
@@ -396,19 +396,19 @@ declare class Glue extends Service {
    */
   getClassifiers(callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
   /**
-   * Retrieves partition statistics of columns.
+   * Retrieves partition statistics of columns. The Identity and Access Management (IAM) permission required for this operation is GetPartition.
    */
   getColumnStatisticsForPartition(params: Glue.Types.GetColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.GetColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Retrieves partition statistics of columns.
+   * Retrieves partition statistics of columns. The Identity and Access Management (IAM) permission required for this operation is GetPartition.
    */
   getColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.GetColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Retrieves table statistics of columns.
+   * Retrieves table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is GetTable.
    */
   getColumnStatisticsForTable(params: Glue.Types.GetColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForTableResponse) => void): Request<Glue.Types.GetColumnStatisticsForTableResponse, AWSError>;
   /**
-   * Retrieves table statistics of columns.
+   * Retrieves table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is GetTable.
    */
   getColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForTableResponse) => void): Request<Glue.Types.GetColumnStatisticsForTableResponse, AWSError>;
   /**
@@ -980,19 +980,19 @@ declare class Glue extends Service {
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Creates or updates partition statistics of columns.
+   * Creates or updates partition statistics of columns. The Identity and Access Management (IAM) permission required for this operation is UpdatePartition.
    */
   updateColumnStatisticsForPartition(params: Glue.Types.UpdateColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Creates or updates partition statistics of columns.
+   * Creates or updates partition statistics of columns. The Identity and Access Management (IAM) permission required for this operation is UpdatePartition.
    */
   updateColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForPartitionResponse, AWSError>;
   /**
-   * Creates or updates table statistics of columns.
+   * Creates or updates table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is UpdateTable.
    */
   updateColumnStatisticsForTable(params: Glue.Types.UpdateColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForTableResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForTableResponse, AWSError>;
   /**
-   * Creates or updates table statistics of columns.
+   * Creates or updates table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is UpdateTable.
    */
   updateColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForTableResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForTableResponse, AWSError>;
   /**
@@ -1445,15 +1445,15 @@ declare namespace Glue {
   }
   export interface BinaryColumnStatisticsData {
     /**
-     * Maximum length of the column.
+     * The size of the longest bit sequence in the column.
      */
     MaximumLength: NonNegativeLong;
     /**
-     * Average length of the column.
+     * The average bit sequence length in the column.
      */
     AverageLength: NonNegativeDouble;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
   }
@@ -1461,15 +1461,15 @@ declare namespace Glue {
   export type Boolean = boolean;
   export interface BooleanColumnStatisticsData {
     /**
-     * Number of true value.
+     * The number of true values in the column.
      */
     NumberOfTrues: NonNegativeLong;
     /**
-     * Number of false value.
+     * The number of false values in the column.
      */
     NumberOfFalses: NonNegativeLong;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
   }
@@ -1642,11 +1642,11 @@ declare namespace Glue {
   }
   export interface ColumnError {
     /**
-     * The name of the column.
+     * The name of the column that failed.
      */
     ColumnName?: NameString;
     /**
-     * The error message occurred during operation.
+     * An error message with the reason for the failure of an operation.
      */
     Error?: ErrorDetail;
   }
@@ -1655,53 +1655,53 @@ declare namespace Glue {
   export type ColumnNameString = string;
   export interface ColumnStatistics {
     /**
-     * The name of the column.
+     * Name of column which statistics belong to.
      */
     ColumnName: NameString;
     /**
-     * The type of the column.
+     * The data type of the column.
      */
     ColumnType: TypeString;
     /**
-     * The analyzed time of the column statistics.
+     * The timestamp of when column statistics were generated.
      */
     AnalyzedTime: Timestamp;
     /**
-     * The statistics of the column.
+     * A ColumnStatisticData object that contains the statistics data values.
      */
     StatisticsData: ColumnStatisticsData;
   }
   export interface ColumnStatisticsData {
     /**
-     * The name of the column.
+     * The type of column statistics data.
      */
     Type: ColumnStatisticsType;
     /**
-     * Boolean Column Statistics Data.
+     * Boolean column statistics data.
      */
     BooleanColumnStatisticsData?: BooleanColumnStatisticsData;
     /**
-     * Date Column Statistics Data.
+     * Date column statistics data.
      */
     DateColumnStatisticsData?: DateColumnStatisticsData;
     /**
-     * Decimal Column Statistics Data.
+     * Decimal column statistics data.
      */
     DecimalColumnStatisticsData?: DecimalColumnStatisticsData;
     /**
-     * Double Column Statistics Data.
+     * Double column statistics data.
      */
     DoubleColumnStatisticsData?: DoubleColumnStatisticsData;
     /**
-     * Long Column Statistics Data.
+     * Long column statistics data.
      */
     LongColumnStatisticsData?: LongColumnStatisticsData;
     /**
-     * String Column Statistics Data.
+     * String column statistics data.
      */
     StringColumnStatisticsData?: StringColumnStatisticsData;
     /**
-     * Binary Column Statistics Data.
+     * Binary column statistics data.
      */
     BinaryColumnStatisticsData?: BinaryColumnStatisticsData;
   }
@@ -1711,7 +1711,7 @@ declare namespace Glue {
      */
     ColumnStatistics?: ColumnStatistics;
     /**
-     * The error message occurred during operation.
+     * An error message with the reason for the failure of an operation.
      */
     Error?: ErrorDetail;
   }
@@ -2450,6 +2450,10 @@ declare namespace Glue {
      * The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
      */
     Tags?: TagsMap;
+    /**
+     * The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
+     */
+    TransformEncryption?: TransformEncryption;
   }
   export interface CreateMLTransformResponse {
     /**
@@ -2784,37 +2788,37 @@ declare namespace Glue {
   export type DatabaseName = string;
   export interface DateColumnStatisticsData {
     /**
-     * Minimum value of the column.
+     * The lowest value in the column.
      */
     MinimumValue?: Timestamp;
     /**
-     * Maximum value of the column.
+     * The highest value in the column.
      */
     MaximumValue?: Timestamp;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
     /**
-     * Number of distinct values.
+     * The number of distinct values in a column.
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
   export interface DecimalColumnStatisticsData {
     /**
-     * Minimum value of the column.
+     * The lowest value in the column.
      */
     MinimumValue?: DecimalNumber;
     /**
-     * Maximum value of the column.
+     * The highest value in the column.
      */
     MaximumValue?: DecimalNumber;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
     /**
-     * Number of distinct values.
+     * The number of distinct values in a column.
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
@@ -3182,19 +3186,19 @@ declare namespace Glue {
   export type Double = number;
   export interface DoubleColumnStatisticsData {
     /**
-     * Minimum value of the column.
+     * The lowest value in the column.
      */
     MinimumValue?: Double;
     /**
-     * Maximum value of the column.
+     * The highest value in the column.
      */
     MaximumValue?: Double;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
     /**
-     * Number of distinct values.
+     * The number of distinct values in a column.
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
@@ -3927,6 +3931,10 @@ declare namespace Glue {
      * The maximum number of times to retry a task for this transform after a task run fails.
      */
     MaxRetries?: NullableInteger;
+    /**
+     * The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
+     */
+    TransformEncryption?: TransformEncryption;
   }
   export interface GetMLTransformsRequest {
     /**
@@ -5134,19 +5142,19 @@ declare namespace Glue {
   export type Long = number;
   export interface LongColumnStatisticsData {
     /**
-     * Minimum value of the column.
+     * The lowest value in the column.
      */
     MinimumValue?: Long;
     /**
-     * Maximum value of the column.
+     * The highest value in the column.
      */
     MaximumValue?: Long;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
     /**
-     * Number of distinct values.
+     * The number of distinct values in a column.
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
@@ -5223,7 +5231,22 @@ declare namespace Glue {
      * The maximum number of times to retry after an MLTaskRun of the machine learning transform fails.
      */
     MaxRetries?: NullableInteger;
+    /**
+     * The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
+     */
+    TransformEncryption?: TransformEncryption;
   }
+  export interface MLUserDataEncryption {
+    /**
+     * The encryption mode applied to user data. Valid values are:   DISABLED: encryption is disabled   SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.  
+     */
+    MlUserDataEncryptionMode: MLUserDataEncryptionModeString;
+    /**
+     * The ID for the customer-provided KMS key.
+     */
+    KmsKeyId?: NameString;
+  }
+  export type MLUserDataEncryptionModeString = "DISABLED"|"SSE-KMS"|string;
   export type MapValue = {[key: string]: GenericString};
   export interface MappingEntry {
     /**
@@ -6044,19 +6067,19 @@ declare namespace Glue {
   }
   export interface StringColumnStatisticsData {
     /**
-     * Maximum value of the column.
+     * The size of the longest string in the column.
      */
     MaximumLength: NonNegativeLong;
     /**
-     * Average value of the column.
+     * The average string length in the column.
      */
     AverageLength: NonNegativeDouble;
     /**
-     * Number of nulls.
+     * The number of null values in the column.
      */
     NumberOfNulls: NonNegativeLong;
     /**
-     * Number of distinct values.
+     * The number of distinct values in a column.
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
@@ -6364,6 +6387,16 @@ declare namespace Glue {
   export type TimestampValue = Date;
   export type Token = string;
   export type TotalSegmentsInteger = number;
+  export interface TransformEncryption {
+    /**
+     * An MLUserDataEncryption object containing the encryption mode and customer-provided KMS key ID.
+     */
+    MlUserDataEncryption?: MLUserDataEncryption;
+    /**
+     * The name of the security configuration.
+     */
+    TaskRunSecurityConfigurationName?: NameString;
+  }
   export interface TransformFilterCriteria {
     /**
      * A unique transform name that is used to filter the machine learning transforms.

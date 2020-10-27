@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.779.0-->
+<!--LATEST=2.780.0-->
 <!--ENTRYINSERT-->
+
+## 2.780.0
+* feature: Glue: AWS Glue machine learning transforms now support encryption-at-rest for labels and trained models.
 
 ## 2.779.0
 * feature: Kendra: Amazon Kendra now supports indexing data from Confluence Server.

@@ -919,7 +919,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Delete the partition column statistics of a column.</p>"
+      "documentation": "<p>Delete the partition column statistics of a column.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeletePartition</code>.</p>"
     },
     "DeleteColumnStatisticsForTable": {
       "name": "DeleteColumnStatisticsForTable",
@@ -950,7 +950,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Retrieves table statistics of columns.</p>"
+      "documentation": "<p>Retrieves table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeleteTable</code>.</p>"
     },
     "DeleteConnection": {
       "name": "DeleteConnection",
@@ -1430,7 +1430,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Retrieves partition statistics of columns.</p>"
+      "documentation": "<p>Retrieves partition statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetPartition</code>.</p>"
     },
     "GetColumnStatisticsForTable": {
       "name": "GetColumnStatisticsForTable",
@@ -1461,7 +1461,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Retrieves table statistics of columns.</p>"
+      "documentation": "<p>Retrieves table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetTable</code>.</p>"
     },
     "GetConnection": {
       "name": "GetConnection",
@@ -3510,7 +3510,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Creates or updates partition statistics of columns.</p>"
+      "documentation": "<p>Creates or updates partition statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdatePartition</code>.</p>"
     },
     "UpdateColumnStatisticsForTable": {
       "name": "UpdateColumnStatisticsForTable",
@@ -3541,7 +3541,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Creates or updates table statistics of columns.</p>"
+      "documentation": "<p>Creates or updates table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdateTable</code>.</p>"
     },
     "UpdateConnection": {
       "name": "UpdateConnection",
@@ -4508,18 +4508,18 @@
       "members": {
         "MaximumLength": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Maximum length of the column.</p>"
+          "documentation": "<p>The size of the longest bit sequence in the column.</p>"
         },
         "AverageLength": {
           "shape": "NonNegativeDouble",
-          "documentation": "<p>Average length of the column.</p>"
+          "documentation": "<p>The average bit sequence length in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         }
       },
-      "documentation": "<p>Defines a binary column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for bit sequence data values.</p>"
     },
     "Blob": {
       "type": "blob"
@@ -4537,18 +4537,18 @@
       "members": {
         "NumberOfTrues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of true value.</p>"
+          "documentation": "<p>The number of true values in the column.</p>"
         },
         "NumberOfFalses": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of false value.</p>"
+          "documentation": "<p>The number of false values in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         }
       },
-      "documentation": "<p>Defines a boolean column statistics.</p>"
+      "documentation": "<p>Defines column statistics supported for Boolean data columns.</p>"
     },
     "BooleanNullable": {
       "type": "boolean"
@@ -4866,14 +4866,14 @@
       "members": {
         "ColumnName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the column.</p>"
+          "documentation": "<p>The name of the column that failed.</p>"
         },
         "Error": {
           "shape": "ErrorDetail",
-          "documentation": "<p>The error message occurred during operation.</p>"
+          "documentation": "<p>An error message with the reason for the failure of an operation.</p>"
         }
       },
-      "documentation": "<p>Defines a column containing error.</p>"
+      "documentation": "<p>Encapsulates a column name that failed and the reason for failure.</p>"
     },
     "ColumnErrors": {
       "type": "list",
@@ -4904,22 +4904,22 @@
       "members": {
         "ColumnName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the column.</p>"
+          "documentation": "<p>Name of column which statistics belong to.</p>"
         },
         "ColumnType": {
           "shape": "TypeString",
-          "documentation": "<p>The type of the column.</p>"
+          "documentation": "<p>The data type of the column.</p>"
         },
         "AnalyzedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The analyzed time of the column statistics.</p>"
+          "documentation": "<p>The timestamp of when column statistics were generated.</p>"
         },
         "StatisticsData": {
           "shape": "ColumnStatisticsData",
-          "documentation": "<p>The statistics of the column.</p>"
+          "documentation": "<p>A <code>ColumnStatisticData</code> object that contains the statistics data values.</p>"
         }
       },
-      "documentation": "<p>Defines a column statistics.</p>"
+      "documentation": "<p>Represents the generated column-level statistics for a table or partition.</p>"
     },
     "ColumnStatisticsData": {
       "type": "structure",
@@ -4929,52 +4929,52 @@
       "members": {
         "Type": {
           "shape": "ColumnStatisticsType",
-          "documentation": "<p>The name of the column.</p>"
+          "documentation": "<p>The type of column statistics data.</p>"
         },
         "BooleanColumnStatisticsData": {
           "shape": "BooleanColumnStatisticsData",
-          "documentation": "<p>Boolean Column Statistics Data.</p>"
+          "documentation": "<p>Boolean column statistics data.</p>"
         },
         "DateColumnStatisticsData": {
           "shape": "DateColumnStatisticsData",
-          "documentation": "<p>Date Column Statistics Data.</p>"
+          "documentation": "<p>Date column statistics data.</p>"
         },
         "DecimalColumnStatisticsData": {
           "shape": "DecimalColumnStatisticsData",
-          "documentation": "<p>Decimal Column Statistics Data.</p>"
+          "documentation": "<p>Decimal column statistics data.</p>"
         },
         "DoubleColumnStatisticsData": {
           "shape": "DoubleColumnStatisticsData",
-          "documentation": "<p>Double Column Statistics Data.</p>"
+          "documentation": "<p>Double column statistics data.</p>"
         },
         "LongColumnStatisticsData": {
           "shape": "LongColumnStatisticsData",
-          "documentation": "<p>Long Column Statistics Data.</p>"
+          "documentation": "<p>Long column statistics data.</p>"
         },
         "StringColumnStatisticsData": {
           "shape": "StringColumnStatisticsData",
-          "documentation": "<p>String Column Statistics Data.</p>"
+          "documentation": "<p>String column statistics data.</p>"
         },
         "BinaryColumnStatisticsData": {
           "shape": "BinaryColumnStatisticsData",
-          "documentation": "<p>Binary Column Statistics Data.</p>"
+          "documentation": "<p>Binary column statistics data.</p>"
         }
       },
-      "documentation": "<p>Defines a column statistics data.</p>"
+      "documentation": "<p>Contains the individual types of column statistics data. Only one data object should be set and indicated by the <code>Type</code> attribute.</p>"
     },
     "ColumnStatisticsError": {
       "type": "structure",
       "members": {
         "ColumnStatistics": {
           "shape": "ColumnStatistics",
-          "documentation": "<p>The ColumnStatistics of the column.</p>"
+          "documentation": "<p>The <code>ColumnStatistics</code> of the column.</p>"
         },
         "Error": {
           "shape": "ErrorDetail",
-          "documentation": "<p>The error message occurred during operation.</p>"
+          "documentation": "<p>An error message with the reason for the failure of an operation.</p>"
         }
       },
-      "documentation": "<p>Defines a column containing error.</p>"
+      "documentation": "<p>Encapsulates a <code>ColumnStatistics</code> object that failed and the reason for failure.</p>"
     },
     "ColumnStatisticsErrors": {
       "type": "list",
@@ -5995,6 +5995,10 @@
         "Tags": {
           "shape": "TagsMap",
           "documentation": "<p>The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+        },
+        "TransformEncryption": {
+          "shape": "TransformEncryption",
+          "documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
         }
       }
     },
@@ -6496,22 +6500,22 @@
       "members": {
         "MinimumValue": {
           "shape": "Timestamp",
-          "documentation": "<p>Minimum value of the column.</p>"
+          "documentation": "<p>The lowest value in the column.</p>"
         },
         "MaximumValue": {
           "shape": "Timestamp",
-          "documentation": "<p>Maximum value of the column.</p>"
+          "documentation": "<p>The highest value in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         },
         "NumberOfDistinctValues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of distinct values.</p>"
+          "documentation": "<p>The number of distinct values in a column.</p>"
         }
       },
-      "documentation": "<p>Defines a date column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for timestamp data columns.</p>"
     },
     "DecimalColumnStatisticsData": {
       "type": "structure",
@@ -6522,22 +6526,22 @@
       "members": {
         "MinimumValue": {
           "shape": "DecimalNumber",
-          "documentation": "<p>Minimum value of the column.</p>"
+          "documentation": "<p>The lowest value in the column.</p>"
         },
         "MaximumValue": {
           "shape": "DecimalNumber",
-          "documentation": "<p>Maximum value of the column.</p>"
+          "documentation": "<p>The highest value in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         },
         "NumberOfDistinctValues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of distinct values.</p>"
+          "documentation": "<p>The number of distinct values in a column.</p>"
         }
       },
-      "documentation": "<p>Defines a decimal column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for fixed-point number data columns.</p>"
     },
     "DecimalNumber": {
       "type": "structure",
@@ -7117,22 +7121,22 @@
       "members": {
         "MinimumValue": {
           "shape": "Double",
-          "documentation": "<p>Minimum value of the column.</p>"
+          "documentation": "<p>The lowest value in the column.</p>"
         },
         "MaximumValue": {
           "shape": "Double",
-          "documentation": "<p>Maximum value of the column.</p>"
+          "documentation": "<p>The highest value in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         },
         "NumberOfDistinctValues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of distinct values.</p>"
+          "documentation": "<p>The number of distinct values in a column.</p>"
         }
       },
-      "documentation": "<p>Defines a double column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for floating-point number data columns.</p>"
     },
     "DynamoDBTarget": {
       "type": "structure",
@@ -8179,6 +8183,10 @@
         "MaxRetries": {
           "shape": "NullableInteger",
           "documentation": "<p>The maximum number of times to retry a task for this transform after a task run fails.</p>"
+        },
+        "TransformEncryption": {
+          "shape": "TransformEncryption",
+          "documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
         }
       }
     },
@@ -9902,22 +9910,22 @@
       "members": {
         "MinimumValue": {
           "shape": "Long",
-          "documentation": "<p>Minimum value of the column.</p>"
+          "documentation": "<p>The lowest value in the column.</p>"
         },
         "MaximumValue": {
           "shape": "Long",
-          "documentation": "<p>Maximum value of the column.</p>"
+          "documentation": "<p>The highest value in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         },
         "NumberOfDistinctValues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of distinct values.</p>"
+          "documentation": "<p>The number of distinct values in a column.</p>"
         }
       },
-      "documentation": "<p>Defines a long column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for integer data columns.</p>"
     },
     "MLTransform": {
       "type": "structure",
@@ -9993,9 +10001,37 @@
         "MaxRetries": {
           "shape": "NullableInteger",
           "documentation": "<p>The maximum number of times to retry after an <code>MLTaskRun</code> of the machine learning transform fails.</p>"
+        },
+        "TransformEncryption": {
+          "shape": "TransformEncryption",
+          "documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
         }
       },
       "documentation": "<p>A structure for a machine learning transform.</p>"
+    },
+    "MLUserDataEncryption": {
+      "type": "structure",
+      "required": [
+        "MlUserDataEncryptionMode"
+      ],
+      "members": {
+        "MlUserDataEncryptionMode": {
+          "shape": "MLUserDataEncryptionModeString",
+          "documentation": "<p>The encryption mode applied to user data. Valid values are:</p> <ul> <li> <p>DISABLED: encryption is disabled</p> </li> <li> <p>SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p> </li> </ul>"
+        },
+        "KmsKeyId": {
+          "shape": "NameString",
+          "documentation": "<p>The ID for the customer-provided KMS key.</p>"
+        }
+      },
+      "documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data.</p>"
+    },
+    "MLUserDataEncryptionModeString": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "SSE-KMS"
+      ]
     },
     "MapValue": {
       "type": "map",
@@ -11451,22 +11487,22 @@
       "members": {
         "MaximumLength": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Maximum value of the column.</p>"
+          "documentation": "<p>The size of the longest string in the column.</p>"
         },
         "AverageLength": {
           "shape": "NonNegativeDouble",
-          "documentation": "<p>Average value of the column.</p>"
+          "documentation": "<p>The average string length in the column.</p>"
         },
         "NumberOfNulls": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of nulls.</p>"
+          "documentation": "<p>The number of null values in the column.</p>"
         },
         "NumberOfDistinctValues": {
           "shape": "NonNegativeLong",
-          "documentation": "<p>Number of distinct values.</p>"
+          "documentation": "<p>The number of distinct values in a column.</p>"
         }
       },
-      "documentation": "<p>Defines a string column statistics data.</p>"
+      "documentation": "<p>Defines column statistics supported for character sequence data values.</p>"
     },
     "StringList": {
       "type": "list",
@@ -11931,6 +11967,20 @@
       "max": 10,
       "min": 1
     },
+    "TransformEncryption": {
+      "type": "structure",
+      "members": {
+        "MlUserDataEncryption": {
+          "shape": "MLUserDataEncryption",
+          "documentation": "<p>An <code>MLUserDataEncryption</code> object containing the encryption mode and customer-provided KMS key ID.</p>"
+        },
+        "TaskRunSecurityConfigurationName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p> <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>"
+    },
     "TransformFilterCriteria": {
       "type": "structure",
       "members": {
@@ -11993,7 +12043,7 @@
       "members": {
         "TransformType": {
           "shape": "TransformType",
-          "documentation": "<p>The type of machine learning transform.</p> <p>For information about the types of machine learning transforms, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html\">Creating Machine Learning Transforms</a>.</p>"
+          "documentation": "<p>The type of machine learning transform.</p> <p>For information about the types of machine learning transforms, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html\">Creating Machine Learning Transforms</a>.</p>"
         },
         "FindMatchesParameters": {
           "shape": "FindMatchesParameters",
