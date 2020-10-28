@@ -125,6 +125,14 @@ declare class EC2 extends Service {
    */
   associateDhcpOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide. When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS key that has an attached attestation-based key policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS key, you must grant it permission to call kms:Decrypt on AWS KMS key returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the Amazon Elastic Compute Cloud User Guide.
+   */
+  associateEnclaveCertificateIamRole(params: EC2.Types.AssociateEnclaveCertificateIamRoleRequest, callback?: (err: AWSError, data: EC2.Types.AssociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.AssociateEnclaveCertificateIamRoleResult, AWSError>;
+  /**
+   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide. When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS key that has an attached attestation-based key policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS key, you must grant it permission to call kms:Decrypt on AWS KMS key returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the Amazon Elastic Compute Cloud User Guide.
+   */
+  associateEnclaveCertificateIamRole(callback?: (err: AWSError, data: EC2.Types.AssociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.AssociateEnclaveCertificateIamRoleResult, AWSError>;
+  /**
    * Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.
    */
   associateIamInstanceProfile(params: EC2.Types.AssociateIamInstanceProfileRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIamInstanceProfileResult) => void): Request<EC2.Types.AssociateIamInstanceProfileResult, AWSError>;
@@ -2253,6 +2261,14 @@ declare class EC2 extends Service {
    */
   disassociateClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.DisassociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.DisassociateClientVpnTargetNetworkResult, AWSError>;
   /**
+   * Disassociates an IAM role from an AWS Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the AWS Key Management Service (KMS) key used to encrypt the private key. This effectively revokes the role's permission to use the certificate. 
+   */
+  disassociateEnclaveCertificateIamRole(params: EC2.Types.DisassociateEnclaveCertificateIamRoleRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.DisassociateEnclaveCertificateIamRoleResult, AWSError>;
+  /**
+   * Disassociates an IAM role from an AWS Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the AWS Key Management Service (KMS) key used to encrypt the private key. This effectively revokes the role's permission to use the certificate. 
+   */
+  disassociateEnclaveCertificateIamRole(callback?: (err: AWSError, data: EC2.Types.DisassociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.DisassociateEnclaveCertificateIamRoleResult, AWSError>;
+  /**
    * Disassociates an IAM instance profile from a running or stopped instance. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
   disassociateIamInstanceProfile(params: EC2.Types.DisassociateIamInstanceProfileRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIamInstanceProfileResult) => void): Request<EC2.Types.DisassociateIamInstanceProfileResult, AWSError>;
@@ -2388,6 +2404,14 @@ declare class EC2 extends Service {
    * Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range. The routes are saved to the specified bucket in a JSON file. For more information, see Export Route Tables to Amazon S3 in Transit Gateways.
    */
   exportTransitGatewayRoutes(callback?: (err: AWSError, data: EC2.Types.ExportTransitGatewayRoutesResult) => void): Request<EC2.Types.ExportTransitGatewayRoutesResult, AWSError>;
+  /**
+   * Returns the IAM roles that are associated with the specified AWS Certificate Manager (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the AWS Key Management Service (KMS) key that's used to encrypt the private key.
+   */
+  getAssociatedEnclaveCertificateIamRoles(params: EC2.Types.GetAssociatedEnclaveCertificateIamRolesRequest, callback?: (err: AWSError, data: EC2.Types.GetAssociatedEnclaveCertificateIamRolesResult) => void): Request<EC2.Types.GetAssociatedEnclaveCertificateIamRolesResult, AWSError>;
+  /**
+   * Returns the IAM roles that are associated with the specified AWS Certificate Manager (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the AWS Key Management Service (KMS) key that's used to encrypt the private key.
+   */
+  getAssociatedEnclaveCertificateIamRoles(callback?: (err: AWSError, data: EC2.Types.GetAssociatedEnclaveCertificateIamRolesResult) => void): Request<EC2.Types.GetAssociatedEnclaveCertificateIamRolesResult, AWSError>;
   /**
    * Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
    */
@@ -4125,6 +4149,34 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface AssociateEnclaveCertificateIamRoleRequest {
+    /**
+     * The ARN of the ACM certificate with which to associate the IAM role.
+     */
+    CertificateArn?: ResourceArn;
+    /**
+     * The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
+     */
+    RoleArn?: ResourceArn;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateEnclaveCertificateIamRoleResult {
+    /**
+     * The name of the Amazon S3 bucket to which the certificate was uploaded.
+     */
+    CertificateS3BucketName?: String;
+    /**
+     * The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The object key is formatted as follows: certificate_arn/role_arn.
+     */
+    CertificateS3ObjectKey?: String;
+    /**
+     * The ID of the AWS Key Management Service (KMS) key used to encrypt the private key of the certificate.
+     */
+    EncryptionKmsKeyId?: String;
+  }
   export interface AssociateIamInstanceProfileRequest {
     /**
      * The IAM instance profile.
@@ -4274,6 +4326,25 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type AssociatedNetworkType = "vpc"|string;
+  export interface AssociatedRole {
+    /**
+     * The ARN of the associated IAM role.
+     */
+    AssociatedRoleArn?: ResourceArn;
+    /**
+     * The name of the Amazon S3 bucket in which the Amazon S3 object is stored.
+     */
+    CertificateS3BucketName?: String;
+    /**
+     * The key of the Amazon S3 object ey where the certificate, certificate chain, and encrypted private key bundle is stored. The object key is formated as follows: certificate_arn/role_arn. 
+     */
+    CertificateS3ObjectKey?: String;
+    /**
+     * The ID of the KMS key used to encrypt the private key.
+     */
+    EncryptionKmsKeyId?: String;
+  }
+  export type AssociatedRolesList = AssociatedRole[];
   export interface AssociatedTargetNetwork {
     /**
      * The ID of the subnet.
@@ -12619,6 +12690,26 @@ declare namespace EC2 {
      */
     Status?: AssociationStatus;
   }
+  export interface DisassociateEnclaveCertificateIamRoleRequest {
+    /**
+     * The ARN of the ACM certificate from which to disassociate the IAM role.
+     */
+    CertificateArn?: ResourceArn;
+    /**
+     * The ARN of the IAM role to disassociate.
+     */
+    RoleArn?: ResourceArn;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateEnclaveCertificateIamRoleResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface DisassociateIamInstanceProfileRequest {
     /**
      * The ID of the IAM instance profile association.
@@ -13239,6 +13330,18 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
+  }
+  export interface EnclaveOptions {
+    /**
+     * If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+     */
+    Enabled?: Boolean;
+  }
+  export interface EnclaveOptionsRequest {
+    /**
+     * To enable the instance for AWS Nitro Enclaves, set this parameter to true.
+     */
+    Enabled?: Boolean;
   }
   export type EndDateType = "unlimited"|"limited"|string;
   export type EndpointSet = ClientVpnEndpoint[];
@@ -13970,6 +14073,22 @@ declare namespace EC2 {
   }
   export type FreeTierEligibleFlag = boolean;
   export type GatewayType = "ipsec.1"|string;
+  export interface GetAssociatedEnclaveCertificateIamRolesRequest {
+    /**
+     * The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.
+     */
+    CertificateArn?: ResourceArn;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetAssociatedEnclaveCertificateIamRolesResult {
+    /**
+     * Information about the associated IAM roles.
+     */
+    AssociatedRoles?: AssociatedRolesList;
+  }
   export interface GetAssociatedIpv6PoolCidrsRequest {
     /**
      * The ID of the IPv6 address pool.
@@ -15822,6 +15941,10 @@ declare namespace EC2 {
      * The metadata options for the instance.
      */
     MetadataOptions?: InstanceMetadataOptionsResponse;
+    /**
+     * Indicates whether the instance is enabled for AWS Nitro Enclaves.
+     */
+    EnclaveOptions?: EnclaveOptions;
   }
   export interface InstanceAttribute {
     /**
@@ -15840,6 +15963,10 @@ declare namespace EC2 {
      * Indicates whether enhanced networking with ENA is enabled.
      */
     EnaSupport?: AttributeBooleanValue;
+    /**
+     * To enable the instance for AWS Nitro Enclaves, set this parameter to true; otherwise, set it to false.
+     */
+    EnclaveOptions?: EnclaveOptions;
     /**
      * Indicates whether the instance is optimized for Amazon EBS I/O.
      */
@@ -15885,7 +16012,7 @@ declare namespace EC2 {
      */
     UserData?: AttributeValue;
   }
-  export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|string;
+  export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|"enclaveOptions"|string;
   export interface InstanceBlockDeviceMapping {
     /**
      * The device name (for example, /dev/sdh or xvdh).
@@ -17000,6 +17127,18 @@ declare namespace EC2 {
     Count?: Integer;
   }
   export type LaunchTemplateElasticInferenceAcceleratorResponseList = LaunchTemplateElasticInferenceAcceleratorResponse[];
+  export interface LaunchTemplateEnclaveOptions {
+    /**
+     * If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+     */
+    Enabled?: Boolean;
+  }
+  export interface LaunchTemplateEnclaveOptionsRequest {
+    /**
+     * To enable the instance for AWS Nitro Enclaves, set this parameter to true.
+     */
+    Enabled?: Boolean;
+  }
   export type LaunchTemplateErrorCode = "launchTemplateIdDoesNotExist"|"launchTemplateIdMalformed"|"launchTemplateNameDoesNotExist"|"launchTemplateNameMalformed"|"launchTemplateVersionDoesNotExist"|"unexpectedError"|string;
   export interface LaunchTemplateHibernationOptions {
     /**
@@ -20971,6 +21110,10 @@ declare namespace EC2 {
      * The metadata options for the instance. For more information, see Instance Metadata and User Data in the Amazon Elastic Compute Cloud User Guide.
      */
     MetadataOptions?: LaunchTemplateInstanceMetadataOptionsRequest;
+    /**
+     * Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide.
+     */
+    EnclaveOptions?: LaunchTemplateEnclaveOptionsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -21656,6 +21799,10 @@ declare namespace EC2 {
      * The metadata options for the instance. For more information, see Instance Metadata and User Data in the Amazon Elastic Compute Cloud User Guide.
      */
     MetadataOptions?: LaunchTemplateInstanceMetadataOptions;
+    /**
+     * Indicates whether the instance is enabled for AWS Nitro Enclaves.
+     */
+    EnclaveOptions?: LaunchTemplateEnclaveOptions;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -22111,7 +22258,7 @@ declare namespace EC2 {
      */
     CapacityReservationSpecification?: CapacityReservationSpecification;
     /**
-     * Indicates whether an instance is enabled for hibernation. For more information, see Hibernate your instance in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates whether an instance is enabled for hibernation. For more information, see Hibernate your instance in the Amazon Elastic Compute Cloud User Guide. You can't enable hibernation and AWS Nitro Enclaves on the same instance.
      */
     HibernationOptions?: HibernationOptionsRequest;
     /**
@@ -22122,6 +22269,10 @@ declare namespace EC2 {
      * The metadata options for the instance. For more information, see Instance metadata and user data.
      */
     MetadataOptions?: InstanceMetadataOptionsRequest;
+    /**
+     * Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide.
+     */
+    EnclaveOptions?: EnclaveOptionsRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**

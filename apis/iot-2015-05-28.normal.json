@@ -7132,6 +7132,12 @@
         "comment": {
           "shape": "Comment",
           "documentation": "<p>An optional comment string describing why the job was associated with the targets.</p>"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
         }
       }
     },
@@ -9186,6 +9192,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Metadata which can be used to manage the job.</p>"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>"
         }
       }
     },
@@ -10242,6 +10252,12 @@
           "documentation": "<p>(Optional) When true, you can delete a job execution which is \"IN_PROGRESS\". Otherwise, you can only delete a job execution which is in a terminal state (\"SUCCEEDED\", \"FAILED\", \"REJECTED\", \"REMOVED\" or \"CANCELED\") or an exception will occur. The default is false.</p> <note> <p>Deleting a job execution which is \"IN_PROGRESS\", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state.</p> </note>",
           "location": "querystring",
           "locationName": "force"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
         }
       }
     },
@@ -10262,6 +10278,12 @@
           "documentation": "<p>(Optional) When true, you can delete a job which is \"IN_PROGRESS\". Otherwise, you can only delete a job which is in a terminal state (\"COMPLETED\" or \"CANCELED\") or an exception will occur. The default is false.</p> <note> <p>Deleting a job which is \"IN_PROGRESS\", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state.</p> </note>",
           "location": "querystring",
           "locationName": "force"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
         }
       }
     },
@@ -11839,9 +11861,8 @@
     },
     "DetailsValue": {
       "type": "string",
-      "max": 1024,
       "min": 1,
-      "pattern": "[^\\p{C}]*+"
+      "pattern": "[^\\p{C}]+"
     },
     "DeviceCertificateUpdateAction": {
       "type": "string",
@@ -13161,6 +13182,10 @@
         "timeoutConfig": {
           "shape": "TimeoutConfig",
           "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.</p>"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>"
         }
       },
       "documentation": "<p>The <code>Job</code> object contains details about a job.</p>"
@@ -14232,6 +14257,12 @@
           "location": "querystring",
           "locationName": "status"
         },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
+        },
         "maxResults": {
           "shape": "LaserMaxResults",
           "documentation": "<p>The maximum number of results to be returned per request.</p>",
@@ -14297,6 +14328,12 @@
           "documentation": "<p>A filter that limits the returned jobs to those for the specified group.</p>",
           "location": "querystring",
           "locationName": "thingGroupId"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
         }
       }
     },
@@ -15852,6 +15889,12 @@
       "type": "string",
       "max": 65535,
       "min": 1
+    },
+    "NamespaceId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
     },
     "NextToken": {
       "type": "string"
@@ -19479,6 +19522,12 @@
         "timeoutConfig": {
           "shape": "TimeoutConfig",
           "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>. </p>"
+        },
+        "namespaceId": {
+          "shape": "NamespaceId",
+          "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+          "location": "querystring",
+          "locationName": "namespaceId"
         }
       }
     },

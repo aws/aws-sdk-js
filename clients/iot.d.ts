@@ -2011,6 +2011,10 @@ declare namespace Iot {
      * An optional comment string describing why the job was associated with the targets.
      */
     comment?: Comment;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface AssociateTargetsWithJobResponse {
     /**
@@ -3198,6 +3202,10 @@ declare namespace Iot {
      * Metadata which can be used to manage the job.
      */
     tags?: TagList;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface CreateJobResponse {
     /**
@@ -3888,6 +3896,10 @@ declare namespace Iot {
      * (Optional) When true, you can delete a job execution which is "IN_PROGRESS". Otherwise, you can only delete a job execution which is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job execution which is "IN_PROGRESS", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state. 
      */
     force?: ForceFlag;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface DeleteJobRequest {
     /**
@@ -3898,6 +3910,10 @@ declare namespace Iot {
      * (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state. 
      */
     force?: ForceFlag;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface DeleteMitigationActionRequest {
     /**
@@ -5609,6 +5625,10 @@ declare namespace Iot {
      * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to TIMED_OUT.
      */
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -6298,6 +6318,10 @@ declare namespace Iot {
      */
     status?: JobExecutionStatus;
     /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
+    /**
      * The maximum number of results to be returned per request.
      */
     maxResults?: LaserMaxResults;
@@ -6341,6 +6365,10 @@ declare namespace Iot {
      * A filter that limits the returned jobs to those for the specified group.
      */
     thingGroupId?: ThingGroupId;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface ListJobsResponse {
     /**
@@ -7276,6 +7304,7 @@ declare namespace Iot {
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
+  export type NamespaceId = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
   export interface NonCompliantResource {
@@ -9364,6 +9393,10 @@ declare namespace Iot {
      * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT. 
      */
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface UpdateMitigationActionRequest {
     /**

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.780.0-->
+<!--LATEST=2.781.0-->
 <!--ENTRYINSERT-->
+
+## 2.781.0
+* feature: EC2: AWS Nitro Enclaves general availability. Added support to RunInstances for creating enclave-enabled EC2 instances. New APIs to associate an ACM certificate with an IAM role, for enclave consumption.
+* feature: Iot: This release adds support for GG-Managed Job Namespace
 
 ## 2.780.0
 * feature: Glue: AWS Glue machine learning transforms now support encryption-at-rest for labels and trained models.
