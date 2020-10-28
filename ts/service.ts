@@ -1,6 +1,11 @@
 import {AWSError} from '../lib/error';
 import {DescribeTableOutput} from '../clients/dynamodb';
 import {Service} from '../lib/service';
+import {Endpoint} from '../lib/endpoint';
+
+new Service({
+    endpoint: new Endpoint('http://localhost:3000')
+});
 
 const service: Service = new Service({
     endpoint: 'http://localhost:3000',
