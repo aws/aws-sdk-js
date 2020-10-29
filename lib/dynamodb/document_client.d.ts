@@ -1,7 +1,7 @@
 import DynamoDB = require('../../clients/dynamodb');
 import * as stream from 'stream';
 import {Request} from '../request';
-import {AWSError} from '../error';
+import {AWSDynamoDBError} from '../error';
 
 interface File {}
 interface Blob {}
@@ -25,45 +25,45 @@ export class DocumentClient {
     /**
      * Returns the attributes of one or more items from one or more tables by delegating to AWS.DynamoDB.batchGetItem().
      */
-    batchGet(params: DocumentClient.BatchGetItemInput, callback?: (err: AWSError, data: DocumentClient.BatchGetItemOutput) => void): Request<DocumentClient.BatchGetItemOutput, AWSError>;
+    batchGet(params: DocumentClient.BatchGetItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.BatchGetItemOutput) => void): Request<DocumentClient.BatchGetItemOutput, AWSDynamoDBError>;
     /**
      * Puts or deletes multiple items in one or more tables by delegating to AWS.DynamoDB.batchWriteItem().
      */
-    batchWrite(params: DocumentClient.BatchWriteItemInput, callback?: (err: AWSError, data: DocumentClient.BatchWriteItemOutput) => void): Request<DocumentClient.BatchWriteItemOutput, AWSError>;
+    batchWrite(params: DocumentClient.BatchWriteItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.BatchWriteItemOutput) => void): Request<DocumentClient.BatchWriteItemOutput, AWSDynamoDBError>;
     /**
      * Deletes a single item in a table by primary key by delegating to AWS.DynamoDB.deleteItem().
      */
-    delete(params: DocumentClient.DeleteItemInput, callback?: (err: AWSError, data: DocumentClient.DeleteItemOutput) => void): Request<DocumentClient.DeleteItemOutput, AWSError>;
+    delete(params: DocumentClient.DeleteItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.DeleteItemOutput) => void): Request<DocumentClient.DeleteItemOutput, AWSDynamoDBError>;
     /**
      * Returns a set of attributes for the item with the given primary key by delegating to AWS.DynamoDB.getItem().
      */
-    get(params: DocumentClient.GetItemInput, callback?: (err: AWSError, data: DocumentClient.GetItemOutput) => void): Request<DocumentClient.GetItemOutput, AWSError>;
+    get(params: DocumentClient.GetItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.GetItemOutput) => void): Request<DocumentClient.GetItemOutput, AWSDynamoDBError>;
     /**
      * Creates a new item, or replaces an old item with a new item by delegating to AWS.DynamoDB.putItem().
      */
-    put(params: DocumentClient.PutItemInput, callback?: (err: AWSError, data: DocumentClient.PutItemOutput) => void): Request<DocumentClient.PutItemOutput, AWSError>;
+    put(params: DocumentClient.PutItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.PutItemOutput) => void): Request<DocumentClient.PutItemOutput, AWSDynamoDBError>;
     /**
      * Directly access items from a table by primary key or a secondary index.
      */
-    query(params: DocumentClient.QueryInput, callback?: (err: AWSError, data: DocumentClient.QueryOutput) => void): Request<DocumentClient.QueryOutput, AWSError>;
+    query(params: DocumentClient.QueryInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.QueryOutput) => void): Request<DocumentClient.QueryOutput, AWSDynamoDBError>;
     /**
      * Returns one or more items and item attributes by accessing every item in a table or a secondary index.
      */
-    scan(params: DocumentClient.ScanInput, callback?: (err: AWSError, data: DocumentClient.ScanOutput) => void): Request<DocumentClient.ScanOutput, AWSError>;
+    scan(params: DocumentClient.ScanInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.ScanOutput) => void): Request<DocumentClient.ScanOutput, AWSDynamoDBError>;
     /**
      * Edits an existing item's attributes, or adds a new item to the table if it does not already exist by delegating to AWS.DynamoDB.updateItem().
      */
-    update(params: DocumentClient.UpdateItemInput, callback?: (err: AWSError, data: DocumentClient.UpdateItemOutput) => void): Request<DocumentClient.UpdateItemOutput, AWSError>;
+    update(params: DocumentClient.UpdateItemInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.UpdateItemOutput) => void): Request<DocumentClient.UpdateItemOutput, AWSDynamoDBError>;
 
     /**
      * Atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and region.
      */
-    transactGet(params: DocumentClient.TransactGetItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactGetItemsOutput) => void): Request<DocumentClient.TransactGetItemsOutput, AWSError>;
+    transactGet(params: DocumentClient.TransactGetItemsInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.TransactGetItemsOutput) => void): Request<DocumentClient.TransactGetItemsOutput, AWSDynamoDBError>;
 
     /**
      * Synchronous write operation that groups up to 10 action requests
      */
-    transactWrite(params: DocumentClient.TransactWriteItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactWriteItemsOutput) => void): Request<DocumentClient.TransactWriteItemsOutput, AWSError>;
+    transactWrite(params: DocumentClient.TransactWriteItemsInput, callback?: (err: AWSDynamoDBError, data: DocumentClient.TransactWriteItemsOutput) => void): Request<DocumentClient.TransactWriteItemsOutput, AWSDynamoDBError>;
 }
 
 export namespace DocumentClient {

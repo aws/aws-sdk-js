@@ -1,7 +1,9 @@
+import { DynamoDBErrorCode } from './dynamodb/error';
+
 /**
  * A structure containing information about a service or networking error.
  */
-export class AWSError extends Error {
+export interface AWSError extends Error {
     /**
      * A unique short code representing the error that was emitted.
      */
@@ -46,4 +48,8 @@ export class AWSError extends Error {
      * CloudFront request ID associated with the response.
      */
     cfId: string;
+}
+
+export interface AWSDynamoDBError extends AWSError {
+    code: DynamoDBErrorCode
 }
