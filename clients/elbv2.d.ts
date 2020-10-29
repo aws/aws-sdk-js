@@ -570,7 +570,7 @@ declare namespace ELBv2 {
      */
     Certificates?: CertificateList;
     /**
-     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
+     * The actions for the default rule.
      */
     DefaultActions: Actions;
     /**
@@ -638,7 +638,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * The conditions. Each rule can optionally include up to one of each of the following conditions: http-request-method, host-header, path-pattern, and source-ip. Each rule can also optionally include one or more of each of the following conditions: http-header and query-string.
+     * The conditions.
      */
     Conditions: RuleConditionList;
     /**
@@ -646,7 +646,7 @@ declare namespace ELBv2 {
      */
     Priority: RulePriority;
     /**
-     * The actions. Each rule must include exactly one of the following types of actions: forward, fixed-response, or redirect, and it must be the last action to be performed. If the action type is forward, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
+     * The actions.
      */
     Actions: Actions;
     /**
@@ -670,6 +670,10 @@ declare namespace ELBv2 {
      */
     Protocol?: ProtocolEnum;
     /**
+     * [HTTP/HTTPS protocol] The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2. The default is HTTP1, which sends requests to targets using HTTP/1.1.
+     */
+    ProtocolVersion?: ProtocolVersion;
+    /**
      * The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply.
      */
     Port?: Port;
@@ -690,7 +694,7 @@ declare namespace ELBv2 {
      */
     HealthCheckEnabled?: HealthCheckEnabled;
     /**
-     * [HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.
+     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.
      */
     HealthCheckPath?: Path;
     /**
@@ -710,7 +714,7 @@ declare namespace ELBv2 {
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.
+     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.
      */
     Matcher?: Matcher;
     /**
@@ -1040,6 +1044,7 @@ declare namespace ELBv2 {
      */
     TargetGroupStickinessConfig?: TargetGroupStickinessConfig;
   }
+  export type GrpcCode = string;
   export type HealthCheckEnabled = boolean;
   export type HealthCheckIntervalSeconds = number;
   export type HealthCheckPort = string;
@@ -1224,9 +1229,13 @@ declare namespace ELBv2 {
   export type Marker = string;
   export interface Matcher {
     /**
-     * The HTTP codes. For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Network Load Balancers, this is 200–399.
+     * For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Network Load Balancers, this is "200–399".
      */
-    HttpCode: HttpCode;
+    HttpCode?: HttpCode;
+    /**
+     * You can specify values between 0 and 99. You can specify multiple values (for example, "0,1") or a range of values (for example, "0-5"). The default value is 12.
+     */
+    GrpcCode?: GrpcCode;
   }
   export type Max = string;
   export interface ModifyListenerInput {
@@ -1251,7 +1260,7 @@ declare namespace ELBv2 {
      */
     Certificates?: CertificateList;
     /**
-     * The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is forward, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
+     * The actions for the default rule.
      */
     DefaultActions?: Actions;
     /**
@@ -1287,11 +1296,11 @@ declare namespace ELBv2 {
      */
     RuleArn: RuleArn;
     /**
-     * The conditions. Each rule can include zero or one of the following conditions: http-request-method, host-header, path-pattern, and source-ip, and zero or more of the following conditions: http-header and query-string.
+     * The conditions.
      */
     Conditions?: RuleConditionList;
     /**
-     * The actions. Each rule must include exactly one of the following types of actions: forward, fixed-response, or redirect, and it must be the last action to be performed. If the action type is forward, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is authenticate-oidc, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is authenticate-cognito, you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is redirect, you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is fixed-response, you drop specified client requests and return a custom HTTP response.
+     * The actions.
      */
     Actions?: Actions;
   }
@@ -1331,7 +1340,7 @@ declare namespace ELBv2 {
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * [HTTP/HTTPS health checks] The ping path that is the destination for the health check request.
+     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.
      */
     HealthCheckPath?: Path;
     /**
@@ -1339,7 +1348,7 @@ declare namespace ELBv2 {
      */
     HealthCheckEnabled?: HealthCheckEnabled;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. With Network Load Balancers, you can't modify this setting.
+     * The approximate amount of time, in seconds, between health checks of an individual target. For HTTP and HTTPS health checks, the range is 5 to 300 seconds. For TPC health checks, the supported values are 10 or 30 seconds. With Network Load Balancers, you can't modify this setting.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
@@ -1351,11 +1360,11 @@ declare namespace ELBv2 {
      */
     HealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.
+     * The number of consecutive health check failures required before considering the target unhealthy. For target groups with a protocol of TCP or TLS, this value must be the same as the healthy threshold count.
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target. The possible values are from 200 to 499. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). The default is 200. With Network Load Balancers, you can't modify this setting.
+     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target. With Network Load Balancers, you can't modify this setting.
      */
     Matcher?: Matcher;
   }
@@ -1378,6 +1387,7 @@ declare namespace ELBv2 {
   export type Port = number;
   export type PrivateIPv4Address = string;
   export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|"TCP_UDP"|string;
+  export type ProtocolVersion = string;
   export interface QueryStringConditionConfig {
     /**
      * One or more key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in Values using a '\' character. If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.
@@ -1433,7 +1443,7 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The targets. To register a target by instance ID, specify the instance ID. To register a target by IP address, specify the IP address. To register a Lambda function, specify the ARN of the Lambda function.
+     * The targets.
      */
     Targets: TargetDescriptions;
   }
@@ -1738,11 +1748,11 @@ declare namespace ELBv2 {
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The destination for the health check request.
+     * The destination for health checks on the targets.
      */
     HealthCheckPath?: Path;
     /**
-     * The HTTP codes to use when checking for a successful response from a target.
+     * The HTTP or gRPC codes to use when checking for a successful response from a target.
      */
     Matcher?: Matcher;
     /**
@@ -1753,6 +1763,10 @@ declare namespace ELBv2 {
      * The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
      */
     TargetType?: TargetTypeEnum;
+    /**
+     * [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.
+     */
+    ProtocolVersion?: ProtocolVersion;
   }
   export type TargetGroupArn = string;
   export type TargetGroupArns = TargetGroupArn[];

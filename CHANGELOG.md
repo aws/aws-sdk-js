@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.781.0-->
+<!--LATEST=2.782.0-->
 <!--ENTRYINSERT-->
+
+## 2.782.0
+* feature: APIGateway: Support disabling the default execute-api endpoint for REST APIs.
+* feature: CodeArtifact: Add support for tagging of CodeArtifact domain and repository resources.
+* feature: EC2: Support for Appliance mode on Transit Gateway that simplifies deployment of stateful network appliances. Added support for AWS Client VPN Self-Service Portal.
+* feature: ELBv2: Application Load Balancer (ALB) now supports the gRPC protocol-version. With this release, customers can use ALB to route and load balance gRPC traffic between gRPC enabled clients and microservices.
+* feature: SESV2: This release enables customers to manage their own contact lists and end-user subscription preferences.
+* feature: StorageGateway: Adding support for access based enumeration on SMB file shares, file share visibility on SMB file shares, and file upload notifications for all file shares
+* feature: TypeScript: Add AWS.Endpoint to ServiceConfigurationOptions.endpoint type.
 
 ## 2.781.0
 * feature: EC2: AWS Nitro Enclaves general availability. Added support to RunInstances for creating enclave-enabled EC2 instances. New APIs to associate an ACM certificate with an IAM role, for enclave consumption.

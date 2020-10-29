@@ -1094,7 +1094,7 @@ declare namespace APIGateway {
      */
     type?: AuthorizerType;
     /**
-     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined.
      */
     providerARNs?: ListOfARNs;
     /**
@@ -1256,7 +1256,7 @@ declare namespace APIGateway {
      */
     type: AuthorizerType;
     /**
-     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined.
      */
     providerARNs?: ListOfARNs;
     /**
@@ -1406,7 +1406,7 @@ declare namespace APIGateway {
      */
     regionalCertificateArn?: String;
     /**
-     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -1499,11 +1499,11 @@ declare namespace APIGateway {
      */
     minimumCompressionSize?: NullableInteger;
     /**
-     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
      */
     apiKeySource?: ApiKeySourceType;
     /**
-     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     * The endpoint configuration of this RestApi showing the endpoint types of the API.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -1514,6 +1514,10 @@ declare namespace APIGateway {
      * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
      */
     tags?: MapOfStringToString;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    disableExecuteApiEndpoint?: Boolean;
   }
   export interface CreateStageRequest {
     /**
@@ -1986,7 +1990,7 @@ declare namespace APIGateway {
      */
     distributionHostedZoneId?: String;
     /**
-     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -3368,11 +3372,11 @@ declare namespace APIGateway {
      */
     minimumCompressionSize?: NullableInteger;
     /**
-     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
      */
     apiKeySource?: ApiKeySourceType;
     /**
-     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     * The endpoint configuration of this RestApi showing the endpoint types of the API.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -3383,6 +3387,10 @@ declare namespace APIGateway {
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    disableExecuteApiEndpoint?: Boolean;
   }
   export interface RestApis {
     position?: String;
@@ -4119,7 +4127,7 @@ declare namespace APIGateway {
      */
     targetArns?: ListOfString;
     /**
-     * The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING, or FAILED. Deploying an API will wait if the status is PENDING and will fail if the status is DELETING. 
+     * The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING, or FAILED. Deploying an API will wait if the status is PENDING and will fail if the status is DELETING.
      */
     status?: VpcLinkStatus;
     /**

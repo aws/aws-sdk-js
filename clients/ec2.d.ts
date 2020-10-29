@@ -3985,6 +3985,7 @@ declare namespace EC2 {
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
   export type AllowsMultipleInstanceTypes = "on"|"off"|string;
+  export type ApplianceModeSupportValue = "enable"|"disable"|string;
   export interface ApplySecurityGroupsToClientVpnTargetNetworkRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -5462,6 +5463,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId?: VpcId;
+    /**
+     * The URL of the self-service portal.
+     */
+    SelfServicePortalUrl?: String;
   }
   export type ClientVpnEndpointId = string;
   export type ClientVpnEndpointIdList = ClientVpnEndpointId[];
@@ -5973,6 +5978,10 @@ declare namespace EC2 {
      * The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.
      */
     VpcId?: VpcId;
+    /**
+     * Specify whether to enable the self-service portal for the Client VPN endpoint. Default Value: enabled 
+     */
+    SelfServicePortal?: SelfServicePortal;
   }
   export interface CreateClientVpnEndpointResult {
     /**
@@ -7418,6 +7427,10 @@ declare namespace EC2 {
      * Enable or disable IPv6 support. The default is enable.
      */
     Ipv6Support?: Ipv6SupportValue;
+    /**
+     * Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is disable.
+     */
+    ApplianceModeSupport?: ApplianceModeSupportValue;
   }
   export interface CreateTransitGatewayVpcAttachmentResult {
     /**
@@ -13647,12 +13660,20 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the IAM SAML identity provider.
      */
     SamlProviderArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.
+     */
+    SelfServiceSamlProviderArn?: String;
   }
   export interface FederatedAuthenticationRequest {
     /**
      * The Amazon Resource Name (ARN) of the IAM SAML identity provider.
      */
     SAMLProviderArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.
+     */
+    SelfServiceSAMLProviderArn?: String;
   }
   export interface Filter {
     /**
@@ -18030,6 +18051,10 @@ declare namespace EC2 {
      * The ID of the VPC to associate with the Client VPN endpoint.
      */
     VpcId?: VpcId;
+    /**
+     * Specify whether to enable the self-service portal for the Client VPN endpoint.
+     */
+    SelfServicePortal?: SelfServicePortal;
   }
   export interface ModifyClientVpnEndpointResult {
     /**
@@ -18866,6 +18891,10 @@ declare namespace EC2 {
      * Enable or disable IPv6 support. The default is enable.
      */
     Ipv6Support?: Ipv6SupportValue;
+    /**
+     * Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is disable.
+     */
+    ApplianceModeSupport?: ApplianceModeSupportValue;
   }
   export interface ModifyTransitGatewayVpcAttachmentResult {
     /**
@@ -22842,6 +22871,7 @@ declare namespace EC2 {
   }
   export type SecurityGroupReferences = SecurityGroupReference[];
   export type SecurityGroupStringList = SecurityGroupName[];
+  export type SelfServicePortal = "enabled"|"disabled"|string;
   export interface SendDiagnosticInterruptRequest {
     /**
      * The ID of the instance.
@@ -24961,6 +24991,10 @@ declare namespace EC2 {
      * Indicates whether IPv6 support is disabled.
      */
     Ipv6Support?: Ipv6SupportValue;
+    /**
+     * Indicates whether appliance mode support is enabled.
+     */
+    ApplianceModeSupport?: ApplianceModeSupportValue;
   }
   export type TransportProtocol = "tcp"|"udp"|string;
   export type TunnelInsideIpVersion = "ipv4"|"ipv6"|string;

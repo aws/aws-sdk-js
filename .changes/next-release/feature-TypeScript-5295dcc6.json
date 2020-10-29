@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "TypeScript",
-  "description": "Add AWS.Endpoint to ServiceConfigurationOptions.endpoint type."
-}

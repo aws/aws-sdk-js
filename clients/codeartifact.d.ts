@@ -117,19 +117,19 @@ declare class CodeArtifact extends Service {
    */
   disassociateExternalConnection(callback?: (err: AWSError, data: CodeArtifact.Types.DisassociateExternalConnectionResult) => void): Request<CodeArtifact.Types.DisassociateExternalConnectionResult, AWSError>;
   /**
-   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  ListPackageVersions  and set the  status  parameter to Disposed. 
+   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListPackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  DescribePackageVersion .. 
    */
   disposePackageVersions(params: CodeArtifact.Types.DisposePackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
   /**
-   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  ListPackageVersions  and set the  status  parameter to Disposed. 
+   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListPackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  DescribePackageVersion .. 
    */
   disposePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
   /**
-   *  Generates a temporary authentication token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
+   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see AWS CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
    */
   getAuthorizationToken(params: CodeArtifact.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetAuthorizationTokenResult) => void): Request<CodeArtifact.Types.GetAuthorizationTokenResult, AWSError>;
   /**
-   *  Generates a temporary authentication token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
+   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see AWS CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
    */
   getAuthorizationToken(callback?: (err: AWSError, data: CodeArtifact.Types.GetAuthorizationTokenResult) => void): Request<CodeArtifact.Types.GetAuthorizationTokenResult, AWSError>;
   /**
@@ -229,21 +229,45 @@ declare class CodeArtifact extends Service {
    */
   listRepositoriesInDomain(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesInDomainResult) => void): Request<CodeArtifact.Types.ListRepositoriesInDomainResult, AWSError>;
   /**
-   *  Sets a resource policy on a domain that specifies permissions to access it. 
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.
+   */
+  listTagsForResource(params: CodeArtifact.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListTagsForResourceResult) => void): Request<CodeArtifact.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeArtifact.Types.ListTagsForResourceResult) => void): Request<CodeArtifact.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   *  Sets a resource policy on a domain that specifies permissions to access it.   When you call PutDomainPermissionsPolicy, the resource policy on the domain is ignored when evaluting permissions. This ensures that the owner of a domain cannot lock themselves out of the domain, which would prevent them from being able to update the resource policy. 
    */
   putDomainPermissionsPolicy(params: CodeArtifact.Types.PutDomainPermissionsPolicyRequest, callback?: (err: AWSError, data: CodeArtifact.Types.PutDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.PutDomainPermissionsPolicyResult, AWSError>;
   /**
-   *  Sets a resource policy on a domain that specifies permissions to access it. 
+   *  Sets a resource policy on a domain that specifies permissions to access it.   When you call PutDomainPermissionsPolicy, the resource policy on the domain is ignored when evaluting permissions. This ensures that the owner of a domain cannot lock themselves out of the domain, which would prevent them from being able to update the resource policy. 
    */
   putDomainPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.PutDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.PutDomainPermissionsPolicyResult, AWSError>;
   /**
-   *  Sets the resource policy on a repository that specifies permissions to access it. 
+   *  Sets the resource policy on a repository that specifies permissions to access it.   When you call PutRepositoryPermissionsPolicy, the resource policy on the repository is ignored when evaluting permissions. This ensures that the owner of a repository cannot lock themselves out of the repository, which would prevent them from being able to update the resource policy. 
    */
   putRepositoryPermissionsPolicy(params: CodeArtifact.Types.PutRepositoryPermissionsPolicyRequest, callback?: (err: AWSError, data: CodeArtifact.Types.PutRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.PutRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   *  Sets the resource policy on a repository that specifies permissions to access it. 
+   *  Sets the resource policy on a repository that specifies permissions to access it.   When you call PutRepositoryPermissionsPolicy, the resource policy on the repository is ignored when evaluting permissions. This ensures that the owner of a repository cannot lock themselves out of the repository, which would prevent them from being able to update the resource policy. 
    */
   putRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.PutRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.PutRepositoryPermissionsPolicyResult, AWSError>;
+  /**
+   * Adds or updates tags for a resource in AWS CodeArtifact.
+   */
+  tagResource(params: CodeArtifact.Types.TagResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.TagResourceResult) => void): Request<CodeArtifact.Types.TagResourceResult, AWSError>;
+  /**
+   * Adds or updates tags for a resource in AWS CodeArtifact.
+   */
+  tagResource(callback?: (err: AWSError, data: CodeArtifact.Types.TagResourceResult) => void): Request<CodeArtifact.Types.TagResourceResult, AWSError>;
+  /**
+   * Removes tags from a resource in AWS CodeArtifact.
+   */
+  untagResource(params: CodeArtifact.Types.UntagResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.UntagResourceResult) => void): Request<CodeArtifact.Types.UntagResourceResult, AWSError>;
+  /**
+   * Removes tags from a resource in AWS CodeArtifact.
+   */
+  untagResource(callback?: (err: AWSError, data: CodeArtifact.Types.UntagResourceResult) => void): Request<CodeArtifact.Types.UntagResourceResult, AWSError>;
   /**
    *  Updates the status of one or more versions of a package. 
    */
@@ -373,6 +397,10 @@ declare namespace CodeArtifact {
      *  The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an encryptionKey, your IAM role must have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that is used. For more information, see DescribeKey in the AWS Key Management Service API Reference and AWS KMS API Permissions Reference in the AWS Key Management Service Developer Guide.    CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see Using symmetric and asymmetric keys in the AWS Key Management Service Developer Guide.  
      */
     encryptionKey?: Arn;
+    /**
+     * One or more tag key-value pairs for the domain.
+     */
+    tags?: TagList;
   }
   export interface CreateDomainResult {
     /**
@@ -401,6 +429,10 @@ declare namespace CodeArtifact {
      *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
      */
     upstreams?: UpstreamRepositoryList;
+    /**
+     * One or more tag key-value pairs for the repository.
+     */
+    tags?: TagList;
   }
   export interface CreateRepositoryResult {
     /**
@@ -707,6 +739,10 @@ declare namespace CodeArtifact {
      *  The total size of all assets in the domain. 
      */
     assetSizeBytes?: Long;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon S3 bucket that is used to store package assets in the domain.
+     */
+    s3BucketArn?: Arn;
   }
   export type DomainName = string;
   export type DomainStatus = "Active"|"Deleted"|string;
@@ -750,7 +786,7 @@ declare namespace CodeArtifact {
      */
     domainOwner?: AccountId;
     /**
-     * The time, in seconds, that the generated authorization token is valid.
+     * The time, in seconds, that the generated authorization token is valid. Valid values are 0 and any number between 900 (15 minutes) and 43200 (12 hours). A value of 0 will set the expiration of the authorization token to the same expiration of the user's role's temporary credentials.
      */
     durationSeconds?: AuthorizationTokenDurationSeconds;
   }
@@ -1280,6 +1316,18 @@ declare namespace CodeArtifact {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to get tags for.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResult {
+    /**
+     * A list of tag key and value pairs associated with the specified resource.
+     */
+    tags?: TagList;
+  }
   export type Long = number;
   export type LongOptional = number;
   export interface PackageDependency {
@@ -1561,7 +1609,45 @@ declare namespace CodeArtifact {
     status?: PackageVersionStatus;
   }
   export type SuccessfulPackageVersionInfoMap = {[key: string]: SuccessfulPackageVersionInfo};
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    key: TagKey;
+    /**
+     * The tag's value.
+     */
+    value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags you want to modify or add to the resource.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResult {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to remove tags.
+     */
+    resourceArn: Arn;
+    /**
+     * The tag key for each tag that you want to remove from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResult {
+  }
   export interface UpdatePackageVersionsStatusRequest {
     /**
      *  The domain that contains the repository that contains the package versions with a status to be updated. 

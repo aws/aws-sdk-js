@@ -620,21 +620,29 @@ declare class StorageGateway extends Service {
    */
   updateMaintenanceStartTime(callback?: (err: AWSError, data: StorageGateway.Types.UpdateMaintenanceStartTimeOutput) => void): Request<StorageGateway.Types.UpdateMaintenanceStartTimeOutput, AWSError>;
   /**
-   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share settings:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share  
    */
   updateNFSFileShare(params: StorageGateway.Types.UpdateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share settings:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share  
    */
   updateNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a Server Message Block (SMB) file share.  To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Updates a Server Message Block (SMB) file share. This operation is only supported for file gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   updateSMBFileShare(params: StorageGateway.Types.UpdateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
-   * Updates a Server Message Block (SMB) file share.  To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Updates a Server Message Block (SMB) file share. This operation is only supported for file gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   updateSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
+  /**
+   * Controls whether the shares on a gateway are visible in a net view or browse list.
+   */
+  updateSMBFileShareVisibility(params: StorageGateway.Types.UpdateSMBFileShareVisibilityInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareVisibilityOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareVisibilityOutput, AWSError>;
+  /**
+   * Controls whether the shares on a gateway are visible in a net view or browse list.
+   */
+  updateSMBFileShareVisibility(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareVisibilityOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareVisibilityOutput, AWSError>;
   /**
    * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.  This API is called Security level in the User Guide. A higher security level can affect performance of the gateway. 
    */
@@ -1062,6 +1070,10 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -1119,6 +1131,10 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
+     * The files and folders on this share will only be visible to users with read access.
+     */
+    AccessBasedEnumeration?: Boolean;
+    /**
      * A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1.  Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions. 
      */
     AdminUserList?: FileShareUserList;
@@ -1154,6 +1170,10 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export interface CreateSMBFileShareOutput {
     /**
@@ -1739,6 +1759,10 @@ declare namespace StorageGateway {
      * The type of security strategy that was specified for file gateway.    ClientSpecified: If you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.    MandatorySigning: If you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.    MandatoryEncryption: If you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.  
      */
     SMBSecurityStrategy?: SMBSecurityStrategy;
+    /**
+     * The shares on this gateway appear when listing shares.
+     */
+    FileSharesVisible?: Boolean;
   }
   export interface DescribeSnapshotScheduleInput {
     /**
@@ -2361,6 +2385,10 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -2380,6 +2408,7 @@ declare namespace StorageGateway {
   export type NetworkInterfaceId = string;
   export type NextUpdateAvailabilityDate = string;
   export type NotificationId = string;
+  export type NotificationPolicy = string;
   export interface NotifyWhenUploadedInput {
     FileShareARN: FileShareARN;
   }
@@ -2539,6 +2568,10 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
+     * Indicates whether AccessBasedEnumeration is enabled.
+     */
+    AccessBasedEnumeration?: Boolean;
+    /**
      * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     AdminUserList?: FileShareUserList;
@@ -2571,6 +2604,10 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export type SMBFileShareInfoList = SMBFileShareInfo[];
   export type SMBGuestPassword = string;
@@ -3020,6 +3057,10 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export interface UpdateNFSFileShareOutput {
     /**
@@ -3065,6 +3106,10 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
+     * The files and folders on this share will only be visible to users with read access.
+     */
+    AccessBasedEnumeration?: Boolean;
+    /**
      * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     AdminUserList?: FileShareUserList;
@@ -3092,12 +3137,26 @@ declare namespace StorageGateway {
      * Refresh cache information.
      */
     CacheAttributes?: CacheAttributes;
+    /**
+     * The notification policy of the file share.
+     */
+    NotificationPolicy?: NotificationPolicy;
   }
   export interface UpdateSMBFileShareOutput {
     /**
      * The Amazon Resource Name (ARN) of the updated SMB file share.
      */
     FileShareARN?: FileShareARN;
+  }
+  export interface UpdateSMBFileShareVisibilityInput {
+    GatewayARN: GatewayARN;
+    /**
+     * The shares on this gateway appear when listing shares.
+     */
+    FileSharesVisible: Boolean;
+  }
+  export interface UpdateSMBFileShareVisibilityOutput {
+    GatewayARN?: GatewayARN;
   }
   export interface UpdateSMBSecurityStrategyInput {
     GatewayARN: GatewayARN;
