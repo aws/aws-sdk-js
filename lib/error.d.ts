@@ -1,7 +1,7 @@
 /**
  * A structure containing information about a service or networking error.
  */
-export class AWSError extends Error {
+export type AWSError = Error & {
     /**
      * A unique short code representing the error that was emitted.
      */
@@ -13,11 +13,11 @@ export class AWSError extends Error {
     /**
      * Whether the error message is retryable.
      */
-    retryable: boolean;
+    retryable?: boolean;
     /**
      * In the case of a request that reached the service, this value contains the response status code.
      */
-    statusCode: number;
+    statusCode?: number;
     /**
      * The date time object when the error occurred.
      */
@@ -25,25 +25,29 @@ export class AWSError extends Error {
     /**
      * Set when a networking error occurs to easily identify the endpoint of the request.
      */
-    hostname: string;
+    hostname?: string;
     /**
      * Set when a networking error occurs to easily identify the region of the request.
      */
-    region: string;
+    region?: string;
     /**
      * Amount of time (in seconds) that the request waited before being resent.
      */
-    retryDelay: number;
+    retryDelay?: number;
     /**
      * The unique request ID associated with the response.
      */
-    requestId: string;
+    requestId?: string;
     /**
      * Second request ID associated with the response from S3.
      */
-    extendedRequestId: string;
+    extendedRequestId?: string;
     /**
      * CloudFront request ID associated with the response.
      */
-    cfId: string;
+    cfId?: string;
+    /**
+     * The original error which caused this Error
+     */
+    originalError?: Error
 }
