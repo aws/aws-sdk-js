@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.782.0-->
+<!--LATEST=2.783.0-->
 <!--ENTRYINSERT-->
+
+## 2.783.0
+* bugfix: Types: Fix type of AWSError
+* bugfix: Types: Update types for credential provider chain
+* feature: Braket: This release supports tagging for Amazon Braket quantum-task resources. It also supports tag-based access control for quantum-task APIs.
+* feature: DMS: Adding DocDbSettings to support DocumentDB as a source.
+* feature: Imagebuilder: This feature increases the number of accounts that can be added to the Launch permissions within an Image Builder Distribution configuration.
+* feature: Macie2: This release of the Amazon Macie API adds an eqExactMatch operator for filtering findings. With this operator you can increase the precision of your finding filters and suppression rules.
+* feature: MediaLive: Support for HLS discontinuity tags in the child manifests. Support for incomplete segment behavior in the media output. Support for automatic input failover condition settings.
 
 ## 2.782.0
 * feature: APIGateway: Support disabling the default execute-api endpoint for REST APIs.

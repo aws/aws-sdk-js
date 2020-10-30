@@ -3230,6 +3230,16 @@
     "AutomaticInputFailoverSettings": {
       "type": "structure",
       "members": {
+        "ErrorClearTimeMsec": {
+          "shape": "__integerMin1",
+          "locationName": "errorClearTimeMsec",
+          "documentation": "This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input."
+        },
+        "FailoverConditions": {
+          "shape": "__listOfFailoverCondition",
+          "locationName": "failoverConditions",
+          "documentation": "A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input."
+        },
         "InputPreference": {
           "shape": "InputPreference",
           "locationName": "inputPreference",
@@ -6212,6 +6222,28 @@
         "TimecodeConfig"
       ]
     },
+    "FailoverCondition": {
+      "type": "structure",
+      "members": {
+        "FailoverConditionSettings": {
+          "shape": "FailoverConditionSettings",
+          "locationName": "failoverConditionSettings",
+          "documentation": "Failover condition type-specific settings."
+        }
+      },
+      "documentation": "Failover Condition settings. There can be multiple failover conditions inside AutomaticInputFailoverSettings."
+    },
+    "FailoverConditionSettings": {
+      "type": "structure",
+      "members": {
+        "InputLossSettings": {
+          "shape": "InputLossFailoverSettings",
+          "locationName": "inputLossSettings",
+          "documentation": "MediaLive will perform a failover if content is not detected in this input for the specified period."
+        }
+      },
+      "documentation": "Settings for one failover condition."
+    },
     "FeatureActivations": {
       "type": "structure",
       "members": {
@@ -7373,6 +7405,14 @@
         "SUBDIRECTORY_PER_STREAM"
       ]
     },
+    "HlsDiscontinuityTags": {
+      "type": "string",
+      "documentation": "Hls Discontinuity Tags",
+      "enum": [
+        "INSERT",
+        "NEVER_INSERT"
+      ]
+    },
     "HlsEncryptionType": {
       "type": "string",
       "documentation": "Hls Encryption Type",
@@ -7444,6 +7484,11 @@
           "locationName": "directoryStructure",
           "documentation": "Place segments in subdirectories."
         },
+        "DiscontinuityTags": {
+          "shape": "HlsDiscontinuityTags",
+          "locationName": "discontinuityTags",
+          "documentation": "Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child manifests for this output group.\nTypically, choose Insert because these tags are required in the manifest (according to the HLS specification) and serve an important purpose.\nChoose Never Insert only if the downstream system is doing real-time failover (without using the MediaLive automatic failover feature) and only if that downstream system has advised you to exclude the tags."
+        },
         "EncryptionType": {
           "shape": "HlsEncryptionType",
           "locationName": "encryptionType",
@@ -7463,6 +7508,11 @@
           "shape": "IFrameOnlyPlaylistType",
           "locationName": "iFrameOnlyPlaylists",
           "documentation": "DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).\n\nSTANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888\""
+        },
+        "IncompleteSegmentBehavior": {
+          "shape": "HlsIncompleteSegmentBehavior",
+          "locationName": "incompleteSegmentBehavior",
+          "documentation": "Specifies whether to include the final (incomplete) segment in the media output when the pipeline stops producing output because of a channel stop, a channel pause or a loss of input to the pipeline.\nAuto means that MediaLive decides whether to include the final segment, depending on the channel class and the types of output groups.\nSuppress means to never include the incomplete segment. We recommend you choose Auto and let MediaLive control the behavior."
         },
         "IndexNSegments": {
           "shape": "__integerMin3",
@@ -7618,6 +7668,14 @@
       "enum": [
         "DISABLED",
         "ENABLED"
+      ]
+    },
+    "HlsIncompleteSegmentBehavior": {
+      "type": "string",
+      "documentation": "Hls Incomplete Segment Behavior",
+      "enum": [
+        "AUTO",
+        "SUPPRESS"
       ]
     },
     "HlsInputSettings": {
@@ -8460,6 +8518,17 @@
         }
       },
       "documentation": "Input Loss Behavior"
+    },
+    "InputLossFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "InputLossThresholdMsec": {
+          "shape": "__integerMin100",
+          "locationName": "inputLossThresholdMsec",
+          "documentation": "The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur."
+        }
+      },
+      "documentation": "MediaLive will perform a failover if content is not detected in this input for the specified period."
     },
     "InputLossImageType": {
       "type": "string",
@@ -13350,6 +13419,11 @@
       "min": 1,
       "documentation": "Placeholder documentation for __integerMin1"
     },
+    "__integerMin100": {
+      "type": "integer",
+      "min": 100,
+      "documentation": "Placeholder documentation for __integerMin100"
+    },
     "__integerMin1000": {
       "type": "integer",
       "min": 1000,
@@ -13597,6 +13671,13 @@
         "shape": "ChannelSummary"
       },
       "documentation": "Placeholder documentation for __listOfChannelSummary"
+    },
+    "__listOfFailoverCondition": {
+      "type": "list",
+      "member": {
+        "shape": "FailoverCondition"
+      },
+      "documentation": "Placeholder documentation for __listOfFailoverCondition"
     },
     "__listOfHlsAdMarkers": {
       "type": "list",

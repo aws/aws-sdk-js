@@ -365,7 +365,7 @@ declare namespace Imagebuilder {
      */
     name?: NonEmptyString;
     /**
-     * The description of the EC2 AMI. 
+     * The description of the EC2 AMI. Minimum and maximum length are in characters.
      */
     description?: NonEmptyString;
     state?: ImageState;
@@ -380,7 +380,7 @@ declare namespace Imagebuilder {
      */
     name?: AmiNameString;
     /**
-     * The description of the distribution configuration. 
+     * The description of the distribution configuration. Minimum and maximum length are in characters.
      */
     description?: NonEmptyString;
     /**
@@ -1792,7 +1792,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListComponentBuildVersionsResponse {
     /**
@@ -1806,7 +1806,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListComponentsRequest {
     /**
@@ -1824,7 +1824,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListComponentsResponse {
     /**
@@ -1838,7 +1838,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListDistributionConfigurationsRequest {
     /**
@@ -1852,7 +1852,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListDistributionConfigurationsResponse {
     /**
@@ -1866,7 +1866,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImageBuildVersionsRequest {
     /**
@@ -1884,7 +1884,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImageBuildVersionsResponse {
     /**
@@ -1898,7 +1898,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagePipelineImagesRequest {
     /**
@@ -1916,7 +1916,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagePipelineImagesResponse {
     /**
@@ -1930,7 +1930,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagePipelinesRequest {
     /**
@@ -1944,7 +1944,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagePipelinesResponse {
     /**
@@ -1958,7 +1958,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImageRecipesRequest {
     /**
@@ -1976,7 +1976,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImageRecipesResponse {
     /**
@@ -1990,7 +1990,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagesRequest {
     /**
@@ -2008,7 +2008,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListImagesResponse {
     /**
@@ -2022,7 +2022,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListInfrastructureConfigurationsRequest {
     /**
@@ -2036,7 +2036,7 @@ declare namespace Imagebuilder {
     /**
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListInfrastructureConfigurationsResponse {
     /**
@@ -2050,7 +2050,7 @@ declare namespace Imagebuilder {
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.
      */
-    nextToken?: NonEmptyString;
+    nextToken?: PaginationToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -2081,6 +2081,7 @@ declare namespace Imagebuilder {
     amis?: AmiList;
   }
   export type Ownership = "Self"|"Shared"|"Amazon"|string;
+  export type PaginationToken = string;
   export type PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"|"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"|string;
   export type PipelineStatus = "DISABLED"|"ENABLED"|string;
   export type Platform = "Windows"|"Linux"|string;

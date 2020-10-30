@@ -1061,6 +1061,10 @@ declare namespace Macie2 {
      */
     eq?: __listOf__string;
     /**
+     * A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties:customDataIdentifiers.detections.arncustomDataIdentifiers.detections.nameresourcesAffected.s3Bucket.tags.keyresourcesAffected.s3Bucket.tags.valueresourcesAffected.s3Object.tags.keyresourcesAffected.s3Object.tags.valuesensitiveData.categorysensitiveData.detections.type
+     */
+    eqExactMatch?: __listOf__string;
+    /**
      * A greater than condition to apply to a specified property value for findings.
      */
     gt?: __long;

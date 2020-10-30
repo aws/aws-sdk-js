@@ -1678,6 +1678,9 @@
         "ResourceIdentifier": {
           "shape": "String",
           "documentation": "<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code> response parameter that is returned in the created <code>Endpoint</code> object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this value might result in the <code>EndpointArn</code> value <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier value for the end of <code>EndpointArn</code>.</p>"
+        },
+        "DocDbSettings": {
+          "shape": "DocDbSettings"
         }
       },
       "documentation": "<p/>"
@@ -2875,6 +2878,48 @@
       },
       "documentation": "<p> The settings in JSON format for the DMS Transfer type source endpoint. </p>"
     },
+    "DocDbSettings": {
+      "type": "structure",
+      "members": {
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>The user name you use to access the DocumentDB source endpoint. </p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p> The password for the user account you use to access the DocumentDB source endpoint. </p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p> The name of the server on the DocumentDB source endpoint. </p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> The port value for the DocumentDB source endpoint. </p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p> The database name on the DocumentDB source endpoint. </p>"
+        },
+        "NestingLevel": {
+          "shape": "NestingLevelValue",
+          "documentation": "<p> Specifies either document or table mode. </p> <p>Default value is <code>\"none\"</code>. Specify <code>\"none\"</code> to use document mode. Specify <code>\"one\"</code> to use table mode.</p>"
+        },
+        "ExtractDocId": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to <code>\"none\"</code>. </p> <p>Default value is <code>\"false\"</code>. </p>"
+        },
+        "DocsToInvestigate": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> Indicates the number of documents to preview to determine the document organization. Use this setting when <code>NestingLevel</code> is set to <code>\"one\"</code>. </p> <p>Must be a positive value greater than <code>0</code>. Default value is <code>1000</code>.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a DocumentDB endpoint.</p>"
+    },
     "DynamoDbSettings": {
       "type": "structure",
       "required": [
@@ -3059,6 +3104,9 @@
         "IBMDb2Settings": {
           "shape": "IBMDb2Settings",
           "documentation": "<p>The settings for the IBM Db2 LUW source endpoint. For more information, see the <code>IBMDb2Settings</code> structure. </p>"
+        },
+        "DocDbSettings": {
+          "shape": "DocDbSettings"
         }
       },
       "documentation": "<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpointTypes</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>"
@@ -3601,6 +3649,10 @@
         "IBMDb2Settings": {
           "shape": "IBMDb2Settings",
           "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "DocDbSettings": {
+          "shape": "DocDbSettings",
+          "documentation": "<p>Settings in JSON format for the source DocumentDB endpoint. For more information about the available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html\"> Using DocumentDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         }
       },
       "documentation": "<p/>"
@@ -5087,7 +5139,7 @@
         },
         "DatePartitionEnabled": {
           "shape": "BooleanOptional",
-          "documentation": "<p>When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is <code>false</code>. For more information about date-based folder partitoning, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Using date-based folder partitioning</a> </p>"
+          "documentation": "<p>When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is <code>false</code>. For more information about date-based folder partitoning, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning\">Using date-based folder partitioning</a>.</p>"
         },
         "DatePartitionSequence": {
           "shape": "DatePartitionSequenceValue",

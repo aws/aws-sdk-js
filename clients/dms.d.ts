@@ -767,6 +767,7 @@ declare namespace DMS {
      * A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as Example-App-ARN1. For example, this value might result in the EndpointArn value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a ResourceIdentifier value, AWS DMS generates a default identifier value for the end of EndpointArn.
      */
     ResourceIdentifier?: String;
+    DocDbSettings?: DocDbSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -1608,6 +1609,44 @@ declare namespace DMS {
      */
     BucketName?: String;
   }
+  export interface DocDbSettings {
+    /**
+     * The user name you use to access the DocumentDB source endpoint. 
+     */
+    Username?: String;
+    /**
+     *  The password for the user account you use to access the DocumentDB source endpoint. 
+     */
+    Password?: SecretString;
+    /**
+     *  The name of the server on the DocumentDB source endpoint. 
+     */
+    ServerName?: String;
+    /**
+     *  The port value for the DocumentDB source endpoint. 
+     */
+    Port?: IntegerOptional;
+    /**
+     *  The database name on the DocumentDB source endpoint. 
+     */
+    DatabaseName?: String;
+    /**
+     *  Specifies either document or table mode.  Default value is "none". Specify "none" to use document mode. Specify "one" to use table mode.
+     */
+    NestingLevel?: NestingLevelValue;
+    /**
+     *  Specifies the document ID. Use this setting when NestingLevel is set to "none".  Default value is "false". 
+     */
+    ExtractDocId?: BooleanOptional;
+    /**
+     *  Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to "one".  Must be a positive value greater than 0. Default value is 1000.
+     */
+    DocsToInvestigate?: IntegerOptional;
+    /**
+     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     */
+    KmsKeyId?: String;
+  }
   export interface DynamoDbSettings {
     /**
      *  The Amazon Resource Name (ARN) used by the service access IAM role. 
@@ -1763,6 +1802,7 @@ declare namespace DMS {
      * The settings for the IBM Db2 LUW source endpoint. For more information, see the IBMDb2Settings structure. 
      */
     IBMDb2Settings?: IBMDb2Settings;
+    DocDbSettings?: DocDbSettings;
   }
   export type EndpointList = Endpoint[];
   export interface Event {
@@ -2166,6 +2206,10 @@ declare namespace DMS {
      * Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see Extra connection attributes when using Db2 LUW as a source for AWS DMS in the AWS Database Migration Service User Guide. 
      */
     IBMDb2Settings?: IBMDb2Settings;
+    /**
+     * Settings in JSON format for the source DocumentDB endpoint. For more information about the available settings, see the configuration properties section in  Using DocumentDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
+     */
+    DocDbSettings?: DocDbSettings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -3373,7 +3417,7 @@ declare namespace DMS {
      */
     CdcInsertsAndUpdates?: BooleanOptional;
     /**
-     * When set to true, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is false. For more information about date-based folder partitoning, see Using date-based folder partitioning 
+     * When set to true, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is false. For more information about date-based folder partitoning, see Using date-based folder partitioning.
      */
     DatePartitionEnabled?: BooleanOptional;
     /**

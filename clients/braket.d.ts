@@ -44,6 +44,14 @@ declare class Braket extends Service {
    */
   getQuantumTask(callback?: (err: AWSError, data: Braket.Types.GetQuantumTaskResponse) => void): Request<Braket.Types.GetQuantumTaskResponse, AWSError>;
   /**
+   * Shows the tags associated with this resource.
+   */
+  listTagsForResource(params: Braket.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Braket.Types.ListTagsForResourceResponse) => void): Request<Braket.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Shows the tags associated with this resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Braket.Types.ListTagsForResourceResponse) => void): Request<Braket.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Searches for devices using the specified filters.
    */
   searchDevices(params: Braket.Types.SearchDevicesRequest, callback?: (err: AWSError, data: Braket.Types.SearchDevicesResponse) => void): Request<Braket.Types.SearchDevicesResponse, AWSError>;
@@ -59,6 +67,22 @@ declare class Braket extends Service {
    * Searches for tasks that match the specified filter values.
    */
   searchQuantumTasks(callback?: (err: AWSError, data: Braket.Types.SearchQuantumTasksResponse) => void): Request<Braket.Types.SearchQuantumTasksResponse, AWSError>;
+  /**
+   * Add a tag to the specified resource.
+   */
+  tagResource(params: Braket.Types.TagResourceRequest, callback?: (err: AWSError, data: Braket.Types.TagResourceResponse) => void): Request<Braket.Types.TagResourceResponse, AWSError>;
+  /**
+   * Add a tag to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Braket.Types.TagResourceResponse) => void): Request<Braket.Types.TagResourceResponse, AWSError>;
+  /**
+   * Remove tags from a resource.
+   */
+  untagResource(params: Braket.Types.UntagResourceRequest, callback?: (err: AWSError, data: Braket.Types.UntagResourceResponse) => void): Request<Braket.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Remove tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Braket.Types.UntagResourceResponse) => void): Request<Braket.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace Braket {
   export interface CancelQuantumTaskRequest {
@@ -81,7 +105,7 @@ declare namespace Braket {
      */
     quantumTaskArn: QuantumTaskArn;
   }
-  export type CancellationStatus = "CANCELLED"|"CANCELLING"|string;
+  export type CancellationStatus = "CANCELLING"|"CANCELLED"|string;
   export interface CreateQuantumTaskRequest {
     /**
      * The action associated with the task.
@@ -98,24 +122,28 @@ declare namespace Braket {
     /**
      * The parameters for the device to run the task on.
      */
-    deviceParameters?: CreateQuantumTaskRequestdeviceParametersJsonValue;
+    deviceParameters?: CreateQuantumTaskRequestDeviceParametersString;
     /**
      * The S3 bucket to store task result files in.
      */
-    outputS3Bucket: CreateQuantumTaskRequestoutputS3BucketString;
+    outputS3Bucket: CreateQuantumTaskRequestOutputS3BucketString;
     /**
      * The key prefix for the location in the S3 bucket to store task results in.
      */
-    outputS3KeyPrefix: CreateQuantumTaskRequestoutputS3KeyPrefixString;
+    outputS3KeyPrefix: CreateQuantumTaskRequestOutputS3KeyPrefixString;
     /**
      * The number of shots to use for the task.
      */
-    shots: CreateQuantumTaskRequestshotsLong;
+    shots: CreateQuantumTaskRequestShotsLong;
+    /**
+     * Tags to be added to the quantum task you're creating.
+     */
+    tags?: TagsMap;
   }
-  export type CreateQuantumTaskRequestdeviceParametersJsonValue = string;
-  export type CreateQuantumTaskRequestoutputS3BucketString = string;
-  export type CreateQuantumTaskRequestoutputS3KeyPrefixString = string;
-  export type CreateQuantumTaskRequestshotsLong = number;
+  export type CreateQuantumTaskRequestDeviceParametersString = string;
+  export type CreateQuantumTaskRequestOutputS3BucketString = string;
+  export type CreateQuantumTaskRequestOutputS3KeyPrefixString = string;
+  export type CreateQuantumTaskRequestShotsLong = number;
   export interface CreateQuantumTaskResponse {
     /**
      * The ARN of the task created by the request.
@@ -123,7 +151,7 @@ declare namespace Braket {
     quantumTaskArn: QuantumTaskArn;
   }
   export type DeviceArn = string;
-  export type DeviceStatus = "OFFLINE"|"ONLINE"|string;
+  export type DeviceStatus = "ONLINE"|"OFFLINE"|string;
   export interface DeviceSummary {
     /**
      * The ARN of the device.
@@ -227,11 +255,27 @@ declare namespace Braket {
      * The status of the task.
      */
     status: QuantumTaskStatus;
+    /**
+     * The tags that belong to this task.
+     */
+    tags?: TagsMap;
   }
   export type JsonValue = string;
+  export interface ListTagsForResourceRequest {
+    /**
+     * Specify the resourceArn for the resource whose tags to display.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Displays the key, value pairs of tags associated with this resource.
+     */
+    tags?: TagsMap;
+  }
   export type Long = number;
   export type QuantumTaskArn = string;
-  export type QuantumTaskStatus = "CANCELLED"|"CANCELLING"|"COMPLETED"|"CREATED"|"FAILED"|"QUEUED"|"RUNNING"|string;
+  export type QuantumTaskStatus = "CREATED"|"QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
   export interface QuantumTaskSummary {
     /**
      * The time at which the task was created.
@@ -265,36 +309,40 @@ declare namespace Braket {
      * The status of the task.
      */
     status: QuantumTaskStatus;
+    /**
+     * Displays the key, value pairs of tags associated with this quantum task.
+     */
+    tags?: TagsMap;
   }
   export type QuantumTaskSummaryList = QuantumTaskSummary[];
   export interface SearchDevicesFilter {
     /**
      * The name to use to filter results.
      */
-    name: SearchDevicesFilternameString;
+    name: SearchDevicesFilterNameString;
     /**
      * The values to use to filter results.
      */
-    values: SearchDevicesFiltervaluesString256List;
+    values: SearchDevicesFilterValuesList;
   }
-  export type SearchDevicesFilternameString = string;
-  export type SearchDevicesFiltervaluesString256List = String256[];
+  export type SearchDevicesFilterNameString = string;
+  export type SearchDevicesFilterValuesList = String256[];
   export interface SearchDevicesRequest {
     /**
      * The filter values to use to search for a device.
      */
-    filters: SearchDevicesRequestfiltersSearchDevicesFilterList;
+    filters: SearchDevicesRequestFiltersList;
     /**
      * The maximum number of results to return in the response.
      */
-    maxResults?: SearchDevicesRequestmaxResultsInteger;
+    maxResults?: SearchDevicesRequestMaxResultsInteger;
     /**
      * A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
      */
     nextToken?: String;
   }
-  export type SearchDevicesRequestfiltersSearchDevicesFilterList = SearchDevicesFilter[];
-  export type SearchDevicesRequestmaxResultsInteger = number;
+  export type SearchDevicesRequestFiltersList = SearchDevicesFilter[];
+  export type SearchDevicesRequestMaxResultsInteger = number;
   export interface SearchDevicesResponse {
     /**
      * An array of DeviceSummary objects for devices that match the specified filter values.
@@ -317,26 +365,26 @@ declare namespace Braket {
     /**
      * The values to use for the filter.
      */
-    values: SearchQuantumTasksFiltervaluesString256List;
+    values: SearchQuantumTasksFilterValuesList;
   }
-  export type SearchQuantumTasksFilterOperator = "BETWEEN"|"EQUAL"|"GT"|"GTE"|"LT"|"LTE"|string;
-  export type SearchQuantumTasksFiltervaluesString256List = String256[];
+  export type SearchQuantumTasksFilterOperator = "LT"|"LTE"|"EQUAL"|"GT"|"GTE"|"BETWEEN"|string;
+  export type SearchQuantumTasksFilterValuesList = String256[];
   export interface SearchQuantumTasksRequest {
     /**
      * Array of SearchQuantumTasksFilter objects.
      */
-    filters: SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList;
+    filters: SearchQuantumTasksRequestFiltersList;
     /**
      * Maximum number of results to return in the response.
      */
-    maxResults?: SearchQuantumTasksRequestmaxResultsInteger;
+    maxResults?: SearchQuantumTasksRequestMaxResultsInteger;
     /**
      * A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
      */
     nextToken?: String;
   }
-  export type SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList = SearchQuantumTasksFilter[];
-  export type SearchQuantumTasksRequestmaxResultsInteger = number;
+  export type SearchQuantumTasksRequestFiltersList = SearchQuantumTasksFilter[];
+  export type SearchQuantumTasksRequestMaxResultsInteger = number;
   export interface SearchQuantumTasksResponse {
     /**
      * A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
@@ -351,6 +399,32 @@ declare namespace Braket {
   export type String256 = string;
   export type String64 = string;
   export type SyntheticTimestamp_date_time = Date;
+  export type TagKeys = String[];
+  export interface TagResourceRequest {
+    /**
+     * Specify the resourceArn of the resource to which a tag will be added.
+     */
+    resourceArn: String;
+    /**
+     * Specify the tags to add to the resource.
+     */
+    tags: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagsMap = {[key: string]: String};
+  export interface UntagResourceRequest {
+    /**
+     * Specify the resourceArn for the resource from which to remove the tags.
+     */
+    resourceArn: String;
+    /**
+     * pecify the keys for the tags to remove from the resource.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

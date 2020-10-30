@@ -835,6 +835,14 @@ Alternate rendition that the client will not try to play back by default. Repres
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
   export interface AutomaticInputFailoverSettings {
     /**
+     * This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
+     */
+    ErrorClearTimeMsec?: __integerMin1;
+    /**
+     * A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input.
+     */
+    FailoverConditions?: __listOfFailoverCondition;
+    /**
      * Input preference when deciding which input to make active when a previously failed input has recovered.
      */
     InputPreference?: InputPreference;
@@ -2548,6 +2556,18 @@ You specify only the font family. All other style information (color, bold, posi
     TimecodeConfig: TimecodeConfig;
     VideoDescriptions: __listOfVideoDescription;
   }
+  export interface FailoverCondition {
+    /**
+     * Failover condition type-specific settings.
+     */
+    FailoverConditionSettings?: FailoverConditionSettings;
+  }
+  export interface FailoverConditionSettings {
+    /**
+     * MediaLive will perform a failover if content is not detected in this input for the specified period.
+     */
+    InputLossSettings?: InputLossFailoverSettings;
+  }
   export interface FeatureActivations {
     /**
      * Enables the Input Prepare feature. You can create Input Prepare actions in the schedule only if this feature is enabled.
@@ -3118,6 +3138,7 @@ for any single frame within an encoded HDR video stream or file.
   export type HlsClientCache = "DISABLED"|"ENABLED"|string;
   export type HlsCodecSpecification = "RFC_4281"|"RFC_6381"|string;
   export type HlsDirectoryStructure = "SINGLE_DIRECTORY"|"SUBDIRECTORY_PER_STREAM"|string;
+  export type HlsDiscontinuityTags = "INSERT"|"NEVER_INSERT"|string;
   export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string;
   export interface HlsGroupSettings {
     /**
@@ -3176,6 +3197,12 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     DirectoryStructure?: HlsDirectoryStructure;
     /**
+     * Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child manifests for this output group.
+Typically, choose Insert because these tags are required in the manifest (according to the HLS specification) and serve an important purpose.
+Choose Never Insert only if the downstream system is doing real-time failover (without using the MediaLive automatic failover feature) and only if that downstream system has advised you to exclude the tags.
+     */
+    DiscontinuityTags?: HlsDiscontinuityTags;
+    /**
      * Encrypts the segments with the given encryption scheme.  Exclude this parameter if no encryption is desired.
      */
     EncryptionType?: HlsEncryptionType;
@@ -3193,6 +3220,12 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
 STANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
      */
     IFrameOnlyPlaylists?: IFrameOnlyPlaylistType;
+    /**
+     * Specifies whether to include the final (incomplete) segment in the media output when the pipeline stops producing output because of a channel stop, a channel pause or a loss of input to the pipeline.
+Auto means that MediaLive decides whether to include the final segment, depending on the channel class and the types of output groups.
+Suppress means to never include the incomplete segment. We recommend you choose Auto and let MediaLive control the behavior.
+     */
+    IncompleteSegmentBehavior?: HlsIncompleteSegmentBehavior;
     /**
      * Applies only if Mode field is LIVE.
 
@@ -3316,6 +3349,7 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
     Tag: __string;
   }
   export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string;
+  export type HlsIncompleteSegmentBehavior = "AUTO"|"SUPPRESS"|string;
   export interface HlsInputSettings {
     /**
      * When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.
@@ -3738,6 +3772,12 @@ to.
      * Documentation update needed
      */
     RepeatFrameMsec?: __integerMin0Max1000000;
+  }
+  export interface InputLossFailoverSettings {
+    /**
+     * The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
+     */
+    InputLossThresholdMsec?: __integerMin100;
   }
   export type InputLossImageType = "COLOR"|"SLATE"|string;
   export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
@@ -6335,6 +6375,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __integerMin0Max7 = number;
   export type __integerMin0Max8191 = number;
   export type __integerMin1 = number;
+  export type __integerMin100 = number;
   export type __integerMin1000 = number;
   export type __integerMin1000000Max100000000 = number;
   export type __integerMin100000Max100000000 = number;
@@ -6375,6 +6416,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfCaptionSelector = CaptionSelector[];
   export type __listOfChannelEgressEndpoint = ChannelEgressEndpoint[];
   export type __listOfChannelSummary = ChannelSummary[];
+  export type __listOfFailoverCondition = FailoverCondition[];
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
   export type __listOfInput = Input[];
   export type __listOfInputAttachment = InputAttachment[];

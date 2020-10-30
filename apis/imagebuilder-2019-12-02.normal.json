@@ -1617,7 +1617,7 @@
       "member": {
         "shape": "AccountId"
       },
-      "max": 50,
+      "max": 1536,
       "min": 1
     },
     "Ami": {
@@ -1637,7 +1637,7 @@
         },
         "description": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The description of the EC2 AMI. </p>"
+          "documentation": "<p>The description of the EC2 AMI. Minimum and maximum length are in characters.</p>"
         },
         "state": {
           "shape": "ImageState"
@@ -1658,7 +1658,7 @@
         },
         "description": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The description of the distribution configuration. </p>"
+          "documentation": "<p>The description of the distribution configuration. Minimum and maximum length are in characters.</p>"
         },
         "targetAccountIds": {
           "shape": "AccountList",
@@ -3643,7 +3643,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3660,7 +3660,7 @@
           "documentation": "<p>The list of component summaries for the specified semantic version. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3682,7 +3682,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3699,7 +3699,7 @@
           "documentation": "<p>The list of component semantic versions. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3717,7 +3717,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3734,7 +3734,7 @@
           "documentation": "<p>The list of distributions. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3759,7 +3759,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3776,7 +3776,7 @@
           "documentation": "<p>The list of image build versions. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3801,7 +3801,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3818,7 +3818,7 @@
           "documentation": "<p>The list of images built by this pipeline. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3836,7 +3836,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3853,7 +3853,7 @@
           "documentation": "<p>The list of image pipelines. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3875,7 +3875,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3892,7 +3892,7 @@
           "documentation": "<p>The list of image pipelines. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3914,7 +3914,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3931,7 +3931,7 @@
           "documentation": "<p>The list of image semantic versions. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
         }
       }
@@ -3949,7 +3949,7 @@
           "box": true
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
         }
       }
@@ -3966,7 +3966,7 @@
           "documentation": "<p>The list of infrastructure configurations. </p>"
         },
         "nextToken": {
-          "shape": "NonEmptyString",
+          "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.</p>"
         }
       }
@@ -4041,6 +4041,11 @@
         "Shared",
         "Amazon"
       ]
+    },
+    "PaginationToken": {
+      "type": "string",
+      "max": 65535,
+      "min": 1
     },
     "PipelineExecutionStartCondition": {
       "type": "string",

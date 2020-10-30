@@ -3255,6 +3255,11 @@
           "locationName": "eq",
           "documentation": "<p>An equal to condition to apply to a specified property value for findings.</p>"
         },
+        "eqExactMatch": {
+          "shape": "__listOf__string",
+          "locationName": "eqExactMatch",
+          "documentation": "<p>A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties:</p><ul><li><p>customDataIdentifiers.detections.arn</p></li><li><p>customDataIdentifiers.detections.name</p></li><li><p>resourcesAffected.s3Bucket.tags.key</p></li><li><p>resourcesAffected.s3Bucket.tags.value</p></li><li><p>resourcesAffected.s3Object.tags.key</p></li><li><p>resourcesAffected.s3Object.tags.value</p></li><li><p>sensitiveData.category</p></li><li><p>sensitiveData.detections.type</p></li></ul>"
+        },
         "gt": {
           "shape": "__long",
           "locationName": "gt",
