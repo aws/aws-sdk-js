@@ -7054,6 +7054,10 @@
           "shape": "NetworkInterfaceId",
           "documentation": "<p>The ID of the network interface.</p>",
           "locationName": "networkInterfaceId"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for AttachNetworkInterface.</p>"
@@ -7065,6 +7069,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the network interface attachment.</p>",
           "locationName": "attachmentId"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card.</p>",
+          "locationName": "networkCardIndex"
         }
       },
       "documentation": "<p>Contains the output of AttachNetworkInterface.</p>"
@@ -25485,6 +25494,11 @@
           "shape": "AttachmentStatus",
           "documentation": "<p>The attachment state.</p>",
           "locationName": "status"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card.</p>",
+          "locationName": "networkCardIndex"
         }
       },
       "documentation": "<p>Describes a network interface attachment.</p>"
@@ -25567,7 +25581,11 @@
         },
         "InterfaceType": {
           "shape": "String",
-          "documentation": "<p>The type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
+          "documentation": "<p>The type of network interface.</p> <p>To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.</p>"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -26098,6 +26116,7 @@
         "p3.8xlarge",
         "p3.16xlarge",
         "p3dn.24xlarge",
+        "p4d.24xlarge",
         "d2.xlarge",
         "d2.2xlarge",
         "d2.4xlarge",
@@ -27275,7 +27294,7 @@
           "documentation": "<p>To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.</p>"
         }
       },
-      "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>"
     },
     "LaunchTemplateErrorCode": {
       "type": "string",
@@ -27516,6 +27535,11 @@
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet for the network interface.</p>",
           "locationName": "subnetId"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card.</p>",
+          "locationName": "networkCardIndex"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -27586,6 +27610,10 @@
         "SubnetId": {
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet for the network interface.</p>"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.</p>"
         }
       },
       "documentation": "<p>The parameters for a network interface.</p>"
@@ -31080,7 +31108,7 @@
         },
         "PublicIp": {
           "shape": "String",
-          "documentation": "<p>The address of the Elastic IP address or Carrier IP address bound to the network interface.</p>",
+          "documentation": "<p>The address of the Elastic IP address bound to the network interface.</p>",
           "locationName": "publicIp"
         },
         "CustomerOwnedIp": {
@@ -31118,6 +31146,11 @@
           "shape": "Integer",
           "documentation": "<p>The device index of the network interface attachment on the instance.</p>",
           "locationName": "deviceIndex"
+        },
+        "NetworkCardIndex": {
+          "shape": "Integer",
+          "documentation": "<p>The index of the network card.</p>",
+          "locationName": "networkCardIndex"
         },
         "InstanceId": {
           "shape": "String",
@@ -33759,7 +33792,7 @@
         },
         "EnclaveOptions": {
           "shape": "LaunchTemplateEnclaveOptionsRequest",
-          "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance.</p>"
         }
       },
       "documentation": "<p>The information to include in the launch template.</p>"

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.783.0-->
+<!--LATEST=2.784.0-->
 <!--ENTRYINSERT-->
+
+## 2.784.0
+* feature: EC2: This release adds support for the following features: 1. P4d instances based on NVIDIA A100 GPUs.  2. NetworkCardIndex attribute to support multiple network cards.
 
 ## 2.783.0
 * bugfix: Types: Fix type of AWSError
