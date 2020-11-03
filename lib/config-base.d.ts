@@ -62,7 +62,7 @@ export interface HTTPOptions {
      */
     connectTimeout?: number;
     /**
-     * The number of milliseconds to wait before giving up on a requested response from a service.
+     * The number of milliseconds a request can take before automatically being terminated.
      * Defaults to two minutes (120000).
      */
     timeout?: number;
