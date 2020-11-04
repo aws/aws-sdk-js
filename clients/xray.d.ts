@@ -76,6 +76,38 @@ declare class XRay extends Service {
    */
   getGroups(callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
   /**
+   * Retrieves the summary information of an insight. This includes impact to clients and root cause services, the top anomalous services, the category, the state of the insight, and the start and end time of the insight.
+   */
+  getInsight(params: XRay.Types.GetInsightRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightResult) => void): Request<XRay.Types.GetInsightResult, AWSError>;
+  /**
+   * Retrieves the summary information of an insight. This includes impact to clients and root cause services, the top anomalous services, the category, the state of the insight, and the start and end time of the insight.
+   */
+  getInsight(callback?: (err: AWSError, data: XRay.Types.GetInsightResult) => void): Request<XRay.Types.GetInsightResult, AWSError>;
+  /**
+   * X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray console.
+   */
+  getInsightEvents(params: XRay.Types.GetInsightEventsRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightEventsResult) => void): Request<XRay.Types.GetInsightEventsResult, AWSError>;
+  /**
+   * X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray console.
+   */
+  getInsightEvents(callback?: (err: AWSError, data: XRay.Types.GetInsightEventsResult) => void): Request<XRay.Types.GetInsightEventsResult, AWSError>;
+  /**
+   * Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only structural information. For a complete service graph, use this API with the GetServiceGraph API.
+   */
+  getInsightImpactGraph(params: XRay.Types.GetInsightImpactGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightImpactGraphResult) => void): Request<XRay.Types.GetInsightImpactGraphResult, AWSError>;
+  /**
+   * Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only structural information. For a complete service graph, use this API with the GetServiceGraph API.
+   */
+  getInsightImpactGraph(callback?: (err: AWSError, data: XRay.Types.GetInsightImpactGraphResult) => void): Request<XRay.Types.GetInsightImpactGraphResult, AWSError>;
+  /**
+   * Retrieves the summaries of all insights in the specified group matching the provided filter values.
+   */
+  getInsightSummaries(params: XRay.Types.GetInsightSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightSummariesResult) => void): Request<XRay.Types.GetInsightSummariesResult, AWSError>;
+  /**
+   * Retrieves the summaries of all insights in the specified group matching the provided filter values.
+   */
+  getInsightSummaries(callback?: (err: AWSError, data: XRay.Types.GetInsightSummariesResult) => void): Request<XRay.Types.GetInsightSummariesResult, AWSError>;
+  /**
    * Retrieves all sampling rules.
    */
   getSamplingRules(params: XRay.Types.GetSamplingRulesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
@@ -230,6 +262,10 @@ declare namespace XRay {
     StringValue?: String;
   }
   export type Annotations = {[key: string]: ValuesWithServiceIds};
+  export interface AnomalousService {
+    ServiceId?: ServiceId;
+  }
+  export type AnomalousServiceList = AnomalousService[];
   export type AttributeKey = string;
   export type AttributeMap = {[key: string]: AttributeValue};
   export type AttributeValue = string;
@@ -496,6 +532,7 @@ declare namespace XRay {
      */
     TotalCount?: NullableLong;
   }
+  export type EventSummaryText = string;
   export interface FaultRootCause {
     /**
      * A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
@@ -561,6 +598,16 @@ declare namespace XRay {
   }
   export type FilterExpression = string;
   export type FixedRate = number;
+  export interface ForecastStatistics {
+    /**
+     * The upper limit of fault counts for a service.
+     */
+    FaultCountHigh?: NullableLong;
+    /**
+     * The lower limit of fault counts for a service.
+     */
+    FaultCountLow?: NullableLong;
+  }
   export interface GetEncryptionConfigRequest {
   }
   export interface GetEncryptionConfigResult {
@@ -601,6 +648,132 @@ declare namespace XRay {
      * Pagination token.
      */
     NextToken?: String;
+  }
+  export type GetInsightEventsMaxResults = number;
+  export interface GetInsightEventsRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+    /**
+     * Used to retrieve at most the specified value of events.
+     */
+    MaxResults?: GetInsightEventsMaxResults;
+    /**
+     * Specify the pagination token returned by a previous request to retrieve the next page of events. 
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightEventsResult {
+    /**
+     * A detailed description of the event. This includes the time of the event, client and root cause impact statistics, and the top anomalous service at the time of the event.
+     */
+    InsightEvents?: InsightEventList;
+    /**
+     * Use this token to retrieve the next page of insight events.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightImpactGraphRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+    /**
+     * The estimated start time of the insight, in Unix time seconds. The StartTime is inclusive of the value provided and can't be more than 30 days old.
+     */
+    StartTime: Timestamp;
+    /**
+     * The estimated end time of the insight, in Unix time seconds. The EndTime is exclusive of the value provided. The time range between the start time and end time can't be more than six hours. 
+     */
+    EndTime: Timestamp;
+    /**
+     * Specify the pagination token returned by a previous request to retrieve the next page of results. 
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightImpactGraphResult {
+    /**
+     * The insight's unique identifier.
+     */
+    InsightId?: InsightId;
+    /**
+     * The provided start time.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The provided end time. 
+     */
+    EndTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the service graph started.
+     */
+    ServiceGraphStartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the service graph ended.
+     */
+    ServiceGraphEndTime?: Timestamp;
+    /**
+     * The AWS instrumented services related to the insight.
+     */
+    Services?: InsightImpactGraphServiceList;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+  }
+  export interface GetInsightResult {
+    /**
+     * The summary information of an insight.
+     */
+    Insight?: Insight;
+  }
+  export type GetInsightSummariesMaxResults = number;
+  export interface GetInsightSummariesRequest {
+    /**
+     * The list of insight states. 
+     */
+    States?: InsightStateList;
+    /**
+     * The Amazon Resource Name (ARN) of the group. Required if the GroupName isn't provided.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group. Required if the GroupARN isn't provided.
+     */
+    GroupName?: GroupName;
+    /**
+     * The beginning of the time frame in which the insights started. The start time can't be more than 30 days old.
+     */
+    StartTime: Timestamp;
+    /**
+     * The end of the time frame in which the insights ended. The end time can't be more than 30 days old.
+     */
+    EndTime: Timestamp;
+    /**
+     * The maximum number of results to display.
+     */
+    MaxResults?: GetInsightSummariesMaxResults;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightSummariesResult {
+    /**
+     * The summary of each insight within the group matching the provided filters. The summary contains the InsightID, start and end time, the root cause service, the root cause and client impact statistics, the top anomalous services, and the status of the insight.
+     */
+    InsightSummaries?: InsightSummaryList;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
   }
   export interface GetSamplingRulesRequest {
     /**
@@ -723,6 +896,10 @@ declare namespace XRay {
      * Aggregation period in seconds.
      */
     Period?: NullableInteger;
+    /**
+     * The forecasted high and low fault count values. Forecast enabled requests require the EntitySelectorExpression ID be provided.
+     */
+    ForecastStatistics?: NullableBoolean;
     /**
      * Pagination token.
      */
@@ -885,6 +1062,168 @@ declare namespace XRay {
      */
     ClientIp?: String;
   }
+  export interface Insight {
+    /**
+     * The insights unique identifier. 
+     */
+    InsightId?: InsightId;
+    /**
+     * The Amazon Resource Name (ARN) of the group that the insight belongs to.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group that the insight belongs to.
+     */
+    GroupName?: GroupName;
+    RootCauseServiceId?: ServiceId;
+    /**
+     * The categories that label and describe the type of insight.
+     */
+    Categories?: InsightCategoryList;
+    /**
+     * The current state of the insight.
+     */
+    State?: InsightState;
+    /**
+     * The time, in Unix seconds, at which the insight began.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the insight ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * A brief description of the insight.
+     */
+    Summary?: InsightSummaryText;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service within the insight that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+  }
+  export type InsightCategory = "FAULT"|string;
+  export type InsightCategoryList = InsightCategory[];
+  export interface InsightEvent {
+    /**
+     * A brief description of the event.
+     */
+    Summary?: EventSummaryText;
+    /**
+     * The time, in Unix seconds, at which the event was recorded.
+     */
+    EventTime?: Timestamp;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service during the event that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+  }
+  export type InsightEventList = InsightEvent[];
+  export type InsightId = string;
+  export interface InsightImpactGraphEdge {
+    /**
+     * Identifier of the edge. Unique within a service map.
+     */
+    ReferenceId?: NullableInteger;
+  }
+  export type InsightImpactGraphEdgeList = InsightImpactGraphEdge[];
+  export interface InsightImpactGraphService {
+    /**
+     * Identifier for the service. Unique within the service map.
+     */
+    ReferenceId?: NullableInteger;
+    /**
+     * Identifier for the service. Unique within the service map.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    remote - A downstream service of indeterminate type.  
+     */
+    Type?: String;
+    /**
+     * The canonical name of the service.
+     */
+    Name?: String;
+    /**
+     * A list of names for the service, including the canonical name.
+     */
+    Names?: ServiceNames;
+    /**
+     * Identifier of the AWS account in which the service runs.
+     */
+    AccountId?: String;
+    /**
+     * Connections to downstream services.
+     */
+    Edges?: InsightImpactGraphEdgeList;
+  }
+  export type InsightImpactGraphServiceList = InsightImpactGraphService[];
+  export type InsightState = "ACTIVE"|"CLOSED"|string;
+  export type InsightStateList = InsightState[];
+  export interface InsightSummary {
+    /**
+     * The insights unique identifier. 
+     */
+    InsightId?: InsightId;
+    /**
+     * The Amazon Resource Name (ARN) of the group that the insight belongs to.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group that the insight belongs to.
+     */
+    GroupName?: GroupName;
+    RootCauseServiceId?: ServiceId;
+    /**
+     *  Categories The categories that label and describe the type of insight.
+     */
+    Categories?: InsightCategoryList;
+    /**
+     * The current state of the insight.
+     */
+    State?: InsightState;
+    /**
+     * The time, in Unix seconds, at which the insight began.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the insight ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * A brief description of the insight.
+     */
+    Summary?: InsightSummaryText;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay. 
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay. 
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service within the insight that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+    /**
+     * The time, in Unix seconds, that the insight was last updated.
+     */
+    LastUpdateTime?: Timestamp;
+  }
+  export type InsightSummaryList = InsightSummary[];
+  export type InsightSummaryText = string;
   export interface InsightsConfiguration {
     /**
      * Set the InsightsEnabled value to true to enable insights or false to disable insights.
@@ -976,6 +1315,20 @@ declare namespace XRay {
     UnprocessedTraceSegments?: UnprocessedTraceSegmentList;
   }
   export type RequestCount = number;
+  export interface RequestImpactStatistics {
+    /**
+     * The number of requests that have resulted in a fault,
+     */
+    FaultCount?: NullableLong;
+    /**
+     * The number of successful requests.
+     */
+    OkCount?: NullableLong;
+    /**
+     * The total number of requests to the service.
+     */
+    TotalCount?: NullableLong;
+  }
   export type ReservoirSize = number;
   export type ResourceARN = string;
   export interface ResourceARNDetail {
@@ -1428,12 +1781,17 @@ declare namespace XRay {
     EdgeSummaryStatistics?: EdgeStatistics;
     ServiceSummaryStatistics?: ServiceStatistics;
     /**
+     * The forecasted high and low fault count values.
+     */
+    ServiceForecastStatistics?: ForecastStatistics;
+    /**
      * The response time histogram for the selected entities.
      */
     ResponseTimeHistogram?: Histogram;
   }
   export type TimeSeriesServiceStatisticsList = TimeSeriesServiceStatistics[];
   export type Timestamp = Date;
+  export type Token = string;
   export interface Trace {
     /**
      * The unique identifier for the request that generated the trace's segments and subsegments.

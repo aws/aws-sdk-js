@@ -6118,7 +6118,7 @@ declare namespace Iot {
   }
   export interface ListBillingGroupsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6136,7 +6136,7 @@ declare namespace Iot {
      */
     billingGroups?: BillingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6546,7 +6546,7 @@ declare namespace Iot {
   }
   export interface ListPrincipalThingsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6564,7 +6564,7 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6739,7 +6739,7 @@ declare namespace Iot {
      */
     resourceArn: ResourceArn;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
   }
@@ -6749,7 +6749,7 @@ declare namespace Iot {
      */
     tags?: TagList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6807,7 +6807,7 @@ declare namespace Iot {
      */
     thingName: ThingName;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6821,13 +6821,13 @@ declare namespace Iot {
      */
     thingGroups?: ThingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingGroupsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6853,11 +6853,19 @@ declare namespace Iot {
      */
     thingGroups?: ThingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingPrincipalsRequest {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return in this operation.
+     */
+    maxResults?: RegistryMaxResults;
     /**
      * The name of the thing.
      */
@@ -6868,6 +6876,10 @@ declare namespace Iot {
      * The principals associated with the thing.
      */
     principals?: Principals;
+    /**
+     * The token to use to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListThingRegistrationTaskReportsRequest {
     /**
@@ -6879,7 +6891,7 @@ declare namespace Iot {
      */
     reportType: ReportType;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6897,13 +6909,13 @@ declare namespace Iot {
      */
     reportType?: ReportType;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingRegistrationTasksRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6921,13 +6933,13 @@ declare namespace Iot {
      */
     taskIds?: TaskIdList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingTypesRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6955,7 +6967,7 @@ declare namespace Iot {
      */
     billingGroupName: BillingGroupName;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6969,7 +6981,7 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -6983,7 +6995,7 @@ declare namespace Iot {
      */
     recursive?: Recursive;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6997,13 +7009,13 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -7029,7 +7041,7 @@ declare namespace Iot {
      */
     things?: ThingAttributeList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -7039,7 +7051,7 @@ declare namespace Iot {
      */
     maxResults?: TopicRuleDestinationMaxResults;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
   }
@@ -7049,7 +7061,7 @@ declare namespace Iot {
      */
     destinationSummaries?: TopicRuleDestinationSummaries;
     /**
-     * The token to retrieve the next set of results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -7063,7 +7075,7 @@ declare namespace Iot {
      */
     maxResults?: TopicRuleMaxResults;
     /**
-     * A token used to retrieve the next value.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -7077,7 +7089,7 @@ declare namespace Iot {
      */
     rules?: TopicRuleList;
     /**
-     * A token used to retrieve the next value.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -7087,7 +7099,7 @@ declare namespace Iot {
      */
     targetType?: LogTargetType;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -7101,7 +7113,7 @@ declare namespace Iot {
      */
     logTargetConfigurations?: LogTargetConfigurations;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }

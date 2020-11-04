@@ -189,6 +189,94 @@
       ],
       "documentation": "<p>Retrieves all active group details.</p>"
     },
+    "GetInsight": {
+      "name": "GetInsight",
+      "http": {
+        "method": "POST",
+        "requestUri": "/Insight"
+      },
+      "input": {
+        "shape": "GetInsightRequest"
+      },
+      "output": {
+        "shape": "GetInsightResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Retrieves the summary information of an insight. This includes impact to clients and root cause services, the top anomalous services, the category, the state of the insight, and the start and end time of the insight.</p>"
+    },
+    "GetInsightEvents": {
+      "name": "GetInsightEvents",
+      "http": {
+        "method": "POST",
+        "requestUri": "/InsightEvents"
+      },
+      "input": {
+        "shape": "GetInsightEventsRequest"
+      },
+      "output": {
+        "shape": "GetInsightEventsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray console.</p>"
+    },
+    "GetInsightImpactGraph": {
+      "name": "GetInsightImpactGraph",
+      "http": {
+        "method": "POST",
+        "requestUri": "/InsightImpactGraph"
+      },
+      "input": {
+        "shape": "GetInsightImpactGraphRequest"
+      },
+      "output": {
+        "shape": "GetInsightImpactGraphResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only structural information. For a complete service graph, use this API with the GetServiceGraph API.</p>"
+    },
+    "GetInsightSummaries": {
+      "name": "GetInsightSummaries",
+      "http": {
+        "method": "POST",
+        "requestUri": "/InsightSummaries"
+      },
+      "input": {
+        "shape": "GetInsightSummariesRequest"
+      },
+      "output": {
+        "shape": "GetInsightSummariesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Retrieves the summaries of all insights in the specified group matching the provided filter values.</p>"
+    },
     "GetSamplingRules": {
       "name": "GetSamplingRules",
       "http": {
@@ -596,6 +684,21 @@
       },
       "value": {
         "shape": "ValuesWithServiceIds"
+      }
+    },
+    "AnomalousService": {
+      "type": "structure",
+      "members": {
+        "ServiceId": {
+          "shape": "ServiceId"
+        }
+      },
+      "documentation": "<p>The service within the service graph that has anomalously high fault rates. </p>"
+    },
+    "AnomalousServiceList": {
+      "type": "list",
+      "member": {
+        "shape": "AnomalousService"
       }
     },
     "AttributeKey": {
@@ -1009,6 +1112,9 @@
       },
       "documentation": "<p>Information about requests that failed with a 4xx Client Error status code.</p>"
     },
+    "EventSummaryText": {
+      "type": "string"
+    },
     "FaultRootCause": {
       "type": "structure",
       "members": {
@@ -1111,6 +1217,20 @@
       "max": 1,
       "min": 0
     },
+    "ForecastStatistics": {
+      "type": "structure",
+      "members": {
+        "FaultCountHigh": {
+          "shape": "NullableLong",
+          "documentation": "<p>The upper limit of fault counts for a service.</p>"
+        },
+        "FaultCountLow": {
+          "shape": "NullableLong",
+          "documentation": "<p>The lower limit of fault counts for a service.</p>"
+        }
+      },
+      "documentation": "<p>The predicted high and low fault count. This is used to determine if a service has become anomalous and if an insight should be created.</p>"
+    },
     "GetEncryptionConfigRequest": {
       "type": "structure",
       "members": {}
@@ -1169,6 +1289,179 @@
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>Pagination token.</p>"
+        }
+      }
+    },
+    "GetInsightEventsMaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "GetInsightEventsRequest": {
+      "type": "structure",
+      "required": [
+        "InsightId"
+      ],
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>"
+        },
+        "MaxResults": {
+          "shape": "GetInsightEventsMaxResults",
+          "documentation": "<p>Used to retrieve at most the specified value of events.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>Specify the pagination token returned by a previous request to retrieve the next page of events. </p>"
+        }
+      }
+    },
+    "GetInsightEventsResult": {
+      "type": "structure",
+      "members": {
+        "InsightEvents": {
+          "shape": "InsightEventList",
+          "documentation": "<p>A detailed description of the event. This includes the time of the event, client and root cause impact statistics, and the top anomalous service at the time of the event.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>Use this token to retrieve the next page of insight events.</p>"
+        }
+      }
+    },
+    "GetInsightImpactGraphRequest": {
+      "type": "structure",
+      "required": [
+        "InsightId",
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The estimated start time of the insight, in Unix time seconds. The StartTime is inclusive of the value provided and can't be more than 30 days old.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The estimated end time of the insight, in Unix time seconds. The EndTime is exclusive of the value provided. The time range between the start time and end time can't be more than six hours. </p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>Specify the pagination token returned by a previous request to retrieve the next page of results. </p>"
+        }
+      }
+    },
+    "GetInsightImpactGraphResult": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insight's unique identifier.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The provided start time.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The provided end time. </p>"
+        },
+        "ServiceGraphStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the service graph started.</p>"
+        },
+        "ServiceGraphEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the service graph ended.</p>"
+        },
+        "Services": {
+          "shape": "InsightImpactGraphServiceList",
+          "documentation": "<p>The AWS instrumented services related to the insight.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>Pagination token.</p>"
+        }
+      }
+    },
+    "GetInsightRequest": {
+      "type": "structure",
+      "required": [
+        "InsightId"
+      ],
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.</p>"
+        }
+      }
+    },
+    "GetInsightResult": {
+      "type": "structure",
+      "members": {
+        "Insight": {
+          "shape": "Insight",
+          "documentation": "<p>The summary information of an insight.</p>"
+        }
+      }
+    },
+    "GetInsightSummariesMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "GetInsightSummariesRequest": {
+      "type": "structure",
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "States": {
+          "shape": "InsightStateList",
+          "documentation": "<p>The list of insight states. </p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the group. Required if the GroupName isn't provided.</p>"
+        },
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The name of the group. Required if the GroupARN isn't provided.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The beginning of the time frame in which the insights started. The start time can't be more than 30 days old.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end of the time frame in which the insights ended. The end time can't be more than 30 days old.</p>"
+        },
+        "MaxResults": {
+          "shape": "GetInsightSummariesMaxResults",
+          "documentation": "<p>The maximum number of results to display.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>Pagination token.</p>"
+        }
+      }
+    },
+    "GetInsightSummariesResult": {
+      "type": "structure",
+      "members": {
+        "InsightSummaries": {
+          "shape": "InsightSummaryList",
+          "documentation": "<p>The summary of each insight within the group matching the provided filters. The summary contains the InsightID, start and end time, the root cause service, the root cause and client impact statistics, the top anomalous services, and the status of the insight.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
           "documentation": "<p>Pagination token.</p>"
         }
       }
@@ -1330,6 +1623,10 @@
         "Period": {
           "shape": "NullableInteger",
           "documentation": "<p>Aggregation period in seconds.</p>"
+        },
+        "ForecastStatistics": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>The forecasted high and low fault count values. Forecast enabled requests require the EntitySelectorExpression ID be provided.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1559,6 +1856,240 @@
       },
       "documentation": "<p>Information about an HTTP request.</p>"
     },
+    "Insight": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insights unique identifier. </p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the group that the insight belongs to.</p>"
+        },
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The name of the group that the insight belongs to.</p>"
+        },
+        "RootCauseServiceId": {
+          "shape": "ServiceId"
+        },
+        "Categories": {
+          "shape": "InsightCategoryList",
+          "documentation": "<p>The categories that label and describe the type of insight.</p>"
+        },
+        "State": {
+          "shape": "InsightState",
+          "documentation": "<p>The current state of the insight.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the insight began.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the insight ended.</p>"
+        },
+        "Summary": {
+          "shape": "InsightSummaryText",
+          "documentation": "<p>A brief description of the insight.</p>"
+        },
+        "ClientRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.</p>"
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.</p>"
+        },
+        "TopAnomalousServices": {
+          "shape": "AnomalousServiceList",
+          "documentation": "<p>The service within the insight that is most impacted by the incident.</p>"
+        }
+      },
+      "documentation": "<p>When fault rates go outside of the expected range, X-Ray creates an insight. Insights tracks emergent issues within your applications.</p>"
+    },
+    "InsightCategory": {
+      "type": "string",
+      "enum": [
+        "FAULT"
+      ]
+    },
+    "InsightCategoryList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightCategory"
+      }
+    },
+    "InsightEvent": {
+      "type": "structure",
+      "members": {
+        "Summary": {
+          "shape": "EventSummaryText",
+          "documentation": "<p>A brief description of the event.</p>"
+        },
+        "EventTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the event was recorded.</p>"
+        },
+        "ClientRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.</p>"
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.</p>"
+        },
+        "TopAnomalousServices": {
+          "shape": "AnomalousServiceList",
+          "documentation": "<p>The service during the event that is most impacted by the incident.</p>"
+        }
+      },
+      "documentation": "<p>X-Ray reevaluates insights periodically until they are resolved, and records each intermediate state in an event. You can review incident events in the Impact Timeline on the Inspect page in the X-Ray console.</p>"
+    },
+    "InsightEventList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightEvent"
+      }
+    },
+    "InsightId": {
+      "type": "string",
+      "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+    },
+    "InsightImpactGraphEdge": {
+      "type": "structure",
+      "members": {
+        "ReferenceId": {
+          "shape": "NullableInteger",
+          "documentation": "<p>Identifier of the edge. Unique within a service map.</p>"
+        }
+      },
+      "documentation": "<p>The connection between two service in an insight impact graph.</p>"
+    },
+    "InsightImpactGraphEdgeList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightImpactGraphEdge"
+      }
+    },
+    "InsightImpactGraphService": {
+      "type": "structure",
+      "members": {
+        "ReferenceId": {
+          "shape": "NullableInteger",
+          "documentation": "<p>Identifier for the service. Unique within the service map.</p>"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>Identifier for the service. Unique within the service map.</p> <ul> <li> <p>AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used. </p> </li> <li> <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table. </p> </li> <li> <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table. </p> </li> <li> <p>remote - A downstream service of indeterminate type.</p> </li> </ul>"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The canonical name of the service.</p>"
+        },
+        "Names": {
+          "shape": "ServiceNames",
+          "documentation": "<p>A list of names for the service, including the canonical name.</p>"
+        },
+        "AccountId": {
+          "shape": "String",
+          "documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
+        },
+        "Edges": {
+          "shape": "InsightImpactGraphEdgeList",
+          "documentation": "<p>Connections to downstream services.</p>"
+        }
+      },
+      "documentation": "<p>Information about an application that processed requests, users that made requests, or downstream services, resources, and applications that an application used. </p>"
+    },
+    "InsightImpactGraphServiceList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightImpactGraphService"
+      }
+    },
+    "InsightState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CLOSED"
+      ]
+    },
+    "InsightStateList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightState"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "InsightSummary": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p>The insights unique identifier. </p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the group that the insight belongs to.</p>"
+        },
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The name of the group that the insight belongs to.</p>"
+        },
+        "RootCauseServiceId": {
+          "shape": "ServiceId"
+        },
+        "Categories": {
+          "shape": "InsightCategoryList",
+          "documentation": "<p> Categories The categories that label and describe the type of insight.</p>"
+        },
+        "State": {
+          "shape": "InsightState",
+          "documentation": "<p>The current state of the insight.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the insight began.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, at which the insight ended.</p>"
+        },
+        "Summary": {
+          "shape": "InsightSummaryText",
+          "documentation": "<p>A brief description of the insight.</p>"
+        },
+        "ClientRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay. </p>"
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "shape": "RequestImpactStatistics",
+          "documentation": "<p>The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay. </p>"
+        },
+        "TopAnomalousServices": {
+          "shape": "AnomalousServiceList",
+          "documentation": "<p>The service within the insight that is most impacted by the incident.</p>"
+        },
+        "LastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in Unix seconds, that the insight was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Information that describes an insight.</p>"
+    },
+    "InsightSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightSummary"
+      }
+    },
+    "InsightSummaryText": {
+      "type": "string"
+    },
     "InsightsConfiguration": {
       "type": "structure",
       "members": {
@@ -1709,6 +2240,24 @@
     "RequestCount": {
       "type": "integer",
       "min": 0
+    },
+    "RequestImpactStatistics": {
+      "type": "structure",
+      "members": {
+        "FaultCount": {
+          "shape": "NullableLong",
+          "documentation": "<p>The number of requests that have resulted in a fault,</p>"
+        },
+        "OkCount": {
+          "shape": "NullableLong",
+          "documentation": "<p>The number of successful requests.</p>"
+        },
+        "TotalCount": {
+          "shape": "NullableLong",
+          "documentation": "<p>The total number of requests to the service.</p>"
+        }
+      },
+      "documentation": "<p>Statistics that describe how the incident has impacted a service.</p>"
     },
     "ReservoirSize": {
       "type": "integer",
@@ -2400,6 +2949,10 @@
         "ServiceSummaryStatistics": {
           "shape": "ServiceStatistics"
         },
+        "ServiceForecastStatistics": {
+          "shape": "ForecastStatistics",
+          "documentation": "<p>The forecasted high and low fault count values.</p>"
+        },
         "ResponseTimeHistogram": {
           "shape": "Histogram",
           "documentation": "<p>The response time histogram for the selected entities.</p>"
@@ -2415,6 +2968,11 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "Token": {
+      "type": "string",
+      "max": 2000,
+      "min": 1
     },
     "Trace": {
       "type": "structure",

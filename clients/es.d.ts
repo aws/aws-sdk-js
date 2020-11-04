@@ -365,6 +365,10 @@ declare namespace ES {
      * True if the internal user database is enabled.
      */
     InternalUserDatabaseEnabled?: Boolean;
+    /**
+     * Describes the SAML application configured for a domain.
+     */
+    SAMLOptions?: SAMLOptionsOutput;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
@@ -379,6 +383,10 @@ declare namespace ES {
      * Credentials for the master user: username and password, ARN, or both.
      */
     MasterUserOptions?: MasterUserOptions;
+    /**
+     * Specifies the SAML application configuration for the domain.
+     */
+    SAMLOptions?: SAMLOptionsInput;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
@@ -406,6 +414,7 @@ declare namespace ES {
      */
     DomainPackageDetails?: DomainPackageDetails;
   }
+  export type BackendRole = string;
   export type Boolean = boolean;
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
     /**
@@ -1704,6 +1713,70 @@ declare namespace ES {
   export type RoleArn = string;
   export type S3BucketName = string;
   export type S3Key = string;
+  export type SAMLEntityId = string;
+  export interface SAMLIdp {
+    /**
+     * The Metadata of the SAML application in xml format.
+     */
+    MetadataContent: SAMLMetadata;
+    /**
+     * The unique Entity ID of the application in SAML Identity Provider.
+     */
+    EntityId: SAMLEntityId;
+  }
+  export type SAMLMetadata = string;
+  export interface SAMLOptionsInput {
+    /**
+     * True if SAML is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * Specifies the SAML Identity Provider's information.
+     */
+    Idp?: SAMLIdp;
+    /**
+     * The SAML master username, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserName?: Username;
+    /**
+     * The backend role to which the SAML master user is mapped to.
+     */
+    MasterBackendRole?: BackendRole;
+    /**
+     * The key to use for matching the SAML Subject attribute.
+     */
+    SubjectKey?: String;
+    /**
+     * The key to use for matching the SAML Roles attribute.
+     */
+    RolesKey?: String;
+    /**
+     * The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.
+     */
+    SessionTimeoutMinutes?: IntegerClass;
+  }
+  export interface SAMLOptionsOutput {
+    /**
+     * True if SAML is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * Describes the SAML Identity Provider's information.
+     */
+    Idp?: SAMLIdp;
+    /**
+     * The key used for matching the SAML Subject attribute.
+     */
+    SubjectKey?: String;
+    /**
+     * The key used for matching the SAML Roles attribute.
+     */
+    RolesKey?: String;
+    /**
+     * The duration, in minutes, after which a user session becomes inactive.
+     */
+    SessionTimeoutMinutes?: IntegerClass;
+  }
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version that is present on the domain.

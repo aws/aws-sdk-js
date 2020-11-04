@@ -8257,7 +8257,7 @@
           "locationName": "usageStrategy"
         }
       },
-      "documentation": "<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html\">EC2 Fleet Example Configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html\">EC2 Fleet example configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CapacityReservationOptionsRequest": {
       "type": "structure",
@@ -8267,7 +8267,7 @@
           "documentation": "<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p> <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>).</p> <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>"
         }
       },
-      "documentation": "<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html\">EC2 Fleet Example Configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html\">EC2 Fleet example configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CapacityReservationPreference": {
       "type": "string",
@@ -8588,6 +8588,41 @@
         "active"
       ]
     },
+    "ClientConnectOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether client connect options are enabled. The default is <code>false</code> (not enabled).</p>"
+        },
+        "LambdaFunctionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>"
+        }
+      },
+      "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
+    },
+    "ClientConnectResponseOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether client connect options are enabled.</p>",
+          "locationName": "enabled"
+        },
+        "LambdaFunctionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>",
+          "locationName": "lambdaFunctionArn"
+        },
+        "Status": {
+          "shape": "ClientVpnEndpointAttributeStatus",
+          "documentation": "<p>The status of any updates to the client connect options.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
+    },
     "ClientData": {
       "type": "structure",
       "members": {
@@ -8774,6 +8809,11 @@
           "shape": "String",
           "documentation": "<p>The date and time the client connection was terminated.</p>",
           "locationName": "connectionEndTime"
+        },
+        "PostureComplianceStatuses": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The statuses returned by the client connect handler for posture compliance, if applicable.</p>",
+          "locationName": "postureComplianceStatusSet"
         }
       },
       "documentation": "<p>Describes a client connection.</p>"
@@ -8914,9 +8954,37 @@
           "shape": "String",
           "documentation": "<p>The URL of the self-service portal.</p>",
           "locationName": "selfServicePortalUrl"
+        },
+        "ClientConnectOptions": {
+          "shape": "ClientConnectResponseOptions",
+          "documentation": "<p>The options for managing connection authorization for new client connections.</p>",
+          "locationName": "clientConnectOptions"
         }
       },
       "documentation": "<p>Describes a Client VPN endpoint.</p>"
+    },
+    "ClientVpnEndpointAttributeStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "ClientVpnEndpointAttributeStatusCode",
+          "documentation": "<p>The status code.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The status message.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the status of the Client VPN endpoint attribute.</p>"
+    },
+    "ClientVpnEndpointAttributeStatusCode": {
+      "type": "string",
+      "enum": [
+        "applying",
+        "applied"
+      ]
     },
     "ClientVpnEndpointId": {
       "type": "string"
@@ -9725,6 +9793,10 @@
         "SelfServicePortal": {
           "shape": "SelfServicePortal",
           "documentation": "<p>Specify whether to enable the self-service portal for the Client VPN endpoint.</p> <p>Default Value: <code>enabled</code> </p>"
+        },
+        "ClientConnectOptions": {
+          "shape": "ClientConnectOptions",
+          "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
         }
       }
     },
@@ -10075,7 +10147,7 @@
         },
         "Type": {
           "shape": "FleetType",
-          "documentation": "<p>The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (<code>maintain</code>). A value of <code>instant</code> places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of <code>request</code> places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type\">EC2 Fleet Request Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>The type of request. The default value is <code>maintain</code>.</p> <ul> <li> <p> <code>maintain</code> - The EC2 Fleet plaees an asynchronous request for your desired capacity, and continues to maintain your desired Spot capacity by replenishing interrupted Spot Instances.</p> </li> <li> <p> <code>request</code> - The EC2 Fleet places an asynchronous one-time request for your desired capacity, but does submit Spot requests in alternative capacity pools if Spot capacity is unavailable, and does not maintain Spot capacity if Spot Instances are interrupted.</p> </li> <li> <p> <code>instant</code> - The EC2 Fleet places a synchronous one-time request for your desired capacity, and returns errors for any instances that could not be launched.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type\">EC2 Fleet request types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "ValidFrom": {
           "shape": "DateTime",
@@ -10091,7 +10163,7 @@
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
-          "documentation": "<p>The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template\">launch template</a>. For information about tagging after launch, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources\">Tagging Your Resources</a>. </p>",
+          "documentation": "<p>The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template\">launch template</a>. For information about tagging after launch, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources\">Tagging your resources</a>.</p>",
           "locationName": "TagSpecification"
         }
       }
@@ -20750,7 +20822,7 @@
           "documentation": "<p>To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.</p>"
         }
       },
-      "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>"
     },
     "EndDateType": {
       "type": "string",
@@ -21664,12 +21736,60 @@
         "prioritized"
       ]
     },
+    "FleetReplacementStrategy": {
+      "type": "string",
+      "enum": [
+        "launch"
+      ]
+    },
     "FleetSet": {
       "type": "list",
       "member": {
         "shape": "FleetData",
         "locationName": "item"
       }
+    },
+    "FleetSpotCapacityRebalance": {
+      "type": "structure",
+      "members": {
+        "ReplacementStrategy": {
+          "shape": "FleetReplacementStrategy",
+          "documentation": "<p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. Only available for fleets of type <code>maintain</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for both instances while they are running.</p> </note>",
+          "locationName": "replacementStrategy"
+        }
+      },
+      "documentation": "<p>The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.</p>"
+    },
+    "FleetSpotCapacityRebalanceRequest": {
+      "type": "structure",
+      "members": {
+        "ReplacementStrategy": {
+          "shape": "FleetReplacementStrategy",
+          "documentation": "<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>.</p> <p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. You must specify a value, otherwise you get an error.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>"
+        }
+      },
+      "documentation": "<p>The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance\">Capacity rebalancing</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "FleetSpotMaintenanceStrategies": {
+      "type": "structure",
+      "members": {
+        "CapacityRebalance": {
+          "shape": "FleetSpotCapacityRebalance",
+          "documentation": "<p>The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.</p>",
+          "locationName": "capacityRebalance"
+        }
+      },
+      "documentation": "<p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>"
+    },
+    "FleetSpotMaintenanceStrategiesRequest": {
+      "type": "structure",
+      "members": {
+        "CapacityRebalance": {
+          "shape": "FleetSpotCapacityRebalanceRequest",
+          "documentation": "<p>The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.</p>"
+        }
+      },
+      "documentation": "<p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>"
     },
     "FleetStateCode": {
       "type": "string",
@@ -28807,6 +28927,10 @@
         "SelfServicePortal": {
           "shape": "SelfServicePortal",
           "documentation": "<p>Specify whether to enable the self-service portal for the Client VPN endpoint.</p>"
+        },
+        "ClientConnectOptions": {
+          "shape": "ClientConnectOptions",
+          "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
         }
       }
     },
@@ -28880,8 +29004,7 @@
     "ModifyFleetRequest": {
       "type": "structure",
       "required": [
-        "FleetId",
-        "TargetCapacitySpecification"
+        "FleetId"
       ],
       "members": {
         "DryRun": {
@@ -33587,6 +33710,12 @@
         }
       }
     },
+    "ReplacementStrategy": {
+      "type": "string",
+      "enum": [
+        "launch"
+      ]
+    },
     "ReportInstanceReasonCodes": {
       "type": "string",
       "enum": [
@@ -35631,7 +35760,7 @@
         },
         "EnclaveOptions": {
           "shape": "EnclaveOptionsRequest",
-          "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs\"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance.</p>"
         }
       }
     },
@@ -37024,6 +37153,17 @@
         "capacity-optimized"
       ]
     },
+    "SpotCapacityRebalance": {
+      "type": "structure",
+      "members": {
+        "ReplacementStrategy": {
+          "shape": "ReplacementStrategy",
+          "documentation": "<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>. You must specify a value, otherwise you get an error.</p> <p>To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify <code>launch</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>",
+          "locationName": "replacementStrategy"
+        }
+      },
+      "documentation": "<p>The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance\">Capacity rebalancing</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+    },
     "SpotDatafeedSubscription": {
       "type": "structure",
       "members": {
@@ -37214,6 +37354,11 @@
           "shape": "OnDemandAllocationStrategy",
           "documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowestPrice</code>, Spot Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, Spot Fleet uses the priority that you assign to each Spot Fleet launch template override, launching the highest priority first. If you do not specify a value, Spot Fleet defaults to <code>lowestPrice</code>.</p>",
           "locationName": "onDemandAllocationStrategy"
+        },
+        "SpotMaintenanceStrategies": {
+          "shape": "SpotMaintenanceStrategies",
+          "documentation": "<p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>",
+          "locationName": "spotMaintenanceStrategies"
         },
         "ClientToken": {
           "shape": "String",
@@ -37543,6 +37688,17 @@
         "persistent"
       ]
     },
+    "SpotMaintenanceStrategies": {
+      "type": "structure",
+      "members": {
+        "CapacityRebalance": {
+          "shape": "SpotCapacityRebalance",
+          "documentation": "<p>The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.</p>",
+          "locationName": "capacityRebalance"
+        }
+      },
+      "documentation": "<p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>"
+    },
     "SpotMarketOptions": {
       "type": "structure",
       "members": {
@@ -37576,6 +37732,11 @@
           "shape": "SpotAllocationStrategy",
           "documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>",
           "locationName": "allocationStrategy"
+        },
+        "MaintenanceStrategies": {
+          "shape": "FleetSpotMaintenanceStrategies",
+          "documentation": "<p>The strategies for managing your workloads on your Spot Instances that will be interrupted. Currently only the capacity rebalance strategy is available.</p>",
+          "locationName": "maintenanceStrategies"
         },
         "InstanceInterruptionBehavior": {
           "shape": "SpotInstanceInterruptionBehavior",
@@ -37616,6 +37777,10 @@
         "AllocationStrategy": {
           "shape": "SpotAllocationStrategy",
           "documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>"
+        },
+        "MaintenanceStrategies": {
+          "shape": "FleetSpotMaintenanceStrategiesRequest",
+          "documentation": "<p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>"
         },
         "InstanceInterruptionBehavior": {
           "shape": "SpotInstanceInterruptionBehavior",

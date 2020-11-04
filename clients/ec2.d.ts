@@ -5259,6 +5259,30 @@ declare namespace EC2 {
     Message?: String;
   }
   export type ClientCertificateRevocationListStatusCode = "pending"|"active"|string;
+  export interface ClientConnectOptions {
+    /**
+     * Indicates whether client connect options are enabled. The default is false (not enabled).
+     */
+    Enabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+     */
+    LambdaFunctionArn?: String;
+  }
+  export interface ClientConnectResponseOptions {
+    /**
+     * Indicates whether client connect options are enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+     */
+    LambdaFunctionArn?: String;
+    /**
+     * The status of any updates to the client connect options.
+     */
+    Status?: ClientVpnEndpointAttributeStatus;
+  }
   export interface ClientData {
     /**
      * A user-defined comment about the disk upload.
@@ -5381,6 +5405,10 @@ declare namespace EC2 {
      * The date and time the client connection was terminated.
      */
     ConnectionEndTime?: String;
+    /**
+     * The statuses returned by the client connect handler for posture compliance, if applicable.
+     */
+    PostureComplianceStatuses?: ValueStringList;
   }
   export type ClientVpnConnectionSet = ClientVpnConnection[];
   export interface ClientVpnConnectionStatus {
@@ -5475,7 +5503,22 @@ declare namespace EC2 {
      * The URL of the self-service portal.
      */
     SelfServicePortalUrl?: String;
+    /**
+     * The options for managing connection authorization for new client connections.
+     */
+    ClientConnectOptions?: ClientConnectResponseOptions;
   }
+  export interface ClientVpnEndpointAttributeStatus {
+    /**
+     * The status code.
+     */
+    Code?: ClientVpnEndpointAttributeStatusCode;
+    /**
+     * The status message.
+     */
+    Message?: String;
+  }
+  export type ClientVpnEndpointAttributeStatusCode = "applying"|"applied"|string;
   export type ClientVpnEndpointId = string;
   export type ClientVpnEndpointIdList = ClientVpnEndpointId[];
   export interface ClientVpnEndpointStatus {
@@ -5990,6 +6033,10 @@ declare namespace EC2 {
      * Specify whether to enable the self-service portal for the Client VPN endpoint. Default Value: enabled 
      */
     SelfServicePortal?: SelfServicePortal;
+    /**
+     * The options for managing connection authorization for new client connections.
+     */
+    ClientConnectOptions?: ClientConnectOptions;
   }
   export interface CreateClientVpnEndpointResult {
     /**
@@ -6225,7 +6272,7 @@ declare namespace EC2 {
      */
     TerminateInstancesWithExpiration?: Boolean;
     /**
-     * The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (maintain). A value of instant places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of request places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see EC2 Fleet Request Types in the Amazon Elastic Compute Cloud User Guide.
+     * The type of request. The default value is maintain.    maintain - The EC2 Fleet plaees an asynchronous request for your desired capacity, and continues to maintain your desired Spot capacity by replenishing interrupted Spot Instances.    request - The EC2 Fleet places an asynchronous one-time request for your desired capacity, but does submit Spot requests in alternative capacity pools if Spot capacity is unavailable, and does not maintain Spot capacity if Spot Instances are interrupted.    instant - The EC2 Fleet places a synchronous one-time request for your desired capacity, and returns errors for any instances that could not be launched.   For more information, see EC2 Fleet request types in the Amazon Elastic Compute Cloud User Guide.
      */
     Type?: FleetType;
     /**
@@ -6241,7 +6288,7 @@ declare namespace EC2 {
      */
     ReplaceUnhealthyInstances?: Boolean;
     /**
-     * The key-value pair for tagging the EC2 Fleet request on creation. The value for ResourceType must be fleet, otherwise the fleet request fails. To tag instances at launch, specify the tags in the launch template. For information about tagging after launch, see Tagging Your Resources. 
+     * The key-value pair for tagging the EC2 Fleet request on creation. The value for ResourceType must be fleet, otherwise the fleet request fails. To tag instances at launch, specify the tags in the launch template. For information about tagging after launch, see Tagging your resources.
      */
     TagSpecifications?: TagSpecificationList;
   }
@@ -13895,7 +13942,32 @@ declare namespace EC2 {
     Version?: String;
   }
   export type FleetOnDemandAllocationStrategy = "lowest-price"|"prioritized"|string;
+  export type FleetReplacementStrategy = "launch"|string;
   export type FleetSet = FleetData[];
+  export interface FleetSpotCapacityRebalance {
+    /**
+     * To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify launch. Only available for fleets of type maintain.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for both instances while they are running. 
+     */
+    ReplacementStrategy?: FleetReplacementStrategy;
+  }
+  export interface FleetSpotCapacityRebalanceRequest {
+    /**
+     * The replacement strategy to use. Only available for fleets of type maintain. To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify launch. You must specify a value, otherwise you get an error.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running. 
+     */
+    ReplacementStrategy?: FleetReplacementStrategy;
+  }
+  export interface FleetSpotMaintenanceStrategies {
+    /**
+     * The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+     */
+    CapacityRebalance?: FleetSpotCapacityRebalance;
+  }
+  export interface FleetSpotMaintenanceStrategiesRequest {
+    /**
+     * The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+     */
+    CapacityRebalance?: FleetSpotCapacityRebalanceRequest;
+  }
   export type FleetStateCode = "submitted"|"active"|"deleted"|"failed"|"deleted_running"|"deleted_terminating"|"modifying"|string;
   export type FleetType = "request"|"maintain"|"instant"|string;
   export type Float = number;
@@ -18079,6 +18151,10 @@ declare namespace EC2 {
      * Specify whether to enable the self-service portal for the Client VPN endpoint.
      */
     SelfServicePortal?: SelfServicePortal;
+    /**
+     * The options for managing connection authorization for new client connections.
+     */
+    ClientConnectOptions?: ClientConnectOptions;
   }
   export interface ModifyClientVpnEndpointResult {
     /**
@@ -18142,7 +18218,7 @@ declare namespace EC2 {
     /**
      * The size of the EC2 Fleet.
      */
-    TargetCapacitySpecification: TargetCapacitySpecificationRequest;
+    TargetCapacitySpecification?: TargetCapacitySpecificationRequest;
   }
   export interface ModifyFleetResult {
     /**
@@ -21027,6 +21103,7 @@ declare namespace EC2 {
      */
     Route?: TransitGatewayRoute;
   }
+  export type ReplacementStrategy = "launch"|string;
   export type ReportInstanceReasonCodes = "instance-stuck-in-state"|"unresponsive"|"not-accepting-credentials"|"password-not-available"|"performance-network"|"performance-instance-store"|"performance-ebs-volume"|"performance-other"|"other"|string;
   export interface ReportInstanceStatusRequest {
     /**
@@ -22327,7 +22404,7 @@ declare namespace EC2 {
      */
     MetadataOptions?: InstanceMetadataOptionsRequest;
     /**
-     * Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see  AWS Nitro Enclaves in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see  What is AWS Nitro Enclaves? in the AWS Nitro Enclaves User Guide. You can't enable AWS Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: EnclaveOptionsRequest;
   }
@@ -23257,6 +23334,12 @@ declare namespace EC2 {
     UserBucket?: UserBucketDetails;
   }
   export type SpotAllocationStrategy = "lowest-price"|"diversified"|"capacity-optimized"|string;
+  export interface SpotCapacityRebalance {
+    /**
+     * The replacement strategy to use. Only available for fleets of type maintain. You must specify a value, otherwise you get an error. To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify launch.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running. 
+     */
+    ReplacementStrategy?: ReplacementStrategy;
+  }
   export interface SpotDatafeedSubscription {
     /**
      * The name of the Amazon S3 bucket where the Spot Instance data feed is located.
@@ -23394,6 +23477,10 @@ declare namespace EC2 {
      * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowestPrice, Spot Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, Spot Fleet uses the priority that you assign to each Spot Fleet launch template override, launching the highest priority first. If you do not specify a value, Spot Fleet defaults to lowestPrice.
      */
     OnDemandAllocationStrategy?: OnDemandAllocationStrategy;
+    /**
+     * The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
+     */
+    SpotMaintenanceStrategies?: SpotMaintenanceStrategies;
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of your listings. This helps to avoid duplicate listings. For more information, see Ensuring Idempotency.
      */
@@ -23601,6 +23688,12 @@ declare namespace EC2 {
     UpdateTime?: DateTime;
   }
   export type SpotInstanceType = "one-time"|"persistent"|string;
+  export interface SpotMaintenanceStrategies {
+    /**
+     * The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+     */
+    CapacityRebalance?: SpotCapacityRebalance;
+  }
   export interface SpotMarketOptions {
     /**
      * The maximum hourly price you're willing to pay for the Spot Instances. The default is the On-Demand price.
@@ -23628,6 +23721,10 @@ declare namespace EC2 {
      * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
+    /**
+     * The strategies for managing your workloads on your Spot Instances that will be interrupted. Currently only the capacity rebalance strategy is available.
+     */
+    MaintenanceStrategies?: FleetSpotMaintenanceStrategies;
     /**
      * The behavior when a Spot Instance is interrupted. The default is terminate.
      */
@@ -23658,6 +23755,10 @@ declare namespace EC2 {
      * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
+    /**
+     * The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
+     */
+    MaintenanceStrategies?: FleetSpotMaintenanceStrategiesRequest;
     /**
      * The behavior when a Spot Instance is interrupted. The default is terminate.
      */

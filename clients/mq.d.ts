@@ -208,7 +208,7 @@ declare namespace MQ {
   }
   export interface BrokerInstance {
     /**
-     * The URL of the broker's ActiveMQ Web Console.
+     * The URL of the broker's Web Console.
      */
     ConsoleURL?: __string;
     /**
@@ -216,7 +216,7 @@ declare namespace MQ {
      */
     Endpoints?: __listOf__string;
     /**
-     * The IP address of the Elastic Network Interface (ENI) attached to the broker.
+     * The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers
      */
     IpAddress?: __string;
   }
@@ -274,6 +274,10 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
+     * Required. The type of broker engine.
+     */
+    EngineType?: EngineType;
+    /**
      * The broker's instance type.
      */
     HostInstanceType?: __string;
@@ -297,7 +301,7 @@ declare namespace MQ {
      */
     Description?: __string;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
+     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
@@ -389,7 +393,7 @@ declare namespace MQ {
      */
     EncryptionOptions?: EncryptionOptions;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
+     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
@@ -425,7 +429,7 @@ declare namespace MQ {
      */
     StorageType?: BrokerStorageType;
     /**
-     * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.
      */
     SubnetIds?: __listOf__string;
     /**
@@ -433,7 +437,7 @@ declare namespace MQ {
      */
     Tags?: __mapOf__string;
     /**
-     * Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Users?: __listOfUser;
   }
@@ -453,7 +457,7 @@ declare namespace MQ {
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
+     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
@@ -564,7 +568,7 @@ declare namespace MQ {
   }
   export interface DeleteUserResponse {
   }
-  export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|string;
+  export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|"CLUSTER_MULTI_AZ"|string;
   export interface DescribeBrokerEngineTypesRequest {
     /**
      * Filter response by engine type.
@@ -681,7 +685,7 @@ declare namespace MQ {
      */
     EncryptionOptions?: EncryptionOptions;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
+     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
@@ -737,7 +741,7 @@ declare namespace MQ {
      */
     StorageType?: BrokerStorageType;
     /**
-     * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.
      */
     SubnetIds?: __listOf__string;
     /**
@@ -745,7 +749,7 @@ declare namespace MQ {
      */
     Tags?: __mapOf__string;
     /**
-     * The list of all ActiveMQ usernames for the specified broker.
+     * The list of all broker usernames for the specified broker.
      */
     Users?: __listOfUserSummary;
   }
@@ -773,7 +777,7 @@ declare namespace MQ {
      */
     Description?: __string;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
+     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
@@ -867,7 +871,7 @@ declare namespace MQ {
      */
     UseAwsOwnedKey: __boolean;
   }
-  export type EngineType = "ACTIVEMQ"|string;
+  export type EngineType = "ACTIVEMQ"|"RABBITMQ"|string;
   export interface EngineVersion {
     /**
      * Id for the version.
@@ -1084,7 +1088,7 @@ declare namespace MQ {
   }
   export interface Logs {
     /**
-     * Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+     * Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
      */
     Audit?: __boolean;
     /**
@@ -1290,7 +1294,7 @@ declare namespace MQ {
   }
   export interface User {
     /**
-     * Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+     * Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers).
      */
     ConsoleAccess?: __boolean;
     /**
@@ -1298,11 +1302,11 @@ declare namespace MQ {
      */
     Groups?: __listOf__string;
     /**
-     * Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
+     * Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
      */
     Password?: __string;
     /**
-     * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username?: __string;
   }
@@ -1322,11 +1326,11 @@ declare namespace MQ {
   }
   export interface UserSummary {
     /**
-     * The type of change pending for the ActiveMQ user.
+     * The type of change pending for the broker user.
      */
     PendingChange?: ChangeType;
     /**
-     * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username?: __string;
   }

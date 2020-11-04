@@ -798,7 +798,7 @@
         "ConsoleURL": {
           "shape": "__string",
           "locationName": "consoleURL",
-          "documentation": "The URL of the broker's ActiveMQ Web Console."
+          "documentation": "The URL of the broker's Web Console."
         },
         "Endpoints": {
           "shape": "__listOf__string",
@@ -808,7 +808,7 @@
         "IpAddress": {
           "shape": "__string",
           "locationName": "ipAddress",
-          "documentation": "The IP address of the Elastic Network Interface (ENI) attached to the broker."
+          "documentation": "The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers"
         }
       },
       "documentation": "Returns information about all brokers."
@@ -862,7 +862,7 @@
     },
     "BrokerStorageType": {
       "type": "string",
-      "documentation": "The storage type of the broker.",
+      "documentation": "The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>",
       "enum": [
         "EBS",
         "EFS"
@@ -900,6 +900,11 @@
           "shape": "DeploymentMode",
           "locationName": "deploymentMode",
           "documentation": "Required. The deployment mode of the broker."
+        },
+        "EngineType": {
+          "shape": "EngineType",
+          "locationName": "engineType",
+          "documentation": "Required. The type of broker engine."
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -944,7 +949,7 @@
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
-          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ."
+          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ."
         },
         "EngineVersion": {
           "shape": "__string",
@@ -988,7 +993,7 @@
           "documentation": "The revision number of the configuration."
         }
       },
-      "documentation": "A list of information about the configuration."
+      "documentation": "A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>"
     },
     "ConfigurationRevision": {
       "type": "structure",
@@ -1074,7 +1079,7 @@
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
-          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ."
+          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ."
         },
         "EngineVersion": {
           "shape": "__string",
@@ -1119,7 +1124,7 @@
         "SubnetIds": {
           "shape": "__listOf__string",
           "locationName": "subnetIds",
-          "documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+          "documentation": "The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -1129,7 +1134,7 @@
         "Users": {
           "shape": "__listOfUser",
           "locationName": "users",
-          "documentation": "Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
+          "documentation": "Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
       },
       "documentation": "Creates a broker using the specified properties."
@@ -1160,7 +1165,7 @@
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
-          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ."
+          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ."
         },
         "EngineVersion": {
           "shape": "__string",
@@ -1363,7 +1368,8 @@
       "documentation": "The deployment mode of the broker.",
       "enum": [
         "SINGLE_INSTANCE",
-        "ACTIVE_STANDBY_MULTI_AZ"
+        "ACTIVE_STANDBY_MULTI_AZ",
+        "CLUSTER_MULTI_AZ"
       ]
     },
     "DescribeBrokerEngineTypesRequest": {
@@ -1539,7 +1545,7 @@
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
-          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ."
+          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ."
         },
         "EngineVersion": {
           "shape": "__string",
@@ -1609,7 +1615,7 @@
         "SubnetIds": {
           "shape": "__listOf__string",
           "locationName": "subnetIds",
-          "documentation": "The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets."
+          "documentation": "The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -1619,7 +1625,7 @@
         "Users": {
           "shape": "__listOfUserSummary",
           "locationName": "users",
-          "documentation": "The list of all ActiveMQ usernames for the specified broker."
+          "documentation": "The list of all broker usernames for the specified broker."
         }
       }
     },
@@ -1663,7 +1669,7 @@
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
-          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ."
+          "documentation": "Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ."
         },
         "EngineVersion": {
           "shape": "__string",
@@ -1810,9 +1816,10 @@
     },
     "EngineType": {
       "type": "string",
-      "documentation": "The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.",
+      "documentation": "The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.",
       "enum": [
-        "ACTIVEMQ"
+        "ACTIVEMQ",
+        "RABBITMQ"
       ]
     },
     "EngineVersion": {
@@ -2144,7 +2151,7 @@
         "Audit": {
           "shape": "__boolean",
           "locationName": "audit",
-          "documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged."
+          "documentation": "Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers."
         },
         "General": {
           "shape": "__boolean",
@@ -2466,7 +2473,7 @@
         "ConsoleAccess": {
           "shape": "__boolean",
           "locationName": "consoleAccess",
-          "documentation": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user."
+          "documentation": "Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers)."
         },
         "Groups": {
           "shape": "__listOf__string",
@@ -2476,15 +2483,15 @@
         "Password": {
           "shape": "__string",
           "locationName": "password",
-          "documentation": "Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas."
+          "documentation": "Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas."
         },
         "Username": {
           "shape": "__string",
           "locationName": "username",
-          "documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
+          "documentation": "Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
       },
-      "documentation": "An ActiveMQ user associated with the broker."
+      "documentation": "A user associated with the broker."
     },
     "UserPendingChanges": {
       "type": "structure",
@@ -2513,15 +2520,15 @@
         "PendingChange": {
           "shape": "ChangeType",
           "locationName": "pendingChange",
-          "documentation": "The type of change pending for the ActiveMQ user."
+          "documentation": "The type of change pending for the broker user."
         },
         "Username": {
           "shape": "__string",
           "locationName": "username",
-          "documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
+          "documentation": "Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
       },
-      "documentation": "Returns a list of all ActiveMQ users."
+      "documentation": "Returns a list of all broker users."
     },
     "WeeklyStartTime": {
       "type": "structure",
@@ -2666,5 +2673,5 @@
       }
     }
   },
-  "documentation": "Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols."
+  "documentation": "Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols."
 }

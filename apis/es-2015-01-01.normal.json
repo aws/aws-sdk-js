@@ -1186,6 +1186,10 @@
         "InternalUserDatabaseEnabled": {
           "shape": "Boolean",
           "documentation": "<p>True if the internal user database is enabled.</p>"
+        },
+        "SAMLOptions": {
+          "shape": "SAMLOptionsOutput",
+          "documentation": "<p>Describes the SAML application configured for a domain.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>"
@@ -1204,6 +1208,10 @@
         "MasterUserOptions": {
           "shape": "MasterUserOptions",
           "documentation": "<p>Credentials for the master user: username and password, ARN, or both.</p>"
+        },
+        "SAMLOptions": {
+          "shape": "SAMLOptionsInput",
+          "documentation": "<p>Specifies the SAML application configuration for the domain.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>"
@@ -1257,6 +1265,11 @@
         }
       },
       "documentation": "<p> Container for response returned by <code> <a>AssociatePackage</a> </code> operation. </p>"
+    },
+    "BackendRole": {
+      "type": "string",
+      "max": 256,
+      "min": 1
     },
     "Boolean": {
       "type": "boolean"
@@ -3578,6 +3591,94 @@
     },
     "S3Key": {
       "type": "string"
+    },
+    "SAMLEntityId": {
+      "type": "string",
+      "max": 512,
+      "min": 8
+    },
+    "SAMLIdp": {
+      "type": "structure",
+      "required": [
+        "MetadataContent",
+        "EntityId"
+      ],
+      "members": {
+        "MetadataContent": {
+          "shape": "SAMLMetadata",
+          "documentation": "<p>The Metadata of the SAML application in xml format.</p>"
+        },
+        "EntityId": {
+          "shape": "SAMLEntityId",
+          "documentation": "<p>The unique Entity ID of the application in SAML Identity Provider.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the SAML Identity Provider's information.</p>"
+    },
+    "SAMLMetadata": {
+      "type": "string",
+      "max": 1048576,
+      "min": 1
+    },
+    "SAMLOptionsInput": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if SAML is enabled.</p>"
+        },
+        "Idp": {
+          "shape": "SAMLIdp",
+          "documentation": "<p>Specifies the SAML Identity Provider's information.</p>"
+        },
+        "MasterUserName": {
+          "shape": "Username",
+          "documentation": "<p>The SAML master username, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>"
+        },
+        "MasterBackendRole": {
+          "shape": "BackendRole",
+          "documentation": "<p>The backend role to which the SAML master user is mapped to.</p>"
+        },
+        "SubjectKey": {
+          "shape": "String",
+          "documentation": "<p>The key to use for matching the SAML Subject attribute.</p>"
+        },
+        "RolesKey": {
+          "shape": "String",
+          "documentation": "<p>The key to use for matching the SAML Roles attribute.</p>"
+        },
+        "SessionTimeoutMinutes": {
+          "shape": "IntegerClass",
+          "documentation": "<p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the SAML application configuration for the domain.</p>"
+    },
+    "SAMLOptionsOutput": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if SAML is enabled.</p>"
+        },
+        "Idp": {
+          "shape": "SAMLIdp",
+          "documentation": "<p>Describes the SAML Identity Provider's information.</p>"
+        },
+        "SubjectKey": {
+          "shape": "String",
+          "documentation": "<p>The key used for matching the SAML Subject attribute.</p>"
+        },
+        "RolesKey": {
+          "shape": "String",
+          "documentation": "<p>The key used for matching the SAML Roles attribute.</p>"
+        },
+        "SessionTimeoutMinutes": {
+          "shape": "IntegerClass",
+          "documentation": "<p>The duration, in minutes, after which a user session becomes inactive.</p>"
+        }
+      },
+      "documentation": "<p>Describes the SAML application configured for the domain.</p>"
     },
     "ServiceSoftwareOptions": {
       "type": "structure",

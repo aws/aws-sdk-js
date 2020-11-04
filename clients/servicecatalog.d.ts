@@ -2221,7 +2221,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfolioAccessOutput {
     /**
@@ -2609,6 +2609,7 @@ declare namespace ServiceCatalog {
   export type OutputKeys = OutputKey[];
   export type OutputValue = string;
   export type PageSize = number;
+  export type PageSizeMax100 = number;
   export type PageToken = string;
   export interface ParameterConstraints {
     /**
@@ -4029,7 +4030,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId: Id;
     /**
-     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts user ARNs and role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end-user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only an ARN role is valid. A user ARN is invalid.  The OWNER key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts user ARNs and role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end-user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only an ARN role or null is valid. A user ARN is invalid. For example, if an admin user passes null as the value for the key LAUNCH_ROLE, the admin removes the launch role that is associated with the provisioned product. As a result, the end user operations use the credentials of the end user. The OWNER key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
      */
     ProvisionedProductProperties: ProvisionedProductProperties;
     /**
