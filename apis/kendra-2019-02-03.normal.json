@@ -1066,6 +1066,12 @@
       "max": 5,
       "min": 1
     },
+    "ClaimRegex": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "ClickFeedback": {
       "type": "structure",
       "required": [
@@ -1252,7 +1258,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>"
         },
         "Version": {
           "shape": "ConfluenceVersion",
@@ -1419,6 +1425,7 @@
     "ConfluenceVersion": {
       "type": "string",
       "enum": [
+        "CLOUD",
         "SERVER"
       ]
     },
@@ -1612,6 +1619,14 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.</p>"
+        },
+        "UserTokenConfigurations": {
+          "shape": "UserTokenConfigurationList",
+          "documentation": "<p>The user token configuration.</p>"
+        },
+        "UserContextPolicy": {
+          "shape": "UserContextPolicy",
+          "documentation": "<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>"
         }
       }
     },
@@ -2214,6 +2229,14 @@
         "CapacityUnits": {
           "shape": "CapacityUnitsConfiguration",
           "documentation": "<p>For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.</p>"
+        },
+        "UserTokenConfigurations": {
+          "shape": "UserTokenConfigurationList",
+          "documentation": "<p>The user token configuration for the Amazon Kendra index.</p>"
+        },
+        "UserContextPolicy": {
+          "shape": "UserContextPolicy",
+          "documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
         }
       }
     },
@@ -2570,6 +2593,12 @@
         "shape": "FaqSummary"
       }
     },
+    "GroupAttributeField": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "Highlight": {
       "type": "structure",
       "required": [
@@ -2712,6 +2741,74 @@
     },
     "Integer": {
       "type": "integer"
+    },
+    "Issuer": {
+      "type": "string",
+      "max": 65,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
+    "JsonTokenTypeConfiguration": {
+      "type": "structure",
+      "required": [
+        "UserNameAttributeField",
+        "GroupAttributeField"
+      ],
+      "members": {
+        "UserNameAttributeField": {
+          "shape": "String",
+          "documentation": "<p>The user name attribute field.</p>"
+        },
+        "GroupAttributeField": {
+          "shape": "String",
+          "documentation": "<p>The group attribute field.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information for the JSON token type.</p>"
+    },
+    "JwtTokenTypeConfiguration": {
+      "type": "structure",
+      "required": [
+        "KeyLocation"
+      ],
+      "members": {
+        "KeyLocation": {
+          "shape": "KeyLocation",
+          "documentation": "<p>The location of the key.</p>"
+        },
+        "URL": {
+          "shape": "Url",
+          "documentation": "<p>The signing key URL.</p>"
+        },
+        "SecretManagerArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the secret.</p>"
+        },
+        "UserNameAttributeField": {
+          "shape": "UserNameAttributeField",
+          "documentation": "<p>The user name attribute field.</p>"
+        },
+        "GroupAttributeField": {
+          "shape": "GroupAttributeField",
+          "documentation": "<p>The group attribute field.</p>"
+        },
+        "Issuer": {
+          "shape": "Issuer",
+          "documentation": "<p>The issuer of the token.</p>"
+        },
+        "ClaimRegex": {
+          "shape": "ClaimRegex",
+          "documentation": "<p>The regular expression that identifies the claim.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information for the JWT token type.</p>"
+    },
+    "KeyLocation": {
+      "type": "string",
+      "enum": [
+        "URL",
+        "SECRET_MANAGER"
+      ]
     },
     "KmsKeyId": {
       "type": "string",
@@ -2941,6 +3038,10 @@
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
           "documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.</p>"
+        },
+        "DisableLocalGroups": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean value that specifies whether local groups are disabled (<code>True</code>) or enabled (<code>False</code>). </p>"
         }
       },
       "documentation": "<p>Provides configuration information for data sources that connect to OneDrive.</p>"
@@ -3080,6 +3181,10 @@
         "SortingConfiguration": {
           "shape": "SortingConfiguration",
           "documentation": "<p>Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance.</p> <p>If you don't provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.</p>"
+        },
+        "UserContext": {
+          "shape": "UserContext",
+          "documentation": "<p>The user context token.</p>"
         }
       }
     },
@@ -3781,6 +3886,10 @@
         "DocumentTitleFieldName": {
           "shape": "DataSourceFieldName",
           "documentation": "<p>The Microsoft SharePoint attribute field that contains the title of the document.</p>"
+        },
+        "DisableLocalGroups": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean value that specifies whether local groups are disabled (<code>True</code>) or enabled (<code>False</code>). </p>"
         }
       },
       "documentation": "<p>Provides configuration information for connecting to a Microsoft SharePoint data source.</p>"
@@ -4054,6 +4163,12 @@
     "Title": {
       "type": "string"
     },
+    "Token": {
+      "type": "string",
+      "max": 100000,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -4140,6 +4255,14 @@
         "CapacityUnits": {
           "shape": "CapacityUnitsConfiguration",
           "documentation": "<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.</p>"
+        },
+        "UserTokenConfigurations": {
+          "shape": "UserTokenConfigurationList",
+          "documentation": "<p>The user token configuration.</p>"
+        },
+        "UserContextPolicy": {
+          "shape": "UserContextPolicy",
+          "documentation": "<p>The user user token context policy.</p>"
         }
       }
     },
@@ -4148,6 +4271,50 @@
       "max": 2048,
       "min": 1,
       "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
+    },
+    "UserContext": {
+      "type": "structure",
+      "members": {
+        "Token": {
+          "shape": "Token",
+          "documentation": "<p>The user context token. It must be a JWT or a JSON token.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p>"
+    },
+    "UserContextPolicy": {
+      "type": "string",
+      "enum": [
+        "ATTRIBUTE_FILTER",
+        "USER_TOKEN"
+      ]
+    },
+    "UserNameAttributeField": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
+    "UserTokenConfiguration": {
+      "type": "structure",
+      "members": {
+        "JwtTokenTypeConfiguration": {
+          "shape": "JwtTokenTypeConfiguration",
+          "documentation": "<p>Information about the JWT token type configuration.</p>"
+        },
+        "JsonTokenTypeConfiguration": {
+          "shape": "JsonTokenTypeConfiguration",
+          "documentation": "<p>Information about the JSON token type configuration.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for a token configuration.</p>"
+    },
+    "UserTokenConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "UserTokenConfiguration"
+      },
+      "max": 1
     },
     "ValueImportanceMap": {
       "type": "map",

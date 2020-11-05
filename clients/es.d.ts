@@ -852,6 +852,18 @@ declare namespace ES {
      * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy which supports TLSv1.0 and higher. Policy-Min-TLS-1-2-2019-07:  TLS security policy which supports only TLSv1.2  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
+    /**
+     * Specify if custom endpoint should be enabled for the Elasticsearch domain.
+     */
+    CustomEndpointEnabled?: Boolean;
+    /**
+     * Specify the fully qualified domain for your custom endpoint.
+     */
+    CustomEndpoint?: DomainNameFqdn;
+    /**
+     * Specify ACM certificate ARN for your custom endpoint.
+     */
+    CustomEndpointCertificateArn?: ARN;
   }
   export interface DomainEndpointOptionsStatus {
     /**
@@ -877,6 +889,7 @@ declare namespace ES {
     Region?: Region;
   }
   export type DomainName = string;
+  export type DomainNameFqdn = string;
   export type DomainNameList = DomainName[];
   export interface DomainPackageDetails {
     /**

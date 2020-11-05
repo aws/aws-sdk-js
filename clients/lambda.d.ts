@@ -38,11 +38,11 @@ declare class Lambda extends Service {
    */
   createAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.    MaximumRetryAttempts - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.    MaximumRetryAttempts - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -374,11 +374,11 @@ declare class Lambda extends Service {
    */
   updateAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.    MaximumRetryAttempts - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   updateEventSourceMapping(params: Lambda.Types.UpdateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.    MaximumRetryAttempts - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -672,6 +672,14 @@ declare namespace Lambda {
      *  (MSK) The name of the Kafka topic. 
      */
     Topics?: Topics;
+    /**
+     *  (MQ) The name of the Amazon MQ broker destination queue to consume. 
+     */
+    Queues?: Queues;
+    /**
+     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     */
+    SourceAccessConfigurations?: SourceAccessConfigurations;
   }
   export interface CreateFunctionRequest {
     /**
@@ -864,11 +872,11 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Streams) The number of batches to process from each shard concurrently.
+     * (Streams) The number of batches to process from each shard concurrently. The default value is 1.
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
@@ -900,19 +908,27 @@ declare namespace Lambda {
      */
     DestinationConfig?: DestinationConfig;
     /**
-     *  (MSK) The name of the Kafka topic. 
+     *  (MSK) The name of the Kafka topic to consume. 
      */
     Topics?: Topics;
     /**
-     * (Streams) The maximum age of a record that Lambda sends to a function for processing.
+     *  (MQ) The name of the Amazon MQ broker destination queue to consume. 
+     */
+    Queues?: Queues;
+    /**
+     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     */
+    SourceAccessConfigurations?: SourceAccessConfigurations;
+    /**
+     * (Streams) Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
-     * (Streams) If the function returns an error, split the batch in two and retry.
+     * (Streams) If the function returns an error, split the batch in two and retry. The default value is false.
      */
     BisectBatchOnFunctionError?: BisectBatchOnFunctionError;
     /**
-     * (Streams) The maximum number of times to retry when the function returns an error.
+     * (Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
   }
@@ -1908,6 +1924,8 @@ declare namespace Lambda {
     LastModified?: Timestamp;
   }
   export type Qualifier = string;
+  export type Queue = string;
+  export type Queues = Queue[];
   export interface RemoveLayerVersionPermissionRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the layer.
@@ -1954,6 +1972,18 @@ declare namespace Lambda {
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SensitiveString = string;
+  export interface SourceAccessConfiguration {
+    /**
+     * To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     */
+    Type?: SourceAccessType;
+    /**
+     * To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     */
+    URI?: Arn;
+  }
+  export type SourceAccessConfigurations = SourceAccessConfiguration[];
+  export type SourceAccessType = "BASIC_AUTH"|string;
   export type SourceOwner = string;
   export type State = "Pending"|"Active"|"Inactive"|"Failed"|string;
   export type StateReason = string;
@@ -2071,6 +2101,10 @@ declare namespace Lambda {
      * (Streams) The number of batches to process from each shard concurrently.
      */
     ParallelizationFactor?: ParallelizationFactor;
+    /**
+     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     */
+    SourceAccessConfigurations?: SourceAccessConfigurations;
   }
   export interface UpdateFunctionCodeRequest {
     /**

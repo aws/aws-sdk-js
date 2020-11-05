@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.785.0-->
+<!--LATEST=2.786.0-->
 <!--ENTRYINSERT-->
+
+## 2.786.0
+* feature: AppMesh: This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support.
+* feature: CloudWatchEvents: With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive.
+* feature: DynamoDB: This release adds a new ReplicaStatus INACCESSIBLE_ENCRYPTION_CREDENTIALS for the Table description, indicating when a key used to encrypt a regional replica table is not accessible.
+* feature: EC2: Documentation updates for EC2.
+* feature: ES: Amazon Elasticsearch Service now provides the ability to define a custom endpoint for your domain and link an SSL certificate from ACM, making it easier to refer to Kibana and the domain endpoint.
+* feature: EventBridge: With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive.
+* feature: FraudDetector: Added support for deleting resources like Variables, ExternalModels, Outcomes, Models, ModelVersions, Labels, EventTypes and EntityTypes. Updated DeleteEvent operation to catch missing exceptions.
+* feature: Kendra: Amazon Kendra now supports providing user context in your query requests, Tokens can be JSON or JWT format. This release also introduces support for Confluence cloud datasources.
+* feature: Lambda: Support Amazon MQ as an Event Source.
+* feature: RDS: Supports a new parameter to set the max allocated storage in gigabytes for the CreateDBInstanceReadReplica API.
 
 ## 2.785.0
 * feature: AutoScaling: Capacity Rebalance helps you manage and maintain workload availability during Spot interruptions by proactively augmenting your Auto Scaling group with a new instance before interrupting an old one.

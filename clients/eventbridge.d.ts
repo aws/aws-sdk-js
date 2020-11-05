@@ -20,6 +20,22 @@ declare class EventBridge extends Service {
    */
   activateEventSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Cancels the specified replay.
+   */
+  cancelReplay(params: EventBridge.Types.CancelReplayRequest, callback?: (err: AWSError, data: EventBridge.Types.CancelReplayResponse) => void): Request<EventBridge.Types.CancelReplayResponse, AWSError>;
+  /**
+   * Cancels the specified replay.
+   */
+  cancelReplay(callback?: (err: AWSError, data: EventBridge.Types.CancelReplayResponse) => void): Request<EventBridge.Types.CancelReplayResponse, AWSError>;
+  /**
+   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.
+   */
+  createArchive(params: EventBridge.Types.CreateArchiveRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateArchiveResponse) => void): Request<EventBridge.Types.CreateArchiveResponse, AWSError>;
+  /**
+   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.
+   */
+  createArchive(callback?: (err: AWSError, data: EventBridge.Types.CreateArchiveResponse) => void): Request<EventBridge.Types.CreateArchiveResponse, AWSError>;
+  /**
    * Creates a new event bus within your account. This can be a custom event bus which you can use to receive events from your custom applications and services, or it can be a partner event bus which can be matched to a partner event source.
    */
   createEventBus(params: EventBridge.Types.CreateEventBusRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateEventBusResponse) => void): Request<EventBridge.Types.CreateEventBusResponse, AWSError>;
@@ -43,6 +59,14 @@ declare class EventBridge extends Service {
    * You can use this operation to temporarily stop receiving events from the specified partner event source. The matching event bus is not deleted.  When you deactivate a partner event source, the source goes into PENDING state. If it remains in PENDING state for more than two weeks, it is deleted. To activate a deactivated partner event source, use ActivateEventSource.
    */
   deactivateEventSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified archive.
+   */
+  deleteArchive(params: EventBridge.Types.DeleteArchiveRequest, callback?: (err: AWSError, data: EventBridge.Types.DeleteArchiveResponse) => void): Request<EventBridge.Types.DeleteArchiveResponse, AWSError>;
+  /**
+   * Deletes the specified archive.
+   */
+  deleteArchive(callback?: (err: AWSError, data: EventBridge.Types.DeleteArchiveResponse) => void): Request<EventBridge.Types.DeleteArchiveResponse, AWSError>;
   /**
    * Deletes the specified custom event bus or partner event bus. All rules associated with this event bus need to be deleted. You can't delete your account's default event bus.
    */
@@ -68,6 +92,14 @@ declare class EventBridge extends Service {
    */
   deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Retrieves details about an archive.
+   */
+  describeArchive(params: EventBridge.Types.DescribeArchiveRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeArchiveResponse) => void): Request<EventBridge.Types.DescribeArchiveResponse, AWSError>;
+  /**
+   * Retrieves details about an archive.
+   */
+  describeArchive(callback?: (err: AWSError, data: EventBridge.Types.DescribeArchiveResponse) => void): Request<EventBridge.Types.DescribeArchiveResponse, AWSError>;
+  /**
    * Displays details about an event bus in your account. This can include the external AWS accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
    */
   describeEventBus(params: EventBridge.Types.DescribeEventBusRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeEventBusResponse) => void): Request<EventBridge.Types.DescribeEventBusResponse, AWSError>;
@@ -92,6 +124,14 @@ declare class EventBridge extends Service {
    */
   describePartnerEventSource(callback?: (err: AWSError, data: EventBridge.Types.DescribePartnerEventSourceResponse) => void): Request<EventBridge.Types.DescribePartnerEventSourceResponse, AWSError>;
   /**
+   * Retrieves details about a replay. Use DescribeReplay to determine the progress of a running replay. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you use StartReplay and specify an EventStartTime and an EventEndTime that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use DescribeReplay to determine the progress of a replay. The value returned for EventLastReplayedTime indicates the time within the specified time range associated with the last event replayed.
+   */
+  describeReplay(params: EventBridge.Types.DescribeReplayRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeReplayResponse) => void): Request<EventBridge.Types.DescribeReplayResponse, AWSError>;
+  /**
+   * Retrieves details about a replay. Use DescribeReplay to determine the progress of a running replay. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you use StartReplay and specify an EventStartTime and an EventEndTime that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use DescribeReplay to determine the progress of a replay. The value returned for EventLastReplayedTime indicates the time within the specified time range associated with the last event replayed.
+   */
+  describeReplay(callback?: (err: AWSError, data: EventBridge.Types.DescribeReplayResponse) => void): Request<EventBridge.Types.DescribeReplayResponse, AWSError>;
+  /**
    * Describes the specified rule. DescribeRule does not list the targets of a rule. To see the targets associated with a rule, use ListTargetsByRule.
    */
   describeRule(params: EventBridge.Types.DescribeRuleRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeRuleResponse) => void): Request<EventBridge.Types.DescribeRuleResponse, AWSError>;
@@ -115,6 +155,14 @@ declare class EventBridge extends Service {
    * Enables the specified rule. If the rule does not exist, the operation fails. When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Allow a short period of time for changes to take effect.
    */
   enableRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Lists your archives. You can either list all the archives or you can provide a prefix to match to the archive names. Filter parameters are exclusive.
+   */
+  listArchives(params: EventBridge.Types.ListArchivesRequest, callback?: (err: AWSError, data: EventBridge.Types.ListArchivesResponse) => void): Request<EventBridge.Types.ListArchivesResponse, AWSError>;
+  /**
+   * Lists your archives. You can either list all the archives or you can provide a prefix to match to the archive names. Filter parameters are exclusive.
+   */
+  listArchives(callback?: (err: AWSError, data: EventBridge.Types.ListArchivesResponse) => void): Request<EventBridge.Types.ListArchivesResponse, AWSError>;
   /**
    * Lists all the event buses in your account, including the default event bus, custom event buses, and partner event buses.
    */
@@ -147,6 +195,14 @@ declare class EventBridge extends Service {
    * An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by AWS customers.
    */
   listPartnerEventSources(callback?: (err: AWSError, data: EventBridge.Types.ListPartnerEventSourcesResponse) => void): Request<EventBridge.Types.ListPartnerEventSourcesResponse, AWSError>;
+  /**
+   * Lists your replays. You can either list all the replays or you can provide a prefix to match to the replay names. Filter parameters are exclusive.
+   */
+  listReplays(params: EventBridge.Types.ListReplaysRequest, callback?: (err: AWSError, data: EventBridge.Types.ListReplaysResponse) => void): Request<EventBridge.Types.ListReplaysResponse, AWSError>;
+  /**
+   * Lists your replays. You can either list all the replays or you can provide a prefix to match to the replay names. Filter parameters are exclusive.
+   */
+  listReplays(callback?: (err: AWSError, data: EventBridge.Types.ListReplaysResponse) => void): Request<EventBridge.Types.ListReplaysResponse, AWSError>;
   /**
    * Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account.
    */
@@ -236,6 +292,14 @@ declare class EventBridge extends Service {
    */
   removeTargets(callback?: (err: AWSError, data: EventBridge.Types.RemoveTargetsResponse) => void): Request<EventBridge.Types.RemoveTargetsResponse, AWSError>;
   /**
+   * Starts the specified replay. Events are not necessarily replayed in the exact same order that they were added to the archive. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you specify an EventStartTime and an EventEndTime that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use DescribeReplay to determine the progress of a replay. The value returned for EventLastReplayedTime indicates the time within the specified time range associated with the last event replayed.
+   */
+  startReplay(params: EventBridge.Types.StartReplayRequest, callback?: (err: AWSError, data: EventBridge.Types.StartReplayResponse) => void): Request<EventBridge.Types.StartReplayResponse, AWSError>;
+  /**
+   * Starts the specified replay. Events are not necessarily replayed in the exact same order that they were added to the archive. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you specify an EventStartTime and an EventEndTime that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use DescribeReplay to determine the progress of a replay. The value returned for EventLastReplayedTime indicates the time within the specified time range associated with the last event replayed.
+   */
+  startReplay(callback?: (err: AWSError, data: EventBridge.Types.StartReplayResponse) => void): Request<EventBridge.Types.StartReplayResponse, AWSError>;
+  /**
    * Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
    */
   tagResource(params: EventBridge.Types.TagResourceRequest, callback?: (err: AWSError, data: EventBridge.Types.TagResourceResponse) => void): Request<EventBridge.Types.TagResourceResponse, AWSError>;
@@ -259,6 +323,14 @@ declare class EventBridge extends Service {
    * Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge (CloudWatch Events, rules and event buses can be tagged.
    */
   untagResource(callback?: (err: AWSError, data: EventBridge.Types.UntagResourceResponse) => void): Request<EventBridge.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the specified archive.
+   */
+  updateArchive(params: EventBridge.Types.UpdateArchiveRequest, callback?: (err: AWSError, data: EventBridge.Types.UpdateArchiveResponse) => void): Request<EventBridge.Types.UpdateArchiveResponse, AWSError>;
+  /**
+   * Updates the specified archive.
+   */
+  updateArchive(callback?: (err: AWSError, data: EventBridge.Types.UpdateArchiveResponse) => void): Request<EventBridge.Types.UpdateArchiveResponse, AWSError>;
 }
 declare namespace EventBridge {
   export type AccountId = string;
@@ -269,6 +341,46 @@ declare namespace EventBridge {
      */
     Name: EventSourceName;
   }
+  export interface Archive {
+    /**
+     * The name of the archive.
+     */
+    ArchiveName?: ArchiveName;
+    /**
+     * The ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * The current state of the archive.
+     */
+    State?: ArchiveState;
+    /**
+     * A description for the reason that the archive is in the current state.
+     */
+    StateReason?: ArchiveStateReason;
+    /**
+     * The number of days to retain events in the archive before they are deleted.
+     */
+    RetentionDays?: RetentionDays;
+    /**
+     * The size of the archive, in bytes.
+     */
+    SizeBytes?: Long;
+    /**
+     * The number of events in the archive.
+     */
+    EventCount?: Long;
+    /**
+     * The time stamp for the time that the archive was created.
+     */
+    CreationTime?: Timestamp;
+  }
+  export type ArchiveArn = string;
+  export type ArchiveDescription = string;
+  export type ArchiveName = string;
+  export type ArchiveResponseList = Archive[];
+  export type ArchiveState = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type ArchiveStateReason = string;
   export type Arn = string;
   export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
   export interface AwsVpcConfiguration {
@@ -316,6 +428,26 @@ declare namespace EventBridge {
     Attempts?: Integer;
   }
   export type Boolean = boolean;
+  export interface CancelReplayRequest {
+    /**
+     * The name of the replay to cancel.
+     */
+    ReplayName: ReplayName;
+  }
+  export interface CancelReplayResponse {
+    /**
+     * The ARN of the replay to cancel.
+     */
+    ReplayArn?: ReplayArn;
+    /**
+     * The current state of the replay.
+     */
+    State?: ReplayState;
+    /**
+     * The reason that the replay is in the current state.
+     */
+    StateReason?: ReplayStateReason;
+  }
   export interface Condition {
     /**
      * Specifies the type of condition. Currently the only supported value is StringEquals.
@@ -329,6 +461,46 @@ declare namespace EventBridge {
      * Specifies the value for the key. Currently, this must be the ID of the organization.
      */
     Value: String;
+  }
+  export interface CreateArchiveRequest {
+    /**
+     * The name for the archive to create.
+     */
+    ArchiveName: ArchiveName;
+    /**
+     * The ARN of the event source associated with the archive.
+     */
+    EventSourceArn: Arn;
+    /**
+     * A description for the archive.
+     */
+    Description?: ArchiveDescription;
+    /**
+     * An event pattern to use to filter events sent to the archive.
+     */
+    EventPattern?: EventPattern;
+    /**
+     * The number of days to retain events for. Default value is 0. If set to 0, events are retained indefinitely
+     */
+    RetentionDays?: RetentionDays;
+  }
+  export interface CreateArchiveResponse {
+    /**
+     * The ARN of the archive that was created.
+     */
+    ArchiveArn?: ArchiveArn;
+    /**
+     * The state of the archive that was created.
+     */
+    State?: ArchiveState;
+    /**
+     * The reason that the archive is in the state.
+     */
+    StateReason?: ArchiveStateReason;
+    /**
+     * The time at which the archive was created.
+     */
+    CreationTime?: Timestamp;
   }
   export interface CreateEventBusRequest {
     /**
@@ -380,6 +552,14 @@ declare namespace EventBridge {
      */
     Arn?: ResourceArn;
   }
+  export interface DeleteArchiveRequest {
+    /**
+     * The name of the archive to delete.
+     */
+    ArchiveName: ArchiveName;
+  }
+  export interface DeleteArchiveResponse {
+  }
   export interface DeleteEventBusRequest {
     /**
      * The name of the event bus to delete.
@@ -409,6 +589,58 @@ declare namespace EventBridge {
      * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
      */
     Force?: Boolean;
+  }
+  export interface DescribeArchiveRequest {
+    /**
+     * The name of the archive to retrieve.
+     */
+    ArchiveName: ArchiveName;
+  }
+  export interface DescribeArchiveResponse {
+    /**
+     * The ARN of the archive.
+     */
+    ArchiveArn?: ArchiveArn;
+    /**
+     * The name of the archive.
+     */
+    ArchiveName?: ArchiveName;
+    /**
+     * The ARN of the event source associated with the archive.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * The description of the archive.
+     */
+    Description?: ArchiveDescription;
+    /**
+     * The event pattern used to filter events sent to the archive.
+     */
+    EventPattern?: EventPattern;
+    /**
+     * The state of the archive.
+     */
+    State?: ArchiveState;
+    /**
+     * The reason that the archive is in the state.
+     */
+    StateReason?: ArchiveStateReason;
+    /**
+     * The number of days to retain events for in the archive.
+     */
+    RetentionDays?: RetentionDays;
+    /**
+     * The size of the archive in bytes.
+     */
+    SizeBytes?: Long;
+    /**
+     * The number of events in the archive.
+     */
+    EventCount?: Long;
+    /**
+     * The time at which the archive was created.
+     */
+    CreationTime?: Timestamp;
   }
   export interface DescribeEventBusRequest {
     /**
@@ -477,6 +709,62 @@ declare namespace EventBridge {
      * The name of the event source.
      */
     Name?: String;
+  }
+  export interface DescribeReplayRequest {
+    /**
+     * The name of the replay to retrieve.
+     */
+    ReplayName: ReplayName;
+  }
+  export interface DescribeReplayResponse {
+    /**
+     * The name of the replay.
+     */
+    ReplayName?: ReplayName;
+    /**
+     * The ARN of the replay.
+     */
+    ReplayArn?: ReplayArn;
+    /**
+     * The description of the replay.
+     */
+    Description?: ReplayDescription;
+    /**
+     * The current state of the replay.
+     */
+    State?: ReplayState;
+    /**
+     * The reason that the replay is in the current state.
+     */
+    StateReason?: ReplayStateReason;
+    /**
+     * The ARN of the archive events were replayed from.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * A ReplayDestination object that contains details about the replay.
+     */
+    Destination?: ReplayDestination;
+    /**
+     * The time stamp of the first event that was last replayed from the archive.
+     */
+    EventStartTime?: Timestamp;
+    /**
+     * The time stamp for the last event that was replayed from the archive.
+     */
+    EventEndTime?: Timestamp;
+    /**
+     * The time that the event was last replayed.
+     */
+    EventLastReplayedTime?: Timestamp;
+    /**
+     * A time stamp for the time that the replay started.
+     */
+    ReplayStartTime?: Timestamp;
+    /**
+     * A time stamp for the time that the replay stopped.
+     */
+    ReplayEndTime?: Timestamp;
   }
   export interface DescribeRuleRequest {
     /**
@@ -663,6 +951,38 @@ declare namespace EventBridge {
   export type LaunchType = "EC2"|"FARGATE"|string;
   export type LimitMax100 = number;
   export type LimitMin1 = number;
+  export interface ListArchivesRequest {
+    /**
+     * A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+     */
+    NamePrefix?: ArchiveName;
+    /**
+     * The ARN of the event source associated with the archive.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * The state of the archive.
+     */
+    State?: ArchiveState;
+    /**
+     * The token returned by a previous call to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return.
+     */
+    Limit?: LimitMax100;
+  }
+  export interface ListArchivesResponse {
+    /**
+     * An array of Archive objects that include details about an archive.
+     */
+    Archives?: ArchiveResponseList;
+    /**
+     * The token returned by a previous call to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListEventBusesRequest {
     /**
      * Specifying this limits the results to only those event buses with names that start with the specified prefix.
@@ -756,6 +1076,38 @@ declare namespace EventBridge {
     PartnerEventSources?: PartnerEventSourceList;
     /**
      * A token you can use in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListReplaysRequest {
+    /**
+     * A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+     */
+    NamePrefix?: ReplayName;
+    /**
+     * The state of the replay.
+     */
+    State?: ReplayState;
+    /**
+     * The ARN of the event source associated with the replay.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * The token returned by a previous call to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of replays to retrieve.
+     */
+    Limit?: LimitMax100;
+  }
+  export interface ListReplaysResponse {
+    /**
+     * An array of Replay objects that contain information about the replay.
+     */
+    Replays?: ReplayList;
+    /**
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -855,6 +1207,7 @@ declare namespace EventBridge {
      */
     NextToken?: NextToken;
   }
+  export type Long = number;
   export type ManagedBy = string;
   export type MaximumEventAgeInSeconds = number;
   export type MaximumRetryAttempts = number;
@@ -1197,7 +1550,63 @@ declare namespace EventBridge {
     ErrorMessage?: ErrorMessage;
   }
   export type RemoveTargetsResultEntryList = RemoveTargetsResultEntry[];
+  export interface Replay {
+    /**
+     * The name of the replay.
+     */
+    ReplayName?: ReplayName;
+    /**
+     * The ARN of the archive to replay event from.
+     */
+    EventSourceArn?: Arn;
+    /**
+     * The current state of the replay.
+     */
+    State?: ReplayState;
+    /**
+     * A description of why the replay is in the current state.
+     */
+    StateReason?: ReplayStateReason;
+    /**
+     * A time stamp for the time to start replaying events. This is determined by the time in the event as described in Time.
+     */
+    EventStartTime?: Timestamp;
+    /**
+     * A time stamp for the time to start replaying events. Any event with a creation time prior to the EventEndTime specified is replayed.
+     */
+    EventEndTime?: Timestamp;
+    /**
+     * A time stamp for the time that the last event was replayed.
+     */
+    EventLastReplayedTime?: Timestamp;
+    /**
+     * A time stamp for the time that the replay started.
+     */
+    ReplayStartTime?: Timestamp;
+    /**
+     * A time stamp for the time that the replay completed.
+     */
+    ReplayEndTime?: Timestamp;
+  }
+  export type ReplayArn = string;
+  export type ReplayDescription = string;
+  export interface ReplayDestination {
+    /**
+     * The ARN of the event bus to replay event to. You can replay events only to the event bus specified to create the archive.
+     */
+    Arn: Arn;
+    /**
+     * A list of ARNs for rules to replay events to.
+     */
+    FilterArns?: ReplayDestinationFilters;
+  }
+  export type ReplayDestinationFilters = Arn[];
+  export type ReplayList = Replay[];
+  export type ReplayName = string;
+  export type ReplayState = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED"|string;
+  export type ReplayStateReason = string;
   export type ResourceArn = string;
+  export type RetentionDays = number;
   export interface RetryPolicy {
     /**
      * The maximum number of retry attempts to make before the request fails. Retry attempts continue until either the maximum number of attempts is made or until the duration of the MaximumEventAgeInSeconds is met.
@@ -1280,6 +1689,50 @@ declare namespace EventBridge {
      * The FIFO message group ID to use as the target.
      */
     MessageGroupId?: MessageGroupId;
+  }
+  export interface StartReplayRequest {
+    /**
+     * The name of the replay to start.
+     */
+    ReplayName: ReplayName;
+    /**
+     * A description for the replay to start.
+     */
+    Description?: ReplayDescription;
+    /**
+     * The ARN of the archive to replay events from.
+     */
+    EventSourceArn: Arn;
+    /**
+     * A time stamp for the time to start replaying events. Only events that occurred between the EventStartTime and EventEndTime are replayed.
+     */
+    EventStartTime: Timestamp;
+    /**
+     * A time stamp for the time to stop replaying events. Only events that occurred between the EventStartTime and EventEndTime are replayed.
+     */
+    EventEndTime: Timestamp;
+    /**
+     * A ReplayDestination object that includes details about the destination for the replay.
+     */
+    Destination: ReplayDestination;
+  }
+  export interface StartReplayResponse {
+    /**
+     * The ARN of the replay.
+     */
+    ReplayArn?: ReplayArn;
+    /**
+     * The state of the replay.
+     */
+    State?: ReplayState;
+    /**
+     * The reason that the replay is in the state.
+     */
+    StateReason?: ReplayStateReason;
+    /**
+     * The time at which the replay started.
+     */
+    ReplayStartTime?: Timestamp;
   }
   export type StatementId = string;
   export type StatementName = string;
@@ -1410,6 +1863,42 @@ declare namespace EventBridge {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateArchiveRequest {
+    /**
+     * The name of the archive to update.
+     */
+    ArchiveName: ArchiveName;
+    /**
+     * The description for the archive.
+     */
+    Description?: ArchiveDescription;
+    /**
+     * The event pattern to use to filter events sent to the archive.
+     */
+    EventPattern?: EventPattern;
+    /**
+     * The number of days to retain events in the archive.
+     */
+    RetentionDays?: RetentionDays;
+  }
+  export interface UpdateArchiveResponse {
+    /**
+     * The ARN of the archive.
+     */
+    ArchiveArn?: ArchiveArn;
+    /**
+     * The state of the archive.
+     */
+    State?: ArchiveState;
+    /**
+     * The reason that the archive is in the current state.
+     */
+    StateReason?: ArchiveStateReason;
+    /**
+     * The time at which the archive was updated.
+     */
+    CreationTime?: Timestamp;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

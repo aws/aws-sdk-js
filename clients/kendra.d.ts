@@ -363,6 +363,7 @@ declare namespace Kendra {
     QueryCapacityUnits: QueryCapacityUnit;
   }
   export type ChangeDetectingColumns = ColumnName[];
+  export type ClaimRegex = string;
   export interface ClickFeedback {
     /**
      * The unique identifier of the search result that was clicked.
@@ -452,7 +453,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username - The user name of a user with administrative privileges for the Confluence server.   password - The password associated with the user logging in to the Confluence server.  
+     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username - The user name or email address of a user with administrative privileges for the Confluence server.   password - The password associated with the user logging in to the Confluence server.  
      */
     SecretArn: SecretArn;
     /**
@@ -550,7 +551,7 @@ declare namespace Kendra {
      */
     IndexFieldName?: IndexFieldName;
   }
-  export type ConfluenceVersion = "SERVER"|string;
+  export type ConfluenceVersion = "CLOUD"|"SERVER"|string;
   export interface ConnectionConfiguration {
     /**
      * The name of the host for the database. Can be either a string (host.subdomain.domain.tld) or an IPv4 or IPv6 address.
@@ -687,6 +688,14 @@ declare namespace Kendra {
      * A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
      */
     Tags?: TagList;
+    /**
+     * The user token configuration.
+     */
+    UserTokenConfigurations?: UserTokenConfigurationList;
+    /**
+     * The user context policy.  ATTRIBUTE_FILTER  All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes.   USER_TOKEN  Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable.   
+     */
+    UserContextPolicy?: UserContextPolicy;
   }
   export interface CreateIndexResponse {
     /**
@@ -1078,6 +1087,14 @@ declare namespace Kendra {
      * For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
+    /**
+     * The user token configuration for the Amazon Kendra index.
+     */
+    UserTokenConfigurations?: UserTokenConfigurationList;
+    /**
+     * The user context policy for the Amazon Kendra index.
+     */
+    UserContextPolicy?: UserContextPolicy;
   }
   export type Description = string;
   export interface Document {
@@ -1244,6 +1261,7 @@ declare namespace Kendra {
     FileFormat?: FaqFileFormat;
   }
   export type FaqSummaryItems = FaqSummary[];
+  export type GroupAttributeField = string;
   export interface Highlight {
     /**
      * The zero-based location in the response string where the highlight starts.
@@ -1306,6 +1324,48 @@ declare namespace Kendra {
   export type IndexedTextBytes = number;
   export type IndexedTextDocumentsCount = number;
   export type Integer = number;
+  export type Issuer = string;
+  export interface JsonTokenTypeConfiguration {
+    /**
+     * The user name attribute field.
+     */
+    UserNameAttributeField: String;
+    /**
+     * The group attribute field.
+     */
+    GroupAttributeField: String;
+  }
+  export interface JwtTokenTypeConfiguration {
+    /**
+     * The location of the key.
+     */
+    KeyLocation: KeyLocation;
+    /**
+     * The signing key URL.
+     */
+    URL?: Url;
+    /**
+     * The Amazon Resource Name (arn) of the secret.
+     */
+    SecretManagerArn?: RoleArn;
+    /**
+     * The user name attribute field.
+     */
+    UserNameAttributeField?: UserNameAttributeField;
+    /**
+     * The group attribute field.
+     */
+    GroupAttributeField?: GroupAttributeField;
+    /**
+     * The issuer of the token.
+     */
+    Issuer?: Issuer;
+    /**
+     * The regular expression that identifies the claim.
+     */
+    ClaimRegex?: ClaimRegex;
+  }
+  export type KeyLocation = "URL"|"SECRET_MANAGER"|string;
   export type KmsKeyId = string;
   export interface ListDataSourceSyncJobsRequest {
     /**
@@ -1455,6 +1515,10 @@ declare namespace Kendra {
      * A list of DataSourceToIndexFieldMapping objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A Boolean value that specifies whether local groups are disabled (True) or enabled (False). 
+     */
+    DisableLocalGroups?: Boolean;
   }
   export type OneDriveUser = string;
   export type OneDriveUserList = OneDriveUser[];
@@ -1526,6 +1590,10 @@ declare namespace Kendra {
      * Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance. If you don't provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.
      */
     SortingConfiguration?: SortingConfiguration;
+    /**
+     * The user context token.
+     */
+    UserContext?: UserContext;
   }
   export interface QueryResult {
     /**
@@ -1944,6 +2012,10 @@ declare namespace Kendra {
      * The Microsoft SharePoint attribute field that contains the title of the document.
      */
     DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * A Boolean value that specifies whether local groups are disabled (True) or enabled (False). 
+     */
+    DisableLocalGroups?: Boolean;
   }
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
@@ -2072,6 +2144,7 @@ declare namespace Kendra {
   }
   export type Timestamp = Date;
   export type Title = string;
+  export type Token = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.
@@ -2136,8 +2209,35 @@ declare namespace Kendra {
      * Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day. If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
+    /**
+     * The user token configuration.
+     */
+    UserTokenConfigurations?: UserTokenConfigurationList;
+    /**
+     * The user user token context policy.
+     */
+    UserContextPolicy?: UserContextPolicy;
   }
   export type Url = string;
+  export interface UserContext {
+    /**
+     * The user context token. It must be a JWT or a JSON token.
+     */
+    Token?: Token;
+  }
+  export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
+  export type UserNameAttributeField = string;
+  export interface UserTokenConfiguration {
+    /**
+     * Information about the JWT token type configuration.
+     */
+    JwtTokenTypeConfiguration?: JwtTokenTypeConfiguration;
+    /**
+     * Information about the JSON token type configuration.
+     */
+    JsonTokenTypeConfiguration?: JsonTokenTypeConfiguration;
+  }
+  export type UserTokenConfigurationList = UserTokenConfiguration[];
   export type ValueImportanceMap = {[key: string]: Importance};
   export type ValueImportanceMapKey = string;
   export type VpcSecurityGroupId = string;

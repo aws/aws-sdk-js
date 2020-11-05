@@ -2017,6 +2017,18 @@
         "TLSSecurityPolicy": {
           "shape": "TLSSecurityPolicy",
           "documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> </p>"
+        },
+        "CustomEndpointEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify if custom endpoint should be enabled for the Elasticsearch domain.</p>"
+        },
+        "CustomEndpoint": {
+          "shape": "DomainNameFqdn",
+          "documentation": "<p>Specify the fully qualified domain for your custom endpoint.</p>"
+        },
+        "CustomEndpointCertificateArn": {
+          "shape": "ARN",
+          "documentation": "<p>Specify ACM certificate ARN for your custom endpoint.</p>"
         }
       },
       "documentation": "<p>Options to configure endpoint for the Elasticsearch domain.</p>"
@@ -2084,6 +2096,12 @@
       "max": 28,
       "min": 3,
       "pattern": "[a-z][a-z0-9\\-]+"
+    },
+    "DomainNameFqdn": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
     },
     "DomainNameList": {
       "type": "list",

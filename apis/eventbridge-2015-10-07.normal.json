@@ -40,6 +40,68 @@
       ],
       "documentation": "<p>Activates a partner event source that has been deactivated. Once activated, your matching event bus will start receiving events from the event source.</p>"
     },
+    "CancelReplay": {
+      "name": "CancelReplay",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelReplayRequest"
+      },
+      "output": {
+        "shape": "CancelReplayResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "IllegalStatusException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Cancels the specified replay.</p>"
+    },
+    "CreateArchive": {
+      "name": "CreateArchive",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateArchiveRequest"
+      },
+      "output": {
+        "shape": "CreateArchiveResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidEventPatternException"
+        }
+      ],
+      "documentation": "<p>Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.</p>"
+    },
     "CreateEventBus": {
       "name": "CreateEventBus",
       "http": {
@@ -136,6 +198,31 @@
       ],
       "documentation": "<p>You can use this operation to temporarily stop receiving events from the specified partner event source. The matching event bus is not deleted. </p> <p>When you deactivate a partner event source, the source goes into PENDING state. If it remains in PENDING state for more than two weeks, it is deleted.</p> <p>To activate a deactivated partner event source, use <a>ActivateEventSource</a>.</p>"
     },
+    "DeleteArchive": {
+      "name": "DeleteArchive",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteArchiveRequest"
+      },
+      "output": {
+        "shape": "DeleteArchiveResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified archive.</p>"
+    },
     "DeleteEventBus": {
       "name": "DeleteEventBus",
       "http": {
@@ -201,6 +288,31 @@
         }
       ],
       "documentation": "<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p> <p>Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the <code>Force</code> option, but you should do so only if you are sure the other service is not still using that rule.</p>"
+    },
+    "DescribeArchive": {
+      "name": "DescribeArchive",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeArchiveRequest"
+      },
+      "output": {
+        "shape": "DescribeArchiveResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves details about an archive.</p>"
     },
     "DescribeEventBus": {
       "name": "DescribeEventBus",
@@ -274,6 +386,28 @@
       ],
       "documentation": "<p>An SaaS partner can use this operation to list details about a partner event source that they have created. AWS customers do not use this operation. Instead, AWS customers can use <a>DescribeEventSource</a> to see details about a partner event source that is shared with them.</p>"
     },
+    "DescribeReplay": {
+      "name": "DescribeReplay",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReplayRequest"
+      },
+      "output": {
+        "shape": "DescribeReplayResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves details about a replay. Use <code>DescribeReplay</code> to determine the progress of a running replay. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you use <code>StartReplay</code> and specify an <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use <code>DescribeReplay</code> to determine the progress of a replay. The value returned for <code>EventLastReplayedTime</code> indicates the time within the specified time range associated with the last event replayed.</p>"
+    },
     "DescribeRule": {
       "name": "DescribeRule",
       "http": {
@@ -345,6 +479,28 @@
         }
       ],
       "documentation": "<p>Enables the specified rule. If the rule does not exist, the operation fails.</p> <p>When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Allow a short period of time for changes to take effect.</p>"
+    },
+    "ListArchives": {
+      "name": "ListArchives",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListArchivesRequest"
+      },
+      "output": {
+        "shape": "ListArchivesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Lists your archives. You can either list all the archives or you can provide a prefix to match to the archive names. Filter parameters are exclusive.</p>"
     },
     "ListEventBuses": {
       "name": "ListEventBuses",
@@ -433,6 +589,25 @@
         }
       ],
       "documentation": "<p>An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by AWS customers.</p>"
+    },
+    "ListReplays": {
+      "name": "ListReplays",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListReplaysRequest"
+      },
+      "output": {
+        "shape": "ListReplaysResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Lists your replays. You can either list all the replays or you can provide a prefix to match to the replay names. Filter parameters are exclusive.</p>"
     },
     "ListRuleNamesByTarget": {
       "name": "ListRuleNamesByTarget",
@@ -703,6 +878,37 @@
       ],
       "documentation": "<p>Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.</p> <p>When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
     },
+    "StartReplay": {
+      "name": "StartReplay",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartReplayRequest"
+      },
+      "output": {
+        "shape": "StartReplayResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "InvalidEventPatternException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Starts the specified replay. Events are not necessarily replayed in the exact same order that they were added to the archive. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you specify an <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use <code>DescribeReplay</code> to determine the progress of a replay. The value returned for <code>EventLastReplayedTime</code> indicates the time within the specified time range associated with the last event replayed.</p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -780,6 +986,37 @@
         }
       ],
       "documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge (CloudWatch Events, rules and event buses can be tagged.</p>"
+    },
+    "UpdateArchive": {
+      "name": "UpdateArchive",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateArchiveRequest"
+      },
+      "output": {
+        "shape": "UpdateArchiveResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidEventPatternException"
+        }
+      ],
+      "documentation": "<p>Updates the specified archive.</p>"
     }
   },
   "shapes": {
@@ -806,6 +1043,83 @@
           "documentation": "<p>The name of the partner event source to activate.</p>"
         }
       }
+    },
+    "Archive": {
+      "type": "structure",
+      "members": {
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name of the archive.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.</p>"
+        },
+        "State": {
+          "shape": "ArchiveState",
+          "documentation": "<p>The current state of the archive.</p>"
+        },
+        "StateReason": {
+          "shape": "ArchiveStateReason",
+          "documentation": "<p>A description for the reason that the archive is in the current state.</p>"
+        },
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days to retain events in the archive before they are deleted.</p>"
+        },
+        "SizeBytes": {
+          "shape": "Long",
+          "documentation": "<p>The size of the archive, in bytes.</p>"
+        },
+        "EventCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of events in the archive.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp for the time that the archive was created.</p>"
+        }
+      },
+      "documentation": "<p>An <code>Archive</code> object that contains details about an archive.</p>"
+    },
+    "ArchiveArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$"
+    },
+    "ArchiveDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "ArchiveName": {
+      "type": "string",
+      "max": 48,
+      "min": 1,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "ArchiveResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "Archive"
+      }
+    },
+    "ArchiveState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "CREATING",
+        "UPDATING",
+        "CREATE_FAILED",
+        "UPDATE_FAILED"
+      ]
+    },
+    "ArchiveStateReason": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
     },
     "Arn": {
       "type": "string",
@@ -889,6 +1203,35 @@
     "Boolean": {
       "type": "boolean"
     },
+    "CancelReplayRequest": {
+      "type": "structure",
+      "required": [
+        "ReplayName"
+      ],
+      "members": {
+        "ReplayName": {
+          "shape": "ReplayName",
+          "documentation": "<p>The name of the replay to cancel.</p>"
+        }
+      }
+    },
+    "CancelReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayArn": {
+          "shape": "ReplayArn",
+          "documentation": "<p>The ARN of the replay to cancel.</p>"
+        },
+        "State": {
+          "shape": "ReplayState",
+          "documentation": "<p>The current state of the replay.</p>"
+        },
+        "StateReason": {
+          "shape": "ReplayStateReason",
+          "documentation": "<p>The reason that the replay is in the current state.</p>"
+        }
+      }
+    },
     "Condition": {
       "type": "structure",
       "required": [
@@ -911,6 +1254,56 @@
         }
       },
       "documentation": "<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>'{\"Type\" : \"StringEquals\", \"Key\": \"aws:PrincipalOrgID\", \"Value\": \"o-1234567890\"}'</code> </p>"
+    },
+    "CreateArchiveRequest": {
+      "type": "structure",
+      "required": [
+        "ArchiveName",
+        "EventSourceArn"
+      ],
+      "members": {
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name for the archive to create.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event source associated with the archive.</p>"
+        },
+        "Description": {
+          "shape": "ArchiveDescription",
+          "documentation": "<p>A description for the archive.</p>"
+        },
+        "EventPattern": {
+          "shape": "EventPattern",
+          "documentation": "<p>An event pattern to use to filter events sent to the archive.</p>"
+        },
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days to retain events for. Default value is 0. If set to 0, events are retained indefinitely</p>"
+        }
+      }
+    },
+    "CreateArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "shape": "ArchiveArn",
+          "documentation": "<p>The ARN of the archive that was created.</p>"
+        },
+        "State": {
+          "shape": "ArchiveState",
+          "documentation": "<p>The state of the archive that was created.</p>"
+        },
+        "StateReason": {
+          "shape": "ArchiveStateReason",
+          "documentation": "<p>The reason that the archive is in the state.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the archive was created.</p>"
+        }
+      }
     },
     "CreateEventBusRequest": {
       "type": "structure",
@@ -1001,6 +1394,22 @@
       },
       "documentation": "<p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue configuration.</p>"
     },
+    "DeleteArchiveRequest": {
+      "type": "structure",
+      "required": [
+        "ArchiveName"
+      ],
+      "members": {
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name of the archive to delete.</p>"
+        }
+      }
+    },
+    "DeleteArchiveResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteEventBusRequest": {
       "type": "structure",
       "required": [
@@ -1047,6 +1456,67 @@
         "Force": {
           "shape": "Boolean",
           "documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.</p>"
+        }
+      }
+    },
+    "DescribeArchiveRequest": {
+      "type": "structure",
+      "required": [
+        "ArchiveName"
+      ],
+      "members": {
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name of the archive to retrieve.</p>"
+        }
+      }
+    },
+    "DescribeArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "shape": "ArchiveArn",
+          "documentation": "<p>The ARN of the archive.</p>"
+        },
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name of the archive.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event source associated with the archive.</p>"
+        },
+        "Description": {
+          "shape": "ArchiveDescription",
+          "documentation": "<p>The description of the archive.</p>"
+        },
+        "EventPattern": {
+          "shape": "EventPattern",
+          "documentation": "<p>The event pattern used to filter events sent to the archive.</p>"
+        },
+        "State": {
+          "shape": "ArchiveState",
+          "documentation": "<p>The state of the archive.</p>"
+        },
+        "StateReason": {
+          "shape": "ArchiveStateReason",
+          "documentation": "<p>The reason that the archive is in the state.</p>"
+        },
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days to retain events for in the archive.</p>"
+        },
+        "SizeBytes": {
+          "shape": "Long",
+          "documentation": "<p>The size of the archive in bytes.</p>"
+        },
+        "EventCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of events in the archive.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the archive was created.</p>"
         }
       }
     },
@@ -1139,6 +1609,71 @@
         "Name": {
           "shape": "String",
           "documentation": "<p>The name of the event source.</p>"
+        }
+      }
+    },
+    "DescribeReplayRequest": {
+      "type": "structure",
+      "required": [
+        "ReplayName"
+      ],
+      "members": {
+        "ReplayName": {
+          "shape": "ReplayName",
+          "documentation": "<p>The name of the replay to retrieve.</p>"
+        }
+      }
+    },
+    "DescribeReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "shape": "ReplayName",
+          "documentation": "<p>The name of the replay.</p>"
+        },
+        "ReplayArn": {
+          "shape": "ReplayArn",
+          "documentation": "<p>The ARN of the replay.</p>"
+        },
+        "Description": {
+          "shape": "ReplayDescription",
+          "documentation": "<p>The description of the replay.</p>"
+        },
+        "State": {
+          "shape": "ReplayState",
+          "documentation": "<p>The current state of the replay.</p>"
+        },
+        "StateReason": {
+          "shape": "ReplayStateReason",
+          "documentation": "<p>The reason that the replay is in the current state.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the archive events were replayed from.</p>"
+        },
+        "Destination": {
+          "shape": "ReplayDestination",
+          "documentation": "<p>A <code>ReplayDestination</code> object that contains details about the replay.</p>"
+        },
+        "EventStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp of the first event that was last replayed from the archive.</p>"
+        },
+        "EventEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp for the last event that was replayed from the archive.</p>"
+        },
+        "EventLastReplayedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the event was last replayed.</p>"
+        },
+        "ReplayStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the replay started.</p>"
+        },
+        "ReplayEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the replay stopped.</p>"
         }
       }
     },
@@ -1466,6 +2001,44 @@
       "type": "integer",
       "min": 1
     },
+    "ListArchivesRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "shape": "ArchiveName",
+          "documentation": "<p>A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event source associated with the archive.</p>"
+        },
+        "State": {
+          "shape": "ArchiveState",
+          "documentation": "<p>The state of the archive.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        },
+        "Limit": {
+          "shape": "LimitMax100",
+          "documentation": "<p>The maximum number of results to return.</p>"
+        }
+      }
+    },
+    "ListArchivesResponse": {
+      "type": "structure",
+      "members": {
+        "Archives": {
+          "shape": "ArchiveResponseList",
+          "documentation": "<p>An array of <code>Archive</code> objects that include details about an archive.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        }
+      }
+    },
     "ListEventBusesRequest": {
       "type": "structure",
       "members": {
@@ -1589,6 +2162,44 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token you can use in a subsequent operation to retrieve the next set of results.</p>"
+        }
+      }
+    },
+    "ListReplaysRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "shape": "ReplayName",
+          "documentation": "<p>A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.</p>"
+        },
+        "State": {
+          "shape": "ReplayState",
+          "documentation": "<p>The state of the replay.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event source associated with the replay.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        },
+        "Limit": {
+          "shape": "LimitMax100",
+          "documentation": "<p>The maximum number of replays to retrieve.</p>"
+        }
+      }
+    },
+    "ListReplaysResponse": {
+      "type": "structure",
+      "members": {
+        "Replays": {
+          "shape": "ReplayList",
+          "documentation": "<p>An array of <code>Replay</code> objects that contain information about the replay.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
         }
       }
     },
@@ -1720,6 +2331,9 @@
           "documentation": "<p>Indicates whether there are additional results to retrieve. If there are no more results, the value is null.</p>"
         }
       }
+    },
+    "Long": {
+      "type": "long"
     },
     "ManagedBy": {
       "type": "string",
@@ -2274,10 +2888,118 @@
         "shape": "RemoveTargetsResultEntry"
       }
     },
+    "Replay": {
+      "type": "structure",
+      "members": {
+        "ReplayName": {
+          "shape": "ReplayName",
+          "documentation": "<p>The name of the replay.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the archive to replay event from.</p>"
+        },
+        "State": {
+          "shape": "ReplayState",
+          "documentation": "<p>The current state of the replay.</p>"
+        },
+        "StateReason": {
+          "shape": "ReplayStateReason",
+          "documentation": "<p>A description of why the replay is in the current state.</p>"
+        },
+        "EventStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time to start replaying events. This is determined by the time in the event as described in <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time\">Time</a>.</p>"
+        },
+        "EventEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time to start replaying events. Any event with a creation time prior to the <code>EventEndTime</code> specified is replayed.</p>"
+        },
+        "EventLastReplayedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the last event was replayed.</p>"
+        },
+        "ReplayStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the replay started.</p>"
+        },
+        "ReplayEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the replay completed.</p>"
+        }
+      },
+      "documentation": "<p>A <code>Replay</code> object that contains details about a replay.</p>"
+    },
+    "ReplayArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/[\\.\\-_A-Za-z0-9]+$"
+    },
+    "ReplayDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "ReplayDestination": {
+      "type": "structure",
+      "required": [
+        "Arn"
+      ],
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the event bus to replay event to. You can replay events only to the event bus specified to create the archive.</p>"
+        },
+        "FilterArns": {
+          "shape": "ReplayDestinationFilters",
+          "documentation": "<p>A list of ARNs for rules to replay events to.</p>"
+        }
+      },
+      "documentation": "<p>A <code>ReplayDestination</code> object that contains details about a replay.</p>"
+    },
+    "ReplayDestinationFilters": {
+      "type": "list",
+      "member": {
+        "shape": "Arn"
+      }
+    },
+    "ReplayList": {
+      "type": "list",
+      "member": {
+        "shape": "Replay"
+      }
+    },
+    "ReplayName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "ReplayState": {
+      "type": "string",
+      "enum": [
+        "STARTING",
+        "RUNNING",
+        "CANCELLING",
+        "COMPLETED",
+        "CANCELLED",
+        "FAILED"
+      ]
+    },
+    "ReplayStateReason": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
     "ResourceArn": {
       "type": "string",
       "max": 1600,
       "min": 1
+    },
+    "RetentionDays": {
+      "type": "integer",
+      "min": 0
     },
     "RetryPolicy": {
       "type": "structure",
@@ -2450,6 +3172,63 @@
         }
       },
       "documentation": "<p>This structure includes the custom parameter to be used when the target is an SQS FIFO queue.</p>"
+    },
+    "StartReplayRequest": {
+      "type": "structure",
+      "required": [
+        "ReplayName",
+        "EventSourceArn",
+        "EventStartTime",
+        "EventEndTime",
+        "Destination"
+      ],
+      "members": {
+        "ReplayName": {
+          "shape": "ReplayName",
+          "documentation": "<p>The name of the replay to start.</p>"
+        },
+        "Description": {
+          "shape": "ReplayDescription",
+          "documentation": "<p>A description for the replay to start.</p>"
+        },
+        "EventSourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the archive to replay events from.</p>"
+        },
+        "EventStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time to start replaying events. Only events that occurred between the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>"
+        },
+        "EventEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time to stop replaying events. Only events that occurred between the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>"
+        },
+        "Destination": {
+          "shape": "ReplayDestination",
+          "documentation": "<p>A <code>ReplayDestination</code> object that includes details about the destination for the replay.</p>"
+        }
+      }
+    },
+    "StartReplayResponse": {
+      "type": "structure",
+      "members": {
+        "ReplayArn": {
+          "shape": "ReplayArn",
+          "documentation": "<p>The ARN of the replay.</p>"
+        },
+        "State": {
+          "shape": "ReplayState",
+          "documentation": "<p>The state of the replay.</p>"
+        },
+        "StateReason": {
+          "shape": "ReplayStateReason",
+          "documentation": "<p>The reason that the replay is in the state.</p>"
+        },
+        "ReplayStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the replay started.</p>"
+        }
+      }
     },
     "StatementId": {
       "type": "string",
@@ -2705,6 +3484,51 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateArchiveRequest": {
+      "type": "structure",
+      "required": [
+        "ArchiveName"
+      ],
+      "members": {
+        "ArchiveName": {
+          "shape": "ArchiveName",
+          "documentation": "<p>The name of the archive to update.</p>"
+        },
+        "Description": {
+          "shape": "ArchiveDescription",
+          "documentation": "<p>The description for the archive.</p>"
+        },
+        "EventPattern": {
+          "shape": "EventPattern",
+          "documentation": "<p>The event pattern to use to filter events sent to the archive.</p>"
+        },
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days to retain events in the archive.</p>"
+        }
+      }
+    },
+    "UpdateArchiveResponse": {
+      "type": "structure",
+      "members": {
+        "ArchiveArn": {
+          "shape": "ArchiveArn",
+          "documentation": "<p>The ARN of the archive.</p>"
+        },
+        "State": {
+          "shape": "ArchiveState",
+          "documentation": "<p>The state of the archive.</p>"
+        },
+        "StateReason": {
+          "shape": "ArchiveStateReason",
+          "documentation": "<p>The reason that the archive is in the current state.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the archive was updated.</p>"
+        }
+      }
     }
   },
   "documentation": "<p>Amazon EventBridge helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon EventBridge, see the <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide\">Amazon EventBridge User Guide</a>.</p>"
