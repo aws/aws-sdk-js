@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.786.0-->
+<!--LATEST=2.787.0-->
 <!--ENTRYINSERT-->
+
+## 2.787.0
+* feature: DLM: Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images
+* feature: EC2: Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API.
+* feature: IoTSiteWise: Remove the CreatePresignedPortalUrl API
+* feature: MediaLive: Support for SCTE35 ad markers in OnCuePoint style in RTMP outputs.
 
 ## 2.786.0
 * feature: AppMesh: This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support.

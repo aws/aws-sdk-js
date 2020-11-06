@@ -294,6 +294,10 @@ declare namespace DLM {
      * The tags.
      */
     Tags?: TagMap;
+    /**
+     * The type of policy. EBS_SNAPSHOT_MANAGEMENT indicates that the policy manages the lifecycle of Amazon EBS snapshots. IMAGE_MANAGEMENT indicates that the policy manages the lifecycle of EBS-backed AMIs.
+     */
+    PolicyType?: PolicyTypeValues;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
   export interface ListTagsForResourceRequest {
@@ -308,17 +312,22 @@ declare namespace DLM {
      */
     Tags?: TagMap;
   }
+  export type NoReboot = boolean;
   export interface Parameters {
     /**
      * [EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
      */
     ExcludeBootVolume?: ExcludeBootVolume;
+    /**
+     * Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instance are not rebooted).
+     */
+    NoReboot?: NoReboot;
   }
   export type PolicyArn = string;
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
-     * The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
+     * The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. The default is EBS_SNAPSHOT_MANAGEMENT.
      */
     PolicyType?: PolicyTypeValues;
     /**
@@ -340,7 +349,7 @@ declare namespace DLM {
   }
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
-  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|string;
+  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|"IMAGE_MANAGEMENT"|string;
   export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {

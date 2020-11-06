@@ -5313,11 +5313,16 @@ Valid values: 1, 2, 4, 6, 8
   export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
+  export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
   export type RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"|"WAIT_FOR_SERVER"|string;
   export type RtmpCaptionData = "ALL"|"FIELD1_608"|"FIELD1_AND_FIELD2_608"|string;
   export interface RtmpCaptionInfoDestinationSettings {
   }
   export interface RtmpGroupSettings {
+    /**
+     * Choose the ad marker type for this output group. MediaLive will create a message based on the content of each SCTE-35 message, format it for that marker type, and insert it in the datastream.
+     */
+    AdMarkers?: __listOfRtmpAdMarkers;
     /**
      * Authentication scheme to use when connecting with CDN
      */
@@ -6446,6 +6451,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfPipelineDetail = PipelineDetail[];
   export type __listOfPipelinePauseStateSettings = PipelinePauseStateSettings[];
   export type __listOfReservation = Reservation[];
+  export type __listOfRtmpAdMarkers = RtmpAdMarkers[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
   export type __listOfTransferringInputDeviceSummary = TransferringInputDeviceSummary[];

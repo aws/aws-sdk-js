@@ -375,35 +375,6 @@
         "hostPrefix": "monitor."
       }
     },
-    "CreatePresignedPortalUrl": {
-      "name": "CreatePresignedPortalUrl",
-      "http": {
-        "method": "GET",
-        "requestUri": "/portals/{portalId}/presigned-url",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "CreatePresignedPortalUrlRequest"
-      },
-      "output": {
-        "shape": "CreatePresignedPortalUrlResponse"
-      },
-      "errors": [
-        {
-          "shape": "InvalidRequestException"
-        },
-        {
-          "shape": "InternalFailureException"
-        },
-        {
-          "shape": "ThrottlingException"
-        }
-      ],
-      "documentation": "<p>Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.</p>",
-      "endpoint": {
-        "hostPrefix": "monitor."
-      }
-    },
     "CreateProject": {
       "name": "CreateProject",
       "http": {
@@ -2975,38 +2946,6 @@
         }
       }
     },
-    "CreatePresignedPortalUrlRequest": {
-      "type": "structure",
-      "required": [
-        "portalId"
-      ],
-      "members": {
-        "portalId": {
-          "shape": "ID",
-          "documentation": "<p>The ID of the portal to access.</p>",
-          "location": "uri",
-          "locationName": "portalId"
-        },
-        "sessionDurationSeconds": {
-          "shape": "SessionDurationSeconds",
-          "documentation": "<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 900 seconds (15 minutes)</p>",
-          "location": "querystring",
-          "locationName": "sessionDurationSeconds"
-        }
-      }
-    },
-    "CreatePresignedPortalUrlResponse": {
-      "type": "structure",
-      "required": [
-        "presignedPortalUrl"
-      ],
-      "members": {
-        "presignedPortalUrl": {
-          "shape": "Url",
-          "documentation": "<p>The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt;</code> </p>"
-        }
-      }
-    },
     "CreateProjectRequest": {
       "type": "structure",
       "required": [
@@ -5274,11 +5213,6 @@
       "max": 64,
       "min": 1,
       "pattern": "^[!-~]*"
-    },
-    "SessionDurationSeconds": {
-      "type": "integer",
-      "max": 43200,
-      "min": 900
     },
     "TagKey": {
       "type": "string",

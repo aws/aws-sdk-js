@@ -3791,7 +3791,7 @@
       "members": {
         "key": {
           "shape": "AssociationFilterKey",
-          "documentation": "<p>The name of the filter.</p>"
+          "documentation": "<p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>"
         },
         "value": {
           "shape": "AssociationFilterValue",
@@ -4256,7 +4256,7 @@
       "members": {
         "Key": {
           "shape": "AutomationExecutionFilterKey",
-          "documentation": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.</p>"
+          "documentation": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.</p>"
         },
         "Values": {
           "shape": "AutomationExecutionFilterValueList",
@@ -9931,7 +9931,7 @@
       "members": {
         "AssociationFilterList": {
           "shape": "AssociationFilterList",
-          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>"
         },
         "MaxResults": {
           "shape": "MaxResults",
