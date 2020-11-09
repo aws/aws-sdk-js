@@ -4256,7 +4256,7 @@
       "members": {
         "Key": {
           "shape": "AutomationExecutionFilterKey",
-          "documentation": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.</p>"
+          "documentation": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.</p>"
         },
         "Values": {
           "shape": "AutomationExecutionFilterValueList",
@@ -4276,7 +4276,8 @@
         "StartTimeBefore",
         "StartTimeAfter",
         "AutomationType",
-        "TagKey"
+        "TagKey",
+        "TargetResourceGroup"
       ]
     },
     "AutomationExecutionFilterList": {

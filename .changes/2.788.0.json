@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "DataSync now enables customers to adjust the network bandwidth used by a running AWS DataSync task."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "This release adds supports for exporting Amazon DynamoDB table data to Amazon S3 to perform analytics at any scale."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release provides native support for specifying Amazon FSx for Windows File Server file systems as volumes in your Amazon ECS task definitions."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Adding support for package versioning in Amazon Elasticsearch Service"
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds support for creating DNS aliases for Amazon FSx for Windows File Server, and using AWS Backup to automate scheduled, policy-driven backup plans for Amazon FSx file systems."
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "AWS IoT Analytics now supports Late Data Notifications for datasets, dataset content creation using previous version IDs, and includes the LastMessageArrivalTime attribute for channels and datastores."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "Sensitive data findings in Amazon Macie now include enhanced location data for Apache Avro object containers and Apache Parquet files."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "S3 Intelligent-Tiering adds support for Archive and Deep Archive Access tiers; S3 Replication adds replication metrics and failure notifications, brings feature parity for delete marker replication"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "add a new filter to allow customer to filter automation executions by using resource-group which used for execute automation"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Added bandwidth rate limit schedule for Tape and Volume Gateways"
+    }
+]

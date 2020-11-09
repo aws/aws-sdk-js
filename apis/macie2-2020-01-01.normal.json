@@ -3258,7 +3258,7 @@
         "eqExactMatch": {
           "shape": "__listOf__string",
           "locationName": "eqExactMatch",
-          "documentation": "<p>A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties:</p><ul><li><p>customDataIdentifiers.detections.arn</p></li><li><p>customDataIdentifiers.detections.name</p></li><li><p>resourcesAffected.s3Bucket.tags.key</p></li><li><p>resourcesAffected.s3Bucket.tags.value</p></li><li><p>resourcesAffected.s3Object.tags.key</p></li><li><p>resourcesAffected.s3Object.tags.value</p></li><li><p>sensitiveData.category</p></li><li><p>sensitiveData.detections.type</p></li></ul>"
+          "documentation": "<p>A condition that requires an array field of a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.</p>"
         },
         "gt": {
           "shape": "__long",
@@ -5348,12 +5348,12 @@
         "cells": {
           "shape": "Cells",
           "locationName": "cells",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell that contains the data. This value is null for all other types of files.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell or field that contains the data. This value is null for all other types of files.</p>"
         },
         "lineRanges": {
           "shape": "Ranges",
           "locationName": "lineRanges",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Microsoft Word document, or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: full names and addresses in a Microsoft Excel workbook, CSV file, or TSV file; data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>"
         },
         "offsetRanges": {
           "shape": "Ranges",
@@ -5368,7 +5368,7 @@
         "records": {
           "shape": "Records",
           "locationName": "records",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Apache Parquet file. Each object specifies the row that contains the data. This value is null for all other types of files.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the field or record that contains the data. This value is null for all other types of files.</p>"
         }
       },
       "documentation": "<p>Provides the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
@@ -5466,11 +5466,11 @@
           "documentation": "<p>The column number for the column that contains the data, if the file contains structured data.</p>"
         }
       },
-      "documentation": "<p>Provides details about the location of an occurrence of sensitive data in an Adobe Portable Document Format file, Apache Avro object container, Microsoft Word document, or non-binary text file.</p>"
+      "documentation": "<p>Provides details about the location of an occurrence of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>"
     },
     "Ranges": {
       "type": "list",
-      "documentation": "<p>Provides details about the location of occurrences of sensitive data in an Adobe Portable Document Format file, Apache Avro object container, Microsoft Word document, or non-binary text file.</p>",
+      "documentation": "<p>Provides details about the location of occurrences of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>",
       "member": {
         "shape": "Range"
       }
@@ -5478,13 +5478,18 @@
     "Record": {
       "type": "structure",
       "members": {
+        "jsonPath": {
+          "shape": "__string",
+          "locationName": "jsonPath",
+          "documentation": "<p>The path, as a JSONPath expression, to the field (in an Apache Avro object container) or record (in an Apache Parquet file) that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
+        },
         "recordIndex": {
           "shape": "__long",
           "locationName": "recordIndex",
-          "documentation": "<p>The row index, starting from 0, for the row that contains the data.</p>"
+          "documentation": "<p>The record index, starting from 0, for the record that contains the data.</p>"
         }
       },
-      "documentation": "<p>Specifies the location of an occurrence of sensitive data in an Apache Parquet file.</p>"
+      "documentation": "<p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container or Apache Parquet file.</p>"
     },
     "Records": {
       "type": "list",

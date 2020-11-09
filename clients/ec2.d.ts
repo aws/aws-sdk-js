@@ -7891,6 +7891,7 @@ declare namespace EC2 {
   export type DateTime = Date;
   export type DedicatedHostFlag = boolean;
   export type DedicatedHostId = string;
+  export type DefaultNetworkCardIndex = number;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
@@ -10139,7 +10140,7 @@ declare namespace EC2 {
      */
     LocationType?: LocationType;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    location - This depends on the location type. For example, if the location type is region (default), the location is the Region code (for example, us-east-2.)    instance-type - The instance type.  
+     * One or more filters. Filter names and values are case-sensitive.    location - This depends on the location type. For example, if the location type is region (default), the location is the Region code (for example, us-east-2.)    instance-type - The instance type. For example, c5.2xlarge.  
      */
     Filters?: FilterList;
     /**
@@ -10171,7 +10172,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MBps.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MBps.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (supported | unsupported | default)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (supported | unsupported)    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes. (required | supported | unsupported)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store. (required | supported) | unsupported)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA). (true | false)    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture. (arm64 | i386 | x86_64)    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-root-device-type - The root device type. (ebs | instance-store)    supported-usage-class - The usage class. (on-demand | spot)    supported-virtualization-type - The virtualization type. (hvm | paravirtual)    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported) | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
      */
     Filters?: FilterList;
     /**
@@ -13014,7 +13015,7 @@ declare namespace EC2 {
   export type EbsEncryptionSupport = "unsupported"|"supported"|string;
   export interface EbsInfo {
     /**
-     * Indicates that the instance type is Amazon EBS-optimized. For more information, see Amazon EBS-Optimized Instances in Amazon EC2 User Guide for Linux Instances.
+     * Indicates whether the instance type is Amazon EBS-optimized. For more information, see Amazon EBS-Optimized Instances in Amazon EC2 User Guide for Linux Instances.
      */
     EbsOptimizedSupport?: EbsOptimizedSupport;
     /**
@@ -13065,7 +13066,7 @@ declare namespace EC2 {
      */
     BaselineBandwidthInMbps?: BaselineBandwidthInMbps;
     /**
-     * The baseline throughput performance for an EBS-optimized instance type, in MBps.
+     * The baseline throughput performance for an EBS-optimized instance type, in MB/s.
      */
     BaselineThroughputInMBps?: BaselineThroughputInMBps;
     /**
@@ -13077,7 +13078,7 @@ declare namespace EC2 {
      */
     MaximumBandwidthInMbps?: MaximumBandwidthInMbps;
     /**
-     * The maximum throughput performance for an EBS-optimized instance type, in MBps.
+     * The maximum throughput performance for an EBS-optimized instance type, in MB/s.
      */
     MaximumThroughputInMBps?: MaximumThroughputInMBps;
     /**
@@ -14057,7 +14058,7 @@ declare namespace EC2 {
   export type FpgaDeviceManufacturerName = string;
   export interface FpgaDeviceMemoryInfo {
     /**
-     * The size (in MiB) for the memory available to the FPGA accelerator.
+     * The size of the memory available to the FPGA accelerator, in MiB.
      */
     SizeInMiB?: FpgaDeviceMemorySize;
   }
@@ -14788,7 +14789,7 @@ declare namespace EC2 {
   export type GpuDeviceManufacturerName = string;
   export interface GpuDeviceMemoryInfo {
     /**
-     * The size (in MiB) for the memory available to the GPU accelerator.
+     * The size of the memory available to the GPU accelerator, in MiB.
      */
     SizeInMiB?: GpuDeviceMemorySize;
   }
@@ -14800,7 +14801,7 @@ declare namespace EC2 {
      */
     Gpus?: GpuDeviceInfoList;
     /**
-     * The total size of the memory for the GPU accelerators for the instance type.
+     * The total size of the memory for the GPU accelerators for the instance type, in MiB.
      */
     TotalGpuMemoryInMiB?: totalGpuMemory;
   }
@@ -16610,7 +16611,7 @@ declare namespace EC2 {
      */
     TotalSizeInGB?: DiskSize;
     /**
-     * Array describing the disks that are available for the instance type.
+     * Describes the disks that are available for the instance type.
      */
     Disks?: DiskInfoList;
     /**
@@ -16637,7 +16638,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * Indicates whether the instance type is a current generation.
+     * Indicates whether the instance type is current generation.
      */
     CurrentGeneration?: CurrentGenerationFlag;
     /**
@@ -16649,7 +16650,7 @@ declare namespace EC2 {
      */
     SupportedUsageClasses?: UsageClassTypeList;
     /**
-     * Indicates the supported root device types.
+     * The supported root device types.
      */
     SupportedRootDeviceTypes?: RootDeviceTypeList;
     /**
@@ -16657,11 +16658,11 @@ declare namespace EC2 {
      */
     SupportedVirtualizationTypes?: VirtualizationTypeList;
     /**
-     * Indicates whether the instance is bare metal.
+     * Indicates whether the instance is a bare metal instance type.
      */
     BareMetal?: BareMetalFlag;
     /**
-     * Indicates the hypervisor used for the instance type.
+     * The hypervisor for the instance type.
      */
     Hypervisor?: InstanceTypeHypervisor;
     /**
@@ -16681,7 +16682,7 @@ declare namespace EC2 {
      */
     InstanceStorageSupported?: InstanceStorageFlag;
     /**
-     * Describes the disks for the instance type.
+     * Describes the instance storage for the instance type.
      */
     InstanceStorageInfo?: InstanceStorageInfo;
     /**
@@ -18047,11 +18048,12 @@ declare namespace EC2 {
   export type MaxResults = number;
   export type MaximumBandwidthInMbps = number;
   export type MaximumIops = number;
+  export type MaximumNetworkCards = number;
   export type MaximumThroughputInMBps = number;
   export type MembershipType = "static"|"igmp"|string;
   export interface MemoryInfo {
     /**
-     * Size of the memory, in MiB.
+     * The size of the memory, in MiB.
      */
     SizeInMiB?: MemorySize;
   }
@@ -19617,15 +19619,43 @@ declare namespace EC2 {
   export type NetworkAclId = string;
   export type NetworkAclIdStringList = NetworkAclId[];
   export type NetworkAclList = NetworkAcl[];
+  export type NetworkCardIndex = number;
+  export interface NetworkCardInfo {
+    /**
+     * The index of the network card.
+     */
+    NetworkCardIndex?: NetworkCardIndex;
+    /**
+     * The network performance of the network card.
+     */
+    NetworkPerformance?: NetworkPerformance;
+    /**
+     * The maximum number of network interfaces for the network card.
+     */
+    MaximumNetworkInterfaces?: MaxNetworkInterfaces;
+  }
+  export type NetworkCardInfoList = NetworkCardInfo[];
   export interface NetworkInfo {
     /**
-     * Describes the network performance.
+     * The network performance.
      */
     NetworkPerformance?: NetworkPerformance;
     /**
      * The maximum number of network interfaces for the instance type.
      */
     MaximumNetworkInterfaces?: MaxNetworkInterfaces;
+    /**
+     * The maximum number of physical network cards that can be allocated to the instance.
+     */
+    MaximumNetworkCards?: MaximumNetworkCards;
+    /**
+     * The index of the default network card, starting at 0.
+     */
+    DefaultNetworkCardIndex?: DefaultNetworkCardIndex;
+    /**
+     * Describes the network cards for the instance type.
+     */
+    NetworkCards?: NetworkCardInfoList;
     /**
      * The maximum number of IPv4 addresses per network interface.
      */
@@ -20168,7 +20198,7 @@ declare namespace EC2 {
   export type PlacementGroupIdStringList = PlacementGroupId[];
   export interface PlacementGroupInfo {
     /**
-     * A list of supported placement groups types.
+     * The supported placement group types.
      */
     SupportedStrategies?: PlacementGroupStrategyList;
   }
@@ -20347,7 +20377,7 @@ declare namespace EC2 {
   export type PrivateIpAddressStringList = String[];
   export interface ProcessorInfo {
     /**
-     * A list of architectures supported by the instance type.
+     * The architectures supported by the instance type.
      */
     SupportedArchitectures?: ArchitectureTypeList;
     /**
@@ -25422,11 +25452,11 @@ declare namespace EC2 {
      */
     DefaultThreadsPerCore?: ThreadsPerCore;
     /**
-     * List of the valid number of cores that can be configured for the instance type.
+     * The valid number of cores that can be configured for the instance type.
      */
     ValidCores?: CoreCountList;
     /**
-     * List of the valid number of threads per core that can be configured for the instance type. 
+     * The valid number of threads per core that can be configured for the instance type. 
      */
     ValidThreadsPerCore?: ThreadsPerCoreList;
   }

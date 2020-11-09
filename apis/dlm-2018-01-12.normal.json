@@ -576,6 +576,10 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags.</p>"
+        },
+        "PolicyType": {
+          "shape": "PolicyTypeValues",
+          "documentation": "<p>The type of policy. <code>EBS_SNAPSHOT_MANAGEMENT</code> indicates that the policy manages the lifecycle of Amazon EBS snapshots. <code>IMAGE_MANAGEMENT</code> indicates that the policy manages the lifecycle of EBS-backed AMIs.</p>"
         }
       },
       "documentation": "<p>Summary information about a lifecycle policy.</p>"
@@ -609,12 +613,19 @@
         }
       }
     },
+    "NoReboot": {
+      "type": "boolean"
+    },
     "Parameters": {
       "type": "structure",
       "members": {
         "ExcludeBootVolume": {
           "shape": "ExcludeBootVolume",
           "documentation": "<p>[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html\">CreateSnapshots</a>. The default is false.</p>"
+        },
+        "NoReboot": {
+          "shape": "NoReboot",
+          "documentation": "<p>Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. <code>true</code> indicates that targeted instances are not rebooted when the policy runs. <code>false</code> indicates that target instances are rebooted when the policy runs. The default is <code>true</code> (instance are not rebooted).</p>"
         }
       },
       "documentation": "<p>Specifies optional parameters to add to a policy. The set of valid parameters depends on the combination of policy type and resource type.</p>"
@@ -636,7 +647,7 @@
       "members": {
         "PolicyType": {
           "shape": "PolicyTypeValues",
-          "documentation": "<p>The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.</p>"
+          "documentation": "<p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
         },
         "ResourceTypes": {
           "shape": "ResourceTypeValuesList",
@@ -672,7 +683,8 @@
     "PolicyTypeValues": {
       "type": "string",
       "enum": [
-        "EBS_SNAPSHOT_MANAGEMENT"
+        "EBS_SNAPSHOT_MANAGEMENT",
+        "IMAGE_MANAGEMENT"
       ]
     },
     "ResourceTypeValues": {

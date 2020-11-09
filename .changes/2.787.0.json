@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "Remove the CreatePresignedPortalUrl API"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Support for SCTE35 ad markers in OnCuePoint style in RTMP outputs."
+    }
+]

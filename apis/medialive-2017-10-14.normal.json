@@ -11373,6 +11373,13 @@
         "PREMIUM"
       ]
     },
+    "RtmpAdMarkers": {
+      "type": "string",
+      "documentation": "Rtmp Ad Markers",
+      "enum": [
+        "ON_CUE_POINT_SCTE35"
+      ]
+    },
     "RtmpCacheFullBehavior": {
       "type": "string",
       "documentation": "Rtmp Cache Full Behavior",
@@ -11398,6 +11405,11 @@
     "RtmpGroupSettings": {
       "type": "structure",
       "members": {
+        "AdMarkers": {
+          "shape": "__listOfRtmpAdMarkers",
+          "locationName": "adMarkers",
+          "documentation": "Choose the ad marker type for this output group. MediaLive will create a message based on the content of each SCTE-35 message, format it for that marker type, and insert it in the datastream."
+        },
         "AuthenticationScheme": {
           "shape": "AuthenticationScheme",
           "locationName": "authenticationScheme",
@@ -13881,6 +13893,13 @@
         "shape": "Reservation"
       },
       "documentation": "Placeholder documentation for __listOfReservation"
+    },
+    "__listOfRtmpAdMarkers": {
+      "type": "list",
+      "member": {
+        "shape": "RtmpAdMarkers"
+      },
+      "documentation": "Placeholder documentation for __listOfRtmpAdMarkers"
     },
     "__listOfScheduleAction": {
       "type": "list",

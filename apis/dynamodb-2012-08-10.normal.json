@@ -343,6 +343,31 @@
       "documentation": "<p>Returns the regional endpoint information.</p>",
       "endpointoperation": true
     },
+    "DescribeExport": {
+      "name": "DescribeExport",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeExportInput"
+      },
+      "output": {
+        "shape": "DescribeExportOutput"
+      },
+      "errors": [
+        {
+          "shape": "ExportNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Describes an existing table export.</p>"
+    },
     "DescribeGlobalTable": {
       "name": "DescribeGlobalTable",
       "http": {
@@ -477,6 +502,40 @@
       "documentation": "<p>Gives a description of the Time to Live (TTL) status on the specified table. </p>",
       "endpointdiscovery": {}
     },
+    "ExportTableToPointInTime": {
+      "name": "ExportTableToPointInTime",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportTableToPointInTimeInput"
+      },
+      "output": {
+        "shape": "ExportTableToPointInTimeOutput"
+      },
+      "errors": [
+        {
+          "shape": "TableNotFoundException"
+        },
+        {
+          "shape": "PointInTimeRecoveryUnavailableException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidExportTimeException"
+        },
+        {
+          "shape": "ExportConflictException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.</p>"
+    },
     "GetItem": {
       "name": "GetItem",
       "http": {
@@ -547,6 +606,28 @@
         }
       ],
       "documentation": "<p>Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.</p>"
+    },
+    "ListExports": {
+      "name": "ListExports",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListExportsInput"
+      },
+      "output": {
+        "shape": "ListExportsOutput"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Lists completed exports within the past 90 days.</p>"
     },
     "ListGlobalTables": {
       "name": "ListGlobalTables",
@@ -1707,6 +1788,10 @@
       "max": 25,
       "min": 1
     },
+    "BilledSizeBytes": {
+      "type": "long",
+      "min": 0
+    },
     "BillingMode": {
       "type": "string",
       "enum": [
@@ -1765,6 +1850,9 @@
       "type": "string",
       "max": 36,
       "min": 1
+    },
+    "ClientToken": {
+      "type": "string"
     },
     "ComparisonOperator": {
       "type": "string",
@@ -1965,7 +2053,7 @@
           "documentation": "<p>Describes the current status for contributor insights for the given table and index, if applicable.</p>"
         }
       },
-      "documentation": "<p>Represents a Contributor Insights summary entry..</p>"
+      "documentation": "<p>Represents a Contributor Insights summary entry.</p>"
     },
     "CreateBackupInput": {
       "type": "structure",
@@ -2448,6 +2536,27 @@
         }
       }
     },
+    "DescribeExportInput": {
+      "type": "structure",
+      "required": [
+        "ExportArn"
+      ],
+      "members": {
+        "ExportArn": {
+          "shape": "ExportArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the export.</p>"
+        }
+      }
+    },
+    "DescribeExportOutput": {
+      "type": "structure",
+      "members": {
+        "ExportDescription": {
+          "shape": "ExportDescription",
+          "documentation": "<p>Represents the properties of the export.</p>"
+        }
+      }
+    },
     "DescribeGlobalTableInput": {
       "type": "structure",
       "required": [
@@ -2650,6 +2759,198 @@
       },
       "documentation": "<p>Represents a condition to be compared with an attribute value. This condition can be used with <code>DeleteItem</code>, <code>PutItem</code>, or <code>UpdateItem</code> operations; if the comparison evaluates to true, the operation succeeds; if not, the operation fails. You can use <code>ExpectedAttributeValue</code> in one of two different ways:</p> <ul> <li> <p>Use <code>AttributeValueList</code> to specify one or more values to compare against an attribute. Use <code>ComparisonOperator</code> to specify how you want to perform the comparison. If the comparison evaluates to true, then the conditional operation succeeds.</p> </li> <li> <p>Use <code>Value</code> to specify a value that DynamoDB will compare against an attribute. If the values match, then <code>ExpectedAttributeValue</code> evaluates to true and the conditional operation succeeds. Optionally, you can also set <code>Exists</code> to false, indicating that you <i>do not</i> expect to find the attribute value in the table. In this case, the conditional operation succeeds only if the comparison evaluates to false.</p> </li> </ul> <p> <code>Value</code> and <code>Exists</code> are incompatible with <code>AttributeValueList</code> and <code>ComparisonOperator</code>. Note that if you use both sets of parameters at once, DynamoDB will return a <code>ValidationException</code> exception.</p>"
     },
+    "ExportArn": {
+      "type": "string",
+      "max": 1024,
+      "min": 37
+    },
+    "ExportDescription": {
+      "type": "structure",
+      "members": {
+        "ExportArn": {
+          "shape": "ExportArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the table export.</p>"
+        },
+        "ExportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.</p>"
+        },
+        "StartTime": {
+          "shape": "ExportStartTime",
+          "documentation": "<p>The time at which the export task began.</p>"
+        },
+        "EndTime": {
+          "shape": "ExportEndTime",
+          "documentation": "<p>The time at which the export task completed.</p>"
+        },
+        "ExportManifest": {
+          "shape": "ExportManifest",
+          "documentation": "<p>The name of the manifest file for the export task.</p>"
+        },
+        "TableArn": {
+          "shape": "TableArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the table that was exported.</p>"
+        },
+        "TableId": {
+          "shape": "TableId",
+          "documentation": "<p>Unique ID of the table that was exported.</p>"
+        },
+        "ExportTime": {
+          "shape": "ExportTime",
+          "documentation": "<p>Point in time from which table data was exported.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client token that was provided for the export task. A client token makes calls to <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p>"
+        },
+        "S3Bucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The name of the Amazon S3 bucket containing the export.</p>"
+        },
+        "S3BucketOwner": {
+          "shape": "S3BucketOwner",
+          "documentation": "<p>The ID of the AWS account that owns the bucket containing the export.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3Prefix",
+          "documentation": "<p>The Amazon S3 bucket prefix used as the file name and path of the exported snapshot.</p>"
+        },
+        "S3SseAlgorithm": {
+          "shape": "S3SseAlgorithm",
+          "documentation": "<p>Type of encryption used on the bucket where export data is stored. Valid values for <code>S3SseAlgorithm</code> are:</p> <ul> <li> <p> <code>AES256</code> - server-side encryption with Amazon S3 managed keys</p> </li> <li> <p> <code>KMS</code> - server-side encryption with AWS KMS managed keys</p> </li> </ul>"
+        },
+        "S3SseKmsKeyId": {
+          "shape": "S3SseKmsKeyId",
+          "documentation": "<p>The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).</p>"
+        },
+        "FailureCode": {
+          "shape": "FailureCode",
+          "documentation": "<p>Status code for the result of the failed export.</p>"
+        },
+        "FailureMessage": {
+          "shape": "FailureMessage",
+          "documentation": "<p>Export failure reason description.</p>"
+        },
+        "ExportFormat": {
+          "shape": "ExportFormat",
+          "documentation": "<p>The format of the exported data. Valid values for <code>ExportFormat</code> are <code>DYNAMODB_JSON</code> or <code>ION</code>.</p>"
+        },
+        "BilledSizeBytes": {
+          "shape": "BilledSizeBytes",
+          "documentation": "<p>The billable size of the table export.</p>"
+        },
+        "ItemCount": {
+          "shape": "ItemCount",
+          "documentation": "<p>The number of items exported.</p>"
+        }
+      },
+      "documentation": "<p>Represents the properties of the exported table.</p>"
+    },
+    "ExportEndTime": {
+      "type": "timestamp"
+    },
+    "ExportFormat": {
+      "type": "string",
+      "enum": [
+        "DYNAMODB_JSON",
+        "ION"
+      ]
+    },
+    "ExportManifest": {
+      "type": "string"
+    },
+    "ExportNextToken": {
+      "type": "string"
+    },
+    "ExportStartTime": {
+      "type": "timestamp"
+    },
+    "ExportStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "ExportSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ExportSummary"
+      }
+    },
+    "ExportSummary": {
+      "type": "structure",
+      "members": {
+        "ExportArn": {
+          "shape": "ExportArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the export.</p>"
+        },
+        "ExportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.</p>"
+        }
+      },
+      "documentation": "<p>Summary information about an export task.</p>"
+    },
+    "ExportTableToPointInTimeInput": {
+      "type": "structure",
+      "required": [
+        "TableArn",
+        "S3Bucket"
+      ],
+      "members": {
+        "TableArn": {
+          "shape": "TableArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the table to export.</p>"
+        },
+        "ExportTime": {
+          "shape": "ExportTime",
+          "documentation": "<p>Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>Providing a <code>ClientToken</code> makes the call to <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p> <p>A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent.</p> <p>If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an <code>IdempotentParameterMismatch</code> exception.</p>",
+          "idempotencyToken": true
+        },
+        "S3Bucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The name of the Amazon S3 bucket to export the snapshot to.</p>"
+        },
+        "S3BucketOwner": {
+          "shape": "S3BucketOwner",
+          "documentation": "<p>The ID of the AWS account that owns the bucket the export will be stored in.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3Prefix",
+          "documentation": "<p>The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.</p>"
+        },
+        "S3SseAlgorithm": {
+          "shape": "S3SseAlgorithm",
+          "documentation": "<p>Type of encryption used on the bucket where export data will be stored. Valid values for <code>S3SseAlgorithm</code> are:</p> <ul> <li> <p> <code>AES256</code> - server-side encryption with Amazon S3 managed keys</p> </li> <li> <p> <code>KMS</code> - server-side encryption with AWS KMS managed keys</p> </li> </ul>"
+        },
+        "S3SseKmsKeyId": {
+          "shape": "S3SseKmsKeyId",
+          "documentation": "<p>The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).</p>"
+        },
+        "ExportFormat": {
+          "shape": "ExportFormat",
+          "documentation": "<p>The format for the exported data. Valid values for <code>ExportFormat</code> are <code>DYNAMODB_JSON</code> or <code>ION</code>.</p>"
+        }
+      }
+    },
+    "ExportTableToPointInTimeOutput": {
+      "type": "structure",
+      "members": {
+        "ExportDescription": {
+          "shape": "ExportDescription",
+          "documentation": "<p>Contains a description of the table export.</p>"
+        }
+      }
+    },
+    "ExportTime": {
+      "type": "timestamp"
+    },
     "ExpressionAttributeNameMap": {
       "type": "map",
       "key": {
@@ -2674,6 +2975,9 @@
     "ExpressionAttributeValueVariable": {
       "type": "string"
     },
+    "FailureCode": {
+      "type": "string"
+    },
     "FailureException": {
       "type": "structure",
       "members": {
@@ -2687,6 +2991,9 @@
         }
       },
       "documentation": "<p>Represents a failure a contributor insights operation.</p>"
+    },
+    "FailureMessage": {
+      "type": "string"
     },
     "FilterConditionMap": {
       "type": "map",
@@ -3294,6 +3601,41 @@
         "NextToken": {
           "shape": "NextTokenString",
           "documentation": "<p>A token to go to the next page if there is one.</p>"
+        }
+      }
+    },
+    "ListExportsInput": {
+      "type": "structure",
+      "members": {
+        "TableArn": {
+          "shape": "TableArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the exported table.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListExportsMaxLimit",
+          "documentation": "<p>Maximum number of results to return per page.</p>"
+        },
+        "NextToken": {
+          "shape": "ExportNextToken",
+          "documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous call to <code>ListExports</code>. When provided in this manner, the API fetches the next page of results.</p>"
+        }
+      }
+    },
+    "ListExportsMaxLimit": {
+      "type": "integer",
+      "max": 25,
+      "min": 1
+    },
+    "ListExportsOutput": {
+      "type": "structure",
+      "members": {
+        "ExportSummaries": {
+          "shape": "ExportSummaries",
+          "documentation": "<p>A list of <code>ExportSummary</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "ExportNextToken",
+          "documentation": "<p>If this value is returned, there are additional results to be displayed. To retrieve them, call <code>ListExports</code> again, with <code>NextToken</code> set to this value.</p>"
         }
       }
     },
@@ -4461,6 +4803,27 @@
         "ALL_OLD",
         "NONE"
       ]
+    },
+    "S3Bucket": {
+      "type": "string"
+    },
+    "S3BucketOwner": {
+      "type": "string"
+    },
+    "S3Prefix": {
+      "type": "string"
+    },
+    "S3SseAlgorithm": {
+      "type": "string",
+      "enum": [
+        "AES256",
+        "KMS"
+      ]
+    },
+    "S3SseKmsKeyId": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
     },
     "SSEDescription": {
       "type": "structure",

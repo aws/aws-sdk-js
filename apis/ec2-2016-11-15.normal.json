@@ -12465,6 +12465,9 @@
     "DedicatedHostId": {
       "type": "string"
     },
+    "DefaultNetworkCardIndex": {
+      "type": "integer"
+    },
     "DefaultRouteTableAssociationValue": {
       "type": "string",
       "enum": [
@@ -15907,7 +15910,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>location</code> - This depends on the location type. For example, if the location type is <code>region</code> (default), the location is the Region code (for example, <code>us-east-2</code>.)</p> </li> <li> <p> <code>instance-type</code> - The instance type.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>location</code> - This depends on the location type. For example, if the location type is <code>region</code> (default), the location is the Region code (for example, <code>us-east-2</code>.)</p> </li> <li> <p> <code>instance-type</code> - The instance type. For example, <code>c5.2xlarge</code>.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15949,7 +15952,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>bare-metal</code> - Indicates whether it is a bare metal instance type. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>burstable-performance-supported</code> - Indicates whether it is a burstable performance instance type. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>current-generation</code> - Indicates whether this instance type is the latest generation instance type of an instance family. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage operations per second for an EBS-optimized instance type.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline throughput performance for an EBS-optimized instance type, in MBps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage operations per second for an EBS-optimized instance type.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum throughput performance for an EBS-optimized instance type, in MBps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is EBS-optimized. (<code>supported</code> | <code>unsupported</code> | <code>default</code>)</p> </li> <li> <p> <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported. (<code>supported</code> | <code>unsupported</code>)</p> </li> <li> <p> <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes. (<code>required</code> | <code>supported</code> | <code>unsupported</code>)</p> </li> <li> <p> <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use in the free tier. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor. (<code>nitro</code> | <code>xen</code>)</p> </li> <li> <p> <code>instance-storage-info.disk.count</code> - The number of local disks.</p> </li> <li> <p> <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in GB.</p> </li> <li> <p> <code>instance-storage-info.disk.type</code> - The storage technology for the local instance storage disks. (<code>hdd</code> | <code>ssd</code>)</p> </li> <li> <p> <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe) is supported for instance store. (<code>required</code> | <code>supported</code>) | <code>unsupported</code>)</p> </li> <li> <p> <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local instance storage, in GB.</p> </li> <li> <p> <code>instance-storage-supported</code> - Indicates whether the instance type has local instance storage. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or c5*).</p> </li> <li> <p> <code>memory-info.size-in-mib</code> - The memory size.</p> </li> <li> <p> <code>network-info.efa-supported</code> - Indicates whether the instance type supports Elastic Fabric Adapter (EFA). (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is supported or required. (<code>required</code> | <code>supported</code> | <code>unsupported</code>)</p> </li> <li> <p> <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p> </li> <li> <p> <code>network-info.network-performance</code> - The network performance (for example, \"25 Gigabit\").</p> </li> <li> <p> <code>processor-info.supported-architecture</code> - The CPU architecture. (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>)</p> </li> <li> <p> <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p> </li> <li> <p> <code>supported-root-device-type</code> - The root device type. (<code>ebs</code> | <code>instance-store</code>)</p> </li> <li> <p> <code>supported-usage-class</code> - The usage class. (<code>on-demand</code> | <code>spot</code>)</p> </li> <li> <p> <code>supported-virtualization-type</code> - The virtualization type. (<code>hvm</code> | <code>paravirtual</code>)</p> </li> <li> <p> <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p> </li> <li> <p> <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p> </li> <li> <p> <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type. For example, \"1\" or \"1,2\".</p> </li> </ul>",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>bare-metal</code> - Indicates whether it is a bare metal instance type (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>burstable-performance-supported</code> - Indicates whether it is a burstable performance instance type (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>current-generation</code> - Indicates whether this instance type is the latest generation instance type of an instance family (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage operations per second for an EBS-optimized instance type.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline throughput performance for an EBS-optimized instance type, in MB/s.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage operations per second for an EBS-optimized instance type.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum throughput performance for an EBS-optimized instance type, in MB/s.</p> </li> <li> <p> <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is EBS-optimized (<code>supported</code> | <code>unsupported</code> | <code>default</code>).</p> </li> <li> <p> <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported (<code>supported</code> | <code>unsupported</code>).</p> </li> <li> <p> <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (<code>required</code> | <code>supported</code> | <code>unsupported</code>).</p> </li> <li> <p> <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use in the free tier (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p> </li> <li> <p> <code>instance-storage-info.disk.count</code> - The number of local disks.</p> </li> <li> <p> <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in GB.</p> </li> <li> <p> <code>instance-storage-info.disk.type</code> - The storage technology for the local instance storage disks (<code>hdd</code> | <code>ssd</code>).</p> </li> <li> <p> <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>) | <code>unsupported</code>).</p> </li> <li> <p> <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local instance storage, in GB.</p> </li> <li> <p> <code>instance-storage-supported</code> - Indicates whether the instance type has local instance storage (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or c5*).</p> </li> <li> <p> <code>memory-info.size-in-mib</code> - The memory size.</p> </li> <li> <p> <code>network-info.efa-supported</code> - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is supported or required (<code>required</code> | <code>supported</code> | <code>unsupported</code>).</p> </li> <li> <p> <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6 (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p> </li> <li> <p> <code>network-info.network-performance</code> - The network performance (for example, \"25 Gigabit\").</p> </li> <li> <p> <code>processor-info.supported-architecture</code> - The CPU architecture (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p> </li> <li> <p> <code>supported-root-device-type</code> - The root device type (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>supported-usage-class</code> - The usage class (<code>on-demand</code> | <code>spot</code>).</p> </li> <li> <p> <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> | <code>paravirtual</code>).</p> </li> <li> <p> <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p> </li> <li> <p> <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p> </li> <li> <p> <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type. For example, \"1\" or \"1,2\".</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -20112,7 +20115,7 @@
       "members": {
         "EbsOptimizedSupport": {
           "shape": "EbsOptimizedSupport",
-          "documentation": "<p>Indicates that the instance type is Amazon EBS-optimized. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized Instances</a> in <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
+          "documentation": "<p>Indicates whether the instance type is Amazon EBS-optimized. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized Instances</a> in <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
           "locationName": "ebsOptimizedSupport"
         },
         "EncryptionSupport": {
@@ -20193,7 +20196,7 @@
         },
         "BaselineThroughputInMBps": {
           "shape": "BaselineThroughputInMBps",
-          "documentation": "<p>The baseline throughput performance for an EBS-optimized instance type, in MBps.</p>",
+          "documentation": "<p>The baseline throughput performance for an EBS-optimized instance type, in MB/s.</p>",
           "locationName": "baselineThroughputInMBps"
         },
         "BaselineIops": {
@@ -20208,7 +20211,7 @@
         },
         "MaximumThroughputInMBps": {
           "shape": "MaximumThroughputInMBps",
-          "documentation": "<p>The maximum throughput performance for an EBS-optimized instance type, in MBps.</p>",
+          "documentation": "<p>The maximum throughput performance for an EBS-optimized instance type, in MB/s.</p>",
           "locationName": "maximumThroughputInMBps"
         },
         "MaximumIops": {
@@ -21968,7 +21971,7 @@
       "members": {
         "SizeInMiB": {
           "shape": "FpgaDeviceMemorySize",
-          "documentation": "<p>The size (in MiB) for the memory available to the FPGA accelerator.</p>",
+          "documentation": "<p>The size of the memory available to the FPGA accelerator, in MiB.</p>",
           "locationName": "sizeInMiB"
         }
       },
@@ -23059,7 +23062,7 @@
       "members": {
         "SizeInMiB": {
           "shape": "GpuDeviceMemorySize",
-          "documentation": "<p>The size (in MiB) for the memory available to the GPU accelerator.</p>",
+          "documentation": "<p>The size of the memory available to the GPU accelerator, in MiB.</p>",
           "locationName": "sizeInMiB"
         }
       },
@@ -23081,7 +23084,7 @@
         },
         "TotalGpuMemoryInMiB": {
           "shape": "totalGpuMemory",
-          "documentation": "<p>The total size of the memory for the GPU accelerators for the instance type.</p>",
+          "documentation": "<p>The total size of the memory for the GPU accelerators for the instance type, in MiB.</p>",
           "locationName": "totalGpuMemoryInMiB"
         }
       },
@@ -25969,7 +25972,7 @@
         },
         "Disks": {
           "shape": "DiskInfoList",
-          "documentation": "<p>Array describing the disks that are available for the instance type.</p>",
+          "documentation": "<p>Describes the disks that are available for the instance type.</p>",
           "locationName": "disks"
         },
         "NvmeSupport": {
@@ -26375,7 +26378,7 @@
         },
         "CurrentGeneration": {
           "shape": "CurrentGenerationFlag",
-          "documentation": "<p>Indicates whether the instance type is a current generation.</p>",
+          "documentation": "<p>Indicates whether the instance type is current generation.</p>",
           "locationName": "currentGeneration"
         },
         "FreeTierEligible": {
@@ -26390,7 +26393,7 @@
         },
         "SupportedRootDeviceTypes": {
           "shape": "RootDeviceTypeList",
-          "documentation": "<p>Indicates the supported root device types.</p>",
+          "documentation": "<p>The supported root device types.</p>",
           "locationName": "supportedRootDeviceTypes"
         },
         "SupportedVirtualizationTypes": {
@@ -26400,12 +26403,12 @@
         },
         "BareMetal": {
           "shape": "BareMetalFlag",
-          "documentation": "<p>Indicates whether the instance is bare metal.</p>",
+          "documentation": "<p>Indicates whether the instance is a bare metal instance type.</p>",
           "locationName": "bareMetal"
         },
         "Hypervisor": {
           "shape": "InstanceTypeHypervisor",
-          "documentation": "<p>Indicates the hypervisor used for the instance type.</p>",
+          "documentation": "<p>The hypervisor for the instance type.</p>",
           "locationName": "hypervisor"
         },
         "ProcessorInfo": {
@@ -26430,7 +26433,7 @@
         },
         "InstanceStorageInfo": {
           "shape": "InstanceStorageInfo",
-          "documentation": "<p>Describes the disks for the instance type.</p>",
+          "documentation": "<p>Describes the instance storage for the instance type.</p>",
           "locationName": "instanceStorageInfo"
         },
         "EbsInfo": {
@@ -28776,6 +28779,9 @@
     "MaximumIops": {
       "type": "integer"
     },
+    "MaximumNetworkCards": {
+      "type": "integer"
+    },
     "MaximumThroughputInMBps": {
       "type": "double"
     },
@@ -28791,7 +28797,7 @@
       "members": {
         "SizeInMiB": {
           "shape": "MemorySize",
-          "documentation": "<p>Size of the memory, in MiB.</p>",
+          "documentation": "<p>The size of the memory, in MiB.</p>",
           "locationName": "sizeInMiB"
         }
       },
@@ -31056,18 +31062,64 @@
         "locationName": "item"
       }
     },
+    "NetworkCardIndex": {
+      "type": "integer"
+    },
+    "NetworkCardInfo": {
+      "type": "structure",
+      "members": {
+        "NetworkCardIndex": {
+          "shape": "NetworkCardIndex",
+          "documentation": "<p>The index of the network card.</p>",
+          "locationName": "networkCardIndex"
+        },
+        "NetworkPerformance": {
+          "shape": "NetworkPerformance",
+          "documentation": "<p>The network performance of the network card.</p>",
+          "locationName": "networkPerformance"
+        },
+        "MaximumNetworkInterfaces": {
+          "shape": "MaxNetworkInterfaces",
+          "documentation": "<p>The maximum number of network interfaces for the network card.</p>",
+          "locationName": "maximumNetworkInterfaces"
+        }
+      },
+      "documentation": "<p>Describes the network card support of the instance type.</p>"
+    },
+    "NetworkCardInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkCardInfo",
+        "locationName": "item"
+      }
+    },
     "NetworkInfo": {
       "type": "structure",
       "members": {
         "NetworkPerformance": {
           "shape": "NetworkPerformance",
-          "documentation": "<p>Describes the network performance.</p>",
+          "documentation": "<p>The network performance.</p>",
           "locationName": "networkPerformance"
         },
         "MaximumNetworkInterfaces": {
           "shape": "MaxNetworkInterfaces",
           "documentation": "<p>The maximum number of network interfaces for the instance type.</p>",
           "locationName": "maximumNetworkInterfaces"
+        },
+        "MaximumNetworkCards": {
+          "shape": "MaximumNetworkCards",
+          "documentation": "<p>The maximum number of physical network cards that can be allocated to the instance.</p>",
+          "locationName": "maximumNetworkCards"
+        },
+        "DefaultNetworkCardIndex": {
+          "shape": "DefaultNetworkCardIndex",
+          "documentation": "<p>The index of the default network card, starting at 0.</p>",
+          "locationName": "defaultNetworkCardIndex"
+        },
+        "NetworkCards": {
+          "shape": "NetworkCardInfoList",
+          "documentation": "<p>Describes the network cards for the instance type.</p>",
+          "locationName": "networkCards"
         },
         "Ipv4AddressesPerInterface": {
           "shape": "MaxIpv4AddrPerInterface",
@@ -32059,7 +32111,7 @@
       "members": {
         "SupportedStrategies": {
           "shape": "PlacementGroupStrategyList",
-          "documentation": "<p>A list of supported placement groups types.</p>",
+          "documentation": "<p>The supported placement group types.</p>",
           "locationName": "supportedStrategies"
         }
       },
@@ -32491,7 +32543,7 @@
       "members": {
         "SupportedArchitectures": {
           "shape": "ArchitectureTypeList",
-          "documentation": "<p>A list of architectures supported by the instance type.</p>",
+          "documentation": "<p>The architectures supported by the instance type.</p>",
           "locationName": "supportedArchitectures"
         },
         "SustainedClockSpeedInGhz": {
@@ -40744,12 +40796,12 @@
         },
         "ValidCores": {
           "shape": "CoreCountList",
-          "documentation": "<p>List of the valid number of cores that can be configured for the instance type.</p>",
+          "documentation": "<p>The valid number of cores that can be configured for the instance type.</p>",
           "locationName": "validCores"
         },
         "ValidThreadsPerCore": {
           "shape": "ThreadsPerCoreList",
-          "documentation": "<p>List of the valid number of threads per core that can be configured for the instance type. </p>",
+          "documentation": "<p>The valid number of threads per core that can be configured for the instance type. </p>",
           "locationName": "validThreadsPerCore"
         }
       },

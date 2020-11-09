@@ -1598,7 +1598,7 @@ declare namespace SSM {
   }
   export interface AutomationExecutionFilter {
     /**
-     * One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.
+     * One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.
      */
     Key: AutomationExecutionFilterKey;
     /**
@@ -1606,7 +1606,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|"TargetResourceGroup"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
