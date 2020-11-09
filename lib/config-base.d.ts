@@ -1,6 +1,5 @@
 import {Agent as httpAgent} from 'http';
 import {Agent as httpsAgent} from 'https';
-import {LookupFunction} from 'net';
 import {AWSError} from './error';
 import {Credentials, CredentialsOptions} from './credentials';
 import {CredentialProviderChain} from './credentials/credential_provider_chain';
@@ -66,7 +65,7 @@ export interface HTTPOptions {
      * Custom DNS lookup function.
      * Defaults to dns.lookup.
      */
-    lookup?: LookupFunction;
+    lookup?: (hostname: string, options: any, callback: (err: NodeJS.ErrnoException | null, address: string, family: number) => void) => void;
     /**
      * The number of milliseconds a request can take before automatically being terminated.
      * Defaults to two minutes (120000).
