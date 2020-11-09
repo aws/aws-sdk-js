@@ -417,6 +417,7 @@ export namespace DocumentClient {
     ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type BatchWriteItemRequestMap = {[key: string]: WriteRequests};
+  export type BilledSizeBytes = number;
   export type BillingMode = "PROVISIONED"|"PAY_PER_REQUEST"|string;
   export interface BillingModeSummary {
     /**
@@ -447,6 +448,7 @@ export namespace DocumentClient {
     CapacityUnits?: ConsumedCapacityUnits;
   }
   export type ClientRequestToken = string;
+  export type ClientToken = string;
   export type ComparisonOperator = "EQ"|"NE"|"IN"|"LE"|"LT"|"GE"|"GT"|"BETWEEN"|"NOT_NULL"|"NULL"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|string;
   export interface Condition {
     /**
@@ -867,6 +869,18 @@ export namespace DocumentClient {
      */
     Endpoints: Endpoints;
   }
+  export interface DescribeExportInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the export.
+     */
+    ExportArn: ExportArn;
+  }
+  export interface DescribeExportOutput {
+    /**
+     * Represents the properties of the export.
+     */
+    ExportDescription?: ExportDescription;
+  }
   export interface DescribeGlobalTableInput {
     /**
      * The name of the global table.
@@ -984,10 +998,152 @@ export namespace DocumentClient {
      */
     AttributeValueList?: AttributeValueList;
   }
+  export type ExportArn = string;
+  export interface ExportDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the table export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+    /**
+     * The time at which the export task began.
+     */
+    StartTime?: ExportStartTime;
+    /**
+     * The time at which the export task completed.
+     */
+    EndTime?: ExportEndTime;
+    /**
+     * The name of the manifest file for the export task.
+     */
+    ExportManifest?: ExportManifest;
+    /**
+     * The Amazon Resource Name (ARN) of the table that was exported.
+     */
+    TableArn?: TableArn;
+    /**
+     * Unique ID of the table that was exported.
+     */
+    TableId?: TableId;
+    /**
+     * Point in time from which table data was exported.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * The client token that was provided for the export task. A client token makes calls to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket containing the export.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket containing the export.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix used as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * Status code for the result of the failed export.
+     */
+    FailureCode?: FailureCode;
+    /**
+     * Export failure reason description.
+     */
+    FailureMessage?: FailureMessage;
+    /**
+     * The format of the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+    /**
+     * The billable size of the table export.
+     */
+    BilledSizeBytes?: BilledSizeBytes;
+    /**
+     * The number of items exported.
+     */
+    ItemCount?: ItemCount;
+  }
+  export type ExportEndTime = Date;
+  export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportManifest = string;
+  export type ExportNextToken = string;
+  export type ExportStartTime = Date;
+  export type ExportStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ExportSummaries = ExportSummary[];
+  export interface ExportSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+  }
+  export interface ExportTableToPointInTimeInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the table to export.
+     */
+    TableArn: TableArn;
+    /**
+     * Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket to export the snapshot to.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket the export will be stored in.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+  }
+  export interface ExportTableToPointInTimeOutput {
+    /**
+     * Contains a description of the table export.
+     */
+    ExportDescription?: ExportDescription;
+  }
+  export type ExportTime = Date;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
+  export type FailureCode = string;
   export interface FailureException {
     /**
      * Exception name.
@@ -998,6 +1154,7 @@ export namespace DocumentClient {
      */
     ExceptionDescription?: ExceptionDescription;
   }
+  export type FailureMessage = string;
   export type FilterConditionMap = {[key: string]: Condition};
   export interface Get {
     /**
@@ -1335,6 +1492,31 @@ export namespace DocumentClient {
      * A token to go to the next page if there is one.
      */
     NextToken?: NextTokenString;
+  }
+  export interface ListExportsInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the exported table.
+     */
+    TableArn?: TableArn;
+    /**
+     * Maximum number of results to return per page.
+     */
+    MaxResults?: ListExportsMaxLimit;
+    /**
+     * An optional string that, if supplied, must be copied from the output of a previous call to ListExports. When provided in this manner, the API fetches the next page of results.
+     */
+    NextToken?: ExportNextToken;
+  }
+  export type ListExportsMaxLimit = number;
+  export interface ListExportsOutput {
+    /**
+     * A list of ExportSummary objects.
+     */
+    ExportSummaries?: ExportSummaries;
+    /**
+     * If this value is returned, there are additional results to be displayed. To retrieve them, call ListExports again, with NextToken set to this value.
+     */
+    NextToken?: ExportNextToken;
   }
   export interface ListGlobalTablesInput {
     /**
@@ -2063,6 +2245,11 @@ export namespace DocumentClient {
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
+  export type S3Bucket = string;
+  export type S3BucketOwner = string;
+  export type S3Prefix = string;
+  export type S3SseAlgorithm = "AES256"|"KMS"|string;
+  export type S3SseKmsKeyId = string;
   export interface SSEDescription {
     /**
      * Represents the current state of server-side encryption. The only supported values are:    ENABLED - Server-side encryption is enabled.    UPDATING - Server-side encryption is being updated.  

@@ -192,6 +192,14 @@ declare class ES extends Service {
    */
   getCompatibleElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
   /**
+   * Returns a list of versions of the package, along with their creation time and commit message.
+   */
+  getPackageVersionHistory(params: ES.Types.GetPackageVersionHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetPackageVersionHistoryResponse) => void): Request<ES.Types.GetPackageVersionHistoryResponse, AWSError>;
+  /**
+   * Returns a list of versions of the package, along with their creation time and commit message.
+   */
+  getPackageVersionHistory(callback?: (err: AWSError, data: ES.Types.GetPackageVersionHistoryResponse) => void): Request<ES.Types.GetPackageVersionHistoryResponse, AWSError>;
+  /**
    * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
    */
   getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
@@ -291,6 +299,14 @@ declare class ES extends Service {
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
+  /**
+   * Updates a package for use with Amazon ES domains.
+   */
+  updatePackage(params: ES.Types.UpdatePackageRequest, callback?: (err: AWSError, data: ES.Types.UpdatePackageResponse) => void): Request<ES.Types.UpdatePackageResponse, AWSError>;
+  /**
+   * Updates a package for use with Amazon ES domains.
+   */
+  updatePackage(callback?: (err: AWSError, data: ES.Types.UpdatePackageResponse) => void): Request<ES.Types.UpdatePackageResponse, AWSError>;
   /**
    * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
    */
@@ -457,6 +473,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type CommitMessage = string;
   export type CompatibleElasticsearchVersionsList = CompatibleVersionsMap[];
   export interface CompatibleVersionsMap {
     /**
@@ -916,6 +933,7 @@ declare namespace ES {
      * State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
      */
     DomainPackageStatus?: DomainPackageStatus;
+    PackageVersion?: PackageVersion;
     /**
      * The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.
      */
@@ -1216,6 +1234,28 @@ declare namespace ES {
      *  A map of compatible Elasticsearch versions returned as part of the  GetCompatibleElasticsearchVersions  operation. 
      */
     CompatibleElasticsearchVersions?: CompatibleElasticsearchVersionsList;
+  }
+  export interface GetPackageVersionHistoryRequest {
+    /**
+     * Returns an audit history of versions of the package.
+     */
+    PackageID: PackageID;
+    /**
+     * Limits results to a maximum number of versions.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetPackageVersionHistoryResponse {
+    PackageID?: PackageID;
+    /**
+     * List of PackageVersionHistory objects.
+     */
+    PackageVersionHistoryList?: PackageVersionHistoryList;
+    NextToken?: String;
   }
   export interface GetUpgradeHistoryRequest {
     DomainName: DomainName;
@@ -1550,6 +1590,8 @@ declare namespace ES {
      * Timestamp which tells creation date of the package.
      */
     CreatedAt?: CreatedAt;
+    LastUpdatedAt?: LastUpdated;
+    AvailablePackageVersion?: PackageVersion;
     /**
      * Additional information if the package is in an error state. Null otherwise.
      */
@@ -1570,6 +1612,22 @@ declare namespace ES {
   }
   export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
   export type PackageType = "TXT-DICTIONARY"|string;
+  export type PackageVersion = string;
+  export interface PackageVersionHistory {
+    /**
+     * Version of the package.
+     */
+    PackageVersion?: PackageVersion;
+    /**
+     * A message associated with the version.
+     */
+    CommitMessage?: CommitMessage;
+    /**
+     * Timestamp which tells creation time of the package version.
+     */
+    CreatedAt?: CreatedAt;
+  }
+  export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
   export type PolicyDocument = string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
@@ -1944,6 +2002,27 @@ declare namespace ES {
      * The status of the updated Elasticsearch domain. 
      */
     DomainConfig: ElasticsearchDomainConfig;
+  }
+  export interface UpdatePackageRequest {
+    /**
+     * Unique identifier for the package.
+     */
+    PackageID: PackageID;
+    PackageSource: PackageSource;
+    /**
+     * New description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * An info message for the new version which will be shown as part of GetPackageVersionHistoryResponse.
+     */
+    CommitMessage?: CommitMessage;
+  }
+  export interface UpdatePackageResponse {
+    /**
+     * Information about the package PackageDetails.
+     */
+    PackageDetails?: PackageDetails;
   }
   export type UpdateTimestamp = Date;
   export interface UpgradeElasticsearchDomainRequest {

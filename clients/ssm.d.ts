@@ -1321,7 +1321,7 @@ declare namespace SSM {
   export type AssociationExecutionsList = AssociationExecution[];
   export interface AssociationFilter {
     /**
-     * The name of the filter.   InstanceId has been deprecated. 
+     * The name of the filter.
      */
     key: AssociationFilterKey;
     /**
@@ -1606,7 +1606,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|"TargetResourceGroup"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -5371,7 +5371,7 @@ declare namespace SSM {
   }
   export interface ListAssociationsRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the instance that are part of the Target Attributes ResourceGroup or Tags are not returned. 
+     * One or more filters. Use a filter to return a more specific list of results.
      */
     AssociationFilterList?: AssociationFilterList;
     /**

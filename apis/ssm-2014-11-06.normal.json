@@ -3791,7 +3791,7 @@
       "members": {
         "key": {
           "shape": "AssociationFilterKey",
-          "documentation": "<p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>"
+          "documentation": "<p>The name of the filter.</p>"
         },
         "value": {
           "shape": "AssociationFilterValue",
@@ -4276,7 +4276,8 @@
         "StartTimeBefore",
         "StartTimeAfter",
         "AutomationType",
-        "TagKey"
+        "TagKey",
+        "TargetResourceGroup"
       ]
     },
     "AutomationExecutionFilterList": {
@@ -9931,7 +9932,7 @@
       "members": {
         "AssociationFilterList": {
           "shape": "AssociationFilterList",
-          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>"
+          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",

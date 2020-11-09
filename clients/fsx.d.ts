@@ -12,6 +12,14 @@ declare class FSx extends Service {
   constructor(options?: FSx.Types.ClientConfiguration)
   config: Config & FSx.Types.ClientConfiguration;
   /**
+   * Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system. A file systen can have a maximum of 50 DNS aliases associated with it at any one time. If you try to associate a DNS alias that is already associated with the file system, FSx takes no action on that alias in the request. For more information, see Working with DNS Aliases and Walkthrough 5: Using DNS aliases to access your file system, including additional steps you must take to be able to access your file system using a DNS alias. The system response shows the DNS aliases that Amazon FSx is attempting to associate with the file system. Use the API operation to monitor the status of the aliases Amazon FSx is associating with the file system.
+   */
+  associateFileSystemAliases(params: FSx.Types.AssociateFileSystemAliasesRequest, callback?: (err: AWSError, data: FSx.Types.AssociateFileSystemAliasesResponse) => void): Request<FSx.Types.AssociateFileSystemAliasesResponse, AWSError>;
+  /**
+   * Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system. A file systen can have a maximum of 50 DNS aliases associated with it at any one time. If you try to associate a DNS alias that is already associated with the file system, FSx takes no action on that alias in the request. For more information, see Working with DNS Aliases and Walkthrough 5: Using DNS aliases to access your file system, including additional steps you must take to be able to access your file system using a DNS alias. The system response shows the DNS aliases that Amazon FSx is attempting to associate with the file system. Use the API operation to monitor the status of the aliases Amazon FSx is associating with the file system.
+   */
+  associateFileSystemAliases(callback?: (err: AWSError, data: FSx.Types.AssociateFileSystemAliasesResponse) => void): Request<FSx.Types.AssociateFileSystemAliasesResponse, AWSError>;
+  /**
    * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are "in-flight" when the cancel operation is received.   FSx does not export any files that have not yet been exported.  
    */
   cancelDataRepositoryTask(params: FSx.Types.CancelDataRepositoryTaskRequest, callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class FSx extends Service {
    */
   describeDataRepositoryTasks(callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryTasksResponse) => void): Request<FSx.Types.DescribeDataRepositoryTasksResponse, AWSError>;
   /**
+   * Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of all DNS aliases that have been associated with and disassociated from the file system is available in the list of AdministrativeAction provided in the DescribeFileSystems operation response.
+   */
+  describeFileSystemAliases(params: FSx.Types.DescribeFileSystemAliasesRequest, callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemAliasesResponse) => void): Request<FSx.Types.DescribeFileSystemAliasesResponse, AWSError>;
+  /**
+   * Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of all DNS aliases that have been associated with and disassociated from the file system is available in the list of AdministrativeAction provided in the DescribeFileSystems operation response.
+   */
+  describeFileSystemAliases(callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemAliasesResponse) => void): Request<FSx.Types.DescribeFileSystemAliasesResponse, AWSError>;
+  /**
    * Returns the description of specific Amazon FSx file systems, if a FileSystemIds value is provided for that file system. Otherwise, it returns descriptions of all file systems owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxResults parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This action is used in an iterative process to retrieve a list of your file system descriptions. DescribeFileSystems is called first without a NextTokenvalue. Then the action continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this action, keep the following in mind:   The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multicall iteration is unspecified.  
    */
   describeFileSystems(params: FSx.Types.DescribeFileSystemsRequest, callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemsResponse) => void): Request<FSx.Types.DescribeFileSystemsResponse, AWSError>;
@@ -91,6 +107,14 @@ declare class FSx extends Service {
    * Returns the description of specific Amazon FSx file systems, if a FileSystemIds value is provided for that file system. Otherwise, it returns descriptions of all file systems owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxResults parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This action is used in an iterative process to retrieve a list of your file system descriptions. DescribeFileSystems is called first without a NextTokenvalue. Then the action continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this action, keep the following in mind:   The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multicall iteration is unspecified.  
    */
   describeFileSystems(callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemsResponse) => void): Request<FSx.Types.DescribeFileSystemsResponse, AWSError>;
+  /**
+   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with a 400 Bad Request. For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
+   */
+  disassociateFileSystemAliases(params: FSx.Types.DisassociateFileSystemAliasesRequest, callback?: (err: AWSError, data: FSx.Types.DisassociateFileSystemAliasesResponse) => void): Request<FSx.Types.DisassociateFileSystemAliasesResponse, AWSError>;
+  /**
+   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with a 400 Bad Request. For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
+   */
+  disassociateFileSystemAliases(callback?: (err: AWSError, data: FSx.Types.DisassociateFileSystemAliasesResponse) => void): Request<FSx.Types.DisassociateFileSystemAliasesResponse, AWSError>;
   /**
    * Lists tags for an Amazon FSx file systems and backups in the case of Amazon FSx for Windows File Server. When retrieving all tags, you can optionally specify the MaxResults parameter to limit the number of tags in a response. If more tags remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This action is used in an iterative process to retrieve a list of your tags. ListTagsForResource is called first without a NextTokenvalue. Then the action continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this action, keep the following in mind:   The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.   The order of tags returned in the response of one ListTagsForResource call and the order of tags returned across the responses of a multi-call iteration is unspecified.  
    */
@@ -140,7 +164,7 @@ declare namespace FSx {
   export interface AdministrativeAction {
     AdministrativeActionType?: AdministrativeActionType;
     /**
-     * Provides the percent complete of a STORAGE_OPTIMIZATION administrative action.
+     * Provides the percent complete of a STORAGE_OPTIMIZATION administrative action. Does not apply to any other administrative action type.
      */
     ProgressPercent?: ProgressPercent;
     /**
@@ -152,20 +176,51 @@ declare namespace FSx {
      */
     Status?: Status;
     /**
-     * Describes the target StorageCapacity or ThroughputCapacity value provided in the UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative actions. 
+     * Describes the target value for the administration action, provided in the UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative actions. 
      */
     TargetFileSystemValues?: FileSystem;
     FailureDetails?: AdministrativeActionFailureDetails;
   }
   export interface AdministrativeActionFailureDetails {
     /**
-     * Error message providing details about the failure.
+     * Error message providing details about the failed administrative action.
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|string;
   export type AdministrativeActions = AdministrativeAction[];
+  export interface Alias {
+    /**
+     * The name of the DNS alias. The alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+     */
+    Name?: AlternateDNSName;
+    /**
+     * Describes the state of the DNS alias.   AVAILABLE - The DNS alias is associated with an Amazon FSx file system.   CREATING - Amazon FSx is creating the DNS alias and associating it with the file system.   CREATE_FAILED - Amazon FSx was unable to associate the DNS alias with the file system.   DELETING - Amazon FSx is disassociating the DNS alias from the file system and deleting it.   DELETE_FAILED - Amazon FSx was unable to disassocate the DNS alias from the file system.  
+     */
+    Lifecycle?: AliasLifecycle;
+  }
+  export type AliasLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type Aliases = Alias[];
+  export type AlternateDNSName = string;
+  export type AlternateDNSNames = AlternateDNSName[];
   export type ArchivePath = string;
+  export interface AssociateFileSystemAliasesRequest {
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * Specifies the file system with which you want to associate one or more DNS aliases.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * An array of one or more DNS alias names to associate with the file system. The alias name has to comply with the following formatting requirements:   Formatted as a fully-qualified domain name (FQDN),  hostname.domain , for example, accounting.corp.example.com.   Can contain alphanumeric characters and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+     */
+    Aliases: AlternateDNSNames;
+  }
+  export interface AssociateFileSystemAliasesResponse {
+    /**
+     * An array of the DNS aliases that Amazon FSx is associating with the file system.
+     */
+    Aliases?: Aliases;
+  }
   export type AutoImportPolicyType = "NONE"|"NEW"|"NEW_CHANGED"|string;
   export type AutomaticBackupRetentionDays = number;
   export interface Backup {
@@ -220,7 +275,7 @@ declare namespace FSx {
   export type BackupId = string;
   export type BackupIds = BackupId[];
   export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|string;
-  export type BackupType = "AUTOMATIC"|"USER_INITIATED"|string;
+  export type BackupType = "AUTOMATIC"|"USER_INITIATED"|"AWS_BACKUP"|string;
   export type Backups = Backup[];
   export interface CancelDataRepositoryTaskRequest {
     /**
@@ -450,6 +505,10 @@ declare namespace FSx {
      * A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.
      */
     CopyTagsToBackups?: Flag;
+    /**
+     * An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload. For more information, see Working with DNS Aliases and Walkthrough 5: Using DNS aliases to access your file system, including additional steps you must take to be able to access your file system using a DNS alias. An alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+     */
+    Aliases?: AlternateDNSNames;
   }
   export type CreationTime = Date;
   export type DNSName = string;
@@ -691,6 +750,31 @@ declare namespace FSx {
     DataRepositoryTasks?: DataRepositoryTasks;
     NextToken?: NextToken;
   }
+  export interface DescribeFileSystemAliasesRequest {
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The ID of the file system to return the associated DNS aliases for (String).
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * Maximum number of DNS aliases to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the MaxResults parameter specified in the request and the service's internal maximum number of items per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Opaque pagination token returned from a previous DescribeFileSystemAliases operation (String). If a token is included in the request, the action continues the list from where the previous returning call left off.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeFileSystemAliasesResponse {
+    /**
+     * An array of one or more DNS aliases currently associated with the specified file system.
+     */
+    Aliases?: Aliases;
+    /**
+     * Present if there are more DNS aliases than returned in the response (String). You can use the NextToken value in a later request to fetch additional descriptions. 
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeFileSystemsRequest {
     /**
      * IDs of the file systems whose descriptions you want to retrieve (String).
@@ -718,6 +802,23 @@ declare namespace FSx {
   export type DirectoryId = string;
   export type DirectoryPassword = string;
   export type DirectoryUserName = string;
+  export interface DisassociateFileSystemAliasesRequest {
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * Specifies the file system from which to disassociate the DNS aliases.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * An array of one or more DNS alias names to disassociate, or remove, from the file system.
+     */
+    Aliases: AlternateDNSNames;
+  }
+  export interface DisassociateFileSystemAliasesResponse {
+    /**
+     * An array of one or more DNS aliases that Amazon FSx is attempting to disassociate from the file system.
+     */
+    Aliases?: Aliases;
+  }
   export type DnsIps = IpAddress[];
   export type DriveCacheType = "NONE"|"READ"|string;
   export type EndTime = Date;
@@ -1111,6 +1212,7 @@ declare namespace FSx {
      * A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.
      */
     CopyTagsToBackups?: Flag;
+    Aliases?: Aliases;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

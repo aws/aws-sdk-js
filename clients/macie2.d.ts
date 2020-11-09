@@ -1061,7 +1061,7 @@ declare namespace Macie2 {
      */
     eq?: __listOf__string;
     /**
-     * A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties:customDataIdentifiers.detections.arncustomDataIdentifiers.detections.nameresourcesAffected.s3Bucket.tags.keyresourcesAffected.s3Bucket.tags.valueresourcesAffected.s3Object.tags.keyresourcesAffected.s3Object.tags.valuesensitiveData.categorysensitiveData.detections.type
+     * A condition that requires an array field of a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.
      */
     eqExactMatch?: __listOf__string;
     /**
@@ -2327,11 +2327,11 @@ declare namespace Macie2 {
   }
   export interface Occurrences {
     /**
-     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell that contains the data. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell or field that contains the data. This value is null for all other types of files.
      */
     cells?: Cells;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Microsoft Word document, or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: full names and addresses in a Microsoft Excel workbook, CSV file, or TSV file; data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.
      */
     lineRanges?: Ranges;
     /**
@@ -2343,7 +2343,7 @@ declare namespace Macie2 {
      */
     pages?: Pages;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Apache Parquet file. Each object specifies the row that contains the data. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the field or record that contains the data. This value is null for all other types of files.
      */
     records?: Records;
   }
@@ -2402,7 +2402,11 @@ declare namespace Macie2 {
   export type Ranges = Range[];
   export interface Record {
     /**
-     * The row index, starting from 0, for the row that contains the data.
+     * The path, as a JSONPath expression, to the field (in an Apache Avro object container) or record (in an Apache Parquet file) that contains the data. If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
+     */
+    jsonPath?: __string;
+    /**
+     * The record index, starting from 0, for the record that contains the data.
      */
     recordIndex?: __long;
   }

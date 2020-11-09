@@ -252,6 +252,14 @@ declare class StorageGateway extends Service {
    */
   describeBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
+   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types.  This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   */
+  describeBandwidthRateLimitSchedule(params: StorageGateway.Types.DescribeBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
+   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types.  This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   */
+  describeBandwidthRateLimitSchedule(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
    * Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape, and file gateway types. The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
    */
   describeCache(params: StorageGateway.Types.DescribeCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeCacheOutput) => void): Request<StorageGateway.Types.DescribeCacheOutput, AWSError>;
@@ -588,6 +596,14 @@ declare class StorageGateway extends Service {
    */
   updateBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitOutput, AWSError>;
   /**
+   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. 
+   */
+  updateBandwidthRateLimitSchedule(params: StorageGateway.Types.UpdateBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
+   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. 
+   */
+  updateBandwidthRateLimitSchedule(callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
    * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
    */
   updateChapCredentials(params: StorageGateway.Types.UpdateChapCredentialsInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateChapCredentialsOutput) => void): Request<StorageGateway.Types.UpdateChapCredentialsOutput, AWSError>;
@@ -841,6 +857,37 @@ declare namespace StorageGateway {
   export type AutomaticTapeCreationRules = AutomaticTapeCreationRule[];
   export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING"|string;
   export type BandwidthDownloadRateLimit = number;
+  export interface BandwidthRateLimitInterval {
+    /**
+     *  The hour of the day to start the bandwidth rate limit interval. 
+     */
+    StartHourOfDay: HourOfDay;
+    /**
+     *  The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value 0. 
+     */
+    StartMinuteOfHour: MinuteOfHour;
+    /**
+     *  The hour of the day to end the bandwidth rate limit interval. 
+     */
+    EndHourOfDay: HourOfDay;
+    /**
+     *  The minute of the hour to end the bandwidth rate limit interval.    The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value 59.  
+     */
+    EndMinuteOfHour: MinuteOfHour;
+    /**
+     *  The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. 
+     */
+    DaysOfWeek: DaysOfWeek;
+    /**
+     *  The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set. 
+     */
+    AverageUploadRateLimitInBitsPerSec?: BandwidthUploadRateLimit;
+    /**
+     *  The average download rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the download rate limit is not set. 
+     */
+    AverageDownloadRateLimitInBitsPerSec?: BandwidthDownloadRateLimit;
+  }
+  export type BandwidthRateLimitIntervals = BandwidthRateLimitInterval[];
   export type BandwidthType = string;
   export type BandwidthUploadRateLimit = number;
   export type Boolean = boolean;
@@ -1401,6 +1448,7 @@ declare namespace StorageGateway {
   export type CreatedDate = Date;
   export type DayOfMonth = number;
   export type DayOfWeek = number;
+  export type DaysOfWeek = DayOfWeek[];
   export interface DeleteAutomaticTapeCreationPolicyInput {
     GatewayARN: GatewayARN;
   }
@@ -1559,6 +1607,16 @@ declare namespace StorageGateway {
      * The average download bandwidth rate limit in bits per second. This field does not appear in the response if the download rate limit is not set.
      */
     AverageDownloadRateLimitInBitsPerSec?: BandwidthDownloadRateLimit;
+  }
+  export interface DescribeBandwidthRateLimitScheduleInput {
+    GatewayARN: GatewayARN;
+  }
+  export interface DescribeBandwidthRateLimitScheduleOutput {
+    GatewayARN?: GatewayARN;
+    /**
+     *  An array that contains the bandwidth rate limit intervals for a tape or volume gateway. 
+     */
+    BandwidthRateLimitIntervals?: BandwidthRateLimitIntervals;
   }
   export interface DescribeCacheInput {
     GatewayARN: GatewayARN;
@@ -2927,6 +2985,16 @@ declare namespace StorageGateway {
     AverageDownloadRateLimitInBitsPerSec?: BandwidthDownloadRateLimit;
   }
   export interface UpdateBandwidthRateLimitOutput {
+    GatewayARN?: GatewayARN;
+  }
+  export interface UpdateBandwidthRateLimitScheduleInput {
+    GatewayARN: GatewayARN;
+    /**
+     *  An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty. 
+     */
+    BandwidthRateLimitIntervals: BandwidthRateLimitIntervals;
+  }
+  export interface UpdateBandwidthRateLimitScheduleOutput {
     GatewayARN?: GatewayARN;
   }
   export interface UpdateChapCredentialsInput {

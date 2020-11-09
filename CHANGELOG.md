@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.787.0-->
+<!--LATEST=2.788.0-->
 <!--ENTRYINSERT-->
+
+## 2.788.0
+* feature: DataSync: DataSync now enables customers to adjust the network bandwidth used by a running AWS DataSync task.
+* feature: DynamoDB: This release adds supports for exporting Amazon DynamoDB table data to Amazon S3 to perform analytics at any scale.
+* feature: ECS: This release provides native support for specifying Amazon FSx for Windows File Server file systems as volumes in your Amazon ECS task definitions.
+* feature: ES: Adding support for package versioning in Amazon Elasticsearch Service
+* feature: FSx: This release adds support for creating DNS aliases for Amazon FSx for Windows File Server, and using AWS Backup to automate scheduled, policy-driven backup plans for Amazon FSx file systems.
+* feature: IoTAnalytics: AWS IoT Analytics now supports Late Data Notifications for datasets, dataset content creation using previous version IDs, and includes the LastMessageArrivalTime attribute for channels and datastores.
+* feature: Macie2: Sensitive data findings in Amazon Macie now include enhanced location data for Apache Avro object containers and Apache Parquet files.
+* feature: S3: S3 Intelligent-Tiering adds support for Archive and Deep Archive Access tiers; S3 Replication adds replication metrics and failure notifications, brings feature parity for delete marker replication
+* feature: SSM: add a new filter to allow customer to filter automation executions by using resource-group which used for execute automation
+* feature: StorageGateway: Added bandwidth rate limit schedule for Tape and Volume Gateways
 
 ## 2.787.0
 * feature: DLM: Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images

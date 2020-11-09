@@ -678,6 +678,28 @@
       ],
       "documentation": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
+    "DescribeBandwidthRateLimitSchedule": {
+      "name": "DescribeBandwidthRateLimitSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBandwidthRateLimitScheduleInput"
+      },
+      "output": {
+        "shape": "DescribeBandwidthRateLimitScheduleOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types. </p> <p>This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. </p> <p> A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading </p> <p> If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+    },
     "DescribeCache": {
       "name": "DescribeCache",
       "http": {
@@ -1602,6 +1624,28 @@
       ],
       "documentation": "<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
+    "UpdateBandwidthRateLimitSchedule": {
+      "name": "UpdateBandwidthRateLimitSchedule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateBandwidthRateLimitScheduleInput"
+      },
+      "output": {
+        "shape": "UpdateBandwidthRateLimitScheduleOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. </p>"
+    },
     "UpdateChapCredentials": {
       "name": "UpdateChapCredentials",
       "http": {
@@ -2151,6 +2195,55 @@
     "BandwidthDownloadRateLimit": {
       "type": "long",
       "min": 102400
+    },
+    "BandwidthRateLimitInterval": {
+      "type": "structure",
+      "required": [
+        "StartHourOfDay",
+        "StartMinuteOfHour",
+        "EndHourOfDay",
+        "EndMinuteOfHour",
+        "DaysOfWeek"
+      ],
+      "members": {
+        "StartHourOfDay": {
+          "shape": "HourOfDay",
+          "documentation": "<p> The hour of the day to start the bandwidth rate limit interval. </p>"
+        },
+        "StartMinuteOfHour": {
+          "shape": "MinuteOfHour",
+          "documentation": "<p> The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>. </p>"
+        },
+        "EndHourOfDay": {
+          "shape": "HourOfDay",
+          "documentation": "<p> The hour of the day to end the bandwidth rate limit interval. </p>"
+        },
+        "EndMinuteOfHour": {
+          "shape": "MinuteOfHour",
+          "documentation": "<p> The minute of the hour to end the bandwidth rate limit interval. </p> <important> <p> The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>. </p> </important>"
+        },
+        "DaysOfWeek": {
+          "shape": "DaysOfWeek",
+          "documentation": "<p> The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. </p>"
+        },
+        "AverageUploadRateLimitInBitsPerSec": {
+          "shape": "BandwidthUploadRateLimit",
+          "documentation": "<p> The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set. </p>"
+        },
+        "AverageDownloadRateLimitInBitsPerSec": {
+          "shape": "BandwidthDownloadRateLimit",
+          "documentation": "<p> The average download rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the download rate limit is not set. </p>"
+        }
+      },
+      "documentation": "<p> Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. </p>"
+    },
+    "BandwidthRateLimitIntervals": {
+      "type": "list",
+      "member": {
+        "shape": "BandwidthRateLimitInterval"
+      },
+      "max": 20,
+      "min": 0
     },
     "BandwidthType": {
       "type": "string",
@@ -2923,6 +3016,14 @@
       "max": 6,
       "min": 0
     },
+    "DaysOfWeek": {
+      "type": "list",
+      "member": {
+        "shape": "DayOfWeek"
+      },
+      "max": 7,
+      "min": 1
+    },
     "DeleteAutomaticTapeCreationPolicyInput": {
       "type": "structure",
       "required": [
@@ -3232,6 +3333,29 @@
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
+    },
+    "DescribeBandwidthRateLimitScheduleInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
+    },
+    "DescribeBandwidthRateLimitScheduleOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "BandwidthRateLimitIntervals": {
+          "shape": "BandwidthRateLimitIntervals",
+          "documentation": "<p> An array that contains the bandwidth rate limit intervals for a tape or volume gateway. </p>"
+        }
+      }
     },
     "DescribeCacheInput": {
       "type": "structure",
@@ -5751,6 +5875,30 @@
         }
       },
       "documentation": "<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway whose throttle information was updated.</p>"
+    },
+    "UpdateBandwidthRateLimitScheduleInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN",
+        "BandwidthRateLimitIntervals"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "BandwidthRateLimitIntervals": {
+          "shape": "BandwidthRateLimitIntervals",
+          "documentation": "<p> An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty. </p>"
+        }
+      }
+    },
+    "UpdateBandwidthRateLimitScheduleOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
     },
     "UpdateChapCredentialsInput": {
       "type": "structure",
