@@ -1321,7 +1321,7 @@ declare namespace SSM {
   export type AssociationExecutionsList = AssociationExecution[];
   export interface AssociationFilter {
     /**
-     * The name of the filter.
+     * The name of the filter.   InstanceId has been deprecated. 
      */
     key: AssociationFilterKey;
     /**
@@ -5371,7 +5371,7 @@ declare namespace SSM {
   }
   export interface ListAssociationsRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of results.
+     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the instance that are part of the Target Attributes ResourceGroup or Tags are not returned. 
      */
     AssociationFilterList?: AssociationFilterList;
     /**
@@ -7683,11 +7683,11 @@ declare namespace SSM {
      */
     key: SessionFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify an instance to which session connections have been made.   Owner: Specify an AWS user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed    
+     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify an instance to which session connections have been made.   Owner: Specify an AWS user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed     SessionId: Specify a session ID to return details about the session.  
      */
     value: SessionFilterValue;
   }
-  export type SessionFilterKey = "InvokedAfter"|"InvokedBefore"|"Target"|"Owner"|"Status"|string;
+  export type SessionFilterKey = "InvokedAfter"|"InvokedBefore"|"Target"|"Owner"|"Status"|"SessionId"|string;
   export type SessionFilterList = SessionFilter[];
   export type SessionFilterValue = string;
   export type SessionId = string;

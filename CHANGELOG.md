@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.788.0-->
+<!--LATEST=2.789.0-->
 <!--ENTRYINSERT-->
+
+## 2.789.0
+* feature: EC2: This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services
+* feature: ELBv2: Added support for Gateway Load Balancers, which make it easy to deploy, scale, and run third-party virtual networking appliances.
+* feature: SSM: Add SessionId as a filter for DescribeSessions API
 
 ## 2.788.0
 * feature: DataSync: DataSync now enables customers to adjust the network bandwidth used by a running AWS DataSync task.

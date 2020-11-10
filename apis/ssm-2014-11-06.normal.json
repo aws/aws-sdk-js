@@ -3791,7 +3791,7 @@
       "members": {
         "key": {
           "shape": "AssociationFilterKey",
-          "documentation": "<p>The name of the filter.</p>"
+          "documentation": "<p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>"
         },
         "value": {
           "shape": "AssociationFilterValue",
@@ -9932,7 +9932,7 @@
       "members": {
         "AssociationFilterList": {
           "shape": "AssociationFilterList",
-          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+          "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -13968,7 +13968,7 @@
         },
         "value": {
           "shape": "SessionFilterValue",
-          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> <li> <p>SessionId: Specify a session ID to return details about the session.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a filter for Session Manager information.</p>"
@@ -13980,7 +13980,8 @@
         "InvokedBefore",
         "Target",
         "Owner",
-        "Status"
+        "Status",
+        "SessionId"
       ]
     },
     "SessionFilterList": {
@@ -13988,7 +13989,7 @@
       "member": {
         "shape": "SessionFilter"
       },
-      "max": 5,
+      "max": 6,
       "min": 1
     },
     "SessionFilterValue": {

@@ -741,11 +741,11 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
@@ -757,11 +757,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -1157,11 +1157,11 @@ declare class EC2 extends Service {
    */
   deleteVpcEndpointServiceConfigurations(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
+   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
    */
   deleteVpcEndpoints(params: EC2.Types.DeleteVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
+   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
@@ -2885,11 +2885,11 @@ declare class EC2 extends Service {
    */
   modifyVpcAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpoint(params: EC2.Types.ModifyVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
@@ -2901,11 +2901,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.ModifyVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpointServiceConfiguration(params: EC2.Types.ModifyVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -6901,6 +6901,10 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
+     * The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
      * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
@@ -7614,7 +7618,7 @@ declare namespace EC2 {
      */
     ServiceName: String;
     /**
-     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
+     * (Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
      */
     PolicyDocument?: String;
     /**
@@ -7622,7 +7626,7 @@ declare namespace EC2 {
      */
     RouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Interface endpoint) The ID of one or more subnets in which to create an endpoint network interface.
+     * (Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify one subnet only.
      */
     SubnetIds?: VpcEndpointSubnetIdList;
     /**
@@ -7662,13 +7666,17 @@ declare namespace EC2 {
      */
     AcceptanceRequired?: Boolean;
     /**
-     * The private DNS name to assign to the VPC endpoint service.
+     * (Interface endpoint configuration) The private DNS name to assign to the VPC endpoint service.
      */
     PrivateDnsName?: String;
     /**
      * The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
      */
-    NetworkLoadBalancerArns: ValueStringList;
+    NetworkLoadBalancerArns?: ValueStringList;
+    /**
+     * The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
+     */
+    GatewayLoadBalancerArns?: ValueStringList;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
@@ -12286,7 +12294,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -19098,7 +19106,7 @@ declare namespace EC2 {
      */
     ResetPolicy?: Boolean;
     /**
-     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
+     * (Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
      */
     PolicyDocument?: String;
     /**
@@ -19110,7 +19118,7 @@ declare namespace EC2 {
      */
     RemoveRouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
+     * (Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
      */
     AddSubnetIds?: VpcEndpointSubnetIdList;
     /**
@@ -19146,11 +19154,11 @@ declare namespace EC2 {
      */
     ServiceId: VpcEndpointServiceId;
     /**
-     * The private DNS name to assign to the endpoint service.
+     * (Interface endpoint configuration) The private DNS name to assign to the endpoint service.
      */
     PrivateDnsName?: String;
     /**
-     * Removes the private DNS name of the endpoint service.
+     * (Interface endpoint configuration) Removes the private DNS name of the endpoint service.
      */
     RemovePrivateDnsName?: Boolean;
     /**
@@ -19165,6 +19173,14 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
      */
     RemoveNetworkLoadBalancerArns?: ValueStringList;
+    /**
+     * The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to your service configuration.
+     */
+    AddGatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
+     */
+    RemoveGatewayLoadBalancerArns?: ValueStringList;
   }
   export interface ModifyVpcEndpointServiceConfigurationResult {
     /**
@@ -21036,6 +21052,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
+     */
+    VpcEndpointId?: VpcEndpointId;
     /**
      * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
@@ -23052,6 +23072,10 @@ declare namespace EC2 {
      */
     NetworkLoadBalancerArns?: ValueStringList;
     /**
+     * The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
+     */
+    GatewayLoadBalancerArns?: ValueStringList;
+    /**
      * The DNS names for the service.
      */
     BaseEndpointDnsNames?: ValueStringList;
@@ -23121,7 +23145,7 @@ declare namespace EC2 {
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
-  export type ServiceType = "Interface"|"Gateway"|string;
+  export type ServiceType = "Interface"|"Gateway"|"GatewayLoadBalancer"|string;
   export interface ServiceTypeDetail {
     /**
      * The type of service.
@@ -25969,6 +25993,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of the network load balancers for the service.
      */
     NetworkLoadBalancerArns?: ValueStringList;
+    /**
+     * The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
+     */
+    GatewayLoadBalancerArns?: ValueStringList;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointId = string;
@@ -25979,7 +26007,7 @@ declare namespace EC2 {
   export type VpcEndpointServiceIdList = VpcEndpointServiceId[];
   export type VpcEndpointSet = VpcEndpoint[];
   export type VpcEndpointSubnetIdList = SubnetId[];
-  export type VpcEndpointType = "Interface"|"Gateway"|string;
+  export type VpcEndpointType = "Interface"|"Gateway"|"GatewayLoadBalancer"|string;
   export type VpcFlowLogId = string;
   export type VpcId = string;
   export type VpcIdStringList = VpcId[];
