@@ -253,7 +253,7 @@ describe('AWS.Config', function() {
     const config = configure({
       httpOptions: {
         timeout: 120000,
-        lookup: (() => {})
+        lookup: (function() {return;})
       }
     });
 
