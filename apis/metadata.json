@@ -912,5 +912,8 @@
   },
   "s3outposts": {
     "name": "S3Outposts"
+  },
+  "databrew": {
+    "name": "DataBrew"
   }
 }

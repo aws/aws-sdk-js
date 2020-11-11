@@ -232,3 +232,4 @@ export import SSOAdmin = require('./ssoadmin');
 export import TimestreamQuery = require('./timestreamquery');
 export import TimestreamWrite = require('./timestreamwrite');
 export import S3Outposts = require('./s3outposts');
+export import DataBrew = require('./databrew');

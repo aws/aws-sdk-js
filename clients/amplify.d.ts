@@ -389,6 +389,10 @@ declare namespace Amplify {
      */
     buildSpec?: BuildSpec;
     /**
+     * Describes the custom HTTP headers for the Amplify app.
+     */
+    customHeaders?: CustomHeaders;
+    /**
      *  Enables automated branch creation for the Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
@@ -447,7 +451,7 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     * Enables performance mode for the branch. Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. 
      */
     enablePerformanceMode?: EnablePerformanceMode;
     /**
@@ -455,7 +459,7 @@ declare namespace Amplify {
      */
     buildSpec?: BuildSpec;
     /**
-     *  Enables pull request preview for the autocreated branch. 
+     *  Enables pull request previews for the autocreated branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
     /**
@@ -563,7 +567,7 @@ declare namespace Amplify {
      */
     enableBasicAuth: EnableBasicAuth;
     /**
-     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     * Enables performance mode for the branch. Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. 
      */
     enablePerformanceMode?: EnablePerformanceMode;
     /**
@@ -587,7 +591,7 @@ declare namespace Amplify {
      */
     associatedResources?: AssociatedResources;
     /**
-     *  Enables pull request preview for the branch. 
+     *  Enables pull request previews for the branch. 
      */
     enablePullRequestPreview: EnablePullRequestPreview;
     /**
@@ -619,7 +623,7 @@ declare namespace Amplify {
   export type Context = string;
   export interface CreateAppRequest {
     /**
-     *  The name for the Amplify app. 
+     *  The name for an Amplify app. 
      */
     name: Name;
     /**
@@ -679,15 +683,19 @@ declare namespace Amplify {
      */
     buildSpec?: BuildSpec;
     /**
-     *  Enables automated branch creation for the Amplify app. 
+     * The custom HTTP headers for an Amplify app.
+     */
+    customHeaders?: CustomHeaders;
+    /**
+     *  Enables automated branch creation for an Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
     /**
-     *  The automated branch creation glob patterns for the Amplify app. 
+     *  The automated branch creation glob patterns for an Amplify app. 
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  The automated branch creation configuration for the Amplify app. 
+     *  The automated branch creation configuration for an Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
   }
@@ -760,7 +768,7 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     * Enables performance mode for the branch. Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. 
      */
     enablePerformanceMode?: EnablePerformanceMode;
     /**
@@ -780,7 +788,7 @@ declare namespace Amplify {
      */
     displayName?: DisplayName;
     /**
-     *  Enables pull request preview for this branch. 
+     *  Enables pull request previews for this branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
     /**
@@ -881,6 +889,7 @@ declare namespace Amplify {
   }
   export type CustomDomain = string;
   export type CustomDomains = CustomDomain[];
+  export type CustomHeaders = string;
   export interface CustomRule {
     /**
      *  The source pattern for a URL rewrite or redirect rule. 
@@ -1699,15 +1708,19 @@ declare namespace Amplify {
      */
     buildSpec?: BuildSpec;
     /**
-     *  Enables automated branch creation for the Amplify app. 
+     * The custom HTTP headers for an Amplify app.
+     */
+    customHeaders?: CustomHeaders;
+    /**
+     *  Enables automated branch creation for an Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
     /**
-     *  Describes the automated branch creation glob patterns for the Amplify app. 
+     *  Describes the automated branch creation glob patterns for an Amplify app. 
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  The automated branch creation configuration for the Amplify app. 
+     *  The automated branch creation configuration for an Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
     /**
@@ -1771,7 +1784,7 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     * Enables performance mode for the branch. Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. 
      */
     enablePerformanceMode?: EnablePerformanceMode;
     /**
@@ -1787,7 +1800,7 @@ declare namespace Amplify {
      */
     displayName?: DisplayName;
     /**
-     *  Enables pull request preview for this branch. 
+     *  Enables pull request previews for this branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
     /**

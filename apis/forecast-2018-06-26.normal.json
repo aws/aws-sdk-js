@@ -67,7 +67,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p> <p>After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a> operation.</p> <note> <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can create use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p> </note>"
+      "documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p> <p>After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a> operation.</p> <note> <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p> </note>"
     },
     "CreateDatasetImportJob": {
       "name": "CreateDatasetImportJob",
@@ -191,7 +191,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Forecast predictor.</p> <p>In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters.</p> <p>Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the <a>CreateForecast</a> operation.</p> <p>After training a model, the <code>CreatePredictor</code> operation also evaluates it. To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast.</p> <p>Optionally, you can specify a featurization configuration to fill and aggregate the data fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more information, see <a>FeaturizationConfig</a>.</p> <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the <code>DataFrequency</code> specified when the dataset was created matches the <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p> <p> <b>AutoML</b> </p> <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The <code>objective function</code> is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see <a>EvaluationResult</a>.</p> <p>When AutoML is enabled, the following properties are disallowed:</p> <ul> <li> <p> <code>AlgorithmArn</code> </p> </li> <li> <p> <code>HPOConfig</code> </p> </li> <li> <p> <code>PerformHPO</code> </p> </li> <li> <p> <code>TrainingParameters</code> </p> </li> </ul> <p>To get a list of all of your predictors, use the <a>ListPredictors</a> operation.</p> <note> <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>"
+      "documentation": "<p>Creates an Amazon Forecast predictor.</p> <p>In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters.</p> <p>Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets in the specified dataset group. You can then generate a forecast using the <a>CreateForecast</a> operation.</p> <p> To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. </p> <p>You can specify a featurization configuration to fill and aggregate the data fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more information, see <a>FeaturizationConfig</a>.</p> <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the <code>DataFrequency</code> specified when the dataset was created matches the <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p> <p>By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by setting the <code>ForecastTypes</code>. </p> <p> <b>AutoML</b> </p> <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The <code>objective function</code> is defined as the mean of the weighted losses over the forecast types. By default, these are the p10, p50, and p90 quantile losses. For more information, see <a>EvaluationResult</a>.</p> <p>When AutoML is enabled, the following properties are disallowed:</p> <ul> <li> <p> <code>AlgorithmArn</code> </p> </li> <li> <p> <code>HPOConfig</code> </p> </li> <li> <p> <code>PerformHPO</code> </p> </li> <li> <p> <code>TrainingParameters</code> </p> </li> </ul> <p>To get a list of all of your predictors, use the <a>ListPredictors</a> operation.</p> <note> <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>"
     },
     "DeleteDataset": {
       "name": "DeleteDataset",
@@ -492,7 +492,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. For more information, see <a>metrics</a>.</p> <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows (<code>NumberOfBacktestWindows</code>) is specified using the <a>EvaluationParameters</a> object, which is optionally included in the <code>CreatePredictor</code> request. If <code>NumberOfBacktestWindows</code> isn't specified, the number defaults to one.</p> <p>The parameters of the <code>filling</code> method determine which items contribute to the metrics. If you want all items to contribute, specify <code>zero</code>. If you want only those items that have complete data in the range being evaluated to contribute, specify <code>nan</code>. For more information, see <a>FeaturizationMethod</a>.</p> <note> <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>",
+      "documentation": "<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/metrics.html\">Predictor Metrics</a>.</p> <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows (<code>NumberOfBacktestWindows</code>) is specified using the <a>EvaluationParameters</a> object, which is optionally included in the <code>CreatePredictor</code> request. If <code>NumberOfBacktestWindows</code> isn't specified, the number defaults to one.</p> <p>The parameters of the <code>filling</code> method determine which items contribute to the metrics. If you want all items to contribute, specify <code>zero</code>. If you want only those items that have complete data in the range being evaluated to contribute, specify <code>nan</code>. For more information, see <a>FeaturizationMethod</a>.</p> <note> <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the status, use the <a>DescribePredictor</a> operation.</p> </note>",
       "idempotent": true
     },
     "ListDatasetGroups": {
@@ -1013,11 +1013,15 @@
         },
         "AlgorithmArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if <code>PerformAutoML</code> is not set to <code>true</code>.</p> <p class=\"title\"> <b>Supported algorithms:</b> </p> <ul> <li> <p> <code>arn:aws:forecast:::algorithm/ARIMA</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code> </p> <p>Supports hyperparameter optimization (HPO)</p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/ETS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/NPTS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Prophet</code> </p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if <code>PerformAutoML</code> is not set to <code>true</code>.</p> <p class=\"title\"> <b>Supported algorithms:</b> </p> <ul> <li> <p> <code>arn:aws:forecast:::algorithm/ARIMA</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/CNN-QR</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Deep_AR_Plus</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/ETS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/NPTS</code> </p> </li> <li> <p> <code>arn:aws:forecast:::algorithm/Prophet</code> </p> </li> </ul>"
         },
         "ForecastHorizon": {
           "shape": "Integer",
           "documentation": "<p>Specifies the number of time-steps that the model is trained to predict. The forecast horizon is also called the prediction length.</p> <p>For example, if you configure a dataset for daily data collection (using the <code>DataFrequency</code> parameter of the <a>CreateDataset</a> operation) and set the forecast horizon to 10, the model returns predictions for 10 days.</p> <p>The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length.</p>"
+        },
+        "ForecastTypes": {
+          "shape": "ForecastTypes",
+          "documentation": "<p>Specifies the forecast types used to train a predictor. You can specify up to five forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or higher. You can also specify the mean forecast with <code>mean</code>. </p> <p>The default value is <code>[\"0.10\", \"0.50\", \"0.9\"]</code>.</p>"
         },
         "PerformAutoML": {
           "shape": "Boolean",
@@ -1025,7 +1029,7 @@
         },
         "PerformHPO": {
           "shape": "Boolean",
-          "documentation": "<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job.</p> <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm.</p> <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and, optionally, supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and <code>PerformAutoML</code> must be false.</p> <p>The following algorithm supports HPO:</p> <ul> <li> <p>DeepAR+</p> </li> </ul>"
+          "documentation": "<p>Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job.</p> <p>The default value is <code>false</code>. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm.</p> <p>To override the default values, set <code>PerformHPO</code> to <code>true</code> and, optionally, supply the <a>HyperParameterTuningJobConfig</a> object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and <code>PerformAutoML</code> must be false.</p> <p>The following algorithms support HPO:</p> <ul> <li> <p>DeepAR+</p> </li> <li> <p>CNN-QR</p> </li> </ul>"
         },
         "TrainingParameters": {
           "shape": "TrainingParameters",
@@ -1572,6 +1576,10 @@
           "shape": "Integer",
           "documentation": "<p>The number of time-steps of the forecast. The forecast horizon is also called the prediction length.</p>"
         },
+        "ForecastTypes": {
+          "shape": "ForecastTypes",
+          "documentation": "<p>The forecast types used during predictor training. Default value is <code>[\"0.1\",\"0.5\",\"0.9\"]</code> </p>"
+        },
         "PerformAutoML": {
           "shape": "Boolean",
           "documentation": "<p>Whether the predictor is set to perform AutoML.</p>"
@@ -1582,7 +1590,7 @@
         },
         "TrainingParameters": {
           "shape": "TrainingParameters",
-          "documentation": "<p>The default training parameters or overrides selected during model training. If using the AutoML algorithm or if HPO is turned on while using the DeepAR+ algorithms, the optimized values for the chosen hyperparameters are returned. For more information, see <a>aws-forecast-choosing-recipes</a>.</p>"
+          "documentation": "<p>The default training parameters or overrides selected during model training. When running AutoML or choosing HPO with CNN-QR or DeepAR+, the optimized values for the chosen hyperparameters are returned. For more information, see <a>aws-forecast-choosing-recipes</a>.</p>"
         },
         "EvaluationParameters": {
           "shape": "EvaluationParameters",
@@ -1670,6 +1678,30 @@
     "ErrorMessage": {
       "type": "string"
     },
+    "ErrorMetric": {
+      "type": "structure",
+      "members": {
+        "ForecastType": {
+          "shape": "ForecastType",
+          "documentation": "<p> Forecast types can be quantiles from 0.01 to 0.99 (by increments of 0.01), and the mean. </p>"
+        },
+        "WAPE": {
+          "shape": "Double",
+          "documentation": "<p> The weighted absolute percentage error (WAPE). </p>"
+        },
+        "RMSE": {
+          "shape": "Double",
+          "documentation": "<p> The root-mean-square error (RMSE). </p>"
+        }
+      },
+      "documentation": "<p> Provides detailed error metrics to evaluate the performance of a predictor. This object is part of the <a>Metrics</a> object. </p>"
+    },
+    "ErrorMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "ErrorMetric"
+      }
+    },
     "EvaluationParameters": {
       "type": "structure",
       "members": {
@@ -1755,7 +1787,7 @@
         },
         "FeaturizationMethodParameters": {
           "shape": "FeaturizationMethodParameters",
-          "documentation": "<p>The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. Related Time Series attributes do not accept aggregation parameters.</p> <p>The following list shows the parameters and their valid values for the \"filling\" featurization method for a <b>Target Time Series</b> dataset. Bold signifies the default value.</p> <ul> <li> <p> <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>frontfill</code>: <b>none</b> </p> </li> <li> <p> <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>: <b>zero</b>, <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> </ul> <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no defaults):</p> <ul> <li> <p> <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> </ul>"
+          "documentation": "<p>The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. Related Time Series attributes do not accept aggregation parameters.</p> <p>The following list shows the parameters and their valid values for the \"filling\" featurization method for a <b>Target Time Series</b> dataset. Bold signifies the default value.</p> <ul> <li> <p> <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>frontfill</code>: <b>none</b> </p> </li> <li> <p> <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>: <b>zero</b>, <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> </ul> <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no defaults):</p> <ul> <li> <p> <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> </ul> <p>To set a filling method to a specific value, set the fill parameter to <code>value</code> and define the value in a corresponding <code>_value</code> parameter. For example, to set backfilling to a value of 2, include the following: <code>\"backfill\": \"value\"</code> and <code>\"backfill_value\":\"2\"</code>. </p>"
         }
       },
       "documentation": "<p>Provides information about the method that featurizes (transforms) a dataset field. The method is part of the <code>FeaturizationPipeline</code> of the <a>Featurization</a> object. </p> <p>The following is an example of how you specify a <code>FeaturizationMethod</code> object.</p> <p> <code>{</code> </p> <p> <code>\"FeaturizationMethodName\": \"filling\",</code> </p> <p> <code>\"FeaturizationMethodParameters\": {\"aggregation\": \"sum\", \"middlefill\": \"zero\", \"backfill\": \"zero\"}</code> </p> <p> <code>}</code> </p>"
@@ -2243,11 +2275,17 @@
       "members": {
         "RMSE": {
           "shape": "Double",
-          "documentation": "<p>The root mean square error (RMSE).</p>"
+          "documentation": "<p>The root-mean-square error (RMSE).</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"
         },
         "WeightedQuantileLosses": {
           "shape": "WeightedQuantileLosses",
           "documentation": "<p>An array of weighted quantile losses. Quantiles divide a probability distribution into regions of equal probability. The distribution in this case is the loss function.</p>"
+        },
+        "ErrorMetrics": {
+          "shape": "ErrorMetrics",
+          "documentation": "<p> Provides detailed error metrics on forecast type, root-mean square-error (RMSE), and weighted average percentage error (WAPE). </p>"
         }
       },
       "documentation": "<p>Provides metrics that are used to evaluate the performance of a predictor. This object is part of the <a>WindowSummary</a> object.</p>"
@@ -2496,10 +2534,10 @@
         },
         "Value": {
           "shape": "Value",
-          "documentation": "<p>One of the following 2 letter country codes:</p> <ul> <li> <p>\"AR\" - ARGENTINA</p> </li> <li> <p>\"AT\" - AUSTRIA</p> </li> <li> <p>\"AU\" - AUSTRALIA</p> </li> <li> <p>\"BE\" - BELGIUM</p> </li> <li> <p>\"BR\" - BRAZIL</p> </li> <li> <p>\"CA\" - CANADA</p> </li> <li> <p>\"CN\" - CHINA</p> </li> <li> <p>\"CZ\" - CZECH REPUBLIC</p> </li> <li> <p>\"DK\" - DENMARK</p> </li> <li> <p>\"EC\" - ECUADOR</p> </li> <li> <p>\"FI\" - FINLAND</p> </li> <li> <p>\"FR\" - FRANCE</p> </li> <li> <p>\"DE\" - GERMANY</p> </li> <li> <p>\"HU\" - HUNGARY</p> </li> <li> <p>\"IE\" - IRELAND</p> </li> <li> <p>\"IN\" - INDIA</p> </li> <li> <p>\"IT\" - ITALY</p> </li> <li> <p>\"JP\" - JAPAN</p> </li> <li> <p>\"KR\" - KOREA</p> </li> <li> <p>\"LU\" - LUXEMBOURG</p> </li> <li> <p>\"MX\" - MEXICO</p> </li> <li> <p>\"NL\" - NETHERLANDS</p> </li> <li> <p>\"NO\" - NORWAY</p> </li> <li> <p>\"PL\" - POLAND</p> </li> <li> <p>\"PT\" - PORTUGAL</p> </li> <li> <p>\"RU\" - RUSSIA</p> </li> <li> <p>\"ZA\" - SOUTH AFRICA</p> </li> <li> <p>\"ES\" - SPAIN</p> </li> <li> <p>\"SE\" - SWEDEN</p> </li> <li> <p>\"CH\" - SWITZERLAND</p> </li> <li> <p>\"US\" - UNITED STATES</p> </li> <li> <p>\"UK\" - UNITED KINGDOM</p> </li> </ul>"
+          "documentation": "<p>One of the following 2 letter country codes:</p> <ul> <li> <p>\"AL\" - ALBANIA</p> </li> <li> <p>\"AR\" - ARGENTINA</p> </li> <li> <p>\"AT\" - AUSTRIA</p> </li> <li> <p>\"AU\" - AUSTRALIA</p> </li> <li> <p>\"BA\" - BOSNIA HERZEGOVINA</p> </li> <li> <p>\"BE\" - BELGIUM</p> </li> <li> <p>\"BG\" - BULGARIA</p> </li> <li> <p>\"BO\" - BOLIVIA</p> </li> <li> <p>\"BR\" - BRAZIL</p> </li> <li> <p>\"BY\" - BELARUS</p> </li> <li> <p>\"CA\" - CANADA</p> </li> <li> <p>\"CL\" - CHILE</p> </li> <li> <p>\"CO\" - COLOMBIA</p> </li> <li> <p>\"CR\" - COSTA RICA</p> </li> <li> <p>\"HR\" - CROATIA</p> </li> <li> <p>\"CZ\" - CZECH REPUBLIC</p> </li> <li> <p>\"DK\" - DENMARK</p> </li> <li> <p>\"EC\" - ECUADOR</p> </li> <li> <p>\"EE\" - ESTONIA</p> </li> <li> <p>\"ET\" - ETHIOPIA</p> </li> <li> <p>\"FI\" - FINLAND</p> </li> <li> <p>\"FR\" - FRANCE</p> </li> <li> <p>\"DE\" - GERMANY</p> </li> <li> <p>\"GR\" - GREECE</p> </li> <li> <p>\"HU\" - HUNGARY</p> </li> <li> <p>\"IS\" - ICELAND</p> </li> <li> <p>\"IN\" - INDIA</p> </li> <li> <p>\"IE\" - IRELAND</p> </li> <li> <p>\"IT\" - ITALY</p> </li> <li> <p>\"JP\" - JAPAN</p> </li> <li> <p>\"KZ\" - KAZAKHSTAN</p> </li> <li> <p>\"KR\" - KOREA</p> </li> <li> <p>\"LV\" - LATVIA</p> </li> <li> <p>\"LI\" - LIECHTENSTEIN</p> </li> <li> <p>\"LT\" - LITHUANIA</p> </li> <li> <p>\"LU\" - LUXEMBOURG</p> </li> <li> <p>\"MK\" - MACEDONIA</p> </li> <li> <p>\"MT\" - MALTA</p> </li> <li> <p>\"MX\" - MEXICO</p> </li> <li> <p>\"MD\" - MOLDOVA</p> </li> <li> <p>\"ME\" - MONTENEGRO</p> </li> <li> <p>\"NL\" - NETHERLANDS</p> </li> <li> <p>\"NZ\" - NEW ZEALAND</p> </li> <li> <p>\"NI\" - NICARAGUA</p> </li> <li> <p>\"NG\" - NIGERIA</p> </li> <li> <p>\"NO\" - NORWAY</p> </li> <li> <p>\"PA\" - PANAMA</p> </li> <li> <p>\"PY\" - PARAGUAY</p> </li> <li> <p>\"PE\" - PERU</p> </li> <li> <p>\"PL\" - POLAND</p> </li> <li> <p>\"PT\" - PORTUGAL</p> </li> <li> <p>\"RO\" - ROMANIA</p> </li> <li> <p>\"RU\" - RUSSIA</p> </li> <li> <p>\"RS\" - SERBIA</p> </li> <li> <p>\"SK\" - SLOVAKIA</p> </li> <li> <p>\"SI\" - SLOVENIA</p> </li> <li> <p>\"ZA\" - SOUTH AFRICA</p> </li> <li> <p>\"ES\" - SPAIN</p> </li> <li> <p>\"SE\" - SWEDEN</p> </li> <li> <p>\"CH\" - SWITZERLAND</p> </li> <li> <p>\"UA\" - UKRAINE</p> </li> <li> <p>\"AE\" - UNITED ARAB EMIRATES</p> </li> <li> <p>\"US\" - UNITED STATES</p> </li> <li> <p>\"UK\" - UNITED KINGDOM</p> </li> <li> <p>\"UY\" - URUGUAY</p> </li> <li> <p>\"VE\" - VENEZUELA</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p> <p>The only supported feature is a holiday calendar. If you use the calendar, all data in the datasets should belong to the same country as the calendar. For the holiday calendar data, see the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> web site.</p> <p>India and Korea's holidays are not included in the Jollyday library, but both are supported by Amazon Forecast. Their holidays are:</p> <p> <b>\"IN\" - INDIA</b> </p> <ul> <li> <p> <code>JANUARY 26 - REPUBLIC DAY</code> </p> </li> <li> <p> <code>AUGUST 15 - INDEPENDENCE DAY</code> </p> </li> <li> <p> <code>OCTOBER 2 GANDHI'S BIRTHDAY</code> </p> </li> </ul> <p> <b>\"KR\" - KOREA</b> </p> <ul> <li> <p> <code>JANUARY 1 - NEW YEAR</code> </p> </li> <li> <p> <code>MARCH 1 - INDEPENDENCE MOVEMENT DAY</code> </p> </li> <li> <p> <code>MAY 5 - CHILDREN'S DAY</code> </p> </li> <li> <p> <code>JUNE 6 - MEMORIAL DAY</code> </p> </li> <li> <p> <code>AUGUST 15 - LIBERATION DAY</code> </p> </li> <li> <p> <code>OCTOBER 3 - NATIONAL FOUNDATION DAY</code> </p> </li> <li> <p> <code>OCTOBER 9 - HANGEUL DAY</code> </p> </li> <li> <p> <code>DECEMBER 25 - CHRISTMAS DAY</code> </p> </li> </ul>"
+      "documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object.</p> <p>The only supported feature is Holidays. If you use the calendar, all data in the datasets should belong to the same country as the calendar. For the holiday calendar data, see the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> website.</p>"
     },
     "SupplementaryFeatures": {
       "type": "list",

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.789.0-->
+<!--LATEST=2.790.0-->
 <!--ENTRYINSERT-->
+
+## 2.790.0
+* feature: Amplify: Whereas previously custom headers were set via the app's buildspec, custom headers can now be set directly on the Amplify app for both ci/cd and manual deploy apps.
+* feature: DataBrew: This is the initial SDK release for AWS Glue DataBrew. DataBrew is a visual data preparation tool that enables users to clean and normalize data without writing any code.
+* feature: ForecastService: Providing support of custom quantiles in CreatePredictor API.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for Automated ABR encoding and improved the reliability of embedded captions in accelerated outputs.
+* feature: QuickSight: QuickSight now supports Column-level security and connecting to Oracle data source.
+* feature: ServiceCatalog: Adding support to remove a Provisioned Product launch role via UpdateProvisionedProductProperties
 
 ## 2.789.0
 * feature: EC2: This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services

@@ -233,5 +233,6 @@ module.exports = {
   SSOAdmin: require('./ssoadmin'),
   TimestreamQuery: require('./timestreamquery'),
   TimestreamWrite: require('./timestreamwrite'),
-  S3Outposts: require('./s3outposts')
+  S3Outposts: require('./s3outposts'),
+  DataBrew: require('./databrew')
 };
