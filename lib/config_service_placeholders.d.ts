@@ -235,6 +235,7 @@ export abstract class ConfigurationServicePlaceholders {
   timestreamwrite?: AWS.TimestreamWrite.Types.ClientConfiguration;
   s3outposts?: AWS.S3Outposts.Types.ClientConfiguration;
   databrew?: AWS.DataBrew.Types.ClientConfiguration;
+  servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -472,4 +473,5 @@ export interface ConfigurationServiceApiVersions {
   timestreamwrite?: AWS.TimestreamWrite.Types.apiVersion;
   s3outposts?: AWS.S3Outposts.Types.apiVersion;
   databrew?: AWS.DataBrew.Types.apiVersion;
+  servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.apiVersion;
 }

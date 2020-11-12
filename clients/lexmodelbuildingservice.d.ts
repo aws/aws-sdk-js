@@ -1595,7 +1595,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-US"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**

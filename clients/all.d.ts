@@ -233,3 +233,4 @@ export import TimestreamQuery = require('./timestreamquery');
 export import TimestreamWrite = require('./timestreamwrite');
 export import S3Outposts = require('./s3outposts');
 export import DataBrew = require('./databrew');
+export import ServiceCatalogAppRegistry = require('./servicecatalogappregistry');

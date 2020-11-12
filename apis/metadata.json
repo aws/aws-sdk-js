@@ -915,5 +915,9 @@
   },
   "databrew": {
     "name": "DataBrew"
+  },
+  "servicecatalogappregistry": {
+    "prefix": "servicecatalog-appregistry",
+    "name": "ServiceCatalogAppRegistry"
   }
 }
