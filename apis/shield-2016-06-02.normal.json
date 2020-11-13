@@ -186,6 +186,40 @@
       ],
       "documentation": "<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p> <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href=\"https://console.aws.amazon.com/waf/\">AWS WAF console</a>. For more information see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with AWS Shield Advanced</a> and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Add AWS Shield Advanced Protection to more AWS Resources</a>.</p>"
     },
+    "CreateProtectionGroup": {
+      "name": "CreateProtectionGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateProtectionGroupRequest"
+      },
+      "output": {
+        "shape": "CreateProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "LimitsExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
+    },
     "CreateSubscription": {
       "name": "CreateSubscription",
       "http": {
@@ -232,6 +266,31 @@
         }
       ],
       "documentation": "<p>Deletes an AWS Shield Advanced <a>Protection</a>.</p>"
+    },
+    "DeleteProtectionGroup": {
+      "name": "DeleteProtectionGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteProtectionGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes the specified protection group.</p>"
     },
     "DeleteSubscription": {
       "name": "DeleteSubscription",
@@ -280,6 +339,25 @@
         }
       ],
       "documentation": "<p>Describes the details of a DDoS attack. </p>"
+    },
+    "DescribeAttackStatistics": {
+      "name": "DescribeAttackStatistics",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAttackStatisticsRequest"
+      },
+      "output": {
+        "shape": "DescribeAttackStatisticsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>Provides information about the number and type of attacks AWS Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers.</p> <p>The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is <code>2020-10-26 15:39:32 PDT</code>, equal to <code>2020-10-26 22:39:32 UTC</code>, then the time range for the attack data returned is from <code>2019-10-26 00:00:00 UTC</code> to <code>2020-10-26 00:00:00 UTC</code>. </p> <p>The time range indicates the period covered by the attack statistics data items.</p>"
     },
     "DescribeDRTAccess": {
       "name": "DescribeDRTAccess",
@@ -349,6 +427,28 @@
         }
       ],
       "documentation": "<p>Lists the details of a <a>Protection</a> object.</p>"
+    },
+    "DescribeProtectionGroup": {
+      "name": "DescribeProtectionGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeProtectionGroupRequest"
+      },
+      "output": {
+        "shape": "DescribeProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the specification for the specified protection group.</p>"
     },
     "DescribeSubscription": {
       "name": "DescribeSubscription",
@@ -568,6 +668,31 @@
       ],
       "documentation": "<p>Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.</p>"
     },
+    "ListProtectionGroups": {
+      "name": "ListProtectionGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListProtectionGroupsRequest"
+      },
+      "output": {
+        "shape": "ListProtectionGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidPaginationTokenException"
+        }
+      ],
+      "documentation": "<p>Retrieves the <a>ProtectionGroup</a> objects for the account.</p>"
+    },
     "ListProtections": {
       "name": "ListProtections",
       "http": {
@@ -592,6 +717,31 @@
         }
       ],
       "documentation": "<p>Lists all <a>Protection</a> objects for the account.</p>"
+    },
+    "ListResourcesInProtectionGroup": {
+      "name": "ListResourcesInProtectionGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListResourcesInProtectionGroupRequest"
+      },
+      "output": {
+        "shape": "ListResourcesInProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidPaginationTokenException"
+        }
+      ],
+      "documentation": "<p>Retrieves the resources that are included in the protection group. </p>"
     },
     "UpdateEmergencyContactSettings": {
       "name": "UpdateEmergencyContactSettings",
@@ -620,6 +770,34 @@
         }
       ],
       "documentation": "<p>Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+    },
+    "UpdateProtectionGroup": {
+      "name": "UpdateProtectionGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateProtectionGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateProtectionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Updates an existing protection group. A protection group is a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
     },
     "UpdateSubscription": {
       "name": "UpdateSubscription",
@@ -793,7 +971,7 @@
         },
         "TopContributors": {
           "shape": "TopContributors",
-          "documentation": "<p>The array of <a>Contributor</a> objects that includes the top five contributors to an attack. </p>"
+          "documentation": "<p>The array of contributor objects that includes the top five contributors to an attack. </p>"
         },
         "Unit": {
           "shape": "Unit",
@@ -818,6 +996,29 @@
         "WORDPRESS_PINGBACK_REFLECTOR",
         "WORDPRESS_PINGBACK_SOURCE"
       ]
+    },
+    "AttackStatisticsDataItem": {
+      "type": "structure",
+      "required": [
+        "AttackCount"
+      ],
+      "members": {
+        "AttackVolume": {
+          "shape": "AttackVolume",
+          "documentation": "<p>Information about the volume of attacks during the time period. If the accompanying <code>AttackCount</code> is zero, this setting might be empty.</p>"
+        },
+        "AttackCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of attacks detected during the time period. This is always present, but might be zero. </p>"
+        }
+      },
+      "documentation": "<p>A single attack statistics data record. This is returned by <a>DescribeAttackStatistics</a> along with a time range indicating the time period that the attack statistics apply to. </p>"
+    },
+    "AttackStatisticsDataList": {
+      "type": "list",
+      "member": {
+        "shape": "AttackStatisticsDataItem"
+      }
     },
     "AttackSummaries": {
       "type": "list",
@@ -873,6 +1074,37 @@
         "shape": "AttackVectorDescription"
       }
     },
+    "AttackVolume": {
+      "type": "structure",
+      "members": {
+        "BitsPerSecond": {
+          "shape": "AttackVolumeStatistics",
+          "documentation": "<p>A statistics object that uses bits per second as the unit. This is included for network level attacks. </p>"
+        },
+        "PacketsPerSecond": {
+          "shape": "AttackVolumeStatistics",
+          "documentation": "<p>A statistics object that uses packets per second as the unit. This is included for network level attacks. </p>"
+        },
+        "RequestsPerSecond": {
+          "shape": "AttackVolumeStatistics",
+          "documentation": "<p>A statistics object that uses requests per second as the unit. This is included for application level attacks, and is only available for accounts that are subscribed to Shield Advanced.</p>"
+        }
+      },
+      "documentation": "<p>Information about the volume of attacks during the time period, included in an <a>AttackStatisticsDataItem</a>. If the accompanying <code>AttackCount</code> in the statistics object is zero, this setting might be empty.</p>"
+    },
+    "AttackVolumeStatistics": {
+      "type": "structure",
+      "required": [
+        "Max"
+      ],
+      "members": {
+        "Max": {
+          "shape": "Double",
+          "documentation": "<p>The maximum attack volume observed for the given unit.</p>"
+        }
+      },
+      "documentation": "<p>Statistics objects for the various data types in <a>AttackVolume</a>. </p>"
+    },
     "AutoRenew": {
       "type": "string",
       "enum": [
@@ -899,6 +1131,40 @@
         }
       },
       "documentation": "<p>A contributor to the attack and their contribution.</p>"
+    },
+    "CreateProtectionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId",
+        "Aggregation",
+        "Pattern"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        },
+        "Aggregation": {
+          "shape": "ProtectionGroupAggregation",
+          "documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p> <ul> <li> <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p> </li> <li> <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p> </li> <li> <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p> </li> </ul>"
+        },
+        "Pattern": {
+          "shape": "ProtectionGroupPattern",
+          "documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type. </p>"
+        },
+        "ResourceType": {
+          "shape": "ProtectedResourceType",
+          "documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. Newly protected resources of this type are automatically added to the group. You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        },
+        "Members": {
+          "shape": "ProtectionGroupMembers",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        }
+      }
+    },
+    "CreateProtectionGroupResponse": {
+      "type": "structure",
+      "members": {}
     },
     "CreateProtectionRequest": {
       "type": "structure",
@@ -931,6 +1197,22 @@
       "members": {}
     },
     "CreateSubscriptionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteProtectionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        }
+      }
+    },
+    "DeleteProtectionGroupResponse": {
       "type": "structure",
       "members": {}
     },
@@ -981,6 +1263,26 @@
         }
       }
     },
+    "DescribeAttackStatisticsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeAttackStatisticsResponse": {
+      "type": "structure",
+      "required": [
+        "TimeRange",
+        "DataItems"
+      ],
+      "members": {
+        "TimeRange": {
+          "shape": "TimeRange"
+        },
+        "DataItems": {
+          "shape": "AttackStatisticsDataList",
+          "documentation": "<p>The data that describes the attacks detected during the time period.</p>"
+        }
+      }
+    },
     "DescribeDRTAccessRequest": {
       "type": "structure",
       "members": {}
@@ -1008,6 +1310,30 @@
         "EmergencyContactList": {
           "shape": "EmergencyContactList",
           "documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+        }
+      }
+    },
+    "DescribeProtectionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        }
+      }
+    },
+    "DescribeProtectionGroupResponse": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroup"
+      ],
+      "members": {
+        "ProtectionGroup": {
+          "shape": "ProtectionGroup",
+          "documentation": "<p>A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
         }
       }
     },
@@ -1224,7 +1550,7 @@
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          "documentation": "<p>The maximum number of <a>AttackSummary</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
         }
       }
     },
@@ -1237,7 +1563,36 @@
         },
         "NextToken": {
           "shape": "Token",
-          "documentation": "<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          "documentation": "<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>Shield Advanced might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more attack summary objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>"
+        }
+      }
+    },
+    "ListProtectionGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>The next token value from a previous call to <code>ListProtectionGroups</code>. Pass null if this is the first call.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of <a>ProtectionGroup</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
+        }
+      }
+    },
+    "ListProtectionGroupsResponse": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroups"
+      ],
+      "members": {
+        "ProtectionGroups": {
+          "shape": "ProtectionGroups",
+          "documentation": "<p/>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more protection groups than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. </p>"
         }
       }
     },
@@ -1250,7 +1605,7 @@
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of <a>Protection</a> objects to be returned. If this is left blank the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          "documentation": "<p>The maximum number of <a>Protection</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
         }
       }
     },
@@ -1263,7 +1618,43 @@
         },
         "NextToken": {
           "shape": "Token",
-          "documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          "documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>Shield Advanced might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>"
+        }
+      }
+    },
+    "ListResourcesInProtectionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>The next token value from a previous call to <code>ListResourcesInProtectionGroup</code>. Pass null if this is the first call.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of resource ARN objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>"
+        }
+      }
+    },
+    "ListResourcesInProtectionGroupResponse": {
+      "type": "structure",
+      "required": [
+        "ResourceArns"
+      ],
+      "members": {
+        "ResourceArns": {
+          "shape": "ResourceArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the resources that are included in the protection group.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more resources in the protection group than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. </p>"
         }
       }
     },
@@ -1320,6 +1711,17 @@
         "PENDING"
       ]
     },
+    "ProtectedResourceType": {
+      "type": "string",
+      "enum": [
+        "CLOUDFRONT_DISTRIBUTION",
+        "ROUTE_53_HOSTED_ZONE",
+        "ELASTIC_IP_ALLOCATION",
+        "CLASSIC_LOAD_BALANCER",
+        "APPLICATION_LOAD_BALANCER",
+        "GLOBAL_ACCELERATOR"
+      ]
+    },
     "Protection": {
       "type": "structure",
       "members": {
@@ -1329,7 +1731,7 @@
         },
         "Name": {
           "shape": "ProtectionName",
-          "documentation": "<p>The friendly name of the protection. For example, <code>My CloudFront distributions</code>.</p>"
+          "documentation": "<p>The name of the protection. For example, <code>My CloudFront distributions</code>.</p>"
         },
         "ResourceArn": {
           "shape": "ResourceArn",
@@ -1342,11 +1744,136 @@
       },
       "documentation": "<p>An object that represents a resource that is under DDoS protection.</p>"
     },
+    "ProtectionGroup": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId",
+        "Aggregation",
+        "Pattern",
+        "Members"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        },
+        "Aggregation": {
+          "shape": "ProtectionGroupAggregation",
+          "documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p> <ul> <li> <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p> </li> <li> <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p> </li> <li> <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p> </li> </ul>"
+        },
+        "Pattern": {
+          "shape": "ProtectionGroupPattern",
+          "documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.</p>"
+        },
+        "ResourceType": {
+          "shape": "ProtectedResourceType",
+          "documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        },
+        "Members": {
+          "shape": "ProtectionGroupMembers",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        }
+      },
+      "documentation": "<p>A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
+    },
+    "ProtectionGroupAggregation": {
+      "type": "string",
+      "enum": [
+        "SUM",
+        "MEAN",
+        "MAX"
+      ]
+    },
+    "ProtectionGroupArbitraryPatternLimits": {
+      "type": "structure",
+      "required": [
+        "MaxMembers"
+      ],
+      "members": {
+        "MaxMembers": {
+          "shape": "Long",
+          "documentation": "<p>The maximum number of resources you can specify for a single arbitrary pattern in a protection group.</p>"
+        }
+      },
+      "documentation": "<p>Limits settings on protection groups with arbitrary pattern type. </p>"
+    },
+    "ProtectionGroupId": {
+      "type": "string",
+      "max": 36,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9\\\\-]*"
+    },
+    "ProtectionGroupLimits": {
+      "type": "structure",
+      "required": [
+        "MaxProtectionGroups",
+        "PatternTypeLimits"
+      ],
+      "members": {
+        "MaxProtectionGroups": {
+          "shape": "Long",
+          "documentation": "<p>The maximum number of protection groups that you can have at one time. </p>"
+        },
+        "PatternTypeLimits": {
+          "shape": "ProtectionGroupPatternTypeLimits",
+          "documentation": "<p>Limits settings by pattern type in the protection groups for your subscription. </p>"
+        }
+      },
+      "documentation": "<p>Limits settings on protection groups for your subscription. </p>"
+    },
+    "ProtectionGroupMembers": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceArn"
+      },
+      "max": 10000,
+      "min": 0
+    },
+    "ProtectionGroupPattern": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ARBITRARY",
+        "BY_RESOURCE_TYPE"
+      ]
+    },
+    "ProtectionGroupPatternTypeLimits": {
+      "type": "structure",
+      "required": [
+        "ArbitraryPatternLimits"
+      ],
+      "members": {
+        "ArbitraryPatternLimits": {
+          "shape": "ProtectionGroupArbitraryPatternLimits",
+          "documentation": "<p>Limits settings on protection groups with arbitrary pattern type. </p>"
+        }
+      },
+      "documentation": "<p>Limits settings by pattern type in the protection groups for your subscription. </p>"
+    },
+    "ProtectionGroups": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectionGroup"
+      }
+    },
     "ProtectionId": {
       "type": "string",
       "max": 36,
       "min": 1,
       "pattern": "[a-zA-Z0-9\\\\-]*"
+    },
+    "ProtectionLimits": {
+      "type": "structure",
+      "required": [
+        "ProtectedResourceTypeLimits"
+      ],
+      "members": {
+        "ProtectedResourceTypeLimits": {
+          "shape": "Limits",
+          "documentation": "<p>The maximum number of resource types that you can specify in a protection.</p>"
+        }
+      },
+      "documentation": "<p>Limits settings on protections for your subscription. </p>"
     },
     "ProtectionName": {
       "type": "string",
@@ -1367,6 +1894,12 @@
       "pattern": "^arn:aws.*"
     },
     "ResourceArnFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceArn"
+      }
+    },
+    "ResourceArnList": {
       "type": "list",
       "member": {
         "shape": "ResourceArn"
@@ -1418,6 +1951,9 @@
     },
     "Subscription": {
       "type": "structure",
+      "required": [
+        "SubscriptionLimits"
+      ],
       "members": {
         "StartTime": {
           "shape": "Timestamp",
@@ -1442,9 +1978,31 @@
         "ProactiveEngagementStatus": {
           "shape": "ProactiveEngagementStatus",
           "documentation": "<p>If <code>ENABLED</code>, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p> <p>If <code>PENDING</code>, you have requested proactive engagement and the request is pending. The status changes to <code>ENABLED</code> when your request is fully processed.</p> <p>If <code>DISABLED</code>, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. </p>"
+        },
+        "SubscriptionLimits": {
+          "shape": "SubscriptionLimits",
+          "documentation": "<p>Limits settings for your subscription. </p>"
         }
       },
       "documentation": "<p>Information about the AWS Shield Advanced subscription for an account.</p>"
+    },
+    "SubscriptionLimits": {
+      "type": "structure",
+      "required": [
+        "ProtectionLimits",
+        "ProtectionGroupLimits"
+      ],
+      "members": {
+        "ProtectionLimits": {
+          "shape": "ProtectionLimits",
+          "documentation": "<p>Limits settings on protections for your subscription. </p>"
+        },
+        "ProtectionGroupLimits": {
+          "shape": "ProtectionGroupLimits",
+          "documentation": "<p>Limits settings on protection groups for your subscription. </p>"
+        }
+      },
+      "documentation": "<p>Limits settings for your subscription. </p>"
     },
     "SubscriptionState": {
       "type": "string",
@@ -1524,7 +2082,7 @@
           "documentation": "<p>The end time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         }
       },
-      "documentation": "<p>The time range.</p>"
+      "documentation": "<p>The time range. </p>"
     },
     "Timestamp": {
       "type": "timestamp"
@@ -1560,6 +2118,40 @@
       }
     },
     "UpdateEmergencyContactSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateProtectionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "ProtectionGroupId",
+        "Aggregation",
+        "Pattern"
+      ],
+      "members": {
+        "ProtectionGroupId": {
+          "shape": "ProtectionGroupId",
+          "documentation": "<p>The name of the protection group. You use this to identify the protection group in lists and to manage the protection group, for example to update, delete, or describe it. </p>"
+        },
+        "Aggregation": {
+          "shape": "ProtectionGroupAggregation",
+          "documentation": "<p>Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.</p> <ul> <li> <p>Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.</p> </li> <li> <p>Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.</p> </li> <li> <p>Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.</p> </li> </ul>"
+        },
+        "Pattern": {
+          "shape": "ProtectionGroupPattern",
+          "documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.</p>"
+        },
+        "ResourceType": {
+          "shape": "ProtectedResourceType",
+          "documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        },
+        "Members": {
+          "shape": "ProtectionGroupMembers",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        }
+      }
+    },
+    "UpdateProtectionGroupResponse": {
       "type": "structure",
       "members": {}
     },

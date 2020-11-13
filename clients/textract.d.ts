@@ -107,6 +107,10 @@ declare namespace Textract {
      */
     Text?: String;
     /**
+     * The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.
+     */
+    TextType?: TextType;
+    /**
      * The row in which a table cell is located. The first row position is 1. RowIndex isn't returned by DetectDocumentText and GetDocumentTextDetection.
      */
     RowIndex?: UInteger;
@@ -361,6 +365,7 @@ declare namespace Textract {
   export type JobId = string;
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
   export type JobTag = string;
+  export type KMSKeyId = string;
   export type MaxResults = number;
   export type NonEmptyString = string;
   export interface NotificationChannel {
@@ -454,6 +459,10 @@ declare namespace Textract {
      * Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.
      */
     OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+     */
+    KMSKeyId?: KMSKeyId;
   }
   export interface StartDocumentAnalysisResponse {
     /**
@@ -482,6 +491,10 @@ declare namespace Textract {
      * Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.
      */
     OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+     */
+    KMSKeyId?: KMSKeyId;
   }
   export interface StartDocumentTextDetectionResponse {
     /**
@@ -491,6 +504,7 @@ declare namespace Textract {
   }
   export type StatusMessage = string;
   export type String = string;
+  export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
   export interface Warning {
     /**
