@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.792.0-->
+<!--LATEST=2.793.0-->
 <!--ENTRYINSERT-->
+
+## 2.793.0
+* feature: CodePipeline: We show details about inbound executions and id of action executions in GetPipelineState API. We also add ConflictException to StartPipelineExecution, RetryStageExecution, StopPipelineExecution APIs.
+* feature: DMS: Adding MoveReplicationTask feature to move replication tasks between instances
+* feature: IoTSecureTunneling: Support using multiple data streams per tunnel using the Secure Tunneling multiplexing feature.
+* feature: IoTSiteWise: This release supports Unicode characters for string operations in formulae computes in SiteWise. For more information, search for SiteWise in Amazon What's new or refer the SiteWise documentation.
+* feature: QuickSight: Adding new parameters for dashboard persistence
+* feature: SageMaker: This feature enables customers to encrypt their Amazon SageMaker Studio storage volumes with customer master keys (CMKs) managed by them in AWS Key Management Service (KMS).
+* feature: ServiceCatalog: Support import of CloudFormation stacks into Service Catalog provisioned products.
+* feature: Synthetics: AWS Synthetics now supports Environment Variables  to assign runtime parameters in the canary scripts.
 
 ## 2.792.0
 * feature: ELBv2: Adds dualstack support for Network Load Balancers (TCP/TLS only), an attribute for WAF fail open for Application Load Balancers, and an attribute for connection draining for Network Load Balancers.

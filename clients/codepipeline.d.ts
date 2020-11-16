@@ -455,6 +455,10 @@ declare namespace CodePipeline {
   }
   export interface ActionExecution {
     /**
+     * ID of the workflow action execution in the current stage. Use the GetPipelineState action to retrieve the current action execution details of the current stage.  For older executions, this field might be empty. The action execution ID is available for executions run on or after March 2020. 
+     */
+    actionExecutionId?: ActionExecutionId;
+    /**
      * The status of the action, or for a completed action, the last status of the action.
      */
     status?: ActionExecutionStatus;
@@ -664,11 +668,11 @@ declare namespace CodePipeline {
   }
   export interface ActionTypeId {
     /**
-     * A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. 
+     * A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values.    Source   Build   Test   Deploy   Invoke   Approval  
      */
     category: ActionCategory;
     /**
-     * The creator of the action being called.
+     * The creator of the action being called. There are three valid values for the Owner field in the action category section within your pipeline structure: AWS, ThirdParty, and Custom. For more information, see Valid Action Types and Providers in CodePipeline.
      */
     owner: ActionOwner;
     /**
@@ -824,7 +828,7 @@ declare namespace CodePipeline {
   export type ContinuationToken = string;
   export interface CreateCustomActionTypeInput {
     /**
-     * The category of the custom action, such as a build action or a test action.  Although Source and Approval are listed as valid values, they are not currently functional. These values are reserved for future use. 
+     * The category of the custom action, such as a build action or a test action.
      */
     category: ActionCategory;
     /**
@@ -1418,7 +1422,7 @@ declare namespace CodePipeline {
   }
   export interface PipelineDeclaration {
     /**
-     * The name of the action to be performed.
+     * The name of the pipeline.
      */
     name: PipelineName;
     /**
@@ -1833,6 +1837,7 @@ declare namespace CodePipeline {
      * The name of the stage.
      */
     stageName?: StageName;
+    inboundExecution?: StageExecution;
     /**
      * The state of the inbound transition, which is either enabled or disabled.
      */

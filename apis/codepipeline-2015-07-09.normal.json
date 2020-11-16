@@ -820,6 +820,9 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "PipelineNotFoundException"
         },
         {
@@ -851,6 +854,9 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "PipelineNotFoundException"
         }
       ],
@@ -871,6 +877,9 @@
       "errors": [
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "PipelineNotFoundException"
@@ -1246,6 +1255,10 @@
     "ActionExecution": {
       "type": "structure",
       "members": {
+        "actionExecutionId": {
+          "shape": "ActionExecutionId",
+          "documentation": "<p>ID of the workflow action execution in the current stage. Use the <a>GetPipelineState</a> action to retrieve the current action execution details of the current stage.</p> <note> <p>For older executions, this field might be empty. The action execution ID is available for executions run on or after March 2020.</p> </note>"
+        },
         "status": {
           "shape": "ActionExecutionStatus",
           "documentation": "<p>The status of the action, or for a completed action, the last status of the action.</p>"
@@ -1559,11 +1572,11 @@
       "members": {
         "category": {
           "shape": "ActionCategory",
-          "documentation": "<p>A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. </p>"
+          "documentation": "<p>A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. </p> <ul> <li> <p>Source</p> </li> <li> <p>Build</p> </li> <li> <p>Test</p> </li> <li> <p>Deploy</p> </li> <li> <p>Invoke</p> </li> <li> <p>Approval</p> </li> </ul>"
         },
         "owner": {
           "shape": "ActionOwner",
-          "documentation": "<p>The creator of the action being called.</p>"
+          "documentation": "<p>The creator of the action being called. There are three valid values for the <code>Owner</code> field in the action category section within your pipeline structure: <code>AWS</code>, <code>ThirdParty</code>, and <code>Custom</code>. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers\">Valid Action Types and Providers in CodePipeline</a>.</p>"
         },
         "provider": {
           "shape": "ActionProvider",
@@ -1872,7 +1885,7 @@
       "members": {
         "category": {
           "shape": "ActionCategory",
-          "documentation": "<p>The category of the custom action, such as a build action or a test action.</p> <note> <p>Although <code>Source</code> and <code>Approval</code> are listed as valid values, they are not currently functional. These values are reserved for future use.</p> </note>"
+          "documentation": "<p>The category of the custom action, such as a build action or a test action.</p>"
         },
         "provider": {
           "shape": "ActionProvider",
@@ -2129,7 +2142,7 @@
     },
     "EncryptionKeyId": {
       "type": "string",
-      "max": 100,
+      "max": 400,
       "min": 1
     },
     "EncryptionKeyType": {
@@ -2858,7 +2871,7 @@
       "members": {
         "name": {
           "shape": "PipelineName",
-          "documentation": "<p>The name of the action to be performed.</p>"
+          "documentation": "<p>The name of the pipeline.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
@@ -3564,6 +3577,9 @@
         "stageName": {
           "shape": "StageName",
           "documentation": "<p>The name of the stage.</p>"
+        },
+        "inboundExecution": {
+          "shape": "StageExecution"
         },
         "inboundTransitionState": {
           "shape": "TransitionState",

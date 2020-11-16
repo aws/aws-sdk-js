@@ -3506,11 +3506,15 @@ declare namespace QuickSight {
     /**
      * Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables the undo/redo button.
      */
-    UndoRedoDisabled?: boolean;
+    UndoRedoDisabled?: Boolean;
     /**
      * Remove the reset button on the embedded dashboard. The default is FALSE, which enables the reset button.
      */
-    ResetDisabled?: boolean;
+    ResetDisabled?: Boolean;
+    /**
+     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
+     */
+    StatePersistenceEnabled?: Boolean;
     /**
      * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.   Omit this parameter for users in the third group – IAM users and IAM role-based sessions.
      */
