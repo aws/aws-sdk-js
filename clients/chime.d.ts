@@ -132,6 +132,14 @@ declare class Chime extends Service {
    */
   createMeeting(callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and joins them into Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall API with the corresponding SIP media application ID.
+   */
+  createMeetingDialOut(params: Chime.Types.CreateMeetingDialOutRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
+  /**
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and joins them into Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall API with the corresponding SIP media application ID.
+   */
+  createMeetingDialOut(callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
+  /**
    * Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   createMeetingWithAttendees(params: Chime.Types.CreateMeetingWithAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
@@ -171,6 +179,30 @@ declare class Chime extends Service {
    * Adds a member to a chat room in an Amazon Chime Enterprise account. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
+  /**
+   * Creates a SIP media application.
+   */
+  createSipMediaApplication(params: Chime.Types.CreateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Creates a SIP media application.
+   */
+  createSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   */
+  createSipMediaApplicationCall(params: Chime.Types.CreateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   */
+  createSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   */
+  createSipRule(params: Chime.Types.CreateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
+  /**
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   */
+  createSipRule(callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
   /**
    * Creates a user under the specified Amazon Chime account.
    */
@@ -259,6 +291,22 @@ declare class Chime extends Service {
    * Removes a member from a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoomMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP media application.
+   */
+  deleteSipMediaApplication(params: Chime.Types.DeleteSipMediaApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP media application.
+   */
+  deleteSipMediaApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   */
+  deleteSipRule(params: Chime.Types.DeleteSipRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   */
+  deleteSipRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
    */
@@ -452,6 +500,30 @@ declare class Chime extends Service {
    */
   getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   */
+  getSipMediaApplication(params: Chime.Types.GetSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
+  /**
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   */
+  getSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
+  /**
+   * Returns the logging configuration for the specified SIP media application.
+   */
+  getSipMediaApplicationLoggingConfiguration(params: Chime.Types.GetSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Returns the logging configuration for the specified SIP media application.
+   */
+  getSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   */
+  getSipRule(params: Chime.Types.GetSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
+  /**
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   */
+  getSipRule(callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
+  /**
    * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
    */
   getUser(params: Chime.Types.GetUserRequest, callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
@@ -636,6 +708,22 @@ declare class Chime extends Service {
    */
   listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
   /**
+   * Lists the SIP media applications under the administrator's AWS account.
+   */
+  listSipMediaApplications(params: Chime.Types.ListSipMediaApplicationsRequest, callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
+  /**
+   * Lists the SIP media applications under the administrator's AWS account.
+   */
+  listSipMediaApplications(callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
+  /**
+   * Lists the SIP rules under the administrator's AWS account.
+   */
+  listSipRules(params: Chime.Types.ListSipRulesRequest, callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
+  /**
+   * Lists the SIP rules under the administrator's AWS account.
+   */
+  listSipRules(callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
+  /**
    * Lists the tags applied to an Amazon Chime SDK meeting resource.
    */
   listTagsForResource(params: Chime.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Chime.Types.ListTagsForResourceResponse) => void): Request<Chime.Types.ListTagsForResourceResponse, AWSError>;
@@ -699,6 +787,14 @@ declare class Chime extends Service {
    * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide. To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
    */
   putRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
+  /**
+   * Updates the logging configuration for the specified SIP media application.
+   */
+  putSipMediaApplicationLoggingConfiguration(params: Chime.Types.PutSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Updates the logging configuration for the specified SIP media application.
+   */
+  putSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
    * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
    */
@@ -924,6 +1020,22 @@ declare class Chime extends Service {
    */
   updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
+   * Updates the details for the specified SIP media application.
+   */
+  updateSipMediaApplication(params: Chime.Types.UpdateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Updates the details for the specified SIP media application.
+   */
+  updateSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Updates the details for the specified SIP rule.
+   */
+  updateSipRule(params: Chime.Types.UpdateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
+  /**
+   * Updates the details for the specified SIP rule.
+   */
+  updateSipRule(callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
+  /**
    * Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action.
    */
   updateUser(params: Chime.Types.UpdateUserRequest, callback?: (err: AWSError, data: Chime.Types.UpdateUserResponse) => void): Request<Chime.Types.UpdateUserResponse, AWSError>;
@@ -1087,7 +1199,7 @@ declare namespace Chime {
   }
   export interface Attendee {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.
      */
     ExternalUserId?: ExternalUserIdType;
     /**
@@ -1285,14 +1397,11 @@ declare namespace Chime {
     Name: AccountName;
   }
   export interface CreateAccountResponse {
-    /**
-     * The Amazon Chime account details.
-     */
     Account?: Account;
   }
   export interface CreateAttendeeError {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.
      */
     ExternalUserId?: ExternalUserIdType;
     /**
@@ -1310,7 +1419,7 @@ declare namespace Chime {
      */
     MeetingId: GuidString;
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.
      */
     ExternalUserId: ExternalUserIdType;
     /**
@@ -1320,7 +1429,7 @@ declare namespace Chime {
   }
   export interface CreateAttendeeRequestItem {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.
      */
     ExternalUserId: ExternalUserIdType;
     /**
@@ -1354,6 +1463,30 @@ declare namespace Chime {
      * The bot details.
      */
     Bot?: Bot;
+  }
+  export interface CreateMeetingDialOutRequest {
+    /**
+     * The Amazon Chime SDK meeting ID. Type: String Pattern: [a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12} Required: No
+     */
+    MeetingId: GuidString;
+    /**
+     * Phone number used as the caller ID when the remote party receives a call.
+     */
+    FromPhoneNumber: E164PhoneNumber;
+    /**
+     * Phone number called when inviting someone to a meeting.
+     */
+    ToPhoneNumber: E164PhoneNumber;
+    /**
+     * Token used by the Amazon Chime SDK attendee. Call the  CreateAttendee API to get a join token. 
+     */
+    JoinToken: JoinTokenString;
+  }
+  export interface CreateMeetingDialOutResponse {
+    /**
+     * Unique ID that tracks API calls.
+     */
+    TransactionId?: GuidString;
   }
   export interface CreateMeetingRequest {
     /**
@@ -1526,6 +1659,74 @@ declare namespace Chime {
      */
     Room?: Room;
   }
+  export interface CreateSipMediaApplicationCallRequest {
+    /**
+     * The phone number that a user calls from.
+     */
+    FromPhoneNumber?: E164PhoneNumber;
+    /**
+     * The phone number that the user dials in order to connect to a meeting
+     */
+    ToPhoneNumber?: E164PhoneNumber;
+    /**
+     * The ID of the SIP media application.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface CreateSipMediaApplicationCallResponse {
+    /**
+     * The actual call.
+     */
+    SipMediaApplicationCall?: SipMediaApplicationCall;
+  }
+  export interface CreateSipMediaApplicationRequest {
+    /**
+     * AWS Region assigned to the SIP media application.
+     */
+    AwsRegion: String;
+    /**
+     * The SIP media application name.
+     */
+    Name?: SipMediaApplicationName;
+    /**
+     * List of endpoints (Lambda Amazon Resource Names) specified for the SIP media application. Currently, only one endpoint is supported.
+     */
+    Endpoints: SipMediaApplicationEndpointList;
+  }
+  export interface CreateSipMediaApplicationResponse {
+    /**
+     * The Sip media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface CreateSipRuleRequest {
+    /**
+     * The name of the SIP rule.
+     */
+    Name: SipRuleName;
+    /**
+     * The type of trigger whose value is assigned to the SIP rule in TriggerValue. Allowed trigger values are RequestUriHostname and ToPhoneNumber.
+     */
+    TriggerType: SipRuleTriggerType;
+    /**
+     * If TriggerType is RequestUriHostname then the value can be the outbound host name of an Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber then the value can be a customer-owned phone number in E164 format. SipRule is triggered if the SIP application requests a host name, or a If TriggerType is RequestUriHostname, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, then the value can be a customer-owned phone number in E164 format. SipRule is triggered if the SIP application requests a host name, or a ToPhoneNumber value matches the incoming SIP request.
+     */
+    TriggerValue: NonEmptyString;
+    /**
+     * Enables or disables a rule. You must disable rules before you can delete them.
+     */
+    Disabled?: NullableBoolean;
+    /**
+     * List of SIP media applications with priority and AWS Region. Only one SIP application per AWS Region can be used.
+     */
+    TargetApplications: SipRuleTargetApplicationList;
+  }
+  export interface CreateSipRuleResponse {
+    /**
+     * Returns the SIP rule information, including the rule ID, triggers, and target applications.
+     */
+    SipRule?: SipRule;
+  }
   export interface CreateUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -1684,6 +1885,18 @@ declare namespace Chime {
      */
     RoomId: NonEmptyString;
   }
+  export interface DeleteSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface DeleteSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
+  }
   export interface DeleteVoiceConnectorEmergencyCallingConfigurationRequest {
     /**
      * The Amazon Chime Voice Connector ID.
@@ -1819,6 +2032,7 @@ declare namespace Chime {
   }
   export type ExternalMeetingIdType = string;
   export type ExternalUserIdType = string;
+  export type FunctionArn = string;
   export type GeoMatchLevel = "Country"|"AreaCode"|string;
   export interface GeoMatchParams {
     /**
@@ -1837,9 +2051,6 @@ declare namespace Chime {
     AccountId: NonEmptyString;
   }
   export interface GetAccountResponse {
-    /**
-     * The Amazon Chime account details.
-     */
     Account?: Account;
   }
   export interface GetAccountSettingsRequest {
@@ -2005,6 +2216,42 @@ declare namespace Chime {
      * The room details.
      */
     Room?: Room;
+  }
+  export interface GetSipMediaApplicationLoggingConfigurationRequest {
+    /**
+     * The ID of the SIP media application.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface GetSipMediaApplicationLoggingConfigurationResponse {
+    /**
+     * The actual logging configuration.
+     */
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
+  }
+  export interface GetSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface GetSipMediaApplicationResponse {
+    /**
+     * The SIP media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface GetSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
+  }
+  export interface GetSipRuleResponse {
+    /**
+     * The SIP rule details.
+     */
+    SipRule?: SipRule;
   }
   export interface GetUserRequest {
     /**
@@ -2212,11 +2459,11 @@ declare namespace Chime {
   }
   export interface ListAccountsResponse {
     /**
-     * List of Amazon Chime accounts and account details.
+     * The list of accounts.
      */
     Accounts?: AccountList;
     /**
-     * The token to use to retrieve the next page of results.
+     * The account's user token.
      */
     NextToken?: String;
   }
@@ -2455,6 +2702,50 @@ declare namespace Chime {
      * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
+  }
+  export interface ListSipMediaApplicationsRequest {
+    /**
+     * The maximum number of results to return in a single call. Defaults to 100.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipMediaApplicationsResponse {
+    /**
+     * List of SIP media applications and application details.
+     */
+    SipMediaApplications?: SipMediaApplicationList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipRulesRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * The maximum number of results to return in a single call. Defaults to 100.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipRulesResponse {
+    /**
+     * List of SIP rules and rule details.
+     */
+    SipRules?: SipRuleList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -2812,7 +3103,7 @@ declare namespace Chime {
     AssociatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberAssociationList = PhoneNumberAssociation[];
-  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|string;
+  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId"|string;
   export interface PhoneNumberCapabilities {
     /**
      * Allows or denies inbound calling for the specified phone number.
@@ -3005,6 +3296,22 @@ declare namespace Chime {
      * The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.
      */
     InitiateDeletionTimestamp?: Iso8601Timestamp;
+  }
+  export interface PutSipMediaApplicationLoggingConfigurationRequest {
+    /**
+     * The ID of the specified SIP media application
+     */
+    SipMediaApplicationId: NonEmptyString;
+    /**
+     * The actual logging configuration.
+     */
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
+  }
+  export interface PutSipMediaApplicationLoggingConfigurationResponse {
+    /**
+     * The actual logging configuration.
+     */
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
   }
   export interface PutVoiceConnectorEmergencyCallingConfigurationRequest {
     /**
@@ -3309,6 +3616,106 @@ declare namespace Chime {
     GroupName?: NonEmptyString;
   }
   export type SigninDelegateGroupList = SigninDelegateGroup[];
+  export type SipApplicationPriority = number;
+  export interface SipMediaApplication {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * The AWS Region in which the SIP media application is created.
+     */
+    AwsRegion?: String;
+    /**
+     * The name of the SIP media application.
+     */
+    Name?: SipMediaApplicationName;
+    /**
+     * List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.
+     */
+    Endpoints?: SipMediaApplicationEndpointList;
+    /**
+     * The SIP media application creation timestamp, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The SIP media application updated timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export interface SipMediaApplicationCall {
+    /**
+     * The transaction ID of a call.
+     */
+    TransactionId?: GuidString;
+  }
+  export interface SipMediaApplicationEndpoint {
+    /**
+     * Valid Amazon Resource Name (ARN) of the Lambda function of the same AWS Region where the SIP media application is created.
+     */
+    LambdaArn?: FunctionArn;
+  }
+  export type SipMediaApplicationEndpointList = SipMediaApplicationEndpoint[];
+  export type SipMediaApplicationList = SipMediaApplication[];
+  export interface SipMediaApplicationLoggingConfiguration {
+    /**
+     * Enables application message logs for the SIP media application.
+     */
+    EnableSipMediaApplicationMessageLogs?: Boolean;
+  }
+  export type SipMediaApplicationName = string;
+  export interface SipRule {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId?: NonEmptyString;
+    /**
+     * The name of the SIP rule.
+     */
+    Name?: SipRuleName;
+    /**
+     * Indicates if the SIP rule is enabled or disabled. You must disable a rule before you can delete it.
+     */
+    Disabled?: Boolean;
+    /**
+     * The type of trigger whose value is assigned to the SIP rule in TriggerValue.
+     */
+    TriggerType?: SipRuleTriggerType;
+    /**
+     * If TriggerType is RequestUriHostname, then the value can be the outbound host name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, then the value can be a customer-owned phone number in E164 format. SipRule is triggered when a SIP rule requests host name or ToPhoneNumber matches in the incoming SIP request.
+     */
+    TriggerValue?: NonEmptyString;
+    /**
+     * List of SIP media applications with priority and AWS Region. You can only use one SIP application per AWS Region and priority combination.
+     */
+    TargetApplications?: SipRuleTargetApplicationList;
+    /**
+     * The SIP rule created timestamp, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The SIP rule updated timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type SipRuleList = SipRule[];
+  export type SipRuleName = string;
+  export interface SipRuleTargetApplication {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * Priority of the SIP media application in the target list.
+     */
+    Priority?: SipApplicationPriority;
+    /**
+     * AWS Region of target application.
+     */
+    AwsRegion?: String;
+  }
+  export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
+  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
   export interface StreamingConfiguration {
     /**
      * The retention period, in hours, for the Amazon Kinesis data.
@@ -3473,9 +3880,6 @@ declare namespace Chime {
     Name?: AccountName;
   }
   export interface UpdateAccountResponse {
-    /**
-     * The updated Amazon Chime account details.
-     */
     Account?: Account;
   }
   export interface UpdateAccountSettingsRequest {
@@ -3628,6 +4032,50 @@ declare namespace Chime {
      * The room details.
      */
     Room?: Room;
+  }
+  export interface UpdateSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+    /**
+     * The new name for the specified SIP media application.
+     */
+    Name?: SipMediaApplicationName;
+    /**
+     * The new set of endpoints for the specified SIP media application.
+     */
+    Endpoints?: SipMediaApplicationEndpointList;
+  }
+  export interface UpdateSipMediaApplicationResponse {
+    /**
+     * The updated SIP media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface UpdateSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
+    /**
+     * The new name for the specified SIP rule.
+     */
+    Name: SipRuleName;
+    /**
+     * The new value specified to indicate whether the rule is disabled.
+     */
+    Disabled?: NullableBoolean;
+    /**
+     * The new value of the list of target applications.
+     */
+    TargetApplications?: SipRuleTargetApplicationList;
+  }
+  export interface UpdateSipRuleResponse {
+    /**
+     * Updated SIP rule details.
+     */
+    SipRule?: SipRule;
   }
   export interface UpdateUserRequest {
     /**

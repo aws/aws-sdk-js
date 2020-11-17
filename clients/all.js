@@ -235,5 +235,6 @@ module.exports = {
   TimestreamWrite: require('./timestreamwrite'),
   S3Outposts: require('./s3outposts'),
   DataBrew: require('./databrew'),
-  ServiceCatalogAppRegistry: require('./servicecatalogappregistry')
+  ServiceCatalogAppRegistry: require('./servicecatalogappregistry'),
+  NetworkFirewall: require('./networkfirewall')
 };

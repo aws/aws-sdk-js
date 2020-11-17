@@ -598,6 +598,44 @@
       ],
       "documentation": "<p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html\">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
+    "CreateMeetingDialOut": {
+      "name": "CreateMeetingDialOut",
+      "http": {
+        "method": "POST",
+        "requestUri": "/meetings/{meetingId}/dial-outs",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateMeetingDialOutRequest"
+      },
+      "output": {
+        "shape": "CreateMeetingDialOutResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and joins them into Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> API with the corresponding SIP media application ID.</p>"
+    },
     "CreateMeetingWithAttendees": {
       "name": "CreateMeetingWithAttendees",
       "http": {
@@ -799,6 +837,132 @@
         }
       ],
       "documentation": "<p>Adds a member to a chat room in an Amazon Chime Enterprise account. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.</p>"
+    },
+    "CreateSipMediaApplication": {
+      "name": "CreateSipMediaApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/sip-media-applications",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateSipMediaApplicationRequest"
+      },
+      "output": {
+        "shape": "CreateSipMediaApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a SIP media application.</p>"
+    },
+    "CreateSipMediaApplicationCall": {
+      "name": "CreateSipMediaApplicationCall",
+      "http": {
+        "method": "POST",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}/calls",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateSipMediaApplicationCallRequest"
+      },
+      "output": {
+        "shape": "CreateSipMediaApplicationCallResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified <code>sipMediaApplicationId</code>.</p>"
+    },
+    "CreateSipRule": {
+      "name": "CreateSipRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/sip-rules",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateSipRuleRequest"
+      },
+      "output": {
+        "shape": "CreateSipRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.</p>"
     },
     "CreateUser": {
       "name": "CreateUser",
@@ -1205,6 +1369,82 @@
         }
       ],
       "documentation": "<p>Removes a member from a chat room in an Amazon Chime Enterprise account.</p>"
+    },
+    "DeleteSipMediaApplication": {
+      "name": "DeleteSipMediaApplication",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteSipMediaApplicationRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a SIP media application.</p>"
+    },
+    "DeleteSipRule": {
+      "name": "DeleteSipRule",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/sip-rules/{sipRuleId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteSipRuleRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a SIP rule. You must disable a SIP rule before you can delete it.</p>"
     },
     "DeleteVoiceConnector": {
       "name": "DeleteVoiceConnector",
@@ -2122,6 +2362,120 @@
       ],
       "documentation": "<p>Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.</p>"
     },
+    "GetSipMediaApplication": {
+      "name": "GetSipMediaApplication",
+      "http": {
+        "method": "GET",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetSipMediaApplicationRequest"
+      },
+      "output": {
+        "shape": "GetSipMediaApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.</p>"
+    },
+    "GetSipMediaApplicationLoggingConfiguration": {
+      "name": "GetSipMediaApplicationLoggingConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}/logging-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetSipMediaApplicationLoggingConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetSipMediaApplicationLoggingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the logging configuration for the specified SIP media application.</p>"
+    },
+    "GetSipRule": {
+      "name": "GetSipRule",
+      "http": {
+        "method": "GET",
+        "requestUri": "/sip-rules/{sipRuleId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetSipRuleRequest"
+      },
+      "output": {
+        "shape": "GetSipRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.</p>"
+    },
     "GetUser": {
       "name": "GetUser",
       "http": {
@@ -2985,6 +3339,76 @@
       ],
       "documentation": "<p>Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.</p>"
     },
+    "ListSipMediaApplications": {
+      "name": "ListSipMediaApplications",
+      "http": {
+        "method": "GET",
+        "requestUri": "/sip-media-applications",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSipMediaApplicationsRequest"
+      },
+      "output": {
+        "shape": "ListSipMediaApplicationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the SIP media applications under the administrator's AWS account.</p>"
+    },
+    "ListSipRules": {
+      "name": "ListSipRules",
+      "http": {
+        "method": "GET",
+        "requestUri": "/sip-rules",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSipRulesRequest"
+      },
+      "output": {
+        "shape": "ListSipRulesResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the SIP rules under the administrator's AWS account.</p>"
+    },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
       "http": {
@@ -3281,6 +3705,44 @@
         }
       ],
       "documentation": "<p>Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "PutSipMediaApplicationLoggingConfiguration": {
+      "name": "PutSipMediaApplicationLoggingConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}/logging-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutSipMediaApplicationLoggingConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutSipMediaApplicationLoggingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the logging configuration for the specified SIP media application.</p>"
     },
     "PutVoiceConnectorEmergencyCallingConfiguration": {
       "name": "PutVoiceConnectorEmergencyCallingConfiguration",
@@ -4323,6 +4785,91 @@
       ],
       "documentation": "<p>Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.</p>"
     },
+    "UpdateSipMediaApplication": {
+      "name": "UpdateSipMediaApplication",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateSipMediaApplicationRequest"
+      },
+      "output": {
+        "shape": "UpdateSipMediaApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the details for the specified SIP media application.</p>"
+    },
+    "UpdateSipRule": {
+      "name": "UpdateSipRule",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/sip-rules/{sipRuleId}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateSipRuleRequest"
+      },
+      "output": {
+        "shape": "UpdateSipRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the details for the specified SIP rule.</p>"
+    },
     "UpdateUser": {
       "name": "UpdateUser",
       "http": {
@@ -4706,7 +5253,7 @@
       "members": {
         "ExternalUserId": {
           "shape": "ExternalUserIdType",
-          "documentation": "<p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>"
+          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p>"
         },
         "AttendeeId": {
           "shape": "GuidString",
@@ -5093,8 +5640,7 @@
       "type": "structure",
       "members": {
         "Account": {
-          "shape": "Account",
-          "documentation": "<p>The Amazon Chime account details.</p>"
+          "shape": "Account"
         }
       }
     },
@@ -5103,7 +5649,7 @@
       "members": {
         "ExternalUserId": {
           "shape": "ExternalUserIdType",
-          "documentation": "<p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>"
+          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p>"
         },
         "ErrorCode": {
           "shape": "String",
@@ -5131,7 +5677,7 @@
         },
         "ExternalUserId": {
           "shape": "ExternalUserIdType",
-          "documentation": "<p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>"
+          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p>"
         },
         "Tags": {
           "shape": "AttendeeTagList",
@@ -5147,7 +5693,7 @@
       "members": {
         "ExternalUserId": {
           "shape": "ExternalUserIdType",
-          "documentation": "<p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>"
+          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p>"
         },
         "Tags": {
           "shape": "AttendeeTagList",
@@ -5200,6 +5746,44 @@
         "Bot": {
           "shape": "Bot",
           "documentation": "<p>The bot details.</p>"
+        }
+      }
+    },
+    "CreateMeetingDialOutRequest": {
+      "type": "structure",
+      "required": [
+        "FromPhoneNumber",
+        "ToPhoneNumber",
+        "JoinToken",
+        "MeetingId"
+      ],
+      "members": {
+        "MeetingId": {
+          "shape": "GuidString",
+          "documentation": "<p>The Amazon Chime SDK meeting ID.</p> <p>Type: String</p> <p>Pattern: [a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}</p> <p>Required: No</p>",
+          "location": "uri",
+          "locationName": "meetingId"
+        },
+        "FromPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>Phone number used as the caller ID when the remote party receives a call.</p>"
+        },
+        "ToPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>Phone number called when inviting someone to a meeting.</p>"
+        },
+        "JoinToken": {
+          "shape": "JoinTokenString",
+          "documentation": "<p>Token used by the Amazon Chime SDK attendee. Call the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html\"> CreateAttendee API</a> to get a join token. </p>"
+        }
+      }
+    },
+    "CreateMeetingDialOutResponse": {
+      "type": "structure",
+      "members": {
+        "TransactionId": {
+          "shape": "GuidString",
+          "documentation": "<p>Unique ID that tracks API calls.</p>"
         }
       }
     },
@@ -5453,6 +6037,107 @@
         "Room": {
           "shape": "Room",
           "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
+    "CreateSipMediaApplicationCallRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "FromPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number that a user calls from.</p>"
+        },
+        "ToPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number that the user dials in order to connect to a meeting</p>"
+        },
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        }
+      }
+    },
+    "CreateSipMediaApplicationCallResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationCall": {
+          "shape": "SipMediaApplicationCall",
+          "documentation": "<p>The actual call.</p>"
+        }
+      }
+    },
+    "CreateSipMediaApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "AwsRegion",
+        "Endpoints"
+      ],
+      "members": {
+        "AwsRegion": {
+          "shape": "String",
+          "documentation": "<p>AWS Region assigned to the SIP media application.</p>"
+        },
+        "Name": {
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The SIP media application name.</p>"
+        },
+        "Endpoints": {
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>List of endpoints (Lambda Amazon Resource Names) specified for the SIP media application. Currently, only one endpoint is supported.</p>"
+        }
+      }
+    },
+    "CreateSipMediaApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplication": {
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The Sip media application details.</p>"
+        }
+      }
+    },
+    "CreateSipRuleRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "TriggerType",
+        "TriggerValue",
+        "TargetApplications"
+      ],
+      "members": {
+        "Name": {
+          "shape": "SipRuleName",
+          "documentation": "<p>The name of the SIP rule.</p>"
+        },
+        "TriggerType": {
+          "shape": "SipRuleTriggerType",
+          "documentation": "<p>The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>. Allowed trigger values are <code>RequestUriHostname</code> and <code>ToPhoneNumber</code>.</p>"
+        },
+        "TriggerValue": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If <code>TriggerType</code> is <code>RequestUriHostname</code> then the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code> then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a <code>ToPhoneNumber</code> value matches the incoming SIP request.</p>"
+        },
+        "Disabled": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Enables or disables a rule. You must disable rules before you can delete them.</p>"
+        },
+        "TargetApplications": {
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>List of SIP media applications with priority and AWS Region. Only one SIP application per AWS Region can be used.</p>"
+        }
+      }
+    },
+    "CreateSipRuleResponse": {
+      "type": "structure",
+      "members": {
+        "SipRule": {
+          "shape": "SipRule",
+          "documentation": "<p>Returns the SIP rule information, including the rule ID, triggers, and target applications.</p>"
         }
       }
     },
@@ -5752,6 +6437,34 @@
           "documentation": "<p>The chat room ID.</p>",
           "location": "uri",
           "locationName": "roomId"
+        }
+      }
+    },
+    "DeleteSipMediaApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        }
+      }
+    },
+    "DeleteSipRuleRequest": {
+      "type": "structure",
+      "required": [
+        "SipRuleId"
+      ],
+      "members": {
+        "SipRuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
+          "location": "uri",
+          "locationName": "sipRuleId"
         }
       }
     },
@@ -6060,6 +6773,12 @@
       "min": 2,
       "sensitive": true
     },
+    "FunctionArn": {
+      "type": "string",
+      "max": 10000,
+      "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
+      "sensitive": true
+    },
     "GeoMatchLevel": {
       "type": "string",
       "enum": [
@@ -6103,8 +6822,7 @@
       "type": "structure",
       "members": {
         "Account": {
-          "shape": "Account",
-          "documentation": "<p>The Amazon Chime account details.</p>"
+          "shape": "Account"
         }
       }
     },
@@ -6400,6 +7118,75 @@
         "Room": {
           "shape": "Room",
           "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
+    "GetSipMediaApplicationLoggingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        }
+      }
+    },
+    "GetSipMediaApplicationLoggingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationLoggingConfiguration": {
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The actual logging configuration.</p>"
+        }
+      }
+    },
+    "GetSipMediaApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        }
+      }
+    },
+    "GetSipMediaApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplication": {
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The SIP media application details.</p>"
+        }
+      }
+    },
+    "GetSipRuleRequest": {
+      "type": "structure",
+      "required": [
+        "SipRuleId"
+      ],
+      "members": {
+        "SipRuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
+          "location": "uri",
+          "locationName": "sipRuleId"
+        }
+      }
+    },
+    "GetSipRuleResponse": {
+      "type": "structure",
+      "members": {
+        "SipRule": {
+          "shape": "SipRule",
+          "documentation": "<p>The SIP rule details.</p>"
         }
       }
     },
@@ -6753,6 +7540,7 @@
       "type": "string",
       "max": 2048,
       "min": 2,
+      "pattern": "^[a-zA-Z0-9+/]+$",
       "sensitive": true
     },
     "License": {
@@ -6804,11 +7592,11 @@
       "members": {
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>List of Amazon Chime accounts and account details.</p>"
+          "documentation": "<p>The list of accounts.</p>"
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+          "documentation": "<p>The account's user token.</p>"
         }
       }
     },
@@ -7189,6 +7977,72 @@
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListSipMediaApplicationsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListSipMediaApplicationsResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplications": {
+          "shape": "SipMediaApplicationList",
+          "documentation": "<p>List of SIP media applications and application details.</p>"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListSipRulesRequest": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
+          "location": "querystring",
+          "locationName": "sip-media-application"
+        },
+        "MaxResults": {
+          "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListSipRulesResponse": {
+      "type": "structure",
+      "members": {
+        "SipRules": {
+          "shape": "SipRuleList",
+          "documentation": "<p>List of SIP rules and rule details.</p>"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
           "documentation": "<p>The token to use to retrieve the next page of results.</p>"
         }
       }
@@ -7798,7 +8652,8 @@
         "AccountId",
         "UserId",
         "VoiceConnectorId",
-        "VoiceConnectorGroupId"
+        "VoiceConnectorGroupId",
+        "SipRuleId"
       ]
     },
     "PhoneNumberCapabilities": {
@@ -8117,6 +8972,33 @@
         "InitiateDeletionTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>"
+        }
+      }
+    },
+    "PutSipMediaApplicationLoggingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the specified SIP media application</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        },
+        "SipMediaApplicationLoggingConfiguration": {
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The actual logging configuration.</p>"
+        }
+      }
+    },
+    "PutSipMediaApplicationLoggingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationLoggingConfiguration": {
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The actual logging configuration.</p>"
         }
       }
     },
@@ -8663,6 +9545,171 @@
         "shape": "SigninDelegateGroup"
       }
     },
+    "SipApplicationPriority": {
+      "type": "integer",
+      "min": 1
+    },
+    "SipMediaApplication": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>"
+        },
+        "AwsRegion": {
+          "shape": "String",
+          "documentation": "<p>The AWS Region in which the SIP media application is created.</p>"
+        },
+        "Name": {
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The name of the SIP media application.</p>"
+        },
+        "Endpoints": {
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The SIP media application creation timestamp, in ISO 8601 format.</p>"
+        },
+        "UpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The SIP media application updated timestamp, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>The SIP media application details, including name and endpoints. An AWS account can have multiple SIP media applications.</p>"
+    },
+    "SipMediaApplicationCall": {
+      "type": "structure",
+      "members": {
+        "TransactionId": {
+          "shape": "GuidString",
+          "documentation": "<p>The transaction ID of a call.</p>"
+        }
+      },
+      "documentation": "<p>A <code>Call</code> instance for a SIP media application.</p>"
+    },
+    "SipMediaApplicationEndpoint": {
+      "type": "structure",
+      "members": {
+        "LambdaArn": {
+          "shape": "FunctionArn",
+          "documentation": "<p>Valid Amazon Resource Name (ARN) of the Lambda function of the same AWS Region where the SIP media application is created.</p>"
+        }
+      },
+      "documentation": "<p>Endpoints to specify as part of a SIP media application.</p>"
+    },
+    "SipMediaApplicationEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "SipMediaApplicationEndpoint"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "SipMediaApplicationList": {
+      "type": "list",
+      "member": {
+        "shape": "SipMediaApplication"
+      }
+    },
+    "SipMediaApplicationLoggingConfiguration": {
+      "type": "structure",
+      "members": {
+        "EnableSipMediaApplicationMessageLogs": {
+          "shape": "Boolean",
+          "documentation": "<p>Enables application message logs for the SIP media application.</p>"
+        }
+      },
+      "documentation": "<p>Logging configuration of the SIP media application.</p>"
+    },
+    "SipMediaApplicationName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "SipRule": {
+      "type": "structure",
+      "members": {
+        "SipRuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>"
+        },
+        "Name": {
+          "shape": "SipRuleName",
+          "documentation": "<p>The name of the SIP rule.</p>"
+        },
+        "Disabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if the SIP rule is enabled or disabled. You must disable a rule before you can delete it.</p>"
+        },
+        "TriggerType": {
+          "shape": "SipRuleTriggerType",
+          "documentation": "<p>The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>.</p>"
+        },
+        "TriggerValue": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound host name of the Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered when a SIP rule requests host name or <code>ToPhoneNumber</code> matches in the incoming SIP request.</p>"
+        },
+        "TargetApplications": {
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>List of SIP media applications with priority and AWS Region. You can only use one SIP application per AWS Region and priority combination.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The SIP rule created timestamp, in ISO 8601 format.</p>"
+        },
+        "UpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The SIP rule updated timestamp, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>The SIP rule details, including name, triggers, and target applications. An AWS account can have multiple SIP rules.</p>"
+    },
+    "SipRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "SipRule"
+      }
+    },
+    "SipRuleName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "SipRuleTargetApplication": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>"
+        },
+        "Priority": {
+          "shape": "SipApplicationPriority",
+          "documentation": "<p>Priority of the SIP media application in the target list.</p>"
+        },
+        "AwsRegion": {
+          "shape": "String",
+          "documentation": "<p>AWS Region of target application.</p>"
+        }
+      },
+      "documentation": "<p>Target SIP media application along with other details like priority and AWS Region to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.</p>"
+    },
+    "SipRuleTargetApplicationList": {
+      "type": "list",
+      "member": {
+        "shape": "SipRuleTargetApplication"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "SipRuleTriggerType": {
+      "type": "string",
+      "enum": [
+        "ToPhoneNumber",
+        "RequestUriHostname"
+      ]
+    },
     "StreamingConfiguration": {
       "type": "structure",
       "required": [
@@ -8979,8 +10026,7 @@
       "type": "structure",
       "members": {
         "Account": {
-          "shape": "Account",
-          "documentation": "<p>The updated Amazon Chime account details.</p>"
+          "shape": "Account"
         }
       }
     },
@@ -9239,6 +10285,73 @@
         "Room": {
           "shape": "Room",
           "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
+    "UpdateSipMediaApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        },
+        "Name": {
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The new name for the specified SIP media application.</p>"
+        },
+        "Endpoints": {
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>The new set of endpoints for the specified SIP media application.</p>"
+        }
+      }
+    },
+    "UpdateSipMediaApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplication": {
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The updated SIP media application details.</p>"
+        }
+      }
+    },
+    "UpdateSipRuleRequest": {
+      "type": "structure",
+      "required": [
+        "SipRuleId",
+        "Name"
+      ],
+      "members": {
+        "SipRuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
+          "location": "uri",
+          "locationName": "sipRuleId"
+        },
+        "Name": {
+          "shape": "SipRuleName",
+          "documentation": "<p>The new name for the specified SIP rule.</p>"
+        },
+        "Disabled": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>The new value specified to indicate whether the rule is disabled.</p>"
+        },
+        "TargetApplications": {
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>The new value of the list of target applications.</p>"
+        }
+      }
+    },
+    "UpdateSipRuleResponse": {
+      "type": "structure",
+      "members": {
+        "SipRule": {
+          "shape": "SipRule",
+          "documentation": "<p>Updated SIP rule details.</p>"
         }
       }
     },
@@ -9667,5 +10780,5 @@
       "documentation": "<p>The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.</p>"
     }
   },
-  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
 }

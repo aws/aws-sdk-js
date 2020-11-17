@@ -919,5 +919,9 @@
   "servicecatalogappregistry": {
     "prefix": "servicecatalog-appregistry",
     "name": "ServiceCatalogAppRegistry"
+  },
+  "networkfirewall": {
+    "prefix": "network-firewall",
+    "name": "NetworkFirewall"
   }
 }

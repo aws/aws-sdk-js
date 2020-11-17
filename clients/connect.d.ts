@@ -44,6 +44,14 @@ declare class Connect extends Service {
    */
   createUser(callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
+   * Creates a new user hierarchy group.
+   */
+  createUserHierarchyGroup(params: Connect.Types.CreateUserHierarchyGroupRequest, callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
+  /**
+   * Creates a new user hierarchy group.
+   */
+  createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
+  /**
    * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
   deleteUser(params: Connect.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -51,6 +59,14 @@ declare class Connect extends Service {
    * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
+   */
+  deleteUserHierarchyGroup(params: Connect.Types.DeleteUserHierarchyGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
+   */
+  deleteUserHierarchyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
@@ -292,11 +308,11 @@ declare class Connect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. This operation is also available in the Amazon Connect Flow language. See UpdateContactAttributes.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. This operation is also available in the Amazon Connect Flow language. See UpdateContactAttributes.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
@@ -308,11 +324,11 @@ declare class Connect extends Service {
    */
   updateContactFlowContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * The name of the contact flow.
+   * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(params: Connect.Types.UpdateContactFlowNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * The name of the contact flow.
+   * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -355,6 +371,22 @@ declare class Connect extends Service {
    * Assigns the specified hierarchy group to the specified user.
    */
   updateUserHierarchy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the name of the user hierarchy group. 
+   */
+  updateUserHierarchyGroupName(params: Connect.Types.UpdateUserHierarchyGroupNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the name of the user hierarchy group. 
+   */
+  updateUserHierarchyGroupName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the user hierarchy structure: add, remove, and rename user hierarchy levels.
+   */
+  updateUserHierarchyStructure(params: Connect.Types.UpdateUserHierarchyStructureRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the user hierarchy structure: add, remove, and rename user hierarchy levels.
+   */
+  updateUserHierarchyStructure(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the identity information for the specified user.  Someone with the ability to invoke UpdateUserIndentityInfo can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke UpdateUserIndentityInfo. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
    */
@@ -561,6 +593,30 @@ declare namespace Connect {
      */
     RoutingProfileId?: RoutingProfileId;
   }
+  export interface CreateUserHierarchyGroupRequest {
+    /**
+     * The name of the user hierarchy group. Must not be more than 100 characters.
+     */
+    Name: HierarchyGroupName;
+    /**
+     * The identifier for the parent hierarchy group. The user hierarchy is created at level one if the parent group ID is null.
+     */
+    ParentGroupId?: HierarchyGroupId;
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface CreateUserHierarchyGroupResponse {
+    /**
+     * The identifier of the hierarchy group.
+     */
+    HierarchyGroupId?: HierarchyGroupId;
+    /**
+     * The Amazon Resource Name (ARN) of the hierarchy group. 
+     */
+    HierarchyGroupArn?: ARN;
+  }
   export interface CreateUserRequest {
     /**
      * The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
@@ -666,6 +722,16 @@ declare namespace Connect {
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
   export type Delay = number;
+  export interface DeleteUserHierarchyGroupRequest {
+    /**
+     * The identifier of the hierarchy group.
+     */
+    HierarchyGroupId: HierarchyGroupId;
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
   export interface DeleteUserRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -958,6 +1024,12 @@ declare namespace Connect {
   }
   export type HierarchyLevelId = string;
   export type HierarchyLevelName = string;
+  export interface HierarchyLevelUpdate {
+    /**
+     * The name of the user hierarchy level. Must not be more than 50 characters.
+     */
+    Name: HierarchyLevelName;
+  }
   export interface HierarchyPath {
     /**
      * Information about level one.
@@ -1001,6 +1073,28 @@ declare namespace Connect {
      * Information about level five.
      */
     LevelFive?: HierarchyLevel;
+  }
+  export interface HierarchyStructureUpdate {
+    /**
+     * The update for level one.
+     */
+    LevelOne?: HierarchyLevelUpdate;
+    /**
+     * The update for level two.
+     */
+    LevelTwo?: HierarchyLevelUpdate;
+    /**
+     * The update for level three.
+     */
+    LevelThree?: HierarchyLevelUpdate;
+    /**
+     * The update for level four.
+     */
+    LevelFour?: HierarchyLevelUpdate;
+    /**
+     * The update for level five.
+     */
+    LevelFive?: HierarchyLevelUpdate;
   }
   export interface HistoricalMetric {
     /**
@@ -1864,6 +1958,20 @@ declare namespace Connect {
      */
     QueueConfigs: RoutingProfileQueueConfigList;
   }
+  export interface UpdateUserHierarchyGroupNameRequest {
+    /**
+     * The name of the hierarchy group. Must not be more than 100 characters.
+     */
+    Name: HierarchyGroupName;
+    /**
+     * The identifier of the hierarchy group.
+     */
+    HierarchyGroupId: HierarchyGroupId;
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
   export interface UpdateUserHierarchyRequest {
     /**
      * The identifier of the hierarchy group.
@@ -1873,6 +1981,16 @@ declare namespace Connect {
      * The identifier of the user account.
      */
     UserId: UserId;
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface UpdateUserHierarchyStructureRequest {
+    /**
+     * The hierarchy levels to update.
+     */
+    HierarchyStructure: HierarchyStructureUpdate;
     /**
      * The identifier of the Amazon Connect instance.
      */

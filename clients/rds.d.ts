@@ -1476,6 +1476,10 @@ declare namespace RDS {
      */
     OptionGroupName?: String;
     /**
+     * The external custom Availability Zone (CAZ) identifier for the target CAZ. Example: rds-caz-aiqhTgQv.
+     */
+    TargetCustomAvailabilityZone?: String;
+    /**
      * The ID of the region that contains the snapshot to be copied.
      */
     SourceRegion?: String;

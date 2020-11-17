@@ -155,6 +155,43 @@
       ],
       "documentation": "<p>Creates a user account for the specified Amazon Connect instance.</p> <p>For information about how to create user accounts using the Amazon Connect console, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html\">Add Users</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
+    "CreateUserHierarchyGroup": {
+      "name": "CreateUserHierarchyGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/user-hierarchy-groups/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateUserHierarchyGroupRequest"
+      },
+      "output": {
+        "shape": "CreateUserHierarchyGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Creates a new user hierarchy group.</p>"
+    },
     "DeleteUser": {
       "name": "DeleteUser",
       "http": {
@@ -182,6 +219,37 @@
         }
       ],
       "documentation": "<p>Deletes a user account from the specified Amazon Connect instance.</p> <p>For information about what happens to a user's data when their account is deleted, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html\">Delete Users from Your Amazon Connect Instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+    },
+    "DeleteUserHierarchyGroup": {
+      "name": "DeleteUserHierarchyGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}"
+      },
+      "input": {
+        "shape": "DeleteUserHierarchyGroupRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.</p>"
     },
     "DescribeContactFlow": {
       "name": "DescribeContactFlow",
@@ -1115,7 +1183,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p>This operation is also available in the Amazon Connect Flow language. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-actions-updatecontactattributes.html\">UpdateContactAttributes</a>.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>"
+      "documentation": "<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>"
     },
     "UpdateContactFlowContent": {
       "name": "UpdateContactFlowContent",
@@ -1177,7 +1245,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>The name of the contact flow.</p>"
+      "documentation": "<p>The name of the contact flow.</p> <p>You can also create and update contact flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>"
     },
     "UpdateRoutingProfileConcurrency": {
       "name": "UpdateRoutingProfileConcurrency",
@@ -1321,6 +1389,68 @@
         }
       ],
       "documentation": "<p>Assigns the specified hierarchy group to the specified user.</p>"
+    },
+    "UpdateUserHierarchyGroupName": {
+      "name": "UpdateUserHierarchyGroupName",
+      "http": {
+        "method": "POST",
+        "requestUri": "/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}/name"
+      },
+      "input": {
+        "shape": "UpdateUserHierarchyGroupNameRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Updates the name of the user hierarchy group. </p>"
+    },
+    "UpdateUserHierarchyStructure": {
+      "name": "UpdateUserHierarchyStructure",
+      "http": {
+        "method": "POST",
+        "requestUri": "/user-hierarchy-structure/{InstanceId}"
+      },
+      "input": {
+        "shape": "UpdateUserHierarchyStructureRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Updates the user hierarchy structure: add, remove, and rename user hierarchy levels.</p>"
     },
     "UpdateUserIdentityInfo": {
       "name": "UpdateUserIdentityInfo",
@@ -1770,6 +1900,42 @@
         }
       }
     },
+    "CreateUserHierarchyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "InstanceId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "HierarchyGroupName",
+          "documentation": "<p>The name of the user hierarchy group. Must not be more than 100 characters.</p>"
+        },
+        "ParentGroupId": {
+          "shape": "HierarchyGroupId",
+          "documentation": "<p>The identifier for the parent hierarchy group. The user hierarchy is created at level one if the parent group ID is null.</p>"
+        },
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        }
+      }
+    },
+    "CreateUserHierarchyGroupResponse": {
+      "type": "structure",
+      "members": {
+        "HierarchyGroupId": {
+          "shape": "HierarchyGroupId",
+          "documentation": "<p>The identifier of the hierarchy group.</p>"
+        },
+        "HierarchyGroupArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the hierarchy group. </p>"
+        }
+      }
+    },
     "CreateUserRequest": {
       "type": "structure",
       "required": [
@@ -1943,6 +2109,27 @@
       "type": "integer",
       "max": 9999,
       "min": 0
+    },
+    "DeleteUserHierarchyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "HierarchyGroupId",
+        "InstanceId"
+      ],
+      "members": {
+        "HierarchyGroupId": {
+          "shape": "HierarchyGroupId",
+          "documentation": "<p>The identifier of the hierarchy group.</p>",
+          "location": "uri",
+          "locationName": "HierarchyGroupId"
+        },
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        }
+      }
     },
     "DeleteUserRequest": {
       "type": "structure",
@@ -2434,6 +2621,19 @@
     "HierarchyLevelName": {
       "type": "string"
     },
+    "HierarchyLevelUpdate": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "HierarchyLevelName",
+          "documentation": "<p>The name of the user hierarchy level. Must not be more than 50 characters.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the hierarchy level to update.</p>"
+    },
     "HierarchyPath": {
       "type": "structure",
       "members": {
@@ -2485,6 +2685,32 @@
         }
       },
       "documentation": "<p>Contains information about a hierarchy structure.</p>"
+    },
+    "HierarchyStructureUpdate": {
+      "type": "structure",
+      "members": {
+        "LevelOne": {
+          "shape": "HierarchyLevelUpdate",
+          "documentation": "<p>The update for level one.</p>"
+        },
+        "LevelTwo": {
+          "shape": "HierarchyLevelUpdate",
+          "documentation": "<p>The update for level two.</p>"
+        },
+        "LevelThree": {
+          "shape": "HierarchyLevelUpdate",
+          "documentation": "<p>The update for level three.</p>"
+        },
+        "LevelFour": {
+          "shape": "HierarchyLevelUpdate",
+          "documentation": "<p>The update for level four.</p>"
+        },
+        "LevelFive": {
+          "shape": "HierarchyLevelUpdate",
+          "documentation": "<p>The update for level five.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the level hierarchy to update.</p>"
     },
     "HistoricalMetric": {
       "type": "structure",
@@ -4294,6 +4520,32 @@
         }
       }
     },
+    "UpdateUserHierarchyGroupNameRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "HierarchyGroupId",
+        "InstanceId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "HierarchyGroupName",
+          "documentation": "<p>The name of the hierarchy group. Must not be more than 100 characters.</p>"
+        },
+        "HierarchyGroupId": {
+          "shape": "HierarchyGroupId",
+          "documentation": "<p>The identifier of the hierarchy group.</p>",
+          "location": "uri",
+          "locationName": "HierarchyGroupId"
+        },
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        }
+      }
+    },
     "UpdateUserHierarchyRequest": {
       "type": "structure",
       "required": [
@@ -4310,6 +4562,25 @@
           "documentation": "<p>The identifier of the user account.</p>",
           "location": "uri",
           "locationName": "UserId"
+        },
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        }
+      }
+    },
+    "UpdateUserHierarchyStructureRequest": {
+      "type": "structure",
+      "required": [
+        "HierarchyStructure",
+        "InstanceId"
+      ],
+      "members": {
+        "HierarchyStructure": {
+          "shape": "HierarchyStructureUpdate",
+          "documentation": "<p>The hierarchy levels to update.</p>"
         },
         "InstanceId": {
           "shape": "InstanceId",

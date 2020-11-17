@@ -329,6 +329,9 @@
         },
         {
           "shape": "KMSKeyNotAccessibleFault"
+        },
+        {
+          "shape": "CustomAvailabilityZoneNotFoundFault"
         }
       ],
       "documentation": "<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot\">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>"
@@ -4286,6 +4289,10 @@
         "OptionGroupName": {
           "shape": "String",
           "documentation": "<p>The name of an option group to associate with the copy of the snapshot.</p> <p>Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options\">Option Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>"
+        },
+        "TargetCustomAvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The external custom Availability Zone (CAZ) identifier for the target CAZ.</p> <p>Example: <code>rds-caz-aiqhTgQv</code>.</p>"
         },
         "SourceRegion": {
           "shape": "String",
