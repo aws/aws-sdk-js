@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.794.0-->
+<!--LATEST=2.795.0-->
 <!--ENTRYINSERT-->
+
+## 2.795.0
+* feature: Backup: AWS Backup now supports cross-account backup, enabling AWS customers to securely copy their backups across their AWS accounts within their AWS organizations.
+* feature: CloudFormation: This release adds ChangeSets support for Nested Stacks. ChangeSets offer a preview of how proposed changes to a stack might impact existing resources or create new ones.
+* feature: CodeBuild: AWS CodeBuild - Adding Status field for Report Group
+* feature: EC2: EC2 Fleet adds support of DeleteFleets API for instant type fleets. Now you can delete an instant type fleet and terminate all associated instances with a single API call.
+* feature: Outposts: Mark the Name parameter in CreateOutpost as required.
+* feature: S3Control: AWS S3 Storage Lens provides visibility into your storage usage and activity trends at the organization or account level, with aggregations by Region, storage class, bucket, and prefix.
 
 ## 2.794.0
 * feature: Chime: This release adds CRUD APIs for Amazon Chime SipMediaApplications and SipRules. It also adds the API for creating outbound PSTN calls for Amazon Chime meetings.

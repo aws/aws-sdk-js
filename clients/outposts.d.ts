@@ -73,7 +73,7 @@ declare namespace Outposts {
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
   export interface CreateOutpostInput {
-    Name?: OutpostName;
+    Name: OutpostName;
     Description?: OutpostDescription;
     SiteId: SiteId;
     AvailabilityZone?: AvailabilityZone;

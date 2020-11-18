@@ -292,11 +292,11 @@ declare class CodeBuild extends Service {
    */
   retryBuild(callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildOutput) => void): Request<CodeBuild.Types.RetryBuildOutput, AWSError>;
   /**
-   * Restarts a batch build.
+   * Restarts a failed batch build. Only batch builds that have failed can be retried.
    */
   retryBuildBatch(params: CodeBuild.Types.RetryBuildBatchInput, callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildBatchOutput) => void): Request<CodeBuild.Types.RetryBuildBatchOutput, AWSError>;
   /**
-   * Restarts a batch build.
+   * Restarts a failed batch build. Only batch builds that have failed can be retried.
    */
   retryBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildBatchOutput) => void): Request<CodeBuild.Types.RetryBuildBatchOutput, AWSError>;
   /**
@@ -1900,7 +1900,7 @@ declare namespace CodeBuild {
      */
     location?: String;
     /**
-     *  If you use a LOCAL cache, the local cache mode. You can use one or more local cache modes at the same time.     LOCAL_SOURCE_CACHE mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored.     LOCAL_DOCKER_LAYER_CACHE mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network.      You can use a Docker layer cache in the Linux environment only.     The privileged flag must be set so that your project has the required Docker permissions.     You should consider the security implications before you use a Docker layer cache.          LOCAL_CUSTOM_CACHE mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache:     Only directories can be specified for caching. You cannot specify individual files.     Symlinks are used to reference cached directories.     Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file.     
+     * An array of strings that specify the local cache modes. You can use one or more local cache modes at the same time. This is only used for LOCAL cache types. Possible values are:  LOCAL_SOURCE_CACHE  Caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored.   LOCAL_DOCKER_LAYER_CACHE  Caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network.     You can use a Docker layer cache in the Linux environment only.    The privileged flag must be set so that your project has the required Docker permissions.    You should consider the security implications before you use a Docker layer cache.      LOCAL_CUSTOM_CACHE  Caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache:    Only directories can be specified for caching. You cannot specify individual files.    Symlinks are used to reference cached directories.    Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file.     
      */
     modes?: ProjectCacheModes;
   }
@@ -1912,7 +1912,7 @@ declare namespace CodeBuild {
      */
     type: EnvironmentType;
     /**
-     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: &lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be aws/codebuild/standard:4.0. To specify the latest version of this image, this would be aws/codebuild/standard:latest.   For an image digest: &lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use &lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
+     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: &lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be aws/codebuild/standard:4.0.    For an image digest: &lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use &lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
      */
     image: NonEmptyString;
     /**
@@ -1928,7 +1928,7 @@ declare namespace CodeBuild {
      */
     privilegedMode?: WrapperBoolean;
     /**
-     * The certificate to use with this build project.
+     * The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see certificate in the AWS CodeBuild User Guide.
      */
     certificate?: String;
     /**
@@ -1946,15 +1946,15 @@ declare namespace CodeBuild {
      */
     type?: FileSystemType;
     /**
-     *  A string that specifies the location of the file system created by Amazon EFS. Its format is efs-dns-name:/directory-path. You can find the DNS name of file system when you view it in the AWS EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com, and its mount directory is my-efs-mount-directory, then the location is fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory.   The directory path in the format efs-dns-name:/directory-path is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. 
+     * A string that specifies the location of the file system created by Amazon EFS. Its format is efs-dns-name:/directory-path. You can find the DNS name of file system when you view it in the AWS EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com, and its mount directory is my-efs-mount-directory, then the location is fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory.  The directory path in the format efs-dns-name:/directory-path is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. 
      */
     location?: String;
     /**
-     *  The location in the container where you mount the file system. 
+     * The location in the container where you mount the file system. 
      */
     mountPoint?: String;
     /**
-     *  The name used to access a file system created by Amazon EFS. CodeBuild creates an environment variable by appending the identifier in all capital letters to CODEBUILD_. For example, if you specify my-efs for identifier, a new environment variable is create named CODEBUILD_MY-EFS.   The identifier is used to mount your file system. 
+     * The name used to access a file system created by Amazon EFS. CodeBuild creates an environment variable by appending the identifier in all capital letters to CODEBUILD_. For example, if you specify my_efs for identifier, a new environment variable is create named CODEBUILD_MY_EFS.   The identifier is used to mount your file system. 
      */
     identifier?: String;
     /**
@@ -2145,10 +2145,12 @@ declare namespace CodeBuild {
      *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
      */
     tags?: TagList;
+    status?: ReportGroupStatusType;
   }
   export type ReportGroupArns = NonEmptyString[];
   export type ReportGroupName = string;
   export type ReportGroupSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
+  export type ReportGroupStatusType = "ACTIVE"|"DELETING"|string;
   export type ReportGroups = ReportGroup[];
   export type ReportPackagingType = "ZIP"|"NONE"|string;
   export type ReportStatusCounts = {[key: string]: WrapperInt};
