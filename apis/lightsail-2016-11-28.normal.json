@@ -407,6 +407,99 @@
       ],
       "documentation": "<p>Creates an email or SMS text message contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>"
     },
+    "CreateContainerService": {
+      "name": "CreateContainerService",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateContainerServiceRequest"
+      },
+      "output": {
+        "shape": "CreateContainerServiceResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Lightsail container service.</p> <p>A Lightsail container service is a compute resource to which you can deploy containers. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-containers\">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev Guide</i>.</p>"
+    },
+    "CreateContainerServiceDeployment": {
+      "name": "CreateContainerServiceDeployment",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateContainerServiceDeploymentRequest"
+      },
+      "output": {
+        "shape": "CreateContainerServiceDeploymentResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates a deployment for your Amazon Lightsail container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p> <p>You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images\">Creating container images for your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p>"
+    },
+    "CreateContainerServiceRegistryLogin": {
+      "name": "CreateContainerServiceRegistryLogin",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateContainerServiceRegistryLoginRequest"
+      },
+      "output": {
+        "shape": "CreateContainerServiceRegistryLoginResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.</p> <note> <p>You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.</p> </note> <p>After you push your container images to the container image registry of your Lightsail account, use the <code>RegisterContainerImage</code> action to register the pushed images to a specific Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>"
+    },
     "CreateDisk": {
       "name": "CreateDisk",
       "http": {
@@ -550,7 +643,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks\">Content delivery networks in Amazon Lightsail</a>.</p>"
+      "documentation": "<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions\">Content delivery networks in Amazon Lightsail</a>.</p>"
     },
     "CreateDomain": {
       "name": "CreateDomain",
@@ -624,7 +717,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
     "CreateInstanceSnapshot": {
       "name": "CreateInstanceSnapshot",
@@ -1091,6 +1184,68 @@
         }
       ],
       "documentation": "<p>Deletes a contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>"
+    },
+    "DeleteContainerImage": {
+      "name": "DeleteContainerImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteContainerImageRequest"
+      },
+      "output": {
+        "shape": "DeleteContainerImageResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes a container image that is registered to your Amazon Lightsail container service.</p>"
+    },
+    "DeleteContainerService": {
+      "name": "DeleteContainerService",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteContainerServiceRequest"
+      },
+      "output": {
+        "shape": "DeleteContainerServiceResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes your Amazon Lightsail container service.</p>"
     },
     "DeleteDisk": {
       "name": "DeleteDisk",
@@ -2137,6 +2292,217 @@
         }
       ],
       "documentation": "<p>Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>"
+    },
+    "GetContainerAPIMetadata": {
+      "name": "GetContainerAPIMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerAPIMetadataRequest"
+      },
+      "output": {
+        "shape": "GetContainerAPIMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns information about Amazon Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.</p>"
+    },
+    "GetContainerImages": {
+      "name": "GetContainerImages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerImagesRequest"
+      },
+      "output": {
+        "shape": "GetContainerImagesResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the container images that are registered to your Amazon Lightsail container service.</p> <note> <p>If you created a deployment on your Lightsail container service that uses container images from a public registry like Docker Hub, those images are not returned as part of this action. Those images are not registered to your Lightsail container service.</p> </note>"
+    },
+    "GetContainerLog": {
+      "name": "GetContainerLog",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerLogRequest"
+      },
+      "output": {
+        "shape": "GetContainerLogResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the log events of a container of your Amazon Lightsail container service.</p> <p>If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.</p> <note> <p>Container logs are retained for a certain amount of time. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail endpoints and quotas</a> in the <i>AWS General Reference</i>.</p> </note>"
+    },
+    "GetContainerServiceDeployments": {
+      "name": "GetContainerServiceDeployments",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerServiceDeploymentsRequest"
+      },
+      "output": {
+        "shape": "GetContainerServiceDeploymentsResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the deployments for your Amazon Lightsail container service</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p> <p>The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.</p> <note> <p>A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail endpoints and quotas</a> in the <i>AWS General Reference</i>.</p> </note>"
+    },
+    "GetContainerServiceMetricData": {
+      "name": "GetContainerServiceMetricData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerServiceMetricDataRequest"
+      },
+      "output": {
+        "shape": "GetContainerServiceMetricDataResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the data points of a specific metric of your Amazon Lightsail container service.</p> <p>Metrics report the utilization of your resources. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>"
+    },
+    "GetContainerServicePowers": {
+      "name": "GetContainerServicePowers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerServicePowersRequest"
+      },
+      "output": {
+        "shape": "GetContainerServicePowersResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the list of powers that can be specified for your Amazon Lightsail container services.</p> <p>The power specifies the amount of memory, the number of vCPUs, and the base price of the container service.</p>"
+    },
+    "GetContainerServices": {
+      "name": "GetContainerServices",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetContainerServicesRequest"
+      },
+      "output": {
+        "shape": "ContainerServicesListResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more of your Amazon Lightsail container services.</p>"
     },
     "GetDisk": {
       "name": "GetDisk",
@@ -4010,6 +4376,37 @@
       ],
       "documentation": "<p>Restarts a specific database in Amazon Lightsail.</p> <p>The <code>reboot relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
+    "RegisterContainerImage": {
+      "name": "RegisterContainerImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterContainerImageRequest"
+      },
+      "output": {
+        "shape": "RegisterContainerImageResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>"
+    },
     "ReleaseStaticIp": {
       "name": "ReleaseStaticIp",
       "http": {
@@ -4407,6 +4804,37 @@
         }
       ],
       "documentation": "<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "UpdateContainerService": {
+      "name": "UpdateContainerService",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateContainerServiceRequest"
+      },
+      "output": {
+        "shape": "UpdateContainerServiceResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Updates the configuration of your Amazon Lightsail container service, such as its power, scale, and public domain names.</p>"
     },
     "UpdateDistribution": {
       "name": "UpdateDistribution",
@@ -5573,6 +6001,422 @@
         "shape": "ContactProtocol"
       }
     },
+    "Container": {
+      "type": "structure",
+      "members": {
+        "image": {
+          "shape": "string",
+          "documentation": "<p>The name of the image used for the container.</p> <p>Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (<code>:</code>). For example, <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, <code>nginx:latest</code> or <code>nginx</code>.</p>"
+        },
+        "command": {
+          "shape": "StringList",
+          "documentation": "<p>The launch command for the container.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The environment variables of the container.</p>"
+        },
+        "ports": {
+          "shape": "PortMap",
+          "documentation": "<p>The open firewall ports of the container.</p>"
+        }
+      },
+      "documentation": "<p>Describes the settings of a container that will be launched, or that is launched, to an Amazon Lightsail container service.</p>"
+    },
+    "ContainerImage": {
+      "type": "structure",
+      "members": {
+        "image": {
+          "shape": "string",
+          "documentation": "<p>The name of the container image.</p>"
+        },
+        "digest": {
+          "shape": "string",
+          "documentation": "<p>The digest of the container image.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the container image was created.</p>"
+        }
+      },
+      "documentation": "<p>Describes a container image that is registered to an Amazon Lightsail container service.</p>"
+    },
+    "ContainerImageList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerImage"
+      }
+    },
+    "ContainerLabel": {
+      "type": "string",
+      "max": 53,
+      "min": 1,
+      "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$"
+    },
+    "ContainerMap": {
+      "type": "map",
+      "key": {
+        "shape": "ContainerName"
+      },
+      "value": {
+        "shape": "Container"
+      }
+    },
+    "ContainerName": {
+      "type": "string",
+      "max": 53,
+      "min": 1,
+      "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$"
+    },
+    "ContainerService": {
+      "type": "structure",
+      "members": {
+        "containerServiceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service.</p>"
+        },
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container service.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the container service was created.</p>"
+        },
+        "location": {
+          "shape": "ResourceLocation",
+          "documentation": "<p>An object that describes the location of the container service, such as the AWS Region and Availability Zone.</p>"
+        },
+        "resourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The Lightsail resource type of the container service (i.e., <code>ContainerService</code>).</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+        },
+        "power": {
+          "shape": "ContainerServicePowerName",
+          "documentation": "<p>The power specification of the container service.</p> <p>The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.</p>"
+        },
+        "powerId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the power of the container service.</p>"
+        },
+        "state": {
+          "shape": "ContainerServiceState",
+          "documentation": "<p>The current state of the container service.</p> <p>The state can be:</p> <ul> <li> <p> <code>Pending</code> - The container service is being created.</p> </li> <li> <p> <code>Ready</code> - The container service is created but does not have a container deployment.</p> </li> <li> <p> <code>Disabled</code> - The container service is disabled.</p> </li> <li> <p> <code>Updating</code> - The container service capacity or other setting is being updated.</p> </li> <li> <p> <code>Deploying</code> - The container service is launching a container deployment.</p> </li> <li> <p> <code>Running</code> - The container service is created and it has a container deployment.</p> </li> </ul>"
+        },
+        "scale": {
+          "shape": "ContainerServiceScale",
+          "documentation": "<p>The scale specification of the container service.</p> <p>The scale specifies the allocated compute nodes of the container service.</p>"
+        },
+        "currentDeployment": {
+          "shape": "ContainerServiceDeployment",
+          "documentation": "<p>An object that describes the current container deployment of the container service.</p>"
+        },
+        "nextDeployment": {
+          "shape": "ContainerServiceDeployment",
+          "documentation": "<p>An object that describes the next deployment of the container service.</p> <p>This value is <code>null</code> when there is no deployment in a <code>pending</code> state.</p>"
+        },
+        "isDisabled": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value indicating whether the container service is disabled.</p>"
+        },
+        "principalArn": {
+          "shape": "string",
+          "documentation": "<p>The principal ARN of the container service.</p> <p>The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.</p>"
+        },
+        "privateDomainName": {
+          "shape": "string",
+          "documentation": "<p>The private domain name of the container service.</p> <p>The private domain name is accessible only by other resources within the default virtual private cloud (VPC) of your Lightsail account.</p>"
+        },
+        "publicDomainNames": {
+          "shape": "ContainerServicePublicDomains",
+          "documentation": "<p>The public domain name of the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don't specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>See <code>CreateContainerService</code> or <code>UpdateContainerService</code> for information about how to specify public domain names for your Lightsail container service.</p>"
+        },
+        "url": {
+          "shape": "string",
+          "documentation": "<p>The publicly accessible URL of the container service.</p> <p>If no public endpoint is specified in the <code>currentDeployment</code>, this URL returns a 404 response.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Lightsail container service.</p>"
+    },
+    "ContainerServiceDeployment": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "integer",
+          "documentation": "<p>The version number of the deployment.</p>"
+        },
+        "state": {
+          "shape": "ContainerServiceDeploymentState",
+          "documentation": "<p>The state of the deployment.</p> <p>A deployment can be in one of the following states:</p> <ul> <li> <p> <code>Activating</code> - The deployment is being created.</p> </li> <li> <p> <code>Active</code> - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.</p> </li> <li> <p> <code>Inactive</code> - The deployment was previously successfully created, but it is not currently running on the container service.</p> </li> <li> <p> <code>Failed</code> - The deployment failed. Use the <code>GetContainerLog</code> action to view the log events for the containers in the deployment to try to determine the reason for the failure.</p> </li> </ul>"
+        },
+        "containers": {
+          "shape": "ContainerMap",
+          "documentation": "<p>An object that describes the configuration for the containers of the deployment.</p>"
+        },
+        "publicEndpoint": {
+          "shape": "ContainerServiceEndpoint",
+          "documentation": "<p>An object that describes the endpoint of the deployment.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the deployment was created.</p>"
+        }
+      },
+      "documentation": "<p>Describes a container deployment configuration of an Amazon Lightsail container service.</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p>"
+    },
+    "ContainerServiceDeploymentList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerServiceDeployment"
+      }
+    },
+    "ContainerServiceDeploymentRequest": {
+      "type": "structure",
+      "members": {
+        "containers": {
+          "shape": "ContainerMap",
+          "documentation": "<p>An object that describes the configuration for the containers of the deployment.</p>"
+        },
+        "publicEndpoint": {
+          "shape": "EndpointRequest",
+          "documentation": "<p>An object that describes the endpoint of the deployment.</p>"
+        }
+      },
+      "documentation": "<p>Describes a container deployment configuration of an Amazon Lightsail container service.</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p>"
+    },
+    "ContainerServiceDeploymentState": {
+      "type": "string",
+      "enum": [
+        "ACTIVATING",
+        "ACTIVE",
+        "INACTIVE",
+        "FAILED"
+      ]
+    },
+    "ContainerServiceEndpoint": {
+      "type": "structure",
+      "members": {
+        "containerName": {
+          "shape": "string",
+          "documentation": "<p>The name of the container entry of the deployment that the endpoint configuration applies to.</p>"
+        },
+        "containerPort": {
+          "shape": "integer",
+          "documentation": "<p>The port of the specified container to which traffic is forwarded to.</p>"
+        },
+        "healthCheck": {
+          "shape": "ContainerServiceHealthCheckConfig",
+          "documentation": "<p>An object that describes the health check configuration of the container.</p>"
+        }
+      },
+      "documentation": "<p>Describes the public endpoint configuration of a deployment of an Amazon Lightsail container service.</p>"
+    },
+    "ContainerServiceHealthCheckConfig": {
+      "type": "structure",
+      "members": {
+        "healthyThreshold": {
+          "shape": "integer",
+          "documentation": "<p>The number of consecutive health checks successes required before moving the container to the <code>Healthy</code> state.</p>"
+        },
+        "unhealthyThreshold": {
+          "shape": "integer",
+          "documentation": "<p>The number of consecutive health check failures required before moving the container to the <code>Unhealthy</code> state.</p>"
+        },
+        "timeoutSeconds": {
+          "shape": "integer",
+          "documentation": "<p>The amount of time, in seconds, during which no response means a failed health check. You may specify between 2 and 60 seconds.</p>"
+        },
+        "intervalSeconds": {
+          "shape": "integer",
+          "documentation": "<p>The approximate interval, in seconds, between health checks of an individual container. You may specify between 5 and 300 seconds.</p>"
+        },
+        "path": {
+          "shape": "string",
+          "documentation": "<p>The path on the container on which to perform the health check.</p>"
+        },
+        "successCodes": {
+          "shape": "string",
+          "documentation": "<p>The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499.</p>"
+        }
+      },
+      "documentation": "<p>Describes the health check configuration of an Amazon Lightsail container service.</p>"
+    },
+    "ContainerServiceList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerService"
+      }
+    },
+    "ContainerServiceLogEvent": {
+      "type": "structure",
+      "members": {
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the container service log event was created.</p>"
+        },
+        "message": {
+          "shape": "string",
+          "documentation": "<p>The message of the container service log event.</p>"
+        }
+      },
+      "documentation": "<p>Describes the log events of a container of an Amazon Lightsail container service.</p>"
+    },
+    "ContainerServiceLogEventList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerServiceLogEvent"
+      }
+    },
+    "ContainerServiceMetadataEntry": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "string"
+      }
+    },
+    "ContainerServiceMetadataEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerServiceMetadataEntry"
+      }
+    },
+    "ContainerServiceMetricName": {
+      "type": "string",
+      "enum": [
+        "CPUUtilization",
+        "MemoryUtilization"
+      ]
+    },
+    "ContainerServiceName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$"
+    },
+    "ContainerServicePower": {
+      "type": "structure",
+      "members": {
+        "powerId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the power (e.g., <code>nano-1</code>).</p>"
+        },
+        "price": {
+          "shape": "float",
+          "documentation": "<p>The monthly price of the power in USD.</p>"
+        },
+        "cpuCount": {
+          "shape": "float",
+          "documentation": "<p>The number of vCPUs included in the power.</p>"
+        },
+        "ramSizeInGb": {
+          "shape": "float",
+          "documentation": "<p>The amount of RAM (in GB) of the power.</p>"
+        },
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The friendly name of the power (e.g., <code>nano</code>).</p>"
+        },
+        "isActive": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value indicating whether the power is active and can be specified for container services.</p>"
+        }
+      },
+      "documentation": "<p>Describes the powers that can be specified for an Amazon Lightsail container service.</p> <p>The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.</p>"
+    },
+    "ContainerServicePowerList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerServicePower"
+      }
+    },
+    "ContainerServicePowerName": {
+      "type": "string",
+      "enum": [
+        "nano",
+        "micro",
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ]
+    },
+    "ContainerServiceProtocol": {
+      "type": "string",
+      "enum": [
+        "HTTP",
+        "HTTPS",
+        "TCP",
+        "UDP"
+      ]
+    },
+    "ContainerServicePublicDomains": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "ContainerServicePublicDomainsList"
+      }
+    },
+    "ContainerServicePublicDomainsList": {
+      "type": "list",
+      "member": {
+        "shape": "string"
+      }
+    },
+    "ContainerServiceRegistryLogin": {
+      "type": "structure",
+      "members": {
+        "username": {
+          "shape": "string",
+          "documentation": "<p>The container service registry username to use to push container images to the container image registry of a Lightsail account.</p>"
+        },
+        "password": {
+          "shape": "string",
+          "documentation": "<p>The container service registry password to use to push container images to the container image registry of a Lightsail account</p>"
+        },
+        "expiresAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp of when the container image registry username and password expire.</p> <p>The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the <code>CreateContainerServiceRegistryLogin</code> action.</p>"
+        },
+        "registry": {
+          "shape": "string",
+          "documentation": "<p>The address to use to push container images to the container image registry of a Lightsail account.</p>"
+        }
+      },
+      "documentation": "<p>Describes the login information for the container image registry of an Amazon Lightsail account.</p>"
+    },
+    "ContainerServiceScale": {
+      "type": "integer",
+      "max": 20,
+      "min": 1
+    },
+    "ContainerServiceState": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "READY",
+        "RUNNING",
+        "UPDATING",
+        "DELETING",
+        "DISABLED"
+      ]
+    },
+    "ContainerServicesListResult": {
+      "type": "structure",
+      "members": {
+        "containerServices": {
+          "shape": "ContainerServiceList",
+          "documentation": "<p>An array of objects that describe one or more container services.</p>"
+        }
+      }
+    },
     "CookieObject": {
       "type": "structure",
       "members": {
@@ -5711,6 +6555,91 @@
         "operations": {
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "CreateContainerServiceDeploymentRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to create the deployment.</p>"
+        },
+        "containers": {
+          "shape": "ContainerMap",
+          "documentation": "<p>An object that describes the settings of the containers that will be launched on the container service.</p>"
+        },
+        "publicEndpoint": {
+          "shape": "EndpointRequest",
+          "documentation": "<p>An object that describes the settings of the public endpoint for the container service.</p>"
+        }
+      }
+    },
+    "CreateContainerServiceDeploymentResult": {
+      "type": "structure",
+      "members": {
+        "containerService": {
+          "shape": "ContainerService",
+          "documentation": "<p>An object that describes a container service.</p>"
+        }
+      }
+    },
+    "CreateContainerServiceRegistryLoginRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "CreateContainerServiceRegistryLoginResult": {
+      "type": "structure",
+      "members": {
+        "registryLogin": {
+          "shape": "ContainerServiceRegistryLogin",
+          "documentation": "<p>An object that describes the log in information for the container service registry of your Lightsail account.</p>"
+        }
+      }
+    },
+    "CreateContainerServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName",
+        "power",
+        "scale"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name for the container service.</p> <p>The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically <code>https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com</code>. If the name of your container service is <code>container-service-1</code>, and it's located in the US East (Ohio) AWS region (<code>us-east-2</code>), then the domain for your container service will be like the following example: <code>https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com</code> </p> <p>The following are the requirements for container service names:</p> <ul> <li> <p>Must be unique within each AWS Region in your Lightsail account.</p> </li> <li> <p>Must contain 1 to 63 characters.</p> </li> <li> <p>Must contain only alphanumeric characters and hyphens.</p> </li> <li> <p>A hyphen (-) can separate words but cannot be at the start or end of the name.</p> </li> </ul>"
+        },
+        "power": {
+          "shape": "ContainerServicePowerName",
+          "documentation": "<p>The power specification for the container service.</p> <p>The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p> <p>Use the <code>GetContainerServicePowers</code> action to get a list of power options that you can specify using this parameter, and their base monthly cost.</p>"
+        },
+        "scale": {
+          "shape": "ContainerServiceScale",
+          "documentation": "<p>The scale specification for the container service.</p> <p>The scale specifies the allocated compute nodes of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the container service.</p> <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+        },
+        "publicDomainNames": {
+          "shape": "ContainerServicePublicDomains",
+          "documentation": "<p>The public domain names to use with the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don't specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>You can specify public domain names using a string to array map as shown in the example later on this page.</p>"
+        },
+        "deployment": {
+          "shape": "ContainerServiceDeploymentRequest",
+          "documentation": "<p>An object that describes a deployment for the container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p>"
+        }
+      }
+    },
+    "CreateContainerServiceResult": {
+      "type": "structure",
+      "members": {
+        "containerService": {
+          "shape": "ContainerService",
+          "documentation": "<p>An object that describes a container service.</p>"
         }
       }
     },
@@ -6456,6 +7385,43 @@
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
+    },
+    "DeleteContainerImageRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName",
+        "image"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to delete a registered container image.</p>"
+        },
+        "image": {
+          "shape": "string",
+          "documentation": "<p>The name of the container image to delete from the container service.</p> <p>Use the <code>GetContainerImages</code> action to get the name of the container images that are registered to a container service.</p> <note> <p>Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (<code>:</code>). For example, <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, <code>nginx:latest</code> or <code>nginx</code>.</p> </note>"
+        }
+      }
+    },
+    "DeleteContainerImageResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteContainerServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service to delete.</p>"
+        }
+      }
+    },
+    "DeleteContainerServiceResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteDiskRequest": {
       "type": "structure",
@@ -7221,7 +8187,7 @@
         },
         "isAlias": {
           "shape": "boolean",
-          "documentation": "<p>When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer</p>"
+          "documentation": "<p>When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer.</p>"
         },
         "type": {
           "shape": "DomainEntryType",
@@ -7335,6 +8301,37 @@
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
+      }
+    },
+    "EndpointRequest": {
+      "type": "structure",
+      "required": [
+        "containerName",
+        "containerPort"
+      ],
+      "members": {
+        "containerName": {
+          "shape": "string",
+          "documentation": "<p>The name of the container for the endpoint.</p>"
+        },
+        "containerPort": {
+          "shape": "integer",
+          "documentation": "<p>The port of the container to which traffic is forwarded to.</p>"
+        },
+        "healthCheck": {
+          "shape": "ContainerServiceHealthCheckConfig",
+          "documentation": "<p>An object that describes the health check configuration of the container.</p>"
+        }
+      },
+      "documentation": "<p>Describes the settings of a public endpoint for an Amazon Lightsail container service.</p>"
+    },
+    "Environment": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "string"
       }
     },
     "ExportSnapshotRecord": {
@@ -7473,7 +8470,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetActiveNames</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetActiveNames</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7503,7 +8500,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetAlarms</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetAlarms</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7558,7 +8555,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7584,7 +8581,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7593,7 +8590,7 @@
       "members": {
         "certificateStatuses": {
           "shape": "CertificateStatusList",
-          "documentation": "<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.</p>"
+          "documentation": "<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS Region where the request is made, regardless of their current status.</p>"
         },
         "includeCertificateDetails": {
           "shape": "IncludeCertificateDetails",
@@ -7601,7 +8598,7 @@
         },
         "certificateName": {
           "shape": "CertificateName",
-          "documentation": "<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made.</p>"
+          "documentation": "<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS Region where the request is made.</p>"
         }
       }
     },
@@ -7632,7 +8629,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetCloudFormationStackRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetCloudFormationStackRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7651,6 +8648,179 @@
         "contactMethods": {
           "shape": "ContactMethodsList",
           "documentation": "<p>An array of objects that describe the contact methods.</p>"
+        }
+      }
+    },
+    "GetContainerAPIMetadataRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetContainerAPIMetadataResult": {
+      "type": "structure",
+      "members": {
+        "metadata": {
+          "shape": "ContainerServiceMetadataEntryList",
+          "documentation": "<p>Metadata about Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.</p>"
+        }
+      }
+    },
+    "GetContainerImagesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to return registered container images.</p>"
+        }
+      }
+    },
+    "GetContainerImagesResult": {
+      "type": "structure",
+      "members": {
+        "containerImages": {
+          "shape": "ContainerImageList",
+          "documentation": "<p>An array of objects that describe container images that are registered to the container service.</p>"
+        }
+      }
+    },
+    "GetContainerLogRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName",
+        "containerName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to get a container log.</p>"
+        },
+        "containerName": {
+          "shape": "string",
+          "documentation": "<p>The name of the container that is either running or previously ran on the container service for which to return a log.</p>"
+        },
+        "startTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The start of the time interval for which to get log data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify <code>1538424000</code> as the start time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>"
+        },
+        "endTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The end of the time interval for which to get log data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify <code>1538427600</code> as the end time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>"
+        },
+        "filterPattern": {
+          "shape": "string",
+          "documentation": "<p>The pattern to use to filter the returned log events to a specific term.</p> <p>The following are a few examples of filter patterns that you can specify:</p> <ul> <li> <p>To return all log events, specify a filter pattern of <code>\"\"</code>.</p> </li> <li> <p>To exclude log events that contain the <code>ERROR</code> term, and return all other log events, specify a filter pattern of <code>\"-ERROR\"</code>.</p> </li> <li> <p>To return log events that contain the <code>ERROR</code> term, specify a filter pattern of <code>\"ERROR\"</code>.</p> </li> <li> <p>To return log events that contain both the <code>ERROR</code> and <code>Exception</code> terms, specify a filter pattern of <code>\"ERROR Exception\"</code>.</p> </li> <li> <p>To return log events that contain the <code>ERROR</code> <i>or</i> the <code>Exception</code> term, specify a filter pattern of <code>\"?ERROR ?Exception\"</code>.</p> </li> </ul>"
+        },
+        "pageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetContainerLog</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>"
+        }
+      }
+    },
+    "GetContainerLogResult": {
+      "type": "structure",
+      "members": {
+        "logEvents": {
+          "shape": "ContainerServiceLogEventList",
+          "documentation": "<p>An array of objects that describe the log events of a container.</p>"
+        },
+        "nextPageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetContainerLog</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+        }
+      }
+    },
+    "GetContainerServiceDeploymentsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to return deployments.</p>"
+        }
+      }
+    },
+    "GetContainerServiceDeploymentsResult": {
+      "type": "structure",
+      "members": {
+        "deployments": {
+          "shape": "ContainerServiceDeploymentList",
+          "documentation": "<p>An array of objects that describe deployments for a container service.</p>"
+        }
+      }
+    },
+    "GetContainerServiceMetricDataRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName",
+        "metricName",
+        "startTime",
+        "endTime",
+        "period",
+        "statistics"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to get metric data.</p>"
+        },
+        "metricName": {
+          "shape": "ContainerServiceMetricName",
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid container service metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.</p> <ul> <li> <p> <code>CPUUtilization</code> - The average percentage of compute units that are currently in use across all nodes of the container service. This metric identifies the processing power required to run containers on each node of the container service.</p> <p>Statistics: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p>Unit: The published unit is <code>Percent</code>.</p> </li> <li> <p> <code>MemoryUtilization</code> - The average percentage of available memory that is currently in use across all nodes of the container service. This metric identifies the memory required to run containers on each node of the container service.</p> <p>Statistics: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p>Unit: The published unit is <code>Percent</code>.</p> </li> </ul>"
+        },
+        "startTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The start time of the time period.</p>"
+        },
+        "endTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The end time of the time period.</p>"
+        },
+        "period": {
+          "shape": "MetricPeriod",
+          "documentation": "<p>The granularity, in seconds, of the returned data points.</p> <p>All container service metric data is available in 5-minute (300 seconds) granularity.</p>"
+        },
+        "statistics": {
+          "shape": "MetricStatisticList",
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of <code>Sum</code> / <code>SampleCount</code> during the specified period. By comparing this statistic with the <code>Minimum</code> and <code>Maximum</code> values, you can determine the full scope of a metric and how close the average use is to the <code>Minimum</code> and <code>Maximum</code> values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+        }
+      }
+    },
+    "GetContainerServiceMetricDataResult": {
+      "type": "structure",
+      "members": {
+        "metricName": {
+          "shape": "ContainerServiceMetricName",
+          "documentation": "<p>The name of the metric returned. </p>"
+        },
+        "metricData": {
+          "shape": "MetricDatapointList",
+          "documentation": "<p>An array of objects that describe the metric data returned.</p>"
+        }
+      }
+    },
+    "GetContainerServicePowersRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetContainerServicePowersResult": {
+      "type": "structure",
+      "members": {
+        "powers": {
+          "shape": "ContainerServicePowerList",
+          "documentation": "<p>An array of objects that describe the powers that can be specified for a container service.</p>"
+        }
+      }
+    },
+    "GetContainerServicesRequest": {
+      "type": "structure",
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to return information.</p> <p>When omitted, the response includes all of your container services in the AWS Region where the request is made.</p>"
         }
       }
     },
@@ -7714,7 +8884,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDiskSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDiskSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7736,7 +8906,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDisks</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDisks</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7895,7 +9065,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDomains</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDomains</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7917,7 +9087,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetExportSnapshotRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetExportSnapshotRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8082,7 +9252,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstanceSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstanceSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8125,7 +9295,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstances</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstances</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8168,7 +9338,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetKeyPairs</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetKeyPairs</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8287,7 +9457,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetLoadBalancers</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetLoadBalancers</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8342,7 +9512,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperationsForResource</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperationsForResource</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8364,7 +9534,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperations</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperations</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8377,7 +9547,7 @@
         },
         "includeRelationalDatabaseAvailabilityZones": {
           "shape": "boolean",
-          "documentation": "<p>&gt;A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., <code>us-east-2a</code>).</p>"
+          "documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., <code>us-east-2a</code>).</p>"
         }
       }
     },
@@ -8408,7 +9578,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8430,7 +9600,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8463,7 +9633,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseEvents</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseEvents</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8647,7 +9817,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseParameters</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseParameters</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8711,7 +9881,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8733,7 +9903,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabases</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabases</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -8776,7 +9946,7 @@
         },
         "nextPageToken": {
           "shape": "string",
-          "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetStaticIps</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetStaticIps</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -10290,7 +11460,14 @@
         "DetachCertificateFromDistribution",
         "UpdateDistributionBundle",
         "CreateCertificate",
-        "DeleteCertificate"
+        "DeleteCertificate",
+        "CreateContainerService",
+        "UpdateContainerService",
+        "DeleteContainerService",
+        "CreateContainerServiceDeployment",
+        "CreateContainerServiceRegistryLogin",
+        "RegisterContainerImage",
+        "DeleteContainerImage"
       ]
     },
     "Origin": {
@@ -10448,6 +11625,15 @@
       "type": "list",
       "member": {
         "shape": "Port"
+      }
+    },
+    "PortMap": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "ContainerServiceProtocol"
       }
     },
     "PortState": {
@@ -10667,6 +11853,36 @@
         "ap-northeast-1",
         "ap-northeast-2"
       ]
+    },
+    "RegisterContainerImageRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName",
+        "label",
+        "digest"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service for which to register a container image.</p>"
+        },
+        "label": {
+          "shape": "ContainerLabel",
+          "documentation": "<p>The label for the container image when it's registered to the container service.</p> <p>Use a descriptive label that you can use to track the different versions of your registered container images.</p> <p>Use the <code>GetContainerImages</code> action to return the container images registered to a Lightsail container service. The label is the <code>&lt;imagelabel&gt;</code> portion of the following image name example:</p> <ul> <li> <p> <code>:container-service-1.&lt;imagelabel&gt;.1</code> </p> </li> </ul> <p>If the name of your container service is <code>mycontainerservice</code>, and the label that you specify is <code>mystaticwebsite</code>, then the name of the registered container image will be <code>:mycontainerservice.mystaticwebsite.1</code>.</p> <p>The number at the end of these image name examples represents the version of the registered container image. If you push and register another container image to the same Lightsail container service, with the same label, then the version number for the new registered container image will be <code>2</code>. If you push and register another container image, the version number will be <code>3</code>, and so on.</p>"
+        },
+        "digest": {
+          "shape": "string",
+          "documentation": "<p>The digest of the container image to be registered.</p>"
+        }
+      }
+    },
+    "RegisterContainerImageResult": {
+      "type": "structure",
+      "members": {
+        "containerImage": {
+          "shape": "ContainerImage"
+        }
+      }
     },
     "RelationalDatabase": {
       "type": "structure",
@@ -11202,6 +12418,7 @@
     "ResourceType": {
       "type": "string",
       "enum": [
+        "ContainerService",
         "Instance",
         "StaticIp",
         "KeyPair",
@@ -11554,6 +12771,43 @@
         }
       }
     },
+    "UpdateContainerServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceName"
+      ],
+      "members": {
+        "serviceName": {
+          "shape": "ContainerServiceName",
+          "documentation": "<p>The name of the container service to update.</p>"
+        },
+        "power": {
+          "shape": "ContainerServicePowerName",
+          "documentation": "<p>The power for the container service.</p> <p>The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p> <p>Use the <code>GetContainerServicePowers</code> action to view the specifications of each power option.</p>"
+        },
+        "scale": {
+          "shape": "ContainerServiceScale",
+          "documentation": "<p>The scale for the container service.</p> <p>The scale specifies the allocated compute nodes of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p>"
+        },
+        "isDisabled": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value to indicate whether the container service is disabled.</p>"
+        },
+        "publicDomainNames": {
+          "shape": "ContainerServicePublicDomains",
+          "documentation": "<p>The public domain names to use with the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don't specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>You can specify public domain names using a string to array map as shown in the example later on this page.</p>"
+        }
+      }
+    },
+    "UpdateContainerServiceResult": {
+      "type": "structure",
+      "members": {
+        "containerService": {
+          "shape": "ContainerService",
+          "documentation": "<p>An object that describes a container service.</p>"
+        }
+      }
+    },
     "UpdateDistributionBundleRequest": {
       "type": "structure",
       "members": {
@@ -11778,5 +13032,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly – instances (virtual private servers), managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and snapshots (backups) – for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas for the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
+  "documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly - instances (virtual private servers), container services, managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and resource snapshots (backups) - for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
 }

@@ -362,6 +362,25 @@
       "documentation": "<p>Returns metadata associated with creating a copy of a resource.</p>",
       "idempotent": true
     },
+    "DescribeGlobalSettings": {
+      "name": "DescribeGlobalSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-settings"
+      },
+      "input": {
+        "shape": "DescribeGlobalSettingsInput"
+      },
+      "output": {
+        "shape": "DescribeGlobalSettingsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>The current feature settings for the AWS Account.</p>"
+    },
     "DescribeProtectedResource": {
       "name": "DescribeProtectedResource",
       "http": {
@@ -437,7 +456,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Returns the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service's resources in this Region.</p>"
+      "documentation": "<p>Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region, AWS Backup does not try to protect that service's resources in this Region.</p>"
     },
     "DescribeRestoreJob": {
       "name": "DescribeRestoreJob",
@@ -1122,6 +1141,9 @@
           "shape": "MissingParameterValueException"
         },
         {
+          "shape": "InvalidRequestException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -1304,6 +1326,31 @@
       "documentation": "<p>Updates an existing backup plan identified by its <code>backupPlanId</code> with the input document in JSON format. The new version is uniquely identified by a <code>VersionId</code>.</p>",
       "idempotent": true
     },
+    "UpdateGlobalSettings": {
+      "name": "UpdateGlobalSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/global-settings"
+      },
+      "input": {
+        "shape": "UpdateGlobalSettingsInput"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "MissingParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Updates the current global settings for the AWS Account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.</p>"
+    },
     "UpdateRecoveryPointLifecycle": {
       "name": "UpdateRecoveryPointLifecycle",
       "http": {
@@ -1353,7 +1400,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Updates the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service's resources in this Region.</p>"
+      "documentation": "<p>Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region. Use the <code>DescribeRegionSettings</code> API to determine the resource types that are supported.</p>"
     }
   },
   "shapes": {
@@ -1373,7 +1420,7 @@
         },
         "BackupOptions": {
           "shape": "BackupOptions",
-          "documentation": "<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>\"WindowsVSS”:“enabled\"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html\">Creating a VSS-Enabled Windows Backup</a>.</p>"
+          "documentation": "<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the WindowsVSS backup option and create a VSS Windows backup. </p> <p>Set to <code>\"WindowsVSS\":\"disabled\"</code> to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html\">Creating a VSS-Enabled Windows Backup</a>.</p>"
         }
       },
       "documentation": "<p>A list of backup options for each resource type.</p>"
@@ -2362,7 +2409,7 @@
         },
         "BackupType": {
           "shape": "string",
-          "documentation": "<p>Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns “WindowsVSS”. If <code>BackupType</code> is empty, then it is a regular backup.</p>"
+          "documentation": "<p>Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns \"WindowsVSS\". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.</p>"
         }
       }
     },
@@ -2432,6 +2479,23 @@
         }
       }
     },
+    "DescribeGlobalSettingsInput": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeGlobalSettingsOutput": {
+      "type": "structure",
+      "members": {
+        "GlobalSettings": {
+          "shape": "GlobalSettings",
+          "documentation": "<p>A list of resources along with the opt-in preferences for the account.</p>"
+        },
+        "LastUpdateTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The date and time that the global settings was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+        }
+      }
+    },
     "DescribeProtectedResourceInput": {
       "type": "structure",
       "required": [
@@ -2498,6 +2562,10 @@
         "BackupVaultArn": {
           "shape": "ARN",
           "documentation": "<p>An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.</p>"
+        },
+        "SourceBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same AWS account or Region, this value will be <code>null</code>.</p>"
         },
         "ResourceArn": {
           "shape": "ARN",
@@ -2927,6 +2995,21 @@
           "documentation": "<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>"
         }
       }
+    },
+    "GlobalSettings": {
+      "type": "map",
+      "key": {
+        "shape": "GlobalSettingsName"
+      },
+      "value": {
+        "shape": "GlobalSettingsValue"
+      }
+    },
+    "GlobalSettingsName": {
+      "type": "string"
+    },
+    "GlobalSettingsValue": {
+      "type": "string"
     },
     "IAMPolicy": {
       "type": "string"
@@ -3611,6 +3694,10 @@
           "shape": "ARN",
           "documentation": "<p>An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.</p>"
         },
+        "SourceBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>The backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account this value will be <code>null</code>.</p>"
+        },
         "ResourceArn": {
           "shape": "ARN",
           "documentation": "<p>An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.</p>"
@@ -4114,6 +4201,15 @@
         "AdvancedBackupSettings": {
           "shape": "AdvancedBackupSettings",
           "documentation": "<p>Contains a list of <code>BackupOptions</code> for each resource type.</p>"
+        }
+      }
+    },
+    "UpdateGlobalSettingsInput": {
+      "type": "structure",
+      "members": {
+        "GlobalSettings": {
+          "shape": "GlobalSettings",
+          "documentation": "<p>A list of resources along with the opt-in preferences for the account.</p>"
         }
       }
     },

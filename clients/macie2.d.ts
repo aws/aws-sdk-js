@@ -844,7 +844,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationResult {
     /**
-     * Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data. This value can help you to determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).
+     * Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data. This value can help you determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).
      */
     additionalOccurrences?: __boolean;
     /**
@@ -870,7 +870,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationResultStatus {
     /**
-     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.
+     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie analyzed only a subset of the data in the object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.
      */
     code?: __string;
     /**
@@ -1061,7 +1061,7 @@ declare namespace Macie2 {
      */
     eq?: __listOf__string;
     /**
-     * A condition that requires an array field of a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.
+     * A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.
      */
     eqExactMatch?: __listOf__string;
     /**
@@ -1275,6 +1275,10 @@ declare namespace Macie2 {
      */
     jobType?: JobType;
     /**
+     * Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run.
+     */
+    lastRunErrorStatus?: LastRunErrorStatus;
+    /**
      * The date and time, in UTC and extended ISO 8601 format, when the job last ran.
      */
     lastRunTime?: __timestampIso8601;
@@ -1420,7 +1424,7 @@ declare namespace Macie2 {
      */
     classificationDetails?: ClassificationDetails;
     /**
-     * The total number of occurrences of the finding.
+     * The total number of occurrences of the finding. For sensitive data findings, this value is always 1. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.
      */
     count?: __long;
     /**
@@ -2023,6 +2027,10 @@ declare namespace Macie2 {
      */
     jobType?: JobType;
     /**
+     * Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run.
+     */
+    lastRunErrorStatus?: LastRunErrorStatus;
+    /**
      * The custom name of the job.
      */
     name?: __string;
@@ -2038,11 +2046,18 @@ declare namespace Macie2 {
      */
     key?: __string;
     /**
-     * One part of a key-value pair that comprises a tag. A tag value acts as a descriptor for a tag key. A tag value can be empty or null.
+     * One part of a key-value pair that comprises a tag. A tag value acts as a descriptor for a tag key. A tag value can be an empty string.
      */
     value?: __string;
   }
   export type KeyValuePairList = KeyValuePair[];
+  export interface LastRunErrorStatus {
+    /**
+     * Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run. Possible values are: ERROR - One or more errors occurred. Amazon Macie didn't process all the data specified for the job. NONE - No errors occurred. Macie processed all the data specified for the job.
+     */
+    code?: LastRunErrorStatusCode;
+  }
+  export type LastRunErrorStatusCode = "NONE"|"ERROR"|string;
   export interface ListClassificationJobsRequest {
     /**
      * The criteria to use to filter the results.
@@ -2335,7 +2350,7 @@ declare namespace Macie2 {
      */
     lineRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file. This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
+     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file. This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
      */
     offsetRanges?: Ranges;
     /**
@@ -2343,7 +2358,7 @@ declare namespace Macie2 {
      */
     pages?: Pages;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the field or record that contains the data. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the record index and the path to the field in the record that contains the data. This value is null for all other types of files.
      */
     records?: Records;
   }
@@ -2402,7 +2417,7 @@ declare namespace Macie2 {
   export type Ranges = Range[];
   export interface Record {
     /**
-     * The path, as a JSONPath expression, to the field (in an Apache Avro object container) or record (in an Apache Parquet file) that contains the data. If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
+     * The path, as a JSONPath expression, to the field in the record that contains the data. If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
      */
     jsonPath?: __string;
     /**
@@ -2574,7 +2589,7 @@ declare namespace Macie2 {
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
     /**
-     * The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information, such as full names and mailing addresses, or personal health information; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.
+     * The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.
      */
     category?: SensitiveDataItemCategory;
     /**

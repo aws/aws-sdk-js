@@ -100,6 +100,30 @@ declare class Lightsail extends Service {
    */
   createContactMethod(callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
+   * Creates an Amazon Lightsail container service. A Lightsail container service is a compute resource to which you can deploy containers. For more information, see Container services in Amazon Lightsail in the Lightsail Dev Guide.
+   */
+  createContainerService(params: Lightsail.Types.CreateContainerServiceRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceResult) => void): Request<Lightsail.Types.CreateContainerServiceResult, AWSError>;
+  /**
+   * Creates an Amazon Lightsail container service. A Lightsail container service is a compute resource to which you can deploy containers. For more information, see Container services in Amazon Lightsail in the Lightsail Dev Guide.
+   */
+  createContainerService(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceResult) => void): Request<Lightsail.Types.CreateContainerServiceResult, AWSError>;
+  /**
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Lightsail Dev Guide.
+   */
+  createContainerServiceDeployment(params: Lightsail.Types.CreateContainerServiceDeploymentRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
+  /**
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Lightsail Dev Guide.
+   */
+  createContainerServiceDeployment(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
+  /**
+   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   */
+  createContainerServiceRegistryLogin(params: Lightsail.Types.CreateContainerServiceRegistryLoginRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceRegistryLoginResult) => void): Request<Lightsail.Types.CreateContainerServiceRegistryLoginResult, AWSError>;
+  /**
+   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   */
+  createContainerServiceRegistryLogin(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceRegistryLoginResult) => void): Request<Lightsail.Types.CreateContainerServiceRegistryLoginResult, AWSError>;
+  /**
    * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createDisk(params: Lightsail.Types.CreateDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
@@ -140,11 +164,11 @@ declare class Lightsail extends Service {
    */
   createDomain(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
-   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   createDomainEntry(params: Lightsail.Types.CreateDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
-   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   createDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
@@ -251,6 +275,22 @@ declare class Lightsail extends Service {
    * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
+  /**
+   * Deletes a container image that is registered to your Amazon Lightsail container service.
+   */
+  deleteContainerImage(params: Lightsail.Types.DeleteContainerImageRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContainerImageResult) => void): Request<Lightsail.Types.DeleteContainerImageResult, AWSError>;
+  /**
+   * Deletes a container image that is registered to your Amazon Lightsail container service.
+   */
+  deleteContainerImage(callback?: (err: AWSError, data: Lightsail.Types.DeleteContainerImageResult) => void): Request<Lightsail.Types.DeleteContainerImageResult, AWSError>;
+  /**
+   * Deletes your Amazon Lightsail container service.
+   */
+  deleteContainerService(params: Lightsail.Types.DeleteContainerServiceRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContainerServiceResult) => void): Request<Lightsail.Types.DeleteContainerServiceResult, AWSError>;
+  /**
+   * Deletes your Amazon Lightsail container service.
+   */
+  deleteContainerService(callback?: (err: AWSError, data: Lightsail.Types.DeleteContainerServiceResult) => void): Request<Lightsail.Types.DeleteContainerServiceResult, AWSError>;
   /**
    * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
@@ -483,6 +523,62 @@ declare class Lightsail extends Service {
    * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   getContactMethods(callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
+  /**
+   * Returns information about Amazon Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.
+   */
+  getContainerAPIMetadata(params: Lightsail.Types.GetContainerAPIMetadataRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerAPIMetadataResult) => void): Request<Lightsail.Types.GetContainerAPIMetadataResult, AWSError>;
+  /**
+   * Returns information about Amazon Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.
+   */
+  getContainerAPIMetadata(callback?: (err: AWSError, data: Lightsail.Types.GetContainerAPIMetadataResult) => void): Request<Lightsail.Types.GetContainerAPIMetadataResult, AWSError>;
+  /**
+   * Returns the container images that are registered to your Amazon Lightsail container service.  If you created a deployment on your Lightsail container service that uses container images from a public registry like Docker Hub, those images are not returned as part of this action. Those images are not registered to your Lightsail container service. 
+   */
+  getContainerImages(params: Lightsail.Types.GetContainerImagesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerImagesResult) => void): Request<Lightsail.Types.GetContainerImagesResult, AWSError>;
+  /**
+   * Returns the container images that are registered to your Amazon Lightsail container service.  If you created a deployment on your Lightsail container service that uses container images from a public registry like Docker Hub, those images are not returned as part of this action. Those images are not registered to your Lightsail container service. 
+   */
+  getContainerImages(callback?: (err: AWSError, data: Lightsail.Types.GetContainerImagesResult) => void): Request<Lightsail.Types.GetContainerImagesResult, AWSError>;
+  /**
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   */
+  getContainerLog(params: Lightsail.Types.GetContainerLogRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
+  /**
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   */
+  getContainerLog(callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
+  /**
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   */
+  getContainerServiceDeployments(params: Lightsail.Types.GetContainerServiceDeploymentsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
+  /**
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   */
+  getContainerServiceDeployments(callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric of your Amazon Lightsail container service. Metrics report the utilization of your resources. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.
+   */
+  getContainerServiceMetricData(params: Lightsail.Types.GetContainerServiceMetricDataRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceMetricDataResult) => void): Request<Lightsail.Types.GetContainerServiceMetricDataResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric of your Amazon Lightsail container service. Metrics report the utilization of your resources. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.
+   */
+  getContainerServiceMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceMetricDataResult) => void): Request<Lightsail.Types.GetContainerServiceMetricDataResult, AWSError>;
+  /**
+   * Returns the list of powers that can be specified for your Amazon Lightsail container services. The power specifies the amount of memory, the number of vCPUs, and the base price of the container service.
+   */
+  getContainerServicePowers(params: Lightsail.Types.GetContainerServicePowersRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerServicePowersResult) => void): Request<Lightsail.Types.GetContainerServicePowersResult, AWSError>;
+  /**
+   * Returns the list of powers that can be specified for your Amazon Lightsail container services. The power specifies the amount of memory, the number of vCPUs, and the base price of the container service.
+   */
+  getContainerServicePowers(callback?: (err: AWSError, data: Lightsail.Types.GetContainerServicePowersResult) => void): Request<Lightsail.Types.GetContainerServicePowersResult, AWSError>;
+  /**
+   * Returns information about one or more of your Amazon Lightsail container services.
+   */
+  getContainerServices(params: Lightsail.Types.GetContainerServicesRequest, callback?: (err: AWSError, data: Lightsail.Types.ContainerServicesListResult) => void): Request<Lightsail.Types.ContainerServicesListResult, AWSError>;
+  /**
+   * Returns information about one or more of your Amazon Lightsail container services.
+   */
+  getContainerServices(callback?: (err: AWSError, data: Lightsail.Types.ContainerServicesListResult) => void): Request<Lightsail.Types.ContainerServicesListResult, AWSError>;
   /**
    * Returns information about a specific block storage disk.
    */
@@ -892,6 +988,14 @@ declare class Lightsail extends Service {
    */
   rebootRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.RebootRelationalDatabaseResult) => void): Request<Lightsail.Types.RebootRelationalDatabaseResult, AWSError>;
   /**
+   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   */
+  registerContainerImage(params: Lightsail.Types.RegisterContainerImageRequest, callback?: (err: AWSError, data: Lightsail.Types.RegisterContainerImageResult) => void): Request<Lightsail.Types.RegisterContainerImageResult, AWSError>;
+  /**
+   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   */
+  registerContainerImage(callback?: (err: AWSError, data: Lightsail.Types.RegisterContainerImageResult) => void): Request<Lightsail.Types.RegisterContainerImageResult, AWSError>;
+  /**
    * Deletes a specific static IP from your account.
    */
   releaseStaticIp(params: Lightsail.Types.ReleaseStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
@@ -979,6 +1083,14 @@ declare class Lightsail extends Service {
    * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   untagResource(callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
+  /**
+   * Updates the configuration of your Amazon Lightsail container service, such as its power, scale, and public domain names.
+   */
+  updateContainerService(params: Lightsail.Types.UpdateContainerServiceRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateContainerServiceResult) => void): Request<Lightsail.Types.UpdateContainerServiceResult, AWSError>;
+  /**
+   * Updates the configuration of your Amazon Lightsail container service, such as its power, scale, and public domain names.
+   */
+  updateContainerService(callback?: (err: AWSError, data: Lightsail.Types.UpdateContainerServiceResult) => void): Request<Lightsail.Types.UpdateContainerServiceResult, AWSError>;
   /**
    * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution
    */
@@ -1663,6 +1775,259 @@ declare namespace Lightsail {
   export type ContactMethodsList = ContactMethod[];
   export type ContactProtocol = "Email"|"SMS"|string;
   export type ContactProtocolsList = ContactProtocol[];
+  export interface Container {
+    /**
+     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, :container-service-1.mystaticwebsite.1. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
+     */
+    image?: string;
+    /**
+     * The launch command for the container.
+     */
+    command?: StringList;
+    /**
+     * The environment variables of the container.
+     */
+    environment?: Environment;
+    /**
+     * The open firewall ports of the container.
+     */
+    ports?: PortMap;
+  }
+  export interface ContainerImage {
+    /**
+     * The name of the container image.
+     */
+    image?: string;
+    /**
+     * The digest of the container image.
+     */
+    digest?: string;
+    /**
+     * The timestamp when the container image was created.
+     */
+    createdAt?: IsoDate;
+  }
+  export type ContainerImageList = ContainerImage[];
+  export type ContainerLabel = string;
+  export type ContainerMap = {[key: string]: Container};
+  export type ContainerName = string;
+  export interface ContainerService {
+    /**
+     * The name of the container service.
+     */
+    containerServiceName?: ContainerServiceName;
+    /**
+     * The Amazon Resource Name (ARN) of the container service.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The timestamp when the container service was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * An object that describes the location of the container service, such as the AWS Region and Availability Zone.
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type of the container service (i.e., ContainerService).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     */
+    tags?: TagList;
+    /**
+     * The power specification of the container service. The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.
+     */
+    power?: ContainerServicePowerName;
+    /**
+     * The ID of the power of the container service.
+     */
+    powerId?: string;
+    /**
+     * The current state of the container service. The state can be:    Pending - The container service is being created.    Ready - The container service is created but does not have a container deployment.    Disabled - The container service is disabled.    Updating - The container service capacity or other setting is being updated.    Deploying - The container service is launching a container deployment.    Running - The container service is created and it has a container deployment.  
+     */
+    state?: ContainerServiceState;
+    /**
+     * The scale specification of the container service. The scale specifies the allocated compute nodes of the container service.
+     */
+    scale?: ContainerServiceScale;
+    /**
+     * An object that describes the current container deployment of the container service.
+     */
+    currentDeployment?: ContainerServiceDeployment;
+    /**
+     * An object that describes the next deployment of the container service. This value is null when there is no deployment in a pending state.
+     */
+    nextDeployment?: ContainerServiceDeployment;
+    /**
+     * A Boolean value indicating whether the container service is disabled.
+     */
+    isDisabled?: boolean;
+    /**
+     * The principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.
+     */
+    principalArn?: string;
+    /**
+     * The private domain name of the container service. The private domain name is accessible only by other resources within the default virtual private cloud (VPC) of your Lightsail account.
+     */
+    privateDomainName?: string;
+    /**
+     * The public domain name of the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service.  You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the CreateCertificate action to create a certificate for the public domain names you want to use with your container service.  See CreateContainerService or UpdateContainerService for information about how to specify public domain names for your Lightsail container service.
+     */
+    publicDomainNames?: ContainerServicePublicDomains;
+    /**
+     * The publicly accessible URL of the container service. If no public endpoint is specified in the currentDeployment, this URL returns a 404 response.
+     */
+    url?: string;
+  }
+  export interface ContainerServiceDeployment {
+    /**
+     * The version number of the deployment.
+     */
+    version?: integer;
+    /**
+     * The state of the deployment. A deployment can be in one of the following states:    Activating - The deployment is being created.    Active - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.    Inactive - The deployment was previously successfully created, but it is not currently running on the container service.    Failed - The deployment failed. Use the GetContainerLog action to view the log events for the containers in the deployment to try to determine the reason for the failure.  
+     */
+    state?: ContainerServiceDeploymentState;
+    /**
+     * An object that describes the configuration for the containers of the deployment.
+     */
+    containers?: ContainerMap;
+    /**
+     * An object that describes the endpoint of the deployment.
+     */
+    publicEndpoint?: ContainerServiceEndpoint;
+    /**
+     * The timestamp when the deployment was created.
+     */
+    createdAt?: IsoDate;
+  }
+  export type ContainerServiceDeploymentList = ContainerServiceDeployment[];
+  export interface ContainerServiceDeploymentRequest {
+    /**
+     * An object that describes the configuration for the containers of the deployment.
+     */
+    containers?: ContainerMap;
+    /**
+     * An object that describes the endpoint of the deployment.
+     */
+    publicEndpoint?: EndpointRequest;
+  }
+  export type ContainerServiceDeploymentState = "ACTIVATING"|"ACTIVE"|"INACTIVE"|"FAILED"|string;
+  export interface ContainerServiceEndpoint {
+    /**
+     * The name of the container entry of the deployment that the endpoint configuration applies to.
+     */
+    containerName?: string;
+    /**
+     * The port of the specified container to which traffic is forwarded to.
+     */
+    containerPort?: integer;
+    /**
+     * An object that describes the health check configuration of the container.
+     */
+    healthCheck?: ContainerServiceHealthCheckConfig;
+  }
+  export interface ContainerServiceHealthCheckConfig {
+    /**
+     * The number of consecutive health checks successes required before moving the container to the Healthy state.
+     */
+    healthyThreshold?: integer;
+    /**
+     * The number of consecutive health check failures required before moving the container to the Unhealthy state.
+     */
+    unhealthyThreshold?: integer;
+    /**
+     * The amount of time, in seconds, during which no response means a failed health check. You may specify between 2 and 60 seconds.
+     */
+    timeoutSeconds?: integer;
+    /**
+     * The approximate interval, in seconds, between health checks of an individual container. You may specify between 5 and 300 seconds.
+     */
+    intervalSeconds?: integer;
+    /**
+     * The path on the container on which to perform the health check.
+     */
+    path?: string;
+    /**
+     * The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499.
+     */
+    successCodes?: string;
+  }
+  export type ContainerServiceList = ContainerService[];
+  export interface ContainerServiceLogEvent {
+    /**
+     * The timestamp when the container service log event was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The message of the container service log event.
+     */
+    message?: string;
+  }
+  export type ContainerServiceLogEventList = ContainerServiceLogEvent[];
+  export type ContainerServiceMetadataEntry = {[key: string]: string};
+  export type ContainerServiceMetadataEntryList = ContainerServiceMetadataEntry[];
+  export type ContainerServiceMetricName = "CPUUtilization"|"MemoryUtilization"|string;
+  export type ContainerServiceName = string;
+  export interface ContainerServicePower {
+    /**
+     * The ID of the power (e.g., nano-1).
+     */
+    powerId?: string;
+    /**
+     * The monthly price of the power in USD.
+     */
+    price?: float;
+    /**
+     * The number of vCPUs included in the power.
+     */
+    cpuCount?: float;
+    /**
+     * The amount of RAM (in GB) of the power.
+     */
+    ramSizeInGb?: float;
+    /**
+     * The friendly name of the power (e.g., nano).
+     */
+    name?: string;
+    /**
+     * A Boolean value indicating whether the power is active and can be specified for container services.
+     */
+    isActive?: boolean;
+  }
+  export type ContainerServicePowerList = ContainerServicePower[];
+  export type ContainerServicePowerName = "nano"|"micro"|"small"|"medium"|"large"|"xlarge"|string;
+  export type ContainerServiceProtocol = "HTTP"|"HTTPS"|"TCP"|"UDP"|string;
+  export type ContainerServicePublicDomains = {[key: string]: ContainerServicePublicDomainsList};
+  export type ContainerServicePublicDomainsList = string[];
+  export interface ContainerServiceRegistryLogin {
+    /**
+     * The container service registry username to use to push container images to the container image registry of a Lightsail account.
+     */
+    username?: string;
+    /**
+     * The container service registry password to use to push container images to the container image registry of a Lightsail account
+     */
+    password?: string;
+    /**
+     * The timestamp of when the container image registry username and password expire. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the CreateContainerServiceRegistryLogin action.
+     */
+    expiresAt?: IsoDate;
+    /**
+     * The address to use to push container images to the container image registry of a Lightsail account.
+     */
+    registry?: string;
+  }
+  export type ContainerServiceScale = number;
+  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|string;
+  export interface ContainerServicesListResult {
+    /**
+     * An array of objects that describe one or more container services.
+     */
+    containerServices?: ContainerServiceList;
+  }
   export interface CookieObject {
     /**
      * Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.
@@ -1760,6 +2125,66 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
+  }
+  export interface CreateContainerServiceDeploymentRequest {
+    /**
+     * The name of the container service for which to create the deployment.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * An object that describes the settings of the containers that will be launched on the container service.
+     */
+    containers?: ContainerMap;
+    /**
+     * An object that describes the settings of the public endpoint for the container service.
+     */
+    publicEndpoint?: EndpointRequest;
+  }
+  export interface CreateContainerServiceDeploymentResult {
+    /**
+     * An object that describes a container service.
+     */
+    containerService?: ContainerService;
+  }
+  export interface CreateContainerServiceRegistryLoginRequest {
+  }
+  export interface CreateContainerServiceRegistryLoginResult {
+    /**
+     * An object that describes the log in information for the container service registry of your Lightsail account.
+     */
+    registryLogin?: ContainerServiceRegistryLogin;
+  }
+  export interface CreateContainerServiceRequest {
+    /**
+     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) AWS region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each AWS Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The power specification for the container service. The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The power and scale of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the power with the scale (the number of nodes) of the service. Use the GetContainerServicePowers action to get a list of power options that you can specify using this parameter, and their base monthly cost.
+     */
+    power: ContainerServicePowerName;
+    /**
+     * The scale specification for the container service. The scale specifies the allocated compute nodes of the container service. The power and scale of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the power with the scale (the number of nodes) of the service.
+     */
+    scale: ContainerServiceScale;
+    /**
+     * The tag keys and optional values for the container service. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     */
+    tags?: TagList;
+    /**
+     * The public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service.  You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the CreateCertificate action to create a certificate for the public domain names you want to use with your container service.  You can specify public domain names using a string to array map as shown in the example later on this page.
+     */
+    publicDomainNames?: ContainerServicePublicDomains;
+    /**
+     * An object that describes a deployment for the container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.
+     */
+    deployment?: ContainerServiceDeploymentRequest;
+  }
+  export interface CreateContainerServiceResult {
+    /**
+     * An object that describes a container service.
+     */
+    containerService?: ContainerService;
   }
   export interface CreateDiskFromSnapshotRequest {
     /**
@@ -2309,6 +2734,26 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface DeleteContainerImageRequest {
+    /**
+     * The name of the container service for which to delete a registered container image.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The name of the container image to delete from the container service. Use the GetContainerImages action to get the name of the container images that are registered to a container service.  Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, :container-service-1.mystaticwebsite.1. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx. 
+     */
+    image: string;
+  }
+  export interface DeleteContainerImageResult {
+  }
+  export interface DeleteContainerServiceRequest {
+    /**
+     * The name of the container service to delete.
+     */
+    serviceName: ContainerServiceName;
+  }
+  export interface DeleteContainerServiceResult {
+  }
   export interface DeleteDiskRequest {
     /**
      * The unique name of the disk you want to delete (e.g., my-disk).
@@ -2816,7 +3261,7 @@ declare namespace Lightsail {
      */
     target?: string;
     /**
-     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer
+     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer.
      */
     isAlias?: boolean;
     /**
@@ -2875,6 +3320,21 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface EndpointRequest {
+    /**
+     * The name of the container for the endpoint.
+     */
+    containerName: string;
+    /**
+     * The port of the container to which traffic is forwarded to.
+     */
+    containerPort: integer;
+    /**
+     * An object that describes the health check configuration of the container.
+     */
+    healthCheck?: ContainerServiceHealthCheckConfig;
+  }
+  export type Environment = {[key: string]: string};
   export interface ExportSnapshotRecord {
     /**
      * The export snapshot record name.
@@ -2970,7 +3430,7 @@ declare namespace Lightsail {
      */
     activeNames?: StringList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetActiveNames request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetActiveNames request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2994,7 +3454,7 @@ declare namespace Lightsail {
      */
     alarms?: AlarmsList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetAlarms request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetAlarms request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3034,7 +3494,7 @@ declare namespace Lightsail {
      */
     blueprints?: BlueprintList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBlueprints request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBlueprints request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3054,13 +3514,13 @@ declare namespace Lightsail {
      */
     bundles?: BundleList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBundles request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBundles request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetCertificatesRequest {
     /**
-     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.
+     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the AWS Region where the request is made, regardless of their current status.
      */
     certificateStatuses?: CertificateStatusList;
     /**
@@ -3068,7 +3528,7 @@ declare namespace Lightsail {
      */
     includeCertificateDetails?: IncludeCertificateDetails;
     /**
-     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the AWS region where the request is made.
+     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the AWS Region where the request is made.
      */
     certificateName?: CertificateName;
   }
@@ -3090,7 +3550,7 @@ declare namespace Lightsail {
      */
     cloudFormationStackRecords?: CloudFormationStackRecordList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetCloudFormationStackRecords request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetCloudFormationStackRecords request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3105,6 +3565,124 @@ declare namespace Lightsail {
      * An array of objects that describe the contact methods.
      */
     contactMethods?: ContactMethodsList;
+  }
+  export interface GetContainerAPIMetadataRequest {
+  }
+  export interface GetContainerAPIMetadataResult {
+    /**
+     * Metadata about Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.
+     */
+    metadata?: ContainerServiceMetadataEntryList;
+  }
+  export interface GetContainerImagesRequest {
+    /**
+     * The name of the container service for which to return registered container images.
+     */
+    serviceName: ContainerServiceName;
+  }
+  export interface GetContainerImagesResult {
+    /**
+     * An array of objects that describe container images that are registered to the container service.
+     */
+    containerImages?: ContainerImageList;
+  }
+  export interface GetContainerLogRequest {
+    /**
+     * The name of the container service for which to get a container log.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The name of the container that is either running or previously ran on the container service for which to return a log.
+     */
+    containerName: string;
+    /**
+     * The start of the time interval for which to get log data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    startTime?: IsoDate;
+    /**
+     * The end of the time interval for which to get log data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    endTime?: IsoDate;
+    /**
+     * The pattern to use to filter the returned log events to a specific term. The following are a few examples of filter patterns that you can specify:   To return all log events, specify a filter pattern of "".   To exclude log events that contain the ERROR term, and return all other log events, specify a filter pattern of "-ERROR".   To return log events that contain the ERROR term, specify a filter pattern of "ERROR".   To return log events that contain both the ERROR and Exception terms, specify a filter pattern of "ERROR Exception".   To return log events that contain the ERROR or the Exception term, specify a filter pattern of "?ERROR ?Exception".  
+     */
+    filterPattern?: string;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetContainerLog request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+  }
+  export interface GetContainerLogResult {
+    /**
+     * An array of objects that describe the log events of a container.
+     */
+    logEvents?: ContainerServiceLogEventList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetContainerLog request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetContainerServiceDeploymentsRequest {
+    /**
+     * The name of the container service for which to return deployments.
+     */
+    serviceName: ContainerServiceName;
+  }
+  export interface GetContainerServiceDeploymentsResult {
+    /**
+     * An array of objects that describe deployments for a container service.
+     */
+    deployments?: ContainerServiceDeploymentList;
+  }
+  export interface GetContainerServiceMetricDataRequest {
+    /**
+     * The name of the container service for which to get metric data.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The metric for which you want to return information. Valid container service metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.    CPUUtilization - The average percentage of compute units that are currently in use across all nodes of the container service. This metric identifies the processing power required to run containers on each node of the container service. Statistics: The most useful statistics are Maximum and Average. Unit: The published unit is Percent.    MemoryUtilization - The average percentage of available memory that is currently in use across all nodes of the container service. This metric identifies the memory required to run containers on each node of the container service. Statistics: The most useful statistics are Maximum and Average. Unit: The published unit is Percent.  
+     */
+    metricName: ContainerServiceMetricName;
+    /**
+     * The start time of the time period.
+     */
+    startTime: IsoDate;
+    /**
+     * The end time of the time period.
+     */
+    endTime: IsoDate;
+    /**
+     * The granularity, in seconds, of the returned data points. All container service metric data is available in 5-minute (300 seconds) granularity.
+     */
+    period: MetricPeriod;
+    /**
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
+     */
+    statistics: MetricStatisticList;
+  }
+  export interface GetContainerServiceMetricDataResult {
+    /**
+     * The name of the metric returned. 
+     */
+    metricName?: ContainerServiceMetricName;
+    /**
+     * An array of objects that describe the metric data returned.
+     */
+    metricData?: MetricDatapointList;
+  }
+  export interface GetContainerServicePowersRequest {
+  }
+  export interface GetContainerServicePowersResult {
+    /**
+     * An array of objects that describe the powers that can be specified for a container service.
+     */
+    powers?: ContainerServicePowerList;
+  }
+  export interface GetContainerServicesRequest {
+    /**
+     * The name of the container service for which to return information. When omitted, the response includes all of your container services in the AWS Region where the request is made.
+     */
+    serviceName?: ContainerServiceName;
   }
   export interface GetDiskRequest {
     /**
@@ -3142,7 +3720,7 @@ declare namespace Lightsail {
      */
     diskSnapshots?: DiskSnapshotList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDiskSnapshots request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDiskSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3158,7 +3736,7 @@ declare namespace Lightsail {
      */
     disks?: DiskList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDisks request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDisks request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3270,7 +3848,7 @@ declare namespace Lightsail {
      */
     domains?: DomainList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDomains request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDomains request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3286,7 +3864,7 @@ declare namespace Lightsail {
      */
     exportSnapshotRecords?: ExportSnapshotRecordList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetExportSnapshotRecords request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetExportSnapshotRecords request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3394,7 +3972,7 @@ declare namespace Lightsail {
      */
     instanceSnapshots?: InstanceSnapshotList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstanceSnapshots request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstanceSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3422,7 +4000,7 @@ declare namespace Lightsail {
      */
     instances?: InstanceList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstances request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstances request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3450,7 +4028,7 @@ declare namespace Lightsail {
      */
     keyPairs?: KeyPairList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetKeyPairs request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetKeyPairs request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3530,7 +4108,7 @@ declare namespace Lightsail {
      */
     loadBalancers?: LoadBalancerList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetLoadBalancers request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetLoadBalancers request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3566,7 +4144,7 @@ declare namespace Lightsail {
      */
     nextPageCount?: string;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperationsForResource request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperationsForResource request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3582,7 +4160,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperations request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperations request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3592,7 +4170,7 @@ declare namespace Lightsail {
      */
     includeAvailabilityZones?: boolean;
     /**
-     * &gt;A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., us-east-2a).
+     * A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., us-east-2a).
      */
     includeRelationalDatabaseAvailabilityZones?: boolean;
   }
@@ -3614,7 +4192,7 @@ declare namespace Lightsail {
      */
     blueprints?: RelationalDatabaseBlueprintList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBlueprints request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBlueprints request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3630,7 +4208,7 @@ declare namespace Lightsail {
      */
     bundles?: RelationalDatabaseBundleList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBundles request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBundles request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3654,7 +4232,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseEvents?: RelationalDatabaseEventList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseEvents request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseEvents request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3786,7 +4364,7 @@ declare namespace Lightsail {
      */
     parameters?: RelationalDatabaseParameterList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseParameters request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseParameters request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3826,7 +4404,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseSnapshots?: RelationalDatabaseSnapshotList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseSnapshots request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3842,7 +4420,7 @@ declare namespace Lightsail {
      */
     relationalDatabases?: RelationalDatabaseList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabases request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabases request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3870,7 +4448,7 @@ declare namespace Lightsail {
      */
     staticIps?: StaticIpList;
     /**
-     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetStaticIps request and specify the next page token using the pageToken parameter.
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetStaticIps request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -4799,7 +5377,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"CreateCertificate"|"DeleteCertificate"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|string;
   export interface Origin {
     /**
      * The name of the origin resource.
@@ -4893,6 +5471,7 @@ declare namespace Lightsail {
   export type PortInfoList = PortInfo[];
   export type PortInfoSourceType = "DEFAULT"|"INSTANCE"|"NONE"|"CLOSED"|string;
   export type PortList = Port[];
+  export type PortMap = {[key: string]: ContainerServiceProtocol};
   export type PortState = "open"|"closed"|string;
   export interface PutAlarmRequest {
     /**
@@ -5025,6 +5604,23 @@ declare namespace Lightsail {
   }
   export type RegionList = Region[];
   export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export interface RegisterContainerImageRequest {
+    /**
+     * The name of the container service for which to register a container image.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The label for the container image when it's registered to the container service. Use a descriptive label that you can use to track the different versions of your registered container images. Use the GetContainerImages action to return the container images registered to a Lightsail container service. The label is the &lt;imagelabel&gt; portion of the following image name example:    :container-service-1.&lt;imagelabel&gt;.1    If the name of your container service is mycontainerservice, and the label that you specify is mystaticwebsite, then the name of the registered container image will be :mycontainerservice.mystaticwebsite.1. The number at the end of these image name examples represents the version of the registered container image. If you push and register another container image to the same Lightsail container service, with the same label, then the version number for the new registered container image will be 2. If you push and register another container image, the version number will be 3, and so on.
+     */
+    label: ContainerLabel;
+    /**
+     * The digest of the container image to be registered.
+     */
+    digest: string;
+  }
+  export interface RegisterContainerImageResult {
+    containerImage?: ContainerImage;
+  }
   export interface RelationalDatabase {
     /**
      * The unique name of the database resource in Lightsail.
@@ -5422,7 +6018,7 @@ declare namespace Lightsail {
      */
     value?: string;
   }
-  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|string;
+  export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|string;
   export type RevocationReason = string;
   export interface SendContactMethodVerificationRequest {
     /**
@@ -5615,6 +6211,34 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
+  }
+  export interface UpdateContainerServiceRequest {
+    /**
+     * The name of the container service to update.
+     */
+    serviceName: ContainerServiceName;
+    /**
+     * The power for the container service. The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The power and scale of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the power with the scale (the number of nodes) of the service. Use the GetContainerServicePowers action to view the specifications of each power option.
+     */
+    power?: ContainerServicePowerName;
+    /**
+     * The scale for the container service. The scale specifies the allocated compute nodes of the container service. The power and scale of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the power with the scale (the number of nodes) of the service.
+     */
+    scale?: ContainerServiceScale;
+    /**
+     * A Boolean value to indicate whether the container service is disabled.
+     */
+    isDisabled?: boolean;
+    /**
+     * The public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service.  You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the CreateCertificate action to create a certificate for the public domain names you want to use with your container service.  You can specify public domain names using a string to array map as shown in the example later on this page.
+     */
+    publicDomainNames?: ContainerServicePublicDomains;
+  }
+  export interface UpdateContainerServiceResult {
+    /**
+     * An object that describes a container service.
+     */
+    containerService?: ContainerService;
   }
   export interface UpdateDistributionBundleRequest {
     /**

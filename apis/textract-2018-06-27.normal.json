@@ -195,6 +195,9 @@
           "shape": "InvalidS3ObjectException"
         },
         {
+          "shape": "InvalidKMSKeyException"
+        },
+        {
           "shape": "UnsupportedDocumentException"
         },
         {
@@ -242,6 +245,9 @@
         },
         {
           "shape": "InvalidS3ObjectException"
+        },
+        {
+          "shape": "InvalidKMSKeyException"
         },
         {
           "shape": "UnsupportedDocumentException"
@@ -331,6 +337,10 @@
         "Text": {
           "shape": "String",
           "documentation": "<p>The word or line of text that's recognized by Amazon Textract. </p>"
+        },
+        "TextType": {
+          "shape": "TextType",
+          "documentation": "<p>The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.</p>"
         },
         "RowIndex": {
           "shape": "UInteger",
@@ -761,6 +771,12 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9_.\\-:]+"
     },
+    "KMSKeyId": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+    },
     "MaxResults": {
       "type": "integer",
       "min": 1
@@ -954,6 +970,10 @@
         "OutputConfig": {
           "shape": "OutputConfig",
           "documentation": "<p>Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.</p>"
+        },
+        "KMSKeyId": {
+          "shape": "KMSKeyId",
+          "documentation": "<p>The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.</p>"
         }
       }
     },
@@ -991,6 +1011,10 @@
         "OutputConfig": {
           "shape": "OutputConfig",
           "documentation": "<p>Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.</p>"
+        },
+        "KMSKeyId": {
+          "shape": "KMSKeyId",
+          "documentation": "<p>The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.</p>"
         }
       }
     },
@@ -1008,6 +1032,13 @@
     },
     "String": {
       "type": "string"
+    },
+    "TextType": {
+      "type": "string",
+      "enum": [
+        "HANDWRITING",
+        "PRINTED"
+      ]
     },
     "UInteger": {
       "type": "integer",

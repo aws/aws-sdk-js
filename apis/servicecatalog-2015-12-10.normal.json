@@ -1209,6 +1209,34 @@
       ],
       "documentation": "<p>This API takes either a <code>ProvisonedProductId</code> or a <code>ProvisionedProductName</code>, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.</p>"
     },
+    "ImportAsProvisionedProduct": {
+      "name": "ImportAsProvisionedProduct",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportAsProvisionedProductInput"
+      },
+      "output": {
+        "shape": "ImportAsProvisionedProductOutput"
+      },
+      "errors": [
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "InvalidStateException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParametersException"
+        }
+      ],
+      "documentation": "<p>Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported all supported Service Catalog governance actions are supported on the provisioned product.</p> <p>Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported.</p> <p>The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE.</p> <p>Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p>"
+    },
     "ListAcceptedPortfolioShares": {
       "name": "ListAcceptedPortfolioShares",
       "http": {
@@ -2591,7 +2619,7 @@
         },
         "ProvisioningArtifactParameters": {
           "shape": "ProvisioningArtifactProperties",
-          "documentation": "<p>The configuration of the provisioning artifact.</p>"
+          "documentation": "<p>The configuration of the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>.</p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
@@ -2609,7 +2637,7 @@
         },
         "ProvisioningArtifactDetail": {
           "shape": "ProvisioningArtifactDetail",
-          "documentation": "<p>Information about the provisioning artifact.</p>"
+          "documentation": "<p>Information about the provisioning artifact. </p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -2718,7 +2746,7 @@
         },
         "Parameters": {
           "shape": "ProvisioningArtifactProperties",
-          "documentation": "<p>The configuration for the provisioning artifact.</p>"
+          "documentation": "<p>The configuration for the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>. </p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
@@ -3943,6 +3971,51 @@
     "IgnoreErrors": {
       "type": "boolean"
     },
+    "ImportAsProvisionedProductInput": {
+      "type": "structure",
+      "required": [
+        "ProductId",
+        "ProvisioningArtifactId",
+        "ProvisionedProductName",
+        "PhysicalId",
+        "IdempotencyToken"
+      ],
+      "members": {
+        "AcceptLanguage": {
+          "shape": "AcceptLanguage",
+          "documentation": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "ProductId": {
+          "shape": "Id",
+          "documentation": "<p>The product identifier.</p>"
+        },
+        "ProvisioningArtifactId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the provisioning artifact.</p>"
+        },
+        "ProvisionedProductName": {
+          "shape": "ProvisionedProductName",
+          "documentation": "<p>The user-friendly name of the provisioned product. The value must be unique for the AWS account. The name cannot be updated after the product is provisioned. </p>"
+        },
+        "PhysicalId": {
+          "shape": "PhysicalId",
+          "documentation": "<p>The unique identifier of the resource to be imported. It only currently supports CloudFormation stack IDs.</p>"
+        },
+        "IdempotencyToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "ImportAsProvisionedProductOutput": {
+      "type": "structure",
+      "members": {
+        "RecordDetail": {
+          "shape": "RecordDetail"
+        }
+      }
+    },
     "InstructionType": {
       "type": "string"
     },
@@ -5099,7 +5172,7 @@
     "PropertyValue": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 0
     },
     "ProviderName": {
       "type": "string",
@@ -6208,6 +6281,9 @@
     "ResourceType": {
       "type": "string"
     },
+    "RetainPhysicalResources": {
+      "type": "boolean"
+    },
     "RoleArn": {
       "type": "string",
       "max": 1224,
@@ -6859,6 +6935,10 @@
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
           "documentation": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "RetainPhysicalResources": {
+          "shape": "RetainPhysicalResources",
+          "documentation": "<p>When this boolean parameter is set to true, the TerminateProvisionedProduct API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.</p>"
         }
       }
     },
@@ -7117,7 +7197,7 @@
         },
         "ProvisionedProductProperties": {
           "shape": "ProvisionedProductProperties",
-          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts user ARNs and role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end-user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only an ARN role or <code>null</code> is valid. A user ARN is invalid. For example, if an admin user passes <code>null</code> as the value for the key <code>LAUNCH_ROLE</code>, the admin removes the launch role that is associated with the provisioned product. As a result, the end user operations use the credentials of the end user.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
+          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN is valid. A user ARN is invalid. </p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
@@ -7361,5 +7441,5 @@
       "type": "boolean"
     }
   },
-  "documentation": "<fullname>AWS Service Catalog</fullname> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for use on AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p>"
+  "documentation": "<fullname>AWS Service Catalog</fullname> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p>"
 }

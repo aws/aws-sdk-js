@@ -365,6 +365,14 @@ declare class DMS extends Service {
    */
   modifyReplicationTask(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
+   * Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later AWS DMS version as the current replication instance.
+   */
+  moveReplicationTask(params: DMS.Types.MoveReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.MoveReplicationTaskResponse) => void): Request<DMS.Types.MoveReplicationTaskResponse, AWSError>;
+  /**
+   * Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later AWS DMS version as the current replication instance.
+   */
+  moveReplicationTask(callback?: (err: AWSError, data: DMS.Types.MoveReplicationTaskResponse) => void): Request<DMS.Types.MoveReplicationTaskResponse, AWSError>;
+  /**
    * Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.
    */
   rebootReplicationInstance(params: DMS.Types.RebootReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.RebootReplicationInstanceResponse) => void): Request<DMS.Types.RebootReplicationInstanceResponse, AWSError>;
@@ -2411,6 +2419,22 @@ declare namespace DMS {
      */
     KmsKeyId?: String;
   }
+  export interface MoveReplicationTaskMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the task that you want to move.
+     */
+    ReplicationTaskArn: String;
+    /**
+     * The ARN of the replication instance where you want to move the task to.
+     */
+    TargetReplicationInstanceArn: String;
+  }
+  export interface MoveReplicationTaskResponse {
+    /**
+     * The replication task that was moved.
+     */
+    ReplicationTask?: ReplicationTask;
+  }
   export interface MySQLSettings {
     /**
      * Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.
@@ -3091,15 +3115,15 @@ declare namespace DMS {
      */
     ReplicationTaskIdentifier?: String;
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+     * The Amazon Resource Name (ARN) that uniquely identifies the endpoint.
      */
     SourceEndpointArn?: String;
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+     * The ARN that uniquely identifies the endpoint.
      */
     TargetEndpointArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the replication instance.
+     * The ARN of the replication instance.
      */
     ReplicationInstanceArn?: String;
     /**
@@ -3115,7 +3139,7 @@ declare namespace DMS {
      */
     ReplicationTaskSettings?: String;
     /**
-     * The status of the replication task.
+     * The status of the replication task. This response parameter can return one of the following values:    "moving" – The task is being moved in response to running the  MoveReplicationTask  operation.    "creating" – The task is being created in response to running the  CreateReplicationTask  operation.    "deleting" – The task is being deleted in response to running the  DeleteReplicationTask  operation.    "failed" – The task failed to successfully complete the database migration in response to running the  StartReplicationTask  operation.    "failed-move" – The task failed to move in response to running the  MoveReplicationTask  operation.    "modifying" – The task definition is being modified in response to running the  ModifyReplicationTask  operation.    "ready" – The task is in a ready state where it can respond to other task operations, such as  StartReplicationTask  or  DeleteReplicationTask .     "running" – The task is performing a database migration in response to running the  StartReplicationTask  operation.    "starting" – The task is preparing to perform a database migration in response to running the  StartReplicationTask  operation.    "stopped" – The task has stopped in response to running the  StopReplicationTask  operation.    "stopping" – The task is preparing to stop in response to running the  StopReplicationTask  operation.    "testing" – The database migration specified for this task is being tested in response to running either the  StartReplicationTaskAssessmentRun  or the  StartReplicationTaskAssessment  operation.    StartReplicationTaskAssessmentRun  is an improved premigration task assessment operation. The  StartReplicationTaskAssessment  operation assesses data type compatibility only between the source and target database of a given migration task. In contrast,  StartReplicationTaskAssessmentRun  enables you to specify a variety of premigration task assessments in addition to data type compatibility. These assessments include ones for the validity of primary key definitions and likely issues with database migration performance, among others.   
      */
     Status?: String;
     /**
@@ -3123,7 +3147,7 @@ declare namespace DMS {
      */
     LastFailureMessage?: String;
     /**
-     * The reason the replication task was stopped. This response parameter can return one of the following values:    "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load migration completed.    "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data capture (CDC) load completed.    "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a full-load and CDC migration, the full-load stopped as specified before starting the CDC migration.    "STOP_REASON_SERVER_TIME" – The migration stopped at the specified server time.  
+     * The reason the replication task was stopped. This response parameter can return one of the following values:    "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load migration completed.    "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data capture (CDC) load completed.    "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.    "STOP_REASON_SERVER_TIME" – The migration stopped at the specified server time.  
      */
     StopReason?: String;
     /**
@@ -3158,6 +3182,10 @@ declare namespace DMS {
      * Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see Specifying Supplemental Data for Task Settings in the AWS Database Migration Service User Guide. 
      */
     TaskData?: String;
+    /**
+     * The ARN of the replication instance to which this task is moved in response to running the  MoveReplicationTask  operation. Otherwise, this response parameter isn't a member of the ReplicationTask object.
+     */
+    TargetReplicationInstanceArn?: String;
   }
   export interface ReplicationTaskAssessmentResult {
     /**

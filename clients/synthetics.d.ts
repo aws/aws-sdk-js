@@ -164,7 +164,7 @@ declare namespace Synthetics {
      */
     EngineArn?: FunctionArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
@@ -252,6 +252,10 @@ declare namespace Synthetics {
      * Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
      */
     ActiveTracing?: NullableBoolean;
+    /**
+     * Specifies the keys and values to use for any environment variables used in the canary script. Use the following format: { "key1" : "value1", "key2" : "value2", ...} Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can't specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see  Runtime environment variables.
+     */
+    EnvironmentVariables?: EnvironmentVariablesMap;
   }
   export interface CanaryRunConfigOutput {
     /**
@@ -382,7 +386,7 @@ declare namespace Synthetics {
      */
     FailureRetentionPeriodInDays?: MaxSize1024;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For a list of valid runtime versions and more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion: String;
     /**
@@ -468,6 +472,9 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type EnvironmentVariableName = string;
+  export type EnvironmentVariableValue = string;
+  export type EnvironmentVariablesMap = {[key: string]: EnvironmentVariableValue};
   export type FunctionArn = string;
   export interface GetCanaryRequest {
     /**
@@ -527,7 +534,7 @@ declare namespace Synthetics {
   export type RoleArn = string;
   export interface RuntimeVersion {
     /**
-     * The name of the runtime version. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0.
+     * The name of the runtime version. For a list of valid runtime versions, see  Canary Runtime Versions.
      */
     VersionName?: String;
     /**
@@ -610,7 +617,7 @@ declare namespace Synthetics {
      */
     ExecutionRoleArn?: RoleArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For a list of valid runtime versions and for more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     /**

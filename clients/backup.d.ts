@@ -108,6 +108,14 @@ declare class Backup extends Service {
    */
   describeCopyJob(callback?: (err: AWSError, data: Backup.Types.DescribeCopyJobOutput) => void): Request<Backup.Types.DescribeCopyJobOutput, AWSError>;
   /**
+   * The current feature settings for the AWS Account.
+   */
+  describeGlobalSettings(params: Backup.Types.DescribeGlobalSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeGlobalSettingsOutput) => void): Request<Backup.Types.DescribeGlobalSettingsOutput, AWSError>;
+  /**
+   * The current feature settings for the AWS Account.
+   */
+  describeGlobalSettings(callback?: (err: AWSError, data: Backup.Types.DescribeGlobalSettingsOutput) => void): Request<Backup.Types.DescribeGlobalSettingsOutput, AWSError>;
+  /**
    * Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
    */
   describeProtectedResource(params: Backup.Types.DescribeProtectedResourceInput, callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
@@ -124,11 +132,11 @@ declare class Backup extends Service {
    */
   describeRecoveryPoint(callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region, AWS Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(params: Backup.Types.DescribeRegionSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region, AWS Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
@@ -376,6 +384,14 @@ declare class Backup extends Service {
    */
   updateBackupPlan(callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
+   * Updates the current global settings for the AWS Account. Use the DescribeGlobalSettings API to determine the current settings.
+   */
+  updateGlobalSettings(params: Backup.Types.UpdateGlobalSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the current global settings for the AWS Account. Use the DescribeGlobalSettings API to determine the current settings.
+   */
+  updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
    */
   updateRecoveryPointLifecycle(params: Backup.Types.UpdateRecoveryPointLifecycleInput, callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
@@ -384,11 +400,11 @@ declare class Backup extends Service {
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
+   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(params: Backup.Types.UpdateRegionSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
+   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -401,7 +417,7 @@ declare namespace Backup {
      */
     ResourceType?: ResourceType;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values:  Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a VSS Windows backup.  Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS option is not enabled by default. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
      */
     BackupOptions?: BackupOptions;
   }
@@ -1064,7 +1080,7 @@ declare namespace Backup {
      */
     BackupOptions?: BackupOptions;
     /**
-     * Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, BackupType returns “WindowsVSS”. If BackupType is empty, then it is a regular backup.
+     * Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, BackupType returns "WindowsVSS". If BackupType is empty, then the backup type that was is a regular backup.
      */
     BackupType?: string;
   }
@@ -1112,6 +1128,18 @@ declare namespace Backup {
      */
     CopyJob?: CopyJob;
   }
+  export interface DescribeGlobalSettingsInput {
+  }
+  export interface DescribeGlobalSettingsOutput {
+    /**
+     * A list of resources along with the opt-in preferences for the account.
+     */
+    GlobalSettings?: GlobalSettings;
+    /**
+     * The date and time that the global settings was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastUpdateTime?: timestamp;
+  }
   export interface DescribeProtectedResourceInput {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
@@ -1155,6 +1183,10 @@ declare namespace Backup {
      * An ARN that uniquely identifies a backup vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
      */
     BackupVaultArn?: ARN;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is restored to the same AWS account or Region, this value will be null.
+     */
+    SourceBackupVaultArn?: ARN;
     /**
      * An ARN that uniquely identifies a saved resource. The format of the ARN depends on the resource type.
      */
@@ -1470,6 +1502,9 @@ declare namespace Backup {
      */
     ResourceTypes?: ResourceTypes;
   }
+  export type GlobalSettings = {[key: string]: GlobalSettingsValue};
+  export type GlobalSettingsName = string;
+  export type GlobalSettingsValue = string;
   export type IAMPolicy = string;
   export type IAMRoleArn = string;
   export type IsEnabled = boolean;
@@ -1898,6 +1933,10 @@ declare namespace Backup {
      */
     BackupVaultArn?: ARN;
     /**
+     * The backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account this value will be null.
+     */
+    SourceBackupVaultArn?: ARN;
+    /**
      * An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
      */
     ResourceArn?: ARN;
@@ -2233,6 +2272,12 @@ declare namespace Backup {
      * Contains a list of BackupOptions for each resource type.
      */
     AdvancedBackupSettings?: AdvancedBackupSettings;
+  }
+  export interface UpdateGlobalSettingsInput {
+    /**
+     * A list of resources along with the opt-in preferences for the account.
+     */
+    GlobalSettings?: GlobalSettings;
   }
   export interface UpdateRecoveryPointLifecycleInput {
     /**

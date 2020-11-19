@@ -93,6 +93,14 @@ declare class IoTSiteWise extends Service {
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   */
+  createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
+  /**
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   */
+  createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
+  /**
    * Creates a project in the specified portal.
    */
   createProject(params: IoTSiteWise.Types.CreateProjectRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateProjectResponse) => void): Request<IoTSiteWise.Types.CreateProjectResponse, AWSError>;
@@ -1159,6 +1167,22 @@ declare namespace IoTSiteWise {
      * The associated AWS SSO application ID, if the portal uses AWS SSO.
      */
     ssoApplicationId: SSOApplicationId;
+  }
+  export interface CreatePresignedPortalUrlRequest {
+    /**
+     * The ID of the portal to access.
+     */
+    portalId: ID;
+    /**
+     * The duration (in seconds) for which the session at the URL is valid. Default: 900 seconds (15 minutes)
+     */
+    sessionDurationSeconds?: SessionDurationSeconds;
+  }
+  export interface CreatePresignedPortalUrlResponse {
+    /**
+     * The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.  https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt; 
+     */
+    presignedPortalUrl: Url;
   }
   export interface CreateProjectRequest {
     /**
@@ -2426,6 +2450,7 @@ declare namespace IoTSiteWise {
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
   export type SSOApplicationId = string;
+  export type SessionDurationSeconds = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};

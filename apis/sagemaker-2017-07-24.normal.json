@@ -103,7 +103,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a configuration for running an Amazon SageMaker image as a KernelGateway app.</p>"
+      "documentation": "<p>Creates a configuration for running a SageMaker image as a KernelGateway app. The configuration specifies the Amazon Elastic File System (EFS) storage volume on the image, and a list of the kernels in the image.</p>"
     },
     "CreateAutoMLJob": {
       "name": "CreateAutoMLJob",
@@ -202,7 +202,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a>CreateEndpointConfig</a> API. </p> <p> Use this API to deploy models using Amazon SageMaker hosting services. </p> <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the Model to Amazon SageMaker Hosting Services (AWS SDK for Python (Boto 3)).</a> </p> <note> <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code> operations are being performed on the endpoint. To update an endpoint, you must create a new <code>EndpointConfig</code>.</p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a>DescribeEndpoint</a> API.</p> <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
+      "documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a>CreateEndpointConfig</a> API. </p> <p> Use this API to deploy models using Amazon SageMaker hosting services. </p> <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the Model to Amazon SageMaker Hosting Services (AWS SDK for Python (Boto 3)).</a> </p> <note> <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code> operations are being performed on the endpoint. To update an endpoint, you must create a new <code>EndpointConfig</code>.</p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a>DescribeEndpoint</a> API.</p> <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <note> <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to the role. </p> <ul> <li> <p>Option 1: For a full Amazon SageMaker access, search and attach the <code>AmazonSageMakerFullAccess</code> policy.</p> </li> <li> <p>Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role: </p> <p> <code>\"Action\": [\"sagemaker:CreateEndpoint\", \"sagemaker:CreateEndpointConfig\"]</code> </p> <p> <code>\"Resource\": [</code> </p> <p> <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code> </p> <p> <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code> </p> <p> <code>]</code> </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference</a>.</p> </li> </ul> </note>"
     },
     "CreateEndpointConfig": {
       "name": "CreateEndpointConfig",
@@ -328,7 +328,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates a SageMaker <code>Image</code>. A SageMaker image represents a set of container images. Each of these container images is represented by a SageMaker <code>ImageVersion</code>.</p>"
+      "documentation": "<p>Creates a custom SageMaker image. A SageMaker image is a set of image versions. Each image version represents a container image stored in Amazon Container Registry (ECR). For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html\">Bring your own SageMaker image</a>.</p>"
     },
     "CreateImageVersion": {
       "name": "CreateImageVersion",
@@ -2921,7 +2921,7 @@
         },
         "AppImageConfigName": {
           "shape": "AppImageConfigName",
-          "documentation": "<p>The name of the AppImageConfig.</p>"
+          "documentation": "<p>The name of the AppImageConfig. Must be unique to your account.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -2933,10 +2933,10 @@
         },
         "KernelGatewayImageConfig": {
           "shape": "KernelGatewayImageConfig",
-          "documentation": "<p>The KernelGateway app.</p>"
+          "documentation": "<p>The configuration for the file system and kernels in the SageMaker image.</p>"
         }
       },
-      "documentation": "<p>The configuration for running an Amazon SageMaker image as a KernelGateway app.</p>"
+      "documentation": "<p>The configuration for running a SageMaker image as a KernelGateway app.</p>"
     },
     "AppImageConfigList": {
       "type": "list",
@@ -4576,7 +4576,13 @@
         },
         "HomeEfsFileSystemKmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.</p>"
+          "documentation": "<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated, use KmsKeyId instead."
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, specify a customer managed CMK.</p>"
         }
       }
     },
@@ -4840,7 +4846,7 @@
         },
         "DisplayName": {
           "shape": "ImageDisplayName",
-          "documentation": "<p>The display name of the image. When the image is added to a domain, <code>DisplayName</code> must be unique to the domain.</p>"
+          "documentation": "<p>The display name of the image. If not provided, <code>ImageName</code> is displayed.</p>"
         },
         "ImageName": {
           "shape": "ImageName",
@@ -5728,7 +5734,7 @@
           "documentation": "<p>The name of the AppImageConfig.</p>"
         }
       },
-      "documentation": "<p>A custom image.</p>"
+      "documentation": "<p>A custom SageMaker image. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html\">Bring your own SageMaker image</a>.</p>"
     },
     "CustomImages": {
       "type": "list",
@@ -6461,7 +6467,7 @@
         },
         "KernelGatewayImageConfig": {
           "shape": "KernelGatewayImageConfig",
-          "documentation": "<p>The KernelGateway app.</p>"
+          "documentation": "<p>The configuration of a KernelGateway app.</p>"
         }
       }
     },
@@ -6823,7 +6829,7 @@
         },
         "DefaultUserSettings": {
           "shape": "UserSettings",
-          "documentation": "<p>Settings which are applied to all UserProfile in this domain, if settings are not explicitly specified in a given UserProfile. </p>"
+          "documentation": "<p>Settings which are applied to all UserProfiles in this domain, if settings are not explicitly specified in a given UserProfile. </p>"
         },
         "AppNetworkAccessType": {
           "shape": "AppNetworkAccessType",
@@ -6831,7 +6837,9 @@
         },
         "HomeEfsFileSystemKmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service encryption key ID.</p>"
+          "documentation": "<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated, use KmsKeyId instead."
         },
         "SubnetIds": {
           "shape": "Subnets",
@@ -6844,6 +6852,10 @@
         "VpcId": {
           "shape": "VpcId",
           "documentation": "<p>The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.</p>"
         }
       }
     },
@@ -8914,16 +8926,16 @@
         },
         "DefaultUid": {
           "shape": "DefaultUid",
-          "documentation": "<p>The default POSIX user ID. If not specified, defaults to <code>1000</code>.</p>",
+          "documentation": "<p>The default POSIX user ID (UID). If not specified, defaults to <code>1000</code>.</p>",
           "box": true
         },
         "DefaultGid": {
           "shape": "DefaultGid",
-          "documentation": "<p>The default POSIX group ID. If not specified, defaults to <code>100</code>.</p>",
+          "documentation": "<p>The default POSIX group ID (GID). If not specified, defaults to <code>100</code>.</p>",
           "box": true
         }
       },
-      "documentation": "<p>The Amazon Elastic File System (EFS) storage configuration for an image.</p>"
+      "documentation": "<p>The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.</p>"
     },
     "FileSystemDataSource": {
       "type": "structure",
@@ -10197,7 +10209,7 @@
         },
         "DataInputConfig": {
           "shape": "DataInputConfig",
-          "documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are <a>InputConfig$Framework</a> specific. </p> <ul> <li> <p> <code>TensorFlow</code>: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input\":[1,1024,1024,3]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input\\\":[1,1024,1024,3]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data1\\\": [1,28,28,1], \\\"data2\\\":[1,28,28,1]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>KERAS</code>: You must specify the name and shape (NCHW format) of expected data inputs using a dictionary format for your trained model. Note that while Keras model artifacts should be uploaded in NHWC (channel-last) format, <code>DataInputConfig</code> should be specified in NCHW (channel-first) format. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input_1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\": [1,3,224,224], \\\"input_2\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>MXNET/ONNX</code>: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"data\":[1,3,1024,1024]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data\\\":[1,3,1024,1024]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"var1\\\": [1,1,28,28], \\\"var2\\\":[1,1,28,28]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>PyTorch</code>: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.</p> <ul> <li> <p>Examples for one input in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Example for one input in list format: <code>[[1,3,224,224]]</code> </p> </li> <li> <p>Examples for two inputs in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224], \\\"input1\\\":[1,3,224,224]} </code> </p> </li> </ul> </li> <li> <p>Example for two inputs in list format: <code>[[1,3,224,224], [1,3,224,224]]</code> </p> </li> </ul> </li> <li> <p> <code>XGBOOST</code>: input data name and shape are not needed.</p> </li> </ul> <p> <code>DataInputConfig</code> supports the following parameters for <code>CoreML</code> <a>OutputConfig$TargetDevice</a> (ML Model format):</p> <ul> <li> <p> <code>shape</code>: Input shape, for example <code>{\"input_1\": {\"shape\": [1,224,224,3]}}</code>. In addition to static input shapes, CoreML converter supports Flexible input shapes:</p> <ul> <li> <p>Range Dimension. You can use the Range Dimension feature if you know the input shape will be within some specific interval in that dimension, for example: <code>{\"input_1\": {\"shape\": [\"1..10\", 224, 224, 3]}}</code> </p> </li> <li> <p>Enumerated shapes. Sometimes, the models are trained to work only on a select set of inputs. You can enumerate all supported input shapes, for example: <code>{\"input_1\": {\"shape\": [[1, 224, 224, 3], [1, 160, 160, 3]]}}</code> </p> </li> </ul> </li> <li> <p> <code>default_shape</code>: Default input shape. You can set a default shape during conversion for both Range Dimension and Enumerated Shapes. For example <code>{\"input_1\": {\"shape\": [\"1..10\", 224, 224, 3], \"default_shape\": [1, 224, 224, 3]}}</code> </p> </li> <li> <p> <code>type</code>: Input type. Allowed values: <code>Image</code> and <code>Tensor</code>. By default, the converter generates an ML Model with inputs of type Tensor (MultiArray). User can set input type to be Image. Image input type requires additional input parameters such as <code>bias</code> and <code>scale</code>.</p> </li> <li> <p> <code>bias</code>: If the input type is an Image, you need to provide the bias vector.</p> </li> <li> <p> <code>scale</code>: If the input type is an Image, you need to provide a scale factor.</p> </li> </ul> <p>CoreML <code>ClassifierConfig</code> parameters can be specified using <a>OutputConfig$CompilerOptions</a>. CoreML converter supports Tensorflow and PyTorch models. CoreML conversion examples:</p> <ul> <li> <p>Tensor type input:</p> <ul> <li> <p> <code>\"DataInputConfig\": {\"input_1\": {\"shape\": [[1,224,224,3], [1,160,160,3]], \"default_shape\": [1,224,224,3]}}</code> </p> </li> </ul> </li> <li> <p>Tensor type input without input name (PyTorch):</p> <ul> <li> <p> <code>\"DataInputConfig\": [{\"shape\": [[1,3,224,224], [1,3,160,160]], \"default_shape\": [1,3,224,224]}]</code> </p> </li> </ul> </li> <li> <p>Image type input:</p> <ul> <li> <p> <code>\"DataInputConfig\": {\"input_1\": {\"shape\": [[1,224,224,3], [1,160,160,3]], \"default_shape\": [1,224,224,3], \"type\": \"Image\", \"bias\": [-1,-1,-1], \"scale\": 0.007843137255}}</code> </p> </li> <li> <p> <code>\"CompilerOptions\": {\"class_labels\": \"imagenet_labels_1000.txt\"}</code> </p> </li> </ul> </li> <li> <p>Image type input without input name (PyTorch):</p> <ul> <li> <p> <code>\"DataInputConfig\": [{\"shape\": [[1,3,224,224], [1,3,160,160]], \"default_shape\": [1,3,224,224], \"type\": \"Image\", \"bias\": [-1,-1,-1], \"scale\": 0.007843137255}]</code> </p> </li> <li> <p> <code>\"CompilerOptions\": {\"class_labels\": \"imagenet_labels_1000.txt\"}</code> </p> </li> </ul> </li> </ul>"
+          "documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are <a>InputConfig$Framework</a> specific. </p> <ul> <li> <p> <code>TensorFlow</code>: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input\":[1,1024,1024,3]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input\\\":[1,1024,1024,3]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data1\\\": [1,28,28,1], \\\"data2\\\":[1,28,28,1]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>KERAS</code>: You must specify the name and shape (NCHW format) of expected data inputs using a dictionary format for your trained model. Note that while Keras model artifacts should be uploaded in NHWC (channel-last) format, <code>DataInputConfig</code> should be specified in NCHW (channel-first) format. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input_1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\": [1,3,224,224], \\\"input_2\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>MXNET/ONNX/DARKNET</code>: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"data\":[1,3,1024,1024]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data\\\":[1,3,1024,1024]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"var1\\\": [1,1,28,28], \\\"var2\\\":[1,1,28,28]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>PyTorch</code>: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.</p> <ul> <li> <p>Examples for one input in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Example for one input in list format: <code>[[1,3,224,224]]</code> </p> </li> <li> <p>Examples for two inputs in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224], \\\"input1\\\":[1,3,224,224]} </code> </p> </li> </ul> </li> <li> <p>Example for two inputs in list format: <code>[[1,3,224,224], [1,3,224,224]]</code> </p> </li> </ul> </li> <li> <p> <code>XGBOOST</code>: input data name and shape are not needed.</p> </li> </ul> <p> <code>DataInputConfig</code> supports the following parameters for <code>CoreML</code> <a>OutputConfig$TargetDevice</a> (ML Model format):</p> <ul> <li> <p> <code>shape</code>: Input shape, for example <code>{\"input_1\": {\"shape\": [1,224,224,3]}}</code>. In addition to static input shapes, CoreML converter supports Flexible input shapes:</p> <ul> <li> <p>Range Dimension. You can use the Range Dimension feature if you know the input shape will be within some specific interval in that dimension, for example: <code>{\"input_1\": {\"shape\": [\"1..10\", 224, 224, 3]}}</code> </p> </li> <li> <p>Enumerated shapes. Sometimes, the models are trained to work only on a select set of inputs. You can enumerate all supported input shapes, for example: <code>{\"input_1\": {\"shape\": [[1, 224, 224, 3], [1, 160, 160, 3]]}}</code> </p> </li> </ul> </li> <li> <p> <code>default_shape</code>: Default input shape. You can set a default shape during conversion for both Range Dimension and Enumerated Shapes. For example <code>{\"input_1\": {\"shape\": [\"1..10\", 224, 224, 3], \"default_shape\": [1, 224, 224, 3]}}</code> </p> </li> <li> <p> <code>type</code>: Input type. Allowed values: <code>Image</code> and <code>Tensor</code>. By default, the converter generates an ML Model with inputs of type Tensor (MultiArray). User can set input type to be Image. Image input type requires additional input parameters such as <code>bias</code> and <code>scale</code>.</p> </li> <li> <p> <code>bias</code>: If the input type is an Image, you need to provide the bias vector.</p> </li> <li> <p> <code>scale</code>: If the input type is an Image, you need to provide a scale factor.</p> </li> </ul> <p>CoreML <code>ClassifierConfig</code> parameters can be specified using <a>OutputConfig$CompilerOptions</a>. CoreML converter supports Tensorflow and PyTorch models. CoreML conversion examples:</p> <ul> <li> <p>Tensor type input:</p> <ul> <li> <p> <code>\"DataInputConfig\": {\"input_1\": {\"shape\": [[1,224,224,3], [1,160,160,3]], \"default_shape\": [1,224,224,3]}}</code> </p> </li> </ul> </li> <li> <p>Tensor type input without input name (PyTorch):</p> <ul> <li> <p> <code>\"DataInputConfig\": [{\"shape\": [[1,3,224,224], [1,3,160,160]], \"default_shape\": [1,3,224,224]}]</code> </p> </li> </ul> </li> <li> <p>Image type input:</p> <ul> <li> <p> <code>\"DataInputConfig\": {\"input_1\": {\"shape\": [[1,224,224,3], [1,160,160,3]], \"default_shape\": [1,224,224,3], \"type\": \"Image\", \"bias\": [-1,-1,-1], \"scale\": 0.007843137255}}</code> </p> </li> <li> <p> <code>\"CompilerOptions\": {\"class_labels\": \"imagenet_labels_1000.txt\"}</code> </p> </li> </ul> </li> <li> <p>Image type input without input name (PyTorch):</p> <ul> <li> <p> <code>\"DataInputConfig\": [{\"shape\": [[1,3,224,224], [1,3,160,160]], \"default_shape\": [1,3,224,224], \"type\": \"Image\", \"bias\": [-1,-1,-1], \"scale\": 0.007843137255}]</code> </p> </li> <li> <p> <code>\"CompilerOptions\": {\"class_labels\": \"imagenet_labels_1000.txt\"}</code> </p> </li> </ul> </li> </ul>"
         },
         "Framework": {
           "shape": "Framework",
@@ -10369,10 +10381,10 @@
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
+          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app.</p>"
         }
       },
-      "documentation": "<p>Jupyter server's app settings.</p>"
+      "documentation": "<p>The JupyterServer app settings.</p>"
     },
     "KernelDisplayName": {
       "type": "string",
@@ -10387,7 +10399,7 @@
         },
         "CustomImages": {
           "shape": "CustomImages",
-          "documentation": "<p>A list of custom images that are configured to run as a KernelGateway app.</p>"
+          "documentation": "<p>A list of custom SageMaker images that are configured to run as a KernelGateway app.</p>"
         }
       },
       "documentation": "<p>The KernelGateway app settings.</p>"
@@ -10400,14 +10412,14 @@
       "members": {
         "KernelSpecs": {
           "shape": "KernelSpecs",
-          "documentation": "<p>Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.</p>"
+          "documentation": "<p>The specification of the Jupyter kernels in the image.</p>"
         },
         "FileSystemConfig": {
           "shape": "FileSystemConfig",
-          "documentation": "<p>The file system configuration.</p>"
+          "documentation": "<p>The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.</p>"
         }
       },
-      "documentation": "<p>The configuration for an Amazon SageMaker KernelGateway app.</p>"
+      "documentation": "<p>The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.</p>"
     },
     "KernelName": {
       "type": "string",
@@ -10421,14 +10433,14 @@
       "members": {
         "Name": {
           "shape": "KernelName",
-          "documentation": "<p>The name of the kernel. Must be unique to your account.</p>"
+          "documentation": "<p>The name of the kernel.</p>"
         },
         "DisplayName": {
           "shape": "KernelDisplayName",
           "documentation": "<p>The display name of the kernel.</p>"
         }
       },
-      "documentation": "<p>Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.</p>"
+      "documentation": "<p>The specification of a Jupyter kernel.</p>"
     },
     "KernelSpecs": {
       "type": "list",

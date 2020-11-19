@@ -231,6 +231,7 @@
     "CreateOutpostInput": {
       "type": "structure",
       "required": [
+        "Name",
         "SiteId"
       ],
       "members": {

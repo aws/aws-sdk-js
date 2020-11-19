@@ -33,6 +33,9 @@ declare namespace PersonalizeRuntime {
   export type AttributeName = string;
   export type AttributeValue = string;
   export type Context = {[key: string]: AttributeValue};
+  export type FilterAttributeName = string;
+  export type FilterAttributeValue = string;
+  export type FilterValues = {[key: string]: FilterAttributeValue};
   export interface GetPersonalizedRankingRequest {
     /**
      * The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
@@ -51,9 +54,13 @@ declare namespace PersonalizeRuntime {
      */
     context?: Context;
     /**
-     * The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
+     * The Amazon Resource Name (ARN) of a filter you created to include items or exclude items from recommendations for a given user. For more information, see Filtering Recommendations.
      */
     filterArn?: Arn;
+    /**
+     * The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.  For filter expressions that use an INCLUDE element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an EXCLUDE element to exclude items, you can omit the filter-values.In this case, Amazon Personalize doesn't use that portion of the expression to filter recommendations. For more information, see Filtering Recommendations.
+     */
+    filterValues?: FilterValues;
   }
   export interface GetPersonalizedRankingResponse {
     /**
@@ -87,9 +94,13 @@ declare namespace PersonalizeRuntime {
      */
     context?: Context;
     /**
-     * The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize. When using this parameter, be sure the filter resource is ACTIVE.
+     * The ARN of the filter to apply to the returned recommendations. For more information, see Filtering Recommendations. When using this parameter, be sure the filter resource is ACTIVE.
      */
     filterArn?: Arn;
+    /**
+     * The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.  For filter expressions that use an INCLUDE element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an EXCLUDE element to exclude items, you can omit the filter-values.In this case, Amazon Personalize doesn't use that portion of the expression to filter recommendations. For more information, see Filtering Recommendations.
+     */
+    filterValues?: FilterValues;
   }
   export interface GetRecommendationsResponse {
     /**

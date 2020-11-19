@@ -1065,7 +1065,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
     /**
-     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  AllWorldGenerationFailed  All of the worlds in the world generation job failed. This can happen if your worldCount is greater than 50 or less than 1.    For more information about troubleshooting WorldForge, see Troubleshooting Simulation WorldForge. 
      */
     failureCode?: WorldExportJobErrorCode;
     /**
@@ -1099,6 +1099,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generator job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface CreateWorldGenerationJobResponse {
     /**
@@ -1133,6 +1137,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generator job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface CreateWorldTemplateRequest {
     /**
@@ -1844,6 +1852,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generation job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface DescribeWorldRequest {
     /**

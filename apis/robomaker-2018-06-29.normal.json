@@ -2456,7 +2456,7 @@
         },
         "failureCode": {
           "shape": "WorldExportJobErrorCode",
-          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> <dt>AllWorldGenerationFailed</dt> <dd> <p>All of the worlds in the world generation job failed. This can happen if your <code>worldCount</code> is greater than 50 or less than 1. </p> </dd> </dl> <p>For more information about troubleshooting WorldForge, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html\">Troubleshooting Simulation WorldForge</a>. </p>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2498,6 +2498,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },
@@ -2535,6 +2539,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },
@@ -3497,6 +3505,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generation job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },

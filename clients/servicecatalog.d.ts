@@ -420,6 +420,14 @@ declare class ServiceCatalog extends Service {
    */
   getProvisionedProductOutputs(callback?: (err: AWSError, data: ServiceCatalog.Types.GetProvisionedProductOutputsOutput) => void): Request<ServiceCatalog.Types.GetProvisionedProductOutputsOutput, AWSError>;
   /**
+   * Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. 
+   */
+  importAsProvisionedProduct(params: ServiceCatalog.Types.ImportAsProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
+  /**
+   * Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. 
+   */
+  importAsProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
+  /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
   listAcceptedPortfolioShares(params: ServiceCatalog.Types.ListAcceptedPortfolioSharesInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
@@ -1082,7 +1090,7 @@ declare namespace ServiceCatalog {
      */
     Tags?: AddTags;
     /**
-     * The configuration of the provisioning artifact.
+     * The configuration of the provisioning artifact. The info field accepts ImportFromPhysicalID.
      */
     ProvisioningArtifactParameters: ProvisioningArtifactProperties;
     /**
@@ -1096,7 +1104,7 @@ declare namespace ServiceCatalog {
      */
     ProductViewDetail?: ProductViewDetail;
     /**
-     * Information about the provisioning artifact.
+     * Information about the provisioning artifact. 
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
@@ -1182,7 +1190,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The configuration for the provisioning artifact.
+     * The configuration for the provisioning artifact. The info field accepts ImportFromPhysicalID. 
      */
     Parameters: ProvisioningArtifactProperties;
     /**
@@ -2020,6 +2028,35 @@ declare namespace ServiceCatalog {
   export type Id = string;
   export type IdempotencyToken = string;
   export type IgnoreErrors = boolean;
+  export interface ImportAsProvisionedProductInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The user-friendly name of the provisioned product. The value must be unique for the AWS account. The name cannot be updated after the product is provisioned. 
+     */
+    ProvisionedProductName: ProvisionedProductName;
+    /**
+     * The unique identifier of the resource to be imported. It only currently supports CloudFormation stack IDs.
+     */
+    PhysicalId: PhysicalId;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface ImportAsProvisionedProductOutput {
+    RecordDetail?: RecordDetail;
+  }
   export type InstructionType = string;
   export type InstructionValue = string;
   export type LastRequestId = string;
@@ -3481,6 +3518,7 @@ declare namespace ServiceCatalog {
     RequiresRecreation?: RequiresRecreation;
   }
   export type ResourceType = string;
+  export type RetainPhysicalResources = boolean;
   export type RoleArn = string;
   export interface ScanProvisionedProductsInput {
     /**
@@ -3824,6 +3862,10 @@ declare namespace ServiceCatalog {
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    /**
+     * When this boolean parameter is set to true, the TerminateProvisionedProduct API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.
+     */
+    RetainPhysicalResources?: RetainPhysicalResources;
   }
   export interface TerminateProvisionedProductOutput {
     /**
@@ -4030,7 +4072,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId: Id;
     /**
-     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts user ARNs and role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end-user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only an ARN role or null is valid. A user ARN is invalid. For example, if an admin user passes null as the value for the key LAUNCH_ROLE, the admin removes the launch role that is associated with the provisioned product. As a result, the end user operations use the credentials of the end user. The OWNER key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only a role ARN is valid. A user ARN is invalid.  The OWNER key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
      */
     ProvisionedProductProperties: ProvisionedProductProperties;
     /**

@@ -76,11 +76,11 @@ declare class QuickSight extends Service {
    */
   createGroupMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateGroupMembershipResponse) => void): Request<QuickSight.Types.CreateGroupMembershipResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. 
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per AWS account. To avoid overwriting rules in other namespaces, use assignment names that are unique.
    */
   createIAMPolicyAssignment(params: QuickSight.Types.CreateIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. 
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per AWS account. To avoid overwriting rules in other namespaces, use assignment names that are unique.
    */
   createIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
@@ -740,11 +740,11 @@ declare class QuickSight extends Service {
    */
   updateGroup(callback?: (err: AWSError, data: QuickSight.Types.UpdateGroupResponse) => void): Request<QuickSight.Types.UpdateGroupResponse, AWSError>;
   /**
-   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request. This overwrites all of the users included in Identities. 
    */
   updateIAMPolicyAssignment(params: QuickSight.Types.UpdateIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request. This overwrites all of the users included in Identities. 
    */
   updateIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
@@ -1118,8 +1118,20 @@ declare namespace QuickSight {
   }
   export type ColumnGroupSchemaList = ColumnGroupSchema[];
   export type ColumnId = string;
+  export interface ColumnLevelPermissionRule {
+    /**
+     * An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
+     */
+    Principals?: PrincipalList;
+    /**
+     * An array of column names.
+     */
+    ColumnNames?: ColumnNameList;
+  }
+  export type ColumnLevelPermissionRuleList = ColumnLevelPermissionRule[];
   export type ColumnList = ColumnName[];
   export type ColumnName = string;
+  export type ColumnNameList = String[];
   export interface ColumnSchema {
     /**
      * The name of the column schema.
@@ -1359,6 +1371,10 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
+     * A set of one or more definitions of a  ColumnLevelPermissionRule .
+     */
+    ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
+    /**
      * Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
      */
     Tags?: TagList;
@@ -1523,7 +1539,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment. It must be unique within an AWS account.
+     * The name of the assignment, also called a rule. It must be unique within an AWS account.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -2124,6 +2140,10 @@ declare namespace QuickSight {
      * The row-level security configuration for the dataset.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
+    /**
+     * A set of one or more definitions of a  ColumnLevelPermissionRule .
+     */
+    ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
   }
   export type DataSetArnsList = Arn[];
   export interface DataSetConfiguration {
@@ -2189,6 +2209,10 @@ declare namespace QuickSight {
      * The row-level security configuration for the dataset.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
+    /**
+     * Indicates if the dataset has column level permission configured. 
+     */
+    ColumnLevelPermissionRulesApplied?: Boolean;
   }
   export type DataSetSummaryList = DataSetSummary[];
   export interface DataSource {
@@ -2297,6 +2321,10 @@ declare namespace QuickSight {
      */
     MySqlParameters?: MySqlParameters;
     /**
+     * Oracle parameters.
+     */
+    OracleParameters?: OracleParameters;
+    /**
      * PostgreSQL parameters.
      */
     PostgreSqlParameters?: PostgreSqlParameters;
@@ -2342,7 +2370,7 @@ declare namespace QuickSight {
     TwitterParameters?: TwitterParameters;
   }
   export type DataSourceParametersList = DataSourceParameters[];
-  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|string;
+  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|string;
   export type Database = string;
   export interface DateTimeParameter {
     /**
@@ -3125,7 +3153,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment. 
+     * The name of the assignment, also called a rule.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -3478,11 +3506,15 @@ declare namespace QuickSight {
     /**
      * Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables the undo/redo button.
      */
-    UndoRedoDisabled?: boolean;
+    UndoRedoDisabled?: Boolean;
     /**
      * Remove the reset button on the embedded dashboard. The default is FALSE, which enables the reset button.
      */
-    ResetDisabled?: boolean;
+    ResetDisabled?: Boolean;
+    /**
+     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
+     */
+    StatePersistenceEnabled?: Boolean;
     /**
      * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.   Omit this parameter for users in the third group – IAM users and IAM role-based sessions.
      */
@@ -4527,6 +4559,20 @@ declare namespace QuickSight {
   export type NonEmptyString = string;
   export type OnClause = string;
   export type OptionalPort = number;
+  export interface OracleParameters {
+    /**
+     * An Oracle host.
+     */
+    Host: Host;
+    /**
+     * Port.
+     */
+    Port: Port;
+    /**
+     * Database.
+     */
+    Database: Database;
+  }
   export interface OutputColumn {
     /**
      * A display name for the dataset.
@@ -4608,6 +4654,7 @@ declare namespace QuickSight {
     Catalog: Catalog;
   }
   export type Principal = string;
+  export type PrincipalList = String[];
   export interface ProjectOperation {
     /**
      * Projected columns.
@@ -4749,7 +4796,7 @@ declare namespace QuickSight {
      */
     Principal: Principal;
     /**
-     * The IAM action to grant or revoke permissions on, for example "quicksight:DescribeDashboard".
+     * The IAM action to grant or revoke permissions on.
      */
     Actions: ActionList;
   }
@@ -5875,6 +5922,10 @@ declare namespace QuickSight {
      * The row-level security configuration for the data you want to create.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
+    /**
+     * A set of one or more definitions of a  ColumnLevelPermissionRule .
+     */
+    ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
   }
   export interface UpdateDataSetResponse {
     /**
@@ -6024,11 +6075,11 @@ declare namespace QuickSight {
   }
   export interface UpdateIAMPolicyAssignmentRequest {
     /**
-     * The ID of the AWS account that contains the IAM policy assignment.
+     * The ID of the AWS account that contains the IAM policy assignment. 
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment. This name must be unique within an AWS account.
+     * The name of the assignment, also called a rule. This name must be unique within an AWS account.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -6050,7 +6101,7 @@ declare namespace QuickSight {
   }
   export interface UpdateIAMPolicyAssignmentResponse {
     /**
-     * The name of the assignment. 
+     * The name of the assignment or rule.
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**

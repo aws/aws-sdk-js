@@ -105,6 +105,9 @@
         },
         {
           "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "S3AccessDeniedFault"
         }
       ],
       "documentation": "<p>Creates an endpoint using the provided settings.</p>"
@@ -1059,6 +1062,31 @@
         }
       ],
       "documentation": "<p>Modifies the specified replication task.</p> <p>You can't modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html\">Working with Migration Tasks</a> in the <i>AWS Database Migration Service User Guide</i>.</p>"
+    },
+    "MoveReplicationTask": {
+      "name": "MoveReplicationTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MoveReplicationTaskMessage"
+      },
+      "output": {
+        "shape": "MoveReplicationTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later AWS DMS version as the current replication instance.</p>"
     },
     "RebootReplicationInstance": {
       "name": "RebootReplicationInstance",
@@ -3910,6 +3938,34 @@
       },
       "documentation": "<p>Provides information that defines a MongoDB endpoint.</p>"
     },
+    "MoveReplicationTaskMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationTaskArn",
+        "TargetReplicationInstanceArn"
+      ],
+      "members": {
+        "ReplicationTaskArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the task that you want to move.</p>"
+        },
+        "TargetReplicationInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the replication instance where you want to move the task to.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "MoveReplicationTaskResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationTask": {
+          "shape": "ReplicationTask",
+          "documentation": "<p>The replication task that was moved.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "MySQLSettings": {
       "type": "structure",
       "members": {
@@ -4765,15 +4821,15 @@
         },
         "SourceEndpointArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the endpoint.</p>"
         },
         "TargetEndpointArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+          "documentation": "<p>The ARN that uniquely identifies the endpoint.</p>"
         },
         "ReplicationInstanceArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+          "documentation": "<p>The ARN of the replication instance.</p>"
         },
         "MigrationType": {
           "shape": "MigrationTypeValue",
@@ -4789,7 +4845,7 @@
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>The status of the replication task.</p>"
+          "documentation": "<p>The status of the replication task. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>\"moving\"</code> – The task is being moved in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html\"> <code>MoveReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"creating\"</code> – The task is being created in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\"> <code>CreateReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"deleting\"</code> – The task is being deleted in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html\"> <code>DeleteReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"failed\"</code> – The task failed to successfully complete the database migration in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"failed-move\"</code> – The task failed to move in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html\"> <code>MoveReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"modifying\"</code> – The task definition is being modified in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\"> <code>ModifyReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"ready\"</code> – The task is in a <code>ready</code> state where it can respond to other task operations, such as <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\"> <code>StartReplicationTask</code> </a> or <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html\"> <code>DeleteReplicationTask</code> </a>. </p> </li> <li> <p> <code>\"running\"</code> – The task is performing a database migration in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"starting\"</code> – The task is preparing to perform a database migration in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"stopped\"</code> – The task has stopped in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html\"> <code>StopReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"stopping\"</code> – The task is preparing to stop in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html\"> <code>StopReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>\"testing\"</code> – The database migration specified for this task is being tested in response to running either the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html\"> <code>StartReplicationTaskAssessmentRun</code> </a> or the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html\"> <code>StartReplicationTaskAssessment</code> </a> operation.</p> <note> <p> <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html\"> <code>StartReplicationTaskAssessmentRun</code> </a> is an improved premigration task assessment operation. The <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html\"> <code>StartReplicationTaskAssessment</code> </a> operation assesses data type compatibility only between the source and target database of a given migration task. In contrast, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html\"> <code>StartReplicationTaskAssessmentRun</code> </a> enables you to specify a variety of premigration task assessments in addition to data type compatibility. These assessments include ones for the validity of primary key definitions and likely issues with database migration performance, among others.</p> </note> </li> </ul>"
         },
         "LastFailureMessage": {
           "shape": "String",
@@ -4797,7 +4853,7 @@
         },
         "StopReason": {
           "shape": "String",
-          "documentation": "<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>\"STOP_REASON_FULL_LOAD_COMPLETED\"</code> – Full-load migration completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_APPLIED\"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_NOT_APPLIED\"</code> – In a full-load and CDC migration, the full-load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>\"STOP_REASON_SERVER_TIME\"</code> – The migration stopped at the specified server time.</p> </li> </ul>"
+          "documentation": "<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>\"STOP_REASON_FULL_LOAD_COMPLETED\"</code> – Full-load migration completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_APPLIED\"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_NOT_APPLIED\"</code> – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>\"STOP_REASON_SERVER_TIME\"</code> – The migration stopped at the specified server time.</p> </li> </ul>"
         },
         "ReplicationTaskCreationDate": {
           "shape": "TStamp",
@@ -4830,6 +4886,10 @@
         "TaskData": {
           "shape": "String",
           "documentation": "<p>Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "TargetReplicationInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the replication instance to which this task is moved in response to running the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html\"> <code>MoveReplicationTask</code> </a> operation. Otherwise, this response parameter isn't a member of the <code>ReplicationTask</code> object.</p>"
         }
       },
       "documentation": "<p>Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.</p>"

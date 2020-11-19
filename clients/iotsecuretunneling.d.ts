@@ -44,11 +44,11 @@ declare class IoTSecureTunneling extends Service {
    */
   listTunnels(callback?: (err: AWSError, data: IoTSecureTunneling.Types.ListTunnelsResponse) => void): Request<IoTSecureTunneling.Types.ListTunnelsResponse, AWSError>;
   /**
-   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server. .
+   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.
    */
   openTunnel(params: IoTSecureTunneling.Types.OpenTunnelRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.OpenTunnelResponse) => void): Request<IoTSecureTunneling.Types.OpenTunnelResponse, AWSError>;
   /**
-   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server. .
+   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.
    */
   openTunnel(callback?: (err: AWSError, data: IoTSecureTunneling.Types.OpenTunnelResponse) => void): Request<IoTSecureTunneling.Types.OpenTunnelResponse, AWSError>;
   /**
@@ -113,9 +113,9 @@ declare namespace IoTSecureTunneling {
     /**
      * The name of the IoT thing to which you want to connect.
      */
-    thingName: ThingName;
+    thingName?: ThingName;
     /**
-     * A list of service names that identity the target application. Currently, you can only specify a single name. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
+     * A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
      */
     services: ServiceList;
   }
