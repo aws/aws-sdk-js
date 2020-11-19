@@ -28,11 +28,11 @@ declare class EventBridge extends Service {
    */
   cancelReplay(callback?: (err: AWSError, data: EventBridge.Types.CancelReplayResponse) => void): Request<EventBridge.Types.CancelReplayResponse, AWSError>;
   /**
-   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.
+   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.
    */
   createArchive(params: EventBridge.Types.CreateArchiveRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateArchiveResponse) => void): Request<EventBridge.Types.CreateArchiveResponse, AWSError>;
   /**
-   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.
+   * Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.
    */
   createArchive(callback?: (err: AWSError, data: EventBridge.Types.CreateArchiveResponse) => void): Request<EventBridge.Types.CreateArchiveResponse, AWSError>;
   /**
@@ -538,6 +538,7 @@ declare namespace EventBridge {
      */
     EventSourceArn?: String;
   }
+  export type CreatedBy = string;
   export type Database = string;
   export type DbUser = string;
   export interface DeactivateEventSourceRequest {
@@ -582,9 +583,9 @@ declare namespace EventBridge {
      */
     Name: RuleName;
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
      */
@@ -644,9 +645,9 @@ declare namespace EventBridge {
   }
   export interface DescribeEventBusRequest {
     /**
-     * The name of the event bus to show details for. If you omit this, the default event bus is displayed.
+     * The name or ARN of the event bus to show details for. If you omit this, the default event bus is displayed.
      */
-    Name?: EventBusName;
+    Name?: EventBusNameOrArn;
   }
   export interface DescribeEventBusResponse {
     /**
@@ -772,9 +773,9 @@ declare namespace EventBridge {
      */
     Name: RuleName;
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
   }
   export interface DescribeRuleResponse {
     /**
@@ -810,9 +811,13 @@ declare namespace EventBridge {
      */
     ManagedBy?: ManagedBy;
     /**
-     * The event bus associated with the rule.
+     * The name of the event bus associated with the rule.
      */
     EventBusName?: EventBusName;
+    /**
+     * The account ID of the user that created the rule. If you use PutRule to put a rule on an event bus in another account, the other account is the owner of the rule, and the rule ARN includes the account ID for that account. However, the value for CreatedBy is the account ID as the account that created the rule in the other account.
+     */
+    CreatedBy?: CreatedBy;
   }
   export interface DisableRuleRequest {
     /**
@@ -820,9 +825,9 @@ declare namespace EventBridge {
      */
     Name: RuleName;
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
   }
   export interface EcsParameters {
     /**
@@ -856,9 +861,9 @@ declare namespace EventBridge {
      */
     Name: RuleName;
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
   }
   export type ErrorCode = string;
   export type ErrorMessage = string;
@@ -878,6 +883,7 @@ declare namespace EventBridge {
   }
   export type EventBusList = EventBus[];
   export type EventBusName = string;
+  export type EventBusNameOrArn = string;
   export type EventId = string;
   export type EventPattern = string;
   export type EventResource = string;
@@ -1081,7 +1087,7 @@ declare namespace EventBridge {
   }
   export interface ListReplaysRequest {
     /**
-     * A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+     * A name prefix to filter the replays returned. Only replays with name that match the prefix are returned.
      */
     NamePrefix?: ReplayName;
     /**
@@ -1117,9 +1123,9 @@ declare namespace EventBridge {
      */
     TargetArn: TargetArn;
     /**
-     * Limits the results to show only the rules associated with the specified event bus.
+     * The name or ARN of the event bus to list rules for. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * The token returned by a previous call to retrieve the next set of results.
      */
@@ -1145,9 +1151,9 @@ declare namespace EventBridge {
      */
     NamePrefix?: RuleName;
     /**
-     * Limits the results to show only the rules associated with the specified event bus.
+     * The name or ARN of the event bus to list the rules for. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * The token returned by a previous call to retrieve the next set of results.
      */
@@ -1185,9 +1191,9 @@ declare namespace EventBridge {
      */
     Rule: RuleName;
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * The token returned by a previous call to retrieve the next set of results.
      */
@@ -1220,6 +1226,7 @@ declare namespace EventBridge {
   }
   export type NextToken = string;
   export type NonPartnerEventBusName = string;
+  export type NonPartnerEventBusNameOrArn = string;
   export interface PartnerEventSource {
     /**
      * The ARN of the partner event source.
@@ -1282,9 +1289,9 @@ declare namespace EventBridge {
      */
     Detail?: String;
     /**
-     * The event bus that will receive the event. Only the rules that are associated with this event bus will be able to match the event.
+     * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.
      */
-    EventBusName?: NonPartnerEventBusName;
+    EventBusName?: NonPartnerEventBusNameOrArn;
   }
   export type PutEventsRequestEntryList = PutEventsRequestEntry[];
   export interface PutEventsResponse {
@@ -1368,25 +1375,29 @@ declare namespace EventBridge {
   export type PutPartnerEventsResultEntryList = PutPartnerEventsResultEntry[];
   export interface PutPermissionRequest {
     /**
-     * The event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
     EventBusName?: NonPartnerEventBusName;
     /**
      * The action that you are enabling the other account to perform. Currently, this must be events:PutEvents.
      */
-    Action: Action;
+    Action?: Action;
     /**
      * The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*" without specifying Condition, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.
      */
-    Principal: Principal;
+    Principal?: Principal;
     /**
      * An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this StatementId when you run RemovePermission.
      */
-    StatementId: StatementId;
+    StatementId?: StatementId;
     /**
      * This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see What Is AWS Organizations in the AWS Organizations User Guide. If you specify Condition with an AWS organization ID, and specify "*" as the value for Principal, you grant permission to all the accounts in the named organization. The Condition is a JSON string which must contain Type, Key, and Value fields.
      */
     Condition?: Condition;
+    /**
+     * A JSON string that describes the permission policy statement. You can include a Policy parameter in the request instead of using the StatementId, Action, Principal, or Condition parameters.
+     */
+    Policy?: String;
   }
   export interface PutRuleRequest {
     /**
@@ -1418,9 +1429,9 @@ declare namespace EventBridge {
      */
     Tags?: TagList;
     /**
-     * The event bus to associate with this rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
   }
   export interface PutRuleResponse {
     /**
@@ -1434,9 +1445,9 @@ declare namespace EventBridge {
      */
     Rule: RuleName;
     /**
-     * The name of the event bus associated with the rule. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * The targets to update or add to the rule.
      */
@@ -1501,7 +1512,11 @@ declare namespace EventBridge {
     /**
      * The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
      */
-    StatementId: StatementId;
+    StatementId?: StatementId;
+    /**
+     * Specifies whether to remove all permissions.
+     */
+    RemoveAllPermissions?: Boolean;
     /**
      * The name of the event bus to revoke permissions for. If you omit this, the default event bus is used.
      */
@@ -1513,9 +1528,9 @@ declare namespace EventBridge {
      */
     Rule: RuleName;
     /**
-     * The name of the event bus associated with the rule.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
-    EventBusName?: EventBusName;
+    EventBusName?: EventBusNameOrArn;
     /**
      * The IDs of the targets to remove from the rule.
      */
@@ -1652,7 +1667,7 @@ declare namespace EventBridge {
      */
     ManagedBy?: ManagedBy;
     /**
-     * The event bus associated with the rule.
+     * The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
      */
     EventBusName?: EventBusName;
   }

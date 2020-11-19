@@ -55,6 +55,36 @@ declare class LexRuntime extends Service {
 }
 declare namespace LexRuntime {
   export type Accept = string;
+  export interface ActiveContext {
+    /**
+     * The name of the context.
+     */
+    name: ActiveContextName;
+    /**
+     * The length of time or number of turns that a context remains active.
+     */
+    timeToLive: ActiveContextTimeToLive;
+    /**
+     * State variables for the current context. You can use these values as default values for slots in subsequent events.
+     */
+    parameters: ActiveContextParametersMap;
+  }
+  export type ActiveContextName = string;
+  export type ActiveContextParametersMap = {[key: string]: Text};
+  export interface ActiveContextTimeToLive {
+    /**
+     * The number of seconds that the context should be active after it is first sent in a PostContent or PostText response. You can set the value between 5 and 86,400 seconds (24 hours).
+     */
+    timeToLiveInSeconds?: ActiveContextTimeToLiveInSeconds;
+    /**
+     * The number of conversation turns that the context should be active. A conversation turn is one PostContent or PostText request and the corresponding response from Amazon Lex.
+     */
+    turnsToLive?: ActiveContextTurnsToLive;
+  }
+  export type ActiveContextTimeToLiveInSeconds = number;
+  export type ActiveContextTurnsToLive = number;
+  export type ActiveContextsList = ActiveContext[];
+  export type ActiveContextsString = string;
   export type AttributesString = string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type BotAlias = string;
@@ -197,6 +227,10 @@ declare namespace LexRuntime {
      * Describes the current state of the bot.
      */
     dialogAction?: DialogAction;
+    /**
+     * A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the PostContent, PostText, or PutSession operation. You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.
+     */
+    activeContexts?: ActiveContextsList;
   }
   export type HttpContentType = string;
   export interface IntentConfidence {
@@ -240,6 +274,7 @@ declare namespace LexRuntime {
   export type IntentSummaryCheckpointLabel = string;
   export type IntentSummaryList = IntentSummary[];
   export type MessageFormatType = "PlainText"|"CustomPayload"|"SSML"|"Composite"|string;
+  export type ParameterName = string;
   export interface PostContentRequest {
     /**
      * Name of the Amazon Lex bot.
@@ -273,6 +308,10 @@ declare namespace LexRuntime {
      *  User input in PCM or Opus audio format or text format as described in the Content-Type HTTP header.  You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.
      */
     inputStream: BlobStream;
+    /**
+     * A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request, If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.
+     */
+    activeContexts?: ActiveContextsString;
   }
   export interface PostContentResponse {
     /**
@@ -284,7 +323,7 @@ declare namespace LexRuntime {
      */
     intentName?: IntentName;
     /**
-     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex NLU.
+     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. The score is a relative score, not an absolute score. The score may change based on improvements to Amazon Lex. 
      */
     nluIntentConfidence?: String;
     /**
@@ -328,13 +367,17 @@ declare namespace LexRuntime {
      */
     audioStream?: BlobStream;
     /**
-     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version. If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU. For more information about enabling the new NLU, see the enableModelImprovements parameter of the PutBot operation.
+     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.
      */
     botVersion?: BotVersion;
     /**
      * The unique identifier for the session.
      */
     sessionId?: String;
+    /**
+     * A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the PostContent, PostText, or PutSession operation. You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.
+     */
+    activeContexts?: ActiveContextsString;
   }
   export interface PostTextRequest {
     /**
@@ -361,6 +404,10 @@ declare namespace LexRuntime {
      * The text that the user entered (Amazon Lex interprets this text).
      */
     inputText: Text;
+    /**
+     * A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request, If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.
+     */
+    activeContexts?: ActiveContextsList;
   }
   export interface PostTextResponse {
     /**
@@ -368,7 +415,7 @@ declare namespace LexRuntime {
      */
     intentName?: IntentName;
     /**
-     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. For more information, see Confidence Scores. The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex natural language understanding (NLU) model.
+     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. For more information, see Confidence Scores. The score is a relative score, not an absolute score. The score may change based on improvements to Amazon Lex.
      */
     nluIntentConfidence?: IntentConfidence;
     /**
@@ -412,9 +459,13 @@ declare namespace LexRuntime {
      */
     sessionId?: String;
     /**
-     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version. If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU. For more information about enabling the new NLU, see the enableModelImprovements parameter of the PutBot operation.
+     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.
      */
     botVersion?: BotVersion;
+    /**
+     * A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the PostContent, PostText, or PutSession operation. You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.
+     */
+    activeContexts?: ActiveContextsList;
   }
   export interface PredictedIntent {
     /**
@@ -459,6 +510,10 @@ declare namespace LexRuntime {
      * The message that Amazon Lex returns in the response can be either text or speech based depending on the value of this field.   If the value is text/plain; charset=utf-8, Amazon Lex returns text in the response.   If the value begins with audio/, Amazon Lex returns speech in the response. Amazon Lex uses Amazon Polly to generate the speech in the configuration that you specify. For example, if you specify audio/mpeg as the value, Amazon Lex returns speech in the MPEG format.   If the value is audio/pcm, the speech is returned as audio/pcm in 16-bit, little endian format.   The following are the accepted values:    audio/mpeg     audio/ogg     audio/pcm     audio/* (defaults to mpeg)    text/plain; charset=utf-8     
      */
     accept?: Accept;
+    /**
+     * A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request, If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.
+     */
+    activeContexts?: ActiveContextsList;
   }
   export interface PutSessionResponse {
     /**
@@ -501,6 +556,10 @@ declare namespace LexRuntime {
      * A unique identifier for the session.
      */
     sessionId?: String;
+    /**
+     * A list of active contexts for the session.
+     */
+    activeContexts?: ActiveContextsString;
   }
   export interface ResponseCard {
     /**

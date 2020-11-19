@@ -1116,6 +1116,10 @@ declare namespace Redshift {
      * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
      */
     ResizeInfo?: ResizeInfo;
+    /**
+     * The namespace Amazon Resource Name (ARN) of the cluster.
+     */
+    ClusterNamespaceArn?: String;
   }
   export interface ClusterAssociatedToSchedule {
     /**

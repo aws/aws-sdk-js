@@ -243,6 +243,31 @@
       ],
       "documentation": "<p>Creates a Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html\">Creating an Application</a>.</p>"
     },
+    "CreateApplicationPresignedUrl": {
+      "name": "CreateApplicationPresignedUrl",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateApplicationPresignedUrlRequest"
+      },
+      "output": {
+        "shape": "CreateApplicationPresignedUrlResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        }
+      ],
+      "documentation": "<p>Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>"
+    },
     "CreateApplicationSnapshot": {
       "name": "CreateApplicationSnapshot",
       "http": {
@@ -713,7 +738,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Stops the application from processing data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. </p>"
+      "documentation": "<p>Stops the application from processing data. You can stop an application only if it is in the running status, unless you set the <code>Force</code> parameter to <code>true</code>.</p> <p>You can use the <a>DescribeApplication</a> operation to find the application status. </p> <p>Kinesis Data Analytics takes a snapshot when the application is stopped, unless <code>Force</code> is set to <code>true</code>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1393,6 +1418,11 @@
       "max": 999999999,
       "min": 1
     },
+    "AuthorizedUrl": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
     "BooleanObject": {
       "type": "boolean"
     },
@@ -1643,6 +1673,36 @@
         "DEFAULT",
         "CUSTOM"
       ]
+    },
+    "CreateApplicationPresignedUrlRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName",
+        "UrlType"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application.</p>"
+        },
+        "UrlType": {
+          "shape": "UrlType",
+          "documentation": "<p>The type of the extension for which to create and return a URL. Currently, the only valid extension URL type is <code>FLINK_DASHBOARD_URL</code>. </p>"
+        },
+        "SessionExpirationDurationInSeconds": {
+          "shape": "SessionExpirationDurationInSeconds",
+          "documentation": "<p>The duration in seconds for which the returned URL will be valid.</p>"
+        }
+      }
+    },
+    "CreateApplicationPresignedUrlResponse": {
+      "type": "structure",
+      "members": {
+        "AuthorizedUrl": {
+          "shape": "AuthorizedUrl",
+          "documentation": "<p>The URL of the extension.</p>"
+        }
+      }
     },
     "CreateApplicationRequest": {
       "type": "structure",
@@ -3422,7 +3482,8 @@
       "enum": [
         "SQL-1_0",
         "FLINK-1_6",
-        "FLINK-1_8"
+        "FLINK-1_8",
+        "FLINK-1_11"
       ]
     },
     "S3ApplicationCodeLocationDescription": {
@@ -3565,6 +3626,11 @@
       },
       "max": 5,
       "min": 1
+    },
+    "SessionExpirationDurationInSeconds": {
+      "type": "long",
+      "max": 43200,
+      "min": 1800
     },
     "SnapshotDetails": {
       "type": "structure",
@@ -3747,7 +3813,7 @@
         },
         "Force": {
           "shape": "BooleanObject",
-          "documentation": "<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code> to <code>true</code>, Kinesis Data Analytics stops the application without taking a snapshot.</p> <p>You can only force stop a Flink-based Kinesis Data Analytics application. You can't force stop a SQL-based Kinesis Data Analytics application.</p> <p>The application must be in the <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or <code>RUNNING</code> state. </p>"
+          "documentation": "<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code> to <code>true</code>, Kinesis Data Analytics stops the application without taking a snapshot. </p> <note> <p>Force-stopping your application may lead to data loss or duplication. To prevent data loss or duplicate processing of data during application restarts, we recommend you to take frequent snapshots of your application.</p> </note> <p>You can only force stop a Flink-based Kinesis Data Analytics application. You can't force stop a SQL-based Kinesis Data Analytics application.</p> <p>The application must be in the <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or <code>RUNNING</code> status. </p>"
         }
       }
     },
@@ -3903,6 +3969,12 @@
           "documentation": "<p>Describes application updates.</p>"
         }
       }
+    },
+    "UrlType": {
+      "type": "string",
+      "enum": [
+        "FLINK_DASHBOARD_URL"
+      ]
     },
     "VpcConfiguration": {
       "type": "structure",

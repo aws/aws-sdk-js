@@ -100,7 +100,7 @@
           "shape": "InvalidEventPatternException"
         }
       ],
-      "documentation": "<p>Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.</p>"
+      "documentation": "<p>Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.</p>"
     },
     "CreateEventBus": {
       "name": "CreateEventBus",
@@ -759,6 +759,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "OperationDisabledException"
         }
       ],
       "documentation": "<p>Running <code>PutPermission</code> permits the specified AWS account or AWS organization to put events to the specified <i>event bus</i>. Amazon EventBridge (CloudWatch Events) rules in your account are triggered by these events arriving to an event bus in your account. </p> <p>For another account to send events to your account, that external account must have an EventBridge rule with your account's event bus as a target.</p> <p>To enable multiple AWS accounts to put events to your event bus, run <code>PutPermission</code> once for each of these accounts. Or, if all the accounts are members of the same AWS organization, you can run <code>PutPermission</code> once specifying <code>Principal</code> as \"*\" and specifying the AWS organization ID in <code>Condition</code>, to grant permissions to all accounts in that organization.</p> <p>If you grant permissions using an organization, then accounts in that organization must specify a <code>RoleArn</code> with proper permissions when they use <code>PutTarget</code> to add your account's event bus as a target. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>The permission policy on the default event bus cannot exceed 10 KB in size.</p>"
@@ -846,6 +849,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "OperationDisabledException"
         }
       ],
       "documentation": "<p>Revokes the permission of another AWS account to be able to put events to the specified event bus. Specify the account to revoke by the <code>StatementId</code> value that you associated with the account when you granted it permission with <code>PutPermission</code>. You can find the <code>StatementId</code> by using <a>DescribeEventBus</a>.</p>"
@@ -1360,6 +1366,11 @@
         }
       }
     },
+    "CreatedBy": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
     "Database": {
       "type": "string",
       "max": 64,
@@ -1450,8 +1461,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         },
         "Force": {
           "shape": "Boolean",
@@ -1524,8 +1535,8 @@
       "type": "structure",
       "members": {
         "Name": {
-          "shape": "EventBusName",
-          "documentation": "<p>The name of the event bus to show details for. If you omit this, the default event bus is displayed.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus to show details for. If you omit this, the default event bus is displayed.</p>"
         }
       }
     },
@@ -1688,8 +1699,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         }
       }
     },
@@ -1730,7 +1741,11 @@
         },
         "EventBusName": {
           "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule.</p>"
+          "documentation": "<p>The name of the event bus associated with the rule.</p>"
+        },
+        "CreatedBy": {
+          "shape": "CreatedBy",
+          "documentation": "<p>The account ID of the user that created the rule. If you use <code>PutRule</code> to put a rule on an event bus in another account, the other account is the owner of the rule, and the rule ARN includes the account ID for that account. However, the value for <code>CreatedBy</code> is the account ID as the account that created the rule in the other account.</p>"
         }
       }
     },
@@ -1745,8 +1760,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         }
       }
     },
@@ -1794,8 +1809,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         }
       }
     },
@@ -1834,6 +1849,12 @@
       "max": 256,
       "min": 1,
       "pattern": "[/\\.\\-_A-Za-z0-9]+"
+    },
+    "EventBusNameOrArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+"
     },
     "EventId": {
       "type": "string"
@@ -2170,7 +2191,7 @@
       "members": {
         "NamePrefix": {
           "shape": "ReplayName",
-          "documentation": "<p>A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.</p>"
+          "documentation": "<p>A name prefix to filter the replays returned. Only replays with name that match the prefix are returned.</p>"
         },
         "State": {
           "shape": "ReplayState",
@@ -2214,8 +2235,8 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the target resource.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>Limits the results to show only the rules associated with the specified event bus.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus to list rules for. If you omit this, the default event bus is used.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -2248,8 +2269,8 @@
           "documentation": "<p>The prefix matching the rule name.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>Limits the results to show only the rules associated with the specified event bus.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus to list the rules for. If you omit this, the default event bus is used.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -2306,8 +2327,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -2373,6 +2394,12 @@
       "max": 256,
       "min": 1,
       "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "NonPartnerEventBusNameOrArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+"
     },
     "PartnerEventSource": {
       "type": "structure",
@@ -2480,8 +2507,8 @@
           "documentation": "<p>A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.</p>"
         },
         "EventBusName": {
-          "shape": "NonPartnerEventBusName",
-          "documentation": "<p>The event bus that will receive the event. Only the rules that are associated with this event bus will be able to match the event.</p>"
+          "shape": "NonPartnerEventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.</p>"
         }
       },
       "documentation": "<p>Represents an event to be submitted.</p>"
@@ -2616,15 +2643,10 @@
     },
     "PutPermissionRequest": {
       "type": "structure",
-      "required": [
-        "Action",
-        "Principal",
-        "StatementId"
-      ],
       "members": {
         "EventBusName": {
           "shape": "NonPartnerEventBusName",
-          "documentation": "<p>The event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "documentation": "<p>The name of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         },
         "Action": {
           "shape": "Action",
@@ -2641,6 +2663,10 @@
         "Condition": {
           "shape": "Condition",
           "documentation": "<p>This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is AWS Organizations</a> in the <i>AWS Organizations User Guide</i>.</p> <p>If you specify <code>Condition</code> with an AWS organization ID, and specify \"*\" as the value for <code>Principal</code>, you grant permission to all the accounts in the named organization.</p> <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields.</p>"
+        },
+        "Policy": {
+          "shape": "String",
+          "documentation": "<p>A JSON string that describes the permission policy statement. You can include a <code>Policy</code> parameter in the request instead of using the <code>StatementId</code>, <code>Action</code>, <code>Principal</code>, or <code>Condition</code> parameters.</p>"
         }
       }
     },
@@ -2679,8 +2705,8 @@
           "documentation": "<p>The list of key-value pairs to associate with the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The event bus to associate with this rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.</p>"
         }
       }
     },
@@ -2705,8 +2731,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The name of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         },
         "Targets": {
           "shape": "TargetList",
@@ -2812,13 +2838,14 @@
     },
     "RemovePermissionRequest": {
       "type": "structure",
-      "required": [
-        "StatementId"
-      ],
       "members": {
         "StatementId": {
           "shape": "StatementId",
           "documentation": "<p>The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.</p>"
+        },
+        "RemoveAllPermissions": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether to remove all permissions.</p>"
         },
         "EventBusName": {
           "shape": "NonPartnerEventBusName",
@@ -2838,8 +2865,8 @@
           "documentation": "<p>The name of the rule.</p>"
         },
         "EventBusName": {
-          "shape": "EventBusName",
-          "documentation": "<p>The name of the event bus associated with the rule.</p>"
+          "shape": "EventBusNameOrArn",
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         },
         "Ids": {
           "shape": "TargetIdList",
@@ -3057,7 +3084,7 @@
         },
         "EventBusName": {
           "shape": "EventBusName",
-          "documentation": "<p>The event bus associated with the rule.</p>"
+          "documentation": "<p>The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.</p>"
         }
       },
       "documentation": "<p>Contains information about a rule in Amazon EventBridge.</p>"

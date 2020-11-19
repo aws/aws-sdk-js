@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.795.0-->
+<!--LATEST=2.796.0-->
 <!--ENTRYINSERT-->
+
+## 2.796.0
+* feature: AutoScaling: You can now create Auto Scaling groups with multiple launch templates using a mixed instances policy, making it easy to deploy an AMI with an architecture that is different from the rest of the group.
+* feature: CloudWatchEvents: EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management.
+* feature: CostExplorer: Additional metadata that may be applicable to the recommendation.
+* feature: DirectoryService: Adding multi-region replication feature for AWS Managed Microsoft AD
+* feature: EventBridge: EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management.
+* feature: Glue: Adding support for Glue Schema Registry. The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas.
+* feature: KinesisAnalyticsV2: Amazon Kinesis Data Analytics now supports building and running streaming applications using Apache Flink 1.11 and provides a way to access the Apache Flink dashboard for supported Flink versions.
+* feature: Lambda: Added the starting position and starting position timestamp to ESM Configuration. Now customers will be able to view these fields for their ESM.
+* feature: LexModelBuildingService: Amazon Lex supports managing input and output contexts as well as default values for slots.
+* feature: LexRuntime: Amazon Lex now supports the ability to view and manage active contexts associated with a user session.
+* feature: MediaLive: The AWS Elemental MediaLive APIs and SDKs now support the ability to see the software update status on Link devices
+* feature: Redshift: Amazon Redshift support for returning ClusterNamespaceArn in describeClusters
 
 ## 2.795.0
 * feature: Backup: AWS Backup now supports cross-account backup, enabling AWS customers to securely copy their backups across their AWS accounts within their AWS organizations.
