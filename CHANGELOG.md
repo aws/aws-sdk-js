@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.796.0-->
+<!--LATEST=2.797.0-->
 <!--ENTRYINSERT-->
+
+## 2.797.0
+* feature: AppMesh: This release makes tag value a required attribute of the tag's key-value pair.
+* feature: Chime: The Amazon Chime SDK for messaging provides the building blocks needed to build chat and other real-time collaboration features.
+* feature: CloudHSMV2: Added managed backup retention, a feature that enables customers to retain backups for a configurable period after which CloudHSM service will automatically delete them.
+* feature: CodeGuruReviewer: This release supports tagging repository association resources in Amazon CodeGuru Reviewer.
+* feature: CognitoIdentity: Added SDK pagination support for ListIdentityPools
+* feature: Connect: This release adds a set of Amazon Connect APIs to programmatically control instance creation, modification, description and deletion.
+* feature: Kafka: This release adds support for PER TOPIC PER PARTITION monitoring on AWS MSK clusters.
+* feature: Macie2: The Amazon Macie API now provides S3 bucket metadata that indicates whether any one-time or recurring classification jobs are configured to analyze data in a bucket.
+* feature: S3: Add new documentation regarding automatically generated Content-MD5 headers when using the SDK or CLI.
+* feature: ServiceCatalogAppRegistry: AWS Service Catalog AppRegistry Documentation update
 
 ## 2.796.0
 * feature: AutoScaling: You can now create Auto Scaling groups with multiple launch templates using a mixed instances policy, making it easy to deploy an AMI with an architecture that is different from the rest of the group.

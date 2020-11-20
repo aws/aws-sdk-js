@@ -1896,7 +1896,7 @@ declare namespace AppMesh {
     /**
      * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
      */
-    value?: TagValue;
+    value: TagValue;
   }
   export interface TagResourceInput {
     /**
