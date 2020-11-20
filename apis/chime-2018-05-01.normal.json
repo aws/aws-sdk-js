@@ -478,6 +478,138 @@
       ],
       "documentation": "<p>Creates an Amazon Chime account under the administrator's AWS account. Only <code>Team</code> account types are currently supported for this action. For more information about different account types, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
+    "CreateAppInstance": {
+      "name": "CreateAppInstance",
+      "http": {
+        "method": "POST",
+        "requestUri": "/app-instances",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateAppInstanceRequest"
+      },
+      "output": {
+        "shape": "CreateAppInstanceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Chime Messaging SDK <code>AppInstance</code> under an AWS Account. Only Messaging SDK customers use this API. <code>CreateAppInstance</code> supports <code>idempotency</code> behavior as described in the AWS API Standard.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "CreateAppInstanceAdmin": {
+      "name": "CreateAppInstanceAdmin",
+      "http": {
+        "method": "POST",
+        "requestUri": "/app-instances/{appInstanceArn}/admins",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateAppInstanceAdminRequest"
+      },
+      "output": {
+        "shape": "CreateAppInstanceAdminResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the app instance.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "CreateAppInstanceUser": {
+      "name": "CreateAppInstanceUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/app-instance-users",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "CreateAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a user under an Amazon Chime <code>AppInstance</code>. The request consists of a unique <code>appInstanceUserId</code> and <code>Name</code> for that user.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
     "CreateAttendee": {
       "name": "CreateAttendee",
       "http": {
@@ -559,6 +691,182 @@
         }
       ],
       "documentation": "<p>Creates a bot for an Amazon Chime Enterprise account.</p>"
+    },
+    "CreateChannel": {
+      "name": "CreateChannel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateChannelRequest"
+      },
+      "output": {
+        "shape": "CreateChannelResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can't change a channel's privacy.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "CreateChannelBan": {
+      "name": "CreateChannelBan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/bans",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateChannelBanRequest"
+      },
+      "output": {
+        "shape": "CreateChannelBanResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels. </p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "CreateChannelMembership": {
+      "name": "CreateChannelMembership",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/memberships",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateChannelMembershipRequest"
+      },
+      "output": {
+        "shape": "CreateChannelMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "CreateChannelModerator": {
+      "name": "CreateChannelModerator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/moderators",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateChannelModeratorRequest"
+      },
+      "output": {
+        "shape": "CreateChannelModeratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "CreateMeeting": {
       "name": "CreateMeeting",
@@ -1128,6 +1436,152 @@
       ],
       "documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting a <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to do so.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore a deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>"
     },
+    "DeleteAppInstance": {
+      "name": "DeleteAppInstance",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/app-instances/{appInstanceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAppInstanceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes an <code>AppInstance</code> and all associated data asynchronously.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "DeleteAppInstanceAdmin": {
+      "name": "DeleteAppInstanceAdmin",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAppInstanceAdminRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action does not delete the user.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "DeleteAppInstanceStreamingConfigurations": {
+      "name": "DeleteAppInstanceStreamingConfigurations",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/app-instances/{appInstanceArn}/streaming-configurations",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAppInstanceStreamingConfigurationsRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the streaming configurations of an app instance.</p>"
+    },
+    "DeleteAppInstanceUser": {
+      "name": "DeleteAppInstanceUser",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/app-instance-users/{appInstanceUserArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAppInstanceUserRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes an <code>AppInstanceUser</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
     "DeleteAttendee": {
       "name": "DeleteAttendee",
       "http": {
@@ -1162,6 +1616,181 @@
         }
       ],
       "documentation": "<p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
+    },
+    "DeleteChannel": {
+      "name": "DeleteChannel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/channels/{channelArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteChannelRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DeleteChannelBan": {
+      "name": "DeleteChannelBan",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/channels/{channelArn}/bans/{memberArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteChannelBanRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Removes a user from a channel's ban list.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DeleteChannelMembership": {
+      "name": "DeleteChannelMembership",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/channels/{channelArn}/memberships/{memberArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteChannelMembershipRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Removes a member from a channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DeleteChannelMessage": {
+      "name": "DeleteChannelMessage",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/channels/{channelArn}/messages/{messageId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteChannelMessageRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DeleteChannelModerator": {
+      "name": "DeleteChannelModerator",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/channels/{channelArn}/moderators/{channelModeratorArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteChannelModeratorRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a channel moderator.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "DeleteEventsConfiguration": {
       "name": "DeleteEventsConfiguration",
@@ -1732,6 +2361,357 @@
       ],
       "documentation": "<p>Deletes the specified SIP credentials used by your equipment to authenticate during call termination.</p>"
     },
+    "DescribeAppInstance": {
+      "name": "DescribeAppInstance",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances/{appInstanceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeAppInstanceRequest"
+      },
+      "output": {
+        "shape": "DescribeAppInstanceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of an <code>AppInstance</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "DescribeAppInstanceAdmin": {
+      "name": "DescribeAppInstanceAdmin",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeAppInstanceAdminRequest"
+      },
+      "output": {
+        "shape": "DescribeAppInstanceAdminResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of an <code>AppInstanceAdmin</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "DescribeAppInstanceUser": {
+      "name": "DescribeAppInstanceUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instance-users/{appInstanceUserArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "DescribeAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of an <code>AppInstanceUser</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "DescribeChannel": {
+      "name": "DescribeChannel",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of a channel in an Amazon Chime app instance.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DescribeChannelBan": {
+      "name": "DescribeChannelBan",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/bans/{memberArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelBanRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelBanResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of a channel ban.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DescribeChannelMembership": {
+      "name": "DescribeChannelMembership",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/memberships/{memberArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelMembershipRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of a user's channel membership.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DescribeChannelMembershipForAppInstanceUser": {
+      "name": "DescribeChannelMembershipForAppInstanceUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}?scope=app-instance-user-membership",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelMembershipForAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelMembershipForAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the details of a channel based on the membership of the <code>AppInstanceUser</code> specified.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DescribeChannelModeratedByAppInstanceUser": {
+      "name": "DescribeChannelModeratedByAppInstanceUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}?scope=app-instance-user-moderated-channel",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelModeratedByAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelModeratedByAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "DescribeChannelModerator": {
+      "name": "DescribeChannelModerator",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/moderators/{channelModeratorArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeChannelModeratorRequest"
+      },
+      "output": {
+        "shape": "DescribeChannelModeratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns the full details of a single ChannelModerator.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
     "DisassociatePhoneNumberFromUser": {
       "name": "DisassociatePhoneNumberFromUser",
       "http": {
@@ -1958,6 +2938,85 @@
       ],
       "documentation": "<p>Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
+    "GetAppInstanceRetentionSettings": {
+      "name": "GetAppInstanceRetentionSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances/{appInstanceArn}/retention-settings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetAppInstanceRetentionSettingsRequest"
+      },
+      "output": {
+        "shape": "GetAppInstanceRetentionSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Gets the retention settings for an app instance.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "GetAppInstanceStreamingConfigurations": {
+      "name": "GetAppInstanceStreamingConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances/{appInstanceArn}/streaming-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetAppInstanceStreamingConfigurationsRequest"
+      },
+      "output": {
+        "shape": "GetAppInstanceStreamingConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Gets the streaming settings for an app instance.</p>"
+    },
     "GetAttendee": {
       "name": "GetAttendee",
       "http": {
@@ -2033,6 +3092,47 @@
         }
       ],
       "documentation": "<p>Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.</p>"
+    },
+    "GetChannelMessage": {
+      "name": "GetChannelMessage",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/messages/{messageId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetChannelMessageRequest"
+      },
+      "output": {
+        "shape": "GetChannelMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Gets the full details of a channel message.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "GetEventsConfiguration": {
       "name": "GetEventsConfiguration",
@@ -2141,6 +3241,41 @@
         }
       ],
       "documentation": "<p>Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
+    },
+    "GetMessagingSessionEndpoint": {
+      "name": "GetMessagingSessionEndpoint",
+      "http": {
+        "method": "GET",
+        "requestUri": "/endpoints/messaging-session",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetMessagingSessionEndpointRequest"
+      },
+      "output": {
+        "shape": "GetMessagingSessionEndpointResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>The endpoint for the messaging session.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "GetPhoneNumber": {
       "name": "GetPhoneNumber",
@@ -2702,7 +3837,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
+      "documentation": "<p>Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch.</p>"
     },
     "GetVoiceConnectorOrigination": {
       "name": "GetVoiceConnectorOrigination",
@@ -2969,6 +4104,123 @@
       ],
       "documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user's email address, which returns one account result.</p>"
     },
+    "ListAppInstanceAdmins": {
+      "name": "ListAppInstanceAdmins",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances/{appInstanceArn}/admins",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListAppInstanceAdminsRequest"
+      },
+      "output": {
+        "shape": "ListAppInstanceAdminsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the administrators in the app instance.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "ListAppInstanceUsers": {
+      "name": "ListAppInstanceUsers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instance-users",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListAppInstanceUsersRequest"
+      },
+      "output": {
+        "shape": "ListAppInstanceUsersResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>List all <code>AppInstanceUsers</code> created under a single app instance.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "ListAppInstances": {
+      "name": "ListAppInstances",
+      "http": {
+        "method": "GET",
+        "requestUri": "/app-instances",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListAppInstancesRequest"
+      },
+      "output": {
+        "shape": "ListAppInstancesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all Amazon Chime app instances created under a single AWS account.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
     "ListAttendeeTags": {
       "name": "ListAttendeeTags",
       "http": {
@@ -3082,6 +4334,272 @@
         }
       ],
       "documentation": "<p>Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.</p>"
+    },
+    "ListChannelBans": {
+      "name": "ListChannelBans",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/bans",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelBansRequest"
+      },
+      "output": {
+        "shape": "ListChannelBansResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all the users banned from a particular channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannelMemberships": {
+      "name": "ListChannelMemberships",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/memberships",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelMembershipsRequest"
+      },
+      "output": {
+        "shape": "ListChannelMembershipsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all channel memberships in a channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannelMembershipsForAppInstanceUser": {
+      "name": "ListChannelMembershipsForAppInstanceUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels?scope=app-instance-user-memberships",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelMembershipsForAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "ListChannelMembershipsForAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannelMessages": {
+      "name": "ListChannelMessages",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/messages",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelMessagesRequest"
+      },
+      "output": {
+        "shape": "ListChannelMessagesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. Sorted in descending order by default, based on the creation timestamp.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> </note>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannelModerators": {
+      "name": "ListChannelModerators",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels/{channelArn}/moderators",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelModeratorsRequest"
+      },
+      "output": {
+        "shape": "ListChannelModeratorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all the moderators for a channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannels": {
+      "name": "ListChannels",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelsRequest"
+      },
+      "output": {
+        "shape": "ListChannelsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class=\"title\"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "ListChannelsModeratedByAppInstanceUser": {
+      "name": "ListChannelsModeratedByAppInstanceUser",
+      "http": {
+        "method": "GET",
+        "requestUri": "/channels?scope=app-instance-user-moderated-channels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListChannelsModeratedByAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "ListChannelsModeratedByAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>A list of the channels moderated by an app instance user.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "ListMeetingTags": {
       "name": "ListMeetingTags",
@@ -3627,6 +5145,88 @@
       ],
       "documentation": "<p>Logs out the specified user from all of the devices they are currently logged into.</p>"
     },
+    "PutAppInstanceRetentionSettings": {
+      "name": "PutAppInstanceRetentionSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/app-instances/{appInstanceArn}/retention-settings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutAppInstanceRetentionSettingsRequest"
+      },
+      "output": {
+        "shape": "PutAppInstanceRetentionSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Sets the amount of time in days that a given app instance retains data.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "PutAppInstanceStreamingConfigurations": {
+      "name": "PutAppInstanceStreamingConfigurations",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/app-instances/{appInstanceArn}/streaming-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutAppInstanceStreamingConfigurationsRequest"
+      },
+      "output": {
+        "shape": "PutAppInstanceStreamingConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>The data streaming configurations of an app instance.</p>"
+    },
     "PutEventsConfiguration": {
       "name": "PutEventsConfiguration",
       "http": {
@@ -4012,6 +5612,44 @@
       ],
       "documentation": "<p>Adds termination SIP credentials for the specified Amazon Chime Voice Connector.</p>"
     },
+    "RedactChannelMessage": {
+      "name": "RedactChannelMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/messages/{messageId}?operation=redact",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RedactChannelMessageRequest"
+      },
+      "output": {
+        "shape": "RedactChannelMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
     "RedactConversationMessage": {
       "name": "RedactConversationMessage",
       "http": {
@@ -4086,7 +5724,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Redacts the specified message from the specified Amazon Chime chat room.</p>"
+      "documentation": "<p>Redacts the specified message from the specified Amazon Chime channel.</p>"
     },
     "RegenerateSecurityToken": {
       "name": "RegenerateSecurityToken",
@@ -4241,6 +5879,47 @@
         }
       ],
       "documentation": "<p>Searches phone numbers that can be ordered.</p>"
+    },
+    "SendChannelMessage": {
+      "name": "SendChannelMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/messages",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "SendChannelMessageRequest"
+      },
+      "output": {
+        "shape": "SendChannelMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p> <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "TagAttendee": {
       "name": "TagAttendee",
@@ -4531,6 +6210,88 @@
       ],
       "documentation": "<p>Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
+    "UpdateAppInstance": {
+      "name": "UpdateAppInstance",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/app-instances/{appInstanceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateAppInstanceRequest"
+      },
+      "output": {
+        "shape": "UpdateAppInstanceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates <code>AppInstance</code> metadata.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
+    "UpdateAppInstanceUser": {
+      "name": "UpdateAppInstanceUser",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/app-instance-users/{appInstanceUserArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateAppInstanceUserRequest"
+      },
+      "output": {
+        "shape": "UpdateAppInstanceUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the details for an <code>AppInstanceUser</code>. You can update names and metadata.</p>",
+      "endpoint": {
+        "hostPrefix": "identity-"
+      }
+    },
     "UpdateBot": {
       "name": "UpdateBot",
       "http": {
@@ -4568,6 +6329,129 @@
         }
       ],
       "documentation": "<p>Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.</p>"
+    },
+    "UpdateChannel": {
+      "name": "UpdateChannel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/channels/{channelArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateChannelRequest"
+      },
+      "output": {
+        "shape": "UpdateChannelResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Update a channel's attributes.</p> <p> <b>Restriction</b>: You can't change a channel's privacy.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "UpdateChannelMessage": {
+      "name": "UpdateChannelMessage",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/channels/{channelArn}/messages/{messageId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateChannelMessageRequest"
+      },
+      "output": {
+        "shape": "UpdateChannelMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the content of a message.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
+    "UpdateChannelReadMarker": {
+      "name": "UpdateChannelReadMarker",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/channels/{channelArn}/readMarker",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateChannelReadMarkerRequest"
+      },
+      "output": {
+        "shape": "UpdateChannelReadMarkerResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Sets the timestamp to the point when a user last read messages in a channel.</p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
     },
     "UpdateGlobalSettings": {
       "name": "UpdateGlobalSettings",
@@ -5120,6 +7004,197 @@
       "type": "string",
       "pattern": "[A-Z]{2}"
     },
+    "AppInstance": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the messaging instance. </p>"
+        },
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of an app instance.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of an app instance.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which an app instance was created. In epoch milliseconds.</p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time an app instance was last updated. In epoch milliseconds.</p>"
+        }
+      },
+      "documentation": "<p>An instance of a Chime messaging application.</p>"
+    },
+    "AppInstanceAdmin": {
+      "type": "structure",
+      "members": {
+        "Admin": {
+          "shape": "Identity",
+          "documentation": "<p>The name and metadata of the app instance administrator.</p>"
+        },
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance administrator.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which an administrator was created.</p>"
+        }
+      },
+      "documentation": "<p>Promotes a user to the administrator role for the duration of an app instance.</p>"
+    },
+    "AppInstanceAdminList": {
+      "type": "list",
+      "member": {
+        "shape": "AppInstanceAdminSummary"
+      }
+    },
+    "AppInstanceAdminSummary": {
+      "type": "structure",
+      "members": {
+        "Admin": {
+          "shape": "Identity",
+          "documentation": "<p>The name and metadata of the app instance administrator.</p>"
+        }
+      },
+      "documentation": "<p>The identity and metadata of an administrator.</p>"
+    },
+    "AppInstanceDataType": {
+      "type": "string",
+      "enum": [
+        "Channel",
+        "ChannelMessage"
+      ]
+    },
+    "AppInstanceList": {
+      "type": "list",
+      "member": {
+        "shape": "AppInstanceSummary"
+      }
+    },
+    "AppInstanceRetentionSettings": {
+      "type": "structure",
+      "members": {
+        "ChannelRetentionSettings": {
+          "shape": "ChannelRetentionSettings",
+          "documentation": "<p>The length of time in days to retain a channel.</p>"
+        }
+      },
+      "documentation": "<p>The length of time in days to retain messages.</p>"
+    },
+    "AppInstanceStreamingConfiguration": {
+      "type": "structure",
+      "required": [
+        "AppInstanceDataType",
+        "ResourceArn"
+      ],
+      "members": {
+        "AppInstanceDataType": {
+          "shape": "AppInstanceDataType",
+          "documentation": "<p>The data type of the app instance.</p>"
+        },
+        "ResourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The resource ARN.</p>"
+        }
+      },
+      "documentation": "<p>The streaming configuration of an app instance.</p>"
+    },
+    "AppInstanceStreamingConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "AppInstanceStreamingConfiguration"
+      },
+      "max": 2,
+      "min": 1
+    },
+    "AppInstanceSummary": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The app instance ARN.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of the app instance summary.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the app instance summary.</p>"
+        }
+      },
+      "documentation": "<p>The summary data for an app instance.</p>"
+    },
+    "AppInstanceUser": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user.</p>"
+        },
+        "Name": {
+          "shape": "UserName",
+          "documentation": "<p>The name of the app instance user.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the app instance user was created.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the app instance user.</p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the app instance user was last updated.</p>"
+        }
+      },
+      "documentation": "<p>The app instance user.</p>"
+    },
+    "AppInstanceUserList": {
+      "type": "list",
+      "member": {
+        "shape": "AppInstanceUserSummary"
+      }
+    },
+    "AppInstanceUserMembershipSummary": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The type of channel summary, </p>"
+        },
+        "ReadMarkerTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a summary was last read.</p>"
+        }
+      },
+      "documentation": "<p>Lists the channels to which app instance users belong.</p>"
+    },
+    "AppInstanceUserSummary": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user.</p>"
+        },
+        "Name": {
+          "shape": "UserName",
+          "documentation": "<p>The name in an app instance user summary.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata in an app instance user summary.</p>"
+        }
+      },
+      "documentation": "<p>The app instance user summary data .</p>"
+    },
     "AreaCode": {
       "type": "string",
       "pattern": "^$|^[0-9]{3,3}$"
@@ -5591,11 +7666,398 @@
         "shape": "Capability"
       }
     },
+    "Channel": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of the channel.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "Mode": {
+          "shape": "ChannelMode",
+          "documentation": "<p>The mode of the channel.</p>"
+        },
+        "Privacy": {
+          "shape": "ChannelPrivacy",
+          "documentation": "<p>The channel's privacy setting, <code>PUBLIC</code> or <code>HIDDEN</code>.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the channel.</p>"
+        },
+        "CreatedBy": {
+          "shape": "Identity",
+          "documentation": "<p>The administrator who created the channel.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the administrator created the channel.</p>"
+        },
+        "LastMessageTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a member sent the last message in a session.</p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a channel was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Creates a channel.</p>"
+    },
+    "ChannelBan": {
+      "type": "structure",
+      "members": {
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>The member being banned from the channel.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel from which a member is being banned.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the ban was created.</p>"
+        },
+        "CreatedBy": {
+          "shape": "Identity",
+          "documentation": "<p>The parameter of the action.</p>"
+        }
+      },
+      "documentation": "<p>Bans a user from a channel.</p>"
+    },
+    "ChannelBanSummary": {
+      "type": "structure",
+      "members": {
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>The member being banned from a channel.</p>"
+        }
+      },
+      "documentation": "<p>The summary data for the channel ban.</p>"
+    },
+    "ChannelBanSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelBanSummary"
+      }
+    },
+    "ChannelMembership": {
+      "type": "structure",
+      "members": {
+        "InvitedBy": {
+          "shape": "Identity",
+          "documentation": "<p>The identifier of the member who invited another member. Taken from the message header.</p>"
+        },
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The membership type set for the channel member.</p>"
+        },
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>The data of the channel member.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member's channel.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the channel membership was created. </p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a channel membership was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Creates a channel member.</p>"
+    },
+    "ChannelMembershipForAppInstanceUserSummary": {
+      "type": "structure",
+      "members": {
+        "ChannelSummary": {
+          "shape": "ChannelSummary"
+        },
+        "AppInstanceUserMembershipSummary": {
+          "shape": "AppInstanceUserMembershipSummary",
+          "documentation": "<p>Returns the channel membership data for an app instance.</p>"
+        }
+      },
+      "documentation": "<p>Returns the channel membership summary data for an app instance.</p>"
+    },
+    "ChannelMembershipForAppInstanceUserSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelMembershipForAppInstanceUserSummary"
+      }
+    },
+    "ChannelMembershipSummary": {
+      "type": "structure",
+      "members": {
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>A member's summary data.</p>"
+        }
+      },
+      "documentation": "<p>The summary data of a channel membership.</p>"
+    },
+    "ChannelMembershipSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelMembershipSummary"
+      }
+    },
+    "ChannelMembershipType": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "HIDDEN"
+      ]
+    },
+    "ChannelMessage": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of a message.</p>"
+        },
+        "Content": {
+          "shape": "Content",
+          "documentation": "<p>The message content.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The message metadata.</p>"
+        },
+        "Type": {
+          "shape": "ChannelMessageType",
+          "documentation": "<p>The message type.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the message was created.</p>"
+        },
+        "LastEditedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a message was edited.</p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which a message was updated.</p>"
+        },
+        "Sender": {
+          "shape": "Identity",
+          "documentation": "<p>The message sender.</p>"
+        },
+        "Redacted": {
+          "shape": "NonNullableBoolean",
+          "documentation": "<p>Hides the content of a message. The message still exists on the back end, but this action only returns metadata.</p>"
+        },
+        "Persistence": {
+          "shape": "ChannelMessagePersistenceType"
+        }
+      },
+      "documentation": "<p>Creates a message in a channel.</p>"
+    },
+    "ChannelMessagePersistenceType": {
+      "type": "string",
+      "enum": [
+        "PERSISTENT",
+        "NON_PERSISTENT"
+      ]
+    },
+    "ChannelMessageSummary": {
+      "type": "structure",
+      "members": {
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of the message summary.</p>"
+        },
+        "Content": {
+          "shape": "Content",
+          "documentation": "<p>The content of the message summary.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the message summary.</p>"
+        },
+        "Type": {
+          "shape": "ChannelMessageType",
+          "documentation": "<p>The type of message summary.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the message summary was created.</p>"
+        },
+        "LastUpdatedTimestamp": {
+          "shape": "Timestamp"
+        },
+        "LastEditedTimestamp": {
+          "shape": "Timestamp"
+        },
+        "Sender": {
+          "shape": "Identity",
+          "documentation": "<p>The sender of the message summary.</p>"
+        },
+        "Redacted": {
+          "shape": "NonNullableBoolean",
+          "documentation": "<p>Redacts the content of a message summary.</p>"
+        }
+      },
+      "documentation": "<p>A summary of the messages in a channel.</p>"
+    },
+    "ChannelMessageSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelMessageSummary"
+      }
+    },
+    "ChannelMessageType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "CONTROL"
+      ]
+    },
+    "ChannelMode": {
+      "type": "string",
+      "enum": [
+        "UNRESTRICTED",
+        "RESTRICTED"
+      ]
+    },
+    "ChannelModeratedByAppInstanceUserSummary": {
+      "type": "structure",
+      "members": {
+        "ChannelSummary": {
+          "shape": "ChannelSummary"
+        }
+      },
+      "documentation": "<p>Returns the summary data for a moderated channel.</p>"
+    },
+    "ChannelModeratedByAppInstanceUserSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelModeratedByAppInstanceUserSummary"
+      }
+    },
+    "ChannelModerator": {
+      "type": "structure",
+      "members": {
+        "Moderator": {
+          "shape": "Identity",
+          "documentation": "<p>The moderator's data.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the moderator's channel.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the moderator was created.</p>"
+        },
+        "CreatedBy": {
+          "shape": "Identity",
+          "documentation": "<p>The member who created the moderator.</p>"
+        }
+      },
+      "documentation": "<p>Creates a moderator on a channel.</p>"
+    },
+    "ChannelModeratorSummary": {
+      "type": "structure",
+      "members": {
+        "Moderator": {
+          "shape": "Identity",
+          "documentation": "<p>The data for a moderator.</p>"
+        }
+      },
+      "documentation": "<p>Summary data of the moderators in a channel.</p>"
+    },
+    "ChannelModeratorSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelModeratorSummary"
+      }
+    },
+    "ChannelPrivacy": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE"
+      ]
+    },
+    "ChannelRetentionSettings": {
+      "type": "structure",
+      "members": {
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The time in days to retain a channel.</p>"
+        }
+      },
+      "documentation": "<p>The retention settings for a channel.</p>"
+    },
+    "ChannelSummary": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The parameter of the action.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel summary.</p>"
+        },
+        "Mode": {
+          "shape": "ChannelMode",
+          "documentation": "<p>The summary mode of the channel.</p>"
+        },
+        "Privacy": {
+          "shape": "ChannelPrivacy",
+          "documentation": "<p>The privacy setting of the channel being summarized, <code>PUBLIC</code> or <code>HIDDEN</code>.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the channel summary.</p>"
+        },
+        "LastMessageTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the last message in a channel was sent.</p>"
+        }
+      },
+      "documentation": "<p>The summary data for a channel.</p>"
+    },
+    "ChannelSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ChannelSummary"
+      }
+    },
+    "ChimeArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 5,
+      "pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
     "ClientRequestToken": {
       "type": "string",
       "max": 64,
       "min": 2,
       "pattern": "[-_a-zA-Z0-9]*",
+      "sensitive": true
+    },
+    "Content": {
+      "type": "string",
+      "max": 4096,
+      "min": 0,
+      "pattern": "[\\s\\S]*",
       "sensitive": true
     },
     "ConversationRetentionSettings": {
@@ -5641,6 +8103,110 @@
       "members": {
         "Account": {
           "shape": "Account"
+        }
+      }
+    },
+    "CreateAppInstanceAdminRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceAdminArn",
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceAdminArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the administrator of the current app instance.</p>"
+        },
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "CreateAppInstanceAdminResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceAdmin": {
+          "shape": "Identity",
+          "documentation": "<p>The name and ARN of the admin for the app instance.</p>"
+        },
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the of the admin for the app instance.</p>"
+        }
+      }
+    },
+    "CreateAppInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of the app instance.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the app instance. Limited to a 1KB string in UTF-8.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The <code>ClientRequestToken</code> of the app instance.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateAppInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the app instance.</p>"
+        }
+      }
+    },
+    "CreateAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn",
+        "AppInstanceUserId",
+        "Name",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance request.</p>"
+        },
+        "AppInstanceUserId": {
+          "shape": "UserId",
+          "documentation": "<p>The user ID of the app instance.</p>"
+        },
+        "Name": {
+          "shape": "UserName",
+          "documentation": "<p>The user's name.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The request's metadata. Limited to a 1KB string in UTF-8.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The token assigned to the user requesting an app instance.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The user's ARN.</p>"
         }
       }
     },
@@ -5693,7 +8259,7 @@
       "members": {
         "ExternalUserId": {
           "shape": "ExternalUserIdType",
-          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p>"
+          "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p> <p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>"
         },
         "Tags": {
           "shape": "AttendeeTagList",
@@ -5746,6 +8312,154 @@
         "Bot": {
           "shape": "Bot",
           "documentation": "<p>The bot details.</p>"
+        }
+      }
+    },
+    "CreateChannelBanRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the ban request.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member being banned.</p>"
+        }
+      }
+    },
+    "CreateChannelBanResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the response to the ban request.</p>"
+        },
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.</p>"
+        }
+      }
+    },
+    "CreateChannelMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn",
+        "Type"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel to which you're adding users.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member you want to add to the channel.</p>"
+        },
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>"
+        }
+      }
+    },
+    "CreateChannelMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "Member": {
+          "shape": "Identity",
+          "documentation": "<p>The ARN and metadata of the member being added.</p>"
+        }
+      }
+    },
+    "CreateChannelModeratorRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "ChannelModeratorArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "ChannelModeratorArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the moderator.</p>"
+        }
+      }
+    },
+    "CreateChannelModeratorResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "ChannelModerator": {
+          "shape": "Identity",
+          "documentation": "<p>The ARNs of the channel and the moderator.</p>"
+        }
+      }
+    },
+    "CreateChannelRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn",
+        "Name",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel request.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of the channel.</p>"
+        },
+        "Mode": {
+          "shape": "ChannelMode",
+          "documentation": "<p>The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.</p>"
+        },
+        "Privacy": {
+          "shape": "ChannelPrivacy",
+          "documentation": "<p>The channel's privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren't discoverable by users outside the channel. Public channels are discoverable by anyone in the app instance.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the creation request. Limited to 1KB and UTF-8.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The client token for the request. An <code>Idempotency</code> token.</p>",
+          "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "CreateChannelResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
         }
       }
     },
@@ -6300,6 +9014,69 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteAppInstanceAdminRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceAdminArn",
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceAdminArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance's administrator.</p>",
+          "location": "uri",
+          "locationName": "appInstanceAdminArn"
+        },
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "DeleteAppInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "DeleteAppInstanceStreamingConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the streaming configurations being deleted.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "DeleteAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceUserArn"
+      ],
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the user request being deleted.</p>",
+          "location": "uri",
+          "locationName": "appInstanceUserArn"
+        }
+      }
+    },
     "DeleteAttendeeRequest": {
       "type": "structure",
       "required": [
@@ -6318,6 +9095,104 @@
           "documentation": "<p>The Amazon Chime SDK attendee ID.</p>",
           "location": "uri",
           "locationName": "attendeeId"
+        }
+      }
+    },
+    "DeleteChannelBanRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel from which the app instance user was banned.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user that you want to reinstate.</p>",
+          "location": "uri",
+          "locationName": "memberArn"
+        }
+      }
+    },
+    "DeleteChannelMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel from which you want to remove the user.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member that you're removing from the channel.</p>",
+          "location": "uri",
+          "locationName": "memberArn"
+        }
+      }
+    },
+    "DeleteChannelMessageRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MessageId"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of the message being deleted.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        }
+      }
+    },
+    "DeleteChannelModeratorRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "ChannelModeratorArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "ChannelModeratorArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the moderator being deleted.</p>",
+          "location": "uri",
+          "locationName": "channelModeratorArn"
+        }
+      }
+    },
+    "DeleteChannelRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel being deleted.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
         }
       }
     },
@@ -6585,6 +9460,255 @@
         }
       }
     },
+    "DescribeAppInstanceAdminRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceAdminArn",
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceAdminArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance administrator.</p>",
+          "location": "uri",
+          "locationName": "appInstanceAdminArn"
+        },
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "DescribeAppInstanceAdminResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceAdmin": {
+          "shape": "AppInstanceAdmin",
+          "documentation": "<p>The ARN and name of the app instance user, the ARN of the app instance, and the created and last-updated timestamps. All timestamps use epoch milliseconds.</p>"
+        }
+      }
+    },
+    "DescribeAppInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "DescribeAppInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstance": {
+          "shape": "AppInstance",
+          "documentation": "<p>The ARN, metadata, created and last-updated timestamps, and the name of the app instance. All timestamps use epoch milliseconds.</p>"
+        }
+      }
+    },
+    "DescribeAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceUserArn"
+      ],
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user.</p>",
+          "location": "uri",
+          "locationName": "appInstanceUserArn"
+        }
+      }
+    },
+    "DescribeAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUser": {
+          "shape": "AppInstanceUser",
+          "documentation": "<p>The name of the app instance user.</p>"
+        }
+      }
+    },
+    "DescribeChannelBanRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel from which the user is banned.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member being banned.</p>",
+          "location": "uri",
+          "locationName": "memberArn"
+        }
+      }
+    },
+    "DescribeChannelBanResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelBan": {
+          "shape": "ChannelBan",
+          "documentation": "<p>The the details of the ban.</p>"
+        }
+      }
+    },
+    "DescribeChannelMembershipForAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "AppInstanceUserArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel to which the user belongs.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the user in a channel.</p>",
+          "location": "querystring",
+          "locationName": "app-instance-user-arn"
+        }
+      }
+    },
+    "DescribeChannelMembershipForAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelMembership": {
+          "shape": "ChannelMembershipForAppInstanceUserSummary",
+          "documentation": "<p>The channel to which a user belongs.</p>"
+        }
+      }
+    },
+    "DescribeChannelMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member.</p>",
+          "location": "uri",
+          "locationName": "memberArn"
+        }
+      }
+    },
+    "DescribeChannelMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelMembership": {
+          "shape": "ChannelMembership",
+          "documentation": "<p>The details of the membership.</p>"
+        }
+      }
+    },
+    "DescribeChannelModeratedByAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "AppInstanceUserArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the moderated channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user in the moderated channel.</p>",
+          "location": "querystring",
+          "locationName": "app-instance-user-arn"
+        }
+      }
+    },
+    "DescribeChannelModeratedByAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "Channel": {
+          "shape": "ChannelModeratedByAppInstanceUserSummary",
+          "documentation": "<p>The moderated channel.</p>"
+        }
+      }
+    },
+    "DescribeChannelModeratorRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "ChannelModeratorArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "ChannelModeratorArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel moderator.</p>",
+          "location": "uri",
+          "locationName": "channelModeratorArn"
+        }
+      }
+    },
+    "DescribeChannelModeratorResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelModerator": {
+          "shape": "ChannelModerator",
+          "documentation": "<p>The details of the channel moderator.</p>"
+        }
+      }
+    },
+    "DescribeChannelRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        }
+      }
+    },
+    "DescribeChannelResponse": {
+      "type": "structure",
+      "members": {
+        "Channel": {
+          "shape": "Channel",
+          "documentation": "<p>The channel details.</p>"
+        }
+      }
+    },
     "DisassociatePhoneNumberFromUserRequest": {
       "type": "structure",
       "required": [
@@ -6849,6 +9973,56 @@
         }
       }
     },
+    "GetAppInstanceRetentionSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "GetAppInstanceRetentionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceRetentionSettings": {
+          "shape": "AppInstanceRetentionSettings",
+          "documentation": "<p>The retention settings for the app instance.</p>"
+        },
+        "InitiateDeletionTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp representing the time at which the specified items are retained, in Epoch Seconds.</p>"
+        }
+      }
+    },
+    "GetAppInstanceStreamingConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance. </p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        }
+      }
+    },
+    "GetAppInstanceStreamingConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceStreamingConfigurations": {
+          "shape": "AppInstanceStreamingConfigurationList",
+          "documentation": "<p>The streaming settings.</p>"
+        }
+      }
+    },
     "GetAttendeeRequest": {
       "type": "structure",
       "required": [
@@ -6906,6 +10080,36 @@
         "Bot": {
           "shape": "Bot",
           "documentation": "<p>The chat bot details.</p>"
+        }
+      }
+    },
+    "GetChannelMessageRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MessageId"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of the message.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        }
+      }
+    },
+    "GetChannelMessageResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelMessage": {
+          "shape": "ChannelMessage",
+          "documentation": "<p>The details of and content in the message.</p>"
         }
       }
     },
@@ -6972,6 +10176,19 @@
         "Meeting": {
           "shape": "Meeting",
           "documentation": "<p>The Amazon Chime SDK meeting information.</p>"
+        }
+      }
+    },
+    "GetMessagingSessionEndpointRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetMessagingSessionEndpointResponse": {
+      "type": "structure",
+      "members": {
+        "Endpoint": {
+          "shape": "MessagingSessionEndpoint",
+          "documentation": "<p>The endpoint returned in the response.</p>"
         }
       }
     },
@@ -7461,6 +10678,20 @@
       "type": "string",
       "pattern": "[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}"
     },
+    "Identity": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN in an Identity.</p>"
+        },
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name in an Identity.</p>"
+        }
+      },
+      "documentation": "<p>The ARN and name of a user.</p>"
+    },
     "Integer": {
       "type": "integer"
     },
@@ -7600,6 +10831,122 @@
         }
       }
     },
+    "ListAppInstanceAdminsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of administrators that you want to return.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of administrators is reached.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListAppInstanceAdminsResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>"
+        },
+        "AppInstanceAdmins": {
+          "shape": "AppInstanceAdminList",
+          "documentation": "<p>The information for each administrator.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of administrators is reached.</p>"
+        }
+      }
+    },
+    "ListAppInstanceUsersRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "querystring",
+          "locationName": "app-instance-arn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of requests that you want returned.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListAppInstanceUsersResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>"
+        },
+        "AppInstanceUsers": {
+          "shape": "AppInstanceUserList",
+          "documentation": "<p>The information for each of the requested app instance users.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>"
+        }
+      }
+    },
+    "ListAppInstancesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of app instances that you want to return.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API requests until you reach the maximum number of app instances.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListAppInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstances": {
+          "shape": "AppInstanceList",
+          "documentation": "<p>The information for each app instance.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API requests until the maximum number of app instances is reached.</p>"
+        }
+      }
+    },
     "ListAttendeeTagsRequest": {
       "type": "structure",
       "required": [
@@ -7705,6 +11052,319 @@
         "NextToken": {
           "shape": "String",
           "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListChannelBansRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of bans that you want returned.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested bans are returned.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelBansResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested bans are returned.</p>"
+        },
+        "ChannelBans": {
+          "shape": "ChannelBanSummaryList",
+          "documentation": "<p>The information for each requested ban.</p>"
+        }
+      }
+    },
+    "ListChannelMembershipsForAppInstanceUserRequest": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance users</p>",
+          "location": "querystring",
+          "locationName": "app-instance-user-arn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of users that you want returned. </p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of channel memberships is reached.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelMembershipsForAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelMemberships": {
+          "shape": "ChannelMembershipForAppInstanceUserSummaryList",
+          "documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>"
+        }
+      }
+    },
+    "ListChannelMembershipsRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The maximum number of channel memberships that you want returned.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>",
+          "location": "querystring",
+          "locationName": "type"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of channel memberships that you want returned.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested channel memberships are returned..</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelMembershipsResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "ChannelMemberships": {
+          "shape": "ChannelMembershipSummaryList",
+          "documentation": "<p>The information for the requested channel memberships.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested channel memberships are returned.</p>"
+        }
+      }
+    },
+    "ListChannelMessagesRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>The order in which you want messages sorted. Default is Descending, based on time created.</p>",
+          "location": "querystring",
+          "locationName": "sort-order"
+        },
+        "NotBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>The initial or starting time stamp for your requested messages. </p>",
+          "location": "querystring",
+          "locationName": "not-before"
+        },
+        "NotAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>The final or ending time stamp for your requested messages.</p>",
+          "location": "querystring",
+          "locationName": "not-after"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of messages that you want returned.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested messages are returned.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel containing the requested messages.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested messages are returned.</p>"
+        },
+        "ChannelMessages": {
+          "shape": "ChannelMessageSummaryList",
+          "documentation": "<p>The information about and content of each requested message.</p>"
+        }
+      }
+    },
+    "ListChannelModeratorsRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of moderators that you want returned.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested moderators are returned.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelModeratorsResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested moderators are returned.</p>"
+        },
+        "ChannelModerators": {
+          "shape": "ChannelModeratorSummaryList",
+          "documentation": "<p>The information about and names of each moderator.</p>"
+        }
+      }
+    },
+    "ListChannelsModeratedByAppInstanceUserRequest": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the user in the moderated channel.</p>",
+          "location": "querystring",
+          "locationName": "app-instance-user-arn"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of channels in the request.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelsModeratedByAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "Channels": {
+          "shape": "ChannelModeratedByAppInstanceUserSummaryList",
+          "documentation": "<p>The moderated channels in the request.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>"
+        }
+      }
+    },
+    "ListChannelsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "querystring",
+          "locationName": "app-instance-arn"
+        },
+        "Privacy": {
+          "shape": "ChannelPrivacy",
+          "documentation": "<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an app instance administrator can retrieve private channels.</p>",
+          "location": "querystring",
+          "locationName": "privacy"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of channels that you want to return.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token passed by previous API calls until all requested channels are returned.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListChannelsResponse": {
+      "type": "structure",
+      "members": {
+        "Channels": {
+          "shape": "ChannelSummaryList",
+          "documentation": "<p>The information about each channel.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned from previous API requests until the number of channels is reached.</p>"
         }
       }
     },
@@ -8239,6 +11899,11 @@
       "type": "structure",
       "members": {}
     },
+    "MaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
     "MediaPlacement": {
       "type": "structure",
       "members": {
@@ -8410,9 +12075,53 @@
       },
       "max": 50
     },
+    "MessageId": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[-_a-zA-Z0-9]*"
+    },
+    "MessagingSessionEndpoint": {
+      "type": "structure",
+      "members": {
+        "Url": {
+          "shape": "UrlType",
+          "documentation": "<p>The URL of a meeting session endpoint.</p>"
+        }
+      },
+      "documentation": "<p>The endpoint of a meeting session.</p>"
+    },
+    "Metadata": {
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": ".*",
+      "sensitive": true
+    },
+    "NextToken": {
+      "type": "string",
+      "max": 2048,
+      "min": 0,
+      "pattern": ".*",
+      "sensitive": true
+    },
     "NextTokenString": {
       "type": "string",
       "max": 65535
+    },
+    "NonEmptyContent": {
+      "type": "string",
+      "max": 4096,
+      "min": 1,
+      "pattern": "[\\s\\S]*",
+      "sensitive": true
+    },
+    "NonEmptyResourceName": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*",
+      "sensitive": true
     },
     "NonEmptyString": {
       "type": "string",
@@ -8430,6 +12139,9 @@
         "shape": "String"
       },
       "min": 1
+    },
+    "NonNullableBoolean": {
+      "type": "boolean"
     },
     "NotificationTarget": {
       "type": "string",
@@ -8906,6 +12618,66 @@
         "shape": "ProxySession"
       }
     },
+    "PutAppInstanceRetentionSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn",
+        "AppInstanceRetentionSettings"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        },
+        "AppInstanceRetentionSettings": {
+          "shape": "AppInstanceRetentionSettings",
+          "documentation": "<p>The time in days to retain data. Data type: number.</p>"
+        }
+      }
+    },
+    "PutAppInstanceRetentionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceRetentionSettings": {
+          "shape": "AppInstanceRetentionSettings",
+          "documentation": "<p>The time in days to retain data. Data type: number.</p>"
+        },
+        "InitiateDeletionTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the API deletes data.</p>"
+        }
+      }
+    },
+    "PutAppInstanceStreamingConfigurationsRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn",
+        "AppInstanceStreamingConfigurations"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        },
+        "AppInstanceStreamingConfigurations": {
+          "shape": "AppInstanceStreamingConfigurationList",
+          "documentation": "<p>The streaming configurations set for an app instance.</p>"
+        }
+      }
+    },
+    "PutAppInstanceStreamingConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceStreamingConfigurations": {
+          "shape": "AppInstanceStreamingConfigurationList",
+          "documentation": "<p>The streaming configurations of an app instance.</p>"
+        }
+      }
+    },
     "PutEventsConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -9201,6 +12973,40 @@
         }
       }
     },
+    "RedactChannelMessageRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MessageId"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel containing the messages that you want to redact.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of the message being redacted.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        }
+      }
+    },
+    "RedactChannelMessageResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel containing the messages that you want to redact.</p>"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID of the message being redacted.</p>"
+        }
+      }
+    },
     "RedactConversationMessageRequest": {
       "type": "structure",
       "required": [
@@ -9331,6 +13137,13 @@
           "documentation": "<p>The user details and new personal meeting PIN.</p>"
         }
       }
+    },
+    "ResourceName": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*",
+      "sensitive": true
     },
     "RestorePhoneNumberRequest": {
       "type": "structure",
@@ -9516,6 +13329,58 @@
         "E164PhoneNumbers": {
           "shape": "E164PhoneNumberList",
           "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        }
+      }
+    },
+    "SendChannelMessageRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "Content",
+        "Type",
+        "Persistence",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "Content": {
+          "shape": "NonEmptyContent",
+          "documentation": "<p>The content of the message.</p>"
+        },
+        "Type": {
+          "shape": "ChannelMessageType",
+          "documentation": "<p>The type of message, <code>STANDARD</code> or <code>CONTROL</code>.</p>"
+        },
+        "Persistence": {
+          "shape": "ChannelMessagePersistenceType",
+          "documentation": "<p>Boolean that controls whether the message is persisted on the back end. Required.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The optional metadata for each message. </p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The <code>Idempotency</code> token for each client request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "SendChannelMessageResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID string assigned to each message. </p>"
         }
       }
     },
@@ -9708,6 +13573,13 @@
       "enum": [
         "ToPhoneNumber",
         "RequestUriHostname"
+      ]
+    },
+    "SortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING"
       ]
     },
     "StreamingConfiguration": {
@@ -9936,6 +13808,9 @@
       },
       "documentation": "<p>The termination health details, including the source IP address and timestamp of the last successful SIP <code>OPTIONS</code> message from your SIP infrastructure.</p>"
     },
+    "Timestamp": {
+      "type": "timestamp"
+    },
     "TollFreePrefix": {
       "type": "string",
       "max": 3,
@@ -10053,6 +13928,70 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateAppInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceArn",
+        "Name"
+      ],
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>",
+          "location": "uri",
+          "locationName": "appInstanceArn"
+        },
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name that you want to change.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata that you want to change.</p>"
+        }
+      }
+    },
+    "UpdateAppInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance.</p>"
+        }
+      }
+    },
+    "UpdateAppInstanceUserRequest": {
+      "type": "structure",
+      "required": [
+        "AppInstanceUserArn",
+        "Name"
+      ],
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user.</p>",
+          "location": "uri",
+          "locationName": "appInstanceUserArn"
+        },
+        "Name": {
+          "shape": "UserName",
+          "documentation": "<p>The name of the app instance user.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the app instance user.</p>"
+        }
+      }
+    },
+    "UpdateAppInstanceUserResponse": {
+      "type": "structure",
+      "members": {
+        "AppInstanceUserArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the app instance user.</p>"
+        }
+      }
+    },
     "UpdateBotRequest": {
       "type": "structure",
       "required": [
@@ -10084,6 +14023,108 @@
         "Bot": {
           "shape": "Bot",
           "documentation": "<p>The updated bot details.</p>"
+        }
+      }
+    },
+    "UpdateChannelMessageRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MessageId"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID string of the message being updated.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        },
+        "Content": {
+          "shape": "Content",
+          "documentation": "<p>The content of the message being updated.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the message being updated.</p>"
+        }
+      }
+    },
+    "UpdateChannelMessageResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>The ID string of the message being updated.</p>"
+        }
+      }
+    },
+    "UpdateChannelReadMarkerRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        }
+      }
+    },
+    "UpdateChannelReadMarkerResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
+        }
+      }
+    },
+    "UpdateChannelRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "Name",
+        "Mode"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "Name": {
+          "shape": "NonEmptyResourceName",
+          "documentation": "<p>The name of the channel.</p>"
+        },
+        "Mode": {
+          "shape": "ChannelMode",
+          "documentation": "<p>The mode of the update request.</p>"
+        },
+        "Metadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the channel.</p>"
+        }
+      }
+    },
+    "UpdateChannelResponse": {
+      "type": "structure",
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel.</p>"
         }
       }
     },
@@ -10525,6 +14566,10 @@
       "type": "string",
       "max": 4096
     },
+    "UrlType": {
+      "type": "string",
+      "max": 4096
+    },
     "User": {
       "type": "structure",
       "required": [
@@ -10617,6 +14662,13 @@
         "shape": "UserError"
       }
     },
+    "UserId": {
+      "type": "string",
+      "max": 50,
+      "min": 1,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9\\:\\-\\_\\.\\@]{3,50}[A-Za-z0-9]",
+      "sensitive": true
+    },
     "UserIdList": {
       "type": "list",
       "member": {
@@ -10629,6 +14681,13 @@
       "member": {
         "shape": "User"
       }
+    },
+    "UserName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": ".*\\S.*",
+      "sensitive": true
     },
     "UserSettings": {
       "type": "structure",
@@ -10780,5 +14839,5 @@
       "documentation": "<p>The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.</p>"
     }
   },
-  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
 }

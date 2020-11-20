@@ -10,7 +10,7 @@
     "serviceId": "Service Catalog AppRegistry",
     "signatureVersion": "v4",
     "signingName": "servicecatalog",
-    "uid": "AWS242AppRegistry"
+    "uid": "AWS242AppRegistry-2020-06-24"
   },
   "operations": {
     "AssociateAttributeGroup": {
@@ -39,7 +39,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Associates an attribute group with an application to augment the application's metadata with the group's attributes. This way applications can be described with user-defined details which are machine-readable (e.g. for third-party integrations).</p>"
+      "documentation": "<p>Associates an attribute group with an application to augment the application's metadata with the group's attributes. This feature enables applications to be described with user-defined details that are machine-readable, such as third-party integrations.</p>"
     },
     "AssociateResource": {
       "name": "AssociateResource",
@@ -122,7 +122,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a new attribute group as a container for user-defined attributes. This approach enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.</p>"
+      "documentation": "<p>Creates a new attribute group as a container for user-defined attributes. This feature enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.</p>"
     },
     "DeleteApplication": {
       "name": "DeleteApplication",
@@ -147,7 +147,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Delete an application, specified either by its application ID or name.</p>"
+      "documentation": "<p>Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.</p>"
     },
     "DeleteAttributeGroup": {
       "name": "DeleteAttributeGroup",
@@ -197,7 +197,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts AssociateAttributeGroup.</p>"
+      "documentation": "<p>Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts <code>AssociateAttributeGroup</code>.</p>"
     },
     "DisassociateResource": {
       "name": "DisassociateResource",
@@ -244,7 +244,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.</p>"
+      "documentation": "<p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>"
     },
     "GetAttributeGroup": {
       "name": "GetAttributeGroup",
@@ -269,7 +269,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Retrieves an attribute group, either by its name or its ID.</p>"
+      "documentation": "<p>Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.</p>"
     },
     "ListApplications": {
       "name": "ListApplications",
@@ -564,6 +564,7 @@
         },
         "resourceType": {
           "shape": "ResourceType",
+          "documentation": "<p>The type of resource of which the application will be associated.</p>",
           "location": "uri",
           "locationName": "resourceType"
         },
@@ -601,7 +602,7 @@
         },
         "arn": {
           "shape": "AttributeGroupArn",
-          "documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
         },
         "name": {
           "shape": "Name",
@@ -663,7 +664,7 @@
         },
         "arn": {
           "shape": "AttributeGroupArn",
-          "documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
         },
         "name": {
           "shape": "Name",
@@ -717,7 +718,7 @@
         },
         "clientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.</p>",
+          "documentation": "<p>A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.</p>",
           "idempotencyToken": true
         }
       }
@@ -727,7 +728,7 @@
       "members": {
         "application": {
           "shape": "Application",
-          "documentation": "<p>The name or ID of the application.</p>"
+          "documentation": "<p>Information about the application.</p>"
         }
       }
     },
@@ -757,7 +758,7 @@
         },
         "clientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.</p>",
+          "documentation": "<p>A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.</p>",
           "idempotencyToken": true
         }
       }
@@ -767,7 +768,7 @@
       "members": {
         "attributeGroup": {
           "shape": "AttributeGroup",
-          "documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>"
+          "documentation": "<p>Information about the attribute group.</p>"
         }
       }
     },
@@ -790,7 +791,7 @@
       "members": {
         "application": {
           "shape": "ApplicationSummary",
-          "documentation": "<p>The name or ID of the application.</p>"
+          "documentation": "<p>Information about the deleted application.</p>"
         }
       }
     },
@@ -813,7 +814,7 @@
       "members": {
         "attributeGroup": {
           "shape": "AttributeGroupSummary",
-          "documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>"
+          "documentation": "<p>Information about the deleted attribute group.</p>"
         }
       }
     },
@@ -847,11 +848,11 @@
       "members": {
         "applicationArn": {
           "shape": "ApplicationArn",
-          "documentation": "<p>The Amazon resource name (ARN) of the application that was augmented with attributes.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the application.</p>"
         },
         "attributeGroupArn": {
           "shape": "AttributeGroupArn",
-          "documentation": "<p>The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group.</p>"
         }
       }
     },
@@ -871,13 +872,13 @@
         },
         "resourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of the resource that's being disassociated.</p>",
+          "documentation": "<p>The type of the resource that is being disassociated.</p>",
           "location": "uri",
           "locationName": "resourceType"
         },
         "resource": {
           "shape": "ResourceSpecifier",
-          "documentation": "<p>The name or ID of the resource of which the application will be associated.</p>",
+          "documentation": "<p>The name or ID of the resource.</p>",
           "location": "uri",
           "locationName": "resource"
         }
@@ -888,7 +889,7 @@
       "members": {
         "applicationArn": {
           "shape": "ApplicationArn",
-          "documentation": "<p>The Amazon resource name (ARN) of the application that was augmented with attributes.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the application.</p>"
         },
         "resourceArn": {
           "shape": "Arn",
@@ -943,7 +944,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>Key-value pairs you can use to associate with the application.</p>"
+          "documentation": "<p>Key-value pairs associated with the application.</p>"
         }
       }
     },
@@ -966,11 +967,11 @@
       "members": {
         "id": {
           "shape": "AttributeGroupId",
-          "documentation": "<p>The identifier of the application.</p>"
+          "documentation": "<p>The identifier of the attribute group.</p>"
         },
         "arn": {
           "shape": "AttributeGroupArn",
-          "documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group across services.</p>"
         },
         "name": {
           "shape": "Name",
@@ -994,7 +995,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>Key-value pairs you can use to associate with the attribute group.</p>"
+          "documentation": "<p>Key-value pairs associated with the attribute group.</p>"
         }
       }
     },
@@ -1021,7 +1022,7 @@
       "members": {
         "applications": {
           "shape": "ApplicationSummaries",
-          "documentation": "<p>The name or ID of the application.</p>"
+          "documentation": "<p>This list of applications.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1101,7 +1102,7 @@
       "members": {
         "resources": {
           "shape": "Resources",
-          "documentation": "<p>The name or ID of the resource of which the application will be associated.</p>"
+          "documentation": "<p>Information about the resources.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1132,7 +1133,7 @@
       "members": {
         "attributeGroups": {
           "shape": "AttributeGroupSummaries",
-          "documentation": "<p>A list of attribute group IDs.</p>"
+          "documentation": "<p>This list of attribute groups.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1166,7 +1167,7 @@
         },
         "arn": {
           "shape": "StackArn",
-          "documentation": "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+          "documentation": "<p>The Amazon resource name (ARN) that specifies the resource across services.</p>"
         }
       },
       "documentation": "<p>Information about the resource.</p>"
@@ -1227,17 +1228,17 @@
       "members": {
         "application": {
           "shape": "ApplicationSpecifier",
-          "documentation": "<p>The name or ID of the application. The name must be unique in the region in which you are updating the attribute group.</p>",
+          "documentation": "<p>The name or ID of the application that will be updated.</p>",
           "location": "uri",
           "locationName": "application"
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The anme of the application. The name must be unique in the region in which you are creating the application.</p>"
+          "documentation": "<p>The new name of the application. The name must be unique in the region in which you are updating the application.</p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p>The description of the application.</p>"
+          "documentation": "<p>The new description of the application.</p>"
         }
       }
     },
@@ -1246,7 +1247,7 @@
       "members": {
         "application": {
           "shape": "Application",
-          "documentation": "<p>The name or ID of the application.</p>"
+          "documentation": "<p>The updated information of the application.</p>"
         }
       }
     },
@@ -1281,7 +1282,7 @@
       "members": {
         "attributeGroup": {
           "shape": "AttributeGroup",
-          "documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>"
+          "documentation": "<p>The updated information of the attribute group.</p>"
         }
       }
     }

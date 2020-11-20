@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "This release makes tag value a required attribute of the tag's key-value pair."
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "The Amazon Chime SDK for messaging provides the building blocks needed to build chat and other real-time collaboration features."
+    },
+    {
+        "type": "feature",
+        "category": "CloudHSMV2",
+        "description": "Added managed backup retention, a feature that enables customers to retain backups for a configurable period after which CloudHSM service will automatically delete them."
+    },
+    {
+        "type": "feature",
+        "category": "CodeGuruReviewer",
+        "description": "This release supports tagging repository association resources in Amazon CodeGuru Reviewer."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentity",
+        "description": "Added SDK pagination support for ListIdentityPools"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds a set of Amazon Connect APIs to programmatically control instance creation, modification, description and deletion."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "This release adds support for PER TOPIC PER PARTITION monitoring on AWS MSK clusters."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "The Amazon Macie API now provides S3 bucket metadata that indicates whether any one-time or recurring classification jobs are configured to analyze data in a bucket."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Add new documentation regarding automatically generated Content-MD5 headers when using the SDK or CLI."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalogAppRegistry",
+        "description": "AWS Service Catalog AppRegistry Documentation update"
+    }
+]

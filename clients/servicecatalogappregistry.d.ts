@@ -12,11 +12,11 @@ declare class ServiceCatalogAppRegistry extends Service {
   constructor(options?: ServiceCatalogAppRegistry.Types.ClientConfiguration)
   config: Config & ServiceCatalogAppRegistry.Types.ClientConfiguration;
   /**
-   * Associates an attribute group with an application to augment the application's metadata with the group's attributes. This way applications can be described with user-defined details which are machine-readable (e.g. for third-party integrations).
+   * Associates an attribute group with an application to augment the application's metadata with the group's attributes. This feature enables applications to be described with user-defined details that are machine-readable, such as third-party integrations.
    */
   associateAttributeGroup(params: ServiceCatalogAppRegistry.Types.AssociateAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse, AWSError>;
   /**
-   * Associates an attribute group with an application to augment the application's metadata with the group's attributes. This way applications can be described with user-defined details which are machine-readable (e.g. for third-party integrations).
+   * Associates an attribute group with an application to augment the application's metadata with the group's attributes. This feature enables applications to be described with user-defined details that are machine-readable, such as third-party integrations.
    */
   associateAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse, AWSError>;
   /**
@@ -36,19 +36,19 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   createApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.CreateApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates a new attribute group as a container for user-defined attributes. This approach enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
+   * Creates a new attribute group as a container for user-defined attributes. This feature enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
    */
   createAttributeGroup(params: ServiceCatalogAppRegistry.Types.CreateAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse, AWSError>;
   /**
-   * Creates a new attribute group as a container for user-defined attributes. This approach enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
+   * Creates a new attribute group as a container for user-defined attributes. This feature enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
    */
   createAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse, AWSError>;
   /**
-   * Delete an application, specified either by its application ID or name.
+   * Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
    */
   deleteApplication(params: ServiceCatalogAppRegistry.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Delete an application, specified either by its application ID or name.
+   * Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
    */
   deleteApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteApplicationResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   getApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetApplicationResponse, AWSError>;
   /**
-   * Retrieves an attribute group, either by its name or its ID.
+   * Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
    */
   getAttributeGroup(params: ServiceCatalogAppRegistry.Types.GetAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
   /**
-   * Retrieves an attribute group, either by its name or its ID.
+   * Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
    */
   getAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
   /**
@@ -227,6 +227,9 @@ declare namespace ServiceCatalogAppRegistry {
      * The name or ID of the application.
      */
     application: ApplicationSpecifier;
+    /**
+     * The type of resource of which the application will be associated.
+     */
     resourceType: ResourceType;
     /**
      * The name or ID of the resource of which the application will be associated.
@@ -250,7 +253,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     id?: AttributeGroupId;
     /**
-     * The Amazon resource name (ARN) that specifies the application across services.
+     * The Amazon resource name (ARN) that specifies the attribute group across services.
      */
     arn?: AttributeGroupArn;
     /**
@@ -285,7 +288,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     id?: AttributeGroupId;
     /**
-     * The Amazon resource name (ARN) that specifies the application across services.
+     * The Amazon resource name (ARN) that specifies the attribute group across services.
      */
     arn?: AttributeGroupArn;
     /**
@@ -321,13 +324,13 @@ declare namespace ServiceCatalogAppRegistry {
      */
     tags?: Tags;
     /**
-     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.
+     * A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.
      */
     clientToken: ClientToken;
   }
   export interface CreateApplicationResponse {
     /**
-     * The name or ID of the application.
+     * Information about the application.
      */
     application?: Application;
   }
@@ -349,13 +352,13 @@ declare namespace ServiceCatalogAppRegistry {
      */
     tags?: Tags;
     /**
-     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.
+     * A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.
      */
     clientToken: ClientToken;
   }
   export interface CreateAttributeGroupResponse {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     * Information about the attribute group.
      */
     attributeGroup?: AttributeGroup;
   }
@@ -367,7 +370,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface DeleteApplicationResponse {
     /**
-     * The name or ID of the application.
+     * Information about the deleted application.
      */
     application?: ApplicationSummary;
   }
@@ -379,7 +382,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface DeleteAttributeGroupResponse {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     * Information about the deleted attribute group.
      */
     attributeGroup?: AttributeGroupSummary;
   }
@@ -396,11 +399,11 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface DisassociateAttributeGroupResponse {
     /**
-     * The Amazon resource name (ARN) of the application that was augmented with attributes.
+     * The Amazon resource name (ARN) that specifies the application.
      */
     applicationArn?: ApplicationArn;
     /**
-     * The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.
+     * The Amazon resource name (ARN) that specifies the attribute group.
      */
     attributeGroupArn?: AttributeGroupArn;
   }
@@ -410,17 +413,17 @@ declare namespace ServiceCatalogAppRegistry {
      */
     application: ApplicationSpecifier;
     /**
-     * The type of the resource that's being disassociated.
+     * The type of the resource that is being disassociated.
      */
     resourceType: ResourceType;
     /**
-     * The name or ID of the resource of which the application will be associated.
+     * The name or ID of the resource.
      */
     resource: ResourceSpecifier;
   }
   export interface DisassociateResourceResponse {
     /**
-     * The Amazon resource name (ARN) of the application that was augmented with attributes.
+     * The Amazon resource name (ARN) that specifies the application.
      */
     applicationArn?: ApplicationArn;
     /**
@@ -464,7 +467,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     associatedResourceCount?: AssociationCount;
     /**
-     * Key-value pairs you can use to associate with the application.
+     * Key-value pairs associated with the application.
      */
     tags?: Tags;
   }
@@ -476,11 +479,11 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface GetAttributeGroupResponse {
     /**
-     * The identifier of the application.
+     * The identifier of the attribute group.
      */
     id?: AttributeGroupId;
     /**
-     * The Amazon resource name (ARN) that specifies the application across services.
+     * The Amazon resource name (ARN) that specifies the attribute group across services.
      */
     arn?: AttributeGroupArn;
     /**
@@ -504,7 +507,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     lastUpdateTime?: Timestamp;
     /**
-     * Key-value pairs you can use to associate with the attribute group.
+     * Key-value pairs associated with the attribute group.
      */
     tags?: Tags;
   }
@@ -520,7 +523,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface ListApplicationsResponse {
     /**
-     * The name or ID of the application.
+     * This list of applications.
      */
     applications?: ApplicationSummaries;
     /**
@@ -568,7 +571,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface ListAssociatedResourcesResponse {
     /**
-     * The name or ID of the resource of which the application will be associated.
+     * Information about the resources.
      */
     resources?: Resources;
     /**
@@ -588,7 +591,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface ListAttributeGroupsResponse {
     /**
-     * A list of attribute group IDs.
+     * This list of attribute groups.
      */
     attributeGroups?: AttributeGroupSummaries;
     /**
@@ -605,7 +608,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     name?: ResourceSpecifier;
     /**
-     * The Amazon resource name (ARN) that specifies the application across services.
+     * The Amazon resource name (ARN) that specifies the resource across services.
      */
     arn?: StackArn;
   }
@@ -619,21 +622,21 @@ declare namespace ServiceCatalogAppRegistry {
   export type Timestamp = Date;
   export interface UpdateApplicationRequest {
     /**
-     * The name or ID of the application. The name must be unique in the region in which you are updating the attribute group.
+     * The name or ID of the application that will be updated.
      */
     application: ApplicationSpecifier;
     /**
-     * The anme of the application. The name must be unique in the region in which you are creating the application.
+     * The new name of the application. The name must be unique in the region in which you are updating the application.
      */
     name?: Name;
     /**
-     * The description of the application.
+     * The new description of the application.
      */
     description?: Description;
   }
   export interface UpdateApplicationResponse {
     /**
-     * The name or ID of the application.
+     * The updated information of the application.
      */
     application?: Application;
   }
@@ -657,7 +660,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface UpdateAttributeGroupResponse {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     * The updated information of the attribute group.
      */
     attributeGroup?: AttributeGroup;
   }

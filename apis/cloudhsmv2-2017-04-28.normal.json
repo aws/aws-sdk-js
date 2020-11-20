@@ -339,6 +339,68 @@
       ],
       "documentation": "<p>Gets a list of tags for the specified AWS CloudHSM cluster.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>ListTags</code> request to get more tags. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more tags to get.</p>"
     },
+    "ModifyBackupAttributes": {
+      "name": "ModifyBackupAttributes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyBackupAttributesRequest"
+      },
+      "output": {
+        "shape": "ModifyBackupAttributesResponse"
+      },
+      "errors": [
+        {
+          "shape": "CloudHsmAccessDeniedException"
+        },
+        {
+          "shape": "CloudHsmInternalFailureException"
+        },
+        {
+          "shape": "CloudHsmInvalidRequestException"
+        },
+        {
+          "shape": "CloudHsmResourceNotFoundException"
+        },
+        {
+          "shape": "CloudHsmServiceException"
+        }
+      ],
+      "documentation": "<p>Modifies attributes for AWS CloudHSM backup.</p>"
+    },
+    "ModifyCluster": {
+      "name": "ModifyCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClusterRequest"
+      },
+      "output": {
+        "shape": "ModifyClusterResponse"
+      },
+      "errors": [
+        {
+          "shape": "CloudHsmAccessDeniedException"
+        },
+        {
+          "shape": "CloudHsmInternalFailureException"
+        },
+        {
+          "shape": "CloudHsmInvalidRequestException"
+        },
+        {
+          "shape": "CloudHsmResourceNotFoundException"
+        },
+        {
+          "shape": "CloudHsmServiceException"
+        }
+      ],
+      "documentation": "<p>Modifies AWS CloudHSM cluster.</p>"
+    },
     "RestoreBackup": {
       "name": "RestoreBackup",
       "http": {
@@ -466,6 +528,10 @@
           "shape": "Timestamp",
           "documentation": "<p>The date and time when the backup was copied from a source backup.</p>"
         },
+        "NeverExpires": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the service should exempt a backup from the retention policy for the cluster. <code>True</code> exempts a backup from the retention policy. <code>False</code> means the service applies the backup retention policy defined at the cluster.</p>"
+        },
         "SourceRegion": {
           "shape": "Region",
           "documentation": "<p>The AWS Region that contains the source backup from which the new backup was copied.</p>"
@@ -487,7 +553,7 @@
           "documentation": "<p>The list of tags for the backup.</p>"
         }
       },
-      "documentation": "<p>Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp parameters. Backups that were copied into a destination region additionally contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion paramters. A backup that is pending deletion will include the DeleteTimestamp parameter.</p>"
+      "documentation": "<p>Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the <code>BackupId</code>, <code>BackupState</code>, <code>ClusterId</code>, and <code>CreateTimestamp</code> parameters. Backups that were copied into a destination region additionally contain the <code>CopyTimestamp</code>, <code>SourceBackup</code>, <code>SourceCluster</code>, and <code>SourceRegion</code> parameters. A backup that is pending deletion will include the <code>DeleteTimestamp</code> parameter.</p>"
     },
     "BackupId": {
       "type": "string",
@@ -498,6 +564,32 @@
       "enum": [
         "DEFAULT"
       ]
+    },
+    "BackupRetentionPolicy": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "BackupRetentionType",
+          "documentation": "<p>The type of backup retention policy. For the <code>DAYS</code> type, the value is the number of days to retain backups.</p>"
+        },
+        "Value": {
+          "shape": "BackupRetentionValue",
+          "documentation": "<p>Use a value between 7 - 379.</p>"
+        }
+      },
+      "documentation": "<p>A policy that defines the number of days to retain backups.</p>"
+    },
+    "BackupRetentionType": {
+      "type": "string",
+      "enum": [
+        "DAYS"
+      ]
+    },
+    "BackupRetentionValue": {
+      "type": "string",
+      "max": 3,
+      "min": 1,
+      "pattern": "[0-9]+"
     },
     "BackupState": {
       "type": "string",
@@ -513,6 +605,11 @@
       "member": {
         "shape": "Backup"
       }
+    },
+    "BackupsMaxSize": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
     },
     "Boolean": {
       "type": "boolean"
@@ -554,6 +651,10 @@
         "BackupPolicy": {
           "shape": "BackupPolicy",
           "documentation": "<p>The cluster's backup policy.</p>"
+        },
+        "BackupRetentionPolicy": {
+          "shape": "BackupRetentionPolicy",
+          "documentation": "<p>A policy that defines how the service retains backups.</p>"
         },
         "ClusterId": {
           "shape": "ClusterId",
@@ -634,6 +735,11 @@
         "shape": "Cluster"
       }
     },
+    "ClustersMaxSize": {
+      "type": "integer",
+      "max": 25,
+      "min": 1
+    },
     "CopyBackupToRegionRequest": {
       "type": "structure",
       "required": [
@@ -667,13 +773,13 @@
     "CreateClusterRequest": {
       "type": "structure",
       "required": [
-        "SubnetIds",
-        "HsmType"
+        "HsmType",
+        "SubnetIds"
       ],
       "members": {
-        "SubnetIds": {
-          "shape": "SubnetIds",
-          "documentation": "<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>"
+        "BackupRetentionPolicy": {
+          "shape": "BackupRetentionPolicy",
+          "documentation": "<p>A policy that defines how the service retains backups.</p>"
         },
         "HsmType": {
           "shape": "HsmType",
@@ -682,6 +788,10 @@
         "SourceBackupId": {
           "shape": "BackupId",
           "documentation": "<p>The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIds",
+          "documentation": "<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>"
         },
         "TagList": {
           "shape": "TagList",
@@ -811,12 +921,12 @@
           "documentation": "<p>The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.</p>"
         },
         "MaxResults": {
-          "shape": "MaxSize",
+          "shape": "BackupsMaxSize",
           "documentation": "<p>The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.</p>"
         },
         "Filters": {
           "shape": "Filters",
-          "documentation": "<p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>"
+          "documentation": "<p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p> <p>Use the <code>neverExpires</code> filter to return backups filtered by the value in the <code>neverExpires</code> parameter. <code>True</code> returns all backups exempt from the backup retention policy. <code>False</code> returns all backups with a backup retention policy defined at the cluster.</p>"
         },
         "SortAscending": {
           "shape": "Boolean",
@@ -849,7 +959,7 @@
           "documentation": "<p>The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.</p>"
         },
         "MaxResults": {
-          "shape": "MaxSize",
+          "shape": "ClustersMaxSize",
           "documentation": "<p>The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.</p>"
         }
       }
@@ -1063,6 +1173,56 @@
       "type": "integer",
       "max": 100,
       "min": 1
+    },
+    "ModifyBackupAttributesRequest": {
+      "type": "structure",
+      "required": [
+        "BackupId",
+        "NeverExpires"
+      ],
+      "members": {
+        "BackupId": {
+          "shape": "BackupId",
+          "documentation": "<p>The identifier (ID) of the backup to modify. To find the ID of a backup, use the <a>DescribeBackups</a> operation.</p>"
+        },
+        "NeverExpires": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the service should exempt a backup from the retention policy for the cluster. <code>True</code> exempts a backup from the retention policy. <code>False</code> means the service applies the backup retention policy defined at the cluster.</p>"
+        }
+      }
+    },
+    "ModifyBackupAttributesResponse": {
+      "type": "structure",
+      "members": {
+        "Backup": {
+          "shape": "Backup"
+        }
+      }
+    },
+    "ModifyClusterRequest": {
+      "type": "structure",
+      "required": [
+        "BackupRetentionPolicy",
+        "ClusterId"
+      ],
+      "members": {
+        "BackupRetentionPolicy": {
+          "shape": "BackupRetentionPolicy",
+          "documentation": "<p>A policy that defines how the service retains backups.</p>"
+        },
+        "ClusterId": {
+          "shape": "ClusterId",
+          "documentation": "<p>The identifier (ID) of the cluster that you want to modify. To find the cluster ID, use <a>DescribeClusters</a>.</p>"
+        }
+      }
+    },
+    "ModifyClusterResponse": {
+      "type": "structure",
+      "members": {
+        "Cluster": {
+          "shape": "Cluster"
+        }
+      }
     },
     "NextToken": {
       "type": "string",

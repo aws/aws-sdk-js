@@ -20,11 +20,11 @@ declare class CodeGuruReviewer extends Service {
    */
   associateRepository(callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
-   *  Use to create a code review for a repository analysis. 
+   *  Use to create a code review with a  CodeReviewType  of RepositoryAnalysis. This type of code review analyzes all code under a specified branch in an associated repository. PullRequest code reviews are automatically triggered by a pull request so cannot be created using this method. 
    */
   createCodeReview(params: CodeGuruReviewer.Types.CreateCodeReviewRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.CreateCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.CreateCodeReviewResponse, AWSError>;
   /**
-   *  Use to create a code review for a repository analysis. 
+   *  Use to create a code review with a  CodeReviewType  of RepositoryAnalysis. This type of code review analyzes all code under a specified branch in an associated repository. PullRequest code reviews are automatically triggered by a pull request so cannot be created using this method. 
    */
   createCodeReview(callback?: (err: AWSError, data: CodeGuruReviewer.Types.CreateCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.CreateCodeReviewResponse, AWSError>;
   /**
@@ -92,6 +92,14 @@ declare class CodeGuruReviewer extends Service {
    */
   listRepositoryAssociations(callback?: (err: AWSError, data: CodeGuruReviewer.Types.ListRepositoryAssociationsResponse) => void): Request<CodeGuruReviewer.Types.ListRepositoryAssociationsResponse, AWSError>;
   /**
+   * Returns the list of tags associated with an associated repository resource.
+   */
+  listTagsForResource(params: CodeGuruReviewer.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.ListTagsForResourceResponse) => void): Request<CodeGuruReviewer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns the list of tags associated with an associated repository resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeGuruReviewer.Types.ListTagsForResourceResponse) => void): Request<CodeGuruReviewer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    *  Stores customer feedback for a CodeGuru Reviewer recommendation. When this API is called again with different reactions the previous feedback is overwritten. 
    */
   putRecommendationFeedback(params: CodeGuruReviewer.Types.PutRecommendationFeedbackRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.PutRecommendationFeedbackResponse) => void): Request<CodeGuruReviewer.Types.PutRecommendationFeedbackResponse, AWSError>;
@@ -99,6 +107,22 @@ declare class CodeGuruReviewer extends Service {
    *  Stores customer feedback for a CodeGuru Reviewer recommendation. When this API is called again with different reactions the previous feedback is overwritten. 
    */
   putRecommendationFeedback(callback?: (err: AWSError, data: CodeGuruReviewer.Types.PutRecommendationFeedbackResponse) => void): Request<CodeGuruReviewer.Types.PutRecommendationFeedbackResponse, AWSError>;
+  /**
+   * Adds one or more tags to an associated repository.
+   */
+  tagResource(params: CodeGuruReviewer.Types.TagResourceRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.TagResourceResponse) => void): Request<CodeGuruReviewer.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to an associated repository.
+   */
+  tagResource(callback?: (err: AWSError, data: CodeGuruReviewer.Types.TagResourceResponse) => void): Request<CodeGuruReviewer.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from an associated repository.
+   */
+  untagResource(params: CodeGuruReviewer.Types.UntagResourceRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.UntagResourceResponse) => void): Request<CodeGuruReviewer.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from an associated repository.
+   */
+  untagResource(callback?: (err: AWSError, data: CodeGuruReviewer.Types.UntagResourceResponse) => void): Request<CodeGuruReviewer.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace CodeGuruReviewer {
   export type Arn = string;
@@ -111,13 +135,22 @@ declare namespace CodeGuruReviewer {
      * Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. 
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags?: TagMap;
   }
   export interface AssociateRepositoryResponse {
     /**
      * Information about the repository association.
      */
     RepositoryAssociation?: RepositoryAssociation;
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags?: TagMap;
   }
+  export type AssociationArn = string;
   export type AssociationId = string;
   export type BranchName = string;
   export type ClientRequestToken = string;
@@ -177,6 +210,10 @@ declare namespace CodeGuruReviewer {
      */
     SourceCodeType?: SourceCodeType;
     /**
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  that contains the reviewed source code. You can retrieve associated repository ARNs by calling  ListRepositoryAssociations . 
+     */
+    AssociationArn?: AssociationArn;
+    /**
      *  The statistics from the code review. 
      */
     Metrics?: Metrics;
@@ -231,7 +268,7 @@ declare namespace CodeGuruReviewer {
   }
   export interface CodeReviewType {
     /**
-     *  A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in  CreateCodeReview  
+     *  A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in  CreateCodeReview . 
      */
     RepositoryAnalysis: RepositoryAnalysis;
   }
@@ -249,15 +286,15 @@ declare namespace CodeGuruReviewer {
   export type ConnectionArn = string;
   export interface CreateCodeReviewRequest {
     /**
-     *  The name of the code review. Each code review of the same code review type must have a unique name in your AWS account. 
+     *  The name of the code review. The name of each code review in your AWS account must be unique. 
      */
     Name: CodeReviewName;
     /**
-     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories.   A code review can only be created on an associated repository. This is the ARN of the associated repository. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations .   A code review can only be created on an associated repository. This is the ARN of the associated repository. 
      */
-    RepositoryAssociationArn: Arn;
+    RepositoryAssociationArn: AssociationArn;
     /**
-     *  The type of code review to create. This is specified using a  CodeReviewType  object. 
+     *  The type of code review to create. This is specified using a  CodeReviewType  object. You can create a code review only of type RepositoryAnalysis. 
      */
     Type: CodeReviewType;
     /**
@@ -302,27 +339,35 @@ declare namespace CodeGuruReviewer {
   }
   export interface DescribeRepositoryAssociationRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
      */
-    AssociationArn: Arn;
+    AssociationArn: AssociationArn;
   }
   export interface DescribeRepositoryAssociationResponse {
     /**
      * Information about the repository association.
      */
     RepositoryAssociation?: RepositoryAssociation;
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags?: TagMap;
   }
   export interface DisassociateRepositoryRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
      */
-    AssociationArn: Arn;
+    AssociationArn: AssociationArn;
   }
   export interface DisassociateRepositoryResponse {
     /**
      * Information about the disassociated repository.
      */
     RepositoryAssociation?: RepositoryAssociation;
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags?: TagMap;
   }
   export type FilePath = string;
   export type FindingsCount = number;
@@ -428,7 +473,7 @@ declare namespace CodeGuruReviewer {
      */
     ProviderTypes?: ProviderTypes;
     /**
-     * List of repository association states to use as a filter. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * List of repository association states to use as a filter. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.     Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in an associated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories in the Amazon CodeGuru Reviewer User Guide.   
      */
     States?: RepositoryAssociationStates;
     /**
@@ -457,6 +502,18 @@ declare namespace CodeGuruReviewer {
      * The nextToken value to include in a future ListRecommendations request. When the results of a ListRecommendations request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
+     */
+    resourceArn: AssociationArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags?: TagMap;
   }
   export type MaxResults = number;
   export type MeteredLinesOfCodeCount = number;
@@ -618,7 +675,7 @@ declare namespace CodeGuruReviewer {
      */
     ProviderType?: ProviderType;
     /**
-     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.     Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in an associated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories in the Amazon CodeGuru Reviewer User Guide.   
      */
     State?: RepositoryAssociationState;
     /**
@@ -634,12 +691,12 @@ declare namespace CodeGuruReviewer {
      */
     CreatedTimeStamp?: TimeStamp;
   }
-  export type RepositoryAssociationState = "Associated"|"Associating"|"Failed"|"Disassociating"|string;
+  export type RepositoryAssociationState = "Associated"|"Associating"|"Failed"|"Disassociating"|"Disassociated"|string;
   export type RepositoryAssociationStates = RepositoryAssociationState[];
   export type RepositoryAssociationSummaries = RepositoryAssociationSummary[];
   export interface RepositoryAssociationSummary {
     /**
-     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
      */
     AssociationArn?: Arn;
     /**
@@ -667,7 +724,7 @@ declare namespace CodeGuruReviewer {
      */
     ProviderType?: ProviderType;
     /**
-     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.     Disassociated: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in an associated repository with tags after it has been disassociated. For more information, see Using tags to control access to associated repositories in the Amazon CodeGuru Reviewer User Guide.   
      */
     State?: RepositoryAssociationState;
   }
@@ -686,6 +743,22 @@ declare namespace CodeGuruReviewer {
     RepositoryHead?: RepositoryHeadSourceCodeType;
   }
   export type StateReason = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
+     */
+    resourceArn: AssociationArn;
+    /**
+     *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Text = string;
   export interface ThirdPartySourceRepository {
     /**
@@ -703,6 +776,18 @@ declare namespace CodeGuruReviewer {
   }
   export type TimeStamp = Date;
   export type Type = "PullRequest"|"RepositoryAnalysis"|string;
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling  ListRepositoryAssociations . 
+     */
+    resourceArn: AssociationArn;
+    /**
+     * A list of the keys for each tag you want to remove from an associated repository.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UserId = string;
   export type UserIds = UserId[];
   /**
