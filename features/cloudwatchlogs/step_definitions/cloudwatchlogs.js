@@ -11,7 +11,7 @@ module.exports = function() {
   });
 
   this.Given(/^I list the CloudWatch logGroups$/, function (callback) {
-    this.request(null, 'describeLogGroups', {}, callback);
+    this.request(null, 'describeLogGroups', {logGroupNamePrefix: this.logGroupName}, callback);
   });
 
   this.Then(/^the list should contain the CloudWatch logGroup$/, function (callback) {
