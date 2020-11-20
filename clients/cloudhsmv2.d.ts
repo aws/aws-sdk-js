@@ -92,6 +92,22 @@ declare class CloudHSMV2 extends Service {
    */
   listTags(callback?: (err: AWSError, data: CloudHSMV2.Types.ListTagsResponse) => void): Request<CloudHSMV2.Types.ListTagsResponse, AWSError>;
   /**
+   * Modifies attributes for AWS CloudHSM backup.
+   */
+  modifyBackupAttributes(params: CloudHSMV2.Types.ModifyBackupAttributesRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.ModifyBackupAttributesResponse) => void): Request<CloudHSMV2.Types.ModifyBackupAttributesResponse, AWSError>;
+  /**
+   * Modifies attributes for AWS CloudHSM backup.
+   */
+  modifyBackupAttributes(callback?: (err: AWSError, data: CloudHSMV2.Types.ModifyBackupAttributesResponse) => void): Request<CloudHSMV2.Types.ModifyBackupAttributesResponse, AWSError>;
+  /**
+   * Modifies AWS CloudHSM cluster.
+   */
+  modifyCluster(params: CloudHSMV2.Types.ModifyClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.ModifyClusterResponse) => void): Request<CloudHSMV2.Types.ModifyClusterResponse, AWSError>;
+  /**
+   * Modifies AWS CloudHSM cluster.
+   */
+  modifyCluster(callback?: (err: AWSError, data: CloudHSMV2.Types.ModifyClusterResponse) => void): Request<CloudHSMV2.Types.ModifyClusterResponse, AWSError>;
+  /**
    * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For mor information on deleting a backup, see DeleteBackup.
    */
   restoreBackup(params: CloudHSMV2.Types.RestoreBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
@@ -139,6 +155,10 @@ declare namespace CloudHSMV2 {
      */
     CopyTimestamp?: Timestamp;
     /**
+     * Specifies whether the service should exempt a backup from the retention policy for the cluster. True exempts a backup from the retention policy. False means the service applies the backup retention policy defined at the cluster.
+     */
+    NeverExpires?: Boolean;
+    /**
      * The AWS Region that contains the source backup from which the new backup was copied.
      */
     SourceRegion?: Region;
@@ -161,8 +181,21 @@ declare namespace CloudHSMV2 {
   }
   export type BackupId = string;
   export type BackupPolicy = "DEFAULT"|string;
+  export interface BackupRetentionPolicy {
+    /**
+     * The type of backup retention policy. For the DAYS type, the value is the number of days to retain backups.
+     */
+    Type?: BackupRetentionType;
+    /**
+     * Use a value between 7 - 379.
+     */
+    Value?: BackupRetentionValue;
+  }
+  export type BackupRetentionType = "DAYS"|string;
+  export type BackupRetentionValue = string;
   export type BackupState = "CREATE_IN_PROGRESS"|"READY"|"DELETED"|"PENDING_DELETION"|string;
   export type Backups = Backup[];
+  export type BackupsMaxSize = number;
   export type Boolean = boolean;
   export type Cert = string;
   export interface Certificates {
@@ -192,6 +225,10 @@ declare namespace CloudHSMV2 {
      * The cluster's backup policy.
      */
     BackupPolicy?: BackupPolicy;
+    /**
+     * A policy that defines how the service retains backups.
+     */
+    BackupRetentionPolicy?: BackupRetentionPolicy;
     /**
      * The cluster's identifier (ID).
      */
@@ -248,6 +285,7 @@ declare namespace CloudHSMV2 {
   export type ClusterId = string;
   export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED"|string;
   export type Clusters = Cluster[];
+  export type ClustersMaxSize = number;
   export interface CopyBackupToRegionRequest {
     /**
      * The AWS region that will contain your copied CloudHSM cluster backup.
@@ -270,9 +308,9 @@ declare namespace CloudHSMV2 {
   }
   export interface CreateClusterRequest {
     /**
-     * The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:   All subnets must be in the same virtual private cloud (VPC).   You can specify only one subnet per Availability Zone.  
+     * A policy that defines how the service retains backups.
      */
-    SubnetIds: SubnetIds;
+    BackupRetentionPolicy?: BackupRetentionPolicy;
     /**
      * The type of HSM to use in the cluster. Currently the only allowed value is hsm1.medium.
      */
@@ -281,6 +319,10 @@ declare namespace CloudHSMV2 {
      * The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use DescribeBackups.
      */
     SourceBackupId?: BackupId;
+    /**
+     * The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:   All subnets must be in the same virtual private cloud (VPC).   You can specify only one subnet per Availability Zone.  
+     */
+    SubnetIds: SubnetIds;
     /**
      * Tags to apply to the CloudHSM cluster during creation.
      */
@@ -368,9 +410,9 @@ declare namespace CloudHSMV2 {
     /**
      * The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a NextToken value.
      */
-    MaxResults?: MaxSize;
+    MaxResults?: BackupsMaxSize;
     /**
-     * One or more filters to limit the items returned in the response. Use the backupIds filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the sourceBackupIds filter to return only the backups created from a source backup. The sourceBackupID of a source backup is returned by the CopyBackupToRegion operation. Use the clusterIds filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the states filter to return only backups that match the specified state.
+     * One or more filters to limit the items returned in the response. Use the backupIds filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the sourceBackupIds filter to return only the backups created from a source backup. The sourceBackupID of a source backup is returned by the CopyBackupToRegion operation. Use the clusterIds filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the states filter to return only backups that match the specified state. Use the neverExpires filter to return backups filtered by the value in the neverExpires parameter. True returns all backups exempt from the backup retention policy. False returns all backups with a backup retention policy defined at the cluster.
      */
     Filters?: Filters;
     /**
@@ -400,7 +442,7 @@ declare namespace CloudHSMV2 {
     /**
      * The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a NextToken value.
      */
-    MaxResults?: MaxSize;
+    MaxResults?: ClustersMaxSize;
   }
   export interface DescribeClustersResponse {
     /**
@@ -523,6 +565,32 @@ declare namespace CloudHSMV2 {
     NextToken?: NextToken;
   }
   export type MaxSize = number;
+  export interface ModifyBackupAttributesRequest {
+    /**
+     * The identifier (ID) of the backup to modify. To find the ID of a backup, use the DescribeBackups operation.
+     */
+    BackupId: BackupId;
+    /**
+     * Specifies whether the service should exempt a backup from the retention policy for the cluster. True exempts a backup from the retention policy. False means the service applies the backup retention policy defined at the cluster.
+     */
+    NeverExpires: Boolean;
+  }
+  export interface ModifyBackupAttributesResponse {
+    Backup?: Backup;
+  }
+  export interface ModifyClusterRequest {
+    /**
+     * A policy that defines how the service retains backups.
+     */
+    BackupRetentionPolicy: BackupRetentionPolicy;
+    /**
+     * The identifier (ID) of the cluster that you want to modify. To find the cluster ID, use DescribeClusters.
+     */
+    ClusterId: ClusterId;
+  }
+  export interface ModifyClusterResponse {
+    Cluster?: Cluster;
+  }
   export type NextToken = string;
   export type PreCoPassword = string;
   export type Region = string;

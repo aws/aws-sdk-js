@@ -12,6 +12,38 @@ declare class Connect extends Service {
   constructor(options?: Connect.Types.ClientConfiguration)
   config: Config & Connect.Types.ClientConfiguration;
   /**
+   * Associates an approved origin to an Amazon Connect instance.
+   */
+  associateApprovedOrigin(params: Connect.Types.AssociateApprovedOriginRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates an approved origin to an Amazon Connect instance.
+   */
+  associateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   */
+  associateInstanceStorageConfig(params: Connect.Types.AssociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
+  /**
+   * Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   */
+  associateInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
+  /**
+   * Allows the specified Amazon Connect instance to access the specified Lambda function.
+   */
+  associateLambdaFunction(params: Connect.Types.AssociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows the specified Amazon Connect instance to access the specified Lambda function.
+   */
+  associateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   */
+  associateLexBot(params: Connect.Types.AssociateLexBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   */
+  associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Associates a set of queues with a routing profile.
    */
   associateRoutingProfileQueues(params: Connect.Types.AssociateRoutingProfileQueuesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -20,6 +52,14 @@ declare class Connect extends Service {
    */
   associateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates a security key to the instance.
+   */
+  associateSecurityKey(params: Connect.Types.AssociateSecurityKeyRequest, callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
+  /**
+   * Associates a security key to the instance.
+   */
+  associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
+  /**
    * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   createContactFlow(params: Connect.Types.CreateContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
@@ -27,6 +67,14 @@ declare class Connect extends Service {
    * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
+  /**
+   * Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   */
+  createInstance(params: Connect.Types.CreateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
+  /**
+   * Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   */
+  createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
    * Creates a new routing profile.
    */
@@ -52,6 +100,14 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
+   * Deletes the Amazon Connect instance.
+   */
+  deleteInstance(params: Connect.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the Amazon Connect instance.
+   */
+  deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
   deleteUser(params: Connect.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -75,6 +131,30 @@ declare class Connect extends Service {
    * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
+  /**
+   * Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   */
+  describeInstance(params: Connect.Types.DescribeInstanceRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
+  /**
+   * Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   */
+  describeInstance(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
+  /**
+   * Describes the specified instance attribute.
+   */
+  describeInstanceAttribute(params: Connect.Types.DescribeInstanceAttributeRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceAttributeResponse) => void): Request<Connect.Types.DescribeInstanceAttributeResponse, AWSError>;
+  /**
+   * Describes the specified instance attribute.
+   */
+  describeInstanceAttribute(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceAttributeResponse) => void): Request<Connect.Types.DescribeInstanceAttributeResponse, AWSError>;
+  /**
+   * Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
+   */
+  describeInstanceStorageConfig(params: Connect.Types.DescribeInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
+  /**
+   * Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
+   */
+  describeInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
   /**
    * Describes the specified routing profile.
    */
@@ -108,6 +188,38 @@ declare class Connect extends Service {
    */
   describeUserHierarchyStructure(callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
   /**
+   * Revokes access to integrated applications from Amazon Connect.
+   */
+  disassociateApprovedOrigin(params: Connect.Types.DisassociateApprovedOriginRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes access to integrated applications from Amazon Connect.
+   */
+  disassociateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the storage type configurations for the specified resource type and association ID.
+   */
+  disassociateInstanceStorageConfig(params: Connect.Types.DisassociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the storage type configurations for the specified resource type and association ID.
+   */
+  disassociateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   */
+  disassociateLambdaFunction(params: Connect.Types.DisassociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   */
+  disassociateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+   */
+  disassociateLexBot(params: Connect.Types.DisassociateLexBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+   */
+  disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disassociates a set of queues from a routing profile.
    */
   disassociateRoutingProfileQueues(params: Connect.Types.DisassociateRoutingProfileQueuesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -115,6 +227,14 @@ declare class Connect extends Service {
    * Disassociates a set of queues from a routing profile.
    */
   disassociateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified security key.
+   */
+  disassociateSecurityKey(params: Connect.Types.DisassociateSecurityKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified security key.
+   */
+  disassociateSecurityKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Retrieves the contact attributes for the specified contact.
    */
@@ -148,6 +268,14 @@ declare class Connect extends Service {
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
+   * Returns a paginated list of all approved origins associated with the instance.
+   */
+  listApprovedOrigins(params: Connect.Types.ListApprovedOriginsRequest, callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all approved origins associated with the instance.
+   */
+  listApprovedOrigins(callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
+  /**
    * Provides information about the contact flows for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
    */
   listContactFlows(params: Connect.Types.ListContactFlowsRequest, callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
@@ -163,6 +291,46 @@ declare class Connect extends Service {
    * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
   listHoursOfOperations(callback?: (err: AWSError, data: Connect.Types.ListHoursOfOperationsResponse) => void): Request<Connect.Types.ListHoursOfOperationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all attribute types for the given instance.
+   */
+  listInstanceAttributes(params: Connect.Types.ListInstanceAttributesRequest, callback?: (err: AWSError, data: Connect.Types.ListInstanceAttributesResponse) => void): Request<Connect.Types.ListInstanceAttributesResponse, AWSError>;
+  /**
+   * Returns a paginated list of all attribute types for the given instance.
+   */
+  listInstanceAttributes(callback?: (err: AWSError, data: Connect.Types.ListInstanceAttributesResponse) => void): Request<Connect.Types.ListInstanceAttributesResponse, AWSError>;
+  /**
+   * Returns a paginated list of storage configs for the identified instance and resource type.
+   */
+  listInstanceStorageConfigs(params: Connect.Types.ListInstanceStorageConfigsRequest, callback?: (err: AWSError, data: Connect.Types.ListInstanceStorageConfigsResponse) => void): Request<Connect.Types.ListInstanceStorageConfigsResponse, AWSError>;
+  /**
+   * Returns a paginated list of storage configs for the identified instance and resource type.
+   */
+  listInstanceStorageConfigs(callback?: (err: AWSError, data: Connect.Types.ListInstanceStorageConfigsResponse) => void): Request<Connect.Types.ListInstanceStorageConfigsResponse, AWSError>;
+  /**
+   * Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
+   */
+  listInstances(params: Connect.Types.ListInstancesRequest, callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
+  /**
+   * Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
+   */
+  listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   */
+  listLambdaFunctions(params: Connect.Types.ListLambdaFunctionsRequest, callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   */
+  listLambdaFunctions(callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   */
+  listLexBots(params: Connect.Types.ListLexBotsRequest, callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   */
+  listLexBots(callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
    * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
    */
@@ -203,6 +371,14 @@ declare class Connect extends Service {
    * Provides summary information about the routing profiles for the specified Amazon Connect instance. For more information about routing profiles, see Routing Profiles and Create a Routing Profile in the Amazon Connect Administrator Guide.
    */
   listRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
+  /**
+   * Returns a paginated list of all security keys associated with the instance.
+   */
+  listSecurityKeys(params: Connect.Types.ListSecurityKeysRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
+  /**
+   * Returns a paginated list of all security keys associated with the instance.
+   */
+  listSecurityKeys(callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
    * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
@@ -332,6 +508,22 @@ declare class Connect extends Service {
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the value for the specified attribute type.
+   */
+  updateInstanceAttribute(params: Connect.Types.UpdateInstanceAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the value for the specified attribute type.
+   */
+  updateInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing configuration for a resource type. This API is idempotent.
+   */
+  updateInstanceStorageConfig(params: Connect.Types.UpdateInstanceStorageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing configuration for a resource type. This API is idempotent.
+   */
+  updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
    */
   updateRoutingProfileConcurrency(params: Connect.Types.UpdateRoutingProfileConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -426,6 +618,56 @@ declare namespace Connect {
   export type AgentFirstName = string;
   export type AgentLastName = string;
   export type AgentUsername = string;
+  export interface AssociateApprovedOriginRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The domain to add to your allow list.
+     */
+    Origin: Origin;
+  }
+  export interface AssociateInstanceStorageConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A valid resource type.
+     */
+    ResourceType: InstanceStorageResourceType;
+    /**
+     * A valid storage type.
+     */
+    StorageConfig: InstanceStorageConfig;
+  }
+  export interface AssociateInstanceStorageConfigResponse {
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId?: AssociationId;
+  }
+  export interface AssociateLambdaFunctionRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is 140.
+     */
+    FunctionArn: FunctionArn;
+  }
+  export interface AssociateLexBotRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The Amazon Lex box to associate with the instance.
+     */
+    LexBot: LexBot;
+  }
   export interface AssociateRoutingProfileQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -440,10 +682,40 @@ declare namespace Connect {
      */
     QueueConfigs: RoutingProfileQueueConfigList;
   }
+  export interface AssociateSecurityKeyRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A valid security key in PEM format.
+     */
+    Key: PEM;
+  }
+  export interface AssociateSecurityKeyResponse {
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId?: AssociationId;
+  }
+  export type AssociationId = string;
+  export interface Attribute {
+    /**
+     * The type of attribute.
+     */
+    AttributeType?: InstanceAttributeType;
+    /**
+     * The value of the attribute.
+     */
+    Value?: InstanceAttributeValue;
+  }
   export type AttributeName = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
+  export type AttributesList = Attribute[];
   export type AutoAccept = boolean;
+  export type BotName = string;
+  export type BucketName = string;
   export type Channel = "VOICE"|"CHAT"|string;
   export type Channels = Channel[];
   export type ChatContent = string;
@@ -552,6 +824,42 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the contact flow.
      */
     ContactFlowArn?: ARN;
+  }
+  export interface CreateInstanceRequest {
+    /**
+     * The idempotency token.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The type of identity management for your Amazon Connect users.
+     */
+    IdentityManagementType: DirectoryType;
+    /**
+     * The name for your instance.
+     */
+    InstanceAlias?: DirectoryAlias;
+    /**
+     * The identifier for the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * Whether your contact center handles incoming contacts.
+     */
+    InboundCallsEnabled: InboundCallsEnabled;
+    /**
+     * Whether your contact center allows outbound calls.
+     */
+    OutboundCallsEnabled: OutboundCallsEnabled;
+  }
+  export interface CreateInstanceResponse {
+    /**
+     * The identifier for the instance.
+     */
+    Id?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    Arn?: ARN;
   }
   export interface CreateRoutingProfileRequest {
     /**
@@ -722,6 +1030,12 @@ declare namespace Connect {
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
   export type Delay = number;
+  export interface DeleteInstanceRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
   export interface DeleteUserHierarchyGroupRequest {
     /**
      * The identifier of the hierarchy group.
@@ -757,6 +1071,54 @@ declare namespace Connect {
      * Information about the contact flow.
      */
     ContactFlow?: ContactFlow;
+  }
+  export interface DescribeInstanceAttributeRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The type of attribute.
+     */
+    AttributeType: InstanceAttributeType;
+  }
+  export interface DescribeInstanceAttributeResponse {
+    /**
+     * The type of attribute.
+     */
+    Attribute?: Attribute;
+  }
+  export interface DescribeInstanceRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface DescribeInstanceResponse {
+    /**
+     * The name of the instance.
+     */
+    Instance?: Instance;
+  }
+  export interface DescribeInstanceStorageConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId: AssociationId;
+    /**
+     * A valid resource type.
+     */
+    ResourceType: InstanceStorageResourceType;
+  }
+  export interface DescribeInstanceStorageConfigResponse {
+    /**
+     * A valid storage type.
+     */
+    StorageConfig?: InstanceStorageConfig;
   }
   export interface DescribeRoutingProfileRequest {
     /**
@@ -828,7 +1190,58 @@ declare namespace Connect {
      */
     Channel?: Channel;
   }
+  export type DirectoryAlias = string;
+  export type DirectoryId = string;
+  export type DirectoryType = "SAML"|"CONNECT_MANAGED"|"EXISTING_DIRECTORY"|string;
   export type DirectoryUserId = string;
+  export interface DisassociateApprovedOriginRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The domain URL of the integrated application.
+     */
+    Origin: Origin;
+  }
+  export interface DisassociateInstanceStorageConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId: AssociationId;
+    /**
+     * A valid resource type.
+     */
+    ResourceType: InstanceStorageResourceType;
+  }
+  export interface DisassociateLambdaFunctionRequest {
+    /**
+     * The identifier of the Amazon Connect instance..
+     */
+    InstanceId: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the Lambda function being disassociated.
+     */
+    FunctionArn: FunctionArn;
+  }
+  export interface DisassociateLexBotRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the Amazon Lex bot. Maximum character limit of 50.
+     */
+    BotName: BotName;
+    /**
+     * The Region in which the Amazon Lex bot has been created.
+     */
+    LexRegion: LexRegion;
+  }
   export interface DisassociateRoutingProfileQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -843,8 +1256,29 @@ declare namespace Connect {
      */
     QueueReferences: RoutingProfileQueueReferenceList;
   }
+  export interface DisassociateSecurityKeyRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId: AssociationId;
+  }
   export type DisplayName = string;
   export type Email = string;
+  export interface EncryptionConfig {
+    /**
+     * The type of encryption.
+     */
+    EncryptionType: EncryptionType;
+    /**
+     * The identifier of the encryption key.
+     */
+    KeyId: KeyId;
+  }
+  export type EncryptionType = "KMS"|string;
   export interface Filters {
     /**
      * The queues to use to filter the metrics. You can specify up to 100 queues per request.
@@ -855,6 +1289,8 @@ declare namespace Connect {
      */
     Channels?: Channels;
   }
+  export type FunctionArn = string;
+  export type FunctionArnsList = FunctionArn[];
   export interface GetContactAttributesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1138,6 +1574,7 @@ declare namespace Connect {
   }
   export type HistoricalMetricResults = HistoricalMetricResult[];
   export type HistoricalMetrics = HistoricalMetric[];
+  export type Hours = number;
   export type HoursOfOperationId = string;
   export type HoursOfOperationName = string;
   export interface HoursOfOperationSummary {
@@ -1155,7 +1592,189 @@ declare namespace Connect {
     Name?: HoursOfOperationName;
   }
   export type HoursOfOperationSummaryList = HoursOfOperationSummary[];
+  export type InboundCallsEnabled = boolean;
+  export interface Instance {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    Id?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    Arn?: ARN;
+    /**
+     * The identity management type.
+     */
+    IdentityManagementType?: DirectoryType;
+    /**
+     * The alias of instance.
+     */
+    InstanceAlias?: DirectoryAlias;
+    /**
+     * When the instance was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The service role of the instance.
+     */
+    ServiceRole?: ARN;
+    /**
+     * The state of the instance.
+     */
+    InstanceStatus?: InstanceStatus;
+    /**
+     * Relevant details why the instance was not successfully created. 
+     */
+    StatusReason?: InstanceStatusReason;
+    /**
+     * Whether inbound calls are enabled.
+     */
+    InboundCallsEnabled?: InboundCallsEnabled;
+    /**
+     * Whether outbound calls are enabled.
+     */
+    OutboundCallsEnabled?: OutboundCallsEnabled;
+  }
+  export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|string;
+  export type InstanceAttributeValue = string;
   export type InstanceId = string;
+  export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string;
+  export interface InstanceStatusReason {
+    /**
+     * The message.
+     */
+    Message?: String;
+  }
+  export interface InstanceStorageConfig {
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId?: AssociationId;
+    /**
+     * A valid storage type.
+     */
+    StorageType: StorageType;
+    /**
+     * The S3 configuration.
+     */
+    S3Config?: S3Config;
+    /**
+     * The configuration of the Kinesis video stream.
+     */
+    KinesisVideoStreamConfig?: KinesisVideoStreamConfig;
+    /**
+     * The configuration of the Kinesis data stream.
+     */
+    KinesisStreamConfig?: KinesisStreamConfig;
+    /**
+     * The configuration of the Kinesis Firehose delivery stream.
+     */
+    KinesisFirehoseConfig?: KinesisFirehoseConfig;
+  }
+  export type InstanceStorageConfigs = InstanceStorageConfig[];
+  export type InstanceStorageResourceType = "CHAT_TRANSCRIPTS"|"CALL_RECORDINGS"|"SCHEDULED_REPORTS"|"MEDIA_STREAMS"|"CONTACT_TRACE_RECORDS"|"AGENT_EVENTS"|string;
+  export interface InstanceSummary {
+    /**
+     * The identifier of the instance.
+     */
+    Id?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    Arn?: ARN;
+    /**
+     * The identity management type of the instance.
+     */
+    IdentityManagementType?: DirectoryType;
+    /**
+     * The alias of the instance.
+     */
+    InstanceAlias?: DirectoryAlias;
+    /**
+     * When the instance was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The service role of the instance.
+     */
+    ServiceRole?: ARN;
+    /**
+     * The state of the instance.
+     */
+    InstanceStatus?: InstanceStatus;
+    /**
+     * Whether inbound calls are enabled.
+     */
+    InboundCallsEnabled?: InboundCallsEnabled;
+    /**
+     * Whether outbound calls are enabled.
+     */
+    OutboundCallsEnabled?: OutboundCallsEnabled;
+  }
+  export type InstanceSummaryList = InstanceSummary[];
+  export type KeyId = string;
+  export interface KinesisFirehoseConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the delivery stream.
+     */
+    FirehoseArn: ARN;
+  }
+  export interface KinesisStreamConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the data stream.
+     */
+    StreamArn: ARN;
+  }
+  export interface KinesisVideoStreamConfig {
+    /**
+     * The prefix of the video stream.
+     */
+    Prefix: Prefix;
+    /**
+     * The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+     */
+    RetentionPeriodHours: Hours;
+    /**
+     * The encryption configuration.
+     */
+    EncryptionConfig: EncryptionConfig;
+  }
+  export interface LexBot {
+    /**
+     * The name of the Amazon Lex bot.
+     */
+    Name?: BotName;
+    /**
+     * The Region the Amazon Lex bot was created in.
+     */
+    LexRegion?: LexRegion;
+  }
+  export type LexBotsList = LexBot[];
+  export type LexRegion = string;
+  export interface ListApprovedOriginsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult25;
+  }
+  export interface ListApprovedOriginsResponse {
+    /**
+     * The approved origins.
+     */
+    Origins?: OriginsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListContactFlowsRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1203,6 +1822,126 @@ declare namespace Connect {
      * Information about the hours of operation.
      */
     HoursOfOperationSummaryList?: HoursOfOperationSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInstanceAttributesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult7;
+  }
+  export interface ListInstanceAttributesResponse {
+    /**
+     * The attribute types.
+     */
+    Attributes?: AttributesList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInstanceStorageConfigsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A valid resource type.
+     */
+    ResourceType: InstanceStorageResourceType;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult10;
+  }
+  export interface ListInstanceStorageConfigsResponse {
+    /**
+     * A valid storage type.
+     */
+    StorageConfigs?: InstanceStorageConfigs;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInstancesRequest {
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult10;
+  }
+  export interface ListInstancesResponse {
+    /**
+     * Information about the instances.
+     */
+    InstanceSummaryList?: InstanceSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListLambdaFunctionsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult25;
+  }
+  export interface ListLambdaFunctionsResponse {
+    /**
+     * The Lambdafunction ARNs associated with the specified instance.
+     */
+    LambdaFunctions?: FunctionArnsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListLexBotsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult25;
+  }
+  export interface ListLexBotsResponse {
+    /**
+     * The the names and regions of the Amazon Lex bots associated with the specified instance.
+     */
+    LexBots?: LexBotsList;
     /**
      * If there are additional results, this is the token for the next set of results.
      */
@@ -1344,6 +2083,30 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListSecurityKeysRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult2;
+  }
+  export interface ListSecurityKeysResponse {
+    /**
+     * The security keys.
+     */
+    SecurityKeys?: SecurityKeysList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSecurityProfilesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1428,8 +2191,12 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export type MaxResult10 = number;
   export type MaxResult100 = number;
   export type MaxResult1000 = number;
+  export type MaxResult2 = number;
+  export type MaxResult25 = number;
+  export type MaxResult7 = number;
   export type MediaConcurrencies = MediaConcurrency[];
   export interface MediaConcurrency {
     /**
@@ -1442,6 +2209,10 @@ declare namespace Connect {
     Concurrency: Concurrency;
   }
   export type NextToken = string;
+  export type Origin = string;
+  export type OriginsList = Origin[];
+  export type OutboundCallsEnabled = boolean;
+  export type PEM = string;
   export interface ParticipantDetails {
     /**
      * Display name of the participant.
@@ -1481,6 +2252,7 @@ declare namespace Connect {
   export type PhoneNumberType = "TOLL_FREE"|"DID"|string;
   export type PhoneNumberTypes = PhoneNumberType[];
   export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
+  export type Prefix = string;
   export type Priority = number;
   export type PromptId = string;
   export type PromptName = string;
@@ -1654,6 +2426,35 @@ declare namespace Connect {
     Name?: RoutingProfileName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
+  export interface S3Config {
+    /**
+     * The S3 bucket name.
+     */
+    BucketName: BucketName;
+    /**
+     * The S3 bucket prefix.
+     */
+    BucketPrefix: Prefix;
+    /**
+     * The S3 encryption configuration.
+     */
+    EncryptionConfig?: EncryptionConfig;
+  }
+  export interface SecurityKey {
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId?: AssociationId;
+    /**
+     * The key of the security key.
+     */
+    Key?: PEM;
+    /**
+     * When the security key was created.
+     */
+    CreationTime?: timestamp;
+  }
+  export type SecurityKeysList = SecurityKey[];
   export type SecurityProfileId = string;
   export type SecurityProfileIds = SecurityProfileId[];
   export type SecurityProfileName = string;
@@ -1798,6 +2599,8 @@ declare namespace Connect {
   }
   export interface StopContactResponse {
   }
+  export type StorageType = "S3"|"KINESIS_VIDEO_STREAM"|"KINESIS_STREAM"|"KINESIS_FIREHOSE"|string;
+  export type String = string;
   export interface SuspendContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1839,6 +2642,7 @@ declare namespace Connect {
     ThresholdValue?: ThresholdValue;
   }
   export type ThresholdValue = number;
+  export type Timestamp = Date;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
     /**
@@ -1897,6 +2701,35 @@ declare namespace Connect {
      * The description of the contact flow.
      */
     Description?: ContactFlowDescription;
+  }
+  export interface UpdateInstanceAttributeRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The type of attribute.
+     */
+    AttributeType: InstanceAttributeType;
+    /**
+     * The value for the attribute. Maximum character limit is 100. 
+     */
+    Value: InstanceAttributeValue;
+  }
+  export interface UpdateInstanceStorageConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+     */
+    AssociationId: AssociationId;
+    /**
+     * A valid resource type.
+     */
+    ResourceType: InstanceStorageResourceType;
+    StorageConfig: InstanceStorageConfig;
   }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**
