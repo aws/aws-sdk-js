@@ -7,8 +7,8 @@ Feature: IAM
   Scenario: Users
     Given I have an IAM username "js-test"
     And I create an IAM user with the username
-    And I list the IAM users
-    Then the list should contain the user
+    And I get the IAM user
+    Then the IAM user should exist
     And I delete the IAM user
 
   Scenario: Roles
