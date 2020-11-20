@@ -481,6 +481,8 @@ declare namespace LexModelBuildingService {
   export type ConfidenceThreshold = number;
   export type ContentString = string;
   export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
+  export type ContextTimeToLiveInSeconds = number;
+  export type ContextTurnsToLive = number;
   export interface ConversationLogsRequest {
     /**
      * The settings for your conversation logs. You can log the conversation text, conversation audio, or both.
@@ -657,6 +659,14 @@ declare namespace LexModelBuildingService {
      * Configuration information, if any, for connecting an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface CreateSlotTypeVersionRequest {
     /**
@@ -1352,6 +1362,14 @@ declare namespace LexModelBuildingService {
      * Configuration information, if any, to connect to an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface GetIntentVersionsRequest {
     /**
@@ -1528,6 +1546,14 @@ declare namespace LexModelBuildingService {
   export type GroupNumber = number;
   export type IamRoleArn = string;
   export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export interface InputContext {
+    /**
+     * The name of the context.
+     */
+    name: InputContextName;
+  }
+  export type InputContextList = InputContext[];
+  export type InputContextName = string;
   export interface Intent {
     /**
      * The name of the intent.
@@ -1662,6 +1688,22 @@ declare namespace LexModelBuildingService {
   export type NextToken = string;
   export type NumericalVersion = string;
   export type ObfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"|string;
+  export interface OutputContext {
+    /**
+     * The name of the context.
+     */
+    name: OutputContextName;
+    /**
+     * The number of seconds that the context should be active after it is first sent in a PostContent or PostText response. You can set the value between 5 and 86,400 seconds (24 hours).
+     */
+    timeToLiveInSeconds: ContextTimeToLiveInSeconds;
+    /**
+     * The number of conversation turns that the context should be active. A conversation turn is one PostContent or PostText request and the corresponding response from Amazon Lex.
+     */
+    turnsToLive: ContextTurnsToLive;
+  }
+  export type OutputContextList = OutputContext[];
+  export type OutputContextName = string;
   export type Priority = number;
   export type ProcessBehavior = "SAVE"|"BUILD"|string;
   export interface Prompt {
@@ -1761,11 +1803,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Set to true to enable access to natural language understanding improvements.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Tokyo) (ap-northeast-1)   EU (Frankfurt) (eu-central-1)   EU (London) (eu-west-2)  
+     * Set to true to enable access to natural language understanding improvements.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.
      */
     enableModelImprovements?: Boolean;
     /**
-     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores in the following regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1952,6 +1994,14 @@ declare namespace LexModelBuildingService {
      * Configuration information required to use the AMAZON.KendraSearchIntent intent to connect to an Amazon Kendra index. For more information, see  AMAZON.KendraSearchIntent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface PutIntentResponse {
     /**
@@ -2022,6 +2072,14 @@ declare namespace LexModelBuildingService {
      * Configuration information, if any, required to connect to an Amazon Kendra index and use the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface PutSlotTypeRequest {
     /**
@@ -2151,8 +2209,26 @@ declare namespace LexModelBuildingService {
      * Determines whether a slot is obfuscated in conversation logs and stored utterances. When you obfuscate a slot, the value is replaced by the slot name in curly braces ({}). For example, if the slot name is "full_name", obfuscated values are replaced with "{full_name}". For more information, see  Slot Obfuscation . 
      */
     obfuscationSetting?: ObfuscationSetting;
+    /**
+     * A list of default values for the slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values.
+     */
+    defaultValueSpec?: SlotDefaultValueSpec;
   }
   export type SlotConstraint = "Required"|"Optional"|string;
+  export interface SlotDefaultValue {
+    /**
+     * The default value for the slot. You can specify one of the following:    #context-name.slot-name - The slot value "slot-name" in the context "context-name."    {attribute} - The slot value of the session attribute "attribute."    'value' - The discrete value "value."  
+     */
+    defaultValue: SlotDefaultValueString;
+  }
+  export type SlotDefaultValueList = SlotDefaultValue[];
+  export interface SlotDefaultValueSpec {
+    /**
+     * The default values for a slot. You can specify more than one default. For example, you can specify a default value to use from a matching context variable, a session attribute, or a fixed value. The default value chosen is selected based on the order that you specify them in the list. For example, if you specify a context variable and a fixed value in that order, Amazon Lex uses the context variable if it is available, else it uses the fixed value.
+     */
+    defaultValueList: SlotDefaultValueList;
+  }
+  export type SlotDefaultValueString = string;
   export type SlotList = Slot[];
   export type SlotName = string;
   export interface SlotTypeConfiguration {

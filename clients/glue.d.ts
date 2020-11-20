@@ -124,6 +124,14 @@ declare class Glue extends Service {
    */
   cancelMLTaskRun(callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
   /**
+   * Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using DataFormat as the format. Since it does not take a schema set name, no compatibility checks are performed.
+   */
+  checkSchemaVersionValidity(params: Glue.Types.CheckSchemaVersionValidityInput, callback?: (err: AWSError, data: Glue.Types.CheckSchemaVersionValidityResponse) => void): Request<Glue.Types.CheckSchemaVersionValidityResponse, AWSError>;
+  /**
+   * Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using DataFormat as the format. Since it does not take a schema set name, no compatibility checks are performed.
+   */
+  checkSchemaVersionValidity(callback?: (err: AWSError, data: Glue.Types.CheckSchemaVersionValidityResponse) => void): Request<Glue.Types.CheckSchemaVersionValidityResponse, AWSError>;
+  /**
    * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
@@ -187,6 +195,22 @@ declare class Glue extends Service {
    * Creates a new partition.
    */
   createPartition(callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
+  /**
+   * Creates a new registry which may be used to hold a collection of schemas.
+   */
+  createRegistry(params: Glue.Types.CreateRegistryInput, callback?: (err: AWSError, data: Glue.Types.CreateRegistryResponse) => void): Request<Glue.Types.CreateRegistryResponse, AWSError>;
+  /**
+   * Creates a new registry which may be used to hold a collection of schemas.
+   */
+  createRegistry(callback?: (err: AWSError, data: Glue.Types.CreateRegistryResponse) => void): Request<Glue.Types.CreateRegistryResponse, AWSError>;
+  /**
+   * Creates a new schema set and registers the schema definition. Returns an error if the schema set already exists without actually registering the version. When the schema set is created, a version checkpoint will be set to the first version. Compatibility mode "DISABLED" restricts any additional schema versions from being added after the first schema version. For all other compatibility modes, validation of compatibility settings will be applied only from the second version onwards when the RegisterSchemaVersion API is used. When this API is called without a RegistryId, this will create an entry for a "default-registry" in the registry database tables, if it is not already present.
+   */
+  createSchema(params: Glue.Types.CreateSchemaInput, callback?: (err: AWSError, data: Glue.Types.CreateSchemaResponse) => void): Request<Glue.Types.CreateSchemaResponse, AWSError>;
+  /**
+   * Creates a new schema set and registers the schema definition. Returns an error if the schema set already exists without actually registering the version. When the schema set is created, a version checkpoint will be set to the first version. Compatibility mode "DISABLED" restricts any additional schema versions from being added after the first schema version. For all other compatibility modes, validation of compatibility settings will be applied only from the second version onwards when the RegisterSchemaVersion API is used. When this API is called without a RegistryId, this will create an entry for a "default-registry" in the registry database tables, if it is not already present.
+   */
+  createSchema(callback?: (err: AWSError, data: Glue.Types.CreateSchemaResponse) => void): Request<Glue.Types.CreateSchemaResponse, AWSError>;
   /**
    * Transforms a directed acyclic graph (DAG) into code.
    */
@@ -316,6 +340,14 @@ declare class Glue extends Service {
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
+   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
+   */
+  deleteRegistry(params: Glue.Types.DeleteRegistryInput, callback?: (err: AWSError, data: Glue.Types.DeleteRegistryResponse) => void): Request<Glue.Types.DeleteRegistryResponse, AWSError>;
+  /**
+   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
+   */
+  deleteRegistry(callback?: (err: AWSError, data: Glue.Types.DeleteRegistryResponse) => void): Request<Glue.Types.DeleteRegistryResponse, AWSError>;
+  /**
    * Deletes a specified policy.
    */
   deleteResourcePolicy(params: Glue.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
@@ -323,6 +355,22 @@ declare class Glue extends Service {
    * Deletes a specified policy.
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
+   */
+  deleteSchema(params: Glue.Types.DeleteSchemaInput, callback?: (err: AWSError, data: Glue.Types.DeleteSchemaResponse) => void): Request<Glue.Types.DeleteSchemaResponse, AWSError>;
+  /**
+   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
+   */
+  deleteSchema(callback?: (err: AWSError, data: Glue.Types.DeleteSchemaResponse) => void): Request<Glue.Types.DeleteSchemaResponse, AWSError>;
+  /**
+   * Remove versions from the specified schema. A version number or range may be supplied. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned. Calling the GetSchemaVersions API after this call will list the status of the deleted versions. When the range of version numbers contain check pointed version, the API will return a 409 conflict and will not proceed with the deletion. You have to remove the checkpoint first using the DeleteSchemaCheckpoint API before using this API. You cannot use the DeleteSchemaVersions API to delete the first schema version in the schema set. The first schema version can only be deleted by the DeleteSchema API. This operation will also delete the attached SchemaVersionMetadata under the schema versions. Hard deletes will be enforced on the database. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned.
+   */
+  deleteSchemaVersions(params: Glue.Types.DeleteSchemaVersionsInput, callback?: (err: AWSError, data: Glue.Types.DeleteSchemaVersionsResponse) => void): Request<Glue.Types.DeleteSchemaVersionsResponse, AWSError>;
+  /**
+   * Remove versions from the specified schema. A version number or range may be supplied. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned. Calling the GetSchemaVersions API after this call will list the status of the deleted versions. When the range of version numbers contain check pointed version, the API will return a 409 conflict and will not proceed with the deletion. You have to remove the checkpoint first using the DeleteSchemaCheckpoint API before using this API. You cannot use the DeleteSchemaVersions API to delete the first schema version in the schema set. The first schema version can only be deleted by the DeleteSchema API. This operation will also delete the attached SchemaVersionMetadata under the schema versions. Hard deletes will be enforced on the database. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned.
+   */
+  deleteSchemaVersions(callback?: (err: AWSError, data: Glue.Types.DeleteSchemaVersionsResponse) => void): Request<Glue.Types.DeleteSchemaVersionsResponse, AWSError>;
   /**
    * Deletes a specified security configuration.
    */
@@ -612,6 +660,14 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Describes the specified registry in detail.
+   */
+  getRegistry(params: Glue.Types.GetRegistryInput, callback?: (err: AWSError, data: Glue.Types.GetRegistryResponse) => void): Request<Glue.Types.GetRegistryResponse, AWSError>;
+  /**
+   * Describes the specified registry in detail.
+   */
+  getRegistry(callback?: (err: AWSError, data: Glue.Types.GetRegistryResponse) => void): Request<Glue.Types.GetRegistryResponse, AWSError>;
+  /**
    * Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy. This operation also returns the Data Catalog resource policy. However, if you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy.
    */
   getResourcePolicies(params: Glue.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePoliciesResponse) => void): Request<Glue.Types.GetResourcePoliciesResponse, AWSError>;
@@ -627,6 +683,38 @@ declare class Glue extends Service {
    * Retrieves a specified resource policy.
    */
   getResourcePolicy(callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Describes the specified schema in detail.
+   */
+  getSchema(params: Glue.Types.GetSchemaInput, callback?: (err: AWSError, data: Glue.Types.GetSchemaResponse) => void): Request<Glue.Types.GetSchemaResponse, AWSError>;
+  /**
+   * Describes the specified schema in detail.
+   */
+  getSchema(callback?: (err: AWSError, data: Glue.Types.GetSchemaResponse) => void): Request<Glue.Types.GetSchemaResponse, AWSError>;
+  /**
+   * Retrieves a schema by the SchemaDefinition. The schema definition is sent to the Schema Registry, canonicalized, and hashed. If the hash is matched within the scope of the SchemaName or ARN (or the default registry, if none is supplied), that schema’s metadata is returned. Otherwise, a 404 or NotFound error is returned. Schema versions in Deleted statuses will not be included in the results.
+   */
+  getSchemaByDefinition(params: Glue.Types.GetSchemaByDefinitionInput, callback?: (err: AWSError, data: Glue.Types.GetSchemaByDefinitionResponse) => void): Request<Glue.Types.GetSchemaByDefinitionResponse, AWSError>;
+  /**
+   * Retrieves a schema by the SchemaDefinition. The schema definition is sent to the Schema Registry, canonicalized, and hashed. If the hash is matched within the scope of the SchemaName or ARN (or the default registry, if none is supplied), that schema’s metadata is returned. Otherwise, a 404 or NotFound error is returned. Schema versions in Deleted statuses will not be included in the results.
+   */
+  getSchemaByDefinition(callback?: (err: AWSError, data: Glue.Types.GetSchemaByDefinitionResponse) => void): Request<Glue.Types.GetSchemaByDefinitionResponse, AWSError>;
+  /**
+   * Get the specified schema by its unique ID assigned when a version of the schema is created or registered. Schema versions in Deleted status will not be included in the results.
+   */
+  getSchemaVersion(params: Glue.Types.GetSchemaVersionInput, callback?: (err: AWSError, data: Glue.Types.GetSchemaVersionResponse) => void): Request<Glue.Types.GetSchemaVersionResponse, AWSError>;
+  /**
+   * Get the specified schema by its unique ID assigned when a version of the schema is created or registered. Schema versions in Deleted status will not be included in the results.
+   */
+  getSchemaVersion(callback?: (err: AWSError, data: Glue.Types.GetSchemaVersionResponse) => void): Request<Glue.Types.GetSchemaVersionResponse, AWSError>;
+  /**
+   * Fetches the schema version difference in the specified difference type between two stored schema versions in the Schema Registry. This API allows you to compare two schema versions between two schema definitions under the same schema.
+   */
+  getSchemaVersionsDiff(params: Glue.Types.GetSchemaVersionsDiffInput, callback?: (err: AWSError, data: Glue.Types.GetSchemaVersionsDiffResponse) => void): Request<Glue.Types.GetSchemaVersionsDiffResponse, AWSError>;
+  /**
+   * Fetches the schema version difference in the specified difference type between two stored schema versions in the Schema Registry. This API allows you to compare two schema versions between two schema definitions under the same schema.
+   */
+  getSchemaVersionsDiff(callback?: (err: AWSError, data: Glue.Types.GetSchemaVersionsDiffResponse) => void): Request<Glue.Types.GetSchemaVersionsDiffResponse, AWSError>;
   /**
    * Retrieves a specified security configuration.
    */
@@ -788,6 +876,30 @@ declare class Glue extends Service {
    */
   listMLTransforms(callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
   /**
+   * Returns a list of registries that you have created, with minimal registry information. Registries in the Deleting status will not be included in the results. Empty results will be returned if there are no registries available.
+   */
+  listRegistries(params: Glue.Types.ListRegistriesInput, callback?: (err: AWSError, data: Glue.Types.ListRegistriesResponse) => void): Request<Glue.Types.ListRegistriesResponse, AWSError>;
+  /**
+   * Returns a list of registries that you have created, with minimal registry information. Registries in the Deleting status will not be included in the results. Empty results will be returned if there are no registries available.
+   */
+  listRegistries(callback?: (err: AWSError, data: Glue.Types.ListRegistriesResponse) => void): Request<Glue.Types.ListRegistriesResponse, AWSError>;
+  /**
+   * Returns a list of schema versions that you have created, with minimal information. Schema versions in Deleted status will not be included in the results. Empty results will be returned if there are no schema versions available.
+   */
+  listSchemaVersions(params: Glue.Types.ListSchemaVersionsInput, callback?: (err: AWSError, data: Glue.Types.ListSchemaVersionsResponse) => void): Request<Glue.Types.ListSchemaVersionsResponse, AWSError>;
+  /**
+   * Returns a list of schema versions that you have created, with minimal information. Schema versions in Deleted status will not be included in the results. Empty results will be returned if there are no schema versions available.
+   */
+  listSchemaVersions(callback?: (err: AWSError, data: Glue.Types.ListSchemaVersionsResponse) => void): Request<Glue.Types.ListSchemaVersionsResponse, AWSError>;
+  /**
+   * Returns a list of schemas with minimal details. Schemas in Deleting status will not be included in the results. Empty results will be returned if there are no schemas available. When the RegistryId is not provided, all the schemas across registries will be part of the API response.
+   */
+  listSchemas(params: Glue.Types.ListSchemasInput, callback?: (err: AWSError, data: Glue.Types.ListSchemasResponse) => void): Request<Glue.Types.ListSchemasResponse, AWSError>;
+  /**
+   * Returns a list of schemas with minimal details. Schemas in Deleting status will not be included in the results. Empty results will be returned if there are no schemas available. When the RegistryId is not provided, all the schemas across registries will be part of the API response.
+   */
+  listSchemas(callback?: (err: AWSError, data: Glue.Types.ListSchemasResponse) => void): Request<Glue.Types.ListSchemasResponse, AWSError>;
+  /**
    * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
@@ -820,6 +932,14 @@ declare class Glue extends Service {
    */
   putResourcePolicy(callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
   /**
+   * Puts the metadata key value pair for a specified schema version ID. A maximum of 10 key value pairs will be allowed per schema version. They can be added over one or more calls.
+   */
+  putSchemaVersionMetadata(params: Glue.Types.PutSchemaVersionMetadataInput, callback?: (err: AWSError, data: Glue.Types.PutSchemaVersionMetadataResponse) => void): Request<Glue.Types.PutSchemaVersionMetadataResponse, AWSError>;
+  /**
+   * Puts the metadata key value pair for a specified schema version ID. A maximum of 10 key value pairs will be allowed per schema version. They can be added over one or more calls.
+   */
+  putSchemaVersionMetadata(callback?: (err: AWSError, data: Glue.Types.PutSchemaVersionMetadataResponse) => void): Request<Glue.Types.PutSchemaVersionMetadataResponse, AWSError>;
+  /**
    * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
    */
   putWorkflowRunProperties(params: Glue.Types.PutWorkflowRunPropertiesRequest, callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
@@ -827,6 +947,30 @@ declare class Glue extends Service {
    * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
    */
   putWorkflowRunProperties(callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Queries for the schema version metadata information. 
+   */
+  querySchemaVersionMetadata(params: Glue.Types.QuerySchemaVersionMetadataInput, callback?: (err: AWSError, data: Glue.Types.QuerySchemaVersionMetadataResponse) => void): Request<Glue.Types.QuerySchemaVersionMetadataResponse, AWSError>;
+  /**
+   * Queries for the schema version metadata information. 
+   */
+  querySchemaVersionMetadata(callback?: (err: AWSError, data: Glue.Types.QuerySchemaVersionMetadataResponse) => void): Request<Glue.Types.QuerySchemaVersionMetadataResponse, AWSError>;
+  /**
+   * Adds a new version to the existing schema. Returns an error if new version of schema does not meet the compatibility requirements of the schema set. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry. If this is the first schema definition to be registered in the Schema Registry, this API will store the schema version and return immediately. Otherwise, this call has the potential to run longer than other operations due to compatibility modes. You can call the GetSchemaVersion API with the SchemaVersionId to check compatibility modes. If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.
+   */
+  registerSchemaVersion(params: Glue.Types.RegisterSchemaVersionInput, callback?: (err: AWSError, data: Glue.Types.RegisterSchemaVersionResponse) => void): Request<Glue.Types.RegisterSchemaVersionResponse, AWSError>;
+  /**
+   * Adds a new version to the existing schema. Returns an error if new version of schema does not meet the compatibility requirements of the schema set. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry. If this is the first schema definition to be registered in the Schema Registry, this API will store the schema version and return immediately. Otherwise, this call has the potential to run longer than other operations due to compatibility modes. You can call the GetSchemaVersion API with the SchemaVersionId to check compatibility modes. If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.
+   */
+  registerSchemaVersion(callback?: (err: AWSError, data: Glue.Types.RegisterSchemaVersionResponse) => void): Request<Glue.Types.RegisterSchemaVersionResponse, AWSError>;
+  /**
+   * Removes a key value pair from the schema version metadata for the specified schema version ID.
+   */
+  removeSchemaVersionMetadata(params: Glue.Types.RemoveSchemaVersionMetadataInput, callback?: (err: AWSError, data: Glue.Types.RemoveSchemaVersionMetadataResponse) => void): Request<Glue.Types.RemoveSchemaVersionMetadataResponse, AWSError>;
+  /**
+   * Removes a key value pair from the schema version metadata for the specified schema version ID.
+   */
+  removeSchemaVersionMetadata(callback?: (err: AWSError, data: Glue.Types.RemoveSchemaVersionMetadataResponse) => void): Request<Glue.Types.RemoveSchemaVersionMetadataResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -1059,6 +1203,22 @@ declare class Glue extends Service {
    * Updates a partition.
    */
   updatePartition(callback?: (err: AWSError, data: Glue.Types.UpdatePartitionResponse) => void): Request<Glue.Types.UpdatePartitionResponse, AWSError>;
+  /**
+   * Updates an existing registry which is used to hold a collection of schemas. The updated properties relate to the registry, and do not modify any of the schemas within the registry. 
+   */
+  updateRegistry(params: Glue.Types.UpdateRegistryInput, callback?: (err: AWSError, data: Glue.Types.UpdateRegistryResponse) => void): Request<Glue.Types.UpdateRegistryResponse, AWSError>;
+  /**
+   * Updates an existing registry which is used to hold a collection of schemas. The updated properties relate to the registry, and do not modify any of the schemas within the registry. 
+   */
+  updateRegistry(callback?: (err: AWSError, data: Glue.Types.UpdateRegistryResponse) => void): Request<Glue.Types.UpdateRegistryResponse, AWSError>;
+  /**
+   * Updates the description, compatibility setting, or version checkpoint for a schema set. For updating the compatibility setting, the call will not validate compatibility for the entire set of schema versions with the new compatibility setting. If the value for Compatibility is provided, the VersionNumber (a checkpoint) is also required. The API will validate the checkpoint version number for consistency. If the value for the VersionNumber (checkpoint) is provided, Compatibility is optional and this can be used to set/reset a checkpoint for the schema. This update will happen only if the schema is in the AVAILABLE state.
+   */
+  updateSchema(params: Glue.Types.UpdateSchemaInput, callback?: (err: AWSError, data: Glue.Types.UpdateSchemaResponse) => void): Request<Glue.Types.UpdateSchemaResponse, AWSError>;
+  /**
+   * Updates the description, compatibility setting, or version checkpoint for a schema set. For updating the compatibility setting, the call will not validate compatibility for the entire set of schema versions with the new compatibility setting. If the value for Compatibility is provided, the VersionNumber (a checkpoint) is also required. The API will validate the checkpoint version number for consistency. If the value for the VersionNumber (checkpoint) is provided, Compatibility is optional and this can be used to set/reset a checkpoint for the schema. This update will happen only if the schema is in the AVAILABLE state.
+   */
+  updateSchema(callback?: (err: AWSError, data: Glue.Types.UpdateSchemaResponse) => void): Request<Glue.Types.UpdateSchemaResponse, AWSError>;
   /**
    * Updates a metadata table in the Data Catalog.
    */
@@ -1539,6 +1699,26 @@ declare namespace Glue {
     Tables: CatalogTablesList;
   }
   export type CatalogTargetList = CatalogTarget[];
+  export interface CheckSchemaVersionValidityInput {
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat: DataFormat;
+    /**
+     * The definition of the schema that has to be validated.
+     */
+    SchemaDefinition: SchemaDefinitionString;
+  }
+  export interface CheckSchemaVersionValidityResponse {
+    /**
+     * Return true, if the schema is valid and false otherwise.
+     */
+    Valid?: IsVersionValid;
+    /**
+     * A validation failure error message.
+     */
+    Error?: SchemaValidationError;
+  }
   export type Classification = string;
   export interface Classifier {
     /**
@@ -1723,6 +1903,7 @@ declare namespace Glue {
   export type ColumnValuesString = string;
   export type CommentString = string;
   export type Comparator = "EQUALS"|"GREATER_THAN"|"LESS_THAN"|"GREATER_THAN_EQUALS"|"LESS_THAN_EQUALS"|string;
+  export type Compatibility = "NONE"|"DISABLED"|"BACKWARD"|"BACKWARD_ALL"|"FORWARD"|"FORWARD_ALL"|"FULL"|"FULL_ALL"|string;
   export interface Condition {
     /**
      * A logical operator.
@@ -2481,6 +2662,126 @@ declare namespace Glue {
   }
   export interface CreatePartitionResponse {
   }
+  export interface CreateRegistryInput {
+    /**
+     * Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark. No whitespace.
+     */
+    RegistryName: SchemaRegistryNameString;
+    /**
+     * A description of the registry. If description is not provided, there will not be any default value for this.
+     */
+    Description?: DescriptionString;
+    /**
+     * AWS tags that contain a key value pair and may be searched by console, command line, or API.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateRegistryResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the newly created registry.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * A description of the registry.
+     */
+    Description?: DescriptionString;
+    /**
+     * The tags for the registry.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateSchemaInput {
+    /**
+     *  This is a wrapper shape to contain the registry identity fields. If this is not provided, the default registry will be used. The ARN format for the same will be: arn:aws:glue:us-east-2:&lt;customer id&gt;:registry/default-registry:random-5-letter-id.
+     */
+    RegistryId?: RegistryId;
+    /**
+     * Name of the schema to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark. No whitespace.
+     */
+    SchemaName: SchemaRegistryNameString;
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat: DataFormat;
+    /**
+     * The compatibility mode of the schema. The possible values are:    NONE: No compatibility mode applies. You can use this choice in development scenarios or if you do not know the compatibility mode that you want to apply to schemas. Any new version added will be accepted without undergoing a compatibility check.    DISABLED: This compatibility choice prevents versioning for a particular schema. You can use this choice to prevent future versioning of a schema.    BACKWARD: This compatibility choice is recommended as it allows data receivers to read both the current and one previous schema version. This means that for instance, a new schema version cannot drop data fields or change the type of these fields, so they can't be read by readers using the previous version.    BACKWARD_ALL: This compatibility choice allows data receivers to read both the current and all previous schema versions. You can use this choice when you need to delete fields or add optional fields, and check compatibility against all previous schema versions.     FORWARD: This compatibility choice allows data receivers to read both the current and one next schema version, but not necessarily later versions. You can use this choice when you need to add fields or delete optional fields, but only check compatibility against the last schema version.    FORWARD_ALL: This compatibility choice allows data receivers to read written by producers of any new registered schema. You can use this choice when you need to add fields or delete optional fields, and check compatibility against all previous schema versions.    FULL: This compatibility choice allows data receivers to read data written by producers using the previous or next version of the schema, but not necessarily earlier or later versions. You can use this choice when you need to add or remove optional fields, but only check compatibility against the last schema version.    FULL_ALL: This compatibility choice allows data receivers to read data written by producers using all previous schema versions. You can use this choice when you need to add or remove optional fields, and check compatibility against all previous schema versions.  
+     */
+    Compatibility?: Compatibility;
+    /**
+     * An optional description of the schema. If description is not provided, there will not be any automatic default value for this.
+     */
+    Description?: DescriptionString;
+    /**
+     * AWS tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the AWS tags-on-create pattern.
+     */
+    Tags?: TagsMap;
+    /**
+     * The schema definition using the DataFormat setting for SchemaName.
+     */
+    SchemaDefinition?: SchemaDefinitionString;
+  }
+  export interface CreateSchemaResponse {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the registry.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * The name of the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * A description of the schema if specified when created.
+     */
+    Description?: DescriptionString;
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat?: DataFormat;
+    /**
+     * The schema compatibility mode.
+     */
+    Compatibility?: Compatibility;
+    /**
+     * The version number of the checkpoint (the last time the compatibility mode was changed).
+     */
+    SchemaCheckpoint?: SchemaCheckpointNumber;
+    /**
+     * The latest version of the schema associated with the returned schema definition.
+     */
+    LatestSchemaVersion?: VersionLongNumber;
+    /**
+     * The next version of the schema associated with the returned schema definition.
+     */
+    NextSchemaVersion?: VersionLongNumber;
+    /**
+     * The status of the schema. 
+     */
+    SchemaStatus?: SchemaStatus;
+    /**
+     * The tags for the schema.
+     */
+    Tags?: TagsMap;
+    /**
+     * The unique identifier of the first schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The status of the first schema version created.
+     */
+    SchemaVersionStatus?: SchemaVersionStatus;
+  }
   export interface CreateScriptRequest {
     /**
      * A list of the nodes in the DAG.
@@ -2647,6 +2948,7 @@ declare namespace Glue {
      */
     RowTag?: RowTag;
   }
+  export type CreatedTimestamp = string;
   export type CronExpression = string;
   export interface CsvClassifier {
     /**
@@ -2707,6 +3009,7 @@ declare namespace Glue {
      */
     ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
   }
+  export type DataFormat = "AVRO"|string;
   export interface DataLakePrincipal {
     /**
      * An identifier for the AWS Lake Formation principal.
@@ -2970,6 +3273,26 @@ declare namespace Glue {
   }
   export interface DeletePartitionResponse {
   }
+  export interface DeleteRegistryInput {
+    /**
+     * This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+     */
+    RegistryId: RegistryId;
+  }
+  export interface DeleteRegistryResponse {
+    /**
+     * The name of the registry being deleted.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the registry being deleted.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * The status of the registry. A successful operation will return the Deleting status.
+     */
+    Status?: RegistryStatus;
+  }
   export interface DeleteResourcePolicyRequest {
     /**
      * The hash value returned when this policy was set.
@@ -2981,6 +3304,42 @@ declare namespace Glue {
     ResourceArn?: GlueResourceArn;
   }
   export interface DeleteResourcePolicyResponse {
+  }
+  export interface DeleteSchemaInput {
+    /**
+     * This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+     */
+    SchemaId: SchemaId;
+  }
+  export interface DeleteSchemaResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the schema being deleted.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The name of the schema being deleted.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The status of the schema.
+     */
+    Status?: SchemaStatus;
+  }
+  export interface DeleteSchemaVersionsInput {
+    /**
+     * This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+     */
+    SchemaId: SchemaId;
+    /**
+     * A version range may be supplied which may be of the format:   a single version number, 5   a range, 5-8 : deletes versions 5, 6, 7, 8  
+     */
+    Versions: VersionsString;
+  }
+  export interface DeleteSchemaVersionsResponse {
+    /**
+     * A list of SchemaVersionErrorItem objects, each containing an error and schema version.
+     */
+    SchemaVersionErrors?: SchemaVersionErrorList;
   }
   export interface DeleteSecurityConfigurationRequest {
     /**
@@ -3254,6 +3613,7 @@ declare namespace Glue {
     JobBookmarksEncryption?: JobBookmarksEncryption;
   }
   export type ErrorByName = {[key: string]: ErrorDetail};
+  export type ErrorCodeString = string;
   export interface ErrorDetail {
     /**
      * The code associated with this error.
@@ -3264,6 +3624,17 @@ declare namespace Glue {
      */
     ErrorMessage?: DescriptionString;
   }
+  export interface ErrorDetails {
+    /**
+     * The error code for an error.
+     */
+    ErrorCode?: ErrorCodeString;
+    /**
+     * The error message for an error.
+     */
+    ErrorMessage?: ErrorMessageString;
+  }
+  export type ErrorMessageString = string;
   export type ErrorString = string;
   export interface EvaluationMetrics {
     /**
@@ -4112,6 +4483,38 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface GetRegistryInput {
+    /**
+     * This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+     */
+    RegistryId: RegistryId;
+  }
+  export interface GetRegistryResponse {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the registry.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * A description of the registry.
+     */
+    Description?: DescriptionString;
+    /**
+     * The status of the registry.
+     */
+    Status?: RegistryStatus;
+    /**
+     * The date and time the registry was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+    /**
+     * The date and time the registry was updated.
+     */
+    UpdatedTime?: UpdatedTimestamp;
+  }
   export interface GetResourcePoliciesRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -4156,6 +4559,166 @@ declare namespace Glue {
      * The date and time at which the policy was last updated.
      */
     UpdateTime?: Timestamp;
+  }
+  export interface GetSchemaByDefinitionInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of SchemaArn or SchemaName has to be provided.   SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName has to be provided.  
+     */
+    SchemaId: SchemaId;
+    /**
+     * The definition of the schema for which schema details are required.
+     */
+    SchemaDefinition: SchemaDefinitionString;
+  }
+  export interface GetSchemaByDefinitionResponse {
+    /**
+     * The schema ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat?: DataFormat;
+    /**
+     * The status of the schema version.
+     */
+    Status?: SchemaVersionStatus;
+    /**
+     * The date and time the schema was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+  }
+  export interface GetSchemaInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.   SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.  
+     */
+    SchemaId: SchemaId;
+  }
+  export interface GetSchemaResponse {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the registry.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * The name of the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * A description of schema if specified when created
+     */
+    Description?: DescriptionString;
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat?: DataFormat;
+    /**
+     * The compatibility mode of the schema.
+     */
+    Compatibility?: Compatibility;
+    /**
+     * The version number of the checkpoint (the last time the compatibility mode was changed).
+     */
+    SchemaCheckpoint?: SchemaCheckpointNumber;
+    /**
+     * The latest version of the schema associated with the returned schema definition.
+     */
+    LatestSchemaVersion?: VersionLongNumber;
+    /**
+     * The next version of the schema associated with the returned schema definition.
+     */
+    NextSchemaVersion?: VersionLongNumber;
+    /**
+     * The status of the schema.
+     */
+    SchemaStatus?: SchemaStatus;
+    /**
+     * The date and time the schema was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+    /**
+     * The date and time the schema was updated.
+     */
+    UpdatedTime?: UpdatedTimestamp;
+  }
+  export interface GetSchemaVersionInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.   SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.  
+     */
+    SchemaId?: SchemaId;
+    /**
+     * The SchemaVersionId of the schema version. This field is required for fetching by schema ID. Either this or the SchemaId wrapper has to be provided.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The version number of the schema.
+     */
+    SchemaVersionNumber?: SchemaVersionNumber;
+  }
+  export interface GetSchemaVersionResponse {
+    /**
+     * The SchemaVersionId of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The schema definition for the schema ID.
+     */
+    SchemaDefinition?: SchemaDefinitionString;
+    /**
+     * The data format of the schema definition. Currently only AVRO is supported.
+     */
+    DataFormat?: DataFormat;
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The version number of the schema.
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The status of the schema version. 
+     */
+    Status?: SchemaVersionStatus;
+    /**
+     * The date and time the schema version was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+  }
+  export interface GetSchemaVersionsDiffInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of SchemaArn or SchemaName has to be provided.   SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName has to be provided.  
+     */
+    SchemaId: SchemaId;
+    /**
+     * The first of the two schema versions to be compared.
+     */
+    FirstSchemaVersionNumber: SchemaVersionNumber;
+    /**
+     * The second of the two schema versions to be compared.
+     */
+    SecondSchemaVersionNumber: SchemaVersionNumber;
+    /**
+     * Refers to SYNTAX_DIFF, which is the currently supported diff type.
+     */
+    SchemaDiffType: SchemaDiffType;
+  }
+  export interface GetSchemaVersionsDiffResponse {
+    /**
+     * The difference between schemas as a string in JsonPatch format.
+     */
+    Diff?: SchemaDefinitionDiff;
   }
   export interface GetSecurityConfigurationRequest {
     /**
@@ -4571,6 +5134,7 @@ declare namespace Glue {
   export type Integer = number;
   export type IntegerFlag = number;
   export type IntegerValue = number;
+  export type IsVersionValid = boolean;
   export interface JdbcTarget {
     /**
      * The name of the connection to use to connect to the JDBC target.
@@ -4967,6 +5531,7 @@ declare namespace Glue {
     StartTime?: Timestamp;
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export type LatestSchemaVersionBoolean = boolean;
   export interface ListCrawlersRequest {
     /**
      * The maximum size of a list to return.
@@ -5070,6 +5635,74 @@ declare namespace Glue {
      * A continuation token, if the returned list does not contain the last metric available.
      */
     NextToken?: PaginationToken;
+  }
+  export interface ListRegistriesInput {
+    /**
+     * Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.
+     */
+    MaxResults?: MaxResultsNumber;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export interface ListRegistriesResponse {
+    /**
+     * An array of RegistryDetailedListItem objects containing minimal details of each registry.
+     */
+    Registries?: RegistryListDefinition;
+    /**
+     * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export interface ListSchemaVersionsInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.   SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.  
+     */
+    SchemaId: SchemaId;
+    /**
+     * Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.
+     */
+    MaxResults?: MaxResultsNumber;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export interface ListSchemaVersionsResponse {
+    /**
+     * An array of SchemaVersionList objects containing details of each schema version.
+     */
+    Schemas?: SchemaVersionList;
+    /**
+     * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export interface ListSchemasInput {
+    /**
+     * A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+     */
+    RegistryId?: RegistryId;
+    /**
+     * Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.
+     */
+    MaxResults?: MaxResultsNumber;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export interface ListSchemasResponse {
+    /**
+     * An array of SchemaListItem objects containing details of each schema.
+     */
+    Schemas?: SchemaListDefinition;
+    /**
+     * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
+     */
+    NextToken?: SchemaRegistryTokenString;
   }
   export interface ListTriggersRequest {
     /**
@@ -5277,8 +5910,33 @@ declare namespace Glue {
   export type MappingList = MappingEntry[];
   export type MatchCriteria = NameString[];
   export type MaxConcurrentRuns = number;
+  export type MaxResultsNumber = number;
   export type MaxRetries = number;
   export type MessagePrefix = string;
+  export interface MetadataInfo {
+    /**
+     * The metadata key’s corresponding value.
+     */
+    MetadataValue?: MetadataValueString;
+    /**
+     * The time at which the entry was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+  }
+  export type MetadataInfoMap = {[key: string]: MetadataInfo};
+  export type MetadataKeyString = string;
+  export interface MetadataKeyValuePair {
+    /**
+     * A metadata key.
+     */
+    MetadataKey?: MetadataKeyString;
+    /**
+     * A metadata key’s corresponding value.
+     */
+    MetadataValue?: MetadataValueString;
+  }
+  export type MetadataList = MetadataKeyValuePair[];
+  export type MetadataValueString = string;
   export type MillisecondsCount = number;
   export interface MongoDBTarget {
     /**
@@ -5569,6 +6227,58 @@ declare namespace Glue {
      */
     PolicyHash?: HashString;
   }
+  export interface PutSchemaVersionMetadataInput {
+    /**
+     * The unique ID for the schema.
+     */
+    SchemaId?: SchemaId;
+    /**
+     * The version number of the schema.
+     */
+    SchemaVersionNumber?: SchemaVersionNumber;
+    /**
+     * The unique version ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The metadata key's corresponding value.
+     */
+    MetadataKeyValue: MetadataKeyValuePair;
+  }
+  export interface PutSchemaVersionMetadataResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The name for the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The name for the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The latest version of the schema.
+     */
+    LatestVersion?: LatestSchemaVersionBoolean;
+    /**
+     * The version number of the schema.
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The unique version ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The metadata key.
+     */
+    MetadataKey?: MetadataKeyString;
+    /**
+     * The value of the metadata key.
+     */
+    MetadataValue?: MetadataValueString;
+  }
   export interface PutWorkflowRunPropertiesRequest {
     /**
      * Name of the workflow which was run.
@@ -5587,6 +6297,47 @@ declare namespace Glue {
   }
   export type PythonScript = string;
   export type PythonVersionString = string;
+  export interface QuerySchemaVersionMetadataInput {
+    /**
+     * A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+     */
+    SchemaId?: SchemaId;
+    /**
+     * The version number of the schema.
+     */
+    SchemaVersionNumber?: SchemaVersionNumber;
+    /**
+     * The unique version ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * Search key-value pairs for metadata, if they are not provided all the metadata information will be fetched.
+     */
+    MetadataList?: MetadataList;
+    /**
+     * Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.
+     */
+    MaxResults?: QuerySchemaVersionMetadataMaxResults;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
+  export type QuerySchemaVersionMetadataMaxResults = number;
+  export interface QuerySchemaVersionMetadataResponse {
+    /**
+     * A map of a metadata key and associated values.
+     */
+    MetadataInfoMap?: MetadataInfoMap;
+    /**
+     * The unique version ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
+     */
+    NextToken?: SchemaRegistryTokenString;
+  }
   export type RecordsCount = number;
   export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|string;
   export interface RecrawlPolicy {
@@ -5594,6 +6345,120 @@ declare namespace Glue {
      * Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run.
      */
     RecrawlBehavior?: RecrawlBehavior;
+  }
+  export interface RegisterSchemaVersionInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.   SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.  
+     */
+    SchemaId: SchemaId;
+    /**
+     * The schema definition using the DataFormat setting for the SchemaName.
+     */
+    SchemaDefinition: SchemaDefinitionString;
+  }
+  export interface RegisterSchemaVersionResponse {
+    /**
+     * The unique ID that represents the version of this schema.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The version of this schema (for sync flow only, in case this is the first version).
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The status of the schema version.
+     */
+    Status?: SchemaVersionStatus;
+  }
+  export interface RegistryId {
+    /**
+     * Name of the registry. Used only for lookup. One of RegistryArn or RegistryName has to be provided. 
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * Arn of the registry to be updated. One of RegistryArn or RegistryName has to be provided.
+     */
+    RegistryArn?: GlueResourceArn;
+  }
+  export type RegistryListDefinition = RegistryListItem[];
+  export interface RegistryListItem {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) of the registry.
+     */
+    RegistryArn?: GlueResourceArn;
+    /**
+     * A description of the registry.
+     */
+    Description?: DescriptionString;
+    /**
+     * The status of the registry.
+     */
+    Status?: RegistryStatus;
+    /**
+     * The data the registry was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+    /**
+     * The date the registry was updated.
+     */
+    UpdatedTime?: UpdatedTimestamp;
+  }
+  export type RegistryStatus = "AVAILABLE"|"DELETING"|string;
+  export interface RemoveSchemaVersionMetadataInput {
+    /**
+     * A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+     */
+    SchemaId?: SchemaId;
+    /**
+     * The version number of the schema.
+     */
+    SchemaVersionNumber?: SchemaVersionNumber;
+    /**
+     * The unique version ID of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The value of the metadata key.
+     */
+    MetadataKeyValue: MetadataKeyValuePair;
+  }
+  export interface RemoveSchemaVersionMetadataResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The name of the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The latest version of the schema.
+     */
+    LatestVersion?: LatestSchemaVersionBoolean;
+    /**
+     * The version number of the schema.
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The version ID for the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The metadata key.
+     */
+    MetadataKey?: MetadataKeyString;
+    /**
+     * The value of the metadata key.
+     */
+    MetadataValue?: MetadataValueString;
   }
   export type ReplaceBoolean = boolean;
   export interface ResetJobBookmarkRequest {
@@ -5703,6 +6568,7 @@ declare namespace Glue {
      */
     DeleteBehavior?: DeleteBehavior;
   }
+  export type SchemaCheckpointNumber = number;
   export interface SchemaColumn {
     /**
      * The name of the column.
@@ -5713,7 +6579,104 @@ declare namespace Glue {
      */
     DataType?: ColumnTypeString;
   }
+  export type SchemaDefinitionDiff = string;
+  export type SchemaDefinitionString = string;
+  export type SchemaDiffType = "SYNTAX_DIFF"|string;
+  export interface SchemaId {
+    SchemaArn?: GlueResourceArn;
+    SchemaName?: SchemaRegistryNameString;
+    RegistryName?: SchemaRegistryNameString;
+  }
+  export type SchemaListDefinition = SchemaListItem[];
+  export interface SchemaListItem {
+    /**
+     * the name of the registry where the schema resides.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The name of the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource Name (ARN) for the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * A description for the schema.
+     */
+    Description?: DescriptionString;
+    /**
+     * The status of the schema.
+     */
+    SchemaStatus?: SchemaStatus;
+    /**
+     * The date and time that a schema was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+    /**
+     * The date and time that a schema was updated.
+     */
+    UpdatedTime?: UpdatedTimestamp;
+  }
   export type SchemaPathString = string;
+  export interface SchemaReference {
+    /**
+     * A structure that contains schema identity fields. Either this or the SchemaVersionId has to be provided.
+     */
+    SchemaId?: SchemaId;
+    /**
+     * The unique ID assigned to a version of the schema. Either this or the SchemaId has to be provided.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The version number of the schema.
+     */
+    SchemaVersionNumber?: VersionLongNumber;
+  }
+  export type SchemaRegistryNameString = string;
+  export type SchemaRegistryTokenString = string;
+  export type SchemaStatus = "AVAILABLE"|"PENDING"|"DELETING"|string;
+  export type SchemaValidationError = string;
+  export interface SchemaVersionErrorItem {
+    /**
+     * The version number of the schema.
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The details of the error for the schema version.
+     */
+    ErrorDetails?: ErrorDetails;
+  }
+  export type SchemaVersionErrorList = SchemaVersionErrorItem[];
+  export type SchemaVersionIdString = string;
+  export type SchemaVersionList = SchemaVersionListItem[];
+  export interface SchemaVersionListItem {
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The unique identifier of the schema version.
+     */
+    SchemaVersionId?: SchemaVersionIdString;
+    /**
+     * The version number of the schema.
+     */
+    VersionNumber?: VersionLongNumber;
+    /**
+     * The status of the schema version.
+     */
+    Status?: SchemaVersionStatus;
+    /**
+     * The date and time the schema version was created.
+     */
+    CreatedTime?: CreatedTimestamp;
+  }
+  export interface SchemaVersionNumber {
+    LatestVersion?: LatestSchemaVersionBoolean;
+    VersionNumber?: VersionLongNumber;
+  }
+  export type SchemaVersionStatus = "AVAILABLE"|"PENDING"|"FAILURE"|"DELETING"|string;
   export type ScriptLocationString = string;
   export type SearchPropertyPredicates = PropertyPredicate[];
   export interface SearchTablesRequest {
@@ -6064,6 +7027,10 @@ declare namespace Glue {
      *  True if the table data is stored in subdirectories, or False if not.
      */
     StoredAsSubDirectories?: Boolean;
+    /**
+     * An object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.
+     */
+    SchemaReference?: SchemaReference;
   }
   export interface StringColumnStatisticsData {
     /**
@@ -6901,6 +7868,58 @@ declare namespace Glue {
   }
   export interface UpdatePartitionResponse {
   }
+  export interface UpdateRegistryInput {
+    /**
+     * This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+     */
+    RegistryId: RegistryId;
+    /**
+     * A description of the registry. If description is not provided, this field will not be updated.
+     */
+    Description: DescriptionString;
+  }
+  export interface UpdateRegistryResponse {
+    /**
+     * The name of the updated registry.
+     */
+    RegistryName?: SchemaRegistryNameString;
+    /**
+     * The Amazon Resource name (ARN) of the updated registry.
+     */
+    RegistryArn?: GlueResourceArn;
+  }
+  export interface UpdateSchemaInput {
+    /**
+     * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of SchemaArn or SchemaName has to be provided.   SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName has to be provided.  
+     */
+    SchemaId: SchemaId;
+    /**
+     * Version number required for check pointing. One of VersionNumber or Compatibility has to be provided.
+     */
+    SchemaVersionNumber?: SchemaVersionNumber;
+    /**
+     * The new compatibility setting for the schema.
+     */
+    Compatibility?: Compatibility;
+    /**
+     * The new description for the schema.
+     */
+    Description?: DescriptionString;
+  }
+  export interface UpdateSchemaResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the schema.
+     */
+    SchemaArn?: GlueResourceArn;
+    /**
+     * The name of the schema.
+     */
+    SchemaName?: SchemaRegistryNameString;
+    /**
+     * The name of the registry that contains the schema.
+     */
+    RegistryName?: SchemaRegistryNameString;
+  }
   export interface UpdateTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
@@ -6995,6 +8014,7 @@ declare namespace Glue {
      */
     RowTag?: RowTag;
   }
+  export type UpdatedTimestamp = string;
   export type UriString = string;
   export interface UserDefinedFunction {
     /**
@@ -7056,7 +8076,9 @@ declare namespace Glue {
   export type ValueString = string;
   export type ValueStringList = ValueString[];
   export type VersionId = number;
+  export type VersionLongNumber = number;
   export type VersionString = string;
+  export type VersionsString = string;
   export type ViewTextString = string;
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|string;
   export interface Workflow {

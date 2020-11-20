@@ -3036,6 +3036,10 @@
         "ResizeInfo": {
           "shape": "ResizeInfo",
           "documentation": "<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>"
+        },
+        "ClusterNamespaceArn": {
+          "shape": "String",
+          "documentation": "<p>The namespace Amazon Resource Name (ARN) of the cluster.</p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",

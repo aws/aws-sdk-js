@@ -28,6 +28,14 @@ declare class DirectoryService extends Service {
    */
   addIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
   /**
+   * Adds two domain controllers in the specified Region for the specified directory.
+   */
+  addRegion(params: DirectoryService.Types.AddRegionRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddRegionResult) => void): Request<DirectoryService.Types.AddRegionResult, AWSError>;
+  /**
+   * Adds two domain controllers in the specified Region for the specified directory.
+   */
+  addRegion(callback?: (err: AWSError, data: DirectoryService.Types.AddRegionResult) => void): Request<DirectoryService.Types.AddRegionResult, AWSError>;
+  /**
    * Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
   addTagsToResource(params: DirectoryService.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
@@ -60,11 +68,11 @@ declare class DirectoryService extends Service {
    */
   createAlias(callback?: (err: AWSError, data: DirectoryService.Types.CreateAliasResult) => void): Request<DirectoryService.Types.CreateAliasResult, AWSError>;
   /**
-   * Creates a computer account in the specified directory, and joins the computer to the directory.
+   * Creates an Active Directory computer object in the specified directory.
    */
   createComputer(params: DirectoryService.Types.CreateComputerRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateComputerResult) => void): Request<DirectoryService.Types.CreateComputerResult, AWSError>;
   /**
-   * Creates a computer account in the specified directory, and joins the computer to the directory.
+   * Creates an Active Directory computer object in the specified directory.
    */
   createComputer(callback?: (err: AWSError, data: DirectoryService.Types.CreateComputerResult) => void): Request<DirectoryService.Types.CreateComputerResult, AWSError>;
   /**
@@ -219,6 +227,14 @@ declare class DirectoryService extends Service {
    * Describes the status of LDAP security for the specified directory.
    */
   describeLDAPSSettings(callback?: (err: AWSError, data: DirectoryService.Types.DescribeLDAPSSettingsResult) => void): Request<DirectoryService.Types.DescribeLDAPSSettingsResult, AWSError>;
+  /**
+   * Provides information about the Regions that are configured for multi-Region replication.
+   */
+  describeRegions(params: DirectoryService.Types.DescribeRegionsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeRegionsResult) => void): Request<DirectoryService.Types.DescribeRegionsResult, AWSError>;
+  /**
+   * Provides information about the Regions that are configured for multi-Region replication.
+   */
+  describeRegions(callback?: (err: AWSError, data: DirectoryService.Types.DescribeRegionsResult) => void): Request<DirectoryService.Types.DescribeRegionsResult, AWSError>;
   /**
    * Returns the shared directories in your account. 
    */
@@ -380,6 +396,14 @@ declare class DirectoryService extends Service {
    */
   removeIpRoutes(callback?: (err: AWSError, data: DirectoryService.Types.RemoveIpRoutesResult) => void): Request<DirectoryService.Types.RemoveIpRoutesResult, AWSError>;
   /**
+   * Stops all replication and removes the domain controllers from the specified Region. You cannot remove the primary Region with this operation. Instead, use the DeleteDirectory API.
+   */
+  removeRegion(params: DirectoryService.Types.RemoveRegionRequest, callback?: (err: AWSError, data: DirectoryService.Types.RemoveRegionResult) => void): Request<DirectoryService.Types.RemoveRegionResult, AWSError>;
+  /**
+   * Stops all replication and removes the domain controllers from the specified Region. You cannot remove the primary Region with this operation. Instead, use the DeleteDirectory API.
+   */
+  removeRegion(callback?: (err: AWSError, data: DirectoryService.Types.RemoveRegionResult) => void): Request<DirectoryService.Types.RemoveRegionResult, AWSError>;
+  /**
    * Removes tags from a directory.
    */
   removeTagsFromResource(params: DirectoryService.Types.RemoveTagsFromResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
@@ -498,6 +522,19 @@ declare namespace DirectoryService {
   }
   export interface AddIpRoutesResult {
   }
+  export interface AddRegionRequest {
+    /**
+     * The identifier of the directory to which you want to add Region replication.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The name of the Region where you want to add domain controllers for replication. For example, us-east-1.
+     */
+    RegionName: RegionName;
+    VPCSettings: DirectoryVpcSettings;
+  }
+  export interface AddRegionResult {
+  }
   export interface AddTagsToResourceRequest {
     /**
      * Identifier (ID) for the directory to which to add the tag.
@@ -511,6 +548,7 @@ declare namespace DirectoryService {
   export interface AddTagsToResourceResult {
   }
   export type AddedDateTime = Date;
+  export type AdditionalRegions = RegionName[];
   export type AliasName = string;
   export interface Attribute {
     /**
@@ -737,7 +775,7 @@ declare namespace DirectoryService {
      */
     ShortName?: DirectoryShortName;
     /**
-     * The password for the directory administrator. The directory creation process creates a directory administrator account with the user name Administrator and this password. If you need to change the password for the administrator account, you can use the ResetUserPassword API call.
+     * The password for the directory administrator. The directory creation process creates a directory administrator account with the user name Administrator and this password. If you need to change the password for the administrator account, you can use the ResetUserPassword API call. The regex pattern for this string is made up of the following conditions:   Length (?=^.{8,64}$) – Must be between 8 and 64 characters   AND any 3 of the following password complexity rules required by Active Directory:   Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])   Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])   Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])   Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])   For additional information about how Active Directory passwords are enforced, see Password must meet complexity requirements on the Microsoft website.
      */
     Password: Password;
     /**
@@ -1080,6 +1118,30 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeRegionsRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The name of the Region. For example, us-east-1.
+     */
+    RegionName?: RegionName;
+    /**
+     * The DescribeRegionsResult.NextToken value from a previous call to DescribeRegions. Pass null if this is the first call.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeRegionsResult {
+    /**
+     * List of regional information related to the directory per replicated Region.
+     */
+    RegionsDescription?: RegionsDescription;
+    /**
+     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to DescribeRegions to retrieve the next set of items.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeSharedDirectoriesRequest {
     /**
      * Returns the identifier of the directory in the directory owner account. 
@@ -1307,6 +1369,10 @@ declare namespace DirectoryService {
      * Describes the AWS Managed Microsoft AD directory in the directory owner account.
      */
     OwnerDirectoryDescription?: OwnerDirectoryDescription;
+    /**
+     * Lists the Regions where the directory has replicated.
+     */
+    RegionsInfo?: RegionsInfo;
   }
   export type DirectoryDescriptions = DirectoryDescription[];
   export type DirectoryEdition = "Enterprise"|"Standard"|string;
@@ -1789,7 +1855,7 @@ declare namespace DirectoryService {
   export type RadiusRetries = number;
   export interface RadiusSettings {
     /**
-     * An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.
+     * An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.
      */
     RadiusServers?: Servers;
     /**
@@ -1824,6 +1890,54 @@ declare namespace DirectoryService {
   export type RadiusSharedSecret = string;
   export type RadiusStatus = "Creating"|"Completed"|"Failed"|string;
   export type RadiusTimeout = number;
+  export interface RegionDescription {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The name of the Region. For example, us-east-1.
+     */
+    RegionName?: RegionName;
+    /**
+     * Specifies if the Region is the primary Region or an additional Region.
+     */
+    RegionType?: RegionType;
+    /**
+     * The status of the replication process for the specified Region.
+     */
+    Status?: DirectoryStage;
+    VpcSettings?: DirectoryVpcSettings;
+    /**
+     * The desired number of domain controllers in the specified Region for the specified directory.
+     */
+    DesiredNumberOfDomainControllers?: DesiredNumberOfDomainControllers;
+    /**
+     * Specifies when the Region replication began.
+     */
+    LaunchTime?: LaunchTime;
+    /**
+     * The date and time that the Region status was last updated.
+     */
+    StatusLastUpdatedDateTime?: StateLastUpdatedDateTime;
+    /**
+     * The date and time that the Region description was last updated.
+     */
+    LastUpdatedDateTime?: LastUpdatedDateTime;
+  }
+  export type RegionName = string;
+  export type RegionType = "Primary"|"Additional"|string;
+  export type RegionsDescription = RegionDescription[];
+  export interface RegionsInfo {
+    /**
+     * The Region from where the AWS Managed Microsoft AD directory was originally created.
+     */
+    PrimaryRegion?: RegionName;
+    /**
+     * Lists the Regions where the directory has been replicated, excluding the primary Region.
+     */
+    AdditionalRegions?: AdditionalRegions;
+  }
   export interface RegisterCertificateRequest {
     /**
      * The identifier of the directory.
@@ -1877,6 +1991,14 @@ declare namespace DirectoryService {
     CidrIps: CidrIps;
   }
   export interface RemoveIpRoutesResult {
+  }
+  export interface RemoveRegionRequest {
+    /**
+     * The identifier of the directory for which you want to remove Region replication.
+     */
+    DirectoryId: DirectoryId;
+  }
+  export interface RemoveRegionResult {
   }
   export interface RemoveTagsFromResourceRequest {
     /**

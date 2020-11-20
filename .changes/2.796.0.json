@@ -1,0 +1,62 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "You can now create Auto Scaling groups with multiple launch templates using a mixed instances policy, making it easy to deploy an AMI with an architecture that is different from the rest of the group."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Additional metadata that may be applicable to the recommendation."
+    },
+    {
+        "type": "feature",
+        "category": "DirectoryService",
+        "description": "Adding multi-region replication feature for AWS Managed Microsoft AD"
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding support for Glue Schema Registry. The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "Amazon Kinesis Data Analytics now supports building and running streaming applications using Apache Flink 1.11 and provides a way to access the Apache Flink dashboard for supported Flink versions."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Added the starting position and starting position timestamp to ESM Configuration. Now customers will be able to view these fields for their ESM."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex supports managing input and output contexts as well as default values for slots."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntime",
+        "description": "Amazon Lex now supports the ability to view and manage active contexts associated with a user session."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "The AWS Elemental MediaLive APIs and SDKs now support the ability to see the software update status on Link devices"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Amazon Redshift support for returning ClusterNamespaceArn in describeClusters"
+    }
+]
