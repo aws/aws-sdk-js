@@ -78,6 +78,10 @@ declare namespace Outposts {
     SiteId: SiteId;
     AvailabilityZone?: AvailabilityZone;
     AvailabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The tags to apply to the Outpost.
+     */
+    Tags?: TagMap;
   }
   export interface CreateOutpostOutput {
     Outpost?: Outpost;
@@ -142,6 +146,10 @@ declare namespace Outposts {
     LifeCycleStatus?: LifeCycleStatus;
     AvailabilityZone?: AvailabilityZone;
     AvailabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The Outpost tags.
+     */
+    Tags?: TagMap;
   }
   export type OutpostArn = string;
   export type OutpostDescription = string;
@@ -153,10 +161,17 @@ declare namespace Outposts {
     AccountId?: AccountId;
     Name?: SiteName;
     Description?: SiteDescription;
+    /**
+     * The site tags.
+     */
+    Tags?: TagMap;
   }
   export type SiteDescription = string;
   export type SiteId = string;
   export type SiteName = string;
+  export type TagKey = string;
+  export type TagMap = {[key: string]: TagValue};
+  export type TagValue = string;
   export type Token = string;
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];

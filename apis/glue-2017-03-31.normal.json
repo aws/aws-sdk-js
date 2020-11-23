@@ -689,6 +689,43 @@
       ],
       "documentation": "<p>Creates a new partition.</p>"
     },
+    "CreatePartitionIndex": {
+      "name": "CreatePartitionIndex",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreatePartitionIndexRequest"
+      },
+      "output": {
+        "shape": "CreatePartitionIndexResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Creates a specified partition index in an existing table.</p>"
+    },
     "CreateRegistry": {
       "name": "CreateRegistry",
       "http": {
@@ -1228,6 +1265,40 @@
         }
       ],
       "documentation": "<p>Deletes a specified partition.</p>"
+    },
+    "DeletePartitionIndex": {
+      "name": "DeletePartitionIndex",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeletePartitionIndexRequest"
+      },
+      "output": {
+        "shape": "DeletePartitionIndexResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Deletes a specified partition index from an existing table.</p>"
     },
     "DeleteRegistry": {
       "name": "DeleteRegistry",
@@ -4543,6 +4614,42 @@
     "AttemptCount": {
       "type": "integer"
     },
+    "BackfillError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "BackfillErrorCode",
+          "documentation": "<p>The error code for an error that occurred when registering partition indexes for an existing table.</p>"
+        },
+        "Partitions": {
+          "shape": "BackfillErroredPartitionsList",
+          "documentation": "<p>A list of a limited number of partitions in the response.</p>"
+        }
+      },
+      "documentation": "<p>A list of errors that can occur when registering partition indexes for an existing table.</p> <p>These errors give the details about why an index registration failed and provide a limited number of partitions in the response, so that you can fix the partitions at fault and try registering the index again. The most common set of errors that can occur are categorized as follows:</p> <ul> <li> <p>EncryptedPartitionError: The partitions are encrypted.</p> </li> <li> <p>InvalidPartitionTypeDataError: The partition value doesn't match the data type for that partition column.</p> </li> <li> <p>MissingPartitionValueError: The partitions are encrypted.</p> </li> <li> <p>UnsupportedPartitionCharacterError: Characters inside the partition value are not supported. For example: U+0000 , U+0001, U+0002.</p> </li> <li> <p>InternalError: Any error which does not belong to other error codes.</p> </li> </ul>"
+    },
+    "BackfillErrorCode": {
+      "type": "string",
+      "enum": [
+        "ENCRYPTED_PARTITION_ERROR",
+        "INTERNAL_ERROR",
+        "INVALID_PARTITION_TYPE_DATA_ERROR",
+        "MISSING_PARTITION_VALUE_ERROR",
+        "UNSUPPORTED_PARTITION_CHARACTER_ERROR"
+      ]
+    },
+    "BackfillErroredPartitionsList": {
+      "type": "list",
+      "member": {
+        "shape": "PartitionValueList"
+      }
+    },
+    "BackfillErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BackfillError"
+      }
+    },
     "BatchCreatePartitionRequest": {
       "type": "structure",
       "required": [
@@ -5941,6 +6048,10 @@
           "shape": "SchemaChangePolicy",
           "documentation": "<p>The policy that specifies update and delete behaviors for the crawler.</p>"
         },
+        "LineageConfiguration": {
+          "shape": "LineageConfiguration",
+          "documentation": "<p>A configuration that specifies whether data lineage is enabled for the crawler.</p>"
+        },
         "State": {
           "shape": "CrawlerState",
           "documentation": "<p>Indicates whether the crawler is running, or whether a run is pending.</p>"
@@ -5986,6 +6097,13 @@
     },
     "CrawlerConfiguration": {
       "type": "string"
+    },
+    "CrawlerLineageSettings": {
+      "type": "string",
+      "enum": [
+        "ENABLE",
+        "DISABLE"
+      ]
     },
     "CrawlerList": {
       "type": "list",
@@ -6186,6 +6304,10 @@
         "RecrawlPolicy": {
           "shape": "RecrawlPolicy",
           "documentation": "<p>A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.</p>"
+        },
+        "LineageConfiguration": {
+          "shape": "LineageConfiguration",
+          "documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
@@ -6625,6 +6747,36 @@
           "documentation": "<p>A unique identifier that is generated for the transform.</p>"
         }
       }
+    },
+    "CreatePartitionIndexRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "PartitionIndex"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The catalog ID where the table resides.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a database in which you want to create a partition index.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a table in which you want to create a partition index.</p>"
+        },
+        "PartitionIndex": {
+          "shape": "PartitionIndex",
+          "documentation": "<p>Specifies a <code>PartitionIndex</code> structure to create a partition index in an existing table.</p>"
+        }
+      }
+    },
+    "CreatePartitionIndexResponse": {
+      "type": "structure",
+      "members": {}
     },
     "CreatePartitionRequest": {
       "type": "structure",
@@ -7534,6 +7686,36 @@
           "documentation": "<p>The unique identifier of the transform that was deleted.</p>"
         }
       }
+    },
+    "DeletePartitionIndexRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "IndexName"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The catalog ID where the table resides.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a database from which you want to delete a partition index.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a table from which you want to delete a partition index.</p>"
+        },
+        "IndexName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partition index to be deleted.</p>"
+        }
+      }
+    },
+    "DeletePartitionIndexResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeletePartitionRequest": {
       "type": "structure",
@@ -10761,6 +10943,16 @@
     "LatestSchemaVersionBoolean": {
       "type": "boolean"
     },
+    "LineageConfiguration": {
+      "type": "structure",
+      "members": {
+        "CrawlerLineageSettings": {
+          "shape": "CrawlerLineageSettings",
+          "documentation": "<p>Specifies whether data lineage is enabled for the crawler. Valid values are:</p> <ul> <li> <p>ENABLE: enables data lineage for the crawler</p> </li> <li> <p>DISABLE: disables data lineage for the crawler</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
+    },
     "ListCrawlersRequest": {
       "type": "structure",
       "members": {
@@ -11639,7 +11831,11 @@
         },
         "IndexStatus": {
           "shape": "PartitionIndexStatus",
-          "documentation": "<p>The status of the partition index. </p>"
+          "documentation": "<p>The status of the partition index. </p> <p>The possible statuses are:</p> <ul> <li> <p>CREATING: The index is being created. When an index is in a CREATING state, the index or its table cannot be deleted.</p> </li> <li> <p>ACTIVE: The index creation succeeds.</p> </li> <li> <p>FAILED: The index creation fails. </p> </li> <li> <p>DELETING: The index is deleted from the list of indexes.</p> </li> </ul>"
+        },
+        "BackfillErrors": {
+          "shape": "BackfillErrors",
+          "documentation": "<p>A list of errors that can occur when registering partition indexes for an existing table.</p>"
         }
       },
       "documentation": "<p>A descriptor for a partition index in a table.</p>"
@@ -11660,7 +11856,10 @@
     "PartitionIndexStatus": {
       "type": "string",
       "enum": [
-        "ACTIVE"
+        "CREATING",
+        "ACTIVE",
+        "DELETING",
+        "FAILED"
       ]
     },
     "PartitionInput": {
@@ -14155,6 +14354,10 @@
         "RecrawlPolicy": {
           "shape": "RecrawlPolicy",
           "documentation": "<p>A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.</p>"
+        },
+        "LineageConfiguration": {
+          "shape": "LineageConfiguration",
+          "documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",

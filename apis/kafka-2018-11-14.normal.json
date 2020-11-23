@@ -1425,7 +1425,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         },
         "StateInfo": {
           "shape": "StateInfo",
@@ -1543,9 +1543,11 @@
       "enum": [
         "ACTIVE",
         "CREATING",
-        "UPDATING",
         "DELETING",
-        "FAILED"
+        "FAILED",
+        "MAINTENANCE",
+        "REBOOTING_BROKER",
+        "UPDATING"
       ]
     },
     "CompatibleKafkaVersion": {
@@ -1749,7 +1751,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },
@@ -1843,7 +1845,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },

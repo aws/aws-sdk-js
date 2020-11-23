@@ -99,6 +99,14 @@ declare class CodeStarconnections extends Service {
    * Removes tags from an AWS resource.
    */
   untagResource(callback?: (err: AWSError, data: CodeStarconnections.Types.UntagResourceOutput) => void): Request<CodeStarconnections.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Updates a specified host with the provided configurations.
+   */
+  updateHost(params: CodeStarconnections.Types.UpdateHostInput, callback?: (err: AWSError, data: CodeStarconnections.Types.UpdateHostOutput) => void): Request<CodeStarconnections.Types.UpdateHostOutput, AWSError>;
+  /**
+   * Updates a specified host with the provided configurations.
+   */
+  updateHost(callback?: (err: AWSError, data: CodeStarconnections.Types.UpdateHostOutput) => void): Request<CodeStarconnections.Types.UpdateHostOutput, AWSError>;
 }
 declare namespace CodeStarconnections {
   export type AccountId = string;
@@ -113,7 +121,7 @@ declare namespace CodeStarconnections {
      */
     ConnectionArn?: ConnectionArn;
     /**
-     * The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
+     * The name of the external provider where your third-party code repository is configured.
      */
     ProviderType?: ProviderType;
     /**
@@ -135,7 +143,7 @@ declare namespace CodeStarconnections {
   export type ConnectionStatus = "PENDING"|"AVAILABLE"|"ERROR"|string;
   export interface CreateConnectionInput {
     /**
-     * The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
+     * The name of the external provider where your third-party code repository is configured.
      */
     ProviderType?: ProviderType;
     /**
@@ -381,6 +389,22 @@ declare namespace CodeStarconnections {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceOutput {
+  }
+  export interface UpdateHostInput {
+    /**
+     * The Amazon Resource Name (ARN) of the host to be updated.
+     */
+    HostArn: HostArn;
+    /**
+     * The URL or endpoint of the host to be updated.
+     */
+    ProviderEndpoint?: Url;
+    /**
+     * The VPC configuration of the host to be updated. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+     */
+    VpcConfiguration?: VpcConfiguration;
+  }
+  export interface UpdateHostOutput {
   }
   export type Url = string;
   export interface VpcConfiguration {

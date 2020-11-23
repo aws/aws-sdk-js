@@ -15,6 +15,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
   constructor(options?: DynamoDB.Types.ClientConfiguration)
   config: Config & DynamoDB.Types.ClientConfiguration;
   /**
+   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   */
+  batchExecuteStatement(params: DynamoDB.Types.BatchExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   */
+  batchExecuteStatement(callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
+  /**
    * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem retrieves items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
    */
   batchGetItem(params: DynamoDB.Types.BatchGetItemInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchGetItemOutput) => void): Request<DynamoDB.Types.BatchGetItemOutput, AWSError>;
@@ -135,6 +143,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
+   * Returns information about the status of Kinesis streaming.
+   */
+  describeKinesisStreamingDestination(params: DynamoDB.Types.DescribeKinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Returns information about the status of Kinesis streaming.
+   */
+  describeKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
+  /**
    * Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
   describeLimits(params: DynamoDB.Types.DescribeLimitsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeLimitsOutput) => void): Request<DynamoDB.Types.DescribeLimitsOutput, AWSError>;
@@ -166,6 +182,38 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Gives a description of the Time to Live (TTL) status on the specified table. 
    */
   describeTimeToLive(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTimeToLiveOutput) => void): Request<DynamoDB.Types.DescribeTimeToLiveOutput, AWSError>;
+  /**
+   * Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
+   */
+  disableKinesisStreamingDestination(params: DynamoDB.Types.KinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
+   */
+  disableKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.
+   */
+  enableKinesisStreamingDestination(params: DynamoDB.Types.KinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.
+   */
+  enableKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeStatement(params: DynamoDB.Types.ExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeStatement(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeTransaction(params: DynamoDB.Types.ExecuteTransactionInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
+  /**
+   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeTransaction(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
   /**
    * Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.
    */
@@ -671,6 +719,18 @@ declare namespace DynamoDB {
   export type BackupType = "USER"|"SYSTEM"|"AWS_BACKUP"|string;
   export type BackupTypeFilter = "USER"|"SYSTEM"|"AWS_BACKUP"|"ALL"|string;
   export type BackupsInputLimit = number;
+  export interface BatchExecuteStatementInput {
+    /**
+     *  The list of PartiQL statements representing the batch to run. 
+     */
+    Statements: PartiQLBatchRequest;
+  }
+  export interface BatchExecuteStatementOutput {
+    /**
+     *  The response to each PartiQL statement in the batch. 
+     */
+    Responses?: PartiQLBatchResponse;
+  }
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -694,6 +754,45 @@ declare namespace DynamoDB {
   }
   export type BatchGetRequestMap = {[key: string]: KeysAndAttributes};
   export type BatchGetResponseMap = {[key: string]: ItemList};
+  export interface BatchStatementError {
+    /**
+     *  The error code associated with the failed PartiQL batch statement. 
+     */
+    Code?: BatchStatementErrorCodeEnum;
+    /**
+     *  The error message associated with the PartiQL batch resposne. 
+     */
+    Message?: String;
+  }
+  export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
+  export interface BatchStatementRequest {
+    /**
+     *  A valid PartiQL statement. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters associated with a PartiQL statement in the batch request. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The read consistency of the PartiQL batch request. 
+     */
+    ConsistentRead?: ConsistentRead;
+  }
+  export interface BatchStatementResponse {
+    /**
+     *  The error associated with a failed PartiQL batch statement. 
+     */
+    Error?: BatchStatementError;
+    /**
+     *  The table name associated with a failed PartiQL batch statement. 
+     */
+    TableName?: TableName;
+    /**
+     *  A DynamoDB item associated with a BatchStatementResponse 
+     */
+    Item?: AttributeMap;
+  }
   export interface BatchWriteItemInput {
     /**
      * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
@@ -1212,6 +1311,22 @@ declare namespace DynamoDB {
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
+  export interface DescribeKinesisStreamingDestinationInput {
+    /**
+     * The name of the table being described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeKinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The list of replica structures for the table being described.
+     */
+    KinesisDataStreamDestinations?: KinesisDataStreamDestinations;
+  }
   export interface DescribeLimitsInput {
   }
   export interface DescribeLimitsOutput {
@@ -1268,6 +1383,7 @@ declare namespace DynamoDB {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
   export type Double = number;
   export interface Endpoint {
     /**
@@ -1282,6 +1398,50 @@ declare namespace DynamoDB {
   export type Endpoints = Endpoint[];
   export type ExceptionDescription = string;
   export type ExceptionName = string;
+  export interface ExecuteStatementInput {
+    /**
+     *  The PartiQL statement representing the operation to run. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters for the PartiQL statement, if any. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     */
+    ConsistentRead?: ConsistentRead;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteStatementOutput {
+    /**
+     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     */
+    Items?: ItemList;
+    /**
+     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteTransactionInput {
+    /**
+     *  The list of PartiQL statements representing the transaction to run. 
+     */
+    TransactStatements: ParameterizedStatements;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface ExecuteTransactionOutput {
+    /**
+     *  The response to a PartiQL transaction. 
+     */
+    Responses?: ItemResponseList;
+  }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -1733,6 +1893,45 @@ declare namespace DynamoDB {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export interface KinesisDataStreamDestination {
+    /**
+     * The ARN for a specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of replication.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The human-readable string that corresponds to the replica status.
+     */
+    DestinationStatusDescription?: String;
+  }
+  export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
+  export interface KinesisStreamingDestinationInput {
+    /**
+     * The name of the DynamoDB table.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for a Kinesis data stream.
+     */
+    StreamArn: StreamArn;
+  }
+  export interface KinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being modified.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of the replication.
+     */
+    DestinationStatus?: DestinationStatus;
+  }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
@@ -1952,6 +2151,21 @@ declare namespace DynamoDB {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface ParameterizedStatement {
+    /**
+     *  A PartiQL statment that uses parameters. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameter values. 
+     */
+    Parameters?: PreparedStatementParameters;
+  }
+  export type ParameterizedStatements = ParameterizedStatement[];
+  export type PartiQLBatchRequest = BatchStatementRequest[];
+  export type PartiQLBatchResponse = BatchStatementResponse[];
+  export type PartiQLNextToken = string;
+  export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
      * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
@@ -1975,6 +2189,7 @@ declare namespace DynamoDB {
   export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
+  export type PreparedStatementParameters = AttributeValue[];
   export interface Projection {
     /**
      * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  

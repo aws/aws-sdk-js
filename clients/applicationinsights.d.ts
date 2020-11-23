@@ -237,9 +237,17 @@ declare namespace ApplicationInsights {
      */
     ComponentName?: ComponentName;
     /**
+     *  If logging is supported for the resource type, indicates whether the component has configured logs to be monitored. 
+     */
+    ComponentRemarks?: Remarks;
+    /**
      * The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.
      */
     ResourceType?: ResourceType;
+    /**
+     *  The operating system of the component. 
+     */
+    OsType?: OsType;
     /**
      * The stack tier of the application component.
      */
@@ -248,6 +256,10 @@ declare namespace ApplicationInsights {
      * Indicates whether the application component is monitored. 
      */
     Monitor?: Monitor;
+    /**
+     *  Workloads detected in the application component. 
+     */
+    DetectedWorkload?: DetectedWorkload;
   }
   export type ApplicationComponentList = ApplicationComponent[];
   export interface ApplicationInfo {
@@ -280,7 +292,7 @@ declare namespace ApplicationInsights {
   export type CWEMonitorEnabled = boolean;
   export type CloudWatchEventDetailType = string;
   export type CloudWatchEventId = string;
-  export type CloudWatchEventSource = "EC2"|"CODE_DEPLOY"|"HEALTH"|string;
+  export type CloudWatchEventSource = "EC2"|"CODE_DEPLOY"|"HEALTH"|"RDS"|string;
   export type CodeDeployApplication = string;
   export type CodeDeployDeploymentGroup = string;
   export type CodeDeployDeploymentId = string;
@@ -318,7 +330,7 @@ declare namespace ApplicationInsights {
   export type ConfigurationEventList = ConfigurationEvent[];
   export type ConfigurationEventMonitoredResourceARN = string;
   export type ConfigurationEventResourceName = string;
-  export type ConfigurationEventResourceType = "CLOUDWATCH_ALARM"|"CLOUDFORMATION"|"SSM_ASSOCIATION"|string;
+  export type ConfigurationEventResourceType = "CLOUDWATCH_ALARM"|"CLOUDWATCH_LOG"|"CLOUDFORMATION"|"SSM_ASSOCIATION"|string;
   export type ConfigurationEventStatus = "INFO"|"WARN"|"ERROR"|string;
   export type ConfigurationEventTime = Date;
   export interface CreateApplicationRequest {
@@ -357,7 +369,7 @@ declare namespace ApplicationInsights {
     /**
      * The name of the component.
      */
-    ComponentName: ComponentName;
+    ComponentName: CustomComponentName;
     /**
      * The list of resource ARNs that belong to the component.
      */
@@ -379,11 +391,11 @@ declare namespace ApplicationInsights {
      */
     PatternName: LogPatternName;
     /**
-     * The log pattern.
+     * The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
      */
     Pattern: LogPatternRegex;
     /**
-     * Rank of the log pattern.
+     * Rank of the log pattern. Must be a value between 1 and 1,000,000. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank 1 will be the first to get matched to a log line. A pattern of rank 1,000,000 will be last to get matched. When you configure custom log patterns from the console, a Low severity pattern translates to a 750,000 rank. A Medium severity pattern translates to a 500,000 rank. And a High severity pattern translates to a 250,000 rank. Rank values less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns. 
      */
     Rank: LogPatternRank;
   }
@@ -397,6 +409,7 @@ declare namespace ApplicationInsights {
      */
     ResourceGroupName?: ResourceGroupName;
   }
+  export type CustomComponentName = string;
   export interface DeleteApplicationRequest {
     /**
      * The name of the resource group.
@@ -413,7 +426,7 @@ declare namespace ApplicationInsights {
     /**
      * The name of the component.
      */
-    ComponentName: ComponentName;
+    ComponentName: CustomComponentName;
   }
   export interface DeleteComponentResponse {
   }
@@ -566,6 +579,11 @@ declare namespace ApplicationInsights {
      */
     Problem?: Problem;
   }
+  export type DetectedWorkload = {[key: string]: WorkloadMetaData};
+  export type EbsCause = string;
+  export type EbsEvent = string;
+  export type EbsRequestId = string;
+  export type EbsResult = string;
   export type Ec2State = string;
   export type EndTime = Date;
   export type Feedback = {[key: string]: FeedbackValue};
@@ -767,19 +785,19 @@ declare namespace ApplicationInsights {
   export type LogGroup = string;
   export interface LogPattern {
     /**
-     * The name of the log pattern. A log pattern name can contains at many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.
+     * The name of the log pattern. A log pattern name can contain as many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.
      */
     PatternSetName?: LogPatternSetName;
     /**
-     * The name of the log pattern. A log pattern name can contains at many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.
+     * The name of the log pattern. A log pattern name can contain as many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.
      */
     PatternName?: LogPatternName;
     /**
-     * A regular expression that defines the log pattern. A log pattern can contains at many as 50 characters, and it cannot be empty.
+     * A regular expression that defines the log pattern. A log pattern can contain as many as 50 characters, and it cannot be empty. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
      */
     Pattern?: LogPatternRegex;
     /**
-     * Rank of the log pattern.
+     * Rank of the log pattern. Must be a value between 1 and 1,000,000. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank 1 will be the first to get matched to a log line. A pattern of rank 1,000,000 will be last to get matched. When you configure custom log patterns from the console, a Low severity pattern translates to a 750,000 rank. A Medium severity pattern translates to a 500,000 rank. And a High severity pattern translates to a 250,000 rank. Rank values less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns. 
      */
     Rank?: LogPatternRank;
   }
@@ -791,10 +809,11 @@ declare namespace ApplicationInsights {
   export type LogPatternSetName = string;
   export type LogText = string;
   export type MaxEntities = number;
+  export type MetaDataKey = string;
+  export type MetaDataValue = string;
   export type MetricName = string;
   export type MetricNamespace = string;
   export type Monitor = boolean;
-  export type NewComponentName = string;
   export interface Observation {
     /**
      * The ID of the observation type.
@@ -905,6 +924,50 @@ declare namespace ApplicationInsights {
      */
     Ec2State?: Ec2State;
     /**
+     *  The category of an RDS event. 
+     */
+    RdsEventCategories?: RdsEventCategories;
+    /**
+     *  The message of an RDS event. 
+     */
+    RdsEventMessage?: RdsEventMessage;
+    /**
+     *  The name of the S3 CloudWatch Event-based observation. 
+     */
+    S3EventName?: S3EventName;
+    /**
+     *  The Amazon Resource Name (ARN) of the step function execution-based observation. 
+     */
+    StatesExecutionArn?: StatesExecutionArn;
+    /**
+     *  The Amazon Resource Name (ARN) of the step function-based observation. 
+     */
+    StatesArn?: StatesArn;
+    /**
+     *  The status of the step function-related observation. 
+     */
+    StatesStatus?: StatesStatus;
+    /**
+     *  The input to the step function-based observation. 
+     */
+    StatesInput?: StatesInput;
+    /**
+     *  The type of EBS CloudWatch event, such as createVolume, deleteVolume or attachVolume. 
+     */
+    EbsEvent?: EbsEvent;
+    /**
+     *  The result of an EBS CloudWatch event, such as failed or succeeded. 
+     */
+    EbsResult?: EbsResult;
+    /**
+     *  The cause of an EBS CloudWatch event. 
+     */
+    EbsCause?: EbsCause;
+    /**
+     *  The request ID of an EBS CloudWatch event. 
+     */
+    EbsRequestId?: EbsRequestId;
+    /**
      *  The X-Ray request fault percentage for this node. 
      */
     XRayFaultPercent?: XRayFaultPercent;
@@ -937,6 +1000,7 @@ declare namespace ApplicationInsights {
   export type ObservationList = Observation[];
   export type OpsCenterEnabled = boolean;
   export type OpsItemSNSTopicArn = string;
+  export type OsType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
   export interface Problem {
     /**
@@ -982,6 +1046,8 @@ declare namespace ApplicationInsights {
   }
   export type ProblemId = string;
   export type ProblemList = Problem[];
+  export type RdsEventCategories = string;
+  export type RdsEventMessage = string;
   export interface RelatedObservations {
     /**
      * The list of observations related to the problem.
@@ -994,10 +1060,15 @@ declare namespace ApplicationInsights {
   export type ResourceGroupName = string;
   export type ResourceList = ResourceARN[];
   export type ResourceType = string;
+  export type S3EventName = string;
   export type SeverityLevel = "Low"|"Medium"|"High"|string;
   export type SourceARN = string;
   export type SourceType = string;
   export type StartTime = Date;
+  export type StatesArn = string;
+  export type StatesExecutionArn = string;
+  export type StatesInput = string;
+  export type StatesStatus = string;
   export type Status = "IGNORE"|"RESOLVED"|"PENDING"|string;
   export interface Tag {
     /**
@@ -1025,7 +1096,7 @@ declare namespace ApplicationInsights {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type Tier = "DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB"|"SQL_SERVER"|string;
+  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|string;
   export type Title = string;
   export type Unit = string;
   export interface UntagResourceRequest {
@@ -1100,11 +1171,11 @@ declare namespace ApplicationInsights {
     /**
      * The name of the component.
      */
-    ComponentName: ComponentName;
+    ComponentName: CustomComponentName;
     /**
      * The new name of the component.
      */
-    NewComponentName?: NewComponentName;
+    NewComponentName?: CustomComponentName;
     /**
      * The list of resource ARNs that belong to the component.
      */
@@ -1126,11 +1197,11 @@ declare namespace ApplicationInsights {
      */
     PatternName: LogPatternName;
     /**
-     * The log pattern.
+     * The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
      */
     Pattern?: LogPatternRegex;
     /**
-     * Rank of the log pattern.
+     * Rank of the log pattern. Must be a value between 1 and 1,000,000. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank 1 will be the first to get matched to a log line. A pattern of rank 1,000,000 will be last to get matched. When you configure custom log patterns from the console, a Low severity pattern translates to a 750,000 rank. A Medium severity pattern translates to a 500,000 rank. And a High severity pattern translates to a 250,000 rank. Rank values less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns. 
      */
     Rank?: LogPatternRank;
   }
@@ -1145,6 +1216,7 @@ declare namespace ApplicationInsights {
     LogPattern?: LogPattern;
   }
   export type Value = number;
+  export type WorkloadMetaData = {[key: string]: MetaDataValue};
   export type XRayErrorPercent = number;
   export type XRayFaultPercent = number;
   export type XRayNodeName = string;

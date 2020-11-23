@@ -28,6 +28,14 @@ declare class SSOAdmin extends Service {
    */
   createAccountAssignment(callback?: (err: AWSError, data: SSOAdmin.Types.CreateAccountAssignmentResponse) => void): Request<SSOAdmin.Types.CreateAccountAssignmentResponse, AWSError>;
   /**
+   * Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  createInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
+   * Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  createInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
    * Creates a permission set within a specified SSO instance.  To grant users and groups access to AWS account resources, use  CreateAccountAssignment . 
    */
   createPermissionSet(params: SSOAdmin.Types.CreatePermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreatePermissionSetResponse) => void): Request<SSOAdmin.Types.CreatePermissionSetResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class SSOAdmin extends Service {
    */
   deleteInlinePolicyFromPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInlinePolicyFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DeleteInlinePolicyFromPermissionSetResponse, AWSError>;
   /**
+   * Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  deleteInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
+   * Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  deleteInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
    * Deletes the specified permission set.
    */
   deletePermissionSet(params: SSOAdmin.Types.DeletePermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DeletePermissionSetResponse) => void): Request<SSOAdmin.Types.DeletePermissionSetResponse, AWSError>;
@@ -75,6 +91,14 @@ declare class SSOAdmin extends Service {
    * Describes the status of the assignment deletion request.
    */
   describeAccountAssignmentDeletionStatus(callback?: (err: AWSError, data: SSOAdmin.Types.DescribeAccountAssignmentDeletionStatusResponse) => void): Request<SSOAdmin.Types.DescribeAccountAssignmentDeletionStatusResponse, AWSError>;
+  /**
+   * Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  describeInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
+   * Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  describeInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
    * Gets the details of the permission set.
    */
@@ -220,6 +244,14 @@ declare class SSOAdmin extends Service {
    */
   untagResource(callback?: (err: AWSError, data: SSOAdmin.Types.UntagResourceResponse) => void): Request<SSOAdmin.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  updateInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
+   * Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see Attribute-Based Access Control in the AWS SSO User Guide.
+   */
+  updateInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
+  /**
    * Updates an existing permission set.
    */
   updatePermissionSet(params: SSOAdmin.Types.UpdatePermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.UpdatePermissionSetResponse) => void): Request<SSOAdmin.Types.UpdatePermissionSetResponse, AWSError>;
@@ -229,6 +261,26 @@ declare class SSOAdmin extends Service {
   updatePermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.UpdatePermissionSetResponse) => void): Request<SSOAdmin.Types.UpdatePermissionSetResponse, AWSError>;
 }
 declare namespace SSOAdmin {
+  export interface AccessControlAttribute {
+    /**
+     * The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+     */
+    Key: AccessControlAttributeKey;
+    /**
+     * The value used for mapping a specified attribute to an identity source.
+     */
+    Value: AccessControlAttributeValue;
+  }
+  export type AccessControlAttributeKey = string;
+  export type AccessControlAttributeList = AccessControlAttribute[];
+  export interface AccessControlAttributeValue {
+    /**
+     * The identity source to use when mapping a specified attribute to AWS SSO.
+     */
+    Source: AccessControlAttributeValueSourceList;
+  }
+  export type AccessControlAttributeValueSource = string;
+  export type AccessControlAttributeValueSourceList = AccessControlAttributeValueSource[];
   export interface AccountAssignment {
     /**
      * The identifier of the AWS account.
@@ -362,6 +414,18 @@ declare namespace SSOAdmin {
      */
     AccountAssignmentCreationStatus?: AccountAssignmentOperationStatus;
   }
+  export interface CreateInstanceAccessControlAttributeConfigurationRequest {
+    /**
+     * The ARN of the SSO instance under which the operation will be executed.
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * Specifies the AWS SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store.
+     */
+    InstanceAccessControlAttributeConfiguration: InstanceAccessControlAttributeConfiguration;
+  }
+  export interface CreateInstanceAccessControlAttributeConfigurationResponse {
+  }
   export interface CreatePermissionSetRequest {
     /**
      * The name of the PermissionSet.
@@ -439,6 +503,14 @@ declare namespace SSOAdmin {
   }
   export interface DeleteInlinePolicyFromPermissionSetResponse {
   }
+  export interface DeleteInstanceAccessControlAttributeConfigurationRequest {
+    /**
+     * The ARN of the SSO instance under which the operation will be executed.
+     */
+    InstanceArn: InstanceArn;
+  }
+  export interface DeleteInstanceAccessControlAttributeConfigurationResponse {
+  }
   export interface DeletePermissionSetRequest {
     /**
      * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
@@ -482,6 +554,26 @@ declare namespace SSOAdmin {
      * The status object for the account assignment deletion operation.
      */
     AccountAssignmentDeletionStatus?: AccountAssignmentOperationStatus;
+  }
+  export interface DescribeInstanceAccessControlAttributeConfigurationRequest {
+    /**
+     * The ARN of the SSO instance under which the operation will be executed.
+     */
+    InstanceArn: InstanceArn;
+  }
+  export interface DescribeInstanceAccessControlAttributeConfigurationResponse {
+    /**
+     * The status of the attribute configuration process.
+     */
+    Status?: InstanceAccessControlAttributeConfigurationStatus;
+    /**
+     * Provides more details about the current status of the specified attribute.
+     */
+    StatusReason?: InstanceAccessControlAttributeConfigurationStatusReason;
+    /**
+     * Gets the list of AWS SSO identity store attributes added to your ABAC configuration.
+     */
+    InstanceAccessControlAttributeConfiguration?: InstanceAccessControlAttributeConfiguration;
   }
   export interface DescribePermissionSetProvisioningStatusRequest {
     /**
@@ -550,6 +642,14 @@ declare namespace SSOAdmin {
     InlinePolicy?: PermissionSetPolicyDocument;
   }
   export type Id = string;
+  export interface InstanceAccessControlAttributeConfiguration {
+    /**
+     * Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+     */
+    AccessControlAttributes: AccessControlAttributeList;
+  }
+  export type InstanceAccessControlAttributeConfigurationStatus = "ENABLED"|"CREATION_IN_PROGRESS"|"CREATION_FAILED"|string;
+  export type InstanceAccessControlAttributeConfigurationStatusReason = string;
   export type InstanceArn = string;
   export type InstanceList = InstanceMetadata[];
   export interface InstanceMetadata {
@@ -1015,6 +1115,18 @@ declare namespace SSOAdmin {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateInstanceAccessControlAttributeConfigurationRequest {
+    /**
+     * The ARN of the SSO instance under which the operation will be executed.
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * Updates the attributes for your ABAC configuration.
+     */
+    InstanceAccessControlAttributeConfiguration: InstanceAccessControlAttributeConfiguration;
+  }
+  export interface UpdateInstanceAccessControlAttributeConfigurationResponse {
   }
   export interface UpdatePermissionSetRequest {
     /**

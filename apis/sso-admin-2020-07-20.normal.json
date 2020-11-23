@@ -88,6 +88,40 @@
       ],
       "documentation": "<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>"
     },
+    "CreateInstanceAccessControlAttributeConfiguration": {
+      "name": "CreateInstanceAccessControlAttributeConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateInstanceAccessControlAttributeConfigurationRequest"
+      },
+      "output": {
+        "shape": "CreateInstanceAccessControlAttributeConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.</p>"
+    },
     "CreatePermissionSet": {
       "name": "CreatePermissionSet",
       "http": {
@@ -193,6 +227,40 @@
       ],
       "documentation": "<p>Deletes the inline policy from a specified permission set.</p>"
     },
+    "DeleteInstanceAccessControlAttributeConfiguration": {
+      "name": "DeleteInstanceAccessControlAttributeConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteInstanceAccessControlAttributeConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeleteInstanceAccessControlAttributeConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.</p>"
+    },
     "DeletePermissionSet": {
       "name": "DeletePermissionSet",
       "http": {
@@ -288,6 +356,37 @@
         }
       ],
       "documentation": "<p>Describes the status of the assignment deletion request.</p>"
+    },
+    "DescribeInstanceAccessControlAttributeConfiguration": {
+      "name": "DescribeInstanceAccessControlAttributeConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInstanceAccessControlAttributeConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeInstanceAccessControlAttributeConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.</p>"
     },
     "DescribePermissionSet": {
       "name": "DescribePermissionSet",
@@ -865,6 +964,40 @@
       ],
       "documentation": "<p>Disassociates a set of tags from a specified resource.</p>"
     },
+    "UpdateInstanceAccessControlAttributeConfiguration": {
+      "name": "UpdateInstanceAccessControlAttributeConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateInstanceAccessControlAttributeConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateInstanceAccessControlAttributeConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.</p>"
+    },
     "UpdatePermissionSet": {
       "name": "UpdatePermissionSet",
       "http": {
@@ -901,6 +1034,65 @@
     }
   },
   "shapes": {
+    "AccessControlAttribute": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "AccessControlAttributeKey",
+          "documentation": "<p>The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.</p>"
+        },
+        "Value": {
+          "shape": "AccessControlAttributeValue",
+          "documentation": "<p>The value used for mapping a specified attribute to an identity source.</p>"
+        }
+      },
+      "documentation": "<p>These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.</p>"
+    },
+    "AccessControlAttributeKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"
+    },
+    "AccessControlAttributeList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessControlAttribute"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "AccessControlAttributeValue": {
+      "type": "structure",
+      "required": [
+        "Source"
+      ],
+      "members": {
+        "Source": {
+          "shape": "AccessControlAttributeValueSourceList",
+          "documentation": "<p>The identity source to use when mapping a specified attribute to AWS SSO.</p>"
+        }
+      },
+      "documentation": "<p>The value used for mapping a specified attribute to an identity source.</p>"
+    },
+    "AccessControlAttributeValueSource": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"
+    },
+    "AccessControlAttributeValueSourceList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessControlAttributeValueSource"
+      },
+      "max": 1,
+      "min": 1
+    },
     "AccountAssignment": {
       "type": "structure",
       "members": {
@@ -1097,6 +1289,27 @@
         }
       }
     },
+    "CreateInstanceAccessControlAttributeConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "InstanceAccessControlAttributeConfiguration"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+        },
+        "InstanceAccessControlAttributeConfiguration": {
+          "shape": "InstanceAccessControlAttributeConfiguration",
+          "documentation": "<p>Specifies the AWS SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store.</p>"
+        }
+      }
+    },
+    "CreateInstanceAccessControlAttributeConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "CreatePermissionSetRequest": {
       "type": "structure",
       "required": [
@@ -1209,6 +1422,22 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteInstanceAccessControlAttributeConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+        }
+      }
+    },
+    "DeleteInstanceAccessControlAttributeConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeletePermissionSetRequest": {
       "type": "structure",
       "required": [
@@ -1279,6 +1508,35 @@
         "AccountAssignmentDeletionStatus": {
           "shape": "AccountAssignmentOperationStatus",
           "documentation": "<p>The status object for the account assignment deletion operation.</p>"
+        }
+      }
+    },
+    "DescribeInstanceAccessControlAttributeConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+        }
+      }
+    },
+    "DescribeInstanceAccessControlAttributeConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "InstanceAccessControlAttributeConfigurationStatus",
+          "documentation": "<p>The status of the attribute configuration process.</p>"
+        },
+        "StatusReason": {
+          "shape": "InstanceAccessControlAttributeConfigurationStatusReason",
+          "documentation": "<p>Provides more details about the current status of the specified attribute.</p>"
+        },
+        "InstanceAccessControlAttributeConfiguration": {
+          "shape": "InstanceAccessControlAttributeConfiguration",
+          "documentation": "<p>Gets the list of AWS SSO identity store attributes added to your ABAC configuration.</p>"
         }
       }
     },
@@ -1403,6 +1661,30 @@
       "max": 64,
       "min": 1,
       "pattern": "^[a-zA-Z0-9-]*"
+    },
+    "InstanceAccessControlAttributeConfiguration": {
+      "type": "structure",
+      "required": [
+        "AccessControlAttributes"
+      ],
+      "members": {
+        "AccessControlAttributes": {
+          "shape": "AccessControlAttributeList",
+          "documentation": "<p>Lists the attributes that are configured for ABAC in the specified AWS SSO instance.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the attributes to add to your attribute-based access control (ABAC) configuration.</p>"
+    },
+    "InstanceAccessControlAttributeConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "CREATION_IN_PROGRESS",
+        "CREATION_FAILED"
+      ]
+    },
+    "InstanceAccessControlAttributeConfigurationStatusReason": {
+      "type": "string"
     },
     "InstanceArn": {
       "type": "string",
@@ -2155,6 +2437,27 @@
       }
     },
     "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateInstanceAccessControlAttributeConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "InstanceAccessControlAttributeConfiguration"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+        },
+        "InstanceAccessControlAttributeConfiguration": {
+          "shape": "InstanceAccessControlAttributeConfiguration",
+          "documentation": "<p>Updates the attributes for your ABAC configuration.</p>"
+        }
+      }
+    },
+    "UpdateInstanceAccessControlAttributeConfigurationResponse": {
       "type": "structure",
       "members": {}
     },

@@ -118,6 +118,29 @@
       ],
       "documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">alias</a> for a Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a different version.</p> <p>You can also map an alias to split invocation requests between two versions. Use the <code>RoutingConfig</code> parameter to specify a second version and the percentage of invocation requests that it receives.</p>"
     },
+    "CreateCodeSigningConfig": {
+      "name": "CreateCodeSigningConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-04-22/code-signing-configs/",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "CreateCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>Creates a code signing configuration. A <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">code signing configuration</a> defines a list of allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment validation checks fail). </p>"
+    },
     "CreateEventSourceMapping": {
       "name": "CreateEventSourceMapping",
       "http": {
@@ -181,9 +204,18 @@
         },
         {
           "shape": "CodeStorageExceededException"
+        },
+        {
+          "shape": "CodeVerificationFailedException"
+        },
+        {
+          "shape": "InvalidCodeSignatureException"
+        },
+        {
+          "shape": "CodeSigningConfigNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Functions</a>.</p>"
+      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Functions</a>.</p>"
     },
     "DeleteAlias": {
       "name": "DeleteAlias",
@@ -210,6 +242,35 @@
         }
       ],
       "documentation": "<p>Deletes a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">alias</a>.</p>"
+    },
+    "DeleteCodeSigningConfig": {
+      "name": "DeleteCodeSigningConfig",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "DeleteCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        }
+      ],
+      "documentation": "<p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is using it. </p>"
     },
     "DeleteEventSourceMapping": {
       "name": "DeleteEventSourceMapping",
@@ -271,6 +332,38 @@
         }
       ],
       "documentation": "<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted.</p> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>"
+    },
+    "DeleteFunctionCodeSigningConfig": {
+      "name": "DeleteFunctionCodeSigningConfig",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteFunctionCodeSigningConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "CodeSigningConfigNotFoundException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        }
+      ],
+      "documentation": "<p>Removes the code signing configuration from the function.</p>"
     },
     "DeleteFunctionConcurrency": {
       "name": "DeleteFunctionConcurrency",
@@ -428,6 +521,32 @@
       ],
       "documentation": "<p>Returns details about a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">alias</a>.</p>"
     },
+    "GetCodeSigningConfig": {
+      "name": "GetCodeSigningConfig",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "GetCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns information about the specified code signing configuration.</p>"
+    },
     "GetEventSourceMapping": {
       "name": "GetEventSourceMapping",
       "http": {
@@ -485,6 +604,35 @@
         }
       ],
       "documentation": "<p>Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.</p>"
+    },
+    "GetFunctionCodeSigningConfig": {
+      "name": "GetFunctionCodeSigningConfig",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetFunctionCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "GetFunctionCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Returns the code signing configuration for the specified function.</p>"
     },
     "GetFunctionConcurrency": {
       "name": "GetFunctionConcurrency",
@@ -877,6 +1025,29 @@
       ],
       "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">aliases</a> for a Lambda function.</p>"
     },
+    "ListCodeSigningConfigs": {
+      "name": "ListCodeSigningConfigs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-04-22/code-signing-configs/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListCodeSigningConfigsRequest"
+      },
+      "output": {
+        "shape": "ListCodeSigningConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html\">code signing configurations</a> for the specified function. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. </p>"
+    },
     "ListEventSourceMappings": {
       "name": "ListEventSourceMappings",
       "http": {
@@ -960,6 +1131,32 @@
         }
       ],
       "documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>"
+    },
+    "ListFunctionsByCodeSigningConfig": {
+      "name": "ListFunctionsByCodeSigningConfig",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListFunctionsByCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "ListFunctionsByCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>List the functions that use the specified code signing configuration. You can use this method prior to deleting a code signing configuration, to verify that no functions are using it.</p>"
     },
     "ListLayerVersions": {
       "name": "ListLayerVersions",
@@ -1171,6 +1368,41 @@
         }
       ],
       "documentation": "<p>Creates a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">version</a> from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change.</p> <p>AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the function before publishing a version.</p> <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>"
+    },
+    "PutFunctionCodeSigningConfig": {
+      "name": "PutFunctionCodeSigningConfig",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutFunctionCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "PutFunctionCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "CodeSigningConfigNotFoundException"
+        }
+      ],
+      "documentation": "<p>Update the code signing configuration for the function. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. </p>"
     },
     "PutFunctionConcurrency": {
       "name": "PutFunctionConcurrency",
@@ -1416,6 +1648,32 @@
       ],
       "documentation": "<p>Updates the configuration of a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">alias</a>.</p>"
     },
+    "UpdateCodeSigningConfig": {
+      "name": "UpdateCodeSigningConfig",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateCodeSigningConfigRequest"
+      },
+      "output": {
+        "shape": "UpdateCodeSigningConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Update the code signing configuration. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. </p>"
+    },
     "UpdateEventSourceMapping": {
       "name": "UpdateEventSourceMapping",
       "http": {
@@ -1485,9 +1743,18 @@
         },
         {
           "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "CodeVerificationFailedException"
+        },
+        {
+          "shape": "InvalidCodeSignatureException"
+        },
+        {
+          "shape": "CodeSigningConfigNotFoundException"
         }
       ],
-      "documentation": "<p>Updates a Lambda function's code.</p> <p>The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.</p>"
+      "documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">Configuring code signing</a>.</p> <p>The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.</p>"
     },
     "UpdateFunctionConfiguration": {
       "name": "UpdateFunctionConfiguration",
@@ -1520,6 +1787,15 @@
         },
         {
           "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "CodeVerificationFailedException"
+        },
+        {
+          "shape": "InvalidCodeSignatureException"
+        },
+        {
+          "shape": "CodeSigningConfigNotFoundException"
         }
       ],
       "documentation": "<p>Modify the version-specific settings of a Lambda function.</p> <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute. During this time, you can't modify the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the update is complete and the function is processing events with the new configuration. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can't modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>"
@@ -1785,6 +2061,19 @@
       },
       "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html\">traffic-shifting</a> configuration of a Lambda function alias.</p>"
     },
+    "AllowedPublishers": {
+      "type": "structure",
+      "required": [
+        "SigningProfileVersionArns"
+      ],
+      "members": {
+        "SigningProfileVersionArns": {
+          "shape": "SigningProfileVersionArns",
+          "documentation": "<p>The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. </p>"
+        }
+      },
+      "documentation": "<p>List of signing profiles that can sign a code package. </p>"
+    },
     "Arn": {
       "type": "string",
       "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"
@@ -1808,12 +2097,81 @@
     "Boolean": {
       "type": "boolean"
     },
+    "CodeSigningConfig": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigId",
+        "CodeSigningConfigArn",
+        "AllowedPublishers",
+        "CodeSigningPolicies",
+        "LastModified"
+      ],
+      "members": {
+        "CodeSigningConfigId": {
+          "shape": "CodeSigningConfigId",
+          "documentation": "<p>Unique identifer for the Code signing configuration.</p>"
+        },
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Code signing configuration.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>Code signing configuration description.</p>"
+        },
+        "AllowedPublishers": {
+          "shape": "AllowedPublishers",
+          "documentation": "<p>List of allowed publishers.</p>"
+        },
+        "CodeSigningPolicies": {
+          "shape": "CodeSigningPolicies",
+          "documentation": "<p>The code signing policy controls the validation failure action for signature mismatch or expiry.</p>"
+        },
+        "LastModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). </p>"
+        }
+      },
+      "documentation": "<p>Details about a Code signing configuration. </p>"
+    },
+    "CodeSigningConfigArn": {
+      "type": "string",
+      "max": 200,
+      "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}"
+    },
+    "CodeSigningConfigId": {
+      "type": "string",
+      "pattern": "csc-[a-zA-Z0-9-_\\.]{17}"
+    },
+    "CodeSigningConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "CodeSigningConfig"
+      }
+    },
+    "CodeSigningPolicies": {
+      "type": "structure",
+      "members": {
+        "UntrustedArtifactOnDeployment": {
+          "shape": "CodeSigningPolicy",
+          "documentation": "<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>"
+        }
+      },
+      "documentation": "<p>Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.</p>"
+    },
+    "CodeSigningPolicy": {
+      "type": "string",
+      "enum": [
+        "Warn",
+        "Enforce"
+      ]
+    },
     "CompatibleRuntimes": {
       "type": "list",
       "member": {
         "shape": "Runtime"
       },
-      "max": 5
+      "max": 15
     },
     "Concurrency": {
       "type": "structure",
@@ -1853,6 +2211,38 @@
         "RoutingConfig": {
           "shape": "AliasRoutingConfiguration",
           "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing\">routing configuration</a> of the alias.</p>"
+        }
+      }
+    },
+    "CreateCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "AllowedPublishers"
+      ],
+      "members": {
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>Descriptive name for this code signing configuration.</p>"
+        },
+        "AllowedPublishers": {
+          "shape": "AllowedPublishers",
+          "documentation": "<p>Signing profiles for this code signing configuration.</p>"
+        },
+        "CodeSigningPolicies": {
+          "shape": "CodeSigningPolicies",
+          "documentation": "<p>The code signing policies define the actions to take if the validation checks fail. </p>"
+        }
+      }
+    },
+    "CreateCodeSigningConfigResponse": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfig"
+      ],
+      "members": {
+        "CodeSigningConfig": {
+          "shape": "CodeSigningConfig",
+          "documentation": "<p>The code signing configuration.</p>"
         }
       }
     },
@@ -2002,6 +2392,10 @@
         "FileSystemConfigs": {
           "shape": "FileSystemConfigList",
           "documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+        },
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p>"
         }
       }
     },
@@ -2039,6 +2433,24 @@
         }
       }
     },
+    "DeleteCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>",
+          "location": "uri",
+          "locationName": "CodeSigningConfigArn"
+        }
+      }
+    },
+    "DeleteCodeSigningConfigResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteEventSourceMappingRequest": {
       "type": "structure",
       "required": [
@@ -2050,6 +2462,20 @@
           "documentation": "<p>The identifier of the event source mapping.</p>",
           "location": "uri",
           "locationName": "UUID"
+        }
+      }
+    },
+    "DeleteFunctionCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
         }
       }
     },
@@ -2370,6 +2796,12 @@
       "type": "string",
       "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
     },
+    "FunctionArnList": {
+      "type": "list",
+      "member": {
+        "shape": "FunctionArn"
+      }
+    },
     "FunctionCode": {
       "type": "structure",
       "members": {
@@ -2516,6 +2948,14 @@
         "FileSystemConfigs": {
           "shape": "FileSystemConfigList",
           "documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+        },
+        "SigningProfileVersionArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the signing profile version.</p>"
+        },
+        "SigningJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the signing job.</p>"
         }
       },
       "documentation": "<p>Details about a function's configuration.</p>"
@@ -2607,6 +3047,32 @@
         }
       }
     },
+    "GetCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration. </p>",
+          "location": "uri",
+          "locationName": "CodeSigningConfigArn"
+        }
+      }
+    },
+    "GetCodeSigningConfigResponse": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfig"
+      ],
+      "members": {
+        "CodeSigningConfig": {
+          "shape": "CodeSigningConfig",
+          "documentation": "<p>The code signing configuration</p>"
+        }
+      }
+    },
     "GetEventSourceMappingRequest": {
       "type": "structure",
       "required": [
@@ -2618,6 +3084,37 @@
           "documentation": "<p>The identifier of the event source mapping.</p>",
           "location": "uri",
           "locationName": "UUID"
+        }
+      }
+    },
+    "GetFunctionCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        }
+      }
+    },
+    "GetFunctionCodeSigningConfigResponse": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn",
+        "FunctionName"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>"
+        },
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>"
         }
       }
     },
@@ -3079,6 +3576,14 @@
         "CodeSize": {
           "shape": "Long",
           "documentation": "<p>The size of the layer archive in bytes.</p>"
+        },
+        "SigningProfileVersionArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for a signing profile version.</p>"
+        },
+        "SigningJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a signing job.</p>"
         }
       },
       "documentation": "<p>An <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layer</a>.</p>"
@@ -3151,6 +3656,14 @@
         "CodeSize": {
           "shape": "Long",
           "documentation": "<p>The size of the layer archive in bytes.</p>"
+        },
+        "SigningProfileVersionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for a signing profile version.</p>"
+        },
+        "SigningJobArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a signing job.</p>"
         }
       },
       "documentation": "<p>Details about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layer</a>.</p>"
@@ -3273,6 +3786,36 @@
         }
       }
     },
+    "ListCodeSigningConfigsRequest": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "MaxListItems",
+          "documentation": "<p>Maximum number of items to return.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        }
+      }
+    },
+    "ListCodeSigningConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "NextMarker": {
+          "shape": "String",
+          "documentation": "<p>The pagination token that's included if more results are available.</p>"
+        },
+        "CodeSigningConfigs": {
+          "shape": "CodeSigningConfigList",
+          "documentation": "<p>The code signing configurations</p>"
+        }
+      }
+    },
     "ListEventSourceMappingsRequest": {
       "type": "structure",
       "members": {
@@ -3351,6 +3894,45 @@
         "NextMarker": {
           "shape": "String",
           "documentation": "<p>The pagination token that's included if more results are available.</p>"
+        }
+      }
+    },
+    "ListFunctionsByCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>",
+          "location": "uri",
+          "locationName": "CodeSigningConfigArn"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "MaxListItems",
+          "documentation": "<p>Maximum number of items to return.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        }
+      }
+    },
+    "ListFunctionsByCodeSigningConfigResponse": {
+      "type": "structure",
+      "members": {
+        "NextMarker": {
+          "shape": "String",
+          "documentation": "<p>The pagination token that's included if more results are available.</p>"
+        },
+        "FunctionArns": {
+          "shape": "FunctionArnList",
+          "documentation": "<p>The function ARNs. </p>"
         }
       }
     },
@@ -3847,6 +4429,42 @@
         }
       }
     },
+    "PutFunctionCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn",
+        "FunctionName"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>"
+        },
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        }
+      }
+    },
+    "PutFunctionCodeSigningConfigResponse": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn",
+        "FunctionName"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>"
+        },
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>"
+        }
+      }
+    },
     "PutFunctionConcurrencyRequest": {
       "type": "structure",
       "required": [
@@ -4110,6 +4728,14 @@
       "type": "string",
       "sensitive": true
     },
+    "SigningProfileVersionArns": {
+      "type": "list",
+      "member": {
+        "shape": "Arn"
+      },
+      "max": 20,
+      "min": 1
+    },
     "SourceAccessConfiguration": {
       "type": "structure",
       "members": {
@@ -4335,6 +4961,44 @@
         "RevisionId": {
           "shape": "String",
           "documentation": "<p>Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.</p>"
+        }
+      }
+    },
+    "UpdateCodeSigningConfigRequest": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfigArn"
+      ],
+      "members": {
+        "CodeSigningConfigArn": {
+          "shape": "CodeSigningConfigArn",
+          "documentation": "<p>The The Amazon Resource Name (ARN) of the code signing configuration.</p>",
+          "location": "uri",
+          "locationName": "CodeSigningConfigArn"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>Descriptive name for this code signing configuration.</p>"
+        },
+        "AllowedPublishers": {
+          "shape": "AllowedPublishers",
+          "documentation": "<p>Signing profiles for this code signing configuration.</p>"
+        },
+        "CodeSigningPolicies": {
+          "shape": "CodeSigningPolicies",
+          "documentation": "<p>The code signing policy.</p>"
+        }
+      }
+    },
+    "UpdateCodeSigningConfigResponse": {
+      "type": "structure",
+      "required": [
+        "CodeSigningConfig"
+      ],
+      "members": {
+        "CodeSigningConfig": {
+          "shape": "CodeSigningConfig",
+          "documentation": "<p>The code signing configuration</p>"
         }
       }
     },

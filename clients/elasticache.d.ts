@@ -1892,7 +1892,7 @@ declare namespace ElastiCache {
      */
     ProductDescription?: String;
     /**
-     * The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid Values: "Light Utilization"|"Medium Utilization"|"Heavy Utilization" 
+     * The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid Values: "Light Utilization"|"Medium Utilization"|"Heavy Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront" 
      */
     OfferingType?: String;
     /**
