@@ -21,15 +21,12 @@ module.exports = function() {
     this.request('iam', 'createUser', {UserName: this.iamUser}, next, false);
   });
 
-  this.Given(/^I list the IAM users$/, function(callback) {
-    this.request('iam', 'listUsers', {}, callback);
+  this.Given(/^I get the IAM user$/, function(callback) {
+    this.request('iam', 'getUser', {UserName: this.iamUser}, callback);
   });
 
-  this.Then(/^the list should contain the user$/, function(callback) {
-    var name = this.iamUser;
-    this.assert.contains(this.data.Users, function(user) {
-      return user.UserName === name;
-    });
+  this.Then(/^the IAM user should exist$/, function(callback) {
+    this.assert.equal(this.data.User.UserName, this.iamUser);
     callback();
   });
 

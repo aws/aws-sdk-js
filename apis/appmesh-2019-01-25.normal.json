@@ -4400,7 +4400,8 @@
     "TagRef": {
       "type": "structure",
       "required": [
-        "key"
+        "key",
+        "value"
       ],
       "members": {
         "key": {
