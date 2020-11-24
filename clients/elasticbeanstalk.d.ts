@@ -1292,7 +1292,7 @@ declare namespace ElasticBeanstalk {
     /**
      * The maximum number of items to return for a single request.
      */
-    MaxItems?: Integer;
+    MaxItems?: ManagedActionHistoryMaxItems;
   }
   export interface DescribeEnvironmentManagedActionHistoryResult {
     /**
@@ -1979,6 +1979,7 @@ declare namespace ElasticBeanstalk {
     FinishedTime?: Timestamp;
   }
   export type ManagedActionHistoryItems = ManagedActionHistoryItem[];
+  export type ManagedActionHistoryMaxItems = number;
   export type ManagedActions = ManagedAction[];
   export interface MaxAgeRule {
     /**

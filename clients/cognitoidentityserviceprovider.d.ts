@@ -660,11 +660,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   setUICustomization(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
   /**
-   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
+   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in. If an MFA type is enabled for a user, the user will be prompted for MFA during all sign in attempts, unless device tracking is turned on and the device has been trusted. If you would like MFA to be applied selectively based on the assessed risk level of sign in attempts, disable MFA for users and turn on Adaptive Authentication for the user pool.
    */
   setUserMFAPreference(params: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
   /**
-   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
+   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in. If an MFA type is enabled for a user, the user will be prompted for MFA during all sign in attempts, unless device tracking is turned on and the device has been trusted. If you would like MFA to be applied selectively based on the assessed risk level of sign in attempts, disable MFA for users and turn on Adaptive Authentication for the user pool.
    */
   setUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
   /**
@@ -2025,11 +2025,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SmsVerificationMessage?: SmsVerificationMessageType;
     /**
-     * A string representing the email verification message.
+     * A string representing the email verification message. EmailVerificationMessage is allowed only if EmailSendingAccount is DEVELOPER. 
      */
     EmailVerificationMessage?: EmailVerificationMessageType;
     /**
-     * A string representing the email verification subject.
+     * A string representing the email verification subject. EmailVerificationSubject is allowed only if EmailSendingAccount is DEVELOPER. 
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
@@ -2095,6 +2095,28 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CertificateArn: ArnType;
   }
+  export interface CustomEmailLambdaVersionConfigType {
+    /**
+     * The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
+     */
+    LambdaVersion: CustomEmailSenderLambdaVersionType;
+    /**
+     * The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+     */
+    LambdaArn: ArnType;
+  }
+  export type CustomEmailSenderLambdaVersionType = "V1_0"|string;
+  export interface CustomSMSLambdaVersionConfigType {
+    /**
+     * The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
+     */
+    LambdaVersion: CustomSMSSenderLambdaVersionType;
+    /**
+     * The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+     */
+    LambdaArn: ArnType;
+  }
+  export type CustomSMSSenderLambdaVersionType = "V1_0"|string;
   export type DateType = Date;
   export type DefaultEmailOptionType = "CONFIRM_WITH_LINK"|"CONFIRM_WITH_CODE"|string;
   export interface DeleteGroupRequest {
@@ -2374,7 +2396,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ReplyToEmailAddress?: EmailAddressType;
     /**
-     * Specifies whether Amazon Cognito emails your users by using its built-in email functionality or your Amazon SES email configuration. Specify one of the following values:  COGNITO_DEFAULT  When Amazon Cognito emails your users, it uses its built-in email functionality. When you use the default option, Amazon Cognito allows only a limited number of emails each day for your user pool. For typical production environments, the default email limit is below the required delivery volume. To achieve a higher delivery volume, specify DEVELOPER to use your Amazon SES email configuration. To look up the email delivery limit for the default option, see Limits in Amazon Cognito in the Amazon Cognito Developer Guide. The default FROM address is no-reply@verificationemail.com. To customize the FROM address, provide the ARN of an Amazon SES verified email address for the SourceArn parameter.  DEVELOPER  When Amazon Cognito emails your users, it uses your Amazon SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email from your verified email address. When you use this option, the email delivery limits are the same limits that apply to your Amazon SES verified email address in your AWS account. If you use this option, you must provide the ARN of an Amazon SES verified email address for the SourceArn parameter. Before Amazon Cognito can email your users, it requires additional permissions to call Amazon SES on your behalf. When you update your user pool with this option, Amazon Cognito creates a service-linked role, which is a type of IAM role, in your AWS account. This role contains the permissions that allow Amazon Cognito to access Amazon SES and send email messages with your address. For more information about the service-linked role that Amazon Cognito creates, see Using Service-Linked Roles for Amazon Cognito in the Amazon Cognito Developer Guide.  
+     * Specifies whether Amazon Cognito emails your users by using its built-in email functionality or your Amazon SES email configuration. Specify one of the following values:  COGNITO_DEFAULT  When Amazon Cognito emails your users, it uses its built-in email functionality. When you use the default option, Amazon Cognito allows only a limited number of emails each day for your user pool. For typical production environments, the default email limit is below the required delivery volume. To achieve a higher delivery volume, specify DEVELOPER to use your Amazon SES email configuration. To look up the email delivery limit for the default option, see Limits in Amazon Cognito in the Amazon Cognito Developer Guide. The default FROM address is no-reply@verificationemail.com. To customize the FROM address, provide the ARN of an Amazon SES verified email address for the SourceArn parameter.  If EmailSendingAccount is COGNITO_DEFAULT, the following parameters aren't allowed:   EmailVerificationMessage   EmailVerificationSubject   InviteMessageTemplate.EmailMessage   InviteMessageTemplate.EmailSubject   VerificationMessageTemplate.EmailMessage   VerificationMessageTemplate.EmailMessageByLink   VerificationMessageTemplate.EmailSubject,   VerificationMessageTemplate.EmailSubjectByLink    DEVELOPER EmailSendingAccount is required.   DEVELOPER  When Amazon Cognito emails your users, it uses your Amazon SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email from your verified email address. When you use this option, the email delivery limits are the same limits that apply to your Amazon SES verified email address in your AWS account. If you use this option, you must provide the ARN of an Amazon SES verified email address for the SourceArn parameter. Before Amazon Cognito can email your users, it requires additional permissions to call Amazon SES on your behalf. When you update your user pool with this option, Amazon Cognito creates a service-linked role, which is a type of IAM role, in your AWS account. This role contains the permissions that allow Amazon Cognito to access Amazon SES and send email messages with your address. For more information about the service-linked role that Amazon Cognito creates, see Using Service-Linked Roles for Amazon Cognito in the Amazon Cognito Developer Guide.  
      */
     EmailSendingAccount?: EmailSendingAccountType;
     /**
@@ -2833,6 +2855,18 @@ declare namespace CognitoIdentityServiceProvider {
      * The user migration Lambda config type.
      */
     UserMigration?: ArnType;
+    /**
+     * A custom SMS sender AWS Lambda trigger.
+     */
+    CustomSMSSender?: CustomSMSLambdaVersionConfigType;
+    /**
+     * A custom email sender AWS Lambda trigger.
+     */
+    CustomEmailSender?: CustomEmailLambdaVersionConfigType;
+    /**
+     * The Amazon Resource Name of Key Management Service Customer master keys . Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+     */
+    KMSKeyID?: ArnType;
   }
   export interface ListDevicesRequest {
     /**
@@ -3093,11 +3127,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SMSMessage?: SmsVerificationMessageType;
     /**
-     * The message template for email messages.
+     * The message template for email messages. EmailMessage is allowed only if EmailSendingAccount is DEVELOPER. 
      */
     EmailMessage?: EmailVerificationMessageType;
     /**
-     * The subject line for email messages.
+     * The subject line for email messages. EmailSubject is allowed only if EmailSendingAccount is DEVELOPER. 
      */
     EmailSubject?: EmailVerificationSubjectType;
   }
@@ -3406,7 +3440,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type SESConfigurationSet = string;
   export interface SMSMfaSettingsType {
     /**
-     * Specifies whether SMS text message MFA is enabled.
+     * Specifies whether SMS text message MFA is enabled. If an MFA type is enabled for a user, the user will be prompted for MFA during all sign in attempts, unless device tracking is turned on and the device has been trusted.
      */
     Enabled?: BooleanType;
     /**
@@ -3619,7 +3653,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type SkippedIPRangeListType = StringType[];
   export interface SmsConfigurationType {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller. This is the ARN of the IAM role in your AWS account which Cognito will use to send SMS messages.
+     * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller. This is the ARN of the IAM role in your AWS account which Cognito will use to send SMS messages. SMS messages are subject to a spending limit. 
      */
     SnsCallerArn: ArnType;
     /**
@@ -3647,7 +3681,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface SoftwareTokenMfaSettingsType {
     /**
-     * Specifies whether software token MFA is enabled.
+     * Specifies whether software token MFA is enabled. If an MFA type is enabled for a user, the user will be prompted for MFA during all sign in attempts, unless device tracking is turned on and the device has been trusted.
      */
     Enabled?: BooleanType;
     /**
@@ -4477,19 +4511,19 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SmsMessage?: SmsVerificationMessageType;
     /**
-     * The email message template.
+     * The email message template. EmailMessage is allowed only if  EmailSendingAccount is DEVELOPER. 
      */
     EmailMessage?: EmailVerificationMessageType;
     /**
-     * The subject line for the email message template.
+     * The subject line for the email message template. EmailSubject is allowed only if EmailSendingAccount is DEVELOPER. 
      */
     EmailSubject?: EmailVerificationSubjectType;
     /**
-     * The email message template for sending a confirmation link to the user.
+     * The email message template for sending a confirmation link to the user. EmailMessageByLink is allowed only if  EmailSendingAccount is DEVELOPER.
      */
     EmailMessageByLink?: EmailVerificationMessageByLinkType;
     /**
-     * The subject line for the email message template for sending a confirmation link to the user.
+     * The subject line for the email message template for sending a confirmation link to the user. EmailSubjectByLink is allowed only  EmailSendingAccount is DEVELOPER.
      */
     EmailSubjectByLink?: EmailVerificationSubjectByLinkType;
     /**

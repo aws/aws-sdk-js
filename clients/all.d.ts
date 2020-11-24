@@ -235,3 +235,4 @@ export import S3Outposts = require('./s3outposts');
 export import DataBrew = require('./databrew');
 export import ServiceCatalogAppRegistry = require('./servicecatalogappregistry');
 export import NetworkFirewall = require('./networkfirewall');
+export import MWAA = require('./mwaa');

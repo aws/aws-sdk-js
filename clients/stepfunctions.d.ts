@@ -156,6 +156,14 @@ declare class StepFunctions extends Service {
    */
   startExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
+   * Starts a Synchronous Express state machine execution.
+   */
+  startSyncExecution(params: StepFunctions.Types.StartSyncExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
+  /**
+   * Starts a Synchronous Express state machine execution.
+   */
+  startSyncExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
+  /**
    * Stops an execution. This API action is not supported by EXPRESS state machines.
    */
   stopExecution(params: StepFunctions.Types.StopExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
@@ -273,11 +281,23 @@ declare namespace StepFunctions {
     cause?: SensitiveCause;
   }
   export type Arn = string;
+  export type BilledDuration = number;
+  export type BilledMemoryUsed = number;
+  export interface BillingDetails {
+    /**
+     * Billed memory consumption of your workflow, in MB.
+     */
+    billedMemoryUsedInMB?: BilledMemoryUsed;
+    /**
+     * Billed duration of your workflow, in milliseconds.
+     */
+    billedDurationInMilliseconds?: BilledDuration;
+  }
   export interface CloudWatchEventsExecutionDataDetails {
     /**
      * Indicates whether input or output was included in the response. Always true for API calls. 
      */
-    included?: included;
+    included?: includedDetails;
   }
   export interface CloudWatchLogsLogGroup {
     /**
@@ -391,7 +411,7 @@ declare namespace StepFunctions {
   }
   export interface DescribeExecutionOutput {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
@@ -425,7 +445,7 @@ declare namespace StepFunctions {
     output?: SensitiveData;
     outputDetails?: CloudWatchEventsExecutionDataDetails;
     /**
-     * The AWS X-Ray trace header which was passed to the execution.
+     * The AWS X-Ray trace header that was passed to the execution.
      */
     traceHeader?: TraceHeader;
   }
@@ -528,7 +548,7 @@ declare namespace StepFunctions {
   export type ExecutionList = ExecutionListItem[];
   export interface ExecutionListItem {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
@@ -996,13 +1016,83 @@ declare namespace StepFunctions {
   }
   export interface StartExecutionOutput {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
      * The date the execution is started.
      */
     startDate: Timestamp;
+  }
+  export interface StartSyncExecutionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine to execute.
+     */
+    stateMachineArn: Arn;
+    /**
+     * The name of the execution.
+     */
+    name?: Name;
+    /**
+     * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"   Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     */
+    input?: SensitiveData;
+    /**
+     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     */
+    traceHeader?: TraceHeader;
+  }
+  export interface StartSyncExecutionOutput {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the execution.
+     */
+    executionArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the state machine.
+     */
+    stateMachineArn?: Arn;
+    /**
+     * The name of the execution.
+     */
+    name?: Name;
+    /**
+     * The date the execution is started.
+     */
+    startDate: Timestamp;
+    /**
+     * If the execution has already ended, the date the execution stopped.
+     */
+    stopDate: Timestamp;
+    /**
+     * The current status of the execution.
+     */
+    status: SyncExecutionStatus;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
+    /**
+     * The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     */
+    input?: SensitiveData;
+    inputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
+     */
+    output?: SensitiveData;
+    outputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The AWS X-Ray trace header that was passed to the execution.
+     */
+    traceHeader?: TraceHeader;
+    /**
+     * An object that describes workflow billing details, including billed duration and memory use.
+     */
+    billingDetails?: BillingDetails;
   }
   export interface StateEnteredEventDetails {
     /**
@@ -1073,6 +1163,7 @@ declare namespace StepFunctions {
      */
     stopDate: Timestamp;
   }
+  export type SyncExecutionStatus = "SUCCEEDED"|"FAILED"|"TIMED_OUT"|string;
   export interface Tag {
     /**
      * The key of a tag.
@@ -1294,7 +1385,7 @@ declare namespace StepFunctions {
      */
     updateDate: Timestamp;
   }
-  export type included = boolean;
+  export type includedDetails = boolean;
   export type truncated = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

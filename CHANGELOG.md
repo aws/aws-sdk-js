@@ -1,6 +1,25 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.798.0-->
+<!--LATEST=2.799.0-->
 <!--ENTRYINSERT-->
+
+## 2.799.0
+* feature: Appflow: Upsolver as a destination connector and documentation update.
+* feature: Batch: Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support.
+* feature: CloudFormation: Adds support for the new Modules feature for CloudFormation. A module encapsulates one or more resources and their respective configurations for reuse across your organization.
+* feature: CloudTrail: CloudTrail now includes advanced event selectors, which give you finer-grained control over the events that are logged to your trail.
+* feature: CodeBuild: Adding GetReportGroupTrend API for Test Reports.
+* feature: CognitoIdentityServiceProvider: This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users.
+* feature: Comprehend: Support Comprehend events detection APIs
+* feature: ElasticBeanstalk: Updates the Integer constraint of DescribeEnvironmentManagedActionHistory's MaxItems parameter to [1, 100].
+* feature: FSx: This release adds the capability to increase storage capacity of Amazon FSx for Lustre file systems, providing the flexibility to meet evolving storage needs over time.
+* feature: GameLift: GameLift FlexMatch is now available as a standalone matchmaking solution. FlexMatch now provides customizable matchmaking for games hosted peer-to-peer, on-premises, or on cloud compute primitives.
+* feature: IoTSiteWise: This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise.
+* feature: LexModelBuildingService: Lex now supports es-419, de-DE locales
+* feature: MWAA: (New Service) Amazon MWAA is a managed service for Apache Airflow that makes it easy for data engineers and data scientists to execute data processing workflows in the cloud.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for Vorbis and Opus audio in OGG/OGA containers.
+* feature: QuickSight: Support for embedding without user registration. New enum EmbeddingIdentityType. A potential breaking change. Affects code that refers IdentityType enum type directly instead of literal string value.
+* feature: StepFunctions: This release of the AWS Step Functions SDK introduces support for Synchronous Express Workflows
+* feature: TimestreamWrite: Adds support of upserts for idempotent updates to Timestream.
 
 ## 2.798.0
 * feature: ApplicationInsights: Add Detected Workload to ApplicationComponent which shows the workloads that installed in the component

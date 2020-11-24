@@ -580,6 +580,34 @@
       ],
       "documentation": "<p>Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.</p>"
     },
+    "DescribeEventsDetectionJob": {
+      "name": "DescribeEventsDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEventsDetectionJobRequest"
+      },
+      "output": {
+        "shape": "DescribeEventsDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "JobNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the status and details of an events detection job.</p>"
+    },
     "DescribeKeyPhrasesDetectionJob": {
       "name": "DescribeKeyPhrasesDetectionJob",
       "http": {
@@ -1025,6 +1053,34 @@
       ],
       "documentation": "<p>Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list.</p> <p>The results of this list are not in any particular order. Please get the list and sort locally if needed.</p>"
     },
+    "ListEventsDetectionJobs": {
+      "name": "ListEventsDetectionJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListEventsDetectionJobsRequest"
+      },
+      "output": {
+        "shape": "ListEventsDetectionJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidFilterException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a list of the events detection jobs that you have submitted.</p>"
+    },
     "ListKeyPhrasesDetectionJobs": {
       "name": "ListKeyPhrasesDetectionJobs",
       "http": {
@@ -1258,6 +1314,34 @@
       ],
       "documentation": "<p>Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.</p> <p>This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional <code>EntityRecognizerArn</code> must be used in order to provide access to the recognizer being used to detect the custom entity.</p>"
     },
+    "StartEventsDetectionJob": {
+      "name": "StartEventsDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartEventsDetectionJobRequest"
+      },
+      "output": {
+        "shape": "StartEventsDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "KmsKeyValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts an asynchronous event detection job for a collection of documents.</p>"
+    },
     "StartKeyPhrasesDetectionJob": {
       "name": "StartKeyPhrasesDetectionJob",
       "http": {
@@ -1419,6 +1503,31 @@
         }
       ],
       "documentation": "<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
+    },
+    "StopEventsDetectionJob": {
+      "name": "StopEventsDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopEventsDetectionJobRequest"
+      },
+      "output": {
+        "shape": "StopEventsDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "JobNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Stops an events detection job in progress.</p>"
     },
     "StopKeyPhrasesDetectionJob": {
       "name": "StopKeyPhrasesDetectionJob",
@@ -2040,7 +2149,7 @@
         },
         "Labels": {
           "shape": "ListOfLabels",
-          "documentation": "<p>The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. </p>"
+          "documentation": "<p>The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. </p>"
         }
       },
       "sensitive": true
@@ -2413,6 +2522,27 @@
         "EntityRecognizerProperties": {
           "shape": "EntityRecognizerProperties",
           "documentation": "<p>Describes information associated with an entity recognizer.</p>"
+        }
+      }
+    },
+    "DescribeEventsDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the events detection job.</p>"
+        }
+      }
+    },
+    "DescribeEventsDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "EventsDetectionJobProperties": {
+          "shape": "EventsDetectionJobProperties",
+          "documentation": "<p>An object that contains the properties associated with an event detection job.</p>"
         }
       }
     },
@@ -3043,7 +3173,7 @@
           "documentation": "<p>Specifies a date after which the returned endpoint or endpoints were created.</p>"
         }
       },
-      "documentation": "<p>The filter used to determine which endpoints are are returned. You can filter jobs on their name, model, status, or the date and time that they were created. You can only set one filter at a time. </p>"
+      "documentation": "<p>The filter used to determine which endpoints are returned. You can filter jobs on their name, model, status, or the date and time that they were created. You can only set one filter at a time. </p>"
     },
     "EndpointProperties": {
       "type": "structure",
@@ -3485,7 +3615,7 @@
         },
         "F1Score": {
           "shape": "Double",
-          "documentation": "<p>A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. </p>"
+          "documentation": "<p>A measure of how accurate the recognizer results are for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. </p>"
         }
       },
       "documentation": "<p>Detailed information about the accuracy of an entity recognizer for a specific entity type. </p>"
@@ -3508,6 +3638,90 @@
         }
       },
       "documentation": "<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.</p>"
+    },
+    "EventTypeString": {
+      "type": "string",
+      "max": 40,
+      "min": 1,
+      "pattern": "[A-Z_]*"
+    },
+    "EventsDetectionJobFilter": {
+      "type": "structure",
+      "members": {
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>Filters on the name of the events detection job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>Filters the list of jobs based on job status. Returns only jobs with the specified status.</p>"
+        },
+        "SubmitTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.</p>"
+        },
+        "SubmitTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.</p>"
+        }
+      },
+      "documentation": "<p>Provides information for filtering a list of event detection jobs.</p>"
+    },
+    "EventsDetectionJobProperties": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier assigned to the events detection job.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name you assigned the events detection job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The current status of the events detection job.</p>"
+        },
+        "Message": {
+          "shape": "AnyLengthString",
+          "documentation": "<p>A description of the status of the events detection job.</p>"
+        },
+        "SubmitTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the events detection job was submitted for processing.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the events detection job completed.</p>"
+        },
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>The input data configuration that you supplied when you created the events detection job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "OutputDataConfig",
+          "documentation": "<p>The output data configuration that you supplied when you created the events detection job.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the input documents.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+        },
+        "TargetEventTypes": {
+          "shape": "TargetEventTypes",
+          "documentation": "<p>The types of events that are detected by the job.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an events detection job.</p>"
+    },
+    "EventsDetectionJobPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "EventsDetectionJobProperties"
+      }
     },
     "Float": {
       "type": "float"
@@ -3876,6 +4090,36 @@
         "EntityRecognizerPropertiesList": {
           "shape": "EntityRecognizerPropertiesList",
           "documentation": "<p>The list of properties of an entity recognizer.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        }
+      }
+    },
+    "ListEventsDetectionJobsRequest": {
+      "type": "structure",
+      "members": {
+        "Filter": {
+          "shape": "EventsDetectionJobFilter",
+          "documentation": "<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>The maximum number of results to return in each page.</p>"
+        }
+      }
+    },
+    "ListEventsDetectionJobsResponse": {
+      "type": "structure",
+      "members": {
+        "EventsDetectionJobPropertiesList": {
+          "shape": "EventsDetectionJobPropertiesList",
+          "documentation": "<p>A list containing the properties of each job that is returned.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -4671,6 +4915,60 @@
         }
       }
     },
+    "StartEventsDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "InputDataConfig",
+        "OutputDataConfig",
+        "DataAccessRoleArn",
+        "LanguageCode",
+        "TargetEventTypes"
+      ],
+      "members": {
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>Specifies the format and location of the input data for the job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "OutputDataConfig",
+          "documentation": "<p>Specifies where to send the output files.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The identifier of the events detection job.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the input documents.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestTokenString",
+          "documentation": "<p>An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.</p>",
+          "idempotencyToken": true
+        },
+        "TargetEventTypes": {
+          "shape": "TargetEventTypes",
+          "documentation": "<p>The types of events to detect in the input documents.</p>"
+        }
+      }
+    },
+    "StartEventsDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the events detection job.</p>"
+        }
+      }
+    },
     "StartKeyPhrasesDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -4949,6 +5247,31 @@
         }
       }
     },
+    "StopEventsDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the events detection job to stop.</p>"
+        }
+      }
+    },
+    "StopEventsDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the events detection job to stop.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the events detection job.</p>"
+        }
+      }
+    },
     "StopKeyPhrasesDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -5171,6 +5494,13 @@
       "max": 256,
       "min": 0
     },
+    "TargetEventTypes": {
+      "type": "list",
+      "member": {
+        "shape": "EventTypeString"
+      },
+      "min": 1
+    },
     "Timestamp": {
       "type": "timestamp"
     },
@@ -5314,7 +5644,7 @@
           "documentation": "<p>The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s region. This ID number is preceded by \"subnet-\", for instance: \"subnet-04ccf456919e69055\". For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">VPCs and Subnets</a>. </p>"
         }
       },
-      "documentation": "<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>"
+      "documentation": "<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>"
     }
   },
   "documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents. Use these actions to determine the topics contained in your documents, the topics they discuss, the predominant sentiment expressed in them, the predominant language used, and more.</p>"

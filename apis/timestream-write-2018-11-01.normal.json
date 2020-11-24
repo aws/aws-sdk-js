@@ -126,7 +126,7 @@
           "shape": "InvalidEndpointException"
         }
       ],
-      "documentation": "<p>Deletes a given Timestream database. <i>This is an irreversible operation. After a database is deleted, the time series data from its tables cannot be recovered.</i> </p> <p>All tables in the database must be deleted first, or a ValidationException error will be thrown. </p>",
+      "documentation": "<p>Deletes a given Timestream database. <i>This is an irreversible operation. After a database is deleted, the time series data from its tables cannot be recovered.</i> </p> <p>All tables in the database must be deleted first, or a ValidationException error will be thrown. </p> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>",
       "endpointdiscovery": {
         "required": true
       }
@@ -160,7 +160,7 @@
           "shape": "InvalidEndpointException"
         }
       ],
-      "documentation": "<p>Deletes a given Timestream table. This is an irreversible operation. After a Timestream database table is deleted, the time series data stored in the table cannot be recovered. </p>",
+      "documentation": "<p>Deletes a given Timestream table. This is an irreversible operation. After a Timestream database table is deleted, the time series data stored in the table cannot be recovered. </p> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>",
       "endpointdiscovery": {
         "required": true
       }
@@ -353,6 +353,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -384,6 +387,9 @@
           "shape": "ServiceQuotaExceededException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -413,6 +419,9 @@
         },
         {
           "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -750,7 +759,7 @@
       "members": {
         "Name": {
           "shape": "StringValue256",
-          "documentation": "<p> Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. <i>Dimension names can only contain alphanumeric characters and underscores. Dimension names cannot end with an underscore.</i> </p>"
+          "documentation": "<p> Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. </p> <p>For constraints on Dimension names, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming\">Naming Constraints</a>.</p>"
         },
         "Value": {
           "shape": "StringValue2048",
@@ -926,14 +935,22 @@
         },
         "Time": {
           "shape": "StringValue256",
-          "documentation": "<p> Contains the time at which the measure value for the data point was collected. </p>"
+          "documentation": "<p> Contains the time at which the measure value for the data point was collected. The time value plus the unit provides the time elapsed since the epoch. For example, if the time value is <code>12345</code> and the unit is <code>ms</code>, then <code>12345 ms</code> have elapsed since the epoch. </p>"
         },
         "TimeUnit": {
           "shape": "TimeUnit",
           "documentation": "<p> The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. </p>"
+        },
+        "Version": {
+          "shape": "RecordVersion",
+          "documentation": "<p>64-bit attribute used for record updates. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is to 1.</p>",
+          "box": true
         }
       },
       "documentation": "<p>Record represents a time series data point being written into Timestream. Each record contains an array of dimensions. Dimensions represent the meta data attributes of a time series data point such as the instance name or availability zone of an EC2 instance. A record also contains the measure name which is the name of the measure being collected for example the CPU utilization of an EC2 instance. A record also contains the measure value and the value type which is the data type of the measure value. In addition, the record contains the timestamp when the measure was collected that the timestamp unit which represents the granularity of the timestamp. </p>"
+    },
+    "RecordVersion": {
+      "type": "long"
     },
     "Records": {
       "type": "list",

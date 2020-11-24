@@ -236,5 +236,6 @@ module.exports = {
   S3Outposts: require('./s3outposts'),
   DataBrew: require('./databrew'),
   ServiceCatalogAppRegistry: require('./servicecatalogappregistry'),
-  NetworkFirewall: require('./networkfirewall')
+  NetworkFirewall: require('./networkfirewall'),
+  MWAA: require('./mwaa')
 };

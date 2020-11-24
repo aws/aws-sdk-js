@@ -1,0 +1,87 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Upsolver as a destination connector and documentation update."
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Adds support for the new Modules feature for CloudFormation. A module encapsulates one or more resources and their respective configurations for reuse across your organization."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "CloudTrail now includes advanced event selectors, which give you finer-grained control over the events that are logged to your trail."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Adding GetReportGroupTrend API for Test Reports."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Support Comprehend events detection APIs"
+    },
+    {
+        "type": "feature",
+        "category": "ElasticBeanstalk",
+        "description": "Updates the Integer constraint of DescribeEnvironmentManagedActionHistory's MaxItems parameter to [1, 100]."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds the capability to increase storage capacity of Amazon FSx for Lustre file systems, providing the flexibility to meet evolving storage needs over time."
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "GameLift FlexMatch is now available as a standalone matchmaking solution. FlexMatch now provides customizable matchmaking for games hosted peer-to-peer, on-premises, or on cloud compute primitives."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Lex now supports es-419, de-DE locales"
+    },
+    {
+        "type": "feature",
+        "category": "MWAA",
+        "description": "(New Service) Amazon MWAA is a managed service for Apache Airflow that makes it easy for data engineers and data scientists to execute data processing workflows in the cloud."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added support for Vorbis and Opus audio in OGG/OGA containers."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Support for embedding without user registration. New enum EmbeddingIdentityType. A potential breaking change. Affects code that refers IdentityType enum type directly instead of literal string value."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release of the AWS Step Functions SDK introduces support for Synchronous Express Workflows"
+    },
+    {
+        "type": "feature",
+        "category": "TimestreamWrite",
+        "description": "Adds support of upserts for idempotent updates to Timestream."
+    }
+]

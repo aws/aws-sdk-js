@@ -923,5 +923,8 @@
   "networkfirewall": {
     "prefix": "network-firewall",
     "name": "NetworkFirewall"
+  },
+  "mwaa": {
+    "name": "MWAA"
   }
 }

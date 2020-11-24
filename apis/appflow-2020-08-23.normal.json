@@ -849,6 +849,10 @@
         "EventBridge": {
           "shape": "EventBridgeMetadata",
           "documentation": "<p> The connector metadata specific to Amazon EventBridge. </p>"
+        },
+        "Upsolver": {
+          "shape": "UpsolverMetadata",
+          "documentation": "<p> The connector metadata specific to Upsolver. </p>"
         }
       },
       "documentation": "<p> A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. </p>"
@@ -1160,7 +1164,8 @@
         "Infornexus",
         "Amplitude",
         "Veeva",
-        "EventBridge"
+        "EventBridge",
+        "Upsolver"
       ]
     },
     "ConnectorTypeList": {
@@ -1635,6 +1640,10 @@
         "EventBridge": {
           "shape": "EventBridgeDestinationProperties",
           "documentation": "<p> The properties required to query Amazon EventBridge. </p>"
+        },
+        "Upsolver": {
+          "shape": "UpsolverDestinationProperties",
+          "documentation": "<p> The properties required to query Upsolver. </p>"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -2854,7 +2863,7 @@
       "members": {
         "scheduleExpression": {
           "shape": "ScheduleExpression",
-          "documentation": "<p> The scheduling expression that determines when and how often the rule runs. </p>"
+          "documentation": "<p> The scheduling expression that determines the rate at which the schedule will run, for example <code>rate(5minutes)</code>. </p>"
         },
         "dataPullMode": {
           "shape": "DataPullMode",
@@ -3707,6 +3716,58 @@
       "type": "string",
       "max": 256,
       "pattern": "\\S+"
+    },
+    "UpsolverBucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 16,
+      "pattern": "^(upsolver-appflow)\\S*"
+    },
+    "UpsolverDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "s3OutputFormatConfig"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "UpsolverBucketName",
+          "documentation": "<p> The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data. </p>"
+        },
+        "bucketPrefix": {
+          "shape": "BucketPrefix",
+          "documentation": "<p> The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. </p>"
+        },
+        "s3OutputFormatConfig": {
+          "shape": "UpsolverS3OutputFormatConfig",
+          "documentation": "<p> The configuration that determines how data is formatted when Upsolver is used as the flow destination. </p>"
+        }
+      },
+      "documentation": "<p> The properties that are applied when Upsolver is used as a destination. </p>"
+    },
+    "UpsolverMetadata": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The connector metadata specific to Upsolver. </p>"
+    },
+    "UpsolverS3OutputFormatConfig": {
+      "type": "structure",
+      "required": [
+        "prefixConfig"
+      ],
+      "members": {
+        "fileType": {
+          "shape": "FileType",
+          "documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. </p>"
+        },
+        "prefixConfig": {
+          "shape": "PrefixConfig"
+        },
+        "aggregationConfig": {
+          "shape": "AggregationConfig"
+        }
+      },
+      "documentation": "<p> The configuration that determines how Amazon AppFlow formats the flow output data when Upsolver is used as the destination. </p>"
     },
     "Username": {
       "type": "string",

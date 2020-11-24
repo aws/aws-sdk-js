@@ -156,6 +156,14 @@ declare class Comprehend extends Service {
    */
   describeEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
   /**
+   * Gets the status and details of an events detection job.
+   */
+  describeEventsDetectionJob(params: Comprehend.Types.DescribeEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEventsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEventsDetectionJobResponse, AWSError>;
+  /**
+   * Gets the status and details of an events detection job.
+   */
+  describeEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEventsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEventsDetectionJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
   describeKeyPhrasesDetectionJob(params: Comprehend.Types.DescribeKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
@@ -284,6 +292,14 @@ declare class Comprehend extends Service {
    */
   listEntityRecognizers(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
   /**
+   * Gets a list of the events detection jobs that you have submitted.
+   */
+  listEventsDetectionJobs(params: Comprehend.Types.ListEventsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEventsDetectionJobsResponse) => void): Request<Comprehend.Types.ListEventsDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the events detection jobs that you have submitted.
+   */
+  listEventsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEventsDetectionJobsResponse) => void): Request<Comprehend.Types.ListEventsDetectionJobsResponse, AWSError>;
+  /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
   listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
@@ -348,6 +364,14 @@ declare class Comprehend extends Service {
    */
   startEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
+   * Starts an asynchronous event detection job for a collection of documents.
+   */
+  startEventsDetectionJob(params: Comprehend.Types.StartEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEventsDetectionJobResponse) => void): Request<Comprehend.Types.StartEventsDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous event detection job for a collection of documents.
+   */
+  startEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEventsDetectionJobResponse) => void): Request<Comprehend.Types.StartEventsDetectionJobResponse, AWSError>;
+  /**
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startKeyPhrasesDetectionJob(params: Comprehend.Types.StartKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
@@ -395,6 +419,14 @@ declare class Comprehend extends Service {
    * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Stops an events detection job in progress.
+   */
+  stopEventsDetectionJob(params: Comprehend.Types.StopEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopEventsDetectionJobResponse) => void): Request<Comprehend.Types.StopEventsDetectionJobResponse, AWSError>;
+  /**
+   * Stops an events detection job in progress.
+   */
+  stopEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEventsDetectionJobResponse) => void): Request<Comprehend.Types.StopEventsDetectionJobResponse, AWSError>;
   /**
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -707,7 +739,7 @@ declare namespace Comprehend {
      */
     Classes?: ListOfClasses;
     /**
-     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
+     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
      */
     Labels?: ListOfLabels;
   }
@@ -930,6 +962,18 @@ declare namespace Comprehend {
      * Describes information associated with an entity recognizer.
      */
     EntityRecognizerProperties?: EntityRecognizerProperties;
+  }
+  export interface DescribeEventsDetectionJobRequest {
+    /**
+     * The identifier of the events detection job.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeEventsDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with an event detection job.
+     */
+    EventsDetectionJobProperties?: EventsDetectionJobProperties;
   }
   export interface DescribeKeyPhrasesDetectionJobRequest {
     /**
@@ -1676,7 +1720,7 @@ declare namespace Comprehend {
      */
     Recall?: Double;
     /**
-     * A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     * A measure of how accurate the recognizer results are for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
      */
     F1Score?: Double;
   }
@@ -1687,6 +1731,72 @@ declare namespace Comprehend {
      */
     Type: EntityTypeName;
   }
+  export type EventTypeString = string;
+  export interface EventsDetectionJobFilter {
+    /**
+     * Filters on the name of the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface EventsDetectionJobProperties {
+    /**
+     * The identifier assigned to the events detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name you assigned the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the events detection job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of the events detection job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the events detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the events detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the events detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the events detection job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * The types of events that are detected by the job.
+     */
+    TargetEventTypes?: TargetEventTypes;
+  }
+  export type EventsDetectionJobPropertiesList = EventsDetectionJobProperties[];
   export type Float = number;
   export type IamRoleArn = string;
   export type InferenceUnitsInteger = number;
@@ -1934,6 +2044,30 @@ declare namespace Comprehend {
      * The list of properties of an entity recognizer.
      */
     EntityRecognizerPropertiesList?: EntityRecognizerPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListEventsDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: EventsDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEventsDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    EventsDetectionJobPropertiesList?: EventsDetectionJobPropertiesList;
     /**
      * Identifies the next page of results to return.
      */
@@ -2426,6 +2560,46 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StartEventsDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * The types of events to detect in the input documents.
+     */
+    TargetEventTypes: TargetEventTypes;
+  }
+  export interface StartEventsDetectionJobResponse {
+    /**
+     * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the events detection job.
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StartKeyPhrasesDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -2634,6 +2808,22 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StopEventsDetectionJobRequest {
+    /**
+     * The identifier of the events detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopEventsDetectionJobResponse {
+    /**
+     * The identifier of the events detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the events detection job.
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StopKeyPhrasesDetectionJobRequest {
     /**
      * The identifier of the key phrases detection job to stop.
@@ -2750,6 +2940,7 @@ declare namespace Comprehend {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TargetEventTypes = EventTypeString[];
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**
