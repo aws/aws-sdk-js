@@ -3963,7 +3963,7 @@
         },
         "OfferingType": {
           "shape": "String",
-          "documentation": "<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>\"Light Utilization\"|\"Medium Utilization\"|\"Heavy Utilization\"</code> </p>"
+          "documentation": "<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>\"Light Utilization\"|\"Medium Utilization\"|\"Heavy Utilization\" |\"All Upfront\"|\"Partial Upfront\"| \"No Upfront\"</code> </p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",

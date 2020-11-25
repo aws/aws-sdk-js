@@ -368,6 +368,18 @@ export namespace DocumentClient {
   export type BackupType = "USER"|"SYSTEM"|"AWS_BACKUP"|string;
   export type BackupTypeFilter = "USER"|"SYSTEM"|"AWS_BACKUP"|"ALL"|string;
   export type BackupsInputLimit = number;
+  export interface BatchExecuteStatementInput {
+    /**
+     *  The list of PartiQL statements representing the batch to run. 
+     */
+    Statements: PartiQLBatchRequest;
+  }
+  export interface BatchExecuteStatementOutput {
+    /**
+     *  The response to each PartiQL statement in the batch. 
+     */
+    Responses?: PartiQLBatchResponse;
+  }
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -391,6 +403,45 @@ export namespace DocumentClient {
   }
   export type BatchGetRequestMap = {[key: string]: KeysAndAttributes};
   export type BatchGetResponseMap = {[key: string]: ItemList};
+  export interface BatchStatementError {
+    /**
+     *  The error code associated with the failed PartiQL batch statement. 
+     */
+    Code?: BatchStatementErrorCodeEnum;
+    /**
+     *  The error message associated with the PartiQL batch resposne. 
+     */
+    Message?: String;
+  }
+  export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
+  export interface BatchStatementRequest {
+    /**
+     *  A valid PartiQL statement. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters associated with a PartiQL statement in the batch request. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The read consistency of the PartiQL batch request. 
+     */
+    ConsistentRead?: ConsistentRead;
+  }
+  export interface BatchStatementResponse {
+    /**
+     *  The error associated with a failed PartiQL batch statement. 
+     */
+    Error?: BatchStatementError;
+    /**
+     *  The table name associated with a failed PartiQL batch statement. 
+     */
+    TableName?: TableName;
+    /**
+     *  A DynamoDB item associated with a BatchStatementResponse 
+     */
+    Item?: AttributeMap;
+  }
   export interface BatchWriteItemInput {
     /**
      * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
@@ -909,6 +960,22 @@ export namespace DocumentClient {
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
+  export interface DescribeKinesisStreamingDestinationInput {
+    /**
+     * The name of the table being described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeKinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The list of replica structures for the table being described.
+     */
+    KinesisDataStreamDestinations?: KinesisDataStreamDestinations;
+  }
   export interface DescribeLimitsInput {
   }
   export interface DescribeLimitsOutput {
@@ -965,6 +1032,7 @@ export namespace DocumentClient {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
   export type Double = number;
   export interface Endpoint {
     /**
@@ -979,6 +1047,50 @@ export namespace DocumentClient {
   export type Endpoints = Endpoint[];
   export type ExceptionDescription = string;
   export type ExceptionName = string;
+  export interface ExecuteStatementInput {
+    /**
+     *  The PartiQL statement representing the operation to run. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters for the PartiQL statement, if any. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     */
+    ConsistentRead?: ConsistentRead;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteStatementOutput {
+    /**
+     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     */
+    Items?: ItemList;
+    /**
+     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteTransactionInput {
+    /**
+     *  The list of PartiQL statements representing the transaction to run. 
+     */
+    TransactStatements: ParameterizedStatements;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface ExecuteTransactionOutput {
+    /**
+     *  The response to a PartiQL transaction. 
+     */
+    Responses?: ItemResponseList;
+  }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -1430,6 +1542,45 @@ export namespace DocumentClient {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export interface KinesisDataStreamDestination {
+    /**
+     * The ARN for a specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of replication.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The human-readable string that corresponds to the replica status.
+     */
+    DestinationStatusDescription?: String;
+  }
+  export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
+  export interface KinesisStreamingDestinationInput {
+    /**
+     * The name of the DynamoDB table.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for a Kinesis data stream.
+     */
+    StreamArn: StreamArn;
+  }
+  export interface KinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being modified.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of the replication.
+     */
+    DestinationStatus?: DestinationStatus;
+  }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
@@ -1649,6 +1800,21 @@ export namespace DocumentClient {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface ParameterizedStatement {
+    /**
+     *  A PartiQL statment that uses parameters. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameter values. 
+     */
+    Parameters?: PreparedStatementParameters;
+  }
+  export type ParameterizedStatements = ParameterizedStatement[];
+  export type PartiQLBatchRequest = BatchStatementRequest[];
+  export type PartiQLBatchResponse = BatchStatementResponse[];
+  export type PartiQLNextToken = string;
+  export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
      * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
@@ -1672,6 +1838,7 @@ export namespace DocumentClient {
   export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
+  export type PreparedStatementParameters = AttributeValue[];
   export interface Projection {
     /**
      * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  

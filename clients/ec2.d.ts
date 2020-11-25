@@ -20360,6 +20360,13 @@ declare namespace EC2 {
   }
   export type PrincipalIdFormatList = PrincipalIdFormat[];
   export type PrincipalType = "All"|"Service"|"OrganizationUnit"|"Account"|"User"|"Role"|string;
+  export interface PrivateDnsDetails {
+    /**
+     * The private DNS name assigned to the VPC endpoint service.
+     */
+    PrivateDnsName?: String;
+  }
+  export type PrivateDnsDetailsSet = PrivateDnsDetails[];
   export interface PrivateDnsNameConfiguration {
     /**
      * The verification state of the VPC endpoint service. &gt;Consumers of the endpoint service can use the private name only when the state is verified.
@@ -23122,6 +23129,10 @@ declare namespace EC2 {
      * The private DNS name for the service.
      */
     PrivateDnsName?: String;
+    /**
+     * The private DNS names assigned to the VPC endpoint service. 
+     */
+    PrivateDnsNames?: PrivateDnsDetailsSet;
     /**
      * Indicates whether the service supports endpoint policies.
      */

@@ -12,6 +12,22 @@ declare class Translate extends Service {
   constructor(options?: Translate.Types.ClientConfiguration)
   config: Config & Translate.Types.ClientConfiguration;
   /**
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   */
+  createParallelData(params: Translate.Types.CreateParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
+  /**
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   */
+  createParallelData(callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
+  /**
+   * Deletes a parallel data resource in Amazon Translate.
+   */
+  deleteParallelData(params: Translate.Types.DeleteParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.DeleteParallelDataResponse) => void): Request<Translate.Types.DeleteParallelDataResponse, AWSError>;
+  /**
+   * Deletes a parallel data resource in Amazon Translate.
+   */
+  deleteParallelData(callback?: (err: AWSError, data: Translate.Types.DeleteParallelDataResponse) => void): Request<Translate.Types.DeleteParallelDataResponse, AWSError>;
+  /**
    * A synchronous action that deletes a custom terminology.
    */
   deleteTerminology(params: Translate.Types.DeleteTerminologyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -28,6 +44,14 @@ declare class Translate extends Service {
    */
   describeTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.DescribeTextTranslationJobResponse) => void): Request<Translate.Types.DescribeTextTranslationJobResponse, AWSError>;
   /**
+   * Provides information about a parallel data resource.
+   */
+  getParallelData(params: Translate.Types.GetParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.GetParallelDataResponse) => void): Request<Translate.Types.GetParallelDataResponse, AWSError>;
+  /**
+   * Provides information about a parallel data resource.
+   */
+  getParallelData(callback?: (err: AWSError, data: Translate.Types.GetParallelDataResponse) => void): Request<Translate.Types.GetParallelDataResponse, AWSError>;
+  /**
    * Retrieves a custom terminology.
    */
   getTerminology(params: Translate.Types.GetTerminologyRequest, callback?: (err: AWSError, data: Translate.Types.GetTerminologyResponse) => void): Request<Translate.Types.GetTerminologyResponse, AWSError>;
@@ -43,6 +67,14 @@ declare class Translate extends Service {
    * Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name. If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.
    */
   importTerminology(callback?: (err: AWSError, data: Translate.Types.ImportTerminologyResponse) => void): Request<Translate.Types.ImportTerminologyResponse, AWSError>;
+  /**
+   * Provides a list of your parallel data resources in Amazon Translate.
+   */
+  listParallelData(params: Translate.Types.ListParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.ListParallelDataResponse) => void): Request<Translate.Types.ListParallelDataResponse, AWSError>;
+  /**
+   * Provides a list of your parallel data resources in Amazon Translate.
+   */
+  listParallelData(callback?: (err: AWSError, data: Translate.Types.ListParallelDataResponse) => void): Request<Translate.Types.ListParallelDataResponse, AWSError>;
   /**
    * Provides a list of custom terminologies associated with your account.
    */
@@ -83,6 +115,14 @@ declare class Translate extends Service {
    * Translates input text from the source language to the target language. For a list of available languages and language codes, see what-is-languages.
    */
   translateText(callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
+  /**
+   * Updates a previously created parallel data resource by importing a new input file from Amazon S3.
+   */
+  updateParallelData(params: Translate.Types.UpdateParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.UpdateParallelDataResponse) => void): Request<Translate.Types.UpdateParallelDataResponse, AWSError>;
+  /**
+   * Updates a previously created parallel data resource by importing a new input file from Amazon S3.
+   */
+  updateParallelData(callback?: (err: AWSError, data: Translate.Types.UpdateParallelDataResponse) => void): Request<Translate.Types.UpdateParallelDataResponse, AWSError>;
 }
 declare namespace Translate {
   export interface AppliedTerminology {
@@ -99,6 +139,51 @@ declare namespace Translate {
   export type BoundedLengthString = string;
   export type ClientTokenString = string;
   export type ContentType = string;
+  export interface CreateParallelDataRequest {
+    /**
+     * A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
+     */
+    Name: ResourceName;
+    /**
+     * A custom description for the parallel data resource in Amazon Translate.
+     */
+    Description?: Description;
+    /**
+     * Specifies the format and S3 location of the parallel data input file.
+     */
+    ParallelDataConfig: ParallelDataConfig;
+    EncryptionKey?: EncryptionKey;
+    /**
+     * A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+     */
+    ClientToken: ClientTokenString;
+  }
+  export interface CreateParallelDataResponse {
+    /**
+     * The custom name that you assigned to the parallel data resource.
+     */
+    Name?: ResourceName;
+    /**
+     * The status of the parallel data resource. When the resource is ready for you to use, the status is ACTIVE.
+     */
+    Status?: ParallelDataStatus;
+  }
+  export interface DeleteParallelDataRequest {
+    /**
+     * The name of the parallel data resource that is being deleted.
+     */
+    Name: ResourceName;
+  }
+  export interface DeleteParallelDataResponse {
+    /**
+     * The name of the parallel data resource that is being deleted.
+     */
+    Name?: ResourceName;
+    /**
+     * The status of the parallel data deletion.
+     */
+    Status?: ParallelDataStatus;
+  }
   export interface DeleteTerminologyRequest {
     /**
      * The name of the custom terminology being deleted. 
@@ -130,6 +215,30 @@ declare namespace Translate {
   }
   export type EncryptionKeyID = string;
   export type EncryptionKeyType = "KMS"|string;
+  export interface GetParallelDataRequest {
+    /**
+     * The name of the parallel data resource that is being retrieved.
+     */
+    Name: ResourceName;
+  }
+  export interface GetParallelDataResponse {
+    /**
+     * The properties of the parallel data resource that is being retrieved.
+     */
+    ParallelDataProperties?: ParallelDataProperties;
+    /**
+     * The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+     */
+    DataLocation?: ParallelDataDataLocation;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    AuxiliaryDataLocation?: ParallelDataDataLocation;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    LatestUpdateAttemptAuxiliaryDataLocation?: ParallelDataDataLocation;
+  }
   export interface GetTerminologyRequest {
     /**
      * The name of the custom terminology being retrieved.
@@ -209,6 +318,26 @@ declare namespace Translate {
   export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
   export type LanguageCodeString = string;
   export type LanguageCodeStringList = LanguageCodeString[];
+  export interface ListParallelDataRequest {
+    /**
+     * A string that specifies the next page of results to return in a paginated response.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of parallel data resources returned for each request.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListParallelDataResponse {
+    /**
+     * The properties of the parallel data resources returned by this request.
+     */
+    ParallelDataPropertiesList?: ParallelDataPropertiesList;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTerminologiesRequest {
     /**
      * If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. 
@@ -253,6 +382,7 @@ declare namespace Translate {
      */
     NextToken?: NextToken;
   }
+  export type Long = number;
   export type MaxResultsInteger = number;
   export type MergeStrategy = "OVERWRITE"|string;
   export type NextToken = string;
@@ -262,6 +392,97 @@ declare namespace Translate {
      */
     S3Uri: S3Uri;
   }
+  export type ParallelDataArn = string;
+  export interface ParallelDataConfig {
+    /**
+     * The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The format of the parallel data input file.
+     */
+    Format: ParallelDataFormat;
+  }
+  export interface ParallelDataDataLocation {
+    /**
+     * Describes the repository that contains the parallel data input file.
+     */
+    RepositoryType: String;
+    /**
+     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    Location: String;
+  }
+  export type ParallelDataFormat = "TSV"|"CSV"|"TMX"|string;
+  export interface ParallelDataProperties {
+    /**
+     * The custom name assigned to the parallel data resource.
+     */
+    Name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the parallel data resource.
+     */
+    Arn?: ParallelDataArn;
+    /**
+     * The description assigned to the parallel data resource.
+     */
+    Description?: Description;
+    /**
+     * The status of the parallel data resource. When the parallel data is ready for you to use, the status is ACTIVE.
+     */
+    Status?: ParallelDataStatus;
+    /**
+     * The source language of the translations in the parallel data file.
+     */
+    SourceLanguageCode?: LanguageCodeString;
+    /**
+     * The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+     */
+    TargetLanguageCodes?: LanguageCodeStringList;
+    /**
+     * Specifies the format and S3 location of the parallel data input file.
+     */
+    ParallelDataConfig?: ParallelDataConfig;
+    /**
+     * Additional information from Amazon Translate about the parallel data resource. 
+     */
+    Message?: UnboundedLengthString;
+    /**
+     * The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.
+     */
+    ImportedDataSize?: Long;
+    /**
+     * The number of records successfully imported from the parallel data input file.
+     */
+    ImportedRecordCount?: Long;
+    /**
+     * The number of records unsuccessfully imported from the parallel data input file.
+     */
+    FailedRecordCount?: Long;
+    /**
+     * The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.
+     */
+    SkippedRecordCount?: Long;
+    EncryptionKey?: EncryptionKey;
+    /**
+     * The time at which the parallel data resource was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The time at which the parallel data resource was last updated.
+     */
+    LastUpdatedAt?: Timestamp;
+    /**
+     * The status of the most recent update attempt for the parallel data resource.
+     */
+    LatestUpdateAttemptStatus?: ParallelDataStatus;
+    /**
+     * The time that the most recent update was attempted.
+     */
+    LatestUpdateAttemptAt?: Timestamp;
+  }
+  export type ParallelDataPropertiesList = ParallelDataProperties[];
+  export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
   export type S3Uri = string;
@@ -294,6 +515,10 @@ declare namespace Translate {
      * The name of the terminology to use in the batch translation job. For a list of available terminologies, use the ListTerminologies operation.
      */
     TerminologyNames?: ResourceNameList;
+    /**
+     * The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the ListParallelData operation.
+     */
+    ParallelDataNames?: ResourceNameList;
     /**
      * A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
      */
@@ -452,6 +677,10 @@ declare namespace Translate {
      */
     TerminologyNames?: ResourceNameList;
     /**
+     * A list containing the names of the parallel data resources applied to the translation job.
+     */
+    ParallelDataNames?: ResourceNameList;
+    /**
      * An explanation of any errors that may have occured during the translation job.
      */
     Message?: UnboundedLengthString;
@@ -515,6 +744,42 @@ declare namespace Translate {
     AppliedTerminologies?: AppliedTerminologyList;
   }
   export type UnboundedLengthString = string;
+  export interface UpdateParallelDataRequest {
+    /**
+     * The name of the parallel data resource being updated.
+     */
+    Name: ResourceName;
+    /**
+     * A custom description for the parallel data resource in Amazon Translate.
+     */
+    Description?: Description;
+    /**
+     * Specifies the format and S3 location of the parallel data input file.
+     */
+    ParallelDataConfig: ParallelDataConfig;
+    /**
+     * A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+     */
+    ClientToken: ClientTokenString;
+  }
+  export interface UpdateParallelDataResponse {
+    /**
+     * The name of the parallel data resource being updated.
+     */
+    Name?: ResourceName;
+    /**
+     * The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either ACTIVE or FAILED.
+     */
+    Status?: ParallelDataStatus;
+    /**
+     * The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is ACTIVE.
+     */
+    LatestUpdateAttemptStatus?: ParallelDataStatus;
+    /**
+     * The time that the most recent update was attempted.
+     */
+    LatestUpdateAttemptAt?: Timestamp;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -847,6 +847,7 @@ declare namespace QuickSight {
      */
     AvailabilityStatus?: DashboardBehavior;
   }
+  export type AdditionalDashboardIdList = RestrictiveResourceId[];
   export type AliasName = string;
   export interface AmazonElasticsearchParameters {
     /**
@@ -2210,7 +2211,7 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
-     * Indicates if the dataset has column level permission configured. 
+     * Indicates if the dataset has column level permission configured.
      */
     ColumnLevelPermissionRulesApplied?: Boolean;
   }
@@ -3443,6 +3444,7 @@ declare namespace QuickSight {
   export type Double = number;
   export type DoubleList = Double[];
   export type Edition = "STANDARD"|"ENTERPRISE"|string;
+  export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS"|string;
   export type EmbeddingUrl = string;
   export type EntryPoint = string;
   export interface ErrorInfo {
@@ -3498,7 +3500,7 @@ declare namespace QuickSight {
     /**
      * The authentication method that the user uses to sign in.
      */
-    IdentityType: IdentityType;
+    IdentityType: EmbeddingIdentityType;
     /**
      * How many minutes the session is valid. The session lifetime must be 15-600 minutes.
      */
@@ -3519,6 +3521,14 @@ declare namespace QuickSight {
      * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.   Omit this parameter for users in the third group – IAM users and IAM role-based sessions.
      */
     UserArn?: Arn;
+    /**
+     * The QuickSight namespace that contains the dashboard IDs in this request. If you're not using a custom namespace, set this to "default".
+     */
+    Namespace?: Namespace;
+    /**
+     * A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. IdentityType must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
+     */
+    AdditionalDashboardIds?: AdditionalDashboardIdList;
   }
   export interface GetDashboardEmbedUrlResponse {
     /**

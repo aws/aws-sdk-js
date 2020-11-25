@@ -38,6 +38,14 @@ declare class Lambda extends Service {
    */
   createAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
+   * Creates a code signing configuration. A code signing configuration defines a list of allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment validation checks fail). 
+   */
+  createCodeSigningConfig(params: Lambda.Types.CreateCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.CreateCodeSigningConfigResponse) => void): Request<Lambda.Types.CreateCodeSigningConfigResponse, AWSError>;
+  /**
+   * Creates a code signing configuration. A code signing configuration defines a list of allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment validation checks fail). 
+   */
+  createCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.CreateCodeSigningConfigResponse) => void): Request<Lambda.Types.CreateCodeSigningConfigResponse, AWSError>;
+  /**
    * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MQ     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
@@ -46,11 +54,11 @@ declare class Lambda extends Service {
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(params: Lambda.Types.CreateFunctionRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -61,6 +69,14 @@ declare class Lambda extends Service {
    * Deletes a Lambda function alias.
    */
   deleteAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the code signing configuration. You can delete the code signing configuration only if no function is using it. 
+   */
+  deleteCodeSigningConfig(params: Lambda.Types.DeleteCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.DeleteCodeSigningConfigResponse) => void): Request<Lambda.Types.DeleteCodeSigningConfigResponse, AWSError>;
+  /**
+   * Deletes the code signing configuration. You can delete the code signing configuration only if no function is using it. 
+   */
+  deleteCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.DeleteCodeSigningConfigResponse) => void): Request<Lambda.Types.DeleteCodeSigningConfigResponse, AWSError>;
   /**
    * Deletes an event source mapping. You can get the identifier of a mapping from the output of ListEventSourceMappings. When you delete an event source mapping, it enters a Deleting state and might not be completely deleted for several seconds.
    */
@@ -77,6 +93,14 @@ declare class Lambda extends Service {
    * Deletes a Lambda function. To delete a specific function version, use the Qualifier parameter. Otherwise, all versions and aliases are deleted. To delete Lambda event source mappings that invoke a function, use DeleteEventSourceMapping. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the code signing configuration from the function.
+   */
+  deleteFunctionCodeSigningConfig(params: Lambda.Types.DeleteFunctionCodeSigningConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the code signing configuration from the function.
+   */
+  deleteFunctionCodeSigningConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a concurrent execution limit from a function.
    */
@@ -126,6 +150,14 @@ declare class Lambda extends Service {
    */
   getAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
+   * Returns information about the specified code signing configuration.
+   */
+  getCodeSigningConfig(params: Lambda.Types.GetCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetCodeSigningConfigResponse) => void): Request<Lambda.Types.GetCodeSigningConfigResponse, AWSError>;
+  /**
+   * Returns information about the specified code signing configuration.
+   */
+  getCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.GetCodeSigningConfigResponse) => void): Request<Lambda.Types.GetCodeSigningConfigResponse, AWSError>;
+  /**
    * Returns details about an event source mapping. You can get the identifier of a mapping from the output of ListEventSourceMappings.
    */
   getEventSourceMapping(params: Lambda.Types.GetEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
@@ -141,6 +173,14 @@ declare class Lambda extends Service {
    * Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.
    */
   getFunction(callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Returns the code signing configuration for the specified function.
+   */
+  getFunctionCodeSigningConfig(params: Lambda.Types.GetFunctionCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionCodeSigningConfigResponse) => void): Request<Lambda.Types.GetFunctionCodeSigningConfigResponse, AWSError>;
+  /**
+   * Returns the code signing configuration for the specified function.
+   */
+  getFunctionCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.GetFunctionCodeSigningConfigResponse) => void): Request<Lambda.Types.GetFunctionCodeSigningConfigResponse, AWSError>;
   /**
    * Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a function, use PutFunctionConcurrency.
    */
@@ -230,6 +270,14 @@ declare class Lambda extends Service {
    */
   listAliases(callback?: (err: AWSError, data: Lambda.Types.ListAliasesResponse) => void): Request<Lambda.Types.ListAliasesResponse, AWSError>;
   /**
+   * Returns a list of code signing configurations for the specified function. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
+   */
+  listCodeSigningConfigs(params: Lambda.Types.ListCodeSigningConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListCodeSigningConfigsResponse) => void): Request<Lambda.Types.ListCodeSigningConfigsResponse, AWSError>;
+  /**
+   * Returns a list of code signing configurations for the specified function. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
+   */
+  listCodeSigningConfigs(callback?: (err: AWSError, data: Lambda.Types.ListCodeSigningConfigsResponse) => void): Request<Lambda.Types.ListCodeSigningConfigsResponse, AWSError>;
+  /**
    * Lists event source mappings. Specify an EventSourceArn to only show event source mappings for a single event source.
    */
   listEventSourceMappings(params: Lambda.Types.ListEventSourceMappingsRequest, callback?: (err: AWSError, data: Lambda.Types.ListEventSourceMappingsResponse) => void): Request<Lambda.Types.ListEventSourceMappingsResponse, AWSError>;
@@ -253,6 +301,14 @@ declare class Lambda extends Service {
    * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use GetFunction.
    */
   listFunctions(callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
+  /**
+   * List the functions that use the specified code signing configuration. You can use this method prior to deleting a code signing configuration, to verify that no functions are using it.
+   */
+  listFunctionsByCodeSigningConfig(params: Lambda.Types.ListFunctionsByCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionsByCodeSigningConfigResponse) => void): Request<Lambda.Types.ListFunctionsByCodeSigningConfigResponse, AWSError>;
+  /**
+   * List the functions that use the specified code signing configuration. You can use this method prior to deleting a code signing configuration, to verify that no functions are using it.
+   */
+  listFunctionsByCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.ListFunctionsByCodeSigningConfigResponse) => void): Request<Lambda.Types.ListFunctionsByCodeSigningConfigResponse, AWSError>;
   /**
    * Lists the versions of an AWS Lambda layer. Versions that have been deleted aren't listed. Specify a runtime identifier to list only versions that indicate that they're compatible with that runtime.
    */
@@ -309,6 +365,14 @@ declare class Lambda extends Service {
    * Creates a version from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change. AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to update the function before publishing a version. Clients can invoke versions directly or with an alias. To create an alias, use CreateAlias.
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
+  /**
+   * Update the code signing configuration for the function. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. 
+   */
+  putFunctionCodeSigningConfig(params: Lambda.Types.PutFunctionCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.PutFunctionCodeSigningConfigResponse) => void): Request<Lambda.Types.PutFunctionCodeSigningConfigResponse, AWSError>;
+  /**
+   * Update the code signing configuration for the function. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. 
+   */
+  putFunctionCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.PutFunctionCodeSigningConfigResponse) => void): Request<Lambda.Types.PutFunctionCodeSigningConfigResponse, AWSError>;
   /**
    * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your Regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
    */
@@ -374,6 +438,14 @@ declare class Lambda extends Service {
    */
   updateAlias(callback?: (err: AWSError, data: Lambda.Types.AliasConfiguration) => void): Request<Lambda.Types.AliasConfiguration, AWSError>;
   /**
+   * Update the code signing configuration. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. 
+   */
+  updateCodeSigningConfig(params: Lambda.Types.UpdateCodeSigningConfigRequest, callback?: (err: AWSError, data: Lambda.Types.UpdateCodeSigningConfigResponse) => void): Request<Lambda.Types.UpdateCodeSigningConfigResponse, AWSError>;
+  /**
+   * Update the code signing configuration. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. 
+   */
+  updateCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateCodeSigningConfigResponse) => void): Request<Lambda.Types.UpdateCodeSigningConfigResponse, AWSError>;
+  /**
    * Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   updateEventSourceMapping(params: Lambda.Types.UpdateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
@@ -382,11 +454,11 @@ declare class Lambda extends Service {
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
+   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
    */
   updateFunctionCode(params: Lambda.Types.UpdateFunctionCodeRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
+   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
    */
   updateFunctionCode(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -584,12 +656,54 @@ declare namespace Lambda {
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
+  export interface AllowedPublishers {
+    /**
+     * The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. 
+     */
+    SigningProfileVersionArns: SigningProfileVersionArns;
+  }
   export type Arn = string;
   export type BatchSize = number;
   export type BisectBatchOnFunctionError = boolean;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
+  export interface CodeSigningConfig {
+    /**
+     * Unique identifer for the Code signing configuration.
+     */
+    CodeSigningConfigId: CodeSigningConfigId;
+    /**
+     * The Amazon Resource Name (ARN) of the Code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * Code signing configuration description.
+     */
+    Description?: Description;
+    /**
+     * List of allowed publishers.
+     */
+    AllowedPublishers: AllowedPublishers;
+    /**
+     * The code signing policy controls the validation failure action for signature mismatch or expiry.
+     */
+    CodeSigningPolicies: CodeSigningPolicies;
+    /**
+     * The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). 
+     */
+    LastModified: Timestamp;
+  }
+  export type CodeSigningConfigArn = string;
+  export type CodeSigningConfigId = string;
+  export type CodeSigningConfigList = CodeSigningConfig[];
+  export interface CodeSigningPolicies {
+    /**
+     * Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log.  Default value: Warn 
+     */
+    UntrustedArtifactOnDeployment?: CodeSigningPolicy;
+  }
+  export type CodeSigningPolicy = "Warn"|"Enforce"|string;
   export type CompatibleRuntimes = Runtime[];
   export interface Concurrency {
     /**
@@ -618,6 +732,26 @@ declare namespace Lambda {
      * The routing configuration of the alias.
      */
     RoutingConfig?: AliasRoutingConfiguration;
+  }
+  export interface CreateCodeSigningConfigRequest {
+    /**
+     * Descriptive name for this code signing configuration.
+     */
+    Description?: Description;
+    /**
+     * Signing profiles for this code signing configuration.
+     */
+    AllowedPublishers: AllowedPublishers;
+    /**
+     * The code signing policies define the actions to take if the validation checks fail. 
+     */
+    CodeSigningPolicies?: CodeSigningPolicies;
+  }
+  export interface CreateCodeSigningConfigResponse {
+    /**
+     * The code signing configuration.
+     */
+    CodeSigningConfig: CodeSigningConfig;
   }
   export interface CreateEventSourceMappingRequest {
     /**
@@ -750,6 +884,10 @@ declare namespace Lambda {
      * Connection settings for an Amazon EFS file system.
      */
     FileSystemConfigs?: FileSystemConfigList;
+    /**
+     * To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.
+     */
+    CodeSigningConfigArn?: CodeSigningConfigArn;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -768,11 +906,25 @@ declare namespace Lambda {
      */
     Name: Alias;
   }
+  export interface DeleteCodeSigningConfigRequest {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+  }
+  export interface DeleteCodeSigningConfigResponse {
+  }
   export interface DeleteEventSourceMappingRequest {
     /**
      * The identifier of the event source mapping.
      */
     UUID: String;
+  }
+  export interface DeleteFunctionCodeSigningConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
   }
   export interface DeleteFunctionConcurrencyRequest {
     /**
@@ -956,6 +1108,7 @@ declare namespace Lambda {
   }
   export type FileSystemConfigList = FileSystemConfig[];
   export type FunctionArn = string;
+  export type FunctionArnList = FunctionArn[];
   export interface FunctionCode {
     /**
      * The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
@@ -1093,6 +1246,14 @@ declare namespace Lambda {
      * Connection settings for an Amazon EFS file system.
      */
     FileSystemConfigs?: FileSystemConfigList;
+    /**
+     * The ARN of the signing profile version.
+     */
+    SigningProfileVersionArn?: Arn;
+    /**
+     * The ARN of the signing job.
+     */
+    SigningJobArn?: Arn;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -1142,11 +1303,39 @@ declare namespace Lambda {
      */
     Name: Alias;
   }
+  export interface GetCodeSigningConfigRequest {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration. 
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+  }
+  export interface GetCodeSigningConfigResponse {
+    /**
+     * The code signing configuration
+     */
+    CodeSigningConfig: CodeSigningConfig;
+  }
   export interface GetEventSourceMappingRequest {
     /**
      * The identifier of the event source mapping.
      */
     UUID: String;
+  }
+  export interface GetFunctionCodeSigningConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+  }
+  export interface GetFunctionCodeSigningConfigResponse {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
   }
   export interface GetFunctionConcurrencyRequest {
     /**
@@ -1415,6 +1604,14 @@ declare namespace Lambda {
      * The size of the layer archive in bytes.
      */
     CodeSize?: Long;
+    /**
+     * The Amazon Resource Name (ARN) for a signing profile version.
+     */
+    SigningProfileVersionArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of a signing job.
+     */
+    SigningJobArn?: Arn;
   }
   export type LayerArn = string;
   export type LayerList = LayerVersionArn[];
@@ -1453,6 +1650,14 @@ declare namespace Lambda {
      * The size of the layer archive in bytes.
      */
     CodeSize?: Long;
+    /**
+     * The Amazon Resource Name (ARN) for a signing profile version.
+     */
+    SigningProfileVersionArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of a signing job.
+     */
+    SigningJobArn?: String;
   }
   export type LayerVersionNumber = number;
   export type LayerVersionsList = LayerVersionsListItem[];
@@ -1527,6 +1732,26 @@ declare namespace Lambda {
      */
     Aliases?: AliasList;
   }
+  export interface ListCodeSigningConfigsRequest {
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    Marker?: String;
+    /**
+     * Maximum number of items to return.
+     */
+    MaxItems?: MaxListItems;
+  }
+  export interface ListCodeSigningConfigsResponse {
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    NextMarker?: String;
+    /**
+     * The code signing configurations
+     */
+    CodeSigningConfigs?: CodeSigningConfigList;
+  }
   export interface ListEventSourceMappingsRequest {
     /**
      * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis - The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams - The ARN of the stream.    Amazon Simple Queue Service - The ARN of the queue.    Amazon Managed Streaming for Apache Kafka - The ARN of the cluster.  
@@ -1578,6 +1803,30 @@ declare namespace Lambda {
      * The pagination token that's included if more results are available.
      */
     NextMarker?: String;
+  }
+  export interface ListFunctionsByCodeSigningConfigRequest {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    Marker?: String;
+    /**
+     * Maximum number of items to return.
+     */
+    MaxItems?: MaxListItems;
+  }
+  export interface ListFunctionsByCodeSigningConfigResponse {
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    NextMarker?: String;
+    /**
+     * The function ARNs. 
+     */
+    FunctionArns?: FunctionArnList;
   }
   export interface ListFunctionsRequest {
     /**
@@ -1859,6 +2108,26 @@ declare namespace Lambda {
      */
     RevisionId?: String;
   }
+  export interface PutFunctionCodeSigningConfigRequest {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+  }
+  export interface PutFunctionCodeSigningConfigResponse {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+  }
   export interface PutFunctionConcurrencyRequest {
     /**
      * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -1980,6 +2249,7 @@ declare namespace Lambda {
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SensitiveString = string;
+  export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
      * To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
@@ -2067,6 +2337,30 @@ declare namespace Lambda {
      * Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
      */
     RevisionId?: String;
+  }
+  export interface UpdateCodeSigningConfigRequest {
+    /**
+     * The The Amazon Resource Name (ARN) of the code signing configuration.
+     */
+    CodeSigningConfigArn: CodeSigningConfigArn;
+    /**
+     * Descriptive name for this code signing configuration.
+     */
+    Description?: Description;
+    /**
+     * Signing profiles for this code signing configuration.
+     */
+    AllowedPublishers?: AllowedPublishers;
+    /**
+     * The code signing policy.
+     */
+    CodeSigningPolicies?: CodeSigningPolicies;
+  }
+  export interface UpdateCodeSigningConfigResponse {
+    /**
+     * The code signing configuration
+     */
+    CodeSigningConfig: CodeSigningConfig;
   }
   export interface UpdateEventSourceMappingRequest {
     /**

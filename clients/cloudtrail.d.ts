@@ -100,11 +100,11 @@ declare class CloudTrail extends Service {
    */
   listTrails(callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
   /**
-   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(params: CloudTrail.Types.LookupEventsRequest, callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
@@ -169,6 +169,21 @@ declare namespace CloudTrail {
   }
   export interface AddTagsResponse {
   }
+  export interface AdvancedEventSelector {
+    Name: SelectorName;
+    FieldSelectors: AdvancedFieldSelectors;
+  }
+  export type AdvancedEventSelectors = AdvancedEventSelector[];
+  export interface AdvancedFieldSelector {
+    Field: SelectorField;
+    Equals?: Operator;
+    StartsWith?: Operator;
+    EndsWith?: Operator;
+    NotEquals?: Operator;
+    NotStartsWith?: Operator;
+    NotEndsWith?: Operator;
+  }
+  export type AdvancedFieldSelectors = AdvancedFieldSelector[];
   export type Boolean = boolean;
   export type ByteBuffer = Buffer|Uint8Array|Blob|string;
   export interface CreateTrailRequest {
@@ -354,7 +369,7 @@ declare namespace CloudTrail {
      */
     ReadWriteType?: ReadWriteType;
     /**
-     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the AWS CloudTrail User Guide. By default, the value is true.
+     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the AWS CloudTrail User Guide. By default, the value is true. The first copy of management events is free. You are charged for additional copies of management events that you are logging on any subsequent trail in the same region. For more information about CloudTrail pricing, see AWS CloudTrail Pricing.
      */
     IncludeManagementEvents?: Boolean;
     /**
@@ -384,6 +399,7 @@ declare namespace CloudTrail {
      * The event selectors that are configured for the trail.
      */
     EventSelectors?: EventSelectors;
+    AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface GetInsightSelectorsRequest {
     /**
@@ -604,6 +620,8 @@ declare namespace CloudTrail {
   }
   export type MaxResults = number;
   export type NextToken = string;
+  export type Operator = OperatorValue[];
+  export type OperatorValue = string;
   export interface PublicKey {
     /**
      * The DER encoded public key value in PKCS#1 format.
@@ -631,7 +649,8 @@ declare namespace CloudTrail {
     /**
      * Specifies the settings for your event selectors. You can configure up to five event selectors for a trail.
      */
-    EventSelectors: EventSelectors;
+    EventSelectors?: EventSelectors;
+    AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface PutEventSelectorsResponse {
     /**
@@ -642,6 +661,7 @@ declare namespace CloudTrail {
      * Specifies the event selectors configured for your trail.
      */
     EventSelectors?: EventSelectors;
+    AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface PutInsightSelectorsRequest {
     /**
@@ -699,6 +719,8 @@ declare namespace CloudTrail {
     TagsList?: TagsList;
   }
   export type ResourceTagList = ResourceTag[];
+  export type SelectorField = string;
+  export type SelectorName = string;
   export interface StartLoggingRequest {
     /**
      * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 

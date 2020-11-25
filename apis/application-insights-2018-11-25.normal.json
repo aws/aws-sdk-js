@@ -41,6 +41,9 @@
         },
         {
           "shape": "TagsAlreadyExistException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Adds an application that is created from a resource group.</p>"
@@ -712,7 +715,8 @@
     "AmazonResourceName": {
       "type": "string",
       "max": 1011,
-      "min": 1
+      "min": 1,
+      "pattern": "^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
     },
     "ApplicationComponent": {
       "type": "structure",
@@ -721,9 +725,17 @@
           "shape": "ComponentName",
           "documentation": "<p>The name of the component.</p>"
         },
+        "ComponentRemarks": {
+          "shape": "Remarks",
+          "documentation": "<p> If logging is supported for the resource type, indicates whether the component has configured logs to be monitored. </p>"
+        },
         "ResourceType": {
           "shape": "ResourceType",
           "documentation": "<p>The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.</p>"
+        },
+        "OsType": {
+          "shape": "OsType",
+          "documentation": "<p> The operating system of the component. </p>"
         },
         "Tier": {
           "shape": "Tier",
@@ -732,6 +744,10 @@
         "Monitor": {
           "shape": "Monitor",
           "documentation": "<p>Indicates whether the application component is monitored. </p>"
+        },
+        "DetectedWorkload": {
+          "shape": "DetectedWorkload",
+          "documentation": "<p> Workloads detected in the application component. </p>"
         }
       },
       "documentation": "<p>Describes a standalone resource or similarly grouped resources that the application is made up of.</p>"
@@ -792,7 +808,8 @@
       "enum": [
         "EC2",
         "CODE_DEPLOY",
-        "HEALTH"
+        "HEALTH",
+        "RDS"
       ]
     },
     "CodeDeployApplication": {
@@ -813,10 +830,14 @@
     "ComponentConfiguration": {
       "type": "string",
       "max": 10000,
-      "min": 1
+      "min": 1,
+      "pattern": "[\\S\\s]+"
     },
     "ComponentName": {
-      "type": "string"
+      "type": "string",
+      "max": 1011,
+      "min": 1,
+      "pattern": "(?:^[\\d\\w\\-_\\.+]*$)|(?:^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$)"
     },
     "ConfigurationEvent": {
       "type": "structure",
@@ -867,6 +888,7 @@
       "type": "string",
       "enum": [
         "CLOUDWATCH_ALARM",
+        "CLOUDWATCH_LOG",
         "CLOUDFORMATION",
         "SSM_ASSOCIATION"
       ]
@@ -932,7 +954,7 @@
           "documentation": "<p>The name of the resource group.</p>"
         },
         "ComponentName": {
-          "shape": "ComponentName",
+          "shape": "CustomComponentName",
           "documentation": "<p>The name of the component.</p>"
         },
         "ResourceList": {
@@ -969,11 +991,11 @@
         },
         "Pattern": {
           "shape": "LogPatternRegex",
-          "documentation": "<p>The log pattern.</p>"
+          "documentation": "<p>The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.</p>"
         },
         "Rank": {
           "shape": "LogPatternRank",
-          "documentation": "<p>Rank of the log pattern.</p>"
+          "documentation": "<p>Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. </p>"
         }
       }
     },
@@ -989,6 +1011,12 @@
           "documentation": "<p>The name of the resource group.</p>"
         }
       }
+    },
+    "CustomComponentName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[\\d\\w\\-_\\.+]*$"
     },
     "DeleteApplicationRequest": {
       "type": "structure",
@@ -1018,7 +1046,7 @@
           "documentation": "<p>The name of the resource group.</p>"
         },
         "ComponentName": {
-          "shape": "ComponentName",
+          "shape": "CustomComponentName",
           "documentation": "<p>The name of the component.</p>"
         }
       }
@@ -1265,6 +1293,27 @@
           "documentation": "<p>Information about the problem. </p>"
         }
       }
+    },
+    "DetectedWorkload": {
+      "type": "map",
+      "key": {
+        "shape": "Tier"
+      },
+      "value": {
+        "shape": "WorkloadMetaData"
+      }
+    },
+    "EbsCause": {
+      "type": "string"
+    },
+    "EbsEvent": {
+      "type": "string"
+    },
+    "EbsRequestId": {
+      "type": "string"
+    },
+    "EbsResult": {
+      "type": "string"
     },
     "Ec2State": {
       "type": "string"
@@ -1574,19 +1623,19 @@
       "members": {
         "PatternSetName": {
           "shape": "LogPatternSetName",
-          "documentation": "<p>The name of the log pattern. A log pattern name can contains at many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.</p>"
+          "documentation": "<p>The name of the log pattern. A log pattern name can contain as many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.</p>"
         },
         "PatternName": {
           "shape": "LogPatternName",
-          "documentation": "<p>The name of the log pattern. A log pattern name can contains at many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.</p>"
+          "documentation": "<p>The name of the log pattern. A log pattern name can contain as many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.</p>"
         },
         "Pattern": {
           "shape": "LogPatternRegex",
-          "documentation": "<p>A regular expression that defines the log pattern. A log pattern can contains at many as 50 characters, and it cannot be empty.</p>"
+          "documentation": "<p>A regular expression that defines the log pattern. A log pattern can contain as many as 50 characters, and it cannot be empty. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.</p>"
         },
         "Rank": {
           "shape": "LogPatternRank",
-          "documentation": "<p>Rank of the log pattern.</p>"
+          "documentation": "<p>Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. </p>"
         }
       },
       "documentation": "<p>An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.</p>"
@@ -1609,7 +1658,8 @@
     "LogPatternRegex": {
       "type": "string",
       "max": 50,
-      "min": 1
+      "min": 1,
+      "pattern": "[\\S\\s]+"
     },
     "LogPatternSetList": {
       "type": "list",
@@ -1631,6 +1681,12 @@
       "max": 40,
       "min": 1
     },
+    "MetaDataKey": {
+      "type": "string"
+    },
+    "MetaDataValue": {
+      "type": "string"
+    },
     "MetricName": {
       "type": "string"
     },
@@ -1639,9 +1695,6 @@
     },
     "Monitor": {
       "type": "boolean"
-    },
-    "NewComponentName": {
-      "type": "string"
     },
     "Observation": {
       "type": "structure",
@@ -1754,6 +1807,50 @@
           "shape": "Ec2State",
           "documentation": "<p> The state of the instance, such as <code>STOPPING</code> or <code>TERMINATING</code>. </p>"
         },
+        "RdsEventCategories": {
+          "shape": "RdsEventCategories",
+          "documentation": "<p> The category of an RDS event. </p>"
+        },
+        "RdsEventMessage": {
+          "shape": "RdsEventMessage",
+          "documentation": "<p> The message of an RDS event. </p>"
+        },
+        "S3EventName": {
+          "shape": "S3EventName",
+          "documentation": "<p> The name of the S3 CloudWatch Event-based observation. </p>"
+        },
+        "StatesExecutionArn": {
+          "shape": "StatesExecutionArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the step function execution-based observation. </p>"
+        },
+        "StatesArn": {
+          "shape": "StatesArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the step function-based observation. </p>"
+        },
+        "StatesStatus": {
+          "shape": "StatesStatus",
+          "documentation": "<p> The status of the step function-related observation. </p>"
+        },
+        "StatesInput": {
+          "shape": "StatesInput",
+          "documentation": "<p> The input to the step function-based observation. </p>"
+        },
+        "EbsEvent": {
+          "shape": "EbsEvent",
+          "documentation": "<p> The type of EBS CloudWatch event, such as <code>createVolume</code>, <code>deleteVolume</code> or <code>attachVolume</code>. </p>"
+        },
+        "EbsResult": {
+          "shape": "EbsResult",
+          "documentation": "<p> The result of an EBS CloudWatch event, such as <code>failed</code> or <code>succeeded</code>. </p>"
+        },
+        "EbsCause": {
+          "shape": "EbsCause",
+          "documentation": "<p> The cause of an EBS CloudWatch event. </p>"
+        },
+        "EbsRequestId": {
+          "shape": "EbsRequestId",
+          "documentation": "<p> The request ID of an EBS CloudWatch event. </p>"
+        },
         "XRayFaultPercent": {
           "shape": "XRayFaultPercent",
           "documentation": "<p> The X-Ray request fault percentage for this node. </p>"
@@ -1803,10 +1900,21 @@
     "OpsItemSNSTopicArn": {
       "type": "string",
       "max": 300,
-      "min": 20
+      "min": 20,
+      "pattern": "^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
+    },
+    "OsType": {
+      "type": "string",
+      "enum": [
+        "WINDOWS",
+        "LINUX"
+      ]
     },
     "PaginationToken": {
-      "type": "string"
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": ".+"
     },
     "Problem": {
       "type": "structure",
@@ -1866,6 +1974,12 @@
         "shape": "Problem"
       }
     },
+    "RdsEventCategories": {
+      "type": "string"
+    },
+    "RdsEventMessage": {
+      "type": "string"
+    },
     "RelatedObservations": {
       "type": "structure",
       "members": {
@@ -1885,7 +1999,8 @@
     "ResourceARN": {
       "type": "string",
       "max": 1011,
-      "min": 1
+      "min": 1,
+      "pattern": "^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
     },
     "ResourceGroupName": {
       "type": "string",
@@ -1900,6 +2015,12 @@
       }
     },
     "ResourceType": {
+      "type": "string",
+      "max": 50,
+      "min": 1,
+      "pattern": "[0-9a-zA-Z:_]*"
+    },
+    "S3EventName": {
       "type": "string"
     },
     "SeverityLevel": {
@@ -1918,6 +2039,18 @@
     },
     "StartTime": {
       "type": "timestamp"
+    },
+    "StatesArn": {
+      "type": "string"
+    },
+    "StatesExecutionArn": {
+      "type": "string"
+    },
+    "StatesInput": {
+      "type": "string"
+    },
+    "StatesStatus": {
+      "type": "string"
     },
     "Status": {
       "type": "string",
@@ -1948,7 +2081,8 @@
     "TagKey": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "TagKeyList": {
       "type": "list",
@@ -1990,16 +2124,24 @@
     "TagValue": {
       "type": "string",
       "max": 256,
-      "min": 0
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "Tier": {
       "type": "string",
       "enum": [
+        "CUSTOM",
         "DEFAULT",
         "DOT_NET_CORE",
         "DOT_NET_WORKER",
+        "DOT_NET_WEB_TIER",
         "DOT_NET_WEB",
-        "SQL_SERVER"
+        "SQL_SERVER",
+        "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP",
+        "MYSQL",
+        "POSTGRESQL",
+        "JAVA_JMX",
+        "ORACLE"
       ],
       "max": 50,
       "min": 1
@@ -2113,11 +2255,11 @@
           "documentation": "<p>The name of the resource group.</p>"
         },
         "ComponentName": {
-          "shape": "ComponentName",
+          "shape": "CustomComponentName",
           "documentation": "<p>The name of the component.</p>"
         },
         "NewComponentName": {
-          "shape": "NewComponentName",
+          "shape": "CustomComponentName",
           "documentation": "<p>The new name of the component.</p>"
         },
         "ResourceList": {
@@ -2152,11 +2294,11 @@
         },
         "Pattern": {
           "shape": "LogPatternRegex",
-          "documentation": "<p>The log pattern.</p>"
+          "documentation": "<p>The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.</p>"
         },
         "Rank": {
           "shape": "LogPatternRank",
-          "documentation": "<p>Rank of the log pattern.</p>"
+          "documentation": "<p>Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. </p>"
         }
       }
     },
@@ -2175,6 +2317,15 @@
     },
     "Value": {
       "type": "double"
+    },
+    "WorkloadMetaData": {
+      "type": "map",
+      "key": {
+        "shape": "MetaDataKey"
+      },
+      "value": {
+        "shape": "MetaDataValue"
+      }
     },
     "XRayErrorPercent": {
       "type": "integer"
@@ -2198,5 +2349,5 @@
       "type": "integer"
     }
   },
-  "documentation": "<fullname>Amazon CloudWatch Application Insights for .NET and SQL Server</fullname> <p> Amazon CloudWatch Application Insights for .NET and SQL Server is a service that helps you detect common problems with your .NET and SQL Server-based applications. It enables you to pinpoint the source of issues in your applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key insights into detected problems.</p> <p>After you onboard your application, CloudWatch Application Insights for .NET and SQL Server identifies, recommends, and sets up metrics and logs. It continuously analyzes and correlates your metrics and logs for unusual behavior to surface actionable problems with your application. For example, if your application is slow and unresponsive and leading to HTTP 500 errors in your Application Load Balancer (ALB), Application Insights informs you that a memory pressure problem with your SQL Server database is occurring. It bases this analysis on impactful metrics and log errors. </p>"
+  "documentation": "<fullname>Amazon CloudWatch Application Insights</fullname> <p> Amazon CloudWatch Application Insights is a service that helps you detect common problems with your applications. It enables you to pinpoint the source of issues in your applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key insights into detected problems.</p> <p>After you onboard your application, CloudWatch Application Insights identifies, recommends, and sets up metrics and logs. It continuously analyzes and correlates your metrics and logs for unusual behavior to surface actionable problems with your application. For example, if your application is slow and unresponsive and leading to HTTP 500 errors in your Application Load Balancer (ALB), Application Insights informs you that a memory pressure problem with your SQL Server database is occurring. It bases this analysis on impactful metrics and log errors. </p>"
 }

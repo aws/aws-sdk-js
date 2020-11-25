@@ -1876,6 +1876,9 @@
           "shape": "UnsupportedUserEditionException"
         },
         {
+          "shape": "UnsupportedPricingPlanException"
+        },
+        {
           "shape": "InternalFailureException"
         }
       ],
@@ -3619,6 +3622,14 @@
         }
       },
       "documentation": "<p>Ad hoc (one-time) filtering option.</p>"
+    },
+    "AdditionalDashboardIdList": {
+      "type": "list",
+      "member": {
+        "shape": "RestrictiveResourceId"
+      },
+      "max": 20,
+      "min": 1
     },
     "AliasName": {
       "type": "string",
@@ -5705,7 +5716,7 @@
         },
         "ColumnLevelPermissionRulesApplied": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates if the dataset has column level permission configured. </p>"
+          "documentation": "<p>Indicates if the dataset has column level permission configured.</p>"
         }
       },
       "documentation": "<p>Dataset summary.</p>"
@@ -7667,6 +7678,14 @@
         "ENTERPRISE"
       ]
     },
+    "EmbeddingIdentityType": {
+      "type": "string",
+      "enum": [
+        "IAM",
+        "QUICKSIGHT",
+        "ANONYMOUS"
+      ]
+    },
     "EmbeddingUrl": {
       "type": "string",
       "sensitive": true
@@ -7797,7 +7816,7 @@
           "locationName": "DashboardId"
         },
         "IdentityType": {
-          "shape": "IdentityType",
+          "shape": "EmbeddingIdentityType",
           "documentation": "<p>The authentication method that the user uses to sign in.</p>",
           "location": "querystring",
           "locationName": "creds-type"
@@ -7831,8 +7850,21 @@
           "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>",
           "location": "querystring",
           "locationName": "user-arn"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The QuickSight namespace that contains the dashboard IDs in this request. If you're not using a custom namespace, set this to \"<code>default</code>\".</p>",
+          "location": "querystring",
+          "locationName": "namespace"
+        },
+        "AdditionalDashboardIds": {
+          "shape": "AdditionalDashboardIdList",
+          "documentation": "<p>A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set \"<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session can access all three dashboards. </p>",
+          "location": "querystring",
+          "locationName": "additional-dashboard-ids"
         }
-      }
+      },
+      "documentation": "<p>Parameter input for the <code>GetDashboardEmbedUrl</code> operation.</p>"
     },
     "GetDashboardEmbedUrlResponse": {
       "type": "structure",
@@ -7850,7 +7882,8 @@
           "shape": "String",
           "documentation": "<p>The AWS request ID for this operation.</p>"
         }
-      }
+      },
+      "documentation": "<p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>"
     },
     "GetSessionEmbedUrlRequest": {
       "type": "structure",

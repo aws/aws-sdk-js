@@ -237,6 +237,7 @@ export abstract class ConfigurationServicePlaceholders {
   databrew?: AWS.DataBrew.Types.ClientConfiguration;
   servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.ClientConfiguration;
   networkfirewall?: AWS.NetworkFirewall.Types.ClientConfiguration;
+  mwaa?: AWS.MWAA.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -476,4 +477,5 @@ export interface ConfigurationServiceApiVersions {
   databrew?: AWS.DataBrew.Types.apiVersion;
   servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.apiVersion;
   networkfirewall?: AWS.NetworkFirewall.Types.apiVersion;
+  mwaa?: AWS.MWAA.Types.apiVersion;
 }

@@ -5117,6 +5117,7 @@ declare namespace Iot {
     s3Location?: S3Location;
   }
   export type FileName = string;
+  export type FileType = number;
   export type FindingId = string;
   export type FindingIds = FindingId[];
   export interface FirehoseAction {
@@ -7356,6 +7357,10 @@ declare namespace Iot {
      * The name of the file.
      */
     fileName?: FileName;
+    /**
+     * An integer value you can include in the job document to allow your devices to identify the type of file received from the cloud.
+     */
+    fileType?: FileType;
     /**
      * The file version.
      */

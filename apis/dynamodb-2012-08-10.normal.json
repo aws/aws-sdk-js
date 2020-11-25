@@ -13,6 +13,28 @@
     "uid": "dynamodb-2012-08-10"
   },
   "operations": {
+    "BatchExecuteStatement": {
+      "name": "BatchExecuteStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchExecuteStatementInput"
+      },
+      "output": {
+        "shape": "BatchExecuteStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "RequestLimitExceeded"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. </p>"
+    },
     "BatchGetItem": {
       "name": "BatchGetItem",
       "http": {
@@ -414,6 +436,29 @@
       "documentation": "<p>Describes Region-specific settings for a global table.</p> <note> <p>This operation only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p> </note>",
       "endpointdiscovery": {}
     },
+    "DescribeKinesisStreamingDestination": {
+      "name": "DescribeKinesisStreamingDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeKinesisStreamingDestinationInput"
+      },
+      "output": {
+        "shape": "DescribeKinesisStreamingDestinationOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns information about the status of Kinesis streaming.</p>",
+      "endpointdiscovery": {}
+    },
     "DescribeLimits": {
       "name": "DescribeLimits",
       "http": {
@@ -501,6 +546,141 @@
       ],
       "documentation": "<p>Gives a description of the Time to Live (TTL) status on the specified table. </p>",
       "endpointdiscovery": {}
+    },
+    "DisableKinesisStreamingDestination": {
+      "name": "DisableKinesisStreamingDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "KinesisStreamingDestinationInput"
+      },
+      "output": {
+        "shape": "KinesisStreamingDestinationOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.</p>",
+      "endpointdiscovery": {}
+    },
+    "EnableKinesisStreamingDestination": {
+      "name": "EnableKinesisStreamingDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "KinesisStreamingDestinationInput"
+      },
+      "output": {
+        "shape": "KinesisStreamingDestinationOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.</p>",
+      "endpointdiscovery": {}
+    },
+    "ExecuteStatement": {
+      "name": "ExecuteStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExecuteStatementInput"
+      },
+      "output": {
+        "shape": "ExecuteStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "ConditionalCheckFailedException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ItemCollectionSizeLimitExceededException"
+        },
+        {
+          "shape": "TransactionConflictException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "DuplicateItemException"
+        }
+      ],
+      "documentation": "<p> This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. </p>"
+    },
+    "ExecuteTransaction": {
+      "name": "ExecuteTransaction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExecuteTransactionInput"
+      },
+      "output": {
+        "shape": "ExecuteTransactionOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TransactionCanceledException"
+        },
+        {
+          "shape": "TransactionInProgressException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "RequestLimitExceeded"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p> This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. </p>"
     },
     "ExportTableToPointInTime": {
       "name": "ExportTableToPointInTime",
@@ -1685,6 +1865,27 @@
       "max": 100,
       "min": 1
     },
+    "BatchExecuteStatementInput": {
+      "type": "structure",
+      "required": [
+        "Statements"
+      ],
+      "members": {
+        "Statements": {
+          "shape": "PartiQLBatchRequest",
+          "documentation": "<p> The list of PartiQL statements representing the batch to run. </p>"
+        }
+      }
+    },
+    "BatchExecuteStatementOutput": {
+      "type": "structure",
+      "members": {
+        "Responses": {
+          "shape": "PartiQLBatchResponse",
+          "documentation": "<p> The response to each PartiQL statement in the batch. </p>"
+        }
+      }
+    },
     "BatchGetItemInput": {
       "type": "structure",
       "required": [
@@ -1738,6 +1939,75 @@
       "value": {
         "shape": "ItemList"
       }
+    },
+    "BatchStatementError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "BatchStatementErrorCodeEnum",
+          "documentation": "<p> The error code associated with the failed PartiQL batch statement. </p>"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p> The error message associated with the PartiQL batch resposne. </p>"
+        }
+      },
+      "documentation": "<p> An error associated with a statement in a PartiQL batch that was run. </p>"
+    },
+    "BatchStatementErrorCodeEnum": {
+      "type": "string",
+      "enum": [
+        "ConditionalCheckFailed",
+        "ItemCollectionSizeLimitExceeded",
+        "RequestLimitExceeded",
+        "ValidationError",
+        "ProvisionedThroughputExceeded",
+        "TransactionConflict",
+        "ThrottlingError",
+        "InternalServerError",
+        "ResourceNotFound",
+        "AccessDenied",
+        "DuplicateItem"
+      ]
+    },
+    "BatchStatementRequest": {
+      "type": "structure",
+      "required": [
+        "Statement"
+      ],
+      "members": {
+        "Statement": {
+          "shape": "PartiQLStatement",
+          "documentation": "<p> A valid PartiQL statement. </p>"
+        },
+        "Parameters": {
+          "shape": "PreparedStatementParameters",
+          "documentation": "<p> The parameters associated with a PartiQL statement in the batch request. </p>"
+        },
+        "ConsistentRead": {
+          "shape": "ConsistentRead",
+          "documentation": "<p> The read consistency of the PartiQL batch request. </p>"
+        }
+      },
+      "documentation": "<p> A PartiQL batch statement request. </p>"
+    },
+    "BatchStatementResponse": {
+      "type": "structure",
+      "members": {
+        "Error": {
+          "shape": "BatchStatementError",
+          "documentation": "<p> The error associated with a failed PartiQL batch statement. </p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p> The table name associated with a failed PartiQL batch statement. </p>"
+        },
+        "Item": {
+          "shape": "AttributeMap",
+          "documentation": "<p> A DynamoDB item associated with a BatchStatementResponse </p>"
+        }
+      },
+      "documentation": "<p> A PartiQL batch statement response.. </p>"
     },
     "BatchWriteItemInput": {
       "type": "structure",
@@ -2603,6 +2873,31 @@
         }
       }
     },
+    "DescribeKinesisStreamingDestinationInput": {
+      "type": "structure",
+      "required": [
+        "TableName"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table being described.</p>"
+        }
+      }
+    },
+    "DescribeKinesisStreamingDestinationOutput": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table being described.</p>"
+        },
+        "KinesisDataStreamDestinations": {
+          "shape": "KinesisDataStreamDestinations",
+          "documentation": "<p>The list of replica structures for the table being described.</p>"
+        }
+      }
+    },
     "DescribeLimitsInput": {
       "type": "structure",
       "members": {},
@@ -2695,6 +2990,16 @@
         }
       }
     },
+    "DestinationStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLING",
+        "ACTIVE",
+        "DISABLING",
+        "DISABLED",
+        "ENABLE_FAILED"
+      ]
+    },
     "Double": {
       "type": "double"
     },
@@ -2727,6 +3032,69 @@
     },
     "ExceptionName": {
       "type": "string"
+    },
+    "ExecuteStatementInput": {
+      "type": "structure",
+      "required": [
+        "Statement"
+      ],
+      "members": {
+        "Statement": {
+          "shape": "PartiQLStatement",
+          "documentation": "<p> The PartiQL statement representing the operation to run. </p>"
+        },
+        "Parameters": {
+          "shape": "PreparedStatementParameters",
+          "documentation": "<p> The parameters for the PartiQL statement, if any. </p>"
+        },
+        "ConsistentRead": {
+          "shape": "ConsistentRead",
+          "documentation": "<p> The consistency of a read operation. If set to <code>true</code>, then a strongly consistent read is used; otherwise, an eventually consistent read is used. </p>"
+        },
+        "NextToken": {
+          "shape": "PartiQLNextToken",
+          "documentation": "<p> Set this value to get remaining results, if <code>NextToken</code> was returned in the statement response. </p>"
+        }
+      }
+    },
+    "ExecuteStatementOutput": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "ItemList",
+          "documentation": "<p> If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. </p>"
+        },
+        "NextToken": {
+          "shape": "PartiQLNextToken",
+          "documentation": "<p> If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. </p>"
+        }
+      }
+    },
+    "ExecuteTransactionInput": {
+      "type": "structure",
+      "required": [
+        "TransactStatements"
+      ],
+      "members": {
+        "TransactStatements": {
+          "shape": "ParameterizedStatements",
+          "documentation": "<p> The list of PartiQL statements representing the transaction to run. </p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p> Set this value to get remaining results, if <code>NextToken</code> was returned in the statement response. </p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "ExecuteTransactionOutput": {
+      "type": "structure",
+      "members": {
+        "Responses": {
+          "shape": "ItemResponseList",
+          "documentation": "<p> The response to a PartiQL transaction. </p>"
+        }
+      }
     },
     "ExpectedAttributeMap": {
       "type": "map",
@@ -3519,6 +3887,64 @@
       },
       "documentation": "<p>Represents a set of primary keys and, for each key, the attributes to retrieve from the table.</p> <p>For each primary key, you must provide <i>all</i> of the key attributes. For example, with a simple primary key, you only need to provide the partition key. For a composite primary key, you must provide <i>both</i> the partition key and the sort key.</p>"
     },
+    "KinesisDataStreamDestination": {
+      "type": "structure",
+      "members": {
+        "StreamArn": {
+          "shape": "StreamArn",
+          "documentation": "<p>The ARN for a specific Kinesis data stream.</p>"
+        },
+        "DestinationStatus": {
+          "shape": "DestinationStatus",
+          "documentation": "<p>The current status of replication.</p>"
+        },
+        "DestinationStatusDescription": {
+          "shape": "String",
+          "documentation": "<p>The human-readable string that corresponds to the replica status.</p>"
+        }
+      },
+      "documentation": "<p>Describes a Kinesis data stream destination.</p>"
+    },
+    "KinesisDataStreamDestinations": {
+      "type": "list",
+      "member": {
+        "shape": "KinesisDataStreamDestination"
+      }
+    },
+    "KinesisStreamingDestinationInput": {
+      "type": "structure",
+      "required": [
+        "TableName",
+        "StreamArn"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the DynamoDB table.</p>"
+        },
+        "StreamArn": {
+          "shape": "StreamArn",
+          "documentation": "<p>The ARN for a Kinesis data stream.</p>"
+        }
+      }
+    },
+    "KinesisStreamingDestinationOutput": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table being modified.</p>"
+        },
+        "StreamArn": {
+          "shape": "StreamArn",
+          "documentation": "<p>The ARN for the specific Kinesis data stream.</p>"
+        },
+        "DestinationStatus": {
+          "shape": "DestinationStatus",
+          "documentation": "<p>The current status of the replication.</p>"
+        }
+      }
+    },
     "LastUpdateDateTime": {
       "type": "timestamp"
     },
@@ -3864,6 +4290,55 @@
         "shape": "NumberAttributeValue"
       }
     },
+    "ParameterizedStatement": {
+      "type": "structure",
+      "required": [
+        "Statement"
+      ],
+      "members": {
+        "Statement": {
+          "shape": "PartiQLStatement",
+          "documentation": "<p> A PartiQL statment that uses parameters. </p>"
+        },
+        "Parameters": {
+          "shape": "PreparedStatementParameters",
+          "documentation": "<p> The parameter values. </p>"
+        }
+      },
+      "documentation": "<p> Represents a PartiQL statment that uses parameters. </p>"
+    },
+    "ParameterizedStatements": {
+      "type": "list",
+      "member": {
+        "shape": "ParameterizedStatement"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "PartiQLBatchRequest": {
+      "type": "list",
+      "member": {
+        "shape": "BatchStatementRequest"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "PartiQLBatchResponse": {
+      "type": "list",
+      "member": {
+        "shape": "BatchStatementResponse"
+      }
+    },
+    "PartiQLNextToken": {
+      "type": "string",
+      "max": 32768,
+      "min": 1
+    },
+    "PartiQLStatement": {
+      "type": "string",
+      "max": 8192,
+      "min": 1
+    },
     "PointInTimeRecoveryDescription": {
       "type": "structure",
       "members": {
@@ -3908,6 +4383,13 @@
     },
     "PositiveLongObject": {
       "type": "long",
+      "min": 1
+    },
+    "PreparedStatementParameters": {
+      "type": "list",
+      "member": {
+        "shape": "AttributeValue"
+      },
       "min": 1
     },
     "Projection": {
