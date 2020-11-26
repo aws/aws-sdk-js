@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "dist-tools",
+  "description": "service-collector works properly when strict mode"
+}
