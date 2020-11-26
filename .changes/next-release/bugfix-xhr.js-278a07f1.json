@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "xhr.js",
-  "description": "solve ie11 parsing head problem"
-}
