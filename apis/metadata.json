@@ -948,9 +948,6 @@
   "lookoutvision": {
     "name": "LookoutVision"
   },
-  "profile": {
-    "name": "Profile"
-  },
   "sagemakerfeaturestoreruntime": {
     "prefix": "sagemaker-featurestore-runtime",
     "name": "SageMakerFeatureStoreRuntime"
