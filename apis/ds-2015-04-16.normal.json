@@ -1022,6 +1022,40 @@
       ],
       "documentation": "<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>"
     },
+    "DisableClientAuthentication": {
+      "name": "DisableClientAuthentication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableClientAuthenticationRequest"
+      },
+      "output": {
+        "shape": "DisableClientAuthenticationResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidClientAuthStatusException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Disable client authentication for smart cards.</p>"
+    },
     "DisableLDAPS": {
       "name": "DisableLDAPS",
       "http": {
@@ -1114,6 +1148,43 @@
         }
       ],
       "documentation": "<p>Disables single-sign on for a directory.</p>"
+    },
+    "EnableClientAuthentication": {
+      "name": "EnableClientAuthentication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableClientAuthenticationRequest"
+      },
+      "output": {
+        "shape": "EnableClientAuthenticationResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidClientAuthStatusException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "NoAvailableCertificateException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Enable client authentication for smardtcards.</p>"
     },
     "EnableLDAPS": {
       "name": "EnableLDAPS",
@@ -2145,6 +2216,14 @@
         "ExpiryDateTime": {
           "shape": "CertificateExpiryDateTime",
           "documentation": "<p>The date and time when the certificate will expire.</p>"
+        },
+        "Type": {
+          "shape": "CertificateType",
+          "documentation": "<p>Select <code>ClientCertAuth</code> for smart card integration.</p>"
+        },
+        "ClientCertAuthSettings": {
+          "shape": "ClientCertAuthSettings",
+          "documentation": "<p>Provides information about the client certificate authentication settings. The default value is <code>ClientLDAPS</code>.</p>"
         }
       },
       "documentation": "<p>Information about the certificate.</p>"
@@ -2182,6 +2261,10 @@
         "ExpiryDateTime": {
           "shape": "CertificateExpiryDateTime",
           "documentation": "<p>The date and time when the certificate will expire.</p>"
+        },
+        "Type": {
+          "shape": "CertificateType",
+          "documentation": "<p>Displays the type of certificate.</p>"
         }
       },
       "documentation": "<p>Contains general information about a certificate.</p>"
@@ -2203,6 +2286,13 @@
     "CertificateStateReason": {
       "type": "string"
     },
+    "CertificateType": {
+      "type": "string",
+      "enum": [
+        "ClientCertAuth",
+        "ClientLDAPS"
+      ]
+    },
     "CertificatesInfo": {
       "type": "list",
       "member": {
@@ -2218,6 +2308,22 @@
       "member": {
         "shape": "CidrIp"
       }
+    },
+    "ClientAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "SmartCard"
+      ]
+    },
+    "ClientCertAuthSettings": {
+      "type": "structure",
+      "members": {
+        "OCSPUrl": {
+          "shape": "OCSPUrl",
+          "documentation": "<p>Specifies the URL of the default OCSP server used to check for revocation status.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the client certificate authentication settings, such as <code>ClientLDAPS</code> or <code>ClientCertAuth</code>.</p>"
     },
     "CloudOnlyDirectoriesLimitReached": {
       "type": "boolean"
@@ -3006,7 +3112,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The <i>DescribeRegionsResult.NextToken</i> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>"
+          "documentation": "<p>The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>"
         }
       }
     },
@@ -3015,11 +3121,11 @@
       "members": {
         "RegionsDescription": {
           "shape": "RegionsDescription",
-          "documentation": "<p>List of regional information related to the directory per replicated Region.</p>"
+          "documentation": "<p>List of Region information related to the directory for each replicated Region.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.</p>"
+          "documentation": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.</p>"
         }
       }
     },
@@ -3453,6 +3559,27 @@
       },
       "documentation": "<p>Contains information about the directory.</p>"
     },
+    "DisableClientAuthenticationRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "Type"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Disable client authentication in a specified directory for smart cards. </p>"
+        },
+        "Type": {
+          "shape": "ClientAuthenticationType",
+          "documentation": "<p>Disable the type of client authentication request. </p>"
+        }
+      }
+    },
+    "DisableClientAuthenticationResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DisableLDAPSRequest": {
       "type": "structure",
       "required": [
@@ -3600,6 +3727,27 @@
       "member": {
         "shape": "DomainController"
       }
+    },
+    "EnableClientAuthenticationRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "Type"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>Enable client authentication in a specified directory for smart cards. </p>"
+        },
+        "Type": {
+          "shape": "ClientAuthenticationType",
+          "documentation": "<p>Enable the type of client authentication request. </p>"
+        }
+      }
+    },
+    "EnableClientAuthenticationResult": {
+      "type": "structure",
+      "members": {}
     },
     "EnableLDAPSRequest": {
       "type": "structure",
@@ -4084,6 +4232,12 @@
       "max": 1024,
       "sensitive": true
     },
+    "OCSPUrl": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^(https?|ftp|file|ldaps?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;()]*[-a-zA-Z0-9+&@#/%=~_|()]"
+    },
     "OrganizationalUnitDN": {
       "type": "string",
       "max": 2000,
@@ -4223,7 +4377,7 @@
         },
         "RegionType": {
           "shape": "RegionType",
-          "documentation": "<p>Specifies if the Region is the primary Region or an additional Region.</p>"
+          "documentation": "<p>Specifies whether the Region is the primary Region or an additional Region.</p>"
         },
         "Status": {
           "shape": "DirectoryStage",
@@ -4249,7 +4403,7 @@
           "documentation": "<p>The date and time that the Region description was last updated.</p>"
         }
       },
-      "documentation": "<p>The replicated regional information for a directory.</p>"
+      "documentation": "<p>The replicated Region information for a directory.</p>"
     },
     "RegionName": {
       "type": "string",
@@ -4274,7 +4428,7 @@
       "members": {
         "PrimaryRegion": {
           "shape": "RegionName",
-          "documentation": "<p>The Region from where the AWS Managed Microsoft AD directory was originally created.</p>"
+          "documentation": "<p>The Region where the AWS Managed Microsoft AD directory was originally created.</p>"
         },
         "AdditionalRegions": {
           "shape": "AdditionalRegions",
@@ -4297,6 +4451,13 @@
         "CertificateData": {
           "shape": "CertificateData",
           "documentation": "<p>The certificate PEM string that needs to be registered.</p>"
+        },
+        "Type": {
+          "shape": "CertificateType",
+          "documentation": "<p>The certificate type to register for the request.</p>"
+        },
+        "ClientCertAuthSettings": {
+          "shape": "ClientCertAuthSettings"
         }
       }
     },

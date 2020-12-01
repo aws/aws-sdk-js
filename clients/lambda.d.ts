@@ -54,11 +54,11 @@ declare class Lambda extends Service {
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package is a ZIP archive or image container that contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). You can use code signing if your deployment package is a ZIP archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(params: Lambda.Types.CreateFunctionRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package is a ZIP archive or image container that contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). You can use code signing if your deployment package is a ZIP archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -270,11 +270,11 @@ declare class Lambda extends Service {
    */
   listAliases(callback?: (err: AWSError, data: Lambda.Types.ListAliasesResponse) => void): Request<Lambda.Types.ListAliasesResponse, AWSError>;
   /**
-   * Returns a list of code signing configurations for the specified function. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
+   * Returns a list of code signing configurations. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
    */
   listCodeSigningConfigs(params: Lambda.Types.ListCodeSigningConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListCodeSigningConfigsResponse) => void): Request<Lambda.Types.ListCodeSigningConfigsResponse, AWSError>;
   /**
-   * Returns a list of code signing configurations for the specified function. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
+   * Returns a list of code signing configurations. A request returns up to 10,000 configurations per call. You can use the MaxItems parameter to return fewer configurations per call. 
    */
   listCodeSigningConfigs(callback?: (err: AWSError, data: Lambda.Types.ListCodeSigningConfigsResponse) => void): Request<Lambda.Types.ListCodeSigningConfigsResponse, AWSError>;
   /**
@@ -699,7 +699,7 @@ declare namespace Lambda {
   export type CodeSigningConfigList = CodeSigningConfig[];
   export interface CodeSigningPolicies {
     /**
-     * Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log.  Default value: Warn 
+     * Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log.  Default value: Warn 
      */
     UntrustedArtifactOnDeployment?: CodeSigningPolicy;
   }
@@ -823,7 +823,7 @@ declare namespace Lambda {
     /**
      * The identifier of the function's runtime.
      */
-    Runtime: Runtime;
+    Runtime?: Runtime;
     /**
      * The Amazon Resource Name (ARN) of the function's execution role.
      */
@@ -831,7 +831,7 @@ declare namespace Lambda {
     /**
      * The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
      */
-    Handler: Handler;
+    Handler?: Handler;
     /**
      * The code for the function.
      */
@@ -856,6 +856,10 @@ declare namespace Lambda {
      * For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see VPC Settings.
      */
     VpcConfig?: VpcConfig;
+    /**
+     * The type of deployment package. Set to Image for container image and set Zip for ZIP archive.
+     */
+    PackageType?: PackageType;
     /**
      * A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see Dead Letter Queues.
      */
@@ -885,7 +889,11 @@ declare namespace Lambda {
      */
     FileSystemConfigs?: FileSystemConfigList;
     /**
-     * To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.
+     * Configuration values that override the container image Dockerfile.
+     */
+    ImageConfig?: ImageConfig;
+    /**
+     * To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
      */
     CodeSigningConfigArn?: CodeSigningConfigArn;
   }
@@ -1126,6 +1134,10 @@ declare namespace Lambda {
      * For versioned objects, the version of the deployment package object to use.
      */
     S3ObjectVersion?: S3ObjectVersion;
+    /**
+     * URI of a container image in the Amazon ECR registry.
+     */
+    ImageUri?: String;
   }
   export interface FunctionCodeLocation {
     /**
@@ -1136,6 +1148,14 @@ declare namespace Lambda {
      * A presigned URL that you can use to download the deployment package.
      */
     Location?: String;
+    /**
+     * URI of a container image in the Amazon ECR registry.
+     */
+    ImageUri?: String;
+    /**
+     * The resolved URI for the image.
+     */
+    ResolvedImageUri?: String;
   }
   export interface FunctionConfiguration {
     /**
@@ -1246,6 +1266,14 @@ declare namespace Lambda {
      * Connection settings for an Amazon EFS file system.
      */
     FileSystemConfigs?: FileSystemConfigList;
+    /**
+     * The type of deployment package. Set to Image for container image and set Zip for ZIP archive.
+     */
+    PackageType?: PackageType;
+    /**
+     * The function's image configuration values.
+     */
+    ImageConfigResponse?: ImageConfigResponse;
     /**
      * The ARN of the signing profile version.
      */
@@ -1525,6 +1553,40 @@ declare namespace Lambda {
   }
   export type Handler = string;
   export type HttpStatus = number;
+  export interface ImageConfig {
+    /**
+     * Specifies the entry point to their application, which is typically the location of the runtime executable.
+     */
+    EntryPoint?: StringList;
+    /**
+     * Specifies parameters that you want to pass in with ENTRYPOINT. 
+     */
+    Command?: StringList;
+    /**
+     * Specifies the working directory.
+     */
+    WorkingDirectory?: WorkingDirectory;
+  }
+  export interface ImageConfigError {
+    /**
+     * Error code.
+     */
+    ErrorCode?: String;
+    /**
+     * Error message.
+     */
+    Message?: SensitiveString;
+  }
+  export interface ImageConfigResponse {
+    /**
+     * Configuration values that override the container image Dockerfile.
+     */
+    ImageConfig?: ImageConfig;
+    /**
+     * Error response to GetFunctionConfiguration.
+     */
+    Error?: ImageConfigError;
+  }
   export type Integer = number;
   export interface InvocationRequest {
     /**
@@ -1594,7 +1656,7 @@ declare namespace Lambda {
   export type KMSKeyArn = string;
   export type LastUpdateStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastUpdateStatusReason = string;
-  export type LastUpdateStatusReasonCode = "EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|string;
+  export type LastUpdateStatusReasonCode = "EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|string;
   export interface Layer {
     /**
      * The Amazon Resource Name (ARN) of the function layer.
@@ -1999,6 +2061,7 @@ declare namespace Lambda {
     Destination?: DestinationArn;
   }
   export type OrganizationId = string;
+  export type PackageType = "Zip"|"Image"|string;
   export type ParallelizationFactor = number;
   export type PositiveInteger = number;
   export type Principal = string;
@@ -2265,9 +2328,10 @@ declare namespace Lambda {
   export type SourceOwner = string;
   export type State = "Pending"|"Active"|"Inactive"|"Failed"|string;
   export type StateReason = string;
-  export type StateReasonCode = "Idle"|"Creating"|"Restoring"|"EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|string;
+  export type StateReasonCode = "Idle"|"Creating"|"Restoring"|"EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|string;
   export type StatementId = string;
   export type String = string;
+  export type StringList = String[];
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export type TagKey = string;
@@ -2430,6 +2494,10 @@ declare namespace Lambda {
      */
     S3ObjectVersion?: S3ObjectVersion;
     /**
+     * URI of a container image in the Amazon ECR registry.
+     */
+    ImageUri?: String;
+    /**
      * Set to true to publish a new version of the function after updating the code. This has the same effect as calling PublishVersion separately.
      */
     Publish?: Boolean;
@@ -2503,6 +2571,10 @@ declare namespace Lambda {
      * Connection settings for an Amazon EFS file system.
      */
     FileSystemConfigs?: FileSystemConfigList;
+    /**
+     * Configuration values that override the container image Dockerfile.
+     */
+    ImageConfig?: ImageConfig;
   }
   export interface UpdateFunctionEventInvokeConfigRequest {
     /**
@@ -2553,6 +2625,7 @@ declare namespace Lambda {
   }
   export type VpcId = string;
   export type Weight = number;
+  export type WorkingDirectory = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

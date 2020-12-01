@@ -1,0 +1,119 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-07-01",
+    "endpointPrefix": "featurestore-runtime.sagemaker",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon SageMaker Feature Store Runtime",
+    "serviceId": "SageMaker FeatureStore Runtime",
+    "signatureVersion": "v4",
+    "signingName": "sagemaker",
+    "uid": "sagemaker-featurestore-runtime-2020-07-01"
+  },
+  "operations": {
+    "DeleteRecord": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/FeatureGroup/{FeatureGroupName}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FeatureGroupName",
+          "RecordIdentifierValueAsString",
+          "EventTime"
+        ],
+        "members": {
+          "FeatureGroupName": {
+            "location": "uri",
+            "locationName": "FeatureGroupName"
+          },
+          "RecordIdentifierValueAsString": {
+            "location": "querystring",
+            "locationName": "RecordIdentifierValueAsString"
+          },
+          "EventTime": {
+            "location": "querystring",
+            "locationName": "EventTime"
+          }
+        }
+      }
+    },
+    "GetRecord": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/FeatureGroup/{FeatureGroupName}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FeatureGroupName",
+          "RecordIdentifierValueAsString"
+        ],
+        "members": {
+          "FeatureGroupName": {
+            "location": "uri",
+            "locationName": "FeatureGroupName"
+          },
+          "RecordIdentifierValueAsString": {
+            "location": "querystring",
+            "locationName": "RecordIdentifierValueAsString"
+          },
+          "FeatureNames": {
+            "location": "querystring",
+            "locationName": "FeatureName",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Record": {
+            "shape": "S8"
+          }
+        }
+      }
+    },
+    "PutRecord": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/FeatureGroup/{FeatureGroupName}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "FeatureGroupName",
+          "Record"
+        ],
+        "members": {
+          "FeatureGroupName": {
+            "location": "uri",
+            "locationName": "FeatureGroupName"
+          },
+          "Record": {
+            "shape": "S8"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S8": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "FeatureName",
+          "ValueAsString"
+        ],
+        "members": {
+          "FeatureName": {},
+          "ValueAsString": {}
+        }
+      }
+    }
+  }
+}
