@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.799.0-->
+<!--LATEST=2.800.0-->
 <!--ENTRYINSERT-->
+
+## 2.800.0
+* feature: EC2: This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
 
 ## 2.799.0
 * feature: Appflow: Upsolver as a destination connector and documentation update.
