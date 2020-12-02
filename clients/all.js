@@ -244,6 +244,5 @@ module.exports = {
   DevOpsGuru: require('./devopsguru'),
   ECRPUBLIC: require('./ecrpublic'),
   LookoutVision: require('./lookoutvision'),
-  Profile: require('./profile'),
   SageMakerFeatureStoreRuntime: require('./sagemakerfeaturestoreruntime')
 };

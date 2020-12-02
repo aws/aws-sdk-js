@@ -242,5 +242,4 @@ export import ConnectContactLens = require('./connectcontactlens');
 export import DevOpsGuru = require('./devopsguru');
 export import ECRPUBLIC = require('./ecrpublic');
 export import LookoutVision = require('./lookoutvision');
-export import Profile = require('./profile');
 export import SageMakerFeatureStoreRuntime = require('./sagemakerfeaturestoreruntime');
