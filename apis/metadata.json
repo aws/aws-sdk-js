@@ -951,5 +951,9 @@
   "sagemakerfeaturestoreruntime": {
     "prefix": "sagemaker-featurestore-runtime",
     "name": "SageMakerFeatureStoreRuntime"
+  },
+  "customerprofiles": {
+    "prefix": "customer-profiles",
+    "name": "CustomerProfiles"
   }
 }

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.801.0-->
+<!--LATEST=2.802.0-->
 <!--ENTRYINSERT-->
+
+## 2.802.0
+* bugfix: Profile: Removes an incorrectly named service `Profile` that was included in release, v2.801.0
+* feature: CustomerProfiles: This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center.
 
 ## 2.801.0
 * feature: AmplifyBackend: (New Service) The Amplify Admin UI offers an accessible way to develop app backends and manage app content. We recommend that you use the Amplify Admin UI to manage the backend of your Amplify app.

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Profile",
-  "description": "Removes an incorrectly named service `Profile` that was included in release, v2.801.0"
-}

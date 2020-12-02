@@ -245,6 +245,7 @@ export abstract class ConfigurationServicePlaceholders {
   ecrpublic?: AWS.ECRPUBLIC.Types.ClientConfiguration;
   lookoutvision?: AWS.LookoutVision.Types.ClientConfiguration;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.ClientConfiguration;
+  customerprofiles?: AWS.CustomerProfiles.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -492,4 +493,5 @@ export interface ConfigurationServiceApiVersions {
   ecrpublic?: AWS.ECRPUBLIC.Types.apiVersion;
   lookoutvision?: AWS.LookoutVision.Types.apiVersion;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.apiVersion;
+  customerprofiles?: AWS.CustomerProfiles.Types.apiVersion;
 }

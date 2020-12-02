@@ -243,3 +243,4 @@ export import DevOpsGuru = require('./devopsguru');
 export import ECRPUBLIC = require('./ecrpublic');
 export import LookoutVision = require('./lookoutvision');
 export import SageMakerFeatureStoreRuntime = require('./sagemakerfeaturestoreruntime');
+export import CustomerProfiles = require('./customerprofiles');
