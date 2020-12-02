@@ -905,6 +905,10 @@
         "AssociationTime": {
           "shape": "DateTime",
           "documentation": "<p>Time when the license configuration was associated with the resource.</p>"
+        },
+        "AmiAssociationScope": {
+          "shape": "String",
+          "documentation": "<p>Scope of AMI associations.</p>"
         }
       },
       "documentation": "<p>Describes an association with a license configuration.</p>"
@@ -1026,6 +1030,10 @@
         "LicenseConfigurationArn": {
           "shape": "String",
           "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
+        },
+        "AmiAssociationScope": {
+          "shape": "String",
+          "documentation": "<p>Scope of AMI associations.</p>"
         }
       },
       "documentation": "<p>Details for associating a license configuration with a resource.</p>"

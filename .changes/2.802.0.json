@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Profile",
+        "description": "Removes an incorrectly named service `Profile` that was included in release, v2.801.0"
+    },
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center."
+    }
+]

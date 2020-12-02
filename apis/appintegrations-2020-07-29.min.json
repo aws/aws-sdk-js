@@ -1,0 +1,318 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-07-29",
+    "endpointPrefix": "app-integrations",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon AppIntegrations Service",
+    "serviceId": "AppIntegrations",
+    "signatureVersion": "v4",
+    "signingName": "app-integrations",
+    "uid": "appintegrations-2020-07-29"
+  },
+  "operations": {
+    "CreateEventIntegration": {
+      "http": {
+        "requestUri": "/eventIntegrations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "EventFilter",
+          "EventBridgeBus"
+        ],
+        "members": {
+          "Name": {},
+          "Description": {},
+          "EventFilter": {
+            "shape": "S4"
+          },
+          "EventBridgeBus": {},
+          "ClientToken": {
+            "idempotencyToken": true
+          },
+          "Tags": {
+            "shape": "S8"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "EventIntegrationArn": {}
+        }
+      }
+    },
+    "DeleteEventIntegration": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/eventIntegrations/{Name}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {
+            "location": "uri",
+            "locationName": "Name"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "GetEventIntegration": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/eventIntegrations/{Name}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {
+            "location": "uri",
+            "locationName": "Name"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "Description": {},
+          "EventIntegrationArn": {},
+          "EventBridgeBus": {},
+          "EventFilter": {
+            "shape": "S4"
+          },
+          "Tags": {
+            "shape": "S8"
+          }
+        }
+      }
+    },
+    "ListEventIntegrationAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/eventIntegrations/{Name}/associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "EventIntegrationName"
+        ],
+        "members": {
+          "EventIntegrationName": {
+            "location": "uri",
+            "locationName": "Name"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "EventIntegrationAssociations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "EventIntegrationAssociationArn": {},
+                "EventIntegrationAssociationId": {},
+                "EventIntegrationName": {},
+                "ClientId": {},
+                "EventBridgeRuleName": {},
+                "ClientAssociationMetadata": {
+                  "type": "map",
+                  "key": {},
+                  "value": {}
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListEventIntegrations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/eventIntegrations"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "EventIntegrations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "EventIntegrationArn": {},
+                "Name": {},
+                "Description": {},
+                "EventFilter": {
+                  "shape": "S4"
+                },
+                "EventBridgeBus": {},
+                "Tags": {
+                  "shape": "S8"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S8"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S8"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateEventIntegration": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/eventIntegrations/{Name}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {
+            "location": "uri",
+            "locationName": "Name"
+          },
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "structure",
+      "required": [
+        "Source"
+      ],
+      "members": {
+        "Source": {}
+      }
+    },
+    "S8": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    }
+  }
+}

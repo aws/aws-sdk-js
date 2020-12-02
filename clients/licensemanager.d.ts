@@ -416,6 +416,10 @@ declare namespace LicenseManager {
      * Time when the license configuration was associated with the resource.
      */
     AssociationTime?: DateTime;
+    /**
+     * Scope of AMI associations.
+     */
+    AmiAssociationScope?: String;
   }
   export type LicenseConfigurationAssociations = LicenseConfigurationAssociation[];
   export type LicenseConfigurationStatus = "AVAILABLE"|"DISABLED"|string;
@@ -488,6 +492,10 @@ declare namespace LicenseManager {
      * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn: String;
+    /**
+     * Scope of AMI associations.
+     */
+    AmiAssociationScope?: String;
   }
   export type LicenseSpecifications = LicenseSpecification[];
   export interface ListAssociationsForLicenseConfigurationRequest {

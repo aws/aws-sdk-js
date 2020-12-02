@@ -357,6 +357,14 @@ declare class ECS extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ECS.Types.UntagResourceResponse) => void): Request<ECS.Types.UntagResourceResponse, AWSError>;
   /**
+   * Modifies the parameters for a capacity provider.
+   */
+  updateCapacityProvider(params: ECS.Types.UpdateCapacityProviderRequest, callback?: (err: AWSError, data: ECS.Types.UpdateCapacityProviderResponse) => void): Request<ECS.Types.UpdateCapacityProviderResponse, AWSError>;
+  /**
+   * Modifies the parameters for a capacity provider.
+   */
+  updateCapacityProvider(callback?: (err: AWSError, data: ECS.Types.UpdateCapacityProviderResponse) => void): Request<ECS.Types.UpdateCapacityProviderResponse, AWSError>;
+  /**
    * Modifies the settings to use for a cluster.
    */
   updateClusterSettings(params: ECS.Types.UpdateClusterSettingsRequest, callback?: (err: AWSError, data: ECS.Types.UpdateClusterSettingsResponse) => void): Request<ECS.Types.UpdateClusterSettingsResponse, AWSError>;
@@ -504,6 +512,13 @@ declare namespace ECS {
      */
     managedTerminationProtection?: ManagedTerminationProtection;
   }
+  export interface AutoScalingGroupProviderUpdate {
+    managedScaling?: ManagedScaling;
+    /**
+     * The managed termination protection setting to use for the Auto Scaling group capacity provider. This determines whether the Auto Scaling group has managed termination protection.  When using managed termination protection, managed scaling must also be used otherwise managed termination protection will not work.  When managed termination protection is enabled, Amazon ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks from being terminated during a scale-in action. The Auto Scaling group and each instance in the Auto Scaling group must have instance protection from scale-in actions enabled as well. For more information, see Instance Protection in the AWS Auto Scaling User Guide. When managed termination protection is disabled, your Amazon EC2 instances are not protected from termination when the Auto Scaling group scales in.
+     */
+    managedTerminationProtection?: ManagedTerminationProtection;
+  }
   export interface AwsVpcConfiguration {
     /**
      * The IDs of the subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.  All specified subnets must be from the same VPC. 
@@ -571,7 +586,7 @@ declare namespace ECS {
   }
   export type CapacityProviderStrategyItemBase = number;
   export type CapacityProviderStrategyItemWeight = number;
-  export type CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|string;
+  export type CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
   export type CapacityProviders = CapacityProvider[];
   export interface Cluster {
     /**
@@ -802,7 +817,7 @@ declare namespace ECS {
      */
     hostname?: String;
     /**
-     * The user name to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run. You can use the following formats. If specifying a UID or GID, you must specify it as a positive integer.    user     user:group     uid     uid:gid     user:gid     uid:group     This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * The user to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.  When running tasks using the host network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.  You can specify the user using the following formats. If specifying a UID or GID, you must specify it as a positive integer.    user     user:group     uid     uid:gid     user:gid     uid:group     This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
      */
     user?: String;
     /**
@@ -1338,6 +1353,10 @@ declare namespace ECS {
      */
     runningCount?: Integer;
     /**
+     * The number of consecutively failed tasks in the deployment. A task is considered a failure if the service scheduler can't launch the task, the task doesn't transition to a RUNNING state, or if it fails any of its defined health checks and is stopped.  Once a service deployment has one or more successfully running tasks, the failed task count resets to zero and stops being evaluated. 
+     */
+    failedTasks?: Integer;
+    /**
      * The Unix timestamp for when the service deployment was created.
      */
     createdAt?: Timestamp;
@@ -1361,8 +1380,30 @@ declare namespace ECS {
      * The VPC subnet and security group configuration for tasks that receive their own elastic network interface by using the awsvpc networking mode.
      */
     networkConfiguration?: NetworkConfiguration;
+    /**
+     *  The rolloutState of a service is only returned for services that use the rolling update (ECS) deployment type that are not behind a Classic Load Balancer.  The rollout state of the deployment. When a service deployment is started, it begins in an IN_PROGRESS state. When the service reaches a steady state, the deployment will transition to a COMPLETED state. If the service fails to reach a steady state and circuit breaker is enabled, the deployment will transition to a FAILED state. A deployment in FAILED state will launch no new tasks. For more information, see DeploymentCircuitBreaker.
+     */
+    rolloutState?: DeploymentRolloutState;
+    /**
+     * A description of the rollout state of a deployment.
+     */
+    rolloutStateReason?: String;
+  }
+  export interface DeploymentCircuitBreaker {
+    /**
+     * Whether to enable the deployment circuit breaker logic for the service.
+     */
+    enable: Boolean;
+    /**
+     * Whether to enable Amazon ECS to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+     */
+    rollback: Boolean;
   }
   export interface DeploymentConfiguration {
+    /**
+     *  The deployment circuit breaker can only be used for services using the rolling update (ECS) deployment type.  The deployment circuit breaker determines whether a service deployment will fail if the service can't reach a steady state. If deployment circuit breaker is enabled, a service deployment will transition to a failed state and stop launching new tasks. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+     */
+    deploymentCircuitBreaker?: DeploymentCircuitBreaker;
     /**
      * If a service is using the rolling update (ECS) deployment type, the maximum percent parameter represents an upper limit on the number of tasks in a service that are allowed in the RUNNING or PENDING state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the DRAINING state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%. If a service is using the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and tasks that use the EC2 launch type, the maximum percent value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.
      */
@@ -1379,6 +1420,7 @@ declare namespace ECS {
     type: DeploymentControllerType;
   }
   export type DeploymentControllerType = "ECS"|"CODE_DEPLOY"|"EXTERNAL"|string;
+  export type DeploymentRolloutState = "COMPLETED"|"FAILED"|"IN_PROGRESS"|string;
   export type Deployments = Deployment[];
   export interface DeregisterContainerInstanceRequest {
     /**
@@ -1695,11 +1737,11 @@ declare namespace ECS {
   export type EnvironmentVariables = KeyValuePair[];
   export interface FSxWindowsFileServerAuthorizationConfig {
     /**
-     * The authorization credential option to use. The authorization credential options can be provided using either the AWS Secrets Manager ARN or the AWS Systems Manager ARN. The ARNs refer to the stored credentials.  options:     ARN of an AWS Secrets Manager secret.    ARN of an AWS Systems Manager parameter.  
+     * The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
      */
     credentialsParameter: String;
     /**
-     * A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted EC2 AD.
+     * A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
      */
     domain: String;
   }
@@ -2182,14 +2224,19 @@ declare namespace ECS {
      */
     targetCapacity?: ManagedScalingTargetCapacity;
     /**
-     * The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale in process is not affected by this parameter If this parameter is omitted, the default value of 1 is used. When additional capacity is required, Amazon ECS will scale up the minimum scaling step size even if the actual demand is less than the minimum scaling step size. If you use a capacity provider with an Auto Scaling group configured with more than one Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up by the exact minimum scaling step size value and will ignore both the maximum scaling step size as well as the capacity demand.
+     * The minimum number of container instances that Amazon ECS will scale in or scale out at one time. If this parameter is omitted, the default value of 1 is used.
      */
     minimumScalingStepSize?: ManagedScalingStepSize;
     /**
-     * The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale in process is not affected by this parameter. If this parameter is omitted, the default value of 10000 is used.
+     * The maximum number of container instances that Amazon ECS will scale in or scale out at one time. If this parameter is omitted, the default value of 10000 is used.
      */
     maximumScalingStepSize?: ManagedScalingStepSize;
+    /**
+     * The period of time, in seconds, after a newly launched Amazon EC2 instance can contribute to CloudWatch metrics for Auto Scaling group. If this parameter is omitted, the default value of 300 seconds is used.
+     */
+    instanceWarmupPeriod?: ManagedScalingInstanceWarmupPeriod;
   }
+  export type ManagedScalingInstanceWarmupPeriod = number;
   export type ManagedScalingStatus = "ENABLED"|"DISABLED"|string;
   export type ManagedScalingStepSize = number;
   export type ManagedScalingTargetCapacity = number;
@@ -2443,7 +2490,7 @@ declare namespace ECS {
      */
     executionRoleArn?: String;
     /**
-     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. The default Docker network mode is bridge. If you are using the Fargate launch type, the awsvpc network mode is required. If you are using the EC2 launch type, any network mode can be used. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. With the host and awsvpc network modes, exposed container ports are mapped directly to the corresponding host port (for the host network mode) or the attached elastic network interface port (for the awsvpc network mode), so you cannot take advantage of dynamic host port mappings.  If the network mode is awsvpc, the task is allocated an elastic network interface, and you must specify a NetworkConfiguration value when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.  Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or AWS Fargate infrastructure support the awsvpc network mode.   If the network mode is host, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used. Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the &lt;default&gt; network mode object.  For more information, see Network settings in the Docker run reference.
+     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. If no network mode is specified, the default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is required. For Amazon ECS tasks on Amazon EC2 instances, any network mode can be used. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. With the host and awsvpc network modes, exposed container ports are mapped directly to the corresponding host port (for the host network mode) or the attached elastic network interface port (for the awsvpc network mode), so you cannot take advantage of dynamic host port mappings.   When using the host network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.  If the network mode is awsvpc, the task is allocated an elastic network interface, and you must specify a NetworkConfiguration value when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.  Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or AWS Fargate infrastructure support the awsvpc network mode.   If the network mode is host, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used. Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the &lt;default&gt; network mode object.  For more information, see Network settings in the Docker run reference.
      */
     networkMode?: NetworkMode;
     /**
@@ -3191,7 +3238,7 @@ declare namespace ECS {
      */
     executionRoleArn?: String;
     /**
-     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. The default Docker network mode is bridge. If you are using the Fargate launch type, the awsvpc network mode is required. If you are using the EC2 launch type, any network mode can be used. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. With the host and awsvpc network modes, exposed container ports are mapped directly to the corresponding host port (for the host network mode) or the attached elastic network interface port (for the awsvpc network mode), so you cannot take advantage of dynamic host port mappings.  If the network mode is awsvpc, the task is allocated an elastic network interface, and you must specify a NetworkConfiguration value when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.  Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or AWS Fargate infrastructure support the awsvpc network mode.   If the network mode is host, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used. Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the &lt;default&gt; network mode object.  For more information, see Network settings in the Docker run reference.
+     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. If no network mode is specified, the default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is required. For Amazon ECS tasks on Amazon EC2 instances, any network mode can be used. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. With the host and awsvpc network modes, exposed container ports are mapped directly to the corresponding host port (for the host network mode) or the attached elastic network interface port (for the awsvpc network mode), so you cannot take advantage of dynamic host port mappings.   When using the host network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.  If the network mode is awsvpc, the task is allocated an elastic network interface, and you must specify a NetworkConfiguration value when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.  Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or AWS Fargate infrastructure support the awsvpc network mode.   If the network mode is host, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used. Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the &lt;default&gt; network mode object.  For more information, see Network settings in the Docker run reference.
      */
     networkMode?: NetworkMode;
     /**
@@ -3434,6 +3481,19 @@ declare namespace ECS {
     tagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateCapacityProviderRequest {
+    /**
+     * An object representing the parameters to update for the Auto Scaling group capacity provider.
+     */
+    name: String;
+    /**
+     * The name of the capacity provider to update.
+     */
+    autoScalingGroupProvider: AutoScalingGroupProviderUpdate;
+  }
+  export interface UpdateCapacityProviderResponse {
+    capacityProvider?: CapacityProvider;
   }
   export interface UpdateClusterSettingsRequest {
     /**

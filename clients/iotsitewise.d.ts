@@ -93,11 +93,11 @@ declare class IoTSiteWise extends Service {
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
-   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
    */
   createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
   /**
-   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
    */
   createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
   /**
@@ -204,6 +204,14 @@ declare class IoTSiteWise extends Service {
    * Retrieves information about a dashboard.
    */
   describeDashboard(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeDashboardResponse) => void): Request<IoTSiteWise.Types.DescribeDashboardResponse, AWSError>;
+  /**
+   * Retrieves information about the default encryption configuration for the AWS account in the default or specified region. For more information, see Key management in the AWS IoT SiteWise User Guide.
+   */
+  describeDefaultEncryptionConfiguration(params: IoTSiteWise.Types.DescribeDefaultEncryptionConfigurationRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeDefaultEncryptionConfigurationResponse) => void): Request<IoTSiteWise.Types.DescribeDefaultEncryptionConfigurationResponse, AWSError>;
+  /**
+   * Retrieves information about the default encryption configuration for the AWS account in the default or specified region. For more information, see Key management in the AWS IoT SiteWise User Guide.
+   */
+  describeDefaultEncryptionConfiguration(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeDefaultEncryptionConfigurationResponse) => void): Request<IoTSiteWise.Types.DescribeDefaultEncryptionConfigurationResponse, AWSError>;
   /**
    * Retrieves information about a gateway.
    */
@@ -356,6 +364,14 @@ declare class IoTSiteWise extends Service {
    * Retrieves the list of tags for an AWS IoT SiteWise resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTSiteWise.Types.ListTagsForResourceResponse) => void): Request<IoTSiteWise.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Sets the default encryption configuration for the AWS account. For more information, see Key management in the AWS IoT SiteWise User Guide.
+   */
+  putDefaultEncryptionConfiguration(params: IoTSiteWise.Types.PutDefaultEncryptionConfigurationRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.PutDefaultEncryptionConfigurationResponse) => void): Request<IoTSiteWise.Types.PutDefaultEncryptionConfigurationResponse, AWSError>;
+  /**
+   * Sets the default encryption configuration for the AWS account. For more information, see Key management in the AWS IoT SiteWise User Guide.
+   */
+  putDefaultEncryptionConfiguration(callback?: (err: AWSError, data: IoTSiteWise.Types.PutDefaultEncryptionConfigurationResponse) => void): Request<IoTSiteWise.Types.PutDefaultEncryptionConfigurationResponse, AWSError>;
   /**
    * Sets logging options for AWS IoT SiteWise.
    */
@@ -948,6 +964,27 @@ declare namespace IoTSiteWise {
   export type CapabilityNamespace = string;
   export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|string;
   export type ClientToken = string;
+  export interface ConfigurationErrorDetails {
+    /**
+     * 
+     */
+    code: ErrorCode;
+    /**
+     * 
+     */
+    message: ErrorMessage;
+  }
+  export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export interface ConfigurationStatus {
+    /**
+     * 
+     */
+    state: ConfigurationState;
+    /**
+     * 
+     */
+    error?: ConfigurationErrorDetails;
+  }
   export interface CreateAccessPolicyRequest {
     /**
      * The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.
@@ -1174,13 +1211,13 @@ declare namespace IoTSiteWise {
      */
     portalId: ID;
     /**
-     * The duration (in seconds) for which the session at the URL is valid. Default: 900 seconds (15 minutes)
+     * The duration (in seconds) for which the session at the URL is valid. Default: 43,200 seconds (12 hours)
      */
     sessionDurationSeconds?: SessionDurationSeconds;
   }
   export interface CreatePresignedPortalUrlResponse {
     /**
-     * The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.  https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt; 
+     * The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.  https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt; 
      */
     presignedPortalUrl: Url;
   }
@@ -1523,6 +1560,22 @@ declare namespace IoTSiteWise {
      */
     dashboardLastUpdateDate: Timestamp;
   }
+  export interface DescribeDefaultEncryptionConfigurationRequest {
+  }
+  export interface DescribeDefaultEncryptionConfigurationResponse {
+    /**
+     * The type of encryption used for the encryption configuration.
+     */
+    encryptionType: EncryptionType;
+    /**
+     * The key ARN of the customer managed customer master key (CMK) used for AWS KMS encryption if you use KMS_BASED_ENCRYPTION.
+     */
+    kmsKeyArn?: ARN;
+    /**
+     * The status of the account configuration. This contains the ConfigurationState. If there's an error, it also contains the ErrorDetails.
+     */
+    configurationStatus: ConfigurationStatus;
+  }
   export interface DescribeGatewayCapabilityConfigurationRequest {
     /**
      * The ID of the gateway that defines the capability configuration.
@@ -1711,6 +1764,7 @@ declare namespace IoTSiteWise {
     clientToken?: ClientToken;
   }
   export type Email = string;
+  export type EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"|"KMS_BASED_ENCRYPTION"|string;
   export type EntryId = string;
   export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|string;
   export interface ErrorDetails {
@@ -1966,6 +2020,7 @@ declare namespace IoTSiteWise {
     url: Url;
   }
   export type Interval = string;
+  export type KmsKeyId = string;
   export interface ListAccessPoliciesRequest {
     /**
      * The type of identity (AWS SSO user, AWS SSO group, or IAM user). This parameter is required if you specify identityId.
@@ -2426,6 +2481,30 @@ declare namespace IoTSiteWise {
      * The list of property values to upload. You can specify up to 10 propertyValues array elements. 
      */
     propertyValues: AssetPropertyValues;
+  }
+  export interface PutDefaultEncryptionConfigurationRequest {
+    /**
+     * The type of encryption used for the encryption configuration.
+     */
+    encryptionType: EncryptionType;
+    /**
+     * The Key ID of the customer managed customer master key (CMK) used for AWS KMS encryption. This is required if you use KMS_BASED_ENCRYPTION.
+     */
+    kmsKeyId?: KmsKeyId;
+  }
+  export interface PutDefaultEncryptionConfigurationResponse {
+    /**
+     * The type of encryption used for the encryption configuration.
+     */
+    encryptionType: EncryptionType;
+    /**
+     * The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you use KMS_BASED_ENCRYPTION.
+     */
+    kmsKeyArn?: ARN;
+    /**
+     * The status of the account configuration. This contains the ConfigurationState. If there is an error, it also contains the ErrorDetails.
+     */
+    configurationStatus: ConfigurationStatus;
   }
   export interface PutLoggingOptionsRequest {
     /**

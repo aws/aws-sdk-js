@@ -340,7 +340,7 @@ declare namespace Batch {
      */
     instanceTypes: StringList;
     /**
-     * The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+     * The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter is overridden by the imageIdOverride member of the Ec2Configuration structure.
      */
     imageId?: String;
     /**
@@ -379,6 +379,10 @@ declare namespace Batch {
      * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see Launch Template Support in the AWS Batch User Guide.
      */
     launchTemplate?: LaunchTemplateSpecification;
+    /**
+     * Provides additional details used to selecting the AMI to use for instances in a compute environment.
+     */
+    ec2Configuration?: Ec2ConfigurationList;
   }
   export interface ComputeResourceUpdate {
     /**
@@ -803,6 +807,17 @@ declare namespace Batch {
   export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD"|string;
   export type DeviceCgroupPermissions = DeviceCgroupPermission[];
   export type DevicesList = Device[];
+  export interface Ec2Configuration {
+    /**
+     * The image type to match with the instance type to pick an AMI. If the imageIdOverride parameter is not specified, then a recent Amazon ECS-optimized AMI will be used.  ECS_AL2   Amazon Linux 2− Default for all AWS Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non-AWS Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
+     */
+    imageType: ImageType;
+    /**
+     * The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the imageId set in the computeResource object.
+     */
+    imageIdOverride?: ImageIdOverride;
+  }
+  export type Ec2ConfigurationList = Ec2Configuration[];
   export type EnvironmentVariables = KeyValuePair[];
   export interface EvaluateOnExit {
     /**
@@ -829,6 +844,8 @@ declare namespace Batch {
      */
     sourcePath?: String;
   }
+  export type ImageIdOverride = string;
+  export type ImageType = string;
   export type Integer = number;
   export type JQState = "ENABLED"|"DISABLED"|string;
   export type JQStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;

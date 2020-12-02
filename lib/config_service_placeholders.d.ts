@@ -237,6 +237,15 @@ export abstract class ConfigurationServicePlaceholders {
   databrew?: AWS.DataBrew.Types.ClientConfiguration;
   servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.ClientConfiguration;
   networkfirewall?: AWS.NetworkFirewall.Types.ClientConfiguration;
+  mwaa?: AWS.MWAA.Types.ClientConfiguration;
+  amplifybackend?: AWS.AmplifyBackend.Types.ClientConfiguration;
+  appintegrations?: AWS.AppIntegrations.Types.ClientConfiguration;
+  connectcontactlens?: AWS.ConnectContactLens.Types.ClientConfiguration;
+  devopsguru?: AWS.DevOpsGuru.Types.ClientConfiguration;
+  ecrpublic?: AWS.ECRPUBLIC.Types.ClientConfiguration;
+  lookoutvision?: AWS.LookoutVision.Types.ClientConfiguration;
+  sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.ClientConfiguration;
+  customerprofiles?: AWS.CustomerProfiles.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -476,4 +485,13 @@ export interface ConfigurationServiceApiVersions {
   databrew?: AWS.DataBrew.Types.apiVersion;
   servicecatalogappregistry?: AWS.ServiceCatalogAppRegistry.Types.apiVersion;
   networkfirewall?: AWS.NetworkFirewall.Types.apiVersion;
+  mwaa?: AWS.MWAA.Types.apiVersion;
+  amplifybackend?: AWS.AmplifyBackend.Types.apiVersion;
+  appintegrations?: AWS.AppIntegrations.Types.apiVersion;
+  connectcontactlens?: AWS.ConnectContactLens.Types.apiVersion;
+  devopsguru?: AWS.DevOpsGuru.Types.apiVersion;
+  ecrpublic?: AWS.ECRPUBLIC.Types.apiVersion;
+  lookoutvision?: AWS.LookoutVision.Types.apiVersion;
+  sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.apiVersion;
+  customerprofiles?: AWS.CustomerProfiles.Types.apiVersion;
 }

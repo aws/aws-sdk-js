@@ -156,6 +156,14 @@ declare class CodeBuild extends Service {
    */
   describeTestCases(callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
   /**
+   * 
+   */
+  getReportGroupTrend(params: CodeBuild.Types.GetReportGroupTrendInput, callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
+  /**
+   * 
+   */
+  getReportGroupTrend(callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
+  /**
    *  Gets a resource policy that is identified by its resource ARN. 
    */
   getResourcePolicy(params: CodeBuild.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: CodeBuild.Types.GetResourcePolicyOutput) => void): Request<CodeBuild.Types.GetResourcePolicyOutput, AWSError>;
@@ -1305,6 +1313,15 @@ declare namespace CodeBuild {
   export type FileSystemType = "EFS"|string;
   export type FilterGroup = WebhookFilter[];
   export type FilterGroups = FilterGroup[];
+  export interface GetReportGroupTrendInput {
+    reportGroupArn: NonEmptyString;
+    numOfReports?: PageSize;
+    trendField: ReportGroupTrendFieldType;
+  }
+  export interface GetReportGroupTrendOutput {
+    stats?: ReportGroupTrendStats;
+    rawData?: ReportGroupTrendRawDataList;
+  }
   export interface GetResourcePolicyInput {
     /**
      *  The ARN of the resource that is associated with the resource policy. 
@@ -2151,11 +2168,22 @@ declare namespace CodeBuild {
   export type ReportGroupName = string;
   export type ReportGroupSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export type ReportGroupStatusType = "ACTIVE"|"DELETING"|string;
+  export type ReportGroupTrendFieldType = "PASS_RATE"|"DURATION"|"TOTAL"|"LINE_COVERAGE"|"LINES_COVERED"|"LINES_MISSED"|"BRANCH_COVERAGE"|"BRANCHES_COVERED"|"BRANCHES_MISSED"|string;
+  export type ReportGroupTrendRawDataList = ReportWithRawData[];
+  export interface ReportGroupTrendStats {
+    average?: String;
+    max?: String;
+    min?: String;
+  }
   export type ReportGroups = ReportGroup[];
   export type ReportPackagingType = "ZIP"|"NONE"|string;
   export type ReportStatusCounts = {[key: string]: WrapperInt};
   export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
   export type ReportType = "TEST"|"CODE_COVERAGE"|string;
+  export interface ReportWithRawData {
+    reportArn?: NonEmptyString;
+    data?: String;
+  }
   export type Reports = Report[];
   export interface ResolvedArtifact {
     /**

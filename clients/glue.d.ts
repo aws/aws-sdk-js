@@ -196,6 +196,14 @@ declare class Glue extends Service {
    */
   createPartition(callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
   /**
+   * Creates a specified partition index in an existing table.
+   */
+  createPartitionIndex(params: Glue.Types.CreatePartitionIndexRequest, callback?: (err: AWSError, data: Glue.Types.CreatePartitionIndexResponse) => void): Request<Glue.Types.CreatePartitionIndexResponse, AWSError>;
+  /**
+   * Creates a specified partition index in an existing table.
+   */
+  createPartitionIndex(callback?: (err: AWSError, data: Glue.Types.CreatePartitionIndexResponse) => void): Request<Glue.Types.CreatePartitionIndexResponse, AWSError>;
+  /**
    * Creates a new registry which may be used to hold a collection of schemas.
    */
   createRegistry(params: Glue.Types.CreateRegistryInput, callback?: (err: AWSError, data: Glue.Types.CreateRegistryResponse) => void): Request<Glue.Types.CreateRegistryResponse, AWSError>;
@@ -339,6 +347,14 @@ declare class Glue extends Service {
    * Deletes a specified partition.
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
+  /**
+   * Deletes a specified partition index from an existing table.
+   */
+  deletePartitionIndex(params: Glue.Types.DeletePartitionIndexRequest, callback?: (err: AWSError, data: Glue.Types.DeletePartitionIndexResponse) => void): Request<Glue.Types.DeletePartitionIndexResponse, AWSError>;
+  /**
+   * Deletes a specified partition index from an existing table.
+   */
+  deletePartitionIndex(callback?: (err: AWSError, data: Glue.Types.DeletePartitionIndexResponse) => void): Request<Glue.Types.DeletePartitionIndexResponse, AWSError>;
   /**
    * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
    */
@@ -1282,6 +1298,19 @@ declare namespace Glue {
   export type ActionList = Action[];
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AttemptCount = number;
+  export interface BackfillError {
+    /**
+     * The error code for an error that occurred when registering partition indexes for an existing table.
+     */
+    Code?: BackfillErrorCode;
+    /**
+     * A list of a limited number of partitions in the response.
+     */
+    Partitions?: BackfillErroredPartitionsList;
+  }
+  export type BackfillErrorCode = "ENCRYPTED_PARTITION_ERROR"|"INTERNAL_ERROR"|"INVALID_PARTITION_TYPE_DATA_ERROR"|"MISSING_PARTITION_VALUE_ERROR"|"UNSUPPORTED_PARTITION_CHARACTER_ERROR"|string;
+  export type BackfillErroredPartitionsList = PartitionValueList[];
+  export type BackfillErrors = BackfillError[];
   export interface BatchCreatePartitionRequest {
     /**
      * The ID of the catalog in which the partition is to be created. Currently, this should be the AWS account ID.
@@ -2092,6 +2121,10 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
+     * A configuration that specifies whether data lineage is enabled for the crawler.
+     */
+    LineageConfiguration?: LineageConfiguration;
+    /**
      * Indicates whether the crawler is running, or whether a run is pending.
      */
     State?: CrawlerState;
@@ -2133,6 +2166,7 @@ declare namespace Glue {
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export type CrawlerConfiguration = string;
+  export type CrawlerLineageSettings = "ENABLE"|"DISABLE"|string;
   export type CrawlerList = Crawler[];
   export interface CrawlerMetrics {
     /**
@@ -2273,6 +2307,10 @@ declare namespace Glue {
      * A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.
      */
     RecrawlPolicy?: RecrawlPolicy;
+    /**
+     * Specifies data lineage configuration settings for the crawler.
+     */
+    LineageConfiguration?: LineageConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
@@ -2641,6 +2679,26 @@ declare namespace Glue {
      * A unique identifier that is generated for the transform.
      */
     TransformId?: HashString;
+  }
+  export interface CreatePartitionIndexRequest {
+    /**
+     * The catalog ID where the table resides.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * Specifies the name of a database in which you want to create a partition index.
+     */
+    DatabaseName: NameString;
+    /**
+     * Specifies the name of a table in which you want to create a partition index.
+     */
+    TableName: NameString;
+    /**
+     * Specifies a PartitionIndex structure to create a partition index in an existing table.
+     */
+    PartitionIndex: PartitionIndex;
+  }
+  export interface CreatePartitionIndexResponse {
   }
   export interface CreatePartitionRequest {
     /**
@@ -3252,6 +3310,26 @@ declare namespace Glue {
      * The unique identifier of the transform that was deleted.
      */
     TransformId?: HashString;
+  }
+  export interface DeletePartitionIndexRequest {
+    /**
+     * The catalog ID where the table resides.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * Specifies the name of a database from which you want to delete a partition index.
+     */
+    DatabaseName: NameString;
+    /**
+     * Specifies the name of a table from which you want to delete a partition index.
+     */
+    TableName: NameString;
+    /**
+     * The name of the partition index to be deleted.
+     */
+    IndexName: NameString;
+  }
+  export interface DeletePartitionIndexResponse {
   }
   export interface DeletePartitionRequest {
     /**
@@ -5532,6 +5610,12 @@ declare namespace Glue {
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
   export type LatestSchemaVersionBoolean = boolean;
+  export interface LineageConfiguration {
+    /**
+     * Specifies whether data lineage is enabled for the crawler. Valid values are:   ENABLE: enables data lineage for the crawler   DISABLE: disables data lineage for the crawler  
+     */
+    CrawlerLineageSettings?: CrawlerLineageSettings;
+  }
   export interface ListCrawlersRequest {
     /**
      * The maximum size of a list to return.
@@ -6082,13 +6166,17 @@ declare namespace Glue {
      */
     Keys: KeySchemaElementList;
     /**
-     * The status of the partition index. 
+     * The status of the partition index.  The possible statuses are:   CREATING: The index is being created. When an index is in a CREATING state, the index or its table cannot be deleted.   ACTIVE: The index creation succeeds.   FAILED: The index creation fails.    DELETING: The index is deleted from the list of indexes.  
      */
     IndexStatus: PartitionIndexStatus;
+    /**
+     * A list of errors that can occur when registering partition indexes for an existing table.
+     */
+    BackfillErrors?: BackfillErrors;
   }
   export type PartitionIndexDescriptorList = PartitionIndexDescriptor[];
   export type PartitionIndexList = PartitionIndex[];
-  export type PartitionIndexStatus = "ACTIVE"|string;
+  export type PartitionIndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
   export interface PartitionInput {
     /**
      * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input. The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.
@@ -7643,6 +7731,10 @@ declare namespace Glue {
      * A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.
      */
     RecrawlPolicy?: RecrawlPolicy;
+    /**
+     * Specifies data lineage configuration settings for the crawler.
+     */
+    LineageConfiguration?: LineageConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */

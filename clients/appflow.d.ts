@@ -348,6 +348,10 @@ declare namespace Appflow {
      *  The connector metadata specific to Amazon EventBridge. 
      */
     EventBridge?: EventBridgeMetadata;
+    /**
+     *  The connector metadata specific to Upsolver. 
+     */
+    Upsolver?: UpsolverMetadata;
   }
   export interface ConnectorOAuthRequest {
     /**
@@ -589,7 +593,7 @@ declare namespace Appflow {
      */
     Zendesk?: ZendeskConnectorProfileProperties;
   }
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|string;
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"Upsolver"|string;
   export type ConnectorTypeList = ConnectorType[];
   export interface CreateConnectorProfileRequest {
     /**
@@ -903,6 +907,10 @@ declare namespace Appflow {
      *  The properties required to query Amazon EventBridge. 
      */
     EventBridge?: EventBridgeDestinationProperties;
+    /**
+     *  The properties required to query Upsolver. 
+     */
+    Upsolver?: UpsolverDestinationProperties;
   }
   export type DestinationField = string;
   export interface DestinationFieldProperties {
@@ -1484,7 +1492,7 @@ declare namespace Appflow {
   export type ScheduleFrequencyType = "BYMINUTE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"ONCE"|string;
   export interface ScheduledTriggerProperties {
     /**
-     *  The scheduling expression that determines when and how often the rule runs. 
+     *  The scheduling expression that determines the rate at which the schedule will run, for example rate(5minutes). 
      */
     scheduleExpression: ScheduleExpression;
     /**
@@ -1921,6 +1929,31 @@ declare namespace Appflow {
     flowStatus?: FlowStatus;
   }
   export type UpdatedBy = string;
+  export type UpsolverBucketName = string;
+  export interface UpsolverDestinationProperties {
+    /**
+     *  The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data. 
+     */
+    bucketName: UpsolverBucketName;
+    /**
+     *  The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. 
+     */
+    bucketPrefix?: BucketPrefix;
+    /**
+     *  The configuration that determines how data is formatted when Upsolver is used as the flow destination. 
+     */
+    s3OutputFormatConfig: UpsolverS3OutputFormatConfig;
+  }
+  export interface UpsolverMetadata {
+  }
+  export interface UpsolverS3OutputFormatConfig {
+    /**
+     *  Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. 
+     */
+    fileType?: FileType;
+    prefixConfig: PrefixConfig;
+    aggregationConfig?: AggregationConfig;
+  }
   export type Username = string;
   export type Value = string;
   export type VeevaConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;

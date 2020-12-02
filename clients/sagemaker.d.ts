@@ -13,6 +13,14 @@ declare class SageMaker extends Service {
   constructor(options?: SageMaker.Types.ClientConfiguration)
   config: Config & SageMaker.Types.ClientConfiguration;
   /**
+   * Creates an association between the source and the destination. A source can be associated with multiple destinations, and a destination can be associated with multiple sources. An association is a lineage tracking entity. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  addAssociation(params: SageMaker.Types.AddAssociationRequest, callback?: (err: AWSError, data: SageMaker.Types.AddAssociationResponse) => void): Request<SageMaker.Types.AddAssociationResponse, AWSError>;
+  /**
+   * Creates an association between the source and the destination. A source can be associated with multiple destinations, and a destination can be associated with multiple sources. An association is a lineage tracking entity. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  addAssociation(callback?: (err: AWSError, data: SageMaker.Types.AddAssociationResponse) => void): Request<SageMaker.Types.AddAssociationResponse, AWSError>;
+  /**
    * Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see AWS Tagging Strategies.  Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob  
    */
   addTags(params: SageMaker.Types.AddTagsInput, callback?: (err: AWSError, data: SageMaker.Types.AddTagsOutput) => void): Request<SageMaker.Types.AddTagsOutput, AWSError>;
@@ -28,6 +36,14 @@ declare class SageMaker extends Service {
    * Associates a trial component with a trial. A trial component can be associated with multiple trials. To disassociate a trial component from a trial, call the DisassociateTrialComponent API.
    */
   associateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.AssociateTrialComponentResponse) => void): Request<SageMaker.Types.AssociateTrialComponentResponse, AWSError>;
+  /**
+   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createAction(params: SageMaker.Types.CreateActionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateActionResponse) => void): Request<SageMaker.Types.CreateActionResponse, AWSError>;
+  /**
+   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createAction(callback?: (err: AWSError, data: SageMaker.Types.CreateActionResponse) => void): Request<SageMaker.Types.CreateActionResponse, AWSError>;
   /**
    * Create a machine learning algorithm that you can use in Amazon SageMaker and list in the AWS Marketplace.
    */
@@ -53,6 +69,14 @@ declare class SageMaker extends Service {
    */
   createAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
   /**
+   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createArtifact(params: SageMaker.Types.CreateArtifactRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
+  /**
+   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
+  /**
    * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
@@ -77,11 +101,19 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
+   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createContext(params: SageMaker.Types.CreateContextRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateContextResponse) => void): Request<SageMaker.Types.CreateContextResponse, AWSError>;
+  /**
+   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.
+   */
+  createContext(callback?: (err: AWSError, data: SageMaker.Types.CreateContextResponse) => void): Request<SageMaker.Types.CreateContextResponse, AWSError>;
+  /**
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, you can specify a customer managed CMK. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, you can specify a customer managed CMK. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
@@ -108,6 +140,14 @@ declare class SageMaker extends Service {
    * Creates an SageMaker experiment. An experiment is a collection of trials that are observed, compared and evaluated as a group. A trial is a set of steps, called trial components, that produce a machine learning model. The goal of an experiment is to determine the components that produce the best model. Multiple trials are performed, each one isolating and measuring the impact of a change to one or more inputs, while keeping the remaining inputs constant. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to experiments, trials, trial components and then use the Search API to search for the tags. To add a description to an experiment, specify the optional Description parameter. To add a description later, or to change the description, call the UpdateExperiment API. To get a list of all your experiments, call the ListExperiments API. To view an experiment's properties, call the DescribeExperiment API. To get a list of all the trials associated with an experiment, call the ListTrials API. To create a trial call the CreateTrial API.
    */
   createExperiment(callback?: (err: AWSError, data: SageMaker.Types.CreateExperimentResponse) => void): Request<SageMaker.Types.CreateExperimentResponse, AWSError>;
+  /**
+   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check AWS service quotas to see the FeatureGroups quota for your AWS account.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
+   */
+  createFeatureGroup(params: SageMaker.Types.CreateFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateFeatureGroupResponse) => void): Request<SageMaker.Types.CreateFeatureGroupResponse, AWSError>;
+  /**
+   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check AWS service quotas to see the FeatureGroups quota for your AWS account.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
+   */
+  createFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.CreateFeatureGroupResponse) => void): Request<SageMaker.Types.CreateFeatureGroupResponse, AWSError>;
   /**
    * Creates a flow definition.
    */
@@ -165,13 +205,21 @@ declare class SageMaker extends Service {
    */
   createModel(callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
-   * Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker. To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for InferenceSpecification. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for SourceAlgorithmSpecification.
+   * Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker. To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for InferenceSpecification. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for SourceAlgorithmSpecification.  There are two types of model packages:   Versioned - a model that is part of a model group in the model registry.   Unversioned - a model package that is not part of a model group.   
    */
   createModelPackage(params: SageMaker.Types.CreateModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageOutput) => void): Request<SageMaker.Types.CreateModelPackageOutput, AWSError>;
   /**
-   * Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker. To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for InferenceSpecification. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for SourceAlgorithmSpecification.
+   * Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker. To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for InferenceSpecification. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for SourceAlgorithmSpecification.  There are two types of model packages:   Versioned - a model that is part of a model group in the model registry.   Unversioned - a model package that is not part of a model group.   
    */
   createModelPackage(callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageOutput) => void): Request<SageMaker.Types.CreateModelPackageOutput, AWSError>;
+  /**
+   * Creates a model group. A model group contains a group of model versions.
+   */
+  createModelPackageGroup(params: SageMaker.Types.CreateModelPackageGroupInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageGroupOutput) => void): Request<SageMaker.Types.CreateModelPackageGroupOutput, AWSError>;
+  /**
+   * Creates a model group. A model group contains a group of model versions.
+   */
+  createModelPackageGroup(callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageGroupOutput) => void): Request<SageMaker.Types.CreateModelPackageGroupOutput, AWSError>;
   /**
    * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
    */
@@ -197,6 +245,14 @@ declare class SageMaker extends Service {
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
+   * Creates a pipeline using a JSON pipeline definition.
+   */
+  createPipeline(params: SageMaker.Types.CreatePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePipelineResponse) => void): Request<SageMaker.Types.CreatePipelineResponse, AWSError>;
+  /**
+   * Creates a pipeline using a JSON pipeline definition.
+   */
+  createPipeline(callback?: (err: AWSError, data: SageMaker.Types.CreatePipelineResponse) => void): Request<SageMaker.Types.CreatePipelineResponse, AWSError>;
+  /**
    * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM.   The URL that you get from a call to CreatePresignedDomainUrl is valid only for 5 minutes. If you try to use the URL after the 5-minute limit expires, you are directed to the AWS console sign-in page. 
    */
   createPresignedDomainUrl(params: SageMaker.Types.CreatePresignedDomainUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
@@ -221,11 +277,19 @@ declare class SageMaker extends Service {
    */
   createProcessingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateProcessingJobResponse) => void): Request<SageMaker.Types.CreateProcessingJobResponse, AWSError>;
   /**
-   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
+   * Creates a machine learning (ML) project that can contain one or more templates that set up an ML pipeline from training to deploying an approved model.
+   */
+  createProject(params: SageMaker.Types.CreateProjectInput, callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
+  /**
+   * Creates a machine learning (ML) project that can contain one or more templates that set up an ML pipeline from training to deploying an approved model.
+   */
+  createProject(callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
+  /**
+   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inference.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleArn - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
    */
   createTrainingJob(params: SageMaker.Types.CreateTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
   /**
-   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
+   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inference.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleArn - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
    */
   createTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
   /**
@@ -277,6 +341,14 @@ declare class SageMaker extends Service {
    */
   createWorkteam(callback?: (err: AWSError, data: SageMaker.Types.CreateWorkteamResponse) => void): Request<SageMaker.Types.CreateWorkteamResponse, AWSError>;
   /**
+   * Deletes an action.
+   */
+  deleteAction(params: SageMaker.Types.DeleteActionRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteActionResponse) => void): Request<SageMaker.Types.DeleteActionResponse, AWSError>;
+  /**
+   * Deletes an action.
+   */
+  deleteAction(callback?: (err: AWSError, data: SageMaker.Types.DeleteActionResponse) => void): Request<SageMaker.Types.DeleteActionResponse, AWSError>;
+  /**
    * Removes the specified algorithm from your account.
    */
   deleteAlgorithm(params: SageMaker.Types.DeleteAlgorithmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -301,6 +373,22 @@ declare class SageMaker extends Service {
    */
   deleteAppImageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an artifact. Either ArtifactArn or Source must be specified.
+   */
+  deleteArtifact(params: SageMaker.Types.DeleteArtifactRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteArtifactResponse) => void): Request<SageMaker.Types.DeleteArtifactResponse, AWSError>;
+  /**
+   * Deletes an artifact. Either ArtifactArn or Source must be specified.
+   */
+  deleteArtifact(callback?: (err: AWSError, data: SageMaker.Types.DeleteArtifactResponse) => void): Request<SageMaker.Types.DeleteArtifactResponse, AWSError>;
+  /**
+   * Deletes an association.
+   */
+  deleteAssociation(params: SageMaker.Types.DeleteAssociationRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteAssociationResponse) => void): Request<SageMaker.Types.DeleteAssociationResponse, AWSError>;
+  /**
+   * Deletes an association.
+   */
+  deleteAssociation(callback?: (err: AWSError, data: SageMaker.Types.DeleteAssociationResponse) => void): Request<SageMaker.Types.DeleteAssociationResponse, AWSError>;
+  /**
    * Deletes the specified Git repository from your account.
    */
   deleteCodeRepository(params: SageMaker.Types.DeleteCodeRepositoryInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -308,6 +396,14 @@ declare class SageMaker extends Service {
    * Deletes the specified Git repository from your account.
    */
   deleteCodeRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an context.
+   */
+  deleteContext(params: SageMaker.Types.DeleteContextRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteContextResponse) => void): Request<SageMaker.Types.DeleteContextResponse, AWSError>;
+  /**
+   * Deletes an context.
+   */
+  deleteContext(callback?: (err: AWSError, data: SageMaker.Types.DeleteContextResponse) => void): Request<SageMaker.Types.DeleteContextResponse, AWSError>;
   /**
    * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
@@ -340,6 +436,14 @@ declare class SageMaker extends Service {
    * Deletes an Amazon SageMaker experiment. All trials associated with the experiment must be deleted first. Use the ListTrials API to get a list of the trials associated with the experiment.
    */
   deleteExperiment(callback?: (err: AWSError, data: SageMaker.Types.DeleteExperimentResponse) => void): Request<SageMaker.Types.DeleteExperimentResponse, AWSError>;
+  /**
+   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The AWS Glue database and tables that are automatically created for your OfflineStore are not deleted. 
+   */
+  deleteFeatureGroup(params: SageMaker.Types.DeleteFeatureGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The AWS Glue database and tables that are automatically created for your OfflineStore are not deleted. 
+   */
+  deleteFeatureGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified flow definition.
    */
@@ -389,6 +493,22 @@ declare class SageMaker extends Service {
    */
   deleteModelPackage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified model group.
+   */
+  deleteModelPackageGroup(params: SageMaker.Types.DeleteModelPackageGroupInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified model group.
+   */
+  deleteModelPackageGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a model group resource policy.
+   */
+  deleteModelPackageGroupPolicy(params: SageMaker.Types.DeleteModelPackageGroupPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a model group resource policy.
+   */
+  deleteModelPackageGroupPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a monitoring schedule. Also stops the schedule had not already been stopped. This does not delete the job execution history of the monitoring schedule. 
    */
   deleteMonitoringSchedule(params: SageMaker.Types.DeleteMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -412,6 +532,22 @@ declare class SageMaker extends Service {
    * Deletes a notebook instance lifecycle configuration.
    */
   deleteNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a pipeline.
+   */
+  deletePipeline(params: SageMaker.Types.DeletePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.DeletePipelineResponse) => void): Request<SageMaker.Types.DeletePipelineResponse, AWSError>;
+  /**
+   * Deletes a pipeline.
+   */
+  deletePipeline(callback?: (err: AWSError, data: SageMaker.Types.DeletePipelineResponse) => void): Request<SageMaker.Types.DeletePipelineResponse, AWSError>;
+  /**
+   * Delete the specified project.
+   */
+  deleteProject(params: SageMaker.Types.DeleteProjectInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the specified project.
+   */
+  deleteProject(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API. 
    */
@@ -461,6 +597,14 @@ declare class SageMaker extends Service {
    */
   deleteWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkteamResponse) => void): Request<SageMaker.Types.DeleteWorkteamResponse, AWSError>;
   /**
+   * Describes an action.
+   */
+  describeAction(params: SageMaker.Types.DescribeActionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeActionResponse) => void): Request<SageMaker.Types.DescribeActionResponse, AWSError>;
+  /**
+   * Describes an action.
+   */
+  describeAction(callback?: (err: AWSError, data: SageMaker.Types.DescribeActionResponse) => void): Request<SageMaker.Types.DescribeActionResponse, AWSError>;
+  /**
    * Returns a description of the specified algorithm that is in your account.
    */
   describeAlgorithm(params: SageMaker.Types.DescribeAlgorithmInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeAlgorithmOutput) => void): Request<SageMaker.Types.DescribeAlgorithmOutput, AWSError>;
@@ -485,6 +629,14 @@ declare class SageMaker extends Service {
    */
   describeAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeAppImageConfigResponse) => void): Request<SageMaker.Types.DescribeAppImageConfigResponse, AWSError>;
   /**
+   * Describes an artifact.
+   */
+  describeArtifact(params: SageMaker.Types.DescribeArtifactRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeArtifactResponse) => void): Request<SageMaker.Types.DescribeArtifactResponse, AWSError>;
+  /**
+   * Describes an artifact.
+   */
+  describeArtifact(callback?: (err: AWSError, data: SageMaker.Types.DescribeArtifactResponse) => void): Request<SageMaker.Types.DescribeArtifactResponse, AWSError>;
+  /**
    * Returns information about an Amazon SageMaker job.
    */
   describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
@@ -508,6 +660,14 @@ declare class SageMaker extends Service {
    * Returns information about a model compilation job. To create a model compilation job, use CreateCompilationJob. To get information about multiple model compilation jobs, use ListCompilationJobs.
    */
   describeCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeCompilationJobResponse) => void): Request<SageMaker.Types.DescribeCompilationJobResponse, AWSError>;
+  /**
+   * Describes a context.
+   */
+  describeContext(params: SageMaker.Types.DescribeContextRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeContextResponse) => void): Request<SageMaker.Types.DescribeContextResponse, AWSError>;
+  /**
+   * Describes a context.
+   */
+  describeContext(callback?: (err: AWSError, data: SageMaker.Types.DescribeContextResponse) => void): Request<SageMaker.Types.DescribeContextResponse, AWSError>;
   /**
    * The description of the domain.
    */
@@ -540,6 +700,14 @@ declare class SageMaker extends Service {
    * Provides a list of an experiment's properties.
    */
   describeExperiment(callback?: (err: AWSError, data: SageMaker.Types.DescribeExperimentResponse) => void): Request<SageMaker.Types.DescribeExperimentResponse, AWSError>;
+  /**
+   * Use this operation to describe a FeatureGroup. The response includes information on the creation time, FeatureGroup name, the unique identifier for each FeatureGroup, and more.
+   */
+  describeFeatureGroup(params: SageMaker.Types.DescribeFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeFeatureGroupResponse) => void): Request<SageMaker.Types.DescribeFeatureGroupResponse, AWSError>;
+  /**
+   * Use this operation to describe a FeatureGroup. The response includes information on the creation time, FeatureGroup name, the unique identifier for each FeatureGroup, and more.
+   */
+  describeFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeFeatureGroupResponse) => void): Request<SageMaker.Types.DescribeFeatureGroupResponse, AWSError>;
   /**
    * Returns information about the specified flow definition.
    */
@@ -605,6 +773,14 @@ declare class SageMaker extends Service {
    */
   describeModelPackage(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
+   * Gets a description for the specified model group.
+   */
+  describeModelPackageGroup(params: SageMaker.Types.DescribeModelPackageGroupInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageGroupOutput) => void): Request<SageMaker.Types.DescribeModelPackageGroupOutput, AWSError>;
+  /**
+   * Gets a description for the specified model group.
+   */
+  describeModelPackageGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageGroupOutput) => void): Request<SageMaker.Types.DescribeModelPackageGroupOutput, AWSError>;
+  /**
    * Describes the schedule for a monitoring job.
    */
   describeMonitoringSchedule(params: SageMaker.Types.DescribeMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeMonitoringScheduleResponse) => void): Request<SageMaker.Types.DescribeMonitoringScheduleResponse, AWSError>;
@@ -629,6 +805,30 @@ declare class SageMaker extends Service {
    */
   describeNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
+   * Describes the details of a pipeline.
+   */
+  describePipeline(params: SageMaker.Types.DescribePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineResponse) => void): Request<SageMaker.Types.DescribePipelineResponse, AWSError>;
+  /**
+   * Describes the details of a pipeline.
+   */
+  describePipeline(callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineResponse) => void): Request<SageMaker.Types.DescribePipelineResponse, AWSError>;
+  /**
+   * Describes the details of an execution's pipeline definition.
+   */
+  describePipelineDefinitionForExecution(params: SageMaker.Types.DescribePipelineDefinitionForExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineDefinitionForExecutionResponse) => void): Request<SageMaker.Types.DescribePipelineDefinitionForExecutionResponse, AWSError>;
+  /**
+   * Describes the details of an execution's pipeline definition.
+   */
+  describePipelineDefinitionForExecution(callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineDefinitionForExecutionResponse) => void): Request<SageMaker.Types.DescribePipelineDefinitionForExecutionResponse, AWSError>;
+  /**
+   * Describes the details of a pipeline execution.
+   */
+  describePipelineExecution(params: SageMaker.Types.DescribePipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineExecutionResponse) => void): Request<SageMaker.Types.DescribePipelineExecutionResponse, AWSError>;
+  /**
+   * Describes the details of a pipeline execution.
+   */
+  describePipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.DescribePipelineExecutionResponse) => void): Request<SageMaker.Types.DescribePipelineExecutionResponse, AWSError>;
+  /**
    * Returns a description of a processing job.
    */
   describeProcessingJob(params: SageMaker.Types.DescribeProcessingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
@@ -636,6 +836,14 @@ declare class SageMaker extends Service {
    * Returns a description of a processing job.
    */
   describeProcessingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
+  /**
+   * Describes the details of a project.
+   */
+  describeProject(params: SageMaker.Types.DescribeProjectInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeProjectOutput) => void): Request<SageMaker.Types.DescribeProjectOutput, AWSError>;
+  /**
+   * Describes the details of a project.
+   */
+  describeProject(callback?: (err: AWSError, data: SageMaker.Types.DescribeProjectOutput) => void): Request<SageMaker.Types.DescribeProjectOutput, AWSError>;
   /**
    * Gets information about a work team provided by a vendor. It returns details about the subscription with a vendor in the AWS Marketplace.
    */
@@ -701,6 +909,14 @@ declare class SageMaker extends Service {
    */
   describeWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
   /**
+   * Disables using Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  disableSagemakerServicecatalogPortfolio(params: SageMaker.Types.DisableSagemakerServicecatalogPortfolioInput, callback?: (err: AWSError, data: SageMaker.Types.DisableSagemakerServicecatalogPortfolioOutput) => void): Request<SageMaker.Types.DisableSagemakerServicecatalogPortfolioOutput, AWSError>;
+  /**
+   * Disables using Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  disableSagemakerServicecatalogPortfolio(callback?: (err: AWSError, data: SageMaker.Types.DisableSagemakerServicecatalogPortfolioOutput) => void): Request<SageMaker.Types.DisableSagemakerServicecatalogPortfolioOutput, AWSError>;
+  /**
    * Disassociates a trial component from a trial. This doesn't effect other trials the component is associated with. Before you can delete a component, you must disassociate the component from all trials it is associated with. To associate a trial component with a trial, call the AssociateTrialComponent API. To get a list of the trials a component is associated with, use the Search API. Specify ExperimentTrialComponent for the Resource parameter. The list appears in the response under Results.TrialComponent.Parents.
    */
   disassociateTrialComponent(params: SageMaker.Types.DisassociateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.DisassociateTrialComponentResponse) => void): Request<SageMaker.Types.DisassociateTrialComponentResponse, AWSError>;
@@ -709,6 +925,30 @@ declare class SageMaker extends Service {
    */
   disassociateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.DisassociateTrialComponentResponse) => void): Request<SageMaker.Types.DisassociateTrialComponentResponse, AWSError>;
   /**
+   * Enables using Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  enableSagemakerServicecatalogPortfolio(params: SageMaker.Types.EnableSagemakerServicecatalogPortfolioInput, callback?: (err: AWSError, data: SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput) => void): Request<SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput, AWSError>;
+  /**
+   * Enables using Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  enableSagemakerServicecatalogPortfolio(callback?: (err: AWSError, data: SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput) => void): Request<SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput, AWSError>;
+  /**
+   * Gets a resource policy that manages access for a model group. For information about resource policies, see Identity-based policies and resource-based policies in the AWS Identity and Access Management User Guide..
+   */
+  getModelPackageGroupPolicy(params: SageMaker.Types.GetModelPackageGroupPolicyInput, callback?: (err: AWSError, data: SageMaker.Types.GetModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.GetModelPackageGroupPolicyOutput, AWSError>;
+  /**
+   * Gets a resource policy that manages access for a model group. For information about resource policies, see Identity-based policies and resource-based policies in the AWS Identity and Access Management User Guide..
+   */
+  getModelPackageGroupPolicy(callback?: (err: AWSError, data: SageMaker.Types.GetModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.GetModelPackageGroupPolicyOutput, AWSError>;
+  /**
+   * Gets the status of Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  getSagemakerServicecatalogPortfolioStatus(params: SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusInput, callback?: (err: AWSError, data: SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput) => void): Request<SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput, AWSError>;
+  /**
+   * Gets the status of Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
+   */
+  getSagemakerServicecatalogPortfolioStatus(callback?: (err: AWSError, data: SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput) => void): Request<SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput, AWSError>;
+  /**
    * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(params: SageMaker.Types.GetSearchSuggestionsRequest, callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
@@ -716,6 +956,14 @@ declare class SageMaker extends Service {
    * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
+  /**
+   * Lists the actions in your account and their properties.
+   */
+  listActions(params: SageMaker.Types.ListActionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListActionsResponse) => void): Request<SageMaker.Types.ListActionsResponse, AWSError>;
+  /**
+   * Lists the actions in your account and their properties.
+   */
+  listActions(callback?: (err: AWSError, data: SageMaker.Types.ListActionsResponse) => void): Request<SageMaker.Types.ListActionsResponse, AWSError>;
   /**
    * Lists the machine learning algorithms that have been created.
    */
@@ -740,6 +988,22 @@ declare class SageMaker extends Service {
    * Lists apps.
    */
   listApps(callback?: (err: AWSError, data: SageMaker.Types.ListAppsResponse) => void): Request<SageMaker.Types.ListAppsResponse, AWSError>;
+  /**
+   * Lists the artifacts in your account and their properties.
+   */
+  listArtifacts(params: SageMaker.Types.ListArtifactsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListArtifactsResponse) => void): Request<SageMaker.Types.ListArtifactsResponse, AWSError>;
+  /**
+   * Lists the artifacts in your account and their properties.
+   */
+  listArtifacts(callback?: (err: AWSError, data: SageMaker.Types.ListArtifactsResponse) => void): Request<SageMaker.Types.ListArtifactsResponse, AWSError>;
+  /**
+   * Lists the associations in your account and their properties.
+   */
+  listAssociations(params: SageMaker.Types.ListAssociationsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAssociationsResponse) => void): Request<SageMaker.Types.ListAssociationsResponse, AWSError>;
+  /**
+   * Lists the associations in your account and their properties.
+   */
+  listAssociations(callback?: (err: AWSError, data: SageMaker.Types.ListAssociationsResponse) => void): Request<SageMaker.Types.ListAssociationsResponse, AWSError>;
   /**
    * Request a list of jobs.
    */
@@ -773,6 +1037,14 @@ declare class SageMaker extends Service {
    */
   listCompilationJobs(callback?: (err: AWSError, data: SageMaker.Types.ListCompilationJobsResponse) => void): Request<SageMaker.Types.ListCompilationJobsResponse, AWSError>;
   /**
+   * Lists the contexts in your account and their properties.
+   */
+  listContexts(params: SageMaker.Types.ListContextsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListContextsResponse) => void): Request<SageMaker.Types.ListContextsResponse, AWSError>;
+  /**
+   * Lists the contexts in your account and their properties.
+   */
+  listContexts(callback?: (err: AWSError, data: SageMaker.Types.ListContextsResponse) => void): Request<SageMaker.Types.ListContextsResponse, AWSError>;
+  /**
    * Lists the domains.
    */
   listDomains(params: SageMaker.Types.ListDomainsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
@@ -804,6 +1076,14 @@ declare class SageMaker extends Service {
    * Lists all the experiments in your account. The list can be filtered to show only experiments that were created in a specific time range. The list can be sorted by experiment name or creation time.
    */
   listExperiments(callback?: (err: AWSError, data: SageMaker.Types.ListExperimentsResponse) => void): Request<SageMaker.Types.ListExperimentsResponse, AWSError>;
+  /**
+   * List FeatureGroups based on given filter and order.
+   */
+  listFeatureGroups(params: SageMaker.Types.ListFeatureGroupsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListFeatureGroupsResponse) => void): Request<SageMaker.Types.ListFeatureGroupsResponse, AWSError>;
+  /**
+   * List FeatureGroups based on given filter and order.
+   */
+  listFeatureGroups(callback?: (err: AWSError, data: SageMaker.Types.ListFeatureGroupsResponse) => void): Request<SageMaker.Types.ListFeatureGroupsResponse, AWSError>;
   /**
    * Returns information about the flow definitions in your account.
    */
@@ -861,6 +1141,14 @@ declare class SageMaker extends Service {
    */
   listLabelingJobsForWorkteam(callback?: (err: AWSError, data: SageMaker.Types.ListLabelingJobsForWorkteamResponse) => void): Request<SageMaker.Types.ListLabelingJobsForWorkteamResponse, AWSError>;
   /**
+   * Gets a list of the model groups in your AWS account.
+   */
+  listModelPackageGroups(params: SageMaker.Types.ListModelPackageGroupsInput, callback?: (err: AWSError, data: SageMaker.Types.ListModelPackageGroupsOutput) => void): Request<SageMaker.Types.ListModelPackageGroupsOutput, AWSError>;
+  /**
+   * Gets a list of the model groups in your AWS account.
+   */
+  listModelPackageGroups(callback?: (err: AWSError, data: SageMaker.Types.ListModelPackageGroupsOutput) => void): Request<SageMaker.Types.ListModelPackageGroupsOutput, AWSError>;
+  /**
    * Lists the model packages that have been created.
    */
   listModelPackages(params: SageMaker.Types.ListModelPackagesInput, callback?: (err: AWSError, data: SageMaker.Types.ListModelPackagesOutput) => void): Request<SageMaker.Types.ListModelPackagesOutput, AWSError>;
@@ -909,6 +1197,38 @@ declare class SageMaker extends Service {
    */
   listNotebookInstances(callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstancesOutput) => void): Request<SageMaker.Types.ListNotebookInstancesOutput, AWSError>;
   /**
+   * Gets a list of PipeLineExecutionStep objects.
+   */
+  listPipelineExecutionSteps(params: SageMaker.Types.ListPipelineExecutionStepsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListPipelineExecutionStepsResponse) => void): Request<SageMaker.Types.ListPipelineExecutionStepsResponse, AWSError>;
+  /**
+   * Gets a list of PipeLineExecutionStep objects.
+   */
+  listPipelineExecutionSteps(callback?: (err: AWSError, data: SageMaker.Types.ListPipelineExecutionStepsResponse) => void): Request<SageMaker.Types.ListPipelineExecutionStepsResponse, AWSError>;
+  /**
+   * Gets a list of the pipeline executions.
+   */
+  listPipelineExecutions(params: SageMaker.Types.ListPipelineExecutionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListPipelineExecutionsResponse) => void): Request<SageMaker.Types.ListPipelineExecutionsResponse, AWSError>;
+  /**
+   * Gets a list of the pipeline executions.
+   */
+  listPipelineExecutions(callback?: (err: AWSError, data: SageMaker.Types.ListPipelineExecutionsResponse) => void): Request<SageMaker.Types.ListPipelineExecutionsResponse, AWSError>;
+  /**
+   * Gets a list of parameters for a pipeline execution.
+   */
+  listPipelineParametersForExecution(params: SageMaker.Types.ListPipelineParametersForExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.ListPipelineParametersForExecutionResponse) => void): Request<SageMaker.Types.ListPipelineParametersForExecutionResponse, AWSError>;
+  /**
+   * Gets a list of parameters for a pipeline execution.
+   */
+  listPipelineParametersForExecution(callback?: (err: AWSError, data: SageMaker.Types.ListPipelineParametersForExecutionResponse) => void): Request<SageMaker.Types.ListPipelineParametersForExecutionResponse, AWSError>;
+  /**
+   * Gets a list of pipelines.
+   */
+  listPipelines(params: SageMaker.Types.ListPipelinesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListPipelinesResponse) => void): Request<SageMaker.Types.ListPipelinesResponse, AWSError>;
+  /**
+   * Gets a list of pipelines.
+   */
+  listPipelines(callback?: (err: AWSError, data: SageMaker.Types.ListPipelinesResponse) => void): Request<SageMaker.Types.ListPipelinesResponse, AWSError>;
+  /**
    * Lists processing jobs that satisfy various filters.
    */
   listProcessingJobs(params: SageMaker.Types.ListProcessingJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListProcessingJobsResponse) => void): Request<SageMaker.Types.ListProcessingJobsResponse, AWSError>;
@@ -916,6 +1236,14 @@ declare class SageMaker extends Service {
    * Lists processing jobs that satisfy various filters.
    */
   listProcessingJobs(callback?: (err: AWSError, data: SageMaker.Types.ListProcessingJobsResponse) => void): Request<SageMaker.Types.ListProcessingJobsResponse, AWSError>;
+  /**
+   * Gets a list of the projects in an AWS account.
+   */
+  listProjects(params: SageMaker.Types.ListProjectsInput, callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
+  /**
+   * Gets a list of the projects in an AWS account.
+   */
+  listProjects(callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
   /**
    * Gets a list of the work teams that you are subscribed to in the AWS Marketplace. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
@@ -997,6 +1325,14 @@ declare class SageMaker extends Service {
    */
   listWorkteams(callback?: (err: AWSError, data: SageMaker.Types.ListWorkteamsResponse) => void): Request<SageMaker.Types.ListWorkteamsResponse, AWSError>;
   /**
+   * Adds a resouce policy to control access to a model group. For information about resoure policies, see Identity-based policies and resource-based policies in the AWS Identity and Access Management User Guide..
+   */
+  putModelPackageGroupPolicy(params: SageMaker.Types.PutModelPackageGroupPolicyInput, callback?: (err: AWSError, data: SageMaker.Types.PutModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.PutModelPackageGroupPolicyOutput, AWSError>;
+  /**
+   * Adds a resouce policy to control access to a model group. For information about resoure policies, see Identity-based policies and resource-based policies in the AWS Identity and Access Management User Guide..
+   */
+  putModelPackageGroupPolicy(callback?: (err: AWSError, data: SageMaker.Types.PutModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.PutModelPackageGroupPolicyOutput, AWSError>;
+  /**
    * Renders the UI template so that you can preview the worker's experience. 
    */
   renderUiTemplate(params: SageMaker.Types.RenderUiTemplateRequest, callback?: (err: AWSError, data: SageMaker.Types.RenderUiTemplateResponse) => void): Request<SageMaker.Types.RenderUiTemplateResponse, AWSError>;
@@ -1028,6 +1364,14 @@ declare class SageMaker extends Service {
    * Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to InService. A notebook instance's status must be InService before you can connect to your Jupyter notebook. 
    */
   startNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a pipeline execution.
+   */
+  startPipelineExecution(params: SageMaker.Types.StartPipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.StartPipelineExecutionResponse) => void): Request<SageMaker.Types.StartPipelineExecutionResponse, AWSError>;
+  /**
+   * Starts a pipeline execution.
+   */
+  startPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.StartPipelineExecutionResponse) => void): Request<SageMaker.Types.StartPipelineExecutionResponse, AWSError>;
   /**
    * A method for forcing the termination of a running job.
    */
@@ -1077,6 +1421,14 @@ declare class SageMaker extends Service {
    */
   stopNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Stops a pipeline execution.
+   */
+  stopPipelineExecution(params: SageMaker.Types.StopPipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
+  /**
+   * Stops a pipeline execution.
+   */
+  stopPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
+  /**
    * Stops a processing job.
    */
   stopProcessingJob(params: SageMaker.Types.StopProcessingJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1101,6 +1453,14 @@ declare class SageMaker extends Service {
    */
   stopTransformJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates an action.
+   */
+  updateAction(params: SageMaker.Types.UpdateActionRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateActionResponse) => void): Request<SageMaker.Types.UpdateActionResponse, AWSError>;
+  /**
+   * Updates an action.
+   */
+  updateAction(callback?: (err: AWSError, data: SageMaker.Types.UpdateActionResponse) => void): Request<SageMaker.Types.UpdateActionResponse, AWSError>;
+  /**
    * Updates the properties of an AppImageConfig.
    */
   updateAppImageConfig(params: SageMaker.Types.UpdateAppImageConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateAppImageConfigResponse) => void): Request<SageMaker.Types.UpdateAppImageConfigResponse, AWSError>;
@@ -1109,6 +1469,14 @@ declare class SageMaker extends Service {
    */
   updateAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateAppImageConfigResponse) => void): Request<SageMaker.Types.UpdateAppImageConfigResponse, AWSError>;
   /**
+   * Updates an artifact.
+   */
+  updateArtifact(params: SageMaker.Types.UpdateArtifactRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateArtifactResponse) => void): Request<SageMaker.Types.UpdateArtifactResponse, AWSError>;
+  /**
+   * Updates an artifact.
+   */
+  updateArtifact(callback?: (err: AWSError, data: SageMaker.Types.UpdateArtifactResponse) => void): Request<SageMaker.Types.UpdateArtifactResponse, AWSError>;
+  /**
    * Updates the specified Git repository with the specified values.
    */
   updateCodeRepository(params: SageMaker.Types.UpdateCodeRepositoryInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateCodeRepositoryOutput) => void): Request<SageMaker.Types.UpdateCodeRepositoryOutput, AWSError>;
@@ -1116,6 +1484,14 @@ declare class SageMaker extends Service {
    * Updates the specified Git repository with the specified values.
    */
   updateCodeRepository(callback?: (err: AWSError, data: SageMaker.Types.UpdateCodeRepositoryOutput) => void): Request<SageMaker.Types.UpdateCodeRepositoryOutput, AWSError>;
+  /**
+   * Updates a context.
+   */
+  updateContext(params: SageMaker.Types.UpdateContextRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateContextResponse) => void): Request<SageMaker.Types.UpdateContextResponse, AWSError>;
+  /**
+   * Updates a context.
+   */
+  updateContext(callback?: (err: AWSError, data: SageMaker.Types.UpdateContextResponse) => void): Request<SageMaker.Types.UpdateContextResponse, AWSError>;
   /**
    * Updates the default settings for new user profiles in the domain.
    */
@@ -1157,6 +1533,14 @@ declare class SageMaker extends Service {
    */
   updateImage(callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
   /**
+   * Updates a versioned model.
+   */
+  updateModelPackage(params: SageMaker.Types.UpdateModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateModelPackageOutput) => void): Request<SageMaker.Types.UpdateModelPackageOutput, AWSError>;
+  /**
+   * Updates a versioned model.
+   */
+  updateModelPackage(callback?: (err: AWSError, data: SageMaker.Types.UpdateModelPackageOutput) => void): Request<SageMaker.Types.UpdateModelPackageOutput, AWSError>;
+  /**
    * Updates a previously created schedule.
    */
   updateMonitoringSchedule(params: SageMaker.Types.UpdateMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateMonitoringScheduleResponse) => void): Request<SageMaker.Types.UpdateMonitoringScheduleResponse, AWSError>;
@@ -1180,6 +1564,22 @@ declare class SageMaker extends Service {
    * Updates a notebook instance lifecycle configuration created with the CreateNotebookInstanceLifecycleConfig API.
    */
   updateNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Updates a pipeline.
+   */
+  updatePipeline(params: SageMaker.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineResponse) => void): Request<SageMaker.Types.UpdatePipelineResponse, AWSError>;
+  /**
+   * Updates a pipeline.
+   */
+  updatePipeline(callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineResponse) => void): Request<SageMaker.Types.UpdatePipelineResponse, AWSError>;
+  /**
+   * Updates a pipeline execution.
+   */
+  updatePipelineExecution(params: SageMaker.Types.UpdatePipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineExecutionResponse) => void): Request<SageMaker.Types.UpdatePipelineExecutionResponse, AWSError>;
+  /**
+   * Updates a pipeline execution.
+   */
+  updatePipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineExecutionResponse) => void): Request<SageMaker.Types.UpdatePipelineExecutionResponse, AWSError>;
   /**
    * Updates the display name of a trial.
    */
@@ -1288,13 +1688,84 @@ declare class SageMaker extends Service {
 declare namespace SageMaker {
   export type Accept = string;
   export type AccountId = string;
+  export type ActionArn = string;
+  export interface ActionSource {
+    /**
+     * The URI of the source.
+     */
+    SourceUri: String2048;
+    /**
+     * The type of the source.
+     */
+    SourceType?: String256;
+    /**
+     * The ID of the source.
+     */
+    SourceId?: String256;
+  }
+  export type ActionStatus = "Unknown"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export type ActionSummaries = ActionSummary[];
+  export interface ActionSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    ActionArn?: ActionArn;
+    /**
+     * The name of the action.
+     */
+    ActionName?: ExperimentEntityName;
+    /**
+     * The source of the action.
+     */
+    Source?: ActionSource;
+    /**
+     * The type of the action.
+     */
+    ActionType?: String64;
+    /**
+     * The status of the action.
+     */
+    Status?: ActionStatus;
+    /**
+     * When the action was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the action was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface AddAssociationRequest {
+    /**
+     * The ARN of the source.
+     */
+    SourceArn: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
+    DestinationArn: AssociationEntityArn;
+    /**
+     * The type of association. The following are suggested uses for each type. Amazon SageMaker places no restrictions on their use.   ContributedTo - The source contributed to the destination or had a part in enabling the destination. For example, the training data contributed to the training job.   AssociatedWith - The source is connected to the destination. For example, an approval workflow is associated with a model deployment.   DerivedFrom - The destination is a modification of the source. For example, a digest output of a channel input for a processing job is derived from the original inputs.   Produced - The source generated the destination. For example, a training job produced a model artifact.  
+     */
+    AssociationType?: AssociationEdgeType;
+  }
+  export interface AddAssociationResponse {
+    /**
+     * The ARN of the source.
+     */
+    SourceArn?: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
+    DestinationArn?: AssociationEntityArn;
+  }
   export interface AddTagsInput {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to tag.
      */
     ResourceArn: ResourceArn;
     /**
-     * An array of Tag objects. Each tag is a key-value pair. Only the key parameter is required. If you don't specify a value, Amazon SageMaker sets the value to an empty string. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags: TagList;
   }
@@ -1305,6 +1776,14 @@ declare namespace SageMaker {
     Tags?: TagList;
   }
   export type AdditionalCodeRepositoryNamesOrUrls = CodeRepositoryNameOrUrl[];
+  export interface Alarm {
+    /**
+     * 
+     */
+    AlarmName?: AlarmName;
+  }
+  export type AlarmList = Alarm[];
+  export type AlarmName = string;
   export type AlgorithmArn = string;
   export type AlgorithmImage = string;
   export type AlgorithmSortBy = "Name"|"CreationTime"|string;
@@ -1465,6 +1944,7 @@ declare namespace SageMaker {
   export type AppImageConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
   export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|string;
   export type AppList = AppDetails[];
+  export type AppManaged = boolean;
   export type AppName = string;
   export type AppNetworkAccessType = "PublicInternetOnly"|"VpcOnly"|string;
   export type AppSortKey = "CreationTime"|string;
@@ -1484,7 +1964,59 @@ declare namespace SageMaker {
   }
   export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
   export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|string;
+  export type ApprovalDescription = string;
   export type ArnOrName = string;
+  export type ArtifactArn = string;
+  export type ArtifactDigest = string;
+  export interface ArtifactSource {
+    /**
+     * The URI of the source.
+     */
+    SourceUri: String2048;
+    /**
+     * A list of source types.
+     */
+    SourceTypes?: ArtifactSourceTypes;
+  }
+  export type ArtifactSourceIdType = "MD5Hash"|"S3ETag"|"S3Version"|"Custom"|string;
+  export interface ArtifactSourceType {
+    /**
+     * The type of ID.
+     */
+    SourceIdType: ArtifactSourceIdType;
+    /**
+     * The ID.
+     */
+    Value: String256;
+  }
+  export type ArtifactSourceTypes = ArtifactSourceType[];
+  export type ArtifactSummaries = ArtifactSummary[];
+  export interface ArtifactSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact.
+     */
+    ArtifactArn?: ArtifactArn;
+    /**
+     * The name of the artifact.
+     */
+    ArtifactName?: ExperimentEntityName;
+    /**
+     * The source of the artifact.
+     */
+    Source?: ArtifactSource;
+    /**
+     * The type of the artifact.
+     */
+    ArtifactType?: String256;
+    /**
+     * When the artifact was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the artifact was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
   export type AssemblyType = "None"|"Line"|string;
   export interface AssociateTrialComponentRequest {
     /**
@@ -1506,6 +2038,66 @@ declare namespace SageMaker {
      */
     TrialArn?: TrialArn;
   }
+  export type AssociationEdgeType = "ContributedTo"|"AssociatedWith"|"DerivedFrom"|"Produced"|string;
+  export type AssociationEntityArn = string;
+  export type AssociationSummaries = AssociationSummary[];
+  export interface AssociationSummary {
+    /**
+     * The ARN of the source.
+     */
+    SourceArn?: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
+    DestinationArn?: AssociationEntityArn;
+    /**
+     * The source type.
+     */
+    SourceType?: String256;
+    /**
+     * The destination type.
+     */
+    DestinationType?: String256;
+    /**
+     * The type of the association.
+     */
+    AssociationType?: AssociationEdgeType;
+    /**
+     * The name of the source.
+     */
+    SourceName?: ExperimentEntityName;
+    /**
+     * The name of the destination.
+     */
+    DestinationName?: ExperimentEntityName;
+    /**
+     * When the association was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+  }
+  export type AthenaCatalog = string;
+  export type AthenaDatabase = string;
+  export interface AthenaDatasetDefinition {
+    Catalog: AthenaCatalog;
+    Database: AthenaDatabase;
+    QueryString: AthenaQueryString;
+    WorkGroup?: AthenaWorkGroup;
+    /**
+     * The location in Amazon S3 where Athena query results are stored.
+     */
+    OutputS3Uri: S3Uri;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data generated from an Athena query execution.
+     */
+    KmsKeyId?: KmsKeyId;
+    OutputFormat: AthenaResultFormat;
+    OutputCompression?: AthenaResultCompressionType;
+  }
+  export type AthenaQueryString = string;
+  export type AthenaResultCompressionType = "GZIP"|"SNAPPY"|"ZLIB"|string;
+  export type AthenaResultFormat = "PARQUET"|"ORC"|"AVRO"|"JSON"|"TEXTFILE"|string;
+  export type AthenaWorkGroup = string;
   export type AttributeName = string;
   export type AttributeNames = AttributeName[];
   export type AuthMode = "SSO"|"IAM"|string;
@@ -1720,12 +2312,45 @@ declare namespace SageMaker {
   }
   export type AutoMLSortBy = "Name"|"CreationTime"|"Status"|string;
   export type AutoMLSortOrder = "Ascending"|"Descending"|string;
+  export interface AutoRollbackConfig {
+    /**
+     * 
+     */
+    Alarms?: AlarmList;
+  }
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
   export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
+  export interface Bias {
+    /**
+     * The bias report for a model
+     */
+    Report?: MetricsSource;
+  }
   export type BillableTimeInSeconds = number;
+  export type BlockedReason = string;
+  export interface BlueGreenUpdatePolicy {
+    /**
+     * 
+     */
+    TrafficRoutingConfiguration: TrafficRoutingConfig;
+    /**
+     * 
+     */
+    TerminationWaitInSeconds?: TerminationWaitInSeconds;
+    /**
+     * 
+     */
+    MaximumExecutionTimeoutInSeconds?: MaximumExecutionTimeoutInSeconds;
+  }
   export type Boolean = boolean;
   export type BooleanOperator = "And"|"Or"|string;
   export type Branch = string;
+  export interface CacheHitResult {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    SourcePipelineExecutionArn?: PipelineExecutionArn;
+  }
   export type CandidateDefinitionNotebookLocation = string;
   export type CandidateName = string;
   export type CandidateSortBy = "CreationTime"|"Status"|"FinalObjectiveMetricValue"|string;
@@ -1734,6 +2359,18 @@ declare namespace SageMaker {
   export type CandidateStepName = string;
   export type CandidateStepType = "AWS::SageMaker::TrainingJob"|"AWS::SageMaker::TransformJob"|"AWS::SageMaker::ProcessingJob"|string;
   export type CandidateSteps = AutoMLCandidateStep[];
+  export interface CapacitySize {
+    /**
+     * This API is not supported.
+     */
+    Type: CapacitySizeType;
+    /**
+     * 
+     */
+    Value: CapacitySizeValue;
+  }
+  export type CapacitySizeType = "INSTANCE_COUNT"|"CAPACITY_PERCENT"|string;
+  export type CapacitySizeValue = number;
   export interface CaptureContentTypeHeader {
     /**
      * 
@@ -1753,6 +2390,7 @@ declare namespace SageMaker {
   }
   export type CaptureOptionList = CaptureOption[];
   export type CaptureStatus = "Started"|"Stopped"|string;
+  export type Catalog = string;
   export interface CategoricalParameterRange {
     /**
      * The name of the categorical hyperparameter to tune.
@@ -1965,6 +2603,13 @@ declare namespace SageMaker {
   export type CompilerOptions = string;
   export type CompressionType = "None"|"Gzip"|string;
   export type CompressionTypes = CompressionType[];
+  export type ConditionOutcome = "True"|"False"|string;
+  export interface ConditionStepMetadata {
+    /**
+     * The outcome of the Condition step evaluation.
+     */
+    Outcome?: ConditionOutcome;
+  }
   export type ConfigKey = string;
   export type ConfigValue = string;
   export type ContainerArgument = string;
@@ -2007,8 +2652,51 @@ declare namespace SageMaker {
   export type ContainerMode = "SingleModel"|"MultiModel"|string;
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
   export type ContentClassifiers = ContentClassifier[];
+  export type ContentDigest = string;
   export type ContentType = string;
   export type ContentTypes = ContentType[];
+  export type ContextArn = string;
+  export interface ContextSource {
+    /**
+     * The URI of the source.
+     */
+    SourceUri: String2048;
+    /**
+     * The type of the source.
+     */
+    SourceType?: String256;
+    /**
+     * The ID of the source.
+     */
+    SourceId?: String256;
+  }
+  export type ContextSummaries = ContextSummary[];
+  export interface ContextSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the context.
+     */
+    ContextArn?: ContextArn;
+    /**
+     * The name of the context.
+     */
+    ContextName?: ExperimentEntityName;
+    /**
+     * The source of the context.
+     */
+    Source?: ContextSource;
+    /**
+     * The type of the context.
+     */
+    ContextType?: String256;
+    /**
+     * When the context was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the context was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
   export interface ContinuousParameterRange {
     /**
      * The name of the continuous hyperparameter to tune.
@@ -2038,6 +2726,43 @@ declare namespace SageMaker {
     MaxValue: ParameterValue;
   }
   export type ContinuousParameterRanges = ContinuousParameterRange[];
+  export interface CreateActionRequest {
+    /**
+     * The name of the action. Must be unique to your account in an AWS Region.
+     */
+    ActionName: ExperimentEntityName;
+    /**
+     * The source type, ID, and URI.
+     */
+    Source: ActionSource;
+    /**
+     * The action type.
+     */
+    ActionType: String256;
+    /**
+     * The description of the action.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * The status of the action.
+     */
+    Status?: ActionStatus;
+    /**
+     * A list of properties to add to the action.
+     */
+    Properties?: LineageEntityParameters;
+    MetadataProperties?: MetadataProperties;
+    /**
+     * A list of tags to apply to the action.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateActionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    ActionArn?: ActionArn;
+  }
   export interface CreateAlgorithmInput {
     /**
      * The name of the algorithm.
@@ -2063,6 +2788,10 @@ declare namespace SageMaker {
      * Whether to certify the algorithm so that it can be listed in AWS Marketplace.
      */
     CertifyForMarketplace?: CertifyForMarketplace;
+    /**
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
+     */
+    Tags?: TagList;
   }
   export interface CreateAlgorithmOutput {
     /**
@@ -2122,6 +2851,35 @@ declare namespace SageMaker {
      */
     AppArn?: AppArn;
   }
+  export interface CreateArtifactRequest {
+    /**
+     * The name of the artifact. Must be unique to your account in an AWS Region.
+     */
+    ArtifactName?: ExperimentEntityName;
+    /**
+     * The ID, ID type, and URI of the source.
+     */
+    Source: ArtifactSource;
+    /**
+     * The artifact type.
+     */
+    ArtifactType: String256;
+    /**
+     * A list of properties to add to the artifact.
+     */
+    Properties?: LineageEntityParameters;
+    MetadataProperties?: MetadataProperties;
+    /**
+     * A list of tags to apply to the artifact.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateArtifactResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact.
+     */
+    ArtifactArn?: ArtifactArn;
+  }
   export interface CreateAutoMLJobRequest {
     /**
      * Identifies an Autopilot job. Must be unique to your account and is case-insensitive.
@@ -2175,6 +2933,10 @@ declare namespace SageMaker {
      * Specifies details about the repository, including the URL where the repository is located, the default branch, and credentials to use to access the repository.
      */
     GitConfig: GitConfig;
+    /**
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
+     */
+    Tags?: TagList;
   }
   export interface CreateCodeRepositoryOutput {
     /**
@@ -2204,7 +2966,7 @@ declare namespace SageMaker {
      */
     StoppingCondition: StoppingCondition;
     /**
-     * An array of key-value pairs that you want to use to organize and track your AWS resource costs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
   }
@@ -2213,6 +2975,38 @@ declare namespace SageMaker {
      * If the action is successful, the service sends back an HTTP 200 response. Amazon SageMaker returns the following data in JSON format:    CompilationJobArn: The Amazon Resource Name (ARN) of the compiled job.  
      */
     CompilationJobArn: CompilationJobArn;
+  }
+  export interface CreateContextRequest {
+    /**
+     * The name of the context. Must be unique to your account in an AWS Region.
+     */
+    ContextName: ExperimentEntityName;
+    /**
+     * The source type, ID, and URI.
+     */
+    Source: ContextSource;
+    /**
+     * The context type.
+     */
+    ContextType: String256;
+    /**
+     * The description of the context.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * A list of properties to add to the context.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * A list of tags to apply to the context.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateContextResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the context.
+     */
+    ContextArn?: ContextArn;
   }
   export interface CreateDomainRequest {
     /**
@@ -2273,7 +3067,7 @@ declare namespace SageMaker {
     ProductionVariants: ProductionVariantList;
     DataCaptureConfig?: DataCaptureConfig;
     /**
-     * A list of key-value pairs. For more information, see Using Cost Allocation Tags in the  AWS Billing and Cost Management User Guide. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
     /**
@@ -2297,7 +3091,7 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     * An array of key-value pairs. For more information, see Using Cost Allocation Tagsin the AWS Billing and Cost Management User Guide. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
   }
@@ -2330,6 +3124,50 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the experiment.
      */
     ExperimentArn?: ExperimentArn;
+  }
+  export interface CreateFeatureGroupRequest {
+    /**
+     * The name of the FeatureGroup. The name must be unique within an AWS Region in an AWS account. The name:   Must start and end with an alphanumeric character.   Can only contain alphanumeric character and hyphens. Spaces are not allowed.   
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The name of the Feature whose value uniquely identifies a Record defined in the FeatureStore. Only the latest record per identifier value will be stored in the OnlineStore. RecordIdentifierFeatureName must be one of feature definitions' names. You use the RecordIdentifierFeatureName to access data in a FeatureStore. This name:   Must start and end with an alphanumeric character.   Can only contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.   
+     */
+    RecordIdentifierFeatureName: FeatureName;
+    /**
+     * The name of the feature that stores the EventTime of a Record in a FeatureGroup. An EventTime is a point in time when a new event occurs that corresponds to the creation or update of a Record in a FeatureGroup. All Records in the FeatureGroup must have a corresponding EventTime. An EventTime can be a String or Fractional.     Fractional: EventTime feature values must be a Unix timestamp in seconds.    String: EventTime feature values must be an ISO-8601 string in the format. The following formats are supported yyyy-MM-dd'T'HH:mm:ssZ and yyyy-MM-dd'T'HH:mm:ss.SSSZ where yyyy, MM, and dd represent the year, month, and day respectively and HH, mm, ss, and if applicable, SSS represent the hour, month, second and milliseconds respsectively. 'T' and Z are constants.  
+     */
+    EventTimeFeatureName: FeatureName;
+    /**
+     * A list of Feature names and types. Name and Type is compulsory per Feature.  Valid feature FeatureTypes are Integral, Fractional and String.  FeatureNames cannot be any of the following: is_deleted, write_time, api_invocation_time  You can create up to 2,500 FeatureDefinitions per FeatureGroup.
+     */
+    FeatureDefinitions: FeatureDefinitions;
+    /**
+     * You can turn the OnlineStore on or off by specifying True for the EnableOnlineStore flag in OnlineStoreConfig; the default value is False. You can also include an AWS KMS key ID (KMSKeyId) for at-rest encryption of the OnlineStore.
+     */
+    OnlineStoreConfig?: OnlineStoreConfig;
+    /**
+     * Use this to configure an OfflineFeatureStore. This parameter allows you to specify:   The Amazon Simple Storage Service (Amazon S3) location of an OfflineStore.   A configuration for an AWS Glue or AWS Hive data cataolgue.    An KMS encryption key to encrypt the Amazon S3 location used for OfflineStore.   To learn more about this parameter, see OfflineStoreConfig.
+     */
+    OfflineStoreConfig?: OfflineStoreConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the OfflineStore if an OfflineStoreConfig is provided.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * A free-form description of a FeatureGroup.
+     */
+    Description?: Description;
+    /**
+     * Tags used to identify Features in each FeatureGroup.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFeatureGroupResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FeatureGroup. This is a unique identifier for the feature group. 
+     */
+    FeatureGroupArn: FeatureGroupArn;
   }
   export interface CreateFlowDefinitionRequest {
     /**
@@ -2406,7 +3244,7 @@ declare namespace SageMaker {
      */
     WarmStartConfig?: HyperParameterTuningJobWarmStartConfig;
     /**
-     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see AWS Tagging Strategies. Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources. Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.
      */
     Tags?: TagList;
   }
@@ -2530,7 +3368,7 @@ declare namespace SageMaker {
      */
     ExecutionRoleArn: RoleArn;
     /**
-     * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
     /**
@@ -2548,11 +3386,35 @@ declare namespace SageMaker {
      */
     ModelArn: ModelArn;
   }
+  export interface CreateModelPackageGroupInput {
+    /**
+     * The name of the model group.
+     */
+    ModelPackageGroupName: EntityName;
+    /**
+     * A description for the model group.
+     */
+    ModelPackageGroupDescription?: EntityDescription;
+    /**
+     * A list of key value pairs associated with the model group. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateModelPackageGroupOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the model group.
+     */
+    ModelPackageGroupArn: ModelPackageGroupArn;
+  }
   export interface CreateModelPackageInput {
     /**
-     * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+     * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen). This parameter is required for unversioned models. It is not applicable to versioned models.
      */
     ModelPackageName?: EntityName;
+    /**
+     * The name of the model group that this model version belongs to. This parameter is required for versioned models, and does not apply to unversioned models.
+     */
+    ModelPackageGroupName?: EntityName;
     /**
      * A description of the model package.
      */
@@ -2570,9 +3432,26 @@ declare namespace SageMaker {
      */
     SourceAlgorithmSpecification?: SourceAlgorithmSpecification;
     /**
-     * Whether to certify the model package for listing on AWS Marketplace.
+     * Whether to certify the model package for listing on AWS Marketplace. This parameter is optional for unversioned models, and does not apply to versioned models.
      */
     CertifyForMarketplace?: CertifyForMarketplace;
+    /**
+     * A list of key value pairs associated with the model. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+    /**
+     * Whether the model is approved for deployment. This parameter is optional for versioned models, and does not apply to unversioned models. For versioned models, the value of this parameter must be set to Approved to deploy the model.
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
+    MetadataProperties?: MetadataProperties;
+    /**
+     * A structure that contains model metrics reports.
+     */
+    ModelMetrics?: ModelMetrics;
+    /**
+     * A unique token that guarantees that the call to this API is idempotent.
+     */
+    ClientToken?: ClientToken;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -2626,7 +3505,7 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * A list of tags to associate with the notebook instance. You can add tags later by using the CreateTags API.
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
     /**
@@ -2684,6 +3563,42 @@ declare namespace SageMaker {
      */
     NotebookInstanceArn?: NotebookInstanceArn;
   }
+  export interface CreatePipelineRequest {
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName: PipelineName;
+    /**
+     * The display name of the pipeline.
+     */
+    PipelineDisplayName?: PipelineName;
+    /**
+     * The JSON pipeline definition of the pipeline.
+     */
+    PipelineDefinition: PipelineDefinition;
+    /**
+     * A description of the pipeline.
+     */
+    PipelineDescription?: PipelineDescription;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken: IdempotencyToken;
+    /**
+     * The Amazon Resource Name (ARN) of the role used by the pipeline to access and create resources.
+     */
+    RoleArn: RoleArn;
+    /**
+     * A list of tags to apply to the created pipeline.
+     */
+    Tags?: TagList;
+  }
+  export interface CreatePipelineResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the created pipeline.
+     */
+    PipelineArn?: PipelineArn;
+  }
   export interface CreatePresignedDomainUrlRequest {
     /**
      * The domain ID.
@@ -2722,7 +3637,7 @@ declare namespace SageMaker {
   }
   export interface CreateProcessingJobRequest {
     /**
-     * For each input, data is downloaded from S3 into the processing container before the processing job begins running if "S3InputMode" is set to File.
+     * List of input configurations for the processing job.
      */
     ProcessingInputs?: ProcessingInputs;
     /**
@@ -2769,6 +3684,34 @@ declare namespace SageMaker {
      */
     ProcessingJobArn: ProcessingJobArn;
   }
+  export interface CreateProjectInput {
+    /**
+     * The name of the project.
+     */
+    ProjectName: ProjectEntityName;
+    /**
+     * A description for the project.
+     */
+    ProjectDescription?: EntityDescription;
+    /**
+     * The product ID and provisioning artifact ID to provision a service catalog. For information, see What is AWS Service Catalog.
+     */
+    ServiceCatalogProvisioningDetails: ServiceCatalogProvisioningDetails;
+    /**
+     * An array of key-value pairs that you want to use to organize and track your AWS resource costs. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateProjectOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the project.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * The ID of the new project.
+     */
+    ProjectId: ProjectId;
+  }
   export interface CreateTrainingJobRequest {
     /**
      * The name of the training job. The name must be unique within an AWS Region in an AWS account. 
@@ -2807,7 +3750,7 @@ declare namespace SageMaker {
      */
     StoppingCondition: StoppingCondition;
     /**
-     * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
     /**
@@ -2930,6 +3873,7 @@ declare namespace SageMaker {
      * The output artifacts for the component. Examples of output artifacts are metrics, snapshots, logs, and images.
      */
     OutputArtifacts?: TrialComponentArtifacts;
+    MetadataProperties?: MetadataProperties;
     /**
      * A list of tags to associate with the component. You can use Search API to search on the tags.
      */
@@ -2954,6 +3898,7 @@ declare namespace SageMaker {
      * The name of the experiment to associate the trial with.
      */
     ExperimentName: ExperimentEntityName;
+    MetadataProperties?: MetadataProperties;
     /**
      * A list of tags to associate with the trial. You can use Search API to search on the tags.
      */
@@ -3120,6 +4065,21 @@ declare namespace SageMaker {
      */
     KmsKeyId: KmsKeyId;
   }
+  export interface DataCatalogConfig {
+    /**
+     * The name of the Glue table.
+     */
+    TableName: TableName;
+    /**
+     * The name of the Glue table catalog.
+     */
+    Catalog: Catalog;
+    /**
+     * The name of the Glue table database.
+     */
+    Database: Database;
+  }
+  export type DataDistributionType = "FullyReplicated"|"ShardedByS3Key"|string;
   export type DataExplorationNotebookLocation = string;
   export type DataInputConfig = string;
   export interface DataProcessing {
@@ -3145,6 +4105,23 @@ declare namespace SageMaker {
      * The file system that is associated with a channel.
      */
     FileSystemDataSource?: FileSystemDataSource;
+  }
+  export type Database = string;
+  export interface DatasetDefinition {
+    AthenaDatasetDefinition?: AthenaDatasetDefinition;
+    RedshiftDatasetDefinition?: RedshiftDatasetDefinition;
+    /**
+     * The local path where you want Amazon SageMaker to download the Dataset Definition inputs to run a processing job. LocalPath is an absolute path to the input data. This is a required parameter when AppManaged is False (default).
+     */
+    LocalPath?: ProcessingLocalPath;
+    /**
+     * Whether the generated dataset is FullyReplicated or ShardedByS3Key (default).
+     */
+    DataDistributionType?: DataDistributionType;
+    /**
+     * Whether to use File or Pipe input mode. In File (default) mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.
+     */
+    InputMode?: InputMode;
   }
   export interface DebugHookConfig {
     /**
@@ -3220,6 +4197,18 @@ declare namespace SageMaker {
   export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
   export type DefaultGid = number;
   export type DefaultUid = number;
+  export interface DeleteActionRequest {
+    /**
+     * The name of the action to delete.
+     */
+    ActionName: ExperimentEntityName;
+  }
+  export interface DeleteActionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    ActionArn?: ActionArn;
+  }
   export interface DeleteAlgorithmInput {
     /**
      * The name of the algorithm to delete.
@@ -3250,11 +4239,59 @@ declare namespace SageMaker {
      */
     AppName: AppName;
   }
+  export interface DeleteArtifactRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact to delete.
+     */
+    ArtifactArn?: ArtifactArn;
+    /**
+     * The URI of the source.
+     */
+    Source?: ArtifactSource;
+  }
+  export interface DeleteArtifactResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact.
+     */
+    ArtifactArn?: ArtifactArn;
+  }
+  export interface DeleteAssociationRequest {
+    /**
+     * The ARN of the source.
+     */
+    SourceArn: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
+    DestinationArn: AssociationEntityArn;
+  }
+  export interface DeleteAssociationResponse {
+    /**
+     * The ARN of the source.
+     */
+    SourceArn?: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
+    DestinationArn?: AssociationEntityArn;
+  }
   export interface DeleteCodeRepositoryInput {
     /**
      * The name of the Git repository to delete.
      */
     CodeRepositoryName: EntityName;
+  }
+  export interface DeleteContextRequest {
+    /**
+     * The name of the context to delete.
+     */
+    ContextName: ExperimentEntityName;
+  }
+  export interface DeleteContextResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the context.
+     */
+    ContextArn?: ContextArn;
   }
   export interface DeleteDomainRequest {
     /**
@@ -3289,6 +4326,12 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the experiment that is being deleted.
      */
     ExperimentArn?: ExperimentArn;
+  }
+  export interface DeleteFeatureGroupRequest {
+    /**
+     * The name of the FeatureGroup you want to delete. The name must be unique within an AWS Region in an AWS account. 
+     */
+    FeatureGroupName: FeatureGroupName;
   }
   export interface DeleteFlowDefinitionRequest {
     /**
@@ -3332,6 +4375,18 @@ declare namespace SageMaker {
      */
     ModelName: ModelName;
   }
+  export interface DeleteModelPackageGroupInput {
+    /**
+     * The name of the model group to delete.
+     */
+    ModelPackageGroupName: ArnOrName;
+  }
+  export interface DeleteModelPackageGroupPolicyInput {
+    /**
+     * The name of the model group for which to delete the policy.
+     */
+    ModelPackageGroupName: EntityName;
+  }
   export interface DeleteModelPackageInput {
     /**
      * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -3355,6 +4410,28 @@ declare namespace SageMaker {
      * The name of the lifecycle configuration to delete.
      */
     NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+  }
+  export interface DeletePipelineRequest {
+    /**
+     * The name of the pipeline to delete.
+     */
+    PipelineName: PipelineName;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken: IdempotencyToken;
+  }
+  export interface DeletePipelineResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline to delete.
+     */
+    PipelineArn?: PipelineArn;
+  }
+  export interface DeleteProjectInput {
+    /**
+     * The name of the project to delete.
+     */
+    ProjectName: ProjectEntityName;
   }
   export interface DeleteTagsInput {
     /**
@@ -3437,6 +4514,63 @@ declare namespace SageMaker {
     ResolutionTime?: Timestamp;
   }
   export type DeployedImages = DeployedImage[];
+  export interface DeploymentConfig {
+    /**
+     * 
+     */
+    BlueGreenUpdatePolicy: BlueGreenUpdatePolicy;
+    /**
+     * 
+     */
+    AutoRollbackConfiguration?: AutoRollbackConfig;
+  }
+  export interface DescribeActionRequest {
+    /**
+     * The name of the action to describe.
+     */
+    ActionName: ExperimentEntityName;
+  }
+  export interface DescribeActionResponse {
+    /**
+     * The name of the action.
+     */
+    ActionName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    ActionArn?: ActionArn;
+    /**
+     * The source of the action.
+     */
+    Source?: ActionSource;
+    /**
+     * The type of the action.
+     */
+    ActionType?: String256;
+    /**
+     * The description of the action.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * The status of the action.
+     */
+    Status?: ActionStatus;
+    /**
+     * A list of the action's properties.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * When the action was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * When the action was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
+  }
   export interface DescribeAlgorithmInput {
     /**
      * The name of the algorithm to describe.
@@ -3580,6 +4714,45 @@ declare namespace SageMaker {
      * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     ResourceSpec?: ResourceSpec;
+  }
+  export interface DescribeArtifactRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact to describe.
+     */
+    ArtifactArn: ArtifactArn;
+  }
+  export interface DescribeArtifactResponse {
+    /**
+     * The name of the artifact.
+     */
+    ArtifactName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the artifact.
+     */
+    ArtifactArn?: ArtifactArn;
+    /**
+     * The source of the artifact.
+     */
+    Source?: ArtifactSource;
+    /**
+     * The type of the artifact.
+     */
+    ArtifactType?: String256;
+    /**
+     * A list of the artifact's properties.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * When the artifact was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * When the artifact was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
   }
   export interface DescribeAutoMLJobRequest {
     /**
@@ -3737,6 +4910,10 @@ declare namespace SageMaker {
      */
     ModelArtifacts: ModelArtifacts;
     /**
+     * Provides a BLAKE2 hash value that identifies the compiled model artifacts in Amazon S3.
+     */
+    ModelDigests?: ModelDigests;
+    /**
      * The Amazon Resource Name (ARN) of the model compilation job.
      */
     RoleArn: RoleArn;
@@ -3748,6 +4925,48 @@ declare namespace SageMaker {
      * Information about the output location for the compiled model and the target device that the model runs on.
      */
     OutputConfig: OutputConfig;
+  }
+  export interface DescribeContextRequest {
+    /**
+     * The name of the context to describe.
+     */
+    ContextName: ExperimentEntityName;
+  }
+  export interface DescribeContextResponse {
+    /**
+     * The name of the context.
+     */
+    ContextName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the context.
+     */
+    ContextArn?: ContextArn;
+    /**
+     * The source of the context.
+     */
+    Source?: ContextSource;
+    /**
+     * The type of the context.
+     */
+    ContextType?: String256;
+    /**
+     * The description of the context.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * A list of the context's properties.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * When the context was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * When the context was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
   }
   export interface DescribeDomainRequest {
     /**
@@ -3894,6 +5113,10 @@ declare namespace SageMaker {
      * A timestamp that shows when the endpoint was last modified.
      */
     LastModifiedTime: Timestamp;
+    /**
+     * The most recent deployment configuration for the endpoint.
+     */
+    LastDeploymentConfig?: DeploymentConfig;
   }
   export interface DescribeExperimentRequest {
     /**
@@ -3938,6 +5161,74 @@ declare namespace SageMaker {
      * Who last modified the experiment.
      */
     LastModifiedBy?: UserContext;
+  }
+  export interface DescribeFeatureGroupRequest {
+    /**
+     * The name of the FeatureGroup you want described. 
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * A token to resume pagination of the list of Features (FeatureDefinitions). 2,500 Features are returned by default.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeFeatureGroupResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FeatureGroup. 
+     */
+    FeatureGroupArn: FeatureGroupArn;
+    /**
+     * he name of the FeatureGroup.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The name of the Feature used for RecordIdentifier, whose value uniquely identifies a record stored in the feature store.
+     */
+    RecordIdentifierFeatureName: FeatureName;
+    /**
+     * The name of the feature that stores the EventTime of a Record in a FeatureGroup.  An EventTime is a point in time when a new event occurs that corresponds to the creation or update of a Record in a FeatureGroup. All Records in the FeatureGroup have a corresponding EventTime.
+     */
+    EventTimeFeatureName: FeatureName;
+    /**
+     * A list of the Features in the FeatureGroup. Each feature is defined by a FeatureName and FeatureType.
+     */
+    FeatureDefinitions: FeatureDefinitions;
+    /**
+     * A timestamp indicating when SageMaker created the FeatureGroup.
+     */
+    CreationTime: CreationTime;
+    /**
+     * The configuration for the OnlineStore.
+     */
+    OnlineStoreConfig?: OnlineStoreConfig;
+    /**
+     * The configuration of the OfflineStore, inducing the S3 location of the OfflineStore, AWS Glue or AWS Hive data catalogue configurations, and the security configuration.
+     */
+    OfflineStoreConfig?: OfflineStoreConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the OfflineStore if an OfflineStoreConfig is provided.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The status of the feature group.
+     */
+    FeatureGroupStatus?: FeatureGroupStatus;
+    /**
+     * The status of the OfflineStore. Notifies you if replicating data into the OfflineStore has failed. Returns either: Active or Blocked 
+     */
+    OfflineStoreStatus?: OfflineStoreStatus;
+    /**
+     * The reason that the FeatureGroup failed to be replicated in the OfflineStore. This is failure can occur because:   The FeatureGroup could not be created in the OfflineStore.   The FeatureGroup could not be deleted from the OfflineStore.  
+     */
+    FailureReason?: FailureReason;
+    /**
+     * A free form description of the feature group.
+     */
+    Description?: Description;
+    /**
+     * A token to resume pagination of the list of Features (FeatureDefinitions).
+     */
+    NextToken: NextToken;
   }
   export interface DescribeFlowDefinitionRequest {
     /**
@@ -4244,7 +5535,7 @@ declare namespace SageMaker {
      */
     HumanTaskConfig: HumanTaskConfig;
     /**
-     * An array of key/value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
     /**
@@ -4292,6 +5583,35 @@ declare namespace SageMaker {
      */
     EnableNetworkIsolation?: Boolean;
   }
+  export interface DescribeModelPackageGroupInput {
+    /**
+     * The name of the model group to describe.
+     */
+    ModelPackageGroupName: ArnOrName;
+  }
+  export interface DescribeModelPackageGroupOutput {
+    /**
+     * The name of the model group.
+     */
+    ModelPackageGroupName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model group.
+     */
+    ModelPackageGroupArn: ModelPackageGroupArn;
+    /**
+     * A description of the model group.
+     */
+    ModelPackageGroupDescription?: EntityDescription;
+    /**
+     * The time that the model group was created.
+     */
+    CreationTime: CreationTime;
+    CreatedBy: UserContext;
+    /**
+     * The status of the model group.
+     */
+    ModelPackageGroupStatus: ModelPackageGroupStatus;
+  }
   export interface DescribeModelPackageInput {
     /**
      * The name of the model package to describe.
@@ -4303,6 +5623,14 @@ declare namespace SageMaker {
      * The name of the model package being described.
      */
     ModelPackageName: EntityName;
+    /**
+     * If the model is a versioned model, the name of the model group that the versioned model belongs to.
+     */
+    ModelPackageGroupName?: EntityName;
+    /**
+     * The version of the model package.
+     */
+    ModelPackageVersion?: ModelPackageVersion;
     /**
      * The Amazon Resource Name (ARN) of the model package.
      */
@@ -4339,6 +5667,25 @@ declare namespace SageMaker {
      * Whether the model package is certified for listing on AWS Marketplace.
      */
     CertifyForMarketplace?: CertifyForMarketplace;
+    /**
+     * The approval status of the model package.
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
+    CreatedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
+    /**
+     * Metrics for the model.
+     */
+    ModelMetrics?: ModelMetrics;
+    /**
+     * The last time the model package was modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * A description provided for the model approval.
+     */
+    ApprovalDescription?: ApprovalDescription;
   }
   export interface DescribeMonitoringScheduleRequest {
     /**
@@ -4504,6 +5851,110 @@ declare namespace SageMaker {
      */
     RootAccess?: RootAccess;
   }
+  export interface DescribePipelineDefinitionForExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+  }
+  export interface DescribePipelineDefinitionForExecutionResponse {
+    /**
+     * The JSON pipeline definition.
+     */
+    PipelineDefinition?: PipelineDefinition;
+    /**
+     * The time when the pipeline was created.
+     */
+    CreationTime?: Timestamp;
+  }
+  export interface DescribePipelineExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+  }
+  export interface DescribePipelineExecutionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline.
+     */
+    PipelineArn?: PipelineArn;
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+    /**
+     * The display name of the pipeline execution.
+     */
+    PipelineExecutionDisplayName?: PipelineExecutionName;
+    /**
+     * The status of the pipeline execution.
+     */
+    PipelineExecutionStatus?: PipelineExecutionStatus;
+    /**
+     * The description of the pipeline execution.
+     */
+    PipelineExecutionDescription?: PipelineExecutionDescription;
+    /**
+     * The time when the pipeline execution was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time when the pipeline execution was modified last.
+     */
+    LastModifiedTime?: Timestamp;
+    CreatedBy?: UserContext;
+    LastModifiedBy?: UserContext;
+  }
+  export interface DescribePipelineRequest {
+    /**
+     * The name of the pipeline to describe.
+     */
+    PipelineName: PipelineName;
+  }
+  export interface DescribePipelineResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline.
+     */
+    PipelineArn?: PipelineArn;
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName?: PipelineName;
+    /**
+     * The display name of the pipeline.
+     */
+    PipelineDisplayName?: PipelineName;
+    /**
+     * The JSON pipeline definition.
+     */
+    PipelineDefinition?: PipelineDefinition;
+    /**
+     * The description of the pipeline.
+     */
+    PipelineDescription?: PipelineDescription;
+    /**
+     * The Amazon Resource Name (ARN) that the pipeline uses to execute.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The status of the pipeline execution.
+     */
+    PipelineStatus?: PipelineStatus;
+    /**
+     * The time when the pipeline was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time when the pipeline was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The time when the pipeline was last run.
+     */
+    LastRunTime?: Timestamp;
+    CreatedBy?: UserContext;
+    LastModifiedBy?: UserContext;
+  }
   export interface DescribeProcessingJobRequest {
     /**
      * The name of the processing job. The name must be unique within an AWS Region in the AWS account.
@@ -4595,6 +6046,47 @@ declare namespace SageMaker {
      * The ARN of a training job associated with this processing job.
      */
     TrainingJobArn?: TrainingJobArn;
+  }
+  export interface DescribeProjectInput {
+    /**
+     * The name of the project to describe.
+     */
+    ProjectName: ProjectEntityName;
+  }
+  export interface DescribeProjectOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the project.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * The name of the project.
+     */
+    ProjectName: ProjectEntityName;
+    /**
+     * The ID of the project.
+     */
+    ProjectId: ProjectId;
+    /**
+     * The description of the project.
+     */
+    ProjectDescription?: EntityDescription;
+    /**
+     * Information used to provision a service catalog product. For information, see What is AWS Service Catalog.
+     */
+    ServiceCatalogProvisioningDetails: ServiceCatalogProvisioningDetails;
+    /**
+     * Information about a provisioned service catalog product.
+     */
+    ServiceCatalogProvisionedProductDetails?: ServiceCatalogProvisionedProductDetails;
+    /**
+     * The status of the project.
+     */
+    ProjectStatus: ProjectStatus;
+    CreatedBy?: UserContext;
+    /**
+     * The time when the project was created.
+     */
+    CreationTime: Timestamp;
   }
   export interface DescribeSubscribedWorkteamRequest {
     /**
@@ -4885,6 +6377,7 @@ declare namespace SageMaker {
      * The output artifacts of the component.
      */
     OutputArtifacts?: TrialComponentArtifacts;
+    MetadataProperties?: MetadataProperties;
     /**
      * The metrics for the component.
      */
@@ -4933,6 +6426,7 @@ declare namespace SageMaker {
      * Who last modified the trial.
      */
     LastModifiedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
   }
   export interface DescribeUserProfileRequest {
     /**
@@ -5014,6 +6508,7 @@ declare namespace SageMaker {
      */
     Workteam: Workteam;
   }
+  export type Description = string;
   export interface DesiredWeightAndCapacity {
     /**
      * The name of the variant to update.
@@ -5034,6 +6529,10 @@ declare namespace SageMaker {
   export type DetailedModelPackageStatus = "NotStarted"|"InProgress"|"Completed"|"Failed"|string;
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;
   export type DirectoryPath = string;
+  export interface DisableSagemakerServicecatalogPortfolioInput {
+  }
+  export interface DisableSagemakerServicecatalogPortfolioOutput {
+  }
   export type DisassociateAdditionalCodeRepositories = boolean;
   export type DisassociateDefaultCodeRepository = boolean;
   export type DisassociateNotebookInstanceAcceleratorTypes = boolean;
@@ -5097,6 +6596,53 @@ declare namespace SageMaker {
   export type DoubleParameterValue = number;
   export type EfsUid = string;
   export type EnableCapture = boolean;
+  export interface EnableSagemakerServicecatalogPortfolioInput {
+  }
+  export interface EnableSagemakerServicecatalogPortfolioOutput {
+  }
+  export interface Endpoint {
+    /**
+     * The name of the endpoint.
+     */
+    EndpointName: EndpointName;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint.
+     */
+    EndpointArn: EndpointArn;
+    /**
+     * The endpoint configuration associated with the endpoint.
+     */
+    EndpointConfigName: EndpointConfigName;
+    /**
+     * A list of the production variants hosted on the endpoint. Each production variant is a model.
+     */
+    ProductionVariants?: ProductionVariantSummaryList;
+    DataCaptureConfig?: DataCaptureConfigSummary;
+    /**
+     * The status of the endpoint.
+     */
+    EndpointStatus: EndpointStatus;
+    /**
+     * If the endpoint failed, the reason it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The time that the endpoint was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The last time the endpoint was modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * A list of monitoring schedules for the endpoint. For information about model monitoring, see Amazon SageMaker Model Monitor.
+     */
+    MonitoringSchedules?: MonitoringScheduleList;
+    /**
+     * A list of the tags associated with the endpoint. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
   export type EndpointArn = string;
   export type EndpointConfigArn = string;
   export type EndpointConfigName = string;
@@ -5254,7 +6800,105 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
   }
+  export interface Explainability {
+    /**
+     * The explainability report for a model.
+     */
+    Report?: MetricsSource;
+  }
   export type FailureReason = string;
+  export interface FeatureDefinition {
+    /**
+     * The name of a feature. The type must be a string. FeatureName cannot be any of the following: is_deleted, write_time, api_invocation_time.
+     */
+    FeatureName?: FeatureName;
+    /**
+     * The value type of a feature. Valid values are Integral, Fractional, or String.
+     */
+    FeatureType?: FeatureType;
+  }
+  export type FeatureDefinitions = FeatureDefinition[];
+  export interface FeatureGroup {
+    /**
+     * The Amazon Resource Name (ARN) of a FeatureGroup.
+     */
+    FeatureGroupArn?: FeatureGroupArn;
+    /**
+     * The name of the FeatureGroup.
+     */
+    FeatureGroupName?: FeatureGroupName;
+    /**
+     * The name of the Feature whose value uniquely identifies a Record defined in the FeatureGroup FeatureDefinitions.
+     */
+    RecordIdentifierFeatureName?: FeatureName;
+    /**
+     * The name of the feature that stores the EventTime of a Record in a FeatureGroup. A EventTime is point in time when a new event occurs that corresponds to the creation or update of a Record in FeatureGroup. All Records in the FeatureGroup must have a corresponding EventTime.
+     */
+    EventTimeFeatureName?: FeatureName;
+    /**
+     * A list of Features. Each Feature must include a FeatureName and a FeatureType.  Valid FeatureTypes are Integral, Fractional and String.   FeatureNames cannot be any of the following: is_deleted, write_time, api_invocation_time. You can create up to 2,500 FeatureDefinitions per FeatureGroup.
+     */
+    FeatureDefinitions?: FeatureDefinitions;
+    /**
+     * The time a FeatureGroup was created.
+     */
+    CreationTime?: CreationTime;
+    OnlineStoreConfig?: OnlineStoreConfig;
+    OfflineStoreConfig?: OfflineStoreConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role used to create the feature group.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * A FeatureGroup status.
+     */
+    FeatureGroupStatus?: FeatureGroupStatus;
+    OfflineStoreStatus?: OfflineStoreStatus;
+    /**
+     * The reason that the FeatureGroup failed to be replicated in the OfflineStore. This is failure may be due to a failure to create a FeatureGroup in or delete a FeatureGroup from the OfflineStore.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * A free form description of a FeatureGroup.
+     */
+    Description?: Description;
+    /**
+     * Tags used to define a FeatureGroup.
+     */
+    Tags?: TagList;
+  }
+  export type FeatureGroupArn = string;
+  export type FeatureGroupMaxResults = number;
+  export type FeatureGroupName = string;
+  export type FeatureGroupNameContains = string;
+  export type FeatureGroupSortBy = "Name"|"FeatureGroupStatus"|"OfflineStoreStatus"|"CreationTime"|string;
+  export type FeatureGroupSortOrder = "Ascending"|"Descending"|string;
+  export type FeatureGroupStatus = "Creating"|"Created"|"CreateFailed"|"Deleting"|"DeleteFailed"|string;
+  export type FeatureGroupSummaries = FeatureGroupSummary[];
+  export interface FeatureGroupSummary {
+    /**
+     * The name of FeatureGroup.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * Unique identifier for the FeatureGroup.
+     */
+    FeatureGroupArn: FeatureGroupArn;
+    /**
+     * A timestamp indicating the time of creation time of the FeatureGroup.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The status of a FeatureGroup. The status can be any of the following: Creating, Created, CreateFail, Deleting or DetailFail. 
+     */
+    FeatureGroupStatus?: FeatureGroupStatus;
+    /**
+     * Notifies you if replicating data into the OfflineStore has failed. Returns either: Active or Blocked.
+     */
+    OfflineStoreStatus?: OfflineStoreStatus;
+  }
+  export type FeatureName = string;
+  export type FeatureType = "Integral"|"Fractional"|"String"|string;
   export type FileSystemAccessMode = "rw"|"ro"|string;
   export interface FileSystemConfig {
     /**
@@ -5379,8 +7023,28 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
-  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|string;
+  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"|string;
   export type GenerateCandidateDefinitionsOnly = boolean;
+  export interface GetModelPackageGroupPolicyInput {
+    /**
+     * The name of the model group for which to get the resource policy.
+     */
+    ModelPackageGroupName: EntityName;
+  }
+  export interface GetModelPackageGroupPolicyOutput {
+    /**
+     * The resource policy for the model group.
+     */
+    ResourcePolicy: PolicyString;
+  }
+  export interface GetSagemakerServicecatalogPortfolioStatusInput {
+  }
+  export interface GetSagemakerServicecatalogPortfolioStatusOutput {
+    /**
+     * Whether Service Catalog is enabled or disabled in SageMaker.
+     */
+    Status?: SagemakerServicecatalogStatus;
+  }
   export interface GetSearchSuggestionsRequest {
     /**
      * The name of the Amazon SageMaker resource to search for.
@@ -5799,6 +7463,7 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
   export type HyperParameterValue = string;
   export type HyperParameters = {[key: string]: HyperParameterValue};
+  export type IdempotencyToken = string;
   export interface Image {
     /**
      * When the image was created.
@@ -5896,13 +7561,13 @@ declare namespace SageMaker {
      */
     Containers: ModelPackageContainerDefinitionList;
     /**
-     * A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.
+     * A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed. This parameter is required for unversioned models, and optional for versioned models.
      */
-    SupportedTransformInstanceTypes: TransformInstanceTypes;
+    SupportedTransformInstanceTypes?: TransformInstanceTypes;
     /**
-     * A list of the instance types that are used to generate inferences in real-time.
+     * A list of the instance types that are used to generate inferences in real-time. This parameter is required for unversioned models, and optional for versioned models.
      */
-    SupportedRealtimeInferenceInstanceTypes: RealtimeInferenceInstanceTypes;
+    SupportedRealtimeInferenceInstanceTypes?: RealtimeInferenceInstanceTypes;
     /**
      * The supported MIME types for the input data.
      */
@@ -5927,6 +7592,7 @@ declare namespace SageMaker {
     Framework: Framework;
   }
   export type InputDataConfig = Channel[];
+  export type InputMode = "Pipe"|"File"|string;
   export type InputModes = TrainingInputMode[];
   export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
   export interface IntegerParameterRange {
@@ -6220,6 +7886,51 @@ declare namespace SageMaker {
   export type LabelingJobSummaryList = LabelingJobSummary[];
   export type LambdaFunctionArn = string;
   export type LastModifiedTime = Date;
+  export type LineageEntityParameters = {[key: string]: StringParameterValue};
+  export interface ListActionsRequest {
+    /**
+     * A filter that returns only actions with the specified source URI.
+     */
+    SourceUri?: SourceUri;
+    /**
+     * A filter that returns only actions of the specified type.
+     */
+    ActionType?: String256;
+    /**
+     * A filter that returns only actions created on or after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only actions created on or before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortActionsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous call to ListActions didn't return the full set of actions, the call returns a token for getting the next set of actions.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of actions to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListActionsResponse {
+    /**
+     * A list of actions and their properties.
+     */
+    ActionSummaries?: ActionSummaries;
+    /**
+     * A token for getting the next set of actions, if there are any.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListAlgorithmsInput {
     /**
      * A filter that returns only algorithms created after the specified time (timestamp).
@@ -6341,6 +8052,106 @@ declare namespace SageMaker {
     Apps?: AppList;
     /**
      * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListArtifactsRequest {
+    /**
+     * A filter that returns only artifacts with the specified source URI.
+     */
+    SourceUri?: SourceUri;
+    /**
+     * A filter that returns only artifacts of the specified type.
+     */
+    ArtifactType?: String256;
+    /**
+     * A filter that returns only artifacts created on or after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only artifacts created on or before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortArtifactsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous call to ListArtifacts didn't return the full set of artifacts, the call returns a token for getting the next set of artifacts.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of artifacts to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListArtifactsResponse {
+    /**
+     * A list of artifacts and their properties.
+     */
+    ArtifactSummaries?: ArtifactSummaries;
+    /**
+     * A token for getting the next set of artifacts, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAssociationsRequest {
+    /**
+     * A filter that returns only associations with the specified source ARN.
+     */
+    SourceArn?: AssociationEntityArn;
+    /**
+     * A filter that returns only associations with the specified destination Amazon Resource Name (ARN).
+     */
+    DestinationArn?: AssociationEntityArn;
+    /**
+     * A filter that returns only associations with the specified source type.
+     */
+    SourceType?: String256;
+    /**
+     * A filter that returns only associations with the specified destination type.
+     */
+    DestinationType?: String256;
+    /**
+     * A filter that returns only associations of the specified type.
+     */
+    AssociationType?: AssociationEdgeType;
+    /**
+     * A filter that returns only associations created on or after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only associations created on or before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortAssociationsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous call to ListAssociations didn't return the full set of associations, the call returns a token for getting the next set of associations.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of associations to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAssociationsResponse {
+    /**
+     * A list of associations and their properties.
+     */
+    AssociationSummaries?: AssociationSummaries;
+    /**
+     * A token for getting the next set of associations, if there are any.
      */
     NextToken?: NextToken;
   }
@@ -6537,6 +8348,50 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListCompilationJobsSortBy = "Name"|"CreationTime"|"Status"|string;
+  export interface ListContextsRequest {
+    /**
+     * A filter that returns only contexts with the specified source URI.
+     */
+    SourceUri?: SourceUri;
+    /**
+     * A filter that returns only contexts of the specified type.
+     */
+    ContextType?: String256;
+    /**
+     * A filter that returns only contexts created on or after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only contexts created on or before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortContextsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous call to ListContexts didn't return the full set of contexts, the call returns a token for getting the next set of contexts.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of contexts to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListContextsResponse {
+    /**
+     * A list of contexts and their properties.
+     */
+    ContextSummaries?: ContextSummaries;
+    /**
+     * A token for getting the next set of contexts, if there are any.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDomainsRequest {
     /**
      * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
@@ -6684,6 +8539,54 @@ declare namespace SageMaker {
      * A token for getting the next set of experiments, if there are any.
      */
     NextToken?: NextToken;
+  }
+  export interface ListFeatureGroupsRequest {
+    /**
+     * A string that partially matches one or more FeatureGroups names. Filters FeatureGroups by name. 
+     */
+    NameContains?: FeatureGroupNameContains;
+    /**
+     * A FeatureGroup status. Filters by FeatureGroup status. 
+     */
+    FeatureGroupStatusEquals?: FeatureGroupStatus;
+    /**
+     * An OfflineStore status. Filters by OfflineStore status. 
+     */
+    OfflineStoreStatusEquals?: OfflineStoreStatusValue;
+    /**
+     * Use this parameter to search for FeatureGroupss created after a specific date and time.
+     */
+    CreationTimeAfter?: CreationTime;
+    /**
+     * Use this parameter to search for FeatureGroupss created before a specific date and time.
+     */
+    CreationTimeBefore?: CreationTime;
+    /**
+     * The order in which feature groups are listed.
+     */
+    SortOrder?: FeatureGroupSortOrder;
+    /**
+     * The value on which the feature group list is sorted.
+     */
+    SortBy?: FeatureGroupSortBy;
+    /**
+     * The maximum number of results returned by ListFeatureGroups.
+     */
+    MaxResults?: FeatureGroupMaxResults;
+    /**
+     * A token to resume pagination of ListFeatureGroups results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFeatureGroupsResponse {
+    /**
+     * A summary of feature groups.
+     */
+    FeatureGroupSummaries: FeatureGroupSummaries;
+    /**
+     * A token to resume pagination of ListFeatureGroups results.
+     */
+    NextToken: NextToken;
   }
   export interface ListFlowDefinitionsRequest {
     /**
@@ -6994,6 +8897,47 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export type ListLineageEntityParameterKey = StringParameterValue[];
+  export interface ListModelPackageGroupsInput {
+    /**
+     * A filter that returns only model groups created after the specified time.
+     */
+    CreationTimeAfter?: CreationTime;
+    /**
+     * A filter that returns only model groups created before the specified time.
+     */
+    CreationTimeBefore?: CreationTime;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A string in the model group name. This filter returns only model groups whose name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * If the result of the previous ListModelPackageGroups request was truncated, the response includes a NextToken. To retrieve the next set of model groups, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The field to sort results by. The default is CreationTime.
+     */
+    SortBy?: ModelPackageGroupSortBy;
+    /**
+     * The sort order for results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListModelPackageGroupsOutput {
+    /**
+     * A list of summaries of the model groups in your AWS account.
+     */
+    ModelPackageGroupSummaryList: ModelPackageGroupSummaryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of model groups, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListModelPackagesInput {
     /**
      * A filter that returns only model packages created after the specified time (timestamp).
@@ -7011,6 +8955,18 @@ declare namespace SageMaker {
      * A string in the model package name. This filter returns only model packages whose name contains the specified string.
      */
     NameContains?: NameContains;
+    /**
+     * A filter that returns only the model packages with the specified approval status.
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
+    /**
+     * A filter that returns only model versions that belong to the specified model group.
+     */
+    ModelPackageGroupName?: ArnOrName;
+    /**
+     * A filter that returns onlyl the model packages of the specified type. This can be one of the following values.    VERSIONED - List only versioned models.    UNVERSIONED - List only unversioined models.    BOTH - List both versioned and unversioned models.  
+     */
+    ModelPackageType?: ModelPackageType;
     /**
      * If the response to a previous ListModelPackages request was truncated, the response includes a NextToken. To retrieve the next set of model packages, use the token in the next request.
      */
@@ -7306,6 +9262,138 @@ declare namespace SageMaker {
      */
     NotebookInstances?: NotebookInstanceSummaryList;
   }
+  export interface ListPipelineExecutionStepsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+    /**
+     * If the result of the previous ListPipelineExecutionSteps request was truncated, the response includes a NextToken. To retrieve the next set of pipeline execution steps, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of pipeline execution steps to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The field by which to sort results. The default is CreatedTime.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListPipelineExecutionStepsResponse {
+    /**
+     * A list of PipeLineExecutionStep objects. Each PipeLineExecutionStep consists of StepName, StartTime, EndTime, StepStatus, and Metadata. Metadata is an object with properties for each job that contains relevant information about the job created by the step.
+     */
+    PipelineExecutionSteps?: PipelineExecutionStepList;
+    /**
+     * If the result of the previous ListPipelineExecutionSteps request was truncated, the response includes a NextToken. To retrieve the next set of pipeline execution steps, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPipelineExecutionsRequest {
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName: PipelineName;
+    /**
+     * A filter that returns the pipeline executions that were created after a specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns the pipeline executions that were created before a specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The field by which to sort results. The default is CreatedTime.
+     */
+    SortBy?: SortPipelineExecutionsBy;
+    /**
+     * The sort order for results.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListPipelineExecutions request was truncated, the response includes a NextToken. To retrieve the next set of pipeline executions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of pipeline executions to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPipelineExecutionsResponse {
+    /**
+     * Contains a sorted list of pipeline execution summary objects matching the specified filters. Each run summary includes the Amazon Resource Name (ARN) of the pipeline execution, the run date, and the status. This list can be empty. 
+     */
+    PipelineExecutionSummaries?: PipelineExecutionSummaryList;
+    /**
+     * If the result of the previous ListPipelineExecutions request was truncated, the response includes a NextToken. To retrieve the next set of pipeline executions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPipelineParametersForExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+    /**
+     * If the result of the previous ListPipelineParametersForExecution request was truncated, the response includes a NextToken. To retrieve the next set of parameters, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of parameters to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPipelineParametersForExecutionResponse {
+    /**
+     * Contains a list of pipeline parameters. This list can be empty. 
+     */
+    PipelineParameters?: ParameterList;
+    /**
+     * If the result of the previous ListPipelineParametersForExecution request was truncated, the response includes a NextToken. To retrieve the next set of parameters, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPipelinesRequest {
+    /**
+     * The prefix of the pipeline name.
+     */
+    PipelineNamePrefix?: PipelineName;
+    /**
+     * A filter that returns the pipelines that were created after a specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns the pipelines that were created before a specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The field by which to sort results. The default is CreatedTime.
+     */
+    SortBy?: SortPipelinesBy;
+    /**
+     * The sort order for results.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListPipelines request was truncated, the response includes a NextToken. To retrieve the next set of pipelines, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of pipelines to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPipelinesResponse {
+    /**
+     * Contains a sorted list of PipelineSummary objects matching the specified filters. Each PipelineSummary consists of PipelineArn, PipelineName, ExperimentName, PipelineDescription, CreationTime, LastModifiedTime, LastRunTime, and RoleArn. This list can be empty. 
+     */
+    PipelineSummaries?: PipelineSummaryList;
+    /**
+     * If the result of the previous ListPipelines request was truncated, the response includes a NextToken. To retrieve the next set of pipelines, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListProcessingJobsRequest {
     /**
      * A filter that returns only processing jobs created after the specified time.
@@ -7355,6 +9443,46 @@ declare namespace SageMaker {
     ProcessingJobSummaries: ProcessingJobSummaries;
     /**
      * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of processing jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListProjectsInput {
+    /**
+     * A filter that returns the projects that were created after a specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns the projects that were created before a specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * The maximum number of projects to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A filter that returns the projects whose name contains a specified string.
+     */
+    NameContains?: ProjectEntityName;
+    /**
+     * If the result of the previous ListProjects request was truncated, the response includes a NextToken. To retrieve the next set of projects, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The field by which to sort results. The default is CreationTime.
+     */
+    SortBy?: ProjectSortBy;
+    /**
+     * The sort order for results. The default is Ascending.
+     */
+    SortOrder?: ProjectSortOrder;
+  }
+  export interface ListProjectsOutput {
+    /**
+     * A list of summaries of projects.
+     */
+    ProjectSummaryList: ProjectSummaryList;
+    /**
+     * If the result of the previous ListCompilationJobs request was truncated, the response includes a NextToken. To retrieve the next set of model compilation jobs, use the token in the next request.
      */
     NextToken?: NextToken;
   }
@@ -7755,6 +9883,7 @@ declare namespace SageMaker {
   export type MaxRuntimeInSeconds = number;
   export type MaxRuntimePerTrainingJobInSeconds = number;
   export type MaxWaitTimeInSeconds = number;
+  export type MaximumExecutionTimeoutInSeconds = number;
   export type MediaType = string;
   export interface MemberDefinition {
     /**
@@ -7767,6 +9896,25 @@ declare namespace SageMaker {
     OidcMemberDefinition?: OidcMemberDefinition;
   }
   export type MemberDefinitions = MemberDefinition[];
+  export interface MetadataProperties {
+    /**
+     * The commit ID.
+     */
+    CommitId?: MetadataPropertyValue;
+    /**
+     * The repository.
+     */
+    Repository?: MetadataPropertyValue;
+    /**
+     * The entity this entity was generated by.
+     */
+    GeneratedBy?: MetadataPropertyValue;
+    /**
+     * The project ID.
+     */
+    ProjectId?: MetadataPropertyValue;
+  }
+  export type MetadataPropertyValue = string;
   export interface MetricData {
     /**
      * The name of the metric.
@@ -7795,6 +9943,21 @@ declare namespace SageMaker {
   export type MetricName = string;
   export type MetricRegex = string;
   export type MetricValue = number;
+  export interface MetricsSource {
+    /**
+     * 
+     */
+    ContentType: ContentType;
+    /**
+     * 
+     */
+    ContentDigest?: ContentDigest;
+    /**
+     * 
+     */
+    S3Uri: S3Uri;
+  }
+  export type ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval"|string;
   export type ModelArn = string;
   export interface ModelArtifacts {
     /**
@@ -7812,8 +9975,103 @@ declare namespace SageMaker {
      */
     InvocationsMaxRetries?: InvocationsMaxRetries;
   }
+  export interface ModelDataQuality {
+    /**
+     * Data quality statistics for a model.
+     */
+    Statistics?: MetricsSource;
+    /**
+     * Data quality constraints for a model.
+     */
+    Constraints?: MetricsSource;
+  }
+  export interface ModelDigests {
+    /**
+     * Provides a hash value that uniquely identifies the stored model artifacts.
+     */
+    ArtifactDigest?: ArtifactDigest;
+  }
+  export interface ModelMetrics {
+    /**
+     * Metrics that measure the quality of a model.
+     */
+    ModelQuality?: ModelQuality;
+    /**
+     * Metrics that measure the quality of the input data for a model.
+     */
+    ModelDataQuality?: ModelDataQuality;
+    /**
+     * Metrics that measure bais in a model.
+     */
+    Bias?: Bias;
+    /**
+     * Metrics that help explain a model.
+     */
+    Explainability?: Explainability;
+  }
   export type ModelName = string;
   export type ModelNameContains = string;
+  export interface ModelPackage {
+    /**
+     * The name of the model.
+     */
+    ModelPackageName?: EntityName;
+    /**
+     * The model group to which the model belongs.
+     */
+    ModelPackageGroupName?: EntityName;
+    /**
+     * The version number of a versioned model.
+     */
+    ModelPackageVersion?: ModelPackageVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model package.
+     */
+    ModelPackageArn?: ModelPackageArn;
+    /**
+     * The description of the model package.
+     */
+    ModelPackageDescription?: EntityDescription;
+    /**
+     * The time that the model package was created.
+     */
+    CreationTime?: CreationTime;
+    InferenceSpecification?: InferenceSpecification;
+    SourceAlgorithmSpecification?: SourceAlgorithmSpecification;
+    ValidationSpecification?: ModelPackageValidationSpecification;
+    /**
+     * The status of the model package. This can be one of the following values.    PENDING - The model package is pending being created.    IN_PROGRESS - The model package is in the process of being created.    COMPLETED - The model package was successfully created.    FAILED - The model package failed.    DELETING - The model package is in the process of being deleted.  
+     */
+    ModelPackageStatus?: ModelPackageStatus;
+    ModelPackageStatusDetails?: ModelPackageStatusDetails;
+    /**
+     * Whether the model package is to be certified to be listed on AWS Marketplace. For information about listing model packages on AWS Marketplace, see List Your Algorithm or Model Package on AWS Marketplace.
+     */
+    CertifyForMarketplace?: CertifyForMarketplace;
+    /**
+     * The approval status of the model. This can be one of the following values.    APPROVED - The model is approved    REJECTED - The model is rejected.    PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.  
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
+    CreatedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
+    /**
+     * Metrics for the model.
+     */
+    ModelMetrics?: ModelMetrics;
+    /**
+     * The last time the model package was modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * A description provided when the model approval is set.
+     */
+    ApprovalDescription?: ApprovalDescription;
+    /**
+     * A list of the tags associated with the model package. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
   export type ModelPackageArn = string;
   export interface ModelPackageContainerDefinition {
     /**
@@ -7838,6 +10096,59 @@ declare namespace SageMaker {
     ProductId?: ProductId;
   }
   export type ModelPackageContainerDefinitionList = ModelPackageContainerDefinition[];
+  export interface ModelPackageGroup {
+    /**
+     * The name of the model group.
+     */
+    ModelPackageGroupName?: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model group.
+     */
+    ModelPackageGroupArn?: ModelPackageGroupArn;
+    /**
+     * The description for the model group.
+     */
+    ModelPackageGroupDescription?: EntityDescription;
+    /**
+     * The time that the model group was created.
+     */
+    CreationTime?: CreationTime;
+    CreatedBy?: UserContext;
+    /**
+     * The status of the model group. This can be one of the following values.    PENDING - The model group is pending being created.    IN_PROGRESS - The model group is in the process of being created.    COMPLETED - The model group was successfully created.    FAILED - The model group failed.    DELETING - The model group is in the process of being deleted.    DELETE_FAILED - SageMaker failed to delete the model group.  
+     */
+    ModelPackageGroupStatus?: ModelPackageGroupStatus;
+    /**
+     * A list of the tags associated with the model group. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
+  export type ModelPackageGroupArn = string;
+  export type ModelPackageGroupSortBy = "Name"|"CreationTime"|string;
+  export type ModelPackageGroupStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|"DeleteFailed"|string;
+  export interface ModelPackageGroupSummary {
+    /**
+     * The name of the model group.
+     */
+    ModelPackageGroupName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model group.
+     */
+    ModelPackageGroupArn: ModelPackageGroupArn;
+    /**
+     * A description of the model group.
+     */
+    ModelPackageGroupDescription?: EntityDescription;
+    /**
+     * The time that the model group was created.
+     */
+    CreationTime: CreationTime;
+    /**
+     * The status of the model group.
+     */
+    ModelPackageGroupStatus: ModelPackageGroupStatus;
+  }
+  export type ModelPackageGroupSummaryList = ModelPackageGroupSummary[];
   export type ModelPackageSortBy = "Name"|"CreationTime"|string;
   export type ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|string;
   export interface ModelPackageStatusDetails {
@@ -7871,6 +10182,14 @@ declare namespace SageMaker {
      */
     ModelPackageName: EntityName;
     /**
+     * If the model package is a versioned model, the model group that the versioned model belongs to.
+     */
+    ModelPackageGroupName?: EntityName;
+    /**
+     * If the model package is a versioned model, the version of the model.
+     */
+    ModelPackageVersion?: ModelPackageVersion;
+    /**
      * The Amazon Resource Name (ARN) of the model package.
      */
     ModelPackageArn: ModelPackageArn;
@@ -7886,8 +10205,13 @@ declare namespace SageMaker {
      * The overall status of the model package.
      */
     ModelPackageStatus: ModelPackageStatus;
+    /**
+     * The approval status of the model. This can be one of the following values.    APPROVED - The model is approved    REJECTED - The model is rejected.    PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.  
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
   }
   export type ModelPackageSummaryList = ModelPackageSummary[];
+  export type ModelPackageType = "Versioned"|"Unversioned"|"Both"|string;
   export interface ModelPackageValidationProfile {
     /**
      * The name of the profile for the model package.
@@ -7909,7 +10233,24 @@ declare namespace SageMaker {
      */
     ValidationProfiles: ModelPackageValidationProfiles;
   }
+  export type ModelPackageVersion = number;
+  export interface ModelQuality {
+    /**
+     * Model quality statistics.
+     */
+    Statistics?: MetricsSource;
+    /**
+     * Model quality constraints.
+     */
+    Constraints?: MetricsSource;
+  }
   export type ModelSortKey = "Name"|"CreationTime"|string;
+  export interface ModelStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the created model.
+     */
+    Arn?: String256;
+  }
   export interface ModelSummary {
     /**
      * The name of the model that you want a summary for.
@@ -8103,6 +10444,42 @@ declare namespace SageMaker {
     S3UploadMode?: ProcessingS3UploadMode;
   }
   export type MonitoringS3Uri = string;
+  export interface MonitoringSchedule {
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn?: MonitoringScheduleArn;
+    /**
+     * The name of the monitoring schedule.
+     */
+    MonitoringScheduleName?: MonitoringScheduleName;
+    /**
+     * The status of the monitoring schedule. This can be one of the following values.    PENDING - The schedule is pending being created.    FAILED - The schedule failed.    SCHEDULED - The schedule was successfully created.    STOPPED - The schedule was stopped.  
+     */
+    MonitoringScheduleStatus?: ScheduleStatus;
+    /**
+     * If the monitoring schedule failed, the reason it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The time that the monitoring schedule was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the monitoring schedule was changed.
+     */
+    LastModifiedTime?: Timestamp;
+    MonitoringScheduleConfig?: MonitoringScheduleConfig;
+    /**
+     * The endpoint that hosts the model being monitored.
+     */
+    EndpointName?: EndpointName;
+    LastMonitoringExecutionSummary?: MonitoringExecutionSummary;
+    /**
+     * A list of the tags associated with the monitoring schedlue. For more information, see Tagging AWS resources in the AWS General Reference Guide.
+     */
+    Tags?: TagList;
+  }
   export type MonitoringScheduleArn = string;
   export interface MonitoringScheduleConfig {
     /**
@@ -8112,8 +10489,9 @@ declare namespace SageMaker {
     /**
      * Defines the monitoring job.
      */
-    MonitoringJobDefinition: MonitoringJobDefinition;
+    MonitoringJobDefinition?: MonitoringJobDefinition;
   }
+  export type MonitoringScheduleList = MonitoringSchedule[];
   export type MonitoringScheduleName = string;
   export type MonitoringScheduleSortKey = "Name"|"CreationTime"|"Status"|string;
   export interface MonitoringScheduleSummary {
@@ -8291,6 +10669,31 @@ declare namespace SageMaker {
      */
     Failed?: ObjectiveStatusCounter;
   }
+  export interface OfflineStoreConfig {
+    /**
+     * The Amazon Simple Storage (Amazon S3) location of OfflineStore.
+     */
+    S3StorageConfig: S3StorageConfig;
+    /**
+     * Set to True to disable the automatic creation of an AWS Glue table when configuring an OfflineStore.
+     */
+    DisableGlueTableCreation?: Boolean;
+    /**
+     * The meta data of the Glue table that is autogenerated when an OfflineStore is created. 
+     */
+    DataCatalogConfig?: DataCatalogConfig;
+  }
+  export interface OfflineStoreStatus {
+    /**
+     * An OfflineStore status.
+     */
+    Status: OfflineStoreStatusValue;
+    /**
+     * The justification for why the OfflineStoreStatus is Blocked (if applicable).
+     */
+    BlockedReason?: BlockedReason;
+  }
+  export type OfflineStoreStatusValue = "Active"|"Blocked"|"Disabled"|string;
   export interface OidcConfig {
     /**
      * The OIDC IdP client ID used to configure your private workforce.
@@ -8362,6 +10765,22 @@ declare namespace SageMaker {
      */
     Groups: Groups;
   }
+  export interface OnlineStoreConfig {
+    /**
+     * Use to specify KMS Key ID (KMSKeyId) for at-rest encryption of your OnlineStore.
+     */
+    SecurityConfig?: OnlineStoreSecurityConfig;
+    /**
+     * Turn OnlineStore off by specifying False for the EnableOnlineStore flag. Turn OnlineStore on by specifying True for the EnableOnlineStore flag.  The default value is False.
+     */
+    EnableOnlineStore?: Boolean;
+  }
+  export interface OnlineStoreSecurityConfig {
+    /**
+     * The ID of the AWS Key Management Service (AWS KMS) key that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM role) of CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId:    "kms:Encrypt"     "kms:Decrypt"     "kms:DescribeKey"     "kms:CreateGrant"     "kms:RetireGrant"     "kms:ReEncryptFrom"     "kms:ReEncryptTo"     "kms:GenerateDataKey"     "kms:ListAliases"     "kms:ListGrants"     "kms:RevokeGrant"    The caller (either IAM user or IAM role) to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the following permissions to the KmsKeyId:    "kms:Decrypt"   
+     */
+    KmsKeyId?: KmsKeyId;
+  }
   export type Operator = "Equals"|"NotEquals"|"GreaterThan"|"GreaterThanOrEqualTo"|"LessThan"|"LessThanOrEqualTo"|"Contains"|"Exists"|"NotExists"|"In"|string;
   export type OptionalDouble = number;
   export type OptionalInteger = number;
@@ -8384,6 +10803,10 @@ declare namespace SageMaker {
      * Specifies additional parameters for compiler options in JSON format. The compiler options are TargetPlatform specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify CompilerOptions.     CPU: Compilation for CPU supports the following compiler options.    mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}       ARM: Details of ARM CPU compilations.    NEON: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.      NVIDIA: Compilation for NVIDIA GPU supports the following compiler options.    gpu_code: Specifies the targeted architecture.    trt-ver: Specifies the TensorRT versions in x.y.z. format.    cuda-ver: Specifies the CUDA version in x.y format.   For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}     ANDROID: Compilation for the Android OS supports the following compiler options:    ANDROID_PLATFORM: Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.    mattr: Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.      INFERENTIA: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"".  For information about supported compiler options, see  Neuron Compiler CLI.     CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the following compiler options:    class_labels: Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by newlines.    
      */
     CompilerOptions?: CompilerOptions;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
+     */
+    KmsKeyId?: KmsKeyId;
   }
   export interface OutputDataConfig {
     /**
@@ -8396,7 +10819,18 @@ declare namespace SageMaker {
     S3OutputPath: S3Uri;
   }
   export type PaginationToken = string;
+  export interface Parameter {
+    /**
+     * The name of the parameter to assign a value to. This parameter name must match a named parameter in the pipeline definition.
+     */
+    Name: PipelineParameterName;
+    /**
+     * The literal value for the parameter.
+     */
+    Value: String1024;
+  }
   export type ParameterKey = string;
+  export type ParameterList = Parameter[];
   export type ParameterName = string;
   export interface ParameterRange {
     /**
@@ -8447,6 +10881,212 @@ declare namespace SageMaker {
   }
   export type ParentHyperParameterTuningJobs = ParentHyperParameterTuningJob[];
   export type Parents = Parent[];
+  export interface Pipeline {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline.
+     */
+    PipelineArn?: PipelineArn;
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName?: PipelineName;
+    /**
+     * The display name of the pipeline.
+     */
+    PipelineDisplayName?: PipelineName;
+    /**
+     * The description of the pipeline.
+     */
+    PipelineDescription?: PipelineDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the role that created the pipeline.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The status of the pipeline.
+     */
+    PipelineStatus?: PipelineStatus;
+    /**
+     * The creation time of the pipeline.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time that the pipeline was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The time when the pipeline was last run.
+     */
+    LastRunTime?: Timestamp;
+    CreatedBy?: UserContext;
+    LastModifiedBy?: UserContext;
+    /**
+     * A list of tags that apply to the pipeline.
+     */
+    Tags?: TagList;
+  }
+  export type PipelineArn = string;
+  export type PipelineDefinition = string;
+  export type PipelineDescription = string;
+  export interface PipelineExecution {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline that was executed.
+     */
+    PipelineArn?: PipelineArn;
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+    /**
+     * The display name of the pipeline execution.
+     */
+    PipelineExecutionDisplayName?: PipelineExecutionName;
+    /**
+     * The status of the pipeline status.
+     */
+    PipelineExecutionStatus?: PipelineExecutionStatus;
+    /**
+     * The description of the pipeline execution.
+     */
+    PipelineExecutionDescription?: PipelineExecutionDescription;
+    /**
+     * The creation time of the pipeline execution.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time that the pipeline execution was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    CreatedBy?: UserContext;
+    LastModifiedBy?: UserContext;
+    /**
+     * Contains a list of pipeline parameters. This list can be empty. 
+     */
+    PipelineParameters?: ParameterList;
+  }
+  export type PipelineExecutionArn = string;
+  export type PipelineExecutionDescription = string;
+  export type PipelineExecutionName = string;
+  export type PipelineExecutionStatus = "Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded"|string;
+  export interface PipelineExecutionStep {
+    /**
+     * The name of the step that is executed.
+     */
+    StepName?: StepName;
+    /**
+     * The time that the step started executing.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time that the step stopped executing.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The status of the step execution.
+     */
+    StepStatus?: StepStatus;
+    /**
+     * If this pipeline execution step was cached, details on the cache hit.
+     */
+    CacheHitResult?: CacheHitResult;
+    /**
+     * The reason why the step failed execution. This is only returned if the step failed its execution.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The metadata for the step execution.
+     */
+    Metadata?: PipelineExecutionStepMetadata;
+  }
+  export type PipelineExecutionStepList = PipelineExecutionStep[];
+  export interface PipelineExecutionStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the training job that was run by this step execution.
+     */
+    TrainingJob?: TrainingJobStepMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the processing job that was run by this step execution.
+     */
+    ProcessingJob?: ProcessingJobStepMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the transform job that was run by this step execution.
+     */
+    TransformJob?: TransformJobStepMetadata;
+    /**
+     * Metadata for the Model step.
+     */
+    Model?: ModelStepMetadata;
+    /**
+     * Metadata for the RegisterModel step.
+     */
+    RegisterModel?: RegisterModelStepMetadata;
+    /**
+     * If this is a Condition step metadata object, details on the condition.
+     */
+    Condition?: ConditionStepMetadata;
+  }
+  export interface PipelineExecutionSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+    /**
+     * The start time of the pipeline execution.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The status of the pipeline execution.
+     */
+    PipelineExecutionStatus?: PipelineExecutionStatus;
+    /**
+     * The description of the pipeline execution.
+     */
+    PipelineExecutionDescription?: PipelineExecutionDescription;
+    /**
+     * The display name of the pipeline execution.
+     */
+    PipelineExecutionDisplayName?: PipelineExecutionName;
+  }
+  export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
+  export type PipelineName = string;
+  export type PipelineParameterName = string;
+  export type PipelineStatus = "Active"|string;
+  export interface PipelineSummary {
+    /**
+     *  The Amazon Resource Name (ARN) of the pipeline.
+     */
+    PipelineArn?: PipelineArn;
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName?: PipelineName;
+    /**
+     * The display name of the pipeline.
+     */
+    PipelineDisplayName?: PipelineName;
+    /**
+     * The description of the pipeline.
+     */
+    PipelineDescription?: PipelineDescription;
+    /**
+     * The Amazon Resource Name (ARN) that the pipeline used to execute.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The creation time of the pipeline.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time that the pipeline was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The last time that a pipeline execution began.
+     */
+    LastExecutionTime?: Timestamp;
+  }
+  export type PipelineSummaryList = PipelineSummary[];
+  export type PolicyString = string;
   export type PresignedDomainUrl = string;
   export type ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
   export interface ProcessingClusterConfig {
@@ -8470,22 +11110,36 @@ declare namespace SageMaker {
   export type ProcessingEnvironmentKey = string;
   export type ProcessingEnvironmentMap = {[key: string]: ProcessingEnvironmentValue};
   export type ProcessingEnvironmentValue = string;
+  export interface ProcessingFeatureStoreOutput {
+    /**
+     * The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output.
+     */
+    FeatureGroupName: FeatureGroupName;
+  }
   export interface ProcessingInput {
     /**
      * The name of the inputs for the processing job.
      */
     InputName: String;
     /**
-     * The S3 inputs for the processing job. 
+     * When True, input operations such as data download are managed natively by the processing job application. When False (default), input operations are managed by Amazon SageMaker.
      */
-    S3Input: ProcessingS3Input;
+    AppManaged?: AppManaged;
+    /**
+     * Configuration for processing job inputs in Amazon S3.
+     */
+    S3Input?: ProcessingS3Input;
+    /**
+     * Configuration for a Dataset Definition input. 
+     */
+    DatasetDefinition?: DatasetDefinition;
   }
   export type ProcessingInputs = ProcessingInput[];
   export type ProcessingInstanceCount = number;
   export type ProcessingInstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|string;
   export interface ProcessingJob {
     /**
-     * For each input, data is downloaded from S3 into the processing container before the processing job begins running if "S3InputMode" is set to File.
+     * List of input configurations for the processing job.
      */
     ProcessingInputs?: ProcessingInputs;
     ProcessingOutputConfig?: ProcessingOutputConfig;
@@ -8558,6 +11212,12 @@ declare namespace SageMaker {
   export type ProcessingJobArn = string;
   export type ProcessingJobName = string;
   export type ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export interface ProcessingJobStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the processing job.
+     */
+    Arn?: ProcessingJobArn;
+  }
   export type ProcessingJobSummaries = ProcessingJobSummary[];
   export interface ProcessingJobSummary {
     /**
@@ -8603,11 +11263,19 @@ declare namespace SageMaker {
     /**
      * Configuration for processing job outputs in Amazon S3.
      */
-    S3Output: ProcessingS3Output;
+    S3Output?: ProcessingS3Output;
+    /**
+     * Configuration for processing job outputs in Amazon SageMaker Feature Store. This processing output type is only supported when AppManaged is specified. 
+     */
+    FeatureStoreOutput?: ProcessingFeatureStoreOutput;
+    /**
+     * When True, output operations such as data upload are managed natively by the processing job application. When False (default), output operations are managed by Amazon SageMaker.
+     */
+    AppManaged?: AppManaged;
   }
   export interface ProcessingOutputConfig {
     /**
-     * Output configuration information for a processing job.
+     * List of output configurations for the processing job.
      */
     Outputs: ProcessingOutputs;
     /**
@@ -8631,17 +11299,17 @@ declare namespace SageMaker {
      */
     S3Uri: S3Uri;
     /**
-     * The local path to the Amazon S3 bucket where you want Amazon SageMaker to download the inputs to run a processing job. LocalPath is an absolute path to the input data.
+     * The local path to the Amazon S3 bucket where you want Amazon SageMaker to download the inputs to run a processing job. LocalPath is an absolute path to the input data. This is a required parameter when AppManaged is False (default).
      */
-    LocalPath: ProcessingLocalPath;
+    LocalPath?: ProcessingLocalPath;
     /**
      * Whether you use an S3Prefix or a ManifestFile for the data type. If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job. If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for the processing job.
      */
     S3DataType: ProcessingS3DataType;
     /**
-     * Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.
+     * Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.This is a required parameter when AppManaged is False (default).
      */
-    S3InputMode: ProcessingS3InputMode;
+    S3InputMode?: ProcessingS3InputMode;
     /**
      * Whether the data stored in Amazon S3 is FullyReplicated or ShardedByS3Key.
      */
@@ -8732,6 +11400,39 @@ declare namespace SageMaker {
     DesiredInstanceCount?: TaskCount;
   }
   export type ProductionVariantSummaryList = ProductionVariantSummary[];
+  export type ProjectArn = string;
+  export type ProjectEntityName = string;
+  export type ProjectId = string;
+  export type ProjectSortBy = "Name"|"CreationTime"|string;
+  export type ProjectSortOrder = "Ascending"|"Descending"|string;
+  export type ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted"|string;
+  export interface ProjectSummary {
+    /**
+     * The name of the project.
+     */
+    ProjectName: ProjectEntityName;
+    /**
+     * The description of the project.
+     */
+    ProjectDescription?: EntityDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the project.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * The ID of the project.
+     */
+    ProjectId: ProjectId;
+    /**
+     * The time that the project was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The status of the project.
+     */
+    ProjectStatus: ProjectStatus;
+  }
+  export type ProjectSummaryList = ProjectSummary[];
   export type PropertyNameHint = string;
   export interface PropertyNameQuery {
     /**
@@ -8746,14 +11447,76 @@ declare namespace SageMaker {
     PropertyName?: ResourcePropertyName;
   }
   export type PropertyNameSuggestionList = PropertyNameSuggestion[];
+  export type ProvisionedProductStatusMessage = string;
+  export interface ProvisioningParameter {
+    /**
+     * The key that identifies a provisioning parameter.
+     */
+    Key?: ProvisioningParameterKey;
+    /**
+     * The value of the provisioning parameter.
+     */
+    Value?: ProvisioningParameterValue;
+  }
+  export type ProvisioningParameterKey = string;
+  export type ProvisioningParameterValue = string;
+  export type ProvisioningParameters = ProvisioningParameter[];
   export interface PublicWorkforceTaskPrice {
     /**
      * Defines the amount of money paid to an Amazon Mechanical Turk worker in United States dollars.
      */
     AmountInUsd?: USD;
   }
+  export interface PutModelPackageGroupPolicyInput {
+    /**
+     * The name of the model group to add a resource policy to.
+     */
+    ModelPackageGroupName: EntityName;
+    /**
+     * The resource policy for the model group.
+     */
+    ResourcePolicy: PolicyString;
+  }
+  export interface PutModelPackageGroupPolicyOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the model package group.
+     */
+    ModelPackageGroupArn: ModelPackageGroupArn;
+  }
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecordWrapper = "None"|"RecordIO"|string;
+  export type RedshiftClusterId = string;
+  export type RedshiftDatabase = string;
+  export interface RedshiftDatasetDefinition {
+    ClusterId: RedshiftClusterId;
+    Database: RedshiftDatabase;
+    DbUser: RedshiftUserName;
+    QueryString: RedshiftQueryString;
+    /**
+     * The IAM role attached to your Redshift cluster that Amazon SageMaker uses to generate datasets.
+     */
+    ClusterRoleArn: RoleArn;
+    /**
+     * The location in Amazon S3 where the Redshift query results are stored.
+     */
+    OutputS3Uri: S3Uri;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data from a Redshift execution.
+     */
+    KmsKeyId?: KmsKeyId;
+    OutputFormat: RedshiftResultFormat;
+    OutputCompression?: RedshiftResultCompressionType;
+  }
+  export type RedshiftQueryString = string;
+  export type RedshiftResultCompressionType = "None"|"GZIP"|"BZIP2"|"ZSTD"|"SNAPPY"|string;
+  export type RedshiftResultFormat = "PARQUET"|"CSV"|string;
+  export type RedshiftUserName = string;
+  export interface RegisterModelStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the model package.
+     */
+    Arn?: String256;
+  }
   export interface RenderUiTemplateRequest {
     /**
      * A Template object containing the worker UI template to render.
@@ -8853,7 +11616,7 @@ declare namespace SageMaker {
      */
     InstanceType?: AppInstanceType;
   }
-  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|string;
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
@@ -8888,7 +11651,18 @@ declare namespace SageMaker {
     AttributeNames?: AttributeNames;
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
+  export interface S3StorageConfig {
+    /**
+     * The S3 URI, or location in Amazon S3, of OfflineStore. S3 URIs have a format similar to the following: s3://example-bucket/prefix/.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location. The IAM roleARN that is passed as a parameter to CreateFeatureGroup must have below permissions to the KmsKeyId:    "kms:GenerateDataKey"   
+     */
+    KmsKeyId?: KmsKeyId;
+  }
   export type S3Uri = string;
+  export type SagemakerServicecatalogStatus = "Enabled"|"Disabled"|string;
   export type SamplingPercentage = number;
   export interface ScheduleConfig {
     /**
@@ -8934,6 +11708,12 @@ declare namespace SageMaker {
      * The properties of a trial component.
      */
     TrialComponent?: TrialComponent;
+    Endpoint?: Endpoint;
+    ModelPackage?: ModelPackage;
+    ModelPackageGroup?: ModelPackageGroup;
+    Pipeline?: Pipeline;
+    PipelineExecution?: PipelineExecution;
+    FeatureGroup?: FeatureGroup;
   }
   export interface SearchRequest {
     /**
@@ -8973,7 +11753,7 @@ declare namespace SageMaker {
   }
   export type SearchResultsList = SearchRecord[];
   export type SearchSortOrder = "Ascending"|"Descending"|string;
-  export type SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|string;
+  export type SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating"|string;
   export interface SecondaryStatusTransition {
     /**
      * Contains a secondary status information from a training job. Status might be one of the following secondary statuses:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.     We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTrainingStack     DownloadingTrainingImage   
@@ -8997,6 +11777,35 @@ declare namespace SageMaker {
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type Seed = number;
+  export type ServiceCatalogEntityId = string;
+  export interface ServiceCatalogProvisionedProductDetails {
+    /**
+     * The ID of the provisioned product.
+     */
+    ProvisionedProductId?: ServiceCatalogEntityId;
+    /**
+     * The current status of the product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.    PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.  
+     */
+    ProvisionedProductStatusMessage?: ProvisionedProductStatusMessage;
+  }
+  export interface ServiceCatalogProvisioningDetails {
+    /**
+     * The ID of the product to provision.
+     */
+    ProductId: ServiceCatalogEntityId;
+    /**
+     * The ID of the provisioning artifact.
+     */
+    ProvisioningArtifactId: ServiceCatalogEntityId;
+    /**
+     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. 
+     */
+    PathId?: ServiceCatalogEntityId;
+    /**
+     * A list of key value pairs that you specify when you provision a product.
+     */
+    ProvisioningParameters?: ProvisioningParameters;
+  }
   export type SessionExpirationDurationInSeconds = number;
   export interface SharingSettings {
     /**
@@ -9020,9 +11829,15 @@ declare namespace SageMaker {
   }
   export type SingleSignOnUserIdentifier = string;
   export type SnsTopicArn = string;
+  export type SortActionsBy = "Name"|"CreationTime"|string;
+  export type SortArtifactsBy = "CreationTime"|string;
+  export type SortAssociationsBy = "SourceArn"|"DestinationArn"|"SourceType"|"DestinationType"|"CreationTime"|string;
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
+  export type SortContextsBy = "Name"|"CreationTime"|string;
   export type SortExperimentsBy = "Name"|"CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
+  export type SortPipelineExecutionsBy = "CreationTime"|"PipelineExecutionArn"|string;
+  export type SortPipelinesBy = "Name"|"CreationTime"|string;
   export type SortTrialComponentsBy = "Name"|"CreationTime"|string;
   export type SortTrialsBy = "Name"|"CreationTime"|string;
   export interface SourceAlgorithm {
@@ -9049,6 +11864,7 @@ declare namespace SageMaker {
     Cidrs: Cidrs;
   }
   export type SourceType = string;
+  export type SourceUri = string;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export interface StartMonitoringScheduleRequest {
     /**
@@ -9062,8 +11878,38 @@ declare namespace SageMaker {
      */
     NotebookInstanceName: NotebookInstanceName;
   }
+  export interface StartPipelineExecutionRequest {
+    /**
+     * The name of the pipeline.
+     */
+    PipelineName: PipelineName;
+    /**
+     * The display name of the pipeline execution.
+     */
+    PipelineExecutionDisplayName?: PipelineExecutionName;
+    /**
+     * Contains a list of pipeline parameters. This list can be empty. 
+     */
+    PipelineParameters?: ParameterList;
+    /**
+     * The description of the pipeline execution.
+     */
+    PipelineExecutionDescription?: PipelineExecutionDescription;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken: IdempotencyToken;
+  }
+  export interface StartPipelineExecutionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
   export type StatusDetails = string;
   export type StatusMessage = string;
+  export type StepName = string;
+  export type StepStatus = "Starting"|"Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded"|string;
   export interface StopAutoMLJobRequest {
     /**
      * The name of the object you are requesting.
@@ -9100,6 +11946,22 @@ declare namespace SageMaker {
      */
     NotebookInstanceName: NotebookInstanceName;
   }
+  export interface StopPipelineExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken: IdempotencyToken;
+  }
+  export interface StopPipelineExecutionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
   export interface StopProcessingJobRequest {
     /**
      * The name of the processing job to stop.
@@ -9131,7 +11993,9 @@ declare namespace SageMaker {
   export type String = string;
   export type String1024 = string;
   export type String200 = string;
+  export type String2048 = string;
   export type String256 = string;
+  export type String64 = string;
   export type StringParameterValue = string;
   export type SubnetId = string;
   export type Subnets = SubnetId[];
@@ -9165,6 +12029,7 @@ declare namespace SageMaker {
      */
     PropertyNameQuery?: PropertyNameQuery;
   }
+  export type TableName = string;
   export interface Tag {
     /**
      * The tag key.
@@ -9180,7 +12045,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"x86_win32"|"x86_win64"|"coreml"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
     /**
@@ -9227,7 +12092,23 @@ declare namespace SageMaker {
     S3OutputPath: S3Uri;
   }
   export type TenthFractionsOfACent = number;
+  export type TerminationWaitInSeconds = number;
   export type Timestamp = Date;
+  export interface TrafficRoutingConfig {
+    /**
+     * 
+     */
+    Type: TrafficRoutingConfigType;
+    /**
+     * 
+     */
+    WaitIntervalInSeconds: WaitIntervalInSeconds;
+    /**
+     * 
+     */
+    CanarySize?: CapacitySize;
+  }
+  export type TrafficRoutingConfigType = "ALL_AT_ONCE"|"CANARY"|string;
   export type TrainingInputMode = "Pipe"|"File"|string;
   export type TrainingInstanceCount = number;
   export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
@@ -9358,7 +12239,7 @@ declare namespace SageMaker {
      */
     DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
     /**
-     * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
      */
     Tags?: TagList;
   }
@@ -9415,6 +12296,12 @@ declare namespace SageMaker {
      * The number of training jobs launched by a hyperparameter tuning job that were manually stopped.
      */
     Stopped?: TrainingJobStatusCounter;
+  }
+  export interface TrainingJobStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the training job that was run by this step execution.
+     */
+    Arn?: TrainingJobArn;
   }
   export type TrainingJobSummaries = TrainingJobSummary[];
   export interface TrainingJobSummary {
@@ -9609,6 +12496,12 @@ declare namespace SageMaker {
   }
   export type TransformJobName = string;
   export type TransformJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export interface TransformJobStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the transform job that was run by this step execution.
+     */
+    Arn?: TransformJobArn;
+  }
   export type TransformJobSummaries = TransformJobSummary[];
   export interface TransformJobSummary {
     /**
@@ -9710,6 +12603,7 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
+    MetadataProperties?: MetadataProperties;
     /**
      * The list of tags that are associated with the trial. You can use Search API to search on the tags.
      */
@@ -9772,6 +12666,7 @@ declare namespace SageMaker {
      * The metrics for the component.
      */
     Metrics?: TrialComponentMetricSummaries;
+    MetadataProperties?: MetadataProperties;
     /**
      * Details of the source of the component.
      */
@@ -10033,6 +12928,34 @@ declare namespace SageMaker {
      */
     ContentSha256?: TemplateContentSha256;
   }
+  export interface UpdateActionRequest {
+    /**
+     * The name of the action to update.
+     */
+    ActionName: ExperimentEntityName;
+    /**
+     * The new description for the action.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * The new status for the action.
+     */
+    Status?: ActionStatus;
+    /**
+     * The new list of properties. Overwrites the current property list.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * A list of properties to remove.
+     */
+    PropertiesToRemove?: ListLineageEntityParameterKey;
+  }
+  export interface UpdateActionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    ActionArn?: ActionArn;
+  }
   export interface UpdateAppImageConfigRequest {
     /**
      * The name of the AppImageConfig to update.
@@ -10049,6 +12972,30 @@ declare namespace SageMaker {
      */
     AppImageConfigArn?: AppImageConfigArn;
   }
+  export interface UpdateArtifactRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact to update.
+     */
+    ArtifactArn: ArtifactArn;
+    /**
+     * The new name for the artifact.
+     */
+    ArtifactName?: ExperimentEntityName;
+    /**
+     * The new list of properties. Overwrites the current property list.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * A list of properties to remove.
+     */
+    PropertiesToRemove?: ListLineageEntityParameterKey;
+  }
+  export interface UpdateArtifactResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the artifact.
+     */
+    ArtifactArn?: ArtifactArn;
+  }
   export interface UpdateCodeRepositoryInput {
     /**
      * The name of the Git repository to update.
@@ -10064,6 +13011,30 @@ declare namespace SageMaker {
      * The ARN of the Git repository.
      */
     CodeRepositoryArn: CodeRepositoryArn;
+  }
+  export interface UpdateContextRequest {
+    /**
+     * The name of the context to update.
+     */
+    ContextName: ExperimentEntityName;
+    /**
+     * The new description for the context.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * The new list of properties. Overwrites the current property list.
+     */
+    Properties?: LineageEntityParameters;
+    /**
+     * A list of properties to remove.
+     */
+    PropertiesToRemove?: ListLineageEntityParameterKey;
+  }
+  export interface UpdateContextResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the context.
+     */
+    ContextArn?: ContextArn;
   }
   export interface UpdateDomainRequest {
     /**
@@ -10091,13 +13062,17 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     * When updating endpoint resources, enables or disables the retention of variant properties, such as the instance count or the variant weight. To retain the variant properties of an endpoint when updating it, set RetainAllVariantProperties to true. To use the variant properties specified in a new EndpointConfig call when updating an endpoint, set RetainAllVariantProperties to false.
+     * When updating endpoint resources, enables or disables the retention of variant properties, such as the instance count or the variant weight. To retain the variant properties of an endpoint when updating it, set RetainAllVariantProperties to true. To use the variant properties specified in a new EndpointConfig call when updating an endpoint, set RetainAllVariantProperties to false. The default is false.
      */
     RetainAllVariantProperties?: Boolean;
     /**
      * When you are updating endpoint resources with UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true, ExcludeRetainedVariantProperties specifies the list of type VariantProperty to override with the values provided by EndpointConfig. If you don't specify a value for ExcludeAllVariantProperties, no variant properties are overridden. 
      */
     ExcludeRetainedVariantProperties?: VariantPropertyList;
+    /**
+     * The deployment configuration for the endpoint to be updated.
+     */
+    DeploymentConfig?: DeploymentConfig;
   }
   export interface UpdateEndpointOutput {
     /**
@@ -10168,6 +13143,26 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the image.
      */
     ImageArn?: ImageArn;
+  }
+  export interface UpdateModelPackageInput {
+    /**
+     * The Amazon Resource Name (ARN) of the model.
+     */
+    ModelPackageArn: ModelPackageArn;
+    /**
+     * The approval status of the model.
+     */
+    ModelApprovalStatus: ModelApprovalStatus;
+    /**
+     * A description for the approval status of the model.
+     */
+    ApprovalDescription?: ApprovalDescription;
+  }
+  export interface UpdateModelPackageOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the model.
+     */
+    ModelPackageArn: ModelPackageArn;
   }
   export interface UpdateMonitoringScheduleRequest {
     /**
@@ -10256,6 +13251,54 @@ declare namespace SageMaker {
   export interface UpdateNotebookInstanceLifecycleConfigOutput {
   }
   export interface UpdateNotebookInstanceOutput {
+  }
+  export interface UpdatePipelineExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+    /**
+     * The description of the pipeline execution.
+     */
+    PipelineExecutionDescription?: PipelineExecutionDescription;
+    /**
+     * The display name of the pipeline execution.
+     */
+    PipelineExecutionDisplayName?: PipelineExecutionName;
+  }
+  export interface UpdatePipelineExecutionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
+  export interface UpdatePipelineRequest {
+    /**
+     * The name of the pipeline to update.
+     */
+    PipelineName: PipelineName;
+    /**
+     * The display name of the pipeline.
+     */
+    PipelineDisplayName?: PipelineName;
+    /**
+     * The JSON pipeline definition.
+     */
+    PipelineDefinition?: PipelineDefinition;
+    /**
+     * The description of the pipeline.
+     */
+    PipelineDescription?: PipelineDescription;
+    /**
+     * The Amazon Resource Name (ARN) that the pipeline uses to execute.
+     */
+    RoleArn?: RoleArn;
+  }
+  export interface UpdatePipelineResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated pipeline.
+     */
+    PipelineArn?: PipelineArn;
   }
   export interface UpdateTrialComponentRequest {
     /**
@@ -10481,6 +13524,7 @@ declare namespace SageMaker {
   }
   export type VpcId = string;
   export type VpcSecurityGroupIds = SecurityGroupId[];
+  export type WaitIntervalInSeconds = number;
   export interface Workforce {
     /**
      * The name of the private workforce.

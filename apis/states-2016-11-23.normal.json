@@ -466,6 +466,43 @@
       "documentation": "<p>Starts a state machine execution.</p> <note> <p> <code>StartExecution</code> is idempotent. If <code>StartExecution</code> is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 <code>ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p> </note>",
       "idempotent": true
     },
+    "StartSyncExecution": {
+      "name": "StartSyncExecution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartSyncExecutionInput"
+      },
+      "output": {
+        "shape": "StartSyncExecutionOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArn"
+        },
+        {
+          "shape": "InvalidExecutionInput"
+        },
+        {
+          "shape": "InvalidName"
+        },
+        {
+          "shape": "StateMachineDoesNotExist"
+        },
+        {
+          "shape": "StateMachineDeleting"
+        },
+        {
+          "shape": "StateMachineTypeNotSupported"
+        }
+      ],
+      "documentation": "<p>Starts a Synchronous Express state machine execution.</p>",
+      "endpoint": {
+        "hostPrefix": "sync-"
+      }
+    },
     "StopExecution": {
       "name": "StopExecution",
       "http": {
@@ -706,11 +743,33 @@
       "max": 256,
       "min": 1
     },
+    "BilledDuration": {
+      "type": "long",
+      "min": 0
+    },
+    "BilledMemoryUsed": {
+      "type": "long",
+      "min": 0
+    },
+    "BillingDetails": {
+      "type": "structure",
+      "members": {
+        "billedMemoryUsedInMB": {
+          "shape": "BilledMemoryUsed",
+          "documentation": "<p>Billed memory consumption of your workflow, in MB.</p>"
+        },
+        "billedDurationInMilliseconds": {
+          "shape": "BilledDuration",
+          "documentation": "<p>Billed duration of your workflow, in milliseconds.</p>"
+        }
+      },
+      "documentation": "<p>An object that describes workflow billing details.</p>"
+    },
     "CloudWatchEventsExecutionDataDetails": {
       "type": "structure",
       "members": {
         "included": {
-          "shape": "included",
+          "shape": "includedDetails",
           "documentation": "<p>Indicates whether input or output was included in the response. Always <code>true</code> for API calls. </p>"
         }
       },
@@ -915,7 +974,7 @@
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "stateMachineArn": {
           "shape": "Arn",
@@ -953,7 +1012,7 @@
         },
         "traceHeader": {
           "shape": "TraceHeader",
-          "documentation": "<p>The AWS X-Ray trace header which was passed to the execution.</p>"
+          "documentation": "<p>The AWS X-Ray trace header that was passed to the execution.</p>"
         }
       }
     },
@@ -1120,7 +1179,7 @@
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "stateMachineArn": {
           "shape": "Arn",
@@ -1921,11 +1980,100 @@
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "startDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date the execution is started.</p>"
+        }
+      }
+    },
+    "StartSyncExecutionInput": {
+      "type": "structure",
+      "required": [
+        "stateMachineArn"
+      ],
+      "members": {
+        "stateMachineArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the state machine to execute.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the execution.</p>"
+        },
+        "input": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON input data, you still must include the two braces, for example: <code>\"input\": \"{}\"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.</p>"
+        }
+      }
+    },
+    "StartSyncExecutionOutput": {
+      "type": "structure",
+      "required": [
+        "executionArn",
+        "startDate",
+        "stopDate",
+        "status"
+      ],
+      "members": {
+        "executionArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
+        },
+        "stateMachineArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the execution.</p>"
+        },
+        "startDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the execution is started.</p>"
+        },
+        "stopDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>If the execution has already ended, the date the execution stopped.</p>"
+        },
+        "status": {
+          "shape": "SyncExecutionStatus",
+          "documentation": "<p>The current status of the execution.</p>"
+        },
+        "error": {
+          "shape": "SensitiveError",
+          "documentation": "<p>The error code of the failure.</p>"
+        },
+        "cause": {
+          "shape": "SensitiveCause",
+          "documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+        },
+        "input": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "output": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>"
+        },
+        "outputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>The AWS X-Ray trace header that was passed to the execution.</p>"
+        },
+        "billingDetails": {
+          "shape": "BillingDetails",
+          "documentation": "<p>An object that describes workflow billing details, including billed duration and memory use.</p>"
         }
       }
     },
@@ -2050,6 +2198,14 @@
           "documentation": "<p>The date the execution is stopped.</p>"
         }
       }
+    },
+    "SyncExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "TIMED_OUT"
+      ]
     },
     "Tag": {
       "type": "structure",
@@ -2412,7 +2568,7 @@
         }
       }
     },
-    "included": {
+    "includedDetails": {
       "type": "boolean"
     },
     "truncated": {

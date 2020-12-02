@@ -1,0 +1,82 @@
+[
+    {
+        "type": "feature",
+        "category": "AmplifyBackend",
+        "description": "(New Service) The Amplify Admin UI offers an accessible way to develop app backends and manage app content. We recommend that you use the Amplify Admin UI to manage the backend of your Amplify app."
+    },
+    {
+        "type": "feature",
+        "category": "AppIntegrations",
+        "description": "The Amazon AppIntegrations service (in preview release) enables you to configure and reuse connections to external applications."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds an Amazon Connect API that provides the ability to create tasks, and a set of APIs (in preview) to configure AppIntegrations associations with Amazon Connect instances."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectContactLens",
+        "description": "Contact Lens for Amazon Connect analyzes conversations, both real-time and post-call. The ListRealtimeContactAnalysisSegments API returns a list of analysis segments for a real-time analysis session."
+    },
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "(New Service) Amazon DevOps Guru is available in public preview. It's a fully managed service that uses machine learning to analyze your operational solutions to help you find and troubleshoot issues."
+    },
+    {
+        "type": "feature",
+        "category": "DirectoryService",
+        "description": "Adding client authentication feature for AWS AD Connector"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs"
+    },
+    {
+        "type": "feature",
+        "category": "ECRPUBLIC",
+        "description": "Supports Amazon Elastic Container Registry (Amazon ECR) Public, a fully managed registry that makes it easy for a developer to publicly share container software worldwide for anyone to download."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS now allows you to define and manage the lifecycle for Kubernetes add-ons for your clusters. This release adds support for the AWS VPC CNI (vpc-cni)."
+    },
+    {
+        "type": "feature",
+        "category": "Honeycode",
+        "description": "Introducing APIs to read and write directly from Honeycode tables. Use APIs to pull table and column metadata, then use the read and write APIs to programmatically read and write from the tables."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "This release includes support for a new feature: Container images support in AWS Lambda. This adds APIs for deploying functions as container images. AWS Lambda now supports memory up to 10240MB."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutVision",
+        "description": "This release introduces support for Amazon Lookout for Vision."
+    },
+    {
+        "type": "feature",
+        "category": "Profile",
+        "description": "This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features."
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerFeatureStoreRuntime",
+        "description": "This release adds support for Amazon SageMaker Feature Store, which makes it easy for customers to create, version, share, and manage curated data for machine learning (ML) development."
+    }
+]

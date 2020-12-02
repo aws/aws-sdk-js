@@ -1,6 +1,71 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.797.0-->
+<!--LATEST=2.802.0-->
 <!--ENTRYINSERT-->
+
+## 2.802.0
+* bugfix: Profile: Removes an incorrectly named service `Profile` that was included in release, v2.801.0
+* feature: CustomerProfiles: This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center.
+
+## 2.801.0
+* feature: AmplifyBackend: (New Service) The Amplify Admin UI offers an accessible way to develop app backends and manage app content. We recommend that you use the Amplify Admin UI to manage the backend of your Amplify app.
+* feature: AppIntegrations: The Amazon AppIntegrations service (in preview release) enables you to configure and reuse connections to external applications.
+* feature: Connect: This release adds an Amazon Connect API that provides the ability to create tasks, and a set of APIs (in preview) to configure AppIntegrations associations with Amazon Connect instances.
+* feature: ConnectContactLens: Contact Lens for Amazon Connect analyzes conversations, both real-time and post-call. The ListRealtimeContactAnalysisSegments API returns a list of analysis segments for a real-time analysis session.
+* feature: DevOpsGuru: (New Service) Amazon DevOps Guru is available in public preview. It's a fully managed service that uses machine learning to analyze your operational solutions to help you find and troubleshoot issues.
+* feature: DirectoryService: Adding client authentication feature for AWS AD Connector
+* feature: EC2: This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs
+* feature: ECRPUBLIC: Supports Amazon Elastic Container Registry (Amazon ECR) Public, a fully managed registry that makes it easy for a developer to publicly share container software worldwide for anyone to download.
+* feature: EKS: Amazon EKS now allows you to define and manage the lifecycle for Kubernetes add-ons for your clusters. This release adds support for the AWS VPC CNI (vpc-cni).
+* feature: Honeycode: Introducing APIs to read and write directly from Honeycode tables. Use APIs to pull table and column metadata, then use the read and write APIs to programmatically read and write from the tables.
+* feature: Lambda: This release includes support for a new feature: Container images support in AWS Lambda. This adds APIs for deploying functions as container images. AWS Lambda now supports memory up to 10240MB.
+* feature: LookoutVision: This release introduces support for Amazon Lookout for Vision.
+* feature: Profile: This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center.
+* feature: S3: S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS
+* feature: SageMaker: Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features.
+* feature: SageMakerFeatureStoreRuntime: This release adds support for Amazon SageMaker Feature Store, which makes it easy for customers to create, version, share, and manage curated data for machine learning (ML) development.
+
+## 2.800.0
+* feature: EC2: This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
+
+## 2.799.0
+* feature: Appflow: Upsolver as a destination connector and documentation update.
+* feature: Batch: Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support.
+* feature: CloudFormation: Adds support for the new Modules feature for CloudFormation. A module encapsulates one or more resources and their respective configurations for reuse across your organization.
+* feature: CloudTrail: CloudTrail now includes advanced event selectors, which give you finer-grained control over the events that are logged to your trail.
+* feature: CodeBuild: Adding GetReportGroupTrend API for Test Reports.
+* feature: CognitoIdentityServiceProvider: This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users.
+* feature: Comprehend: Support Comprehend events detection APIs
+* feature: ElasticBeanstalk: Updates the Integer constraint of DescribeEnvironmentManagedActionHistory's MaxItems parameter to [1, 100].
+* feature: FSx: This release adds the capability to increase storage capacity of Amazon FSx for Lustre file systems, providing the flexibility to meet evolving storage needs over time.
+* feature: GameLift: GameLift FlexMatch is now available as a standalone matchmaking solution. FlexMatch now provides customizable matchmaking for games hosted peer-to-peer, on-premises, or on cloud compute primitives.
+* feature: IoTSiteWise: This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise.
+* feature: LexModelBuildingService: Lex now supports es-419, de-DE locales
+* feature: MWAA: (New Service) Amazon MWAA is a managed service for Apache Airflow that makes it easy for data engineers and data scientists to execute data processing workflows in the cloud.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for Vorbis and Opus audio in OGG/OGA containers.
+* feature: QuickSight: Support for embedding without user registration. New enum EmbeddingIdentityType. A potential breaking change. Affects code that refers IdentityType enum type directly instead of literal string value.
+* feature: StepFunctions: This release of the AWS Step Functions SDK introduces support for Synchronous Express Workflows
+* feature: TimestreamWrite: Adds support of upserts for idempotent updates to Timestream.
+
+## 2.798.0
+* feature: ApplicationInsights: Add Detected Workload to ApplicationComponent which shows the workloads that installed in the component
+* feature: CodeArtifact: Add support for the NuGet package format.
+* feature: CodeStarconnections: Added support for the UpdateHost API.
+* feature: DynamoDB: With this release, you can capture data changes in any Amazon DynamoDB table as an Amazon Kinesis data stream. You also can use PartiQL (SQL-compatible language) to manipulate data in DynamoDB tables.
+* feature: EC2: This release adds support for Multiple Private DNS names to DescribeVpcEndpointServices response.
+* feature: ECS: This release adds support for updating capacity providers, specifying custom instance warmup periods for capacity providers, and using deployment circuit breaker for your ECS Services.
+* feature: EMR: Add API support for EMR Studio, a new notebook-first IDE for data scientists and data engineers with single sign-on, Jupyter notebooks, automated infrastructure provisioning, and job diagnosis.
+* feature: ForecastService: Releasing the set of PredictorBacktestExportJob APIs which allow customers to export backtest values and item-level metrics data from Predictor training.
+* feature: Glue: Feature1 - Glue crawler adds data lineage configuration option. Feature2 - AWS Glue Data Catalog adds APIs for PartitionIndex creation and deletion as part of Enhancement Partition Management feature.
+* feature: Iot: This release enables users to identify different file types in the over-the-air update (OTA) functionality using fileType parameter for CreateOTAUpdate API
+* feature: Kafka: Adding MAINTENANCE and REBOOTING_BROKER to Cluster states.
+* feature: Lambda: This release includes support for new feature: Code Signing for AWS Lambda. This adds new resources and APIs to configure Lambda functions to accept and verify signed code artifacts at deployment.
+* feature: LicenseManager: AWS License Manager now provides the ability for license administrators to be able to associate license configurations to AMIs shared with their AWS account
+* feature: Outposts: Support specifying tags during the creation of the Outpost resource. Tags are now returned in the response body of Outpost APIs.
+* feature: SSOAdmin: AWS Single Sign-On now enables attribute-based access control for workforce identities to simplify permissions in AWS
+* feature: SecurityHub: Updated the account management API to support the integration with AWS Organizations. Added new methods to allow users to view and manage the delegated administrator account for Security Hub.
+* feature: Signer: AWS Signer is launching code-signing for AWS Lambda. Now customers can cryptographically sign Lambda code to ensure trust, integrity, and functionality.
+* feature: TimestreamQuery: Amazon Timestream now supports "QueryStatus" in Query API which has information about cumulative bytes scanned, metered, as well as progress percentage for the query.
+* feature: Translate: This update adds new operations to create and manage parallel data in Amazon Translate. Parallel data is a resource that you can use to run Active Custom Translation jobs.
 
 ## 2.797.0
 * feature: AppMesh: This release makes tag value a required attribute of the tag's key-value pair.

@@ -399,7 +399,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.</p>",
+      "documentation": "<p>Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -824,6 +824,31 @@
       "endpoint": {
         "hostPrefix": "monitor."
       }
+    },
+    "DescribeDefaultEncryptionConfiguration": {
+      "name": "DescribeDefaultEncryptionConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/configuration/account/encryption"
+      },
+      "input": {
+        "shape": "DescribeDefaultEncryptionConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeDefaultEncryptionConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about the default encryption configuration for the AWS account in the default or specified region. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
     },
     "DescribeGateway": {
       "name": "DescribeGateway",
@@ -1405,6 +1430,37 @@
         }
       ],
       "documentation": "<p>Retrieves the list of tags for an AWS IoT SiteWise resource.</p>"
+    },
+    "PutDefaultEncryptionConfiguration": {
+      "name": "PutDefaultEncryptionConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/configuration/account/encryption"
+      },
+      "input": {
+        "shape": "PutDefaultEncryptionConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutDefaultEncryptionConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ConflictingOperationException"
+        }
+      ],
+      "documentation": "<p>Sets the default encryption configuration for the AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
     },
     "PutLoggingOptions": {
       "name": "PutLoggingOptions",
@@ -2659,6 +2715,49 @@
       "min": 36,
       "pattern": "\\S{36,64}"
     },
+    "ConfigurationErrorDetails": {
+      "type": "structure",
+      "required": [
+        "code",
+        "message"
+      ],
+      "members": {
+        "code": {
+          "shape": "ErrorCode",
+          "documentation": "<p/>"
+        },
+        "message": {
+          "shape": "ErrorMessage",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "ConfigurationState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "UPDATE_IN_PROGRESS",
+        "UPDATE_FAILED"
+      ]
+    },
+    "ConfigurationStatus": {
+      "type": "structure",
+      "required": [
+        "state"
+      ],
+      "members": {
+        "state": {
+          "shape": "ConfigurationState",
+          "documentation": "<p/>"
+        },
+        "error": {
+          "shape": "ConfigurationErrorDetails",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "CreateAccessPolicyRequest": {
       "type": "structure",
       "required": [
@@ -2989,7 +3088,7 @@
         },
         "sessionDurationSeconds": {
           "shape": "SessionDurationSeconds",
-          "documentation": "<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 900 seconds (15 minutes)</p>",
+          "documentation": "<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 43,200 seconds (12 hours)</p>",
           "location": "querystring",
           "locationName": "sessionDurationSeconds"
         }
@@ -3003,7 +3102,7 @@
       "members": {
         "presignedPortalUrl": {
           "shape": "Url",
-          "documentation": "<p>The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt;</code> </p>"
+          "documentation": "<p>The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt;</code> </p>"
         }
       }
     },
@@ -3586,6 +3685,31 @@
         }
       }
     },
+    "DescribeDefaultEncryptionConfigurationRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeDefaultEncryptionConfigurationResponse": {
+      "type": "structure",
+      "required": [
+        "encryptionType",
+        "configurationStatus"
+      ],
+      "members": {
+        "encryptionType": {
+          "shape": "EncryptionType",
+          "documentation": "<p>The type of encryption used for the encryption configuration.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "ARN",
+          "documentation": "<p>The key ARN of the customer managed customer master key (CMK) used for AWS KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.</p>"
+        },
+        "configurationStatus": {
+          "shape": "ConfigurationStatus",
+          "documentation": "<p>The status of the account configuration. This contains the <code>ConfigurationState</code>. If there's an error, it also contains the <code>ErrorDetails</code>.</p>"
+        }
+      }
+    },
     "DescribeGatewayCapabilityConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -3882,6 +4006,13 @@
       "max": 255,
       "min": 1,
       "pattern": "[^@]+@[^@]+"
+    },
+    "EncryptionType": {
+      "type": "string",
+      "enum": [
+        "SITEWISE_DEFAULT_ENCRYPTION",
+        "KMS_BASED_ENCRYPTION"
+      ]
     },
     "EntryId": {
       "type": "string",
@@ -4371,6 +4502,11 @@
       "max": 3,
       "min": 2,
       "pattern": "1w|1d|1h|15m|5m|1m"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
     },
     "ListAccessPoliciesRequest": {
       "type": "structure",
@@ -5208,6 +5344,43 @@
         }
       },
       "documentation": "<p>Contains a list of value updates for an asset property in the list of asset entries consumed by the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html\">BatchPutAssetPropertyValue</a> API operation.</p>"
+    },
+    "PutDefaultEncryptionConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "encryptionType"
+      ],
+      "members": {
+        "encryptionType": {
+          "shape": "EncryptionType",
+          "documentation": "<p>The type of encryption used for the encryption configuration.</p>"
+        },
+        "kmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The Key ID of the customer managed customer master key (CMK) used for AWS KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.</p>"
+        }
+      }
+    },
+    "PutDefaultEncryptionConfigurationResponse": {
+      "type": "structure",
+      "required": [
+        "encryptionType",
+        "configurationStatus"
+      ],
+      "members": {
+        "encryptionType": {
+          "shape": "EncryptionType",
+          "documentation": "<p>The type of encryption used for the encryption configuration.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.</p>"
+        },
+        "configurationStatus": {
+          "shape": "ConfigurationStatus",
+          "documentation": "<p>The status of the account configuration. This contains the <code>ConfigurationState</code>. If there is an error, it also contains the <code>ErrorDetails</code>.</p>"
+        }
+      }
     },
     "PutLoggingOptionsRequest": {
       "type": "structure",

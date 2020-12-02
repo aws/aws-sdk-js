@@ -1935,6 +1935,10 @@ declare namespace CloudFormation {
      */
     DeprecatedStatus?: DeprecatedStatus;
     /**
+     * The type of extension.
+     */
+    Type?: RegistryType;
+    /**
      * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
      */
     MaxResults?: MaxResults;
@@ -1964,12 +1968,23 @@ declare namespace CloudFormation {
      */
     LogGroupName: LogGroupName;
   }
+  export type LogicalIdHierarchy = string;
   export type LogicalResourceId = string;
   export type LogicalResourceIds = LogicalResourceId[];
   export type MaxConcurrentCount = number;
   export type MaxConcurrentPercentage = number;
   export type MaxResults = number;
   export type Metadata = string;
+  export interface ModuleInfo {
+    /**
+     * A concantenated list of the the module type or types containing the resource. Module types are listed starting with the inner-most nested module, and separated by /. In the following example, the resource was created from a module of type AWS::First::Example::MODULE, that is nested inside a parent module of type AWS::Second::Example::MODULE.  AWS::First::Example::MODULE/AWS::Second::Example::MODULE 
+     */
+    TypeHierarchy?: TypeHierarchy;
+    /**
+     * A concantenated list of the logical IDs of the module or modules containing the resource. Modules are listed starting with the inner-most nested module, and separated by /. In the following example, the resource was created from a module, moduleA, that is nested inside a parent module, moduleB.  moduleA/moduleB  For more information, see Referencing resources in a module in the CloudFormation User Guide.
+     */
+    LogicalIdHierarchy?: LogicalIdHierarchy;
+  }
   export type MonitoringTimeInMinutes = number;
   export type NextToken = string;
   export type NoEcho = boolean;
@@ -2164,7 +2179,7 @@ declare namespace CloudFormation {
   export type RegistrationStatus = "COMPLETE"|"IN_PROGRESS"|"FAILED"|string;
   export type RegistrationToken = string;
   export type RegistrationTokenList = RegistrationToken[];
-  export type RegistryType = "RESOURCE"|string;
+  export type RegistryType = "RESOURCE"|"MODULE"|string;
   export type Replacement = "True"|"False"|"Conditional"|string;
   export type RequestToken = string;
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
@@ -2202,6 +2217,10 @@ declare namespace CloudFormation {
      * The change set ID of the nested change set.
      */
     ChangeSetId?: ChangeSetId;
+    /**
+     * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
+     */
+    ModuleInfo?: ModuleInfo;
   }
   export interface ResourceChangeDetail {
     /**
@@ -2680,6 +2699,10 @@ declare namespace CloudFormation {
      * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
      */
     DriftInformation?: StackResourceDriftInformation;
+    /**
+     * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
+     */
+    ModuleInfo?: ModuleInfo;
   }
   export interface StackResourceDetail {
     /**
@@ -2726,6 +2749,10 @@ declare namespace CloudFormation {
      * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
      */
     DriftInformation?: StackResourceDriftInformation;
+    /**
+     * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
+     */
+    ModuleInfo?: ModuleInfo;
   }
   export interface StackResourceDrift {
     /**
@@ -2768,6 +2795,10 @@ declare namespace CloudFormation {
      * Time at which AWS CloudFormation performed drift detection on the stack resource.
      */
     Timestamp: Timestamp;
+    /**
+     * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
+     */
+    ModuleInfo?: ModuleInfo;
   }
   export interface StackResourceDriftInformation {
     /**
@@ -2822,6 +2853,10 @@ declare namespace CloudFormation {
      * Information about whether the resource's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
      */
     DriftInformation?: StackResourceDriftInformationSummary;
+    /**
+     * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
+     */
+    ModuleInfo?: ModuleInfo;
   }
   export type StackResources = StackResource[];
   export interface StackSet {
@@ -3195,6 +3230,7 @@ declare namespace CloudFormation {
   export type TransformsList = TransformName[];
   export type Type = string;
   export type TypeArn = string;
+  export type TypeHierarchy = string;
   export type TypeName = string;
   export type TypeSchema = string;
   export type TypeSummaries = TypeSummary[];
