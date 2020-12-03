@@ -44,6 +44,14 @@ declare class ComputeOptimizer extends Service {
    */
   getAutoScalingGroupRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse, AWSError>;
   /**
+   * Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations. AWS Compute Optimizer generates recommendations for Amazon EBS volumes that meet a specific set of requirements. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide.
+   */
+  getEBSVolumeRecommendations(params: ComputeOptimizer.Types.GetEBSVolumeRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEBSVolumeRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetEBSVolumeRecommendationsResponse, AWSError>;
+  /**
+   * Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations. AWS Compute Optimizer generates recommendations for Amazon EBS volumes that meet a specific set of requirements. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide.
+   */
+  getEBSVolumeRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEBSVolumeRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetEBSVolumeRecommendationsResponse, AWSError>;
+  /**
    * Returns Amazon EC2 instance recommendations. AWS Compute Optimizer generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that meet a specific set of requirements. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide.
    */
   getEC2InstanceRecommendations(params: ComputeOptimizer.Types.GetEC2InstanceRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEC2InstanceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetEC2InstanceRecommendationsResponse, AWSError>;
@@ -60,11 +68,11 @@ declare class ComputeOptimizer extends Service {
    */
   getEC2RecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse, AWSError>;
   /**
-   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.
+   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the management account of an organization, this action also confirms the enrollment status of member accounts within the organization.
    */
   getEnrollmentStatus(params: ComputeOptimizer.Types.GetEnrollmentStatusRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
   /**
-   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.
+   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the management account of an organization, this action also confirms the enrollment status of member accounts within the organization.
    */
   getEnrollmentStatus(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
   /**
@@ -76,11 +84,11 @@ declare class ComputeOptimizer extends Service {
    */
   getRecommendationSummaries(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.
+   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a management account of an organization, this action can also be used to enroll member accounts within the organization.
    */
   updateEnrollmentStatus(params: ComputeOptimizer.Types.UpdateEnrollmentStatusRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.UpdateEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.UpdateEnrollmentStatusResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.
+   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a management account of an organization, this action can also be used to enroll member accounts within the organization.
    */
   updateEnrollmentStatus(callback?: (err: AWSError, data: ComputeOptimizer.Types.UpdateEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.UpdateEnrollmentStatusResponse, AWSError>;
 }
@@ -122,7 +130,7 @@ declare namespace ComputeOptimizer {
      */
     autoScalingGroupName?: AutoScalingGroupName;
     /**
-     * The finding classification for the Auto Scaling group. Findings for Auto Scaling groups include:     NotOptimized —An Auto Scaling group is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.     Optimized —An Auto Scaling group is considered optimized when Compute Optimizer determines that the group is correctly provisioned to run your workload based on the chosen instance type. For optimized resources, Compute Optimizer might recommend a new generation instance type.    The values that are returned might be NOT_OPTIMIZED or OPTIMIZED. 
+     * The finding classification for the Auto Scaling group. Findings for Auto Scaling groups include:     NotOptimized —An Auto Scaling group is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.     Optimized —An Auto Scaling group is considered optimized when Compute Optimizer determines that the group is correctly provisioned to run your workload based on the chosen instance type. For optimized resources, Compute Optimizer might recommend a new generation instance type.  
      */
     finding?: Finding;
     /**
@@ -201,9 +209,38 @@ declare namespace ComputeOptimizer {
   export type DestinationBucket = string;
   export type DestinationKey = string;
   export type DestinationKeyPrefix = string;
+  export interface EBSFilter {
+    /**
+     * The name of the filter. Specify Finding to return recommendations with a specific finding classification (e.g., Optimized).
+     */
+    name?: EBSFilterName;
+    /**
+     * The value of the filter. The valid values are Optimized, or NotOptimized.
+     */
+    values?: FilterValues;
+  }
+  export type EBSFilterName = "Finding"|string;
+  export type EBSFilters = EBSFilter[];
+  export type EBSFinding = "Optimized"|"NotOptimized"|string;
+  export type EBSMetricName = "VolumeReadOpsPerSecond"|"VolumeWriteOpsPerSecond"|"VolumeReadBytesPerSecond"|"VolumeWriteBytesPerSecond"|string;
+  export interface EBSUtilizationMetric {
+    /**
+     * The name of the utilization metric. The following utilization metrics are available:    VolumeReadOpsPerSecond - The completed read operations per second from the volume in a specified period of time. Unit: Count    VolumeWriteOpsPerSecond - The completed write operations per second to the volume in a specified period of time. Unit: Count    VolumeReadBytesPerSecond - The bytes read per second from the volume in a specified period of time. Unit: Bytes    VolumeWriteBytesPerSecond - The bytes written to the volume in a specified period of time. Unit: Bytes  
+     */
+    name?: EBSMetricName;
+    /**
+     * The statistic of the utilization metric. The following statistics are available:    Average - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.  
+     */
+    statistic?: MetricStatistic;
+    /**
+     * The value of the utilization metric.
+     */
+    value?: MetricValue;
+  }
+  export type EBSUtilizationMetrics = EBSUtilizationMetric[];
   export interface ExportAutoScalingGroupRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to export Auto Scaling group recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     * The IDs of the AWS accounts for which to export Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
      */
     accountIds?: AccountIds;
     /**
@@ -223,7 +260,7 @@ declare namespace ComputeOptimizer {
      */
     fileFormat?: FileFormat;
     /**
-     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
+     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
      */
     includeMemberAccounts?: IncludeMemberAccounts;
   }
@@ -245,7 +282,7 @@ declare namespace ComputeOptimizer {
   }
   export interface ExportEC2InstanceRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to export instance recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     * The IDs of the AWS accounts for which to export instance recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
      */
     accountIds?: AccountIds;
     /**
@@ -265,7 +302,7 @@ declare namespace ComputeOptimizer {
      */
     fileFormat?: FileFormat;
     /**
-     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
+     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
      */
     includeMemberAccounts?: IncludeMemberAccounts;
   }
@@ -287,11 +324,11 @@ declare namespace ComputeOptimizer {
   export type FileFormat = "Csv"|string;
   export interface Filter {
     /**
-     * The name of the filter. Specify Finding to return recommendations with a specific findings classification (e.g., Overprovisioned). Specify RecommendationSourceType to return recommendations of a specific resource type (e.g., AutoScalingGroup).
+     * The name of the filter. Specify Finding to return recommendations with a specific finding classification (e.g., Overprovisioned). Specify RecommendationSourceType to return recommendations of a specific resource type (e.g., AutoScalingGroup).
      */
     name?: FilterName;
     /**
-     * The value of the filter. If you specify the name parameter as Finding, and you request recommendations for an instance, then the valid values are Underprovisioned, Overprovisioned, NotOptimized, or Optimized. If you specify the name parameter as Finding, and you request recommendations for an Auto Scaling group, then the valid values are Optimized, or NotOptimized. If you specify the name parameter as RecommendationSourceType, then the valid values are Ec2Instance, or AutoScalingGroup.
+     * The value of the filter. The valid values for this parameter are as follows, depending on what you specify for the name parameter and the resource type that you wish to filter results for:   Specify Optimized or NotOptimized if you specified the name parameter as Finding and you want to filter results for Auto Scaling groups.   Specify Underprovisioned, Overprovisioned, or Optimized if you specified the name parameter as Finding and you want to filter results for EC2 instances.   Specify Ec2Instance or AutoScalingGroup if you specified the name parameter as RecommendationSourceType.  
      */
     values?: FilterValues;
   }
@@ -302,7 +339,7 @@ declare namespace ComputeOptimizer {
   export type Finding = "Underprovisioned"|"Overprovisioned"|"Optimized"|"NotOptimized"|string;
   export interface GetAutoScalingGroupRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to return Auto Scaling group recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -336,6 +373,42 @@ declare namespace ComputeOptimizer {
      */
     errors?: GetRecommendationErrors;
   }
+  export interface GetEBSVolumeRecommendationsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the volumes for which to return recommendations.
+     */
+    volumeArns?: VolumeArns;
+    /**
+     * The token to advance to the next page of volume recommendations.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of volume recommendations to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
+     */
+    maxResults?: MaxResults;
+    /**
+     * An array of objects that describe a filter that returns a more specific list of volume recommendations.
+     */
+    filters?: EBSFilters;
+    /**
+     * The IDs of the AWS accounts for which to return volume recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return volume recommendations. Only one account ID can be specified per request.
+     */
+    accountIds?: AccountIds;
+  }
+  export interface GetEBSVolumeRecommendationsResponse {
+    /**
+     * The token to use to advance to the next page of volume recommendations. This value is null when there are no more pages of volume recommendations to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * An array of objects that describe volume recommendations.
+     */
+    volumeRecommendations?: VolumeRecommendations;
+    /**
+     * An array of objects that describe errors of the request. For example, an error is returned if you request recommendations for an unsupported volume.
+     */
+    errors?: GetRecommendationErrors;
+  }
   export interface GetEC2InstanceRecommendationsRequest {
     /**
      * The Amazon Resource Name (ARN) of the instances for which to return recommendations.
@@ -354,7 +427,7 @@ declare namespace ComputeOptimizer {
      */
     filters?: Filters;
     /**
-     * The IDs of the AWS accounts for which to return instance recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return instance recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
   }
@@ -412,7 +485,7 @@ declare namespace ComputeOptimizer {
      */
     statusReason?: StatusReason;
     /**
-     * Confirms the enrollment status of member accounts within the organization, if the account is a master account of an organization.
+     * Confirms the enrollment status of member accounts within the organization, if the account is a management account of an organization.
      */
     memberAccountsEnrolled?: MemberAccountsEnrolled;
   }
@@ -433,7 +506,7 @@ declare namespace ComputeOptimizer {
   export type GetRecommendationErrors = GetRecommendationError[];
   export interface GetRecommendationSummariesRequest {
     /**
-     * The IDs of the AWS accounts for which to return recommendation summaries. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return recommendation summaries. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -478,7 +551,7 @@ declare namespace ComputeOptimizer {
      */
     currentInstanceType?: CurrentInstanceType;
     /**
-     * The finding classification for the instance. Findings for instances include:     Underprovisioned —An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.     Overprovisioned —An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.     Optimized —An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. An optimized instance runs your workloads with optimal performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might recommend a new generation instance type.    The values that are returned might be UNDER_PROVISIONED, OVER_PROVISIONED, or OPTIMIZED. 
+     * The finding classification for the instance. Findings for instances include:     Underprovisioned —An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.     Overprovisioned —An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.     Optimized —An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. An optimized instance runs your workloads with optimal performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might recommend a new generation instance type.  
      */
     finding?: Finding;
     /**
@@ -528,7 +601,7 @@ declare namespace ComputeOptimizer {
      */
     name?: JobFilterName;
     /**
-     * The value of the filter. If you specify the name parameter as ResourceType, the valid values are Ec2Instance or AutoScalingGroup. If you specify the name parameter as JobStatus, the valid values are Queued, InProgress, Complete, or Failed.
+     * The value of the filter. The valid values for this parameter are as follows, depending on what you specify for the name parameter:   Specify Ec2Instance or AutoScalingGroup if you specified the name parameter as ResourceType. There is no filter for EBS volumes because volume recommendations cannot be exported at this time.   Specify Queued, InProgress, Complete, or Failed if you specified the name parameter as JobStatus.  
      */
     values?: FilterValues;
   }
@@ -555,7 +628,7 @@ declare namespace ComputeOptimizer {
   export type Period = number;
   export interface ProjectedMetric {
     /**
-     * The name of the projected utilization metric.
+     * The name of the projected utilization metric. The following projected utilization metrics are returned:    Cpu - The projected percentage of allocated EC2 compute units that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the processing power required to run an application on the recommendation option. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core. Units: Percent    Memory - The percentage of memory that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the amount of memory required to run an application on the recommendation option. Units: Percent  The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent.   
      */
     name?: MetricName;
     /**
@@ -613,7 +686,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|string;
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -693,7 +766,7 @@ declare namespace ComputeOptimizer {
      */
     status: Status;
     /**
-     * Indicates whether to enroll member accounts of the organization if the your account is the master account of an organization.
+     * Indicates whether to enroll member accounts of the organization if the your account is the management account of an organization.
      */
     includeMemberAccounts?: IncludeMemberAccounts;
   }
@@ -709,11 +782,11 @@ declare namespace ComputeOptimizer {
   }
   export interface UtilizationMetric {
     /**
-     * The name of the utilization metric.  The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent. 
+     * The name of the utilization metric. The following utilization metrics are available:    Cpu - The percentage of allocated EC2 compute units that are currently in use on the instance. This metric identifies the processing power required to run an application on the instance. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core. Units: Percent    Memory - The percentage of memory that is currently in use on the instance. This metric identifies the amount of memory required to run an application on the instance. Units: Percent  The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent.     EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes attached to the instance in a specified period of time. Unit: Count    EBS_WRITE_OPS_PER_SECOND - The completed write operations to all EBS volumes attached to the instance in a specified period of time. Unit: Count    EBS_READ_BYTES_PER_SECOND - The bytes read from all EBS volumes attached to the instance in a specified period of time. Unit: Bytes    EBS_WRITE_BYTES_PER_SECOND - The bytes written to all EBS volumes attached to the instance in a specified period of time. Unit: Bytes  
      */
     name?: MetricName;
     /**
-     * The statistic of the utilization metric.
+     * The statistic of the utilization metric. The following statistics are available:    Average - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.  
      */
     statistic?: MetricStatistic;
     /**
@@ -722,6 +795,90 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type UtilizationMetrics = UtilizationMetric[];
+  export type VolumeArn = string;
+  export type VolumeArns = VolumeArn[];
+  export type VolumeBaselineIOPS = number;
+  export type VolumeBaselineThroughput = number;
+  export type VolumeBurstIOPS = number;
+  export type VolumeBurstThroughput = number;
+  export interface VolumeConfiguration {
+    /**
+     * The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
+     */
+    volumeType?: VolumeType;
+    /**
+     * The size of the volume, in GiB.
+     */
+    volumeSize?: VolumeSize;
+    /**
+     * The baseline IOPS of the volume.
+     */
+    volumeBaselineIOPS?: VolumeBaselineIOPS;
+    /**
+     * The burst IOPS of the volume.
+     */
+    volumeBurstIOPS?: VolumeBurstIOPS;
+    /**
+     * The baseline throughput of the volume.
+     */
+    volumeBaselineThroughput?: VolumeBaselineThroughput;
+    /**
+     * The burst throughput of the volume.
+     */
+    volumeBurstThroughput?: VolumeBurstThroughput;
+  }
+  export interface VolumeRecommendation {
+    /**
+     * The Amazon Resource Name (ARN) of the current volume.
+     */
+    volumeArn?: VolumeArn;
+    /**
+     * The AWS account ID of the volume.
+     */
+    accountId?: AccountId;
+    /**
+     * An array of objects that describe the current configuration of the volume.
+     */
+    currentConfiguration?: VolumeConfiguration;
+    /**
+     * The finding classification for the volume. Findings for volumes include:     NotOptimized —A volume is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.     Optimized —An volume is considered optimized when Compute Optimizer determines that the volume is correctly provisioned to run your workload based on the chosen volume type. For optimized resources, Compute Optimizer might recommend a new generation volume type.  
+     */
+    finding?: EBSFinding;
+    /**
+     * An array of objects that describe the utilization metrics of the volume.
+     */
+    utilizationMetrics?: EBSUtilizationMetrics;
+    /**
+     * The number of days for which utilization metrics were analyzed for the volume.
+     */
+    lookBackPeriodInDays?: LookBackPeriodInDays;
+    /**
+     * An array of objects that describe the recommendation options for the volume.
+     */
+    volumeRecommendationOptions?: VolumeRecommendationOptions;
+    /**
+     * The time stamp of when the volume recommendation was last refreshed.
+     */
+    lastRefreshTimestamp?: LastRefreshTimestamp;
+  }
+  export interface VolumeRecommendationOption {
+    /**
+     * An array of objects that describe a volume configuration.
+     */
+    configuration?: VolumeConfiguration;
+    /**
+     * The performance risk of the volume recommendation option. Performance risk is the likelihood of the recommended volume type not meeting the performance requirement of your workload. The lowest performance risk is categorized as 0, and the highest as 5.
+     */
+    performanceRisk?: PerformanceRisk;
+    /**
+     * The rank of the volume recommendation option. The top recommendation option is ranked as 1.
+     */
+    rank?: Rank;
+  }
+  export type VolumeRecommendationOptions = VolumeRecommendationOption[];
+  export type VolumeRecommendations = VolumeRecommendation[];
+  export type VolumeSize = number;
+  export type VolumeType = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

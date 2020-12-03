@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.802.0-->
+<!--LATEST=2.803.0-->
 <!--ENTRYINSERT-->
+
+## 2.803.0
+* feature: Batch: This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for EBS volumes that are attached to instances.
+* feature: LicenseManager: AWS License Manager enables managed entitlements for AWS customers and Software Vendors (ISV). You can track and distribute license entitlements from AWS Marketplace and supported ISVs.
 
 ## 2.802.0
 * bugfix: Profile: Removes an incorrectly named service `Profile` that was included in release, v2.801.0

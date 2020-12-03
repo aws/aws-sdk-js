@@ -52,19 +52,19 @@ declare class AmplifyBackend extends Service {
    */
   createBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendConfigResponse) => void): Request<AmplifyBackend.Types.CreateBackendConfigResponse, AWSError>;
   /**
-   * Generates a one time challenge code to authenticate a user into your Amplify Admin UI.
+   * Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
    */
   createToken(params: AmplifyBackend.Types.CreateTokenRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.CreateTokenResponse) => void): Request<AmplifyBackend.Types.CreateTokenResponse, AWSError>;
   /**
-   * Generates a one time challenge code to authenticate a user into your Amplify Admin UI.
+   * Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
    */
   createToken(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateTokenResponse) => void): Request<AmplifyBackend.Types.CreateTokenResponse, AWSError>;
   /**
-   * Removes an existing environment from your Ampify project.
+   * Removes an existing environment from your Amplify project.
    */
   deleteBackend(params: AmplifyBackend.Types.DeleteBackendRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendResponse) => void): Request<AmplifyBackend.Types.DeleteBackendResponse, AWSError>;
   /**
-   * Removes an existing environment from your Ampify project.
+   * Removes an existing environment from your Amplify project.
    */
   deleteBackend(callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendResponse) => void): Request<AmplifyBackend.Types.DeleteBackendResponse, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class AmplifyBackend extends Service {
    */
   generateBackendAPIModels(callback?: (err: AWSError, data: AmplifyBackend.Types.GenerateBackendAPIModelsResponse) => void): Request<AmplifyBackend.Types.GenerateBackendAPIModelsResponse, AWSError>;
   /**
-   * Provides project level details for your Amplify UI project.
+   * Provides project-level details for your Amplify UI project.
    */
   getBackend(params: AmplifyBackend.Types.GetBackendRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendResponse) => void): Request<AmplifyBackend.Types.GetBackendResponse, AWSError>;
   /**
-   * Provides project level details for your Amplify UI project.
+   * Provides project-level details for your Amplify UI project.
    */
   getBackend(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendResponse) => void): Request<AmplifyBackend.Types.GetBackendResponse, AWSError>;
   /**
-   * Gets the details for a backend api.
+   * Gets the details for a backend API.
    */
   getBackendAPI(params: AmplifyBackend.Types.GetBackendAPIRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIResponse, AWSError>;
   /**
-   * Gets the details for a backend api.
+   * Gets the details for a backend API.
    */
   getBackendAPI(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class AmplifyBackend extends Service {
    */
   getBackendAPIModels(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIModelsResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIModelsResponse, AWSError>;
   /**
-   * Gets a backend auth details.
+   * Gets backend auth details.
    */
   getBackendAuth(params: AmplifyBackend.Types.GetBackendAuthRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAuthResponse) => void): Request<AmplifyBackend.Types.GetBackendAuthResponse, AWSError>;
   /**
-   * Gets a backend auth details.
+   * Gets backend auth details.
    */
   getBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAuthResponse) => void): Request<AmplifyBackend.Types.GetBackendAuthResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class AmplifyBackend extends Service {
    */
   removeAllBackends(callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveAllBackendsResponse) => void): Request<AmplifyBackend.Types.RemoveAllBackendsResponse, AWSError>;
   /**
-   * Removes the AWS resources required to access the Amplify Admin UI.
+   * Removes the AWS resources that are required to access the Amplify Admin UI.
    */
   removeBackendConfig(params: AmplifyBackend.Types.RemoveBackendConfigRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveBackendConfigResponse) => void): Request<AmplifyBackend.Types.RemoveBackendConfigResponse, AWSError>;
   /**
-   * Removes the AWS resources required to access the Amplify Admin UI.
+   * Removes the AWS resources that are required to access the Amplify Admin UI.
    */
   removeBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveBackendConfigResponse) => void): Request<AmplifyBackend.Types.RemoveBackendConfigResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class AmplifyBackend extends Service {
    */
   updateBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendAuthResponse) => void): Request<AmplifyBackend.Types.UpdateBackendAuthResponse, AWSError>;
   /**
-   * Updates the AWS resources required to access the Amplify Admin UI.
+   * Updates the AWS resources that are required to access the Amplify Admin UI.
    */
   updateBackendConfig(params: AmplifyBackend.Types.UpdateBackendConfigRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendConfigResponse) => void): Request<AmplifyBackend.Types.UpdateBackendConfigResponse, AWSError>;
   /**
-   * Updates the AWS resources required to access the Amplify Admin UI.
+   * Updates the AWS resources that are required to access the Amplify Admin UI.
    */
   updateBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendConfigResponse) => void): Request<AmplifyBackend.Types.UpdateBackendConfigResponse, AWSError>;
   /**
@@ -208,15 +208,15 @@ declare namespace AmplifyBackend {
   export type AuthResources = "USER_POOL_ONLY"|"IDENTITY_POOL_AND_USER_POOL"|string;
   export interface BackendAPIAppSyncAuthSettings {
     /**
-     * The Amazon Cognito user pool id, if Amazon Cognito was used as an authentication setting to access your data models.
+     * The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.
      */
     CognitoUserPoolId?: __string;
     /**
-     * The api key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+     * The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.
      */
     Description?: __string;
     /**
-     * The api key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+     * The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.
      */
     ExpirationTime?: __double;
     /**
@@ -224,7 +224,7 @@ declare namespace AmplifyBackend {
      */
     OpenIDAuthTTL?: __string;
     /**
-     * The clientID for openID, if openID was used as an authentication setting to access your data models.
+     * The clientID for openID, if openID is used as an authentication setting to access your data models.
      */
     OpenIDClientId?: __string;
     /**
@@ -232,11 +232,11 @@ declare namespace AmplifyBackend {
      */
     OpenIDIatTTL?: __string;
     /**
-     * The openID issuer URL, if openID was used as an authentication setting to access your data models.
+     * The openID issuer URL, if openID is used as an authentication setting to access your data models.
      */
     OpenIDIssueURL?: __string;
     /**
-     * The open id provider name, if openID was used as an authentication mechanism to access your data models.
+     * The openID provider name, if openID is used as an authentication mechanism to access your data models.
      */
     OpenIDProviderName?: __string;
   }
@@ -258,19 +258,19 @@ declare namespace AmplifyBackend {
   }
   export interface BackendAPIResourceConfig {
     /**
-     * Addition authentication methods used to interact with your data models.
+     * Additional authentication methods used to interact with your data models.
      */
     AdditionalAuthTypes?: ListOfBackendAPIAuthType;
     /**
-     * The API name used to interact with the data model, configured as a part of the amplify project.
+     * The API name used to interact with the data model, configured as a part of the Amplify project.
      */
     ApiName?: __string;
     /**
-     * The conflict resoultion strategy for your data stored in the data models.
+     * The conflict resolution strategy for your data stored in the data models.
      */
     ConflictResolution?: BackendAPIConflictResolution;
     /**
-     * The default authentication type for interacting with the configured data models in your amplify project.
+     * The default authentication type for interacting with the configured data models in your Amplify project.
      */
     DefaultAuthType?: BackendAPIAuthType;
     /**
@@ -278,17 +278,17 @@ declare namespace AmplifyBackend {
      */
     Service?: __string;
     /**
-     * The definition of the data model in the annotated transform of the graphql schema.
+     * The definition of the data model in the annotated transform of the GraphQL schema.
      */
     TransformSchema?: __string;
   }
   export interface BackendAuthSocialProviderConfig {
     /**
-     * Describes the client_id which can be obtained from the third party social federation provider.
+     * Describes the client_id that can be obtained from the third-party social federation provider.
      */
     ClientId?: __string;
     /**
-     * Describes the client_secret which can be obtained from third party social federation providers.
+     * Describes the client_secret that can be obtained from third-party social federation providers.
      */
     ClientSecret?: __string;
   }
@@ -412,7 +412,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthForgotPasswordConfig {
     /**
-     * Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
+     * Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
      */
     DeliveryMethod: DeliveryMethod;
     /**
@@ -436,7 +436,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthMFAConfig {
     /**
-     * Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.
+     * Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.
      */
     MFAMode: MFAMode;
     /**
@@ -450,33 +450,33 @@ declare namespace AmplifyBackend {
      */
     DomainPrefix?: __string;
     /**
-     * The OAuth grant type which you use to allow app users to authenticate from your Amplify app.
+     * The OAuth grant type that you use to allow app users to authenticate from your Amplify app.
      */
     OAuthGrantType: OAuthGrantType;
     /**
-     * List of OAuth related flows which use to allow your app users to authenticate from your Amplify app.
+     * List of OAuth-related flows that allow your app users to authenticate from your Amplify app.
      */
     OAuthScopes: ListOfOAuthScopesElement;
     /**
-     * The redirected URI for sigining into your Amplify app.
+     * The redirected URI for signing in to your Amplify app.
      */
     RedirectSignInURIs: ListOf__string;
     /**
-     * Redirect URLs used by OAuth when a user signs out of an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs out of an Amplify app.
      */
     RedirectSignOutURIs: ListOf__string;
     /**
-     * The settings for using the social providers for access to your Amplify app.
+     * The settings for using social identity providers for access to your Amplify app.
      */
     SocialProviderSettings?: SocialProviderSettings;
   }
   export interface CreateBackendAuthPasswordPolicyConfig {
     /**
-     * Additional constraints for the pasword used to access the backend of your Amplify project.
+     * Additional constraints for the password used to access the backend of your Amplify project.
      */
     AdditionalConstraints?: ListOfAdditionalConstraintsElement;
     /**
-     * The minimum length of password used to access the backend of your Amplify project.
+     * The minimum length of the password used to access the backend of your Amplify project.
      */
     MinimumLength: __double;
   }
@@ -504,7 +504,7 @@ declare namespace AmplifyBackend {
      */
     AuthResources: AuthResources;
     /**
-     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
+     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.
      */
     IdentityPoolConfigs?: CreateBackendAuthIdentityPoolConfig;
     /**
@@ -512,7 +512,7 @@ declare namespace AmplifyBackend {
      */
     Service: Service;
     /**
-     * Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
+     * Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.
      */
     UserPoolConfigs: CreateBackendAuthUserPoolConfig;
   }
@@ -548,7 +548,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: CreateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
      */
     Mfa?: CreateBackendAuthMFAConfig;
     /**
@@ -560,11 +560,11 @@ declare namespace AmplifyBackend {
      */
     PasswordPolicy?: CreateBackendAuthPasswordPolicyConfig;
     /**
-     * The required attributes to sign up new users in the user pool.
+     * The required attributes to sign up new users in the Amazon Cognito user pool.
      */
     RequiredSignUpAttributes: ListOfRequiredSignUpAttributesElement;
     /**
-     * Describes the sign-in methods that your Amplify app users to login using the Amazon Cognito user pool, configured as a part of your Amplify project.
+     * Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.
      */
     SignInMethod: SignInMethod;
     /**
@@ -614,7 +614,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName: __string;
     /**
-     * The resource configuration for the create backend request.
+     * The resource configuration for the backend creation request.
      */
     ResourceConfig?: ResourceConfig;
     /**
@@ -660,15 +660,15 @@ declare namespace AmplifyBackend {
      */
     AppId?: __string;
     /**
-     * One time challenge code for authenticating into Amplify Admin UI.
+     * One-time challenge code for authenticating into the Amplify Admin UI.
      */
     ChallengeCode?: __string;
     /**
-     * A unique identifier provided when creating a new challenge token.
+     * A unique ID provided when creating a new challenge token.
      */
     SessionId?: __string;
     /**
-     * The expiry time for the one time generated token code.
+     * The expiry time for the one-time generated token code.
      */
     Ttl?: __string;
   }
@@ -798,7 +798,7 @@ declare namespace AmplifyBackend {
      */
     AppId: __string;
     /**
-     * The session Id.
+     * The session ID.
      */
     SessionId: __string;
   }
@@ -875,7 +875,7 @@ declare namespace AmplifyBackend {
   }
   export interface GetBackendAPIModelsResponse {
     /**
-     * Stringified JSON of the datastore model.
+     * Stringified JSON of the DataStore model.
      */
     Models?: __string;
     /**
@@ -1019,7 +1019,7 @@ declare namespace AmplifyBackend {
   }
   export interface GetBackendResponse {
     /**
-     * A stringified version of the current configs for your Amplify project.
+     * A stringified version of the current configurations for your Amplify project.
      */
     AmplifyMetaConfig?: __string;
     /**
@@ -1049,7 +1049,7 @@ declare namespace AmplifyBackend {
      */
     AppId: __string;
     /**
-     * The session Id.
+     * The session ID.
      */
     SessionId: __string;
   }
@@ -1059,15 +1059,15 @@ declare namespace AmplifyBackend {
      */
     AppId?: __string;
     /**
-     * The one time challenge code for authenticating into Amplify Admin UI.
+     * The one-time challenge code for authenticating into the Amplify Admin UI.
      */
     ChallengeCode?: __string;
     /**
-     * A unique identifier provided when creating a new challenge token.
+     * A unique ID provided when creating a new challenge token.
      */
     SessionId?: __string;
     /**
-     * The expiry time for the one time generated token code.
+     * The expiry time for the one-time generated token code.
      */
     Ttl?: __string;
   }
@@ -1085,7 +1085,7 @@ declare namespace AmplifyBackend {
      */
     JobId?: __string;
     /**
-     * The maximum number of results you want in the response.
+     * The maximum number of results that you want in the response.
      */
     MaxResults?: __integerMin1Max25;
     /**
@@ -1093,11 +1093,11 @@ declare namespace AmplifyBackend {
      */
     NextToken?: __string;
     /**
-     * Filters the list of response objects to only include those with the specified operation name.
+     * Filters the list of response objects to include only those with the specified operation name.
      */
     Operation?: __string;
     /**
-     * Filters the list of response objects to only include those with the specified status.
+     * Filters the list of response objects to include only those with the specified status.
      */
     Status?: __string;
   }
@@ -1113,19 +1113,19 @@ declare namespace AmplifyBackend {
   }
   export interface LoginAuthConfigReqObj {
     /**
-     * Amazon Cognito identitypool id used for the Amplify Admin UI login authorization.
+     * The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.
      */
     AwsCognitoIdentityPoolId?: __string;
     /**
-     * The AWS Region for the the Amplify Admin login.
+     * The AWS Region for the Amplify Admin UI login.
      */
     AwsCognitoRegion?: __string;
     /**
-     * The Amazon Cognito userpool id used for Amplify Admin UI login authentication.
+     * The Amazon Cognito user pool ID used for Amplify Admin UI login authentication.
      */
     AwsUserPoolsId?: __string;
     /**
-     * The web client ID for the Amazon Cognito userpools.
+     * The web client ID for the Amazon Cognito user pools.
      */
     AwsUserPoolsWebClientId?: __string;
   }
@@ -1182,7 +1182,7 @@ declare namespace AmplifyBackend {
   export type Service = "COGNITO"|string;
   export interface Settings {
     /**
-     * The supported MFA types
+     * The supported MFA types.
      */
     MfaTypes?: ListOfMfaTypesElement;
     /**
@@ -1249,7 +1249,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthForgotPasswordConfig {
     /**
-     * Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
+     * Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
      */
     DeliveryMethod?: DeliveryMethod;
     /**
@@ -1263,7 +1263,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthIdentityPoolConfig {
     /**
-     * A boolean value which can be set to allow or disallow guest level authorization into your Amplify app.
+     * A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.
      */
     UnauthenticatedLogin?: __boolean;
   }
@@ -1287,29 +1287,29 @@ declare namespace AmplifyBackend {
      */
     OAuthGrantType?: OAuthGrantType;
     /**
-     * The list of OAuth related flows which can allow users to authenticate from your Amplify app.
+     * The list of OAuth-related flows that can allow users to authenticate from your Amplify app.
      */
     OAuthScopes?: ListOfOAuthScopesElement;
     /**
-     * Redirect URLs used by OAuth when a user signs in to an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs in to an Amplify app.
      */
     RedirectSignInURIs?: ListOf__string;
     /**
-     * Redirect URLs used by OAuth when a user signs out of an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs out of an Amplify app.
      */
     RedirectSignOutURIs?: ListOf__string;
     /**
-     * Describes third party social federation configurations for allowing your users to sign in with OAuth.
+     * Describes third-party social federation configurations for allowing your users to sign in with OAuth.
      */
     SocialProviderSettings?: SocialProviderSettings;
   }
   export interface UpdateBackendAuthPasswordPolicyConfig {
     /**
-     * Describes additional constrains on password requirements to sign in into the auth resource, configured as a part of your Ampify project.
+     * Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.
      */
     AdditionalConstraints?: ListOfAdditionalConstraintsElement;
     /**
-     * Describes the minimum length of password required to sign in into the auth resource, configured as a part of your Ampify project.
+     * Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.
      */
     MinimumLength?: __double;
   }
@@ -1337,7 +1337,7 @@ declare namespace AmplifyBackend {
      */
     AuthResources: AuthResources;
     /**
-     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
+     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.
      */
     IdentityPoolConfigs?: UpdateBackendAuthIdentityPoolConfig;
     /**
@@ -1345,7 +1345,7 @@ declare namespace AmplifyBackend {
      */
     Service: Service;
     /**
-     * Describes the authentication configuration for the Amazon Cognito userpool, provisioned as a part of your auth resource in the Amplify project.
+     * Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.
      */
     UserPoolConfigs: UpdateBackendAuthUserPoolConfig;
   }
@@ -1381,7 +1381,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: UpdateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
      */
     Mfa?: UpdateBackendAuthMFAConfig;
     /**
@@ -1417,7 +1417,7 @@ declare namespace AmplifyBackend {
      */
     Error?: __string;
     /**
-     * Describes the Amazon Cognito configurations for the Admin UI auth resource to login with.
+     * Describes the Amazon Cognito configurations for the Admin UI auth resource to log in with.
      */
     LoginAuthConfig?: LoginAuthConfigReqObj;
   }
@@ -1435,11 +1435,11 @@ declare namespace AmplifyBackend {
      */
     JobId: __string;
     /**
-     * Filters the list of response objects to only include those with the specified operation name.
+     * Filters the list of response objects to include only those with the specified operation name.
      */
     Operation?: __string;
     /**
-     * Filters the list of response objects to only include those with the specified status.
+     * Filters the list of response objects to include only those with the specified status.
      */
     Status?: __string;
   }
