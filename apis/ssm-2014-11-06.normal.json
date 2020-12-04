@@ -298,6 +298,37 @@
       ],
       "documentation": "<p>Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
+    "CreateOpsMetadata": {
+      "name": "CreateOpsMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateOpsMetadataRequest"
+      },
+      "output": {
+        "shape": "CreateOpsMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "OpsMetadataAlreadyExistsException"
+        },
+        {
+          "shape": "OpsMetadataTooManyUpdatesException"
+        },
+        {
+          "shape": "OpsMetadataInvalidArgumentException"
+        },
+        {
+          "shape": "OpsMetadataLimitExceededException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>If you create a new application in AppManager, Systems Manager calls this API action to specify information about the new application, including the application type.</p>"
+    },
     "CreatePatchBaseline": {
       "name": "CreatePatchBaseline",
       "http": {
@@ -487,6 +518,31 @@
         }
       ],
       "documentation": "<p>Deletes a maintenance window.</p>"
+    },
+    "DeleteOpsMetadata": {
+      "name": "DeleteOpsMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteOpsMetadataRequest"
+      },
+      "output": {
+        "shape": "DeleteOpsMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "OpsMetadataNotFoundException"
+        },
+        {
+          "shape": "OpsMetadataInvalidArgumentException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Delete OpsMetadata related to an application.</p>"
     },
     "DeleteParameter": {
       "name": "DeleteParameter",
@@ -1407,7 +1463,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>DEBIAN</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>ORACLE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>UBUNTU</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>WINDOWS</dt> <dd> <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p> </dd> </dl>"
+      "documentation": "<p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>DEBIAN</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>MACOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION</p> </dd> <dt>ORACLE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>UBUNTU</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>WINDOWS</dt> <dd> <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p> </dd> </dl>"
     },
     "DescribeSessions": {
       "name": "DescribeSessions",
@@ -1796,6 +1852,31 @@
         }
       ],
       "documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
+    "GetOpsMetadata": {
+      "name": "GetOpsMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetOpsMetadataRequest"
+      },
+      "output": {
+        "shape": "GetOpsMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "OpsMetadataNotFoundException"
+        },
+        {
+          "shape": "OpsMetadataInvalidArgumentException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>View operational metadata related to an application in AppManager.</p>"
     },
     "GetOpsSummary": {
       "name": "GetOpsSummary",
@@ -2285,6 +2366,28 @@
         }
       ],
       "documentation": "<p>A list of inventory items returned by the request.</p>"
+    },
+    "ListOpsMetadata": {
+      "name": "ListOpsMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListOpsMetadataRequest"
+      },
+      "output": {
+        "shape": "ListOpsMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "OpsMetadataInvalidArgumentException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or blobs.</p>"
     },
     "ListResourceComplianceSummaries": {
       "name": "ListResourceComplianceSummaries",
@@ -3219,6 +3322,37 @@
       ],
       "documentation": "<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
+    "UpdateOpsMetadata": {
+      "name": "UpdateOpsMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateOpsMetadataRequest"
+      },
+      "output": {
+        "shape": "UpdateOpsMetadataResult"
+      },
+      "errors": [
+        {
+          "shape": "OpsMetadataNotFoundException"
+        },
+        {
+          "shape": "OpsMetadataInvalidArgumentException"
+        },
+        {
+          "shape": "OpsMetadataKeyLimitExceededException"
+        },
+        {
+          "shape": "OpsMetadataTooManyUpdatesException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Systems Manager calls this API action when you edit OpsMetadata in AppManager.</p>"
+    },
     "UpdatePatchBaseline": {
       "name": "UpdatePatchBaseline",
       "http": {
@@ -3596,7 +3730,7 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
         }
       },
       "documentation": "<p>Describes the parameters for a document.</p>"
@@ -3998,7 +4132,7 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
         }
       },
       "documentation": "<p>Information about the association version.</p>"
@@ -5335,7 +5469,7 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
         }
       },
       "documentation": "<p>Describes the association of a Systems Manager SSM document and an instance.</p>"
@@ -5413,7 +5547,7 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
         }
       }
     },
@@ -5607,6 +5741,31 @@
         "OpsItemId": {
           "shape": "String",
           "documentation": "<p>The ID of the OpsItem.</p>"
+        }
+      }
+    },
+    "CreateOpsMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "OpsMetadataResourceId",
+          "documentation": "<p>A resource ID for a new AppManager application.</p>"
+        },
+        "Metadata": {
+          "shape": "MetadataMap",
+          "documentation": "<p>Metadata for a new AppManager application. </p>"
+        }
+      }
+    },
+    "CreateOpsMetadataResult": {
+      "type": "structure",
+      "members": {
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.</p>"
         }
       }
     },
@@ -5851,6 +6010,22 @@
           "documentation": "<p>The ID of the deleted maintenance window.</p>"
         }
       }
+    },
+    "DeleteOpsMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "OpsMetadataArn"
+      ],
+      "members": {
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.</p>"
+        }
+      }
+    },
+    "DeleteOpsMetadataResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteParameterRequest": {
       "type": "structure",
@@ -7168,7 +7343,7 @@
         },
         "PatchSet": {
           "shape": "PatchSet",
-          "documentation": "<p>Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for Linux operating systems.</p>"
+          "documentation": "<p>Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for the Linux or macOS operating systems.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -8525,6 +8700,49 @@
         "OpsItem": {
           "shape": "OpsItem",
           "documentation": "<p>The OpsItem.</p>"
+        }
+      }
+    },
+    "GetOpsMetadataMaxResults": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
+    },
+    "GetOpsMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "OpsMetadataArn"
+      ],
+      "members": {
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an OpsMetadata Object to view.</p>"
+        },
+        "MaxResults": {
+          "shape": "GetOpsMetadataMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
+    "GetOpsMetadataResult": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "OpsMetadataResourceId",
+          "documentation": "<p>The resource ID of the AppManager application.</p>"
+        },
+        "Metadata": {
+          "shape": "MetadataMap",
+          "documentation": "<p>OpsMetadata for an AppManager application.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
         }
       }
     },
@@ -10238,6 +10456,42 @@
         }
       }
     },
+    "ListOpsMetadataMaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "ListOpsMetadataRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "OpsMetadataFilterList",
+          "documentation": "<p>One or more filters to limit the number of OpsMetadata objects returned by the call.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListOpsMetadataMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListOpsMetadataResult": {
+      "type": "structure",
+      "members": {
+        "OpsMetadataList": {
+          "shape": "OpsMetadataList",
+          "documentation": "<p>Returns a list of OpsMetadata objects.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
     "ListResourceComplianceSummariesRequest": {
       "type": "structure",
       "members": {
@@ -11078,6 +11332,46 @@
       "max": 50,
       "min": 5
     },
+    "MetadataKey": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^(?!\\s*$).+"
+    },
+    "MetadataKeysToDeleteList": {
+      "type": "list",
+      "member": {
+        "shape": "MetadataKey"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "MetadataMap": {
+      "type": "map",
+      "key": {
+        "shape": "MetadataKey"
+      },
+      "value": {
+        "shape": "MetadataValue"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "MetadataValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "MetadataValueString",
+          "documentation": "<p>Metadata value to assign to an AppManager application.</p>"
+        }
+      },
+      "documentation": "<p>Metadata to assign to an AppManager application.</p>"
+    },
+    "MetadataValueString": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
+    },
     "ModifyDocumentPermissionRequest": {
       "type": "structure",
       "required": [
@@ -11193,7 +11487,8 @@
         "SUSE",
         "CENTOS",
         "ORACLE_LINUX",
-        "DEBIAN"
+        "DEBIAN",
+        "MACOS"
       ]
     },
     "OpsAggregator": {
@@ -11707,6 +12002,97 @@
       "max": 1024,
       "min": 1
     },
+    "OpsMetadata": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "OpsMetadataResourceId",
+          "documentation": "<p>The ID of the AppManager application.</p>"
+        },
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the OpsMetadata object was last updated.</p>"
+        },
+        "LastModifiedUser": {
+          "shape": "String",
+          "documentation": "<p>The user name who last updated the OpsMetadata object.</p>"
+        },
+        "CreationDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the OpsMetadata objects was created.</p>"
+        }
+      },
+      "documentation": "<p>Operational metadata for an application in AppManager.</p>"
+    },
+    "OpsMetadataArn": {
+      "type": "string",
+      "max": 1011,
+      "min": 1,
+      "pattern": "arn:(aws[a-zA-Z-]*)?:ssm:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:opsmetadata\\/([a-zA-Z0-9-_\\.\\/]*)"
+    },
+    "OpsMetadataFilter": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "members": {
+        "Key": {
+          "shape": "OpsMetadataFilterKey",
+          "documentation": "<p>A filter key.</p>"
+        },
+        "Values": {
+          "shape": "OpsMetadataFilterValueList",
+          "documentation": "<p>A filter value.</p>"
+        }
+      },
+      "documentation": "<p>A filter to limit the number of OpsMetadata objects displayed.</p>"
+    },
+    "OpsMetadataFilterKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!\\s*$).+"
+    },
+    "OpsMetadataFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsMetadataFilter"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "OpsMetadataFilterValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "OpsMetadataFilterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsMetadataFilterValue"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "OpsMetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsMetadata"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "OpsMetadataResourceId": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^(?!\\s*$).+"
+    },
     "OpsResultAttribute": {
       "type": "structure",
       "required": [
@@ -12203,7 +12589,7 @@
         },
         "CVEIds": {
           "shape": "PatchCVEIdList",
-          "documentation": "<p>The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-1999-0067</code>. Applies to Linux-based instances only.</p>"
+          "documentation": "<p>The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-2011-3192</code>. Applies to Linux-based instances only.</p>"
         },
         "Name": {
           "shape": "PatchName",
@@ -14756,7 +15142,7 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>"
+          "documentation": "<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>"
         }
       }
     },
@@ -15259,6 +15645,35 @@
     "UpdateOpsItemResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateOpsMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "OpsMetadataArn"
+      ],
+      "members": {
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.</p>"
+        },
+        "MetadataToUpdate": {
+          "shape": "MetadataMap",
+          "documentation": "<p>Metadata to add to an OpsMetadata object.</p>"
+        },
+        "KeysToDelete": {
+          "shape": "MetadataKeysToDeleteList",
+          "documentation": "<p>The metadata keys to delete from the OpsMetadata object. </p>"
+        }
+      }
+    },
+    "UpdateOpsMetadataResult": {
+      "type": "structure",
+      "members": {
+        "OpsMetadataArn": {
+          "shape": "OpsMetadataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.</p>"
+        }
+      }
     },
     "UpdatePatchBaselineRequest": {
       "type": "structure",

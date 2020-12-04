@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.803.0-->
+<!--LATEST=2.804.0-->
 <!--ENTRYINSERT-->
+
+## 2.804.0
+* feature: EC2: This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time.
+* feature: Kafka: Adding HEALING to ClusterState.
+* feature: Lambda: Added the additional enum InvalidImage to StateReasonCode and LastUpdateStatusReasonCode fields.
+* feature: LicenseManager: Automated Discovery now has support for custom tags, and detects software uninstalls.
+* feature: MediaLive: AWS Elemental MediaLive now supports black video and audio silence as new conditions to trigger automatic input failover.
+* feature: RDS: Adds support for Amazon RDS Cross-Region Automated Backups, the ability to setup automatic replication of snapshots and transaction logs from a primary AWS Region to a secondary AWS Region.
+* feature: SSM: AWS Systems Manager Patch Manager MAC OS Support and OpsMetadata Store APIs to store operational metadata for an Application.
+* feature: WorkSpaces: Update the import-workspace-image API to have "BYOL_REGULAR_WSP" as a valid input string for ingestion-process.
 
 ## 2.803.0
 * feature: Batch: This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task.

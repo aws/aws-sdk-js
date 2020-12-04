@@ -1425,7 +1425,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         },
         "StateInfo": {
           "shape": "StateInfo",
@@ -1545,6 +1545,7 @@
         "CREATING",
         "DELETING",
         "FAILED",
+        "HEALING",
         "MAINTENANCE",
         "REBOOTING_BROKER",
         "UPDATING"
@@ -1751,7 +1752,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },
@@ -1845,7 +1846,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },

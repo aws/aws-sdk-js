@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Adding HEALING to ClusterState."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Added the additional enum InvalidImage to StateReasonCode and LastUpdateStatusReasonCode fields."
+    },
+    {
+        "type": "feature",
+        "category": "LicenseManager",
+        "description": "Automated Discovery now has support for custom tags, and detects software uninstalls."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports black video and audio silence as new conditions to trigger automatic input failover."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds support for Amazon RDS Cross-Region Automated Backups, the ability to setup automatic replication of snapshots and transaction logs from a primary AWS Region to a secondary AWS Region."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager Patch Manager MAC OS Support and OpsMetadata Store APIs to store operational metadata for an Application."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Update the import-workspace-image API to have \"BYOL_REGULAR_WSP\" as a valid input string for ingestion-process."
+    }
+]

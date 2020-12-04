@@ -661,7 +661,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Deletes from the system the certificate that was registered for a secured LDAP connection.</p>"
+      "documentation": "<p>Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.</p>"
     },
     "DeregisterEventTopic": {
       "name": "DeregisterEventTopic",
@@ -723,7 +723,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Displays information about the certificate registered for a secured LDAP connection.</p>"
+      "documentation": "<p>Displays information about the certificate registered for secure LDAP or client certificate authentication.</p>"
     },
     "DescribeConditionalForwarders": {
       "name": "DescribeConditionalForwarders",
@@ -1054,7 +1054,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Disable client authentication for smart cards.</p>"
+      "documentation": "<p>Disables alternative client authentication methods for the specified directory. </p>"
     },
     "DisableLDAPS": {
       "name": "DisableLDAPS",
@@ -1184,7 +1184,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Enable client authentication for smardtcards.</p>"
+      "documentation": "<p>Enables alternative client authentication methods for the specified directory.</p>"
     },
     "EnableLDAPS": {
       "name": "EnableLDAPS",
@@ -1370,7 +1370,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>For the specified directory, lists all the certificates registered for a secured LDAP connection.</p>"
+      "documentation": "<p>For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.</p>"
     },
     "ListIpRoutes": {
       "name": "ListIpRoutes",
@@ -1531,7 +1531,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Registers a certificate for secured LDAP connection.</p>"
+      "documentation": "<p>Registers a certificate for a secure LDAP or client certificate authentication.</p>"
     },
     "RegisterEventTopic": {
       "name": "RegisterEventTopic",
@@ -2219,11 +2219,11 @@
         },
         "Type": {
           "shape": "CertificateType",
-          "documentation": "<p>Select <code>ClientCertAuth</code> for smart card integration.</p>"
+          "documentation": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>"
         },
         "ClientCertAuthSettings": {
           "shape": "ClientCertAuthSettings",
-          "documentation": "<p>Provides information about the client certificate authentication settings. The default value is <code>ClientLDAPS</code>.</p>"
+          "documentation": "<p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>"
         }
       },
       "documentation": "<p>Information about the certificate.</p>"
@@ -2264,7 +2264,7 @@
         },
         "Type": {
           "shape": "CertificateType",
-          "documentation": "<p>Displays the type of certificate.</p>"
+          "documentation": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>"
         }
       },
       "documentation": "<p>Contains general information about a certificate.</p>"
@@ -2320,10 +2320,10 @@
       "members": {
         "OCSPUrl": {
           "shape": "OCSPUrl",
-          "documentation": "<p>Specifies the URL of the default OCSP server used to check for revocation status.</p>"
+          "documentation": "<p>Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.</p>"
         }
       },
-      "documentation": "<p>Contains information about the client certificate authentication settings, such as <code>ClientLDAPS</code> or <code>ClientCertAuth</code>.</p>"
+      "documentation": "<p>Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. </p>"
     },
     "CloudOnlyDirectoriesLimitReached": {
       "type": "boolean"
@@ -3568,11 +3568,11 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>Disable client authentication in a specified directory for smart cards. </p>"
+          "documentation": "<p>The identifier of the directory </p>"
         },
         "Type": {
           "shape": "ClientAuthenticationType",
-          "documentation": "<p>Disable the type of client authentication request. </p>"
+          "documentation": "<p>The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.</p>"
         }
       }
     },
@@ -3737,11 +3737,11 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>Enable client authentication in a specified directory for smart cards. </p>"
+          "documentation": "<p>The identifier of the specified directory. </p>"
         },
         "Type": {
           "shape": "ClientAuthenticationType",
-          "documentation": "<p>Enable the type of client authentication request. </p>"
+          "documentation": "<p>The type of client authentication to enable. Currently only the value <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in the on-premises AD. </p>"
         }
       }
     },
@@ -4454,10 +4454,11 @@
         },
         "Type": {
           "shape": "CertificateType",
-          "documentation": "<p>The certificate type to register for the request.</p>"
+          "documentation": "<p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>"
         },
         "ClientCertAuthSettings": {
-          "shape": "ClientCertAuthSettings"
+          "shape": "ClientCertAuthSettings",
+          "documentation": "<p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>"
         }
       }
     },

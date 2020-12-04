@@ -3181,6 +3181,25 @@
       },
       "documentation": "Audio Selector Settings"
     },
+    "AudioSilenceFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "AudioSelectorName": {
+          "shape": "__string",
+          "locationName": "audioSelectorName",
+          "documentation": "The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank."
+        },
+        "AudioSilenceThresholdMsec": {
+          "shape": "__integerMin1000",
+          "locationName": "audioSilenceThresholdMsec",
+          "documentation": "The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS."
+        }
+      },
+      "required": [
+        "AudioSelectorName"
+      ],
+      "documentation": "Placeholder documentation for AudioSilenceFailoverSettings"
+    },
     "AudioTrack": {
       "type": "structure",
       "members": {
@@ -5040,6 +5059,11 @@
           "shape": "InputDeviceType",
           "locationName": "type",
           "documentation": "The type of the input device."
+        },
+        "UhdDeviceSettings": {
+          "shape": "InputDeviceUhdSettings",
+          "locationName": "uhdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type UHD."
         }
       },
       "documentation": "Placeholder documentation for DescribeInputDeviceResponse"
@@ -6249,10 +6273,20 @@
     "FailoverConditionSettings": {
       "type": "structure",
       "members": {
+        "AudioSilenceSettings": {
+          "shape": "AudioSilenceFailoverSettings",
+          "locationName": "audioSilenceSettings",
+          "documentation": "MediaLive will perform a failover if the specified audio selector is silent for the specified period."
+        },
         "InputLossSettings": {
           "shape": "InputLossFailoverSettings",
           "locationName": "inputLossSettings",
           "documentation": "MediaLive will perform a failover if content is not detected in this input for the specified period."
+        },
+        "VideoBlackSettings": {
+          "shape": "VideoBlackFailoverSettings",
+          "locationName": "videoBlackSettings",
+          "documentation": "MediaLive will perform a failover if content is considered black for the specified period."
         }
       },
       "documentation": "Settings for one failover condition."
@@ -8421,6 +8455,11 @@
           "shape": "InputDeviceType",
           "locationName": "type",
           "documentation": "The type of the input device."
+        },
+        "UhdDeviceSettings": {
+          "shape": "InputDeviceUhdSettings",
+          "locationName": "uhdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type UHD."
         }
       },
       "documentation": "Details of the input device."
@@ -8439,6 +8478,52 @@
       "enum": [
         "HD"
       ]
+    },
+    "InputDeviceUhdSettings": {
+      "type": "structure",
+      "members": {
+        "ActiveInput": {
+          "shape": "InputDeviceActiveInput",
+          "locationName": "activeInput",
+          "documentation": "If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI)."
+        },
+        "ConfiguredInput": {
+          "shape": "InputDeviceConfiguredInput",
+          "locationName": "configuredInput",
+          "documentation": "The source at the input device that is currently active. You can specify this source."
+        },
+        "DeviceState": {
+          "shape": "InputDeviceState",
+          "locationName": "deviceState",
+          "documentation": "The state of the input device."
+        },
+        "Framerate": {
+          "shape": "__double",
+          "locationName": "framerate",
+          "documentation": "The frame rate of the video source."
+        },
+        "Height": {
+          "shape": "__integer",
+          "locationName": "height",
+          "documentation": "The height of the video source, in pixels."
+        },
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum."
+        },
+        "ScanType": {
+          "shape": "InputDeviceScanType",
+          "locationName": "scanType",
+          "documentation": "The scan type of the video source."
+        },
+        "Width": {
+          "shape": "__integer",
+          "locationName": "width",
+          "documentation": "The width of the video source, in pixels."
+        }
+      },
+      "documentation": "Settings that describe the active source from the input device, and the video characteristics of that source."
     },
     "InputFilter": {
       "type": "string",
@@ -12844,7 +12929,7 @@
         "HdDeviceSettings": {
           "shape": "InputDeviceConfigurableSettings",
           "locationName": "hdDeviceSettings",
-          "documentation": "The settings that you want to apply to the input device."
+          "documentation": "The settings that you want to apply to the HD input device."
         },
         "InputDeviceId": {
           "shape": "__string",
@@ -12856,6 +12941,11 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "The name that you assigned to this input device (not the unique ID)."
+        },
+        "UhdDeviceSettings": {
+          "shape": "InputDeviceConfigurableSettings",
+          "locationName": "uhdDeviceSettings",
+          "documentation": "The settings that you want to apply to the UHD input device."
         }
       },
       "documentation": "A request to update an input device.",
@@ -12920,6 +13010,11 @@
           "shape": "InputDeviceType",
           "locationName": "type",
           "documentation": "The type of the input device."
+        },
+        "UhdDeviceSettings": {
+          "shape": "InputDeviceUhdSettings",
+          "locationName": "uhdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type UHD."
         }
       },
       "documentation": "Placeholder documentation for UpdateInputDeviceResponse"
@@ -13123,6 +13218,22 @@
       },
       "documentation": "Placeholder documentation for UpdateReservationResponse"
     },
+    "VideoBlackFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "BlackDetectThreshold": {
+          "shape": "__doubleMin0Max1",
+          "locationName": "blackDetectThreshold",
+          "documentation": "A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places."
+        },
+        "VideoBlackThresholdMsec": {
+          "shape": "__integerMin1000",
+          "locationName": "videoBlackThresholdMsec",
+          "documentation": "The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs."
+        }
+      },
+      "documentation": "Placeholder documentation for VideoBlackFailoverSettings"
+    },
     "VideoCodecSettings": {
       "type": "structure",
       "members": {
@@ -13323,6 +13434,10 @@
     "__doubleMin0": {
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMin0"
+    },
+    "__doubleMin0Max1": {
+      "type": "double",
+      "documentation": "Placeholder documentation for __doubleMin0Max1"
     },
     "__doubleMin1": {
       "type": "double",
