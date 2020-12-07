@@ -3456,6 +3456,22 @@ declare namespace DMS {
      * Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH. Use this parameter when DatePartitionedEnabled is set to true.
      */
     DatePartitionDelimiter?: DatePartitionDelimiterValue;
+    /**
+     * This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If set to true for columns not included in the supplemental log, AWS DMS uses the value specified by  CsvNoSupValue . If not set or set to false, AWS DMS uses the null value for these columns.  This setting is supported in AWS DMS versions 3.4.1 and later. 
+     */
+    UseCsvNoSupValue?: BooleanOptional;
+    /**
+     * This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format. If  UseCsvNoSupValue  is set to true, specify a string value that you want AWS DMS to use for all columns not included in the supplemental log. If you do not specify a string value, AWS DMS uses the null value for these columns regardless of the UseCsvNoSupValue setting.  This setting is supported in AWS DMS versions 3.4.1 and later. 
+     */
+    CsvNoSupValue?: String;
+    /**
+     * If set to true, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by  CdcPath .  This setting is supported in AWS DMS versions 3.4.2 and later. 
+     */
+    PreserveTransactions?: BooleanOptional;
+    /**
+     * Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If CdcPath is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. For an S3 target, if CdcPathis set, it is the folder path where data changes are replicated. If you set  PreserveTransactions  to true, AWS DMS verifies that you have set this parameter to a folder path on your S3 target where AWS DMS can save the transaction order for the CDC load. AWS DMS creates this CDC folder path in either your S3 target working directory or the S3 target location specified by  BucketFolder  and  BucketName . For example, if you specify CdcPath as MyChangedData, and you specify BucketName as MyTargetBucket but do not specify BucketFolder, AWS DMS creates the CDC folder path following: MyTargetBucket/MyChangedData. If you specify the same CdcPath, and you specify BucketName as MyTargetBucket and BucketFolder as MyTargetData, AWS DMS creates the CDC folder path following: MyTargetBucket/MyTargetData/MyChangedData.  This setting is supported in AWS DMS versions 3.4.2 and later. 
+     */
+    CdcPath?: String;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];

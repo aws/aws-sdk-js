@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.804.0-->
+<!--LATEST=2.805.0-->
 <!--ENTRYINSERT-->
+
+## 2.805.0
+* bugfix: S3: fixed a bug where createPresignedPost could result in a process crash.
+* feature: DMS: Added PreserveTransaction setting to preserve order of CDC for S3 as target. Added CsvNoSupValue setting to replace empty value for columns not included in the supplemental log for S3 as target.
+* feature: ServiceCatalogAppRegistry: AWS Service Catalog AppRegistry now supports adding, removing, and listing tags on resources after they are created.
 
 ## 2.804.0
 * feature: EC2: This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time.
