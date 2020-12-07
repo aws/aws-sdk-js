@@ -1,6 +1,46 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.799.0-->
+<!--LATEST=2.804.0-->
 <!--ENTRYINSERT-->
+
+## 2.804.0
+* feature: EC2: This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time.
+* feature: Kafka: Adding HEALING to ClusterState.
+* feature: Lambda: Added the additional enum InvalidImage to StateReasonCode and LastUpdateStatusReasonCode fields.
+* feature: LicenseManager: Automated Discovery now has support for custom tags, and detects software uninstalls.
+* feature: MediaLive: AWS Elemental MediaLive now supports black video and audio silence as new conditions to trigger automatic input failover.
+* feature: RDS: Adds support for Amazon RDS Cross-Region Automated Backups, the ability to setup automatic replication of snapshots and transaction logs from a primary AWS Region to a secondary AWS Region.
+* feature: SSM: AWS Systems Manager Patch Manager MAC OS Support and OpsMetadata Store APIs to store operational metadata for an Application.
+* feature: WorkSpaces: Update the import-workspace-image API to have "BYOL_REGULAR_WSP" as a valid input string for ingestion-process.
+
+## 2.803.0
+* feature: Batch: This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for EBS volumes that are attached to instances.
+* feature: LicenseManager: AWS License Manager enables managed entitlements for AWS customers and Software Vendors (ISV). You can track and distribute license entitlements from AWS Marketplace and supported ISVs.
+
+## 2.802.0
+* bugfix: Profile: Removes an incorrectly named service `Profile` that was included in release, v2.801.0
+* feature: CustomerProfiles: This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center.
+
+## 2.801.0
+* feature: AmplifyBackend: (New Service) The Amplify Admin UI offers an accessible way to develop app backends and manage app content. We recommend that you use the Amplify Admin UI to manage the backend of your Amplify app.
+* feature: AppIntegrations: The Amazon AppIntegrations service (in preview release) enables you to configure and reuse connections to external applications.
+* feature: Connect: This release adds an Amazon Connect API that provides the ability to create tasks, and a set of APIs (in preview) to configure AppIntegrations associations with Amazon Connect instances.
+* feature: ConnectContactLens: Contact Lens for Amazon Connect analyzes conversations, both real-time and post-call. The ListRealtimeContactAnalysisSegments API returns a list of analysis segments for a real-time analysis session.
+* feature: DevOpsGuru: (New Service) Amazon DevOps Guru is available in public preview. It's a fully managed service that uses machine learning to analyze your operational solutions to help you find and troubleshoot issues.
+* feature: DirectoryService: Adding client authentication feature for AWS AD Connector
+* feature: EC2: This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs
+* feature: ECRPUBLIC: Supports Amazon Elastic Container Registry (Amazon ECR) Public, a fully managed registry that makes it easy for a developer to publicly share container software worldwide for anyone to download.
+* feature: EKS: Amazon EKS now allows you to define and manage the lifecycle for Kubernetes add-ons for your clusters. This release adds support for the AWS VPC CNI (vpc-cni).
+* feature: Honeycode: Introducing APIs to read and write directly from Honeycode tables. Use APIs to pull table and column metadata, then use the read and write APIs to programmatically read and write from the tables.
+* feature: Lambda: This release includes support for a new feature: Container images support in AWS Lambda. This adds APIs for deploying functions as container images. AWS Lambda now supports memory up to 10240MB.
+* feature: LookoutVision: This release introduces support for Amazon Lookout for Vision.
+* feature: Profile: This is the first release of Amazon Connect Customer Profiles, a unified customer profile for your Amazon Connect contact center.
+* feature: S3: S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS
+* feature: SageMaker: Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features.
+* feature: SageMakerFeatureStoreRuntime: This release adds support for Amazon SageMaker Feature Store, which makes it easy for customers to create, version, share, and manage curated data for machine learning (ML) development.
+
+## 2.800.0
+* feature: EC2: This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
 
 ## 2.799.0
 * feature: Appflow: Upsolver as a destination connector and documentation update.

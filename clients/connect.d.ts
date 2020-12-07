@@ -68,13 +68,21 @@ declare class Connect extends Service {
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
    */
   createInstance(params: Connect.Types.CreateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with anAmazon Connect instance.
+   */
+  createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with anAmazon Connect instance.
+   */
+  createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
    * Creates a new routing profile.
    */
@@ -83,6 +91,14 @@ declare class Connect extends Service {
    * Creates a new routing profile.
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a use case for an AppIntegration association.
+   */
+  createUseCase(params: Connect.Types.CreateUseCaseRequest, callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a use case for an AppIntegration association.
+   */
+  createUseCase(callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
    * Creates a user account for the specified Amazon Connect instance. For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
    */
@@ -100,13 +116,29 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
-   * Deletes the Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance.
    */
   deleteInstance(params: Connect.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance.
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   */
+  deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   */
+  deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a use case from an AppIntegration association.
+   */
+  deleteUseCase(params: Connect.Types.DeleteUseCaseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a use case from an AppIntegration association.
+   */
+  deleteUseCase(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
@@ -292,29 +324,37 @@ declare class Connect extends Service {
    */
   listHoursOfOperations(callback?: (err: AWSError, data: Connect.Types.ListHoursOfOperationsResponse) => void): Request<Connect.Types.ListHoursOfOperationsResponse, AWSError>;
   /**
-   * Returns a paginated list of all attribute types for the given instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all attribute types for the given instance.
    */
   listInstanceAttributes(params: Connect.Types.ListInstanceAttributesRequest, callback?: (err: AWSError, data: Connect.Types.ListInstanceAttributesResponse) => void): Request<Connect.Types.ListInstanceAttributesResponse, AWSError>;
   /**
-   * Returns a paginated list of all attribute types for the given instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all attribute types for the given instance.
    */
   listInstanceAttributes(callback?: (err: AWSError, data: Connect.Types.ListInstanceAttributesResponse) => void): Request<Connect.Types.ListInstanceAttributesResponse, AWSError>;
   /**
-   * Returns a paginated list of storage configs for the identified instance and resource type.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of storage configs for the identified instance and resource type.
    */
   listInstanceStorageConfigs(params: Connect.Types.ListInstanceStorageConfigsRequest, callback?: (err: AWSError, data: Connect.Types.ListInstanceStorageConfigsResponse) => void): Request<Connect.Types.ListInstanceStorageConfigsResponse, AWSError>;
   /**
-   * Returns a paginated list of storage configs for the identified instance and resource type.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of storage configs for the identified instance and resource type.
    */
   listInstanceStorageConfigs(callback?: (err: AWSError, data: Connect.Types.ListInstanceStorageConfigsResponse) => void): Request<Connect.Types.ListInstanceStorageConfigsResponse, AWSError>;
   /**
-   * Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
    */
   listInstances(params: Connect.Types.ListInstancesRequest, callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   */
+  listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   */
+  listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
    * Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
    */
@@ -396,6 +436,14 @@ declare class Connect extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. List the use cases. 
+   */
+  listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. List the use cases. 
+   */
+  listUseCases(callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
+  /**
    * Provides summary information about the hierarchy groups for the specified Amazon Connect instance. For more information about agent hierarchies, see Set Up Agent Hierarchies in the Amazon Connect Administrator Guide.
    */
   listUserHierarchyGroups(params: Connect.Types.ListUserHierarchyGroupsRequest, callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
@@ -443,6 +491,14 @@ declare class Connect extends Service {
    * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
+  /**
+   * Initiates a contact flow to start a new task.
+   */
+  startTaskContact(params: Connect.Types.StartTaskContactRequest, callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
+  /**
+   * Initiates a contact flow to start a new task.
+   */
+  startTaskContact(callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
    * Ends the specified contact.
    */
@@ -508,19 +564,19 @@ declare class Connect extends Service {
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the value for the specified attribute type.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the value for the specified attribute type.
    */
   updateInstanceAttribute(params: Connect.Types.UpdateInstanceAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the value for the specified attribute type.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the value for the specified attribute type.
    */
   updateInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing configuration for a resource type. This API is idempotent.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(params: Connect.Types.UpdateInstanceStorageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing configuration for a resource type. This API is idempotent.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -716,7 +772,7 @@ declare namespace Connect {
   export type AutoAccept = boolean;
   export type BotName = string;
   export type BucketName = string;
-  export type Channel = "VOICE"|"CHAT"|string;
+  export type Channel = "VOICE"|"CHAT"|"TASK"|string;
   export type Channels = Channel[];
   export type ChatContent = string;
   export type ChatContentType = string;
@@ -789,6 +845,7 @@ declare namespace Connect {
   export type ContactFlowType = "CONTACT_FLOW"|"CUSTOMER_QUEUE"|"CUSTOMER_HOLD"|"CUSTOMER_WHISPER"|"AGENT_HOLD"|"AGENT_WHISPER"|"OUTBOUND_WHISPER"|"AGENT_TRANSFER"|"QUEUE_TRANSFER"|string;
   export type ContactFlowTypes = ContactFlowType[];
   export type ContactId = string;
+  export type ContactReferences = {[key: string]: Reference};
   export interface CreateContactFlowRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -861,6 +918,42 @@ declare namespace Connect {
      */
     Arn?: ARN;
   }
+  export interface CreateIntegrationAssociationRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The type of information to be ingested.
+     */
+    IntegrationType: IntegrationType;
+    /**
+     * The Amazon Resource Name (ARN) of the integration.
+     */
+    IntegrationArn: ARN;
+    /**
+     * The URL for the external application.
+     */
+    SourceApplicationUrl: URI;
+    /**
+     * The name of the external application.
+     */
+    SourceApplicationName: SourceApplicationName;
+    /**
+     * The type of the data source.
+     */
+    SourceType: SourceType;
+  }
+  export interface CreateIntegrationAssociationResponse {
+    /**
+     * The identifier for the association.
+     */
+    IntegrationAssociationId?: IntegrationAssociationId;
+    /**
+     * The Amazon Resource Name (ARN) for the association.
+     */
+    IntegrationAssociationArn?: ARN;
+  }
   export interface CreateRoutingProfileRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -900,6 +993,30 @@ declare namespace Connect {
      * The identifier of the routing profile.
      */
     RoutingProfileId?: RoutingProfileId;
+  }
+  export interface CreateUseCaseRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the AppIntegration association.
+     */
+    IntegrationAssociationId: IntegrationAssociationId;
+    /**
+     * The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+     */
+    UseCaseType: UseCaseType;
+  }
+  export interface CreateUseCaseResponse {
+    /**
+     * The identifier of the use case.
+     */
+    UseCaseId?: UseCaseId;
+    /**
+     * The Amazon Resource Name (ARN) for the use case.
+     */
+    UseCaseArn?: ARN;
   }
   export interface CreateUserHierarchyGroupRequest {
     /**
@@ -1035,6 +1152,30 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance.
      */
     InstanceId: InstanceId;
+  }
+  export interface DeleteIntegrationAssociationRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the AppIntegration association.
+     */
+    IntegrationAssociationId: IntegrationAssociationId;
+  }
+  export interface DeleteUseCaseRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the AppIntegration association.
+     */
+    IntegrationAssociationId: IntegrationAssociationId;
+    /**
+     * The identifier for the use case.
+     */
+    UseCaseId: UseCaseId;
   }
   export interface DeleteUserHierarchyGroupRequest {
     /**
@@ -1180,6 +1321,7 @@ declare namespace Connect {
      */
     User?: User;
   }
+  export type Description = string;
   export interface Dimensions {
     /**
      * Information about the queue for which metrics are returned.
@@ -1313,11 +1455,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both VOICE and CHAT channels are supported.
+     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.
      */
     Filters: Filters;
     /**
-     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues. If you group by CHANNEL, you should include a Channels filter. Both VOICE and CHAT channels are supported. If no Grouping is included in the request, a summary of metrics is returned.
+     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues. If you group by CHANNEL, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported. If no Grouping is included in the request, a summary of metrics is returned.
      */
     Groupings?: Groupings;
     /**
@@ -1373,7 +1515,7 @@ declare namespace Connect {
      */
     EndTime: timestamp;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both VOICE and CHAT channels are supported.
+     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.
      */
     Filters: Filters;
     /**
@@ -1712,6 +1854,43 @@ declare namespace Connect {
     OutboundCallsEnabled?: OutboundCallsEnabled;
   }
   export type InstanceSummaryList = InstanceSummary[];
+  export type IntegrationAssociationId = string;
+  export interface IntegrationAssociationSummary {
+    /**
+     * The identifier for the AppIntegration association.
+     */
+    IntegrationAssociationId?: IntegrationAssociationId;
+    /**
+     * The Amazon Resource Name (ARN) for the AppIntegration association.
+     */
+    IntegrationAssociationArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The integration type.
+     */
+    IntegrationType?: IntegrationType;
+    /**
+     * The Amazon Resource Name (ARN) for the AppIntegration.
+     */
+    IntegrationArn?: ARN;
+    /**
+     * The URL for the external application.
+     */
+    SourceApplicationUrl?: URI;
+    /**
+     * The user-provided, friendly name for the external application.
+     */
+    SourceApplicationName?: SourceApplicationName;
+    /**
+     * The name of the source.
+     */
+    SourceType?: SourceType;
+  }
+  export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
+  export type IntegrationType = "EVENT"|string;
   export type KeyId = string;
   export interface KinesisFirehoseConfig {
     /**
@@ -1894,6 +2073,30 @@ declare namespace Connect {
      * Information about the instances.
      */
     InstanceSummaryList?: InstanceSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListIntegrationAssociationsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface ListIntegrationAssociationsResponse {
+    /**
+     * The AppIntegration associations.
+     */
+    IntegrationAssociationSummaryList?: IntegrationAssociationSummaryList;
     /**
      * If there are additional results, this is the token for the next set of results.
      */
@@ -2143,6 +2346,34 @@ declare namespace Connect {
      */
     tags?: TagMap;
   }
+  export interface ListUseCasesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the integration association.
+     */
+    IntegrationAssociationId: IntegrationAssociationId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface ListUseCasesResponse {
+    /**
+     * The use cases.
+     */
+    UseCaseSummaryList?: UseCaseSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListUserHierarchyGroupsRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -2208,6 +2439,7 @@ declare namespace Connect {
      */
     Concurrency: Concurrency;
   }
+  export type Name = string;
   export type NextToken = string;
   export type Origin = string;
   export type OriginsList = Origin[];
@@ -2305,6 +2537,19 @@ declare namespace Connect {
   export type QueueType = "STANDARD"|"AGENT"|string;
   export type QueueTypes = QueueType[];
   export type Queues = QueueId[];
+  export interface Reference {
+    /**
+     * A formatted URL that will be shown to an agent in the Contact Control Panel (CCP)
+     */
+    Value: ReferenceValue;
+    /**
+     * A valid URL.
+     */
+    Type: ReferenceType;
+  }
+  export type ReferenceKey = string;
+  export type ReferenceType = "URL"|string;
+  export type ReferenceValue = string;
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -2474,6 +2719,8 @@ declare namespace Connect {
   }
   export type SecurityProfileSummaryList = SecurityProfileSummary[];
   export type SecurityToken = string;
+  export type SourceApplicationName = string;
+  export type SourceType = "SALESFORCE"|"ZENDESK"|string;
   export interface StartChatContactRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -2570,6 +2817,46 @@ declare namespace Connect {
      */
     ContactId?: ContactId;
   }
+  export interface StartTaskContactRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the previous chat, voice, or task contact. 
+     */
+    PreviousContactId?: ContactId;
+    /**
+     * The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
+     */
+    ContactFlowId: ContactFlowId;
+    /**
+     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     */
+    Attributes?: Attributes;
+    /**
+     * The name of a task that is shown to an agent in the Contact Control Panel (CCP).
+     */
+    Name: Name;
+    /**
+     * A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+     */
+    References?: ContactReferences;
+    /**
+     * A description of the task that is shown to an agent in the Contact Control Panel (CCP).
+     */
+    Description?: Description;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartTaskContactResponse {
+    /**
+     * The identifier of this contact within the Amazon Connect instance.
+     */
+    ContactId?: ContactId;
+  }
   export type Statistic = "SUM"|"MAX"|"AVG"|string;
   export interface StopContactRecordingRequest {
     /**
@@ -2643,6 +2930,7 @@ declare namespace Connect {
   }
   export type ThresholdValue = number;
   export type Timestamp = Date;
+  export type URI = string;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
     /**
@@ -2787,7 +3075,7 @@ declare namespace Connect {
      */
     RoutingProfileId: RoutingProfileId;
     /**
-     * The queues to be updated for this routing profile.
+     * The queues to be updated for this routing profile. Queues must first be associated to the routing profile. You can do this using AssociateRoutingProfileQueues.
      */
     QueueConfigs: RoutingProfileQueueConfigList;
   }
@@ -2885,6 +3173,23 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
   }
+  export interface UseCase {
+    /**
+     * The identifier for the use case.
+     */
+    UseCaseId?: UseCaseId;
+    /**
+     * The Amazon Resource Name (ARN) for the use case.
+     */
+    UseCaseArn?: ARN;
+    /**
+     * The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+     */
+    UseCaseType?: UseCaseType;
+  }
+  export type UseCaseId = string;
+  export type UseCaseSummaryList = UseCase[];
+  export type UseCaseType = "RULES_EVALUATION"|string;
   export interface User {
     /**
      * The identifier of the user account.

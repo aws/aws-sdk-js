@@ -215,7 +215,7 @@
           "shape": "CodeSigningConfigNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Functions</a>.</p>"
+      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package is a .zip file archive or container image that contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>You can use code signing if your deployment package is a .zip file archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Functions</a>.</p>"
     },
     "DeleteAlias": {
       "name": "DeleteAlias",
@@ -1046,7 +1046,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html\">code signing configurations</a> for the specified function. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. </p>"
+      "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html\">code signing configurations</a>. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. </p>"
     },
     "ListEventSourceMappings": {
       "name": "ListEventSourceMappings",
@@ -1754,7 +1754,7 @@
           "shape": "CodeSigningConfigNotFoundException"
         }
       ],
-      "documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">Configuring code signing</a>.</p> <p>The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.</p>"
+      "documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">Configuring code signing</a>.</p> <p>The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.</p> <note> <p>For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you update the image tag to a new image, Lambda does not automatically update the function.</p> </note>"
     },
     "UpdateFunctionConfiguration": {
       "name": "UpdateFunctionConfiguration",
@@ -2154,7 +2154,7 @@
       "members": {
         "UntrustedArtifactOnDeployment": {
           "shape": "CodeSigningPolicy",
-          "documentation": "<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>"
+          "documentation": "<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>"
         }
       },
       "documentation": "<p>Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.</p>"
@@ -2319,9 +2319,7 @@
       "type": "structure",
       "required": [
         "FunctionName",
-        "Runtime",
         "Role",
-        "Handler",
         "Code"
       ],
       "members": {
@@ -2355,7 +2353,7 @@
         },
         "MemorySize": {
           "shape": "MemorySize",
-          "documentation": "<p>The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
+          "documentation": "<p>The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>"
         },
         "Publish": {
           "shape": "Boolean",
@@ -2364,6 +2362,10 @@
         "VpcConfig": {
           "shape": "VpcConfig",
           "documentation": "<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
+        },
+        "PackageType": {
+          "shape": "PackageType",
+          "documentation": "<p>The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.</p>"
         },
         "DeadLetterConfig": {
           "shape": "DeadLetterConfig",
@@ -2393,9 +2395,13 @@
           "shape": "FileSystemConfigList",
           "documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
         },
+        "ImageConfig": {
+          "shape": "ImageConfig",
+          "documentation": "<p>Configuration values that override the container image Dockerfile.</p>"
+        },
         "CodeSigningConfigArn": {
           "shape": "CodeSigningConfigArn",
-          "documentation": "<p>To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p>"
+          "documentation": "<p>To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.</p>"
         }
       }
     },
@@ -2820,9 +2826,13 @@
         "S3ObjectVersion": {
           "shape": "S3ObjectVersion",
           "documentation": "<p>For versioned objects, the version of the deployment package object to use.</p>"
+        },
+        "ImageUri": {
+          "shape": "String",
+          "documentation": "<p>URI of a container image in the Amazon ECR registry.</p>"
         }
       },
-      "documentation": "<p>The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.</p>"
+      "documentation": "<p>The code for the Lambda function. You can specify either an object in Amazon S3, upload a .zip file archive deployment package directly, or specify the URI of a container image.</p>"
     },
     "FunctionCodeLocation": {
       "type": "structure",
@@ -2834,6 +2844,14 @@
         "Location": {
           "shape": "String",
           "documentation": "<p>A presigned URL that you can use to download the deployment package.</p>"
+        },
+        "ImageUri": {
+          "shape": "String",
+          "documentation": "<p>URI of a container image in the Amazon ECR registry.</p>"
+        },
+        "ResolvedImageUri": {
+          "shape": "String",
+          "documentation": "<p>The resolved URI for the image.</p>"
         }
       },
       "documentation": "<p>Details about a function's deployment package.</p>"
@@ -2875,7 +2893,7 @@
         },
         "MemorySize": {
           "shape": "MemorySize",
-          "documentation": "<p>The memory that's allocated to the function.</p>"
+          "documentation": "<p>The amount of memory available to the function at runtime. </p>"
         },
         "LastModified": {
           "shape": "Timestamp",
@@ -2948,6 +2966,14 @@
         "FileSystemConfigs": {
           "shape": "FileSystemConfigList",
           "documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+        },
+        "PackageType": {
+          "shape": "PackageType",
+          "documentation": "<p>The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for .zip file archive.</p>"
+        },
+        "ImageConfigResponse": {
+          "shape": "ImageConfigResponse",
+          "documentation": "<p>The function's image configuration values.</p>"
         },
         "SigningProfileVersionArn": {
           "shape": "Arn",
@@ -3419,6 +3445,52 @@
     "HttpStatus": {
       "type": "integer"
     },
+    "ImageConfig": {
+      "type": "structure",
+      "members": {
+        "EntryPoint": {
+          "shape": "StringList",
+          "documentation": "<p>Specifies the entry point to their application, which is typically the location of the runtime executable.</p>"
+        },
+        "Command": {
+          "shape": "StringList",
+          "documentation": "<p>Specifies parameters that you want to pass in with ENTRYPOINT. </p>"
+        },
+        "WorkingDirectory": {
+          "shape": "WorkingDirectory",
+          "documentation": "<p>Specifies the working directory.</p>"
+        }
+      },
+      "documentation": "<p>Configuration values that override the container image Dockerfile. See <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html\">Override Container settings</a>. </p>"
+    },
+    "ImageConfigError": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "String",
+          "documentation": "<p>Error code.</p>"
+        },
+        "Message": {
+          "shape": "SensitiveString",
+          "documentation": "<p>Error message.</p>"
+        }
+      },
+      "documentation": "<p>Error response to GetFunctionConfiguration.</p>"
+    },
+    "ImageConfigResponse": {
+      "type": "structure",
+      "members": {
+        "ImageConfig": {
+          "shape": "ImageConfig",
+          "documentation": "<p>Configuration values that override the container image Dockerfile.</p>"
+        },
+        "Error": {
+          "shape": "ImageConfigError",
+          "documentation": "<p>Error response to GetFunctionConfiguration.</p>"
+        }
+      },
+      "documentation": "<p>Response to GetFunctionConfiguration request.</p>"
+    },
     "Integer": {
       "type": "integer"
     },
@@ -3563,7 +3635,10 @@
         "InternalError",
         "SubnetOutOfIPAddresses",
         "InvalidSubnet",
-        "InvalidSecurityGroup"
+        "InvalidSecurityGroup",
+        "ImageDeleted",
+        "ImageAccessDenied",
+        "InvalidImage"
       ]
     },
     "Layer": {
@@ -4227,7 +4302,7 @@
     },
     "MemorySize": {
       "type": "integer",
-      "max": 3008,
+      "max": 10240,
       "min": 128
     },
     "NameSpacedFunctionArn": {
@@ -4273,6 +4348,13 @@
     "OrganizationId": {
       "type": "string",
       "pattern": "o-[a-z0-9]{10,32}"
+    },
+    "PackageType": {
+      "type": "string",
+      "enum": [
+        "Zip",
+        "Image"
+      ]
     },
     "ParallelizationFactor": {
       "type": "integer",
@@ -4792,7 +4874,10 @@
         "InternalError",
         "SubnetOutOfIPAddresses",
         "InvalidSubnet",
-        "InvalidSecurityGroup"
+        "InvalidSecurityGroup",
+        "ImageDeleted",
+        "ImageAccessDenied",
+        "InvalidImage"
       ]
     },
     "StatementId": {
@@ -4803,6 +4888,13 @@
     },
     "String": {
       "type": "string"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      },
+      "max": 1500
     },
     "SubnetId": {
       "type": "string"
@@ -5084,6 +5176,10 @@
           "shape": "S3ObjectVersion",
           "documentation": "<p>For versioned objects, the version of the deployment package object to use.</p>"
         },
+        "ImageUri": {
+          "shape": "String",
+          "documentation": "<p>URI of a container image in the Amazon ECR registry.</p>"
+        },
         "Publish": {
           "shape": "Boolean",
           "documentation": "<p>Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.</p>"
@@ -5128,7 +5224,7 @@
         },
         "MemorySize": {
           "shape": "MemorySize",
-          "documentation": "<p>The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.</p>"
+          "documentation": "<p>The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>"
         },
         "VpcConfig": {
           "shape": "VpcConfig",
@@ -5165,6 +5261,10 @@
         "FileSystemConfigs": {
           "shape": "FileSystemConfigList",
           "documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+        },
+        "ImageConfig": {
+          "shape": "ImageConfig",
+          "documentation": "<p>Configuration values that override the container image Dockerfile.</p>"
         }
       }
     },
@@ -5245,6 +5345,10 @@
       "type": "double",
       "max": 1,
       "min": 0
+    },
+    "WorkingDirectory": {
+      "type": "string",
+      "max": 1000
     }
   },
   "documentation": "<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is AWS Lambda</a>, and for information about how the service works, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <b>AWS Lambda Developer Guide</b>.</p>"

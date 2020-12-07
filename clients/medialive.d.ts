@@ -819,6 +819,16 @@ Alternate rendition that the client will not try to play back by default. Repres
     AudioPidSelection?: AudioPidSelection;
     AudioTrackSelection?: AudioTrackSelection;
   }
+  export interface AudioSilenceFailoverSettings {
+    /**
+     * The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+     */
+    AudioSelectorName: __string;
+    /**
+     * The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
+     */
+    AudioSilenceThresholdMsec?: __integerMin1000;
+  }
   export interface AudioTrack {
     /**
      * 1-based integer value that maps to a specific audio track
@@ -1893,6 +1903,10 @@ one destination per packager.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -2569,9 +2583,17 @@ You specify only the font family. All other style information (color, bold, posi
   }
   export interface FailoverConditionSettings {
     /**
+     * MediaLive will perform a failover if the specified audio selector is silent for the specified period.
+     */
+    AudioSilenceSettings?: AudioSilenceFailoverSettings;
+    /**
      * MediaLive will perform a failover if content is not detected in this input for the specified period.
      */
     InputLossSettings?: InputLossFailoverSettings;
+    /**
+     * MediaLive will perform a failover if content is considered black for the specified period.
+     */
+    VideoBlackSettings?: VideoBlackFailoverSettings;
   }
   export interface FeatureActivations {
     /**
@@ -3738,9 +3760,47 @@ to.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|string;
+  export interface InputDeviceUhdSettings {
+    /**
+     * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
+     */
+    ActiveInput?: InputDeviceActiveInput;
+    /**
+     * The source at the input device that is currently active. You can specify this source.
+     */
+    ConfiguredInput?: InputDeviceConfiguredInput;
+    /**
+     * The state of the input device.
+     */
+    DeviceState?: InputDeviceState;
+    /**
+     * The frame rate of the video source.
+     */
+    Framerate?: __double;
+    /**
+     * The height of the video source, in pixels.
+     */
+    Height?: __integer;
+    /**
+     * The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.
+     */
+    MaxBitrate?: __integer;
+    /**
+     * The scan type of the video source.
+     */
+    ScanType?: InputDeviceScanType;
+    /**
+     * The width of the video source, in pixels.
+     */
+    Width?: __integer;
+  }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
     /**
@@ -6107,7 +6167,7 @@ one destination per packager.
   }
   export interface UpdateInputDeviceRequest {
     /**
-     * The settings that you want to apply to the input device.
+     * The settings that you want to apply to the HD input device.
      */
     HdDeviceSettings?: InputDeviceConfigurableSettings;
     /**
@@ -6118,6 +6178,10 @@ one destination per packager.
      * The name that you assigned to this input device (not the unique ID).
      */
     Name?: __string;
+    /**
+     * The settings that you want to apply to the UHD input device.
+     */
+    UhdDeviceSettings?: InputDeviceConfigurableSettings;
   }
   export interface UpdateInputDeviceResponse {
     /**
@@ -6164,6 +6228,10 @@ one destination per packager.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export interface UpdateInputRequest {
     /**
@@ -6278,6 +6346,16 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface UpdateReservationResponse {
     Reservation?: Reservation;
   }
+  export interface VideoBlackFailoverSettings {
+    /**
+     * A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
+     */
+    BlackDetectThreshold?: __doubleMin0Max1;
+    /**
+     * The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
+     */
+    VideoBlackThresholdMsec?: __integerMin1000;
+  }
   export interface VideoCodecSettings {
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
@@ -6370,6 +6448,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   }
   export type __double = number;
   export type __doubleMin0 = number;
+  export type __doubleMin0Max1 = number;
   export type __doubleMin1 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;

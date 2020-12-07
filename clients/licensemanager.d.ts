@@ -12,6 +12,62 @@ declare class LicenseManager extends Service {
   constructor(options?: LicenseManager.Types.ClientConfiguration)
   config: Config & LicenseManager.Types.ClientConfiguration;
   /**
+   * Accepts the specified grant.
+   */
+  acceptGrant(params: LicenseManager.Types.AcceptGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.AcceptGrantResponse) => void): Request<LicenseManager.Types.AcceptGrantResponse, AWSError>;
+  /**
+   * Accepts the specified grant.
+   */
+  acceptGrant(callback?: (err: AWSError, data: LicenseManager.Types.AcceptGrantResponse) => void): Request<LicenseManager.Types.AcceptGrantResponse, AWSError>;
+  /**
+   * Checks in the specified license. Check in a license when it is no longer in use.
+   */
+  checkInLicense(params: LicenseManager.Types.CheckInLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.CheckInLicenseResponse) => void): Request<LicenseManager.Types.CheckInLicenseResponse, AWSError>;
+  /**
+   * Checks in the specified license. Check in a license when it is no longer in use.
+   */
+  checkInLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckInLicenseResponse) => void): Request<LicenseManager.Types.CheckInLicenseResponse, AWSError>;
+  /**
+   * Checks out the specified license for offline use.
+   */
+  checkoutBorrowLicense(params: LicenseManager.Types.CheckoutBorrowLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.CheckoutBorrowLicenseResponse) => void): Request<LicenseManager.Types.CheckoutBorrowLicenseResponse, AWSError>;
+  /**
+   * Checks out the specified license for offline use.
+   */
+  checkoutBorrowLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckoutBorrowLicenseResponse) => void): Request<LicenseManager.Types.CheckoutBorrowLicenseResponse, AWSError>;
+  /**
+   * Checks out the specified license.
+   */
+  checkoutLicense(params: LicenseManager.Types.CheckoutLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.CheckoutLicenseResponse) => void): Request<LicenseManager.Types.CheckoutLicenseResponse, AWSError>;
+  /**
+   * Checks out the specified license.
+   */
+  checkoutLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckoutLicenseResponse) => void): Request<LicenseManager.Types.CheckoutLicenseResponse, AWSError>;
+  /**
+   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+   */
+  createGrant(params: LicenseManager.Types.CreateGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantResponse) => void): Request<LicenseManager.Types.CreateGrantResponse, AWSError>;
+  /**
+   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+   */
+  createGrant(callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantResponse) => void): Request<LicenseManager.Types.CreateGrantResponse, AWSError>;
+  /**
+   * Creates a new version of the specified grant.
+   */
+  createGrantVersion(params: LicenseManager.Types.CreateGrantVersionRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantVersionResponse) => void): Request<LicenseManager.Types.CreateGrantVersionResponse, AWSError>;
+  /**
+   * Creates a new version of the specified grant.
+   */
+  createGrantVersion(callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantVersionResponse) => void): Request<LicenseManager.Types.CreateGrantVersionResponse, AWSError>;
+  /**
+   * Creates a license.
+   */
+  createLicense(params: LicenseManager.Types.CreateLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseResponse) => void): Request<LicenseManager.Types.CreateLicenseResponse, AWSError>;
+  /**
+   * Creates a license.
+   */
+  createLicense(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseResponse) => void): Request<LicenseManager.Types.CreateLicenseResponse, AWSError>;
+  /**
    * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(params: LicenseManager.Types.CreateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
@@ -19,6 +75,38 @@ declare class LicenseManager extends Service {
    * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
+  /**
+   * Creates a new version of the specified license.
+   */
+  createLicenseVersion(params: LicenseManager.Types.CreateLicenseVersionRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseVersionResponse) => void): Request<LicenseManager.Types.CreateLicenseVersionResponse, AWSError>;
+  /**
+   * Creates a new version of the specified license.
+   */
+  createLicenseVersion(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseVersionResponse) => void): Request<LicenseManager.Types.CreateLicenseVersionResponse, AWSError>;
+  /**
+   * Creates a long-lived token. A refresh token is a JWT token used to get an access token. With an access token, you can call AssumeRoleWithWebIdentity to get role credentials that you can use to call License Manager to manage the specified license.
+   */
+  createToken(params: LicenseManager.Types.CreateTokenRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateTokenResponse) => void): Request<LicenseManager.Types.CreateTokenResponse, AWSError>;
+  /**
+   * Creates a long-lived token. A refresh token is a JWT token used to get an access token. With an access token, you can call AssumeRoleWithWebIdentity to get role credentials that you can use to call License Manager to manage the specified license.
+   */
+  createToken(callback?: (err: AWSError, data: LicenseManager.Types.CreateTokenResponse) => void): Request<LicenseManager.Types.CreateTokenResponse, AWSError>;
+  /**
+   * Deletes the specified grant.
+   */
+  deleteGrant(params: LicenseManager.Types.DeleteGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteGrantResponse) => void): Request<LicenseManager.Types.DeleteGrantResponse, AWSError>;
+  /**
+   * Deletes the specified grant.
+   */
+  deleteGrant(callback?: (err: AWSError, data: LicenseManager.Types.DeleteGrantResponse) => void): Request<LicenseManager.Types.DeleteGrantResponse, AWSError>;
+  /**
+   * Deletes the specified license.
+   */
+  deleteLicense(params: LicenseManager.Types.DeleteLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseResponse) => void): Request<LicenseManager.Types.DeleteLicenseResponse, AWSError>;
+  /**
+   * Deletes the specified license.
+   */
+  deleteLicense(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseResponse) => void): Request<LicenseManager.Types.DeleteLicenseResponse, AWSError>;
   /**
    * Deletes the specified license configuration. You cannot delete a license configuration that is in use.
    */
@@ -28,6 +116,46 @@ declare class LicenseManager extends Service {
    */
   deleteLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
   /**
+   * Deletes the specified token. Must be called in the license home Region.
+   */
+  deleteToken(params: LicenseManager.Types.DeleteTokenRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteTokenResponse) => void): Request<LicenseManager.Types.DeleteTokenResponse, AWSError>;
+  /**
+   * Deletes the specified token. Must be called in the license home Region.
+   */
+  deleteToken(callback?: (err: AWSError, data: LicenseManager.Types.DeleteTokenResponse) => void): Request<LicenseManager.Types.DeleteTokenResponse, AWSError>;
+  /**
+   * Extends the expiration date for license consumption.
+   */
+  extendLicenseConsumption(params: LicenseManager.Types.ExtendLicenseConsumptionRequest, callback?: (err: AWSError, data: LicenseManager.Types.ExtendLicenseConsumptionResponse) => void): Request<LicenseManager.Types.ExtendLicenseConsumptionResponse, AWSError>;
+  /**
+   * Extends the expiration date for license consumption.
+   */
+  extendLicenseConsumption(callback?: (err: AWSError, data: LicenseManager.Types.ExtendLicenseConsumptionResponse) => void): Request<LicenseManager.Types.ExtendLicenseConsumptionResponse, AWSError>;
+  /**
+   * Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access tokens are valid for one hour.
+   */
+  getAccessToken(params: LicenseManager.Types.GetAccessTokenRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetAccessTokenResponse) => void): Request<LicenseManager.Types.GetAccessTokenResponse, AWSError>;
+  /**
+   * Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access tokens are valid for one hour.
+   */
+  getAccessToken(callback?: (err: AWSError, data: LicenseManager.Types.GetAccessTokenResponse) => void): Request<LicenseManager.Types.GetAccessTokenResponse, AWSError>;
+  /**
+   * Gets detailed information about the specified grant.
+   */
+  getGrant(params: LicenseManager.Types.GetGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetGrantResponse) => void): Request<LicenseManager.Types.GetGrantResponse, AWSError>;
+  /**
+   * Gets detailed information about the specified grant.
+   */
+  getGrant(callback?: (err: AWSError, data: LicenseManager.Types.GetGrantResponse) => void): Request<LicenseManager.Types.GetGrantResponse, AWSError>;
+  /**
+   * Gets detailed information about the specified license.
+   */
+  getLicense(params: LicenseManager.Types.GetLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseResponse) => void): Request<LicenseManager.Types.GetLicenseResponse, AWSError>;
+  /**
+   * Gets detailed information about the specified license.
+   */
+  getLicense(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseResponse) => void): Request<LicenseManager.Types.GetLicenseResponse, AWSError>;
+  /**
    * Gets detailed information about the specified license configuration.
    */
   getLicenseConfiguration(params: LicenseManager.Types.GetLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
@@ -35,6 +163,14 @@ declare class LicenseManager extends Service {
    * Gets detailed information about the specified license configuration.
    */
   getLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
+  /**
+   * Gets detailed information about the usage of the specified license.
+   */
+  getLicenseUsage(params: LicenseManager.Types.GetLicenseUsageRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseUsageResponse) => void): Request<LicenseManager.Types.GetLicenseUsageResponse, AWSError>;
+  /**
+   * Gets detailed information about the usage of the specified license.
+   */
+  getLicenseUsage(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseUsageResponse) => void): Request<LicenseManager.Types.GetLicenseUsageResponse, AWSError>;
   /**
    * Gets the License Manager settings for the current Region.
    */
@@ -51,6 +187,14 @@ declare class LicenseManager extends Service {
    * Lists the resource associations for the specified license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).
    */
   listAssociationsForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
+  /**
+   * Lists the grants distributed for the specified license.
+   */
+  listDistributedGrants(params: LicenseManager.Types.ListDistributedGrantsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListDistributedGrantsResponse) => void): Request<LicenseManager.Types.ListDistributedGrantsResponse, AWSError>;
+  /**
+   * Lists the grants distributed for the specified license.
+   */
+  listDistributedGrants(callback?: (err: AWSError, data: LicenseManager.Types.ListDistributedGrantsResponse) => void): Request<LicenseManager.Types.ListDistributedGrantsResponse, AWSError>;
   /**
    * Lists the license configuration operations that failed.
    */
@@ -76,6 +220,38 @@ declare class LicenseManager extends Service {
    */
   listLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
   /**
+   * Lists all versions of the specified license.
+   */
+  listLicenseVersions(params: LicenseManager.Types.ListLicenseVersionsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseVersionsResponse) => void): Request<LicenseManager.Types.ListLicenseVersionsResponse, AWSError>;
+  /**
+   * Lists all versions of the specified license.
+   */
+  listLicenseVersions(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseVersionsResponse) => void): Request<LicenseManager.Types.ListLicenseVersionsResponse, AWSError>;
+  /**
+   * Lists the licenses for your account.
+   */
+  listLicenses(params: LicenseManager.Types.ListLicensesRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicensesResponse) => void): Request<LicenseManager.Types.ListLicensesResponse, AWSError>;
+  /**
+   * Lists the licenses for your account.
+   */
+  listLicenses(callback?: (err: AWSError, data: LicenseManager.Types.ListLicensesResponse) => void): Request<LicenseManager.Types.ListLicensesResponse, AWSError>;
+  /**
+   * Lists grants that are received but not accepted.
+   */
+  listReceivedGrants(params: LicenseManager.Types.ListReceivedGrantsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedGrantsResponse) => void): Request<LicenseManager.Types.ListReceivedGrantsResponse, AWSError>;
+  /**
+   * Lists grants that are received but not accepted.
+   */
+  listReceivedGrants(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedGrantsResponse) => void): Request<LicenseManager.Types.ListReceivedGrantsResponse, AWSError>;
+  /**
+   * Lists received licenses.
+   */
+  listReceivedLicenses(params: LicenseManager.Types.ListReceivedLicensesRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesResponse, AWSError>;
+  /**
+   * Lists received licenses.
+   */
+  listReceivedLicenses(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesResponse, AWSError>;
+  /**
    * Lists resources managed using Systems Manager inventory.
    */
   listResourceInventory(params: LicenseManager.Types.ListResourceInventoryRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
@@ -92,6 +268,14 @@ declare class LicenseManager extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Lists your tokens.
+   */
+  listTokens(params: LicenseManager.Types.ListTokensRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListTokensResponse) => void): Request<LicenseManager.Types.ListTokensResponse, AWSError>;
+  /**
+   * Lists your tokens.
+   */
+  listTokens(callback?: (err: AWSError, data: LicenseManager.Types.ListTokensResponse) => void): Request<LicenseManager.Types.ListTokensResponse, AWSError>;
+  /**
    * Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
    */
   listUsageForLicenseConfiguration(params: LicenseManager.Types.ListUsageForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
@@ -99,6 +283,14 @@ declare class LicenseManager extends Service {
    * Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
    */
   listUsageForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
+  /**
+   * Rejects the specified grant.
+   */
+  rejectGrant(params: LicenseManager.Types.RejectGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.RejectGrantResponse) => void): Request<LicenseManager.Types.RejectGrantResponse, AWSError>;
+  /**
+   * Rejects the specified grant.
+   */
+  rejectGrant(callback?: (err: AWSError, data: LicenseManager.Types.RejectGrantResponse) => void): Request<LicenseManager.Types.RejectGrantResponse, AWSError>;
   /**
    * Adds the specified tags to the specified license configuration.
    */
@@ -141,6 +333,30 @@ declare class LicenseManager extends Service {
   updateServiceSettings(callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
 }
 declare namespace LicenseManager {
+  export interface AcceptGrantRequest {
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+  }
+  export interface AcceptGrantResponse {
+    /**
+     * Grant ARN.
+     */
+    GrantArn?: Arn;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * Grant version.
+     */
+    Version?: String;
+  }
+  export type AllowedOperation = "CreateGrant"|"CheckoutLicense"|"CheckoutBorrowLicense"|"CheckInLicense"|"ExtendConsumptionLicense"|"ListPurchasedLicenses"|"CreateToken"|string;
+  export type AllowedOperationList = AllowedOperation[];
+  export type Arn = string;
+  export type ArnList = Arn[];
   export interface AutomatedDiscoveryInformation {
     /**
      * Time that automated discovery last ran.
@@ -148,9 +364,153 @@ declare namespace LicenseManager {
     LastRunTime?: DateTime;
   }
   export type Boolean = boolean;
+  export interface BorrowConfiguration {
+    /**
+     * Indicates whether early check-ins are allowed.
+     */
+    AllowEarlyCheckIn: BoxBoolean;
+    /**
+     * Maximum time for the borrow configuration, in minutes.
+     */
+    MaxTimeToLiveInMinutes: BoxInteger;
+  }
   export type BoxBoolean = boolean;
   export type BoxInteger = number;
   export type BoxLong = number;
+  export interface CheckInLicenseRequest {
+    /**
+     * License consumption token.
+     */
+    LicenseConsumptionToken: String;
+    /**
+     * License beneficiary.
+     */
+    Beneficiary?: String;
+  }
+  export interface CheckInLicenseResponse {
+  }
+  export interface CheckoutBorrowLicenseRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.
+     */
+    LicenseArn: Arn;
+    /**
+     * License entitlements. Partial checkouts are not supported.
+     */
+    Entitlements: EntitlementDataList;
+    /**
+     * Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384. For more information, see RFC 7518 Digital Signature with RSASSA-PSS.
+     */
+    DigitalSignatureMethod: DigitalSignatureMethod;
+    /**
+     * Node ID.
+     */
+    NodeId?: String;
+    /**
+     * Information about constraints.
+     */
+    CheckoutMetadata?: MetadataList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: ClientToken;
+  }
+  export interface CheckoutBorrowLicenseResponse {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn?: Arn;
+    /**
+     * License consumption token.
+     */
+    LicenseConsumptionToken?: String;
+    /**
+     * Allowed license entitlements.
+     */
+    EntitlementsAllowed?: EntitlementDataList;
+    /**
+     * Node ID.
+     */
+    NodeId?: String;
+    /**
+     * Signed token.
+     */
+    SignedToken?: SignedToken;
+    /**
+     * Date and time at which the license checkout is issued.
+     */
+    IssuedAt?: ISO8601DateTime;
+    /**
+     * Date and time at which the license checkout expires.
+     */
+    Expiration?: ISO8601DateTime;
+    /**
+     * Information about constraints.
+     */
+    CheckoutMetadata?: MetadataList;
+  }
+  export interface CheckoutLicenseRequest {
+    /**
+     * Product SKU.
+     */
+    ProductSKU: String;
+    /**
+     * Checkout type.
+     */
+    CheckoutType: CheckoutType;
+    /**
+     * Key fingerprint identifying the license.
+     */
+    KeyFingerprint: String;
+    /**
+     * License entitlements.
+     */
+    Entitlements: EntitlementDataList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: ClientToken;
+    /**
+     * License beneficiary.
+     */
+    Beneficiary?: String;
+    /**
+     * Node ID.
+     */
+    NodeId?: String;
+  }
+  export interface CheckoutLicenseResponse {
+    /**
+     * Checkout type.
+     */
+    CheckoutType?: CheckoutType;
+    /**
+     * License consumption token.
+     */
+    LicenseConsumptionToken?: String;
+    /**
+     * Allowed license entitlements.
+     */
+    EntitlementsAllowed?: EntitlementDataList;
+    /**
+     * Signed token.
+     */
+    SignedToken?: SignedToken;
+    /**
+     * Node ID.
+     */
+    NodeId?: String;
+    /**
+     * Date and time at which the license checkout is issued.
+     */
+    IssuedAt?: ISO8601DateTime;
+    /**
+     * Date and time at which the license checkout expires.
+     */
+    Expiration?: ISO8601DateTime;
+  }
+  export type CheckoutType = "PROVISIONAL"|string;
+  export type ClientToken = string;
   export interface ConsumedLicenseSummary {
     /**
      * Resource type of the resource consuming a license.
@@ -162,6 +522,100 @@ declare namespace LicenseManager {
     ConsumedLicenses?: BoxLong;
   }
   export type ConsumedLicenseSummaryList = ConsumedLicenseSummary[];
+  export interface ConsumptionConfiguration {
+    /**
+     * Renewal frequency.
+     */
+    RenewType?: RenewType;
+    /**
+     * Details about a provisional configuration.
+     */
+    ProvisionalConfiguration?: ProvisionalConfiguration;
+    /**
+     * Details about a borrow configuration.
+     */
+    BorrowConfiguration?: BorrowConfiguration;
+  }
+  export interface CreateGrantRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: String;
+    /**
+     * Grant name.
+     */
+    GrantName: String;
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+    /**
+     * The grant principals.
+     */
+    Principals: PrincipalArnList;
+    /**
+     * Home Region of the grant.
+     */
+    HomeRegion: String;
+    /**
+     * Allowed operations for the grant.
+     */
+    AllowedOperations: AllowedOperationList;
+  }
+  export interface CreateGrantResponse {
+    /**
+     * Grant ARN.
+     */
+    GrantArn?: Arn;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * Grant version.
+     */
+    Version?: String;
+  }
+  export interface CreateGrantVersionRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: String;
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+    /**
+     * Grant name.
+     */
+    GrantName?: String;
+    /**
+     * Allowed operations for the grant.
+     */
+    AllowedOperations?: AllowedOperationList;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * Current version of the grant.
+     */
+    SourceVersion?: String;
+  }
+  export interface CreateGrantVersionResponse {
+    /**
+     * Grant ARN.
+     */
+    GrantArn?: Arn;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * New version of the grant.
+     */
+    Version?: String;
+  }
   export interface CreateLicenseConfigurationRequest {
     /**
      * Name of the license configuration.
@@ -192,6 +646,10 @@ declare namespace LicenseManager {
      */
     Tags?: TagList;
     /**
+     * When true, disassociates a resource when software is uninstalled.
+     */
+    DisassociateWhenNotFound?: BoxBoolean;
+    /**
      * Product information.
      */
     ProductInformationList?: ProductInformationList;
@@ -202,7 +660,201 @@ declare namespace LicenseManager {
      */
     LicenseConfigurationArn?: String;
   }
+  export interface CreateLicenseRequest {
+    /**
+     * License name.
+     */
+    LicenseName: String;
+    /**
+     * Product name.
+     */
+    ProductName: String;
+    /**
+     * Product SKU.
+     */
+    ProductSKU: String;
+    /**
+     * License issuer.
+     */
+    Issuer: Issuer;
+    /**
+     * Home Region for the license.
+     */
+    HomeRegion: String;
+    /**
+     * Date and time range during which the license is valid, in ISO8601-UTC format.
+     */
+    Validity: DatetimeRange;
+    /**
+     * License entitlements.
+     */
+    Entitlements: EntitlementList;
+    /**
+     * License beneficiary.
+     */
+    Beneficiary: String;
+    /**
+     * Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+     */
+    ConsumptionConfiguration: ConsumptionConfiguration;
+    /**
+     * Information about the license.
+     */
+    LicenseMetadata?: MetadataList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: String;
+  }
+  export interface CreateLicenseResponse {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn?: Arn;
+    /**
+     * License status.
+     */
+    Status?: LicenseStatus;
+    /**
+     * License version.
+     */
+    Version?: String;
+  }
+  export interface CreateLicenseVersionRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+    /**
+     * License name.
+     */
+    LicenseName: String;
+    /**
+     * Product name.
+     */
+    ProductName: String;
+    /**
+     * License issuer.
+     */
+    Issuer: Issuer;
+    /**
+     * Home Region of the license.
+     */
+    HomeRegion: String;
+    /**
+     * Date and time range during which the license is valid, in ISO8601-UTC format.
+     */
+    Validity: DatetimeRange;
+    /**
+     * Information about the license.
+     */
+    LicenseMetadata?: MetadataList;
+    /**
+     * License entitlements.
+     */
+    Entitlements: EntitlementList;
+    /**
+     * Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+     */
+    ConsumptionConfiguration: ConsumptionConfiguration;
+    /**
+     * License status.
+     */
+    Status: LicenseStatus;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: String;
+    /**
+     * Current version of the license.
+     */
+    SourceVersion?: String;
+  }
+  export interface CreateLicenseVersionResponse {
+    /**
+     * License ARN.
+     */
+    LicenseArn?: Arn;
+    /**
+     * New version of the license.
+     */
+    Version?: String;
+    /**
+     * License status.
+     */
+    Status?: LicenseStatus;
+  }
+  export interface CreateTokenRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the JWT token.
+     */
+    LicenseArn: Arn;
+    /**
+     * Amazon Resource Name (ARN) of the IAM roles to embed in the token. License Manager does not check whether the roles are in use.
+     */
+    RoleArns?: ArnList;
+    /**
+     * Token expiration, in days, counted from token creation. The default is 365 days.
+     */
+    ExpirationInDays?: Integer;
+    /**
+     * Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
+     */
+    TokenProperties?: MaxSize3StringList;
+    /**
+     * Idempotency token, valid for 10 minutes.
+     */
+    ClientToken: IdempotencyToken;
+  }
+  export interface CreateTokenResponse {
+    /**
+     * Token ID.
+     */
+    TokenId?: String;
+    /**
+     * Token type.
+     */
+    TokenType?: TokenType;
+    /**
+     * Refresh token, encoded as a JWT token.
+     */
+    Token?: TokenString;
+  }
   export type DateTime = Date;
+  export interface DatetimeRange {
+    /**
+     * Start of the time range.
+     */
+    Begin: ISO8601DateTime;
+    /**
+     * End of the time range.
+     */
+    End?: ISO8601DateTime;
+  }
+  export interface DeleteGrantRequest {
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+    /**
+     * Current version of the grant.
+     */
+    Version: String;
+  }
+  export interface DeleteGrantResponse {
+    /**
+     * Grant ARN.
+     */
+    GrantArn?: Arn;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * Grant version.
+     */
+    Version?: String;
+  }
   export interface DeleteLicenseConfigurationRequest {
     /**
      * ID of the license configuration.
@@ -210,6 +862,118 @@ declare namespace LicenseManager {
     LicenseConfigurationArn: String;
   }
   export interface DeleteLicenseConfigurationResponse {
+  }
+  export interface DeleteLicenseRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+    /**
+     * Current version of the license.
+     */
+    SourceVersion: String;
+  }
+  export interface DeleteLicenseResponse {
+    /**
+     * License status.
+     */
+    Status?: LicenseDeletionStatus;
+    /**
+     * Date on which the license is deleted.
+     */
+    DeletionDate?: ISO8601DateTime;
+  }
+  export interface DeleteTokenRequest {
+    /**
+     * Token ID.
+     */
+    TokenId: String;
+  }
+  export interface DeleteTokenResponse {
+  }
+  export type DigitalSignatureMethod = "JWT_PS384"|string;
+  export interface Entitlement {
+    /**
+     * Entitlement name.
+     */
+    Name: String;
+    /**
+     * Entitlement resource. Use only if the unit is None.
+     */
+    Value?: String;
+    /**
+     * Maximum entitlement count. Use if the unit is not None.
+     */
+    MaxCount?: Long;
+    /**
+     * Indicates whether overages are allowed.
+     */
+    Overage?: BoxBoolean;
+    /**
+     * Entitlement unit.
+     */
+    Unit: EntitlementUnit;
+    /**
+     * Indicates whether check-ins are allowed.
+     */
+    AllowCheckIn?: BoxBoolean;
+  }
+  export interface EntitlementData {
+    /**
+     * Entitlement data name.
+     */
+    Name: String;
+    /**
+     * Entitlement data value.
+     */
+    Value?: String;
+    /**
+     * Entitlement data unit.
+     */
+    Unit: EntitlementDataUnit;
+  }
+  export type EntitlementDataList = EntitlementData[];
+  export type EntitlementDataUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|string;
+  export type EntitlementList = Entitlement[];
+  export type EntitlementUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|string;
+  export interface EntitlementUsage {
+    /**
+     * Entitlement usage name.
+     */
+    Name: String;
+    /**
+     * Resource usage consumed.
+     */
+    ConsumedValue: String;
+    /**
+     * Maximum entitlement usage count.
+     */
+    MaxCount?: String;
+    /**
+     * Entitlement usage unit.
+     */
+    Unit: EntitlementDataUnit;
+  }
+  export type EntitlementUsageList = EntitlementUsage[];
+  export interface ExtendLicenseConsumptionRequest {
+    /**
+     * License consumption token.
+     */
+    LicenseConsumptionToken: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ExtendLicenseConsumptionResponse {
+    /**
+     * License consumption token.
+     */
+    LicenseConsumptionToken?: String;
+    /**
+     * Date and time at which the license consumption expires.
+     */
+    Expiration?: ISO8601DateTime;
   }
   export interface Filter {
     /**
@@ -221,10 +985,43 @@ declare namespace LicenseManager {
      */
     Values?: FilterValues;
   }
+  export type FilterList = Filter[];
   export type FilterName = string;
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
+  export interface GetAccessTokenRequest {
+    /**
+     * Refresh token, encoded as a JWT token.
+     */
+    Token: TokenString;
+    /**
+     * Token properties to validate against those present in the JWT token.
+     */
+    TokenProperties?: MaxSize3StringList;
+  }
+  export interface GetAccessTokenResponse {
+    /**
+     * Temporary access token.
+     */
+    AccessToken?: TokenString;
+  }
+  export interface GetGrantRequest {
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+    /**
+     * Grant version.
+     */
+    Version?: String;
+  }
+  export interface GetGrantResponse {
+    /**
+     * Grant details.
+     */
+    Grant?: Grant;
+  }
   export interface GetLicenseConfigurationRequest {
     /**
      * Amazon Resource Name (ARN) of the license configuration.
@@ -296,6 +1093,38 @@ declare namespace LicenseManager {
      * Automated discovery information.
      */
     AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation;
+    /**
+     * When true, disassociates a resource when software is uninstalled.
+     */
+    DisassociateWhenNotFound?: BoxBoolean;
+  }
+  export interface GetLicenseRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+    /**
+     * License version.
+     */
+    Version?: String;
+  }
+  export interface GetLicenseResponse {
+    /**
+     * License details.
+     */
+    License?: License;
+  }
+  export interface GetLicenseUsageRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+  }
+  export interface GetLicenseUsageResponse {
+    /**
+     * License usage details.
+     */
+    LicenseUsage?: LicenseUsage;
   }
   export interface GetServiceSettingsRequest {
   }
@@ -309,11 +1138,11 @@ declare namespace LicenseManager {
      */
     SnsTopicArn?: String;
     /**
-     * Indicates whether AWS Organizations has been integrated with License Manager for cross-account discovery.
+     * Indicates whether AWS Organizations is integrated with License Manager for cross-account discovery.
      */
     OrganizationConfiguration?: OrganizationConfiguration;
     /**
-     * Indicates whether cross-account discovery has been enabled.
+     * Indicates whether cross-account discovery is enabled.
      */
     EnableCrossAccountsDiscovery?: BoxBoolean;
     /**
@@ -321,6 +1150,116 @@ declare namespace LicenseManager {
      */
     LicenseManagerResourceShareArn?: String;
   }
+  export interface Grant {
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+    /**
+     * Grant name.
+     */
+    GrantName: String;
+    /**
+     * Parent ARN.
+     */
+    ParentArn: Arn;
+    /**
+     * License ARN.
+     */
+    LicenseArn: Arn;
+    /**
+     * The grantee principal ARN.
+     */
+    GranteePrincipalArn: Arn;
+    /**
+     * Home Region of the grant.
+     */
+    HomeRegion: String;
+    /**
+     * Grant status.
+     */
+    GrantStatus: GrantStatus;
+    /**
+     * Grant status reason.
+     */
+    StatusReason?: String;
+    /**
+     * Grant version.
+     */
+    Version: String;
+    /**
+     * Granted operations.
+     */
+    GrantedOperations: AllowedOperationList;
+  }
+  export type GrantList = Grant[];
+  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|string;
+  export interface GrantedLicense {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn?: Arn;
+    /**
+     * License name.
+     */
+    LicenseName?: String;
+    /**
+     * Product name.
+     */
+    ProductName?: String;
+    /**
+     * Product SKU.
+     */
+    ProductSKU?: String;
+    /**
+     * Granted license issuer.
+     */
+    Issuer?: IssuerDetails;
+    /**
+     * Home Region of the granted license.
+     */
+    HomeRegion?: String;
+    /**
+     * Granted license status.
+     */
+    Status?: LicenseStatus;
+    /**
+     * Date and time range during which the granted license is valid, in ISO8601-UTC format.
+     */
+    Validity?: DatetimeRange;
+    /**
+     * Granted license beneficiary.
+     */
+    Beneficiary?: String;
+    /**
+     * License entitlements.
+     */
+    Entitlements?: EntitlementList;
+    /**
+     * Configuration for consumption of the license.
+     */
+    ConsumptionConfiguration?: ConsumptionConfiguration;
+    /**
+     * Granted license metadata.
+     */
+    LicenseMetadata?: MetadataList;
+    /**
+     * Creation time of the granted license.
+     */
+    CreateTime?: ISO8601DateTime;
+    /**
+     * Version of the granted license.
+     */
+    Version?: String;
+    /**
+     * Granted license received metadata.
+     */
+    ReceivedMetadata?: ReceivedMetadata;
+  }
+  export type GrantedLicenseList = GrantedLicense[];
+  export type ISO8601DateTime = string;
+  export type IdempotencyToken = string;
+  export type Integer = number;
   export interface InventoryFilter {
     /**
      * Name of the filter.
@@ -337,6 +1276,88 @@ declare namespace LicenseManager {
   }
   export type InventoryFilterCondition = "EQUALS"|"NOT_EQUALS"|"BEGINS_WITH"|"CONTAINS"|string;
   export type InventoryFilterList = InventoryFilter[];
+  export interface Issuer {
+    /**
+     * Issuer name.
+     */
+    Name: String;
+    /**
+     * Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+     */
+    SignKey?: String;
+  }
+  export interface IssuerDetails {
+    /**
+     * Issuer name.
+     */
+    Name?: String;
+    /**
+     * Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+     */
+    SignKey?: String;
+    /**
+     * Issuer key fingerprint.
+     */
+    KeyFingerprint?: String;
+  }
+  export interface License {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn?: Arn;
+    /**
+     * License name.
+     */
+    LicenseName?: String;
+    /**
+     * Product name.
+     */
+    ProductName?: String;
+    /**
+     * Product SKU.
+     */
+    ProductSKU?: String;
+    /**
+     * License issuer.
+     */
+    Issuer?: IssuerDetails;
+    /**
+     * Home Region of the license.
+     */
+    HomeRegion?: String;
+    /**
+     * License status.
+     */
+    Status?: LicenseStatus;
+    /**
+     * Date and time range during which the license is valid, in ISO8601-UTC format.
+     */
+    Validity?: DatetimeRange;
+    /**
+     * License beneficiary.
+     */
+    Beneficiary?: String;
+    /**
+     * License entitlements.
+     */
+    Entitlements?: EntitlementList;
+    /**
+     * Configuration for consumption of the license.
+     */
+    ConsumptionConfiguration?: ConsumptionConfiguration;
+    /**
+     * License metadata.
+     */
+    LicenseMetadata?: MetadataList;
+    /**
+     * License creation time.
+     */
+    CreateTime?: ISO8601DateTime;
+    /**
+     * License version.
+     */
+    Version?: String;
+  }
   export interface LicenseConfiguration {
     /**
      * Unique ID of the license configuration.
@@ -370,6 +1391,10 @@ declare namespace LicenseManager {
      * Number of available licenses as a hard limit.
      */
     LicenseCountHardLimit?: BoxBoolean;
+    /**
+     * When true, disassociates a resource when software is uninstalled.
+     */
+    DisassociateWhenNotFound?: BoxBoolean;
     /**
      * Number of licenses consumed. 
      */
@@ -417,7 +1442,7 @@ declare namespace LicenseManager {
      */
     AssociationTime?: DateTime;
     /**
-     * Scope of AMI associations.
+     * Scope of AMI associations. The possible value is cross-account.
      */
     AmiAssociationScope?: String;
   }
@@ -452,6 +1477,8 @@ declare namespace LicenseManager {
   export type LicenseConfigurationUsageList = LicenseConfigurationUsage[];
   export type LicenseConfigurations = LicenseConfiguration[];
   export type LicenseCountingType = "vCPU"|"Instance"|"Core"|"Socket"|string;
+  export type LicenseDeletionStatus = "PENDING_DELETE"|"DELETED"|string;
+  export type LicenseList = License[];
   export interface LicenseOperationFailure {
     /**
      * Amazon Resource Name (ARN) of the resource.
@@ -493,11 +1520,18 @@ declare namespace LicenseManager {
      */
     LicenseConfigurationArn: String;
     /**
-     * Scope of AMI associations.
+     * Scope of AMI associations. The possible value is cross-account.
      */
     AmiAssociationScope?: String;
   }
   export type LicenseSpecifications = LicenseSpecification[];
+  export type LicenseStatus = "AVAILABLE"|"PENDING_AVAILABLE"|"DEACTIVATED"|"SUSPENDED"|"EXPIRED"|"PENDING_DELETE"|"DELETED"|string;
+  export interface LicenseUsage {
+    /**
+     * License entitlement usages.
+     */
+    EntitlementUsages?: EntitlementUsageList;
+  }
   export interface ListAssociationsForLicenseConfigurationRequest {
     /**
      * Amazon Resource Name (ARN) of a license configuration.
@@ -517,6 +1551,34 @@ declare namespace LicenseManager {
      * Information about the associations for the license configuration.
      */
     LicenseConfigurationAssociations?: LicenseConfigurationAssociations;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListDistributedGrantsRequest {
+    /**
+     * Amazon Resource Names (ARNs) of the grants.
+     */
+    GrantArns?: ArnList;
+    /**
+     * Filters to scope the results. The following filters are supported:    LicenseARN     Status     PrincipalARN     ParentARN   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListDistributedGrantsResponse {
+    /**
+     * Distributed grant details.
+     */
+    Grants?: GrantList;
     /**
      * Token for the next set of results.
      */
@@ -598,6 +1660,114 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
   }
+  export interface ListLicenseVersionsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn: Arn;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListLicenseVersionsResponse {
+    /**
+     * License details.
+     */
+    Licenses?: LicenseList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListLicensesRequest {
+    /**
+     * Amazon Resource Names (ARNs) of the licenses.
+     */
+    LicenseArns?: ArnList;
+    /**
+     * Filters to scope the results. The following filters are supported:    Beneficiary     ProductSKU     KeyFingerprint     Status   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListLicensesResponse {
+    /**
+     * License details.
+     */
+    Licenses?: LicenseList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListReceivedGrantsRequest {
+    /**
+     * Amazon Resource Names (ARNs) of the grants.
+     */
+    GrantArns?: ArnList;
+    /**
+     * Filters to scope the results. The following filters are supported:    LicenseARN     Status   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListReceivedGrantsResponse {
+    /**
+     * Received grant details.
+     */
+    Grants?: GrantList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListReceivedLicensesRequest {
+    /**
+     * Amazon Resource Names (ARNs) of the licenses.
+     */
+    LicenseArns?: ArnList;
+    /**
+     * Filters to scope the results. The following filters are supported:    ProductSKU     Status     KeyFingerprint     Issuer   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListReceivedLicensesResponse {
+    /**
+     * Received license details.
+     */
+    Licenses?: GrantedLicenseList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
   export interface ListResourceInventoryRequest {
     /**
      * Maximum number of results to return in a single call.
@@ -608,7 +1778,7 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * Filters to scope the results. The following filters and logical operators are supported:    account_id - The ID of the AWS account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.    application_name - The name of the application. Logical operators are EQUALS | BEGINS_WITH.    license_included - The type of license included. Logical operators are EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.    platform - The platform of the resource. Logical operators are EQUALS | BEGINS_WITH.    resource_id - The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.  
+     * Filters to scope the results. The following filters and logical operators are supported:    account_id - The ID of the AWS account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.    application_name - The name of the application. Logical operators are EQUALS | BEGINS_WITH.    license_included - The type of license included. Logical operators are EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.    platform - The platform of the resource. Logical operators are EQUALS | BEGINS_WITH.    resource_id - The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Logical operators are EQUALS (single account) or EQUALS | NOT_EQUALS (cross account).  
      */
     Filters?: InventoryFilterList;
   }
@@ -633,6 +1803,34 @@ declare namespace LicenseManager {
      * Information about the tags.
      */
     Tags?: TagList;
+  }
+  export interface ListTokensRequest {
+    /**
+     * Token IDs.
+     */
+    TokenIds?: StringList;
+    /**
+     * Filters to scope the results. The following filter is supported:    licenseArns   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListTokensResponse {
+    /**
+     * Received token details.
+     */
+    Tokens?: TokenList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
   }
   export interface ListUsageForLicenseConfigurationRequest {
     /**
@@ -662,6 +1860,7 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
   }
+  export type Long = number;
   export interface ManagedResourceSummary {
     /**
      * Type of resource associated with a license.
@@ -673,13 +1872,15 @@ declare namespace LicenseManager {
     AssociationCount?: BoxLong;
   }
   export type ManagedResourceSummaryList = ManagedResourceSummary[];
+  export type MaxSize100 = number;
+  export type MaxSize3StringList = String[];
   export interface Metadata {
     /**
-     * Reserved.
+     * The key name.
      */
     Name?: String;
     /**
-     * Reserved.
+     * The value.
      */
     Value?: String;
   }
@@ -690,6 +1891,7 @@ declare namespace LicenseManager {
      */
     EnableIntegration: Boolean;
   }
+  export type PrincipalArnList = Arn[];
   export interface ProductInformation {
     /**
      * Resource type. The possible values are SSM_MANAGED | RDS.
@@ -716,6 +1918,44 @@ declare namespace LicenseManager {
   }
   export type ProductInformationFilterList = ProductInformationFilter[];
   export type ProductInformationList = ProductInformation[];
+  export interface ProvisionalConfiguration {
+    /**
+     * Maximum time for the provisional configuration, in minutes.
+     */
+    MaxTimeToLiveInMinutes: BoxInteger;
+  }
+  export interface ReceivedMetadata {
+    /**
+     * Received status.
+     */
+    ReceivedStatus?: ReceivedStatus;
+    /**
+     * Allowed operations.
+     */
+    AllowedOperations?: AllowedOperationList;
+  }
+  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|string;
+  export interface RejectGrantRequest {
+    /**
+     * Amazon Resource Name (ARN) of the grant.
+     */
+    GrantArn: Arn;
+  }
+  export interface RejectGrantResponse {
+    /**
+     * Grant ARN.
+     */
+    GrantArn?: Arn;
+    /**
+     * Grant status.
+     */
+    Status?: GrantStatus;
+    /**
+     * Grant version.
+     */
+    Version?: String;
+  }
+  export type RenewType = "None"|"Weekly"|"Monthly"|string;
   export interface ResourceInventory {
     /**
      * ID of the resource.
@@ -744,6 +1984,7 @@ declare namespace LicenseManager {
   }
   export type ResourceInventoryList = ResourceInventory[];
   export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|"RDS"|"SYSTEMS_MANAGER_MANAGED_INSTANCE"|string;
+  export type SignedToken = string;
   export type String = string;
   export type StringList = String[];
   export interface Tag {
@@ -770,6 +2011,39 @@ declare namespace LicenseManager {
   }
   export interface TagResourceResponse {
   }
+  export interface TokenData {
+    /**
+     * Token ID.
+     */
+    TokenId?: String;
+    /**
+     * Type of token generated. The supported value is REFRESH_TOKEN.
+     */
+    TokenType?: String;
+    /**
+     * Amazon Resource Name (ARN) of the license.
+     */
+    LicenseArn?: String;
+    /**
+     * Token expiration time, in ISO8601-UTC format.
+     */
+    ExpirationTime?: ISO8601DateTime;
+    /**
+     * Data specified by the caller.
+     */
+    TokenProperties?: MaxSize3StringList;
+    /**
+     * Amazon Resource Names (ARN) of the roles included in the token.
+     */
+    RoleArns?: ArnList;
+    /**
+     * Token status. The possible values are AVAILABLE and DELETED.
+     */
+    Status?: String;
+  }
+  export type TokenList = TokenData[];
+  export type TokenString = string;
+  export type TokenType = "REFRESH_TOKEN"|string;
   export interface UntagResourceRequest {
     /**
      * Amazon Resource Name (ARN) of the license configuration.
@@ -815,6 +2089,10 @@ declare namespace LicenseManager {
      * New product information.
      */
     ProductInformationList?: ProductInformationList;
+    /**
+     * When true, disassociates a resource when software is uninstalled.
+     */
+    DisassociateWhenNotFound?: BoxBoolean;
   }
   export interface UpdateLicenseConfigurationResponse {
   }

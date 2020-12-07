@@ -237,5 +237,13 @@ module.exports = {
   DataBrew: require('./databrew'),
   ServiceCatalogAppRegistry: require('./servicecatalogappregistry'),
   NetworkFirewall: require('./networkfirewall'),
-  MWAA: require('./mwaa')
+  MWAA: require('./mwaa'),
+  AmplifyBackend: require('./amplifybackend'),
+  AppIntegrations: require('./appintegrations'),
+  ConnectContactLens: require('./connectcontactlens'),
+  DevOpsGuru: require('./devopsguru'),
+  ECRPUBLIC: require('./ecrpublic'),
+  LookoutVision: require('./lookoutvision'),
+  SageMakerFeatureStoreRuntime: require('./sagemakerfeaturestoreruntime'),
+  CustomerProfiles: require('./customerprofiles')
 };

@@ -85,6 +85,14 @@ declare class SSM extends Service {
    */
   createOpsItem(callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
   /**
+   * If you create a new application in AppManager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   */
+  createOpsMetadata(params: SSM.Types.CreateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
+  /**
+   * If you create a new application in AppManager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   */
+  createOpsMetadata(callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
+  /**
    * Creates a patch baseline.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   createPatchBaseline(params: SSM.Types.CreatePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
@@ -140,6 +148,14 @@ declare class SSM extends Service {
    * Deletes a maintenance window.
    */
   deleteMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.DeleteMaintenanceWindowResult) => void): Request<SSM.Types.DeleteMaintenanceWindowResult, AWSError>;
+  /**
+   * Delete OpsMetadata related to an application.
+   */
+  deleteOpsMetadata(params: SSM.Types.DeleteOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
+  /**
+   * Delete OpsMetadata related to an application.
+   */
+  deleteOpsMetadata(callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
   /**
    * Delete a parameter from the system.
    */
@@ -445,11 +461,11 @@ declare class SSM extends Service {
    */
   describePatchGroups(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupsResult) => void): Request<SSM.Types.DescribePatchGroupsResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
    */
   describePatchProperties(params: SSM.Types.DescribePatchPropertiesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
    */
   describePatchProperties(callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
@@ -580,6 +596,14 @@ declare class SSM extends Service {
    * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
    */
   getOpsItem(callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
+  /**
+   * View operational metadata related to an application in AppManager.
+   */
+  getOpsMetadata(params: SSM.Types.GetOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsMetadataResult) => void): Request<SSM.Types.GetOpsMetadataResult, AWSError>;
+  /**
+   * View operational metadata related to an application in AppManager.
+   */
+  getOpsMetadata(callback?: (err: AWSError, data: SSM.Types.GetOpsMetadataResult) => void): Request<SSM.Types.GetOpsMetadataResult, AWSError>;
   /**
    * View a summary of OpsItems based on specified filters and aggregators.
    */
@@ -724,6 +748,14 @@ declare class SSM extends Service {
    * A list of inventory items returned by the request.
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
+  /**
+   * Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or blobs.
+   */
+  listOpsMetadata(params: SSM.Types.ListOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
+  /**
+   * Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or blobs.
+   */
+  listOpsMetadata(callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
   /**
    * Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
    */
@@ -964,6 +996,14 @@ declare class SSM extends Service {
    * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
    */
   updateOpsItem(callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
+  /**
+   * Systems Manager calls this API action when you edit OpsMetadata in AppManager.
+   */
+  updateOpsMetadata(params: SSM.Types.UpdateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
+  /**
+   * Systems Manager calls this API action when you edit OpsMetadata in AppManager.
+   */
+  updateOpsMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
   /**
    * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
@@ -1209,7 +1249,7 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
@@ -1433,7 +1473,7 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
@@ -2225,7 +2265,7 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
@@ -2293,7 +2333,7 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
@@ -2450,6 +2490,22 @@ declare namespace SSM {
      * The ID of the OpsItem.
      */
     OpsItemId?: String;
+  }
+  export interface CreateOpsMetadataRequest {
+    /**
+     * A resource ID for a new AppManager application.
+     */
+    ResourceId: OpsMetadataResourceId;
+    /**
+     * Metadata for a new AppManager application. 
+     */
+    Metadata?: MetadataMap;
+  }
+  export interface CreateOpsMetadataResult {
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
   }
   export interface CreatePatchBaselineRequest {
     /**
@@ -2622,6 +2678,14 @@ declare namespace SSM {
      * The ID of the deleted maintenance window.
      */
     WindowId?: MaintenanceWindowId;
+  }
+  export interface DeleteOpsMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+  }
+  export interface DeleteOpsMetadataResult {
   }
   export interface DeleteParameterRequest {
     /**
@@ -3574,7 +3638,7 @@ declare namespace SSM {
      */
     Property: PatchProperty;
     /**
-     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for Linux operating systems.
+     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for the Linux or macOS operating systems.
      */
     PatchSet?: PatchSet;
     /**
@@ -4547,6 +4611,35 @@ declare namespace SSM {
      * The OpsItem.
      */
     OpsItem?: OpsItem;
+  }
+  export type GetOpsMetadataMaxResults = number;
+  export interface GetOpsMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: GetOpsMetadataMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetOpsMetadataResult {
+    /**
+     * The resource ID of the AppManager application.
+     */
+    ResourceId?: OpsMetadataResourceId;
+    /**
+     * OpsMetadata for an AppManager application.
+     */
+    Metadata?: MetadataMap;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
   }
   export interface GetOpsSummaryRequest {
     /**
@@ -5617,6 +5710,31 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
   }
+  export type ListOpsMetadataMaxResults = number;
+  export interface ListOpsMetadataRequest {
+    /**
+     * One or more filters to limit the number of OpsMetadata objects returned by the call.
+     */
+    Filters?: OpsMetadataFilterList;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: ListOpsMetadataMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOpsMetadataResult {
+    /**
+     * Returns a list of OpsMetadata objects.
+     */
+    OpsMetadataList?: OpsMetadataList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListResourceComplianceSummariesRequest {
     /**
      * One or more filters. Use a filter to return a more specific list of results.
@@ -6115,6 +6233,16 @@ declare namespace SSM {
   export type MaxErrors = string;
   export type MaxResults = number;
   export type MaxResultsEC2Compatible = number;
+  export type MetadataKey = string;
+  export type MetadataKeysToDeleteList = MetadataKey[];
+  export type MetadataMap = {[key: string]: MetadataValue};
+  export interface MetadataValue {
+    /**
+     * Metadata value to assign to an AppManager application.
+     */
+    Value?: MetadataValueString;
+  }
+  export type MetadataValueString = string;
   export interface ModifyDocumentPermissionRequest {
     /**
      * The name of the document that you want to share.
@@ -6169,7 +6297,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|string;
   export interface OpsAggregator {
     /**
      * Either a Range or Count aggregator for limiting an OpsItem summary.
@@ -6416,6 +6544,45 @@ declare namespace SSM {
     Severity?: OpsItemSeverity;
   }
   export type OpsItemTitle = string;
+  export interface OpsMetadata {
+    /**
+     * The ID of the AppManager application.
+     */
+    ResourceId?: OpsMetadataResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
+    /**
+     * The date the OpsMetadata object was last updated.
+     */
+    LastModifiedDate?: DateTime;
+    /**
+     * The user name who last updated the OpsMetadata object.
+     */
+    LastModifiedUser?: String;
+    /**
+     * The date the OpsMetadata objects was created.
+     */
+    CreationDate?: DateTime;
+  }
+  export type OpsMetadataArn = string;
+  export interface OpsMetadataFilter {
+    /**
+     * A filter key.
+     */
+    Key: OpsMetadataFilterKey;
+    /**
+     * A filter value.
+     */
+    Values: OpsMetadataFilterValueList;
+  }
+  export type OpsMetadataFilterKey = string;
+  export type OpsMetadataFilterList = OpsMetadataFilter[];
+  export type OpsMetadataFilterValue = string;
+  export type OpsMetadataFilterValueList = OpsMetadataFilterValue[];
+  export type OpsMetadataList = OpsMetadata[];
+  export type OpsMetadataResourceId = string;
   export interface OpsResultAttribute {
     /**
      * Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation, AWS:OpsItemTrendline, or AWS:ComplianceSummary.
@@ -6704,7 +6871,7 @@ declare namespace SSM {
      */
     BugzillaIds?: PatchBugzillaIdList;
     /**
-     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-1999-0067. Applies to Linux-based instances only.
+     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based instances only.
      */
     CVEIds?: PatchCVEIdList;
     /**
@@ -8095,7 +8262,7 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
+     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
@@ -8508,6 +8675,26 @@ declare namespace SSM {
     Severity?: OpsItemSeverity;
   }
   export interface UpdateOpsItemResponse {
+  }
+  export interface UpdateOpsMetadataRequest {
+    /**
+     * The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+    /**
+     * Metadata to add to an OpsMetadata object.
+     */
+    MetadataToUpdate?: MetadataMap;
+    /**
+     * The metadata keys to delete from the OpsMetadata object. 
+     */
+    KeysToDelete?: MetadataKeysToDeleteList;
+  }
+  export interface UpdateOpsMetadataResult {
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
   }
   export interface UpdatePatchBaselineRequest {
     /**

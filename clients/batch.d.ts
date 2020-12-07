@@ -12,19 +12,19 @@ declare class Batch extends Service {
   constructor(options?: Batch.Types.ClientConfiguration)
   config: Config & Batch.Types.ClientConfiguration;
   /**
-   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the TerminateJob operation.
+   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are canceled. Jobs that have progressed to STARTING or RUNNING are not canceled (but the API operation still succeeds, even if no job is canceled); these jobs must be terminated with the TerminateJob operation.
    */
   cancelJob(params: Batch.Types.CancelJobRequest, callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the TerminateJob operation.
+   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are canceled. Jobs that have progressed to STARTING or RUNNING are not canceled (but the API operation still succeeds, even if no job is canceled); these jobs must be terminated with the TerminateJob operation.
    */
   cancelJob(callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the old compute environment from your job queue.   Delete the old compute environment.   
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. MANAGED compute environments can use Amazon EC2 or AWS Fargate resources. UNMANAGED compute environments can only use EC2 resources. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose either to use EC2 On-Demand Instances and EC2 Spot Instances, or to use Fargate and Fargate Spot capacity in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own EC2 compute resources and have a lot of flexibility with how you configure your compute resources. For example, you can use custom AMI. However, you need to verify that your AMI meets the Amazon ECS container instance AMI specification. For more information, see container instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS container instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch doesn't upgrade the AMIs in a compute environment after it's created. For example, it doesn't update the AMIs when a newer version of the Amazon ECS-optimized AMI is available. Therefore, you're responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs, complete these steps:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the earlier compute environment from your job queue.   Delete the earlier compute environment.   
    */
   createComputeEnvironment(params: Batch.Types.CreateComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the old compute environment from your job queue.   Delete the old compute environment.   
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. MANAGED compute environments can use Amazon EC2 or AWS Fargate resources. UNMANAGED compute environments can only use EC2 resources. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose either to use EC2 On-Demand Instances and EC2 Spot Instances, or to use Fargate and Fargate Spot capacity in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own EC2 compute resources and have a lot of flexibility with how you configure your compute resources. For example, you can use custom AMI. However, you need to verify that your AMI meets the Amazon ECS container instance AMI specification. For more information, see container instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS container instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch doesn't upgrade the AMIs in a compute environment after it's created. For example, it doesn't update the AMIs when a newer version of the Amazon ECS-optimized AMI is available. Therefore, you're responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs, complete these steps:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the earlier compute environment from your job queue.   Delete the earlier compute environment.   
    */
   createComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
@@ -36,35 +36,35 @@ declare class Batch extends Service {
    */
   createJobQueue(callback?: (err: AWSError, data: Batch.Types.CreateJobQueueResponse) => void): Request<Batch.Types.CreateJobQueueResponse, AWSError>;
   /**
-   * Deletes an AWS Batch compute environment. Before you can delete a compute environment, you must set its state to DISABLED with the UpdateComputeEnvironment API operation and disassociate it from any job queues with the UpdateJobQueue API operation.
+   * Deletes an AWS Batch compute environment. Before you can delete a compute environment, you must set its state to DISABLED with the UpdateComputeEnvironment API operation and disassociate it from any job queues with the UpdateJobQueue API operation. Compute environments that use AWS Fargate resources must terminate all active jobs on that compute environment before deleting the compute environment. If this isn't done, the compute environment will end up in an invalid state.
    */
   deleteComputeEnvironment(params: Batch.Types.DeleteComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.DeleteComputeEnvironmentResponse) => void): Request<Batch.Types.DeleteComputeEnvironmentResponse, AWSError>;
   /**
-   * Deletes an AWS Batch compute environment. Before you can delete a compute environment, you must set its state to DISABLED with the UpdateComputeEnvironment API operation and disassociate it from any job queues with the UpdateJobQueue API operation.
+   * Deletes an AWS Batch compute environment. Before you can delete a compute environment, you must set its state to DISABLED with the UpdateComputeEnvironment API operation and disassociate it from any job queues with the UpdateJobQueue API operation. Compute environments that use AWS Fargate resources must terminate all active jobs on that compute environment before deleting the compute environment. If this isn't done, the compute environment will end up in an invalid state.
    */
   deleteComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.DeleteComputeEnvironmentResponse) => void): Request<Batch.Types.DeleteComputeEnvironmentResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It's not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(params: Batch.Types.DeleteJobQueueRequest, callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It's not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
+   * Deregisters an AWS Batch job definition. Job definitions are permanently deleted after 180 days.
    */
   deregisterJobDefinition(params: Batch.Types.DeregisterJobDefinitionRequest, callback?: (err: AWSError, data: Batch.Types.DeregisterJobDefinitionResponse) => void): Request<Batch.Types.DeregisterJobDefinitionResponse, AWSError>;
   /**
-   * Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
+   * Deregisters an AWS Batch job definition. Job definitions are permanently deleted after 180 days.
    */
   deregisterJobDefinition(callback?: (err: AWSError, data: Batch.Types.DeregisterJobDefinitionResponse) => void): Request<Batch.Types.DeregisterJobDefinitionResponse, AWSError>;
   /**
-   * Describes one or more of your compute environments. If you are using an unmanaged compute environment, you can use the DescribeComputeEnvironment operation to determine the ecsClusterArn that you should launch your Amazon ECS container instances into.
+   * Describes one or more of your compute environments. If you're using an unmanaged compute environment, you can use the DescribeComputeEnvironment operation to determine the ecsClusterArn that you should launch your Amazon ECS container instances into.
    */
   describeComputeEnvironments(params: Batch.Types.DescribeComputeEnvironmentsRequest, callback?: (err: AWSError, data: Batch.Types.DescribeComputeEnvironmentsResponse) => void): Request<Batch.Types.DescribeComputeEnvironmentsResponse, AWSError>;
   /**
-   * Describes one or more of your compute environments. If you are using an unmanaged compute environment, you can use the DescribeComputeEnvironment operation to determine the ecsClusterArn that you should launch your Amazon ECS container instances into.
+   * Describes one or more of your compute environments. If you're using an unmanaged compute environment, you can use the DescribeComputeEnvironment operation to determine the ecsClusterArn that you should launch your Amazon ECS container instances into.
    */
   describeComputeEnvironments(callback?: (err: AWSError, data: Batch.Types.DescribeComputeEnvironmentsResponse) => void): Request<Batch.Types.DescribeComputeEnvironmentsResponse, AWSError>;
   /**
@@ -92,19 +92,19 @@ declare class Batch extends Service {
    */
   describeJobs(callback?: (err: AWSError, data: Batch.Types.DescribeJobsResponse) => void): Request<Batch.Types.DescribeJobsResponse, AWSError>;
   /**
-   * Returns a list of AWS Batch jobs. You must specify only one of the following:   a job queue ID to return a list of jobs in that job queue   a multi-node parallel job ID to return a list of that job's nodes   an array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
+   * Returns a list of AWS Batch jobs. You must specify only one of the following items:   A job queue ID to return a list of jobs in that job queue   A multi-node parallel job ID to return a list of that job's nodes   An array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you don't specify a status, only RUNNING jobs are returned.
    */
   listJobs(params: Batch.Types.ListJobsRequest, callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * Returns a list of AWS Batch jobs. You must specify only one of the following:   a job queue ID to return a list of jobs in that job queue   a multi-node parallel job ID to return a list of that job's nodes   an array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
+   * Returns a list of AWS Batch jobs. You must specify only one of the following items:   A job queue ID to return a list of jobs in that job queue   A multi-node parallel job ID to return a list of that job's nodes   An array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you don't specify a status, only RUNNING jobs are returned.
    */
   listJobs(callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * List the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Lists the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   listTagsForResource(params: Batch.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Lists the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   listTagsForResource(callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -116,19 +116,19 @@ declare class Batch extends Service {
    */
   registerJobDefinition(callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.  Jobs run on Fargate resources don't run for more than 14 days. After 14 days, the Fargate resources might no longer be available and the job is terminated. 
    */
   submitJob(params: Batch.Types.SubmitJobRequest, callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.  Jobs run on Fargate resources don't run for more than 14 days. After 14 days, the Fargate resources might no longer be available and the job is terminated. 
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   tagResource(params: Batch.Types.TagResourceRequest, callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   tagResource(callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
   /**
@@ -197,6 +197,7 @@ declare namespace Batch {
      */
     index?: Integer;
   }
+  export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
   export interface AttemptContainerDetail {
     /**
      * The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.
@@ -247,7 +248,7 @@ declare namespace Batch {
   export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
   export type CEType = "MANAGED"|"UNMANAGED"|string;
   export type CRAllocationStrategy = "BEST_FIT"|"BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED"|string;
-  export type CRType = "EC2"|"SPOT"|string;
+  export type CRType = "EC2"|"SPOT"|"FARGATE"|"FARGATE_SPOT"|string;
   export interface CancelJobRequest {
     /**
      * The AWS Batch job ID of the job to cancel.
@@ -278,11 +279,11 @@ declare namespace Batch {
      */
     tags?: TagrisTagsMap;
     /**
-     * The type of the compute environment.
+     * The type of compute environment: EC2, SPOT, FARGATE, or FARGATE_SPOT. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     type?: CEType;
     /**
-     * The state of the compute environment. The valid values are ENABLED or DISABLED. If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state do not scale out. However, they scale in to minvCpus value after instances become idle.
+     * The state of the compute environment. The valid values are ENABLED or DISABLED. If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the AWS Batch scheduler doesn't attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state do not scale out. However, they scale in to minvCpus value after instances become idle.
      */
     state?: CEState;
     /**
@@ -305,7 +306,7 @@ declare namespace Batch {
   export type ComputeEnvironmentDetailList = ComputeEnvironmentDetail[];
   export interface ComputeEnvironmentOrder {
     /**
-     * The order of the compute environment.
+     * The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
      */
     order: Integer;
     /**
@@ -316,77 +317,77 @@ declare namespace Batch {
   export type ComputeEnvironmentOrders = ComputeEnvironmentOrder[];
   export interface ComputeResource {
     /**
-     * The type of compute environment: EC2 or SPOT.
+     * The type of compute environment: EC2, SPOT, FARGATE, or FARGATE_SPOT. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     type: CRType;
     /**
-     * The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or Amazon EC2 service limits. If this is not specified, the default is BEST_FIT, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with BEST_FIT then the Spot Fleet IAM Role must be specified. BEST_FIT_PROGRESSIVE will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. SPOT_CAPACITY_OPTIMIZED is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see Allocation Strategies in the AWS Batch User Guide.
+     * The allocation strategy to use for the compute resource if not enough instances of the best fitting instance type can be allocated. This might be because of availability of the instance type in the Region or Amazon EC2 service limits. For more information, see Allocation Strategies in the AWS Batch User Guide.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.   BEST_FIT (default)  AWS Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren't available, AWS Batch will wait for the additional instances to be available. If there are not enough instances available, or if the user is hitting Amazon EC2 service limits then additional jobs aren't run until currently running jobs have completed. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with BEST_FIT then the Spot Fleet IAM Role must be specified.  BEST_FIT_PROGRESSIVE  AWS Batch will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per unit vCPU. If additional instances of the previously selected instance types aren't available, AWS Batch will select new instance types.  SPOT_CAPACITY_OPTIMIZED  AWS Batch will select one or more instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. This allocation strategy is only available for Spot Instance compute resources.   With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED strategies, AWS Batch might need to go above maxvCpus to meet your capacity requirements. In this event, AWS Batch never exceeds maxvCpus by more than a single instance.
      */
     allocationStrategy?: CRAllocationStrategy;
     /**
-     * The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is DISABLED).
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is DISABLED).  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
-    minvCpus: Integer;
+    minvCpus?: Integer;
     /**
-     * The maximum number of Amazon EC2 vCPUs that an environment can reach.
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.  With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, AWS Batch may need to go above maxvCpus to meet your capacity requirements. In this event, AWS Batch will never go above maxvCpus by more than a single instance (e.g., no more than a single instance from among those specified in your compute environment). 
      */
     maxvCpus: Integer;
     /**
-     * The desired number of Amazon EC2 vCPUS in the compute environment.
+     * The desired number of Amazon EC2 vCPUS in the compute environment. AWS Batch modifies this value between the minimum and maximum values, based on job queue demand.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     desiredvCpus?: Integer;
     /**
-     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.
+     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to select instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.   When you create a compute environment, the instance types that you select for the compute environment must share the same architecture. For example, you can't mix x86 and ARM instances in the same compute environment. 
      */
-    instanceTypes: StringList;
+    instanceTypes?: StringList;
     /**
-     * The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter is overridden by the imageIdOverride member of the Ec2Configuration structure.
+     * The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter is overridden by the imageIdOverride member of the Ec2Configuration structure.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.   The AMI that you choose for a compute environment must match the architecture of the instance types that you intend to use for that compute environment. For example, if your compute environment uses A1 instance types, the compute resource AMI that you choose must support ARM instances. Amazon ECS vends both x86 and ARM versions of the Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see Amazon ECS-optimized Amazon Linux 2 AMI in the Amazon Elastic Container Service Developer Guide. 
      */
     imageId?: String;
     /**
-     * The VPC subnets into which the compute resources are launched. For more information, see VPCs and Subnets in the Amazon VPC User Guide.
+     * The VPC subnets into which the compute resources are launched. These subnets must be within the same VPC. This parameter is required for jobs running on Fargate resources, where it can contain up to 16 subnets. For more information, see VPCs and Subnets in the Amazon VPC User Guide.
      */
     subnets: StringList;
     /**
-     * The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in securityGroupIds or using a launch template referenced in launchTemplate. If security groups are specified using both securityGroupIds and launchTemplate, the values in securityGroupIds will be used.
+     * The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in securityGroupIds or using a launch template referenced in launchTemplate. This parameter is required for jobs running on Fargate resources and must contain at least one security group. (Fargate does not support launch templates.) If security groups are specified using both securityGroupIds and launchTemplate, the values in securityGroupIds will be used.
      */
     securityGroupIds?: StringList;
     /**
-     * The Amazon EC2 key pair that is used for instances launched in the compute environment.
+     * The Amazon EC2 key pair that is used for instances launched in the compute environment. You can use this key pair to log in to your instances with SSH.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     ec2KeyPair?: String;
     /**
-     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.
+     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
-    instanceRole: String;
+    instanceRole?: String;
     /**
-     * Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }. These tags can not be updated or removed after the compute environment has been created; any changes require creating a new compute environment and removing the old compute environment. These tags are not seen when using the AWS Batch ListTagsForResource API operation.
+     * Key-value pair tags to be applied to EC2 resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }. This is helpful for recognizing your AWS Batch instances in the Amazon EC2 console. These tags can not be updated or removed after the compute environment has been created; any changes require creating a new compute environment and removing the old compute environment. These tags are not seen when using the AWS Batch ListTagsForResource API operation.
      */
     tags?: TagsMap;
     /**
-     * The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see Placement Groups in the Amazon EC2 User Guide for Linux Instances.
+     * The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see Placement Groups in the Amazon EC2 User Guide for Linux Instances.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     placementGroup?: String;
     /**
-     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.
+     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     bidPercentage?: Integer;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This role is required if the allocation strategy set to BEST_FIT or if the allocation strategy is not specified. For more information, see Amazon EC2 Spot Fleet Role in the AWS Batch User Guide.
+     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This role is required if the allocation strategy set to BEST_FIT or if the allocation strategy isn't specified. For more information, see Amazon EC2 Spot Fleet Role in the AWS Batch User Guide.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.   To tag your Spot Instances on creation, the Spot Fleet IAM role specified here must use the newer AmazonEC2SpotFleetTaggingRole managed policy. The previously recommended AmazonEC2SpotFleetRole managed policy doesn't have the required permissions to tag Spot Instances. For more information, see Spot Instances not tagged on creation in the AWS Batch User Guide. 
      */
     spotIamFleetRole?: String;
     /**
-     * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see Launch Template Support in the AWS Batch User Guide.
+     * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see Launch Template Support in the AWS Batch User Guide.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     launchTemplate?: LaunchTemplateSpecification;
     /**
-     * Provides additional details used to selecting the AMI to use for instances in a compute environment.
+     * Provides information used to select Amazon Machine Images (AMIs) for instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL1.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     ec2Configuration?: Ec2ConfigurationList;
   }
   export interface ComputeResourceUpdate {
     /**
-     * The minimum number of Amazon EC2 vCPUs that an environment should maintain.
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain.  This parameter isnt applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     minvCpus?: Integer;
     /**
@@ -394,9 +395,17 @@ declare namespace Batch {
      */
     maxvCpus?: Integer;
     /**
-     * The desired number of Amazon EC2 vCPUS in the compute environment.
+     * The desired number of Amazon EC2 vCPUS in the compute environment.  This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. 
      */
     desiredvCpus?: Integer;
+    /**
+     * The VPC subnets that the compute resources are launched into. This parameter is required for jobs running on Fargate compute resources, where it can contain up to 16 subnets. For more information, see VPCs and Subnets in the Amazon VPC User Guide. This can't be specified for EC2 compute resources. Providing an empty list will be handled as if this parameter wasn't specified and no change is made.
+     */
+    subnets?: StringList;
+    /**
+     * The Amazon EC2 security groups associated with instances launched in the compute environment. This parameter is required for Fargate compute resources, where it can contain up to 5 security groups. This can't be specified for EC2 compute resources. Providing an empty list is handled as if this parameter wasn't specified and no changeis made.
+     */
+    securityGroupIds?: StringList;
   }
   export interface ContainerDetail {
     /**
@@ -404,11 +413,11 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of VCPUs allocated for the job. This is a required parameter.
+     * The number of vCPUs reserved for the container. Jobs running on EC2 resources can specify the vCPU requirement for the job using resourceRequirements but the vCPU requirements can't be specified both here and in the resourceRequirement object. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places. It must be specified for each node at least once.  This parameter isn't applicable to jobs running on Fargate resources. Jobs running on Fargate resources must specify the vCPU requirement for the job using resourceRequirements. 
      */
     vcpus?: Integer;
     /**
-     * The number of MiB of memory reserved for the job. This is a required parameter.
+     * For jobs run on EC2 resources that didn't specify memory requirements using ResourceRequirement, the number of MiB of memory reserved for the job. For other jobs, including all run on Fargate resources, see resourceRequirements.
      */
     memory?: Integer;
     /**
@@ -420,7 +429,7 @@ declare namespace Batch {
      */
     jobRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see AWS Batch execution IAM role.
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see AWS Batch execution IAM role in the AWS Batch User Guide.
      */
     executionRoleArn?: String;
     /**
@@ -436,19 +445,19 @@ declare namespace Batch {
      */
     mountPoints?: MountPoints;
     /**
-     * When this parameter is true, the container is given read-only access to its root file system.
+     * When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ReadonlyRootfs in the Create a container section of the Docker Remote API and the --read-only option to  docker run .
      */
     readonlyRootFilesystem?: Boolean;
     /**
-     * A list of ulimit values to set in the container.
+     * A list of ulimit values to set in the container. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run.  This parameter isn't applicable to jobs running on Fargate resources. 
      */
     ulimits?: Ulimits;
     /**
-     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user).
+     * When this parameter is true, the container is given elevated permissions on the host container instance (similar to the root user). The default value is false.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided, or specified as false. 
      */
     privileged?: Boolean;
     /**
-     * The user name to use inside the container.
+     * The user name to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.
      */
     user?: String;
     /**
@@ -460,7 +469,7 @@ declare namespace Batch {
      */
     reason?: String;
     /**
-     * The Amazon Resource Name (ARN) of the container instance on which the container is running.
+     * The Amazon Resource Name (ARN) of the container instance that the container is running on.
      */
     containerInstanceArn?: String;
     /**
@@ -472,7 +481,7 @@ declare namespace Batch {
      */
     logStreamName?: String;
     /**
-     * The instance type of the underlying host infrastructure of a multi-node parallel job.
+     * The instance type of the underlying host infrastructure of a multi-node parallel job.  This parameter isn't applicable to jobs running on Fargate resources. 
      */
     instanceType?: String;
     /**
@@ -480,7 +489,7 @@ declare namespace Batch {
      */
     networkInterfaces?: NetworkInterfaceList;
     /**
-     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     * The type and amount of resources to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
      */
     resourceRequirements?: ResourceRequirements;
     /**
@@ -488,21 +497,29 @@ declare namespace Batch {
      */
     linuxParameters?: LinuxParameters;
     /**
-     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container might use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance. Or, alternatively, it must be configured on a different log server for remote logging options. For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
      */
     logConfiguration?: LogConfiguration;
     /**
-     * The secrets to pass to the container. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     * The secrets to pass to the container. For more information, see Specifying sensitive data in the AWS Batch User Guide.
      */
     secrets?: SecretList;
+    /**
+     * The network configuration for jobs running on Fargate resources. Jobs running on EC2 resources must not specify this parameter.
+     */
+    networkConfiguration?: NetworkConfiguration;
+    /**
+     * The platform configuration for jobs running on Fargate resources. Jobs running on EC2 resources must not specify this parameter.
+     */
+    fargatePlatformConfiguration?: FargatePlatformConfiguration;
   }
   export interface ContainerOverrides {
     /**
-     * The number of vCPUs to reserve for the container. This value overrides the value set in the job definition.
+     * This parameter is deprecated and not supported for jobs run on Fargate resources, see resourceRequirement. For jobs run on EC2 resources, the number of vCPUs to reserve for the container. This value overrides the value set in the job definition. Jobs run on EC2 resources can specify the vCPU requirement using resourceRequirement but the vCPU requirements can't be specified both here and in resourceRequirement. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. Jobs running on Fargate resources must specify the vCPU requirement for the job using resourceRequirements. 
      */
     vcpus?: Integer;
     /**
-     * The number of MiB of memory reserved for the job. This value overrides the value set in the job definition.
+     * This parameter is deprecated and not supported for jobs run on Fargate resources, use ResourceRequirement. For jobs run on EC2 resource, the number of MiB of memory reserved for the job. This value overrides the value set in the job definition.
      */
     memory?: Integer;
     /**
@@ -510,7 +527,7 @@ declare namespace Batch {
      */
     command?: StringList;
     /**
-     * The instance type to use for a multi-node parallel job. This parameter is not valid for single-node container jobs.
+     * The instance type to use for a multi-node parallel job.  This parameter isn't applicable to single-node container jobs or for jobs running on Fargate resources and shouldn't be provided. 
      */
     instanceType?: String;
     /**
@@ -518,21 +535,21 @@ declare namespace Batch {
      */
     environment?: EnvironmentVariables;
     /**
-     * The type and amount of a resource to assign to a container. This value overrides the value set in the job definition. Currently, the only supported resource is GPU.
+     * The type and amount of resources to assign to a container. This overrides the settings in the job definition. The supported resources include GPU, MEMORY, and VCPU.
      */
     resourceRequirements?: ResourceRequirements;
   }
   export interface ContainerProperties {
     /**
-     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
+     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.  Docker image architecture must match the processor architecture of the compute resources that they're scheduled on. For example, ARM-based Docker images can only run on ARM-based compute resources.    Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
      */
     image?: String;
     /**
-     * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.
+     * This parameter is deprecated and not supported for jobs run on Fargate resources, see resourceRequirement. The number of vCPUs reserved for the container. Jobs running on EC2 resources can specify the vCPU requirement for the job using resourceRequirements but the vCPU requirements can't be specified both here and in the resourceRequirement structure. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places. It must be specified for each node at least once.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. Jobs running on Fargate resources must specify the vCPU requirement for the job using resourceRequirements. 
      */
     vcpus?: Integer;
     /**
-     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.  If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
+     * This parameter is deprecated and not supported for jobs run on Fargate resources, use ResourceRequirement. For jobs run on EC2 resources can specify the memory requirement using the ResourceRequirement structure. The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places; it must be specified for each node at least once.  If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
      */
     memory?: Integer;
     /**
@@ -540,11 +557,11 @@ declare namespace Batch {
      */
     command?: StringList;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions.
+     * The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions. For more information, see IAM Roles for Tasks in the Amazon Elastic Container Service Developer Guide.
      */
     jobRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see AWS Batch execution IAM role.
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. Jobs running on Fargate resources must provide an execution role. For more information, see AWS Batch execution IAM role in the AWS Batch User Guide.
      */
     executionRoleArn?: String;
     /**
@@ -552,7 +569,7 @@ declare namespace Batch {
      */
     volumes?: Volumes;
     /**
-     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We do not recommend using plaintext environment variables for sensitive information, such as credential data.   Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
+     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We don't recommend using plaintext environment variables for sensitive information, such as credential data.   Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
     /**
@@ -564,11 +581,11 @@ declare namespace Batch {
      */
     readonlyRootFilesystem?: Boolean;
     /**
-     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This parameter maps to Privileged in the Create a container section of the Docker Remote API and the --privileged option to docker run.
+     * When this parameter is true, the container is given elevated permissions on the host container instance (similar to the root user). This parameter maps to Privileged in the Create a container section of the Docker Remote API and the --privileged option to docker run. The default value is false.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided, or specified as false. 
      */
     privileged?: Boolean;
     /**
-     * A list of ulimits to set in the container. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run.
+     * A list of ulimits to set in the container. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     ulimits?: Ulimits;
     /**
@@ -576,11 +593,11 @@ declare namespace Batch {
      */
     user?: String;
     /**
-     * The instance type to use for a multi-node parallel job. Currently all node groups in a multi-node parallel job must use the same instance type. This parameter is not valid for single-node container jobs.
+     * The instance type to use for a multi-node parallel job. All node groups in a multi-node parallel job must use the same instance type.  This parameter isn't applicable to single-node container jobs or for jobs running on Fargate resources and shouldn't be provided. 
      */
     instanceType?: String;
     /**
-     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     * The type and amount of resources to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
      */
     resourceRequirements?: ResourceRequirements;
     /**
@@ -588,13 +605,21 @@ declare namespace Batch {
      */
     linuxParameters?: LinuxParameters;
     /**
-     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type).  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container might use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type).  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
      */
     logConfiguration?: LogConfiguration;
     /**
-     * The secrets for the container. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     * The secrets for the container. For more information, see Specifying sensitive data in the AWS Batch User Guide.
      */
     secrets?: SecretList;
+    /**
+     * The network configuration for jobs running on Fargate resources. Jobs running on EC2 resources must not specify this parameter.
+     */
+    networkConfiguration?: NetworkConfiguration;
+    /**
+     * The platform configuration for jobs running on Fargate resources. Jobs running on EC2 resources must not specify this parameter.
+     */
+    fargatePlatformConfiguration?: FargatePlatformConfiguration;
   }
   export interface ContainerSummary {
     /**
@@ -612,7 +637,7 @@ declare namespace Batch {
      */
     computeEnvironmentName: String;
     /**
-     * The type of the compute environment. For more information, see Compute Environments in the AWS Batch User Guide.
+     * The type of the compute environment: MANAGED or UNMANAGED. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     type: CEType;
     /**
@@ -620,15 +645,15 @@ declare namespace Batch {
      */
     state?: CEState;
     /**
-     * Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments. For more information, see Compute Environments in the AWS Batch User Guide.
+     * Details about the compute resources managed by the compute environment. This parameter is required for managed compute environments. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     computeResources?: ComputeResource;
     /**
-     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN may contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
+     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN may contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
      */
     serviceRole: String;
     /**
-     * The tags that you apply to the compute environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference. These tags can be updated or removed using the TagResource and UntagResource API operations. These tags do not propagate to the underlying compute resources.
+     * The tags that you apply to the compute environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference. These tags can be updated or removed using the TagResource and UntagResource API operations. These tags don't propagate to the underlying compute resources.
      */
     tags?: TagrisTagsMap;
   }
@@ -648,15 +673,15 @@ declare namespace Batch {
      */
     jobQueueName: String;
     /**
-     * The state of the job queue. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the queue, but jobs already in the queue can finish.
+     * The state of the job queue. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs can't be added to the queue, but jobs already in the queue can finish.
      */
     state?: JQState;
     /**
-     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
+     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order. For example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
      */
     priority: Integer;
     /**
-     * The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+     * The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should run a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue. All of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
      */
     computeEnvironmentOrder: ComputeEnvironmentOrders;
     /**
@@ -704,7 +729,7 @@ declare namespace Batch {
      */
     computeEnvironments?: StringList;
     /**
-     * The maximum number of cluster results returned by DescribeComputeEnvironments in paginated output. When this parameter is used, DescribeComputeEnvironments only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeComputeEnvironments request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeComputeEnvironments returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of cluster results returned by DescribeComputeEnvironments in paginated output. When this parameter is used, DescribeComputeEnvironments only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeComputeEnvironments request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then DescribeComputeEnvironments returns up to 100 results and a nextToken value if applicable.
      */
     maxResults?: Integer;
     /**
@@ -728,7 +753,7 @@ declare namespace Batch {
      */
     jobDefinitions?: StringList;
     /**
-     * The maximum number of results returned by DescribeJobDefinitions in paginated output. When this parameter is used, DescribeJobDefinitions only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeJobDefinitions request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results returned by DescribeJobDefinitions in paginated output. When this parameter is used, DescribeJobDefinitions only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeJobDefinitions request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions returns up to 100 results and a nextToken value if applicable.
      */
     maxResults?: Integer;
     /**
@@ -736,7 +761,7 @@ declare namespace Batch {
      */
     jobDefinitionName?: String;
     /**
-     * The status with which to filter job definitions.
+     * The status used to filter job definitions.
      */
     status?: String;
     /**
@@ -760,7 +785,7 @@ declare namespace Batch {
      */
     jobQueues?: StringList;
     /**
-     * The maximum number of results returned by DescribeJobQueues in paginated output. When this parameter is used, DescribeJobQueues only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeJobQueues request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeJobQueues returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results returned by DescribeJobQueues in paginated output. When this parameter is used, DescribeJobQueues only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeJobQueues request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then DescribeJobQueues returns up to 100 results and a nextToken value if applicable.
      */
     maxResults?: Integer;
     /**
@@ -796,7 +821,7 @@ declare namespace Batch {
      */
     hostPath: String;
     /**
-     * The path inside the container at which to expose the host device. By default the hostPath value is used.
+     * The path inside the container used to expose the host device. By default the hostPath value is used.
      */
     containerPath?: String;
     /**
@@ -809,7 +834,7 @@ declare namespace Batch {
   export type DevicesList = Device[];
   export interface Ec2Configuration {
     /**
-     * The image type to match with the instance type to pick an AMI. If the imageIdOverride parameter is not specified, then a recent Amazon ECS-optimized AMI will be used.  ECS_AL2   Amazon Linux 2− Default for all AWS Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non-AWS Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
+     * The image type to match with the instance type to select an AMI. If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized AMI is used.  ECS_AL2   Amazon Linux 2− Default for all AWS Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non-AWS Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
      */
     imageType: ImageType;
     /**
@@ -821,11 +846,11 @@ declare namespace Batch {
   export type EnvironmentVariables = KeyValuePair[];
   export interface EvaluateOnExit {
     /**
-     * Contains a glob pattern to match against the StatusReason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs). and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     * Contains a glob pattern to match against the StatusReason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and white space (spaces, tabs). and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
      */
     onStatusReason?: String;
     /**
-     * Contains a glob pattern to match against the Reason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs), and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     * Contains a glob pattern to match against the Reason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and white space (spaces, tabs), and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
      */
     onReason?: String;
     /**
@@ -833,14 +858,20 @@ declare namespace Batch {
      */
     onExitCode?: String;
     /**
-     * Specifies the action to take if all of the specified conditions (onStatusReason, onReason, and onExitCode) are met.
+     * Specifies the action to take if all of the specified conditions (onStatusReason, onReason, and onExitCode) are met. The values are not case sensitive.
      */
     action: RetryAction;
   }
   export type EvaluateOnExitList = EvaluateOnExit[];
+  export interface FargatePlatformConfiguration {
+    /**
+     * The AWS Fargate platform version on which the jobs are running. A platform version is specified only for jobs running on Fargate resources. If one isn't specified, the LATEST platform version is used by default. This will use a recent, approved version of the AWS Fargate platform for compute resources. For more information, see AWS Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
+     */
+    platformVersion?: String;
+  }
   export interface Host {
     /**
-     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
+     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     sourcePath?: String;
   }
@@ -867,7 +898,7 @@ declare namespace Batch {
      */
     status?: String;
     /**
-     * The type of job definition.
+     * The type of job definition. If the job is run on Fargate resources, then multinode isn't supported. For more information about multi-node parallel jobs, see Creating a multi-node parallel job definition in the AWS Batch User Guide.
      */
     type: String;
     /**
@@ -883,17 +914,25 @@ declare namespace Batch {
      */
     containerProperties?: ContainerProperties;
     /**
-     * The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.
+     * The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they haven't finished.
      */
     timeout?: JobTimeout;
     /**
-     * An object with various properties specific to multi-node parallel jobs.
+     * An object with various properties specific to multi-node parallel jobs.  If the job runs on Fargate resources, then you must not specify nodeProperties; use containerProperties instead. 
      */
     nodeProperties?: NodeProperties;
     /**
      * The tags applied to the job definition.
      */
     tags?: TagrisTagsMap;
+    /**
+     * Specifies whether to propagate the tags from the job or job definition to the corresponding Amazon ECS task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the tasks during task creation. For tags with the same name, job tags are given priority over job definitions tags. If the total number of combined tags from the job and job definition is over 50, the job is moved to the FAILED state.
+     */
+    propagateTags?: Boolean;
+    /**
+     * The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. Jobs run on Fargate resources specify FARGATE.
+     */
+    platformCapabilities?: PlatformCapabilityList;
   }
   export type JobDefinitionList = JobDefinition[];
   export type JobDefinitionType = "container"|"multinode"|string;
@@ -922,7 +961,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * The Amazon Resource Name (ARN) of the job queue with which the job is associated.
+     * The Amazon Resource Name (ARN) of the job queue that the job is associated with.
      */
     jobQueue: String;
     /**
@@ -946,7 +985,7 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix timestamp (in milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state). This parameter is not provided for child jobs of array jobs or multi-node parallel jobs.
+     * The Unix timestamp (in milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state). This parameter isn't provided for child jobs of array jobs or multi-node parallel jobs.
      */
     startedAt: Long;
     /**
@@ -954,7 +993,7 @@ declare namespace Batch {
      */
     stoppedAt?: Long;
     /**
-     * A list of job IDs on which this job depends.
+     * A list of job IDs that this job depends on.
      */
     dependsOn?: JobDependencyList;
     /**
@@ -966,7 +1005,7 @@ declare namespace Batch {
      */
     parameters?: ParametersMap;
     /**
-     * An object representing the details of the container that is associated with the job.
+     * An object representing the details of the container that's associated with the job.
      */
     container?: ContainerDetail;
     /**
@@ -974,7 +1013,7 @@ declare namespace Batch {
      */
     nodeDetails?: NodeDetails;
     /**
-     * An object representing the node properties of a multi-node parallel job.
+     * An object representing the node properties of a multi-node parallel job.  This isn't applicable to jobs running on Fargate resources. 
      */
     nodeProperties?: NodeProperties;
     /**
@@ -989,6 +1028,14 @@ declare namespace Batch {
      * The tags applied to the job.
      */
     tags?: TagrisTagsMap;
+    /**
+     * Specifies whether to propagate the tags from the job or job definition to the corresponding Amazon ECS task. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks during task creation. For tags with the same name, job tags are given priority over job definitions tags. If the total number of combined tags from the job and job definition is over 50, the job is moved to the FAILED state.
+     */
+    propagateTags?: Boolean;
+    /**
+     * The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. Jobs run on Fargate resources specify FARGATE.
+     */
+    platformCapabilities?: PlatformCapabilityList;
   }
   export type JobDetailList = JobDetail[];
   export interface JobQueueDetail {
@@ -1001,7 +1048,7 @@ declare namespace Batch {
      */
     jobQueueArn: String;
     /**
-     * Describes the ability of the queue to accept new jobs. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the queue, but jobs already in the queue can finish.
+     * Describes the ability of the queue to accept new jobs. If the job queue state is ENABLED, it's able to accept jobs. If the job queue state is DISABLED, new jobs can't be added to the queue, but jobs already in the queue can finish.
      */
     state: JQState;
     /**
@@ -1017,7 +1064,7 @@ declare namespace Batch {
      */
     priority: Integer;
     /**
-     * The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
+     * The compute environments that are attached to the job queue and the order that job placement is preferred. Compute environments are selected for job placement in ascending order.
      */
     computeEnvironmentOrder: ComputeEnvironmentOrders;
     /**
@@ -1069,14 +1116,14 @@ declare namespace Batch {
      */
     arrayProperties?: ArrayPropertiesSummary;
     /**
-     * The node properties for a single node in a job summary list.
+     * The node properties for a single node in a job summary list.  This isn't applicable to jobs running on Fargate resources. 
      */
     nodeProperties?: NodePropertiesSummary;
   }
   export type JobSummaryList = JobSummary[];
   export interface JobTimeout {
     /**
-     * The time duration in seconds (measured from the job attempt's startedAt timestamp) after which AWS Batch terminates your jobs if they have not finished.
+     * The time duration in seconds (measured from the job attempt's startedAt timestamp) after which AWS Batch terminates your jobs if they have not finished. The minimum value for the timeout is 60 seconds.
      */
     attemptDurationSeconds?: Integer;
   }
@@ -1106,7 +1153,7 @@ declare namespace Batch {
   }
   export interface LinuxParameters {
     /**
-     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.
+     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     devices?: DevicesList;
     /**
@@ -1114,25 +1161,25 @@ declare namespace Batch {
      */
     initProcessEnabled?: Boolean;
     /**
-     * The value for the size (in MiB) of the /dev/shm volume. This parameter maps to the --shm-size option to docker run.
+     * The value for the size (in MiB) of the /dev/shm volume. This parameter maps to the --shm-size option to docker run.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     sharedMemorySize?: Integer;
     /**
-     * The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the --tmpfs option to docker run.
+     * The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the --tmpfs option to docker run.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     tmpfs?: TmpfsList;
     /**
-     * The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the --memory-swap option to docker run where the value would be the sum of the container memory plus the maxSwap value. For more information, see  --memory-swap details in the Docker documentation. If a maxSwap value of 0 is specified, the container will not use swap. Accepted values are 0 or any positive integer. If the maxSwap parameter is omitted, the container will use the swap configuration for the container instance it is running on. A maxSwap value must be set for the swappiness parameter to be used.
+     * The total amount of swap memory (in MiB) a container can use. This parameter is translated to the --memory-swap option to docker run where the value is the sum of the container memory plus the maxSwap value. For more information, see  --memory-swap details in the Docker documentation. If a maxSwap value of 0 is specified, the container doesn't use swap. Accepted values are 0 or any positive integer. If the maxSwap parameter is omitted, the container doesn't use the swap configuration for the container instance it is running on. A maxSwap value must be set for the swappiness parameter to be used.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     maxSwap?: Integer;
     /**
-     * This allows you to tune a container's memory swappiness behavior. A swappiness value of 0 will cause swapping to not happen unless absolutely necessary. A swappiness value of 100 will cause pages to be swapped very aggressively. Accepted values are whole numbers between 0 and 100. If the swappiness parameter is not specified, a default value of 60 is used. If a value is not specified for maxSwap then this parameter is ignored. This parameter maps to the --memory-swappiness option to docker run.
+     * This allows you to tune a container's memory swappiness behavior. A swappiness value of 0 causes swapping not to happen unless absolutely necessary. A swappiness value of 100 causes pages to be swapped very aggressively. Accepted values are whole numbers between 0 and 100. If the swappiness parameter isn't specified, a default value of 60 is used. If a value isn't specified for maxSwap then this parameter is ignored. This parameter maps to the --memory-swappiness option to docker run.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     swappiness?: Integer;
   }
   export interface ListJobsRequest {
     /**
-     * The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
+     * The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
      */
     jobQueue?: String;
     /**
@@ -1144,11 +1191,11 @@ declare namespace Batch {
      */
     multiNodeJobId?: String;
     /**
-     * The job status with which to filter jobs in the specified queue. If you do not specify a status, only RUNNING jobs are returned.
+     * The job status used to filter jobs in the specified queue. If you don't specify a status, only RUNNING jobs are returned.
      */
     jobStatus?: JobStatus;
     /**
-     * The maximum number of results returned by ListJobs in paginated output. When this parameter is used, ListJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListJobs returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results returned by ListJobs in paginated output. When this parameter is used, ListJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then ListJobs returns up to 100 results and a nextToken value if applicable.
      */
     maxResults?: Integer;
     /**
@@ -1168,7 +1215,7 @@ declare namespace Batch {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     * The Amazon Resource Name (ARN) that identifies the resource that tags are listed for. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
      */
     resourceArn: String;
   }
@@ -1180,7 +1227,7 @@ declare namespace Batch {
   }
   export interface LogConfiguration {
     /**
-     * The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. The supported log drivers are awslogs, fluentd, gelf, json-file, journald, logentries, syslog, and splunk.  awslogs  Specifies the Amazon CloudWatch Logs logging driver. For more information, see Using the awslogs Log Driver in the AWS Batch User Guide and Amazon CloudWatch Logs logging driver in the Docker documentation.  fluentd  Specifies the Fluentd logging driver. For more information, including usage and options, see Fluentd logging driver in the Docker documentation.  gelf  Specifies the Graylog Extended Format (GELF) logging driver. For more information, including usage and options, see Graylog Extended Format logging driver in the Docker documentation.  journald  Specifies the journald logging driver. For more information, including usage and options, see Journald logging driver in the Docker documentation.  json-file  Specifies the JSON file logging driver. For more information, including usage and options, see JSON File logging driver in the Docker documentation.  splunk  Specifies the Splunk logging driver. For more information, including usage and options, see Splunk logging driver in the Docker documentation.  syslog  Specifies the syslog logging driver. For more information, including usage and options, see Syslog logging driver in the Docker documentation.    If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is available on GitHub and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     * The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. The supported log drivers are awslogs, fluentd, gelf, json-file, journald, logentries, syslog, and splunk.  Jobs running on Fargate resources are restricted to the awslogs and splunk log drivers.   awslogs  Specifies the Amazon CloudWatch Logs logging driver. For more information, see Using the awslogs Log Driver in the AWS Batch User Guide and Amazon CloudWatch Logs logging driver in the Docker documentation.  fluentd  Specifies the Fluentd logging driver. For more information, including usage and options, see Fluentd logging driver in the Docker documentation.  gelf  Specifies the Graylog Extended Format (GELF) logging driver. For more information, including usage and options, see Graylog Extended Format logging driver in the Docker documentation.  journald  Specifies the journald logging driver. For more information, including usage and options, see Journald logging driver in the Docker documentation.  json-file  Specifies the JSON file logging driver. For more information, including usage and options, see JSON File logging driver in the Docker documentation.  splunk  Specifies the Splunk logging driver. For more information, including usage and options, see Splunk logging driver in the Docker documentation.  syslog  Specifies the syslog logging driver. For more information, including usage and options, see Syslog logging driver in the Docker documentation.    If you have a custom driver that isn't listed earlier that you want to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is available on GitHub and customize it to work with that driver. We encourage you to submit pull requests for changes that you want to have included. However, Amazon Web Services doesn't currently support running modified copies of this software.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
      */
     logDriver: LogDriver;
     /**
@@ -1197,11 +1244,11 @@ declare namespace Batch {
   export type Long = number;
   export interface MountPoint {
     /**
-     * The path on the container at which to mount the host volume.
+     * The path on the container where the host volume is mounted.
      */
     containerPath?: String;
     /**
-     * If this value is true, the container has read-only access to the volume; otherwise, the container can write to the volume. The default value is false.
+     * If this value is true, the container has read-only access to the volume. Otherwise, the container can write to the volume. The default value is false.
      */
     readOnly?: Boolean;
     /**
@@ -1210,6 +1257,12 @@ declare namespace Batch {
     sourceVolume?: String;
   }
   export type MountPoints = MountPoint[];
+  export interface NetworkConfiguration {
+    /**
+     * Indicates whether the job should have a public IP address. For a job running on Fargate resources in a private subnet to send outbound traffic to the internet (for example, in order to pull container images), the private subnet requires a NAT gateway be attached to route requests to the internet. For more information, see Amazon ECS task networking. The default value is "DISABLED".
+     */
+    assignPublicIp?: AssignPublicIp;
+  }
   export interface NetworkInterface {
     /**
      * The attachment ID for the network interface.
@@ -1275,7 +1328,7 @@ declare namespace Batch {
   }
   export interface NodePropertyOverride {
     /**
-     * The range of nodes, using node index values, with which to override. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range.
+     * The range of nodes, using node index values, that's used to override. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range.
      */
     targetNodes: String;
     /**
@@ -1296,13 +1349,15 @@ declare namespace Batch {
     container?: ContainerProperties;
   }
   export type ParametersMap = {[key: string]: String};
+  export type PlatformCapability = "EC2"|"FARGATE"|string;
+  export type PlatformCapabilityList = PlatformCapability[];
   export interface RegisterJobDefinitionRequest {
     /**
      * The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
      */
     jobDefinitionName: String;
     /**
-     * The type of job definition.
+     * The type of job definition. For more information about multi-node parallel jobs, see Creating a multi-node parallel job definition in the AWS Batch User Guide.  If the job is run on Fargate resources, then multinode isn't supported. 
      */
     type: JobDefinitionType;
     /**
@@ -1310,25 +1365,33 @@ declare namespace Batch {
      */
     parameters?: ParametersMap;
     /**
-     * An object with various properties specific to single-node container-based jobs. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.
+     * An object with various properties specific to single-node container-based jobs. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.  If the job runs on Fargate resources, then you must not specify nodeProperties; use only containerProperties. 
      */
     containerProperties?: ContainerProperties;
     /**
-     * An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see Multi-node Parallel Jobs in the AWS Batch User Guide. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.
+     * An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see Multi-node Parallel Jobs in the AWS Batch User Guide. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.  If the job runs on Fargate resources, then you must not specify nodeProperties; use containerProperties instead. 
      */
     nodeProperties?: NodeProperties;
     /**
-     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.
+     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it isn't retried.
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a SubmitJob operation overrides the timeout configuration defined here. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
+     * Specifies whether to propagate the tags from the job or job definition to the corresponding Amazon ECS task. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks during task creation. For tags with the same name, job tags are given priority over job definitions tags. If the total number of combined tags from the job and job definition is over 50, the job is moved to the FAILED state.
+     */
+    propagateTags?: Boolean;
+    /**
+     * The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it isn't retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a SubmitJob operation overrides the timeout configuration defined here. For more information, see Job Timeouts in the AWS Batch User Guide.
      */
     timeout?: JobTimeout;
     /**
-     * The tags that you apply to the job definition to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference.
+     * The tags that you apply to the job definition to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS Batch User Guide.
      */
     tags?: TagrisTagsMap;
+    /**
+     * The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. To run the job on Fargate resources, specify FARGATE.
+     */
+    platformCapabilities?: PlatformCapabilityList;
   }
   export interface RegisterJobDefinitionResponse {
     /**
@@ -1346,16 +1409,16 @@ declare namespace Batch {
   }
   export interface ResourceRequirement {
     /**
-     * The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a job should not exceed the number of available GPUs on the compute resource that the job is launched on.
+     * The quantity of the specified resource to reserve for the container. The values vary based on the type specified.  type="GPU"  The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a job shouldn't exceed the number of available GPUs on the compute resource that the job is launched on.  GPUs are not available for jobs running on Fargate resources.   type="MEMORY"  For jobs running on EC2 resources, the hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job.  If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide.  For jobs running on Fargate resources, then value is the hard limit (in GiB), represented in decimal form, and must match one of the supported values (0.5 and whole numbers between 1 and 30, inclusive) and the VCPU values must be one of the values supported for that memory value.  value = 0.5   VCPU = 0.25  value = 1   VCPU = 0.25 or 0.5  value = 2   VCPU = 0.25, 0.5, or 1  value = 3   VCPU = 0.5, or 1  value = 4   VCPU = 0.5, 1, or 2  value = 5, 6, or 7   VCPU = 1 or 2  value = 8   VCPU = 1, 2, or 4  value = 9, 10, 11, 12, 13, 14, 15, or 16   VCPU = 2 or 4  value = 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, or 30   VCPU = 4    type="VCPU"  The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places; it must be specified for each node at least once. For jobs running on Fargate resources, then value must match one of the supported values and the MEMORY values must be one of the values supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2, and 4  value = 0.25   MEMORY = 0.5, 1, or 2  value = 0.5   MEMORY = 1, 2, 3, or 4  value = 1   MEMORY = 2, 3, 4, 5, 6, 7, or 8  value = 2   MEMORY = 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, or 16  value = 4   MEMORY = 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, or 30    
      */
     value: String;
     /**
-     * The type of resource to assign to a container. Currently, the only supported resource type is GPU.
+     * The type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
      */
     type: ResourceType;
   }
   export type ResourceRequirements = ResourceRequirement[];
-  export type ResourceType = "GPU"|string;
+  export type ResourceType = "GPU"|"VCPU"|"MEMORY"|string;
   export type RetryAction = "RETRY"|"EXIT"|string;
   export interface RetryStrategy {
     /**
@@ -1373,7 +1436,7 @@ declare namespace Batch {
      */
     name: String;
     /**
-     * The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the AWS Systems Manager Parameter Store.  If the AWS Systems Manager Parameter Store parameter exists in the same Region as the task you are launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified. 
+     * The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the AWS Systems Manager Parameter Store.  If the AWS Systems Manager Parameter Store parameter exists in the same Region as the job you are launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified. 
      */
     valueFrom: String;
   }
@@ -1410,7 +1473,7 @@ declare namespace Batch {
      */
     containerOverrides?: ContainerOverrides;
     /**
-     * A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.
+     * A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.  This parameter isn't applicable to jobs running on Fargate resources; use containerOverrides instead. 
      */
     nodeOverrides?: NodeOverrides;
     /**
@@ -1418,7 +1481,11 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The timeout configuration for this SubmitJob operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
+     * Specifies whether to propagate the tags from the job or job definition to the corresponding Amazon ECS task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the tasks during task creation. For tags with the same name, job tags are given priority over job definitions tags. If the total number of combined tags from the job and job definition is over 50, the job is moved to the FAILED state. When specified, this overrides the tag propagation setting in the job definition.
+     */
+    propagateTags?: Boolean;
+    /**
+     * The timeout configuration for this SubmitJob operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they haven't finished. If a job is terminated due to a timeout, it isn't retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
      */
     timeout?: JobTimeout;
     /**
@@ -1444,7 +1511,7 @@ declare namespace Batch {
   export type TagKeysList = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to which to add tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     * The Amazon Resource Name (ARN) of the resource that tags are added to. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
      */
     resourceArn: String;
     /**
@@ -1471,7 +1538,7 @@ declare namespace Batch {
   }
   export interface Tmpfs {
     /**
-     * The absolute file path in the container where the tmpfs volume is to be mounted.
+     * The absolute file path in the container where the tmpfs volume is mounted.
      */
     containerPath: String;
     /**
@@ -1525,7 +1592,7 @@ declare namespace Batch {
      */
     computeResources?: ComputeResourceUpdate;
     /**
-     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN may contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
+     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN might contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
      */
     serviceRole?: String;
   }
@@ -1553,7 +1620,7 @@ declare namespace Batch {
      */
     priority?: Integer;
     /**
-     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
+     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should run a given job. All of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
      */
     computeEnvironmentOrder?: ComputeEnvironmentOrders;
   }
@@ -1569,7 +1636,7 @@ declare namespace Batch {
   }
   export interface Volume {
     /**
-     * The contents of the host parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running.
+     * The contents of the host parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data isn't guaranteed to persist after the containers associated with it stop running.  This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided. 
      */
     host?: Host;
     /**
