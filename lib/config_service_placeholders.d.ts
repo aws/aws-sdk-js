@@ -246,6 +246,10 @@ export abstract class ConfigurationServicePlaceholders {
   lookoutvision?: AWS.LookoutVision.Types.ClientConfiguration;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.ClientConfiguration;
   customerprofiles?: AWS.CustomerProfiles.Types.ClientConfiguration;
+  auditmanager?: AWS.AuditManager.Types.ClientConfiguration;
+  emrcontainers?: AWS.EMRcontainers.Types.ClientConfiguration;
+  healthlake?: AWS.HealthLake.Types.ClientConfiguration;
+  sagemakeredge?: AWS.SagemakerEdge.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -494,4 +498,8 @@ export interface ConfigurationServiceApiVersions {
   lookoutvision?: AWS.LookoutVision.Types.apiVersion;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.apiVersion;
   customerprofiles?: AWS.CustomerProfiles.Types.apiVersion;
+  auditmanager?: AWS.AuditManager.Types.apiVersion;
+  emrcontainers?: AWS.EMRcontainers.Types.apiVersion;
+  healthlake?: AWS.HealthLake.Types.apiVersion;
+  sagemakeredge?: AWS.SagemakerEdge.Types.apiVersion;
 }

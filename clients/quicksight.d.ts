@@ -3526,7 +3526,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. IdentityType must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
+     * A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. IdentityType must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
      */
     AdditionalDashboardIds?: AdditionalDashboardIdList;
   }
@@ -3739,21 +3739,35 @@ declare namespace QuickSight {
   }
   export interface JoinInstruction {
     /**
-     * Left operand.
+     * The operand on the left side of a join.
      */
     LeftOperand: LogicalTableId;
     /**
-     * Right operand.
+     * The operand on the right side of a join.
      */
     RightOperand: LogicalTableId;
     /**
-     * Type.
+     * Join key properties of the left operand.
+     */
+    LeftJoinKeyProperties?: JoinKeyProperties;
+    /**
+     * Join key properties of the right operand.
+     */
+    RightJoinKeyProperties?: JoinKeyProperties;
+    /**
+     * The type of join that it is.
      */
     Type: JoinType;
     /**
-     * On Clause.
+     * The join instructions provided in the ON clause of a join.
      */
     OnClause: OnClause;
+  }
+  export interface JoinKeyProperties {
+    /**
+     * Indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.
+     */
+    UniqueKey?: Boolean;
   }
   export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
   export interface ListAnalysesRequest {

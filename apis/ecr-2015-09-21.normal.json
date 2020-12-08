@@ -197,6 +197,31 @@
       ],
       "documentation": "<p>Deletes the lifecycle policy associated with the specified repository.</p>"
     },
+    "DeleteRegistryPolicy": {
+      "name": "DeleteRegistryPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteRegistryPolicyRequest"
+      },
+      "output": {
+        "shape": "DeleteRegistryPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RegistryPolicyNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes the registry permissions policy.</p>"
+    },
     "DeleteRepository": {
       "name": "DeleteRepository",
       "http": {
@@ -314,6 +339,31 @@
         }
       ],
       "documentation": "<p>Returns metadata about the images in a repository.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>"
+    },
+    "DescribeRegistry": {
+      "name": "DescribeRegistry",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRegistryRequest"
+      },
+      "output": {
+        "shape": "DescribeRegistryResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Describes the settings for a registry. The replication configuration for a repository can be created or updated with the <a>PutReplicationConfiguration</a> API action.</p>"
     },
     "DescribeRepositories": {
       "name": "DescribeRepositories",
@@ -448,6 +498,31 @@
         }
       ],
       "documentation": "<p>Retrieves the results of the lifecycle policy preview request for the specified repository.</p>"
+    },
+    "GetRegistryPolicy": {
+      "name": "GetRegistryPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetRegistryPolicyRequest"
+      },
+      "output": {
+        "shape": "GetRegistryPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RegistryPolicyNotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the permissions policy for a registry.</p>"
     },
     "GetRepositoryPolicy": {
       "name": "GetRepositoryPolicy",
@@ -675,6 +750,53 @@
         }
       ],
       "documentation": "<p>Creates or updates the lifecycle policy for the specified repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle Policy Template</a>.</p>"
+    },
+    "PutRegistryPolicy": {
+      "name": "PutRegistryPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutRegistryPolicyRequest"
+      },
+      "output": {
+        "shape": "PutRegistryPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Creates or updates the permissions policy for your registry.</p> <p>A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+    },
+    "PutReplicationConfiguration": {
+      "name": "PutReplicationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutReplicationConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutReplicationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECR</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p> <note> <p>When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p> </note>"
     },
     "SetRepositoryPolicy": {
       "name": "SetRepositoryPolicy",
@@ -1177,6 +1299,23 @@
         }
       }
     },
+    "DeleteRegistryPolicyRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteRegistryPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The registry ID associated with the request.</p>"
+        },
+        "policyText": {
+          "shape": "RegistryPolicyText",
+          "documentation": "<p>The contents of the registry permissions policy that was deleted.</p>"
+        }
+      }
+    },
     "DeleteRepositoryPolicyRequest": {
       "type": "structure",
       "required": [
@@ -1350,6 +1489,23 @@
         }
       }
     },
+    "DescribeRegistryRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeRegistryResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The ID of the registry.</p>"
+        },
+        "replicationConfiguration": {
+          "shape": "ReplicationConfiguration",
+          "documentation": "<p>The replication configuration for the registry.</p>"
+        }
+      }
+    },
     "DescribeRepositoriesRequest": {
       "type": "structure",
       "members": {
@@ -1456,7 +1612,9 @@
       "members": {
         "registryIds": {
           "shape": "GetAuthorizationTokenRegistryIdList",
-          "documentation": "<p>A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."
         }
       }
     },
@@ -1602,6 +1760,23 @@
         "lastEvaluatedAt": {
           "shape": "EvaluationTimestamp",
           "documentation": "<p>The time stamp of the last time that the lifecycle policy was run.</p>"
+        }
+      }
+    },
+    "GetRegistryPolicyRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetRegistryPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The ID of the registry.</p>"
+        },
+        "policyText": {
+          "shape": "RegistryPolicyText",
+          "documentation": "<p>The JSON text of the permissions policy for a registry.</p>"
         }
       }
     },
@@ -2383,9 +2558,126 @@
         }
       }
     },
+    "PutRegistryPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "policyText"
+      ],
+      "members": {
+        "policyText": {
+          "shape": "RegistryPolicyText",
+          "documentation": "<p>The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+        }
+      }
+    },
+    "PutRegistryPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The registry ID.</p>"
+        },
+        "policyText": {
+          "shape": "RegistryPolicyText",
+          "documentation": "<p>The JSON policy text for your registry.</p>"
+        }
+      }
+    },
+    "PutReplicationConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "replicationConfiguration"
+      ],
+      "members": {
+        "replicationConfiguration": {
+          "shape": "ReplicationConfiguration",
+          "documentation": "<p>An object representing the replication configuration for a registry.</p>"
+        }
+      }
+    },
+    "PutReplicationConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "replicationConfiguration": {
+          "shape": "ReplicationConfiguration",
+          "documentation": "<p>The contents of the replication configuration for the registry.</p>"
+        }
+      }
+    },
+    "Region": {
+      "type": "string",
+      "max": 25,
+      "min": 2,
+      "pattern": "[0-9a-z-]{2,25}"
+    },
     "RegistryId": {
       "type": "string",
       "pattern": "[0-9]{12}"
+    },
+    "RegistryPolicyText": {
+      "type": "string",
+      "max": 10240,
+      "min": 0
+    },
+    "ReplicationConfiguration": {
+      "type": "structure",
+      "required": [
+        "rules"
+      ],
+      "members": {
+        "rules": {
+          "shape": "ReplicationRuleList",
+          "documentation": "<p>An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.</p>"
+        }
+      },
+      "documentation": "<p>The replication configuration for a registry.</p>"
+    },
+    "ReplicationDestination": {
+      "type": "structure",
+      "required": [
+        "region",
+        "registryId"
+      ],
+      "members": {
+        "region": {
+          "shape": "Region",
+          "documentation": "<p>A Region to replicate to.</p>"
+        },
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The account ID of the destination registry to replicate to.</p>"
+        }
+      },
+      "documentation": "<p>An array of objects representing the details of a replication destination.</p>"
+    },
+    "ReplicationDestinationList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationDestination"
+      },
+      "max": 25,
+      "min": 0
+    },
+    "ReplicationRule": {
+      "type": "structure",
+      "required": [
+        "destinations"
+      ],
+      "members": {
+        "destinations": {
+          "shape": "ReplicationDestinationList",
+          "documentation": "<p>An array of objects representing the details of a replication destination.</p>"
+        }
+      },
+      "documentation": "<p>An array of objects representing the replication destinations for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.</p>"
+    },
+    "ReplicationRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationRule"
+      },
+      "max": 1,
+      "min": 0
     },
     "Repository": {
       "type": "structure",

@@ -245,5 +245,9 @@ module.exports = {
   ECRPUBLIC: require('./ecrpublic'),
   LookoutVision: require('./lookoutvision'),
   SageMakerFeatureStoreRuntime: require('./sagemakerfeaturestoreruntime'),
-  CustomerProfiles: require('./customerprofiles')
+  CustomerProfiles: require('./customerprofiles'),
+  AuditManager: require('./auditmanager'),
+  EMRcontainers: require('./emrcontainers'),
+  HealthLake: require('./healthlake'),
+  SagemakerEdge: require('./sagemakeredge')
 };

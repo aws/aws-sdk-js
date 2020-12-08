@@ -109,6 +109,22 @@ declare class SageMaker extends Service {
    */
   createContext(callback?: (err: AWSError, data: SageMaker.Types.CreateContextResponse) => void): Request<SageMaker.Types.CreateContextResponse, AWSError>;
   /**
+   * Creates a definition for a job that monitors data quality and drift. For information about model monitor, see Amazon SageMaker Model Monitor.
+   */
+  createDataQualityJobDefinition(params: SageMaker.Types.CreateDataQualityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDataQualityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateDataQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Creates a definition for a job that monitors data quality and drift. For information about model monitor, see Amazon SageMaker Model Monitor.
+   */
+  createDataQualityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateDataQualityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateDataQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Creates a device fleet.
+   */
+  createDeviceFleet(params: SageMaker.Types.CreateDeviceFleetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a device fleet.
+   */
+  createDeviceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, you can specify a customer managed CMK. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
@@ -116,6 +132,14 @@ declare class SageMaker extends Service {
    * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, you can specify a customer managed CMK. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.   For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
+  /**
+   * Starts a SageMaker Edge Manager model packaging job. Edge Manager will use the model artifacts from the Amazon Simple Storage Service bucket that you specify. After the model has been packaged, Amazon SageMaker saves the resulting artifacts to an S3 bucket that you specify.
+   */
+  createEdgePackagingJob(params: SageMaker.Types.CreateEdgePackagingJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a SageMaker Edge Manager model packaging job. Edge Manager will use the model artifacts from the Amazon Simple Storage Service bucket that you specify. After the model has been packaged, Amazon SageMaker saves the resulting artifacts to an S3 bucket that you specify.
+   */
+  createEdgePackagingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.   Use this API to deploy models using Amazon SageMaker hosting services.  For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS SDK for Python (Boto 3)).    You must not delete an EndpointConfig that is in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.   To add the IAM role policies for using this API operation, go to the IAM console, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the CreateEndpoint and CreateEndpointConfig API operations, add the following policies to the role.    Option 1: For a full Amazon SageMaker access, search and attach the AmazonSageMakerFullAccess policy.   Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role:   "Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]   "Resource": [   "arn:aws:sagemaker:region:account-id:endpoint/endpointName"   "arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"   ]  For more information, see Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference.   
    */
@@ -205,6 +229,22 @@ declare class SageMaker extends Service {
    */
   createModel(callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
+   * Creates the definition for a model bias job.
+   */
+  createModelBiasJobDefinition(params: SageMaker.Types.CreateModelBiasJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Creates the definition for a model bias job.
+   */
+  createModelBiasJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Creates the definition for a model explainability job.
+   */
+  createModelExplainabilityJobDefinition(params: SageMaker.Types.CreateModelExplainabilityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelExplainabilityJobDefinitionResponse, AWSError>;
+  /**
+   * Creates the definition for a model explainability job.
+   */
+  createModelExplainabilityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelExplainabilityJobDefinitionResponse, AWSError>;
+  /**
    * Creates a model package that you can use to create Amazon SageMaker models or list on AWS Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker. To create a model package by specifying a Docker container that contains your inference code and the Amazon S3 location of your model artifacts, provide values for InferenceSpecification. To create a model from an algorithm resource that you created or subscribed to in AWS Marketplace, provide a value for SourceAlgorithmSpecification.  There are two types of model packages:   Versioned - a model that is part of a model group in the model registry.   Unversioned - a model package that is not part of a model group.   
    */
   createModelPackage(params: SageMaker.Types.CreateModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageOutput) => void): Request<SageMaker.Types.CreateModelPackageOutput, AWSError>;
@@ -220,6 +260,14 @@ declare class SageMaker extends Service {
    * Creates a model group. A model group contains a group of model versions.
    */
   createModelPackageGroup(callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageGroupOutput) => void): Request<SageMaker.Types.CreateModelPackageGroupOutput, AWSError>;
+  /**
+   * Creates a definition for a job that monitors model quality and drift. For information about model monitor, see Amazon SageMaker Model Monitor.
+   */
+  createModelQualityJobDefinition(params: SageMaker.Types.CreateModelQualityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateModelQualityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Creates a definition for a job that monitors model quality and drift. For information about model monitor, see Amazon SageMaker Model Monitor.
+   */
+  createModelQualityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateModelQualityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelQualityJobDefinitionResponse, AWSError>;
   /**
    * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
    */
@@ -405,6 +453,22 @@ declare class SageMaker extends Service {
    */
   deleteContext(callback?: (err: AWSError, data: SageMaker.Types.DeleteContextResponse) => void): Request<SageMaker.Types.DeleteContextResponse, AWSError>;
   /**
+   * Deletes a data quality monitoring job definition.
+   */
+  deleteDataQualityJobDefinition(params: SageMaker.Types.DeleteDataQualityJobDefinitionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a data quality monitoring job definition.
+   */
+  deleteDataQualityJobDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a fleet.
+   */
+  deleteDeviceFleet(params: SageMaker.Types.DeleteDeviceFleetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a fleet.
+   */
+  deleteDeviceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
   deleteDomain(params: SageMaker.Types.DeleteDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -485,6 +549,22 @@ declare class SageMaker extends Service {
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an Amazon SageMaker model bias job definition.
+   */
+  deleteModelBiasJobDefinition(params: SageMaker.Types.DeleteModelBiasJobDefinitionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker model bias job definition.
+   */
+  deleteModelBiasJobDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker model explainability job definition.
+   */
+  deleteModelExplainabilityJobDefinition(params: SageMaker.Types.DeleteModelExplainabilityJobDefinitionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker model explainability job definition.
+   */
+  deleteModelExplainabilityJobDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a model package. A model package is used to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker.
    */
   deleteModelPackage(params: SageMaker.Types.DeleteModelPackageInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -508,6 +588,14 @@ declare class SageMaker extends Service {
    * Deletes a model group resource policy.
    */
   deleteModelPackageGroupPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the secified model quality monitoring job definition.
+   */
+  deleteModelQualityJobDefinition(params: SageMaker.Types.DeleteModelQualityJobDefinitionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the secified model quality monitoring job definition.
+   */
+  deleteModelQualityJobDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a monitoring schedule. Also stops the schedule had not already been stopped. This does not delete the job execution history of the monitoring schedule. 
    */
@@ -533,11 +621,11 @@ declare class SageMaker extends Service {
    */
   deleteNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a pipeline.
+   * Deletes a pipeline if there are no in-progress executions.
    */
   deletePipeline(params: SageMaker.Types.DeletePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.DeletePipelineResponse) => void): Request<SageMaker.Types.DeletePipelineResponse, AWSError>;
   /**
-   * Deletes a pipeline.
+   * Deletes a pipeline if there are no in-progress executions.
    */
   deletePipeline(callback?: (err: AWSError, data: SageMaker.Types.DeletePipelineResponse) => void): Request<SageMaker.Types.DeletePipelineResponse, AWSError>;
   /**
@@ -596,6 +684,14 @@ declare class SageMaker extends Service {
    * Deletes an existing work team. This operation can't be undone.
    */
   deleteWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkteamResponse) => void): Request<SageMaker.Types.DeleteWorkteamResponse, AWSError>;
+  /**
+   * Deregisters the specified devices. After you deregister a device, you will need to re-register the devices.
+   */
+  deregisterDevices(params: SageMaker.Types.DeregisterDevicesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deregisters the specified devices. After you deregister a device, you will need to re-register the devices.
+   */
+  deregisterDevices(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Describes an action.
    */
@@ -669,6 +765,30 @@ declare class SageMaker extends Service {
    */
   describeContext(callback?: (err: AWSError, data: SageMaker.Types.DescribeContextResponse) => void): Request<SageMaker.Types.DescribeContextResponse, AWSError>;
   /**
+   * Gets the details of a data quality monitoring job definition.
+   */
+  describeDataQualityJobDefinition(params: SageMaker.Types.DescribeDataQualityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeDataQualityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeDataQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Gets the details of a data quality monitoring job definition.
+   */
+  describeDataQualityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeDataQualityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeDataQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Describes the device.
+   */
+  describeDevice(params: SageMaker.Types.DescribeDeviceRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeDeviceResponse) => void): Request<SageMaker.Types.DescribeDeviceResponse, AWSError>;
+  /**
+   * Describes the device.
+   */
+  describeDevice(callback?: (err: AWSError, data: SageMaker.Types.DescribeDeviceResponse) => void): Request<SageMaker.Types.DescribeDeviceResponse, AWSError>;
+  /**
+   * A description of the fleet the device belongs to.
+   */
+  describeDeviceFleet(params: SageMaker.Types.DescribeDeviceFleetRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeDeviceFleetResponse) => void): Request<SageMaker.Types.DescribeDeviceFleetResponse, AWSError>;
+  /**
+   * A description of the fleet the device belongs to.
+   */
+  describeDeviceFleet(callback?: (err: AWSError, data: SageMaker.Types.DescribeDeviceFleetResponse) => void): Request<SageMaker.Types.DescribeDeviceFleetResponse, AWSError>;
+  /**
    * The description of the domain.
    */
   describeDomain(params: SageMaker.Types.DescribeDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeDomainResponse) => void): Request<SageMaker.Types.DescribeDomainResponse, AWSError>;
@@ -676,6 +796,14 @@ declare class SageMaker extends Service {
    * The description of the domain.
    */
   describeDomain(callback?: (err: AWSError, data: SageMaker.Types.DescribeDomainResponse) => void): Request<SageMaker.Types.DescribeDomainResponse, AWSError>;
+  /**
+   * A description of edge packaging jobs.
+   */
+  describeEdgePackagingJob(params: SageMaker.Types.DescribeEdgePackagingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeEdgePackagingJobResponse) => void): Request<SageMaker.Types.DescribeEdgePackagingJobResponse, AWSError>;
+  /**
+   * A description of edge packaging jobs.
+   */
+  describeEdgePackagingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeEdgePackagingJobResponse) => void): Request<SageMaker.Types.DescribeEdgePackagingJobResponse, AWSError>;
   /**
    * Returns the description of an endpoint.
    */
@@ -765,6 +893,22 @@ declare class SageMaker extends Service {
    */
   describeModel(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelOutput) => void): Request<SageMaker.Types.DescribeModelOutput, AWSError>;
   /**
+   * Returns a description of a model bias job definition.
+   */
+  describeModelBiasJobDefinition(params: SageMaker.Types.DescribeModelBiasJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Returns a description of a model bias job definition.
+   */
+  describeModelBiasJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Returns a description of a model explainability job definition.
+   */
+  describeModelExplainabilityJobDefinition(params: SageMaker.Types.DescribeModelExplainabilityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse, AWSError>;
+  /**
+   * Returns a description of a model explainability job definition.
+   */
+  describeModelExplainabilityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse, AWSError>;
+  /**
    * Returns a description of the specified model package, which is used to create Amazon SageMaker models or list them on AWS Marketplace. To create models in Amazon SageMaker, buyers can subscribe to model packages listed on AWS Marketplace.
    */
   describeModelPackage(params: SageMaker.Types.DescribeModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
@@ -780,6 +924,14 @@ declare class SageMaker extends Service {
    * Gets a description for the specified model group.
    */
   describeModelPackageGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageGroupOutput) => void): Request<SageMaker.Types.DescribeModelPackageGroupOutput, AWSError>;
+  /**
+   * Returns a description of a model quality job definition.
+   */
+  describeModelQualityJobDefinition(params: SageMaker.Types.DescribeModelQualityJobDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelQualityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelQualityJobDefinitionResponse, AWSError>;
+  /**
+   * Returns a description of a model quality job definition.
+   */
+  describeModelQualityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelQualityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelQualityJobDefinitionResponse, AWSError>;
   /**
    * Describes the schedule for a monitoring job.
    */
@@ -933,6 +1085,14 @@ declare class SageMaker extends Service {
    */
   enableSagemakerServicecatalogPortfolio(callback?: (err: AWSError, data: SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput) => void): Request<SageMaker.Types.EnableSagemakerServicecatalogPortfolioOutput, AWSError>;
   /**
+   * Describes a fleet.
+   */
+  getDeviceFleetReport(params: SageMaker.Types.GetDeviceFleetReportRequest, callback?: (err: AWSError, data: SageMaker.Types.GetDeviceFleetReportResponse) => void): Request<SageMaker.Types.GetDeviceFleetReportResponse, AWSError>;
+  /**
+   * Describes a fleet.
+   */
+  getDeviceFleetReport(callback?: (err: AWSError, data: SageMaker.Types.GetDeviceFleetReportResponse) => void): Request<SageMaker.Types.GetDeviceFleetReportResponse, AWSError>;
+  /**
    * Gets a resource policy that manages access for a model group. For information about resource policies, see Identity-based policies and resource-based policies in the AWS Identity and Access Management User Guide..
    */
   getModelPackageGroupPolicy(params: SageMaker.Types.GetModelPackageGroupPolicyInput, callback?: (err: AWSError, data: SageMaker.Types.GetModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.GetModelPackageGroupPolicyOutput, AWSError>;
@@ -1045,6 +1205,30 @@ declare class SageMaker extends Service {
    */
   listContexts(callback?: (err: AWSError, data: SageMaker.Types.ListContextsResponse) => void): Request<SageMaker.Types.ListContextsResponse, AWSError>;
   /**
+   * Lists the data quality job definitions in your account.
+   */
+  listDataQualityJobDefinitions(params: SageMaker.Types.ListDataQualityJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDataQualityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListDataQualityJobDefinitionsResponse, AWSError>;
+  /**
+   * Lists the data quality job definitions in your account.
+   */
+  listDataQualityJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListDataQualityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListDataQualityJobDefinitionsResponse, AWSError>;
+  /**
+   * Returns a list of devices in the fleet.
+   */
+  listDeviceFleets(params: SageMaker.Types.ListDeviceFleetsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDeviceFleetsResponse) => void): Request<SageMaker.Types.ListDeviceFleetsResponse, AWSError>;
+  /**
+   * Returns a list of devices in the fleet.
+   */
+  listDeviceFleets(callback?: (err: AWSError, data: SageMaker.Types.ListDeviceFleetsResponse) => void): Request<SageMaker.Types.ListDeviceFleetsResponse, AWSError>;
+  /**
+   * A list of devices.
+   */
+  listDevices(params: SageMaker.Types.ListDevicesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDevicesResponse) => void): Request<SageMaker.Types.ListDevicesResponse, AWSError>;
+  /**
+   * A list of devices.
+   */
+  listDevices(callback?: (err: AWSError, data: SageMaker.Types.ListDevicesResponse) => void): Request<SageMaker.Types.ListDevicesResponse, AWSError>;
+  /**
    * Lists the domains.
    */
   listDomains(params: SageMaker.Types.ListDomainsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
@@ -1052,6 +1236,14 @@ declare class SageMaker extends Service {
    * Lists the domains.
    */
   listDomains(callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
+  /**
+   * Returns a list of edge packaging jobs.
+   */
+  listEdgePackagingJobs(params: SageMaker.Types.ListEdgePackagingJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListEdgePackagingJobsResponse) => void): Request<SageMaker.Types.ListEdgePackagingJobsResponse, AWSError>;
+  /**
+   * Returns a list of edge packaging jobs.
+   */
+  listEdgePackagingJobs(callback?: (err: AWSError, data: SageMaker.Types.ListEdgePackagingJobsResponse) => void): Request<SageMaker.Types.ListEdgePackagingJobsResponse, AWSError>;
   /**
    * Lists endpoint configurations.
    */
@@ -1141,6 +1333,22 @@ declare class SageMaker extends Service {
    */
   listLabelingJobsForWorkteam(callback?: (err: AWSError, data: SageMaker.Types.ListLabelingJobsForWorkteamResponse) => void): Request<SageMaker.Types.ListLabelingJobsForWorkteamResponse, AWSError>;
   /**
+   * Lists model bias jobs definitions that satisfy various filters.
+   */
+  listModelBiasJobDefinitions(params: SageMaker.Types.ListModelBiasJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelBiasJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelBiasJobDefinitionsResponse, AWSError>;
+  /**
+   * Lists model bias jobs definitions that satisfy various filters.
+   */
+  listModelBiasJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListModelBiasJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelBiasJobDefinitionsResponse, AWSError>;
+  /**
+   * Lists model explainability job definitions that satisfy various filters.
+   */
+  listModelExplainabilityJobDefinitions(params: SageMaker.Types.ListModelExplainabilityJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse, AWSError>;
+  /**
+   * Lists model explainability job definitions that satisfy various filters.
+   */
+  listModelExplainabilityJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse, AWSError>;
+  /**
    * Gets a list of the model groups in your AWS account.
    */
   listModelPackageGroups(params: SageMaker.Types.ListModelPackageGroupsInput, callback?: (err: AWSError, data: SageMaker.Types.ListModelPackageGroupsOutput) => void): Request<SageMaker.Types.ListModelPackageGroupsOutput, AWSError>;
@@ -1156,6 +1364,14 @@ declare class SageMaker extends Service {
    * Lists the model packages that have been created.
    */
   listModelPackages(callback?: (err: AWSError, data: SageMaker.Types.ListModelPackagesOutput) => void): Request<SageMaker.Types.ListModelPackagesOutput, AWSError>;
+  /**
+   * Gets a list of model quality monitoring job definitions in your account.
+   */
+  listModelQualityJobDefinitions(params: SageMaker.Types.ListModelQualityJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelQualityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelQualityJobDefinitionsResponse, AWSError>;
+  /**
+   * Gets a list of model quality monitoring job definitions in your account.
+   */
+  listModelQualityJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListModelQualityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelQualityJobDefinitionsResponse, AWSError>;
   /**
    * Lists models created with the CreateModel API.
    */
@@ -1333,6 +1549,14 @@ declare class SageMaker extends Service {
    */
   putModelPackageGroupPolicy(callback?: (err: AWSError, data: SageMaker.Types.PutModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.PutModelPackageGroupPolicyOutput, AWSError>;
   /**
+   * Register devices.
+   */
+  registerDevices(params: SageMaker.Types.RegisterDevicesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Register devices.
+   */
+  registerDevices(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Renders the UI template so that you can preview the worker's experience. 
    */
   renderUiTemplate(params: SageMaker.Types.RenderUiTemplateRequest, callback?: (err: AWSError, data: SageMaker.Types.RenderUiTemplateResponse) => void): Request<SageMaker.Types.RenderUiTemplateResponse, AWSError>;
@@ -1349,11 +1573,11 @@ declare class SageMaker extends Service {
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
-   * Starts a previously stopped monitoring schedule.  New monitoring schedules are immediately started after creation. 
+   * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts a previously stopped monitoring schedule.  New monitoring schedules are immediately started after creation. 
+   * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1388,6 +1612,14 @@ declare class SageMaker extends Service {
    * Stops a model compilation job.  To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This gracefully shuts the job down. If the job hasn't stopped, it sends the SIGKILL signal. When it receives a StopCompilationJob request, Amazon SageMaker changes the CompilationJobSummary$CompilationJobStatus of the job to Stopping. After Amazon SageMaker stops the job, it sets the CompilationJobSummary$CompilationJobStatus to Stopped. 
    */
   stopCompilationJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Request to stop an edge packaging job.
+   */
+  stopEdgePackagingJob(params: SageMaker.Types.StopEdgePackagingJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Request to stop an edge packaging job.
+   */
+  stopEdgePackagingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
    */
@@ -1493,6 +1725,22 @@ declare class SageMaker extends Service {
    */
   updateContext(callback?: (err: AWSError, data: SageMaker.Types.UpdateContextResponse) => void): Request<SageMaker.Types.UpdateContextResponse, AWSError>;
   /**
+   * Updates a fleet of devices.
+   */
+  updateDeviceFleet(params: SageMaker.Types.UpdateDeviceFleetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a fleet of devices.
+   */
+  updateDeviceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates one or more devices in a fleet.
+   */
+  updateDevices(params: SageMaker.Types.UpdateDevicesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates one or more devices in a fleet.
+   */
+  updateDevices(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the default settings for new user profiles in the domain.
    */
   updateDomain(params: SageMaker.Types.UpdateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateDomainResponse) => void): Request<SageMaker.Types.UpdateDomainResponse, AWSError>;
@@ -1580,6 +1828,14 @@ declare class SageMaker extends Service {
    * Updates a pipeline execution.
    */
   updatePipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineExecutionResponse) => void): Request<SageMaker.Types.UpdatePipelineExecutionResponse, AWSError>;
+  /**
+   * Update a model training job to request a new Debugger profiling configuration.
+   */
+  updateTrainingJob(params: SageMaker.Types.UpdateTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateTrainingJobResponse) => void): Request<SageMaker.Types.UpdateTrainingJobResponse, AWSError>;
+  /**
+   * Update a model training job to request a new Debugger profiling configuration.
+   */
+  updateTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.UpdateTrainingJobResponse) => void): Request<SageMaker.Types.UpdateTrainingJobResponse, AWSError>;
   /**
    * Updates the display name of a trial.
    */
@@ -1776,6 +2032,17 @@ declare namespace SageMaker {
     Tags?: TagList;
   }
   export type AdditionalCodeRepositoryNamesOrUrls = CodeRepositoryNameOrUrl[];
+  export interface AgentVersion {
+    /**
+     * Version of the agent.
+     */
+    Version: EdgeVersion;
+    /**
+     * The number of Edge Manager agents.
+     */
+    AgentCount: Long;
+  }
+  export type AgentVersions = AgentVersion[];
   export interface Alarm {
     /**
      * 
@@ -3008,6 +3275,67 @@ declare namespace SageMaker {
      */
     ContextArn?: ContextArn;
   }
+  export interface CreateDataQualityJobDefinitionRequest {
+    /**
+     * The name for the monitoring job definition.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * Configures the constraints and baselines for the monitoring job.
+     */
+    DataQualityBaselineConfig?: DataQualityBaselineConfig;
+    /**
+     * Specifies the container that runs the monitoring job.
+     */
+    DataQualityAppSpecification: DataQualityAppSpecification;
+    /**
+     * A list of inputs for the monitoring job. Currently endpoints are supported as monitoring inputs.
+     */
+    DataQualityJobInput: DataQualityJobInput;
+    DataQualityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Specifies networking configuration for the monitoring job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDataQualityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the job definition.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+  }
+  export interface CreateDeviceFleetRequest {
+    /**
+     * The name of the fleet that the device belongs to.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+     */
+    RoleArn?: RoleArn;
+    /**
+     * A description of the fleet.
+     */
+    Description?: DeviceFleetDescription;
+    /**
+     * The output configuration for storing sample data collected by the fleet.
+     */
+    OutputConfig: EdgeOutputConfig;
+    /**
+     * Creates tags for the specified fleet.
+     */
+    Tags?: TagList;
+  }
   export interface CreateDomainRequest {
     /**
      * A name for the domain.
@@ -3055,6 +3383,40 @@ declare namespace SageMaker {
      * The URL to the created domain.
      */
     Url?: String1024;
+  }
+  export interface CreateEdgePackagingJobRequest {
+    /**
+     * The name of the edge packaging job.
+     */
+    EdgePackagingJobName: EntityName;
+    /**
+     * The name of the SageMaker Neo compilation job that will be used to locate model artifacts for packaging.
+     */
+    CompilationJobName: EntityName;
+    /**
+     * The name of the model.
+     */
+    ModelName: EntityName;
+    /**
+     * The version of the model.
+     */
+    ModelVersion: EdgeVersion;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to download and upload the model, and to contact SageMaker Neo.
+     */
+    RoleArn: RoleArn;
+    /**
+     * Provides information about the output location for the packaged model.
+     */
+    OutputConfig: EdgeOutputConfig;
+    /**
+     * The CMK to use when encrypting the EBS volume the edge packaging job runs on.
+     */
+    ResourceKey?: KmsKeyId;
+    /**
+     * Creates tags for the packaging job.
+     */
+    Tags?: TagList;
   }
   export interface CreateEndpointConfigInput {
     /**
@@ -3350,6 +3712,84 @@ declare namespace SageMaker {
      */
     LabelingJobArn: LabelingJobArn;
   }
+  export interface CreateModelBiasJobDefinitionRequest {
+    /**
+     * The name of the bias job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The baseline configuration for a model bias job.
+     */
+    ModelBiasBaselineConfig?: ModelBiasBaselineConfig;
+    /**
+     * Configures the model bias job to run a specified Docker container image.
+     */
+    ModelBiasAppSpecification: ModelBiasAppSpecification;
+    /**
+     * Inputs for the model bias job.
+     */
+    ModelBiasJobInput: ModelBiasJobInput;
+    ModelBiasJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Networking options for a model bias job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateModelBiasJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model bias job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+  }
+  export interface CreateModelExplainabilityJobDefinitionRequest {
+    /**
+     *  The name of the model explainability job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The baseline configuration for a model explainability job.
+     */
+    ModelExplainabilityBaselineConfig?: ModelExplainabilityBaselineConfig;
+    /**
+     * Configures the model explainability job to run a specified Docker container image.
+     */
+    ModelExplainabilityAppSpecification: ModelExplainabilityAppSpecification;
+    /**
+     * Inputs for the model explainability job.
+     */
+    ModelExplainabilityJobInput: ModelExplainabilityJobInput;
+    ModelExplainabilityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Networking options for a model explainability job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateModelExplainabilityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model explainability job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+  }
   export interface CreateModelInput {
     /**
      * The name of the new model.
@@ -3458,6 +3898,45 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the new model package.
      */
     ModelPackageArn: ModelPackageArn;
+  }
+  export interface CreateModelQualityJobDefinitionRequest {
+    /**
+     * The name of the monitoring job definition.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * Specifies the constraints and baselines for the monitoring job.
+     */
+    ModelQualityBaselineConfig?: ModelQualityBaselineConfig;
+    /**
+     * The container that runs the monitoring job.
+     */
+    ModelQualityAppSpecification: ModelQualityAppSpecification;
+    /**
+     * A list of the inputs that are monitored. Currently endpoints are supported.
+     */
+    ModelQualityJobInput: ModelQualityJobInput;
+    ModelQualityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Specifies the network configuration for the monitoring job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateModelQualityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model quality monitoring job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
   }
   export interface CreateMonitoringScheduleRequest {
     /**
@@ -3771,11 +4250,16 @@ declare namespace SageMaker {
     CheckpointConfig?: CheckpointConfig;
     DebugHookConfig?: DebugHookConfig;
     /**
-     * Configuration information for debugging rules.
+     * Configuration information for Debugger rules for debugging output tensors.
      */
     DebugRuleConfigurations?: DebugRuleConfigurations;
     TensorBoardOutputConfig?: TensorBoardOutputConfig;
     ExperimentConfig?: ExperimentConfig;
+    ProfilerConfig?: ProfilerConfig;
+    /**
+     * Configuration information for Debugger rules for profiling system and framework metrics.
+     */
+    ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
   }
   export interface CreateTrainingJobResponse {
     /**
@@ -4096,6 +4580,43 @@ declare namespace SageMaker {
      */
     JoinSource?: JoinSource;
   }
+  export interface DataQualityAppSpecification {
+    /**
+     * The container image that the data quality monitoring job runs.
+     */
+    ImageUri: ImageUri;
+    /**
+     * The entrypoint for a container used to run a monitoring job.
+     */
+    ContainerEntrypoint?: ContainerEntrypoint;
+    /**
+     * The arguments to send to the container that the monitoring job runs.
+     */
+    ContainerArguments?: MonitoringContainerArguments;
+    /**
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     */
+    RecordPreprocessorSourceUri?: S3Uri;
+    /**
+     * An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+     */
+    PostAnalyticsProcessorSourceUri?: S3Uri;
+    /**
+     * Sets the environment variables in the container that the monitoring job runs.
+     */
+    Environment?: MonitoringEnvironmentMap;
+  }
+  export interface DataQualityBaselineConfig {
+    /**
+     * The name of the job that performs baselining for the data quality monitoring job.
+     */
+    BaseliningJobName?: ProcessingJobName;
+    ConstraintsResource?: MonitoringConstraintsResource;
+    StatisticsResource?: MonitoringStatisticsResource;
+  }
+  export interface DataQualityJobInput {
+    EndpointInput: EndpointInput;
+  }
   export interface DataSource {
     /**
      * The S3 location of the data source that is associated with a channel.
@@ -4125,19 +4646,19 @@ declare namespace SageMaker {
   }
   export interface DebugHookConfig {
     /**
-     * Path to local storage location for tensors. Defaults to /opt/ml/output/tensors/.
+     * Path to local storage location for metrics and tensors. Defaults to /opt/ml/output/tensors/.
      */
     LocalPath?: DirectoryPath;
     /**
-     * Path to Amazon S3 storage location for tensors.
+     * Path to Amazon S3 storage location for metrics and tensors.
      */
     S3OutputPath: S3Uri;
     /**
-     * Configuration information for the debug hook parameters.
+     * Configuration information for the Debugger hook parameters.
      */
     HookParameters?: HookParameters;
     /**
-     * Configuration information for tensor collections.
+     * Configuration information for Debugger tensor collections. To learn more about how to configure the CollectionConfiguration parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
      */
     CollectionConfigurations?: CollectionConfigurations;
   }
@@ -4159,7 +4680,7 @@ declare namespace SageMaker {
      */
     RuleEvaluatorImage: AlgorithmImage;
     /**
-     * The instance type to deploy for a training job.
+     * The instance type to deploy a Debugger custom rule for debugging a training job.
      */
     InstanceType?: ProcessingInstanceType;
     /**
@@ -4167,14 +4688,14 @@ declare namespace SageMaker {
      */
     VolumeSizeInGB?: OptionalVolumeSizeInGB;
     /**
-     *  Runtime configuration for rule container.
+     * Runtime configuration for rule container.
      */
     RuleParameters?: RuleParameters;
   }
   export type DebugRuleConfigurations = DebugRuleConfiguration[];
   export interface DebugRuleEvaluationStatus {
     /**
-     * The name of the rule configuration
+     * The name of the rule configuration.
      */
     RuleConfigurationName?: RuleConfigurationName;
     /**
@@ -4293,6 +4814,18 @@ declare namespace SageMaker {
      */
     ContextArn?: ContextArn;
   }
+  export interface DeleteDataQualityJobDefinitionRequest {
+    /**
+     * The name of the data quality monitoring job definition to delete.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DeleteDeviceFleetRequest {
+    /**
+     * The name of the fleet to delete.
+     */
+    DeviceFleetName: EntityName;
+  }
   export interface DeleteDomainRequest {
     /**
      * The domain ID.
@@ -4369,6 +4902,18 @@ declare namespace SageMaker {
   }
   export interface DeleteImageVersionResponse {
   }
+  export interface DeleteModelBiasJobDefinitionRequest {
+    /**
+     * The name of the model bias job definition to delete.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DeleteModelExplainabilityJobDefinitionRequest {
+    /**
+     * The name of the model explainability job definition to delete.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
   export interface DeleteModelInput {
     /**
      * The name of the model to delete.
@@ -4392,6 +4937,12 @@ declare namespace SageMaker {
      * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
     ModelPackageName: VersionedArnOrName;
+  }
+  export interface DeleteModelQualityJobDefinitionRequest {
+    /**
+     * The name of the model quality monitoring job definition to delete.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
   }
   export interface DeleteMonitoringScheduleRequest {
     /**
@@ -4523,6 +5074,16 @@ declare namespace SageMaker {
      * 
      */
     AutoRollbackConfiguration?: AutoRollbackConfig;
+  }
+  export interface DeregisterDevicesRequest {
+    /**
+     * The name of the fleet the devices belong to.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The unique IDs of the devices.
+     */
+    DeviceNames: DeviceNames;
   }
   export interface DescribeActionRequest {
     /**
@@ -4968,6 +5529,145 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
   }
+  export interface DescribeDataQualityJobDefinitionRequest {
+    /**
+     * The name of the data quality monitoring job definition to describe.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DescribeDataQualityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the data quality monitoring job definition.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+    /**
+     * The name of the data quality monitoring job definition.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The time that the data quality monitoring job definition was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The constraints and baselines for the data quality monitoring job definition.
+     */
+    DataQualityBaselineConfig?: DataQualityBaselineConfig;
+    /**
+     * Information about the container that runs the data quality monitoring job.
+     */
+    DataQualityAppSpecification: DataQualityAppSpecification;
+    /**
+     * The list of inputs for the data quality monitoring job. Currently endpoints are supported.
+     */
+    DataQualityJobInput: DataQualityJobInput;
+    DataQualityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * The networking configuration for the data quality monitoring job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+  }
+  export interface DescribeDeviceFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+  }
+  export interface DescribeDeviceFleetResponse {
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The The Amazon Resource Name (ARN) of the fleet.
+     */
+    DeviceFleetArn: DeviceFleetArn;
+    /**
+     * The output configuration for storing sampled data.
+     */
+    OutputConfig: EdgeOutputConfig;
+    /**
+     * A description of the fleet.
+     */
+    Description?: DeviceFleetDescription;
+    /**
+     * Timestamp of when the device fleet was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Timestamp of when the device fleet was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) alias created in AWS Internet of Things (IoT).
+     */
+    IotRoleAlias?: IotRoleAlias;
+  }
+  export interface DescribeDeviceRequest {
+    /**
+     * Next token of device description.
+     */
+    NextToken?: NextToken;
+    /**
+     * The unique ID of the device.
+     */
+    DeviceName: EntityName;
+    /**
+     * The name of the fleet the devices belong to.
+     */
+    DeviceFleetName: EntityName;
+  }
+  export interface DescribeDeviceResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the device.
+     */
+    DeviceArn?: DeviceArn;
+    /**
+     * The unique identifier of the device.
+     */
+    DeviceName: EntityName;
+    /**
+     * A description of the device.
+     */
+    Description?: DeviceDescription;
+    /**
+     * The name of the fleet the device belongs to.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The AWS Internet of Things (IoT) object thing name associated with the device.
+     */
+    IotThingName?: ThingName;
+    /**
+     * The timestamp of the last registration or de-reregistration.
+     */
+    RegistrationTime: Timestamp;
+    /**
+     * The last heartbeat received from the device.
+     */
+    LatestHeartbeat?: Timestamp;
+    /**
+     * Models on the device.
+     */
+    Models?: EdgeModels;
+    /**
+     * The maximum number of models.
+     */
+    MaxModels?: Integer;
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeDomainRequest {
     /**
      * The domain ID.
@@ -5043,6 +5743,70 @@ declare namespace SageMaker {
      * The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
      */
     KmsKeyId?: KmsKeyId;
+  }
+  export interface DescribeEdgePackagingJobRequest {
+    /**
+     * The name of the edge packaging job.
+     */
+    EdgePackagingJobName: EntityName;
+  }
+  export interface DescribeEdgePackagingJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the edge packaging job.
+     */
+    EdgePackagingJobArn: EdgePackagingJobArn;
+    /**
+     * The name of the edge packaging job.
+     */
+    EdgePackagingJobName: EntityName;
+    /**
+     * The name of the SageMaker Neo compilation job that is used to locate model artifacts that are being packaged.
+     */
+    CompilationJobName?: EntityName;
+    /**
+     * The name of the model.
+     */
+    ModelName?: EntityName;
+    /**
+     * The version of the model.
+     */
+    ModelVersion?: EdgeVersion;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to download and upload the model, and to contact Neo.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The output configuration for the edge packaging job.
+     */
+    OutputConfig?: EdgeOutputConfig;
+    /**
+     * The CMK to use when encrypting the EBS volume the job run on.
+     */
+    ResourceKey?: KmsKeyId;
+    /**
+     * The current status of the packaging job.
+     */
+    EdgePackagingJobStatus: EdgePackagingJobStatus;
+    /**
+     * Returns a message describing the job status and error messages.
+     */
+    EdgePackagingJobStatusMessage?: String;
+    /**
+     * The timestamp of when the packaging job was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The timestamp of when the job was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Simple Storage (S3) URI where model artifacts ares stored.
+     */
+    ModelArtifact?: S3Uri;
+    /**
+     * The signature document of files in the model artifact.
+     */
+    ModelSignature?: String;
   }
   export interface DescribeEndpointConfigInput {
     /**
@@ -5543,6 +6307,92 @@ declare namespace SageMaker {
      */
     LabelingJobOutput?: LabelingJobOutput;
   }
+  export interface DescribeModelBiasJobDefinitionRequest {
+    /**
+     * The name of the model bias job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DescribeModelBiasJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model bias job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+    /**
+     * The name of the bias job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The time at which the model bias job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The baseline configuration for a model bias job.
+     */
+    ModelBiasBaselineConfig?: ModelBiasBaselineConfig;
+    /**
+     * Configures the model bias job to run a specified Docker container image.
+     */
+    ModelBiasAppSpecification: ModelBiasAppSpecification;
+    /**
+     * Inputs for the model bias job.
+     */
+    ModelBiasJobInput: ModelBiasJobInput;
+    ModelBiasJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Networking options for a model bias job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+  }
+  export interface DescribeModelExplainabilityJobDefinitionRequest {
+    /**
+     * The name of the model explainability job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DescribeModelExplainabilityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model explainability job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+    /**
+     * The name of the explainability job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The time at which the model explainability job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The baseline configuration for a model explainability job.
+     */
+    ModelExplainabilityBaselineConfig?: ModelExplainabilityBaselineConfig;
+    /**
+     * Configures the model explainability job to run a specified Docker container image.
+     */
+    ModelExplainabilityAppSpecification: ModelExplainabilityAppSpecification;
+    /**
+     * Inputs for the model explainability job.
+     */
+    ModelExplainabilityJobInput: ModelExplainabilityJobInput;
+    ModelExplainabilityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Networking options for a model explainability job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+  }
   export interface DescribeModelInput {
     /**
      * The name of the model.
@@ -5687,6 +6537,49 @@ declare namespace SageMaker {
      */
     ApprovalDescription?: ApprovalDescription;
   }
+  export interface DescribeModelQualityJobDefinitionRequest {
+    /**
+     * The name of the model quality job. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DescribeModelQualityJobDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model quality job.
+     */
+    JobDefinitionArn: MonitoringJobDefinitionArn;
+    /**
+     * The name of the quality job definition. The name must be unique within an AWS Region in the AWS account.
+     */
+    JobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The time at which the model quality job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The baseline configuration for a model quality job.
+     */
+    ModelQualityBaselineConfig?: ModelQualityBaselineConfig;
+    /**
+     * Configures the model quality job to run a specified Docker container image.
+     */
+    ModelQualityAppSpecification: ModelQualityAppSpecification;
+    /**
+     * Inputs for the model quality job.
+     */
+    ModelQualityJobInput: ModelQualityJobInput;
+    ModelQualityJobOutputConfig: MonitoringOutputConfig;
+    JobResources: MonitoringResources;
+    /**
+     * Networking options for a model quality job.
+     */
+    NetworkConfig?: MonitoringNetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition?: MonitoringStoppingCondition;
+  }
   export interface DescribeMonitoringScheduleRequest {
     /**
      * Name of a previously created monitoring schedule.
@@ -5706,6 +6599,10 @@ declare namespace SageMaker {
      * The status of an monitoring job.
      */
     MonitoringScheduleStatus: ScheduleStatus;
+    /**
+     * The type of the monitoring job that this schedule runs. This is one of the following values.    DATA_QUALITY - The schedule is for a data quality monitoring job.    MODEL_QUALITY - The schedule is for a model quality monitoring job.    MODEL_BIAS - The schedule is for a bias monitoring job.    MODEL_EXPLAINABILITY - The schedule is for an explainability monitoring job.  
+     */
+    MonitoringType?: MonitoringType;
     /**
      * A string, up to one KB in size, that contains the reason a monitoring job failed, if it failed.
      */
@@ -6223,14 +7120,27 @@ declare namespace SageMaker {
     DebugHookConfig?: DebugHookConfig;
     ExperimentConfig?: ExperimentConfig;
     /**
-     * Configuration information for debugging rules.
+     * Configuration information for Debugger rules for debugging output tensors.
      */
     DebugRuleConfigurations?: DebugRuleConfigurations;
     TensorBoardOutputConfig?: TensorBoardOutputConfig;
     /**
-     * Status about the debug rule evaluation.
+     * Evaluation status of Debugger rules for debugging on a training job.
      */
     DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
+    ProfilerConfig?: ProfilerConfig;
+    /**
+     * Configuration information for Debugger rules for profiling system and framework metrics.
+     */
+    ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
+    /**
+     * Evaluation status of Debugger rules for profiling on a training job.
+     */
+    ProfilerRuleEvaluationStatuses?: ProfilerRuleEvaluationStatuses;
+    /**
+     * Profiling status of a training job.
+     */
+    ProfilingStatus?: ProfilingStatus;
   }
   export interface DescribeTransformJobRequest {
     /**
@@ -6527,8 +7437,94 @@ declare namespace SageMaker {
   export type DestinationS3Uri = string;
   export type DetailedAlgorithmStatus = "NotStarted"|"InProgress"|"Completed"|"Failed"|string;
   export type DetailedModelPackageStatus = "NotStarted"|"InProgress"|"Completed"|"Failed"|string;
+  export interface Device {
+    /**
+     * The name of the device.
+     */
+    DeviceName: DeviceName;
+    /**
+     * Description of the device.
+     */
+    Description?: DeviceDescription;
+    /**
+     * AWS Internet of Things (IoT) object name.
+     */
+    IotThingName?: ThingName;
+  }
+  export type DeviceArn = string;
+  export type DeviceDescription = string;
+  export type DeviceFleetArn = string;
+  export type DeviceFleetDescription = string;
+  export type DeviceFleetSummaries = DeviceFleetSummary[];
+  export interface DeviceFleetSummary {
+    /**
+     * Amazon Resource Name (ARN) of the device fleet.
+     */
+    DeviceFleetArn: DeviceFleetArn;
+    /**
+     * Name of the device fleet.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * Timestamp of when the device fleet was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Timestamp of when the device fleet was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type DeviceName = string;
+  export type DeviceNames = DeviceName[];
+  export interface DeviceStats {
+    /**
+     * The number of devices connected with a heartbeat.
+     */
+    ConnectedDeviceCount: Long;
+    /**
+     * The number of registered devices.
+     */
+    RegisteredDeviceCount: Long;
+  }
+  export type DeviceSummaries = DeviceSummary[];
+  export interface DeviceSummary {
+    /**
+     * The unique identifier of the device.
+     */
+    DeviceName: EntityName;
+    /**
+     * Amazon Resource Name (ARN) of the device.
+     */
+    DeviceArn: DeviceArn;
+    /**
+     * A description of the device.
+     */
+    Description?: DeviceDescription;
+    /**
+     * The name of the fleet the device belongs to.
+     */
+    DeviceFleetName?: EntityName;
+    /**
+     * The AWS Internet of Things (IoT) object thing name associated with the device..
+     */
+    IotThingName?: ThingName;
+    /**
+     * The timestamp of the last registration or de-reregistration.
+     */
+    RegistrationTime?: Timestamp;
+    /**
+     * The last heartbeat received from the device.
+     */
+    LatestHeartbeat?: Timestamp;
+    /**
+     * Models on the device.
+     */
+    Models?: EdgeModelSummaries;
+  }
+  export type Devices = Device[];
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;
   export type DirectoryPath = string;
+  export type DisableProfiler = boolean;
   export interface DisableSagemakerServicecatalogPortfolioInput {
   }
   export interface DisableSagemakerServicecatalogPortfolioOutput {
@@ -6594,6 +7590,111 @@ declare namespace SageMaker {
   export type DomainName = string;
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
+  export interface EdgeModel {
+    /**
+     * The name of the model.
+     */
+    ModelName: EntityName;
+    /**
+     * The model version.
+     */
+    ModelVersion: EdgeVersion;
+    /**
+     * The timestamp of the last data sample taken.
+     */
+    LatestSampleTime?: Timestamp;
+    /**
+     * The timestamp of the last inference that was made.
+     */
+    LatestInference?: Timestamp;
+  }
+  export interface EdgeModelStat {
+    /**
+     * The name of the model.
+     */
+    ModelName: EntityName;
+    /**
+     * The model version.
+     */
+    ModelVersion: EdgeVersion;
+    /**
+     * The number of devices that have this model version and do not have a heart beat.
+     */
+    OfflineDeviceCount: Long;
+    /**
+     * The number of devices that have this model version and have a heart beat. 
+     */
+    ConnectedDeviceCount: Long;
+    /**
+     * The number of devices that have this model version, a heart beat, and are currently running.
+     */
+    ActiveDeviceCount: Long;
+    /**
+     * The number of devices with this model version and are producing sample data.
+     */
+    SamplingDeviceCount: Long;
+  }
+  export type EdgeModelStats = EdgeModelStat[];
+  export type EdgeModelSummaries = EdgeModelSummary[];
+  export interface EdgeModelSummary {
+    /**
+     * The name of the model.
+     */
+    ModelName: EntityName;
+    /**
+     * The version model.
+     */
+    ModelVersion: EdgeVersion;
+  }
+  export type EdgeModels = EdgeModel[];
+  export interface EdgeOutputConfig {
+    /**
+     * The Amazon Simple Storage (S3) bucker URI.
+     */
+    S3OutputLocation: S3Uri;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type EdgePackagingJobArn = string;
+  export type EdgePackagingJobStatus = "STARTING"|"INPROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export type EdgePackagingJobSummaries = EdgePackagingJobSummary[];
+  export interface EdgePackagingJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the edge packaging job.
+     */
+    EdgePackagingJobArn: EdgePackagingJobArn;
+    /**
+     * The name of the edge packaging job.
+     */
+    EdgePackagingJobName: EntityName;
+    /**
+     * The status of the edge packaging job.
+     */
+    EdgePackagingJobStatus: EdgePackagingJobStatus;
+    /**
+     * The name of the SageMaker Neo compilation job.
+     */
+    CompilationJobName?: EntityName;
+    /**
+     * The name of the model.
+     */
+    ModelName?: EntityName;
+    /**
+     * The version of the model.
+     */
+    ModelVersion?: EdgeVersion;
+    /**
+     * The timestamp of when the job was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The timestamp of when the edge packaging job was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type EdgeVersion = string;
   export type EfsUid = string;
   export type EnableCapture = boolean;
   export interface EnableSagemakerServicecatalogPortfolioInput {
@@ -6680,6 +7781,30 @@ declare namespace SageMaker {
      * Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated 
      */
     S3DataDistributionType?: ProcessingS3DataDistributionType;
+    /**
+     * The attributes of the input data that are the input features.
+     */
+    FeaturesAttribute?: String;
+    /**
+     * The attribute of the input data that represents the ground truth label.
+     */
+    InferenceAttribute?: String;
+    /**
+     * In a classification problem, the attribute that represents the class probability.
+     */
+    ProbabilityAttribute?: String;
+    /**
+     * The threshold for the class probability to be evaluated as a positive result.
+     */
+    ProbabilityThresholdAttribute?: ProbabilityThresholdAttribute;
+    /**
+     * If specified, monitoring jobs substract this time from the start time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
+     */
+    StartTimeOffset?: MonitoringTimeOffsetString;
+    /**
+     * If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
+     */
+    EndTimeOffset?: MonitoringTimeOffsetString;
   }
   export type EndpointName = string;
   export type EndpointNameContains = string;
@@ -7025,6 +8150,46 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskTitle = string;
   export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"|string;
   export type GenerateCandidateDefinitionsOnly = boolean;
+  export interface GetDeviceFleetReportRequest {
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+  }
+  export interface GetDeviceFleetReportResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the device.
+     */
+    DeviceFleetArn: DeviceFleetArn;
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The output configuration for storing sample data collected by the fleet.
+     */
+    OutputConfig?: EdgeOutputConfig;
+    /**
+     * Description of the fleet.
+     */
+    Description?: DeviceFleetDescription;
+    /**
+     * Timestamp of when the report was generated.
+     */
+    ReportGenerated?: Timestamp;
+    /**
+     * Status of devices.
+     */
+    DeviceStats?: DeviceStats;
+    /**
+     * The versions of Edge Manager agent deployed on the fleet.
+     */
+    AgentVersions?: AgentVersions;
+    /**
+     * Status of model on device.
+     */
+    ModelStats?: EdgeModelStats;
+  }
   export interface GetModelPackageGroupPolicyInput {
     /**
      * The name of the model group for which to get the resource policy.
@@ -7595,6 +8760,7 @@ declare namespace SageMaker {
   export type InputMode = "Pipe"|"File"|string;
   export type InputModes = TrainingInputMode[];
   export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
+  export type Integer = number;
   export interface IntegerParameterRange {
     /**
      * The name of the hyperparameter to search.
@@ -7626,6 +8792,7 @@ declare namespace SageMaker {
   export type IntegerParameterRanges = IntegerParameterRange[];
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
+  export type IotRoleAlias = string;
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
   export type JoinSource = "Input"|"None"|string;
@@ -8392,6 +9559,131 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListDataQualityJobDefinitionsRequest {
+    /**
+     * A filter that lists the data quality job definitions associated with the specified endpoint.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * The field to sort results by. The default is CreationTime.
+     */
+    SortBy?: MonitoringJobDefinitionSortKey;
+    /**
+     * The sort order for results. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListDataQualityJobDefinitions request was truncated, the response includes a NextToken. To retrieve the next set of transform jobs, use the token in the next request.&gt;
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of data quality monitoring job definitions to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A string in the data quality monitoring job definition name. This filter returns only data quality monitoring job definitions whose name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that returns only data quality monitoring job definitions created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only data quality monitoring job definitions created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface ListDataQualityJobDefinitionsResponse {
+    /**
+     * A list of data quality monitoring job definitions.
+     */
+    JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
+    /**
+     * If the result of the previous ListDataQualityJobDefinitions request was truncated, the response includes a NextToken. To retrieve the next set of data quality monitoring job definitions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDeviceFleetsRequest {
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to select.
+     */
+    MaxResults?: ListMaxResults;
+    /**
+     * Filter fleets where packaging job was created after specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Filter fleets where the edge packaging job was created before specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Select fleets where the job was updated after X
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Select fleets where the job was updated before X
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * Filter for fleets containing this name in their fleet device name.
+     */
+    NameContains?: NameContains;
+    /**
+     * The column to sort by.
+     */
+    SortBy?: ListDeviceFleetsSortBy;
+    /**
+     * What direction to sort in.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListDeviceFleetsResponse {
+    /**
+     * Summary of the device fleet.
+     */
+    DeviceFleetSummaries: DeviceFleetSummaries;
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListDeviceFleetsSortBy = "NAME"|"CREATION_TIME"|"LAST_MODIFIED_TIME"|string;
+  export interface ListDevicesRequest {
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of results to select.
+     */
+    MaxResults?: ListMaxResults;
+    /**
+     * Select fleets where the job was updated after X
+     */
+    LatestHeartbeatAfter?: Timestamp;
+    /**
+     * A filter that searches devices that contains this name in any of their models.
+     */
+    ModelName?: EntityName;
+    /**
+     * Filter for fleets containing this name in their device fleet name.
+     */
+    DeviceFleetName?: EntityName;
+  }
+  export interface ListDevicesResponse {
+    /**
+     * Summary of devices.
+     */
+    DeviceSummaries: DeviceSummaries;
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDomainsRequest {
     /**
      * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
@@ -8412,6 +9704,63 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListEdgePackagingJobsRequest {
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of results to select.
+     */
+    MaxResults?: ListMaxResults;
+    /**
+     * Select jobs where the job was created after specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Select jobs where the job was created before specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Select jobs where the job was updated after specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Select jobs where the job was updated before specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * Filter for jobs containing this name in their packaging job name.
+     */
+    NameContains?: NameContains;
+    /**
+     * Filter for jobs where the model name contains this string.
+     */
+    ModelNameContains?: NameContains;
+    /**
+     * The job status to filter for.
+     */
+    StatusEquals?: EdgePackagingJobStatus;
+    /**
+     * Use to specify what column to sort by.
+     */
+    SortBy?: ListEdgePackagingJobsSortBy;
+    /**
+     * What direction to sort by.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListEdgePackagingJobsResponse {
+    /**
+     * Summaries of edge packaging jobs.
+     */
+    EdgePackagingJobSummaries: EdgePackagingJobSummaries;
+    /**
+     * Token to use when calling the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListEdgePackagingJobsSortBy = "NAME"|"MODEL_NAME"|"CREATION_TIME"|"LAST_MODIFIED_TIME"|"STATUS"|string;
   export interface ListEndpointConfigsInput {
     /**
      * The field to sort results by. The default is CreationTime.
@@ -8898,6 +10247,95 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListLineageEntityParameterKey = StringParameterValue[];
+  export type ListMaxResults = number;
+  export interface ListModelBiasJobDefinitionsRequest {
+    /**
+     * Name of the endpoint to monitor for model bias.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Whether to sort results by the Name or CreationTime field. The default is CreationTime.
+     */
+    SortBy?: MonitoringJobDefinitionSortKey;
+    /**
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of model bias jobs to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter for model bias jobs whose name contains a specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that returns only model bias jobs created before a specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only model bias jobs created after a specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface ListModelBiasJobDefinitionsResponse {
+    /**
+     * A JSON array in which each element is a summary for a model bias jobs.
+     */
+    JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListModelExplainabilityJobDefinitionsRequest {
+    /**
+     * Name of the endpoint to monitor for model explainability.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Whether to sort results by the Name or CreationTime field. The default is CreationTime.
+     */
+    SortBy?: MonitoringJobDefinitionSortKey;
+    /**
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of jobs to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter for model explainability jobs whose name contains a specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that returns only model explainability jobs created before a specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only model explainability jobs created after a specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface ListModelExplainabilityJobDefinitionsResponse {
+    /**
+     * A JSON array in which each element is a summary for a explainability bias jobs.
+     */
+    JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListModelPackageGroupsInput {
     /**
      * A filter that returns only model groups created after the specified time.
@@ -8987,6 +10425,50 @@ declare namespace SageMaker {
     ModelPackageSummaryList: ModelPackageSummaryList;
     /**
      * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of model packages, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListModelQualityJobDefinitionsRequest {
+    /**
+     * A filter that returns only model quality monitoring job definitions that are associated with the specified endpoint.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * The field to sort results by. The default is CreationTime.
+     */
+    SortBy?: MonitoringJobDefinitionSortKey;
+    /**
+     * The sort order for results. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListModelQualityJobDefinitions request was truncated, the response includes a NextToken. To retrieve the next set of model quality monitoring job definitions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a call to ListModelQualityJobDefinitions.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A string in the transform job name. This filter returns only model quality monitoring job definitions whose name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that returns only model quality monitoring job definitions created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only model quality monitoring job definitions created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface ListModelQualityJobDefinitionsResponse {
+    /**
+     * A list of summaries of model quality monitoring job definitions.
+     */
+    JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of model quality monitoring job definitions, use it in the next request.
      */
     NextToken?: NextToken;
   }
@@ -9083,6 +10565,14 @@ declare namespace SageMaker {
      * A filter that retrieves only jobs with a specific status.
      */
     StatusEquals?: ExecutionStatus;
+    /**
+     * Gets a list of the monitoring job runs of the specified monitoring job definitions.
+     */
+    MonitoringJobDefinitionName?: MonitoringJobDefinitionName;
+    /**
+     * A filter that returns only the monitoring job runs of the specified monitoring type.
+     */
+    MonitoringTypeEquals?: MonitoringType;
   }
   export interface ListMonitoringExecutionsResponse {
     /**
@@ -9139,6 +10629,14 @@ declare namespace SageMaker {
      * A filter that returns only monitoring schedules modified before a specified time.
      */
     StatusEquals?: ScheduleStatus;
+    /**
+     * Gets a list of the monitoring schedules for the specified monitoring job definition.
+     */
+    MonitoringJobDefinitionName?: MonitoringJobDefinitionName;
+    /**
+     * A filter that returns only the monitoring schedules for the specified monitoring type.
+     */
+    MonitoringTypeEquals?: MonitoringType;
   }
   export interface ListMonitoringSchedulesResponse {
     /**
@@ -9146,7 +10644,7 @@ declare namespace SageMaker {
      */
     MonitoringScheduleSummaries: MonitoringScheduleSummaryList;
     /**
-     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent reques
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
      */
     NextToken?: NextToken;
   }
@@ -9870,6 +11368,7 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListWorkteamsSortByOptions = "Name"|"CreateDate"|string;
+  export type Long = number;
   export type MaxAutoMLJobRuntimeInSeconds = number;
   export type MaxCandidates = number;
   export type MaxConcurrentTaskCount = number;
@@ -9965,6 +11464,34 @@ declare namespace SageMaker {
      */
     S3ModelArtifacts: S3Uri;
   }
+  export interface ModelBiasAppSpecification {
+    /**
+     * The container image to be run by the model bias job.
+     */
+    ImageUri: ImageUri;
+    /**
+     * JSON formatted S3 file that defines bias parameters. For more information on this JSON configuration file, see Configure bias parameters.
+     */
+    ConfigUri: S3Uri;
+    /**
+     * Sets the environment variables in the Docker container.
+     */
+    Environment?: MonitoringEnvironmentMap;
+  }
+  export interface ModelBiasBaselineConfig {
+    /**
+     * The name of the baseline model bias job.
+     */
+    BaseliningJobName?: ProcessingJobName;
+    ConstraintsResource?: MonitoringConstraintsResource;
+  }
+  export interface ModelBiasJobInput {
+    EndpointInput: EndpointInput;
+    /**
+     * Location of ground truth labels to use in model bias job.
+     */
+    GroundTruthS3Input: MonitoringGroundTruthS3Input;
+  }
   export interface ModelClientConfig {
     /**
      * The timeout value in seconds for an invocation request.
@@ -9990,6 +11517,30 @@ declare namespace SageMaker {
      * Provides a hash value that uniquely identifies the stored model artifacts.
      */
     ArtifactDigest?: ArtifactDigest;
+  }
+  export interface ModelExplainabilityAppSpecification {
+    /**
+     * The container image to be run by the model explainability job.
+     */
+    ImageUri: ImageUri;
+    /**
+     * JSON formatted S3 file that defines explainability parameters. For more information on this JSON configuration file, see Configure model explainability parameters.
+     */
+    ConfigUri: S3Uri;
+    /**
+     * Sets the environment variables in the Docker container.
+     */
+    Environment?: MonitoringEnvironmentMap;
+  }
+  export interface ModelExplainabilityBaselineConfig {
+    /**
+     * The name of the baseline model explainability job.
+     */
+    BaseliningJobName?: ProcessingJobName;
+    ConstraintsResource?: MonitoringConstraintsResource;
+  }
+  export interface ModelExplainabilityJobInput {
+    EndpointInput: EndpointInput;
   }
   export interface ModelMetrics {
     /**
@@ -10244,6 +11795,50 @@ declare namespace SageMaker {
      */
     Constraints?: MetricsSource;
   }
+  export interface ModelQualityAppSpecification {
+    /**
+     * The address of the container image that the monitoring job runs.
+     */
+    ImageUri: ImageUri;
+    /**
+     * Specifies the entrypoint for a container that the monitoring job runs.
+     */
+    ContainerEntrypoint?: ContainerEntrypoint;
+    /**
+     * An array of arguments for the container used to run the monitoring job.
+     */
+    ContainerArguments?: MonitoringContainerArguments;
+    /**
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     */
+    RecordPreprocessorSourceUri?: S3Uri;
+    /**
+     * An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+     */
+    PostAnalyticsProcessorSourceUri?: S3Uri;
+    /**
+     * The machine learning problem type of the model that the monitoring job monitors.
+     */
+    ProblemType?: MonitoringProblemType;
+    /**
+     * Sets the environment variables in the container that the monitoring job runs.
+     */
+    Environment?: MonitoringEnvironmentMap;
+  }
+  export interface ModelQualityBaselineConfig {
+    /**
+     * The name of the job that performs baselining for the monitoring job.
+     */
+    BaseliningJobName?: ProcessingJobName;
+    ConstraintsResource?: MonitoringConstraintsResource;
+  }
+  export interface ModelQualityJobInput {
+    EndpointInput: EndpointInput;
+    /**
+     * The ground truth label provided for the model.
+     */
+    GroundTruthS3Input: MonitoringGroundTruthS3Input;
+  }
   export type ModelSortKey = "Name"|"CreationTime"|string;
   export interface ModelStepMetadata {
     /**
@@ -10289,6 +11884,10 @@ declare namespace SageMaker {
     PostAnalyticsProcessorSourceUri?: S3Uri;
   }
   export interface MonitoringBaselineConfig {
+    /**
+     * The name of the job that performs baselining for the monitoring job.
+     */
+    BaseliningJobName?: ProcessingJobName;
     /**
      * The baseline constraint file in Amazon S3 that the current monitoring job should validated against.
      */
@@ -10351,15 +11950,29 @@ declare namespace SageMaker {
      */
     ProcessingJobArn?: ProcessingJobArn;
     /**
-     * The name of teh endpoint used to run the monitoring job.
+     * The name of the endpoint used to run the monitoring job.
      */
     EndpointName?: EndpointName;
     /**
      * Contains the reason a monitoring job failed, if it failed.
      */
     FailureReason?: FailureReason;
+    /**
+     * The name of the monitoring job.
+     */
+    MonitoringJobDefinitionName?: MonitoringJobDefinitionName;
+    /**
+     * The type of the monitoring job.
+     */
+    MonitoringType?: MonitoringType;
   }
   export type MonitoringExecutionSummaryList = MonitoringExecutionSummary[];
+  export interface MonitoringGroundTruthS3Input {
+    /**
+     * The address of the Amazon S3 location of the ground truth labels.
+     */
+    S3Uri?: MonitoringS3Uri;
+  }
   export interface MonitoringInput {
     /**
      * The endpoint for a monitoring job.
@@ -10405,7 +12018,40 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
   }
+  export type MonitoringJobDefinitionArn = string;
+  export type MonitoringJobDefinitionName = string;
+  export type MonitoringJobDefinitionSortKey = "Name"|"CreationTime"|string;
+  export interface MonitoringJobDefinitionSummary {
+    /**
+     * The name of the monitoring job.
+     */
+    MonitoringJobDefinitionName: MonitoringJobDefinitionName;
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring job.
+     */
+    MonitoringJobDefinitionArn: MonitoringJobDefinitionArn;
+    /**
+     * The time that the monitoring job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The name of the endpoint that the job monitors.
+     */
+    EndpointName: EndpointName;
+  }
+  export type MonitoringJobDefinitionSummaryList = MonitoringJobDefinitionSummary[];
   export type MonitoringMaxRuntimeInSeconds = number;
+  export interface MonitoringNetworkConfig {
+    /**
+     * Whether to encrypt all communications between the instances used for the monitoring jobs. Choose True to encrypt communications. Encryption provides greater security for distributed jobs, but the processing might take longer.
+     */
+    EnableInterContainerTrafficEncryption?: Boolean;
+    /**
+     * Whether to allow inbound and outbound network calls to and from the containers used for the monitoring job.
+     */
+    EnableNetworkIsolation?: Boolean;
+    VpcConfig?: VpcConfig;
+  }
   export interface MonitoringOutput {
     /**
      * The Amazon S3 storage location where the results of a monitoring job are saved.
@@ -10423,6 +12069,7 @@ declare namespace SageMaker {
     KmsKeyId?: KmsKeyId;
   }
   export type MonitoringOutputs = MonitoringOutput[];
+  export type MonitoringProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
   export interface MonitoringResources {
     /**
      * The configuration for the cluster resources used to run the processing job.
@@ -10458,6 +12105,10 @@ declare namespace SageMaker {
      */
     MonitoringScheduleStatus?: ScheduleStatus;
     /**
+     * The type of the monitoring job definition to schedule.
+     */
+    MonitoringType?: MonitoringType;
+    /**
      * If the monitoring schedule failed, the reason it failed.
      */
     FailureReason?: FailureReason;
@@ -10490,6 +12141,14 @@ declare namespace SageMaker {
      * Defines the monitoring job.
      */
     MonitoringJobDefinition?: MonitoringJobDefinition;
+    /**
+     * The name of the monitoring job definition to schedule.
+     */
+    MonitoringJobDefinitionName?: MonitoringJobDefinitionName;
+    /**
+     * The type of the monitoring job definition to schedule.
+     */
+    MonitoringType?: MonitoringType;
   }
   export type MonitoringScheduleList = MonitoringSchedule[];
   export type MonitoringScheduleName = string;
@@ -10519,6 +12178,14 @@ declare namespace SageMaker {
      * The name of the endpoint using the monitoring schedule.
      */
     EndpointName?: EndpointName;
+    /**
+     * The name of the monitoring job definition that the schedule is for.
+     */
+    MonitoringJobDefinitionName?: MonitoringJobDefinitionName;
+    /**
+     * The type of the monitoring job definition that the schedule is for.
+     */
+    MonitoringType?: MonitoringType;
   }
   export type MonitoringScheduleSummaryList = MonitoringScheduleSummary[];
   export interface MonitoringStatisticsResource {
@@ -10533,6 +12200,8 @@ declare namespace SageMaker {
      */
     MaxRuntimeInSeconds: MonitoringMaxRuntimeInSeconds;
   }
+  export type MonitoringTimeOffsetString = string;
+  export type MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"|string;
   export type MountPath = string;
   export type NameContains = string;
   export interface NestedFilters {
@@ -11088,6 +12757,7 @@ declare namespace SageMaker {
   export type PipelineSummaryList = PipelineSummary[];
   export type PolicyString = string;
   export type PresignedDomainUrl = string;
+  export type ProbabilityThresholdAttribute = number;
   export type ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
   export interface ProcessingClusterConfig {
     /**
@@ -11400,6 +13070,95 @@ declare namespace SageMaker {
     DesiredInstanceCount?: TaskCount;
   }
   export type ProductionVariantSummaryList = ProductionVariantSummary[];
+  export interface ProfilerConfig {
+    /**
+     * Path to Amazon S3 storage location for system and framework metrics.
+     */
+    S3OutputPath: S3Uri;
+    /**
+     * A time interval for capturing system metrics in milliseconds. Available values are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute) milliseconds. The default value is 500 milliseconds.
+     */
+    ProfilingIntervalInMilliseconds?: ProfilingIntervalInMilliseconds;
+    /**
+     * Configuration information for capturing framework metrics. Available key strings for different profiling options are DetailedProfilingConfig, PythonProfilingConfig, and DataLoaderProfilingConfig. The following codes are configuration structures for the ProfilingParameters parameter. To learn more about how to configure the ProfilingParameters parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
+     */
+    ProfilingParameters?: ProfilingParameters;
+  }
+  export interface ProfilerConfigForUpdate {
+    /**
+     * Path to Amazon S3 storage location for system and framework metrics.
+     */
+    S3OutputPath?: S3Uri;
+    /**
+     * A time interval for capturing system metrics in milliseconds. Available values are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute) milliseconds. The default value is 500 milliseconds.
+     */
+    ProfilingIntervalInMilliseconds?: ProfilingIntervalInMilliseconds;
+    /**
+     * Configuration information for capturing framework metrics. Available key strings for different profiling options are DetailedProfilingConfig, PythonProfilingConfig, and DataLoaderProfilingConfig. The following codes are configuration structures for the ProfilingParameters parameter. To learn more about how to configure the ProfilingParameters parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
+     */
+    ProfilingParameters?: ProfilingParameters;
+    /**
+     * To disable Debugger monitoring and profiling, set to True.
+     */
+    DisableProfiler?: DisableProfiler;
+  }
+  export interface ProfilerRuleConfiguration {
+    /**
+     * The name of the rule configuration. It must be unique relative to other rule configuration names.
+     */
+    RuleConfigurationName: RuleConfigurationName;
+    /**
+     * Path to local storage location for output of rules. Defaults to /opt/ml/processing/output/rule/. 
+     */
+    LocalPath?: DirectoryPath;
+    /**
+     * Path to Amazon S3 storage location for rules.
+     */
+    S3OutputPath?: S3Uri;
+    /**
+     * The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+     */
+    RuleEvaluatorImage: AlgorithmImage;
+    /**
+     * The instance type to deploy a Debugger custom rule for profiling a training job.
+     */
+    InstanceType?: ProcessingInstanceType;
+    /**
+     * The size, in GB, of the ML storage volume attached to the processing instance.
+     */
+    VolumeSizeInGB?: OptionalVolumeSizeInGB;
+    /**
+     * Runtime configuration for rule container.
+     */
+    RuleParameters?: RuleParameters;
+  }
+  export type ProfilerRuleConfigurations = ProfilerRuleConfiguration[];
+  export interface ProfilerRuleEvaluationStatus {
+    /**
+     * The name of the rule configuration.
+     */
+    RuleConfigurationName?: RuleConfigurationName;
+    /**
+     * The Amazon Resource Name (ARN) of the rule evaluation job.
+     */
+    RuleEvaluationJobArn?: ProcessingJobArn;
+    /**
+     * Status of the rule evaluation.
+     */
+    RuleEvaluationStatus?: RuleEvaluationStatus;
+    /**
+     * Details from the rule evaluation.
+     */
+    StatusDetails?: StatusDetails;
+    /**
+     * Timestamp when the rule evaluation status was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type ProfilerRuleEvaluationStatuses = ProfilerRuleEvaluationStatus[];
+  export type ProfilingIntervalInMilliseconds = number;
+  export type ProfilingParameters = {[key: string]: ConfigValue};
+  export type ProfilingStatus = "Enabled"|"Disabled"|string;
   export type ProjectArn = string;
   export type ProjectEntityName = string;
   export type ProjectId = string;
@@ -11511,6 +13270,20 @@ declare namespace SageMaker {
   export type RedshiftResultCompressionType = "None"|"GZIP"|"BZIP2"|"ZSTD"|"SNAPPY"|string;
   export type RedshiftResultFormat = "PARQUET"|"CSV"|string;
   export type RedshiftUserName = string;
+  export interface RegisterDevicesRequest {
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * A list of devices to register with SageMaker Edge Manager.
+     */
+    Devices: Devices;
+    /**
+     * The tags associated with devices.
+     */
+    Tags?: TagList;
+  }
   export interface RegisterModelStepMetadata {
     /**
      * The Amazon Resource Name (ARN) of the model package.
@@ -11922,6 +13695,12 @@ declare namespace SageMaker {
      */
     CompilationJobName: EntityName;
   }
+  export interface StopEdgePackagingJobRequest {
+    /**
+     * The name of the edge packaging job.
+     */
+    EdgePackagingJobName: EntityName;
+  }
   export interface StopHyperParameterTuningJobRequest {
     /**
      * The name of the tuning job to stop.
@@ -12093,6 +13872,7 @@ declare namespace SageMaker {
   }
   export type TenthFractionsOfACent = number;
   export type TerminationWaitInSeconds = number;
+  export type ThingName = string;
   export type Timestamp = Date;
   export interface TrafficRoutingConfig {
     /**
@@ -13036,6 +14816,34 @@ declare namespace SageMaker {
      */
     ContextArn?: ContextArn;
   }
+  export interface UpdateDeviceFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the device.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * Description of the fleet.
+     */
+    Description?: DeviceFleetDescription;
+    /**
+     * Output configuration for storing sample data collected by the fleet.
+     */
+    OutputConfig: EdgeOutputConfig;
+  }
+  export interface UpdateDevicesRequest {
+    /**
+     * The name of the fleet the devices belong to.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * List of devices to register with Edge Manager agent.
+     */
+    Devices: Devices;
+  }
   export interface UpdateDomainRequest {
     /**
      * The ID of the domain to be updated.
@@ -13299,6 +15107,26 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the updated pipeline.
      */
     PipelineArn?: PipelineArn;
+  }
+  export interface UpdateTrainingJobRequest {
+    /**
+     * The name of a training job to update the Debugger profiling configuration.
+     */
+    TrainingJobName: TrainingJobName;
+    /**
+     * Configuration information for Debugger system monitoring, framework profiling, and storage paths.
+     */
+    ProfilerConfig?: ProfilerConfigForUpdate;
+    /**
+     * Configuration information for Debugger rules for profiling system and framework metrics.
+     */
+    ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
+  }
+  export interface UpdateTrainingJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the training job.
+     */
+    TrainingJobArn: TrainingJobArn;
   }
   export interface UpdateTrialComponentRequest {
     /**
