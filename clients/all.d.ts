@@ -244,3 +244,7 @@ export import ECRPUBLIC = require('./ecrpublic');
 export import LookoutVision = require('./lookoutvision');
 export import SageMakerFeatureStoreRuntime = require('./sagemakerfeaturestoreruntime');
 export import CustomerProfiles = require('./customerprofiles');
+export import AuditManager = require('./auditmanager');
+export import EMRcontainers = require('./emrcontainers');
+export import HealthLake = require('./healthlake');
+export import SagemakerEdge = require('./sagemakeredge');

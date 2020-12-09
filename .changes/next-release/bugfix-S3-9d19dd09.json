@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "fixed a bug where createPresignedPost could result in a process crash."
-}

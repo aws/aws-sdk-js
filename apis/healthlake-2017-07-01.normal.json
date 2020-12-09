@@ -1,0 +1,667 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2017-07-01",
+    "endpointPrefix": "healthlake",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "serviceAbbreviation": "HealthLake",
+    "serviceFullName": "Amazon HealthLake",
+    "serviceId": "HealthLake",
+    "signatureVersion": "v4",
+    "signingName": "healthlake",
+    "targetPrefix": "HealthLake",
+    "uid": "healthlake-2017-07-01"
+  },
+  "operations": {
+    "CreateFHIRDatastore": {
+      "name": "CreateFHIRDatastore",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateFHIRDatastoreRequest"
+      },
+      "output": {
+        "shape": "CreateFHIRDatastoreResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a datastore that can ingest and export FHIR data.</p>"
+    },
+    "DeleteFHIRDatastore": {
+      "name": "DeleteFHIRDatastore",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteFHIRDatastoreRequest"
+      },
+      "output": {
+        "shape": "DeleteFHIRDatastoreResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a datastore. </p>"
+    },
+    "DescribeFHIRDatastore": {
+      "name": "DescribeFHIRDatastore",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFHIRDatastoreRequest"
+      },
+      "output": {
+        "shape": "DescribeFHIRDatastoreResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the properties associated with the FHIR datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.</p>"
+    },
+    "DescribeFHIRImportJob": {
+      "name": "DescribeFHIRImportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFHIRImportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeFHIRImportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the datastore.</p>"
+    },
+    "ListFHIRDatastores": {
+      "name": "ListFHIRDatastores",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFHIRDatastoresRequest"
+      },
+      "output": {
+        "shape": "ListFHIRDatastoresResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists all FHIR datastores that are in the user’s account, regardless of datastore status.</p>"
+    },
+    "StartFHIRImportJob": {
+      "name": "StartFHIRImportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartFHIRImportJobRequest"
+      },
+      "output": {
+        "shape": "StartFHIRImportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Begins a FHIR Import job.</p>"
+    }
+  },
+  "shapes": {
+    "BoundedLengthString": {
+      "type": "string",
+      "max": 5000,
+      "min": 1,
+      "pattern": "[\\P{M}\\p{M}]{1,5000}"
+    },
+    "ClientTokenString": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "CreateFHIRDatastoreRequest": {
+      "type": "structure",
+      "required": [
+        "DatastoreTypeVersion"
+      ],
+      "members": {
+        "DatastoreName": {
+          "shape": "DatastoreName",
+          "documentation": "<p>The user generated name for the datastore.</p>"
+        },
+        "DatastoreTypeVersion": {
+          "shape": "FHIRVersion",
+          "documentation": "<p>The FHIR version of the datastore. The only supported version is R4.</p>"
+        },
+        "PreloadDataConfig": {
+          "shape": "PreloadDataConfig",
+          "documentation": "<p>Optional parameter to preload data upon creation of the datastore. Currently, the only supported preloaded data is synthetic data generated from Synthea.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenString",
+          "documentation": "<p>Optional user provided token used for ensuring idempotency.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateFHIRDatastoreResponse": {
+      "type": "structure",
+      "required": [
+        "DatastoreId",
+        "DatastoreArn",
+        "DatastoreStatus",
+        "DatastoreEndpoint"
+      ],
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated datastore id. This id is in the output from the initial datastore creation call.</p>"
+        },
+        "DatastoreArn": {
+          "shape": "DatastoreArn",
+          "documentation": "<p>The datastore ARN is generated during the creation of the datastore and can be found in the output from the initial datastore creation call.</p>"
+        },
+        "DatastoreStatus": {
+          "shape": "DatastoreStatus",
+          "documentation": "<p>The status of the FHIR datastore. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.</p>"
+        },
+        "DatastoreEndpoint": {
+          "shape": "BoundedLengthString",
+          "documentation": "<p>The AWS endpoint for the created datastore. For preview, only US-east-1 endpoints are supported.</p>"
+        }
+      }
+    },
+    "DatastoreArn": {
+      "type": "string",
+      "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?"
+    },
+    "DatastoreFilter": {
+      "type": "structure",
+      "members": {
+        "DatastoreName": {
+          "shape": "DatastoreName",
+          "documentation": "<p>Allows the user to filter datastore results by name.</p>"
+        },
+        "DatastoreStatus": {
+          "shape": "DatastoreStatus",
+          "documentation": "<p>Allows the user to filter datastore results by status.</p>"
+        },
+        "CreatedBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that allows the user to set cutoff dates for records. All datastores created before the specified date will be included in the results. </p>"
+        },
+        "CreatedAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that allows the user to set cutoff dates for records. All datastores created after the specified date will be included in the results.</p>"
+        }
+      },
+      "documentation": "<p>The filters applied to datastore query.</p>"
+    },
+    "DatastoreId": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "DatastoreName": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "DatastoreProperties": {
+      "type": "structure",
+      "required": [
+        "DatastoreId",
+        "DatastoreArn",
+        "DatastoreStatus",
+        "DatastoreTypeVersion",
+        "DatastoreEndpoint"
+      ],
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated ID number for the datastore.</p>"
+        },
+        "DatastoreArn": {
+          "shape": "DatastoreArn",
+          "documentation": "<p>The Amazon Resource Name used in the creation of the datastore.</p>"
+        },
+        "DatastoreName": {
+          "shape": "DatastoreName",
+          "documentation": "<p>The user-generated name for the datastore.</p>"
+        },
+        "DatastoreStatus": {
+          "shape": "DatastoreStatus",
+          "documentation": "<p>The status of the datastore. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that a datastore was created. </p>"
+        },
+        "DatastoreTypeVersion": {
+          "shape": "FHIRVersion",
+          "documentation": "<p>The FHIR version. Only R4 version data is supported.</p>"
+        },
+        "DatastoreEndpoint": {
+          "shape": "String",
+          "documentation": "<p>The AWS endpoint for the datastore. Each datastore will have it's own endpoint with datastore ID in the endpoint URL.</p>"
+        },
+        "PreloadDataConfig": {
+          "shape": "PreloadDataConfig",
+          "documentation": "<p>The preloaded data configuration for the datastore. Only data preloaded from Synthea is supported.</p>"
+        }
+      },
+      "documentation": "<p>Displays the properties of the datastore, including the ID, Arn, name, and the status of the datastore.</p>"
+    },
+    "DatastorePropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "DatastoreProperties"
+      }
+    },
+    "DatastoreStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "DELETING",
+        "DELETED"
+      ]
+    },
+    "DeleteFHIRDatastoreRequest": {
+      "type": "structure",
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p> The AWS-generated ID for the datastore to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteFHIRDatastoreResponse": {
+      "type": "structure",
+      "required": [
+        "DatastoreId",
+        "DatastoreArn",
+        "DatastoreStatus",
+        "DatastoreEndpoint"
+      ],
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated ID for the datastore to be deleted.</p>"
+        },
+        "DatastoreArn": {
+          "shape": "DatastoreArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.</p>"
+        },
+        "DatastoreStatus": {
+          "shape": "DatastoreStatus",
+          "documentation": "<p>The status of the datastore that the user has requested to be deleted. </p>"
+        },
+        "DatastoreEndpoint": {
+          "shape": "BoundedLengthString",
+          "documentation": "<p>The AWS endpoint for the datastore the user has requested to be deleted.</p>"
+        }
+      }
+    },
+    "DescribeFHIRDatastoreRequest": {
+      "type": "structure",
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated datastore id. This is part of the ‘CreateFHIRDatastore’ output.</p>"
+        }
+      }
+    },
+    "DescribeFHIRDatastoreResponse": {
+      "type": "structure",
+      "required": [
+        "DatastoreProperties"
+      ],
+      "members": {
+        "DatastoreProperties": {
+          "shape": "DatastoreProperties",
+          "documentation": "<p>All properties associated with a datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.</p>"
+        }
+      }
+    },
+    "DescribeFHIRImportJobRequest": {
+      "type": "structure",
+      "required": [
+        "DatastoreId",
+        "JobId"
+      ],
+      "members": {
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated ID of the datastore.</p>"
+        },
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The AWS-generated job ID.</p>"
+        }
+      }
+    },
+    "DescribeFHIRImportJobResponse": {
+      "type": "structure",
+      "required": [
+        "ImportJobProperties"
+      ],
+      "members": {
+        "ImportJobProperties": {
+          "shape": "ImportJobProperties",
+          "documentation": "<p>The properties of the Import job request, including the ID, ARN, name, and the status of the datastore.</p>"
+        }
+      }
+    },
+    "FHIRVersion": {
+      "type": "string",
+      "enum": [
+        "R4"
+      ]
+    },
+    "IamRoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+    },
+    "ImportJobProperties": {
+      "type": "structure",
+      "required": [
+        "JobId",
+        "JobStatus",
+        "SubmitTime",
+        "DatastoreId",
+        "InputDataConfig"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The AWS-generated id number for the Import job.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The user-generated name for an Import job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.</p>"
+        },
+        "SubmitTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the Import job was submitted for processing.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the Import job was completed.</p>"
+        },
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The datastore id used when the Import job was created. </p>"
+        },
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>The input data configuration that was supplied when the Import job was created.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.</p>"
+        },
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>An explanation of any errors that may have occurred during the FHIR import job. </p>"
+        }
+      },
+      "documentation": "<p>Displays the properties of the import job, including the ID, Arn, Name, and the status of the datastore.</p>"
+    },
+    "InputDataConfig": {
+      "type": "structure",
+      "members": {
+        "S3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. </p>"
+        }
+      },
+      "documentation": "<p> The input properties for an import job.</p>",
+      "union": true
+    },
+    "JobId": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "SUBMITTED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "ListFHIRDatastoresRequest": {
+      "type": "structure",
+      "members": {
+        "Filter": {
+          "shape": "DatastoreFilter",
+          "documentation": "<p>Lists all filters associated with a FHIR datastore request.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Fetches the next page of datastores when results are paginated.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>The maximum number of datastores returned in a single page of a ListFHIRDatastoresRequest call.</p>"
+        }
+      }
+    },
+    "ListFHIRDatastoresResponse": {
+      "type": "structure",
+      "required": [
+        "DatastorePropertiesList"
+      ],
+      "members": {
+        "DatastorePropertiesList": {
+          "shape": "DatastorePropertiesList",
+          "documentation": "<p>All properties associated with the listed datastores.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Pagination token that can be used to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "MaxResultsInteger": {
+      "type": "integer",
+      "max": 500,
+      "min": 1
+    },
+    "Message": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "NextToken": {
+      "type": "string",
+      "max": 8192,
+      "pattern": "\\p{ASCII}{0,8192}"
+    },
+    "PreloadDataConfig": {
+      "type": "structure",
+      "required": [
+        "PreloadDataType"
+      ],
+      "members": {
+        "PreloadDataType": {
+          "shape": "PreloadDataType",
+          "documentation": "<p>The type of preloaded data. Only Synthea preloaded data is supported.</p>"
+        }
+      },
+      "documentation": "<p> The input properties for the preloaded datastore. Only data preloaded from Synthea is supported.</p>"
+    },
+    "PreloadDataType": {
+      "type": "string",
+      "enum": [
+        "SYNTHEA"
+      ]
+    },
+    "S3Uri": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+    },
+    "StartFHIRImportJobRequest": {
+      "type": "structure",
+      "required": [
+        "InputDataConfig",
+        "DatastoreId",
+        "DataAccessRoleArn",
+        "ClientToken"
+      ],
+      "members": {
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name of the FHIR Import job in the StartFHIRImport job request.</p>"
+        },
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>The input properties of the FHIR Import job in the StartFHIRImport job request.</p>"
+        },
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated datastore ID.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenString",
+          "documentation": "<p>Optional user provided token used for ensuring idempotency.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "StartFHIRImportJobResponse": {
+      "type": "structure",
+      "required": [
+        "JobId",
+        "JobStatus"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The AWS-generated job ID.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of an import job.</p>"
+        },
+        "DatastoreId": {
+          "shape": "DatastoreId",
+          "documentation": "<p>The AWS-generated datastore ID.</p>"
+        }
+      }
+    },
+    "String": {
+      "type": "string",
+      "max": 10000,
+      "pattern": "[\\P{M}\\p{M}]{0,10000}"
+    },
+    "Timestamp": {
+      "type": "timestamp"
+    }
+  },
+  "documentation": "<p>Amazon HealthLake is a HIPAA eligibile service that allows customers to store, transform, query, and analyze their data in a consistent fashion in the cloud.</p>"
+}

@@ -124,6 +124,30 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   listAttributeGroups(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAttributeGroupsResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAttributeGroupsResponse, AWSError>;
   /**
+   * Lists all of the tags on the resource.
+   */
+  listTagsForResource(params: ServiceCatalogAppRegistry.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all of the tags on the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.
+   */
+  tagResource(params: ServiceCatalogAppRegistry.Types.TagResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.TagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.TagResourceResponse, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.
+   */
+  tagResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.TagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(params: ServiceCatalogAppRegistry.Types.UntagResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UntagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UntagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates an existing application with new attributes.
    */
   updateApplication(params: ServiceCatalogAppRegistry.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UpdateApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.UpdateApplicationResponse, AWSError>;
@@ -599,6 +623,18 @@ declare namespace ServiceCatalogAppRegistry {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon resource name (ARN) that specifies the resource.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags on the resource.
+     */
+    tags?: Tags;
+  }
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
@@ -617,9 +653,34 @@ declare namespace ServiceCatalogAppRegistry {
   export type Resources = ResourceInfo[];
   export type StackArn = string;
   export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon resource name (ARN) that specifies the resource.
+     */
+    resourceArn: Arn;
+    /**
+     * The new or modified tags for the resource.
+     */
+    tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon resource name (ARN) that specifies the resource.
+     */
+    resourceArn: Arn;
+    /**
+     * A list of the tag keys to remove from the specified resource.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateApplicationRequest {
     /**
      * The name or ID of the application that will be updated.

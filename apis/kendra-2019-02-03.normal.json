@@ -810,7 +810,7 @@
           "documentation": "<p>Path to the AWS S3 bucket that contains the ACL files.</p>"
         }
       },
-      "documentation": "<p>Access Control List files for the documents in a data source.</p>"
+      "documentation": "<p>Access Control List files for the documents in a data source. For the format of the file, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html\">Access control for S3 data sources</a>.</p>"
     },
     "AclConfiguration": {
       "type": "structure",
@@ -1660,7 +1660,7 @@
         },
         "OneDriveConfiguration": {
           "shape": "OneDriveConfiguration",
-          "documentation": "<p>Provided configuration for data sources that connect to Microsoft OneDrive.</p>"
+          "documentation": "<p>Provides configuration for data sources that connect to Microsoft OneDrive.</p>"
         },
         "ServiceNowConfiguration": {
           "shape": "ServiceNowConfiguration",
@@ -1669,6 +1669,10 @@
         "ConfluenceConfiguration": {
           "shape": "ConfluenceConfiguration",
           "documentation": "<p>Provides configuration information for connecting to a Confluence data source.</p>"
+        },
+        "GoogleDriveConfiguration": {
+          "shape": "GoogleDriveConfiguration",
+          "documentation": "<p>Provides configuration for data sources that connect to Google Drive. </p>"
         }
       },
       "documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
@@ -1902,7 +1906,8 @@
         "ONEDRIVE",
         "SERVICENOW",
         "CUSTOM",
-        "CONFLUENCE"
+        "CONFLUENCE",
+        "GOOGLEDRIVE"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -2474,6 +2479,30 @@
       "min": 1,
       "pattern": "^\\P{C}*$"
     },
+    "ExcludeMimeTypesList": {
+      "type": "list",
+      "member": {
+        "shape": "MimeType"
+      },
+      "max": 30,
+      "min": 0
+    },
+    "ExcludeSharedDrivesList": {
+      "type": "list",
+      "member": {
+        "shape": "SharedDriveId"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ExcludeUserAccountsList": {
+      "type": "list",
+      "member": {
+        "shape": "UserAccount"
+      },
+      "max": 100,
+      "min": 0
+    },
     "Facet": {
       "type": "structure",
       "members": {
@@ -2592,6 +2621,49 @@
       "member": {
         "shape": "FaqSummary"
       }
+    },
+    "FeedbackToken": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^\\P{C}*.\\P{C}*$"
+    },
+    "GoogleDriveConfiguration": {
+      "type": "structure",
+      "required": [
+        "SecretArn"
+      ],
+      "members": {
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
+        },
+        "InclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users' My Drives. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.</p>"
+        },
+        "ExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users' My Drives. Items that don't match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <a>UpdateIndex</a> operation.</p>"
+        },
+        "ExcludeMimeTypes": {
+          "shape": "ExcludeMimeTypesList",
+          "documentation": "<p>A list of MIME types to exclude from the index. All documents matching the specified MIME type are excluded. </p> <p>For a list of MIME types, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
+        },
+        "ExcludeUserAccounts": {
+          "shape": "ExcludeUserAccountsList",
+          "documentation": "<p>A list of email addresses of the users. Documents owned by these users are excluded from the index. Documents shared with excluded users are indexed unless they are excluded in another way.</p>"
+        },
+        "ExcludeSharedDrives": {
+          "shape": "ExcludeSharedDrivesList",
+          "documentation": "<p>A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for data sources that connect to Google Drive.</p>"
     },
     "GroupAttributeField": {
       "type": "string",
@@ -3002,6 +3074,12 @@
       "type": "string",
       "pattern": "(([1-9][0-9]*)|0)"
     },
+    "MimeType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "NextToken": {
       "type": "string",
       "max": 800,
@@ -3017,7 +3095,7 @@
       "members": {
         "TenantDomain": {
           "shape": "TenantDomain",
-          "documentation": "<p>Tha Azure Active Directory domain of the organization. </p>"
+          "documentation": "<p>The Azure Active Directory domain of the organization. </p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
@@ -3185,6 +3263,10 @@
         "UserContext": {
           "shape": "UserContext",
           "documentation": "<p>The user context token.</p>"
+        },
+        "VisitorId": {
+          "shape": "VisitorId",
+          "documentation": "<p>Provides an identifier for a specific user. The <code>VisitorId</code> should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the <code>VisitorId</code>.</p>"
         }
       }
     },
@@ -3247,6 +3329,10 @@
         "ScoreAttributes": {
           "shape": "ScoreAttributes",
           "documentation": "<p>Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, <code>VERY_HIGH</code>, <code>HIGH</code>, <code>MEDIUM</code> and <code>LOW</code>. You can use the score to determine if a response meets the confidence needed for your application.</p> <p>The field is only set to <code>LOW</code> when the <code>Type</code> field is set to <code>DOCUMENT</code> and Amazon Kendra is not confident that the result matches the query.</p>"
+        },
+        "FeedbackToken": {
+          "shape": "FeedbackToken",
+          "documentation": "<p>A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html\"> Submitting feedback </a>.</p>"
         }
       },
       "documentation": "<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>"
@@ -3379,7 +3465,7 @@
         },
         "AccessControlListConfiguration": {
           "shape": "AccessControlListConfiguration",
-          "documentation": "<p>Provides the path to the S3 bucket that contains the user context filtering files for the data source.</p>"
+          "documentation": "<p>Provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html\">Access control for S3 data sources</a>.</p>"
         }
       },
       "documentation": "<p>Provides configuration information for a data source to index documents in an Amazon S3 bucket.</p>"
@@ -3908,6 +3994,12 @@
         "SHAREPOINT_ONLINE"
       ]
     },
+    "SharedDriveId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "SortOrder": {
       "type": "string",
       "enum": [
@@ -4272,6 +4364,12 @@
       "min": 1,
       "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
     },
+    "UserAccount": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "UserContext": {
       "type": "structure",
       "members": {
@@ -4329,6 +4427,12 @@
       "type": "string",
       "max": 50,
       "min": 1
+    },
+    "VisitorId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
     },
     "VpcSecurityGroupId": {
       "type": "string",

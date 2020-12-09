@@ -955,5 +955,19 @@
   "customerprofiles": {
     "prefix": "customer-profiles",
     "name": "CustomerProfiles"
+  },
+  "auditmanager": {
+    "name": "AuditManager"
+  },
+  "emrcontainers": {
+    "prefix": "emr-containers",
+    "name": "EMRcontainers"
+  },
+  "healthlake": {
+    "name": "HealthLake"
+  },
+  "sagemakeredge": {
+    "prefix": "sagemaker-edge",
+    "name": "SagemakerEdge"
   }
 }

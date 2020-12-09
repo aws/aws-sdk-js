@@ -721,7 +721,7 @@ declare namespace Kendra {
      */
     SalesforceConfiguration?: SalesforceConfiguration;
     /**
-     * Provided configuration for data sources that connect to Microsoft OneDrive.
+     * Provides configuration for data sources that connect to Microsoft OneDrive.
      */
     OneDriveConfiguration?: OneDriveConfiguration;
     /**
@@ -732,6 +732,10 @@ declare namespace Kendra {
      * Provides configuration information for connecting to a Confluence data source.
      */
     ConfluenceConfiguration?: ConfluenceConfiguration;
+    /**
+     * Provides configuration for data sources that connect to Google Drive. 
+     */
+    GoogleDriveConfiguration?: GoogleDriveConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -851,7 +855,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1202,6 +1206,9 @@ declare namespace Kendra {
   export type Duration = string;
   export type ErrorCode = "InternalError"|"InvalidRequest"|string;
   export type ErrorMessage = string;
+  export type ExcludeMimeTypesList = MimeType[];
+  export type ExcludeSharedDrivesList = SharedDriveId[];
+  export type ExcludeUserAccountsList = UserAccount[];
   export interface Facet {
     /**
      * The unique key for the document attribute.
@@ -1261,6 +1268,37 @@ declare namespace Kendra {
     FileFormat?: FaqFileFormat;
   }
   export type FaqSummaryItems = FaqSummary[];
+  export type FeedbackToken = string;
+  export interface GoogleDriveConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see Using a Google Workspace Drive data source.
+     */
+    SecretArn: SecretArn;
+    /**
+     * A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users' My Drives. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users' My Drives. Items that don't match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Defines mapping between a field in the Google Drive and a Amazon Kendra index field. If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the UpdateIndex operation.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of MIME types to exclude from the index. All documents matching the specified MIME type are excluded.  For a list of MIME types, see Using a Google Workspace Drive data source.
+     */
+    ExcludeMimeTypes?: ExcludeMimeTypesList;
+    /**
+     * A list of email addresses of the users. Documents owned by these users are excluded from the index. Documents shared with excluded users are indexed unless they are excluded in another way.
+     */
+    ExcludeUserAccounts?: ExcludeUserAccountsList;
+    /**
+     * A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.
+     */
+    ExcludeSharedDrives?: ExcludeSharedDrivesList;
+  }
   export type GroupAttributeField = string;
   export interface Highlight {
     /**
@@ -1489,10 +1527,11 @@ declare namespace Kendra {
   export type MaxResultsIntegerForListFaqsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
   export type MetricValue = string;
+  export type MimeType = string;
   export type NextToken = string;
   export interface OneDriveConfiguration {
     /**
-     * Tha Azure Active Directory domain of the organization. 
+     * The Azure Active Directory domain of the organization. 
      */
     TenantDomain: TenantDomain;
     /**
@@ -1594,6 +1633,10 @@ declare namespace Kendra {
      * The user context token.
      */
     UserContext?: UserContext;
+    /**
+     * Provides an identifier for a specific user. The VisitorId should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the VisitorId.
+     */
+    VisitorId?: VisitorId;
   }
   export interface QueryResult {
     /**
@@ -1650,6 +1693,10 @@ declare namespace Kendra {
      * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine if a response meets the confidence needed for your application. The field is only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not confident that the result matches the query.
      */
     ScoreAttributes?: ScoreAttributes;
+    /**
+     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see  Submitting feedback .
+     */
+    FeedbackToken?: FeedbackToken;
   }
   export type QueryResultItemList = QueryResultItem[];
   export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
@@ -1711,7 +1758,7 @@ declare namespace Kendra {
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     DocumentsMetadataConfiguration?: DocumentsMetadataConfiguration;
     /**
-     * Provides the path to the S3 bucket that contains the user context filtering files for the data source.
+     * Provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see Access control for S3 data sources.
      */
     AccessControlListConfiguration?: AccessControlListConfiguration;
   }
@@ -2019,6 +2066,7 @@ declare namespace Kendra {
   }
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
+  export type SharedDriveId = string;
   export type SortOrder = "DESC"|"ASC"|string;
   export interface SortingConfiguration {
     /**
@@ -2219,6 +2267,7 @@ declare namespace Kendra {
     UserContextPolicy?: UserContextPolicy;
   }
   export type Url = string;
+  export type UserAccount = string;
   export interface UserContext {
     /**
      * The user context token. It must be a JWT or a JSON token.
@@ -2240,6 +2289,7 @@ declare namespace Kendra {
   export type UserTokenConfigurationList = UserTokenConfiguration[];
   export type ValueImportanceMap = {[key: string]: Importance};
   export type ValueImportanceMapKey = string;
+  export type VisitorId = string;
   export type VpcSecurityGroupId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
