@@ -12,35 +12,75 @@ declare class GlobalAccelerator extends Service {
   constructor(options?: GlobalAccelerator.Types.ClientConfiguration)
   config: Config & GlobalAccelerator.Types.ClientConfiguration;
   /**
-   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. To see an AWS CLI example of advertising an address range, scroll down to Example. To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Associate a virtual private cloud (VPC) subnet endpoint with your custom routing accelerator. The listener port range must be large enough to support the number of IP addresses that can be specified in your subnet. The number of ports required is: subnet size times the number of ports per destination EC2 instances. For example, a subnet defined as /24 requires a listener port range of at least 255 ports.  Note: You must have enough remaining listener ports available to map to the subnet ports, or the call will fail with a LimitExceededException. By default, all destinations in a subnet in a custom routing accelerator cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   */
+  addCustomRoutingEndpoints(params: GlobalAccelerator.Types.AddCustomRoutingEndpointsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse, AWSError>;
+  /**
+   * Associate a virtual private cloud (VPC) subnet endpoint with your custom routing accelerator. The listener port range must be large enough to support the number of IP addresses that can be specified in your subnet. The number of ports required is: subnet size times the number of ports per destination EC2 instances. For example, a subnet defined as /24 requires a listener port range of at least 255 ports.  Note: You must have enough remaining listener ports available to map to the subnet ports, or the call will fail with a LimitExceededException. By default, all destinations in a subnet in a custom routing accelerator cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   */
+  addCustomRoutingEndpoints(callback?: (err: AWSError, data: GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse, AWSError>;
+  /**
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   advertiseByoipCidr(params: GlobalAccelerator.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
   /**
-   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. To see an AWS CLI example of advertising an address range, scroll down to Example. To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   advertiseByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that can receive traffic for a custom routing accelerator. You can allow traffic to all destinations in the subnet endpoint, or allow traffic to a specified list of destination IP addresses and ports in the subnet. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group. After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.
+   */
+  allowCustomRoutingTraffic(params: GlobalAccelerator.Types.AllowCustomRoutingTrafficRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that can receive traffic for a custom routing accelerator. You can allow traffic to all destinations in the subnet endpoint, or allow traffic to a specified list of destination IP addresses and ports in the subnet. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group. After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.
+   */
+  allowCustomRoutingTraffic(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint. To see an AWS CLI example of creating an endpoint group, scroll down to Example.
+   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   */
+  createCustomRoutingAccelerator(params: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   */
+  createCustomRoutingAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one AWS Region. 
+   */
+  createCustomRoutingEndpointGroup(params: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse, AWSError>;
+  /**
+   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one AWS Region. 
+   */
+  createCustomRoutingEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse, AWSError>;
+  /**
+   * Create a listener to process inbound connections from clients to a custom routing accelerator. Connections arrive to assigned static IP addresses on the port range that you specify. 
+   */
+  createCustomRoutingListener(params: GlobalAccelerator.Types.CreateCustomRoutingListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingListenerResponse, AWSError>;
+  /**
+   * Create a listener to process inbound connections from clients to a custom routing accelerator. Connections arrive to assigned static IP addresses on the port range that you specify. 
+   */
+  createCustomRoutingListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingListenerResponse, AWSError>;
+  /**
+   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint.
    */
   createEndpointGroup(params: GlobalAccelerator.Types.CreateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint. To see an AWS CLI example of creating an endpoint group, scroll down to Example.
+   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint.
    */
   createEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
-   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to Example.
+   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. 
    */
   createListener(params: GlobalAccelerator.Types.CreateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
-   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to Example.
+   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. 
    */
   createListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
@@ -51,6 +91,30 @@ declare class GlobalAccelerator extends Service {
    * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
    */
   deleteAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   */
+  deleteCustomRoutingAccelerator(params: GlobalAccelerator.Types.DeleteCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   */
+  deleteCustomRoutingAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete an endpoint group from a listener for a custom routing accelerator.
+   */
+  deleteCustomRoutingEndpointGroup(params: GlobalAccelerator.Types.DeleteCustomRoutingEndpointGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete an endpoint group from a listener for a custom routing accelerator.
+   */
+  deleteCustomRoutingEndpointGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a listener for a custom routing accelerator.
+   */
+  deleteCustomRoutingListener(params: GlobalAccelerator.Types.DeleteCustomRoutingListenerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a listener for a custom routing accelerator.
+   */
+  deleteCustomRoutingListener(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an endpoint group from a listener.
    */
@@ -68,147 +132,259 @@ declare class GlobalAccelerator extends Service {
    */
   deleteListener(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. To see an AWS CLI example of deprovisioning an address range, scroll down to Example. Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that cannot receive traffic for a custom routing accelerator. You can deny traffic to all destinations in the VPC endpoint, or deny traffic to a specified list of destination IP addresses and ports. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group. After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.
+   */
+  denyCustomRoutingTraffic(params: GlobalAccelerator.Types.DenyCustomRoutingTrafficRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that cannot receive traffic for a custom routing accelerator. You can deny traffic to all destinations in the VPC endpoint, or deny traffic to a specified list of destination IP addresses and ports. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group. After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.
+   */
+  denyCustomRoutingTraffic(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   deprovisionByoipCidr(params: GlobalAccelerator.Types.DeprovisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
   /**
-   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. To see an AWS CLI example of deprovisioning an address range, scroll down to Example. Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
   /**
-   * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
+   * Describe an accelerator. 
    */
   describeAccelerator(params: GlobalAccelerator.Types.DescribeAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
   /**
-   * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
+   * Describe an accelerator. 
    */
   describeAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
   /**
-   * Describe the attributes of an accelerator. To see an AWS CLI example of describing the attributes of an accelerator, scroll down to Example.
+   * Describe the attributes of an accelerator. 
    */
   describeAcceleratorAttributes(params: GlobalAccelerator.Types.DescribeAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
-   * Describe the attributes of an accelerator. To see an AWS CLI example of describing the attributes of an accelerator, scroll down to Example.
+   * Describe the attributes of an accelerator. 
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
-   * Describe an endpoint group. To see an AWS CLI example of describing an endpoint group, scroll down to Example.
+   * Describe a custom routing accelerator. 
+   */
+  describeCustomRoutingAccelerator(params: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Describe a custom routing accelerator. 
+   */
+  describeCustomRoutingAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Describe the attributes of a custom routing accelerator. 
+   */
+  describeCustomRoutingAcceleratorAttributes(params: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Describe the attributes of a custom routing accelerator. 
+   */
+  describeCustomRoutingAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Describe an endpoint group for a custom routing accelerator. 
+   */
+  describeCustomRoutingEndpointGroup(params: GlobalAccelerator.Types.DescribeCustomRoutingEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingEndpointGroupResponse, AWSError>;
+  /**
+   * Describe an endpoint group for a custom routing accelerator. 
+   */
+  describeCustomRoutingEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingEndpointGroupResponse, AWSError>;
+  /**
+   * The description of a listener for a custom routing accelerator.
+   */
+  describeCustomRoutingListener(params: GlobalAccelerator.Types.DescribeCustomRoutingListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingListenerResponse, AWSError>;
+  /**
+   * The description of a listener for a custom routing accelerator.
+   */
+  describeCustomRoutingListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingListenerResponse, AWSError>;
+  /**
+   * Describe an endpoint group. 
    */
   describeEndpointGroup(params: GlobalAccelerator.Types.DescribeEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
-   * Describe an endpoint group. To see an AWS CLI example of describing an endpoint group, scroll down to Example.
+   * Describe an endpoint group. 
    */
   describeEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
-   * Describe a listener. To see an AWS CLI example of describing a listener, scroll down to Example.
+   * Describe a listener. 
    */
   describeListener(params: GlobalAccelerator.Types.DescribeListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * Describe a listener. To see an AWS CLI example of describing a listener, scroll down to Example.
+   * Describe a listener. 
    */
   describeListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account. To see an AWS CLI example of listing the accelerators for an AWS account, scroll down to Example.
+   * List the accelerators for an AWS account. 
    */
   listAccelerators(params: GlobalAccelerator.Types.ListAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account. To see an AWS CLI example of listing the accelerators for an AWS account, scroll down to Example.
+   * List the accelerators for an AWS account. 
    */
   listAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes.
    */
   listByoipCidrs(params: GlobalAccelerator.Types.ListByoipCidrsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
   /**
-   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes.
    */
   listByoipCidrs(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
   /**
-   * List the endpoint groups that are associated with a listener. To see an AWS CLI example of listing the endpoint groups for listener, scroll down to Example.
+   * List the custom routing accelerators for an AWS account. 
+   */
+  listCustomRoutingAccelerators(params: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse, AWSError>;
+  /**
+   * List the custom routing accelerators for an AWS account. 
+   */
+  listCustomRoutingAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse, AWSError>;
+  /**
+   * List the endpoint groups that are associated with a listener for a custom routing accelerator. 
+   */
+  listCustomRoutingEndpointGroups(params: GlobalAccelerator.Types.ListCustomRoutingEndpointGroupsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingEndpointGroupsResponse, AWSError>;
+  /**
+   * List the endpoint groups that are associated with a listener for a custom routing accelerator. 
+   */
+  listCustomRoutingEndpointGroups(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingEndpointGroupsResponse, AWSError>;
+  /**
+   * List the listeners for a custom routing accelerator. 
+   */
+  listCustomRoutingListeners(params: GlobalAccelerator.Types.ListCustomRoutingListenersRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingListenersResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingListenersResponse, AWSError>;
+  /**
+   * List the listeners for a custom routing accelerator. 
+   */
+  listCustomRoutingListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingListenersResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingListenersResponse, AWSError>;
+  /**
+   * Provides a complete mapping from the public accelerator IP address and port to destination EC2 instance IP addresses and ports in the virtual public cloud (VPC) subnet endpoint for a custom routing accelerator. For each subnet endpoint that you add, Global Accelerator creates a new static port mapping for the accelerator. The port mappings don't change after Global Accelerator generates them, so you can retrieve and cache the full mapping on your servers.  If you remove a subnet from your accelerator, Global Accelerator removes (reclaims) the port mappings. If you add a subnet to your accelerator, Global Accelerator creates new port mappings (the existing ones don't change). If you add or remove EC2 instances in your subnet, the port mappings don't change, because the mappings are created when you add the subnet to Global Accelerator. The mappings also include a flag for each destination denoting which destination IP addresses and ports are allowed or denied traffic.
+   */
+  listCustomRoutingPortMappings(params: GlobalAccelerator.Types.ListCustomRoutingPortMappingsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingPortMappingsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingPortMappingsResponse, AWSError>;
+  /**
+   * Provides a complete mapping from the public accelerator IP address and port to destination EC2 instance IP addresses and ports in the virtual public cloud (VPC) subnet endpoint for a custom routing accelerator. For each subnet endpoint that you add, Global Accelerator creates a new static port mapping for the accelerator. The port mappings don't change after Global Accelerator generates them, so you can retrieve and cache the full mapping on your servers.  If you remove a subnet from your accelerator, Global Accelerator removes (reclaims) the port mappings. If you add a subnet to your accelerator, Global Accelerator creates new port mappings (the existing ones don't change). If you add or remove EC2 instances in your subnet, the port mappings don't change, because the mappings are created when you add the subnet to Global Accelerator. The mappings also include a flag for each destination denoting which destination IP addresses and ports are allowed or denied traffic.
+   */
+  listCustomRoutingPortMappings(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingPortMappingsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingPortMappingsResponse, AWSError>;
+  /**
+   * List the port mappings for a specific EC2 instance (destination) in a VPC subnet endpoint. The response is the mappings for one destination IP address. This is useful when your subnet endpoint has mappings that span multiple custom routing accelerators in your account, or for scenarios where you only want to list the port mappings for a specific destination instance.
+   */
+  listCustomRoutingPortMappingsByDestination(params: GlobalAccelerator.Types.ListCustomRoutingPortMappingsByDestinationRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingPortMappingsByDestinationResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingPortMappingsByDestinationResponse, AWSError>;
+  /**
+   * List the port mappings for a specific EC2 instance (destination) in a VPC subnet endpoint. The response is the mappings for one destination IP address. This is useful when your subnet endpoint has mappings that span multiple custom routing accelerators in your account, or for scenarios where you only want to list the port mappings for a specific destination instance.
+   */
+  listCustomRoutingPortMappingsByDestination(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingPortMappingsByDestinationResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingPortMappingsByDestinationResponse, AWSError>;
+  /**
+   * List the endpoint groups that are associated with a listener. 
    */
   listEndpointGroups(params: GlobalAccelerator.Types.ListEndpointGroupsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
-   * List the endpoint groups that are associated with a listener. To see an AWS CLI example of listing the endpoint groups for listener, scroll down to Example.
+   * List the endpoint groups that are associated with a listener. 
    */
   listEndpointGroups(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
-   * List the listeners for an accelerator. To see an AWS CLI example of listing the listeners for an accelerator, scroll down to Example.
+   * List the listeners for an accelerator. 
    */
   listListeners(params: GlobalAccelerator.Types.ListListenersRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * List the listeners for an accelerator. To see an AWS CLI example of listing the listeners for an accelerator, scroll down to Example.
+   * List the listeners for an accelerator. 
    */
   listListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * List all tags for an accelerator. To see an AWS CLI example of listing tags for an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * List all tags for an accelerator.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
    */
   listTagsForResource(params: GlobalAccelerator.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List all tags for an accelerator. To see an AWS CLI example of listing tags for an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * List all tags for an accelerator.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
    */
   listTagsForResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. To see an AWS CLI example of provisioning an address range for BYOIP, scroll down to Example. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   provisionByoipCidr(params: GlobalAccelerator.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
   /**
-   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. To see an AWS CLI example of provisioning an address range for BYOIP, scroll down to Example. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
   /**
-   * Add tags to an accelerator resource. To see an AWS CLI example of adding tags to an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * Remove endpoints from a custom routing accelerator.
+   */
+  removeCustomRoutingEndpoints(params: GlobalAccelerator.Types.RemoveCustomRoutingEndpointsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove endpoints from a custom routing accelerator.
+   */
+  removeCustomRoutingEndpoints(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add tags to an accelerator resource.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
    */
   tagResource(params: GlobalAccelerator.Types.TagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
   /**
-   * Add tags to an accelerator resource. To see an AWS CLI example of adding tags to an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * Add tags to an accelerator resource.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
    */
   tagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. To see an AWS CLI example of removing tags from an accelerator, scroll down to Example. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
    */
   untagResource(params: GlobalAccelerator.Types.UntagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
   /**
-   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. To see an AWS CLI example of removing tags from an accelerator, scroll down to Example. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Update an accelerator.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Update an accelerator.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to Example.
+   * Update the attributes for an accelerator. 
    */
   updateAcceleratorAttributes(params: GlobalAccelerator.Types.UpdateAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
   /**
-   * Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to Example.
+   * Update the attributes for an accelerator. 
    */
   updateAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
   /**
-   * Update an endpoint group. A resource must be valid and active when you add it as an endpoint. To see an AWS CLI example of updating an endpoint group, scroll down to Example. 
+   * Update a custom routing accelerator. 
+   */
+  updateCustomRoutingAccelerator(params: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Update a custom routing accelerator. 
+   */
+  updateCustomRoutingAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorResponse, AWSError>;
+  /**
+   * Update the attributes for a custom routing accelerator. 
+   */
+  updateCustomRoutingAcceleratorAttributes(params: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Update the attributes for a custom routing accelerator. 
+   */
+  updateCustomRoutingAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Update a listener for a custom routing accelerator. 
+   */
+  updateCustomRoutingListener(params: GlobalAccelerator.Types.UpdateCustomRoutingListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingListenerResponse, AWSError>;
+  /**
+   * Update a listener for a custom routing accelerator. 
+   */
+  updateCustomRoutingListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateCustomRoutingListenerResponse, AWSError>;
+  /**
+   * Update an endpoint group. A resource must be valid and active when you add it as an endpoint.
    */
   updateEndpointGroup(params: GlobalAccelerator.Types.UpdateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
   /**
-   * Update an endpoint group. A resource must be valid and active when you add it as an endpoint. To see an AWS CLI example of updating an endpoint group, scroll down to Example. 
+   * Update an endpoint group. A resource must be valid and active when you add it as an endpoint.
    */
   updateEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
   /**
-   * Update a listener. To see an AWS CLI example of updating listener, scroll down to Example.
+   * Update a listener. 
    */
   updateListener(params: GlobalAccelerator.Types.UpdateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
   /**
-   * Update a listener. To see an AWS CLI example of updating listener, scroll down to Example.
+   * Update a listener. 
    */
   updateListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. To see an AWS CLI example of withdrawing an address range for BYOIP so it will no longer be advertised by AWS, scroll down to Example. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   withdrawByoipCidr(params: GlobalAccelerator.Types.WithdrawByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. To see an AWS CLI example of withdrawing an address range for BYOIP so it will no longer be advertised by AWS, scroll down to Example. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
    */
   withdrawByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
 }
@@ -267,6 +443,26 @@ declare namespace GlobalAccelerator {
   }
   export type AcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
   export type Accelerators = Accelerator[];
+  export interface AddCustomRoutingEndpointsRequest {
+    /**
+     * The list of endpoint objects to add to a custom routing accelerator.
+     */
+    EndpointConfigurations: CustomRoutingEndpointConfigurations;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface AddCustomRoutingEndpointsResponse {
+    /**
+     * The endpoint objects added to the custom routing accelerator.
+     */
+    EndpointDescriptions?: CustomRoutingEndpointDescriptions;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.
+     */
+    EndpointGroupArn?: GenericString;
+  }
   export interface AdvertiseByoipCidrRequest {
     /**
      * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.
@@ -278,6 +474,28 @@ declare namespace GlobalAccelerator {
      * Information about the address range.
      */
     ByoipCidr?: ByoipCidr;
+  }
+  export interface AllowCustomRoutingTrafficRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn: GenericString;
+    /**
+     * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID.
+     */
+    EndpointId: GenericString;
+    /**
+     * A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to allow to receive traffic. The IP addresses must be a subset of the IP addresses that you specified for the endpoint group.  DestinationAddresses is required if AllowAllTrafficToEndpoint is FALSE or is not specified.
+     */
+    DestinationAddresses?: DestinationAddresses;
+    /**
+     * A list of specific Amazon EC2 instance ports (destination ports) that you want to allow to receive traffic.
+     */
+    DestinationPorts?: DestinationPorts;
+    /**
+     * Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint can receive traffic from a custom routing accelerator. The value is TRUE or FALSE.  When set to TRUE, all destinations in the custom routing VPC subnet can receive traffic. Note that you cannot specify destination IP addresses and ports when the value is set to TRUE. When set to FALSE (or not specified), you must specify a list of destination IP addresses that are allowed to receive traffic. A list of ports is optional. If you don't specify a list of ports, the ports that can accept traffic is the same as the ports configured for the endpoint group. The default value is FALSE.
+     */
+    AllowAllTrafficToEndpoint?: GenericBoolean;
   }
   export interface ByoipCidr {
     /**
@@ -323,7 +541,7 @@ declare namespace GlobalAccelerator {
      */
     Name: GenericString;
     /**
-     * The value for the address type must be IPv4. 
+     * The value for the address type must be IPv4.
      */
     IpAddressType?: IpAddressType;
     /**
@@ -348,6 +566,78 @@ declare namespace GlobalAccelerator {
      * The accelerator that is created by specifying a listener and the supported IP address types.
      */
     Accelerator?: Accelerator;
+  }
+  export interface CreateCustomRoutingAcceleratorRequest {
+    /**
+     * The name of a custom routing accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     */
+    Name: GenericString;
+    /**
+     * The value for the address type must be IPv4.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.
+     */
+    Enabled?: GenericBoolean;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.
+     */
+    IdempotencyToken: IdempotencyToken;
+    /**
+     * Create tags for an accelerator. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateCustomRoutingAcceleratorResponse {
+    /**
+     * The accelerator that is created.
+     */
+    Accelerator?: CustomRoutingAccelerator;
+  }
+  export interface CreateCustomRoutingEndpointGroupRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the listener for a custom routing endpoint.
+     */
+    ListenerArn: GenericString;
+    /**
+     * The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
+     */
+    EndpointGroupRegion: GenericString;
+    /**
+     * Sets the port range and protocol for all endpoints (virtual private cloud subnets) in a custom routing endpoint group to accept client traffic on.
+     */
+    DestinationConfigurations: CustomRoutingDestinationConfigurations;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateCustomRoutingEndpointGroupResponse {
+    /**
+     * The information about the endpoint group created for a custom routing accelerator.
+     */
+    EndpointGroup?: CustomRoutingEndpointGroup;
+  }
+  export interface CreateCustomRoutingListenerRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator for a custom routing listener.
+     */
+    AcceleratorArn: GenericString;
+    /**
+     * The port range to support for connections from clients to your accelerator. Separately, you set port ranges for endpoints. For more information, see About endpoints for custom routing accelerators.
+     */
+    PortRanges: PortRanges;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateCustomRoutingListenerResponse {
+    /**
+     * The listener that you've created for a custom routing accelerator.
+     */
+    Listener?: CustomRoutingListener;
   }
   export interface CreateEndpointGroupRequest {
     /**
@@ -377,7 +667,7 @@ declare namespace GlobalAccelerator {
     /**
      * If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).
      */
-    HealthCheckPath?: GenericString;
+    HealthCheckPath?: HealthCheckPath;
     /**
      * The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
      */
@@ -429,11 +719,160 @@ declare namespace GlobalAccelerator {
      */
     Listener?: Listener;
   }
+  export interface CustomRoutingAccelerator {
+    /**
+     * The Amazon Resource Name (ARN) of the custom routing accelerator.
+     */
+    AcceleratorArn?: GenericString;
+    /**
+     * The name of the accelerator. The name must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     */
+    Name?: GenericString;
+    /**
+     * The value for the address type must be IPv4.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * Indicates whether the accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.
+     */
+    Enabled?: GenericBoolean;
+    /**
+     * The static IP addresses that Global Accelerator associates with the accelerator.
+     */
+    IpSets?: IpSets;
+    /**
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    DnsName?: GenericString;
+    /**
+     * Describes the deployment status of the accelerator.
+     */
+    Status?: CustomRoutingAcceleratorStatus;
+    /**
+     * The date and time that the accelerator was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The date and time that the accelerator was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface CustomRoutingAcceleratorAttributes {
+    /**
+     * Indicates whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     */
+    FlowLogsEnabled?: GenericBoolean;
+    /**
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     */
+    FlowLogsS3Bucket?: GenericString;
+    /**
+     * The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
+     */
+    FlowLogsS3Prefix?: GenericString;
+  }
+  export type CustomRoutingAcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
+  export type CustomRoutingAccelerators = CustomRoutingAccelerator[];
+  export interface CustomRoutingDestinationConfiguration {
+    /**
+     * The first port, inclusive, in the range of ports for the endpoint group that is associated with a custom routing accelerator.
+     */
+    FromPort: PortNumber;
+    /**
+     * The last port, inclusive, in the range of ports for the endpoint group that is associated with a custom routing accelerator.
+     */
+    ToPort: PortNumber;
+    /**
+     * The protocol for the endpoint group that is associated with a custom routing accelerator. The protocol can be either TCP or UDP.
+     */
+    Protocols: CustomRoutingProtocols;
+  }
+  export type CustomRoutingDestinationConfigurations = CustomRoutingDestinationConfiguration[];
+  export interface CustomRoutingDestinationDescription {
+    /**
+     * The first port, inclusive, in the range of ports for the endpoint group that is associated with a custom routing accelerator.
+     */
+    FromPort?: PortNumber;
+    /**
+     * The last port, inclusive, in the range of ports for the endpoint group that is associated with a custom routing accelerator.
+     */
+    ToPort?: PortNumber;
+    /**
+     * The protocol for the endpoint group that is associated with a custom routing accelerator. The protocol can be either TCP or UDP.
+     */
+    Protocols?: Protocols;
+  }
+  export type CustomRoutingDestinationDescriptions = CustomRoutingDestinationDescription[];
+  export type CustomRoutingDestinationTrafficState = "ALLOW"|"DENY"|string;
+  export interface CustomRoutingEndpointConfiguration {
+    /**
+     * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID. 
+     */
+    EndpointId?: GenericString;
+  }
+  export type CustomRoutingEndpointConfigurations = CustomRoutingEndpointConfiguration[];
+  export interface CustomRoutingEndpointDescription {
+    /**
+     * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID. 
+     */
+    EndpointId?: GenericString;
+  }
+  export type CustomRoutingEndpointDescriptions = CustomRoutingEndpointDescription[];
+  export interface CustomRoutingEndpointGroup {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn?: GenericString;
+    /**
+     * The AWS Region where the endpoint group is located.
+     */
+    EndpointGroupRegion?: GenericString;
+    /**
+     * For a custom routing accelerator, describes the port range and protocol for all endpoints (virtual private cloud subnets) in an endpoint group to accept client traffic on.
+     */
+    DestinationDescriptions?: CustomRoutingDestinationDescriptions;
+    /**
+     * For a custom routing accelerator, describes the endpoints (virtual private cloud subnets) in an endpoint group to accept client traffic on.
+     */
+    EndpointDescriptions?: CustomRoutingEndpointDescriptions;
+  }
+  export type CustomRoutingEndpointGroups = CustomRoutingEndpointGroup[];
+  export interface CustomRoutingListener {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn?: GenericString;
+    /**
+     * The port range to support for connections from clients to your accelerator. Separately, you set port ranges for endpoints. For more information, see About endpoints for custom routing accelerators.
+     */
+    PortRanges?: PortRanges;
+  }
+  export type CustomRoutingListeners = CustomRoutingListener[];
+  export type CustomRoutingProtocol = "TCP"|"UDP"|string;
+  export type CustomRoutingProtocols = CustomRoutingProtocol[];
   export interface DeleteAcceleratorRequest {
     /**
      * The Amazon Resource Name (ARN) of an accelerator.
      */
     AcceleratorArn: GenericString;
+  }
+  export interface DeleteCustomRoutingAcceleratorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom routing accelerator to delete.
+     */
+    AcceleratorArn: GenericString;
+  }
+  export interface DeleteCustomRoutingEndpointGroupRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group to delete.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface DeleteCustomRoutingListenerRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the listener to delete.
+     */
+    ListenerArn: GenericString;
   }
   export interface DeleteEndpointGroupRequest {
     /**
@@ -446,6 +885,28 @@ declare namespace GlobalAccelerator {
      * The Amazon Resource Name (ARN) of the listener.
      */
     ListenerArn: GenericString;
+  }
+  export interface DenyCustomRoutingTrafficRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn: GenericString;
+    /**
+     * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID.
+     */
+    EndpointId: GenericString;
+    /**
+     * A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to prevent from receiving traffic. The IP addresses must be a subset of the IP addresses allowed for the VPC subnet associated with the endpoint group.
+     */
+    DestinationAddresses?: DestinationAddresses;
+    /**
+     * A list of specific Amazon EC2 instance ports (destination ports) in a subnet endpoint that you want to prevent from receiving traffic.
+     */
+    DestinationPorts?: DestinationPorts;
+    /**
+     * Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint cannot receive traffic from a custom routing accelerator. The value is TRUE or FALSE.  When set to TRUE, no destinations in the custom routing VPC subnet can receive traffic. Note that you cannot specify destination IP addresses and ports when the value is set to TRUE. When set to FALSE (or not specified), you must specify a list of destination IP addresses that cannot receive traffic. A list of ports is optional. If you don't specify a list of ports, the ports that can accept traffic is the same as the ports configured for the endpoint group. The default value is FALSE.
+     */
+    DenyAllTrafficToEndpoint?: GenericBoolean;
   }
   export interface DeprovisionByoipCidrRequest {
     /**
@@ -483,6 +944,54 @@ declare namespace GlobalAccelerator {
      */
     Accelerator?: Accelerator;
   }
+  export interface DescribeCustomRoutingAcceleratorAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom routing accelerator to describe the attributes for.
+     */
+    AcceleratorArn: GenericString;
+  }
+  export interface DescribeCustomRoutingAcceleratorAttributesResponse {
+    /**
+     * The attributes of the custom routing accelerator.
+     */
+    AcceleratorAttributes?: CustomRoutingAcceleratorAttributes;
+  }
+  export interface DescribeCustomRoutingAcceleratorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator to describe.
+     */
+    AcceleratorArn: GenericString;
+  }
+  export interface DescribeCustomRoutingAcceleratorResponse {
+    /**
+     * The description of the custom routing accelerator.
+     */
+    Accelerator?: CustomRoutingAccelerator;
+  }
+  export interface DescribeCustomRoutingEndpointGroupRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group to describe.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface DescribeCustomRoutingEndpointGroupResponse {
+    /**
+     * The description of an endpoint group for a custom routing accelerator.
+     */
+    EndpointGroup?: CustomRoutingEndpointGroup;
+  }
+  export interface DescribeCustomRoutingListenerRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the listener to describe.
+     */
+    ListenerArn: GenericString;
+  }
+  export interface DescribeCustomRoutingListenerResponse {
+    /**
+     * The description of a listener for a custom routing accelerator.
+     */
+    Listener?: CustomRoutingListener;
+  }
   export interface DescribeEndpointGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the endpoint group to describe.
@@ -507,6 +1016,43 @@ declare namespace GlobalAccelerator {
      */
     Listener?: Listener;
   }
+  export type DestinationAddresses = IpAddress[];
+  export interface DestinationPortMapping {
+    /**
+     * The Amazon Resource Name (ARN) of the custom routing accelerator that you have port mappings for.
+     */
+    AcceleratorArn?: GenericString;
+    /**
+     * The IP address/port combinations (sockets) that map to a given destination socket address.
+     */
+    AcceleratorSocketAddresses?: SocketAddresses;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn?: GenericString;
+    /**
+     * The ID for the virtual private cloud (VPC) subnet.
+     */
+    EndpointId?: GenericString;
+    /**
+     * The AWS Region for the endpoint group.
+     */
+    EndpointGroupRegion?: GenericString;
+    /**
+     * The endpoint IP address/port combination for traffic received on the accelerator socket address.
+     */
+    DestinationSocketAddress?: SocketAddress;
+    /**
+     * The IP address type, which must be IPv4.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * Indicates whether or not a port mapping destination can receive traffic. The value is either ALLOW, if traffic is allowed to the destination, or DENY, if traffic is not allowed to the destination.
+     */
+    DestinationTrafficState?: CustomRoutingDestinationTrafficState;
+  }
+  export type DestinationPortMappings = DestinationPortMapping[];
+  export type DestinationPorts = PortNumber[];
   export interface EndpointConfiguration {
     /**
      * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active when you add it as an endpoint. An Application Load Balancer can be either internal or internet-facing.
@@ -524,7 +1070,7 @@ declare namespace GlobalAccelerator {
   export type EndpointConfigurations = EndpointConfiguration[];
   export interface EndpointDescription {
     /**
-     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
      */
     EndpointId?: GenericString;
     /**
@@ -536,7 +1082,7 @@ declare namespace GlobalAccelerator {
      */
     HealthState?: HealthState;
     /**
-     * The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided. If the endpoint state is unhealthy, the reason code can be one of the following values:    Timeout: The health check requests to the endpoint are timing out before returning a status.    Failed: The health check failed, for example because the endpoint response was invalid (malformed).   If the endpoint state is initial, the reason code can be one of the following values:    ProvisioningInProgress: The endpoint is in the process of being provisioned.    InitialHealthChecking: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.  
+     * Returns a null result.
      */
     HealthReason?: GenericString;
     /**
@@ -573,7 +1119,7 @@ declare namespace GlobalAccelerator {
     /**
      * If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the endpoints for health checks. The default is slash (/).
      */
-    HealthCheckPath?: GenericString;
+    HealthCheckPath?: HealthCheckPath;
     /**
      * The time—10 seconds or 30 seconds—between health checks for each endpoint. The default value is 30.
      */
@@ -588,10 +1134,12 @@ declare namespace GlobalAccelerator {
     PortOverrides?: PortOverrides;
   }
   export type EndpointGroups = EndpointGroup[];
+  export type EndpointIds = GenericString[];
   export type EndpointWeight = number;
   export type GenericBoolean = boolean;
   export type GenericString = string;
   export type HealthCheckIntervalSeconds = number;
+  export type HealthCheckPath = string;
   export type HealthCheckPort = number;
   export type HealthCheckProtocol = "TCP"|"HTTP"|"HTTPS"|string;
   export type HealthState = "INITIAL"|"HEALTHY"|"UNHEALTHY"|string;
@@ -647,6 +1195,130 @@ declare namespace GlobalAccelerator {
     ByoipCidrs?: ByoipCidrs;
     /**
      * The token for the next page of results.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingAcceleratorsRequest {
+    /**
+     * The number of custom routing Global Accelerator objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingAcceleratorsResponse {
+    /**
+     * The list of custom routing accelerators for a customer account.
+     */
+    Accelerators?: CustomRoutingAccelerators;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingEndpointGroupsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the listener to list endpoint groups for.
+     */
+    ListenerArn: GenericString;
+    /**
+     * The number of endpoint group objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingEndpointGroupsResponse {
+    /**
+     * The list of the endpoint groups associated with a listener for a custom routing accelerator.
+     */
+    EndpointGroups?: CustomRoutingEndpointGroups;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingListenersRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator to list listeners for.
+     */
+    AcceleratorArn: GenericString;
+    /**
+     * The number of listener objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingListenersResponse {
+    /**
+     * The list of listeners for a custom routing accelerator.
+     */
+    Listeners?: CustomRoutingListeners;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingPortMappingsByDestinationRequest {
+    /**
+     * The ID for the virtual private cloud (VPC) subnet.
+     */
+    EndpointId: GenericString;
+    /**
+     * The endpoint IP address in a virtual private cloud (VPC) subnet for which you want to receive back port mappings.
+     */
+    DestinationAddress: GenericString;
+    /**
+     * The number of destination port mappings that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: PortMappingsMaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingPortMappingsByDestinationResponse {
+    /**
+     * The port mappings for the endpoint IP address that you specified in the request.
+     */
+    DestinationPortMappings?: DestinationPortMappings;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingPortMappingsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator to list the custom routing port mappings for.
+     */
+    AcceleratorArn: GenericString;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group to list the custom routing port mappings for.
+     */
+    EndpointGroupArn?: GenericString;
+    /**
+     * The number of destination port mappings that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: PortMappingsMaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCustomRoutingPortMappingsResponse {
+    /**
+     * The port mappings for a custom routing accelerator.
+     */
+    PortMappings?: PortMappings;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
      */
     NextToken?: GenericString;
   }
@@ -730,6 +1402,34 @@ declare namespace GlobalAccelerator {
   }
   export type Listeners = Listener[];
   export type MaxResults = number;
+  export interface PortMapping {
+    /**
+     * The accelerator port.
+     */
+    AcceleratorPort?: PortNumber;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn?: GenericString;
+    /**
+     * The IP address of the VPC subnet (the subnet ID).
+     */
+    EndpointId?: GenericString;
+    /**
+     * The EC2 instance IP address and port number in the virtual private cloud (VPC) subnet.
+     */
+    DestinationSocketAddress?: SocketAddress;
+    /**
+     * The protocols supported by the endpoint group.
+     */
+    Protocols?: CustomRoutingProtocols;
+    /**
+     * Indicates whether or not a port mapping destination can receive traffic. The value is either ALLOW, if traffic is allowed to the destination, or DENY, if traffic is not allowed to the destination.
+     */
+    DestinationTrafficState?: CustomRoutingDestinationTrafficState;
+  }
+  export type PortMappings = PortMapping[];
+  export type PortMappingsMaxResults = number;
   export type PortNumber = number;
   export interface PortOverride {
     /**
@@ -754,6 +1454,7 @@ declare namespace GlobalAccelerator {
   }
   export type PortRanges = PortRange[];
   export type Protocol = "TCP"|"UDP"|string;
+  export type Protocols = Protocol[];
   export interface ProvisionByoipCidrRequest {
     /**
      * The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another Region.
@@ -770,7 +1471,28 @@ declare namespace GlobalAccelerator {
      */
     ByoipCidr?: ByoipCidr;
   }
+  export interface RemoveCustomRoutingEndpointsRequest {
+    /**
+     * The IDs for the endpoints. For custom routing accelerators, endpoint IDs are the virtual private cloud (VPC) subnet IDs. 
+     */
+    EndpointIds: EndpointIds;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group to remove endpoints from.
+     */
+    EndpointGroupArn: GenericString;
+  }
   export type ResourceArn = string;
+  export interface SocketAddress {
+    /**
+     * The IP address for the socket address.
+     */
+    IpAddress?: GenericString;
+    /**
+     * The port for the socket address.
+     */
+    Port?: PortNumber;
+  }
+  export type SocketAddresses = SocketAddress[];
   export interface Tag {
     /**
      * A string that contains a Tag key.
@@ -846,7 +1568,7 @@ declare namespace GlobalAccelerator {
      */
     Name?: GenericString;
     /**
-     * The value for the address type must be IPv4. 
+     * The IP address type, which must be IPv4.
      */
     IpAddressType?: IpAddressType;
     /**
@@ -859,6 +1581,70 @@ declare namespace GlobalAccelerator {
      * Information about the updated accelerator.
      */
     Accelerator?: Accelerator;
+  }
+  export interface UpdateCustomRoutingAcceleratorAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom routing accelerator to update attributes for.
+     */
+    AcceleratorArn: GenericString;
+    /**
+     * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     */
+    FlowLogsEnabled?: GenericBoolean;
+    /**
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     */
+    FlowLogsS3Bucket?: GenericString;
+    /**
+     * Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true.  If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
+     */
+    FlowLogsS3Prefix?: GenericString;
+  }
+  export interface UpdateCustomRoutingAcceleratorAttributesResponse {
+    /**
+     * Updated custom routing accelerator.
+     */
+    AcceleratorAttributes?: CustomRoutingAcceleratorAttributes;
+  }
+  export interface UpdateCustomRoutingAcceleratorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator to update.
+     */
+    AcceleratorArn: GenericString;
+    /**
+     * The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     */
+    Name?: GenericString;
+    /**
+     * The value for the address type must be IPv4.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.
+     */
+    Enabled?: GenericBoolean;
+  }
+  export interface UpdateCustomRoutingAcceleratorResponse {
+    /**
+     * Information about the updated custom routing accelerator.
+     */
+    Accelerator?: CustomRoutingAccelerator;
+  }
+  export interface UpdateCustomRoutingListenerRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the listener to update.
+     */
+    ListenerArn: GenericString;
+    /**
+     * The updated port range to support for connections from clients to your accelerator. If you remove ports that are currently being used by a subnet endpoint, the call fails. Separately, you set port ranges for endpoints. For more information, see About endpoints for custom routing accelerators.
+     */
+    PortRanges: PortRanges;
+  }
+  export interface UpdateCustomRoutingListenerResponse {
+    /**
+     * Information for the updated listener for a custom routing accelerator.
+     */
+    Listener?: CustomRoutingListener;
   }
   export interface UpdateEndpointGroupRequest {
     /**
@@ -884,7 +1670,7 @@ declare namespace GlobalAccelerator {
     /**
      * If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).
      */
-    HealthCheckPath?: GenericString;
+    HealthCheckPath?: HealthCheckPath;
     /**
      * The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
      */

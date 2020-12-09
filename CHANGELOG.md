@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.806.0-->
+<!--LATEST=2.807.0-->
 <!--ENTRYINSERT-->
+
+## 2.807.0
+* feature: EC2: This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+* feature: GlobalAccelerator: This release adds support for custom routing accelerators
+* feature: Redshift: Add support for availability zone relocation feature.
 
 ## 2.806.0
 * feature: AuditManager: AWS Audit Manager helps you continuously audit your AWS usage to simplify how you manage risk and compliance. This update releases the first version of the AWS Audit Manager APIs and SDK.
