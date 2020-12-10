@@ -26,6 +26,20 @@
       },
       "documentation": "<p>Accepts the Convertible Reserved Instance exchange quote described in the <a>GetReservedInstancesExchangeQuote</a> call.</p>"
     },
+    "AcceptTransitGatewayMulticastDomainAssociations": {
+      "name": "AcceptTransitGatewayMulticastDomainAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AcceptTransitGatewayMulticastDomainAssociationsRequest"
+      },
+      "output": {
+        "shape": "AcceptTransitGatewayMulticastDomainAssociationsResult"
+      },
+      "documentation": "<p>Accepts a request to associate subnets with a transit gateway multicast domain.</p>"
+    },
     "AcceptTransitGatewayPeeringAttachment": {
       "name": "AcceptTransitGatewayPeeringAttachment",
       "http": {
@@ -915,6 +929,20 @@
       },
       "documentation": "<p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of ingress rules and a separate set of egress rules.</p> <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p> <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p> <p>For more information about network ACLs, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
+    "CreateNetworkInsightsPath": {
+      "name": "CreateNetworkInsightsPath",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateNetworkInsightsPathRequest"
+      },
+      "output": {
+        "shape": "CreateNetworkInsightsPathResult"
+      },
+      "documentation": "<p>Creates a path to analyze for reachability.</p> <p>Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/reachability/\">What is Reachability Analyzer</a>.</p>"
+    },
     "CreateNetworkInterface": {
       "name": "CreateNetworkInterface",
       "http": {
@@ -1149,6 +1177,34 @@
         "shape": "CreateTransitGatewayResult"
       },
       "documentation": "<p>Creates a transit gateway.</p> <p>You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the <code>available</code> state, you can attach your VPCs and VPN connections to the transit gateway.</p> <p>To attach your VPCs, use <a>CreateTransitGatewayVpcAttachment</a>.</p> <p>To attach a VPN connection, use <a>CreateCustomerGateway</a> to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to <a>CreateVpnConnection</a>.</p> <p>When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use <a>CreateTransitGatewayRouteTable</a> to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use <a>EnableTransitGatewayRouteTablePropagation</a> to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use <a>AssociateTransitGatewayRouteTable</a> to associate a resource attachment with a transit gateway route table.</p>"
+    },
+    "CreateTransitGatewayConnect": {
+      "name": "CreateTransitGatewayConnect",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTransitGatewayConnectRequest"
+      },
+      "output": {
+        "shape": "CreateTransitGatewayConnectResult"
+      },
+      "documentation": "<p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. </p>"
+    },
+    "CreateTransitGatewayConnectPeer": {
+      "name": "CreateTransitGatewayConnectPeer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTransitGatewayConnectPeerRequest"
+      },
+      "output": {
+        "shape": "CreateTransitGatewayConnectPeerResult"
+      },
+      "documentation": "<p>Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance.</p> <p>The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer\">Connect peers</a> in the <i>Transit Gateways Guide</i>.</p>"
     },
     "CreateTransitGatewayMulticastDomain": {
       "name": "CreateTransitGatewayMulticastDomain",
@@ -1605,6 +1661,34 @@
       },
       "documentation": "<p>Deletes the specified ingress or egress entry (rule) from the specified network ACL.</p>"
     },
+    "DeleteNetworkInsightsAnalysis": {
+      "name": "DeleteNetworkInsightsAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteNetworkInsightsAnalysisRequest"
+      },
+      "output": {
+        "shape": "DeleteNetworkInsightsAnalysisResult"
+      },
+      "documentation": "<p>Deletes the specified network insights analysis.</p>"
+    },
+    "DeleteNetworkInsightsPath": {
+      "name": "DeleteNetworkInsightsPath",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteNetworkInsightsPathRequest"
+      },
+      "output": {
+        "shape": "DeleteNetworkInsightsPathResult"
+      },
+      "documentation": "<p>Deletes the specified path.</p>"
+    },
     "DeleteNetworkInterface": {
       "name": "DeleteNetworkInterface",
       "http": {
@@ -1801,6 +1885,34 @@
         "shape": "DeleteTransitGatewayResult"
       },
       "documentation": "<p>Deletes the specified transit gateway.</p>"
+    },
+    "DeleteTransitGatewayConnect": {
+      "name": "DeleteTransitGatewayConnect",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTransitGatewayConnectRequest"
+      },
+      "output": {
+        "shape": "DeleteTransitGatewayConnectResult"
+      },
+      "documentation": "<p>Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.</p>"
+    },
+    "DeleteTransitGatewayConnectPeer": {
+      "name": "DeleteTransitGatewayConnectPeer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTransitGatewayConnectPeerRequest"
+      },
+      "output": {
+        "shape": "DeleteTransitGatewayConnectPeerResult"
+      },
+      "documentation": "<p>Deletes the specified Connect peer.</p>"
     },
     "DeleteTransitGatewayMulticastDomain": {
       "name": "DeleteTransitGatewayMulticastDomain",
@@ -2918,6 +3030,34 @@
       },
       "documentation": "<p>Describes one or more of your network ACLs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
+    "DescribeNetworkInsightsAnalyses": {
+      "name": "DescribeNetworkInsightsAnalyses",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeNetworkInsightsAnalysesRequest"
+      },
+      "output": {
+        "shape": "DescribeNetworkInsightsAnalysesResult"
+      },
+      "documentation": "<p>Describes one or more of your network insights analyses.</p>"
+    },
+    "DescribeNetworkInsightsPaths": {
+      "name": "DescribeNetworkInsightsPaths",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeNetworkInsightsPathsRequest"
+      },
+      "output": {
+        "shape": "DescribeNetworkInsightsPathsResult"
+      },
+      "documentation": "<p>Describes one or more of your paths.</p>"
+    },
     "DescribeNetworkInterfaceAttribute": {
       "name": "DescribeNetworkInterfaceAttribute",
       "http": {
@@ -3365,6 +3505,34 @@
         "shape": "DescribeTransitGatewayAttachmentsResult"
       },
       "documentation": "<p>Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.</p>"
+    },
+    "DescribeTransitGatewayConnectPeers": {
+      "name": "DescribeTransitGatewayConnectPeers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTransitGatewayConnectPeersRequest"
+      },
+      "output": {
+        "shape": "DescribeTransitGatewayConnectPeersResult"
+      },
+      "documentation": "<p>Describes one or more Connect peers.</p>"
+    },
+    "DescribeTransitGatewayConnects": {
+      "name": "DescribeTransitGatewayConnects",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTransitGatewayConnectsRequest"
+      },
+      "output": {
+        "shape": "DescribeTransitGatewayConnectsResult"
+      },
+      "documentation": "<p>Describes one or more Connect attachments.</p>"
     },
     "DescribeTransitGatewayMulticastDomains": {
       "name": "DescribeTransitGatewayMulticastDomains",
@@ -5188,6 +5356,20 @@
       },
       "documentation": "<p>Registers sources (network interfaces) with the specified transit gateway multicast group.</p> <p>A multicast source is a network interface attached to a supported instance that sends multicast traffic. For information about supported instances, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits\">Multicast Considerations</a> in <i>Amazon VPC Transit Gateways</i>.</p> <p>After you add the source, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html\">SearchTransitGatewayMulticastGroups</a> to verify that the source was added to the multicast group.</p>"
     },
+    "RejectTransitGatewayMulticastDomainAssociations": {
+      "name": "RejectTransitGatewayMulticastDomainAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RejectTransitGatewayMulticastDomainAssociationsRequest"
+      },
+      "output": {
+        "shape": "RejectTransitGatewayMulticastDomainAssociationsResult"
+      },
+      "documentation": "<p>Rejects a request to associate cross-account subnets with a transit gateway multicast domain.</p>"
+    },
     "RejectTransitGatewayPeeringAttachment": {
       "name": "RejectTransitGatewayPeeringAttachment",
       "http": {
@@ -5623,6 +5805,20 @@
       },
       "documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "StartNetworkInsightsAnalysis": {
+      "name": "StartNetworkInsightsAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartNetworkInsightsAnalysisRequest"
+      },
+      "output": {
+        "shape": "StartNetworkInsightsAnalysisResult"
+      },
+      "documentation": "<p>Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.</p>"
+    },
     "StartVpcEndpointServicePrivateDnsVerification": {
       "name": "StartVpcEndpointServicePrivateDnsVerification",
       "http": {
@@ -5795,6 +5991,36 @@
         }
       },
       "documentation": "<p>The result of the exchange and whether it was <code>successful</code>.</p>"
+    },
+    "AcceptTransitGatewayMulticastDomainAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayMulticastDomainId": {
+          "shape": "TransitGatewayMulticastDomainId",
+          "documentation": "<p>The ID of the transit gateway multicast domain.</p>"
+        },
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the transit gateway attachment.</p>"
+        },
+        "SubnetIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "AcceptTransitGatewayMulticastDomainAssociationsResult": {
+      "type": "structure",
+      "members": {
+        "Associations": {
+          "shape": "TransitGatewayMulticastDomainAssociations",
+          "locationName": "associations"
+        }
+      }
     },
     "AcceptTransitGatewayPeeringAttachmentRequest": {
       "type": "structure",
@@ -6335,6 +6561,261 @@
         "off"
       ]
     },
+    "AlternatePathHint": {
+      "type": "structure",
+      "members": {
+        "ComponentId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the component.</p>",
+          "locationName": "componentId"
+        },
+        "ComponentArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>",
+          "locationName": "componentArn"
+        }
+      },
+      "documentation": "<p>Describes an potential intermediate component of a feasible path.</p>"
+    },
+    "AlternatePathHintList": {
+      "type": "list",
+      "member": {
+        "shape": "AlternatePathHint",
+        "locationName": "item"
+      }
+    },
+    "AnalysisAclRule": {
+      "type": "structure",
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation.</p>",
+          "locationName": "cidr"
+        },
+        "Egress": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the rule is an outbound rule.</p>",
+          "locationName": "egress"
+        },
+        "PortRange": {
+          "shape": "PortRange",
+          "documentation": "<p>The range of ports.</p>",
+          "locationName": "portRange"
+        },
+        "Protocol": {
+          "shape": "String",
+          "documentation": "<p>The protocol.</p>",
+          "locationName": "protocol"
+        },
+        "RuleAction": {
+          "shape": "String",
+          "documentation": "<p>Indicates whether to allow or deny traffic that matches the rule.</p>",
+          "locationName": "ruleAction"
+        },
+        "RuleNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The rule number.</p>",
+          "locationName": "ruleNumber"
+        }
+      },
+      "documentation": "<p>Describes a network access control (ACL) rule.</p>"
+    },
+    "AnalysisComponent": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "String",
+          "documentation": "<p>The ID of the component.</p>",
+          "locationName": "id"
+        },
+        "Arn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>",
+          "locationName": "arn"
+        }
+      },
+      "documentation": "<p>Describes a path component.</p>"
+    },
+    "AnalysisComponentList": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisComponent",
+        "locationName": "item"
+      }
+    },
+    "AnalysisLoadBalancerListener": {
+      "type": "structure",
+      "members": {
+        "LoadBalancerPort": {
+          "shape": "Port",
+          "documentation": "<p>The port on which the load balancer is listening.</p>",
+          "locationName": "loadBalancerPort"
+        },
+        "InstancePort": {
+          "shape": "Port",
+          "documentation": "<p>[Classic Load Balancers] The back-end port for the listener.</p>",
+          "locationName": "instancePort"
+        }
+      },
+      "documentation": "<p>Describes a load balancer listener.</p>"
+    },
+    "AnalysisLoadBalancerTarget": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IP address.</p>",
+          "locationName": "address"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "Instance": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>Information about the instance.</p>",
+          "locationName": "instance"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port on which the target is listening.</p>",
+          "locationName": "port"
+        }
+      },
+      "documentation": "<p>Describes a load balancer target.</p>"
+    },
+    "AnalysisPacketHeader": {
+      "type": "structure",
+      "members": {
+        "DestinationAddresses": {
+          "shape": "IpAddressList",
+          "documentation": "<p>The destination addresses.</p>",
+          "locationName": "destinationAddressSet"
+        },
+        "DestinationPortRanges": {
+          "shape": "PortRangeList",
+          "documentation": "<p>The destination port ranges.</p>",
+          "locationName": "destinationPortRangeSet"
+        },
+        "Protocol": {
+          "shape": "String",
+          "documentation": "<p>The protocol.</p>",
+          "locationName": "protocol"
+        },
+        "SourceAddresses": {
+          "shape": "IpAddressList",
+          "documentation": "<p>The source addresses.</p>",
+          "locationName": "sourceAddressSet"
+        },
+        "SourcePortRanges": {
+          "shape": "PortRangeList",
+          "documentation": "<p>The source port ranges.</p>",
+          "locationName": "sourcePortRangeSet"
+        }
+      },
+      "documentation": "<p>Describes a header. Reflects any changes made by a component as traffic passes through. The fields of an inbound header are null except for the first component of a path.</p>"
+    },
+    "AnalysisRouteTableRoute": {
+      "type": "structure",
+      "members": {
+        "DestinationCidr": {
+          "shape": "String",
+          "documentation": "<p>The destination IPv4 address, in CIDR notation.</p>",
+          "locationName": "destinationCidr"
+        },
+        "DestinationPrefixListId": {
+          "shape": "String",
+          "documentation": "<p>The prefix of the AWS service.</p>",
+          "locationName": "destinationPrefixListId"
+        },
+        "EgressOnlyInternetGatewayId": {
+          "shape": "String",
+          "documentation": "<p>The ID of an egress-only internet gateway.</p>",
+          "locationName": "egressOnlyInternetGatewayId"
+        },
+        "GatewayId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the gateway, such as an internet gateway or virtual private gateway.</p>",
+          "locationName": "gatewayId"
+        },
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the instance, such as a NAT instance.</p>",
+          "locationName": "instanceId"
+        },
+        "NatGatewayId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a NAT gateway.</p>",
+          "locationName": "natGatewayId"
+        },
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a network interface.</p>",
+          "locationName": "networkInterfaceId"
+        },
+        "Origin": {
+          "shape": "String",
+          "documentation": "<p>Describes how the route was created. The following are possible values:</p> <ul> <li> <p> <code>CreateRouteTable</code> - The route was automatically created when the route table was created.</p> </li> <li> <p> <code>CreateRoute</code> - The route was manually added to the route table.</p> </li> <li> <p> <code>EnableVgwRoutePropagation</code> - The route was propagated by route propagation.</p> </li> </ul>",
+          "locationName": "origin"
+        },
+        "TransitGatewayId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a transit gateway.</p>",
+          "locationName": "transitGatewayId"
+        },
+        "VpcPeeringConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a VPC peering connection.</p>",
+          "locationName": "vpcPeeringConnectionId"
+        }
+      },
+      "documentation": "<p>Describes a route table route.</p>"
+    },
+    "AnalysisSecurityGroupRule": {
+      "type": "structure",
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address range, in CIDR notation.</p>",
+          "locationName": "cidr"
+        },
+        "Direction": {
+          "shape": "String",
+          "documentation": "<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
+          "locationName": "direction"
+        },
+        "SecurityGroupId": {
+          "shape": "String",
+          "documentation": "<p>The security group ID.</p>",
+          "locationName": "securityGroupId"
+        },
+        "PortRange": {
+          "shape": "PortRange",
+          "documentation": "<p>The port range.</p>",
+          "locationName": "portRange"
+        },
+        "PrefixListId": {
+          "shape": "String",
+          "documentation": "<p>The prefix list ID.</p>",
+          "locationName": "prefixListId"
+        },
+        "Protocol": {
+          "shape": "String",
+          "documentation": "<p>The protocol name.</p>",
+          "locationName": "protocol"
+        }
+      },
+      "documentation": "<p>Describes a security group rule.</p>"
+    },
+    "AnalysisStatus": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed"
+      ]
+    },
     "ApplianceModeSupportValue": {
       "type": "string",
       "enum": [
@@ -6401,6 +6882,13 @@
         "x86_64",
         "arm64"
       ]
+    },
+    "ArnList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceArn",
+        "locationName": "item"
+      }
     },
     "AssignIpv6AddressesRequest": {
       "type": "structure",
@@ -6764,7 +7252,7 @@
           "documentation": "<p>The ID of the transit gateway attachment to associate with the transit gateway multicast domain.</p>"
         },
         "SubnetIds": {
-          "shape": "ValueStringList",
+          "shape": "TransitGatewaySubnetIdList",
           "documentation": "<p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>"
         },
         "DryRun": {
@@ -7360,6 +7848,13 @@
         }
       }
     },
+    "AutoAcceptSharedAssociationsValue": {
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
     "AutoAcceptSharedAttachmentsValue": {
       "type": "string",
       "enum": [
@@ -7532,6 +8027,13 @@
         "cancelled_running",
         "cancelled_terminating",
         "modifying"
+      ]
+    },
+    "BgpStatus": {
+      "type": "string",
+      "enum": [
+        "up",
+        "down"
       ]
     },
     "BillingProductList": {
@@ -10830,6 +11332,65 @@
         }
       }
     },
+    "CreateNetworkInsightsPathRequest": {
+      "type": "structure",
+      "required": [
+        "Source",
+        "Destination",
+        "Protocol",
+        "ClientToken"
+      ],
+      "members": {
+        "SourceIp": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IP address of the AWS resource that is the source of the path.</p>"
+        },
+        "DestinationIp": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IP address of the AWS resource that is the destination of the path.</p>"
+        },
+        "Source": {
+          "shape": "String",
+          "documentation": "<p>The AWS resource that is the source of the path.</p>"
+        },
+        "Destination": {
+          "shape": "String",
+          "documentation": "<p>The AWS resource that is the destination of the path.</p>"
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "documentation": "<p>The protocol.</p>"
+        },
+        "DestinationPort": {
+          "shape": "Port",
+          "documentation": "<p>The destination port.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to add to the path.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateNetworkInsightsPathResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsPath": {
+          "shape": "NetworkInsightsPath",
+          "documentation": "<p>Information about the path.</p>",
+          "locationName": "networkInsightsPath"
+        }
+      }
+    },
     "CreateNetworkInterfacePermissionRequest": {
       "type": "structure",
       "required": [
@@ -11600,6 +12161,104 @@
         }
       }
     },
+    "CreateTransitGatewayConnectPeerRequest": {
+      "type": "structure",
+      "required": [
+        "TransitGatewayAttachmentId",
+        "PeerAddress",
+        "InsideCidrBlocks"
+      ],
+      "members": {
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the Connect attachment.</p>"
+        },
+        "TransitGatewayAddress": {
+          "shape": "String",
+          "documentation": "<p>The peer IP address (GRE outer IP address) on the transit gateway side of the Connect peer, which must be specified from a transit gateway CIDR block. If not specified, Amazon automatically assigns the first available IP address from the transit gateway CIDR block.</p>"
+        },
+        "PeerAddress": {
+          "shape": "String",
+          "documentation": "<p>The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.</p>"
+        },
+        "BgpOptions": {
+          "shape": "TransitGatewayConnectRequestBgpOptions",
+          "documentation": "<p>The BGP options for the Connect peer.</p>"
+        },
+        "InsideCidrBlocks": {
+          "shape": "InsideCidrBlocksStringList",
+          "documentation": "<p>The range of inside IP addresses that are used for BGP peering. You must specify a size /29 IPv4 CIDR block from the <code>169.254.0.0/16</code> range. The first address from the range must be configured on the appliance as the BGP IP address. You can also optionally specify a size /125 IPv6 CIDR block from the <code>fd00::/8</code> range.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the Connect peer.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateTransitGatewayConnectPeerResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeer": {
+          "shape": "TransitGatewayConnectPeer",
+          "documentation": "<p>Information about the Connect peer.</p>",
+          "locationName": "transitGatewayConnectPeer"
+        }
+      }
+    },
+    "CreateTransitGatewayConnectRequest": {
+      "type": "structure",
+      "required": [
+        "TransportTransitGatewayAttachmentId",
+        "Options"
+      ],
+      "members": {
+        "TransportTransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.</p>"
+        },
+        "Options": {
+          "shape": "CreateTransitGatewayConnectRequestOptions",
+          "documentation": "<p>The Connect attachment options.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the Connect attachment.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateTransitGatewayConnectRequestOptions": {
+      "type": "structure",
+      "required": [
+        "Protocol"
+      ],
+      "members": {
+        "Protocol": {
+          "shape": "ProtocolValue",
+          "documentation": "<p>The tunnel protocol.</p>"
+        }
+      },
+      "documentation": "<p>The options for a Connect attachment.</p>"
+    },
+    "CreateTransitGatewayConnectResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnect": {
+          "shape": "TransitGatewayConnect",
+          "documentation": "<p>Information about the Connect attachment.</p>",
+          "locationName": "transitGatewayConnect"
+        }
+      }
+    },
     "CreateTransitGatewayMulticastDomainRequest": {
       "type": "structure",
       "required": [
@@ -11609,6 +12268,10 @@
         "TransitGatewayId": {
           "shape": "TransitGatewayId",
           "documentation": "<p>The ID of the transit gateway.</p>"
+        },
+        "Options": {
+          "shape": "CreateTransitGatewayMulticastDomainRequestOptions",
+          "documentation": "<p>The options for the transit gateway multicast domain.</p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -11620,6 +12283,24 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
       }
+    },
+    "CreateTransitGatewayMulticastDomainRequestOptions": {
+      "type": "structure",
+      "members": {
+        "Igmpv2Support": {
+          "shape": "Igmpv2SupportValue",
+          "documentation": "<p>Specify whether to enable Internet Group Management Protocol (IGMP) version 2 for the transit gateway multicast domain.</p>"
+        },
+        "StaticSourcesSupport": {
+          "shape": "StaticSourcesSupportValue",
+          "documentation": "<p>Specify whether to enable support for statically configuring multicast group sources for a domain.</p>"
+        },
+        "AutoAcceptSharedAssociations": {
+          "shape": "AutoAcceptSharedAssociationsValue",
+          "documentation": "<p>Indicates whether to automatically accept cross-account subnet associations that are associated with the transit gateway multicast domain.</p>"
+        }
+      },
+      "documentation": "<p>The options for the transit gateway multicast domain.</p>"
     },
     "CreateTransitGatewayMulticastDomainResult": {
       "type": "structure",
@@ -11860,7 +12541,7 @@
         },
         "Ipv6Support": {
           "shape": "Ipv6SupportValue",
-          "documentation": "<p>Enable or disable IPv6 support.</p>"
+          "documentation": "<p>Enable or disable IPv6 support. The default is <code>disable</code>.</p>"
         },
         "ApplianceModeSupport": {
           "shape": "ApplianceModeSupportValue",
@@ -13142,6 +13823,58 @@
         }
       }
     },
+    "DeleteNetworkInsightsAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkInsightsAnalysisId"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "NetworkInsightsAnalysisId": {
+          "shape": "NetworkInsightsAnalysisId",
+          "documentation": "<p>The ID of the network insights analysis.</p>"
+        }
+      }
+    },
+    "DeleteNetworkInsightsAnalysisResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsAnalysisId": {
+          "shape": "NetworkInsightsAnalysisId",
+          "documentation": "<p>The ID of the network insights analysis.</p>",
+          "locationName": "networkInsightsAnalysisId"
+        }
+      }
+    },
+    "DeleteNetworkInsightsPathRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkInsightsPathId"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path.</p>"
+        }
+      }
+    },
+    "DeleteNetworkInsightsPathResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path.</p>",
+          "locationName": "networkInsightsPathId"
+        }
+      }
+    },
     "DeleteNetworkInterfacePermissionRequest": {
       "type": "structure",
       "required": [
@@ -13513,6 +14246,58 @@
           "shape": "String",
           "documentation": "<p>The ID of the deleted Traffic Mirror target.</p>",
           "locationName": "trafficMirrorTargetId"
+        }
+      }
+    },
+    "DeleteTransitGatewayConnectPeerRequest": {
+      "type": "structure",
+      "required": [
+        "TransitGatewayConnectPeerId"
+      ],
+      "members": {
+        "TransitGatewayConnectPeerId": {
+          "shape": "TransitGatewayConnectPeerId",
+          "documentation": "<p>The ID of the Connect peer.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTransitGatewayConnectPeerResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeer": {
+          "shape": "TransitGatewayConnectPeer",
+          "documentation": "<p>Information about the deleted Connect peer.</p>",
+          "locationName": "transitGatewayConnectPeer"
+        }
+      }
+    },
+    "DeleteTransitGatewayConnectRequest": {
+      "type": "structure",
+      "required": [
+        "TransitGatewayAttachmentId"
+      ],
+      "members": {
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the Connect attachment.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTransitGatewayConnectResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnect": {
+          "shape": "TransitGatewayConnect",
+          "documentation": "<p>Information about the deleted Connect attachment.</p>",
+          "locationName": "transitGatewayConnect"
         }
       }
     },
@@ -16713,6 +17498,102 @@
         }
       }
     },
+    "DescribeNetworkInsightsAnalysesRequest": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsAnalysisIds": {
+          "shape": "NetworkInsightsAnalysisIdList",
+          "documentation": "<p>The ID of the network insights analyses. You must specify either analysis IDs or a path ID.</p>",
+          "locationName": "NetworkInsightsAnalysisId"
+        },
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path. You must specify either a path ID or analysis IDs.</p>"
+        },
+        "AnalysisStartTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time when the network insights analyses started.</p>"
+        },
+        "AnalysisEndTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time when the network insights analyses ended.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters. The following are possible values:</p> <ul> <li> <p>PathFound - A Boolean value that indicates whether a feasible path is found.</p> </li> <li> <p>Status - The status of the analysis (running | succeeded | failed).</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "NetworkInsightsMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeNetworkInsightsAnalysesResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsAnalyses": {
+          "shape": "NetworkInsightsAnalysisList",
+          "documentation": "<p>Information about the network insights analyses.</p>",
+          "locationName": "networkInsightsAnalysisSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeNetworkInsightsPathsRequest": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsPathIds": {
+          "shape": "NetworkInsightsPathIdList",
+          "documentation": "<p>The IDs of the paths.</p>",
+          "locationName": "NetworkInsightsPathId"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters. The following are possible values:</p> <ul> <li> <p>Destination - The ID of the resource.</p> </li> <li> <p>DestinationPort - The destination port.</p> </li> <li> <p>Name - The path name.</p> </li> <li> <p>Protocol - The protocol.</p> </li> <li> <p>Source - The ID of the resource.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "NetworkInsightsMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeNetworkInsightsPathsResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsPaths": {
+          "shape": "NetworkInsightsPathList",
+          "documentation": "<p>Information about the paths.</p>",
+          "locationName": "networkInsightsPathSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeNetworkInterfaceAttributeRequest": {
       "type": "structure",
       "required": [
@@ -18167,7 +19048,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -18191,6 +19072,88 @@
           "shape": "TransitGatewayAttachmentList",
           "documentation": "<p>Information about the attachments.</p>",
           "locationName": "transitGatewayAttachments"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeTransitGatewayConnectPeersRequest": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerIds": {
+          "shape": "TransitGatewayConnectPeerIdStringList",
+          "documentation": "<p>The IDs of the Connect peers.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>state</code> - The state of the Connect peer (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-connect-peer-id</code> - The ID of the Connect peer.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "TransitGatewayMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeTransitGatewayConnectPeersResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeers": {
+          "shape": "TransitGatewayConnectPeerList",
+          "documentation": "<p>Information about the Connect peers.</p>",
+          "locationName": "transitGatewayConnectPeerSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeTransitGatewayConnectsRequest": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAttachmentIds": {
+          "shape": "TransitGatewayAttachmentIdStringList",
+          "documentation": "<p>The IDs of the attachments.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.protocol</code> - The tunnel protocol (<code>gre</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>initiating</code> | <code>initiatingRequest</code> | <code>pendingAcceptance</code> | <code>rollingBack</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code> | <code>rejecting</code> | <code>failing</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the Connect attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transport-transit-gateway-attachment-id</code> - The ID of the transit gateway attachment from which the Connect attachment was created.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "TransitGatewayMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeTransitGatewayConnectsResult": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnects": {
+          "shape": "TransitGatewayConnectList",
+          "documentation": "<p>Information about the Connect attachments.</p>",
+          "locationName": "transitGatewayConnectSet"
         },
         "NextToken": {
           "shape": "String",
@@ -19792,7 +20755,7 @@
           "documentation": "<p>The ID of the attachment.</p>"
         },
         "SubnetIds": {
-          "shape": "ValueStringList",
+          "shape": "TransitGatewaySubnetIdList",
           "documentation": "<p>The IDs of the subnets;</p>"
         },
         "DryRun": {
@@ -20930,6 +21893,244 @@
       "member": {
         "shape": "String",
         "locationName": "ExecutableBy"
+      }
+    },
+    "Explanation": {
+      "type": "structure",
+      "members": {
+        "Acl": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The network ACL.</p>",
+          "locationName": "acl"
+        },
+        "AclRule": {
+          "shape": "AnalysisAclRule",
+          "documentation": "<p>The network ACL rule.</p>",
+          "locationName": "aclRule"
+        },
+        "Address": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IPv4 address, in CIDR notation.</p>",
+          "locationName": "address"
+        },
+        "Addresses": {
+          "shape": "IpAddressList",
+          "documentation": "<p>The IPv4 addresses, in CIDR notation.</p>",
+          "locationName": "addressSet"
+        },
+        "AttachedTo": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The resource to which the component is attached.</p>",
+          "locationName": "attachedTo"
+        },
+        "AvailabilityZones": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The Availability Zones.</p>",
+          "locationName": "availabilityZoneSet"
+        },
+        "Cidrs": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The CIDR ranges.</p>",
+          "locationName": "cidrSet"
+        },
+        "Component": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The component.</p>",
+          "locationName": "component"
+        },
+        "CustomerGateway": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The customer gateway.</p>",
+          "locationName": "customerGateway"
+        },
+        "Destination": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The destination.</p>",
+          "locationName": "destination"
+        },
+        "DestinationVpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The destination VPC.</p>",
+          "locationName": "destinationVpc"
+        },
+        "Direction": {
+          "shape": "String",
+          "documentation": "<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
+          "locationName": "direction"
+        },
+        "ExplanationCode": {
+          "shape": "String",
+          "documentation": "<p>The explanation code.</p>",
+          "locationName": "explanationCode"
+        },
+        "IngressRouteTable": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The route table.</p>",
+          "locationName": "ingressRouteTable"
+        },
+        "InternetGateway": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The internet gateway.</p>",
+          "locationName": "internetGateway"
+        },
+        "LoadBalancerArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>",
+          "locationName": "loadBalancerArn"
+        },
+        "ClassicLoadBalancerListener": {
+          "shape": "AnalysisLoadBalancerListener",
+          "documentation": "<p>The listener for a Classic Load Balancer.</p>",
+          "locationName": "classicLoadBalancerListener"
+        },
+        "LoadBalancerListenerPort": {
+          "shape": "Port",
+          "documentation": "<p>The listener port of the load balancer.</p>",
+          "locationName": "loadBalancerListenerPort"
+        },
+        "LoadBalancerTarget": {
+          "shape": "AnalysisLoadBalancerTarget",
+          "documentation": "<p>The target.</p>",
+          "locationName": "loadBalancerTarget"
+        },
+        "LoadBalancerTargetGroup": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The target group.</p>",
+          "locationName": "loadBalancerTargetGroup"
+        },
+        "LoadBalancerTargetGroups": {
+          "shape": "AnalysisComponentList",
+          "documentation": "<p>The target groups.</p>",
+          "locationName": "loadBalancerTargetGroupSet"
+        },
+        "LoadBalancerTargetPort": {
+          "shape": "Port",
+          "documentation": "<p>The target port.</p>",
+          "locationName": "loadBalancerTargetPort"
+        },
+        "ElasticLoadBalancerListener": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The load balancer listener.</p>",
+          "locationName": "elasticLoadBalancerListener"
+        },
+        "MissingComponent": {
+          "shape": "String",
+          "documentation": "<p>The missing component.</p>",
+          "locationName": "missingComponent"
+        },
+        "NatGateway": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The NAT gateway.</p>",
+          "locationName": "natGateway"
+        },
+        "NetworkInterface": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The network interface.</p>",
+          "locationName": "networkInterface"
+        },
+        "PacketField": {
+          "shape": "String",
+          "documentation": "<p>The packet field.</p>",
+          "locationName": "packetField"
+        },
+        "VpcPeeringConnection": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The VPC peering connection.</p>",
+          "locationName": "vpcPeeringConnection"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port.</p>",
+          "locationName": "port"
+        },
+        "PortRanges": {
+          "shape": "PortRangeList",
+          "documentation": "<p>The port ranges.</p>",
+          "locationName": "portRangeSet"
+        },
+        "PrefixList": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The prefix list.</p>",
+          "locationName": "prefixList"
+        },
+        "Protocols": {
+          "shape": "StringList",
+          "documentation": "<p>The protocols.</p>",
+          "locationName": "protocolSet"
+        },
+        "RouteTableRoute": {
+          "shape": "AnalysisRouteTableRoute",
+          "documentation": "<p>The route table route.</p>",
+          "locationName": "routeTableRoute"
+        },
+        "RouteTable": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The route table.</p>",
+          "locationName": "routeTable"
+        },
+        "SecurityGroup": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The security group.</p>",
+          "locationName": "securityGroup"
+        },
+        "SecurityGroupRule": {
+          "shape": "AnalysisSecurityGroupRule",
+          "documentation": "<p>The security group rule.</p>",
+          "locationName": "securityGroupRule"
+        },
+        "SecurityGroups": {
+          "shape": "AnalysisComponentList",
+          "documentation": "<p>The security groups.</p>",
+          "locationName": "securityGroupSet"
+        },
+        "SourceVpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The source VPC.</p>",
+          "locationName": "sourceVpc"
+        },
+        "State": {
+          "shape": "String",
+          "documentation": "<p>The state.</p>",
+          "locationName": "state"
+        },
+        "Subnet": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The subnet.</p>",
+          "locationName": "subnet"
+        },
+        "SubnetRouteTable": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The route table for the subnet.</p>",
+          "locationName": "subnetRouteTable"
+        },
+        "Vpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The component VPC.</p>",
+          "locationName": "vpc"
+        },
+        "VpcEndpoint": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The VPC endpoint.</p>",
+          "locationName": "vpcEndpoint"
+        },
+        "VpnConnection": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The VPN connection.</p>",
+          "locationName": "vpnConnection"
+        },
+        "VpnGateway": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The VPN gateway.</p>",
+          "locationName": "vpnGateway"
+        }
+      },
+      "documentation": "<p>Describes an explanation code for an unreachable path. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html\">Reachability Analyzer explanation codes</a>.</p>"
+    },
+    "ExplanationList": {
+      "type": "list",
+      "member": {
+        "shape": "Explanation",
+        "locationName": "item"
       }
     },
     "ExportClientVpnClientCertificateRevocationListRequest": {
@@ -22964,7 +24165,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -23008,7 +24209,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -23729,6 +24930,13 @@
         "shape": "IdFormat",
         "locationName": "item"
       }
+    },
+    "Igmpv2SupportValue": {
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
     },
     "Image": {
       "type": "structure",
@@ -24773,6 +25981,13 @@
     },
     "InferenceDeviceName": {
       "type": "string"
+    },
+    "InsideCidrBlocksStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "Instance": {
       "type": "structure",
@@ -26678,6 +27893,19 @@
       "type": "list",
       "member": {
         "shape": "InternetGateway",
+        "locationName": "item"
+      }
+    },
+    "IpAddress": {
+      "type": "string",
+      "max": 15,
+      "min": 0,
+      "pattern": "^([0-9]{1,3}.){3}[0-9]{1,3}$"
+    },
+    "IpAddressList": {
+      "type": "list",
+      "member": {
+        "shape": "IpAddress",
         "locationName": "item"
       }
     },
@@ -30020,6 +31248,14 @@
     "ModifyTransitGatewayOptions": {
       "type": "structure",
       "members": {
+        "AddTransitGatewayCidrBlocks": {
+          "shape": "TransitGatewayCidrBlockStringList",
+          "documentation": "<p>Adds IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.</p>"
+        },
+        "RemoveTransitGatewayCidrBlocks": {
+          "shape": "TransitGatewayCidrBlockStringList",
+          "documentation": "<p>Removes CIDR blocks for the transit gateway.</p>"
+        },
         "VpnEcmpSupport": {
           "shape": "VpnEcmpSupportValue",
           "documentation": "<p>Enable or disable Equal Cost Multipath Protocol support.</p>"
@@ -31224,6 +32460,172 @@
       },
       "documentation": "<p>Describes the networking features of the instance type.</p>"
     },
+    "NetworkInsightsAnalysis": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsAnalysisId": {
+          "shape": "NetworkInsightsAnalysisId",
+          "documentation": "<p>The ID of the network insights analysis.</p>",
+          "locationName": "networkInsightsAnalysisId"
+        },
+        "NetworkInsightsAnalysisArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the network insights analysis.</p>",
+          "locationName": "networkInsightsAnalysisArn"
+        },
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path.</p>",
+          "locationName": "networkInsightsPathId"
+        },
+        "FilterInArns": {
+          "shape": "ArnList",
+          "documentation": "<p>The Amazon Resource Names (ARN) of the AWS resources that the path must traverse.</p>",
+          "locationName": "filterInArnSet"
+        },
+        "StartDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time the analysis started.</p>",
+          "locationName": "startDate"
+        },
+        "Status": {
+          "shape": "AnalysisStatus",
+          "documentation": "<p>The status of the network insights analysis.</p>",
+          "locationName": "status"
+        },
+        "StatusMessage": {
+          "shape": "String",
+          "documentation": "<p>The status message, if the status is <code>failed</code>.</p>",
+          "locationName": "statusMessage"
+        },
+        "NetworkPathFound": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the destination is reachable from the source.</p>",
+          "locationName": "networkPathFound"
+        },
+        "ForwardPathComponents": {
+          "shape": "PathComponentList",
+          "documentation": "<p>The components in the path from source to destination.</p>",
+          "locationName": "forwardPathComponentSet"
+        },
+        "ReturnPathComponents": {
+          "shape": "PathComponentList",
+          "documentation": "<p>The components in the path from destination to source.</p>",
+          "locationName": "returnPathComponentSet"
+        },
+        "Explanations": {
+          "shape": "ExplanationList",
+          "documentation": "<p>The explanations. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html\">Reachability Analyzer explanation codes</a>.</p>",
+          "locationName": "explanationSet"
+        },
+        "AlternatePathHints": {
+          "shape": "AlternatePathHintList",
+          "documentation": "<p>Potential intermediate components.</p>",
+          "locationName": "alternatePathHintSet"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a network insights analysis.</p>"
+    },
+    "NetworkInsightsAnalysisId": {
+      "type": "string"
+    },
+    "NetworkInsightsAnalysisIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInsightsAnalysisId",
+        "locationName": "item"
+      }
+    },
+    "NetworkInsightsAnalysisList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInsightsAnalysis",
+        "locationName": "item"
+      }
+    },
+    "NetworkInsightsMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "NetworkInsightsPath": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path.</p>",
+          "locationName": "networkInsightsPathId"
+        },
+        "NetworkInsightsPathArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the path.</p>",
+          "locationName": "networkInsightsPathArn"
+        },
+        "CreatedDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time stamp when the path was created.</p>",
+          "locationName": "createdDate"
+        },
+        "Source": {
+          "shape": "String",
+          "documentation": "<p>The AWS resource that is the source of the path.</p>",
+          "locationName": "source"
+        },
+        "Destination": {
+          "shape": "String",
+          "documentation": "<p>The AWS resource that is the destination of the path.</p>",
+          "locationName": "destination"
+        },
+        "SourceIp": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IP address of the AWS resource that is the source of the path.</p>",
+          "locationName": "sourceIp"
+        },
+        "DestinationIp": {
+          "shape": "IpAddress",
+          "documentation": "<p>The IP address of the AWS resource that is the destination of the path.</p>",
+          "locationName": "destinationIp"
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "documentation": "<p>The protocol.</p>",
+          "locationName": "protocol"
+        },
+        "DestinationPort": {
+          "shape": "Integer",
+          "documentation": "<p>The destination port.</p>",
+          "locationName": "destinationPort"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags associated with the path.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a path.</p>"
+    },
+    "NetworkInsightsPathId": {
+      "type": "string"
+    },
+    "NetworkInsightsPathIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInsightsPathId",
+        "locationName": "item"
+      }
+    },
+    "NetworkInsightsPathList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInsightsPath",
+        "locationName": "item"
+      }
+    },
     "NetworkInterface": {
       "type": "structure",
       "members": {
@@ -31767,6 +33169,74 @@
         "locationName": "Owner"
       }
     },
+    "PathComponent": {
+      "type": "structure",
+      "members": {
+        "SequenceNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The sequence number.</p>",
+          "locationName": "sequenceNumber"
+        },
+        "AclRule": {
+          "shape": "AnalysisAclRule",
+          "documentation": "<p>The network ACL rule.</p>",
+          "locationName": "aclRule"
+        },
+        "Component": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The component.</p>",
+          "locationName": "component"
+        },
+        "DestinationVpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The destination VPC.</p>",
+          "locationName": "destinationVpc"
+        },
+        "OutboundHeader": {
+          "shape": "AnalysisPacketHeader",
+          "documentation": "<p>The outbound header.</p>",
+          "locationName": "outboundHeader"
+        },
+        "InboundHeader": {
+          "shape": "AnalysisPacketHeader",
+          "documentation": "<p>The inbound header.</p>",
+          "locationName": "inboundHeader"
+        },
+        "RouteTableRoute": {
+          "shape": "AnalysisRouteTableRoute",
+          "documentation": "<p>The route table route.</p>",
+          "locationName": "routeTableRoute"
+        },
+        "SecurityGroupRule": {
+          "shape": "AnalysisSecurityGroupRule",
+          "documentation": "<p>The security group rule.</p>",
+          "locationName": "securityGroupRule"
+        },
+        "SourceVpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The source VPC.</p>",
+          "locationName": "sourceVpc"
+        },
+        "Subnet": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The subnet.</p>",
+          "locationName": "subnet"
+        },
+        "Vpc": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The component VPC.</p>",
+          "locationName": "vpc"
+        }
+      },
+      "documentation": "<p>Describes a path component.</p>"
+    },
+    "PathComponentList": {
+      "type": "list",
+      "member": {
+        "shape": "PathComponent",
+        "locationName": "item"
+      }
+    },
     "PaymentOption": {
       "type": "string",
       "enum": [
@@ -32280,6 +33750,11 @@
       "max": 10,
       "min": 1
     },
+    "Port": {
+      "type": "integer",
+      "max": 65535,
+      "min": 1
+    },
     "PortRange": {
       "type": "structure",
       "members": {
@@ -32295,6 +33770,13 @@
         }
       },
       "documentation": "<p>Describes a range of ports.</p>"
+    },
+    "PortRangeList": {
+      "type": "list",
+      "member": {
+        "shape": "PortRange",
+        "locationName": "item"
+      }
     },
     "PrefixList": {
       "type": "structure",
@@ -32710,6 +34192,19 @@
         "shape": "PropagatingVgw",
         "locationName": "item"
       }
+    },
+    "Protocol": {
+      "type": "string",
+      "enum": [
+        "tcp",
+        "udp"
+      ]
+    },
+    "ProtocolValue": {
+      "type": "string",
+      "enum": [
+        "gre"
+      ]
     },
     "ProvisionByoipCidrRequest": {
       "type": "structure",
@@ -33392,6 +34887,36 @@
           "shape": "TransitGatewayMulticastRegisteredGroupSources",
           "documentation": "<p>Information about the transit gateway multicast group sources.</p>",
           "locationName": "registeredMulticastGroupSources"
+        }
+      }
+    },
+    "RejectTransitGatewayMulticastDomainAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayMulticastDomainId": {
+          "shape": "TransitGatewayMulticastDomainId",
+          "documentation": "<p>The ID of the transit gateway multicast domain.</p>"
+        },
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the transit gateway attachment.</p>"
+        },
+        "SubnetIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "RejectTransitGatewayMulticastDomainAssociationsResult": {
+      "type": "structure",
+      "members": {
+        "Associations": {
+          "shape": "TransitGatewayMulticastDomainAssociations",
+          "locationName": "associations"
         }
       }
     },
@@ -35034,6 +36559,8 @@
         "natgateway",
         "network-acl",
         "network-interface",
+        "network-insights-analysis",
+        "network-insights-path",
         "placement-group",
         "reserved-instances",
         "route-table",
@@ -35047,6 +36574,7 @@
         "traffic-mirror-target",
         "transit-gateway",
         "transit-gateway-attachment",
+        "transit-gateway-connect-peer",
         "transit-gateway-multicast-domain",
         "transit-gateway-route-table",
         "volume",
@@ -36588,7 +38116,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -38150,6 +39678,48 @@
         }
       }
     },
+    "StartNetworkInsightsAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkInsightsPathId",
+        "ClientToken"
+      ],
+      "members": {
+        "NetworkInsightsPathId": {
+          "shape": "NetworkInsightsPathId",
+          "documentation": "<p>The ID of the path.</p>"
+        },
+        "FilterInArns": {
+          "shape": "ArnList",
+          "documentation": "<p>The Amazon Resource Names (ARN) of the resources that the path must traverse.</p>",
+          "locationName": "FilterInArn"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply.</p>",
+          "locationName": "TagSpecification"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "StartNetworkInsightsAnalysisResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInsightsAnalysis": {
+          "shape": "NetworkInsightsAnalysis",
+          "documentation": "<p>Information about the network insights analysis.</p>",
+          "locationName": "networkInsightsAnalysis"
+        }
+      }
+    },
     "StartVpcEndpointServicePrivateDnsVerificationRequest": {
       "type": "structure",
       "required": [
@@ -38204,6 +39774,13 @@
         }
       },
       "documentation": "<p>Describes a state change.</p>"
+    },
+    "StaticSourcesSupportValue": {
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
     },
     "Status": {
       "type": "string",
@@ -38291,6 +39868,13 @@
     },
     "String": {
       "type": "string"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "Subnet": {
       "type": "structure",
@@ -38595,7 +40179,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>route-table</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-connect-peer</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
           "locationName": "resourceType"
         },
         "Tags": {
@@ -39451,6 +41035,44 @@
       },
       "documentation": "<p>Describes an association.</p>"
     },
+    "TransitGatewayAttachmentBgpConfiguration": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAsn": {
+          "shape": "Long",
+          "documentation": "<p>The transit gateway Autonomous System Number (ASN).</p>",
+          "locationName": "transitGatewayAsn"
+        },
+        "PeerAsn": {
+          "shape": "Long",
+          "documentation": "<p>The peer Autonomous System Number (ASN).</p>",
+          "locationName": "peerAsn"
+        },
+        "TransitGatewayAddress": {
+          "shape": "String",
+          "documentation": "<p>The interior BGP peer IP address for the transit gateway.</p>",
+          "locationName": "transitGatewayAddress"
+        },
+        "PeerAddress": {
+          "shape": "String",
+          "documentation": "<p>The interior BGP peer IP address for the appliance.</p>",
+          "locationName": "peerAddress"
+        },
+        "BgpStatus": {
+          "shape": "BgpStatus",
+          "documentation": "<p>The BGP status.</p>",
+          "locationName": "bgpStatus"
+        }
+      },
+      "documentation": "<p>The BGP configuration information.</p>"
+    },
+    "TransitGatewayAttachmentBgpConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "TransitGatewayAttachmentBgpConfiguration",
+        "locationName": "item"
+      }
+    },
     "TransitGatewayAttachmentId": {
       "type": "string"
     },
@@ -39496,6 +41118,7 @@
         "vpc",
         "vpn",
         "direct-connect-gateway",
+        "connect",
         "peering",
         "tgw-peering"
       ]
@@ -39517,6 +41140,175 @@
         "rejecting",
         "failing"
       ]
+    },
+    "TransitGatewayCidrBlockStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
+    },
+    "TransitGatewayConnect": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the Connect attachment.</p>",
+          "locationName": "transitGatewayAttachmentId"
+        },
+        "TransportTransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the attachment from which the Connect attachment was created.</p>",
+          "locationName": "transportTransitGatewayAttachmentId"
+        },
+        "TransitGatewayId": {
+          "shape": "TransitGatewayId",
+          "documentation": "<p>The ID of the transit gateway.</p>",
+          "locationName": "transitGatewayId"
+        },
+        "State": {
+          "shape": "TransitGatewayAttachmentState",
+          "documentation": "<p>The state of the attachment.</p>",
+          "locationName": "state"
+        },
+        "CreationTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The creation time.</p>",
+          "locationName": "creationTime"
+        },
+        "Options": {
+          "shape": "TransitGatewayConnectOptions",
+          "documentation": "<p>The Connect attachment options.</p>",
+          "locationName": "options"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the attachment.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a transit gateway Connect attachment.</p>"
+    },
+    "TransitGatewayConnectList": {
+      "type": "list",
+      "member": {
+        "shape": "TransitGatewayConnect",
+        "locationName": "item"
+      }
+    },
+    "TransitGatewayConnectOptions": {
+      "type": "structure",
+      "members": {
+        "Protocol": {
+          "shape": "ProtocolValue",
+          "documentation": "<p>The tunnel protocol.</p>",
+          "locationName": "protocol"
+        }
+      },
+      "documentation": "<p>Describes the Connect attachment options.</p>"
+    },
+    "TransitGatewayConnectPeer": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAttachmentId": {
+          "shape": "TransitGatewayAttachmentId",
+          "documentation": "<p>The ID of the Connect attachment.</p>",
+          "locationName": "transitGatewayAttachmentId"
+        },
+        "TransitGatewayConnectPeerId": {
+          "shape": "TransitGatewayConnectPeerId",
+          "documentation": "<p>The ID of the Connect peer.</p>",
+          "locationName": "transitGatewayConnectPeerId"
+        },
+        "State": {
+          "shape": "TransitGatewayConnectPeerState",
+          "documentation": "<p>The state of the Connect peer.</p>",
+          "locationName": "state"
+        },
+        "CreationTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The creation time.</p>",
+          "locationName": "creationTime"
+        },
+        "ConnectPeerConfiguration": {
+          "shape": "TransitGatewayConnectPeerConfiguration",
+          "documentation": "<p>The Connect peer details.</p>",
+          "locationName": "connectPeerConfiguration"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the Connect peer.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a transit gateway Connect peer.</p>"
+    },
+    "TransitGatewayConnectPeerConfiguration": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAddress": {
+          "shape": "String",
+          "documentation": "<p>The Connect peer IP address on the transit gateway side of the tunnel.</p>",
+          "locationName": "transitGatewayAddress"
+        },
+        "PeerAddress": {
+          "shape": "String",
+          "documentation": "<p>The Connect peer IP address on the appliance side of the tunnel.</p>",
+          "locationName": "peerAddress"
+        },
+        "InsideCidrBlocks": {
+          "shape": "InsideCidrBlocksStringList",
+          "documentation": "<p>The range of interior BGP peer IP addresses.</p>",
+          "locationName": "insideCidrBlocks"
+        },
+        "Protocol": {
+          "shape": "ProtocolValue",
+          "documentation": "<p>The tunnel protocol.</p>",
+          "locationName": "protocol"
+        },
+        "BgpConfigurations": {
+          "shape": "TransitGatewayAttachmentBgpConfigurationList",
+          "documentation": "<p>The BGP configuration details.</p>",
+          "locationName": "bgpConfigurations"
+        }
+      },
+      "documentation": "<p>Describes the Connect peer details.</p>"
+    },
+    "TransitGatewayConnectPeerId": {
+      "type": "string"
+    },
+    "TransitGatewayConnectPeerIdStringList": {
+      "type": "list",
+      "member": {
+        "shape": "TransitGatewayConnectPeerId",
+        "locationName": "item"
+      }
+    },
+    "TransitGatewayConnectPeerList": {
+      "type": "list",
+      "member": {
+        "shape": "TransitGatewayConnectPeer",
+        "locationName": "item"
+      }
+    },
+    "TransitGatewayConnectPeerState": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "available",
+        "deleting",
+        "deleted"
+      ]
+    },
+    "TransitGatewayConnectRequestBgpOptions": {
+      "type": "structure",
+      "members": {
+        "PeerAsn": {
+          "shape": "Long",
+          "documentation": "<p>The peer Autonomous System Number (ASN).</p>"
+        }
+      },
+      "documentation": "<p>The BGP options for the Connect attachment.</p>"
     },
     "TransitGatewayId": {
       "type": "string"
@@ -39543,10 +41335,13 @@
     "TransitGatewayMulitcastDomainAssociationState": {
       "type": "string",
       "enum": [
+        "pendingAcceptance",
         "associating",
         "associated",
         "disassociating",
-        "disassociated"
+        "disassociated",
+        "rejected",
+        "failed"
       ]
     },
     "TransitGatewayMulticastDeregisteredGroupMembers": {
@@ -39604,6 +41399,21 @@
           "documentation": "<p>The ID of the transit gateway.</p>",
           "locationName": "transitGatewayId"
         },
+        "TransitGatewayMulticastDomainArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway multicast domain.</p>",
+          "locationName": "transitGatewayMulticastDomainArn"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p> The ID of the AWS account that owns the transit gateway multiicast domain.</p>",
+          "locationName": "ownerId"
+        },
+        "Options": {
+          "shape": "TransitGatewayMulticastDomainOptions",
+          "documentation": "<p>The options for the transit gateway multicast domain.</p>",
+          "locationName": "options"
+        },
         "State": {
           "shape": "TransitGatewayMulticastDomainState",
           "documentation": "<p>The state of the transit gateway multicast domain.</p>",
@@ -39639,6 +41449,11 @@
           "shape": "TransitGatewayAttachmentResourceType",
           "documentation": "<p>The type of resource, for example a VPC attachment.</p>",
           "locationName": "resourceType"
+        },
+        "ResourceOwnerId": {
+          "shape": "String",
+          "documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain association resource.</p>",
+          "locationName": "resourceOwnerId"
         },
         "Subnet": {
           "shape": "SubnetAssociation",
@@ -39678,6 +41493,11 @@
           "documentation": "<p>The type of resource, for example a VPC attachment.</p>",
           "locationName": "resourceType"
         },
+        "ResourceOwnerId": {
+          "shape": "String",
+          "documentation": "<p> The ID of the AWS account that owns the resource.</p>",
+          "locationName": "resourceOwnerId"
+        },
         "Subnets": {
           "shape": "SubnetAssociationList",
           "documentation": "<p>The subnets associated with the multicast domain.</p>",
@@ -39702,6 +41522,27 @@
         "shape": "TransitGatewayMulticastDomain",
         "locationName": "item"
       }
+    },
+    "TransitGatewayMulticastDomainOptions": {
+      "type": "structure",
+      "members": {
+        "Igmpv2Support": {
+          "shape": "Igmpv2SupportValue",
+          "documentation": "<p>Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain.</p>",
+          "locationName": "igmpv2Support"
+        },
+        "StaticSourcesSupport": {
+          "shape": "StaticSourcesSupportValue",
+          "documentation": "<p>Indicates whether support for statically configuring transit gateway multicast group sources is turned on.</p>",
+          "locationName": "staticSourcesSupport"
+        },
+        "AutoAcceptSharedAssociations": {
+          "shape": "AutoAcceptSharedAssociationsValue",
+          "documentation": "<p>Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain.</p>",
+          "locationName": "autoAcceptSharedAssociations"
+        }
+      },
+      "documentation": "<p>Describes the options for a transit gateway multicast domain.</p>"
     },
     "TransitGatewayMulticastDomainState": {
       "type": "string",
@@ -39739,6 +41580,11 @@
           "shape": "TransitGatewayAttachmentResourceType",
           "documentation": "<p>The type of resource, for example a VPC attachment.</p>",
           "locationName": "resourceType"
+        },
+        "ResourceOwnerId": {
+          "shape": "String",
+          "documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain group resource.</p>",
+          "locationName": "resourceOwnerId"
         },
         "NetworkInterfaceId": {
           "shape": "String",
@@ -39831,6 +41677,11 @@
           "shape": "Long",
           "documentation": "<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.</p>",
           "locationName": "amazonSideAsn"
+        },
+        "TransitGatewayCidrBlocks": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The transit gateway CIDR blocks.</p>",
+          "locationName": "transitGatewayCidrBlocks"
         },
         "AutoAcceptSharedAttachments": {
           "shape": "AutoAcceptSharedAttachmentsValue",
@@ -40066,6 +41917,10 @@
         "MulticastSupport": {
           "shape": "MulticastSupportValue",
           "documentation": "<p>Indicates whether multicast is enabled on the transit gateway</p>"
+        },
+        "TransitGatewayCidrBlocks": {
+          "shape": "TransitGatewayCidrBlockStringList",
+          "documentation": "<p>One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.</p>"
         }
       },
       "documentation": "<p>Describes the options for a transit gateway.</p>"

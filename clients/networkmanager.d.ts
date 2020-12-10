@@ -28,6 +28,22 @@ declare class NetworkManager extends Service {
    */
   associateLink(callback?: (err: AWSError, data: NetworkManager.Types.AssociateLinkResponse) => void): Request<NetworkManager.Types.AssociateLinkResponse, AWSError>;
   /**
+   * Associates a transit gateway Connect peer with a device, and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate transit gateway Connect peers that have been created on a transit gateway that's registered in your global network. You cannot associate a transit gateway Connect peer with more than one device and link. 
+   */
+  associateTransitGatewayConnectPeer(params: NetworkManager.Types.AssociateTransitGatewayConnectPeerRequest, callback?: (err: AWSError, data: NetworkManager.Types.AssociateTransitGatewayConnectPeerResponse) => void): Request<NetworkManager.Types.AssociateTransitGatewayConnectPeerResponse, AWSError>;
+  /**
+   * Associates a transit gateway Connect peer with a device, and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate transit gateway Connect peers that have been created on a transit gateway that's registered in your global network. You cannot associate a transit gateway Connect peer with more than one device and link. 
+   */
+  associateTransitGatewayConnectPeer(callback?: (err: AWSError, data: NetworkManager.Types.AssociateTransitGatewayConnectPeerResponse) => void): Request<NetworkManager.Types.AssociateTransitGatewayConnectPeerResponse, AWSError>;
+  /**
+   * Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.
+   */
+  createConnection(params: NetworkManager.Types.CreateConnectionRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateConnectionResponse) => void): Request<NetworkManager.Types.CreateConnectionResponse, AWSError>;
+  /**
+   * Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.
+   */
+  createConnection(callback?: (err: AWSError, data: NetworkManager.Types.CreateConnectionResponse) => void): Request<NetworkManager.Types.CreateConnectionResponse, AWSError>;
+  /**
    * Creates a new device in a global network. If you specify both a site ID and a location, the location of the site is used for visualization in the Network Manager console.
    */
   createDevice(params: NetworkManager.Types.CreateDeviceRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateDeviceResponse) => void): Request<NetworkManager.Types.CreateDeviceResponse, AWSError>;
@@ -59,6 +75,14 @@ declare class NetworkManager extends Service {
    * Creates a new site in a global network.
    */
   createSite(callback?: (err: AWSError, data: NetworkManager.Types.CreateSiteResponse) => void): Request<NetworkManager.Types.CreateSiteResponse, AWSError>;
+  /**
+   * Deletes the specified connection in your global network.
+   */
+  deleteConnection(params: NetworkManager.Types.DeleteConnectionRequest, callback?: (err: AWSError, data: NetworkManager.Types.DeleteConnectionResponse) => void): Request<NetworkManager.Types.DeleteConnectionResponse, AWSError>;
+  /**
+   * Deletes the specified connection in your global network.
+   */
+  deleteConnection(callback?: (err: AWSError, data: NetworkManager.Types.DeleteConnectionResponse) => void): Request<NetworkManager.Types.DeleteConnectionResponse, AWSError>;
   /**
    * Deletes an existing device. You must first disassociate the device from any links and customer gateways.
    */
@@ -124,6 +148,22 @@ declare class NetworkManager extends Service {
    */
   disassociateLink(callback?: (err: AWSError, data: NetworkManager.Types.DisassociateLinkResponse) => void): Request<NetworkManager.Types.DisassociateLinkResponse, AWSError>;
   /**
+   * Disassociates a transit gateway Connect peer from a device and link.
+   */
+  disassociateTransitGatewayConnectPeer(params: NetworkManager.Types.DisassociateTransitGatewayConnectPeerRequest, callback?: (err: AWSError, data: NetworkManager.Types.DisassociateTransitGatewayConnectPeerResponse) => void): Request<NetworkManager.Types.DisassociateTransitGatewayConnectPeerResponse, AWSError>;
+  /**
+   * Disassociates a transit gateway Connect peer from a device and link.
+   */
+  disassociateTransitGatewayConnectPeer(callback?: (err: AWSError, data: NetworkManager.Types.DisassociateTransitGatewayConnectPeerResponse) => void): Request<NetworkManager.Types.DisassociateTransitGatewayConnectPeerResponse, AWSError>;
+  /**
+   * Gets information about one or more of your connections in a global network.
+   */
+  getConnections(params: NetworkManager.Types.GetConnectionsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetConnectionsResponse) => void): Request<NetworkManager.Types.GetConnectionsResponse, AWSError>;
+  /**
+   * Gets information about one or more of your connections in a global network.
+   */
+  getConnections(callback?: (err: AWSError, data: NetworkManager.Types.GetConnectionsResponse) => void): Request<NetworkManager.Types.GetConnectionsResponse, AWSError>;
+  /**
    * Gets the association information for customer gateways that are associated with devices and links in your global network.
    */
   getCustomerGatewayAssociations(params: NetworkManager.Types.GetCustomerGatewayAssociationsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetCustomerGatewayAssociationsResponse) => void): Request<NetworkManager.Types.GetCustomerGatewayAssociationsResponse, AWSError>;
@@ -163,6 +203,14 @@ declare class NetworkManager extends Service {
    * Gets information about one or more of your sites in a global network.
    */
   getSites(callback?: (err: AWSError, data: NetworkManager.Types.GetSitesResponse) => void): Request<NetworkManager.Types.GetSitesResponse, AWSError>;
+  /**
+   * Gets information about one or more of your transit gateway Connect peer associations in a global network.
+   */
+  getTransitGatewayConnectPeerAssociations(params: NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse) => void): Request<NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse, AWSError>;
+  /**
+   * Gets information about one or more of your transit gateway Connect peer associations in a global network.
+   */
+  getTransitGatewayConnectPeerAssociations(callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse) => void): Request<NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse, AWSError>;
   /**
    * Gets information about the transit gateway registrations in a specified global network.
    */
@@ -204,6 +252,14 @@ declare class NetworkManager extends Service {
    */
   untagResource(callback?: (err: AWSError, data: NetworkManager.Types.UntagResourceResponse) => void): Request<NetworkManager.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the information for an existing connection. To remove information for any of the parameters, specify an empty string.
+   */
+  updateConnection(params: NetworkManager.Types.UpdateConnectionRequest, callback?: (err: AWSError, data: NetworkManager.Types.UpdateConnectionResponse) => void): Request<NetworkManager.Types.UpdateConnectionResponse, AWSError>;
+  /**
+   * Updates the information for an existing connection. To remove information for any of the parameters, specify an empty string.
+   */
+  updateConnection(callback?: (err: AWSError, data: NetworkManager.Types.UpdateConnectionResponse) => void): Request<NetworkManager.Types.UpdateConnectionResponse, AWSError>;
+  /**
    * Updates the details for an existing device. To remove information for any of the parameters, specify an empty string.
    */
   updateDevice(params: NetworkManager.Types.UpdateDeviceRequest, callback?: (err: AWSError, data: NetworkManager.Types.UpdateDeviceResponse) => void): Request<NetworkManager.Types.UpdateDeviceResponse, AWSError>;
@@ -237,6 +293,16 @@ declare class NetworkManager extends Service {
   updateSite(callback?: (err: AWSError, data: NetworkManager.Types.UpdateSiteResponse) => void): Request<NetworkManager.Types.UpdateSiteResponse, AWSError>;
 }
 declare namespace NetworkManager {
+  export interface AWSLocation {
+    /**
+     * The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+     */
+    Zone?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the subnet the device is located in.
+     */
+    SubnetArn?: String;
+  }
   export interface AssociateCustomerGatewayRequest {
     /**
      * The Amazon Resource Name (ARN) of the customer gateway. For more information, see Resources Defined by Amazon EC2.
@@ -281,6 +347,30 @@ declare namespace NetworkManager {
      */
     LinkAssociation?: LinkAssociation;
   }
+  export interface AssociateTransitGatewayConnectPeerRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The Amazon Resource Name (ARN) of the Connect peer.
+     */
+    TransitGatewayConnectPeerArn: String;
+    /**
+     * The ID of the device.
+     */
+    DeviceId: String;
+    /**
+     * The ID of the link.
+     */
+    LinkId?: String;
+  }
+  export interface AssociateTransitGatewayConnectPeerResponse {
+    /**
+     * The transit gateway Connect peer association.
+     */
+    TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation;
+  }
   export interface Bandwidth {
     /**
      * Upload speed in Mbps.
@@ -291,11 +381,99 @@ declare namespace NetworkManager {
      */
     DownloadSpeed?: Integer;
   }
+  export interface Connection {
+    /**
+     * The ID of the connection.
+     */
+    ConnectionId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the connection.
+     */
+    ConnectionArn?: String;
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId?: String;
+    /**
+     * The ID of the first device in the connection.
+     */
+    DeviceId?: String;
+    /**
+     * The ID of the second device in the connection.
+     */
+    ConnectedDeviceId?: String;
+    /**
+     * The ID of the link for the first device in the connection.
+     */
+    LinkId?: String;
+    /**
+     * The ID of the link for the second device in the connection.
+     */
+    ConnectedLinkId?: String;
+    /**
+     * The description of the connection.
+     */
+    Description?: String;
+    /**
+     * The date and time that the connection was created.
+     */
+    CreatedAt?: DateTime;
+    /**
+     * The state of the connection.
+     */
+    State?: ConnectionState;
+    /**
+     * The tags for the connection.
+     */
+    Tags?: TagList;
+  }
+  export type ConnectionList = Connection[];
+  export type ConnectionState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export interface CreateConnectionRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ID of the first device in the connection.
+     */
+    DeviceId: String;
+    /**
+     * The ID of the second device in the connection.
+     */
+    ConnectedDeviceId: String;
+    /**
+     * The ID of the link for the first device.
+     */
+    LinkId?: String;
+    /**
+     * The ID of the link for the second device.
+     */
+    ConnectedLinkId?: String;
+    /**
+     * A description of the connection. Length Constraints: Maximum length of 256 characters.
+     */
+    Description?: String;
+    /**
+     * The tags to apply to the resource during creation.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateConnectionResponse {
+    /**
+     * Information about the connection.
+     */
+    Connection?: Connection;
+  }
   export interface CreateDeviceRequest {
     /**
      * The ID of the global network.
      */
     GlobalNetworkId: String;
+    /**
+     * The AWS location of the device.
+     */
+    AWSLocation?: AWSLocation;
     /**
      * A description of the device. Length Constraints: Maximum length of 256 characters.
      */
@@ -436,6 +614,22 @@ declare namespace NetworkManager {
   export type CustomerGatewayAssociationList = CustomerGatewayAssociation[];
   export type CustomerGatewayAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
   export type DateTime = Date;
+  export interface DeleteConnectionRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ID of the connection.
+     */
+    ConnectionId: String;
+  }
+  export interface DeleteConnectionResponse {
+    /**
+     * Information about the connection.
+     */
+    Connection?: Connection;
+  }
   export interface DeleteDeviceRequest {
     /**
      * The ID of the global network.
@@ -550,6 +744,10 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId?: String;
     /**
+     * The AWS location of the device.
+     */
+    AWSLocation?: AWSLocation;
+    /**
      * The description of the device.
      */
     Description?: String;
@@ -627,6 +825,54 @@ declare namespace NetworkManager {
      * Information about the link association.
      */
     LinkAssociation?: LinkAssociation;
+  }
+  export interface DisassociateTransitGatewayConnectPeerRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+     */
+    TransitGatewayConnectPeerArn: String;
+  }
+  export interface DisassociateTransitGatewayConnectPeerResponse {
+    /**
+     * The transit gateway Connect peer association.
+     */
+    TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation;
+  }
+  export interface GetConnectionsRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * One or more connection IDs.
+     */
+    ConnectionIds?: StringList;
+    /**
+     * The ID of the device.
+     */
+    DeviceId?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetConnectionsResponse {
+    /**
+     * Information about the connections.
+     */
+    Connections?: ConnectionList;
+    /**
+     * The token to use for the next page of results.
+     */
+    NextToken?: String;
   }
   export interface GetCustomerGatewayAssociationsRequest {
     /**
@@ -785,6 +1031,34 @@ declare namespace NetworkManager {
     Sites?: SiteList;
     /**
      * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetTransitGatewayConnectPeerAssociationsRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+     */
+    TransitGatewayConnectPeerArns?: StringList;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetTransitGatewayConnectPeerAssociationsResponse {
+    /**
+     * Information about the transit gateway Connect peer associations.
+     */
+    TransitGatewayConnectPeerAssociations?: TransitGatewayConnectPeerAssociationList;
+    /**
+     * The token to use for the next page of results.
      */
     NextToken?: String;
   }
@@ -1021,6 +1295,30 @@ declare namespace NetworkManager {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TransitGatewayConnectPeerAssociation {
+    /**
+     * The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+     */
+    TransitGatewayConnectPeerArn?: String;
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId?: String;
+    /**
+     * The ID of the device.
+     */
+    DeviceId?: String;
+    /**
+     * The ID of the link.
+     */
+    LinkId?: String;
+    /**
+     * The state of the association.
+     */
+    State?: TransitGatewayConnectPeerAssociationState;
+  }
+  export type TransitGatewayConnectPeerAssociationList = TransitGatewayConnectPeerAssociation[];
+  export type TransitGatewayConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
   export interface TransitGatewayRegistration {
     /**
      * The ID of the global network.
@@ -1059,6 +1357,34 @@ declare namespace NetworkManager {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateConnectionRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ID of the connection.
+     */
+    ConnectionId: String;
+    /**
+     * The ID of the link for the first device in the connection.
+     */
+    LinkId?: String;
+    /**
+     * The ID of the link for the second device in the connection.
+     */
+    ConnectedLinkId?: String;
+    /**
+     * A description of the connection. Length Constraints: Maximum length of 256 characters.
+     */
+    Description?: String;
+  }
+  export interface UpdateConnectionResponse {
+    /**
+     * Information about the connection.
+     */
+    Connection?: Connection;
+  }
   export interface UpdateDeviceRequest {
     /**
      * The ID of the global network.
@@ -1068,6 +1394,10 @@ declare namespace NetworkManager {
      * The ID of the device.
      */
     DeviceId: String;
+    /**
+     * The AWS location of the device.
+     */
+    AWSLocation?: AWSLocation;
     /**
      * A description of the device. Length Constraints: Maximum length of 256 characters.
      */

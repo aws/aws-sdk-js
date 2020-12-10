@@ -87,6 +87,77 @@
       ],
       "documentation": "<p>Associates a link to a device. A device can be associated to multiple links and a link can be associated to multiple devices. The device and link must be in the same global network and the same site.</p>"
     },
+    "AssociateTransitGatewayConnectPeer": {
+      "name": "AssociateTransitGatewayConnectPeer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+      },
+      "input": {
+        "shape": "AssociateTransitGatewayConnectPeerRequest"
+      },
+      "output": {
+        "shape": "AssociateTransitGatewayConnectPeerResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associates a transit gateway Connect peer with a device, and optionally, with a link. If you specify a link, it must be associated with the specified device. </p> <p>You can only associate transit gateway Connect peers that have been created on a transit gateway that's registered in your global network.</p> <p>You cannot associate a transit gateway Connect peer with more than one device and link. </p>"
+    },
+    "CreateConnection": {
+      "name": "CreateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/global-networks/{globalNetworkId}/connections"
+      },
+      "input": {
+        "shape": "CreateConnectionRequest"
+      },
+      "output": {
+        "shape": "CreateConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.</p>"
+    },
     "CreateDevice": {
       "name": "CreateDevice",
       "http": {
@@ -231,6 +302,40 @@
         }
       ],
       "documentation": "<p>Creates a new site in a global network.</p>"
+    },
+    "DeleteConnection": {
+      "name": "DeleteConnection",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/connections/{connectionId}"
+      },
+      "input": {
+        "shape": "DeleteConnectionRequest"
+      },
+      "output": {
+        "shape": "DeleteConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified connection in your global network.</p>"
     },
     "DeleteDevice": {
       "name": "DeleteDevice",
@@ -501,6 +606,71 @@
       ],
       "documentation": "<p>Disassociates an existing device from a link. You must first disassociate any customer gateways that are associated with the link.</p>"
     },
+    "DisassociateTransitGatewayConnectPeer": {
+      "name": "DisassociateTransitGatewayConnectPeer",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations/{transitGatewayConnectPeerArn}"
+      },
+      "input": {
+        "shape": "DisassociateTransitGatewayConnectPeerRequest"
+      },
+      "output": {
+        "shape": "DisassociateTransitGatewayConnectPeerResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Disassociates a transit gateway Connect peer from a device and link.</p>"
+    },
+    "GetConnections": {
+      "name": "GetConnections",
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/connections"
+      },
+      "input": {
+        "shape": "GetConnectionsRequest"
+      },
+      "output": {
+        "shape": "GetConnectionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets information about one or more of your connections in a global network.</p>"
+    },
     "GetCustomerGatewayAssociations": {
       "name": "GetCustomerGatewayAssociations",
       "http": {
@@ -658,6 +828,40 @@
         }
       ],
       "documentation": "<p>Gets information about one or more of your sites in a global network.</p>"
+    },
+    "GetTransitGatewayConnectPeerAssociations": {
+      "name": "GetTransitGatewayConnectPeerAssociations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+      },
+      "input": {
+        "shape": "GetTransitGatewayConnectPeerAssociationsRequest"
+      },
+      "output": {
+        "shape": "GetTransitGatewayConnectPeerAssociationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets information about one or more of your transit gateway Connect peer associations in a global network.</p>"
     },
     "GetTransitGatewayRegistrations": {
       "name": "GetTransitGatewayRegistrations",
@@ -826,6 +1030,40 @@
       ],
       "documentation": "<p>Removes tags from a specified resource.</p>"
     },
+    "UpdateConnection": {
+      "name": "UpdateConnection",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/connections/{connectionId}"
+      },
+      "input": {
+        "shape": "UpdateConnectionRequest"
+      },
+      "output": {
+        "shape": "UpdateConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates the information for an existing connection. To remove information for any of the parameters, specify an empty string.</p>"
+    },
     "UpdateDevice": {
       "name": "UpdateDevice",
       "http": {
@@ -967,6 +1205,20 @@
     }
   },
   "shapes": {
+    "AWSLocation": {
+      "type": "structure",
+      "members": {
+        "Zone": {
+          "shape": "String",
+          "documentation": "<p>The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.</p>"
+        },
+        "SubnetArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the subnet the device is located in.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a location in AWS.</p>"
+    },
     "AssociateCustomerGatewayRequest": {
       "type": "structure",
       "required": [
@@ -1037,6 +1289,43 @@
         }
       }
     },
+    "AssociateTransitGatewayConnectPeerRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId",
+        "TransitGatewayConnectPeerArn",
+        "DeviceId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "TransitGatewayConnectPeerArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Connect peer.</p>"
+        },
+        "DeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the device.</p>"
+        },
+        "LinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link.</p>"
+        }
+      }
+    },
+    "AssociateTransitGatewayConnectPeerResponse": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerAssociation": {
+          "shape": "TransitGatewayConnectPeerAssociation",
+          "documentation": "<p>The transit gateway Connect peer association.</p>"
+        }
+      }
+    },
     "Bandwidth": {
       "type": "structure",
       "members": {
@@ -1051,6 +1340,120 @@
       },
       "documentation": "<p>Describes bandwidth information.</p>"
     },
+    "Connection": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the connection.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the connection.</p>"
+        },
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>"
+        },
+        "DeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the first device in the connection.</p>"
+        },
+        "ConnectedDeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the second device in the connection.</p>"
+        },
+        "LinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the first device in the connection.</p>"
+        },
+        "ConnectedLinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the second device in the connection.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the connection.</p>"
+        },
+        "CreatedAt": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the connection was created.</p>"
+        },
+        "State": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the connection.</p>"
+        }
+      },
+      "documentation": "<p>Describes a connection.</p>"
+    },
+    "ConnectionList": {
+      "type": "list",
+      "member": {
+        "shape": "Connection"
+      }
+    },
+    "ConnectionState": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "AVAILABLE",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "CreateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId",
+        "DeviceId",
+        "ConnectedDeviceId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "DeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the first device in the connection.</p>"
+        },
+        "ConnectedDeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the second device in the connection.</p>"
+        },
+        "LinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the first device.</p>"
+        },
+        "ConnectedLinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the second device.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to apply to the resource during creation.</p>"
+        }
+      }
+    },
+    "CreateConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "Connection": {
+          "shape": "Connection",
+          "documentation": "<p>Information about the connection.</p>"
+        }
+      }
+    },
     "CreateDeviceRequest": {
       "type": "structure",
       "required": [
@@ -1062,6 +1465,10 @@
           "documentation": "<p>The ID of the global network.</p>",
           "location": "uri",
           "locationName": "globalNetworkId"
+        },
+        "AWSLocation": {
+          "shape": "AWSLocation",
+          "documentation": "<p>The AWS location of the device.</p>"
         },
         "Description": {
           "shape": "String",
@@ -1255,6 +1662,36 @@
     },
     "DateTime": {
       "type": "timestamp"
+    },
+    "DeleteConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId",
+        "ConnectionId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the connection.</p>",
+          "location": "uri",
+          "locationName": "connectionId"
+        }
+      }
+    },
+    "DeleteConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "Connection": {
+          "shape": "Connection",
+          "documentation": "<p>Information about the connection.</p>"
+        }
+      }
     },
     "DeleteDeviceRequest": {
       "type": "structure",
@@ -1450,6 +1887,10 @@
           "shape": "String",
           "documentation": "<p>The ID of the global network.</p>"
         },
+        "AWSLocation": {
+          "shape": "AWSLocation",
+          "documentation": "<p>The AWS location of the device.</p>"
+        },
         "Description": {
           "shape": "String",
           "documentation": "<p>The description of the device.</p>"
@@ -1572,6 +2013,87 @@
         "LinkAssociation": {
           "shape": "LinkAssociation",
           "documentation": "<p>Information about the link association.</p>"
+        }
+      }
+    },
+    "DisassociateTransitGatewayConnectPeerRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId",
+        "TransitGatewayConnectPeerArn"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "TransitGatewayConnectPeerArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway Connect peer.</p>",
+          "location": "uri",
+          "locationName": "transitGatewayConnectPeerArn"
+        }
+      }
+    },
+    "DisassociateTransitGatewayConnectPeerResponse": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerAssociation": {
+          "shape": "TransitGatewayConnectPeerAssociation",
+          "documentation": "<p>The transit gateway Connect peer association.</p>"
+        }
+      }
+    },
+    "GetConnectionsRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "ConnectionIds": {
+          "shape": "StringList",
+          "documentation": "<p>One or more connection IDs.</p>",
+          "location": "querystring",
+          "locationName": "connectionIds"
+        },
+        "DeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the device.</p>",
+          "location": "querystring",
+          "locationName": "deviceId"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "GetConnectionsResponse": {
+      "type": "structure",
+      "members": {
+        "Connections": {
+          "shape": "ConnectionList",
+          "documentation": "<p>Information about the connections.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use for the next page of results.</p>"
         }
       }
     },
@@ -1830,6 +2352,51 @@
         }
       }
     },
+    "GetTransitGatewayConnectPeerAssociationsRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "TransitGatewayConnectPeerArns": {
+          "shape": "StringList",
+          "documentation": "<p>One or more transit gateway Connect peer Amazon Resource Names (ARNs).</p>",
+          "location": "querystring",
+          "locationName": "transitGatewayConnectPeerArns"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "GetTransitGatewayConnectPeerAssociationsResponse": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerAssociations": {
+          "shape": "TransitGatewayConnectPeerAssociationList",
+          "documentation": "<p>Information about the transit gateway Connect peer associations.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use for the next page of results.</p>"
+        }
+      }
+    },
     "GetTransitGatewayRegistrationsRequest": {
       "type": "structure",
       "required": [
@@ -2064,7 +2631,8 @@
           "documentation": "<p>The longitude.</p>"
         }
       },
-      "documentation": "<p>Describes a location.</p>"
+      "documentation": "<p>Describes a location.</p>",
+      "sensitive": true
     },
     "MaxResults": {
       "type": "integer",
@@ -2219,6 +2787,47 @@
     "TagValue": {
       "type": "string"
     },
+    "TransitGatewayConnectPeerAssociation": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway Connect peer.</p>"
+        },
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>"
+        },
+        "DeviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the device.</p>"
+        },
+        "LinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link.</p>"
+        },
+        "State": {
+          "shape": "TransitGatewayConnectPeerAssociationState",
+          "documentation": "<p>The state of the association.</p>"
+        }
+      },
+      "documentation": "<p>Describes a transit gateway Connect peer association.</p>"
+    },
+    "TransitGatewayConnectPeerAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "TransitGatewayConnectPeerAssociation"
+      }
+    },
+    "TransitGatewayConnectPeerAssociationState": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "AVAILABLE",
+        "DELETING",
+        "DELETED"
+      ]
+    },
     "TransitGatewayRegistration": {
       "type": "structure",
       "members": {
@@ -2292,6 +2901,48 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "GlobalNetworkId",
+        "ConnectionId"
+      ],
+      "members": {
+        "GlobalNetworkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the global network.</p>",
+          "location": "uri",
+          "locationName": "globalNetworkId"
+        },
+        "ConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the connection.</p>",
+          "location": "uri",
+          "locationName": "connectionId"
+        },
+        "LinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the first device in the connection.</p>"
+        },
+        "ConnectedLinkId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the link for the second device in the connection.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>"
+        }
+      }
+    },
+    "UpdateConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "Connection": {
+          "shape": "Connection",
+          "documentation": "<p>Information about the connection.</p>"
+        }
+      }
+    },
     "UpdateDeviceRequest": {
       "type": "structure",
       "required": [
@@ -2310,6 +2961,10 @@
           "documentation": "<p>The ID of the device.</p>",
           "location": "uri",
           "locationName": "deviceId"
+        },
+        "AWSLocation": {
+          "shape": "AWSLocation",
+          "documentation": "<p>The AWS location of the device.</p>"
         },
         "Description": {
           "shape": "String",
@@ -2461,5 +3116,5 @@
       }
     }
   },
-  "documentation": "<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.</p>"
+  "documentation": "<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.</p> <p>The Network Manager APIs are supported in the US West (Oregon) Region only. You must specify the <code>us-west-2</code> Region in all requests made to Network Manager.</p>"
 }

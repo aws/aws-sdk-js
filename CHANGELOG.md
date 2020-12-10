@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.807.0-->
+<!--LATEST=2.808.0-->
 <!--ENTRYINSERT-->
+
+## 2.808.0
+* feature: EC2: TGW connect simplifies connectivity of SD-WAN appliances; IGMP support for TGW multicast; VPC Reachability Analyzer for VPC resources connectivity analysis.
+* feature: Kendra: Amazon Kendra now supports adding synonyms to an index through the new Thesaurus resource.
+* feature: NetworkManager: This release adds API support for Transit Gateway Connect integration into AWS Network Manager.
 
 ## 2.807.0
 * feature: EC2: This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
