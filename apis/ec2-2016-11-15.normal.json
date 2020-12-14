@@ -27446,6 +27446,7 @@
         "c5n.4xlarge",
         "c5n.9xlarge",
         "c5n.18xlarge",
+        "c5n.metal",
         "c6g.metal",
         "c6g.medium",
         "c6g.large",

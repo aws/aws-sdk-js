@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.809.0-->
+<!--LATEST=2.810.0-->
 <!--ENTRYINSERT-->
+
+## 2.810.0
+* feature: DevOpsGuru: Documentation updates for DevOps Guru.
+* feature: EC2: Add c5n.metal to ec2 instance types list
+* feature: GlobalAccelerator: This release adds support for custom routing accelerators
 
 ## 2.809.0
 * feature: AutoScaling: Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
