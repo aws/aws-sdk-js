@@ -969,5 +969,20 @@
   "sagemakeredge": {
     "prefix": "sagemaker-edge",
     "name": "SagemakerEdge"
+  },
+  "amp": {
+    "name": "Amp"
+  },
+  "greengrassv2": {
+    "name": "GreengrassV2"
+  },
+  "iotdeviceadvisor": {
+    "name": "IotDeviceAdvisor"
+  },
+  "iotfleethub": {
+    "name": "IoTFleetHub"
+  },
+  "iotwireless": {
+    "name": "IoTWireless"
   }
 }

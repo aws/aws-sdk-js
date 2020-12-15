@@ -84,11 +84,11 @@ declare class Iot extends Service {
    */
   cancelAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelAuditMitigationActionsTaskResponse, AWSError>;
   /**
-   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   * Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn't in progress, an "InvalidRequestException" occurs.
    */
   cancelAuditTask(params: Iot.Types.CancelAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
-   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   * Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn't in progress, an "InvalidRequestException" occurs.
    */
   cancelAuditTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
@@ -99,6 +99,14 @@ declare class Iot extends Service {
    * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
    */
   cancelCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Cancels a Device Defender ML Detect mitigation action. 
+   */
+  cancelDetectMitigationActionsTask(params: Iot.Types.CancelDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Cancels a Device Defender ML Detect mitigation action. 
+   */
+  cancelDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.CancelDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelDetectMitigationActionsTaskResponse, AWSError>;
   /**
    * Cancels a job.
    */
@@ -163,6 +171,14 @@ declare class Iot extends Service {
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
+  /**
+   *  Use this API to define a Custom Metric published by your devices to Device Defender. 
+   */
+  createCustomMetric(params: Iot.Types.CreateCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.CreateCustomMetricResponse) => void): Request<Iot.Types.CreateCustomMetricResponse, AWSError>;
+  /**
+   *  Use this API to define a Custom Metric published by your devices to Device Defender. 
+   */
+  createCustomMetric(callback?: (err: AWSError, data: Iot.Types.CreateCustomMetricResponse) => void): Request<Iot.Types.CreateCustomMetricResponse, AWSError>;
   /**
    * Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
    */
@@ -380,6 +396,14 @@ declare class Iot extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   *  Before you can delete a custom metric, you must first remove the custom metric from all security profiles it's a part of. The security profile associated with the custom metric can be found using the ListSecurityProfiles API with metricName set to your custom metric name.   Deletes a Device Defender detect custom metric. 
+   */
+  deleteCustomMetric(params: Iot.Types.DeleteCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCustomMetricResponse) => void): Request<Iot.Types.DeleteCustomMetricResponse, AWSError>;
+  /**
+   *  Before you can delete a custom metric, you must first remove the custom metric from all security profiles it's a part of. The security profile associated with the custom metric can be found using the ListSecurityProfiles API with metricName set to your custom metric name.   Deletes a Device Defender detect custom metric. 
+   */
+  deleteCustomMetric(callback?: (err: AWSError, data: Iot.Types.DeleteCustomMetricResponse) => void): Request<Iot.Types.DeleteCustomMetricResponse, AWSError>;
+  /**
    * Removes the specified dimension from your AWS account.
    */
   deleteDimension(params: Iot.Types.DeleteDimensionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
@@ -572,11 +596,11 @@ declare class Iot extends Service {
    */
   describeAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
   /**
-   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and the start time when the audit that returned the finding.
    */
   describeAuditFinding(params: Iot.Types.DescribeAuditFindingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
   /**
-   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and the start time when the audit that returned the finding.
    */
   describeAuditFinding(callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
   /**
@@ -636,6 +660,14 @@ declare class Iot extends Service {
    */
   describeCertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
+   *  Gets information about a Device Defender detect custom metric. 
+   */
+  describeCustomMetric(params: Iot.Types.DescribeCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCustomMetricResponse) => void): Request<Iot.Types.DescribeCustomMetricResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender detect custom metric. 
+   */
+  describeCustomMetric(callback?: (err: AWSError, data: Iot.Types.DescribeCustomMetricResponse) => void): Request<Iot.Types.DescribeCustomMetricResponse, AWSError>;
+  /**
    * Describes the default authorizer.
    */
   describeDefaultAuthorizer(params: Iot.Types.DescribeDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
@@ -643,6 +675,14 @@ declare class Iot extends Service {
    * Describes the default authorizer.
    */
   describeDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender ML Detect mitigation action. 
+   */
+  describeDetectMitigationActionsTask(params: Iot.Types.DescribeDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender ML Detect mitigation action. 
+   */
+  describeDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.DescribeDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeDetectMitigationActionsTaskResponse, AWSError>;
   /**
    * Provides details about a dimension that is defined in your AWS account.
    */
@@ -835,6 +875,14 @@ declare class Iot extends Service {
    * Enables the rule.
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Returns a Device Defender's ML Detect Security Profile training model's status. 
+   */
+  getBehaviorModelTrainingSummaries(params: Iot.Types.GetBehaviorModelTrainingSummariesRequest, callback?: (err: AWSError, data: Iot.Types.GetBehaviorModelTrainingSummariesResponse) => void): Request<Iot.Types.GetBehaviorModelTrainingSummariesResponse, AWSError>;
+  /**
+   *  Returns a Device Defender's ML Detect Security Profile training model's status. 
+   */
+  getBehaviorModelTrainingSummaries(callback?: (err: AWSError, data: Iot.Types.GetBehaviorModelTrainingSummariesResponse) => void): Request<Iot.Types.GetBehaviorModelTrainingSummariesResponse, AWSError>;
   /**
    * Returns the approximate count of unique values that match the query.
    */
@@ -1044,6 +1092,30 @@ declare class Iot extends Service {
    */
   listCertificatesByCA(callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
+   *  Lists your Device Defender detect custom metrics. 
+   */
+  listCustomMetrics(params: Iot.Types.ListCustomMetricsRequest, callback?: (err: AWSError, data: Iot.Types.ListCustomMetricsResponse) => void): Request<Iot.Types.ListCustomMetricsResponse, AWSError>;
+  /**
+   *  Lists your Device Defender detect custom metrics. 
+   */
+  listCustomMetrics(callback?: (err: AWSError, data: Iot.Types.ListCustomMetricsResponse) => void): Request<Iot.Types.ListCustomMetricsResponse, AWSError>;
+  /**
+   *  Lists mitigation actions executions for a Device Defender ML Detect Security Profile. 
+   */
+  listDetectMitigationActionsExecutions(params: Iot.Types.ListDetectMitigationActionsExecutionsRequest, callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListDetectMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   *  Lists mitigation actions executions for a Device Defender ML Detect Security Profile. 
+   */
+  listDetectMitigationActionsExecutions(callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListDetectMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   *  List of Device Defender ML Detect mitigation actions tasks. 
+   */
+  listDetectMitigationActionsTasks(params: Iot.Types.ListDetectMitigationActionsTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsTasksResponse) => void): Request<Iot.Types.ListDetectMitigationActionsTasksResponse, AWSError>;
+  /**
+   *  List of Device Defender ML Detect mitigation actions tasks. 
+   */
+  listDetectMitigationActionsTasks(callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsTasksResponse) => void): Request<Iot.Types.ListDetectMitigationActionsTasksResponse, AWSError>;
+  /**
    * List the set of dimensions that are defined for your AWS account.
    */
   listDimensions(params: Iot.Types.ListDimensionsRequest, callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
@@ -1188,11 +1260,11 @@ declare class Iot extends Service {
    */
   listScheduledAudits(callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   * Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric.   dimensionName and metricName cannot be used in the same request. 
    */
   listSecurityProfiles(params: Iot.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   * Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric.   dimensionName and metricName cannot be used in the same request. 
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
   /**
@@ -1460,6 +1532,14 @@ declare class Iot extends Service {
    */
   startAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.StartAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.StartAuditMitigationActionsTaskResponse, AWSError>;
   /**
+   *  Starts a Device Defender ML Detect mitigation actions task. 
+   */
+  startDetectMitigationActionsTask(params: Iot.Types.StartDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.StartDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Starts a Device Defender ML Detect mitigation actions task. 
+   */
+  startDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.StartDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.StartDetectMitigationActionsTaskResponse, AWSError>;
+  /**
    * Starts an on-demand Device Defender audit.
    */
   startOnDemandAuditTask(params: Iot.Types.StartOnDemandAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
@@ -1572,11 +1652,19 @@ declare class Iot extends Service {
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   * Updates a Device Defender detect custom metric. 
+   */
+  updateCustomMetric(params: Iot.Types.UpdateCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.UpdateCustomMetricResponse) => void): Request<Iot.Types.UpdateCustomMetricResponse, AWSError>;
+  /**
+   * Updates a Device Defender detect custom metric. 
+   */
+  updateCustomMetric(callback?: (err: AWSError, data: Iot.Types.UpdateCustomMetricResponse) => void): Request<Iot.Types.UpdateCustomMetricResponse, AWSError>;
+  /**
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and recreate it).
    */
   updateDimension(params: Iot.Types.UpdateDimensionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
-   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and recreate it).
    */
   updateDimension(callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
@@ -1828,6 +1916,10 @@ declare namespace Iot {
      * Send data to an HTTPS endpoint.
      */
     http?: HttpAction;
+    /**
+     * Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
+     */
+    kafka?: KafkaAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -1841,17 +1933,21 @@ declare namespace Iot {
      */
     thingName?: DeviceDefenderThingName;
     /**
-     * The security profile whose behavior is in violation.
+     * The security profile with the behavior is in violation.
      */
     securityProfileName?: SecurityProfileName;
     /**
-     * The behavior which is being violated.
+     * The behavior that is being violated.
      */
     behavior?: Behavior;
     /**
-     * The value of the metric (the measurement) which caused the most recent violation.
+     * The value of the metric (the measurement) that caused the most recent violation.
      */
     lastViolationValue?: MetricValue;
+    /**
+     *  The details of a violation event. 
+     */
+    violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
     /**
      * The time the most recent violation occurred.
      */
@@ -1908,11 +2004,11 @@ declare namespace Iot {
   }
   export interface AddThingsToThingGroupParams {
     /**
-     * The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you cannot add a thing to more than one group in the same hierarchy.
+     * The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you can't add a thing to more than one group in the same hierarchy.
      */
     thingGroupNames: ThingGroupNames;
     /**
-     * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic things groups.
+     * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.
      */
     overrideDynamicGroups?: OverrideDynamicGroups;
   }
@@ -1923,7 +2019,7 @@ declare namespace Iot {
   export type AlarmName = string;
   export interface AlertTarget {
     /**
-     * The ARN of the notification target to which alerts are sent.
+     * The Amazon Resource Name (ARN) of the notification target to which alerts are sent.
      */
     alertTargetArn: AlertTargetArn;
     /**
@@ -2185,7 +2281,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the task that applies the mitigation action.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
     /**
      * The unique identifier for the findings to which the task and associated mitigation action are applied.
      */
@@ -2221,12 +2317,11 @@ declare namespace Iot {
   }
   export type AuditMitigationActionExecutionMetadataList = AuditMitigationActionExecutionMetadata[];
   export type AuditMitigationActionsExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|"SKIPPED"|"PENDING"|string;
-  export type AuditMitigationActionsTaskId = string;
   export interface AuditMitigationActionsTaskMetadata {
     /**
      * The unique identifier for the task.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
     /**
      * The time at which the audit mitigation actions task was started.
      */
@@ -2491,7 +2586,7 @@ declare namespace Iot {
   export type BatchMode = boolean;
   export interface Behavior {
     /**
-     * The name you have given to the behavior.
+     * The name you've given to the behavior.
      */
     name: BehaviorName;
     /**
@@ -2499,17 +2594,21 @@ declare namespace Iot {
      */
     metric?: BehaviorMetric;
     /**
-     * The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+     * The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric to only MQTT topics where the name matches the pattern specified in the dimension. This can't be used with custom metrics.
      */
     metricDimension?: MetricDimension;
     /**
      * The criteria that determine if a device is behaving normally in regard to the metric.
      */
     criteria?: BehaviorCriteria;
+    /**
+     *  Suppresses alerts. 
+     */
+    suppressAlerts?: SuppressAlerts;
   }
   export interface BehaviorCriteria {
     /**
-     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).
+     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold). Valid operators include:    string-list: in-set and not-in-set     number-list: in-set and not-in-set     ip-address-list: in-cidr-set and not-in-cidr-set     number: less-than, less-than-equals, greater-than, and greater-than-equals   
      */
     comparisonOperator?: ComparisonOperator;
     /**
@@ -2517,7 +2616,7 @@ declare namespace Iot {
      */
     value?: MetricValue;
     /**
-     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.
+     * Use this to specify the time duration over which the behavior is evaluated, for those criteria that have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank. Cannot be used with list-based metric datatypes.
      */
     durationSeconds?: DurationSeconds;
     /**
@@ -2529,11 +2628,43 @@ declare namespace Iot {
      */
     consecutiveDatapointsToClear?: ConsecutiveDatapointsToClear;
     /**
-     * A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+     * A statistical ranking (percentile)that indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
      */
     statisticalThreshold?: StatisticalThreshold;
+    /**
+     *  The configuration of an ML Detect 
+     */
+    mlDetectionConfig?: MachineLearningDetectionConfig;
   }
+  export type BehaviorCriteriaType = "STATIC"|"STATISTICAL"|"MACHINE_LEARNING"|string;
   export type BehaviorMetric = string;
+  export type BehaviorModelTrainingSummaries = BehaviorModelTrainingSummary[];
+  export interface BehaviorModelTrainingSummary {
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The name of the behavior. 
+     */
+    behaviorName?: BehaviorName;
+    /**
+     *  The date a training model started collecting data. 
+     */
+    trainingDataCollectionStartDate?: Timestamp;
+    /**
+     *  The status of the behavior model. 
+     */
+    modelStatus?: ModelStatus;
+    /**
+     *  The percentage of datapoints collected. 
+     */
+    datapointsCollectionPercentage?: DataCollectionPercentage;
+    /**
+     *  The date the model was last refreshed. 
+     */
+    lastModelRefreshDate?: Timestamp;
+  }
   export type BehaviorName = string;
   export type Behaviors = Behavior[];
   export type BillingGroupArn = string;
@@ -2627,7 +2758,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the task that you want to cancel. 
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
   }
   export interface CancelAuditMitigationActionsTaskResponse {
   }
@@ -2644,6 +2775,14 @@ declare namespace Iot {
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
+  }
+  export interface CancelDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+  }
+  export interface CancelDetectMitigationActionsTaskResponse {
   }
   export interface CancelJobExecutionRequest {
     /**
@@ -2811,6 +2950,7 @@ declare namespace Iot {
   export interface ClearDefaultAuthorizerResponse {
   }
   export type ClientId = string;
+  export type ClientProperties = {[key: string]: String};
   export type ClientRequestToken = string;
   export interface CloudwatchAlarmAction {
     /**
@@ -2899,8 +3039,9 @@ declare namespace Iot {
   }
   export type CognitoIdentityPoolId = string;
   export type Comment = string;
-  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|string;
+  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|"in-set"|"not-in-set"|string;
   export type CompliantChecksCount = number;
+  export type ConfidenceLevel = "LOW"|"MEDIUM"|"HIGH"|string;
   export interface Configuration {
     /**
      * True to enable the configuration.
@@ -3034,6 +3175,38 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
   }
+  export interface CreateCustomMetricRequest {
+    /**
+     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws:. Cannot be updated once defined.
+     */
+    metricName: MetricName;
+    /**
+     *  Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType: CustomMetricType;
+    /**
+     *  Metadata that can be used to manage the custom metric. 
+     */
+    tags?: TagList;
+    /**
+     * Each custom metric must have a unique client request token. If you try to create a new custom metric that already exists with a different token, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface CreateCustomMetricResponse {
+    /**
+     *  The name of the custom metric to be used in the metric report. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric, e.g. arn:aws-partition:iot:region:accountId:custommetric/metricName  
+     */
+    metricArn?: CustomMetricArn;
+  }
   export interface CreateDimensionRequest {
     /**
      * A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
@@ -3062,7 +3235,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) of the created dimension.
+     * The Amazon Resource Name (ARN) of the created dimension.
      */
     arn?: DimensionArn;
   }
@@ -3544,15 +3717,15 @@ declare namespace Iot {
   }
   export interface CreateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to MONTHLY. If days 29 to 31 are specified, and the month doesn't have that many days, the audit takes place on the LAST day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place, either SUN, MON, TUE, WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -3592,11 +3765,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     *  Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     *  Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -3793,7 +3966,11 @@ declare namespace Iot {
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
+  export type CustomMetricArn = string;
+  export type CustomMetricDisplayName = string;
+  export type CustomMetricType = "string-list"|"ip-address-list"|"number-list"|"number"|string;
   export type CustomerVersion = number;
+  export type DataCollectionPercentage = number;
   export type DateType = Date;
   export type DayOfMonth = string;
   export type DayOfWeek = "SUN"|"MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|string;
@@ -3851,6 +4028,14 @@ declare namespace Iot {
      * Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
      */
     forceDelete?: ForceDelete;
+  }
+  export interface DeleteCustomMetricRequest {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName: MetricName;
+  }
+  export interface DeleteCustomMetricResponse {
   }
   export interface DeleteDimensionRequest {
     /**
@@ -4127,7 +4312,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the audit mitigation task.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
   }
   export interface DescribeAuditMitigationActionsTaskResponse {
     /**
@@ -4283,6 +4468,38 @@ declare namespace Iot {
      */
     certificateDescription?: CertificateDescription;
   }
+  export interface DescribeCustomMetricRequest {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName: MetricName;
+  }
+  export interface DescribeCustomMetricResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric. 
+     */
+    metricArn?: CustomMetricArn;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType?: CustomMetricType;
+    /**
+     *  Field represents a friendly name in the console for the custom metric; doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. 
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The creation date of the custom metric in milliseconds since epoch. 
+     */
+    creationDate?: Timestamp;
+    /**
+     *  The time the custom metric was last modified in milliseconds since epoch. 
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface DescribeDefaultAuthorizerRequest {
   }
   export interface DescribeDefaultAuthorizerResponse {
@@ -4290,6 +4507,18 @@ declare namespace Iot {
      * The default authorizer's description.
      */
     authorizerDescription?: AuthorizerDescription;
+  }
+  export interface DescribeDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+  }
+  export interface DescribeDetectMitigationActionsTaskResponse {
+    /**
+     *  The description of a task. 
+     */
+    taskSummary?: DetectMitigationActionsTaskSummary;
   }
   export interface DescribeDimensionRequest {
     /**
@@ -4303,7 +4532,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) for the dimension.
+     * The Amazon Resource Name (ARN) for the dimension.
      */
     arn?: DimensionArn;
     /**
@@ -4587,15 +4816,15 @@ declare namespace Iot {
   }
   export interface DescribeScheduledAuditResponse {
     /**
-     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This is will be 1 through 31 or LAST. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the LAST day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".
+     * The day of the week on which the scheduled audit takes place, either one of SUN, MON, TUE, WED, THU, FRI, or SAT.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -4897,6 +5126,120 @@ declare namespace Iot {
   export type DetailsKey = string;
   export type DetailsMap = {[key: string]: DetailsValue};
   export type DetailsValue = string;
+  export interface DetectMitigationActionExecution {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The unique identifier of the violation. 
+     */
+    violationId?: ViolationId;
+    /**
+     *  The friendly name that uniquely identifies the mitigation action. 
+     */
+    actionName?: MitigationActionName;
+    /**
+     *  The name of the thing. 
+     */
+    thingName?: DeviceDefenderThingName;
+    /**
+     *  The date a mitigation action was started. 
+     */
+    executionStartDate?: Timestamp;
+    /**
+     *  The date a mitigation action ended. 
+     */
+    executionEndDate?: Timestamp;
+    /**
+     *  The status of a mitigation action. 
+     */
+    status?: DetectMitigationActionExecutionStatus;
+    /**
+     *  The error code of a mitigation action. 
+     */
+    errorCode?: DetectMitigationActionExecutionErrorCode;
+    /**
+     *  The message of a mitigation action. 
+     */
+    message?: ErrorMessage;
+  }
+  export type DetectMitigationActionExecutionErrorCode = string;
+  export type DetectMitigationActionExecutionList = DetectMitigationActionExecution[];
+  export type DetectMitigationActionExecutionStatus = "IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"SKIPPED"|string;
+  export interface DetectMitigationActionsTaskStatistics {
+    /**
+     *  The actions that were performed. 
+     */
+    actionsExecuted?: GenericLongValue;
+    /**
+     *  The actions that were skipped. 
+     */
+    actionsSkipped?: GenericLongValue;
+    /**
+     *  The actions that failed. 
+     */
+    actionsFailed?: GenericLongValue;
+  }
+  export type DetectMitigationActionsTaskStatus = "IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"CANCELED"|string;
+  export interface DetectMitigationActionsTaskSummary {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The status of the task. 
+     */
+    taskStatus?: DetectMitigationActionsTaskStatus;
+    /**
+     *  The date the task started. 
+     */
+    taskStartTime?: Timestamp;
+    /**
+     *  The date the task ended. 
+     */
+    taskEndTime?: Timestamp;
+    /**
+     *  Specifies the ML Detect findings to which the mitigation actions are applied. 
+     */
+    target?: DetectMitigationActionsTaskTarget;
+    /**
+     *  Specifies the time period of which violation events occurred between. 
+     */
+    violationEventOccurrenceRange?: ViolationEventOccurrenceRange;
+    /**
+     *  Includes only active violations. 
+     */
+    onlyActiveViolationsIncluded?: PrimitiveBoolean;
+    /**
+     *  Includes suppressed alerts. 
+     */
+    suppressedAlertsIncluded?: PrimitiveBoolean;
+    /**
+     *  The definition of the actions. 
+     */
+    actionsDefinition?: MitigationActionList;
+    /**
+     *  The statistics of a mitigation action task. 
+     */
+    taskStatistics?: DetectMitigationActionsTaskStatistics;
+  }
+  export type DetectMitigationActionsTaskSummaryList = DetectMitigationActionsTaskSummary[];
+  export interface DetectMitigationActionsTaskTarget {
+    /**
+     *  The unique identifiers of the violations. 
+     */
+    violationIds?: TargetViolationIdsForDetectMitigationActions;
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The name of the behavior. 
+     */
+    behaviorName?: BehaviorName;
+  }
+  export type DetectMitigationActionsToExecuteList = MitigationActionName[];
   export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
   export type DeviceDefenderThingName = string;
   export type DimensionArn = string;
@@ -5032,11 +5375,11 @@ declare namespace Iot {
   export type ElasticsearchType = string;
   export interface EnableIoTLoggingParams {
     /**
-     * The ARN of the IAM role used for logging.
+     * The Amazon Resource Name (ARN) of the IAM role used for logging.
      */
     roleArnForLogging: RoleArn;
     /**
-     * Specifies the types of information to be logged.
+     * Specifies the type of information to be logged.
      */
     logLevel: LogLevel;
   }
@@ -5146,6 +5489,31 @@ declare namespace Iot {
   export type Forced = boolean;
   export type FunctionArn = string;
   export type GenerationId = string;
+  export type GenericLongValue = number;
+  export interface GetBehaviorModelTrainingSummariesRequest {
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: TinyMaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetBehaviorModelTrainingSummariesResponse {
+    /**
+     *  A list of all ML Detect behaviors and their model status for a given Security Profile. 
+     */
+    summaries?: BehaviorModelTrainingSummaries;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
   export interface GetCardinalityRequest {
     /**
      * The name of the index to search.
@@ -5833,6 +6201,28 @@ declare namespace Iot {
   export type JobSummaryList = JobSummary[];
   export type JobTargets = TargetArn[];
   export type JsonDocument = string;
+  export interface KafkaAction {
+    /**
+     * The ARN of Kafka action's VPC TopicRuleDestination.
+     */
+    destinationArn: AwsArn;
+    /**
+     * The Kafka topic for messages to be sent to the Kafka broker.
+     */
+    topic: String;
+    /**
+     * The Kafka message key.
+     */
+    key?: String;
+    /**
+     * The Kafka message partition.
+     */
+    partition?: String;
+    /**
+     * Properties of the Apache Kafka producer client.
+     */
+    clientProperties: ClientProperties;
+  }
   export type Key = string;
   export type KeyName = string;
   export interface KeyPair {
@@ -5868,6 +6258,7 @@ declare namespace Iot {
   }
   export type LaserMaxResults = number;
   export type LastModifiedDate = Date;
+  export type LastUpdatedAtDate = Date;
   export interface ListActiveViolationsRequest {
     /**
      * The name of the thing whose active violations are listed.
@@ -5877,6 +6268,14 @@ declare namespace Iot {
      * The name of the Device Defender security profile for which violations are listed.
      */
     securityProfileName?: SecurityProfileName;
+    /**
+     *  The criteria for a behavior. 
+     */
+    behaviorCriteriaType?: BehaviorCriteriaType;
+    /**
+     *  A list of all suppressed alerts. 
+     */
+    listSuppressedAlerts?: ListSuppressedAlerts;
     /**
      * The token for the next set of results.
      */
@@ -5972,7 +6371,7 @@ declare namespace Iot {
     /**
      * Specify this filter to limit results to actions for a specific audit mitigation actions task.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
     /**
      * Specify this filter to limit results to those with a specific status.
      */
@@ -6229,6 +6628,94 @@ declare namespace Iot {
      * The marker for the next set of results, or null if there are no additional results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListCustomMetricsRequest {
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListCustomMetricsResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricNames?: MetricNames;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsExecutionsRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The unique identifier of the violation. 
+     */
+    violationId?: ViolationId;
+    /**
+     *  The name of the thing whose mitigation actions are listed. 
+     */
+    thingName?: DeviceDefenderThingName;
+    /**
+     *  A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. 
+     */
+    startTime?: Timestamp;
+    /**
+     *  The end of the time period for which ML Detect mitigation actions executions are returned. 
+     */
+    endTime?: Timestamp;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: MaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsExecutionsResponse {
+    /**
+     *  List of actions executions. 
+     */
+    actionsExecutions?: DetectMitigationActionExecutionList;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsTasksRequest {
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The end of the time period for which ML Detect mitigation actions tasks are returned. 
+     */
+    endTime: Timestamp;
+  }
+  export interface ListDetectMitigationActionsTasksResponse {
+    /**
+     *  The collection of ML Detect mitigation tasks that matched the filter criteria. 
+     */
+    tasks?: DetectMitigationActionsTaskSummaryList;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
   }
   export interface ListDimensionsRequest {
     /**
@@ -6708,9 +7195,13 @@ declare namespace Iot {
      */
     maxResults?: MaxResults;
     /**
-     * A filter to limit results to the security profiles that use the defined dimension.
+     * A filter to limit results to the security profiles that use the defined dimension. Cannot be used with metricName 
      */
     dimensionName?: DimensionName;
+    /**
+     *  The name of the custom metric. Cannot be used with dimensionName. 
+     */
+    metricName?: MetricName;
   }
   export interface ListSecurityProfilesResponse {
     /**
@@ -6746,6 +7237,7 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export type ListSuppressedAlerts = boolean;
   export type ListSuppressedFindings = boolean;
   export interface ListTagsForResourceRequest {
     /**
@@ -7149,6 +7641,14 @@ declare namespace Iot {
      */
     securityProfileName?: SecurityProfileName;
     /**
+     *  The criteria for a behavior. 
+     */
+    behaviorCriteriaType?: BehaviorCriteriaType;
+    /**
+     *  A list of all suppressed alerts. 
+     */
+    listSuppressedAlerts?: ListSuppressedAlerts;
+    /**
      * The token for the next set of results.
      */
     nextToken?: NextToken;
@@ -7202,6 +7702,12 @@ declare namespace Iot {
      */
     logLevel?: LogLevel;
   }
+  export interface MachineLearningDetectionConfig {
+    /**
+     *  The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High. 
+     */
+    confidenceLevel: ConfidenceLevel;
+  }
   export type Marker = string;
   export type MaxJobExecutionsPerMin = number;
   export type MaxResults = number;
@@ -7220,13 +7726,15 @@ declare namespace Iot {
      */
     operator?: DimensionValueOperator;
   }
+  export type MetricName = string;
+  export type MetricNames = MetricName[];
   export interface MetricToRetain {
     /**
      * What is measured by the behavior.
      */
     metric: BehaviorMetric;
     /**
-     * The dimension of a metric.
+     * The dimension of a metric. This can't be used with custom metrics.
      */
     metricDimension?: MetricDimension;
   }
@@ -7243,6 +7751,18 @@ declare namespace Iot {
      * If the comparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.
      */
     ports?: Ports;
+    /**
+     *  The numeral value of a metric. 
+     */
+    number?: Number;
+    /**
+     *  The numeral values of a metric. 
+     */
+    numbers?: NumberList;
+    /**
+     *  The string values of a metric. 
+     */
+    strings?: StringList;
   }
   export type Minimum = number;
   export type MinimumNumberOfExecutedThings = number;
@@ -7308,11 +7828,13 @@ declare namespace Iot {
      */
     enableIoTLoggingParams?: EnableIoTLoggingParams;
     /**
-     * Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+     * Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
      */
     publishFindingToSnsParams?: PublishFindingToSnsParams;
   }
   export type MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"|"UPDATE_CA_CERTIFICATE"|"ADD_THINGS_TO_THING_GROUP"|"REPLACE_DEFAULT_POLICY_VERSION"|"ENABLE_IOT_LOGGING"|"PUBLISH_FINDING_TO_SNS"|string;
+  export type MitigationActionsTaskId = string;
+  export type ModelStatus = "PENDING_BUILD"|"ACTIVE"|"EXPIRED"|string;
   export type MqttClientId = string;
   export interface MqttContext {
     /**
@@ -7348,6 +7870,9 @@ declare namespace Iot {
     additionalInfo?: StringMap;
   }
   export type NonCompliantResourcesCount = number;
+  export type NullableBoolean = boolean;
+  export type Number = number;
+  export type NumberList = Number[];
   export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
@@ -7572,6 +8097,7 @@ declare namespace Iot {
      */
     expiresInSec?: ExpiresInSec;
   }
+  export type PrimitiveBoolean = boolean;
   export type Principal = string;
   export type PrincipalArn = string;
   export type PrincipalId = string;
@@ -8115,11 +8641,13 @@ declare namespace Iot {
   }
   export type SearchableAttributes = AttributeName[];
   export type Seconds = number;
+  export type SecurityGroupId = string;
+  export type SecurityGroupList = SecurityGroupId[];
   export type SecurityProfileArn = string;
   export type SecurityProfileDescription = string;
   export interface SecurityProfileIdentifier {
     /**
-     * The name you have given to the security profile.
+     * The name you've given to the security profile.
      */
     name: SecurityProfileName;
     /**
@@ -8296,9 +8824,9 @@ declare namespace Iot {
     /**
      * A unique identifier for the task. You can use this identifier to check the status of the task or to cancel it.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
     /**
-     * Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a speecific set of findings.
+     * Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a specific set of findings.
      */
     target: AuditMitigationActionsTaskTarget;
     /**
@@ -8314,7 +8842,43 @@ declare namespace Iot {
     /**
      * The unique identifier for the audit mitigation task. This matches the taskId that you specified in the request.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
+  }
+  export interface StartDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+    /**
+     *  Specifies the ML Detect findings to which the mitigation actions are applied. 
+     */
+    target: DetectMitigationActionsTaskTarget;
+    /**
+     *  The actions to be performed when a device has unexpected behavior. 
+     */
+    actions: DetectMitigationActionsToExecuteList;
+    /**
+     *  Specifies the time period of which violation events occurred between. 
+     */
+    violationEventOccurrenceRange?: ViolationEventOccurrenceRange;
+    /**
+     *  Specifies to list only active violations. 
+     */
+    includeOnlyActiveViolations?: NullableBoolean;
+    /**
+     *  Specifies to include suppressed alerts. 
+     */
+    includeSuppressedAlerts?: NullableBoolean;
+    /**
+     *  Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface StartDetectMitigationActionsTaskResponse {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
   }
   export interface StartOnDemandAuditTaskRequest {
     /**
@@ -8371,7 +8935,7 @@ declare namespace Iot {
   export type StateValue = string;
   export interface StatisticalThreshold {
     /**
-     * The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
+     * The percentile that resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
      */
     statistic?: EvaluationStatistic;
   }
@@ -8513,11 +9077,15 @@ declare namespace Iot {
   export type StreamVersion = number;
   export type StreamsSummary = StreamSummary[];
   export type String = string;
+  export type StringList = stringValue[];
   export type StringMap = {[key: string]: String};
+  export type SubnetId = string;
+  export type SubnetIdList = SubnetId[];
   export type SucceededFindingsCount = number;
   export type SucceededThings = number;
   export type Sum = number;
   export type SumOfSquares = number;
+  export type SuppressAlerts = boolean;
   export type SuppressIndefinitely = boolean;
   export type SuppressedNonCompliantResourcesCount = number;
   export type TableName = string;
@@ -8551,6 +9119,7 @@ declare namespace Iot {
   export type TargetArn = string;
   export type TargetAuditCheckNames = AuditCheckName[];
   export type TargetSelection = "CONTINUOUS"|"SNAPSHOT"|string;
+  export type TargetViolationIdsForDetectMitigationActions = ViolationId[];
   export type Targets = Target[];
   export type TaskId = string;
   export type TaskIdList = TaskId[];
@@ -8953,6 +9522,7 @@ declare namespace Iot {
   }
   export type TimestreamTimestampUnit = string;
   export type TimestreamTimestampValue = string;
+  export type TinyMaxResults = number;
   export interface TlsContext {
     /**
      * The value of the serverName key in a TLS authorization request.
@@ -9008,6 +9578,14 @@ declare namespace Iot {
      */
     status?: TopicRuleDestinationStatus;
     /**
+     * The date and time when the topic rule destination was created.
+     */
+    createdAt?: CreatedAtDate;
+    /**
+     * The date and time when the topic rule destination was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAtDate;
+    /**
      * Additional details or reason why the topic rule destination is in the current status.
      */
     statusReason?: String;
@@ -9015,15 +9593,23 @@ declare namespace Iot {
      * Properties of the HTTP URL.
      */
     httpUrlProperties?: HttpUrlDestinationProperties;
+    /**
+     * Properties of the virtual private cloud (VPC) connection.
+     */
+    vpcProperties?: VpcDestinationProperties;
   }
   export interface TopicRuleDestinationConfiguration {
     /**
      * Configuration of the HTTP URL.
      */
     httpUrlConfiguration?: HttpUrlDestinationConfiguration;
+    /**
+     * Configuration of the virtual private cloud (VPC) connection.
+     */
+    vpcConfiguration?: VpcDestinationConfiguration;
   }
   export type TopicRuleDestinationMaxResults = number;
-  export type TopicRuleDestinationStatus = "ENABLED"|"IN_PROGRESS"|"DISABLED"|"ERROR"|string;
+  export type TopicRuleDestinationStatus = "ENABLED"|"IN_PROGRESS"|"DISABLED"|"ERROR"|"DELETING"|string;
   export type TopicRuleDestinationSummaries = TopicRuleDestinationSummary[];
   export interface TopicRuleDestinationSummary {
     /**
@@ -9035,6 +9621,14 @@ declare namespace Iot {
      */
     status?: TopicRuleDestinationStatus;
     /**
+     * The date and time when the topic rule destination was created.
+     */
+    createdAt?: CreatedAtDate;
+    /**
+     * The date and time when the topic rule destination was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAtDate;
+    /**
      * The reason the topic rule destination is in the current status.
      */
     statusReason?: String;
@@ -9042,6 +9636,10 @@ declare namespace Iot {
      * Information about the HTTP URL.
      */
     httpUrlSummary?: HttpUrlDestinationSummary;
+    /**
+     * Information about the virtual private cloud (VPC) connection.
+     */
+    vpcDestinationSummary?: VpcDestinationSummary;
   }
   export type TopicRuleList = TopicRuleListItem[];
   export interface TopicRuleListItem {
@@ -9154,7 +9752,7 @@ declare namespace Iot {
   }
   export interface UpdateAccountAuditConfigurationRequest {
     /**
-     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.
+     * The Amazon Resource Name (ARN) of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.
      */
     roleArn?: RoleArn;
     /**
@@ -9162,7 +9760,7 @@ declare namespace Iot {
      */
     auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
     /**
-     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are currently enabled. Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration, this parameter is required and must specify at least one enabled check.
+     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are currently enabled. Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it's used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration, this parameter is required and must specify at least one enabled check.
      */
     auditCheckConfigurations?: AuditCheckConfigurations;
   }
@@ -9240,7 +9838,7 @@ declare namespace Iot {
   }
   export interface UpdateCACertificateParams {
     /**
-     * The action that you want to apply to the CA cerrtificate. The only supported value is DEACTIVATE.
+     * The action that you want to apply to the CA certificate. The only supported value is DEACTIVATE.
      */
     action: CACertificateUpdateAction;
   }
@@ -9276,9 +9874,45 @@ declare namespace Iot {
      */
     newStatus: CertificateStatus;
   }
+  export interface UpdateCustomMetricRequest {
+    /**
+     *  The name of the custom metric. Cannot be updated. 
+     */
+    metricName: MetricName;
+    /**
+     *  Field represents a friendly name in the console for the custom metric, it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. 
+     */
+    displayName: CustomMetricDisplayName;
+  }
+  export interface UpdateCustomMetricResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric. 
+     */
+    metricArn?: CustomMetricArn;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType?: CustomMetricType;
+    /**
+     *  A friendly name in the console for the custom metric 
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The creation date of the custom metric in milliseconds since epoch. 
+     */
+    creationDate?: Timestamp;
+    /**
+     *  The time the custom metric was last modified in milliseconds since epoch. 
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface UpdateDeviceCertificateParams {
     /**
-     * The action that you want to apply to the device cerrtificate. The only supported value is DEACTIVATE.
+     * The action that you want to apply to the device certificate. The only supported value is DEACTIVATE.
      */
     action: DeviceCertificateUpdateAction;
   }
@@ -9298,7 +9932,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) of the created dimension.
+     * The Amazon Resource Name (ARN)of the created dimension.
      */
     arn?: DimensionArn;
     /**
@@ -9430,7 +10064,7 @@ declare namespace Iot {
   }
   export interface UpdateMitigationActionRequest {
     /**
-     * The friendly name for the mitigation action. You can't change the name by using UpdateMitigationAction. Instead, you must delete and re-create the mitigation action with the new name.
+     * The friendly name for the mitigation action. You cannot change the name by using UpdateMitigationAction. Instead, you must delete and recreate the mitigation action with the new name.
      */
     actionName: MitigationActionName;
     /**
@@ -9510,15 +10144,15 @@ declare namespace Iot {
   }
   export interface UpdateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY, or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place. This can be one of SUN, MON, TUE, WED, THU, FRI, or SAT. This field is required if the "frequency" parameter is set to WEEKLY or BIWEEKLY.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -9554,11 +10188,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     *  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     *  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -9604,7 +10238,7 @@ declare namespace Iot {
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -9776,13 +10410,17 @@ declare namespace Iot {
      */
     securityProfileName?: SecurityProfileName;
     /**
-     * The behavior which was violated.
+     * The behavior that was violated.
      */
     behavior?: Behavior;
     /**
      * The value of the metric (the measurement).
      */
     metricValue?: MetricValue;
+    /**
+     *  The details of a violation event. 
+     */
+    violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
     /**
      * The type of violation event.
      */
@@ -9792,10 +10430,82 @@ declare namespace Iot {
      */
     violationEventTime?: Timestamp;
   }
+  export interface ViolationEventAdditionalInfo {
+    /**
+     *  The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High. 
+     */
+    confidenceLevel?: ConfidenceLevel;
+  }
+  export interface ViolationEventOccurrenceRange {
+    /**
+     *  The start date and time of a time period in which violation events occurred. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The end date and time of a time period in which violation events occurred. 
+     */
+    endTime: Timestamp;
+  }
   export type ViolationEventType = "in-alarm"|"alarm-cleared"|"alarm-invalidated"|string;
   export type ViolationEvents = ViolationEvent[];
   export type ViolationId = string;
+  export interface VpcDestinationConfiguration {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn: AwsArn;
+  }
+  export interface VpcDestinationProperties {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds?: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId?: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn?: AwsArn;
+  }
+  export interface VpcDestinationSummary {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds?: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId?: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn?: AwsArn;
+  }
+  export type VpcId = string;
   export type WaitingForDataCollectionChecksCount = number;
+  export type stringValue = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

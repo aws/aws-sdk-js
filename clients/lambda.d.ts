@@ -46,11 +46,11 @@ declare class Lambda extends Service {
    */
   createCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.CreateCodeSigningConfigResponse) => void): Request<Lambda.Types.CreateCodeSigningConfigResponse, AWSError>;
   /**
-   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MQ     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MQ     Using AWS Lambda with Amazon MSK     Using AWS Lambda with Self-Managed Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MQ     Using AWS Lambda with Amazon MSK    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.    Using AWS Lambda with Amazon DynamoDB     Using AWS Lambda with Amazon Kinesis     Using AWS Lambda with Amazon SQS     Using AWS Lambda with Amazon MQ     Using AWS Lambda with Amazon MSK     Using AWS Lambda with Self-Managed Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -757,7 +757,7 @@ declare namespace Lambda {
     /**
      * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis - The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams - The ARN of the stream.    Amazon Simple Queue Service - The ARN of the queue.    Amazon Managed Streaming for Apache Kafka - The ARN of the cluster.  
      */
-    EventSourceArn: Arn;
+    EventSourceArn?: Arn;
     /**
      * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
      */
@@ -767,11 +767,11 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
-     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -803,7 +803,11 @@ declare namespace Lambda {
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     *  (MSK) The name of the Kafka topic. 
+     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     */
+    TumblingWindowInSeconds?: TumblingWindowInSeconds;
+    /**
+     * The name of the Kafka topic.
      */
     Topics?: Topics;
     /**
@@ -811,9 +815,17 @@ declare namespace Lambda {
      */
     Queues?: Queues;
     /**
-     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     * An array of the authentication protocol, or the VPC components to secure your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
+    /**
+     * The Self-Managed Apache Kafka cluster to send records.
+     */
+    SelfManagedEventSource?: SelfManagedEventSource;
+    /**
+     * (Streams) A list of current response type enums applied to the event source mapping.
+     */
+    FunctionResponseTypes?: FunctionResponseTypeList;
   }
   export interface CreateFunctionRequest {
     /**
@@ -993,6 +1005,10 @@ declare namespace Lambda {
     OnFailure?: OnFailure;
   }
   export type Enabled = boolean;
+  export type EndPointType = "KAFKA_BOOTSTRAP_SERVERS"|string;
+  export type Endpoint = string;
+  export type EndpointLists = Endpoint[];
+  export type Endpoints = {[key: string]: EndpointLists};
   export interface Environment {
     /**
      * Environment variable key-value pairs.
@@ -1040,7 +1056,7 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.
+     * (Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -1076,7 +1092,7 @@ declare namespace Lambda {
      */
     DestinationConfig?: DestinationConfig;
     /**
-     *  (MSK) The name of the Kafka topic to consume. 
+     * The name of the Kafka topic.
      */
     Topics?: Topics;
     /**
@@ -1084,9 +1100,13 @@ declare namespace Lambda {
      */
     Queues?: Queues;
     /**
-     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     * An array of the authentication protocol, or the VPC components to secure your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
+    /**
+     * The Self-Managed Apache Kafka cluster for your event source.
+     */
+    SelfManagedEventSource?: SelfManagedEventSource;
     /**
      * (Streams) Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
@@ -1099,6 +1119,14 @@ declare namespace Lambda {
      * (Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
+    /**
+     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     */
+    TumblingWindowInSeconds?: TumblingWindowInSeconds;
+    /**
+     * (Streams) A list of current response type enums applied to the event source mapping.
+     */
+    FunctionResponseTypes?: FunctionResponseTypeList;
   }
   export type EventSourceMappingsList = EventSourceMappingConfiguration[];
   export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
@@ -1308,6 +1336,8 @@ declare namespace Lambda {
   export type FunctionEventInvokeConfigList = FunctionEventInvokeConfig[];
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
+  export type FunctionResponseType = "ReportBatchItemFailures"|string;
+  export type FunctionResponseTypeList = FunctionResponseType[];
   export type FunctionVersion = "ALL"|string;
   export interface GetAccountSettingsRequest {
   }
@@ -2311,20 +2341,26 @@ declare namespace Lambda {
   export type S3ObjectVersion = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export interface SelfManagedEventSource {
+    /**
+     * The list of bootstrap servers for your Kafka brokers in the following format: "KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"].
+     */
+    Endpoints?: Endpoints;
+  }
   export type SensitiveString = string;
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     * The type of authentication protocol or the VPC components for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (MQ) The Secrets Manager secret that stores your broker credentials.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your Kafka brokers.    SASL_SCRAM_256_AUTH - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.    SASL_SCRAM_512_AUTH - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.  
      */
     Type?: SourceAccessType;
     /**
-     * To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     * The value for your chosen configuration in Type. For example: "URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName".
      */
-    URI?: Arn;
+    URI?: URI;
   }
   export type SourceAccessConfigurations = SourceAccessConfiguration[];
-  export type SourceAccessType = "BASIC_AUTH"|string;
+  export type SourceAccessType = "BASIC_AUTH"|"VPC_SUBNET"|"VPC_SECURITY_GROUP"|"SASL_SCRAM_512_AUTH"|"SASL_SCRAM_256_AUTH"|string;
   export type SourceOwner = string;
   export type State = "Pending"|"Active"|"Inactive"|"Failed"|string;
   export type StateReason = string;
@@ -2365,6 +2401,8 @@ declare namespace Lambda {
     Mode?: TracingMode;
   }
   export type TracingMode = "Active"|"PassThrough"|string;
+  export type TumblingWindowInSeconds = number;
+  export type URI = string;
   export type UnreservedConcurrentExecutions = number;
   export interface UntagResourceRequest {
     /**
@@ -2440,11 +2478,11 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
-     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -2468,9 +2506,17 @@ declare namespace Lambda {
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
-     *  (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format:  { "username": "your username", "password": "your password" }  To reference the secret, use the following format: [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]  The value of Type is always BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt permissions.
+     * An array of the authentication protocol, or the VPC components to secure your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
+    /**
+     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     */
+    TumblingWindowInSeconds?: TumblingWindowInSeconds;
+    /**
+     * (Streams) A list of current response type enums applied to the event source mapping.
+     */
+    FunctionResponseTypes?: FunctionResponseTypeList;
   }
   export interface UpdateFunctionCodeRequest {
     /**

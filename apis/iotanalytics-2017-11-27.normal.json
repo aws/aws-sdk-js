@@ -1264,6 +1264,16 @@
     "ChannelArn": {
       "type": "string"
     },
+    "ChannelMessages": {
+      "type": "structure",
+      "members": {
+        "s3Paths": {
+          "shape": "S3PathChannelMessages",
+          "documentation": "<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.</p>"
+        }
+      },
+      "documentation": "<p>Specifies one or more sets of channel messages.</p>"
+    },
     "ChannelName": {
       "type": "string",
       "max": 128,
@@ -1351,6 +1361,42 @@
         }
       },
       "documentation": "<p>A summary of information about a channel.</p>"
+    },
+    "Column": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type"
+      ],
+      "members": {
+        "name": {
+          "shape": "ColumnName",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "type": {
+          "shape": "ColumnDataType",
+          "documentation": "<p>The type of data. For more information about the supported data types, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html\">Common data types</a> in the <i>AWS Glue Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a column that stores your data.</p>"
+    },
+    "ColumnDataType": {
+      "type": "string",
+      "max": 131072,
+      "min": 1,
+      "pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+    },
+    "ColumnName": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$"
+    },
+    "Columns": {
+      "type": "list",
+      "member": {
+        "shape": "Column"
+      }
     },
     "ComputeType": {
       "type": "string",
@@ -1533,6 +1579,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Metadata which can be used to manage the data store.</p>"
+        },
+        "fileFormatConfiguration": {
+          "shape": "FileFormatConfiguration",
+          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         }
       }
     },
@@ -2018,6 +2068,10 @@
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
           "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+        },
+        "fileFormatConfiguration": {
+          "shape": "FileFormatConfiguration",
+          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         }
       },
       "documentation": "<p>Information about a data store.</p>"
@@ -2127,6 +2181,10 @@
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
           "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+        },
+        "fileFormatType": {
+          "shape": "FileFormatType",
+          "documentation": "<p>The file format of the data in the data store.</p>"
         }
       },
       "documentation": "<p>A summary of information about a data store.</p>"
@@ -2456,6 +2514,27 @@
       },
       "documentation": "<p>The estimated size of the resource.</p>"
     },
+    "FileFormatConfiguration": {
+      "type": "structure",
+      "members": {
+        "jsonConfiguration": {
+          "shape": "JsonConfiguration",
+          "documentation": "<p>Contains the configuration information of the JSON format.</p>"
+        },
+        "parquetConfiguration": {
+          "shape": "ParquetConfiguration",
+          "documentation": "<p>Contains the configuration information of the Parquet format.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+    },
+    "FileFormatType": {
+      "type": "string",
+      "enum": [
+        "JSON",
+        "PARQUET"
+      ]
+    },
     "FilterActivity": {
       "type": "structure",
       "required": [
@@ -2580,6 +2659,11 @@
       "max": 128,
       "min": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+    },
+    "JsonConfiguration": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Contains the configuration information of the JSON format.</p>"
     },
     "LambdaActivity": {
       "type": "structure",
@@ -2994,6 +3078,16 @@
       },
       "documentation": "<p>The value of the variable as a structure that specifies an output file URI.</p>"
     },
+    "ParquetConfiguration": {
+      "type": "structure",
+      "members": {
+        "schemaDefinition": {
+          "shape": "SchemaDefinition",
+          "documentation": "<p>Information needed to define a schema.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of the Parquet format.</p>"
+    },
     "Pipeline": {
       "type": "structure",
       "members": {
@@ -3318,6 +3412,20 @@
       "min": 1,
       "pattern": "^[a-zA-Z0-9!_.*'()/{}:-]*/$"
     },
+    "S3PathChannelMessage": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9/_!'(){}\\*\\s\\.\\-\\=\\:]+$"
+    },
+    "S3PathChannelMessages": {
+      "type": "list",
+      "member": {
+        "shape": "S3PathChannelMessage"
+      },
+      "max": 100,
+      "min": 1
+    },
     "SampleChannelDataRequest": {
       "type": "structure",
       "required": [
@@ -3371,6 +3479,16 @@
     },
     "ScheduleExpression": {
       "type": "string"
+    },
+    "SchemaDefinition": {
+      "type": "structure",
+      "members": {
+        "columns": {
+          "shape": "Columns",
+          "documentation": "<p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types</p>"
+        }
+      },
+      "documentation": "<p>Information needed to define a schema.</p>"
     },
     "SelectAttributesActivity": {
       "type": "structure",
@@ -3456,11 +3574,15 @@
         },
         "startTime": {
           "shape": "StartTime",
-          "documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p>"
+          "documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>startTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>"
         },
         "endTime": {
           "shape": "EndTime",
-          "documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p>"
+          "documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>endTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>"
+        },
+        "channelMessages": {
+          "shape": "ChannelMessages",
+          "documentation": "<p>Specifies one or more sets of channel messages that you want to reprocess.</p> <p>If you use the <code>channelMessages</code> object, you must not specify a value for <code>startTime</code> and <code>endTime</code>.</p>"
         }
       }
     },
@@ -3678,6 +3800,10 @@
         "datastoreStorage": {
           "shape": "DatastoreStorage",
           "documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is<code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.</p>"
+        },
+        "fileFormatConfiguration": {
+          "shape": "FileFormatConfiguration",
+          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         }
       }
     },
