@@ -8,6 +8,8 @@
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
+Note: You can find the latest [modular Javascript SDK V3](https://github.com/aws/aws-sdk-js-v3)
+
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
 
