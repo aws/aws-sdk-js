@@ -10,9 +10,6 @@
 
 **Note**: The [version 3.x](https://github.com/aws/aws-sdk-js-v3) of the AWS SDK for JavaScript is generally available. For more information see the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/) or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 
-The official AWS SDK for JavaScript, available for browsers and mobile devices,
-or Node.js backends
-
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
 If you are upgrading from 1.x to 2.0 of the SDK, please see the
