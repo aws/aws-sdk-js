@@ -255,6 +255,8 @@ export abstract class ConfigurationServicePlaceholders {
   iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.ClientConfiguration;
   iotfleethub?: AWS.IoTFleetHub.Types.ClientConfiguration;
   iotwireless?: AWS.IoTWireless.Types.ClientConfiguration;
+  location?: AWS.Location.Types.ClientConfiguration;
+  wellarchitected?: AWS.WellArchitected.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -512,4 +514,6 @@ export interface ConfigurationServiceApiVersions {
   iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.apiVersion;
   iotfleethub?: AWS.IoTFleetHub.Types.apiVersion;
   iotwireless?: AWS.IoTWireless.Types.apiVersion;
+  location?: AWS.Location.Types.apiVersion;
+  wellarchitected?: AWS.WellArchitected.Types.apiVersion;
 }

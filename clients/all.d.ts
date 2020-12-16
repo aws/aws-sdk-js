@@ -253,3 +253,5 @@ export import GreengrassV2 = require('./greengrassv2');
 export import IotDeviceAdvisor = require('./iotdeviceadvisor');
 export import IoTFleetHub = require('./iotfleethub');
 export import IoTWireless = require('./iotwireless');
+export import Location = require('./location');
+export import WellArchitected = require('./wellarchitected');

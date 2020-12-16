@@ -45,7 +45,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates a new StealFire workspace.</p>",
+      "documentation": "<p>Creates a new AMP workspace.</p>",
       "idempotent": true
     },
     "DeleteWorkspace": {
@@ -75,7 +75,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes a StealFire workspace.</p>",
+      "documentation": "<p>Deletes an AMP workspace.</p>",
       "idempotent": true
     },
     "DescribeWorkspace": {
@@ -108,7 +108,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Describes an existing StealFire workspace.</p>"
+      "documentation": "<p>Describes an existing AMP workspace.</p>"
     },
     "ListWorkspaces": {
       "name": "ListWorkspaces",
@@ -137,7 +137,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists all StealFire workspaces, including workspaces being created or deleted.</p>"
+      "documentation": "<p>Lists all AMP workspaces, including workspaces being created or deleted.</p>"
     },
     "UpdateWorkspaceAlias": {
       "name": "UpdateWorkspaceAlias",
@@ -172,7 +172,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Updates a StealFire workspace alias.</p>",
+      "documentation": "<p>Updates an AMP workspace alias.</p>",
       "idempotent": true
     }
   },
@@ -472,5 +472,5 @@
       "documentation": "<p>A list of workspace summaries.</p>"
     }
   },
-  "documentation": "<p>StealFire Service</p>"
+  "documentation": "<p>Amazon Managed Service for Prometheus</p>"
 }

@@ -254,5 +254,7 @@ module.exports = {
   GreengrassV2: require('./greengrassv2'),
   IotDeviceAdvisor: require('./iotdeviceadvisor'),
   IoTFleetHub: require('./iotfleethub'),
-  IoTWireless: require('./iotwireless')
+  IoTWireless: require('./iotwireless'),
+  Location: require('./location'),
+  WellArchitected: require('./wellarchitected')
 };

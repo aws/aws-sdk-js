@@ -891,7 +891,7 @@
           "documentation": "<p> Your unique account identifier. </p>"
         },
         "MonitorArnList": {
-          "shape": "Values",
+          "shape": "MonitorArnList",
           "documentation": "<p> A list of cost anomaly monitors. </p>"
         },
         "Subscribers": {
@@ -2875,6 +2875,12 @@
       },
       "documentation": "<p> Details on the modification recommendation.</p>"
     },
+    "MonitorArnList": {
+      "type": "list",
+      "member": {
+        "shape": "Arn"
+      }
+    },
     "MonitorDimension": {
       "type": "string",
       "enum": [
@@ -4154,7 +4160,7 @@
           "documentation": "<p> The update to the frequency value at which subscribers will receive notifications. </p>"
         },
         "MonitorArnList": {
-          "shape": "Values",
+          "shape": "MonitorArnList",
           "documentation": "<p> A list of cost anomaly subscription ARNs. </p>"
         },
         "Subscribers": {

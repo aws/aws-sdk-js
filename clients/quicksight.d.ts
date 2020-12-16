@@ -420,11 +420,11 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedding Amazon QuickSight in the Amazon QuickSight User Guide .
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
    */
   getDashboardEmbedUrl(params: QuickSight.Types.GetDashboardEmbedUrlRequest, callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedding Amazon QuickSight in the Amazon QuickSight User Guide .
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
    */
   getDashboardEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
@@ -2126,7 +2126,7 @@ declare namespace QuickSight {
      */
     OutputColumns?: OutputColumnList;
     /**
-     * Indicates whether you want to import the data into SPICE.
+     * A value that indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
@@ -2203,7 +2203,7 @@ declare namespace QuickSight {
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * Indicates whether you want to import the data into SPICE.
+     * A value that indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
@@ -2211,7 +2211,7 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
-     * Indicates if the dataset has column level permission configured.
+     * A value that indicates if the dataset has column level permission configured.
      */
     ColumnLevelPermissionRulesApplied?: Boolean;
   }
@@ -3494,7 +3494,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to the IAM policy.
+     * The ID for the dashboard, also added to the AWS Identity and Access Management (IAM) policy.
      */
     DashboardId: RestrictiveResourceId;
     /**
@@ -3514,7 +3514,7 @@ declare namespace QuickSight {
      */
     ResetDisabled?: Boolean;
     /**
-     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
+     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
      */
     StatePersistenceEnabled?: Boolean;
     /**
@@ -3526,7 +3526,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. IdentityType must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
+     * A list of one or more dashboard IDs that you want to add to a session that includes anonymous users. The IdentityType parameter must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight or IAM users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
      */
     AdditionalDashboardIds?: AdditionalDashboardIdList;
   }
@@ -3558,7 +3558,7 @@ declare namespace QuickSight {
      */
     SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
     /**
-     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group – IAM users and IAM role-based sessions.
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
      */
     UserArn?: Arn;
   }
@@ -3765,7 +3765,7 @@ declare namespace QuickSight {
   }
   export interface JoinKeyProperties {
     /**
-     * Indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.
+     * A value that indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.
      */
     UniqueKey?: Boolean;
   }
@@ -4788,6 +4788,10 @@ declare namespace QuickSight {
      */
     DataSourceArn: Arn;
     /**
+     * The catalog associated with a table.
+     */
+    Catalog?: RelationalTableCatalog;
+    /**
      * The schema name. This name applies to certain relational database engines.
      */
     Schema?: RelationalTableSchema;
@@ -4800,6 +4804,7 @@ declare namespace QuickSight {
      */
     InputColumns: InputColumnList;
   }
+  export type RelationalTableCatalog = string;
   export type RelationalTableName = string;
   export type RelationalTableSchema = string;
   export interface RenameColumnOperation {

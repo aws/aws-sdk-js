@@ -12,43 +12,43 @@ declare class Amp extends Service {
   constructor(options?: Amp.Types.ClientConfiguration)
   config: Config & Amp.Types.ClientConfiguration;
   /**
-   * Creates a new StealFire workspace.
+   * Creates a new AMP workspace.
    */
   createWorkspace(params: Amp.Types.CreateWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.CreateWorkspaceResponse) => void): Request<Amp.Types.CreateWorkspaceResponse, AWSError>;
   /**
-   * Creates a new StealFire workspace.
+   * Creates a new AMP workspace.
    */
   createWorkspace(callback?: (err: AWSError, data: Amp.Types.CreateWorkspaceResponse) => void): Request<Amp.Types.CreateWorkspaceResponse, AWSError>;
   /**
-   * Deletes a StealFire workspace.
+   * Deletes an AMP workspace.
    */
   deleteWorkspace(params: Amp.Types.DeleteWorkspaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a StealFire workspace.
+   * Deletes an AMP workspace.
    */
   deleteWorkspace(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes an existing StealFire workspace.
+   * Describes an existing AMP workspace.
    */
   describeWorkspace(params: Amp.Types.DescribeWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
-   * Describes an existing StealFire workspace.
+   * Describes an existing AMP workspace.
    */
   describeWorkspace(callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
-   * Lists all StealFire workspaces, including workspaces being created or deleted.
+   * Lists all AMP workspaces, including workspaces being created or deleted.
    */
   listWorkspaces(params: Amp.Types.ListWorkspacesRequest, callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
   /**
-   * Lists all StealFire workspaces, including workspaces being created or deleted.
+   * Lists all AMP workspaces, including workspaces being created or deleted.
    */
   listWorkspaces(callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
   /**
-   * Updates a StealFire workspace alias.
+   * Updates an AMP workspace alias.
    */
   updateWorkspaceAlias(params: Amp.Types.UpdateWorkspaceAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a StealFire workspace alias.
+   * Updates an AMP workspace alias.
    */
   updateWorkspaceAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }

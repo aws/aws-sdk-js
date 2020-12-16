@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.811.0-->
+<!--LATEST=2.812.0-->
 <!--ENTRYINSERT-->
+
+## 2.812.0
+* feature: CostExplorer: This release updates the "MonitorArnList" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs
+* feature: Location: Initial release of Amazon Location Service. A new geospatial service providing capabilities to render maps, geocode/reverse geocode, track device locations, and detect geofence entry/exit events.
+* feature: QuickSight: QuickSight now supports connecting to federated data sources of Athena
+* feature: WellArchitected: This is the first release of AWS Well-Architected Tool API support, use to review your workload and compare against the latest AWS architectural best practices.
 
 ## 2.811.0
 * feature: Amp: (New Service) Amazon Managed Service for Prometheus is a fully managed Prometheus-compatible monitoring service that makes it easy to monitor containerized applications securely and at scale.

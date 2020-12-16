@@ -984,5 +984,11 @@
   },
   "iotwireless": {
     "name": "IoTWireless"
+  },
+  "location": {
+    "name": "Location"
+  },
+  "wellarchitected": {
+    "name": "WellArchitected"
   }
 }
