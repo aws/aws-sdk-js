@@ -102,6 +102,55 @@
       ],
       "documentation": "<p>Creates a new component that can be used to build, validate, test, and assess your image.</p>"
     },
+    "CreateContainerRecipe": {
+      "name": "CreateContainerRecipe",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/CreateContainerRecipe"
+      },
+      "input": {
+        "shape": "CreateContainerRecipeRequest"
+      },
+      "output": {
+        "shape": "CreateContainerRecipeResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        },
+        {
+          "shape": "InvalidVersionNumberException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.</p>"
+    },
     "CreateDistributionConfiguration": {
       "name": "CreateDistributionConfiguration",
       "http": {
@@ -372,6 +421,43 @@
       ],
       "documentation": "<p> Deletes a component build version. </p>"
     },
+    "DeleteContainerRecipe": {
+      "name": "DeleteContainerRecipe",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/DeleteContainerRecipe"
+      },
+      "input": {
+        "shape": "DeleteContainerRecipeRequest"
+      },
+      "output": {
+        "shape": "DeleteContainerRecipeResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        },
+        {
+          "shape": "ResourceDependencyException"
+        }
+      ],
+      "documentation": "<p>Deletes a container recipe.</p>"
+    },
     "DeleteDistributionConfiguration": {
       "name": "DeleteDistributionConfiguration",
       "http": {
@@ -624,6 +710,74 @@
         }
       ],
       "documentation": "<p> Gets a component policy. </p>"
+    },
+    "GetContainerRecipe": {
+      "name": "GetContainerRecipe",
+      "http": {
+        "method": "GET",
+        "requestUri": "/GetContainerRecipe"
+      },
+      "input": {
+        "shape": "GetContainerRecipeRequest"
+      },
+      "output": {
+        "shape": "GetContainerRecipeResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Retrieves a container recipe.</p>"
+    },
+    "GetContainerRecipePolicy": {
+      "name": "GetContainerRecipePolicy",
+      "http": {
+        "method": "GET",
+        "requestUri": "/GetContainerRecipePolicy"
+      },
+      "input": {
+        "shape": "GetContainerRecipePolicyRequest"
+      },
+      "output": {
+        "shape": "GetContainerRecipePolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Retrieves the policy for a container recipe.</p>"
     },
     "GetDistributionConfiguration": {
       "name": "GetDistributionConfiguration",
@@ -983,6 +1137,43 @@
       ],
       "documentation": "<p>Returns the list of component build versions for the specified semantic version. </p>"
     },
+    "ListContainerRecipes": {
+      "name": "ListContainerRecipes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/ListContainerRecipes"
+      },
+      "input": {
+        "shape": "ListContainerRecipesRequest"
+      },
+      "output": {
+        "shape": "ListContainerRecipesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidPaginationTokenException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Returns a list of container recipes.</p>"
+    },
     "ListDistributionConfigurations": {
       "name": "ListDistributionConfigurations",
       "http": {
@@ -1018,7 +1209,7 @@
           "shape": "CallRateLimitExceededException"
         }
       ],
-      "documentation": "<p> Returns a list of distribution configurations. </p>"
+      "documentation": "<p>Returns a list of distribution configurations. </p>"
     },
     "ListImageBuildVersions": {
       "name": "ListImageBuildVersions",
@@ -1309,6 +1500,46 @@
         }
       ],
       "documentation": "<p> Applies a policy to a component. We recommend that you call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared. </p>"
+    },
+    "PutContainerRecipePolicy": {
+      "name": "PutContainerRecipePolicy",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/PutContainerRecipePolicy"
+      },
+      "input": {
+        "shape": "PutContainerRecipePolicyRequest"
+      },
+      "output": {
+        "shape": "PutContainerRecipePolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.</p>"
     },
     "PutImagePolicy": {
       "name": "PutImagePolicy",
@@ -1694,6 +1925,9 @@
     "Arn": {
       "type": "string"
     },
+    "Boolean": {
+      "type": "boolean"
+    },
     "CancelImageCreationRequest": {
       "type": "structure",
       "required": [
@@ -1948,6 +2182,177 @@
         "shape": "ComponentVersion"
       }
     },
+    "Container": {
+      "type": "structure",
+      "members": {
+        "region": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Containers and container images are Region-specific. This is the Region context for the container.</p>"
+        },
+        "imageUris": {
+          "shape": "StringList",
+          "documentation": "<p>A list of URIs for containers created in the context Region.</p>"
+        }
+      },
+      "documentation": "<p>A container encapsulates the runtime environment for an application.</p>"
+    },
+    "ContainerDistributionConfiguration": {
+      "type": "structure",
+      "required": [
+        "targetRepository"
+      ],
+      "members": {
+        "description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The description of the container distribution configuration.</p>"
+        },
+        "containerTags": {
+          "shape": "StringList",
+          "documentation": "<p>Tags that are attached to the container distribution configuration.</p>"
+        },
+        "targetRepository": {
+          "shape": "TargetContainerRepository",
+          "documentation": "<p>The destination repository for the container distribution configuration.</p>"
+        }
+      },
+      "documentation": "<p>Container distribution settings for encryption, licensing, and sharing in a specific Region.</p>"
+    },
+    "ContainerList": {
+      "type": "list",
+      "member": {
+        "shape": "Container"
+      }
+    },
+    "ContainerRecipe": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "ImageBuilderArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>"
+        },
+        "containerType": {
+          "shape": "ContainerType",
+          "documentation": "<p>Specifies the type of container, such as Docker.</p>"
+        },
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the container recipe.</p>"
+        },
+        "description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The description of the container recipe.</p>"
+        },
+        "platform": {
+          "shape": "Platform",
+          "documentation": "<p>The system platform for the container, such as Windows or Linux.</p>"
+        },
+        "owner": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The owner of the container recipe.</p>"
+        },
+        "version": {
+          "shape": "VersionNumber",
+          "documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>"
+        },
+        "components": {
+          "shape": "ComponentConfigurationList",
+          "documentation": "<p>Components for build and test that are included in the container recipe.</p>"
+        },
+        "dockerfileTemplateData": {
+          "shape": "DockerFileTemplate",
+          "documentation": "<p>Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.</p>"
+        },
+        "kmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Identifies which KMS key is used to encrypt the container image for distribution to the target Region.</p>"
+        },
+        "encrypted": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>A flag that indicates if the target container is encrypted.</p>"
+        },
+        "parentImage": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source image for the container recipe.</p>"
+        },
+        "dateCreated": {
+          "shape": "DateTime",
+          "documentation": "<p>The date when this container recipe was created.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Tags that are attached to the container recipe.</p>"
+        },
+        "workingDirectory": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The working directory for use during build and test workflows.</p>"
+        },
+        "targetRepository": {
+          "shape": "TargetContainerRepository",
+          "documentation": "<p>The destination repository for the container image.</p>"
+        }
+      },
+      "documentation": "<p>A container recipe.</p>"
+    },
+    "ContainerRecipeArn": {
+      "type": "string",
+      "pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):container-recipe/[a-z0-9-_]+/\\d+\\.\\d+\\.\\d+$"
+    },
+    "ContainerRecipeSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "ImageBuilderArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>"
+        },
+        "containerType": {
+          "shape": "ContainerType",
+          "documentation": "<p>Specifies the type of container, such as \"Docker\".</p>"
+        },
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the container recipe.</p>"
+        },
+        "platform": {
+          "shape": "Platform",
+          "documentation": "<p>The system platform for the container, such as Windows or Linux.</p>"
+        },
+        "owner": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The owner of the container recipe.</p>"
+        },
+        "parentImage": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source image for the container recipe.</p>"
+        },
+        "dateCreated": {
+          "shape": "DateTime",
+          "documentation": "<p>The date when this container recipe was created.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Tags that are attached to the container recipe.</p>"
+        }
+      },
+      "documentation": "<p>A summary of a container recipe</p>"
+    },
+    "ContainerRecipeSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerRecipeSummary"
+      }
+    },
+    "ContainerRepositoryService": {
+      "type": "string",
+      "enum": [
+        "ECR"
+      ]
+    },
+    "ContainerType": {
+      "type": "string",
+      "enum": [
+        "DOCKER"
+      ]
+    },
     "CreateComponentRequest": {
       "type": "structure",
       "required": [
@@ -2021,6 +2426,99 @@
         }
       }
     },
+    "CreateContainerRecipeRequest": {
+      "type": "structure",
+      "required": [
+        "containerType",
+        "name",
+        "semanticVersion",
+        "components",
+        "dockerfileTemplateData",
+        "parentImage",
+        "targetRepository",
+        "clientToken"
+      ],
+      "members": {
+        "containerType": {
+          "shape": "ContainerType",
+          "documentation": "<p>The type of container to create.</p>"
+        },
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the container recipe.</p>"
+        },
+        "description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The description of the container recipe.</p>"
+        },
+        "semanticVersion": {
+          "shape": "VersionNumber",
+          "documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>"
+        },
+        "components": {
+          "shape": "ComponentConfigurationList",
+          "documentation": "<p>Components for build and test that are included in the container recipe.</p>"
+        },
+        "dockerfileTemplateData": {
+          "shape": "InlineDockerFileTemplate",
+          "documentation": "<p>The Dockerfile template used to build your image as an inline data blob.</p>"
+        },
+        "dockerfileTemplateUri": {
+          "shape": "Uri",
+          "documentation": "<p>The S3 URI for the Dockerfile that will be used to build your container image.</p>"
+        },
+        "platformOverride": {
+          "shape": "Platform",
+          "documentation": "<p>Specifies the operating system platform when you use a custom source image.</p>"
+        },
+        "imageOsVersionOverride": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Specifies the operating system version for the source image.</p>"
+        },
+        "parentImage": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source image for the container recipe.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Tags that are attached to the container recipe.</p>"
+        },
+        "workingDirectory": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The working directory for use during build and test workflows.</p>"
+        },
+        "targetRepository": {
+          "shape": "TargetContainerRepository",
+          "documentation": "<p>The destination repository for the container image.</p>"
+        },
+        "kmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Identifies which KMS key is used to encrypt the container image.</p>"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client token used to make this request idempotent.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateContainerRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client token used to make this request idempotent.</p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>Returns the Amazon Resource Name (ARN) of the container recipe that the request created.</p>"
+        }
+      }
+    },
     "CreateDistributionConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -2073,7 +2571,6 @@
       "type": "structure",
       "required": [
         "name",
-        "imageRecipeArn",
         "infrastructureConfigurationArn",
         "clientToken"
       ],
@@ -2089,6 +2586,10 @@
         "imageRecipeArn": {
           "shape": "ImageRecipeArn",
           "documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. </p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.</p>"
         },
         "infrastructureConfigurationArn": {
           "shape": "InfrastructureConfigurationArn",
@@ -2211,7 +2712,6 @@
     "CreateImageRequest": {
       "type": "structure",
       "required": [
-        "imageRecipeArn",
         "infrastructureConfigurationArn",
         "clientToken"
       ],
@@ -2219,6 +2719,10 @@
         "imageRecipeArn": {
           "shape": "ImageRecipeArn",
           "documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. </p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.</p>"
         },
         "distributionConfigurationArn": {
           "shape": "DistributionConfigurationArn",
@@ -2374,6 +2878,33 @@
         }
       }
     },
+    "DeleteContainerRecipeRequest": {
+      "type": "structure",
+      "required": [
+        "containerRecipeArn"
+      ],
+      "members": {
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe to delete.</p>",
+          "location": "querystring",
+          "locationName": "containerRecipeArn"
+        }
+      }
+    },
+    "DeleteContainerRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that was deleted.</p>"
+        }
+      }
+    },
     "DeleteDistributionConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -2523,6 +3054,10 @@
           "shape": "AmiDistributionConfiguration",
           "documentation": "<p>The specific AMI settings (for example, launch permissions, AMI tags). </p>"
         },
+        "containerDistributionConfiguration": {
+          "shape": "ContainerDistributionConfiguration",
+          "documentation": "<p>Container distribution settings for encryption, licensing, and sharing in a specific Region.</p>"
+        },
         "licenseConfigurationArns": {
           "shape": "LicenseConfigurationArnList",
           "documentation": "<p>The License Manager Configuration to associate with the AMI in the specified Region.</p>"
@@ -2601,6 +3136,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags associated with the distribution configuration.</p>"
+        },
+        "regions": {
+          "shape": "RegionList",
+          "documentation": "<p>A list of Regions where the container image is distributed to.</p>"
         }
       },
       "documentation": "<p>A high-level overview of a distribution configuration.</p>"
@@ -2621,6 +3160,9 @@
       "type": "integer",
       "max": 720,
       "min": 30
+    },
+    "DockerFileTemplate": {
+      "type": "string"
     },
     "EbsInstanceBlockDeviceSpecification": {
       "type": "structure",
@@ -2771,6 +3313,60 @@
         "component": {
           "shape": "Component",
           "documentation": "<p>The component object associated with the specified ARN. </p>"
+        }
+      }
+    },
+    "GetContainerRecipePolicyRequest": {
+      "type": "structure",
+      "required": [
+        "containerRecipeArn"
+      ],
+      "members": {
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe for the policy being requested.</p>",
+          "location": "querystring",
+          "locationName": "containerRecipeArn"
+        }
+      }
+    },
+    "GetContainerRecipePolicyResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "policy": {
+          "shape": "ResourcePolicyDocument",
+          "documentation": "<p>The container recipe policy object that is returned.</p>"
+        }
+      }
+    },
+    "GetContainerRecipeRequest": {
+      "type": "structure",
+      "required": [
+        "containerRecipeArn"
+      ],
+      "members": {
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe to retrieve.</p>",
+          "location": "querystring",
+          "locationName": "containerRecipeArn"
+        }
+      }
+    },
+    "GetContainerRecipeResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "containerRecipe": {
+          "shape": "ContainerRecipe",
+          "documentation": "<p>The container recipe object that is returned.</p>"
         }
       }
     },
@@ -2972,6 +3568,10 @@
           "shape": "ImageBuilderArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
         },
+        "type": {
+          "shape": "ImageType",
+          "documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+        },
         "name": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the image.</p>"
@@ -2999,6 +3599,10 @@
         "imageRecipe": {
           "shape": "ImageRecipe",
           "documentation": "<p>The image recipe used when creating the image.</p>"
+        },
+        "containerRecipe": {
+          "shape": "ContainerRecipe",
+          "documentation": "<p>The container recipe used to create the container image type.</p>"
         },
         "sourcePipelineName": {
           "shape": "ResourceName",
@@ -3041,7 +3645,7 @@
     },
     "ImageBuilderArn": {
       "type": "string",
-      "pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\\d+)\\.(?:x|\\d+)\\.(?:x|\\d+))(?:/\\d+)?)?$"
+      "pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\\d+)\\.(?:x|\\d+)\\.(?:x|\\d+))(?:/\\d+)?)?$"
     },
     "ImagePipeline": {
       "type": "structure",
@@ -3069,6 +3673,10 @@
         "imageRecipeArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the image recipe associated with this image pipeline.</p>"
+        },
+        "containerRecipeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that is used for this pipeline.</p>"
         },
         "infrastructureConfigurationArn": {
           "shape": "Arn",
@@ -3129,6 +3737,10 @@
         "arn": {
           "shape": "ImageBuilderArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the image recipe.</p>"
+        },
+        "type": {
+          "shape": "ImageType",
+          "documentation": "<p>Specifies which type of image is created by the recipe - an AMI or a container image.</p>"
         },
         "name": {
           "shape": "ResourceName",
@@ -3262,6 +3874,10 @@
           "shape": "ResourceName",
           "documentation": "<p>The name of the image.</p>"
         },
+        "type": {
+          "shape": "ImageType",
+          "documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+        },
         "version": {
           "shape": "VersionNumber",
           "documentation": "<p>The version of the image.</p>"
@@ -3322,6 +3938,13 @@
       "max": 1440,
       "min": 60
     },
+    "ImageType": {
+      "type": "string",
+      "enum": [
+        "AMI",
+        "DOCKER"
+      ]
+    },
     "ImageVersion": {
       "type": "structure",
       "members": {
@@ -3332,6 +3955,10 @@
         "name": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the image semantic version.</p>"
+        },
+        "type": {
+          "shape": "ImageType",
+          "documentation": "<p>Specifies whether this is an AMI or container image.</p>"
         },
         "version": {
           "shape": "VersionNumber",
@@ -3562,7 +4189,14 @@
     "InlineComponentData": {
       "type": "string",
       "max": 16000,
-      "min": 1
+      "min": 1,
+      "pattern": "[^\\x00]+"
+    },
+    "InlineDockerFileTemplate": {
+      "type": "string",
+      "max": 16000,
+      "min": 1,
+      "pattern": "[^\\x00]+"
     },
     "InstanceBlockDeviceMapping": {
       "type": "structure",
@@ -3676,6 +4310,10 @@
           "shape": "FilterList",
           "documentation": "<p>The filters. </p>"
         },
+        "byName": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>"
+        },
         "maxResults": {
           "shape": "RestrictedInteger",
           "documentation": "<p>The maximum items to return in a request. </p>",
@@ -3701,6 +4339,45 @@
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
+        }
+      }
+    },
+    "ListContainerRecipesRequest": {
+      "type": "structure",
+      "members": {
+        "owner": {
+          "shape": "Ownership",
+          "documentation": "<p>Returns container recipes belonging to the specified owner, that have been shared with you. You can omit this field to return container recipes belonging to your account.</p>"
+        },
+        "filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Request filters that are used to narrow the list of container images that are returned.</p>"
+        },
+        "maxResults": {
+          "shape": "RestrictedInteger",
+          "documentation": "<p>The maximum number of results to return in the list.</p>",
+          "box": true
+        },
+        "nextToken": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.</p>"
+        }
+      }
+    },
+    "ListContainerRecipesResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "containerRecipeSummaryList": {
+          "shape": "ContainerRecipeSummaryList",
+          "documentation": "<p>The list of container recipes returned for the request.</p>"
+        },
+        "nextToken": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.</p>"
         }
       }
     },
@@ -3908,6 +4585,10 @@
           "shape": "FilterList",
           "documentation": "<p>The filters. </p>"
         },
+        "byName": {
+          "shape": "Boolean",
+          "documentation": "<p>Requests a list of images with a specific recipe name.</p>"
+        },
         "maxResults": {
           "shape": "RestrictedInteger",
           "documentation": "<p>The maximum items to return in a request. </p>",
@@ -3916,6 +4597,10 @@
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
+        },
+        "includeDeprecated": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Includes deprecated images in the response list.</p>"
         }
       }
     },
@@ -4030,6 +4715,10 @@
         "amis": {
           "shape": "AmiList",
           "documentation": "<p>The EC2 AMIs created by this image. </p>"
+        },
+        "containers": {
+          "shape": "ContainerList",
+          "documentation": "<p>Container images that the pipeline has generated and stored in the output repository.</p>"
         }
       },
       "documentation": "<p>The resources produced by this image. </p>"
@@ -4098,6 +4787,36 @@
         }
       }
     },
+    "PutContainerRecipePolicyRequest": {
+      "type": "structure",
+      "required": [
+        "containerRecipeArn",
+        "policy"
+      ],
+      "members": {
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.</p>"
+        },
+        "policy": {
+          "shape": "ResourcePolicyDocument",
+          "documentation": "<p>The policy to apply to the container recipe.</p>"
+        }
+      }
+    },
+    "PutContainerRecipePolicyResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that this policy was applied to.</p>"
+        }
+      }
+    },
     "PutImagePolicyRequest": {
       "type": "structure",
       "required": [
@@ -4156,6 +4875,12 @@
           "shape": "ImageRecipeArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that this policy was applied to. </p>"
         }
+      }
+    },
+    "RegionList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
       }
     },
     "ResourceName": {
@@ -4314,6 +5039,24 @@
       "type": "string",
       "max": 256
     },
+    "TargetContainerRepository": {
+      "type": "structure",
+      "required": [
+        "service",
+        "repositoryName"
+      ],
+      "members": {
+        "service": {
+          "shape": "ContainerRepositoryService",
+          "documentation": "<p>Specifies the service in which this image was registered.</p>"
+        },
+        "repositoryName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the container repository where the output container image is stored. This name is prefixed by the repository location.</p>"
+        }
+      },
+      "documentation": "<p>The container repository where the output container image is stored.</p>"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -4387,7 +5130,6 @@
       "type": "structure",
       "required": [
         "imagePipelineArn",
-        "imageRecipeArn",
         "infrastructureConfigurationArn",
         "clientToken"
       ],
@@ -4403,6 +5145,10 @@
         "imageRecipeArn": {
           "shape": "ImageRecipeArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. </p>"
+        },
+        "containerRecipeArn": {
+          "shape": "ContainerRecipeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container pipeline to update.</p>"
         },
         "infrastructureConfigurationArn": {
           "shape": "InfrastructureConfigurationArn",
@@ -4536,5 +5282,5 @@
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     }
   },
-  "documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date “golden” server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>"
+  "documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date \"golden\" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>"
 }

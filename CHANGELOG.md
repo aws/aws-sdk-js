@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.812.0-->
+<!--LATEST=2.813.0-->
 <!--ENTRYINSERT-->
+
+## 2.813.0
+* feature: ConfigService: Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config
+* feature: DLM: Provide Cross-account copy event based policy support in DataLifecycleManager (DLM)
+* feature: EC2: C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances
+* feature: Imagebuilder: This release adds support for building and distributing container images within EC2 Image Builder.
+* feature: KMS: Added CreationDate and LastUpdatedDate timestamps to ListAliases API response
+* feature: Route53: This release adds support for DNSSEC signing in Amazon Route 53.
+* feature: Route53Resolver: Route 53 Resolver adds support for enabling resolver DNSSEC validation in virtual private cloud (VPC).
+* feature: SQS: Amazon SQS adds queue attributes to enable high throughput FIFO.
+* feature: ServiceCatalog: Support TagOptions sharing with Service Catalog portfolio sharing.
 
 ## 2.812.0
 * feature: CostExplorer: This release updates the "MonitorArnList" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs

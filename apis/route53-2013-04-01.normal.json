@@ -12,6 +12,37 @@
     "uid": "route53-2013-04-01"
   },
   "operations": {
+    "ActivateKeySigningKey": {
+      "name": "ActivateKeySigningKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate"
+      },
+      "input": {
+        "shape": "ActivateKeySigningKeyRequest"
+      },
+      "output": {
+        "shape": "ActivateKeySigningKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModification"
+        },
+        {
+          "shape": "NoSuchKeySigningKey"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        },
+        {
+          "shape": "InvalidSigningStatus"
+        },
+        {
+          "shape": "InvalidKMSArn"
+        }
+      ],
+      "documentation": "<p>Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to <code>ACTIVE</code>.</p>"
+    },
     "AssociateVPCWithHostedZone": {
       "name": "AssociateVPCWithHostedZone",
       "http": {
@@ -203,6 +234,57 @@
         }
       ],
       "documentation": "<p>Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs). </p> <important> <p>You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.</p> </important> <p>For more information about charges for hosted zones, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p> <p>Note the following:</p> <ul> <li> <p>You can't create a hosted zone for a top-level domain (TLD) such as .com.</p> </li> <li> <p>For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the <code>DelegationSetId</code> element.</p> </li> <li> <p>If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html\">Migrating DNS Service for an Existing Domain to Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide</i>. </p> </li> </ul> <p>When you submit a <code>CreateHostedZone</code> request, the initial status of the hosted zone is <code>PENDING</code>. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to <code>INSYNC</code>.</p>"
+    },
+    "CreateKeySigningKey": {
+      "name": "CreateKeySigningKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/keysigningkey",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateKeySigningKeyRequest",
+        "locationName": "CreateKeySigningKeyRequest",
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        }
+      },
+      "output": {
+        "shape": "CreateKeySigningKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchHostedZone"
+        },
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "InvalidInput"
+        },
+        {
+          "shape": "InvalidKMSArn"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        },
+        {
+          "shape": "InvalidSigningStatus"
+        },
+        {
+          "shape": "InvalidKeySigningKeyName"
+        },
+        {
+          "shape": "KeySigningKeyAlreadyExists"
+        },
+        {
+          "shape": "TooManyKeySigningKeys"
+        },
+        {
+          "shape": "ConcurrentModification"
+        }
+      ],
+      "documentation": "<p>Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.</p>"
     },
     "CreateQueryLoggingConfig": {
       "name": "CreateQueryLoggingConfig",
@@ -425,6 +507,40 @@
       ],
       "documentation": "<p>Authorizes the AWS account that created a specified VPC to submit an <code>AssociateVPCWithHostedZone</code> request to associate the VPC with a specified hosted zone that was created by a different account. To submit a <code>CreateVPCAssociationAuthorization</code> request, you must use the account that created the hosted zone. After you authorize the association, use the account that created the VPC to submit an <code>AssociateVPCWithHostedZone</code> request.</p> <note> <p>If you want to associate multiple VPCs that you created by using one account with a hosted zone that you created by using a different account, you must submit one authorization request for each VPC.</p> </note>"
     },
+    "DeactivateKeySigningKey": {
+      "name": "DeactivateKeySigningKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate"
+      },
+      "input": {
+        "shape": "DeactivateKeySigningKeyRequest"
+      },
+      "output": {
+        "shape": "DeactivateKeySigningKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModification"
+        },
+        {
+          "shape": "NoSuchKeySigningKey"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        },
+        {
+          "shape": "InvalidSigningStatus"
+        },
+        {
+          "shape": "KeySigningKeyInUse"
+        },
+        {
+          "shape": "KeySigningKeyInParentDSRecord"
+        }
+      ],
+      "documentation": "<p>Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to <code>INACTIVE</code>.</p>"
+    },
     "DeleteHealthCheck": {
       "name": "DeleteHealthCheck",
       "http": {
@@ -480,6 +596,37 @@
         }
       ],
       "documentation": "<p>Deletes a hosted zone.</p> <p>If the hosted zone was created by another service, such as AWS Cloud Map, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html#delete-public-hosted-zone-created-by-another-service\">Deleting Public Hosted Zones That Were Created by Another Service</a> in the <i>Amazon Route 53 Developer Guide</i> for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.)</p> <p>If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.</p> <important> <p>If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.</p> </important> <p>If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainNameservers.html\">UpdateDomainNameservers</a> for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on \"free DNS service.\"</p> <p>You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html\">ChangeResourceRecordSets</a>.</p> <p>To verify that the hosted zone has been deleted, do one of the following:</p> <ul> <li> <p>Use the <code>GetHostedZone</code> action to request information about the hosted zone.</p> </li> <li> <p>Use the <code>ListHostedZones</code> action to get a list of the hosted zones associated with the current AWS account.</p> </li> </ul>"
+    },
+    "DeleteKeySigningKey": {
+      "name": "DeleteKeySigningKey",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}"
+      },
+      "input": {
+        "shape": "DeleteKeySigningKeyRequest"
+      },
+      "output": {
+        "shape": "DeleteKeySigningKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModification"
+        },
+        {
+          "shape": "NoSuchKeySigningKey"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        },
+        {
+          "shape": "InvalidSigningStatus"
+        },
+        {
+          "shape": "InvalidKMSArn"
+        }
+      ],
+      "documentation": "<p>Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>"
     },
     "DeleteQueryLoggingConfig": {
       "name": "DeleteQueryLoggingConfig",
@@ -622,6 +769,43 @@
       ],
       "documentation": "<p>Removes authorization to submit an <code>AssociateVPCWithHostedZone</code> request to associate a specified VPC with a hosted zone that was created by a different account. You must use the account that created the hosted zone to submit a <code>DeleteVPCAssociationAuthorization</code> request.</p> <important> <p>Sending this request only prevents the AWS account that created the VPC from associating the VPC with the Amazon Route 53 hosted zone in the future. If the VPC is already associated with the hosted zone, <code>DeleteVPCAssociationAuthorization</code> won't disassociate the VPC from the hosted zone. If you want to delete an existing association, use <code>DisassociateVPCFromHostedZone</code>.</p> </important>"
     },
+    "DisableHostedZoneDNSSEC": {
+      "name": "DisableHostedZoneDNSSEC",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/hostedzone/{Id}/disable-dnssec"
+      },
+      "input": {
+        "shape": "DisableHostedZoneDNSSECRequest"
+      },
+      "output": {
+        "shape": "DisableHostedZoneDNSSECResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchHostedZone"
+        },
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "ConcurrentModification"
+        },
+        {
+          "shape": "KeySigningKeyInParentDSRecord"
+        },
+        {
+          "shape": "DNSSECNotFound"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        },
+        {
+          "shape": "InvalidKMSArn"
+        }
+      ],
+      "documentation": "<p>Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs) that are active in the hosted zone.</p>"
+    },
     "DisassociateVPCFromHostedZone": {
       "name": "DisassociateVPCFromHostedZone",
       "http": {
@@ -656,6 +840,46 @@
         }
       ],
       "documentation": "<p>Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone. Note the following:</p> <ul> <li> <p>You can't disassociate the last Amazon VPC from a private hosted zone.</p> </li> <li> <p>You can't convert a private hosted zone into a public hosted zone.</p> </li> <li> <p>You can submit a <code>DisassociateVPCFromHostedZone</code> request using either the account that created the hosted zone or the account that created the Amazon VPC.</p> </li> <li> <p>Some services, such as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically create hosted zones and associate VPCs with the hosted zones. A service can create a hosted zone using your account or using its own account. You can disassociate a VPC from a hosted zone only if the service created the hosted zone using your account.</p> <p>When you run <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListHostedZonesByVPC.html\">DisassociateVPCFromHostedZone</a>, if the hosted zone has a value for <code>OwningAccount</code>, you can use <code>DisassociateVPCFromHostedZone</code>. If the hosted zone has a value for <code>OwningService</code>, you can't use <code>DisassociateVPCFromHostedZone</code>.</p> </li> </ul>"
+    },
+    "EnableHostedZoneDNSSEC": {
+      "name": "EnableHostedZoneDNSSEC",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/hostedzone/{Id}/enable-dnssec"
+      },
+      "input": {
+        "shape": "EnableHostedZoneDNSSECRequest"
+      },
+      "output": {
+        "shape": "EnableHostedZoneDNSSECResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchHostedZone"
+        },
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "ConcurrentModification"
+        },
+        {
+          "shape": "KeySigningKeyWithActiveStatusNotFound"
+        },
+        {
+          "shape": "InvalidKMSArn"
+        },
+        {
+          "shape": "HostedZonePartiallyDelegated"
+        },
+        {
+          "shape": "DNSSECNotFound"
+        },
+        {
+          "shape": "InvalidKeySigningKeyStatus"
+        }
+      ],
+      "documentation": "<p>Enables DNSSEC signing in a specific hosted zone.</p>"
     },
     "GetAccountLimit": {
       "name": "GetAccountLimit",
@@ -711,6 +935,28 @@
         "shape": "GetCheckerIpRangesResponse"
       },
       "documentation": "<important> <p> <code>GetCheckerIpRanges</code> still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html\">IP Address Ranges of Amazon Route 53 Servers</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> </important>"
+    },
+    "GetDNSSEC": {
+      "name": "GetDNSSEC",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzone/{Id}/dnssec"
+      },
+      "input": {
+        "shape": "GetDNSSECRequest"
+      },
+      "output": {
+        "shape": "GetDNSSECResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchHostedZone"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted zone.</p>"
     },
     "GetGeoLocation": {
       "name": "GetGeoLocation",
@@ -1564,6 +1810,38 @@
         "MAX_TRAFFIC_POLICIES_BY_OWNER"
       ]
     },
+    "ActivateKeySigningKeyRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId",
+        "Name"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "HostedZoneId"
+        },
+        "Name": {
+          "shape": "SigningKeyName",
+          "documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+          "location": "uri",
+          "locationName": "Name"
+        }
+      }
+    },
+    "ActivateKeySigningKeyResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        }
+      }
+    },
     "AlarmIdentifier": {
       "type": "structure",
       "required": [
@@ -2015,6 +2293,61 @@
       },
       "documentation": "<p>A complex type containing the response information for the hosted zone.</p>"
     },
+    "CreateKeySigningKeyRequest": {
+      "type": "structure",
+      "required": [
+        "CallerReference",
+        "HostedZoneId",
+        "KeyManagementServiceArn",
+        "Name",
+        "Status"
+      ],
+      "members": {
+        "CallerReference": {
+          "shape": "Nonce",
+          "documentation": "<p>A unique string that identifies the request.</p>"
+        },
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique string (ID) used to identify a hosted zone.</p>"
+        },
+        "KeyManagementServiceArn": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The <code>KeyManagementServiceArn</code> must be unique for each key signing key (KSK) in a single hosted zone. To see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, scroll down to <b>Example</b>. </p> <p>You must configure the CMK as follows:</p> <dl> <dt>Status</dt> <dd> <p>Enabled</p> </dd> <dt>Key spec</dt> <dd> <p>ECC_NIST_P256</p> </dd> <dt>Key usage</dt> <dd> <p>Sign and verify</p> </dd> <dt>Key policy</dt> <dd> <p>The key policy must give permission for the following actions:</p> <ul> <li> <p>DescribeKey</p> </li> <li> <p>GetPublicKey</p> </li> <li> <p>Sign</p> </li> </ul> <p>The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:</p> <ul> <li> <p> <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code> </p> </li> </ul> </dd> </dl> <p>For more information about working with CMK in KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>"
+        },
+        "Name": {
+          "shape": "SigningKeyName",
+          "documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same hosted zone.</p>"
+        },
+        "Status": {
+          "shape": "SigningKeyStatus",
+          "documentation": "<p>A string specifying the initial status of the key signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.</p>"
+        }
+      }
+    },
+    "CreateKeySigningKeyResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo",
+        "KeySigningKey",
+        "Location"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        },
+        "KeySigningKey": {
+          "shape": "KeySigningKey",
+          "documentation": "<p>The key signing key (KSK) that the request creates.</p>"
+        },
+        "Location": {
+          "shape": "ResourceURI",
+          "documentation": "<p>The unique URL representing the new key signing key (KSK).</p>",
+          "location": "header",
+          "locationName": "Location"
+        }
+      }
+    },
     "CreateQueryLoggingConfigRequest": {
       "type": "structure",
       "required": [
@@ -2270,6 +2603,52 @@
     "DNSRCode": {
       "type": "string"
     },
+    "DNSSECStatus": {
+      "type": "structure",
+      "members": {
+        "ServeSignature": {
+          "shape": "ServeSignature",
+          "documentation": "<p>Indicates your hosted zone signging status: <code>SIGNING</code>, <code>NOT_SIGNING</code>, or <code>INTERNAL_FAILURE</code>. If the status is <code>INTERNAL_FAILURE</code>, see <code>StatusMessage</code> for information about steps that you can take to correct the problem.</p> <p>A status <code>INTERNAL_FAILURE</code> means there was an error during a request. Before you can continue to work with DNSSEC signing, including working with key signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for the hosted zone.</p>"
+        },
+        "StatusMessage": {
+          "shape": "SigningKeyStatusMessage",
+          "documentation": "<p>The status message provided for the following DNSSEC signing status: <code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps that you can take to correct the issue.</p>"
+        }
+      },
+      "documentation": "<p>A string repesenting the status of DNSSEC signing.</p>"
+    },
+    "DeactivateKeySigningKeyRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId",
+        "Name"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "HostedZoneId"
+        },
+        "Name": {
+          "shape": "SigningKeyName",
+          "documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+          "location": "uri",
+          "locationName": "Name"
+        }
+      }
+    },
+    "DeactivateKeySigningKeyResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        }
+      }
+    },
     "DelegationSet": {
       "type": "structure",
       "required": [
@@ -2353,6 +2732,38 @@
         }
       },
       "documentation": "<p>A complex type that contains the response to a <code>DeleteHostedZone</code> request.</p>"
+    },
+    "DeleteKeySigningKeyRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId",
+        "Name"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "HostedZoneId"
+        },
+        "Name": {
+          "shape": "SigningKeyName",
+          "documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+          "location": "uri",
+          "locationName": "Name"
+        }
+      }
+    },
+    "DeleteKeySigningKeyResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        }
+      }
     },
     "DeleteQueryLoggingConfigRequest": {
       "type": "structure",
@@ -2495,6 +2906,31 @@
       },
       "max": 10
     },
+    "DisableHostedZoneDNSSECRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "DisableHostedZoneDNSSECResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        }
+      }
+    },
     "Disabled": {
       "type": "boolean"
     },
@@ -2537,6 +2973,31 @@
         }
       },
       "documentation": "<p>A complex type that contains the response information for the disassociate request.</p>"
+    },
+    "EnableHostedZoneDNSSECRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "EnableHostedZoneDNSSECResponse": {
+      "type": "structure",
+      "required": [
+        "ChangeInfo"
+      ],
+      "members": {
+        "ChangeInfo": {
+          "shape": "ChangeInfo"
+        }
+      }
     },
     "EnableSNI": {
       "type": "boolean"
@@ -2717,6 +3178,37 @@
         }
       },
       "documentation": "<p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>"
+    },
+    "GetDNSSECRequest": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>A unique string used to identify a hosted zone.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetDNSSECResponse": {
+      "type": "structure",
+      "required": [
+        "Status",
+        "KeySigningKeys"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DNSSECStatus",
+          "documentation": "<p>A string repesenting the status of DNSSEC.</p>"
+        },
+        "KeySigningKeys": {
+          "shape": "KeySigningKeys",
+          "documentation": "<p>The key signing keys (KSKs) in your account.</p>"
+        }
+      }
     },
     "GetGeoLocationRequest": {
       "type": "structure",
@@ -3484,6 +3976,82 @@
     },
     "IsPrivateZone": {
       "type": "boolean"
+    },
+    "KeySigningKey": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "SigningKeyName",
+          "documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same hosted zone.</p>"
+        },
+        "KmsArn": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed key (CMK) in AWS Key Management Service (KMS). The <code>KmsArn</code> must be unique for each key signing key (KSK) in a single hosted zone.</p> <p>You must configure the CMK as follows:</p> <dl> <dt>Status</dt> <dd> <p>Enabled</p> </dd> <dt>Key spec</dt> <dd> <p>ECC_NIST_P256</p> </dd> <dt>Key usage</dt> <dd> <p>Sign and verify</p> </dd> <dt>Key policy</dt> <dd> <p>The key policy must give permission for the following actions:</p> <ul> <li> <p>DescribeKey</p> </li> <li> <p>GetPublicKey</p> </li> <li> <p>Sign</p> </li> </ul> <p>The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:</p> <ul> <li> <p> <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code> </p> </li> </ul> </dd> </dl> <p>For more information about working with the customer managed key (CMK) in KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>"
+        },
+        "Flag": {
+          "shape": "SigningKeyInteger",
+          "documentation": "<p>An integer that specifies how the key is used. For key signing key (KSK), this value is always 257.</p>"
+        },
+        "SigningAlgorithmMnemonic": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>A string used to represent the signing algorithm. This value must follow the guidelines provided by <a href=\"https://tools.ietf.org/html/rfc8624#section-3.1\">RFC-8624 Section 3.1</a>. </p>"
+        },
+        "SigningAlgorithmType": {
+          "shape": "SigningKeyInteger",
+          "documentation": "<p>An integer used to represent the signing algorithm. This value must follow the guidelines provided by <a href=\"https://tools.ietf.org/html/rfc8624#section-3.1\">RFC-8624 Section 3.1</a>. </p>"
+        },
+        "DigestAlgorithmMnemonic": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>A string used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by <a href=\"https://tools.ietf.org/html/rfc8624#section-3.3\">RFC-8624 Section 3.3</a>. </p>"
+        },
+        "DigestAlgorithmType": {
+          "shape": "SigningKeyInteger",
+          "documentation": "<p>An integer used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by <a href=\"https://tools.ietf.org/html/rfc8624#section-3.3\">RFC-8624 Section 3.3</a>.</p>"
+        },
+        "KeyTag": {
+          "shape": "SigningKeyTag",
+          "documentation": "<p>An integer used to identify the DNSSEC record for the domain name. The process used to calculate the value is described in <a href=\"https://tools.ietf.org/rfc/rfc4034.txt\">RFC-4034 Appendix B</a>.</p>"
+        },
+        "DigestValue": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>A cryptographic digest of a DNSKEY resource record (RR). DNSKEY records are used to publish the public key that resolvers can use to verify DNSSEC signatures that are used to secure certain kinds of information provided by the DNS system.</p>"
+        },
+        "PublicKey": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>The public key, represented as a Base64 encoding, as required by <a href=\"https://tools.ietf.org/rfc/rfc4034.txt\"> RFC-4034 Page 5</a>.</p>"
+        },
+        "DSRecord": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>A string that represents a delegation signer (DS) record.</p>"
+        },
+        "DNSKEYRecord": {
+          "shape": "SigningKeyString",
+          "documentation": "<p>A string that represents a DNSKEY record.</p>"
+        },
+        "Status": {
+          "shape": "SigningKeyStatus",
+          "documentation": "<p>A string that represents the current key signing key (KSK) status.</p> <p>Status can have one of the following values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The KSK is being used for signing.</p> </dd> <dt>INACTIVE</dt> <dd> <p>The KSK is not being used for signing.</p> </dd> <dt>ACTION_NEEDED</dt> <dd> <p>There is an error in the KSK that requires you to take action to resolve.</p> </dd> <dt>INTERNAL_FAILURE</dt> <dd> <p>There was an error during a request. Before you can continue to work with DNSSEC signing, including actions that involve this KSK, you must correct the problem. For example, you may need to activate or deactivate the KSK.</p> </dd> </dl>"
+        },
+        "StatusMessage": {
+          "shape": "SigningKeyStatusMessage",
+          "documentation": "<p>The status message provided for the following key signing key (KSK) statuses: <code>ACTION_NEEDED</code> or <code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps that you can take to correct the issue.</p>"
+        },
+        "CreatedDate": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The date when the key signing key (KSK) was created.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The last time that the key signing key (KSK) was changed.</p>"
+        }
+      },
+      "documentation": "<p>A key signing key (KSK) is a complex type that represents a public/private key pair. The private key is used to generate a digital signature for the zone signing key (ZSK). The public key is stored in the DNS and is used to authenticate the ZSK. A KSK is always associated with a hosted zone; it cannot exist by itself.</p>"
+    },
+    "KeySigningKeys": {
+      "type": "list",
+      "member": {
+        "shape": "KeySigningKey"
+      }
     },
     "LimitValue": {
       "type": "long",
@@ -4488,7 +5056,8 @@
         "SRV",
         "SPF",
         "AAAA",
-        "CAA"
+        "CAA",
+        "DS"
       ]
     },
     "RecordData": {
@@ -4737,9 +5306,40 @@
       "type": "string",
       "max": 255
     },
+    "ServeSignature": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "ServicePrincipal": {
       "type": "string",
       "max": 128
+    },
+    "SigningKeyInteger": {
+      "type": "integer"
+    },
+    "SigningKeyName": {
+      "type": "string",
+      "max": 128,
+      "min": 3
+    },
+    "SigningKeyStatus": {
+      "type": "string",
+      "max": 150,
+      "min": 5
+    },
+    "SigningKeyStatusMessage": {
+      "type": "string",
+      "max": 512,
+      "min": 0
+    },
+    "SigningKeyString": {
+      "type": "string"
+    },
+    "SigningKeyTag": {
+      "type": "integer",
+      "max": 65536,
+      "min": 0
     },
     "Statistic": {
       "type": "string",
