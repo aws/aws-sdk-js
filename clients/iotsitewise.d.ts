@@ -37,11 +37,11 @@ declare class IoTSiteWise extends Service {
    */
   batchDisassociateProjectAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse) => void): Request<IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(params: IoTSiteWise.Types.BatchPutAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
@@ -92,14 +92,6 @@ declare class IoTSiteWise extends Service {
    * Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
-  /**
-   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
-   */
-  createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
-  /**
-   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
-   */
-  createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
   /**
    * Creates a project in the specified portal.
    */
@@ -300,6 +292,14 @@ declare class IoTSiteWise extends Service {
    * Retrieves a paginated list of summaries of all asset models.
    */
   listAssetModels(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetModelsResponse) => void): Request<IoTSiteWise.Types.ListAssetModelsResponse, AWSError>;
+  /**
+   * Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.
+   */
+  listAssetRelationships(params: IoTSiteWise.Types.ListAssetRelationshipsRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetRelationshipsResponse) => void): Request<IoTSiteWise.Types.ListAssetRelationshipsResponse, AWSError>;
+  /**
+   * Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.
+   */
+  listAssetRelationships(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetRelationshipsResponse) => void): Request<IoTSiteWise.Types.ListAssetRelationshipsResponse, AWSError>;
   /**
    * Retrieves a paginated list of asset summaries. You can use this operation to do the following:   List assets based on a specific asset model.   List top-level assets.   You can't use this operation to list all assets. To retrieve summaries for all of your assets, use ListAssetModels to get all of your asset model IDs. Then, use ListAssets to get all assets for each asset model.
    */
@@ -591,6 +591,25 @@ declare namespace IoTSiteWise {
     standardDeviation?: AggregatedDoubleValue;
   }
   export type AmazonResourceName = string;
+  export interface AssetCompositeModel {
+    /**
+     * The name of the composite model.
+     */
+    name: Name;
+    /**
+     * The description of the composite model.
+     */
+    description?: Description;
+    /**
+     * The type of the composite model. For alarm composite models, this type is AWS/ALARM.
+     */
+    type: Name;
+    /**
+     * The asset properties that this composite model defines.
+     */
+    properties: AssetProperties;
+  }
+  export type AssetCompositeModels = AssetCompositeModel[];
   export type AssetErrorCode = "INTERNAL_FAILURE"|string;
   export interface AssetErrorDetails {
     /**
@@ -618,7 +637,55 @@ declare namespace IoTSiteWise {
      */
     name: Name;
   }
+  export interface AssetHierarchyInfo {
+    /**
+     * The ID of the parent asset in this asset relationship.
+     */
+    parentAssetId?: ID;
+    /**
+     * The ID of the child asset in this asset relationship.
+     */
+    childAssetId?: ID;
+  }
   export type AssetIDs = ID[];
+  export interface AssetModelCompositeModel {
+    /**
+     * The name of the composite model.
+     */
+    name: Name;
+    /**
+     * The description of the composite model.
+     */
+    description?: Description;
+    /**
+     * The type of the composite model. For alarm composite models, this type is AWS/ALARM.
+     */
+    type: Name;
+    /**
+     * The asset property definitions for this composite model.
+     */
+    properties?: AssetModelProperties;
+  }
+  export interface AssetModelCompositeModelDefinition {
+    /**
+     * The name of the composite model.
+     */
+    name: Name;
+    /**
+     * The description of the composite model.
+     */
+    description?: Description;
+    /**
+     * The type of the composite model. For alarm composite models, this type is AWS/ALARM.
+     */
+    type: Name;
+    /**
+     * The asset property definitions for this composite model.
+     */
+    properties?: AssetModelPropertyDefinitions;
+  }
+  export type AssetModelCompositeModelDefinitions = AssetModelCompositeModelDefinition[];
+  export type AssetModelCompositeModels = AssetModelCompositeModel[];
   export type AssetModelHierarchies = AssetModelHierarchy[];
   export interface AssetModelHierarchy {
     /**
@@ -660,6 +727,10 @@ declare namespace IoTSiteWise {
      */
     dataType: PropertyDataType;
     /**
+     * The data type of the structure for this property. This parameter exists on properties that have the STRUCT data type.
+     */
+    dataTypeSpec?: Name;
+    /**
      * The unit of the asset model property, such as Newtons or RPM.
      */
     unit?: PropertyUnit;
@@ -674,9 +745,13 @@ declare namespace IoTSiteWise {
      */
     name: Name;
     /**
-     * The data type of the property definition.
+     * The data type of the property definition. If you specify STRUCT, you must also specify dataTypeSpec to identify the type of the structure for this property.
      */
     dataType: PropertyDataType;
+    /**
+     * The data type of the structure for this property. This parameter is required on properties that have the STRUCT data type. The options for this parameter depend on the type of the composite model in which you define this property. Use AWS/ALARM_STATE for alarm state in alarm composite models.
+     */
+    dataTypeSpec?: Name;
     /**
      * The unit of the property definition, such as Newtons or RPM.
      */
@@ -752,6 +827,10 @@ declare namespace IoTSiteWise {
      */
     dataType: PropertyDataType;
     /**
+     * The data type of the structure for this property. This parameter exists on properties that have the STRUCT data type.
+     */
+    dataTypeSpec?: Name;
+    /**
      * The unit (such as Newtons or RPM) of the asset property.
      */
     unit?: PropertyUnit;
@@ -773,6 +852,18 @@ declare namespace IoTSiteWise {
   }
   export type AssetPropertyValueHistory = AssetPropertyValue[];
   export type AssetPropertyValues = AssetPropertyValue[];
+  export type AssetRelationshipSummaries = AssetRelationshipSummary[];
+  export interface AssetRelationshipSummary {
+    /**
+     * The assets that are related through an asset hierarchy. This object is present if the relationshipType is HIERARCHY.
+     */
+    hierarchyInfo?: AssetHierarchyInfo;
+    /**
+     * The relationship type of the assets in this relationship. This value is one of the following:    HIERARCHY – The assets are related through an asset hierarchy. If you specify this relationship type, this asset relationship includes the hierarchyInfo object.  
+     */
+    relationshipType: AssetRelationshipType;
+  }
+  export type AssetRelationshipType = "HIERARCHY"|string;
   export type AssetState = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
   export interface AssetStatus {
     /**
@@ -964,24 +1055,35 @@ declare namespace IoTSiteWise {
   export type CapabilityNamespace = string;
   export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|string;
   export type ClientToken = string;
+  export interface CompositeModelProperty {
+    /**
+     * The name of the property.
+     */
+    name: Name;
+    /**
+     * The type of the composite model that defines this property.
+     */
+    type: Name;
+    assetProperty: Property;
+  }
   export interface ConfigurationErrorDetails {
     /**
-     * 
+     * The error code.
      */
     code: ErrorCode;
     /**
-     * 
+     * The error message.
      */
     message: ErrorMessage;
   }
   export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
   export interface ConfigurationStatus {
     /**
-     * 
+     * The current state of the configuration.
      */
     state: ConfigurationState;
     /**
-     * 
+     * Contains associated error information, if any.
      */
     error?: ConfigurationErrorDetails;
   }
@@ -1034,6 +1136,10 @@ declare namespace IoTSiteWise {
      * The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelHierarchies?: AssetModelHierarchyDefinitions;
+    /**
+     * The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
+     */
+    assetModelCompositeModels?: AssetModelCompositeModelDefinitions;
     /**
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */
@@ -1179,7 +1285,7 @@ declare namespace IoTSiteWise {
      */
     tags?: TagMap;
     /**
-     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions other than the China Regions.    IAM – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
+     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions other than the China Regions.    IAM – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
      */
     portalAuthMode?: AuthMode;
   }
@@ -1193,7 +1299,7 @@ declare namespace IoTSiteWise {
      */
     portalArn: ARN;
     /**
-     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -1204,22 +1310,6 @@ declare namespace IoTSiteWise {
      * The associated AWS SSO application ID, if the portal uses AWS SSO.
      */
     ssoApplicationId: SSOApplicationId;
-  }
-  export interface CreatePresignedPortalUrlRequest {
-    /**
-     * The ID of the portal to access.
-     */
-    portalId: ID;
-    /**
-     * The duration (in seconds) for which the session at the URL is valid. Default: 43,200 seconds (12 hours)
-     */
-    sessionDurationSeconds?: SessionDurationSeconds;
-  }
-  export interface CreatePresignedPortalUrlResponse {
-    /**
-     * The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.  https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt; 
-     */
-    presignedPortalUrl: Url;
   }
   export interface CreateProjectRequest {
     /**
@@ -1428,13 +1518,17 @@ declare namespace IoTSiteWise {
      */
     assetModelDescription: Description;
     /**
-     * The list of asset properties for the asset model.
+     * The list of asset properties for the asset model. This object doesn't include properties that you define in composite models. You can find composite model properties in the assetModelCompositeModels object.
      */
     assetModelProperties: AssetModelProperties;
     /**
      * A list of asset model hierarchies that each contain a childAssetModelId and a hierarchyId (named id). A hierarchy specifies allowed parent/child asset relationships for an asset model.
      */
     assetModelHierarchies: AssetModelHierarchies;
+    /**
+     * The list of composite asset models for the asset model.
+     */
+    assetModelCompositeModels?: AssetModelCompositeModels;
     /**
      * The date the asset model was created, in Unix epoch time.
      */
@@ -1472,9 +1566,13 @@ declare namespace IoTSiteWise {
      */
     assetModelId: ID;
     /**
-     * The asset property's definition, alias, and notification state.
+     * The asset property's definition, alias, and notification state. This response includes this object for normal asset properties. If you describe an asset property in a composite model, this response includes the asset property information in compositeModel.
      */
-    assetProperty: Property;
+    assetProperty?: Property;
+    /**
+     * The composite asset model that declares this asset property, if this asset property exists in a composite model.
+     */
+    compositeModel?: CompositeModelProperty;
   }
   export interface DescribeAssetRequest {
     /**
@@ -1500,13 +1598,17 @@ declare namespace IoTSiteWise {
      */
     assetModelId: ID;
     /**
-     * The list of asset properties for the asset.
+     * The list of asset properties for the asset. This object doesn't include properties that you define in composite models. You can find composite model properties in the assetCompositeModels object.
      */
     assetProperties: AssetProperties;
     /**
      * A list of asset hierarchies that each contain a hierarchyId. A hierarchy specifies allowed parent/child asset relationships.
      */
     assetHierarchies: AssetHierarchies;
+    /**
+     * The composite models for the asset.
+     */
+    assetCompositeModels?: AssetCompositeModels;
     /**
      * The date the asset was created, in Unix epoch time.
      */
@@ -1676,7 +1778,7 @@ declare namespace IoTSiteWise {
      */
     portalClientId: PortalClientId;
     /**
-     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -1968,7 +2070,7 @@ declare namespace IoTSiteWise {
   }
   export interface IAMUserIdentity {
     /**
-     * The ARN of the IAM user. IAM users must have the iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. For more information, see IAM ARNs in the IAM User Guide.  If you delete the IAM user, access policies that contain this identity include an empty arn. You can delete the access policy for the IAM user that no longer exists. 
+     * The ARN of the IAM user. For more information, see IAM ARNs in the IAM User Guide.  If you delete the IAM user, access policies that contain this identity include an empty arn. You can delete the access policy for the IAM user that no longer exists. 
      */
     arn: ARN;
   }
@@ -2076,6 +2178,34 @@ declare namespace IoTSiteWise {
      * A list that summarizes each asset model.
      */
     assetModelSummaries: AssetModelSummaries;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAssetRelationshipsRequest {
+    /**
+     * The ID of the asset.
+     */
+    assetId: ID;
+    /**
+     * The type of traversal to use to identify asset relationships. Choose the following option:    PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The asset that you specify in assetId is the first result in the list of assetRelationshipSummaries, and the root asset is the last result.  
+     */
+    traversalType: TraversalType;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per paginated request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAssetRelationshipsResponse {
+    /**
+     * A list that summarizes each asset relationship.
+     */
+    assetRelationshipSummaries: AssetRelationshipSummaries;
     /**
      * The token for the next set of results, or null if there are no additional results.
      */
@@ -2346,7 +2476,7 @@ declare namespace IoTSiteWise {
      */
     description?: Description;
     /**
-     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.
      */
     startUrl: Url;
     /**
@@ -2423,7 +2553,7 @@ declare namespace IoTSiteWise {
     type?: PropertyType;
   }
   export type PropertyAlias = string;
-  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|string;
+  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|"STRUCT"|string;
   export interface PropertyNotification {
     /**
      * The MQTT topic to which AWS IoT SiteWise publishes property value update notifications.
@@ -2529,7 +2659,6 @@ declare namespace IoTSiteWise {
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
   export type SSOApplicationId = string;
-  export type SessionDurationSeconds = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2571,6 +2700,7 @@ declare namespace IoTSiteWise {
     variables: ExpressionVariables;
   }
   export type TraversalDirection = "PARENT"|"CHILD"|string;
+  export type TraversalType = "PATH_TO_ROOT"|string;
   export interface TumblingWindow {
     /**
      * The time interval for the tumbling window. Note that w represents weeks, d represents days, h represents hours, and m represents minutes. AWS IoT SiteWise computes the 1w interval the end of Sunday at midnight each week (UTC), the 1d interval at the end of each day at midnight (UTC), the 1h interval at the end of each hour, and so on.  When AWS IoT SiteWise aggregates data points for metric computations, the start of each interval is exclusive and the end of each interval is inclusive. AWS IoT SiteWise places the computed data point at the end of the interval.
@@ -2634,6 +2764,10 @@ declare namespace IoTSiteWise {
      * The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelHierarchies?: AssetModelHierarchies;
+    /**
+     * The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
+     */
+    assetModelCompositeModels?: AssetModelCompositeModels;
     /**
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */

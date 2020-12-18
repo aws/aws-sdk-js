@@ -689,11 +689,11 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
@@ -1117,6 +1117,10 @@ declare namespace Redshift {
      */
     ResizeInfo?: ResizeInfo;
     /**
+     * Describes the status of the Availability Zone relocation operation.
+     */
+    AvailabilityZoneRelocationStatus?: String;
+    /**
      * The namespace Amazon Resource Name (ARN) of the cluster.
      */
     ClusterNamespaceArn?: String;
@@ -1449,7 +1453,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
+     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType: String;
     /**
@@ -1556,6 +1560,10 @@ declare namespace Redshift {
      * A unique identifier for the snapshot schedule.
      */
     SnapshotScheduleIdentifier?: String;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -2687,6 +2695,10 @@ declare namespace Redshift {
      * The port that the database engine is listening on.
      */
     Port?: Integer;
+    /**
+     * Describes a connection endpoint.
+     */
+    VpcEndpoints?: SpartaProxyVpcEndpointList;
   }
   export interface Event {
     /**
@@ -3078,7 +3090,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
+     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType?: String;
     /**
@@ -3157,6 +3169,18 @@ declare namespace Redshift {
      * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
      */
     KmsKeyId?: String;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The option to initiate relocation for an Amazon Redshift cluster to the target Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The option to change the port of an Amazon Redshift cluster.
+     */
+    Port?: IntegerOptional;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -3677,7 +3701,7 @@ declare namespace Redshift {
     /**
      * The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.
      */
-    NumberOfNodes?: Integer;
+    NumberOfNodes?: IntegerOptional;
     /**
      * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
      */
@@ -3868,6 +3892,10 @@ declare namespace Redshift {
      * The number of nodes specified when provisioning the restored cluster.
      */
     NumberOfNodes?: IntegerOptional;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -4126,6 +4154,10 @@ declare namespace Redshift {
      */
     ClusterVersion?: String;
     /**
+     * The cluster version of the cluster used to create the snapshot. For example, 1.0.15503. 
+     */
+    EngineFullVersion?: String;
+    /**
      * The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot are of type "manual". 
      */
     SnapshotType?: String;
@@ -4323,6 +4355,13 @@ declare namespace Redshift {
   export type SortByOrder = "ASC"|"DESC"|string;
   export type SourceIdsList = String[];
   export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action"|string;
+  export interface SpartaProxyVpcEndpoint {
+    /**
+     * The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+     */
+    VpcEndpointId?: String;
+  }
+  export type SpartaProxyVpcEndpointList = SpartaProxyVpcEndpoint[];
   export type String = string;
   export interface Subnet {
     /**

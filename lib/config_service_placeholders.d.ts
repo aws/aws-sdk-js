@@ -250,6 +250,13 @@ export abstract class ConfigurationServicePlaceholders {
   emrcontainers?: AWS.EMRcontainers.Types.ClientConfiguration;
   healthlake?: AWS.HealthLake.Types.ClientConfiguration;
   sagemakeredge?: AWS.SagemakerEdge.Types.ClientConfiguration;
+  amp?: AWS.Amp.Types.ClientConfiguration;
+  greengrassv2?: AWS.GreengrassV2.Types.ClientConfiguration;
+  iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.ClientConfiguration;
+  iotfleethub?: AWS.IoTFleetHub.Types.ClientConfiguration;
+  iotwireless?: AWS.IoTWireless.Types.ClientConfiguration;
+  location?: AWS.Location.Types.ClientConfiguration;
+  wellarchitected?: AWS.WellArchitected.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -502,4 +509,11 @@ export interface ConfigurationServiceApiVersions {
   emrcontainers?: AWS.EMRcontainers.Types.apiVersion;
   healthlake?: AWS.HealthLake.Types.apiVersion;
   sagemakeredge?: AWS.SagemakerEdge.Types.apiVersion;
+  amp?: AWS.Amp.Types.apiVersion;
+  greengrassv2?: AWS.GreengrassV2.Types.apiVersion;
+  iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.apiVersion;
+  iotfleethub?: AWS.IoTFleetHub.Types.apiVersion;
+  iotwireless?: AWS.IoTWireless.Types.apiVersion;
+  location?: AWS.Location.Types.apiVersion;
+  wellarchitected?: AWS.WellArchitected.Types.apiVersion;
 }

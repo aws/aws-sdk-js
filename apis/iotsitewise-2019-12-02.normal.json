@@ -148,7 +148,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html\">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action\">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
+      "documentation": "<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html\">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action\">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
         "hostPrefix": "data."
       }
@@ -371,35 +371,6 @@
         }
       ],
       "documentation": "<p>Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and manage user permissions.</p> <note> <p>Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins\">Adding or removing portal administrators</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> </note>",
-      "endpoint": {
-        "hostPrefix": "monitor."
-      }
-    },
-    "CreatePresignedPortalUrl": {
-      "name": "CreatePresignedPortalUrl",
-      "http": {
-        "method": "GET",
-        "requestUri": "/portals/{portalId}/presigned-url",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "CreatePresignedPortalUrlRequest"
-      },
-      "output": {
-        "shape": "CreatePresignedPortalUrlResponse"
-      },
-      "errors": [
-        {
-          "shape": "InvalidRequestException"
-        },
-        {
-          "shape": "InternalFailureException"
-        },
-        {
-          "shape": "ThrottlingException"
-        }
-      ],
-      "documentation": "<p>Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -1197,6 +1168,37 @@
         "hostPrefix": "model."
       }
     },
+    "ListAssetRelationships": {
+      "name": "ListAssetRelationships",
+      "http": {
+        "method": "GET",
+        "requestUri": "/assets/{assetId}/assetRelationships"
+      },
+      "input": {
+        "shape": "ListAssetRelationshipsRequest"
+      },
+      "output": {
+        "shape": "ListAssetRelationshipsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.</p>",
+      "endpoint": {
+        "hostPrefix": "model."
+      }
+    },
     "ListAssets": {
       "name": "ListAssets",
       "http": {
@@ -1427,6 +1429,15 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictingOperationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
         }
       ],
       "documentation": "<p>Retrieves the list of tags for an AWS IoT SiteWise resource.</p>"
@@ -1522,6 +1533,15 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ConflictingOperationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyTagsException"
         }
       ],
@@ -1551,6 +1571,15 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictingOperationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
         }
       ],
       "documentation": "<p>Removes a tag from an AWS IoT SiteWise resource.</p>"
@@ -1999,6 +2028,39 @@
       "max": 1011,
       "min": 1
     },
+    "AssetCompositeModel": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type",
+        "properties"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the composite model.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the composite model.</p>"
+        },
+        "type": {
+          "shape": "Name",
+          "documentation": "<p>The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.</p>"
+        },
+        "properties": {
+          "shape": "AssetProperties",
+          "documentation": "<p>The asset properties that this composite model defines.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a composite model in an asset. This object contains the asset's properties that you define in the composite model.</p>"
+    },
+    "AssetCompositeModels": {
+      "type": "list",
+      "member": {
+        "shape": "AssetCompositeModel"
+      }
+    },
     "AssetErrorCode": {
       "type": "string",
       "enum": [
@@ -2054,10 +2116,88 @@
       },
       "documentation": "<p>Describes an asset hierarchy that contains a hierarchy's name and ID.</p>"
     },
+    "AssetHierarchyInfo": {
+      "type": "structure",
+      "members": {
+        "parentAssetId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the parent asset in this asset relationship.</p>"
+        },
+        "childAssetId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the child asset in this asset relationship.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a parent asset and a child asset that are related through an asset hierarchy.</p>"
+    },
     "AssetIDs": {
       "type": "list",
       "member": {
         "shape": "ID"
+      }
+    },
+    "AssetModelCompositeModel": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the composite model.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the composite model.</p>"
+        },
+        "type": {
+          "shape": "Name",
+          "documentation": "<p>The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.</p>"
+        },
+        "properties": {
+          "shape": "AssetModelProperties",
+          "documentation": "<p>The asset property definitions for this composite model.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a composite model in an asset model. This object contains the asset property definitions that you define in the composite model.</p>"
+    },
+    "AssetModelCompositeModelDefinition": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the composite model.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the composite model.</p>"
+        },
+        "type": {
+          "shape": "Name",
+          "documentation": "<p>The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.</p>"
+        },
+        "properties": {
+          "shape": "AssetModelPropertyDefinitions",
+          "documentation": "<p>The asset property definitions for this composite model.</p>"
+        }
+      },
+      "documentation": "<p>Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.</p>"
+    },
+    "AssetModelCompositeModelDefinitions": {
+      "type": "list",
+      "member": {
+        "shape": "AssetModelCompositeModelDefinition"
+      }
+    },
+    "AssetModelCompositeModels": {
+      "type": "list",
+      "member": {
+        "shape": "AssetModelCompositeModel"
       }
     },
     "AssetModelHierarchies": {
@@ -2138,6 +2278,10 @@
           "shape": "PropertyDataType",
           "documentation": "<p>The data type of the asset model property.</p>"
         },
+        "dataTypeSpec": {
+          "shape": "Name",
+          "documentation": "<p>The data type of the structure for this property. This parameter exists on properties that have the <code>STRUCT</code> data type.</p>"
+        },
         "unit": {
           "shape": "PropertyUnit",
           "documentation": "<p>The unit of the asset model property, such as <code>Newtons</code> or <code>RPM</code>.</p>"
@@ -2163,7 +2307,11 @@
         },
         "dataType": {
           "shape": "PropertyDataType",
-          "documentation": "<p>The data type of the property definition.</p>"
+          "documentation": "<p>The data type of the property definition.</p> <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this property.</p>"
+        },
+        "dataTypeSpec": {
+          "shape": "Name",
+          "documentation": "<p>The data type of the structure for this property. This parameter is required on properties that have the <code>STRUCT</code> data type.</p> <p>The options for this parameter depend on the type of the composite model in which you define this property. Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>"
         },
         "unit": {
           "shape": "PropertyUnit",
@@ -2293,6 +2441,10 @@
           "shape": "PropertyDataType",
           "documentation": "<p>The data type of the asset property.</p>"
         },
+        "dataTypeSpec": {
+          "shape": "Name",
+          "documentation": "<p>The data type of the structure for this property. This parameter exists on properties that have the <code>STRUCT</code> data type.</p>"
+        },
         "unit": {
           "shape": "PropertyUnit",
           "documentation": "<p>The unit (such as <code>Newtons</code> or <code>RPM</code>) of the asset property.</p>"
@@ -2339,6 +2491,35 @@
       "member": {
         "shape": "AssetPropertyValue"
       }
+    },
+    "AssetRelationshipSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "AssetRelationshipSummary"
+      }
+    },
+    "AssetRelationshipSummary": {
+      "type": "structure",
+      "required": [
+        "relationshipType"
+      ],
+      "members": {
+        "hierarchyInfo": {
+          "shape": "AssetHierarchyInfo",
+          "documentation": "<p>The assets that are related through an asset hierarchy.</p> <p>This object is present if the <code>relationshipType</code> is <code>HIERARCHY</code>.</p>"
+        },
+        "relationshipType": {
+          "shape": "AssetRelationshipType",
+          "documentation": "<p>The relationship type of the assets in this relationship. This value is one of the following:</p> <ul> <li> <p> <code>HIERARCHY</code> – The assets are related through an asset hierarchy. If you specify this relationship type, this asset relationship includes the <code>hierarchyInfo</code> object.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Contains information about assets that are related to one another.</p>"
+    },
+    "AssetRelationshipType": {
+      "type": "string",
+      "enum": [
+        "HIERARCHY"
+      ]
     },
     "AssetState": {
       "type": "string",
@@ -2692,7 +2873,7 @@
     },
     "CapabilityConfiguration": {
       "type": "string",
-      "max": 204800,
+      "max": 104857600,
       "min": 1
     },
     "CapabilityNamespace": {
@@ -2715,6 +2896,28 @@
       "min": 36,
       "pattern": "\\S{36,64}"
     },
+    "CompositeModelProperty": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type",
+        "assetProperty"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the property.</p>"
+        },
+        "type": {
+          "shape": "Name",
+          "documentation": "<p>The type of the composite model that defines this property.</p>"
+        },
+        "assetProperty": {
+          "shape": "Property"
+        }
+      },
+      "documentation": "<p>Contains information about a composite model property on an asset.</p>"
+    },
     "ConfigurationErrorDetails": {
       "type": "structure",
       "required": [
@@ -2724,14 +2927,14 @@
       "members": {
         "code": {
           "shape": "ErrorCode",
-          "documentation": "<p/>"
+          "documentation": "<p>The error code.</p>"
         },
         "message": {
           "shape": "ErrorMessage",
-          "documentation": "<p/>"
+          "documentation": "<p>The error message.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Contains the details of an AWS IoT SiteWise configuration error.</p>"
     },
     "ConfigurationState": {
       "type": "string",
@@ -2749,14 +2952,14 @@
       "members": {
         "state": {
           "shape": "ConfigurationState",
-          "documentation": "<p/>"
+          "documentation": "<p>The current state of the configuration.</p>"
         },
         "error": {
           "shape": "ConfigurationErrorDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Contains associated error information, if any.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Contains current status information for the configuration.</p>"
     },
     "CreateAccessPolicyRequest": {
       "type": "structure",
@@ -2827,6 +3030,10 @@
         "assetModelHierarchies": {
           "shape": "AssetModelHierarchyDefinitions",
           "documentation": "<p>The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>You can specify up to 10 hierarchies per asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+        },
+        "assetModelCompositeModels": {
+          "shape": "AssetModelCompositeModelDefinitions",
+          "documentation": "<p>The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.</p>"
         },
         "clientToken": {
           "shape": "ClientToken",
@@ -3038,7 +3245,7 @@
         },
         "portalAuthMode": {
           "shape": "AuthMode",
-          "documentation": "<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. This option is only available in the China Regions.</p> </li> </ul> <p>You can't change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>"
+          "documentation": "<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can't change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>"
         }
       }
     },
@@ -3062,7 +3269,7 @@
         },
         "portalStartUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>"
         },
         "portalStatus": {
           "shape": "PortalStatus",
@@ -3071,38 +3278,6 @@
         "ssoApplicationId": {
           "shape": "SSOApplicationId",
           "documentation": "<p>The associated AWS SSO application ID, if the portal uses AWS SSO.</p>"
-        }
-      }
-    },
-    "CreatePresignedPortalUrlRequest": {
-      "type": "structure",
-      "required": [
-        "portalId"
-      ],
-      "members": {
-        "portalId": {
-          "shape": "ID",
-          "documentation": "<p>The ID of the portal to access.</p>",
-          "location": "uri",
-          "locationName": "portalId"
-        },
-        "sessionDurationSeconds": {
-          "shape": "SessionDurationSeconds",
-          "documentation": "<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 43,200 seconds (12 hours)</p>",
-          "location": "querystring",
-          "locationName": "sessionDurationSeconds"
-        }
-      }
-    },
-    "CreatePresignedPortalUrlResponse": {
-      "type": "structure",
-      "required": [
-        "presignedPortalUrl"
-      ],
-      "members": {
-        "presignedPortalUrl": {
-          "shape": "Url",
-          "documentation": "<p>The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt;</code> </p>"
         }
       }
     },
@@ -3491,11 +3666,15 @@
         },
         "assetModelProperties": {
           "shape": "AssetModelProperties",
-          "documentation": "<p>The list of asset properties for the asset model.</p>"
+          "documentation": "<p>The list of asset properties for the asset model.</p> <p>This object doesn't include properties that you define in composite models. You can find composite model properties in the <code>assetModelCompositeModels</code> object.</p>"
         },
         "assetModelHierarchies": {
           "shape": "AssetModelHierarchies",
           "documentation": "<p>A list of asset model hierarchies that each contain a <code>childAssetModelId</code> and a <code>hierarchyId</code> (named <code>id</code>). A hierarchy specifies allowed parent/child asset relationships for an asset model.</p>"
+        },
+        "assetModelCompositeModels": {
+          "shape": "AssetModelCompositeModels",
+          "documentation": "<p>The list of composite asset models for the asset model.</p>"
         },
         "assetModelCreationDate": {
           "shape": "Timestamp",
@@ -3537,8 +3716,7 @@
       "required": [
         "assetId",
         "assetName",
-        "assetModelId",
-        "assetProperty"
+        "assetModelId"
       ],
       "members": {
         "assetId": {
@@ -3555,7 +3733,11 @@
         },
         "assetProperty": {
           "shape": "Property",
-          "documentation": "<p>The asset property's definition, alias, and notification state.</p>"
+          "documentation": "<p>The asset property's definition, alias, and notification state.</p> <p>This response includes this object for normal asset properties. If you describe an asset property in a composite model, this response includes the asset property information in <code>compositeModel</code>.</p>"
+        },
+        "compositeModel": {
+          "shape": "CompositeModelProperty",
+          "documentation": "<p>The composite asset model that declares this asset property, if this asset property exists in a composite model.</p>"
         }
       }
     },
@@ -3605,11 +3787,15 @@
         },
         "assetProperties": {
           "shape": "AssetProperties",
-          "documentation": "<p>The list of asset properties for the asset.</p>"
+          "documentation": "<p>The list of asset properties for the asset.</p> <p>This object doesn't include properties that you define in composite models. You can find composite model properties in the <code>assetCompositeModels</code> object.</p>"
         },
         "assetHierarchies": {
           "shape": "AssetHierarchies",
           "documentation": "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
+        },
+        "assetCompositeModels": {
+          "shape": "AssetCompositeModels",
+          "documentation": "<p>The composite models for the asset.</p>"
         },
         "assetCreationDate": {
           "shape": "Timestamp",
@@ -3879,7 +4065,7 @@
         },
         "portalStartUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>"
         },
         "portalContactEmail": {
           "shape": "Email",
@@ -4386,7 +4572,7 @@
       "members": {
         "arn": {
           "shape": "ARN",
-          "documentation": "<p>The ARN of the IAM user. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>"
+          "documentation": "<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>"
         }
       },
       "documentation": "<p>Contains information about an AWS Identity and Access Management (IAM) user.</p>"
@@ -4597,6 +4783,55 @@
         "assetModelSummaries": {
           "shape": "AssetModelSummaries",
           "documentation": "<p>A list that summarizes each asset model.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListAssetRelationshipsRequest": {
+      "type": "structure",
+      "required": [
+        "assetId",
+        "traversalType"
+      ],
+      "members": {
+        "assetId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the asset.</p>",
+          "location": "uri",
+          "locationName": "assetId"
+        },
+        "traversalType": {
+          "shape": "TraversalType",
+          "documentation": "<p>The type of traversal to use to identify asset relationships. Choose the following option:</p> <ul> <li> <p> <code>PATH_TO_ROOT</code> – Identify the asset's parent assets up to the root asset. The asset that you specify in <code>assetId</code> is the first result in the list of <code>assetRelationshipSummaries</code>, and the root asset is the last result.</p> </li> </ul>",
+          "location": "querystring",
+          "locationName": "traversalType"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to be used for the next set of paginated results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAssetRelationshipsResponse": {
+      "type": "structure",
+      "required": [
+        "assetRelationshipSummaries"
+      ],
+      "members": {
+        "assetRelationshipSummaries": {
+          "shape": "AssetRelationshipSummaries",
+          "documentation": "<p>A list that summarizes each asset relationship.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -5116,7 +5351,7 @@
         },
         "startUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -5235,7 +5470,8 @@
         "STRING",
         "INTEGER",
         "DOUBLE",
-        "BOOLEAN"
+        "BOOLEAN",
+        "STRUCT"
       ]
     },
     "PropertyNotification": {
@@ -5305,8 +5541,6 @@
     },
     "PropertyValueStringValue": {
       "type": "string",
-      "max": 1024,
-      "min": 1,
       "pattern": "[^\\u0000-\\u001F\\u007F]+"
     },
     "PutAssetPropertyValueEntries": {
@@ -5447,11 +5681,6 @@
       "min": 1,
       "pattern": "^[!-~]*"
     },
-    "SessionDurationSeconds": {
-      "type": "integer",
-      "max": 43200,
-      "min": 900
-    },
     "TagKey": {
       "type": "string",
       "max": 128,
@@ -5567,6 +5796,12 @@
         "CHILD"
       ]
     },
+    "TraversalType": {
+      "type": "string",
+      "enum": [
+        "PATH_TO_ROOT"
+      ]
+    },
     "TumblingWindow": {
       "type": "structure",
       "required": [
@@ -5671,6 +5906,10 @@
         "assetModelHierarchies": {
           "shape": "AssetModelHierarchies",
           "documentation": "<p>The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>You can specify up to 10 hierarchies per asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+        },
+        "assetModelCompositeModels": {
+          "shape": "AssetModelCompositeModels",
+          "documentation": "<p>The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.</p>"
         },
         "clientToken": {
           "shape": "ClientToken",

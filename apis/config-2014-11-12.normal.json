@@ -740,7 +740,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Provides organization config rule deployment status for an organization.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>"
+      "documentation": "<p>Provides organization config rule deployment status for an organization.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>"
     },
     "DescribeOrganizationConfigRules": {
       "name": "DescribeOrganizationConfigRules",
@@ -768,7 +768,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns a list of organization config rules. </p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.&#x2028;</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>"
+      "documentation": "<p>Returns a list of organization config rules. </p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>"
     },
     "DescribeOrganizationConformancePackStatuses": {
       "name": "DescribeOrganizationConformancePackStatuses",
@@ -796,7 +796,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Provides organization conformance pack deployment status for an organization. </p> <p> Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs.</p> </note>"
+      "documentation": "<p>Provides organization conformance pack deployment status for an organization. </p> <note> <p>The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs.</p> </note>"
     },
     "DescribeOrganizationConformancePacks": {
       "name": "DescribeOrganizationConformancePacks",
@@ -824,7 +824,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns a list of organization conformance packs. </p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. </p> </note>"
+      "documentation": "<p>Returns a list of organization conformance packs. </p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. </p> </note>"
     },
     "DescribePendingAggregationRequests": {
       "name": "DescribePendingAggregationRequests",
@@ -1227,7 +1227,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p>"
+      "documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p>"
     },
     "GetOrganizationConformancePackDetailedStatus": {
       "name": "GetOrganizationConformancePackDetailedStatus",
@@ -1255,7 +1255,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p>"
+      "documentation": "<p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p>"
     },
     "GetResourceConfigHistory": {
       "name": "GetResourceConfigHistory",
@@ -1571,6 +1571,27 @@
       ],
       "documentation": "<p>Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.</p>"
     },
+    "PutExternalEvaluation": {
+      "name": "PutExternalEvaluation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutExternalEvaluationRequest"
+      },
+      "output": {
+        "shape": "PutExternalEvaluationResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchConfigRuleException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ]
+    },
     "PutOrganizationConfigRule": {
       "name": "PutOrganizationConfigRule",
       "http": {
@@ -1671,7 +1692,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. </p> <note> <p>If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run.</p> </note>"
+      "documentation": "<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. </p> <note> <p>If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run.</p> <p>This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by AWS Security Hub.</p> </note>"
     },
     "PutRemediationExceptions": {
       "name": "PutRemediationExceptions",
@@ -1693,7 +1714,7 @@
           "shape": "InsufficientPermissionsException"
         }
       ],
-      "documentation": "<p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>"
+      "documentation": "<p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>"
     },
     "PutResourceConfig": {
       "name": "PutResourceConfig",
@@ -2830,7 +2851,7 @@
         },
         "arn": {
           "shape": "ARN",
-          "documentation": "<p>accoun</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) associated with the resource.</p>"
         },
         "resourceType": {
           "shape": "ResourceType",
@@ -3068,11 +3089,11 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: \"Resource\": \"arn:aws:s3:::your_bucket_name/*\".</p>"
+          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates. </p> <note> <p>This field is optional.</p> </note>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
-          "documentation": "<p>The prefix for the Amazon S3 bucket.</p>"
+          "documentation": "<p>The prefix for the Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>"
         },
         "ConformancePackInputParameters": {
           "shape": "ConformancePackInputParameters",
@@ -4506,6 +4527,32 @@
       "max": 4096,
       "min": 1
     },
+    "ExternalEvaluation": {
+      "type": "structure",
+      "required": [
+        "ComplianceResourceType",
+        "ComplianceResourceId",
+        "ComplianceType",
+        "OrderingTimestamp"
+      ],
+      "members": {
+        "ComplianceResourceType": {
+          "shape": "StringWithCharLimit256"
+        },
+        "ComplianceResourceId": {
+          "shape": "BaseResourceId"
+        },
+        "ComplianceType": {
+          "shape": "ComplianceType"
+        },
+        "Annotation": {
+          "shape": "StringWithCharLimit256"
+        },
+        "OrderingTimestamp": {
+          "shape": "OrderingTimestamp"
+        }
+      }
+    },
     "FailedDeleteRemediationExceptionsBatch": {
       "type": "structure",
       "members": {
@@ -5175,7 +5222,7 @@
         },
         "Limit": {
           "shape": "Limit",
-          "documentation": "<p>The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.</p>"
+          "documentation": "<p>The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -5505,11 +5552,11 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. </p>"
+          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates. </p> <note> <p>This field is optional.</p> </note>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
-          "documentation": "<p>Any folder structure you want to add to an Amazon S3 bucket.</p>"
+          "documentation": "<p>Any folder structure you want to add to an Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>"
         },
         "ConformancePackInputParameters": {
           "shape": "ConformancePackInputParameters",
@@ -5926,11 +5973,11 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>AWS Config stores intermediate files while processing conformance pack template.</p>"
+          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
-          "documentation": "<p>The prefix for the Amazon S3 bucket. </p>"
+          "documentation": "<p>The prefix for the Amazon S3 bucket. </p> <note> <p>This field is optional.</p> </note>"
         },
         "ConformancePackInputParameters": {
           "shape": "ConformancePackInputParameters",
@@ -5991,6 +6038,25 @@
       },
       "documentation": "<p/>"
     },
+    "PutExternalEvaluationRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigRuleName",
+        "ExternalEvaluation"
+      ],
+      "members": {
+        "ConfigRuleName": {
+          "shape": "ConfigRuleName"
+        },
+        "ExternalEvaluation": {
+          "shape": "ExternalEvaluation"
+        }
+      }
+    },
+    "PutExternalEvaluationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "PutOrganizationConfigRuleRequest": {
       "type": "structure",
       "required": [
@@ -6044,11 +6110,11 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template. </p> <p>The delivery bucket name should start with awsconfigconforms. For example: \"Resource\": \"arn:aws:s3:::your_bucket_name/*\". For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html\">Permissions for cross account bucket access</a>.</p>"
+          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
-          "documentation": "<p>The prefix for the Amazon S3 bucket.</p>"
+          "documentation": "<p>The prefix for the Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>"
         },
         "ConformancePackInputParameters": {
           "shape": "ConformancePackInputParameters",
@@ -6311,11 +6377,11 @@
         },
         "MaximumAutomaticAttempts": {
           "shape": "AutoRemediationAttempts",
-          "documentation": "<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.</p>"
+          "documentation": "<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.</p>"
         },
         "RetryAttemptSeconds": {
           "shape": "AutoRemediationAttemptSeconds",
-          "documentation": "<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.</p>"
+          "documentation": "<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.</p>"
         },
         "Arn": {
           "shape": "StringWithCharLimit1024",

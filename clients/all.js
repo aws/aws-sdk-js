@@ -249,5 +249,12 @@ module.exports = {
   AuditManager: require('./auditmanager'),
   EMRcontainers: require('./emrcontainers'),
   HealthLake: require('./healthlake'),
-  SagemakerEdge: require('./sagemakeredge')
+  SagemakerEdge: require('./sagemakeredge'),
+  Amp: require('./amp'),
+  GreengrassV2: require('./greengrassv2'),
+  IotDeviceAdvisor: require('./iotdeviceadvisor'),
+  IoTFleetHub: require('./iotfleethub'),
+  IoTWireless: require('./iotwireless'),
+  Location: require('./location'),
+  WellArchitected: require('./wellarchitected')
 };

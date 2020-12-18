@@ -1,6 +1,54 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.806.0-->
+<!--LATEST=2.813.0-->
 <!--ENTRYINSERT-->
+
+## 2.813.0
+* feature: ConfigService: Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config
+* feature: DLM: Provide Cross-account copy event based policy support in DataLifecycleManager (DLM)
+* feature: EC2: C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances
+* feature: Imagebuilder: This release adds support for building and distributing container images within EC2 Image Builder.
+* feature: KMS: Added CreationDate and LastUpdatedDate timestamps to ListAliases API response
+* feature: Route53: This release adds support for DNSSEC signing in Amazon Route 53.
+* feature: Route53Resolver: Route 53 Resolver adds support for enabling resolver DNSSEC validation in virtual private cloud (VPC).
+* feature: SQS: Amazon SQS adds queue attributes to enable high throughput FIFO.
+* feature: ServiceCatalog: Support TagOptions sharing with Service Catalog portfolio sharing.
+
+## 2.812.0
+* feature: CostExplorer: This release updates the "MonitorArnList" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs
+* feature: Location: Initial release of Amazon Location Service. A new geospatial service providing capabilities to render maps, geocode/reverse geocode, track device locations, and detect geofence entry/exit events.
+* feature: QuickSight: QuickSight now supports connecting to federated data sources of Athena
+* feature: WellArchitected: This is the first release of AWS Well-Architected Tool API support, use to review your workload and compare against the latest AWS architectural best practices.
+
+## 2.811.0
+* feature: Amp: (New Service) Amazon Managed Service for Prometheus is a fully managed Prometheus-compatible monitoring service that makes it easy to monitor containerized applications securely and at scale.
+* feature: GreengrassV2: AWS IoT Greengrass V2 is a new major version of AWS IoT Greengrass. This release adds several updates such as modular components, continuous deployments, and improved ease of use.
+* feature: IoTAnalytics: FileFormatConfiguration enables data store to save data in JSON or Parquet format. S3Paths enables you to specify the S3 objects that save your channel messages when you reprocess the pipeline.
+* feature: IoTFleetHub: AWS IoT Fleet Hub, a new feature of AWS IoT Device Management that provides a web application for monitoring and managing device fleets connected to AWS IoT at scale.
+* feature: IoTWireless: AWS IoT for LoRaWAN enables customers to setup a private LoRaWAN network by connecting their LoRaWAN devices and gateways to the AWS cloud without managing a LoRaWAN Network Server.
+* feature: Iot: AWS IoT Rules Engine adds Kafka Action that allows sending data to Apache Kafka clusters inside a VPC. AWS IoT Device Defender adds custom metrics and machine-learning based anomaly detection.
+* feature: IotDeviceAdvisor: AWS IoT Core Device Advisor is fully managed test capability for IoT devices. Device manufacturers can use Device Advisor to test their IoT devices for reliable and secure connectivity with AWS IoT.
+* feature: Lambda: Added support for Apache Kafka as a event source. Added support for TumblingWindowInSeconds for streams event source mappings. Added support for FunctionResponseTypes for streams event source mappings
+* feature: SSM: Adding support for Change Manager API content
+
+## 2.810.0
+* feature: DevOpsGuru: Documentation updates for DevOps Guru.
+* feature: EC2: Add c5n.metal to ec2 instance types list
+* feature: GlobalAccelerator: This release adds support for custom routing accelerators
+
+## 2.809.0
+* feature: AutoScaling: Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+* feature: CloudTrail: CloudTrailInvalidClientTokenIdException is now thrown when a call results in the InvalidClientTokenId error code. The Name parameter of the AdvancedEventSelector data type is now optional.
+* feature: IoTSiteWise: Added the ListAssetRelationships operation and support for composite asset models, which represent structured sets of properties within asset models.
+
+## 2.808.0
+* feature: EC2: TGW connect simplifies connectivity of SD-WAN appliances; IGMP support for TGW multicast; VPC Reachability Analyzer for VPC resources connectivity analysis.
+* feature: Kendra: Amazon Kendra now supports adding synonyms to an index through the new Thesaurus resource.
+* feature: NetworkManager: This release adds API support for Transit Gateway Connect integration into AWS Network Manager.
+
+## 2.807.0
+* feature: EC2: This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+* feature: GlobalAccelerator: This release adds support for custom routing accelerators
+* feature: Redshift: Add support for availability zone relocation feature.
 
 ## 2.806.0
 * feature: AuditManager: AWS Audit Manager helps you continuously audit your AWS usage to simplify how you manage risk and compliance. This update releases the first version of the AWS Audit Manager APIs and SDK.

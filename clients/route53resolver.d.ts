@@ -108,6 +108,14 @@ declare class Route53Resolver extends Service {
    */
   disassociateResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverRuleResponse) => void): Request<Route53Resolver.Types.DisassociateResolverRuleResponse, AWSError>;
   /**
+   * Gets DNSSEC validation information for a specified resource.
+   */
+  getResolverDnssecConfig(params: Route53Resolver.Types.GetResolverDnssecConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.GetResolverDnssecConfigResponse, AWSError>;
+  /**
+   * Gets DNSSEC validation information for a specified resource.
+   */
+  getResolverDnssecConfig(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.GetResolverDnssecConfigResponse, AWSError>;
+  /**
    * Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the current status of the endpoint.
    */
   getResolverEndpoint(params: Route53Resolver.Types.GetResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverEndpointResponse) => void): Request<Route53Resolver.Types.GetResolverEndpointResponse, AWSError>;
@@ -156,13 +164,21 @@ declare class Route53Resolver extends Service {
    */
   getResolverRuleAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRuleAssociationResponse) => void): Request<Route53Resolver.Types.GetResolverRuleAssociationResponse, AWSError>;
   /**
-   * Gets information about a Resolver rule policy. A Resolver rule policy specifies the Resolver operations and resources that you want to allow another AWS account to be able to use. 
+   * Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share with another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. 
    */
   getResolverRulePolicy(params: Route53Resolver.Types.GetResolverRulePolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.GetResolverRulePolicyResponse, AWSError>;
   /**
-   * Gets information about a Resolver rule policy. A Resolver rule policy specifies the Resolver operations and resources that you want to allow another AWS account to be able to use. 
+   * Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share with another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. 
    */
   getResolverRulePolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.GetResolverRulePolicyResponse, AWSError>;
+  /**
+   * Lists the configurations for DNSSEC validation that are associated with the current AWS account.
+   */
+  listResolverDnssecConfigs(params: Route53Resolver.Types.ListResolverDnssecConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverDnssecConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverDnssecConfigsResponse, AWSError>;
+  /**
+   * Lists the configurations for DNSSEC validation that are associated with the current AWS account.
+   */
+  listResolverDnssecConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverDnssecConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverDnssecConfigsResponse, AWSError>;
   /**
    * Gets the IP addresses for a specified Resolver endpoint.
    */
@@ -228,11 +244,11 @@ declare class Route53Resolver extends Service {
    */
   putResolverQueryLogConfigPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse, AWSError>;
   /**
-   * Specifies an AWS account that you want to share rules with, the Resolver rules that you want to share, and the operations that you want the account to be able to perform on those rules.
+   * Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
    */
   putResolverRulePolicy(params: Route53Resolver.Types.PutResolverRulePolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
   /**
-   * Specifies an AWS account that you want to share rules with, the Resolver rules that you want to share, and the operations that you want the account to be able to perform on those rules.
+   * Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
    */
   putResolverRulePolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
   /**
@@ -251,6 +267,14 @@ declare class Route53Resolver extends Service {
    * Removes one or more tags from a specified resource.
    */
   untagResource(callback?: (err: AWSError, data: Route53Resolver.Types.UntagResourceResponse) => void): Request<Route53Resolver.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.
+   */
+  updateResolverDnssecConfig(params: Route53Resolver.Types.UpdateResolverDnssecConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
+  /**
+   * Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.
+   */
+  updateResolverDnssecConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
   /**
    * Updates the name of an inbound or an outbound Resolver endpoint. 
    */
@@ -518,6 +542,18 @@ declare namespace Route53Resolver {
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
+  export interface GetResolverDnssecConfigRequest {
+    /**
+     * The ID of the virtual private cloud (VPC) for the DNSSEC validation status.
+     */
+    ResourceId: ResourceId;
+  }
+  export interface GetResolverDnssecConfigResponse {
+    /**
+     * The information about a configuration for DNSSEC validation.
+     */
+    ResolverDNSSECConfig?: ResolverDnssecConfig;
+  }
   export interface GetResolverEndpointRequest {
     /**
      * The ID of the Resolver endpoint that you want to get information about.
@@ -580,13 +616,13 @@ declare namespace Route53Resolver {
   }
   export interface GetResolverRulePolicyRequest {
     /**
-     * The ID of the Resolver rule policy that you want to get information about.
+     * The ID of the Resolver rule that you want to get the Resolver rule policy for.
      */
     Arn: Arn;
   }
   export interface GetResolverRulePolicyResponse {
     /**
-     * Information about the Resolver rule policy that you specified in a GetResolverRulePolicy request.
+     * The Resolver rule policy for the rule that you specified in a GetResolverRulePolicy request.
      */
     ResolverRulePolicy?: ResolverRulePolicy;
   }
@@ -661,6 +697,30 @@ declare namespace Route53Resolver {
   }
   export type IpAddressesRequest = IpAddressRequest[];
   export type IpAddressesResponse = IpAddressResponse[];
+  export interface ListResolverDnssecConfigsRequest {
+    /**
+     *  Optional: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53 returns up to 100 configuration per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * (Optional) If the current AWS account has more than MaxResults DNSSEC configurations, use NextToken to get the second and subsequent pages of results. For the first ListResolverDnssecConfigs request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.
+     */
+    NextToken?: NextToken;
+    /**
+     * An optional specification to return a subset of objects.
+     */
+    Filters?: Filters;
+  }
+  export interface ListResolverDnssecConfigsResponse {
+    /**
+     * If a response includes the last of the DNSSEC configurations that are associated with the current AWS account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverDnssecConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * An array that contains one ResolverDnssecConfig element for each configuration for DNSSEC validation that is associated with the current AWS account.
+     */
+    ResolverDnssecConfigs?: ResolverDnssecConfigList;
+  }
   export interface ListResolverEndpointIpAddressesRequest {
     /**
      * The ID of the Resolver endpoint that you want to get IP addresses for.
@@ -899,11 +959,11 @@ declare namespace Route53Resolver {
   }
   export interface PutResolverRulePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the account that you want to share rules with.
+     * The Amazon Resource Name (ARN) of the rule that you want to share with another account.
      */
     Arn: Arn;
     /**
-     * An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account to be able to perform. You can specify the following operations in the Actions section of the statement:    route53resolver:GetResolverRule     route53resolver:AssociateResolverRule     route53resolver:DisassociateResolverRule     route53resolver:ListResolverRules     route53resolver:ListResolverRuleAssociations    In the Resource section of the statement, you specify the ARNs for the rules that you want to share with the account that you specified in Arn. 
+     * An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account to be able to perform. You can specify the following operations in the Action section of the statement:    route53resolver:GetResolverRule     route53resolver:AssociateResolverRule     route53resolver:DisassociateResolverRule     route53resolver:ListResolverRules     route53resolver:ListResolverRuleAssociations    In the Resource section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN that you specified in Arn.
      */
     ResolverRulePolicy: ResolverRulePolicy;
   }
@@ -913,6 +973,26 @@ declare namespace Route53Resolver {
      */
     ReturnValue?: Boolean;
   }
+  export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export interface ResolverDnssecConfig {
+    /**
+     * The ID for a configuration for DNSSEC validation.
+     */
+    Id?: ResourceId;
+    /**
+     * The owner account ID of the virtual private cloud (VPC) for a configuration for DNSSEC validation.
+     */
+    OwnerId?: AccountId;
+    /**
+     * The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC validation status for.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The validation status for a DNSSEC configuration. The status can be one of the following:    ENABLING: DNSSEC validation is being enabled but is not complete.    ENABLED: DNSSEC validation is enabled.    DISABLING: DNSSEC validation is being disabled but is not complete.    DISABLED DNSSEC validation is disabled.  
+     */
+    ValidationStatus?: ResolverDNSSECValidationStatus;
+  }
+  export type ResolverDnssecConfigList = ResolverDnssecConfig[];
   export interface ResolverEndpoint {
     /**
      * The ID of the Resolver endpoint.
@@ -1207,6 +1287,22 @@ declare namespace Route53Resolver {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateResolverDnssecConfigRequest {
+    /**
+     * The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The new value that you are specifying for DNSSEC validation for the VPC. The value can be ENABLE or DISABLE. Be aware that it can take time for a validation status change to be completed.
+     */
+    Validation: Validation;
+  }
+  export interface UpdateResolverDnssecConfigResponse {
+    /**
+     * A complex type that contains settings for the specified DNSSEC configuration.
+     */
+    ResolverDNSSECConfig?: ResolverDnssecConfig;
+  }
   export interface UpdateResolverEndpointRequest {
     /**
      * The ID of the Resolver endpoint that you want to update.
@@ -1239,6 +1335,7 @@ declare namespace Route53Resolver {
      */
     ResolverRule?: ResolverRule;
   }
+  export type Validation = "ENABLE"|"DISABLE"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

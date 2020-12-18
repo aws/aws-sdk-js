@@ -268,35 +268,35 @@ declare class ConfigService extends Service {
    */
   describeDeliveryChannels(callback?: (err: AWSError, data: ConfigService.Types.DescribeDeliveryChannelsResponse) => void): Request<ConfigService.Types.DescribeDeliveryChannelsResponse, AWSError>;
   /**
-   * Provides organization config rule deployment status for an organization. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
    */
   describeOrganizationConfigRuleStatuses(params: ConfigService.Types.DescribeOrganizationConfigRuleStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * Provides organization config rule deployment status for an organization. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
    */
   describeOrganizationConfigRuleStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * Returns a list of organization config rules.  Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.&#x2028;  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Returns a list of organization config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
    */
   describeOrganizationConfigRules(params: ConfigService.Types.DescribeOrganizationConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
-   * Returns a list of organization config rules.  Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.&#x2028;  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Returns a list of organization config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
    */
   describeOrganizationConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
-   * Provides organization conformance pack deployment status for an organization.   Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. 
+   * Provides organization conformance pack deployment status for an organization.   The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. 
    */
   describeOrganizationConformancePackStatuses(params: ConfigService.Types.DescribeOrganizationConformancePackStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse, AWSError>;
   /**
-   * Provides organization conformance pack deployment status for an organization.   Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. 
+   * Provides organization conformance pack deployment status for an organization.   The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. 
    */
   describeOrganizationConformancePackStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse, AWSError>;
   /**
-   * Returns a list of organization conformance packs.  Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs.  
+   * Returns a list of organization conformance packs.   When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs.  
    */
   describeOrganizationConformancePacks(params: ConfigService.Types.DescribeOrganizationConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePacksResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePacksResponse, AWSError>;
   /**
-   * Returns a list of organization conformance packs.  Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs.  
+   * Returns a list of organization conformance packs.   When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs.  
    */
   describeOrganizationConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePacksResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePacksResponse, AWSError>;
   /**
@@ -424,19 +424,19 @@ declare class ConfigService extends Service {
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization config rule. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.
+   * Returns detailed status for each member account within an organization for a given organization config rule.
    */
   getOrganizationConfigRuleDetailedStatus(params: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization config rule. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.
+   * Returns detailed status for each member account within an organization for a given organization config rule.
    */
   getOrganizationConfigRuleDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization conformance pack. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.
+   * Returns detailed status for each member account within an organization for a given organization conformance pack.
    */
   getOrganizationConformancePackDetailedStatus(params: ConfigService.Types.GetOrganizationConformancePackDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization conformance pack. Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.
+   * Returns detailed status for each member account within an organization for a given organization conformance pack.
    */
   getOrganizationConformancePackDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
   /**
@@ -528,6 +528,14 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
+   * 
+   */
+  putExternalEvaluation(params: ConfigService.Types.PutExternalEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
+  /**
+   * 
+   */
+  putExternalEvaluation(callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
+  /**
    * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. AWS Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(params: ConfigService.Types.PutOrganizationConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
@@ -544,19 +552,19 @@ declare class ConfigService extends Service {
    */
   putOrganizationConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. 
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by AWS Security Hub. 
    */
   putRemediationConfigurations(params: ConfigService.Types.PutRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. 
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by AWS Security Hub. 
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(params: ConfigService.Types.PutRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
@@ -1213,7 +1221,7 @@ declare namespace ConfigService {
      */
     configurationItemMD5Hash?: ConfigurationItemMD5Hash;
     /**
-     * accoun
+     * Amazon Resource Name (ARN) associated with the resource.
      */
     arn?: ARN;
     /**
@@ -1356,11 +1364,11 @@ declare namespace ConfigService {
      */
     ConformancePackId: ConformancePackId;
     /**
-     * Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket.
+     * The prefix for the Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -2272,6 +2280,13 @@ declare namespace ConfigService {
     SsmControls?: SsmControls;
   }
   export type Expression = string;
+  export interface ExternalEvaluation {
+    ComplianceResourceType: StringWithCharLimit256;
+    ComplianceResourceId: BaseResourceId;
+    ComplianceType: ComplianceType;
+    Annotation?: StringWithCharLimit256;
+    OrderingTimestamp: OrderingTimestamp;
+  }
   export interface FailedDeleteRemediationExceptionsBatch {
     /**
      * Returns a failure message for delete remediation exception. For example, AWS Config creates an exception due to an internal error.
@@ -2730,7 +2745,7 @@ declare namespace ConfigService {
      */
     Filters?: ResourceFilters;
     /**
-     * The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -2920,11 +2935,11 @@ declare namespace ConfigService {
      */
     OrganizationConformancePackArn: StringWithCharLimit256;
     /**
-     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. 
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * Any folder structure you want to add to an Amazon S3 bucket.
+     * Any folder structure you want to add to an Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3168,11 +3183,11 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * AWS Config stores intermediate files while processing conformance pack template.
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket. 
+     * The prefix for the Amazon S3 bucket.   This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3212,6 +3227,12 @@ declare namespace ConfigService {
      */
     FailedEvaluations?: Evaluations;
   }
+  export interface PutExternalEvaluationRequest {
+    ConfigRuleName: ConfigRuleName;
+    ExternalEvaluation: ExternalEvaluation;
+  }
+  export interface PutExternalEvaluationResponse {
+  }
   export interface PutOrganizationConfigRuleRequest {
     /**
      * The name that you assign to an organization config rule.
@@ -3250,11 +3271,11 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.  The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see Permissions for cross account bucket access.
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket.
+     * The prefix for the Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3425,11 +3446,11 @@ declare namespace ConfigService {
      */
     ExecutionControls?: ExecutionControls;
     /**
-     * The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5. For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.
+     * The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5. For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.
      */
     MaximumAutomaticAttempts?: AutoRemediationAttempts;
     /**
-     * Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.  For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.
+     * Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.  For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.
      */
     RetryAttemptSeconds?: AutoRemediationAttemptSeconds;
     /**

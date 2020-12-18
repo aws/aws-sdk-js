@@ -108,11 +108,11 @@ declare class CloudTrail extends Service {
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events.  When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging data and management events for trails  and Quotas in AWS CloudTrail in the AWS CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the AWS CloudTrail User Guide.
    */
   putEventSelectors(params: CloudTrail.Types.PutEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events.  When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging data and management events for trails  and Quotas in AWS CloudTrail in the AWS CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the AWS CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
@@ -170,17 +170,44 @@ declare namespace CloudTrail {
   export interface AddTagsResponse {
   }
   export interface AdvancedEventSelector {
-    Name: SelectorName;
+    /**
+     * An optional, descriptive name for an advanced event selector, such as "Log data events for only two S3 buckets".
+     */
+    Name?: SelectorName;
+    /**
+     * Contains all selector statements in an advanced event selector.
+     */
     FieldSelectors: AdvancedFieldSelectors;
   }
   export type AdvancedEventSelectors = AdvancedEventSelector[];
   export interface AdvancedFieldSelector {
+    /**
+     *  A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.      readOnly  - Optional. Can be set to Equals a value of true or false. A value of false logs both read and write events.     eventSource  - For filtering management events only. This can be set only to NotEquals kms.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required. It must be set to Equals, and the value must be Management or Data.     resources.type  - This ﬁeld is required. resources.type can only use the Equals operator, and the value can be one of the following: AWS::S3::Object or AWS::Lambda::Function. You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. The trailing slash is intentional; do not exclude it.    arn:partition:s3:::bucket_name/     arn:partition:s3:::bucket_name/object_or_file_name/    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:partition:lambda:region:account_ID:function:function_name     
+     */
     Field: SelectorField;
+    /**
+     *  An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields. 
+     */
     Equals?: Operator;
+    /**
+     *  An operator that includes events that match the first few characters of the event record field specified as the value of Field. 
+     */
     StartsWith?: Operator;
+    /**
+     *  An operator that includes events that match the last few characters of the event record field specified as the value of Field. 
+     */
     EndsWith?: Operator;
+    /**
+     *  An operator that excludes events that match the exact value of the event record field specified as the value of Field. 
+     */
     NotEquals?: Operator;
+    /**
+     *  An operator that excludes events that match the first few characters of the event record field specified as the value of Field. 
+     */
     NotStartsWith?: Operator;
+    /**
+     *  An operator that excludes events that match the last few characters of the event record field specified as the value of Field. 
+     */
     NotEndsWith?: Operator;
   }
   export type AdvancedFieldSelectors = AdvancedFieldSelector[];
@@ -399,6 +426,9 @@ declare namespace CloudTrail {
      * The event selectors that are configured for the trail.
      */
     EventSelectors?: EventSelectors;
+    /**
+     *  The advanced event selectors that are configured for the trail. 
+     */
     AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface GetInsightSelectorsRequest {
@@ -647,9 +677,12 @@ declare namespace CloudTrail {
      */
     TrailName: String;
     /**
-     * Specifies the settings for your event selectors. You can configure up to five event selectors for a trail.
+     * Specifies the settings for your event selectors. You can configure up to five event selectors for a trail. You can use either EventSelectors or AdvancedEventSelectors in a PutEventSelectors request, but not both. If you apply EventSelectors to a trail, any existing AdvancedEventSelectors are overwritten.
      */
     EventSelectors?: EventSelectors;
+    /**
+     *  Specifies the settings for advanced event selectors. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the AWS CloudTrail User Guide. 
+     */
     AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface PutEventSelectorsResponse {
@@ -661,6 +694,9 @@ declare namespace CloudTrail {
      * Specifies the event selectors configured for your trail.
      */
     EventSelectors?: EventSelectors;
+    /**
+     * Specifies the advanced event selectors configured for your trail.
+     */
     AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface PutInsightSelectorsRequest {

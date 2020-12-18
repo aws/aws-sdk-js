@@ -529,7 +529,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface AttachLoadBalancerTargetGroupsResultType {
   }
@@ -537,7 +537,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups. To get the ARN of a target group, use the Elastic Load Balancing DescribeTargetGroups API operation.
      */
@@ -549,7 +549,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
@@ -668,7 +668,7 @@ declare namespace AutoScaling {
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
   export type AutoScalingGroupMinSize = number;
-  export type AutoScalingGroupNames = ResourceName[];
+  export type AutoScalingGroupNames = XmlStringMaxLen255[];
   export interface AutoScalingGroupNamesType {
     /**
      * The names of the Auto Scaling groups. By default, you can only specify up to 50 names. You can optionally increase this limit using the MaxRecords parameter. If you omit this parameter, all Auto Scaling groups are described.
@@ -759,7 +759,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the scheduled actions to delete. The maximum number allowed is 50. 
      */
@@ -775,7 +775,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * One or more scheduled actions. The maximum number allowed is 50.
      */
@@ -852,7 +852,7 @@ declare namespace AutoScaling {
     /**
      * The name of the launch configuration to use to launch instances.  Conditional: You must specify either a launch template (LaunchTemplate or MixedInstancesPolicy) or a launch configuration (LaunchConfigurationName or InstanceId).
      */
-    LaunchConfigurationName?: ResourceName;
+    LaunchConfigurationName?: XmlStringMaxLen255;
     /**
      * Parameters used to specify the launch template and version to use to launch instances.  Conditional: You must specify either a launch template (LaunchTemplate or MixedInstancesPolicy) or a launch configuration (LaunchConfigurationName or InstanceId).  The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see Creating a launch template for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. 
      */
@@ -1048,7 +1048,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
      */
@@ -1064,23 +1064,23 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface DeleteNotificationConfigurationType {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN: ResourceName;
+    TopicARN: XmlStringMaxLen255;
   }
   export interface DeletePolicyType {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The name or Amazon Resource Name (ARN) of the policy.
      */
@@ -1090,11 +1090,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the action to delete.
      */
-    ScheduledActionName: ResourceName;
+    ScheduledActionName: XmlStringMaxLen255;
   }
   export interface DeleteTagsType {
     /**
@@ -1190,7 +1190,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.
      */
@@ -1200,7 +1200,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
@@ -1224,7 +1224,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
@@ -1282,7 +1282,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
      */
@@ -1308,7 +1308,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
@@ -1322,7 +1322,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.
      */
@@ -1378,7 +1378,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
      */
@@ -1390,7 +1390,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
      */
@@ -1402,7 +1402,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
@@ -1412,7 +1412,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies one or more of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity    If you omit this parameter, all metrics are disabled. 
      */
@@ -1450,7 +1450,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies which group-level metrics to start collecting. You can specify one or more of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances    The instance weighting feature supports the following additional metrics:     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity    If you omit this parameter, all metrics are enabled. 
      */
@@ -1485,7 +1485,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to Standby mode.
      */
@@ -1496,7 +1496,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The name or ARN of the policy.
      */
@@ -1528,7 +1528,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface FailedScheduledUpdateGroupActionRequest {
     /**
@@ -1776,9 +1776,9 @@ declare namespace AutoScaling {
     /**
      * The name of the launch configuration.
      */
-    LaunchConfigurationName: ResourceName;
+    LaunchConfigurationName: XmlStringMaxLen255;
   }
-  export type LaunchConfigurationNames = ResourceName[];
+  export type LaunchConfigurationNames = XmlStringMaxLen255[];
   export interface LaunchConfigurationNamesType {
     /**
      * The launch configuration names. If you omit this parameter, all launch configurations are described.
@@ -1853,7 +1853,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group for the lifecycle hook.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The state of the EC2 instance to which to attach the lifecycle hook. The following are possible values:   autoscaling:EC2_INSTANCE_LAUNCHING   autoscaling:EC2_INSTANCE_TERMINATING  
      */
@@ -1861,11 +1861,11 @@ declare namespace AutoScaling {
     /**
      * The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.
      */
-    NotificationTargetARN?: ResourceName;
+    NotificationTargetARN?: NotificationTargetResourceName;
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
     /**
      * Additional information that is included any time Amazon EC2 Auto Scaling sends a message to the notification target.
      */
@@ -1912,7 +1912,7 @@ declare namespace AutoScaling {
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
   }
   export type LifecycleHookSpecifications = LifecycleHookSpecification[];
   export type LifecycleHooks = LifecycleHook[];
@@ -1998,11 +1998,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN?: ResourceName;
+    TopicARN?: XmlStringMaxLen255;
     /**
      * One of the following event notification types:    autoscaling:EC2_INSTANCE_LAUNCH     autoscaling:EC2_INSTANCE_LAUNCH_ERROR     autoscaling:EC2_INSTANCE_TERMINATE     autoscaling:EC2_INSTANCE_TERMINATE_ERROR     autoscaling:TEST_NOTIFICATION   
      */
@@ -2075,7 +2075,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The instance state to which you want to attach the lifecycle hook. The valid values are:   autoscaling:EC2_INSTANCE_LAUNCHING   autoscaling:EC2_INSTANCE_TERMINATING   Required for new lifecycle hooks, but optional when updating existing hooks.
      */
@@ -2083,7 +2083,7 @@ declare namespace AutoScaling {
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue. Required for new lifecycle hooks, but optional when updating existing hooks.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
     /**
      * The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic. If you specify an empty string, this overrides the current ARN. This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key-value pair format when sending notifications to an Amazon SNS topic. When you specify a notification target, Amazon EC2 Auto Scaling sends it a test message. Test messages contain the following additional key-value pair: "Event": "autoscaling:TEST_NOTIFICATION".
      */
@@ -2105,11 +2105,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN: ResourceName;
+    TopicARN: XmlStringMaxLen255;
     /**
      * The type of event that causes the notification to be sent. To query the notification types supported by Amazon EC2 Auto Scaling, call the DescribeAutoScalingNotificationTypes API.
      */
@@ -2119,7 +2119,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the policy.
      */
@@ -2173,7 +2173,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of this scaling action.
      */
@@ -2309,13 +2309,13 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * One or more of the following processes:    Launch     Terminate     AddToLoadBalancer     AlarmNotification     AZRebalance     HealthCheck     InstanceRefresh     ReplaceUnhealthy     ScheduledActions    If you omit this parameter, all processes are specified.
      */
     ScalingProcesses?: ProcessNames;
   }
-  export type ScheduledActionNames = ResourceName[];
+  export type ScheduledActionNames = XmlStringMaxLen255[];
   export interface ScheduledActionsType {
     /**
      * The scheduled actions.
@@ -2405,7 +2405,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The desired capacity is the initial capacity of the Auto Scaling group after this operation completes and the capacity it attempts to maintain.
      */
@@ -2439,7 +2439,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
      */
@@ -2588,11 +2588,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the launch configuration. If you specify LaunchConfigurationName in your update request, you can't specify LaunchTemplate or MixedInstancesPolicy.
      */
-    LaunchConfigurationName?: ResourceName;
+    LaunchConfigurationName?: XmlStringMaxLen255;
     /**
      * The launch template and version to use to specify the updates. If you specify LaunchTemplate in your update request, you can't specify LaunchConfigurationName or MixedInstancesPolicy.
      */

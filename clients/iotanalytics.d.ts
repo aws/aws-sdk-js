@@ -398,6 +398,12 @@ declare namespace IoTAnalytics {
     next?: ActivityName;
   }
   export type ChannelArn = string;
+  export interface ChannelMessages {
+    /**
+     * Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
+     */
+    s3Paths?: S3PathChannelMessages;
+  }
   export type ChannelName = string;
   export interface ChannelStatistics {
     /**
@@ -453,6 +459,19 @@ declare namespace IoTAnalytics {
      */
     lastMessageArrivalTime?: Timestamp;
   }
+  export interface Column {
+    /**
+     * The name of the column.
+     */
+    name: ColumnName;
+    /**
+     * The type of data. For more information about the supported data types, see Common data types in the AWS Glue Developer Guide.
+     */
+    type: ColumnDataType;
+  }
+  export type ColumnDataType = string;
+  export type ColumnName = string;
+  export type Columns = Column[];
   export type ComputeType = "ACU_1"|"ACU_2"|string;
   export interface ContainerDatasetAction {
     /**
@@ -585,6 +604,10 @@ declare namespace IoTAnalytics {
      * Metadata which can be used to manage the data store.
      */
     tags?: TagList;
+    /**
+     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     */
+    fileFormatConfiguration?: FileFormatConfiguration;
   }
   export interface CreateDatastoreResponse {
     /**
@@ -901,6 +924,10 @@ declare namespace IoTAnalytics {
      * The last time when a new message arrived in the data store. AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
+    /**
+     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     */
+    fileFormatConfiguration?: FileFormatConfiguration;
   }
   export interface DatastoreActivity {
     /**
@@ -967,6 +994,10 @@ declare namespace IoTAnalytics {
      * The last time when a new message arrived in the data store. AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
+    /**
+     * The file format of the data in the data store.
+     */
+    fileFormatType?: FileFormatType;
   }
   export interface DeleteChannelRequest {
     /**
@@ -1149,6 +1180,17 @@ declare namespace IoTAnalytics {
      */
     estimatedOn?: Timestamp;
   }
+  export interface FileFormatConfiguration {
+    /**
+     * Contains the configuration information of the JSON format.
+     */
+    jsonConfiguration?: JsonConfiguration;
+    /**
+     * Contains the configuration information of the Parquet format.
+     */
+    parquetConfiguration?: ParquetConfiguration;
+  }
+  export type FileFormatType = "JSON"|"PARQUET"|string;
   export interface FilterActivity {
     /**
      * The name of the filter activity.
@@ -1213,6 +1255,8 @@ declare namespace IoTAnalytics {
     roleArn: RoleArn;
   }
   export type IotEventsInputName = string;
+  export interface JsonConfiguration {
+  }
   export interface LambdaActivity {
     /**
      * The name of the lambda activity.
@@ -1436,6 +1480,12 @@ declare namespace IoTAnalytics {
      */
     fileName: OutputFileName;
   }
+  export interface ParquetConfiguration {
+    /**
+     * Information needed to define a schema.
+     */
+    schemaDefinition?: SchemaDefinition;
+  }
   export interface Pipeline {
     /**
      * The name of the pipeline.
@@ -1634,6 +1684,8 @@ declare namespace IoTAnalytics {
     roleArn: RoleArn;
   }
   export type S3KeyPrefix = string;
+  export type S3PathChannelMessage = string;
+  export type S3PathChannelMessages = S3PathChannelMessage[];
   export interface SampleChannelDataRequest {
     /**
      * The name of the channel whose message samples are retrieved.
@@ -1665,6 +1717,12 @@ declare namespace IoTAnalytics {
     expression?: ScheduleExpression;
   }
   export type ScheduleExpression = string;
+  export interface SchemaDefinition {
+    /**
+     * Specifies one or more columns that store your data. Each schema can have up to 100 columns. Each column can have up to 100 nested types
+     */
+    columns?: Columns;
+  }
   export interface SelectAttributesActivity {
     /**
      * The name of the selectAttributes activity.
@@ -1706,13 +1764,17 @@ declare namespace IoTAnalytics {
      */
     pipelineName: PipelineName;
     /**
-     * The start time (inclusive) of raw message data that is reprocessed.
+     * The start time (inclusive) of raw message data that is reprocessed. If you specify a value for the startTime parameter, you must not use the channelMessages object.
      */
     startTime?: StartTime;
     /**
-     * The end time (exclusive) of raw message data that is reprocessed.
+     * The end time (exclusive) of raw message data that is reprocessed. If you specify a value for the endTime parameter, you must not use the channelMessages object.
      */
     endTime?: EndTime;
+    /**
+     * Specifies one or more sets of channel messages that you want to reprocess. If you use the channelMessages object, you must not specify a value for startTime and endTime.
+     */
+    channelMessages?: ChannelMessages;
   }
   export interface StartPipelineReprocessingResponse {
     /**
@@ -1827,6 +1889,10 @@ declare namespace IoTAnalytics {
      * Where data store data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default isserviceManagedS3. You cannot change this storage option after the data store is created.
      */
     datastoreStorage?: DatastoreStorage;
+    /**
+     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     */
+    fileFormatConfiguration?: FileFormatConfiguration;
   }
   export interface UpdatePipelineRequest {
     /**

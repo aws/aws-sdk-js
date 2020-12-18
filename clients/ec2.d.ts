@@ -21,6 +21,14 @@ declare class EC2 extends Service {
    */
   acceptReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
   /**
+   * Accepts a request to associate subnets with a transit gateway multicast domain.
+   */
+  acceptTransitGatewayMulticastDomainAssociations(params: EC2.Types.AcceptTransitGatewayMulticastDomainAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.AcceptTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
+   * Accepts a request to associate subnets with a transit gateway multicast domain.
+   */
+  acceptTransitGatewayMulticastDomainAssociations(callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.AcceptTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
    * Accepts a transit gateway peering attachment request. The peering attachment must be in the pendingAcceptance state.
    */
   acceptTransitGatewayPeeringAttachment(params: EC2.Types.AcceptTransitGatewayPeeringAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.AcceptTransitGatewayPeeringAttachmentResult, AWSError>;
@@ -541,6 +549,14 @@ declare class EC2 extends Service {
    */
   createNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
+   */
+  createNetworkInsightsPath(params: EC2.Types.CreateNetworkInsightsPathRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
+  /**
+   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
+   */
+  createNetworkInsightsPath(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
+  /**
    * Creates a network interface in the specified subnet. For more information about network interfaces, see Elastic Network Interfaces in the Amazon Virtual Private Cloud User Guide.
    */
   createNetworkInterface(params: EC2.Types.CreateNetworkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfaceResult) => void): Request<EC2.Types.CreateNetworkInterfaceResult, AWSError>;
@@ -676,6 +692,22 @@ declare class EC2 extends Service {
    * Creates a transit gateway. You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the available state, you can attach your VPCs and VPN connections to the transit gateway. To attach your VPCs, use CreateTransitGatewayVpcAttachment. To attach a VPN connection, use CreateCustomerGateway to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to CreateVpnConnection. When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use CreateTransitGatewayRouteTable to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use EnableTransitGatewayRouteTablePropagation to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use AssociateTransitGatewayRouteTable to associate a resource attachment with a transit gateway route table.
    */
   createTransitGateway(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayResult) => void): Request<EC2.Types.CreateTransitGatewayResult, AWSError>;
+  /**
+   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. 
+   */
+  createTransitGatewayConnect(params: EC2.Types.CreateTransitGatewayConnectRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectResult) => void): Request<EC2.Types.CreateTransitGatewayConnectResult, AWSError>;
+  /**
+   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. 
+   */
+  createTransitGatewayConnect(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectResult) => void): Request<EC2.Types.CreateTransitGatewayConnectResult, AWSError>;
+  /**
+   * Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6). For more information, see Connect peers in the Transit Gateways Guide.
+   */
+  createTransitGatewayConnectPeer(params: EC2.Types.CreateTransitGatewayConnectPeerRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectPeerResult) => void): Request<EC2.Types.CreateTransitGatewayConnectPeerResult, AWSError>;
+  /**
+   * Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6). For more information, see Connect peers in the Transit Gateways Guide.
+   */
+  createTransitGatewayConnectPeer(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectPeerResult) => void): Request<EC2.Types.CreateTransitGatewayConnectPeerResult, AWSError>;
   /**
    * Creates a multicast domain using the specified transit gateway. The transit gateway must be in the available state before you create a domain. Use DescribeTransitGateways to see the state of transit gateway.
    */
@@ -949,6 +981,22 @@ declare class EC2 extends Service {
    */
   deleteNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified network insights analysis.
+   */
+  deleteNetworkInsightsAnalysis(params: EC2.Types.DeleteNetworkInsightsAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAnalysisResult, AWSError>;
+  /**
+   * Deletes the specified network insights analysis.
+   */
+  deleteNetworkInsightsAnalysis(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAnalysisResult, AWSError>;
+  /**
+   * Deletes the specified path.
+   */
+  deleteNetworkInsightsPath(params: EC2.Types.DeleteNetworkInsightsPathRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsPathResult) => void): Request<EC2.Types.DeleteNetworkInsightsPathResult, AWSError>;
+  /**
+   * Deletes the specified path.
+   */
+  deleteNetworkInsightsPath(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsPathResult) => void): Request<EC2.Types.DeleteNetworkInsightsPathResult, AWSError>;
+  /**
    * Deletes the specified network interface. You must detach the network interface before you can delete it.
    */
   deleteNetworkInterface(params: EC2.Types.DeleteNetworkInterfaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1076,6 +1124,22 @@ declare class EC2 extends Service {
    * Deletes the specified transit gateway.
    */
   deleteTransitGateway(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayResult) => void): Request<EC2.Types.DeleteTransitGatewayResult, AWSError>;
+  /**
+   * Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
+   */
+  deleteTransitGatewayConnect(params: EC2.Types.DeleteTransitGatewayConnectRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayConnectResult) => void): Request<EC2.Types.DeleteTransitGatewayConnectResult, AWSError>;
+  /**
+   * Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
+   */
+  deleteTransitGatewayConnect(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayConnectResult) => void): Request<EC2.Types.DeleteTransitGatewayConnectResult, AWSError>;
+  /**
+   * Deletes the specified Connect peer.
+   */
+  deleteTransitGatewayConnectPeer(params: EC2.Types.DeleteTransitGatewayConnectPeerRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayConnectPeerResult) => void): Request<EC2.Types.DeleteTransitGatewayConnectPeerResult, AWSError>;
+  /**
+   * Deletes the specified Connect peer.
+   */
+  deleteTransitGatewayConnectPeer(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayConnectPeerResult) => void): Request<EC2.Types.DeleteTransitGatewayConnectPeerResult, AWSError>;
   /**
    * Deletes the specified transit gateway multicast domain.
    */
@@ -1725,6 +1789,22 @@ declare class EC2 extends Service {
    */
   describeNetworkAcls(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkAclsResult) => void): Request<EC2.Types.DescribeNetworkAclsResult, AWSError>;
   /**
+   * Describes one or more of your network insights analyses.
+   */
+  describeNetworkInsightsAnalyses(params: EC2.Types.DescribeNetworkInsightsAnalysesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAnalysesResult, AWSError>;
+  /**
+   * Describes one or more of your network insights analyses.
+   */
+  describeNetworkInsightsAnalyses(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAnalysesResult, AWSError>;
+  /**
+   * Describes one or more of your paths.
+   */
+  describeNetworkInsightsPaths(params: EC2.Types.DescribeNetworkInsightsPathsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsPathsResult) => void): Request<EC2.Types.DescribeNetworkInsightsPathsResult, AWSError>;
+  /**
+   * Describes one or more of your paths.
+   */
+  describeNetworkInsightsPaths(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsPathsResult) => void): Request<EC2.Types.DescribeNetworkInsightsPathsResult, AWSError>;
+  /**
    * Describes a network interface attribute. You can specify only one attribute at a time.
    */
   describeNetworkInterfaceAttribute(params: EC2.Types.DescribeNetworkInterfaceAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfaceAttributeResult) => void): Request<EC2.Types.DescribeNetworkInterfaceAttributeResult, AWSError>;
@@ -1980,6 +2060,22 @@ declare class EC2 extends Service {
    * Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.
    */
   describeTransitGatewayAttachments(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayAttachmentsResult, AWSError>;
+  /**
+   * Describes one or more Connect peers.
+   */
+  describeTransitGatewayConnectPeers(params: EC2.Types.DescribeTransitGatewayConnectPeersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayConnectPeersResult) => void): Request<EC2.Types.DescribeTransitGatewayConnectPeersResult, AWSError>;
+  /**
+   * Describes one or more Connect peers.
+   */
+  describeTransitGatewayConnectPeers(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayConnectPeersResult) => void): Request<EC2.Types.DescribeTransitGatewayConnectPeersResult, AWSError>;
+  /**
+   * Describes one or more Connect attachments.
+   */
+  describeTransitGatewayConnects(params: EC2.Types.DescribeTransitGatewayConnectsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayConnectsResult) => void): Request<EC2.Types.DescribeTransitGatewayConnectsResult, AWSError>;
+  /**
+   * Describes one or more Connect attachments.
+   */
+  describeTransitGatewayConnects(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayConnectsResult) => void): Request<EC2.Types.DescribeTransitGatewayConnectsResult, AWSError>;
   /**
    * Describes one or more transit gateway multicast domains.
    */
@@ -3053,6 +3149,14 @@ declare class EC2 extends Service {
    */
   registerTransitGatewayMulticastGroupSources(callback?: (err: AWSError, data: EC2.Types.RegisterTransitGatewayMulticastGroupSourcesResult) => void): Request<EC2.Types.RegisterTransitGatewayMulticastGroupSourcesResult, AWSError>;
   /**
+   * Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
+   */
+  rejectTransitGatewayMulticastDomainAssociations(params: EC2.Types.RejectTransitGatewayMulticastDomainAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.RejectTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
+   * Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
+   */
+  rejectTransitGatewayMulticastDomainAssociations(callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.RejectTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
    * Rejects a transit gateway peering attachment request.
    */
   rejectTransitGatewayPeeringAttachment(params: EC2.Types.RejectTransitGatewayPeeringAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.RejectTransitGatewayPeeringAttachmentResult, AWSError>;
@@ -3316,6 +3420,14 @@ declare class EC2 extends Service {
    * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. For more information, see Stopping instances in the Amazon Elastic Compute Cloud User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
+  /**
+   * Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.
+   */
+  startNetworkInsightsAnalysis(params: EC2.Types.StartNetworkInsightsAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAnalysisResult, AWSError>;
+  /**
+   * Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.
+   */
+  startNetworkInsightsAnalysis(callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAnalysisResult, AWSError>;
   /**
    * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server. For more information, see Adding a TXT Record to Your Domain's DNS Server  in the Amazon VPC User Guide.
    */
@@ -3674,6 +3786,27 @@ declare namespace EC2 {
      */
     ExchangeId?: String;
   }
+  export interface AcceptTransitGatewayMulticastDomainAssociationsRequest {
+    /**
+     * The ID of the transit gateway multicast domain.
+     */
+    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    /**
+     * The ID of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The IDs of the subnets to associate with the transit gateway multicast domain.
+     */
+    SubnetIds?: ValueStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AcceptTransitGatewayMulticastDomainAssociationsResult {
+    Associations?: TransitGatewayMulticastDomainAssociations;
+  }
   export interface AcceptTransitGatewayPeeringAttachmentRequest {
     /**
      * The ID of the transit gateway attachment.
@@ -3985,6 +4118,173 @@ declare namespace EC2 {
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
   export type AllowsMultipleInstanceTypes = "on"|"off"|string;
+  export interface AlternatePathHint {
+    /**
+     * The ID of the component.
+     */
+    ComponentId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the component.
+     */
+    ComponentArn?: String;
+  }
+  export type AlternatePathHintList = AlternatePathHint[];
+  export interface AnalysisAclRule {
+    /**
+     * The IPv4 address range, in CIDR notation.
+     */
+    Cidr?: String;
+    /**
+     * Indicates whether the rule is an outbound rule.
+     */
+    Egress?: Boolean;
+    /**
+     * The range of ports.
+     */
+    PortRange?: PortRange;
+    /**
+     * The protocol.
+     */
+    Protocol?: String;
+    /**
+     * Indicates whether to allow or deny traffic that matches the rule.
+     */
+    RuleAction?: String;
+    /**
+     * The rule number.
+     */
+    RuleNumber?: Integer;
+  }
+  export interface AnalysisComponent {
+    /**
+     * The ID of the component.
+     */
+    Id?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the component.
+     */
+    Arn?: String;
+  }
+  export type AnalysisComponentList = AnalysisComponent[];
+  export interface AnalysisLoadBalancerListener {
+    /**
+     * The port on which the load balancer is listening.
+     */
+    LoadBalancerPort?: Port;
+    /**
+     * [Classic Load Balancers] The back-end port for the listener.
+     */
+    InstancePort?: Port;
+  }
+  export interface AnalysisLoadBalancerTarget {
+    /**
+     * The IP address.
+     */
+    Address?: IpAddress;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * Information about the instance.
+     */
+    Instance?: AnalysisComponent;
+    /**
+     * The port on which the target is listening.
+     */
+    Port?: Port;
+  }
+  export interface AnalysisPacketHeader {
+    /**
+     * The destination addresses.
+     */
+    DestinationAddresses?: IpAddressList;
+    /**
+     * The destination port ranges.
+     */
+    DestinationPortRanges?: PortRangeList;
+    /**
+     * The protocol.
+     */
+    Protocol?: String;
+    /**
+     * The source addresses.
+     */
+    SourceAddresses?: IpAddressList;
+    /**
+     * The source port ranges.
+     */
+    SourcePortRanges?: PortRangeList;
+  }
+  export interface AnalysisRouteTableRoute {
+    /**
+     * The destination IPv4 address, in CIDR notation.
+     */
+    DestinationCidr?: String;
+    /**
+     * The prefix of the AWS service.
+     */
+    DestinationPrefixListId?: String;
+    /**
+     * The ID of an egress-only internet gateway.
+     */
+    EgressOnlyInternetGatewayId?: String;
+    /**
+     * The ID of the gateway, such as an internet gateway or virtual private gateway.
+     */
+    GatewayId?: String;
+    /**
+     * The ID of the instance, such as a NAT instance.
+     */
+    InstanceId?: String;
+    /**
+     * The ID of a NAT gateway.
+     */
+    NatGatewayId?: String;
+    /**
+     * The ID of a network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * Describes how the route was created. The following are possible values:    CreateRouteTable - The route was automatically created when the route table was created.    CreateRoute - The route was manually added to the route table.    EnableVgwRoutePropagation - The route was propagated by route propagation.  
+     */
+    Origin?: String;
+    /**
+     * The ID of a transit gateway.
+     */
+    TransitGatewayId?: String;
+    /**
+     * The ID of a VPC peering connection.
+     */
+    VpcPeeringConnectionId?: String;
+  }
+  export interface AnalysisSecurityGroupRule {
+    /**
+     * The IPv4 address range, in CIDR notation.
+     */
+    Cidr?: String;
+    /**
+     * The direction. The following are possible values:   egress   ingress  
+     */
+    Direction?: String;
+    /**
+     * The security group ID.
+     */
+    SecurityGroupId?: String;
+    /**
+     * The port range.
+     */
+    PortRange?: PortRange;
+    /**
+     * The prefix list ID.
+     */
+    PrefixListId?: String;
+    /**
+     * The protocol name.
+     */
+    Protocol?: String;
+  }
+  export type AnalysisStatus = "running"|"succeeded"|"failed"|string;
   export type ApplianceModeSupportValue = "enable"|"disable"|string;
   export interface ApplySecurityGroupsToClientVpnTargetNetworkRequest {
     /**
@@ -4013,6 +4313,7 @@ declare namespace EC2 {
   export type ArchitectureType = "i386"|"x86_64"|"arm64"|string;
   export type ArchitectureTypeList = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|string;
+  export type ArnList = ResourceArn[];
   export interface AssignIpv6AddressesRequest {
     /**
      * The number of IPv6 addresses to assign to the network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
@@ -4254,7 +4555,7 @@ declare namespace EC2 {
     /**
      * The IDs of the subnets to associate with the transit gateway multicast domain.
      */
-    SubnetIds?: ValueStringList;
+    SubnetIds?: TransitGatewaySubnetIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -4633,6 +4934,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export type AutoAcceptSharedAssociationsValue = "enable"|"disable"|string;
   export type AutoAcceptSharedAttachmentsValue = "enable"|"disable"|string;
   export type AutoPlacement = "on"|"off"|string;
   export type AutoRecoveryFlag = boolean;
@@ -4709,6 +5011,7 @@ declare namespace EC2 {
   export type BaselineIops = number;
   export type BaselineThroughputInMBps = number;
   export type BatchState = "submitted"|"active"|"cancelled"|"failed"|"cancelled_running"|"cancelled_terminating"|"modifying"|string;
+  export type BgpStatus = "up"|"down"|string;
   export type BillingProductList = String[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export interface BlobAttributeValue {
@@ -6758,6 +7061,50 @@ declare namespace EC2 {
      */
     NetworkAcl?: NetworkAcl;
   }
+  export interface CreateNetworkInsightsPathRequest {
+    /**
+     * The IP address of the AWS resource that is the source of the path.
+     */
+    SourceIp?: IpAddress;
+    /**
+     * The IP address of the AWS resource that is the destination of the path.
+     */
+    DestinationIp?: IpAddress;
+    /**
+     * The AWS resource that is the source of the path.
+     */
+    Source: String;
+    /**
+     * The AWS resource that is the destination of the path.
+     */
+    Destination: String;
+    /**
+     * The protocol.
+     */
+    Protocol: Protocol;
+    /**
+     * The destination port.
+     */
+    DestinationPort?: Port;
+    /**
+     * The tags to add to the path.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken: String;
+  }
+  export interface CreateNetworkInsightsPathResult {
+    /**
+     * Information about the path.
+     */
+    NetworkInsightsPath?: NetworkInsightsPath;
+  }
   export interface CreateNetworkInterfacePermissionRequest {
     /**
      * The ID of the network interface.
@@ -7303,11 +7650,81 @@ declare namespace EC2 {
      */
     ClientToken?: String;
   }
+  export interface CreateTransitGatewayConnectPeerRequest {
+    /**
+     * The ID of the Connect attachment.
+     */
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * The peer IP address (GRE outer IP address) on the transit gateway side of the Connect peer, which must be specified from a transit gateway CIDR block. If not specified, Amazon automatically assigns the first available IP address from the transit gateway CIDR block.
+     */
+    TransitGatewayAddress?: String;
+    /**
+     * The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.
+     */
+    PeerAddress: String;
+    /**
+     * The BGP options for the Connect peer.
+     */
+    BgpOptions?: TransitGatewayConnectRequestBgpOptions;
+    /**
+     * The range of inside IP addresses that are used for BGP peering. You must specify a size /29 IPv4 CIDR block from the 169.254.0.0/16 range. The first address from the range must be configured on the appliance as the BGP IP address. You can also optionally specify a size /125 IPv6 CIDR block from the fd00::/8 range.
+     */
+    InsideCidrBlocks: InsideCidrBlocksStringList;
+    /**
+     * The tags to apply to the Connect peer.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayConnectPeerResult {
+    /**
+     * Information about the Connect peer.
+     */
+    TransitGatewayConnectPeer?: TransitGatewayConnectPeer;
+  }
+  export interface CreateTransitGatewayConnectRequest {
+    /**
+     * The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.
+     */
+    TransportTransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * The Connect attachment options.
+     */
+    Options: CreateTransitGatewayConnectRequestOptions;
+    /**
+     * The tags to apply to the Connect attachment.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayConnectRequestOptions {
+    /**
+     * The tunnel protocol.
+     */
+    Protocol: ProtocolValue;
+  }
+  export interface CreateTransitGatewayConnectResult {
+    /**
+     * Information about the Connect attachment.
+     */
+    TransitGatewayConnect?: TransitGatewayConnect;
+  }
   export interface CreateTransitGatewayMulticastDomainRequest {
     /**
      * The ID of the transit gateway.
      */
     TransitGatewayId: TransitGatewayId;
+    /**
+     * The options for the transit gateway multicast domain.
+     */
+    Options?: CreateTransitGatewayMulticastDomainRequestOptions;
     /**
      * The tags for the transit gateway multicast domain.
      */
@@ -7316,6 +7733,20 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayMulticastDomainRequestOptions {
+    /**
+     * Specify whether to enable Internet Group Management Protocol (IGMP) version 2 for the transit gateway multicast domain.
+     */
+    Igmpv2Support?: Igmpv2SupportValue;
+    /**
+     * Specify whether to enable support for statically configuring multicast group sources for a domain.
+     */
+    StaticSourcesSupport?: StaticSourcesSupportValue;
+    /**
+     * Indicates whether to automatically accept cross-account subnet associations that are associated with the transit gateway multicast domain.
+     */
+    AutoAcceptSharedAssociations?: AutoAcceptSharedAssociationsValue;
   }
   export interface CreateTransitGatewayMulticastDomainResult {
     /**
@@ -7487,7 +7918,7 @@ declare namespace EC2 {
      */
     DnsSupport?: DnsSupportValue;
     /**
-     * Enable or disable IPv6 support.
+     * Enable or disable IPv6 support. The default is disable.
      */
     Ipv6Support?: Ipv6SupportValue;
     /**
@@ -8299,6 +8730,38 @@ declare namespace EC2 {
      */
     NetworkAclId: NetworkAclId;
   }
+  export interface DeleteNetworkInsightsAnalysisRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the network insights analysis.
+     */
+    NetworkInsightsAnalysisId: NetworkInsightsAnalysisId;
+  }
+  export interface DeleteNetworkInsightsAnalysisResult {
+    /**
+     * The ID of the network insights analysis.
+     */
+    NetworkInsightsAnalysisId?: NetworkInsightsAnalysisId;
+  }
+  export interface DeleteNetworkInsightsPathRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the path.
+     */
+    NetworkInsightsPathId: NetworkInsightsPathId;
+  }
+  export interface DeleteNetworkInsightsPathResult {
+    /**
+     * The ID of the path.
+     */
+    NetworkInsightsPathId?: NetworkInsightsPathId;
+  }
   export interface DeleteNetworkInterfacePermissionRequest {
     /**
      * The ID of the network interface permission.
@@ -8520,6 +8983,38 @@ declare namespace EC2 {
      * The ID of the deleted Traffic Mirror target.
      */
     TrafficMirrorTargetId?: String;
+  }
+  export interface DeleteTransitGatewayConnectPeerRequest {
+    /**
+     * The ID of the Connect peer.
+     */
+    TransitGatewayConnectPeerId: TransitGatewayConnectPeerId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayConnectPeerResult {
+    /**
+     * Information about the deleted Connect peer.
+     */
+    TransitGatewayConnectPeer?: TransitGatewayConnectPeer;
+  }
+  export interface DeleteTransitGatewayConnectRequest {
+    /**
+     * The ID of the Connect attachment.
+     */
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayConnectResult {
+    /**
+     * Information about the deleted Connect attachment.
+     */
+    TransitGatewayConnect?: TransitGatewayConnect;
   }
   export interface DeleteTransitGatewayMulticastDomainRequest {
     /**
@@ -10739,6 +11234,82 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeNetworkInsightsAnalysesRequest {
+    /**
+     * The ID of the network insights analyses. You must specify either analysis IDs or a path ID.
+     */
+    NetworkInsightsAnalysisIds?: NetworkInsightsAnalysisIdList;
+    /**
+     * The ID of the path. You must specify either a path ID or analysis IDs.
+     */
+    NetworkInsightsPathId?: NetworkInsightsPathId;
+    /**
+     * The time when the network insights analyses started.
+     */
+    AnalysisStartTime?: MillisecondDateTime;
+    /**
+     * The time when the network insights analyses ended.
+     */
+    AnalysisEndTime?: MillisecondDateTime;
+    /**
+     * The filters. The following are possible values:   PathFound - A Boolean value that indicates whether a feasible path is found.   Status - The status of the analysis (running | succeeded | failed).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsAnalysesResult {
+    /**
+     * Information about the network insights analyses.
+     */
+    NetworkInsightsAnalyses?: NetworkInsightsAnalysisList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeNetworkInsightsPathsRequest {
+    /**
+     * The IDs of the paths.
+     */
+    NetworkInsightsPathIds?: NetworkInsightsPathIdList;
+    /**
+     * The filters. The following are possible values:   Destination - The ID of the resource.   DestinationPort - The destination port.   Name - The path name.   Protocol - The protocol.   Source - The ID of the resource.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsPathsResult {
+    /**
+     * Information about the paths.
+     */
+    NetworkInsightsPaths?: NetworkInsightsPathList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeNetworkInterfaceAttributeRequest {
     /**
      * The attribute of the network interface. This parameter is required.
@@ -11748,7 +12319,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
+     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -11769,6 +12340,70 @@ declare namespace EC2 {
      * Information about the attachments.
      */
     TransitGatewayAttachments?: TransitGatewayAttachmentList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewayConnectPeersRequest {
+    /**
+     * The IDs of the Connect peers.
+     */
+    TransitGatewayConnectPeerIds?: TransitGatewayConnectPeerIdStringList;
+    /**
+     * One or more filters. The possible values are:    state - The state of the Connect peer (pending | available | deleting | deleted).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-connect-peer-id - The ID of the Connect peer.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayConnectPeersResult {
+    /**
+     * Information about the Connect peers.
+     */
+    TransitGatewayConnectPeers?: TransitGatewayConnectPeerList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewayConnectsRequest {
+    /**
+     * The IDs of the attachments.
+     */
+    TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
+    /**
+     * One or more filters. The possible values are:    options.protocol - The tunnel protocol (gre).    state - The state of the attachment (initiating | initiatingRequest | pendingAcceptance | rollingBack | pending | available | modifying | deleting | deleted | failed | rejected | rejecting | failing).    transit-gateway-attachment-id - The ID of the Connect attachment.    transit-gateway-id - The ID of the transit gateway.    transport-transit-gateway-attachment-id - The ID of the transit gateway attachment from which the Connect attachment was created.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayConnectsResult {
+    /**
+     * Information about the Connect attachments.
+     */
+    TransitGatewayConnects?: TransitGatewayConnectList;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -12845,7 +13480,7 @@ declare namespace EC2 {
     /**
      * The IDs of the subnets;
      */
-    SubnetIds?: ValueStringList;
+    SubnetIds?: TransitGatewaySubnetIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -13454,6 +14089,189 @@ declare namespace EC2 {
   export type EventType = "instanceChange"|"fleetRequestChange"|"error"|"information"|string;
   export type ExcessCapacityTerminationPolicy = "noTermination"|"default"|string;
   export type ExecutableByStringList = String[];
+  export interface Explanation {
+    /**
+     * The network ACL.
+     */
+    Acl?: AnalysisComponent;
+    /**
+     * The network ACL rule.
+     */
+    AclRule?: AnalysisAclRule;
+    /**
+     * The IPv4 address, in CIDR notation.
+     */
+    Address?: IpAddress;
+    /**
+     * The IPv4 addresses, in CIDR notation.
+     */
+    Addresses?: IpAddressList;
+    /**
+     * The resource to which the component is attached.
+     */
+    AttachedTo?: AnalysisComponent;
+    /**
+     * The Availability Zones.
+     */
+    AvailabilityZones?: ValueStringList;
+    /**
+     * The CIDR ranges.
+     */
+    Cidrs?: ValueStringList;
+    /**
+     * The component.
+     */
+    Component?: AnalysisComponent;
+    /**
+     * The customer gateway.
+     */
+    CustomerGateway?: AnalysisComponent;
+    /**
+     * The destination.
+     */
+    Destination?: AnalysisComponent;
+    /**
+     * The destination VPC.
+     */
+    DestinationVpc?: AnalysisComponent;
+    /**
+     * The direction. The following are possible values:   egress   ingress  
+     */
+    Direction?: String;
+    /**
+     * The explanation code.
+     */
+    ExplanationCode?: String;
+    /**
+     * The route table.
+     */
+    IngressRouteTable?: AnalysisComponent;
+    /**
+     * The internet gateway.
+     */
+    InternetGateway?: AnalysisComponent;
+    /**
+     * The Amazon Resource Name (ARN) of the load balancer.
+     */
+    LoadBalancerArn?: ResourceArn;
+    /**
+     * The listener for a Classic Load Balancer.
+     */
+    ClassicLoadBalancerListener?: AnalysisLoadBalancerListener;
+    /**
+     * The listener port of the load balancer.
+     */
+    LoadBalancerListenerPort?: Port;
+    /**
+     * The target.
+     */
+    LoadBalancerTarget?: AnalysisLoadBalancerTarget;
+    /**
+     * The target group.
+     */
+    LoadBalancerTargetGroup?: AnalysisComponent;
+    /**
+     * The target groups.
+     */
+    LoadBalancerTargetGroups?: AnalysisComponentList;
+    /**
+     * The target port.
+     */
+    LoadBalancerTargetPort?: Port;
+    /**
+     * The load balancer listener.
+     */
+    ElasticLoadBalancerListener?: AnalysisComponent;
+    /**
+     * The missing component.
+     */
+    MissingComponent?: String;
+    /**
+     * The NAT gateway.
+     */
+    NatGateway?: AnalysisComponent;
+    /**
+     * The network interface.
+     */
+    NetworkInterface?: AnalysisComponent;
+    /**
+     * The packet field.
+     */
+    PacketField?: String;
+    /**
+     * The VPC peering connection.
+     */
+    VpcPeeringConnection?: AnalysisComponent;
+    /**
+     * The port.
+     */
+    Port?: Port;
+    /**
+     * The port ranges.
+     */
+    PortRanges?: PortRangeList;
+    /**
+     * The prefix list.
+     */
+    PrefixList?: AnalysisComponent;
+    /**
+     * The protocols.
+     */
+    Protocols?: StringList;
+    /**
+     * The route table route.
+     */
+    RouteTableRoute?: AnalysisRouteTableRoute;
+    /**
+     * The route table.
+     */
+    RouteTable?: AnalysisComponent;
+    /**
+     * The security group.
+     */
+    SecurityGroup?: AnalysisComponent;
+    /**
+     * The security group rule.
+     */
+    SecurityGroupRule?: AnalysisSecurityGroupRule;
+    /**
+     * The security groups.
+     */
+    SecurityGroups?: AnalysisComponentList;
+    /**
+     * The source VPC.
+     */
+    SourceVpc?: AnalysisComponent;
+    /**
+     * The state.
+     */
+    State?: String;
+    /**
+     * The subnet.
+     */
+    Subnet?: AnalysisComponent;
+    /**
+     * The route table for the subnet.
+     */
+    SubnetRouteTable?: AnalysisComponent;
+    /**
+     * The component VPC.
+     */
+    Vpc?: AnalysisComponent;
+    /**
+     * The VPC endpoint.
+     */
+    VpcEndpoint?: AnalysisComponent;
+    /**
+     * The VPN connection.
+     */
+    VpnConnection?: AnalysisComponent;
+    /**
+     * The VPN gateway.
+     */
+    VpnGateway?: AnalysisComponent;
+  }
+  export type ExplanationList = Explanation[];
   export interface ExportClientVpnClientCertificateRevocationListRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -14728,7 +15546,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -14760,7 +15578,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -15171,6 +15989,7 @@ declare namespace EC2 {
     UseLongIds?: Boolean;
   }
   export type IdFormatList = IdFormat[];
+  export type Igmpv2SupportValue = "enable"|"disable"|string;
   export interface Image {
     /**
      * The architecture of the image.
@@ -15874,6 +16693,7 @@ declare namespace EC2 {
   export type InferenceDeviceInfoList = InferenceDeviceInfo[];
   export type InferenceDeviceManufacturerName = string;
   export type InferenceDeviceName = string;
+  export type InsideCidrBlocksStringList = String[];
   export interface Instance {
     /**
      * The AMI launch index, which can be used to find this instance in the launch group.
@@ -16650,7 +17470,7 @@ declare namespace EC2 {
      */
     IncludeAllTagsOfInstance?: Boolean;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r6g.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6gd.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c6g.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6gd.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"mac1.metal"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r6g.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6gd.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6gd.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"mac1.metal"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
   export interface InstanceTypeInfo {
     /**
@@ -16808,6 +17628,8 @@ declare namespace EC2 {
   export type InternetGatewayId = string;
   export type InternetGatewayIdList = InternetGatewayId[];
   export type InternetGatewayList = InternetGateway[];
+  export type IpAddress = string;
+  export type IpAddressList = IpAddress[];
   export interface IpPermission {
     /**
      * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
@@ -18913,6 +19735,14 @@ declare namespace EC2 {
   }
   export interface ModifyTransitGatewayOptions {
     /**
+     * Adds IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+     */
+    AddTransitGatewayCidrBlocks?: TransitGatewayCidrBlockStringList;
+    /**
+     * Removes CIDR blocks for the transit gateway.
+     */
+    RemoveTransitGatewayCidrBlocks?: TransitGatewayCidrBlockStringList;
+    /**
      * Enable or disable Equal Cost Multipath Protocol support.
      */
     VpnEcmpSupport?: VpnEcmpSupportValue;
@@ -19717,6 +20547,109 @@ declare namespace EC2 {
      */
     EfaSupported?: EfaSupportedFlag;
   }
+  export interface NetworkInsightsAnalysis {
+    /**
+     * The ID of the network insights analysis.
+     */
+    NetworkInsightsAnalysisId?: NetworkInsightsAnalysisId;
+    /**
+     * The Amazon Resource Name (ARN) of the network insights analysis.
+     */
+    NetworkInsightsAnalysisArn?: ResourceArn;
+    /**
+     * The ID of the path.
+     */
+    NetworkInsightsPathId?: NetworkInsightsPathId;
+    /**
+     * The Amazon Resource Names (ARN) of the AWS resources that the path must traverse.
+     */
+    FilterInArns?: ArnList;
+    /**
+     * The time the analysis started.
+     */
+    StartDate?: MillisecondDateTime;
+    /**
+     * The status of the network insights analysis.
+     */
+    Status?: AnalysisStatus;
+    /**
+     * The status message, if the status is failed.
+     */
+    StatusMessage?: String;
+    /**
+     * Indicates whether the destination is reachable from the source.
+     */
+    NetworkPathFound?: Boolean;
+    /**
+     * The components in the path from source to destination.
+     */
+    ForwardPathComponents?: PathComponentList;
+    /**
+     * The components in the path from destination to source.
+     */
+    ReturnPathComponents?: PathComponentList;
+    /**
+     * The explanations. For more information, see Reachability Analyzer explanation codes.
+     */
+    Explanations?: ExplanationList;
+    /**
+     * Potential intermediate components.
+     */
+    AlternatePathHints?: AlternatePathHintList;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type NetworkInsightsAnalysisId = string;
+  export type NetworkInsightsAnalysisIdList = NetworkInsightsAnalysisId[];
+  export type NetworkInsightsAnalysisList = NetworkInsightsAnalysis[];
+  export type NetworkInsightsMaxResults = number;
+  export interface NetworkInsightsPath {
+    /**
+     * The ID of the path.
+     */
+    NetworkInsightsPathId?: NetworkInsightsPathId;
+    /**
+     * The Amazon Resource Name (ARN) of the path.
+     */
+    NetworkInsightsPathArn?: ResourceArn;
+    /**
+     * The time stamp when the path was created.
+     */
+    CreatedDate?: MillisecondDateTime;
+    /**
+     * The AWS resource that is the source of the path.
+     */
+    Source?: String;
+    /**
+     * The AWS resource that is the destination of the path.
+     */
+    Destination?: String;
+    /**
+     * The IP address of the AWS resource that is the source of the path.
+     */
+    SourceIp?: IpAddress;
+    /**
+     * The IP address of the AWS resource that is the destination of the path.
+     */
+    DestinationIp?: IpAddress;
+    /**
+     * The protocol.
+     */
+    Protocol?: Protocol;
+    /**
+     * The destination port.
+     */
+    DestinationPort?: Integer;
+    /**
+     * The tags associated with the path.
+     */
+    Tags?: TagList;
+  }
+  export type NetworkInsightsPathId = string;
+  export type NetworkInsightsPathIdList = NetworkInsightsPathId[];
+  export type NetworkInsightsPathList = NetworkInsightsPath[];
   export interface NetworkInterface {
     /**
      * The association information for an Elastic IP address (IPv4) associated with the network interface.
@@ -20018,6 +20951,53 @@ declare namespace EC2 {
   }
   export type OperationType = "add"|"remove"|string;
   export type OwnerStringList = String[];
+  export interface PathComponent {
+    /**
+     * The sequence number.
+     */
+    SequenceNumber?: Integer;
+    /**
+     * The network ACL rule.
+     */
+    AclRule?: AnalysisAclRule;
+    /**
+     * The component.
+     */
+    Component?: AnalysisComponent;
+    /**
+     * The destination VPC.
+     */
+    DestinationVpc?: AnalysisComponent;
+    /**
+     * The outbound header.
+     */
+    OutboundHeader?: AnalysisPacketHeader;
+    /**
+     * The inbound header.
+     */
+    InboundHeader?: AnalysisPacketHeader;
+    /**
+     * The route table route.
+     */
+    RouteTableRoute?: AnalysisRouteTableRoute;
+    /**
+     * The security group rule.
+     */
+    SecurityGroupRule?: AnalysisSecurityGroupRule;
+    /**
+     * The source VPC.
+     */
+    SourceVpc?: AnalysisComponent;
+    /**
+     * The subnet.
+     */
+    Subnet?: AnalysisComponent;
+    /**
+     * The component VPC.
+     */
+    Vpc?: AnalysisComponent;
+  }
+  export type PathComponentList = PathComponent[];
   export type PaymentOption = "AllUpfront"|"PartialUpfront"|"NoUpfront"|string;
   export interface PciId {
     /**
@@ -20264,6 +21244,7 @@ declare namespace EC2 {
   }
   export type PoolCidrBlocksSet = PoolCidrBlock[];
   export type PoolMaxResults = number;
+  export type Port = number;
   export interface PortRange {
     /**
      * The first port in the range.
@@ -20274,6 +21255,7 @@ declare namespace EC2 {
      */
     To?: Integer;
   }
+  export type PortRangeList = PortRange[];
   export interface PrefixList {
     /**
      * The IP address range of the AWS service.
@@ -20454,6 +21436,8 @@ declare namespace EC2 {
     GatewayId?: String;
   }
   export type PropagatingVgwList = PropagatingVgw[];
+  export type Protocol = "tcp"|"udp"|string;
+  export type ProtocolValue = "gre"|string;
   export interface ProvisionByoipCidrRequest {
     /**
      * The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can specify is /56. The address range cannot overlap with another address range that you've brought to this or another Region.
@@ -20878,6 +21862,27 @@ declare namespace EC2 {
      * Information about the transit gateway multicast group sources.
      */
     RegisteredMulticastGroupSources?: TransitGatewayMulticastRegisteredGroupSources;
+  }
+  export interface RejectTransitGatewayMulticastDomainAssociationsRequest {
+    /**
+     * The ID of the transit gateway multicast domain.
+     */
+    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    /**
+     * The ID of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The IDs of the subnets to associate with the transit gateway multicast domain.
+     */
+    SubnetIds?: ValueStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RejectTransitGatewayMulticastDomainAssociationsResult {
+    Associations?: TransitGatewayMulticastDomainAssociations;
   }
   export interface RejectTransitGatewayPeeringAttachmentRequest {
     /**
@@ -21896,7 +22901,7 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -22971,7 +23976,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
+     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
      */
     Filters: FilterList;
     /**
@@ -23984,6 +24989,34 @@ declare namespace EC2 {
      */
     StartingInstances?: InstanceStateChangeList;
   }
+  export interface StartNetworkInsightsAnalysisRequest {
+    /**
+     * The ID of the path.
+     */
+    NetworkInsightsPathId: NetworkInsightsPathId;
+    /**
+     * The Amazon Resource Names (ARN) of the resources that the path must traverse.
+     */
+    FilterInArns?: ArnList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The tags to apply.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken: String;
+  }
+  export interface StartNetworkInsightsAnalysisResult {
+    /**
+     * Information about the network insights analysis.
+     */
+    NetworkInsightsAnalysis?: NetworkInsightsAnalysis;
+  }
   export interface StartVpcEndpointServicePrivateDnsVerificationRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -24011,6 +25044,7 @@ declare namespace EC2 {
      */
     Message?: String;
   }
+  export type StaticSourcesSupportValue = "enable"|"disable"|string;
   export type Status = "MoveInProgress"|"InVpc"|"InClassic"|string;
   export type StatusName = "reachability"|string;
   export type StatusType = "passed"|"failed"|"insufficient-data"|"initializing"|string;
@@ -24055,6 +25089,7 @@ declare namespace EC2 {
     Key?: String;
   }
   export type String = string;
+  export type StringList = String[];
   export interface Subnet {
     /**
      * The Availability Zone of the subnet.
@@ -24214,7 +25249,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image| import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | natgateway | network-acl | route-table | security-group| snapshot | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | natgateway | network-acl | route-table | security-group | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-connect-peer | transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -24695,6 +25730,29 @@ declare namespace EC2 {
      */
     State?: TransitGatewayAssociationState;
   }
+  export interface TransitGatewayAttachmentBgpConfiguration {
+    /**
+     * The transit gateway Autonomous System Number (ASN).
+     */
+    TransitGatewayAsn?: Long;
+    /**
+     * The peer Autonomous System Number (ASN).
+     */
+    PeerAsn?: Long;
+    /**
+     * The interior BGP peer IP address for the transit gateway.
+     */
+    TransitGatewayAddress?: String;
+    /**
+     * The interior BGP peer IP address for the appliance.
+     */
+    PeerAddress?: String;
+    /**
+     * The BGP status.
+     */
+    BgpStatus?: BgpStatus;
+  }
+  export type TransitGatewayAttachmentBgpConfigurationList = TransitGatewayAttachmentBgpConfiguration[];
   export type TransitGatewayAttachmentId = string;
   export type TransitGatewayAttachmentIdStringList = TransitGatewayAttachmentId[];
   export type TransitGatewayAttachmentList = TransitGatewayAttachment[];
@@ -24709,13 +25767,109 @@ declare namespace EC2 {
     State?: TransitGatewayPropagationState;
   }
   export type TransitGatewayAttachmentPropagationList = TransitGatewayAttachmentPropagation[];
-  export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|"direct-connect-gateway"|"peering"|"tgw-peering"|string;
+  export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|"direct-connect-gateway"|"connect"|"peering"|"tgw-peering"|string;
   export type TransitGatewayAttachmentState = "initiating"|"initiatingRequest"|"pendingAcceptance"|"rollingBack"|"pending"|"available"|"modifying"|"deleting"|"deleted"|"failed"|"rejected"|"rejecting"|"failing"|string;
+  export type TransitGatewayCidrBlockStringList = String[];
+  export interface TransitGatewayConnect {
+    /**
+     * The ID of the Connect attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The ID of the attachment from which the Connect attachment was created.
+     */
+    TransportTransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: TransitGatewayId;
+    /**
+     * The state of the attachment.
+     */
+    State?: TransitGatewayAttachmentState;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The Connect attachment options.
+     */
+    Options?: TransitGatewayConnectOptions;
+    /**
+     * The tags for the attachment.
+     */
+    Tags?: TagList;
+  }
+  export type TransitGatewayConnectList = TransitGatewayConnect[];
+  export interface TransitGatewayConnectOptions {
+    /**
+     * The tunnel protocol.
+     */
+    Protocol?: ProtocolValue;
+  }
+  export interface TransitGatewayConnectPeer {
+    /**
+     * The ID of the Connect attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The ID of the Connect peer.
+     */
+    TransitGatewayConnectPeerId?: TransitGatewayConnectPeerId;
+    /**
+     * The state of the Connect peer.
+     */
+    State?: TransitGatewayConnectPeerState;
+    /**
+     * The creation time.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The Connect peer details.
+     */
+    ConnectPeerConfiguration?: TransitGatewayConnectPeerConfiguration;
+    /**
+     * The tags for the Connect peer.
+     */
+    Tags?: TagList;
+  }
+  export interface TransitGatewayConnectPeerConfiguration {
+    /**
+     * The Connect peer IP address on the transit gateway side of the tunnel.
+     */
+    TransitGatewayAddress?: String;
+    /**
+     * The Connect peer IP address on the appliance side of the tunnel.
+     */
+    PeerAddress?: String;
+    /**
+     * The range of interior BGP peer IP addresses.
+     */
+    InsideCidrBlocks?: InsideCidrBlocksStringList;
+    /**
+     * The tunnel protocol.
+     */
+    Protocol?: ProtocolValue;
+    /**
+     * The BGP configuration details.
+     */
+    BgpConfigurations?: TransitGatewayAttachmentBgpConfigurationList;
+  }
+  export type TransitGatewayConnectPeerId = string;
+  export type TransitGatewayConnectPeerIdStringList = TransitGatewayConnectPeerId[];
+  export type TransitGatewayConnectPeerList = TransitGatewayConnectPeer[];
+  export type TransitGatewayConnectPeerState = "pending"|"available"|"deleting"|"deleted"|string;
+  export interface TransitGatewayConnectRequestBgpOptions {
+    /**
+     * The peer Autonomous System Number (ASN).
+     */
+    PeerAsn?: Long;
+  }
   export type TransitGatewayId = string;
   export type TransitGatewayIdStringList = TransitGatewayId[];
   export type TransitGatewayList = TransitGateway[];
   export type TransitGatewayMaxResults = number;
-  export type TransitGatewayMulitcastDomainAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|string;
+  export type TransitGatewayMulitcastDomainAssociationState = "pendingAcceptance"|"associating"|"associated"|"disassociating"|"disassociated"|"rejected"|"failed"|string;
   export interface TransitGatewayMulticastDeregisteredGroupMembers {
     /**
      * The ID of the transit gateway multicast domain.
@@ -24754,6 +25908,18 @@ declare namespace EC2 {
      */
     TransitGatewayId?: String;
     /**
+     * The Amazon Resource Name (ARN) of the transit gateway multicast domain.
+     */
+    TransitGatewayMulticastDomainArn?: String;
+    /**
+     *  The ID of the AWS account that owns the transit gateway multiicast domain.
+     */
+    OwnerId?: String;
+    /**
+     * The options for the transit gateway multicast domain.
+     */
+    Options?: TransitGatewayMulticastDomainOptions;
+    /**
      * The state of the transit gateway multicast domain.
      */
     State?: TransitGatewayMulticastDomainState;
@@ -24780,6 +25946,10 @@ declare namespace EC2 {
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
+     *  The ID of the AWS account that owns the transit gateway multicast domain association resource.
+     */
+    ResourceOwnerId?: String;
+    /**
      * The subnet associated with the transit gateway multicast domain.
      */
     Subnet?: SubnetAssociation;
@@ -24803,6 +25973,10 @@ declare namespace EC2 {
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
+     *  The ID of the AWS account that owns the resource.
+     */
+    ResourceOwnerId?: String;
+    /**
      * The subnets associated with the multicast domain.
      */
     Subnets?: SubnetAssociationList;
@@ -24810,6 +25984,20 @@ declare namespace EC2 {
   export type TransitGatewayMulticastDomainId = string;
   export type TransitGatewayMulticastDomainIdStringList = TransitGatewayMulticastDomainId[];
   export type TransitGatewayMulticastDomainList = TransitGatewayMulticastDomain[];
+  export interface TransitGatewayMulticastDomainOptions {
+    /**
+     * Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain.
+     */
+    Igmpv2Support?: Igmpv2SupportValue;
+    /**
+     * Indicates whether support for statically configuring transit gateway multicast group sources is turned on.
+     */
+    StaticSourcesSupport?: StaticSourcesSupportValue;
+    /**
+     * Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain.
+     */
+    AutoAcceptSharedAssociations?: AutoAcceptSharedAssociationsValue;
+  }
   export type TransitGatewayMulticastDomainState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface TransitGatewayMulticastGroup {
     /**
@@ -24832,6 +26020,10 @@ declare namespace EC2 {
      * The type of resource, for example a VPC attachment.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     *  The ID of the AWS account that owns the transit gateway multicast domain group resource.
+     */
+    ResourceOwnerId?: String;
     /**
      * The ID of the transit gateway attachment.
      */
@@ -24888,6 +26080,10 @@ declare namespace EC2 {
      * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
      */
     AmazonSideAsn?: Long;
+    /**
+     * The transit gateway CIDR blocks.
+     */
+    TransitGatewayCidrBlocks?: ValueStringList;
     /**
      * Indicates whether attachment requests are automatically accepted.
      */
@@ -25046,6 +26242,10 @@ declare namespace EC2 {
      * Indicates whether multicast is enabled on the transit gateway
      */
     MulticastSupport?: MulticastSupportValue;
+    /**
+     * One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+     */
+    TransitGatewayCidrBlocks?: TransitGatewayCidrBlockStringList;
   }
   export interface TransitGatewayRoute {
     /**

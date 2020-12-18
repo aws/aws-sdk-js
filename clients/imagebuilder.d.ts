@@ -28,6 +28,14 @@ declare class Imagebuilder extends Service {
    */
   createComponent(callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
+   * Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.
+   */
+  createContainerRecipe(params: Imagebuilder.Types.CreateContainerRecipeRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateContainerRecipeResponse) => void): Request<Imagebuilder.Types.CreateContainerRecipeResponse, AWSError>;
+  /**
+   * Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.
+   */
+  createContainerRecipe(callback?: (err: AWSError, data: Imagebuilder.Types.CreateContainerRecipeResponse) => void): Request<Imagebuilder.Types.CreateContainerRecipeResponse, AWSError>;
+  /**
    * Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
    */
   createDistributionConfiguration(params: Imagebuilder.Types.CreateDistributionConfigurationRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.CreateDistributionConfigurationResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class Imagebuilder extends Service {
    *  Deletes a component build version. 
    */
   deleteComponent(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteComponentResponse) => void): Request<Imagebuilder.Types.DeleteComponentResponse, AWSError>;
+  /**
+   * Deletes a container recipe.
+   */
+  deleteContainerRecipe(params: Imagebuilder.Types.DeleteContainerRecipeRequest, callback?: (err: AWSError, data: Imagebuilder.Types.DeleteContainerRecipeResponse) => void): Request<Imagebuilder.Types.DeleteContainerRecipeResponse, AWSError>;
+  /**
+   * Deletes a container recipe.
+   */
+  deleteContainerRecipe(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteContainerRecipeResponse) => void): Request<Imagebuilder.Types.DeleteContainerRecipeResponse, AWSError>;
   /**
    *  Deletes a distribution configuration. 
    */
@@ -131,6 +147,22 @@ declare class Imagebuilder extends Service {
    *  Gets a component policy. 
    */
   getComponentPolicy(callback?: (err: AWSError, data: Imagebuilder.Types.GetComponentPolicyResponse) => void): Request<Imagebuilder.Types.GetComponentPolicyResponse, AWSError>;
+  /**
+   * Retrieves a container recipe.
+   */
+  getContainerRecipe(params: Imagebuilder.Types.GetContainerRecipeRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetContainerRecipeResponse) => void): Request<Imagebuilder.Types.GetContainerRecipeResponse, AWSError>;
+  /**
+   * Retrieves a container recipe.
+   */
+  getContainerRecipe(callback?: (err: AWSError, data: Imagebuilder.Types.GetContainerRecipeResponse) => void): Request<Imagebuilder.Types.GetContainerRecipeResponse, AWSError>;
+  /**
+   * Retrieves the policy for a container recipe.
+   */
+  getContainerRecipePolicy(params: Imagebuilder.Types.GetContainerRecipePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.GetContainerRecipePolicyResponse, AWSError>;
+  /**
+   * Retrieves the policy for a container recipe.
+   */
+  getContainerRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.GetContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.GetContainerRecipePolicyResponse, AWSError>;
   /**
    *  Gets a distribution configuration. 
    */
@@ -212,11 +244,19 @@ declare class Imagebuilder extends Service {
    */
   listComponents(callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentsResponse) => void): Request<Imagebuilder.Types.ListComponentsResponse, AWSError>;
   /**
-   *  Returns a list of distribution configurations. 
+   * Returns a list of container recipes.
+   */
+  listContainerRecipes(params: Imagebuilder.Types.ListContainerRecipesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListContainerRecipesResponse) => void): Request<Imagebuilder.Types.ListContainerRecipesResponse, AWSError>;
+  /**
+   * Returns a list of container recipes.
+   */
+  listContainerRecipes(callback?: (err: AWSError, data: Imagebuilder.Types.ListContainerRecipesResponse) => void): Request<Imagebuilder.Types.ListContainerRecipesResponse, AWSError>;
+  /**
+   * Returns a list of distribution configurations. 
    */
   listDistributionConfigurations(params: Imagebuilder.Types.ListDistributionConfigurationsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListDistributionConfigurationsResponse) => void): Request<Imagebuilder.Types.ListDistributionConfigurationsResponse, AWSError>;
   /**
-   *  Returns a list of distribution configurations. 
+   * Returns a list of distribution configurations. 
    */
   listDistributionConfigurations(callback?: (err: AWSError, data: Imagebuilder.Types.ListDistributionConfigurationsResponse) => void): Request<Imagebuilder.Types.ListDistributionConfigurationsResponse, AWSError>;
   /**
@@ -283,6 +323,14 @@ declare class Imagebuilder extends Service {
    *  Applies a policy to a component. We recommend that you call the RAM API CreateResourceShare to share resources. If you call the Image Builder API PutComponentPolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy in order for the resource to be visible to all principals with whom the resource is shared. 
    */
   putComponentPolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutComponentPolicyResponse) => void): Request<Imagebuilder.Types.PutComponentPolicyResponse, AWSError>;
+  /**
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   */
+  putContainerRecipePolicy(params: Imagebuilder.Types.PutContainerRecipePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
+  /**
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   */
+  putContainerRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
   /**
    * Applies a policy to an image. We recommend that you call the RAM API CreateResourceShare to share resources. If you call the Image Builder API PutImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy in order for the resource to be visible to all principals with whom the resource is shared. 
    */
@@ -403,6 +451,7 @@ declare namespace Imagebuilder {
   export type AmiList = Ami[];
   export type AmiNameString = string;
   export type Arn = string;
+  export type Boolean = boolean;
   export interface CancelImageCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
@@ -585,6 +634,135 @@ declare namespace Imagebuilder {
   export type ComponentVersionArn = string;
   export type ComponentVersionArnOrBuildVersionArn = string;
   export type ComponentVersionList = ComponentVersion[];
+  export interface Container {
+    /**
+     * Containers and container images are Region-specific. This is the Region context for the container.
+     */
+    region?: NonEmptyString;
+    /**
+     * A list of URIs for containers created in the context Region.
+     */
+    imageUris?: StringList;
+  }
+  export interface ContainerDistributionConfiguration {
+    /**
+     * The description of the container distribution configuration.
+     */
+    description?: NonEmptyString;
+    /**
+     * Tags that are attached to the container distribution configuration.
+     */
+    containerTags?: StringList;
+    /**
+     * The destination repository for the container distribution configuration.
+     */
+    targetRepository: TargetContainerRepository;
+  }
+  export type ContainerList = Container[];
+  export interface ContainerRecipe {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe.
+     */
+    arn?: ImageBuilderArn;
+    /**
+     * Specifies the type of container, such as Docker.
+     */
+    containerType?: ContainerType;
+    /**
+     * The name of the container recipe.
+     */
+    name?: ResourceName;
+    /**
+     * The description of the container recipe.
+     */
+    description?: NonEmptyString;
+    /**
+     * The system platform for the container, such as Windows or Linux.
+     */
+    platform?: Platform;
+    /**
+     * The owner of the container recipe.
+     */
+    owner?: NonEmptyString;
+    /**
+     * The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+     */
+    version?: VersionNumber;
+    /**
+     * Components for build and test that are included in the container recipe.
+     */
+    components?: ComponentConfigurationList;
+    /**
+     * Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.
+     */
+    dockerfileTemplateData?: DockerFileTemplate;
+    /**
+     * Identifies which KMS key is used to encrypt the container image for distribution to the target Region.
+     */
+    kmsKeyId?: NonEmptyString;
+    /**
+     * A flag that indicates if the target container is encrypted.
+     */
+    encrypted?: NullableBoolean;
+    /**
+     * The source image for the container recipe.
+     */
+    parentImage?: NonEmptyString;
+    /**
+     * The date when this container recipe was created.
+     */
+    dateCreated?: DateTime;
+    /**
+     * Tags that are attached to the container recipe.
+     */
+    tags?: TagMap;
+    /**
+     * The working directory for use during build and test workflows.
+     */
+    workingDirectory?: NonEmptyString;
+    /**
+     * The destination repository for the container image.
+     */
+    targetRepository?: TargetContainerRepository;
+  }
+  export type ContainerRecipeArn = string;
+  export interface ContainerRecipeSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe.
+     */
+    arn?: ImageBuilderArn;
+    /**
+     * Specifies the type of container, such as "Docker".
+     */
+    containerType?: ContainerType;
+    /**
+     * The name of the container recipe.
+     */
+    name?: ResourceName;
+    /**
+     * The system platform for the container, such as Windows or Linux.
+     */
+    platform?: Platform;
+    /**
+     * The owner of the container recipe.
+     */
+    owner?: NonEmptyString;
+    /**
+     * The source image for the container recipe.
+     */
+    parentImage?: NonEmptyString;
+    /**
+     * The date when this container recipe was created.
+     */
+    dateCreated?: DateTime;
+    /**
+     * Tags that are attached to the container recipe.
+     */
+    tags?: TagMap;
+  }
+  export type ContainerRecipeSummaryList = ContainerRecipeSummary[];
+  export type ContainerRepositoryService = "ECR"|string;
+  export type ContainerType = "DOCKER"|string;
   export interface CreateComponentRequest {
     /**
      * The name of the component.
@@ -645,6 +823,82 @@ declare namespace Imagebuilder {
      */
     componentBuildVersionArn?: ComponentBuildVersionArn;
   }
+  export interface CreateContainerRecipeRequest {
+    /**
+     * The type of container to create.
+     */
+    containerType: ContainerType;
+    /**
+     * The name of the container recipe.
+     */
+    name: ResourceName;
+    /**
+     * The description of the container recipe.
+     */
+    description?: NonEmptyString;
+    /**
+     * The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+     */
+    semanticVersion: VersionNumber;
+    /**
+     * Components for build and test that are included in the container recipe.
+     */
+    components: ComponentConfigurationList;
+    /**
+     * The Dockerfile template used to build your image as an inline data blob.
+     */
+    dockerfileTemplateData: InlineDockerFileTemplate;
+    /**
+     * The S3 URI for the Dockerfile that will be used to build your container image.
+     */
+    dockerfileTemplateUri?: Uri;
+    /**
+     * Specifies the operating system platform when you use a custom source image.
+     */
+    platformOverride?: Platform;
+    /**
+     * Specifies the operating system version for the source image.
+     */
+    imageOsVersionOverride?: NonEmptyString;
+    /**
+     * The source image for the container recipe.
+     */
+    parentImage: NonEmptyString;
+    /**
+     * Tags that are attached to the container recipe.
+     */
+    tags?: TagMap;
+    /**
+     * The working directory for use during build and test workflows.
+     */
+    workingDirectory?: NonEmptyString;
+    /**
+     * The destination repository for the container image.
+     */
+    targetRepository: TargetContainerRepository;
+    /**
+     * Identifies which KMS key is used to encrypt the container image.
+     */
+    kmsKeyId?: NonEmptyString;
+    /**
+     * The client token used to make this request idempotent.
+     */
+    clientToken: ClientToken;
+  }
+  export interface CreateContainerRecipeResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The client token used to make this request idempotent.
+     */
+    clientToken?: ClientToken;
+    /**
+     * Returns the Amazon Resource Name (ARN) of the container recipe that the request created.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
+  }
   export interface CreateDistributionConfigurationRequest {
     /**
      *  The name of the distribution configuration. 
@@ -693,7 +947,11 @@ declare namespace Imagebuilder {
     /**
      *  The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. 
      */
-    imageRecipeArn: ImageRecipeArn;
+    imageRecipeArn?: ImageRecipeArn;
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
     /**
      *  The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline. 
      */
@@ -797,7 +1055,11 @@ declare namespace Imagebuilder {
     /**
      *  The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. 
      */
-    imageRecipeArn: ImageRecipeArn;
+    imageRecipeArn?: ImageRecipeArn;
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
     /**
      *  The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline. 
      */
@@ -922,6 +1184,22 @@ declare namespace Imagebuilder {
      */
     componentBuildVersionArn?: ComponentBuildVersionArn;
   }
+  export interface DeleteContainerRecipeRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe to delete.
+     */
+    containerRecipeArn: ContainerRecipeArn;
+  }
+  export interface DeleteContainerRecipeResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe that was deleted.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
+  }
   export interface DeleteDistributionConfigurationRequest {
     /**
      * The Amazon Resource Name (ARN) of the distribution configuration to delete. 
@@ -1012,6 +1290,10 @@ declare namespace Imagebuilder {
      */
     amiDistributionConfiguration?: AmiDistributionConfiguration;
     /**
+     * Container distribution settings for encryption, licensing, and sharing in a specific Region.
+     */
+    containerDistributionConfiguration?: ContainerDistributionConfiguration;
+    /**
      * The License Manager Configuration to associate with the AMI in the specified Region.
      */
     licenseConfigurationArns?: LicenseConfigurationArnList;
@@ -1076,10 +1358,15 @@ declare namespace Imagebuilder {
      * The tags associated with the distribution configuration.
      */
     tags?: TagMap;
+    /**
+     * A list of Regions where the container image is distributed to.
+     */
+    regions?: RegionList;
   }
   export type DistributionConfigurationSummaryList = DistributionConfigurationSummary[];
   export type DistributionList = Distribution[];
   export type DistributionTimeoutMinutes = number;
+  export type DockerFileTemplate = string;
   export interface EbsInstanceBlockDeviceSpecification {
     /**
      * Use to configure device encryption.
@@ -1159,6 +1446,38 @@ declare namespace Imagebuilder {
      * The component object associated with the specified ARN. 
      */
     component?: Component;
+  }
+  export interface GetContainerRecipePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe for the policy being requested.
+     */
+    containerRecipeArn: ContainerRecipeArn;
+  }
+  export interface GetContainerRecipePolicyResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The container recipe policy object that is returned.
+     */
+    policy?: ResourcePolicyDocument;
+  }
+  export interface GetContainerRecipeRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe to retrieve.
+     */
+    containerRecipeArn: ContainerRecipeArn;
+  }
+  export interface GetContainerRecipeResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The container recipe object that is returned.
+     */
+    containerRecipe?: ContainerRecipe;
   }
   export interface GetDistributionConfigurationRequest {
     /**
@@ -1278,6 +1597,10 @@ declare namespace Imagebuilder {
      */
     arn?: ImageBuilderArn;
     /**
+     * Specifies whether this is an AMI or container image.
+     */
+    type?: ImageType;
+    /**
      * The name of the image.
      */
     name?: ResourceName;
@@ -1305,6 +1628,10 @@ declare namespace Imagebuilder {
      * The image recipe used when creating the image.
      */
     imageRecipe?: ImageRecipe;
+    /**
+     * The container recipe used to create the container image type.
+     */
+    containerRecipe?: ContainerRecipe;
     /**
      * The name of the image pipeline that created this image.
      */
@@ -1366,6 +1693,10 @@ declare namespace Imagebuilder {
      */
     imageRecipeArn?: Arn;
     /**
+     * The Amazon Resource Name (ARN) of the container recipe that is used for this pipeline.
+     */
+    containerRecipeArn?: Arn;
+    /**
      * The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
      */
     infrastructureConfigurationArn?: Arn;
@@ -1413,6 +1744,10 @@ declare namespace Imagebuilder {
      * The Amazon Resource Name (ARN) of the image recipe.
      */
     arn?: ImageBuilderArn;
+    /**
+     * Specifies which type of image is created by the recipe - an AMI or a container image.
+     */
+    type?: ImageType;
     /**
      * The name of the image recipe.
      */
@@ -1511,6 +1846,10 @@ declare namespace Imagebuilder {
      */
     name?: ResourceName;
     /**
+     * Specifies whether this is an AMI or container image.
+     */
+    type?: ImageType;
+    /**
      * The version of the image.
      */
     version?: VersionNumber;
@@ -1555,6 +1894,7 @@ declare namespace Imagebuilder {
     timeoutMinutes?: ImageTestsTimeoutMinutes;
   }
   export type ImageTestsTimeoutMinutes = number;
+  export type ImageType = "AMI"|"DOCKER"|string;
   export interface ImageVersion {
     /**
      * The Amazon Resource Name (ARN) of the image semantic version.
@@ -1564,6 +1904,10 @@ declare namespace Imagebuilder {
      * The name of the image semantic version.
      */
     name?: ResourceName;
+    /**
+     * Specifies whether this is an AMI or container image.
+     */
+    type?: ImageType;
     /**
      * The semantic version of the image semantic version.
      */
@@ -1747,6 +2091,7 @@ declare namespace Imagebuilder {
   }
   export type InfrastructureConfigurationSummaryList = InfrastructureConfigurationSummary[];
   export type InlineComponentData = string;
+  export type InlineDockerFileTemplate = string;
   export interface InstanceBlockDeviceMapping {
     /**
      * The device to which these mappings apply.
@@ -1818,6 +2163,10 @@ declare namespace Imagebuilder {
      */
     filters?: FilterList;
     /**
+     * Returns the list of component build versions for the specified semantic version.
+     */
+    byName?: Boolean;
+    /**
      * The maximum items to return in a request. 
      */
     maxResults?: RestrictedInteger;
@@ -1839,6 +2188,38 @@ declare namespace Imagebuilder {
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: PaginationToken;
+  }
+  export interface ListContainerRecipesRequest {
+    /**
+     * Returns container recipes belonging to the specified owner, that have been shared with you. You can omit this field to return container recipes belonging to your account.
+     */
+    owner?: Ownership;
+    /**
+     * Request filters that are used to narrow the list of container images that are returned.
+     */
+    filters?: FilterList;
+    /**
+     * The maximum number of results to return in the list.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.
+     */
+    nextToken?: NonEmptyString;
+  }
+  export interface ListContainerRecipesResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The list of container recipes returned for the request.
+     */
+    containerRecipeSummaryList?: ContainerRecipeSummaryList;
+    /**
+     * The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.
+     */
+    nextToken?: NonEmptyString;
   }
   export interface ListDistributionConfigurationsRequest {
     /**
@@ -2002,6 +2383,10 @@ declare namespace Imagebuilder {
      */
     filters?: FilterList;
     /**
+     * Requests a list of images with a specific recipe name.
+     */
+    byName?: Boolean;
+    /**
      * The maximum items to return in a request. 
      */
     maxResults?: RestrictedInteger;
@@ -2009,6 +2394,10 @@ declare namespace Imagebuilder {
      * A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
      */
     nextToken?: PaginationToken;
+    /**
+     * Includes deprecated images in the response list.
+     */
+    includeDeprecated?: NullableBoolean;
   }
   export interface ListImagesResponse {
     /**
@@ -2079,6 +2468,10 @@ declare namespace Imagebuilder {
      * The EC2 AMIs created by this image. 
      */
     amis?: AmiList;
+    /**
+     * Container images that the pipeline has generated and stored in the output repository.
+     */
+    containers?: ContainerList;
   }
   export type Ownership = "Self"|"Shared"|"Amazon"|string;
   export type PaginationToken = string;
@@ -2104,6 +2497,26 @@ declare namespace Imagebuilder {
      * The Amazon Resource Name (ARN) of the component that this policy was applied to. 
      */
     componentArn?: ComponentBuildVersionArn;
+  }
+  export interface PutContainerRecipePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
+     */
+    containerRecipeArn: ContainerRecipeArn;
+    /**
+     * The policy to apply to the container recipe.
+     */
+    policy: ResourcePolicyDocument;
+  }
+  export interface PutContainerRecipePolicyResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the container recipe that this policy was applied to.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
   }
   export interface PutImagePolicyRequest {
     /**
@@ -2145,6 +2558,7 @@ declare namespace Imagebuilder {
      */
     imageRecipeArn?: ImageRecipeArn;
   }
+  export type RegionList = NonEmptyString[];
   export type ResourceName = string;
   export type ResourcePolicyDocument = string;
   export type ResourceTagMap = {[key: string]: TagValue};
@@ -2212,6 +2626,16 @@ declare namespace Imagebuilder {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TargetContainerRepository {
+    /**
+     * Specifies the service in which this image was registered.
+     */
+    service: ContainerRepositoryService;
+    /**
+     * The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+     */
+    repositoryName: NonEmptyString;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to untag. 
@@ -2268,7 +2692,11 @@ declare namespace Imagebuilder {
     /**
      * The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. 
      */
-    imageRecipeArn: ImageRecipeArn;
+    imageRecipeArn?: ImageRecipeArn;
+    /**
+     * The Amazon Resource Name (ARN) of the container pipeline to update.
+     */
+    containerRecipeArn?: ContainerRecipeArn;
     /**
      * The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. 
      */

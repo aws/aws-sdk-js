@@ -356,7 +356,7 @@ declare namespace CostExplorer {
     /**
      *  A list of cost anomaly monitors. 
      */
-    MonitorArnList: Values;
+    MonitorArnList: MonitorArnList;
     /**
      *  A list of subscribers to notify. 
      */
@@ -1656,6 +1656,7 @@ declare namespace CostExplorer {
      */
     TargetInstances?: TargetInstancesList;
   }
+  export type MonitorArnList = Arn[];
   export type MonitorDimension = "SERVICE"|string;
   export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string;
   export type NetRISavings = string;
@@ -2524,7 +2525,7 @@ declare namespace CostExplorer {
     /**
      *  A list of cost anomaly subscription ARNs. 
      */
-    MonitorArnList?: Values;
+    MonitorArnList?: MonitorArnList;
     /**
      *  The update to the subscriber list. 
      */

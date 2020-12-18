@@ -391,7 +391,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>"
+      "documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>"
     },
     "CreateNamespace": {
       "name": "CreateNamespace",
@@ -1882,7 +1882,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i> .</p>"
+      "documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
     },
     "GetSessionEmbedUrl": {
       "name": "GetSessionEmbedUrl",
@@ -5583,7 +5583,7 @@
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
+          "documentation": "<p>A value that indicates whether you want to import the data into SPICE.</p>"
         },
         "ConsumedSpiceCapacityInBytes": {
           "shape": "Long",
@@ -5708,7 +5708,7 @@
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
+          "documentation": "<p>A value that indicates whether you want to import the data into SPICE.</p>"
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
@@ -5716,7 +5716,7 @@
         },
         "ColumnLevelPermissionRulesApplied": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates if the dataset has column level permission configured.</p>"
+          "documentation": "<p>A value that indicates if the dataset has column level permission configured.</p>"
         }
       },
       "documentation": "<p>Dataset summary.</p>"
@@ -7811,7 +7811,7 @@
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
+          "documentation": "<p>The ID for the dashboard, also added to the AWS Identity and Access Management (IAM) policy.</p>",
           "location": "uri",
           "locationName": "DashboardId"
         },
@@ -7841,7 +7841,7 @@
         },
         "StatePersistenceEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to <code>TRUE</code>, the settings are the same when the the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is <code>FALSE</code>.</p>",
+          "documentation": "<p>Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to <code>TRUE</code>, the settings are the same when the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is <code>FALSE</code>.</p>",
           "location": "querystring",
           "locationName": "state-persistence-enabled"
         },
@@ -7859,12 +7859,11 @@
         },
         "AdditionalDashboardIds": {
           "shape": "AdditionalDashboardIdList",
-          "documentation": "<p>A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight users. For example, if you set \"<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session can access all three dashboards. </p>",
+          "documentation": "<p>A list of one or more dashboard IDs that you want to add to a session that includes anonymous users. The <code>IdentityType</code> parameter must be set to <code>ANONYMOUS</code> for this to work, because other identity types authenticate as QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session can access all three dashboards. </p>",
           "location": "querystring",
           "locationName": "additional-dashboard-ids"
         }
-      },
-      "documentation": "<p>Parameter input for the <code>GetDashboardEmbedUrl</code> operation.</p>"
+      }
     },
     "GetDashboardEmbedUrlResponse": {
       "type": "structure",
@@ -7911,7 +7910,7 @@
         },
         "UserArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>",
+          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>",
           "location": "querystring",
           "locationName": "user-arn"
         }
@@ -8373,7 +8372,7 @@
       "members": {
         "UniqueKey": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.</p>",
+          "documentation": "<p>A value that indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.</p>",
           "box": true
         }
       },
@@ -9996,7 +9995,7 @@
         },
         "SessionName": {
           "shape": "RoleSessionName",
-          "documentation": "<p>You need to use this parameter only when you register one or more users using an assumed IAM role. You don't need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html\"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> </p>"
+          "documentation": "<p>You need to use this parameter only when you register one or more users using an assumed IAM role. You don't need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> </p>"
         },
         "AwsAccountId": {
           "shape": "AwsAccountId",
@@ -10054,6 +10053,10 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) for the data source.</p>"
         },
+        "Catalog": {
+          "shape": "RelationalTableCatalog",
+          "documentation": "<p>The catalog associated with a table.</p>"
+        },
         "Schema": {
           "shape": "RelationalTableSchema",
           "documentation": "<p>The schema name. This name applies to certain relational database engines.</p>"
@@ -10068,6 +10071,10 @@
         }
       },
       "documentation": "<p>A physical table type for relational data sources.</p>"
+    },
+    "RelationalTableCatalog": {
+      "type": "string",
+      "max": 256
     },
     "RelationalTableName": {
       "type": "string",

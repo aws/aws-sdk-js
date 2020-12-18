@@ -171,7 +171,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html\">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html\">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html\">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html\">Using AWS Lambda with Amazon MQ</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">Using AWS Lambda with Amazon MSK</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>"
+      "documentation": "<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html\">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html\">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html\">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html\">Using AWS Lambda with Amazon MQ</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">Using AWS Lambda with Amazon MSK</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">Using AWS Lambda with Self-Managed Apache Kafka</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>"
     },
     "CreateFunction": {
       "name": "CreateFunction",
@@ -2249,7 +2249,6 @@
     "CreateEventSourceMappingRequest": {
       "type": "structure",
       "required": [
-        "EventSourceArn",
         "FunctionName"
       ],
       "members": {
@@ -2267,11 +2266,11 @@
         },
         "BatchSize": {
           "shape": "BatchSize",
-          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>"
+          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>"
         },
         "MaximumBatchingWindowInSeconds": {
           "shape": "MaximumBatchingWindowInSeconds",
-          "documentation": "<p>(Streams) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
+          "documentation": "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
         },
         "ParallelizationFactor": {
           "shape": "ParallelizationFactor",
@@ -2301,9 +2300,13 @@
           "shape": "MaximumRetryAttemptsEventSourceMapping",
           "documentation": "<p>(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.</p>"
         },
+        "TumblingWindowInSeconds": {
+          "shape": "TumblingWindowInSeconds",
+          "documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+        },
         "Topics": {
           "shape": "Topics",
-          "documentation": "<p> (MSK) The name of the Kafka topic. </p>"
+          "documentation": "<p>The name of the Kafka topic.</p>"
         },
         "Queues": {
           "shape": "Queues",
@@ -2311,7 +2314,15 @@
         },
         "SourceAccessConfigurations": {
           "shape": "SourceAccessConfigurations",
-          "documentation": "<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { \"username\": \"your username\", \"password\": \"your password\" }</code> </p> <p>To reference the secret, use the following format: <code>[ { \"Type\": \"BASIC_AUTH\", \"URI\": \"secretARN\" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>"
+          "documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+        },
+        "SelfManagedEventSource": {
+          "shape": "SelfManagedEventSource",
+          "documentation": "<p>The Self-Managed Apache Kafka cluster to send records.</p>"
+        },
+        "FunctionResponseTypes": {
+          "shape": "FunctionResponseTypeList",
+          "documentation": "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
         }
       }
     },
@@ -2609,6 +2620,37 @@
     "Enabled": {
       "type": "boolean"
     },
+    "EndPointType": {
+      "type": "string",
+      "enum": [
+        "KAFKA_BOOTSTRAP_SERVERS"
+      ]
+    },
+    "Endpoint": {
+      "type": "string",
+      "max": 300,
+      "min": 1,
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}"
+    },
+    "EndpointLists": {
+      "type": "list",
+      "member": {
+        "shape": "Endpoint"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "Endpoints": {
+      "type": "map",
+      "key": {
+        "shape": "EndPointType"
+      },
+      "value": {
+        "shape": "EndpointLists"
+      },
+      "max": 2,
+      "min": 1
+    },
     "Environment": {
       "type": "structure",
       "members": {
@@ -2687,7 +2729,7 @@
         },
         "MaximumBatchingWindowInSeconds": {
           "shape": "MaximumBatchingWindowInSeconds",
-          "documentation": "<p>(Streams) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.</p>"
+          "documentation": "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.</p>"
         },
         "ParallelizationFactor": {
           "shape": "ParallelizationFactor",
@@ -2723,7 +2765,7 @@
         },
         "Topics": {
           "shape": "Topics",
-          "documentation": "<p> (MSK) The name of the Kafka topic to consume. </p>"
+          "documentation": "<p>The name of the Kafka topic.</p>"
         },
         "Queues": {
           "shape": "Queues",
@@ -2731,7 +2773,11 @@
         },
         "SourceAccessConfigurations": {
           "shape": "SourceAccessConfigurations",
-          "documentation": "<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { \"username\": \"your username\", \"password\": \"your password\" }</code> </p> <p>To reference the secret, use the following format: <code>[ { \"Type\": \"BASIC_AUTH\", \"URI\": \"secretARN\" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>"
+          "documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+        },
+        "SelfManagedEventSource": {
+          "shape": "SelfManagedEventSource",
+          "documentation": "<p>The Self-Managed Apache Kafka cluster for your event source.</p>"
         },
         "MaximumRecordAgeInSeconds": {
           "shape": "MaximumRecordAgeInSeconds",
@@ -2744,6 +2790,14 @@
         "MaximumRetryAttempts": {
           "shape": "MaximumRetryAttemptsEventSourceMapping",
           "documentation": "<p>(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
+        },
+        "TumblingWindowInSeconds": {
+          "shape": "TumblingWindowInSeconds",
+          "documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+        },
+        "FunctionResponseTypes": {
+          "shape": "FunctionResponseTypeList",
+          "documentation": "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
         }
       },
       "documentation": "<p>A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.</p>"
@@ -3028,6 +3082,20 @@
       "max": 140,
       "min": 1,
       "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
+    },
+    "FunctionResponseType": {
+      "type": "string",
+      "enum": [
+        "ReportBatchItemFailures"
+      ]
+    },
+    "FunctionResponseTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "FunctionResponseType"
+      },
+      "max": 1,
+      "min": 1
     },
     "FunctionVersion": {
       "type": "string",
@@ -3461,7 +3529,7 @@
           "documentation": "<p>Specifies the working directory.</p>"
         }
       },
-      "documentation": "<p>Configuration values that override the container image Dockerfile. See <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html\">Override Container settings</a>. </p>"
+      "documentation": "<p>Configuration values that override the container image Dockerfile settings. See <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container settings</a>. </p>"
     },
     "ImageConfigError": {
       "type": "structure",
@@ -4806,6 +4874,16 @@
       },
       "max": 5
     },
+    "SelfManagedEventSource": {
+      "type": "structure",
+      "members": {
+        "Endpoints": {
+          "shape": "Endpoints",
+          "documentation": "<p>The list of bootstrap servers for your Kafka brokers in the following format: <code>\"KAFKA_BOOTSTRAP_SERVERS\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]</code>.</p>"
+        }
+      },
+      "documentation": "<p>The Self-Managed Apache Kafka cluster for your event source.</p>"
+    },
     "SensitiveString": {
       "type": "string",
       "sensitive": true
@@ -4823,27 +4901,31 @@
       "members": {
         "Type": {
           "shape": "SourceAccessType",
-          "documentation": "<p>To reference the secret, use the following format: <code>[ { \"Type\": \"BASIC_AUTH\", \"URI\": \"secretARN\" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>"
+          "documentation": "<p>The type of authentication protocol or the VPC components for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.</p> </li> </ul>"
         },
         "URI": {
-          "shape": "Arn",
-          "documentation": "<p>To reference the secret, use the following format: <code>[ { \"Type\": \"BASIC_AUTH\", \"URI\": \"secretARN\" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>"
+          "shape": "URI",
+          "documentation": "<p>The value for your chosen configuration in <code>Type</code>. For example: <code>\"URI\": \"arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName\"</code>.</p>"
         }
       },
-      "documentation": "<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { \"username\": \"your username\", \"password\": \"your password\" }</code> </p>"
+      "documentation": "<p>You can specify the authentication protocol, or the VPC components to secure access to your event source.</p>"
     },
     "SourceAccessConfigurations": {
       "type": "list",
       "member": {
         "shape": "SourceAccessConfiguration"
       },
-      "max": 1,
+      "max": 22,
       "min": 1
     },
     "SourceAccessType": {
       "type": "string",
       "enum": [
-        "BASIC_AUTH"
+        "BASIC_AUTH",
+        "VPC_SUBNET",
+        "VPC_SECURITY_GROUP",
+        "SASL_SCRAM_512_AUTH",
+        "SASL_SCRAM_256_AUTH"
       ]
     },
     "SourceOwner": {
@@ -4994,6 +5076,17 @@
         "PassThrough"
       ]
     },
+    "TumblingWindowInSeconds": {
+      "type": "integer",
+      "max": 900,
+      "min": 0
+    },
+    "URI": {
+      "type": "string",
+      "max": 200,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*"
+    },
     "UnreservedConcurrentExecutions": {
       "type": "integer",
       "min": 0
@@ -5116,11 +5209,11 @@
         },
         "BatchSize": {
           "shape": "BatchSize",
-          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>"
+          "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>"
         },
         "MaximumBatchingWindowInSeconds": {
           "shape": "MaximumBatchingWindowInSeconds",
-          "documentation": "<p>(Streams) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
+          "documentation": "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
         },
         "DestinationConfig": {
           "shape": "DestinationConfig",
@@ -5144,7 +5237,15 @@
         },
         "SourceAccessConfigurations": {
           "shape": "SourceAccessConfigurations",
-          "documentation": "<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { \"username\": \"your username\", \"password\": \"your password\" }</code> </p> <p>To reference the secret, use the following format: <code>[ { \"Type\": \"BASIC_AUTH\", \"URI\": \"secretARN\" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>"
+          "documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+        },
+        "TumblingWindowInSeconds": {
+          "shape": "TumblingWindowInSeconds",
+          "documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+        },
+        "FunctionResponseTypes": {
+          "shape": "FunctionResponseTypeList",
+          "documentation": "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
         }
       }
     },

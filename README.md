@@ -8,8 +8,7 @@
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
-The official AWS SDK for JavaScript, available for browsers and mobile devices,
-or Node.js backends
+**Note**: The [version 3.x](https://github.com/aws/aws-sdk-js-v3) of the AWS SDK for JavaScript is generally available. For more information see the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/) or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
@@ -25,7 +24,7 @@ version.
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.806.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.813.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
