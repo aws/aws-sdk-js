@@ -16,8 +16,8 @@ describe 'ServiceCollector', ->
       ' = AWS\\.Service\\.defineService\\(\'' +
       helpers.AWS[klass].serviceIdentifier + '\''))
     expect(code).to.match(new RegExp(
-      'AWS\\.apiLoader\\.services\\[\'' + klass.toLowerCase() +
-      '\'\\]\\[\'' + version + '\'\\] ='))
+      'Object.defineProperty\\(AWS\\.apiLoader\\.services\\[\'' + klass.toLowerCase() +
+      '\'\\], \'' + version + '\' , \\{'))
 
   assertBundleFailed = (services, errMsg) ->
     expect(-> add(services)).to.throw(errMsg)
