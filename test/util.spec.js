@@ -310,7 +310,7 @@
   });
 
   describe('AWS.util.ini', function() {
-    return describe('parse', function() {
+    describe('parse', function() {
       it('parses an ini file', function() {
         var ini, map;
         ini = '; comment at the beginning of the line\n[section1] ; comment at end of line\ninvalidline\nkey1=value1 ; another comment\n  key2 = value2;value3\n  key3 = value4 # yet another comment\n[emptysection]\n#key1=value1';
@@ -318,15 +318,38 @@
         expect(map.section1.key1).to.equal('value1');
         expect(map.section1.key2).to.equal('value2;value3');
         expect(map.section1.key3).to.equal('value4');
-        return expect(map.emptysection).to.equal(void 0);
+        expect(map.emptysection).to.equal(void 0);
       });
-      return it('ignores leading and trailing white space', function() {
+
+      it('ignores leading and trailing white space', function() {
         var ini, map;
         ini = '[section1] ; comment at end of line\n\r\tkey1=\t\rvalue1\t\r\n\v\f\tkey2=value2\f\v\n\u00a0key3   =  \u00a0value3\u3000\n[emptysection]';
         map = AWS.util.ini.parse(ini);
         expect(map.section1.key1).to.equal('value1');
         expect(map.section1.key2).to.equal('value2');
-        return expect(map.section1.key3).to.equal('value3');
+        expect(map.section1.key3).to.equal('value3');
+      });
+
+      it('throws if the profile name is __proto__', function(done) {
+        var ini, map;
+        ini = '[__proto__]\nkey1=value1';
+        try {
+          AWS.util.ini.parse(ini);
+        } catch (err) {
+          expect(err.message).to.equal('Cannot load profile name \'__proto__\' from shared ini file.');
+          done();
+        }
+      });
+
+      it('throws if the profile name is "profile __proto__"', function(done) {
+        var ini, map;
+        ini = '[profile __proto__]\nkey2=value2';
+        try {
+          AWS.util.ini.parse(ini);
+        } catch (err) {
+          expect(err.message).to.equal('Cannot load profile name \'profile __proto__\' from shared ini file.');
+          done();
+        }
       });
     });
   });
