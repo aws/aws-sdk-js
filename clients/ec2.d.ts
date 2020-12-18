@@ -7995,7 +7995,7 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
     /**
-     * Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 Instances built on the Nitro System in the same Availability Zone. This parameter is supported with io1 volumes only. For more information, see  Amazon EBS Multi-Attach in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 Instances built on the Nitro System in the same Availability Zone. This parameter is supported with io1 and io2 volumes only. For more information, see  Amazon EBS Multi-Attach in the Amazon Elastic Compute Cloud User Guide.
      */
     MultiAttachEnabled?: Boolean;
     /**
@@ -19901,6 +19901,10 @@ declare namespace EC2 {
      * The target throughput of the volume, in MiB/s. This parameter is valid only for gp3 volumes. The maximum value is 1,000. Default: If no throughput value is specified, the existing value is retained. Valid Range: Minimum value of 125. Maximum value of 1000.
      */
     Throughput?: Integer;
+    /**
+     * Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16  Nitro-based instances in the same Availability Zone. This parameter is supported with io1 and io2 volumes only. For more information, see  Amazon EBS Multi-Attach in the Amazon Elastic Compute Cloud User Guide.
+     */
+    MultiAttachEnabled?: Boolean;
   }
   export interface ModifyVolumeResult {
     /**
@@ -26901,6 +26905,10 @@ declare namespace EC2 {
      */
     TargetThroughput?: Integer;
     /**
+     * The target setting for Amazon EBS Multi-Attach.
+     */
+    TargetMultiAttachEnabled?: Boolean;
+    /**
      * The original size of the volume, in GiB.
      */
     OriginalSize?: Integer;
@@ -26916,6 +26924,10 @@ declare namespace EC2 {
      * The original throughput of the volume, in MiB/s.
      */
     OriginalThroughput?: Integer;
+    /**
+     * The original setting for Amazon EBS Multi-Attach.
+     */
+    OriginalMultiAttachEnabled?: Boolean;
     /**
      * The modification progress, from 0 to 100 percent complete.
      */

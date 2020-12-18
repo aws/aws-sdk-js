@@ -12648,7 +12648,7 @@
         },
         "MultiAttachEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> volumes only. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html\"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html\"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "Throughput": {
           "shape": "Integer",
@@ -31474,6 +31474,10 @@
         "Throughput": {
           "shape": "Integer",
           "documentation": "<p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. The maximum value is 1,000.</p> <p>Default: If no throughput value is specified, the existing value is retained.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>"
+        },
+        "MultiAttachEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\"> Nitro-based instances</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html\"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         }
       }
     },
@@ -43098,6 +43102,11 @@
           "documentation": "<p>The target throughput of the volume, in MiB/s.</p>",
           "locationName": "targetThroughput"
         },
+        "TargetMultiAttachEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>The target setting for Amazon EBS Multi-Attach.</p>",
+          "locationName": "targetMultiAttachEnabled"
+        },
         "OriginalSize": {
           "shape": "Integer",
           "documentation": "<p>The original size of the volume, in GiB.</p>",
@@ -43117,6 +43126,11 @@
           "shape": "Integer",
           "documentation": "<p>The original throughput of the volume, in MiB/s.</p>",
           "locationName": "originalThroughput"
+        },
+        "OriginalMultiAttachEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>The original setting for Amazon EBS Multi-Attach.</p>",
+          "locationName": "originalMultiAttachEnabled"
         },
         "Progress": {
           "shape": "Long",

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.813.0-->
+<!--LATEST=2.814.0-->
 <!--ENTRYINSERT-->
+
+## 2.814.0
+* bugfix: Credentials: SDK will throw if shared ini file's profile name can be resolved to __proto__
+* feature: EC2: EBS io2 volumes now supports Multi-Attach
+* feature: PersonalizeRuntime: Updated FilterValues regex pattern to align with Filter Expression.
+* feature: RDS: Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API.
 
 ## 2.813.0
 * feature: ConfigService: Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config

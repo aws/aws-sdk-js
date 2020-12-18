@@ -1355,6 +1355,25 @@ declare namespace RDS {
      */
     DisableLogTypes?: LogTypeList;
   }
+  export interface ClusterPendingModifiedValues {
+    PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
+    /**
+     * The DBClusterIdentifier for the DB cluster.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * The master credentials for the DB cluster.
+     */
+    MasterUserPassword?: String;
+    /**
+     * Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+     */
+    IAMDatabaseAuthenticationEnabled?: BooleanOptional;
+    /**
+     * The database engine version.
+     */
+    EngineVersion?: String;
+  }
   export interface ConnectionPoolConfiguration {
     /**
      * The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group. Default: 100 Constraints: between 1 and 100
@@ -1749,7 +1768,7 @@ declare namespace RDS {
   }
   export interface CreateDBInstanceMessage {
     /**
-     * The meaning of this parameter differs according to the database engine you use.  MySQL  The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    MariaDB  The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    PostgreSQL  The name of the database to create when the DB instance is created. If this parameter isn't specified, the default "postgres" database is created in the DB instance. Constraints:   Must contain 1 to 63 letters, numbers, or underscores.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    Oracle  The Oracle System ID (SID) of the created DB instance. If you specify null, the default value ORCL is used. You can't specify the string NULL, or any other reserved word, for DBName.  Default: ORCL  Constraints:   Can't be longer than 8 characters    SQL Server  Not applicable. Must be null.  Amazon Aurora  The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Can't be a word reserved by the specified database engine  
+     * The meaning of this parameter differs according to the database engine you use.  MySQL  The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    MariaDB  The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    PostgreSQL  The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 63 letters, numbers, or underscores.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the specified database engine    Oracle  The Oracle System ID (SID) of the created DB instance. If you specify null, the default value ORCL is used. You can't specify the string NULL, or any other reserved word, for DBName.  Default: ORCL  Constraints:   Can't be longer than 8 characters    SQL Server  Not applicable. Must be null.  Amazon Aurora  The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn't specified, no database is created in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Can't be a word reserved by the specified database engine  
      */
     DBName?: String;
     /**
@@ -2008,7 +2027,7 @@ declare namespace RDS {
      */
     MonitoringRoleArn?: String;
     /**
-     * The AWS KMS key identifier for an encrypted read replica. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK. If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance. If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can't use CMKs from one AWS Region in another AWS Region. You can't create an encrypted read replica from an unencrypted DB instance.
+     * The AWS KMS key identifier for an encrypted read replica. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK. If you create an encrypted read replica in the same AWS Region as the source DB instance, then do not specify a value for this parameter. A read replica in the same Region is always encrypted with the same AWS KMS CMK as the source DB instance. If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can't use CMKs from one AWS Region in another AWS Region. You can't create an encrypted read replica from an unencrypted DB instance.
      */
     KmsKeyId?: String;
     /**
@@ -2527,6 +2546,10 @@ declare namespace RDS {
      * Specifies whether you have requested to enable write forwarding for a secondary cluster in an Aurora global database. Because write forwarding takes time to enable, check the value of GlobalWriteForwardingStatus to confirm that the request has completed before using the write forwarding feature for this cluster.
      */
     GlobalWriteForwardingRequested?: BooleanOptional;
+    /**
+     * Specifies that changes to the DB cluster are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
+     */
+    PendingModifiedValues?: ClusterPendingModifiedValues;
   }
   export interface DBClusterBacktrack {
     /**
@@ -6432,31 +6455,31 @@ declare namespace RDS {
   }
   export interface PendingModifiedValues {
     /**
-     *  Contains the new DBInstanceClass for the DB instance that will be applied or is currently being applied. 
+     * The name of the compute and memory capacity class for the DB instance.
      */
     DBInstanceClass?: String;
     /**
-     *  Contains the new AllocatedStorage size for the DB instance that will be applied or is currently being applied. 
+     * The allocated storage size for the DB instance specified in gibibytes .
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * Contains the pending or currently-in-progress change of the master credentials for the DB instance.
+     * The master credentials for the DB instance.
      */
     MasterUserPassword?: String;
     /**
-     * Specifies the pending port for the DB instance.
+     * The port for the DB instance.
      */
     Port?: IntegerOptional;
     /**
-     * Specifies the pending number of days for which automated backups are retained.
+     * The number of days for which automated backups are retained.
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     * Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+     * Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
      */
     MultiAZ?: BooleanOptional;
     /**
-     * Indicates the database engine version.
+     * The database engine version.
      */
     EngineVersion?: String;
     /**
@@ -6464,23 +6487,23 @@ declare namespace RDS {
      */
     LicenseModel?: String;
     /**
-     * Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.
+     * The Provisioned IOPS value for the DB instance.
      */
     Iops?: IntegerOptional;
     /**
-     *  Contains the new DBInstanceIdentifier for the DB instance that will be applied or is currently being applied. 
+     * The database identifier for the DB instance.
      */
     DBInstanceIdentifier?: String;
     /**
-     * Specifies the storage type to be associated with the DB instance.
+     * The storage type of the DB instance.
      */
     StorageType?: String;
     /**
-     * Specifies the identifier of the CA certificate for the DB instance.
+     * The identifier of the CA certificate for the DB instance.
      */
     CACertificateIdentifier?: String;
     /**
-     * The new DB subnet group for the DB instance. 
+     * The DB subnet group for the DB instance.
      */
     DBSubnetGroupName?: String;
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
@@ -6488,6 +6511,10 @@ declare namespace RDS {
      * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
      */
     ProcessorFeatures?: ProcessorFeatureList;
+    /**
+     * Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+     */
+    IAMDatabaseAuthenticationEnabled?: BooleanOptional;
   }
   export interface ProcessorFeature {
     /**

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.813.0',
+	  VERSION: '2.814.0',
 
 	  /**
 	   * @api private
@@ -397,6 +397,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var section = line.match(/^\s*\[([^\[\]]+)\]\s*$/);
 	        if (section) {
 	          currentSection = section[1];
+	          if (currentSection === '__proto__' || currentSection.split(/\s/)[1] === '__proto__') {
+	            throw util.error(
+	              new Error('Cannot load profile name \'' + currentSection + '\' from shared ini file.')
+	            );
+	          }
 	        } else if (currentSection) {
 	          var item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/);
 	          if (item) {

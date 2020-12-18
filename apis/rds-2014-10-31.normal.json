@@ -4147,6 +4147,31 @@
       },
       "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used.</p> <p>For more information about exporting CloudWatch Logs for Amazon RDS DB instances, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about exporting CloudWatch Logs for Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>"
     },
+    "ClusterPendingModifiedValues": {
+      "type": "structure",
+      "members": {
+        "PendingCloudwatchLogsExports": {
+          "shape": "PendingCloudwatchLogsExports"
+        },
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DBClusterIdentifier for the DB cluster.</p>"
+        },
+        "MasterUserPassword": {
+          "shape": "String",
+          "documentation": "<p>The master credentials for the DB cluster.</p>"
+        },
+        "IAMDatabaseAuthenticationEnabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The database engine version.</p>"
+        }
+      },
+      "documentation": "<p>This data type is used as a response element in the <code>ModifyDBCluster</code> operation and contains changes that will be applied during the next maintenance window.</p>"
+    },
     "ConnectionPoolConfiguration": {
       "type": "structure",
       "members": {
@@ -4694,7 +4719,7 @@
       "members": {
         "DBName": {
           "shape": "String",
-          "documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, the default \"postgres\" database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can't be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul>"
+          "documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can't be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn't specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can't be a word reserved by the specified database engine</p> </li> </ul>"
         },
         "DBInstanceIdentifier": {
           "shape": "String",
@@ -4963,7 +4988,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can't use CMKs from one AWS Region in another AWS Region.</p> <p>You can't create an encrypted read replica from an unencrypted DB instance.</p>"
+          "documentation": "<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then do not specify a value for this parameter. A read replica in the same Region is always encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can't use CMKs from one AWS Region in another AWS Region.</p> <p>You can't create an encrypted read replica from an unencrypted DB instance.</p>"
         },
         "PreSignedUrl": {
           "shape": "String",
@@ -5618,6 +5643,10 @@
         "GlobalWriteForwardingRequested": {
           "shape": "BooleanOptional",
           "documentation": "<p>Specifies whether you have requested to enable write forwarding for a secondary cluster in an Aurora global database. Because write forwarding takes time to enable, check the value of <code>GlobalWriteForwardingStatus</code> to confirm that the request has completed before using the write forwarding feature for this cluster.</p>"
+        },
+        "PendingModifiedValues": {
+          "shape": "ClusterPendingModifiedValues",
+          "documentation": "<p>Specifies that changes to the DB cluster are pending. This element is only included when changes are pending. Specific changes are identified by subelements.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>",
@@ -10867,31 +10896,31 @@
       "members": {
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p> Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. </p>"
+          "documentation": "<p>The name of the compute and memory capacity class for the DB instance.</p>"
         },
         "AllocatedStorage": {
           "shape": "IntegerOptional",
-          "documentation": "<p> Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. </p>"
+          "documentation": "<p>The allocated storage size for the DB instance specified in gibibytes .</p>"
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>Contains the pending or currently-in-progress change of the master credentials for the DB instance.</p>"
+          "documentation": "<p>The master credentials for the DB instance.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Specifies the pending port for the DB instance.</p>"
+          "documentation": "<p>The port for the DB instance.</p>"
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Specifies the pending number of days for which automated backups are retained.</p>"
+          "documentation": "<p>The number of days for which automated backups are retained.</p>"
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.</p>"
+          "documentation": "<p>Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.</p>"
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>Indicates the database engine version.</p>"
+          "documentation": "<p>The database engine version.</p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -10899,23 +10928,23 @@
         },
         "Iops": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.</p>"
+          "documentation": "<p>The Provisioned IOPS value for the DB instance.</p>"
         },
         "DBInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p> Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. </p>"
+          "documentation": "<p>The database identifier for the DB instance.</p>"
         },
         "StorageType": {
           "shape": "String",
-          "documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>"
+          "documentation": "<p>The storage type of the DB instance.</p>"
         },
         "CACertificateIdentifier": {
           "shape": "String",
-          "documentation": "<p>Specifies the identifier of the CA certificate for the DB instance.</p>"
+          "documentation": "<p>The identifier of the CA certificate for the DB instance.</p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
-          "documentation": "<p>The new DB subnet group for the DB instance. </p>"
+          "documentation": "<p>The DB subnet group for the DB instance.</p>"
         },
         "PendingCloudwatchLogsExports": {
           "shape": "PendingCloudwatchLogsExports"
@@ -10923,9 +10952,13 @@
         "ProcessorFeatures": {
           "shape": "ProcessorFeatureList",
           "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "IAMDatabaseAuthenticationEnabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
         }
       },
-      "documentation": "<p> This data type is used as a response element in the <code>ModifyDBInstance</code> action. </p>"
+      "documentation": "<p> This data type is used as a response element in the <code>ModifyDBInstance</code> action and contains changes that will be applied during the next maintenance window. </p>"
     },
     "ProcessorFeature": {
       "type": "structure",
