@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.814.0-->
+<!--LATEST=2.815.0-->
 <!--ENTRYINSERT-->
+
+## 2.815.0
+* feature: ConfigService: AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery
+* feature: ConnectParticipant: This release adds three new APIs: StartAttachmentUpload, CompleteAttachmentUpload, and GetAttachment. For Amazon Connect Chat, you can use these APIs to share files in chat conversations.
+* feature: DMS: AWS DMS launches support for AWS Secrets Manager to manage source and target database credentials.
+* feature: EC2: This release adds Tag On Create feature support for the AllocateAddress API.
+* feature: Glue: Add 4 connection properties: SECRET_ID, CONNECTOR_URL, CONNECTOR_TYPE, CONNECTOR_CLASS_NAME. Add two connection types: MARKETPLACE, CUSTOM
+* feature: ManagedBlockchain: Added support for provisioning and managing public Ethereum nodes on main and test networks supporting secure access using Sigv4 and standard open-source Ethereum APIs.
+* feature: Outposts: In this release, AWS Outposts adds support for three new APIs: TagResource, UntagResource, and ListTagsForResource. Customers can now manage tags for their resources through the SDK.
+* feature: QLDBSession: Adds "TimingInformation" to all SendCommand API results and "IOUsage" to ExecuteStatementResult, FetchPageResult and CommitTransactionResult.
+* feature: S3: Format GetObject's Expires header to be an http-date instead of iso8601
+* feature: ServiceCatalogAppRegistry: New API `SyncResouce` to update AppRegistry system tags.
+* feature: ServiceQuotas: Added the ability to tag applied quotas.
 
 ## 2.814.0
 * bugfix: Credentials: SDK will throw if shared ini file's profile name can be resolved to __proto__

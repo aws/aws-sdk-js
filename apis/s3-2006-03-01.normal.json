@@ -9292,7 +9292,8 @@
       "type": "string"
     },
     "ResponseExpires": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "rfc822"
     },
     "Restore": {
       "type": "string"

@@ -50,7 +50,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Associates the Service Quotas template with your organization so that when new accounts are created in your organization, the template submits increase requests for the specified service quotas. Use the Service Quotas template to request an increase for any adjustable quota value. After you define the Service Quotas template, use this operation to associate, or enable, the template. </p>"
+      "documentation": "<p>Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.</p>"
     },
     "DeleteServiceQuotaIncreaseRequestFromTemplate": {
       "name": "DeleteServiceQuotaIncreaseRequestFromTemplate",
@@ -93,7 +93,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Removes a service quota increase request from the Service Quotas template. </p>"
+      "documentation": "<p>Deletes the quota increase request for the specified quota from your quota request template.</p>"
     },
     "DisassociateServiceQuotaTemplate": {
       "name": "DisassociateServiceQuotaTemplate",
@@ -133,7 +133,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Disables the Service Quotas template. Once the template is disabled, it does not request quota increases for new accounts in your organization. Disabling the quota template does not apply the quota increase requests from the template. </p> <p> <b>Related operations</b> </p> <ul> <li> <p>To enable the quota template, call <a>AssociateServiceQuotaTemplate</a>. </p> </li> <li> <p>To delete a specific service quota from the template, use <a>DeleteServiceQuotaIncreaseRequestFromTemplate</a>.</p> </li> </ul>"
+      "documentation": "<p>Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.</p>"
     },
     "GetAWSDefaultServiceQuota": {
       "name": "GetAWSDefaultServiceQuota",
@@ -164,7 +164,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves the default service quotas values. The Value returned for each quota is the AWS default value, even if the quotas have been increased.. </p>"
+      "documentation": "<p>Retrieves the default value for the specified quota. The default value does not reflect any quota increases.</p>"
     },
     "GetAssociationForServiceQuotaTemplate": {
       "name": "GetAssociationForServiceQuotaTemplate",
@@ -204,7 +204,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Retrieves the <code>ServiceQuotaTemplateAssociationStatus</code> value from the service. Use this action to determine if the Service Quota template is associated, or enabled. </p>"
+      "documentation": "<p>Retrieves the status of the association for the quota request template.</p>"
     },
     "GetRequestedServiceQuotaChange": {
       "name": "GetRequestedServiceQuotaChange",
@@ -235,7 +235,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves the details for a particular increase request. </p>"
+      "documentation": "<p>Retrieves information about the specified quota increase request.</p>"
     },
     "GetServiceQuota": {
       "name": "GetServiceQuota",
@@ -266,7 +266,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns the details for the specified service quota. This operation provides a different Value than the <code>GetAWSDefaultServiceQuota</code> operation. This operation returns the applied value for each quota. <code>GetAWSDefaultServiceQuota</code> returns the default AWS value for each quota. </p>"
+      "documentation": "<p>Retrieves the applied quota value for the specified quota. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.</p>"
     },
     "GetServiceQuotaIncreaseRequestFromTemplate": {
       "name": "GetServiceQuotaIncreaseRequestFromTemplate",
@@ -309,7 +309,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Returns the details of the service quota increase request in your template.</p>"
+      "documentation": "<p>Retrieves information about the specified quota increase request in your quota request template.</p>"
     },
     "ListAWSDefaultServiceQuotas": {
       "name": "ListAWSDefaultServiceQuotas",
@@ -343,7 +343,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists all default service quotas for the specified AWS service or all AWS services. ListAWSDefaultServiceQuotas is similar to <a>ListServiceQuotas</a> except for the Value object. The Value object returned by <code>ListAWSDefaultServiceQuotas</code> is the default value assigned by AWS. This request returns a list of all service quotas for the specified service. The listing of each you'll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>"
+      "documentation": "<p>Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.</p>"
     },
     "ListRequestedServiceQuotaChangeHistory": {
       "name": "ListRequestedServiceQuotaChangeHistory",
@@ -377,7 +377,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Requests a list of the changes to quotas for a service.</p>"
+      "documentation": "<p>Retrieves the quota increase requests for the specified service.</p>"
     },
     "ListRequestedServiceQuotaChangeHistoryByQuota": {
       "name": "ListRequestedServiceQuotaChangeHistoryByQuota",
@@ -411,7 +411,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Requests a list of the changes to specific service quotas. This command provides additional granularity over the <code>ListRequestedServiceQuotaChangeHistory</code> command. Once a quota change request has reached <code>CASE_CLOSED, APPROVED,</code> or <code>DENIED</code>, the history has been kept for 90 days.</p>"
+      "documentation": "<p>Retrieves the quota increase requests for the specified quota.</p>"
     },
     "ListServiceQuotaIncreaseRequestsInTemplate": {
       "name": "ListServiceQuotaIncreaseRequestsInTemplate",
@@ -451,7 +451,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Returns a list of the quota increase requests in the template. </p>"
+      "documentation": "<p>Lists the quota increase requests in the specified quota request template.</p>"
     },
     "ListServiceQuotas": {
       "name": "ListServiceQuotas",
@@ -485,7 +485,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists all service quotas for the specified AWS service. This request returns a list of the service quotas for the specified service. you'll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>"
+      "documentation": "<p>Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.</p>"
     },
     "ListServices": {
       "name": "ListServices",
@@ -516,7 +516,38 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists the AWS services available in Service Quotas. Not all AWS services are available in Service Quotas. To list the see the list of the service quotas for a specific service, use <a>ListServiceQuotas</a>.</p>"
+      "documentation": "<p>Lists the names and codes for the services integrated with Service Quotas.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NoSuchResourceException"
+        },
+        {
+          "shape": "IllegalArgumentException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the tags assigned to the specified applied quota.</p>"
     },
     "PutServiceQuotaIncreaseRequestIntoTemplate": {
       "name": "PutServiceQuotaIncreaseRequestIntoTemplate",
@@ -562,7 +593,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Defines and adds a quota to the service quota template. To add a quota to the template, you must provide the <code>ServiceCode</code>, <code>QuotaCode</code>, <code>AwsRegion</code>, and <code>DesiredValue</code>. Once you add a quota to the template, use <a>ListServiceQuotaIncreaseRequestsInTemplate</a> to see the list of quotas in the template.</p>"
+      "documentation": "<p>Adds a quota increase request to your quota request template.</p>"
     },
     "RequestServiceQuotaIncrease": {
       "name": "RequestServiceQuotaIncrease",
@@ -605,10 +636,84 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves the details of a service quota increase request. The response to this command provides the details in the <a>RequestedServiceQuotaChange</a> object. </p>"
+      "documentation": "<p>Submits a quota increase request for the specified quota.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NoSuchResourceException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "TagPolicyViolationException"
+        },
+        {
+          "shape": "IllegalArgumentException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Adds tags to the specified applied quota. You can include one or more tags to add to the quota.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NoSuchResourceException"
+        },
+        {
+          "shape": "IllegalArgumentException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Removes tags from the specified applied quota. You can specify one or more tags to remove.</p>"
     }
   },
   "shapes": {
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 1011,
+      "min": 1,
+      "pattern": "arn:aws(-[\\w]+)*:*:.+:[0-9]{12}:.+"
+    },
     "AssociateServiceQuotaTemplateRequest": {
       "type": "structure",
       "members": {}
@@ -639,15 +744,15 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the code for the service that you want to delete.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the code for the quota that you want to delete.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "AwsRegion": {
           "shape": "AwsRegion",
-          "documentation": "<p>Specifies the AWS Region for the quota that you want to delete.</p>"
+          "documentation": "<p>The AWS Region.</p>"
         }
       }
     },
@@ -680,14 +785,14 @@
       "members": {
         "ErrorCode": {
           "shape": "ErrorCode",
-          "documentation": "<p>Service Quotas returns the following error values. </p> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> is returned when the caller does not have permission to call the service or service quota. To resolve the error, you need permission to access the service or service quota.</p> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> is returned when the service being called is throttling Service Quotas.</p> <p> <code>DEPENDENCY_SERVICE_ERROR</code> is returned when the service being called has availability issues.</p> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> is returned when there was an error in Service Quotas.</p>"
+          "documentation": "<p>Service Quotas returns the following error values:</p> <ul> <li> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota.</p> </li> <li> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> - The service is throttling Service Quotas.</p> </li> <li> <p> <code>DEPENDENCY_SERVICE_ERROR</code> - The service is not available.</p> </li> <li> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in Service Quotas.</p> </li> </ul>"
         },
         "ErrorMessage": {
           "shape": "ErrorMessage",
-          "documentation": "<p>The error message that provides more detail.</p>"
+          "documentation": "<p>The error message.</p>"
         }
       },
-      "documentation": "<p>Returns an error that explains why the action did not succeed.</p>"
+      "documentation": "<p>An error that explains why an action did not succeed.</p>"
     },
     "GetAWSDefaultServiceQuotaRequest": {
       "type": "structure",
@@ -698,11 +803,11 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Identifies the service quota you want to select.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         }
       }
     },
@@ -711,7 +816,7 @@
       "members": {
         "Quota": {
           "shape": "ServiceQuota",
-          "documentation": "<p>Returns the <a>ServiceQuota</a> object which contains all values for a quota.</p>"
+          "documentation": "<p>Information about the quota.</p>"
         }
       }
     },
@@ -724,7 +829,7 @@
       "members": {
         "ServiceQuotaTemplateAssociationStatus": {
           "shape": "ServiceQuotaTemplateAssociationStatus",
-          "documentation": "<p>Specifies whether the template is <code>ASSOCIATED</code> or <code>DISASSOCIATED</code>. If the template is <code>ASSOCIATED</code>, then it requests service quota increases for all new accounts created in your organization. </p>"
+          "documentation": "<p>The association status. If the status is <code>ASSOCIATED</code>, the quota increase requests in the template are automatically applied to new accounts in your organization.</p>"
         }
       }
     },
@@ -736,7 +841,7 @@
       "members": {
         "RequestId": {
           "shape": "RequestId",
-          "documentation": "<p>Identifies the quota increase request.</p>"
+          "documentation": "<p>The ID of the quota increase request.</p>"
         }
       }
     },
@@ -745,7 +850,7 @@
       "members": {
         "RequestedQuota": {
           "shape": "RequestedServiceQuotaChange",
-          "documentation": "<p>Returns the <code>RequestedServiceQuotaChange</code> object for the specific increase request.</p>"
+          "documentation": "<p>Information about the quota increase request.</p>"
         }
       }
     },
@@ -759,15 +864,15 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the quota you want.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "AwsRegion": {
           "shape": "AwsRegion",
-          "documentation": "<p>Specifies the AWS Region for the quota that you want to use.</p>"
+          "documentation": "<p>The AWS Region.</p>"
         }
       }
     },
@@ -776,7 +881,7 @@
       "members": {
         "ServiceQuotaIncreaseRequestInTemplate": {
           "shape": "ServiceQuotaIncreaseRequestInTemplate",
-          "documentation": "<p>This object contains the details about the quota increase request.</p>"
+          "documentation": "<p>Information about the quota increase request.</p>"
         }
       }
     },
@@ -789,11 +894,11 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Identifies the service quota you want to select.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         }
       }
     },
@@ -802,12 +907,25 @@
       "members": {
         "Quota": {
           "shape": "ServiceQuota",
-          "documentation": "<p>Returns the <a>ServiceQuota</a> object which contains all values for a quota.</p>"
+          "documentation": "<p>Information about the quota.</p>"
         }
       }
     },
     "GlobalQuota": {
       "type": "boolean"
+    },
+    "InputTagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "InputTags": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "min": 1
     },
     "ListAWSDefaultServiceQuotasRequest": {
       "type": "structure",
@@ -817,15 +935,15 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -834,11 +952,11 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         },
         "Quotas": {
           "shape": "ServiceQuotaListDefinition",
-          "documentation": "<p>A list of the quotas in the account with the AWS default values. </p>"
+          "documentation": "<p>Information about the quotas.</p>"
         }
       }
     },
@@ -851,23 +969,23 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the service quota that you want to use</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "Status": {
           "shape": "RequestStatus",
-          "documentation": "<p>Specifies the status value of the quota increase request.</p>"
+          "documentation": "<p>The status value of the quota increase request.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -876,11 +994,11 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If present in the response, this value indicates there's more output available that what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         },
         "RequestedQuotas": {
           "shape": "RequestedServiceQuotaChangeHistoryListDefinition",
-          "documentation": "<p>Returns a list of service quota requests.</p>"
+          "documentation": "<p>Information about the quota increase requests.</p>"
         }
       }
     },
@@ -889,19 +1007,19 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "Status": {
           "shape": "RequestStatus",
-          "documentation": "<p>Specifies the status value of the quota increase request.</p>"
+          "documentation": "<p>The status of the quota increase request.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -910,11 +1028,11 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If present in the response, this value indicates there's more output available that what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         },
         "RequestedQuotas": {
           "shape": "RequestedServiceQuotaChangeHistoryListDefinition",
-          "documentation": "<p>Returns a list of service quota requests.</p>"
+          "documentation": "<p>Information about the quota increase requests.</p>"
         }
       }
     },
@@ -923,19 +1041,19 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. </p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "AwsRegion": {
           "shape": "AwsRegion",
-          "documentation": "<p>Specifies the AWS Region for the quota that you want to use.</p>"
+          "documentation": "<p>The AWS Region.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -944,11 +1062,11 @@
       "members": {
         "ServiceQuotaIncreaseRequestInTemplateList": {
           "shape": "ServiceQuotaIncreaseRequestInTemplateList",
-          "documentation": "<p>Returns the list of values of the quota increase request in the template.</p>"
+          "documentation": "<p>Information about the quota increase requests.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If present in the response, this value indicates there's more output available that what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         }
       }
     },
@@ -960,15 +1078,15 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. </p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -977,11 +1095,11 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If present in the response, this value indicates there's more output available that what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         },
         "Quotas": {
           "shape": "ServiceQuotaListDefinition",
-          "documentation": "<p>The response information for a quota lists all attribute information for the quota. </p>"
+          "documentation": "<p>Information about the quotas.</p>"
         }
       }
     },
@@ -990,11 +1108,11 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>(Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, the response defaults to a value that's specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn't null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.</p>"
         }
       }
     },
@@ -1003,11 +1121,32 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If present in the response, this value indicates there's more output available that what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
         },
         "Services": {
           "shape": "ServiceInfoListDefinition",
-          "documentation": "<p>Returns a list of services. </p>"
+          "documentation": "<p>Information about the services.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "OutputTags",
+          "documentation": "<p>A complex data type that contains zero or more tag elements.</p>"
         }
       }
     },
@@ -1037,27 +1176,34 @@
       "members": {
         "MetricNamespace": {
           "shape": "QuotaMetricNamespace",
-          "documentation": "<p>The namespace of the metric. The namespace is a container for CloudWatch metrics. You can specify a name for the namespace when you create a metric.</p>"
+          "documentation": "<p>The namespace of the metric.</p>"
         },
         "MetricName": {
           "shape": "QuotaMetricName",
-          "documentation": "<p>The name of the CloudWatch metric that measures usage of a service quota. This is a required field.</p>"
+          "documentation": "<p>The name of the metric.</p>"
         },
         "MetricDimensions": {
           "shape": "MetricDimensionsMapDefinition",
-          "documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. Every metric has specific characteristics that describe it, and you can think of dimensions as categories for those characteristics. These dimensions are part of the CloudWatch Metric Identity that measures usage against a particular service quota.</p>"
+          "documentation": "<p>The metric dimension. This is a name/value pair that is part of the identity of a metric.</p>"
         },
         "MetricStatisticRecommendation": {
           "shape": "Statistic",
-          "documentation": "<p>Statistics are metric data aggregations over specified periods of time. This is the recommended statistic to use when comparing usage in the CloudWatch Metric against your Service Quota.</p>"
+          "documentation": "<p>The metric statistic that we recommend you use when determining quota usage.</p>"
         }
       },
-      "documentation": "<p>A structure that uses CloudWatch metrics to gather data about the service quota.</p>"
+      "documentation": "<p>Information about the CloudWatch metric that reflects quota usage.</p>"
     },
     "NextToken": {
       "type": "string",
       "max": 2048,
       "pattern": "^[a-zA-Z0-9/+]*={0,2}$"
+    },
+    "OutputTags": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200
     },
     "PeriodUnit": {
       "type": "string",
@@ -1085,19 +1231,19 @@
       "members": {
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the service quota that you want to use.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "AwsRegion": {
           "shape": "AwsRegion",
-          "documentation": "<p>Specifies the AWS Region for the quota. </p>"
+          "documentation": "<p>The AWS Region.</p>"
         },
         "DesiredValue": {
           "shape": "QuotaValue",
-          "documentation": "<p>Specifies the new, increased value for the quota. </p>"
+          "documentation": "<p>The new, increased value for the quota.</p>"
         }
       }
     },
@@ -1106,7 +1252,7 @@
       "members": {
         "ServiceQuotaIncreaseRequestInTemplate": {
           "shape": "ServiceQuotaIncreaseRequestInTemplate",
-          "documentation": "<p>A structure that contains information about one service quota increase request.</p>"
+          "documentation": "<p>Information about the quota increase request.</p>"
         }
       }
     },
@@ -1136,14 +1282,14 @@
       "members": {
         "PeriodValue": {
           "shape": "PeriodValue",
-          "documentation": "<p>The value of a period.</p>"
+          "documentation": "<p>The value.</p>"
         },
         "PeriodUnit": {
           "shape": "PeriodUnit",
-          "documentation": "<p>The time unit of a period.</p>"
+          "documentation": "<p>The time unit.</p>"
         }
       },
-      "documentation": "<p>A structure that contains information about the quota period.</p>"
+      "documentation": "<p>Information about the quota period.</p>"
     },
     "QuotaUnit": {
       "type": "string"
@@ -1169,15 +1315,15 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the service quota that you want to use.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "DesiredValue": {
           "shape": "QuotaValue",
-          "documentation": "<p>Specifies the value submitted in the service quota increase request. </p>"
+          "documentation": "<p>The new, increased value for the quota.</p>"
         }
       }
     },
@@ -1186,7 +1332,7 @@
       "members": {
         "RequestedQuota": {
           "shape": "RequestedServiceQuotaChange",
-          "documentation": "<p>Returns a list of service quota requests.</p>"
+          "documentation": "<p>Information about the quota increase request.</p>"
         }
       }
     },
@@ -1205,62 +1351,62 @@
       "members": {
         "Id": {
           "shape": "RequestId",
-          "documentation": "<p>The unique identifier of a requested service quota change.</p>"
+          "documentation": "<p>The unique identifier.</p>"
         },
         "CaseId": {
           "shape": "CustomerServiceEngagementId",
-          "documentation": "<p>The case Id for the service quota increase request.</p>"
+          "documentation": "<p>The case ID.</p>"
         },
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "ServiceName": {
           "shape": "ServiceName",
-          "documentation": "<p>The name of the AWS service specified in the increase request. </p>"
+          "documentation": "<p>The service name.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>Specifies the service quota that you want to use.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "QuotaName": {
           "shape": "QuotaName",
-          "documentation": "<p>Name of the service quota.</p>"
+          "documentation": "<p>The quota name.</p>"
         },
         "DesiredValue": {
           "shape": "QuotaValue",
-          "documentation": "<p>New increased value for the service quota.</p>"
+          "documentation": "<p>The new, increased value for the quota.</p>"
         },
         "Status": {
           "shape": "RequestStatus",
-          "documentation": "<p>State of the service quota increase request.</p>"
+          "documentation": "<p>The state of the quota increase request.</p>"
         },
         "Created": {
           "shape": "DateTime",
-          "documentation": "<p>The date and time when the service quota increase request was received and the case Id was created. </p>"
+          "documentation": "<p>The date and time when the quota increase request was received and the case ID was created.</p>"
         },
         "LastUpdated": {
           "shape": "DateTime",
-          "documentation": "<p>The date and time of the most recent change in the service quota increase request.</p>"
+          "documentation": "<p>The date and time of the most recent change.</p>"
         },
         "Requester": {
           "shape": "Requester",
-          "documentation": "<p>The IAM identity who submitted the service quota increase request.</p>"
+          "documentation": "<p>The IAM identity of the requester.</p>"
         },
         "QuotaArn": {
           "shape": "QuotaArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service quota.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the quota.</p>"
         },
         "GlobalQuota": {
           "shape": "GlobalQuota",
-          "documentation": "<p>Identifies if the quota is global.</p>"
+          "documentation": "<p>Indicates whether the quota is global.</p>"
         },
         "Unit": {
           "shape": "QuotaUnit",
-          "documentation": "<p>Specifies the unit used for the quota.</p>"
+          "documentation": "<p>The unit of measurement.</p>"
         }
       },
-      "documentation": "<p>A structure that contains information about a requested change for a quota.</p>"
+      "documentation": "<p>Information about a quota increase request.</p>"
     },
     "RequestedServiceQuotaChangeHistoryListDefinition": {
       "type": "list",
@@ -1282,14 +1428,14 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "ServiceName": {
           "shape": "ServiceName",
-          "documentation": "<p>The name of the AWS service specified in the increase request. </p>"
+          "documentation": "<p>The service name.</p>"
         }
       },
-      "documentation": "<p>A structure that contains the <code>ServiceName</code> and <code>ServiceCode</code>. It does not include all details of the service quota. To get those values, use the <a>ListServiceQuotas</a> operation. </p>"
+      "documentation": "<p>Information about a service.</p>"
     },
     "ServiceInfoListDefinition": {
       "type": "list",
@@ -1305,92 +1451,92 @@
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>Specifies the service that you want to use.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "ServiceName": {
           "shape": "ServiceName",
-          "documentation": "<p>The name of the AWS service specified in the increase request. </p>"
+          "documentation": "<p>The service name.</p>"
         },
         "QuotaArn": {
           "shape": "QuotaArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service quota.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the quota.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>The code identifier for the service quota specified.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "QuotaName": {
           "shape": "QuotaName",
-          "documentation": "<p>The name identifier of the service quota.</p>"
+          "documentation": "<p>The quota name.</p>"
         },
         "Value": {
           "shape": "QuotaValue",
-          "documentation": "<p>The value of service quota.</p>"
+          "documentation": "<p>The quota value.</p>"
         },
         "Unit": {
           "shape": "QuotaUnit",
-          "documentation": "<p>The unit of measurement for the value of the service quota.</p>"
+          "documentation": "<p>The unit of measurement.</p>"
         },
         "Adjustable": {
           "shape": "QuotaAdjustable",
-          "documentation": "<p>Specifies if the quota value can be increased.</p>"
+          "documentation": "<p>Indicates whether the quota value can be increased.</p>"
         },
         "GlobalQuota": {
           "shape": "GlobalQuota",
-          "documentation": "<p>Specifies if the quota is global.</p>"
+          "documentation": "<p>Indicates whether the quota is global.</p>"
         },
         "UsageMetric": {
           "shape": "MetricInfo",
-          "documentation": "<p>Specifies the details about the measurement. </p>"
+          "documentation": "<p>Information about the measurement.</p>"
         },
         "Period": {
           "shape": "QuotaPeriod",
-          "documentation": "<p>Identifies the unit and value of how time is measured.</p>"
+          "documentation": "<p>The period of time.</p>"
         },
         "ErrorReason": {
           "shape": "ErrorReason",
-          "documentation": "<p>Specifies the <code>ErrorCode</code> and <code>ErrorMessage</code> when success isn't achieved.</p>"
+          "documentation": "<p>The error code and error reason.</p>"
         }
       },
-      "documentation": "<p>A structure that contains the full set of details that define the service quota.</p>"
+      "documentation": "<p>Information about a quota.</p>"
     },
     "ServiceQuotaIncreaseRequestInTemplate": {
       "type": "structure",
       "members": {
         "ServiceCode": {
           "shape": "ServiceCode",
-          "documentation": "<p>The code identifier for the AWS service specified in the increase request.</p>"
+          "documentation": "<p>The service identifier.</p>"
         },
         "ServiceName": {
           "shape": "ServiceName",
-          "documentation": "<p>The name of the AWS service specified in the increase request. </p>"
+          "documentation": "<p>The service name.</p>"
         },
         "QuotaCode": {
           "shape": "QuotaCode",
-          "documentation": "<p>The code identifier for the service quota specified in the increase request.</p>"
+          "documentation": "<p>The quota identifier.</p>"
         },
         "QuotaName": {
           "shape": "QuotaName",
-          "documentation": "<p>The name of the service quota in the increase request.</p>"
+          "documentation": "<p>The quota name.</p>"
         },
         "DesiredValue": {
           "shape": "QuotaValue",
-          "documentation": "<p>Identifies the new, increased value of the service quota in the increase request. </p>"
+          "documentation": "<p>The new, increased value of the quota.</p>"
         },
         "AwsRegion": {
           "shape": "AwsRegion",
-          "documentation": "<p>The AWS Region where the increase request occurs.</p>"
+          "documentation": "<p>The AWS Region.</p>"
         },
         "Unit": {
           "shape": "QuotaUnit",
-          "documentation": "<p>The unit of measure for the increase request.</p>"
+          "documentation": "<p>The unit of measurement.</p>"
         },
         "GlobalQuota": {
           "shape": "GlobalQuota",
-          "documentation": "<p>Specifies if the quota is a global quota.</p>"
+          "documentation": "<p>Indicates whether the quota is global.</p>"
         }
       },
-      "documentation": "<p>A structure that contains information about one service quota increase request.</p>"
+      "documentation": "<p>Information about a quota increase request.</p>"
     },
     "ServiceQuotaIncreaseRequestInTemplateList": {
       "type": "list",
@@ -1416,7 +1562,79 @@
       "max": 256,
       "min": 1,
       "pattern": "(Sum|Maximum)"
+    },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>A string that contains a tag key. The string length should be between 1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>A string that contains an optional tag value. The string length should be between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.</p>"
+        }
+      },
+      "documentation": "<p>A complex data type that contains a tag key and tag value.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>"
+        },
+        "Tags": {
+          "shape": "InputTags",
+          "documentation": "<p>The tags that you want to add to the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>"
+        },
+        "TagKeys": {
+          "shape": "InputTagKeys",
+          "documentation": "<p>The keys of the tags that you want to remove from the resource.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     }
   },
-  "documentation": "<p> Service Quotas is a web service that you can use to manage many of your AWS service quotas. Quotas, also referred to as limits, are the maximum values for a resource, item, or operation. This guide provide descriptions of the Service Quotas actions that you can call from an API. For the Service Quotas user guide, which explains how to use Service Quotas from the console, see <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">What is Service Quotas</a>. </p> <note> <p>AWS provides SDKs that consist of libraries and sample code for programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc...,). The SDKs provide a convenient way to create programmatic access to Service Quotas and AWS. For information about the AWS SDKs, including how to download and install them, see the <a href=\"https://docs.aws.amazon.com/aws.amazon.com/tools\">Tools for Amazon Web Services</a> page.</p> </note>"
+  "documentation": "<p>With Service Quotas, you can view and manage your quotas easily as your AWS workloads grow. Quotas, also referred to as limits, are the maximum number of resources that you can create in your AWS account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>"
 }

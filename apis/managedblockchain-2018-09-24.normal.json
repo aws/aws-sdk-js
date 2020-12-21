@@ -51,7 +51,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Creates a member within a Managed Blockchain network.</p>"
+      "documentation": "<p>Creates a member within a Managed Blockchain network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "CreateNetwork": {
       "name": "CreateNetwork",
@@ -85,13 +85,13 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Creates a new blockchain network using Amazon Managed Blockchain.</p>"
+      "documentation": "<p>Creates a new blockchain network using Amazon Managed Blockchain.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "CreateNode": {
       "name": "CreateNode",
       "http": {
         "method": "POST",
-        "requestUri": "/networks/{networkId}/members/{memberId}/nodes"
+        "requestUri": "/networks/{networkId}/nodes"
       },
       "input": {
         "shape": "CreateNodeInput"
@@ -125,7 +125,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Creates a peer node in a member.</p>"
+      "documentation": "<p>Creates a node on the specified blockchain network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "CreateProposal": {
       "name": "CreateProposal",
@@ -159,7 +159,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network. Any member can create a proposal.</p>"
+      "documentation": "<p>Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network. Any member can create a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "DeleteMember": {
       "name": "DeleteMember",
@@ -193,13 +193,13 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Deletes a member. Deleting a member removes the member and all associated resources from the network. <code>DeleteMember</code> can only be called for a specified <code>MemberId</code> if the principal performing the action is associated with the AWS account that owns the member. In all other cases, the <code>DeleteMember</code> action is carried out as the result of an approved proposal to remove a member. If <code>MemberId</code> is the last member in a network specified by the last AWS account, the network is deleted also.</p>"
+      "documentation": "<p>Deletes a member. Deleting a member removes the member and all associated resources from the network. <code>DeleteMember</code> can only be called for a specified <code>MemberId</code> if the principal performing the action is associated with the AWS account that owns the member. In all other cases, the <code>DeleteMember</code> action is carried out as the result of an approved proposal to remove a member. If <code>MemberId</code> is the last member in a network specified by the last AWS account, the network is deleted also.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "DeleteNode": {
       "name": "DeleteNode",
       "http": {
         "method": "DELETE",
-        "requestUri": "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        "requestUri": "/networks/{networkId}/nodes/{nodeId}"
       },
       "input": {
         "shape": "DeleteNodeInput"
@@ -227,7 +227,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Deletes a peer node from a member that your AWS account owns. All data on the node is lost and cannot be recovered.</p>"
+      "documentation": "<p>Deletes a node that your AWS account owns. All data on the node is lost and cannot be recovered.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "GetMember": {
       "name": "GetMember",
@@ -258,7 +258,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns detailed information about a member.</p>"
+      "documentation": "<p>Returns detailed information about a member.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "GetNetwork": {
       "name": "GetNetwork",
@@ -289,13 +289,13 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns detailed information about a network.</p>"
+      "documentation": "<p>Returns detailed information about a network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "GetNode": {
       "name": "GetNode",
       "http": {
         "method": "GET",
-        "requestUri": "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        "requestUri": "/networks/{networkId}/nodes/{nodeId}"
       },
       "input": {
         "shape": "GetNodeInput"
@@ -320,7 +320,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns detailed information about a peer node.</p>"
+      "documentation": "<p>Returns detailed information about a node.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "GetProposal": {
       "name": "GetProposal",
@@ -351,7 +351,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns detailed information about a proposal.</p>"
+      "documentation": "<p>Returns detailed information about a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ListInvitations": {
       "name": "ListInvitations",
@@ -385,7 +385,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns a listing of all invitations for the current AWS account.</p>"
+      "documentation": "<p>Returns a list of all invitations for the current AWS account.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ListMembers": {
       "name": "ListMembers",
@@ -413,7 +413,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns a listing of the members in a network and properties of their configurations.</p>"
+      "documentation": "<p>Returns a list of the members in a network and properties of their configurations.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ListNetworks": {
       "name": "ListNetworks",
@@ -441,13 +441,13 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns information about the networks in which the current AWS account has members.</p>"
+      "documentation": "<p>Returns information about the networks in which the current AWS account participates.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "ListNodes": {
       "name": "ListNodes",
       "http": {
         "method": "GET",
-        "requestUri": "/networks/{networkId}/members/{memberId}/nodes"
+        "requestUri": "/networks/{networkId}/nodes"
       },
       "input": {
         "shape": "ListNodesInput"
@@ -469,7 +469,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns information about the nodes within a network.</p>"
+      "documentation": "<p>Returns information about the nodes within a network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "ListProposalVotes": {
       "name": "ListProposalVotes",
@@ -497,7 +497,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns the listing of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.</p>"
+      "documentation": "<p>Returns the list of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ListProposals": {
       "name": "ListProposals",
@@ -528,7 +528,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns a listing of proposals for the network.</p>"
+      "documentation": "<p>Returns a list of proposals for the network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "RejectInvitation": {
       "name": "RejectInvitation",
@@ -562,7 +562,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.</p>"
+      "documentation": "<p>Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "UpdateMember": {
       "name": "UpdateMember",
@@ -593,13 +593,13 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Updates a member configuration with new parameters.</p>"
+      "documentation": "<p>Updates a member configuration with new parameters.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "UpdateNode": {
       "name": "UpdateNode",
       "http": {
         "method": "PATCH",
-        "requestUri": "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        "requestUri": "/networks/{networkId}/nodes/{nodeId}"
       },
       "input": {
         "shape": "UpdateNodeInput"
@@ -624,7 +624,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Updates a node configuration with new parameters.</p>"
+      "documentation": "<p>Updates a node configuration with new parameters.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "VoteOnProposal": {
       "name": "VoteOnProposal",
@@ -658,7 +658,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same AWS account as the principal that calls the action.</p>"
+      "documentation": "<p>Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same AWS account as the principal that calls the action.</p> <p>Applies only to Hyperledger Fabric.</p>"
     }
   },
   "shapes": {
@@ -678,7 +678,7 @@
           "documentation": "<p>Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.</p>"
         }
       },
-      "documentation": "<p>A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>"
+      "documentation": "<p>A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "AvailabilityZoneString": {
       "type": "string"
@@ -791,7 +791,6 @@
       "required": [
         "ClientRequestToken",
         "NetworkId",
-        "MemberId",
         "NodeConfiguration"
       ],
       "members": {
@@ -802,15 +801,13 @@
         },
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the network in which this node runs.</p>",
+          "documentation": "<p>The unique identifier of the network for the node.</p> <p>Ethereum public networks have the following <code>NetworkId</code>s:</p> <ul> <li> <p> <code>n-ethereum-mainnet</code> </p> </li> <li> <p> <code>n-ethereum-rinkeby</code> </p> </li> <li> <p> <code>n-ethereum-ropsten</code> </p> </li> </ul>",
           "location": "uri",
           "locationName": "networkId"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the member that owns this node.</p>",
-          "location": "uri",
-          "locationName": "memberId"
+          "documentation": "<p>The unique identifier of the member that owns this node.</p> <p>Applies only to Hyperledger Fabric.</p>"
         },
         "NodeConfiguration": {
           "shape": "NodeConfiguration",
@@ -899,20 +896,19 @@
       "type": "structure",
       "required": [
         "NetworkId",
-        "MemberId",
         "NodeId"
       ],
       "members": {
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the network that the node belongs to.</p>",
+          "documentation": "<p>The unique identifier of the network that the node is on.</p> <p>Ethereum public networks have the following <code>NetworkId</code>s:</p> <ul> <li> <p> <code>n-ethereum-mainnet</code> </p> </li> <li> <p> <code>n-ethereum-rinkeby</code> </p> </li> <li> <p> <code>n-ethereum-ropsten</code> </p> </li> </ul>",
           "location": "uri",
           "locationName": "networkId"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the member that owns this node.</p>",
-          "location": "uri",
+          "documentation": "<p>The unique identifier of the member that owns this node.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>",
+          "location": "querystring",
           "locationName": "memberId"
         },
         "NodeId": {
@@ -945,7 +941,8 @@
     "Framework": {
       "type": "string",
       "enum": [
-        "HYPERLEDGER_FABRIC"
+        "HYPERLEDGER_FABRIC",
+        "ETHEREUM"
       ]
     },
     "FrameworkVersionString": {
@@ -1010,20 +1007,19 @@
       "type": "structure",
       "required": [
         "NetworkId",
-        "MemberId",
         "NodeId"
       ],
       "members": {
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the network to which the node belongs.</p>",
+          "documentation": "<p>The unique identifier of the network that the node is on.</p>",
           "location": "uri",
           "locationName": "networkId"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the member that owns the node.</p>",
-          "location": "uri",
+          "documentation": "<p>The unique identifier of the member that owns the node.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>",
+          "location": "querystring",
           "locationName": "memberId"
         },
         "NodeId": {
@@ -1099,7 +1095,7 @@
           "shape": "NetworkSummary"
         }
       },
-      "documentation": "<p>An invitation to an AWS account to create a member and join the network.</p>"
+      "documentation": "<p>An invitation to an AWS account to create a member and join the network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "InvitationList": {
       "type": "list",
@@ -1128,7 +1124,7 @@
           "documentation": "<p>The AWS account ID to invite.</p>"
         }
       },
-      "documentation": "<p>An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.</p>"
+      "documentation": "<p>An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "InviteActionList": {
       "type": "list",
@@ -1244,7 +1240,7 @@
         },
         "Status": {
           "shape": "NetworkStatus",
-          "documentation": "<p>An optional status specifier. If provided, only networks currently in this status are listed.</p>",
+          "documentation": "<p>An optional status specifier. If provided, only networks currently in this status are listed.</p> <p>Applies only to Hyperledger Fabric.</p>",
           "location": "querystring",
           "locationName": "status"
         },
@@ -1278,8 +1274,7 @@
     "ListNodesInput": {
       "type": "structure",
       "required": [
-        "NetworkId",
-        "MemberId"
+        "NetworkId"
       ],
       "members": {
         "NetworkId": {
@@ -1290,8 +1285,8 @@
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the member who owns the nodes to list.</p>",
-          "location": "uri",
+          "documentation": "<p>The unique identifier of the member who owns the nodes to list.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>",
+          "location": "querystring",
           "locationName": "memberId"
         },
         "Status": {
@@ -1365,7 +1360,7 @@
       "members": {
         "ProposalVotes": {
           "shape": "ProposalVoteList",
-          "documentation": "<p> The listing of votes. </p>"
+          "documentation": "<p> The list of votes. </p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
@@ -1468,7 +1463,7 @@
           "documentation": "<p>The date and time that the member was created.</p>"
         }
       },
-      "documentation": "<p>Member configuration properties.</p>"
+      "documentation": "<p>Member configuration properties.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "MemberConfiguration": {
       "type": "structure",
@@ -1494,7 +1489,7 @@
           "documentation": "<p>Configuration properties for logging events associated with a member of a Managed Blockchain network.</p>"
         }
       },
-      "documentation": "<p>Configuration properties of the member.</p>"
+      "documentation": "<p>Configuration properties of the member.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "MemberFabricAttributes": {
       "type": "structure",
@@ -1523,7 +1518,7 @@
         },
         "AdminPassword": {
           "shape": "PasswordString",
-          "documentation": "<p>The password for the member's initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quote(‘), double quote(“), forward slash(/), backward slash(\\), @, or a space.</p>"
+          "documentation": "<p>The password for the member's initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\\), @, or a space.</p>"
         }
       },
       "documentation": "<p>Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
@@ -1613,7 +1608,7 @@
           "documentation": "<p>An indicator of whether the member is owned by your AWS account or a different AWS account.</p>"
         }
       },
-      "documentation": "<p>A summary of configuration properties for a member.</p>"
+      "documentation": "<p>A summary of configuration properties for a member.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "MemberSummaryList": {
       "type": "list",
@@ -1673,6 +1668,16 @@
       },
       "documentation": "<p>Network configuration properties.</p>"
     },
+    "NetworkEthereumAttributes": {
+      "type": "structure",
+      "members": {
+        "ChainId": {
+          "shape": "String",
+          "documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p> <ul> <li> <p>mainnet = <code>1</code> </p> </li> <li> <p>rinkeby = <code>4</code> </p> </li> <li> <p>ropsten = <code>3</code> </p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Attributes of Ethereum for a network.</p>"
+    },
     "NetworkFabricAttributes": {
       "type": "structure",
       "members": {
@@ -1706,6 +1711,10 @@
         "Fabric": {
           "shape": "NetworkFabricAttributes",
           "documentation": "<p>Attributes of Hyperledger Fabric for a Managed Blockchain network that uses Hyperledger Fabric.</p>"
+        },
+        "Ethereum": {
+          "shape": "NetworkEthereumAttributes",
+          "documentation": "<p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network.</p>"
         }
       },
       "documentation": "<p>Attributes relevant to the network for the blockchain framework that the network uses.</p>"
@@ -1730,7 +1739,7 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "^(?!-)^[^0-9](?!.*--)[A-Za-z0-9-]+[^- ]$"
+      "pattern": "^(?!-|[0-9])(?!.*-$)(?!.*?--)[a-zA-Z0-9-]+$"
     },
     "NetworkStatus": {
       "type": "string",
@@ -1787,11 +1796,11 @@
       "members": {
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the network that the node is in.</p>"
+          "documentation": "<p>The unique identifier of the network that the node is on.</p>"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique identifier of the member to which the node belongs.</p>"
+          "documentation": "<p>The unique identifier of the member to which the node belongs.</p> <p>Applies only to Hyperledger Fabric.</p>"
         },
         "Id": {
           "shape": "ResourceIdString",
@@ -1811,11 +1820,11 @@
         },
         "LogPublishingConfiguration": {
           "shape": "NodeLogPublishingConfiguration",
-          "documentation": "<p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.</p>"
+          "documentation": "<p>Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.</p>"
         },
         "StateDB": {
           "shape": "StateDBType",
-          "documentation": "<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>.</p>"
+          "documentation": "<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>.</p> <p>Applies only to Hyperledger Fabric.</p>"
         },
         "Status": {
           "shape": "NodeStatus",
@@ -1826,13 +1835,12 @@
           "documentation": "<p>The date and time that the node was created.</p>"
         }
       },
-      "documentation": "<p>Configuration properties of a peer node.</p>"
+      "documentation": "<p>Configuration properties of a node.</p>"
     },
     "NodeConfiguration": {
       "type": "structure",
       "required": [
-        "InstanceType",
-        "AvailabilityZone"
+        "InstanceType"
       ],
       "members": {
         "InstanceType": {
@@ -1845,14 +1853,28 @@
         },
         "LogPublishingConfiguration": {
           "shape": "NodeLogPublishingConfiguration",
-          "documentation": "<p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. </p>"
+          "documentation": "<p>Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain. </p>"
         },
         "StateDB": {
           "shape": "StateDBType",
-          "documentation": "<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.</p>"
+          "documentation": "<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.</p> <p>Applies only to Hyperledger Fabric.</p>"
         }
       },
-      "documentation": "<p>Configuration properties of a peer node.</p>"
+      "documentation": "<p>Configuration properties of a node.</p>"
+    },
+    "NodeEthereumAttributes": {
+      "type": "structure",
+      "members": {
+        "HttpEndpoint": {
+          "shape": "String",
+          "documentation": "<p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over HTTP connections from a client. Use this endpoint in client code for smart contracts when using an HTTP connection. Connections to this endpoint are authenticated using <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>"
+        },
+        "WebSocketEndpoint": {
+          "shape": "String",
+          "documentation": "<p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSockets connections from a client. Use this endpoint in client code for smart contracts when using a WebSockets connection. Connections to this endpoint are authenticated using <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>"
+        }
+      },
+      "documentation": "<p>Attributes of an Ethereum node.</p>"
     },
     "NodeFabricAttributes": {
       "type": "structure",
@@ -1866,7 +1888,7 @@
           "documentation": "<p>The endpoint that identifies the peer node for peer channel-based event services.</p>"
         }
       },
-      "documentation": "<p>Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.</p>"
+      "documentation": "<p>Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric network on Managed Blockchain.</p>"
     },
     "NodeFabricLogPublishingConfiguration": {
       "type": "structure",
@@ -1888,9 +1910,13 @@
         "Fabric": {
           "shape": "NodeFabricAttributes",
           "documentation": "<p>Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.</p>"
+        },
+        "Ethereum": {
+          "shape": "NodeEthereumAttributes",
+          "documentation": "<p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum.</p>"
         }
       },
-      "documentation": "<p>Attributes relevant to a peer node on a Managed Blockchain network for the blockchain framework that the network uses.</p>"
+      "documentation": "<p>Attributes relevant to a node on a Managed Blockchain network for the blockchain framework that the network uses.</p>"
     },
     "NodeListMaxResults": {
       "type": "integer",
@@ -1906,13 +1932,14 @@
           "documentation": "<p>Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
         }
       },
-      "documentation": "<p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.</p>"
+      "documentation": "<p>Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.</p>"
     },
     "NodeStatus": {
       "type": "string",
       "enum": [
         "CREATING",
         "AVAILABLE",
+        "UNHEALTHY",
         "CREATE_FAILED",
         "UPDATING",
         "DELETING",
@@ -1944,7 +1971,7 @@
           "documentation": "<p>The EC2 instance type for the node.</p>"
         }
       },
-      "documentation": "<p>A summary of configuration properties for a peer node.</p>"
+      "documentation": "<p>A summary of configuration properties for a node.</p>"
     },
     "NodeSummaryList": {
       "type": "list",
@@ -2018,7 +2045,7 @@
           "documentation": "<p> The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes. </p>"
         }
       },
-      "documentation": "<p>Properties of a proposal on a Managed Blockchain network.</p>"
+      "documentation": "<p>Properties of a proposal on a Managed Blockchain network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ProposalActions": {
       "type": "structure",
@@ -2032,7 +2059,7 @@
           "documentation": "<p> The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. </p>"
         }
       },
-      "documentation": "<p> The actions to carry out if a proposal is <code>APPROVED</code>. </p>"
+      "documentation": "<p> The actions to carry out if a proposal is <code>APPROVED</code>. </p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ProposalDurationInt": {
       "type": "integer",
@@ -2088,7 +2115,7 @@
           "documentation": "<p> The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. </p>"
         }
       },
-      "documentation": "<p>Properties of a proposal.</p>"
+      "documentation": "<p>Properties of a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "ProposalSummaryList": {
       "type": "list",
@@ -2131,7 +2158,7 @@
           "documentation": "<p>The unique identifier of the member to remove.</p>"
         }
       },
-      "documentation": "<p>An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.</p>"
+      "documentation": "<p>An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.</p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "RemoveActionList": {
       "type": "list",
@@ -2180,13 +2207,13 @@
       "members": {
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique ID of the Managed Blockchain network to which the member belongs.</p>",
+          "documentation": "<p>The unique identifier of the Managed Blockchain network to which the member belongs.</p>",
           "location": "uri",
           "locationName": "networkId"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique ID of the member.</p>",
+          "documentation": "<p>The unique identifier of the member.</p>",
           "location": "uri",
           "locationName": "memberId"
         },
@@ -2204,25 +2231,22 @@
       "type": "structure",
       "required": [
         "NetworkId",
-        "MemberId",
         "NodeId"
       ],
       "members": {
         "NetworkId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique ID of the Managed Blockchain network to which the node belongs.</p>",
+          "documentation": "<p>The unique identifier of the network that the node is on.</p>",
           "location": "uri",
           "locationName": "networkId"
         },
         "MemberId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique ID of the member that owns the node.</p>",
-          "location": "uri",
-          "locationName": "memberId"
+          "documentation": "<p>The unique identifier of the member that owns the node.</p> <p>Applies only to Hyperledger Fabric.</p>"
         },
         "NodeId": {
           "shape": "ResourceIdString",
-          "documentation": "<p>The unique ID of the node.</p>",
+          "documentation": "<p>The unique identifier of the node.</p>",
           "location": "uri",
           "locationName": "nodeId"
         },
@@ -2297,7 +2321,7 @@
           "documentation": "<p> The unique identifier of the member that cast the vote. </p>"
         }
       },
-      "documentation": "<p> Properties of an individual vote that a member cast for a proposal. </p>"
+      "documentation": "<p> Properties of an individual vote that a member cast for a proposal. </p> <p>Applies only to Hyperledger Fabric.</p>"
     },
     "VoteValue": {
       "type": "string",
@@ -2314,8 +2338,8 @@
           "documentation": "<p>Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>"
         }
       },
-      "documentation": "<p> The voting rules for the network to decide if a proposal is accepted </p>"
+      "documentation": "<p> The voting rules for the network to decide if a proposal is accepted </p> <p>Applies only to Hyperledger Fabric.</p>"
     }
   },
-  "documentation": "<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority. Currently, Managed Blockchain supports the Hyperledger Fabric open source framework. </p>"
+  "documentation": "<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open-source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority.</p> <p>Managed Blockchain supports the Hyperledger Fabric and Ethereum open-source frameworks. Because of fundamental differences between the frameworks, some API actions or data types may only apply in the context of one framework and not the other. For example, actions related to Hyperledger Fabric network members such as <code>CreateMember</code> and <code>DeleteMember</code> do not apply to Ethereum.</p> <p>The description for each action indicates the framework or frameworks to which it applies. Data types and properties that apply only in the context of a particular framework are similarly indicated.</p>"
 }
