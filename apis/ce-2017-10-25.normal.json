@@ -3464,6 +3464,10 @@
         "LookbackPeriodInDays": {
           "shape": "LookbackPeriodInDays",
           "documentation": "<p> How many days of previous usage that AWS considers when making this recommendation.</p>"
+        },
+        "AdditionalMetadata": {
+          "shape": "GenericString",
+          "documentation": "<p>Additional metadata that may be applicable to the recommendation.</p>"
         }
       },
       "documentation": "<p>Metadata for this recommendation set.</p>"
@@ -4161,7 +4165,7 @@
         },
         "MonitorArnList": {
           "shape": "MonitorArnList",
-          "documentation": "<p> A list of cost anomaly subscription ARNs. </p>"
+          "documentation": "<p> A list of cost anomaly monitor ARNs. </p>"
         },
         "Subscribers": {
           "shape": "Subscribers",

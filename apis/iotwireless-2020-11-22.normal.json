@@ -2461,6 +2461,13 @@
       "max": 20,
       "min": 0
     },
+    "Fingerprint": {
+      "type": "string",
+      "max": 64,
+      "min": 64,
+      "pattern": "[a-fA-F0-9]{64}",
+      "sensitive": true
+    },
     "GatewayEui": {
       "type": "string",
       "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
@@ -2569,7 +2576,7 @@
       "members": {
         "Sidewalk": {
           "shape": "SidewalkAccountInfoWithFingerprint",
-          "documentation": "<p>The Sidewalk account credentials.</p> <p>The <code>AppServerPrivateKey</code> value is empty to protect its security.</p>"
+          "documentation": "<p>The Sidewalk account credentials.</p>"
         },
         "AccountLinked": {
           "shape": "AccountLinked",
@@ -2690,7 +2697,7 @@
         },
         "ThingName": {
           "shape": "ThingName",
-          "documentation": "<p>The name of the thing associated with the wireless device.</p>"
+          "documentation": "<p>The name of the thing associated with the wireless device. The value is empty if a thing isn't associated with the device.</p>"
         },
         "ThingArn": {
           "shape": "ThingArn",
@@ -2825,7 +2832,7 @@
         },
         "ThingName": {
           "shape": "ThingName",
-          "documentation": "<p>The name of the thing associated with the wireless gateway.</p>"
+          "documentation": "<p>The name of the thing associated with the wireless gateway. The value is empty if a thing isn't associated with the gateway.</p>"
         },
         "ThingArn": {
           "shape": "ThingArn",
@@ -3039,7 +3046,7 @@
         },
         "Sidewalk": {
           "shape": "SidewalkAccountList",
-          "documentation": "<p>The Sidewalk account credentials.</p> <p>The <code>AppServerPrivateKey</code> value is empty to protect its security.</p>"
+          "documentation": "<p>The Sidewalk account credentials.</p>"
         }
       }
     },
@@ -3245,10 +3252,10 @@
         },
         "AbpV1_0_x": {
           "shape": "AbpV1_0_x",
-          "documentation": "<p>LoRa object for create APIs</p>"
+          "documentation": "<p>LoRaWAN object for create APIs</p>"
         }
       },
-      "documentation": "<p>LoRa object for create functions.</p>"
+      "documentation": "<p>LoRaWAN object for create functions.</p>"
     },
     "LoRaWANDeviceMetadata": {
       "type": "structure",
@@ -3313,7 +3320,7 @@
         },
         "MacVersion": {
           "shape": "MacVersion",
-          "documentation": "<p>The MAC version (such as OTAA 1.1 or OTA 1.0.3) to use with this device profile.</p>"
+          "documentation": "<p>The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.</p>"
         },
         "RegParamsRevision": {
           "shape": "RegParamsRevision",
@@ -3552,7 +3559,7 @@
           "documentation": "<p>The ID of the service profile.</p>"
         }
       },
-      "documentation": "<p>LoRa object for update functions.</p>"
+      "documentation": "<p>LoRaWAN object for update functions.</p>"
     },
     "LoRaWANUpdateGatewayTaskCreate": {
       "type": "structure",
@@ -3899,9 +3906,9 @@
           "shape": "AmazonId",
           "documentation": "<p>The Sidewalk Amazon ID.</p>"
         },
-        "AppServerPrivateKey": {
-          "shape": "AppServerPrivateKey",
-          "documentation": "<p>The Sidewalk application server private key.</p>"
+        "Fingerprint": {
+          "shape": "Fingerprint",
+          "documentation": "<p>Fingerprint for Sidewalk application server private key.</p>"
         }
       },
       "documentation": "<p>Information about a Sidewalk account.</p>"

@@ -5590,6 +5590,28 @@
         "shape": "ColumnError"
       }
     },
+    "ColumnImportance": {
+      "type": "structure",
+      "members": {
+        "ColumnName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of a column.</p>"
+        },
+        "Importance": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The column importance score for the column, as a decimal.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing the column name and column importance score for a column. </p> <p>Column importance helps you understand how columns contribute to your model, by identifying which columns in your records are more important than others.</p>"
+    },
+    "ColumnImportanceList": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnImportance"
+      },
+      "max": 100,
+      "min": 0
+    },
     "ColumnList": {
       "type": "list",
       "member": {
@@ -8384,6 +8406,10 @@
         "ConfusionMatrix": {
           "shape": "ConfusionMatrix",
           "documentation": "<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\">Confusion matrix</a> in Wikipedia.</p>"
+        },
+        "ColumnImportances": {
+          "shape": "ColumnImportanceList",
+          "documentation": "<p>A list of <code>ColumnImportance</code> structures containing column importance metrics, sorted in order of descending importance.</p>"
         }
       },
       "documentation": "<p>The evaluation metrics for the find matches algorithm. The quality of your machine learning transform is measured by getting your transform to predict some matches and comparing the results to known matches from the same dataset. The quality metrics are based on a subset of your data, so they are not precise.</p>"

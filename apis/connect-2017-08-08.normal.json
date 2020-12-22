@@ -45,7 +45,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates an approved origin to an Amazon Connect instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates an approved origin to an Amazon Connect instance.</p>"
     },
     "AssociateInstanceStorageConfig": {
       "name": "AssociateInstanceStorageConfig",
@@ -79,7 +79,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>"
     },
     "AssociateLambdaFunction": {
       "name": "AssociateLambdaFunction",
@@ -113,7 +113,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>"
     },
     "AssociateLexBot": {
       "name": "AssociateLexBot",
@@ -147,7 +147,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>"
     },
     "AssociateRoutingProfileQueues": {
       "name": "AssociateRoutingProfileQueues",
@@ -212,7 +212,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates a security key to the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a security key to the instance.</p>"
     },
     "CreateContactFlow": {
       "name": "CreateContactFlow",
@@ -314,7 +314,44 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with anAmazon Connect instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with an Amazon Connect instance.</p>"
+    },
+    "CreateQuickConnect": {
+      "name": "CreateQuickConnect",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/quick-connects/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateQuickConnectRequest"
+      },
+      "output": {
+        "shape": "CreateQuickConnectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a quick connect for the specified Amazon Connect instance.</p>"
     },
     "CreateRoutingProfile": {
       "name": "CreateRoutingProfile",
@@ -505,6 +542,34 @@
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.</p>"
     },
+    "DeleteQuickConnect": {
+      "name": "DeleteQuickConnect",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input": {
+        "shape": "DeleteQuickConnectRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes a quick connect.</p>"
+    },
     "DeleteUseCase": {
       "name": "DeleteUseCase",
       "http": {
@@ -646,7 +711,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>"
     },
     "DescribeInstanceAttribute": {
       "name": "DescribeInstanceAttribute",
@@ -677,7 +742,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes the specified instance attribute.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified instance attribute.</p>"
     },
     "DescribeInstanceStorageConfig": {
       "name": "DescribeInstanceStorageConfig",
@@ -708,7 +773,38 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.</p>"
+    },
+    "DescribeQuickConnect": {
+      "name": "DescribeQuickConnect",
+      "http": {
+        "method": "GET",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input": {
+        "shape": "DescribeQuickConnectRequest"
+      },
+      "output": {
+        "shape": "DescribeQuickConnectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the quick connect.</p>"
     },
     "DescribeRoutingProfile": {
       "name": "DescribeRoutingProfile",
@@ -860,7 +956,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Revokes access to integrated applications from Amazon Connect.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes access to integrated applications from Amazon Connect.</p>"
     },
     "DisassociateInstanceStorageConfig": {
       "name": "DisassociateInstanceStorageConfig",
@@ -888,7 +984,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Removes the storage type configurations for the specified resource type and association ID.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Removes the storage type configurations for the specified resource type and association ID.</p>"
     },
     "DisassociateLambdaFunction": {
       "name": "DisassociateLambdaFunction",
@@ -916,7 +1012,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.</p>"
     },
     "DisassociateLexBot": {
       "name": "DisassociateLexBot",
@@ -944,7 +1040,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>"
     },
     "DisassociateRoutingProfileQueues": {
       "name": "DisassociateRoutingProfileQueues",
@@ -1000,7 +1096,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes the specified security key.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes the specified security key.</p>"
     },
     "GetContactAttributes": {
       "name": "GetContactAttributes",
@@ -1152,7 +1248,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all approved origins associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all approved origins associated with the instance.</p>"
     },
     "ListContactFlows": {
       "name": "ListContactFlows",
@@ -1357,7 +1453,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.</p>"
     },
     "ListLexBots": {
       "name": "ListLexBots",
@@ -1388,7 +1484,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all the Amazon Lex bots currently associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all the Amazon Lex bots currently associated with the instance.</p>"
     },
     "ListPhoneNumbers": {
       "name": "ListPhoneNumbers",
@@ -1483,6 +1579,37 @@
       ],
       "documentation": "<p>Provides information about the queues for the specified Amazon Connect instance.</p> <p>For more information about queues, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html\">Queues: Standard and Agent</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
+    "ListQuickConnects": {
+      "name": "ListQuickConnects",
+      "http": {
+        "method": "GET",
+        "requestUri": "/quick-connects/{InstanceId}"
+      },
+      "input": {
+        "shape": "ListQuickConnectsRequest"
+      },
+      "output": {
+        "shape": "ListQuickConnectsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>"
+    },
     "ListRoutingProfileQueues": {
       "name": "ListRoutingProfileQueues",
       "http": {
@@ -1574,7 +1701,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all security keys associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all security keys associated with the instance.</p>"
     },
     "ListSecurityProfiles": {
       "name": "ListSecurityProfiles",
@@ -1990,7 +2117,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, and contact flows.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, quick connects, and contact flows.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -2165,6 +2292,62 @@
         }
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates an existing configuration for a resource type. This API is idempotent.</p>"
+    },
+    "UpdateQuickConnectConfig": {
+      "name": "UpdateQuickConnectConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}/config"
+      },
+      "input": {
+        "shape": "UpdateQuickConnectConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the configuration settings for the specified quick connect.</p>"
+    },
+    "UpdateQuickConnectName": {
+      "name": "UpdateQuickConnectName",
+      "http": {
+        "method": "POST",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}/name"
+      },
+      "input": {
+        "shape": "UpdateQuickConnectNameRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.</p>"
     },
     "UpdateRoutingProfileConcurrency": {
       "name": "UpdateRoutingProfileConcurrency",
@@ -3025,6 +3208,51 @@
         }
       }
     },
+    "CreateQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "Name",
+        "QuickConnectConfig"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description of the quick connect.</p>"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Configuration settings for the quick connect.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateQuickConnectResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnectARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the quick connect. </p>"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        }
+      }
+    },
     "CreateRoutingProfileRequest": {
       "type": "structure",
       "required": [
@@ -3364,6 +3592,27 @@
         }
       }
     },
+    "DeleteQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        }
+      }
+    },
     "DeleteUseCaseRequest": {
       "type": "structure",
       "required": [
@@ -3551,6 +3800,36 @@
         "StorageConfig": {
           "shape": "InstanceStorageConfig",
           "documentation": "<p>A valid storage type.</p>"
+        }
+      }
+    },
+    "DescribeQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        }
+      }
+    },
+    "DescribeQuickConnectResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnect": {
+          "shape": "QuickConnect",
+          "documentation": "<p>Information about the quick connect.</p>"
         }
       }
     },
@@ -5218,6 +5497,52 @@
         }
       }
     },
+    "ListQuickConnectsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResult1000",
+          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "QuickConnectTypes": {
+          "shape": "QuickConnectTypes",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>",
+          "location": "querystring",
+          "locationName": "QuickConnectTypes"
+        }
+      }
+    },
+    "ListQuickConnectsResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnectSummaryList": {
+          "shape": "QuickConnectSummaryList",
+          "documentation": "<p>Information about the quick connects.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        }
+      }
+    },
     "ListRoutingProfileQueuesRequest": {
       "type": "structure",
       "required": [
@@ -5898,6 +6223,19 @@
     "PhoneNumberId": {
       "type": "string"
     },
+    "PhoneNumberQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "PhoneNumber"
+      ],
+      "members": {
+        "PhoneNumber": {
+          "shape": "PhoneNumber",
+          "documentation": "<p>The phone number in E.164 format.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a phone number for a quick connect.</p>"
+    },
     "PhoneNumberSummary": {
       "type": "structure",
       "members": {
@@ -6003,6 +6341,24 @@
       "max": 256,
       "min": 1
     },
+    "QueueQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "QueueId",
+        "ContactFlowId"
+      ],
+      "members": {
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier of the queue.</p>"
+        },
+        "ContactFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The identifier of the contact flow.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a queue for a quick connect. The contact flow must be of type Transfer to Queue.</p>"
+    },
     "QueueReference": {
       "type": "structure",
       "members": {
@@ -6066,6 +6422,117 @@
       },
       "max": 100,
       "min": 1
+    },
+    "QuickConnect": {
+      "type": "structure",
+      "members": {
+        "QuickConnectARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the quick connect.</p>"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description.</p>"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Contains information about the quick connect.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a quick connect.</p>"
+    },
+    "QuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "QuickConnectType"
+      ],
+      "members": {
+        "QuickConnectType": {
+          "shape": "QuickConnectType",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). </p>"
+        },
+        "UserConfig": {
+          "shape": "UserQuickConnectConfig",
+          "documentation": "<p>The user configuration. This is required only if QuickConnectType is USER.</p>"
+        },
+        "QueueConfig": {
+          "shape": "QueueQuickConnectConfig",
+          "documentation": "<p>The queue configuration. This is required only if QuickConnectType is QUEUE.</p>"
+        },
+        "PhoneConfig": {
+          "shape": "PhoneNumberQuickConnectConfig",
+          "documentation": "<p>The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.</p>"
+        }
+      },
+      "documentation": "<p>Contains configuration settings for a quick connect.</p>"
+    },
+    "QuickConnectDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 0
+    },
+    "QuickConnectId": {
+      "type": "string"
+    },
+    "QuickConnectName": {
+      "type": "string",
+      "max": 127,
+      "min": 1
+    },
+    "QuickConnectSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        },
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name.</p>"
+        },
+        "QuickConnectType": {
+          "shape": "QuickConnectType",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>"
+        }
+      },
+      "documentation": "<p>Contains summary information about a quick connect.</p>"
+    },
+    "QuickConnectSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "QuickConnectSummary"
+      }
+    },
+    "QuickConnectType": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "QUEUE",
+        "PHONE_NUMBER"
+      ]
+    },
+    "QuickConnectTypes": {
+      "type": "list",
+      "member": {
+        "shape": "QuickConnectType"
+      },
+      "max": 3
     },
     "Reference": {
       "type": "structure",
@@ -6922,6 +7389,61 @@
         }
       }
     },
+    "UpdateQuickConnectConfigRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId",
+        "QuickConnectConfig"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Information about the configuration settings for the quick connect.</p>"
+        }
+      }
+    },
+    "UpdateQuickConnectNameRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description of the quick connect.</p>"
+        }
+      }
+    },
     "UpdateRoutingProfileConcurrencyRequest": {
       "type": "structure",
       "required": [
@@ -7329,6 +7851,24 @@
         }
       },
       "documentation": "<p>Contains information about the phone configuration settings for a user.</p>"
+    },
+    "UserQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "UserId",
+        "ContactFlowId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The identifier of the user.</p>"
+        },
+        "ContactFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The identifier of the contact flow.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the quick connect configuration settings for a user. The contact flow must be of type Transfer to Agent.</p>"
     },
     "UserSummary": {
       "type": "structure",

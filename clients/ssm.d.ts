@@ -397,11 +397,11 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowTargets(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTargetsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTargetsResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(params: SSM.Types.DescribeMaintenanceWindowTasksRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
@@ -581,11 +581,11 @@ declare class SSM extends Service {
    */
   getMaintenanceWindowExecutionTaskInvocation(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(params: SSM.Types.GetMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
@@ -1005,11 +1005,11 @@ declare class SSM extends Service {
    */
   updateMaintenanceWindowTarget(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(params: SSM.Types.UpdateMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
@@ -4789,11 +4789,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets allowed to run this task in parallel.
+     * The maximum number of targets allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the task stops being scheduled.
+     * The maximum number of errors allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -7697,9 +7697,9 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * The targets (either instances or maintenance window targets). Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
+     * The targets (either instances or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
      */
-    Targets: Targets;
+    Targets?: Targets;
     /**
      * The ARN of the task to run.
      */
@@ -7725,13 +7725,13 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets this task can be run for in parallel.
+     * The maximum number of targets this task can be run for in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
      */
-    MaxConcurrency: MaxConcurrency;
+    MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.
+     * The maximum number of errors allowed before this task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
      */
-    MaxErrors: MaxErrors;
+    MaxErrors?: MaxErrors;
     /**
      * A structure containing information about an S3 bucket to write instance-level logs to.    LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
@@ -9001,7 +9001,7 @@ declare namespace SSM {
      */
     WindowTaskId: MaintenanceWindowTaskId;
     /**
-     * The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. 
+     * The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide. 
      */
     Targets?: Targets;
     /**
@@ -9025,11 +9025,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.
+     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.
+     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxErrors?: MaxErrors;
     /**

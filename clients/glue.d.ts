@@ -1860,6 +1860,17 @@ declare namespace Glue {
     Error?: ErrorDetail;
   }
   export type ColumnErrors = ColumnError[];
+  export interface ColumnImportance {
+    /**
+     * The name of a column.
+     */
+    ColumnName?: NameString;
+    /**
+     * The column importance score for the column, as a decimal.
+     */
+    Importance?: GenericBoundedDouble;
+  }
+  export type ColumnImportanceList = ColumnImportance[];
   export type ColumnList = Column[];
   export type ColumnNameString = string;
   export interface ColumnStatistics {
@@ -3761,6 +3772,10 @@ declare namespace Glue {
      * The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making. For more information, see Confusion matrix in Wikipedia.
      */
     ConfusionMatrix?: ConfusionMatrix;
+    /**
+     * A list of ColumnImportance structures containing column importance metrics, sorted in order of descending importance.
+     */
+    ColumnImportances?: ColumnImportanceList;
   }
   export interface FindMatchesParameters {
     /**

@@ -2054,6 +2054,10 @@ declare namespace CostExplorer {
      *  How many days of previous usage that AWS considers when making this recommendation.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * Additional metadata that may be applicable to the recommendation.
+     */
+    AdditionalMetadata?: GenericString;
   }
   export interface RightsizingRecommendationSummary {
     /**
@@ -2523,7 +2527,7 @@ declare namespace CostExplorer {
      */
     Frequency?: AnomalySubscriptionFrequency;
     /**
-     *  A list of cost anomaly subscription ARNs. 
+     *  A list of cost anomaly monitor ARNs. 
      */
     MonitorArnList?: MonitorArnList;
     /**

@@ -12,35 +12,35 @@ declare class Connect extends Service {
   constructor(options?: Connect.Types.ClientConfiguration)
   config: Config & Connect.Types.ClientConfiguration;
   /**
-   * Associates an approved origin to an Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates an approved origin to an Amazon Connect instance.
    */
   associateApprovedOrigin(params: Connect.Types.AssociateApprovedOriginRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an approved origin to an Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates an approved origin to an Amazon Connect instance.
    */
   associateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(params: Connect.Types.AssociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
   /**
-   * Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
   /**
-   * Allows the specified Amazon Connect instance to access the specified Lambda function.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Lambda function.
    */
   associateLambdaFunction(params: Connect.Types.AssociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows the specified Amazon Connect instance to access the specified Lambda function.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Lambda function.
    */
   associateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
    */
   associateLexBot(params: Connect.Types.AssociateLexBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Connect extends Service {
    */
   associateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a security key to the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a security key to the instance.
    */
   associateSecurityKey(params: Connect.Types.AssociateSecurityKeyRequest, callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
-   * Associates a security key to the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a security key to the instance.
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
@@ -76,13 +76,21 @@ declare class Connect extends Service {
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with anAmazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with anAmazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a quick connect for the specified Amazon Connect instance.
+   */
+  createQuickConnect(params: Connect.Types.CreateQuickConnectRequest, callback?: (err: AWSError, data: Connect.Types.CreateQuickConnectResponse) => void): Request<Connect.Types.CreateQuickConnectResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a quick connect for the specified Amazon Connect instance.
+   */
+  createQuickConnect(callback?: (err: AWSError, data: Connect.Types.CreateQuickConnectResponse) => void): Request<Connect.Types.CreateQuickConnectResponse, AWSError>;
   /**
    * Creates a new routing profile.
    */
@@ -132,6 +140,14 @@ declare class Connect extends Service {
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a quick connect.
+   */
+  deleteQuickConnect(params: Connect.Types.DeleteQuickConnectRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a quick connect.
+   */
+  deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Deletes a use case from an AppIntegration association.
    */
   deleteUseCase(params: Connect.Types.DeleteUseCaseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -164,29 +180,37 @@ declare class Connect extends Service {
    */
   describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
   /**
-   * Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
    */
   describeInstance(params: Connect.Types.DescribeInstanceRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
   /**
-   * Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
    */
   describeInstance(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
   /**
-   * Describes the specified instance attribute.
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified instance attribute.
    */
   describeInstanceAttribute(params: Connect.Types.DescribeInstanceAttributeRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceAttributeResponse) => void): Request<Connect.Types.DescribeInstanceAttributeResponse, AWSError>;
   /**
-   * Describes the specified instance attribute.
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified instance attribute.
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceAttributeResponse) => void): Request<Connect.Types.DescribeInstanceAttributeResponse, AWSError>;
   /**
-   * Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
+   * This API is in preview release for Amazon Connect and is subject to change. Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
    */
   describeInstanceStorageConfig(params: Connect.Types.DescribeInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
   /**
-   * Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
+   * This API is in preview release for Amazon Connect and is subject to change. Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
    */
   describeInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the quick connect.
+   */
+  describeQuickConnect(params: Connect.Types.DescribeQuickConnectRequest, callback?: (err: AWSError, data: Connect.Types.DescribeQuickConnectResponse) => void): Request<Connect.Types.DescribeQuickConnectResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the quick connect.
+   */
+  describeQuickConnect(callback?: (err: AWSError, data: Connect.Types.DescribeQuickConnectResponse) => void): Request<Connect.Types.DescribeQuickConnectResponse, AWSError>;
   /**
    * Describes the specified routing profile.
    */
@@ -220,35 +244,35 @@ declare class Connect extends Service {
    */
   describeUserHierarchyStructure(callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
   /**
-   * Revokes access to integrated applications from Amazon Connect.
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes access to integrated applications from Amazon Connect.
    */
   disassociateApprovedOrigin(params: Connect.Types.DisassociateApprovedOriginRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes access to integrated applications from Amazon Connect.
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes access to integrated applications from Amazon Connect.
    */
   disassociateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the storage type configurations for the specified resource type and association ID.
+   * This API is in preview release for Amazon Connect and is subject to change. Removes the storage type configurations for the specified resource type and association ID.
    */
   disassociateInstanceStorageConfig(params: Connect.Types.DisassociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the storage type configurations for the specified resource type and association ID.
+   * This API is in preview release for Amazon Connect and is subject to change. Removes the storage type configurations for the specified resource type and association ID.
    */
   disassociateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
    */
   disassociateLambdaFunction(params: Connect.Types.DisassociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
    */
   disassociateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex bot.
    */
   disassociateLexBot(params: Connect.Types.DisassociateLexBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex bot.
    */
   disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -260,11 +284,11 @@ declare class Connect extends Service {
    */
   disassociateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified security key.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the specified security key.
    */
   disassociateSecurityKey(params: Connect.Types.DisassociateSecurityKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified security key.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the specified security key.
    */
   disassociateSecurityKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -300,11 +324,11 @@ declare class Connect extends Service {
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
-   * Returns a paginated list of all approved origins associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all approved origins associated with the instance.
    */
   listApprovedOrigins(params: Connect.Types.ListApprovedOriginsRequest, callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
   /**
-   * Returns a paginated list of all approved origins associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all approved origins associated with the instance.
    */
   listApprovedOrigins(callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
   /**
@@ -356,19 +380,19 @@ declare class Connect extends Service {
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
    */
   listLambdaFunctions(params: Connect.Types.ListLambdaFunctionsRequest, callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
-   * Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
    */
   listLambdaFunctions(callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
-   * Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
    */
   listLexBots(params: Connect.Types.ListLexBotsRequest, callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
-   * Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
    */
   listLexBots(callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
@@ -396,6 +420,14 @@ declare class Connect extends Service {
    */
   listQueues(callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Provides information about the quick connects for the specified Amazon Connect instance. 
+   */
+  listQuickConnects(params: Connect.Types.ListQuickConnectsRequest, callback?: (err: AWSError, data: Connect.Types.ListQuickConnectsResponse) => void): Request<Connect.Types.ListQuickConnectsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Provides information about the quick connects for the specified Amazon Connect instance. 
+   */
+  listQuickConnects(callback?: (err: AWSError, data: Connect.Types.ListQuickConnectsResponse) => void): Request<Connect.Types.ListQuickConnectsResponse, AWSError>;
+  /**
    * List the queues associated with a routing profile.
    */
   listRoutingProfileQueues(params: Connect.Types.ListRoutingProfileQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfileQueuesResponse) => void): Request<Connect.Types.ListRoutingProfileQueuesResponse, AWSError>;
@@ -412,11 +444,11 @@ declare class Connect extends Service {
    */
   listRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
   /**
-   * Returns a paginated list of all security keys associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all security keys associated with the instance.
    */
   listSecurityKeys(params: Connect.Types.ListSecurityKeysRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
-   * Returns a paginated list of all security keys associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all security keys associated with the instance.
    */
   listSecurityKeys(callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
@@ -524,11 +556,11 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -579,6 +611,22 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the configuration settings for the specified quick connect.
+   */
+  updateQuickConnectConfig(params: Connect.Types.UpdateQuickConnectConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the configuration settings for the specified quick connect.
+   */
+  updateQuickConnectConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   */
+  updateQuickConnectName(params: Connect.Types.UpdateQuickConnectNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   */
+  updateQuickConnectName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
    */
@@ -954,6 +1002,38 @@ declare namespace Connect {
      */
     IntegrationAssociationArn?: ARN;
   }
+  export interface CreateQuickConnectRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the quick connect.
+     */
+    Name: QuickConnectName;
+    /**
+     * The description of the quick connect.
+     */
+    Description?: QuickConnectDescription;
+    /**
+     * Configuration settings for the quick connect.
+     */
+    QuickConnectConfig: QuickConnectConfig;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateQuickConnectResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the quick connect. 
+     */
+    QuickConnectARN?: ARN;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId?: QuickConnectId;
+  }
   export interface CreateRoutingProfileRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1163,6 +1243,16 @@ declare namespace Connect {
      */
     IntegrationAssociationId: IntegrationAssociationId;
   }
+  export interface DeleteQuickConnectRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId: QuickConnectId;
+  }
   export interface DeleteUseCaseRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1260,6 +1350,22 @@ declare namespace Connect {
      * A valid storage type.
      */
     StorageConfig?: InstanceStorageConfig;
+  }
+  export interface DescribeQuickConnectRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId: QuickConnectId;
+  }
+  export interface DescribeQuickConnectResponse {
+    /**
+     * Information about the quick connect.
+     */
+    QuickConnect?: QuickConnect;
   }
   export interface DescribeRoutingProfileRequest {
     /**
@@ -2234,6 +2340,34 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListQuickConnectsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+    /**
+     * The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+     */
+    QuickConnectTypes?: QuickConnectTypes;
+  }
+  export interface ListQuickConnectsResponse {
+    /**
+     * Information about the quick connects.
+     */
+    QuickConnectSummaryList?: QuickConnectSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListRoutingProfileQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -2458,6 +2592,12 @@ declare namespace Connect {
   export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
   export type PhoneNumberCountryCodes = PhoneNumberCountryCode[];
   export type PhoneNumberId = string;
+  export interface PhoneNumberQuickConnectConfig {
+    /**
+     * The phone number in E.164 format.
+     */
+    PhoneNumber: PhoneNumber;
+  }
   export interface PhoneNumberSummary {
     /**
      * The identifier of the phone number.
@@ -2505,6 +2645,16 @@ declare namespace Connect {
   export type PromptSummaryList = PromptSummary[];
   export type QueueId = string;
   export type QueueName = string;
+  export interface QueueQuickConnectConfig {
+    /**
+     * The identifier of the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+  }
   export interface QueueReference {
     /**
      * The identifier of the queue.
@@ -2537,6 +2687,74 @@ declare namespace Connect {
   export type QueueType = "STANDARD"|"AGENT"|string;
   export type QueueTypes = QueueType[];
   export type Queues = QueueId[];
+  export interface QuickConnect {
+    /**
+     * The Amazon Resource Name (ARN) of the quick connect.
+     */
+    QuickConnectARN?: ARN;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId?: QuickConnectId;
+    /**
+     * The name of the quick connect.
+     */
+    Name?: QuickConnectName;
+    /**
+     * The description.
+     */
+    Description?: QuickConnectDescription;
+    /**
+     * Contains information about the quick connect.
+     */
+    QuickConnectConfig?: QuickConnectConfig;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface QuickConnectConfig {
+    /**
+     * The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). 
+     */
+    QuickConnectType: QuickConnectType;
+    /**
+     * The user configuration. This is required only if QuickConnectType is USER.
+     */
+    UserConfig?: UserQuickConnectConfig;
+    /**
+     * The queue configuration. This is required only if QuickConnectType is QUEUE.
+     */
+    QueueConfig?: QueueQuickConnectConfig;
+    /**
+     * The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.
+     */
+    PhoneConfig?: PhoneNumberQuickConnectConfig;
+  }
+  export type QuickConnectDescription = string;
+  export type QuickConnectId = string;
+  export type QuickConnectName = string;
+  export interface QuickConnectSummary {
+    /**
+     * The identifier for the quick connect.
+     */
+    Id?: QuickConnectId;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn?: ARN;
+    /**
+     * The name.
+     */
+    Name?: QuickConnectName;
+    /**
+     * The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+     */
+    QuickConnectType?: QuickConnectType;
+  }
+  export type QuickConnectSummaryList = QuickConnectSummary[];
+  export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string;
+  export type QuickConnectTypes = QuickConnectType[];
   export interface Reference {
     /**
      * A formatted URL that will be shown to an agent in the Contact Control Panel (CCP)
@@ -3019,6 +3237,38 @@ declare namespace Connect {
     ResourceType: InstanceStorageResourceType;
     StorageConfig: InstanceStorageConfig;
   }
+  export interface UpdateQuickConnectConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId: QuickConnectId;
+    /**
+     * Information about the configuration settings for the quick connect.
+     */
+    QuickConnectConfig: QuickConnectConfig;
+  }
+  export interface UpdateQuickConnectNameRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId: QuickConnectId;
+    /**
+     * The name of the quick connect.
+     */
+    Name?: QuickConnectName;
+    /**
+     * The description of the quick connect.
+     */
+    Description?: QuickConnectDescription;
+  }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -3264,6 +3514,16 @@ declare namespace Connect {
      * The phone number for the user's desk phone.
      */
     DeskPhoneNumber?: PhoneNumber;
+  }
+  export interface UserQuickConnectConfig {
+    /**
+     * The identifier of the user.
+     */
+    UserId: UserId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
   }
   export interface UserSummary {
     /**

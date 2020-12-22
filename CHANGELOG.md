@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.815.0-->
+<!--LATEST=2.816.0-->
 <!--ENTRYINSERT-->
+
+## 2.816.0
+* feature: Connect: This release adds support for quick connects. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+* feature: CostExplorer: This release adds additional metadata that may be applicable to the Rightsizing Recommendations.
+* feature: Glue: AWS Glue Find Matches machine learning transforms now support column importance scores.
+* feature: IoTWireless: Adding the ability to use Fingerprint in GetPartnerAccount and ListPartnerAccounts API responses to protect sensitive customer account information.
+* feature: RDS: Adds customer-owned IP address (CoIP) support to Amazon RDS on AWS Outposts.
+* feature: SSM: SSM Maintenance Window support for registering/updating maintenance window tasks without targets.
 
 ## 2.815.0
 * feature: ConfigService: AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery

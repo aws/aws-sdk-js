@@ -875,6 +875,7 @@ declare namespace IoTWireless {
   export type FNwkSIntKey = string;
   export type FPort = number;
   export type FactoryPresetFreqsList = PresetFreq[];
+  export type Fingerprint = string;
   export type GatewayEui = string;
   export interface GetDestinationRequest {
     /**
@@ -944,7 +945,7 @@ declare namespace IoTWireless {
   }
   export interface GetPartnerAccountResponse {
     /**
-     * The Sidewalk account credentials. The AppServerPrivateKey value is empty to protect its security.
+     * The Sidewalk account credentials.
      */
     Sidewalk?: SidewalkAccountInfoWithFingerprint;
     /**
@@ -1032,7 +1033,7 @@ declare namespace IoTWireless {
      */
     Arn?: WirelessDeviceArn;
     /**
-     * The name of the thing associated with the wireless device.
+     * The name of the thing associated with the wireless device. The value is empty if a thing isn't associated with the device.
      */
     ThingName?: ThingName;
     /**
@@ -1120,7 +1121,7 @@ declare namespace IoTWireless {
      */
     Arn?: WirelessGatewayArn;
     /**
-     * The name of the thing associated with the wireless gateway.
+     * The name of the thing associated with the wireless gateway. The value is empty if a thing isn't associated with the gateway.
      */
     ThingName?: ThingName;
     /**
@@ -1254,7 +1255,7 @@ declare namespace IoTWireless {
      */
     NextToken?: NextToken;
     /**
-     * The Sidewalk account credentials. The AppServerPrivateKey value is empty to protect its security.
+     * The Sidewalk account credentials.
      */
     Sidewalk?: SidewalkAccountList;
   }
@@ -1396,7 +1397,7 @@ declare namespace IoTWireless {
      */
     AbpV1_1?: AbpV1_1;
     /**
-     * LoRa object for create APIs
+     * LoRaWAN object for create APIs
      */
     AbpV1_0_x?: AbpV1_0_x;
   }
@@ -1456,7 +1457,7 @@ declare namespace IoTWireless {
      */
     ClassCTimeout?: ClassCTimeout;
     /**
-     * The MAC version (such as OTAA 1.1 or OTA 1.0.3) to use with this device profile.
+     * The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
      */
     MacVersion?: MacVersion;
     /**
@@ -1827,9 +1828,9 @@ declare namespace IoTWireless {
      */
     AmazonId?: AmazonId;
     /**
-     * The Sidewalk application server private key.
+     * Fingerprint for Sidewalk application server private key.
      */
-    AppServerPrivateKey?: AppServerPrivateKey;
+    Fingerprint?: Fingerprint;
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
   export interface SidewalkListDevice {
