@@ -76,6 +76,14 @@ declare class ComputeOptimizer extends Service {
    */
   getEnrollmentStatus(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
   /**
+   * Returns AWS Lambda function recommendations. AWS Compute Optimizer generates recommendations for functions that meet a specific set of requirements. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide.
+   */
+  getLambdaFunctionRecommendations(params: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse, AWSError>;
+  /**
+   * Returns AWS Lambda function recommendations. AWS Compute Optimizer generates recommendations for functions that meet a specific set of requirements. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide.
+   */
+  getLambdaFunctionRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse, AWSError>;
+  /**
    * Returns the optimization findings for an account. For example, it returns the number of Amazon EC2 instances in an account that are under-provisioned, over-provisioned, or optimized. It also returns the number of Auto Scaling groups in an account that are not optimized, or optimized.
    */
   getRecommendationSummaries(params: ComputeOptimizer.Types.GetRecommendationSummariesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
@@ -337,6 +345,10 @@ declare namespace ComputeOptimizer {
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
   export type Finding = "Underprovisioned"|"Overprovisioned"|"Optimized"|"NotOptimized"|string;
+  export type FindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|string;
+  export type FunctionArn = string;
+  export type FunctionArns = FunctionArn[];
+  export type FunctionVersion = string;
   export interface GetAutoScalingGroupRecommendationsRequest {
     /**
      * The IDs of the AWS accounts for which to return Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
@@ -489,6 +501,38 @@ declare namespace ComputeOptimizer {
      */
     memberAccountsEnrolled?: MemberAccountsEnrolled;
   }
+  export interface GetLambdaFunctionRecommendationsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the functions for which to return recommendations. You can specify a qualified or unqualified ARN. If you specify an unqualified ARN without a function version suffix, Compute Optimizer will return recommendations for the latest ($LATEST) version of the function. If you specify a qualified ARN with a version suffix, Compute Optimizer will return recommendations for the specified function version. For more information about using function versions, see Using versions in the AWS Lambda Developer Guide.
+     */
+    functionArns?: FunctionArns;
+    /**
+     * The IDs of the AWS accounts for which to return function recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return function recommendations. Only one account ID can be specified per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     * An array of objects that describe a filter that returns a more specific list of function recommendations.
+     */
+    filters?: LambdaFunctionRecommendationFilters;
+    /**
+     * The token to advance to the next page of function recommendations.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of function recommendations to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface GetLambdaFunctionRecommendationsResponse {
+    /**
+     * The token to use to advance to the next page of function recommendations. This value is null when there are no more pages of function recommendations to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * An array of objects that describe function recommendations.
+     */
+    lambdaFunctionRecommendations?: LambdaFunctionRecommendations;
+  }
   export interface GetRecommendationError {
     /**
      * The ID of the error.
@@ -610,12 +654,124 @@ declare namespace ComputeOptimizer {
   export type JobId = string;
   export type JobIds = JobId[];
   export type JobStatus = "Queued"|"InProgress"|"Complete"|"Failed"|string;
+  export type LambdaFunctionMemoryMetricName = "Duration"|string;
+  export type LambdaFunctionMemoryMetricStatistic = "LowerBound"|"UpperBound"|"Expected"|string;
+  export interface LambdaFunctionMemoryProjectedMetric {
+    /**
+     * The name of the projected utilization metric.
+     */
+    name?: LambdaFunctionMemoryMetricName;
+    /**
+     * The statistic of the projected utilization metric.
+     */
+    statistic?: LambdaFunctionMemoryMetricStatistic;
+    /**
+     * The values of the projected utilization metrics.
+     */
+    value?: MetricValue;
+  }
+  export type LambdaFunctionMemoryProjectedMetrics = LambdaFunctionMemoryProjectedMetric[];
+  export interface LambdaFunctionMemoryRecommendationOption {
+    /**
+     * The rank of the function recommendation option. The top recommendation option is ranked as 1.
+     */
+    rank?: Rank;
+    /**
+     * The memory size, in MB, of the function recommendation option.
+     */
+    memorySize?: MemorySize;
+    /**
+     * An array of objects that describe the projected utilization metrics of the function recommendation option.
+     */
+    projectedUtilizationMetrics?: LambdaFunctionMemoryProjectedMetrics;
+  }
+  export type LambdaFunctionMemoryRecommendationOptions = LambdaFunctionMemoryRecommendationOption[];
+  export type LambdaFunctionMetricName = "Duration"|"Memory"|string;
+  export type LambdaFunctionMetricStatistic = "Maximum"|"Average"|string;
+  export interface LambdaFunctionRecommendation {
+    /**
+     * The Amazon Resource Name (ARN) of the current function.
+     */
+    functionArn?: FunctionArn;
+    /**
+     * The version number of the current function.
+     */
+    functionVersion?: FunctionVersion;
+    /**
+     * The AWS account ID of the function.
+     */
+    accountId?: AccountId;
+    /**
+     * The amount of memory, in MB, that's allocated to the current function.
+     */
+    currentMemorySize?: MemorySize;
+    /**
+     * The number of times your function code was executed during the look-back period.
+     */
+    numberOfInvocations?: NumberOfInvocations;
+    /**
+     * An array of objects that describe the utilization metrics of the function.
+     */
+    utilizationMetrics?: LambdaFunctionUtilizationMetrics;
+    /**
+     * The number of days for which utilization metrics were analyzed for the function.
+     */
+    lookbackPeriodInDays?: LookBackPeriodInDays;
+    /**
+     * The time stamp of when the function recommendation was last refreshed.
+     */
+    lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     * The finding classification for the function. Findings for functions include:     Optimized  — The function is correctly provisioned to run your workload based on its current configuration and its utilization history. This finding classification does not include finding reason codes.     NotOptimized  — The function is performing at a higher level (over-provisioned) or at a lower level (under-provisioned) than required for your workload because its current configuration is not optimal. Over-provisioned resources might lead to unnecessary infrastructure cost, and under-provisioned resources might lead to poor application performance. This finding classification can include the MemoryUnderprovisioned and MemoryUnderprovisioned finding reason codes.     Unavailable  — Compute Optimizer was unable to generate a recommendation for the function. This could be because the function has not accumulated sufficient metric data, or the function does not qualify for a recommendation. This finding classification can include the InsufficientData and Inconclusive finding reason codes.  Functions with a finding of unavailable are not returned unless you specify the filter parameter with a value of Unavailable in your GetLambdaFunctionRecommendations request.   
+     */
+    finding?: LambdaFunctionRecommendationFinding;
+    /**
+     * The reason for the finding classification of the function.  Functions that have a finding classification of Optimized don't have a finding reason code.  Reason codes include:     MemoryOverprovisioned  — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the NotOptimized finding classification.     MemoryUnderprovisioned  — The function is under-provisioned when its memory configuration doesn't meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the NotOptimized finding classification.     InsufficientData  — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide. This finding reason code is part of the Unavailable finding classification.     Inconclusive  — The function does not qualify for a recommendation, or there was an internal error. This finding reason code is part of the Unavailable finding classification.  
+     */
+    findingReasonCodes?: LambdaFunctionRecommendationFindingReasonCodes;
+    /**
+     * An array of objects that describe the memory configuration recommendation options for the function.
+     */
+    memorySizeRecommendationOptions?: LambdaFunctionMemoryRecommendationOptions;
+  }
+  export interface LambdaFunctionRecommendationFilter {
+    /**
+     * The name of the filter. Specify Finding to return recommendations with a specific finding classification (e.g., NotOptimized). Specify FindingReasonCode to return recommendations with a specific finding reason code (e.g., MemoryUnderprovisioned).
+     */
+    name?: LambdaFunctionRecommendationFilterName;
+    /**
+     * The value of the filter. The valid values for this parameter are as follows, depending on what you specify for the name parameter:   Specify Optimized, NotOptimized, or Unavailable if you specified the name parameter as Finding.   Specify MemoryOverprovisioned, MemoryUnderprovisioned, InsufficientData, or Inconclusive if you specified the name parameter as FindingReasonCode.  
+     */
+    values?: FilterValues;
+  }
+  export type LambdaFunctionRecommendationFilterName = "Finding"|"FindingReasonCode"|string;
+  export type LambdaFunctionRecommendationFilters = LambdaFunctionRecommendationFilter[];
+  export type LambdaFunctionRecommendationFinding = "Optimized"|"NotOptimized"|"Unavailable"|string;
+  export type LambdaFunctionRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"InsufficientData"|"Inconclusive"|string;
+  export type LambdaFunctionRecommendationFindingReasonCodes = LambdaFunctionRecommendationFindingReasonCode[];
+  export type LambdaFunctionRecommendations = LambdaFunctionRecommendation[];
+  export interface LambdaFunctionUtilizationMetric {
+    /**
+     * The name of the utilization metric.
+     */
+    name?: LambdaFunctionMetricName;
+    /**
+     * The statistic of the utilization metric.
+     */
+    statistic?: LambdaFunctionMetricStatistic;
+    /**
+     * The value of the utilization metric.
+     */
+    value?: MetricValue;
+  }
+  export type LambdaFunctionUtilizationMetrics = LambdaFunctionUtilizationMetric[];
   export type LastRefreshTimestamp = Date;
   export type LastUpdatedTimestamp = Date;
   export type LookBackPeriodInDays = number;
   export type MaxResults = number;
   export type MaxSize = number;
   export type MemberAccountsEnrolled = boolean;
+  export type MemorySize = number;
   export type Message = string;
   export type MetadataKey = string;
   export type MetricName = "Cpu"|"Memory"|"EBS_READ_OPS_PER_SECOND"|"EBS_WRITE_OPS_PER_SECOND"|"EBS_READ_BYTES_PER_SECOND"|"EBS_WRITE_BYTES_PER_SECOND"|string;
@@ -624,6 +780,7 @@ declare namespace ComputeOptimizer {
   export type MetricValues = MetricValue[];
   export type MinSize = number;
   export type NextToken = string;
+  export type NumberOfInvocations = number;
   export type PerformanceRisk = number;
   export type Period = number;
   export interface ProjectedMetric {
@@ -643,6 +800,17 @@ declare namespace ComputeOptimizer {
   export type ProjectedMetrics = ProjectedMetric[];
   export type ProjectedUtilizationMetrics = UtilizationMetric[];
   export type Rank = number;
+  export type ReasonCodeSummaries = ReasonCodeSummary[];
+  export interface ReasonCodeSummary {
+    /**
+     * The name of the finding reason code.
+     */
+    name?: FindingReasonCode;
+    /**
+     * The value of the finding reason code summary.
+     */
+    value?: SummaryValue;
+  }
   export interface RecommendationExportJob {
     /**
      * The identification number of the export job.
@@ -686,7 +854,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|string;
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -756,6 +924,10 @@ declare namespace ComputeOptimizer {
      * The value of the recommendation summary.
      */
     value?: SummaryValue;
+    /**
+     * An array of objects that summarize a finding reason code.
+     */
+    reasonCodeSummaries?: ReasonCodeSummaries;
   }
   export type SummaryValue = number;
   export type Timestamp = Date;

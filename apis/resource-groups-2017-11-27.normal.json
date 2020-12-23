@@ -41,7 +41,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration.</p>"
+      "documentation": "<p>Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration. For more information about constructing a resource query, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>. For more information about service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:CreateGroup</code> </p> </li> </ul>"
     },
     "DeleteGroup": {
       "name": "DeleteGroup",
@@ -75,7 +75,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.</p>"
+      "documentation": "<p>Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:DeleteGroup</code> </p> </li> </ul>"
     },
     "GetGroup": {
       "name": "GetGroup",
@@ -109,7 +109,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns information about a specified resource group.</p>"
+      "documentation": "<p>Returns information about a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroup</code> </p> </li> </ul>"
     },
     "GetGroupConfiguration": {
       "name": "GetGroupConfiguration",
@@ -143,7 +143,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns the service configuration associated with the specified resource group. AWS Resource Groups supports configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
+      "documentation": "<p>Returns the service configuration associated with the specified resource group. For details about the service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroupConfiguration</code> </p> </li> </ul>"
     },
     "GetGroupQuery": {
       "name": "GetGroupQuery",
@@ -177,7 +177,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Retrieves the resource query associated with the specified resource group.</p>"
+      "documentation": "<p>Retrieves the resource query associated with the specified resource group. For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroupQuery</code> </p> </li> </ul>"
     },
     "GetTags": {
       "name": "GetTags",
@@ -211,7 +211,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an ARN.</p>"
+      "documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an ARN.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetTags</code> </p> </li> </ul>"
     },
     "GroupResources": {
       "name": "GroupResources",
@@ -245,7 +245,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Adds the specified resources to the specified group.</p>"
+      "documentation": "<p>Adds the specified resources to the specified group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GroupResources</code> </p> </li> </ul>"
     },
     "ListGroupResources": {
       "name": "ListGroupResources",
@@ -282,7 +282,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of ARNs of the resources that are members of a specified resource group.</p>"
+      "documentation": "<p>Returns a list of ARNs of the resources that are members of a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:ListGroupResources</code> </p> </li> </ul>"
     },
     "ListGroups": {
       "name": "ListGroups",
@@ -313,7 +313,42 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of existing resource groups in your account.</p>"
+      "documentation": "<p>Returns a list of existing resource groups in your account.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:ListGroups</code> </p> </li> </ul>"
+    },
+    "PutGroupConfiguration": {
+      "name": "PutGroupConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/put-group-configuration",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "PutGroupConfigurationInput"
+      },
+      "output": {
+        "shape": "PutGroupConfigurationOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "MethodNotAllowedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Attaches a service configuration to the specified group. This occurs asynchronously, and can take time to complete. You can use <a>GetGroupConfiguration</a> to check the status of the update.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:PutGroupConfiguration</code> </p> </li> </ul>"
     },
     "SearchResources": {
       "name": "SearchResources",
@@ -347,7 +382,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.</p>"
+      "documentation": "<p>Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:SearchResources</code> </p> </li> </ul>"
     },
     "Tag": {
       "name": "Tag",
@@ -381,7 +416,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important>"
+      "documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:Tag</code> </p> </li> </ul>"
     },
     "UngroupResources": {
       "name": "UngroupResources",
@@ -415,7 +450,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Removes the specified resources from the specified group.</p>"
+      "documentation": "<p>Removes the specified resources from the specified group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UngroupResources</code> </p> </li> </ul>"
     },
     "Untag": {
       "name": "Untag",
@@ -449,7 +484,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Deletes tags from a specified resource group.</p>"
+      "documentation": "<p>Deletes tags from a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:Untag</code> </p> </li> </ul>"
     },
     "UpdateGroup": {
       "name": "UpdateGroup",
@@ -483,7 +518,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Updates the description for an existing group. You cannot update the name of a resource group.</p>"
+      "documentation": "<p>Updates the description for an existing group. You cannot update the name of a resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UpdateGroup</code> </p> </li> </ul>"
     },
     "UpdateGroupQuery": {
       "name": "UpdateGroupQuery",
@@ -517,7 +552,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Updates the resource query of a group.</p>"
+      "documentation": "<p>Updates the resource query of a group. For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UpdateGroupQuery</code> </p> </li> </ul>"
     }
   },
   "shapes": {
@@ -537,7 +572,7 @@
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query that determines which AWS resources are members of this group.</p> <note> <p>You can specify either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>"
+          "documentation": "<p>The resource query that determines which AWS resources are members of this group. For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>. </p> <note> <p>A resource group can contain either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>"
         },
         "Tags": {
           "shape": "Tags",
@@ -545,7 +580,7 @@
         },
         "Configuration": {
           "shape": "GroupConfigurationList",
-          "documentation": "<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <note> <p>You can specify either a <code>Configuration</code> or a <code>ResourceQuery</code> in a group, but not both.</p> </note>"
+          "documentation": "<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements. For details about the syntax of service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>"
         }
       }
     },
@@ -558,7 +593,7 @@
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query associated with the group.</p>"
+          "documentation": "<p>The resource query associated with the group. For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>. </p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -566,7 +601,7 @@
         },
         "GroupConfiguration": {
           "shape": "GroupConfiguration",
-          "documentation": "<p>The service configuration associated with the resource group. AWS Resource Groups supports adding service configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The service configuration associated with the resource group. For details about the syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p>"
         }
       }
     },
@@ -575,7 +610,7 @@
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "documentation": "<p>Deprecated - don't use this parameter. Use <code>Group</code> instead.</p>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated, use Group instead."
         },
@@ -647,7 +682,7 @@
       "members": {
         "GroupConfiguration": {
           "shape": "GroupConfiguration",
-          "documentation": "<p>The configuration associated with the specified group.</p>"
+          "documentation": "<p>The service configuration associated with the specified group. For details about the service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p>"
         }
       }
     },
@@ -656,7 +691,7 @@
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "documentation": "<p>Deprecated - don't use this parameter. Use <code>Group</code> instead.</p>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated, use Group instead."
         },
@@ -695,7 +730,7 @@
       "members": {
         "GroupQuery": {
           "shape": "GroupQuery",
-          "documentation": "<p>The resource query associated with the specified group.</p>"
+          "documentation": "<p>The resource query associated with the specified group. For more information about resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create a tag-based group in Resource Groups</a>.</p>"
         }
       }
     },
@@ -746,7 +781,7 @@
           "documentation": "<p>The description of the resource group.</p>"
         }
       },
-      "documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>"
+      "documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group, or later by using the <a>PutGroupConfiguration</a> operation.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>"
     },
     "GroupArn": {
       "type": "string",
@@ -774,7 +809,7 @@
           "documentation": "<p>If present, the reason why a request to update the group configuration failed.</p>"
         }
       },
-      "documentation": "<p>A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group.</p>"
+      "documentation": "<p>A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group by using <a>CreateGroup</a>, or later by using the <a>PutGroupConfiguration</a> operation. For details about group service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p>"
     },
     "GroupConfigurationFailureReason": {
       "type": "string"
@@ -787,14 +822,14 @@
       "members": {
         "Type": {
           "shape": "GroupConfigurationType",
-          "documentation": "<p>Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>.</p> <p>You can specify the following string values:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> </p> <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> <li> <p> <code>AWS::ResourceGroups::Generic</code> - Supports parameters that configure the behavior of resource groups of any type.</p> </li> </ul>"
+          "documentation": "<p>Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>. For the list of types that you can specify for a configuration item, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types\">Supported resource types and parameters</a>.</p>"
         },
         "Parameters": {
           "shape": "GroupParameterList",
-          "documentation": "<p>A collection of parameters for this group configuration item.</p>"
+          "documentation": "<p>A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types\">Supported resource types and parameters</a>.</p>"
         }
       },
-      "documentation": "<p>An item in a group configuration. A group configuration can have one or more items.</p>"
+      "documentation": "<p>An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p>"
     },
     "GroupConfigurationList": {
       "type": "list",
@@ -811,26 +846,26 @@
       "members": {
         "Name": {
           "shape": "GroupConfigurationParameterName",
-          "documentation": "<p>The name of the group configuration parameter.</p> <p>You can specify the following string values:</p> <ul> <li> <p>For configuration item type <code>AWS::ResourceGroups::Generic</code>:</p> <ul> <li> <p> <code>allowed-resource-types</code> </p> <p>Specifies the types of resources that you can add to this group by using the <a>GroupResources</a> operation.</p> </li> </ul> </li> <li> <p>For configuration item type <code>AWS::EC2::CapacityReservationPool</code>:</p> <ul> <li> <p>None - This configuration item type doesn't support any parameters.</p> </li> </ul> <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types\">Supported resource types and parameters</a>.</p>"
         },
         "Values": {
           "shape": "GroupConfigurationParameterValueList",
-          "documentation": "<p>The values of for this parameter.</p> <p>You can specify the following string value:</p> <ul> <li> <p>For item type <code>allowed-resource-types</code>: the only supported parameter value is <code>AWS::EC2::CapacityReservation</code>.</p> </li> </ul>"
+          "documentation": "<p>The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types\">Supported resource types and parameters</a>.</p>"
         }
       },
-      "documentation": "<p>A parameter for a group configuration item.</p>"
+      "documentation": "<p>A parameter for a group configuration item. For details about group service configuration syntax, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p>"
     },
     "GroupConfigurationParameterName": {
       "type": "string",
-      "max": 40,
+      "max": 80,
       "min": 1,
       "pattern": "[a-z-]+"
     },
     "GroupConfigurationParameterValue": {
       "type": "string",
-      "max": 40,
+      "max": 256,
       "min": 1,
-      "pattern": "[a-zA-Z0-9:]+"
+      "pattern": "[a-zA-Z0-9:_-]+"
     },
     "GroupConfigurationParameterValueList": {
       "type": "list",
@@ -974,11 +1009,15 @@
       "members": {
         "Succeeded": {
           "shape": "ResourceArnList",
-          "documentation": "<p>The ARNs of the resources that were successfully added to the group by this operation.</p>"
+          "documentation": "<p>A list of ARNs of resources that were successfully added to the group by this operation.</p>"
         },
         "Failed": {
           "shape": "FailedResourceList",
-          "documentation": "<p>The ARNs of the resources that failed to be added to the group by this operation.</p>"
+          "documentation": "<p>A list of ARNs of any resources that failed to be added to the group by this operation.</p>"
+        },
+        "Pending": {
+          "shape": "PendingResourceList",
+          "documentation": "<p>A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the <code> <a>ListGroupResources</a> </code> operation, and checking the <code>Resources</code> array in the response and the <code>Status</code> field of each object in that array. </p>"
         }
       }
     },
@@ -993,7 +1032,7 @@
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "documentation": "<important> <p> <i> <b>Deprecated - don't use this parameter. Use the <code>Group</code> request field instead.</b> </i> </p> </important>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated, use Group instead."
         },
@@ -1015,12 +1054,37 @@
         }
       }
     },
+    "ListGroupResourcesItem": {
+      "type": "structure",
+      "members": {
+        "Identifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "Status": {
+          "shape": "ResourceStatus",
+          "documentation": "<p>A structure that contains the status of this resource's membership in the group.</p> <note> <p>This field is present in the response only if the group is of type <code>AWS::EC2::HostManagement</code>.</p> </note>"
+        }
+      },
+      "documentation": "<p>A structure returned by the <a>ListGroupResources</a> operation that contains identity and group membership status information for one of the resources in the group.</p>"
+    },
+    "ListGroupResourcesItemList": {
+      "type": "list",
+      "member": {
+        "shape": "ListGroupResourcesItem"
+      }
+    },
     "ListGroupResourcesOutput": {
       "type": "structure",
       "members": {
+        "Resources": {
+          "shape": "ListGroupResourcesItemList",
+          "documentation": "<p>An array of resources from which you can determine each resource's identity, type, and group membership status.</p>"
+        },
         "ResourceIdentifiers": {
           "shape": "ResourceIdentifierList",
-          "documentation": "<p>The ARNs and resource types of resources that are members of the group that you specified.</p>"
+          "documentation": "<important> <p> <b> <i>Deprecated - don't use this parameter. Use the <code>Resources</code> response field instead.</i> </b> </p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Resources instead."
         },
         "NextToken": {
           "shape": "NextToken",
@@ -1037,7 +1101,7 @@
       "members": {
         "Filters": {
           "shape": "GroupFilterList",
-          "documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p>AWS:EC2::CapacityReservationPool</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p> <code>AWS:EC2::CapacityReservationPool</code> </p> </li> <li> <p> <code>AWS:EC2::HostManagement</code> </p> </li> </ul> </li> </ul>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1062,7 +1126,7 @@
         },
         "Groups": {
           "shape": "GroupList",
-          "documentation": "<p>This output element is deprecated and shouldn't be used. Refer to <code>GroupIdentifiers</code> instead.</p>",
+          "documentation": "<important> <p> <i> <b>Deprecated - don't use this field. Use the <code>GroupIdentifiers</code> response field instead.</b> </i> </p> </important>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated, use GroupIdentifiers instead."
         },
@@ -1082,6 +1146,39 @@
       "max": 8192,
       "min": 0,
       "pattern": "^[a-zA-Z0-9+/]*={0,2}$"
+    },
+    "PendingResource": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon resource name (ARN) of the resource that's in a pending state.</p>"
+        }
+      },
+      "documentation": "<p>A structure that identifies a resource that is currently pending addition to the group as a member. Adding a resource to a resource group happens asynchronously as a background task and this one isn't completed yet.</p>"
+    },
+    "PendingResourceList": {
+      "type": "list",
+      "member": {
+        "shape": "PendingResource"
+      }
+    },
+    "PutGroupConfigurationInput": {
+      "type": "structure",
+      "members": {
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or ARN of the resource group with the configuration that you want to update.</p>"
+        },
+        "Configuration": {
+          "shape": "GroupConfigurationList",
+          "documentation": "<p>The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <p>For information about the syntax of a service configuration, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>"
+        }
+      }
+    },
+    "PutGroupConfigurationOutput": {
+      "type": "structure",
+      "members": {}
     },
     "Query": {
       "type": "string",
@@ -1196,7 +1293,7 @@
           "documentation": "<p>The resource type of a resource, such as <code>AWS::EC2::Instance</code>.</p>"
         }
       },
-      "documentation": "<p>The ARN of a resource, and its resource type.</p>"
+      "documentation": "<p>A structure that contains the ARN of a resource and its resource type.</p>"
     },
     "ResourceIdentifierList": {
       "type": "list",
@@ -1221,6 +1318,22 @@
         }
       },
       "documentation": "<p>The query that is used to define a resource group or a search for resources. A query specifies both a query type and a query string as a JSON object. See the examples section for example JSON strings.</p> <p>The examples that follow are shown as standard JSON strings. If you include such a string as a parameter to the AWS CLI or an SDK API, you might need to 'escape' the string into a single line. For example, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html\">Quoting strings</a> in the <i>AWS CLI User Guide</i>.</p> <p> <b>Example 1</b> </p> <p>The following generic example shows a resource query JSON string that includes only resources that meet the following criteria:</p> <ul> <li> <p>The resource type must be either <code>resource_type1</code> or <code>resource_type2</code>.</p> </li> <li> <p>The resource must have a tag <code>Key1</code> with a value of either <code>ValueA</code> or <code>ValueB</code>.</p> </li> <li> <p>The resource must have a tag <code>Key2</code> with a value of either <code>ValueC</code> or <code>ValueD</code>.</p> </li> </ul> <p> <code>{ \"Type\": \"TAG_FILTERS_1_0\", \"Query\": { \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"], \"TagFilters\": [ { \"Key\": \"Key1\", \"Values\": [\"ValueA\",\"ValueB\"] }, { \"Key\":\"Key2\", \"Values\":[\"ValueC\",\"ValueD\"] } ] } }</code> </p> <p>This has the equivalent \"shortcut\" syntax of the following:</p> <p> <code>{ \"Type\": \"TAG_FILTERS_1_0\", \"Query\": { \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"], \"TagFilters\": [ { \"Key1\": [\"ValueA\",\"ValueB\"] }, { \"Key2\": [\"ValueC\",\"ValueD\"] } ] } }</code> </p> <p> <b>Example 2</b> </p> <p>The following example shows a resource query JSON string that includes only Amazon EC2 instances that are tagged <code>Stage</code> with a value of <code>Test</code>.</p> <p> <code>{ \"Type\": \"TAG_FILTERS_1_0\", \"Query\": \"{ \"ResourceTypeFilters\": \"AWS::EC2::Instance\", \"TagFilters\": { \"Stage\": \"Test\" } } }</code> </p> <p> <b>Example 3</b> </p> <p>The following example shows a resource query JSON string that includes resource of any supported type as long as it is tagged <code>Stage</code> with a value of <code>Prod</code>.</p> <p> <code>{ \"Type\": \"TAG_FILTERS_1_0\", \"Query\": { \"ResourceTypeFilters\": \"AWS::AllSupported\", \"TagFilters\": { \"Stage\": \"Prod\" } } }</code> </p> <p> <b>Example 4</b> </p> <p>The following example shows a resource query JSON string that includes only Amazon EC2 instances and Amazon S3 buckets that are part of the specified AWS CloudFormation stack.</p> <p> <code>{ \"Type\": \"CLOUDFORMATION_STACK_1_0\", \"Query\": { \"ResourceTypeFilters\": [ \"AWS::EC2::Instance\", \"AWS::S3::Bucket\" ], \"StackIdentifier\": \"arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE\" } }</code> </p>"
+    },
+    "ResourceStatus": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ResourceStatusValue",
+          "documentation": "<p>The current status.</p>"
+        }
+      },
+      "documentation": "<p>A structure that identifies the current group membership status for a resource. Adding a resource to a resource group is performed asynchronously as a background task. A <code>PENDING</code> status indicates, for this resource, that the process isn't completed yet.</p>"
+    },
+    "ResourceStatusValue": {
+      "type": "string",
+      "enum": [
+        "PENDING"
+      ]
     },
     "ResourceType": {
       "type": "string",
@@ -1344,11 +1457,15 @@
       "members": {
         "Succeeded": {
           "shape": "ResourceArnList",
-          "documentation": "<p>The ARNs of the resources that were successfully removed from the group.</p>"
+          "documentation": "<p>A list of resources that were successfully removed from the group by this operation.</p>"
         },
         "Failed": {
           "shape": "FailedResourceList",
-          "documentation": "<p>The resources that failed to be removed from the group.</p>"
+          "documentation": "<p>A list of any resources that failed to be removed from the group by this operation.</p>"
+        },
+        "Pending": {
+          "shape": "PendingResourceList",
+          "documentation": "<p>A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the <code> <a>ListGroupResources</a> </code> operation. After the resource is successfully removed, it no longer appears in the response.</p>"
         }
       }
     },
@@ -1430,7 +1547,7 @@
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query to determine which AWS resources are members of this resource group.</p>"
+          "documentation": "<p>The resource query to determine which AWS resources are members of this resource group.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>"
         }
       }
     },

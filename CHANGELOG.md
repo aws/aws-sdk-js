@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.816.0-->
+<!--LATEST=2.817.0-->
 <!--ENTRYINSERT-->
+
+## 2.817.0
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for lambda functions.
+* feature: DMS: AWS DMS launches support for AWS Secrets Manager to manage Oracle ASM Database credentials
+* feature: ResourceGroups: Add operation `PutGroupConfiguration`. Support dedicated hosts and add `Pending` in operations `Un/GroupResources`. Add `Resources` in `ListGroupResources` and deprecate `ResourceIdentifiers`.
 
 ## 2.816.0
 * feature: Connect: This release adds support for quick connects. For details, see the Release Notes in the Amazon Connect Administrator Guide.
