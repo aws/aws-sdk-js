@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.817.0-->
+<!--LATEST=2.818.0-->
 <!--ENTRYINSERT-->
+
+## 2.818.0
+* feature: CloudFront: Amazon CloudFront has deprecated the CreateStreamingDistribution and CreateStreamingDistributionWithTags APIs as part of discontinuing support for Real-Time Messaging Protocol (RTMP) distributions.
 
 ## 2.817.0
 * feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for lambda functions.
