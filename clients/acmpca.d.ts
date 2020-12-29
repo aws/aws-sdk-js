@@ -53,11 +53,11 @@ declare class ACMPCA extends Service {
    */
   deletePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful. If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included.  The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy.  The current policy can be shown with GetPolicy and updated with PutPolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful. If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included.  The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy.  The current policy can be shown with GetPolicy and updated with PutPolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   deletePolicy(params: ACMPCA.Types.DeletePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful. If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included.  The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy.  The current policy can be shown with GetPolicy and updated with PutPolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful. If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included.  The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy.  The current policy can be shown with GetPolicy and updated with PutPolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   deletePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -101,19 +101,19 @@ declare class ACMPCA extends Service {
    */
   getCertificateAuthorityCsr(callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
   /**
-   * Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a ResourceNotFoundException.  The policy can be attached or updated with PutPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a ResourceNotFoundException.  The policy can be attached or updated with PutPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   getPolicy(params: ACMPCA.Types.GetPolicyRequest, callback?: (err: AWSError, data: ACMPCA.Types.GetPolicyResponse) => void): Request<ACMPCA.Types.GetPolicyResponse, AWSError>;
   /**
-   * Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a ResourceNotFoundException.  The policy can be attached or updated with PutPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a ResourceNotFoundException.  The policy can be attached or updated with PutPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   getPolicy(callback?: (err: AWSError, data: ACMPCA.Types.GetPolicyResponse) => void): Request<ACMPCA.Types.GetPolicyResponse, AWSError>;
   /**
-   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   The following requirements apply when you import a CA certificate.   You cannot import a non-self-signed certificate for use as a root CA.   You cannot import a self-signed certificate for use as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your ACM Private CA-hosted or on-premises CA certificate must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
+   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following addtitional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(params: ACMPCA.Types.ImportCertificateAuthorityCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   The following requirements apply when you import a CA certificate.   You cannot import a non-self-signed certificate for use as a root CA.   You cannot import a self-signed certificate for use as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your ACM Private CA-hosted or on-premises CA certificate must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
+   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following addtitional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class ACMPCA extends Service {
    */
   listTags(callback?: (err: AWSError, data: ACMPCA.Types.ListTagsResponse) => void): Request<ACMPCA.Types.ListTagsResponse, AWSError>;
   /**
-   * Attaches a resource-based policy to a private CA.  A policy can also be applied by sharing a private CA through AWS Resource Access Manager (RAM). The policy can be displayed with GetPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Attaches a resource-based policy to a private CA.  A policy can also be applied by sharing a private CA through AWS Resource Access Manager (RAM). For more information, see Attach a Policy for Cross-Account Access. The policy can be displayed with GetPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   putPolicy(params: ACMPCA.Types.PutPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches a resource-based policy to a private CA.  A policy can also be applied by sharing a private CA through AWS Resource Access Manager (RAM). The policy can be displayed with GetPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.  
+   * Attaches a resource-based policy to a private CA.  A policy can also be applied by sharing a private CA through AWS Resource Access Manager (RAM). For more information, see Attach a Policy for Cross-Account Access. The policy can be displayed with GetPolicy and removed with DeletePolicy.  About Policies    A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see Using a Resource Based Policy with ACM Private CA.   A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.   For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see Using a Service Linked Role with ACM.   Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see Attach a Policy for Cross-Account Access.  
    */
   putPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -245,7 +245,7 @@ declare namespace ACMPCA {
      */
     State?: String128;
     /**
-     * Fully qualified domain name (FQDN) associated with the certificate subject.
+     * For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.  Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.
      */
     CommonName?: String64;
     /**
@@ -282,6 +282,28 @@ declare namespace ACMPCA {
     GenerationQualifier?: String3;
   }
   export type AWSPolicy = string;
+  export interface AccessDescription {
+    /**
+     * The type and format of AccessDescription information.
+     */
+    AccessMethod: AccessMethod;
+    /**
+     * The location of AccessDescription information.
+     */
+    AccessLocation: GeneralName;
+  }
+  export type AccessDescriptionList = AccessDescription[];
+  export interface AccessMethod {
+    /**
+     * An object identifier (OID) specifying the AccessMethod. The OID must satisfy the regular expression shown below. For more information, see NIST's definition of Object Identifier (OID).
+     */
+    CustomObjectIdentifier?: CustomObjectIdentifier;
+    /**
+     * Specifies the AccessMethod.
+     */
+    AccessMethodType?: AccessMethodType;
+  }
+  export type AccessMethodType = "CA_REPOSITORY"|"RESOURCE_PKI_MANIFEST"|"RESOURCE_PKI_NOTIFY"|string;
   export type AccountId = string;
   export type ActionList = ActionType[];
   export type ActionType = "IssueCertificate"|"GetCertificate"|"ListPermissions"|string;
@@ -358,6 +380,10 @@ declare namespace ACMPCA {
      * Structure that contains X.500 distinguished name information for your private CA.
      */
     Subject: ASN1Subject;
+    /**
+     * Specifies information to be added to the extension section of the certificate signing request (CSR).
+     */
+    CsrExtensions?: CsrExtensions;
   }
   export type CertificateAuthorityStatus = "CREATING"|"PENDING_CERTIFICATE"|"ACTIVE"|"DELETED"|"DISABLED"|"EXPIRED"|"FAILED"|string;
   export type CertificateAuthorityType = "ROOT"|"SUBORDINATE"|string;
@@ -442,7 +468,7 @@ declare namespace ACMPCA {
      */
     Enabled: Boolean;
     /**
-     * Number of days until a certificate expires.
+     * Validity period of the CRL in days.
      */
     ExpirationInDays?: Integer1To5000;
     /**
@@ -456,6 +482,17 @@ declare namespace ACMPCA {
   }
   export type CsrBlob = Buffer|Uint8Array|Blob|string;
   export type CsrBody = string;
+  export interface CsrExtensions {
+    /**
+     * Indicates the purpose of the certificate and of the key contained in the certificate.
+     */
+    KeyUsage?: KeyUsage;
+    /**
+     * For CA certificates, provides a path to additional information pertaining to the CA, such as revocation and policy. For more information, see Subject Information Access in RFC 5280.
+     */
+    SubjectInformationAccess?: AccessDescriptionList;
+  }
+  export type CustomObjectIdentifier = string;
   export interface DeleteCertificateAuthorityRequest {
     /**
      * The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority. This must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 . 
@@ -526,7 +563,48 @@ declare namespace ACMPCA {
      */
     CertificateAuthority?: CertificateAuthority;
   }
+  export interface EdiPartyName {
+    /**
+     * Specifies the party name.
+     */
+    PartyName: String256;
+    /**
+     * Specifies the name assigner.
+     */
+    NameAssigner?: String256;
+  }
   export type FailureReason = "REQUEST_TIMED_OUT"|"UNSUPPORTED_ALGORITHM"|"OTHER"|string;
+  export interface GeneralName {
+    /**
+     * Represents GeneralName using an OtherName object.
+     */
+    OtherName?: OtherName;
+    /**
+     * Represents GeneralName as an RFC 822 email address.
+     */
+    Rfc822Name?: String256;
+    /**
+     * Represents GeneralName as a DNS name.
+     */
+    DnsName?: String253;
+    DirectoryName?: ASN1Subject;
+    /**
+     * Represents GeneralName as an EdiPartyName object.
+     */
+    EdiPartyName?: EdiPartyName;
+    /**
+     * Represents GeneralName as a URI.
+     */
+    UniformResourceIdentifier?: String253;
+    /**
+     * Represents GeneralName as an IPv4 or IPv6 address.
+     */
+    IpAddress?: String39;
+    /**
+     *  Represents GeneralName as an object identifier (OID).
+     */
+    RegisteredId?: CustomObjectIdentifier;
+  }
   export interface GetCertificateAuthorityCertificateRequest {
     /**
      * The Amazon Resource Name (ARN) of your private CA. This is of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 . 
@@ -539,7 +617,7 @@ declare namespace ACMPCA {
      */
     Certificate?: CertificateBody;
     /**
-     * Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.
+     * Base64-encoded certificate chain that includes any intermediate certificates and chains up to root certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.
      */
     CertificateChain?: CertificateChain;
   }
@@ -571,7 +649,7 @@ declare namespace ACMPCA {
      */
     Certificate?: CertificateBody;
     /**
-     * The base64 PEM-encoded certificate chain that chains up to the on-premises root CA certificate that you used to sign your private CA certificate. 
+     * The base64 PEM-encoded certificate chain that chains up to the root CA certificate that you used to sign your private CA certificate. 
      */
     CertificateChain?: CertificateChain;
   }
@@ -636,6 +714,44 @@ declare namespace ACMPCA {
     CertificateArn?: Arn;
   }
   export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|string;
+  export interface KeyUsage {
+    /**
+     *  Key can be used for digital signing.
+     */
+    DigitalSignature?: Boolean;
+    /**
+     * Key can be used for non-repudiation.
+     */
+    NonRepudiation?: Boolean;
+    /**
+     * Key can be used to encipher data.
+     */
+    KeyEncipherment?: Boolean;
+    /**
+     * Key can be used to decipher data.
+     */
+    DataEncipherment?: Boolean;
+    /**
+     * Key can be used in a key-agreement protocol.
+     */
+    KeyAgreement?: Boolean;
+    /**
+     * Key can be used to sign certificates.
+     */
+    KeyCertSign?: Boolean;
+    /**
+     * Key can be used to sign CRLs.
+     */
+    CRLSign?: Boolean;
+    /**
+     * Key can be used only to encipher data.
+     */
+    EncipherOnly?: Boolean;
+    /**
+     * Key can be used only to decipher data.
+     */
+    DecipherOnly?: Boolean;
+  }
   export interface ListCertificateAuthoritiesRequest {
     /**
      * Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the NextToken parameter from the response you just received.
@@ -710,6 +826,16 @@ declare namespace ACMPCA {
   }
   export type MaxResults = number;
   export type NextToken = string;
+  export interface OtherName {
+    /**
+     * Specifies an OID. 
+     */
+    TypeId: CustomObjectIdentifier;
+    /**
+     * Specifies an OID value.
+     */
+    Value: String256;
+  }
   export type PermanentDeletionTimeInDays = number;
   export interface Permission {
     /**
@@ -785,7 +911,9 @@ declare namespace ACMPCA {
   export type String128 = string;
   export type String16 = string;
   export type String253 = string;
+  export type String256 = string;
   export type String3 = string;
+  export type String39 = string;
   export type String3To255 = string;
   export type String40 = string;
   export type String5 = string;
@@ -844,7 +972,7 @@ declare namespace ACMPCA {
      */
     Value: PositiveLong;
     /**
-     * Determines how ACM Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.   END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.   Sample input value: 491231235959 (UTCTime format)   Output expiration date/time: 12/31/2049 23:59:59    ABSOLUTE: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch.    Sample input value: 2524608000   Output expiration date/time: 01/01/2050 00:00:00    DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.  Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:   Sample input value: 90   Output expiration date: 01/10/2020 12:34:54 UTC  
+     * Determines how ACM Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.   END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.   Sample input value: 491231235959 (UTCTime format)   Output expiration date/time: 12/31/2049 23:59:59    ABSOLUTE: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch.    Sample input value: 2524608000   Output expiration date/time: 01/01/2050 00:00:00    DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.  Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:   Sample input value: 90   Output expiration date: 01/10/2020 12:34:54 UTC   The minimum validity duration for a certificate using relative time (DAYS) is one day. The minimum validity for a certificate using absolute time (ABSOLUTE or END_DATE) is one second.
      */
     Type: ValidityPeriodType;
   }
