@@ -361,7 +361,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href=\"/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores.html\">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>"
+      "documentation": "<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html\">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>"
     },
     "CreateReplicationGroup": {
       "name": "CreateReplicationGroup",
@@ -3353,7 +3353,7 @@
         },
         "Engine": {
           "shape": "EngineType",
-          "documentation": "<p>Must be Redis. </p>"
+          "documentation": "<p>The current supported value is Redis. </p>"
         },
         "UserIds": {
           "shape": "UserIdListInput",
@@ -3380,19 +3380,19 @@
         },
         "Engine": {
           "shape": "EngineType",
-          "documentation": "<p>Must be Redis. </p>"
+          "documentation": "<p>The current supported value is Redis. </p>"
         },
         "Passwords": {
           "shape": "PasswordListInput",
-          "documentation": "<p>Passwords used for this user account. You can create up to two passwords for each user.</p>"
+          "documentation": "<p>Passwords used for this user. You can create up to two passwords for each user.</p>"
         },
         "AccessString": {
           "shape": "AccessString",
-          "documentation": "<p>Access permissions string used for this user account.</p>"
+          "documentation": "<p>Access permissions string used for this user.</p>"
         },
         "NoPasswordRequired": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates a password is not required for this user account.</p>"
+          "documentation": "<p>Indicates a password is not required for this user.</p>"
         }
       }
     },
@@ -4697,7 +4697,7 @@
         },
         "AuthTokenUpdateStrategy": {
           "shape": "AuthTokenUpdateStrategyType",
-          "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
+          "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ModifyCacheCluster</code> operation.</p>"
@@ -4887,7 +4887,7 @@
         },
         "AuthTokenUpdateStrategy": {
           "shape": "AuthTokenUpdateStrategyType",
-          "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
+          "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
         },
         "UserGroupIdsToAdd": {
           "shape": "UserGroupIdList",
@@ -4987,7 +4987,7 @@
         },
         "AccessString": {
           "shape": "AccessString",
-          "documentation": "<p>Access permissions string used for this user account.</p>"
+          "documentation": "<p>Access permissions string used for this user.</p>"
         },
         "AppendAccessString": {
           "shape": "AccessString",
@@ -4995,11 +4995,11 @@
         },
         "Passwords": {
           "shape": "PasswordListInput",
-          "documentation": "<p>The passwords belonging to the user account. You are allowed up to two.</p>"
+          "documentation": "<p>The passwords belonging to the user. You are allowed up to two.</p>"
         },
         "NoPasswordRequired": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates no password is required for the user account.</p>"
+          "documentation": "<p>Indicates no password is required for the user.</p>"
         }
       }
     },
@@ -5065,7 +5065,7 @@
         },
         "PrimaryOutpostArn": {
           "shape": "String",
-          "documentation": "<p>The output ARN of the primary node.</p>"
+          "documentation": "<p>The outpost ARN of the primary node.</p>"
         },
         "ReplicaOutpostArns": {
           "shape": "OutpostArnsList",
@@ -6619,11 +6619,11 @@
         },
         "Engine": {
           "shape": "EngineType",
-          "documentation": "<p>Must be Redis. </p>"
+          "documentation": "<p>The current supported value is Redis.</p>"
         },
         "AccessString": {
           "shape": "String",
-          "documentation": "<p>Access permissions string used for this user account.</p>"
+          "documentation": "<p>Access permissions string used for this user.</p>"
         },
         "UserGroupIds": {
           "shape": "UserGroupIdList",
@@ -6635,7 +6635,7 @@
         },
         "ARN": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the user account.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user.</p>"
         }
       }
     },
@@ -6652,7 +6652,7 @@
         },
         "Engine": {
           "shape": "EngineType",
-          "documentation": "<p>Must be Redis. </p>"
+          "documentation": "<p>The current supported value is Redis. </p>"
         },
         "UserIds": {
           "shape": "UserIdList",
@@ -6701,7 +6701,7 @@
       "members": {
         "UserIdsToRemove": {
           "shape": "UserIdList",
-          "documentation": "<p>The list of user group IDs ro remove.</p>"
+          "documentation": "<p>The list of user IDs to remove.</p>"
         },
         "UserIdsToAdd": {
           "shape": "UserIdList",
