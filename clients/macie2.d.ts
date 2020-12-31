@@ -606,11 +606,11 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEncryptionType {
     /**
-     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) by default to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
      */
     kmsManaged?: __long;
     /**
-     * The total number of buckets that use an Amazon S3 managed key to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
+     * The total number of buckets that use an Amazon S3 managed key by default to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
      */
     s3Managed?: __long;
     /**
@@ -639,31 +639,31 @@ declare namespace Macie2 {
   export type BucketCriteria = {[key: string]: BucketCriteriaAdditionalProperties};
   export interface BucketCriteriaAdditionalProperties {
     /**
-     * An equal to condition to apply to a specified attribute value for buckets.
+     * The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.
      */
     eq?: __listOf__string;
     /**
-     * A greater than condition to apply to a specified attribute value for buckets.
+     * The value for the property is greater than the specified value.
      */
     gt?: __long;
     /**
-     * A greater than or equal to condition to apply to a specified attribute value for buckets.
+     * The value for the property is greater than or equal to the specified value.
      */
     gte?: __long;
     /**
-     * A less than condition to apply to a specified attribute value for buckets.
+     * The value for the property is less than the specified value.
      */
     lt?: __long;
     /**
-     * A less than or equal to condition to apply to a specified attribute value for buckets.
+     * The value for the property is less than or equal to the specified value.
      */
     lte?: __long;
     /**
-     * A not equal to condition to apply to a specified attribute value for buckets.
+     * The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
      */
     neq?: __listOf__string;
     /**
-     * The prefix of the buckets to include in the results.
+     * The name of the bucket begins with the specified value.
      */
     prefix?: __string;
   }
@@ -795,7 +795,7 @@ declare namespace Macie2 {
   }
   export interface BucketSortCriteria {
     /**
-     * The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.
+     * The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.
      */
     attributeName?: __string;
     /**
@@ -1061,31 +1061,31 @@ declare namespace Macie2 {
   export type Criterion = {[key: string]: CriterionAdditionalProperties};
   export interface CriterionAdditionalProperties {
     /**
-     * An equal to condition to apply to a specified property value for findings.
+     * The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.
      */
     eq?: __listOf__string;
     /**
-     * A condition that requires an array field to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.
+     * The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.
      */
     eqExactMatch?: __listOf__string;
     /**
-     * A greater than condition to apply to a specified property value for findings.
+     * The value for the property is greater than the specified value.
      */
     gt?: __long;
     /**
-     * A greater than or equal to condition to apply to a specified property value for findings.
+     * The value for the property is greater than or equal to the specified value.
      */
     gte?: __long;
     /**
-     * A less than condition to apply to a specified property value for findings.
+     * The value for the property is less than the specified value.
      */
     lt?: __long;
     /**
-     * A less than or equal to condition to apply to a specified property value for findings.
+     * The value for the property is less than or equal to the specified value.
      */
     lte?: __long;
     /**
-     * A not equal to condition to apply to a specified property value for findings.
+     * The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Macie uses OR logic to join the values.
      */
     neq?: __listOf__string;
   }
@@ -1271,7 +1271,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn't resume it within 30 days of pausing it. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job's expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -1311,7 +1311,7 @@ declare namespace Macie2 {
      */
     tags?: TagMap;
     /**
-     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
+     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
      */
     userPausedDetails?: UserPausedDetails;
   }
@@ -1512,7 +1512,7 @@ declare namespace Macie2 {
   export type FindingCategory = "CLASSIFICATION"|"POLICY"|string;
   export interface FindingCriteria {
     /**
-     * A condition that specifies the property, operator, and value to use to filter the results.
+     * A condition that specifies the property, operator, and one or more values to use to filter the results.
      */
     criterion?: Criterion;
   }
@@ -2043,7 +2043,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn't resume it within 30 days of pausing it. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job's expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -2059,7 +2059,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
+     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
      */
     userPausedDetails?: UserPausedDetails;
   }
@@ -2842,7 +2842,7 @@ declare namespace Macie2 {
      */
     jobId: __string;
     /**
-     * The new status for the job. Valid values are: CANCELLED - Stops the job permanently and cancels it. You can't resume a job after you cancel it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED. RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other configuration settings for the job. USER_PAUSED - Pauses the job. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job. If you pause a job when its status is RUNNING and you don't resume the job within 30 days, the job expires and Macie cancels it. You can't resume a job after it's cancelled.
+     * The new status for the job. Valid values are: CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED. If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it. RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED. If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job. USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job. If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus: JobStatus;
   }
@@ -3037,11 +3037,11 @@ declare namespace Macie2 {
   export type UserIdentityType = "AssumedRole"|"IAMUser"|"FederatedUser"|"Root"|"AWSAccount"|"AWSService"|string;
   export interface UserPausedDetails {
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the job will expire and be cancelled if you don't resume it first. If you don't resume a job within 30 days of pausing it, the job expires and Amazon Macie cancels it.
+     * The date and time, in UTC and extended ISO 8601 format, when the job or job run will expire and be cancelled if you don't resume it first.
      */
     jobExpiresAt?: __timestampIso8601;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
+     * The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
      */
     jobImminentExpirationHealthEventArn?: __string;
     /**

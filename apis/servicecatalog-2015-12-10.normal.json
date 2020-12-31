@@ -2096,13 +2096,10 @@
       },
       "max": 20
     },
-    "AllowedValue": {
-      "type": "string"
-    },
     "AllowedValues": {
       "type": "list",
       "member": {
-        "shape": "AllowedValue"
+        "shape": "String"
       }
     },
     "ApproximateCount": {
@@ -4972,6 +4969,30 @@
         "AllowedValues": {
           "shape": "AllowedValues",
           "documentation": "<p>The values that the administrator has allowed for the parameter.</p>"
+        },
+        "AllowedPattern": {
+          "shape": "String",
+          "documentation": "<p>A regular expression that represents the patterns that allow for <code>String</code> types. The pattern must match the entire parameter value provided.</p>"
+        },
+        "ConstraintDescription": {
+          "shape": "String",
+          "documentation": "<p>A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of <code>[A-Za-z0-9]+</code> displays the following error message when the user specifies an invalid value:</p> <p> <code>Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+</code> </p> <p>By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:</p> <p> <code>Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers.</code> </p>"
+        },
+        "MaxLength": {
+          "shape": "String",
+          "documentation": "<p>An integer value that determines the largest number of characters you want to allow for <code>String</code> types. </p>"
+        },
+        "MinLength": {
+          "shape": "String",
+          "documentation": "<p>An integer value that determines the smallest number of characters you want to allow for <code>String</code> types.</p>"
+        },
+        "MaxValue": {
+          "shape": "String",
+          "documentation": "<p>A numeric value that determines the largest numeric value you want to allow for <code>Number</code> types.</p>"
+        },
+        "MinValue": {
+          "shape": "String",
+          "documentation": "<p>A numeric value that determines the smallest numeric value you want to allow for <code>Number</code> types. </p>"
         }
       },
       "documentation": "<p>The constraints that the administrator has put on the parameter.</p>"
@@ -6916,6 +6937,9 @@
     "StatusMessage": {
       "type": "string",
       "pattern": "[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
+    },
+    "String": {
+      "type": "string"
     },
     "SuccessfulShares": {
       "type": "list",

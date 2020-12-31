@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.819.0-->
+<!--LATEST=2.820.0-->
 <!--ENTRYINSERT-->
+
+## 2.820.0
+* feature: ServiceCatalog: Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern
 
 ## 2.819.0
 * feature: ACMPCA: This release adds a new parameter "CsrExtensions" in the "CertificateAuthorityConfiguration" data structure, which allows customers to add the addition of KU and SIA into the CA CSR.

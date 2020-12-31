@@ -1466,7 +1466,7 @@ declare namespace ElastiCache {
      */
     UserGroupId: String;
     /**
-     * Must be Redis. 
+     * The current supported value is Redis. 
      */
     Engine: EngineType;
     /**
@@ -1484,19 +1484,19 @@ declare namespace ElastiCache {
      */
     UserName: UserName;
     /**
-     * Must be Redis. 
+     * The current supported value is Redis. 
      */
     Engine: EngineType;
     /**
-     * Passwords used for this user account. You can create up to two passwords for each user.
+     * Passwords used for this user. You can create up to two passwords for each user.
      */
     Passwords?: PasswordListInput;
     /**
-     * Access permissions string used for this user account.
+     * Access permissions string used for this user.
      */
     AccessString: AccessString;
     /**
-     * Indicates a password is not required for this user account.
+     * Indicates a password is not required for this user.
      */
     NoPasswordRequired?: BooleanOptional;
   }
@@ -2630,7 +2630,7 @@ declare namespace ElastiCache {
      */
     UserId: UserId;
     /**
-     * Access permissions string used for this user account.
+     * Access permissions string used for this user.
      */
     AccessString?: AccessString;
     /**
@@ -2638,11 +2638,11 @@ declare namespace ElastiCache {
      */
     AppendAccessString?: AccessString;
     /**
-     * The passwords belonging to the user account. You are allowed up to two.
+     * The passwords belonging to the user. You are allowed up to two.
      */
     Passwords?: PasswordListInput;
     /**
-     * Indicates no password is required for the user account.
+     * Indicates no password is required for the user.
      */
     NoPasswordRequired?: BooleanOptional;
   }
@@ -2695,7 +2695,7 @@ declare namespace ElastiCache {
      */
     ReplicaAvailabilityZones?: AvailabilityZonesList;
     /**
-     * The output ARN of the primary node.
+     * The outpost ARN of the primary node.
      */
     PrimaryOutpostArn?: String;
     /**
@@ -3698,11 +3698,11 @@ declare namespace ElastiCache {
      */
     Status?: String;
     /**
-     * Must be Redis. 
+     * The current supported value is Redis.
      */
     Engine?: EngineType;
     /**
-     * Access permissions string used for this user account.
+     * Access permissions string used for this user.
      */
     AccessString?: String;
     /**
@@ -3714,7 +3714,7 @@ declare namespace ElastiCache {
      */
     Authentication?: Authentication;
     /**
-     * The Amazon Resource Name (ARN) of the user account.
+     * The Amazon Resource Name (ARN) of the user.
      */
     ARN?: String;
   }
@@ -3728,7 +3728,7 @@ declare namespace ElastiCache {
      */
     Status?: String;
     /**
-     * Must be Redis. 
+     * The current supported value is Redis. 
      */
     Engine?: EngineType;
     /**
@@ -3754,7 +3754,7 @@ declare namespace ElastiCache {
   export type UserGroupList = UserGroup[];
   export interface UserGroupPendingChanges {
     /**
-     * The list of user group IDs ro remove.
+     * The list of user IDs to remove.
      */
     UserIdsToRemove?: UserIdList;
     /**
