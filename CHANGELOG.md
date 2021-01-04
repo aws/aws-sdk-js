@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.820.0-->
+<!--LATEST=2.821.0-->
 <!--ENTRYINSERT-->
+
+## 2.821.0
+* feature: CloudSearch: This release adds support for new Amazon CloudSearch instances.
+* feature: HealthLake: Amazon HealthLake now supports exporting data from FHIR Data Stores in Preview.
 
 ## 2.820.0
 * feature: ServiceCatalog: Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern
