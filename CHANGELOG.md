@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.821.0-->
+<!--LATEST=2.822.0-->
 <!--ENTRYINSERT-->
+
+## 2.822.0
+* feature: CostExplorer: - ### Features    - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api
+* feature: ParamValidator: Updated validateStructure to accept null and undefined values for params not described in the input shape
 
 ## 2.821.0
 * feature: CloudSearch: This release adds support for new Amazon CloudSearch instances.

@@ -108,6 +108,14 @@ declare class CostExplorer extends Service {
    */
   getCostAndUsageWithResources(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageWithResourcesResponse) => void): Request<CostExplorer.Types.GetCostAndUsageWithResourcesResponse, AWSError>;
   /**
+   * Retrieves an array of Cost Category names and values incurred cost.  If some Cost Category names and values are not associated with any cost, they will not be returned by this API. 
+   */
+  getCostCategories(params: CostExplorer.Types.GetCostCategoriesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostCategoriesResponse) => void): Request<CostExplorer.Types.GetCostCategoriesResponse, AWSError>;
+  /**
+   * Retrieves an array of Cost Category names and values incurred cost.  If some Cost Category names and values are not associated with any cost, they will not be returned by this API. 
+   */
+  getCostCategories(callback?: (err: AWSError, data: CostExplorer.Types.GetCostCategoriesResponse) => void): Request<CostExplorer.Types.GetCostCategoriesResponse, AWSError>;
+  /**
    * Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. 
    */
   getCostForecast(params: CostExplorer.Types.GetCostForecastRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostForecastResponse) => void): Request<CostExplorer.Types.GetCostForecastResponse, AWSError>;
@@ -407,6 +415,7 @@ declare namespace CostExplorer {
   }
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
+  export type CostCategoryNamesList = CostCategoryName[];
   export interface CostCategoryProcessingStatus {
     /**
      *  The Cost Management product name of the applied status. 
@@ -465,7 +474,7 @@ declare namespace CostExplorer {
      */
     Values?: Values;
     /**
-     *  The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE. 
+     *  The match options that you can use to filter your results. MatchOptions is only applicable for actions related to cost category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE. 
      */
     MatchOptions?: MatchOptions;
   }
@@ -633,11 +642,11 @@ declare namespace CostExplorer {
   }
   export interface DateInterval {
     /**
-     * The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if start is 2017-01-01, AWS retrieves cost and usage data starting at 2017-01-01 up to the end date.
+     * The beginning of the time period. The start date is inclusive. For example, if start is 2017-01-01, AWS retrieves cost and usage data starting at 2017-01-01 up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.
      */
     Start: YearMonthDay;
     /**
-     * The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
+     * The end of the time period. The end date is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
      */
     End: YearMonthDay;
   }
@@ -686,7 +695,7 @@ declare namespace CostExplorer {
   export interface DescribeCostCategoryDefinitionResponse {
     CostCategory?: CostCategory;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|string;
   export interface DimensionValues {
     /**
      * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones.
@@ -1052,6 +1061,10 @@ declare namespace CostExplorer {
      * The time period that is covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
+    /**
+     * The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.
+     */
+    DimensionValueAttributes?: DimensionValuesWithAttributesList;
   }
   export interface GetCostAndUsageWithResourcesRequest {
     /**
@@ -1092,6 +1105,53 @@ declare namespace CostExplorer {
      * The time period that is covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
+    /**
+     * The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.
+     */
+    DimensionValueAttributes?: DimensionValuesWithAttributesList;
+  }
+  export interface GetCostCategoriesRequest {
+    /**
+     * The value that you want to search the filter values for. If you do not specify a CostCategoryName, SearchString will be used to filter Cost Category names that match the SearchString pattern. If you do specifiy a CostCategoryName, SearchString will be used to filter Cost Category values that match the SearchString pattern.
+     */
+    SearchString?: SearchString;
+    TimePeriod: DateInterval;
+    CostCategoryName?: CostCategoryName;
+    Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetCostCategoriesResponse {
+    /**
+     * If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The names of the Cost Categories.
+     */
+    CostCategoryNames?: CostCategoryNamesList;
+    /**
+     * The Cost Category values.  CostCategoryValues are not returned if CostCategoryName is not specified in the request. 
+     */
+    CostCategoryValues?: CostCategoryValuesList;
+    /**
+     * The number of objects returned.
+     */
+    ReturnSize: PageSize;
+    /**
+     * The total number of objects.
+     */
+    TotalSize: PageSize;
   }
   export interface GetCostForecastRequest {
     /**
@@ -1142,6 +1202,15 @@ declare namespace CostExplorer {
      * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   REGION - The AWS Region.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The AWS Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
      */
     Context?: Context;
+    Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When you specify a SortBy paramater, the context must be COST_AND_USAGE. Further, when using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.
+     */
+    MaxResults?: MaxResults;
     /**
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
      */
@@ -1190,6 +1259,14 @@ declare namespace CostExplorer {
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    OnDemandCost     CoverageHoursPercentage     OnDemandHours     ReservedHours     TotalRunningHours     CoverageNormalizedUnitsPercentage     OnDemandNormalizedUnits     ReservedNormalizedUnits     TotalRunningNormalizedUnits     Time    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
+    /**
+     * The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: MaxResults;
   }
   export interface GetReservationCoverageResponse {
     /**
@@ -1214,6 +1291,7 @@ declare namespace CostExplorer {
      * The specific service that you want recommendations for.
      */
     Service: GenericString;
+    Filter?: Expression;
     /**
      * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.
      */
@@ -1275,9 +1353,17 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     UtilizationPercentageInUnits     PurchasedHours     PurchasedUnits     TotalActualHours     TotalActualUnits     UnusedHours     UnusedUnits     OnDemandCostOfRIHoursUsed     NetRISavings     TotalPotentialRISavings     AmortizedUpfrontFee     AmortizedRecurringFee     TotalAmortizedFee     RICostForUnusedHours     RealizedSavings     UnrealizedSavings    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
+    /**
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
+    /**
+     * The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: MaxResults;
   }
   export interface GetReservationUtilizationResponse {
     /**
@@ -1363,6 +1449,10 @@ declare namespace CostExplorer {
      * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
      */
     MaxResults?: MaxResults;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    SpendCoveredBySavingsPlan     OnDemandCost     CoveragePercentage     TotalCost     InstanceFamily     Region     Service    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansCoverageResponse {
     /**
@@ -1432,6 +1522,10 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
+     * The data type.
+     */
+    DataType?: SavingsPlansDataTypes;
+    /**
      * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextToken?: NextPageToken;
@@ -1439,6 +1533,10 @@ declare namespace CostExplorer {
      * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
      */
     MaxResults?: MaxResults;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     TotalCommitment     UsedCommitment     UnusedCommitment     NetSavings     AmortizedRecurringCommitment     AmortizedUpfrontCommitment    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansUtilizationDetailsResponse {
     /**
@@ -1468,6 +1566,10 @@ declare namespace CostExplorer {
      * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     SAVINGS_PLANS_TYPE     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension.
      */
     Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     TotalCommitment     UsedCommitment     UnusedCommitment     NetSavings    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansUtilizationResponse {
     /**
@@ -1492,6 +1594,15 @@ declare namespace CostExplorer {
      * The key of the tag that you want to return values for.
      */
     TagKey?: TagKey;
+    Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.
+     */
+    MaxResults?: MaxResults;
     /**
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
      */
@@ -1631,7 +1742,7 @@ declare namespace CostExplorer {
     NextToken?: NextPageToken;
   }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
-  export type MatchOption = "EQUALS"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
+  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
   export type MatchOptions = MatchOption[];
   export type MaxResults = number;
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
@@ -1728,6 +1839,8 @@ declare namespace CostExplorer {
      */
     SizeFlexEligible?: GenericBoolean;
   }
+  export type RICostForUnusedHours = string;
+  export type RealizedSavings = string;
   export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
   export interface RedshiftInstanceDetails {
     /**
@@ -1808,6 +1921,18 @@ declare namespace CostExplorer {
      * The total cost of your reservation, amortized over the reservation period.
      */
     TotalAmortizedFee?: TotalAmortizedFee;
+    /**
+     * The cost of unused hours for your reservation.
+     */
+    RICostForUnusedHours?: RICostForUnusedHours;
+    /**
+     * The realized savings due to purchasing and using a reservation.
+     */
+    RealizedSavings?: RealizedSavings;
+    /**
+     * The unrealized savings due to purchasing and using a reservation.
+     */
+    UnrealizedSavings?: UnrealizedSavings;
   }
   export interface ReservationCoverageGroup {
     /**
@@ -2142,6 +2267,8 @@ declare namespace CostExplorer {
     CoveragePercentage?: GenericString;
   }
   export type SavingsPlansCoverages = SavingsPlansCoverage[];
+  export type SavingsPlansDataType = "ATTRIBUTES"|"UTILIZATION"|"AMORTIZED_COMMITMENT"|"SAVINGS"|string;
+  export type SavingsPlansDataTypes = SavingsPlansDataType[];
   export interface SavingsPlansDetails {
     /**
      * A collection of AWS resources in a geographic area. Each AWS Region is isolated and independent of the other Regions.
@@ -2401,6 +2528,19 @@ declare namespace CostExplorer {
      */
     EC2Specification?: EC2Specification;
   }
+  export interface SortDefinition {
+    /**
+     * The key by which to sort the data.
+     */
+    Key: SortDefinitionKey;
+    /**
+     * The order in which to sort the data.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type SortDefinitionKey = string;
+  export type SortDefinitions = SortDefinition[];
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface Subscriber {
     /**
      *  The email address or SNS Amazon Resource Name (ARN), depending on the Type. 
@@ -2495,6 +2635,7 @@ declare namespace CostExplorer {
   export type TotalPotentialRISavings = string;
   export type TotalRunningHours = string;
   export type TotalRunningNormalizedUnits = string;
+  export type UnrealizedSavings = string;
   export type UnusedHours = string;
   export type UnusedUnits = string;
   export interface UpdateAnomalyMonitorRequest {

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.821.0',
+	  VERSION: '2.822.0',
 
 	  /**
 	   * @api private
@@ -12010,7 +12010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (memberShape !== undefined) {
 	        var memberContext = [context, paramName].join('.');
 	        this.validateMember(memberShape, paramValue, memberContext);
-	      } else {
+	      } else if (paramValue !== undefined && paramValue !== null) {
 	        this.fail('UnexpectedParameter',
 	          'Unexpected key \'' + paramName + '\' found in ' + context);
 	      }
