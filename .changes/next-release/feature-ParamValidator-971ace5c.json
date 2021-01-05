@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "ParamValidator",
+  "description": "Updated validateStructure to accept null and undefined values for params not described in the input shape"
+}
