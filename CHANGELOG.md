@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.822.0-->
+<!--LATEST=2.823.0-->
 <!--ENTRYINSERT-->
+
+## 2.823.0
+* feature: Transfer: This release adds support for Amazon EFS, so customers can transfer files over SFTP, FTPS and FTP in and out of Amazon S3 as well as Amazon EFS.
 
 ## 2.822.0
 * feature: CostExplorer: - ### Features    - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api
