@@ -273,6 +273,10 @@ declare namespace DevOpsGuru {
      *  An integer that specifies the number of metrics that have been analyzed in your AWS account. 
      */
     MetricsAnalyzed: NumMetricsAnalyzed;
+    /**
+     * The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour. 
+     */
+    ResourceHours: ResourceHours;
   }
   export interface DescribeAccountOverviewRequest {
     /**
@@ -1061,6 +1065,7 @@ declare namespace DevOpsGuru {
     CloudFormation?: CloudFormationCollectionFilter;
   }
   export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|string;
+  export type ResourceHours = number;
   export interface SearchInsightsFilters {
     /**
      *  An array of severity values used to search for insights. 

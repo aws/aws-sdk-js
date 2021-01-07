@@ -751,7 +751,7 @@
           "documentation": "<p> The value of the CloudWatch dimension. </p>"
         }
       },
-      "documentation": "<p> The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your account for operational problems and anomalous behaviour. A dimension is a name/value pair that is part of the identity of a metric. A metric can have up to 10 dimensions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+      "documentation": "<p> The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your account for operational problems and anomalous behavior. A dimension is a name/value pair that is part of the identity of a metric. A metric can have up to 10 dimensions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
     },
     "CloudWatchMetricsDimensionName": {
       "type": "string"
@@ -799,7 +799,8 @@
       "required": [
         "OpenReactiveInsights",
         "OpenProactiveInsights",
-        "MetricsAnalyzed"
+        "MetricsAnalyzed",
+        "ResourceHours"
       ],
       "members": {
         "OpenReactiveInsights": {
@@ -813,6 +814,10 @@
         "MetricsAnalyzed": {
           "shape": "NumMetricsAnalyzed",
           "documentation": "<p> An integer that specifies the number of metrics that have been analyzed in your AWS account. </p>"
+        },
+        "ResourceHours": {
+          "shape": "ResourceHours",
+          "documentation": "<p>The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour. </p>"
         }
       }
     },
@@ -2163,6 +2168,9 @@
       "enum": [
         "AWS_CLOUD_FORMATION"
       ]
+    },
+    "ResourceHours": {
+      "type": "long"
     },
     "SearchInsightsFilters": {
       "type": "structure",
