@@ -23,7 +23,7 @@ GEM
     kpeg (1.1.0)
     rake (13.0.1)
     rdiscount (2.1.7)
-    redcarpet (3.2.0)
+    redcarpet (3.5.1)
     samus (1.4.1)
     yard-sitemap (1.0.1)
 
@@ -34,7 +34,7 @@ DEPENDENCIES
   parsejs!
   rake
   rdiscount
-  redcarpet (~> 3.0)
+  redcarpet (~> 3.5)
   samus
   yard!
   yard-js!
