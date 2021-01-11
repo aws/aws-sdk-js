@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.824.0-->
+<!--LATEST=2.825.0-->
 <!--ENTRYINSERT-->
+
+## 2.825.0
+* feature: KMS: Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
+* feature: RDS: This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
 
 ## 2.824.0
 * feature: CodePipeline: Adding cancelled status and summary for executions aborted by pipeline updates.

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version."
+    }
+]
