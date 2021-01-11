@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "honeycode",
+  "description": "Exposed the Honeycode client along with the rest."
+}
