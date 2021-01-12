@@ -641,6 +641,10 @@ declare namespace AuditManager {
   export type AssessmentFrameworkDescription = string;
   export interface AssessmentFrameworkMetadata {
     /**
+     *  The Amazon Resource Name (ARN) of the framework. 
+     */
+    arn?: AuditManagerArn;
+    /**
      *  The unique identified for the specified framework. 
      */
     id?: UUID;
@@ -1002,7 +1006,7 @@ declare namespace AuditManager {
      */
     errorCode?: ErrorCode;
     /**
-     *  The error message returned by the BatchImportEvidenceToAssessmentControlError API. 
+     *  The error message returned by the BatchImportEvidenceToAssessmentControl API. 
      */
     errorMessage?: ErrorMessage;
   }
@@ -1090,7 +1094,7 @@ declare namespace AuditManager {
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data mapping sources for the specified control. 
+     *  The data source that determines from where AWS Audit Manager collects evidence for the control. 
      */
     controlSources?: ControlSources;
     /**
@@ -1255,6 +1259,10 @@ declare namespace AuditManager {
      *  The control sets to be associated with the framework. 
      */
     controlSets: CreateAssessmentFrameworkControlSets;
+    /**
+     *  The tags associated with the framework. 
+     */
+    tags?: TagMap;
   }
   export interface CreateAssessmentFrameworkResponse {
     /**
@@ -1362,7 +1370,7 @@ declare namespace AuditManager {
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data source that determines from where AWS Audit Manager collects evidence for the control. 
+     *  The data mapping sources for the specified control. 
      */
     controlMappingSources: CreateControlMappingSources;
     /**
@@ -1667,6 +1675,10 @@ declare namespace AuditManager {
      *  The IAM user or role that most recently updated the framework. 
      */
     lastUpdatedBy?: LastUpdatedBy;
+    /**
+     *  The tags associated with the framework. 
+     */
+    tags?: TagMap;
   }
   export type FrameworkDescription = string;
   export interface FrameworkMetadata {
@@ -2498,7 +2510,7 @@ declare namespace AuditManager {
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data source that determines from where AWS Audit Manager collects evidence for the control. 
+     *  The data mapping sources for the specified control. 
      */
     controlMappingSources: ControlMappingSources;
   }

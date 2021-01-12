@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.825.0-->
+<!--LATEST=2.826.0-->
 <!--ENTRYINSERT-->
+
+## 2.826.0
+* feature: AppStream: Adds support for the Smart Card Redirection feature
+* feature: AuditManager: This release introduces tag support for assessment frameworks. You can now add, remove, and get tags from existing frameworks, and specify the tags to apply when creating a custom framework.
+* feature: Lightsail: This release adds IPv6 support for Amazon Lightsail instances, container services, CDN distributions, and load balancers.
+* feature: SSM: AWS Systems Manager adds pagination support for DescribeDocumentPermission API
 
 ## 2.825.0
 * feature: KMS: Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
