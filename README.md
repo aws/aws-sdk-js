@@ -24,6 +24,24 @@ For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/ma
 
 ## How To Install
 
+### In the Browser
+
+To use the SDK in the browser, simply add the following script tag to your
+HTML pages:
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.825.0.min.js"></script>
+
+You can also build a custom browser SDK with your specified set of AWS services.
+This can allow you to reduce the SDK's size, specify different API versions of
+services, or use AWS services that don't currently support CORS if you are
+working in an environment that does not enforce CORS. To get started:
+
+http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html
+
+The AWS SDK is also compatible with [browserify](http://browserify.org).
+
+For browser-based web, mobile and hybrid apps, you can use [AWS Amplify Library](https://aws.github.io/aws-amplify/?utm_source=aws-js-sdk&utm_campaign=browser) which extends the AWS SDK and provides an easier and declarative interface.
+
 ### In Node.js
 
 The preferred way to install the AWS SDK for Node.js is to use the

@@ -1460,16 +1460,21 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
+     * The status of the pipeline execution.   Cancelled: The pipeline’s definition was updated before the pipeline execution could be completed.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
+    /**
+     * A summary that contains a description of the pipeline execution status.
+     */
+    statusSummary?: PipelineExecutionStatusSummary;
     /**
      * A list of ArtifactRevision objects included in a pipeline execution.
      */
     artifactRevisions?: ArtifactRevisionList;
   }
   export type PipelineExecutionId = string;
-  export type PipelineExecutionStatus = "InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
+  export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
+  export type PipelineExecutionStatusSummary = string;
   export interface PipelineExecutionSummary {
     /**
      * The ID of the pipeline execution.
@@ -1825,11 +1830,11 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId: PipelineExecutionId;
     /**
-     * The status of the stage, or for a completed stage, the last status of the stage.
+     * The status of the stage, or for a completed stage, the last status of the stage.  A status of cancelled means that the pipeline’s definition was updated before the stage execution could be completed. 
      */
     status: StageExecutionStatus;
   }
-  export type StageExecutionStatus = "InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
+  export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
   export type StageName = string;
   export type StageRetryMode = "FAILED_ACTIONS"|string;
   export interface StageState {

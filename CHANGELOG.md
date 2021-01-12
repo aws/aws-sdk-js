@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.823.0-->
+<!--LATEST=2.825.0-->
 <!--ENTRYINSERT-->
+
+## 2.825.0
+* feature: KMS: Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
+* feature: RDS: This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
+
+## 2.824.0
+* feature: CodePipeline: Adding cancelled status and summary for executions aborted by pipeline updates.
+* feature: DevOpsGuru: Add resourceHours field in GetAccountHealth API to show total number of resource hours AWS Dev Ops Guru has done work for in the last hour.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for I-Frame-only HLS manifest generation in CMAF outputs.
 
 ## 2.823.0
 * feature: Transfer: This release adds support for Amazon EFS, so customers can transfer files over SFTP, FTPS and FTP in and out of Amazon S3 as well as Amazon EFS.
