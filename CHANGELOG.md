@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.826.0-->
+<!--LATEST=2.827.0-->
 <!--ENTRYINSERT-->
+
+## 2.827.0
+* feature: FraudDetector: Added support for cancelling a model version that is TRAINING_IN_PROGRESS.
 
 ## 2.826.0
 * feature: AppStream: Adds support for the Smart Card Redirection feature
