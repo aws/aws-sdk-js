@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.827.0-->
+<!--LATEST=2.828.0-->
 <!--ENTRYINSERT-->
+
+## 2.828.0
+* feature: CognitoIdentity: Add Attributes For Access Control support for Amazon Cognito Identity Pools to facilitate access to AWS resources based on attributes from social and corporate identity providers
+* feature: Pinpoint: Customers can create segments using 5 new filters. Filters can check for the presence of a substring in attributes and can perform time-based comparisons formatted as ISO_INSTANT datetimes.
+* feature: S3Control: Amazon S3 Batch Operations now supports restoring objects from the S3 Intelligent-Tiering Archive Access and Deep Archive Access tiers.
+* feature: SageMaker: This feature allows customers to enable/disable model caching on Multi-Model endpoints.
 
 ## 2.827.0
 * feature: FraudDetector: Added support for cancelling a model version that is TRAINING_IN_PROGRESS.
