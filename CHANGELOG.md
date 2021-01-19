@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.828.0-->
+<!--LATEST=2.829.0-->
 <!--ENTRYINSERT-->
+
+## 2.829.0
+* feature: ACMPCA: ACM Private CA is launching additional certificate templates and API parameters. This allows customers to create custom certificates for their identity and secure communication use cases.
+* feature: Chime: Add support for specifying ChimeBearer header as part of the request for Amazon Chime SDK messaging APIs. Documentation updates.
+* feature: ECS: This release adds support to include task definition metadata information such as registeredAt, deregisteredAt, registeredBy as part of DescribeTaskDefinition API.
 
 ## 2.828.0
 * feature: CognitoIdentity: Add Attributes For Access Control support for Amazon Cognito Identity Pools to facilitate access to AWS resources based on attributes from social and corporate identity providers

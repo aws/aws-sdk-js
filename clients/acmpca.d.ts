@@ -61,11 +61,11 @@ declare class ACMPCA extends Service {
    */
   deletePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following:     CREATING - ACM Private CA is creating your private certificate authority.    PENDING_CERTIFICATE - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA.     ACTIVE - Your private CA is active.    DISABLED - Your private CA has been disabled.    EXPIRED - Your private CA certificate has expired.    FAILED - Your private CA has failed. Your CA can fail because of problems such a network outage or backend AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA.     DELETED - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.  
+   * Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following:     CREATING - ACM Private CA is creating your private certificate authority.    PENDING_CERTIFICATE - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA.     ACTIVE - Your private CA is active.    DISABLED - Your private CA has been disabled.    EXPIRED - Your private CA certificate has expired.    FAILED - Your private CA has failed. Your CA can fail because of problems such a network outage or back-end AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA.     DELETED - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.  
    */
   describeCertificateAuthority(params: ACMPCA.Types.DescribeCertificateAuthorityRequest, callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityResponse, AWSError>;
   /**
-   * Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following:     CREATING - ACM Private CA is creating your private certificate authority.    PENDING_CERTIFICATE - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA.     ACTIVE - Your private CA is active.    DISABLED - Your private CA has been disabled.    EXPIRED - Your private CA certificate has expired.    FAILED - Your private CA has failed. Your CA can fail because of problems such a network outage or backend AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA.     DELETED - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.  
+   * Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following:     CREATING - ACM Private CA is creating your private certificate authority.    PENDING_CERTIFICATE - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA.     ACTIVE - Your private CA is active.    DISABLED - Your private CA has been disabled.    EXPIRED - Your private CA certificate has expired.    FAILED - Your private CA has failed. Your CA can fail because of problems such a network outage or back-end AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA.     DELETED - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.  
    */
   describeCertificateAuthority(callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityResponse, AWSError>;
   /**
@@ -109,11 +109,11 @@ declare class ACMPCA extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: ACMPCA.Types.GetPolicyResponse) => void): Request<ACMPCA.Types.GetPolicyResponse, AWSError>;
   /**
-   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following addtitional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
+   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(params: ACMPCA.Types.ImportCertificateAuthorityCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following addtitional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
+   * Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:   In ACM Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   ACM Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -269,7 +269,7 @@ declare namespace ACMPCA {
      */
     GivenName?: String16;
     /**
-     * Concatenation that typically contains the first letter of the GivenName, the first letter of the middle name if one exists, and the first letter of the SurName.
+     * Concatenation that typically contains the first letter of the GivenName, the first letter of the middle name if one exists, and the first letter of the Surname.
      */
     Initials?: String5;
     /**
@@ -307,6 +307,13 @@ declare namespace ACMPCA {
   export type AccountId = string;
   export type ActionList = ActionType[];
   export type ActionType = "IssueCertificate"|"GetCertificate"|"ListPermissions"|string;
+  export interface ApiPassthrough {
+    /**
+     * Specifies X.509 extension information for a certificate.
+     */
+    Extensions?: Extensions;
+    Subject?: ASN1Subject;
+  }
   export type Arn = string;
   export type AuditReportId = string;
   export type AuditReportResponseFormat = "JSON"|"CSV"|string;
@@ -391,6 +398,7 @@ declare namespace ACMPCA {
   export type CertificateBodyBlob = Buffer|Uint8Array|Blob|string;
   export type CertificateChain = string;
   export type CertificateChainBlob = Buffer|Uint8Array|Blob|string;
+  export type CertificatePolicyList = PolicyInformation[];
   export type CountryCodeString = string;
   export interface CreateCertificateAuthorityAuditReportRequest {
     /**
@@ -430,7 +438,7 @@ declare namespace ACMPCA {
      */
     CertificateAuthorityType: CertificateAuthorityType;
     /**
-     * Alphanumeric string that can be used to distinguish between calls to CreateCertificateAuthority. For a given token, ACM Private CA creates exactly one CA. If you issue a subsequent call using the same token, ACM Private CA returns the ARN of the existing CA and takes no further action. If you change the idempotency token across multiple calls, ACM Private CA creates a unique CA for each unique token.
+     * Custom string that can be used to distinguish between calls to the CreateCertificateAuthority action. Idempotency tokens for CreateCertificateAuthority time out after five minutes. Therefore, if you call CreateCertificateAuthority multiple times with the same idempotency token within five minutes, ACM Private CA recognizes that you are requesting only certificate authority and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificate authorities.
      */
     IdempotencyToken?: IdempotencyToken;
     /**
@@ -573,6 +581,33 @@ declare namespace ACMPCA {
      */
     NameAssigner?: String256;
   }
+  export interface ExtendedKeyUsage {
+    /**
+     * Specifies a standard ExtendedKeyUsage as defined as in RFC 5280.
+     */
+    ExtendedKeyUsageType?: ExtendedKeyUsageType;
+    /**
+     * Specifies a custom ExtendedKeyUsage with an object identifier (OID).
+     */
+    ExtendedKeyUsageObjectIdentifier?: CustomObjectIdentifier;
+  }
+  export type ExtendedKeyUsageList = ExtendedKeyUsage[];
+  export type ExtendedKeyUsageType = "SERVER_AUTH"|"CLIENT_AUTH"|"CODE_SIGNING"|"EMAIL_PROTECTION"|"TIME_STAMPING"|"OCSP_SIGNING"|"SMART_CARD_LOGIN"|"DOCUMENT_SIGNING"|"CERTIFICATE_TRANSPARENCY"|string;
+  export interface Extensions {
+    /**
+     * Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST's definition of Object Identifier (OID). In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.
+     */
+    CertificatePolicies?: CertificatePolicyList;
+    /**
+     * Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the KeyUsage extension.
+     */
+    ExtendedKeyUsage?: ExtendedKeyUsageList;
+    KeyUsage?: KeyUsage;
+    /**
+     * The subject alternative name extension allows identities to be bound to the subject of the certificate. These identities may be included in addition to or in place of the identity in the subject field of the certificate.
+     */
+    SubjectAlternativeNames?: GeneralNameList;
+  }
   export type FailureReason = "REQUEST_TIMED_OUT"|"UNSUPPORTED_ALGORITHM"|"OTHER"|string;
   export interface GeneralName {
     /**
@@ -605,6 +640,7 @@ declare namespace ACMPCA {
      */
     RegisteredId?: CustomObjectIdentifier;
   }
+  export type GeneralNameList = GeneralName[];
   export interface GetCertificateAuthorityCertificateRequest {
     /**
      * The Amazon Resource Name (ARN) of your private CA. This is of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 . 
@@ -683,27 +719,35 @@ declare namespace ACMPCA {
   export type Integer1To5000 = number;
   export interface IssueCertificateRequest {
     /**
+     * Specifies X.509 certificate information to be included in the issued certificate. An APIPassthrough or APICSRPassthrough template variant must be selected, or else this parameter is ignored. For more information about using these templates, see Understanding Certificate Templates. If conflicting or duplicate certificate information is supplied during certificate issuance, ACM Private CA applies order of operation rules to determine what information is used.
+     */
+    ApiPassthrough?: ApiPassthrough;
+    /**
      * The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority. This must be of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
      */
     CertificateAuthorityArn: Arn;
     /**
-     * The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key.   openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr  If you have a configuration file, you can use the following OpenSSL command. The usr_cert block in the configuration file contains your X509 version 3 extensions.   openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr  Note: A CSR must provide either a subject name or a subject alternative name or the request will be rejected. 
+     * The certificate signing request (CSR) for the certificate you want to issue. As an example, you can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key.   openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr  If you have a configuration file, you can then use the following OpenSSL command. The usr_cert block in the configuration file contains your X509 version 3 extensions.   openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr  Note: A CSR must provide either a subject name or a subject alternative name or the request will be rejected. 
      */
     Csr: CsrBlob;
     /**
-     * The name of the algorithm that will be used to sign the certificate to be issued.  This parameter should not be confused with the SigningAlgorithm parameter used to sign a CSR.
+     * The name of the algorithm that will be used to sign the certificate to be issued.  This parameter should not be confused with the SigningAlgorithm parameter used to sign a CSR in the CreateCertificateAuthority action.
      */
     SigningAlgorithm: SigningAlgorithm;
     /**
-     * Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLenN portion of the ARN, where N is the CA depth. Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy. The following service-owned TemplateArn values are supported by ACM Private CA:    arn:aws:acm-pca:::template/CodeSigningCertificate/V1   arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1   arn:aws:acm-pca:::template/EndEntityCertificate/V1   arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1   arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1   arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1   arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1   arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1   arn:aws:acm-pca:::template/OCSPSigningCertificate/V1   arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1   arn:aws:acm-pca:::template/RootCACertificate/V1   arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1   arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1   arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1   arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1   For more information, see Using Templates.
+     * Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLenN portion of the ARN, where N is the CA depth. Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy. For a list of TemplateArn values supported by ACM Private CA, see Understanding Certificate Templates.
      */
     TemplateArn?: Arn;
     /**
-     * Information describing the validity period of the certificate. When issuing a certificate, ACM Private CA sets the "Not Before" date in the validity field to date and time minus 60 minutes. This is intended to compensate for time inconsistencies across systems of 60 minutes or less.  The validity period configured on a certificate must not exceed the limit set by its parents in the CA hierarchy.
+     * Information describing the end of the validity period of the certificate. This parameter sets the “Not After” date for the certificate. Certificate validity is the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the certificate expires, or as a span of time after issuance, stated in days, months, or years. For more information, see Validity in RFC 5280.  This value is unaffected when ValidityNotBefore is also specified. For example, if Validity is set to 20 days in the future, the certificate will expire 20 days from issuance time regardless of the ValidityNotBefore value. The end of the validity period configured on a certificate must not exceed the limit set on its parents in the CA hierarchy.
      */
     Validity: Validity;
     /**
-     * Custom string that can be used to distinguish between calls to the IssueCertificate action. Idempotency tokens time out after one hour. Therefore, if you call IssueCertificate multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
+     * Information describing the start of the validity period of the certificate. This parameter sets the “Not Before" date for the certificate. By default, when issuing a certificate, ACM Private CA sets the "Not Before" date to the issuance time minus 60 minutes. This compensates for clock inconsistencies across computer systems. The ValidityNotBefore parameter can be used to customize the “Not Before” value.  Unlike the Validity parameter, the ValidityNotBefore parameter is optional. The ValidityNotBefore value is expressed as an explicit date and time, using the Validity type value ABSOLUTE. For more information, see Validity in this API reference and Validity in RFC 5280.
+     */
+    ValidityNotBefore?: Validity;
+    /**
+     * Alphanumeric string that can be used to distinguish between calls to the IssueCertificate action. Idempotency tokens for IssueCertificate time out after one minute. Therefore, if you call IssueCertificate multiple times with the same idempotency token within one minute, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
      */
     IdempotencyToken?: IdempotencyToken;
   }
@@ -864,6 +908,28 @@ declare namespace ACMPCA {
     Policy?: AWSPolicy;
   }
   export type PermissionList = Permission[];
+  export interface PolicyInformation {
+    /**
+     * Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of Object Identifier (OID).
+     */
+    CertPolicyId: CustomObjectIdentifier;
+    /**
+     * Modifies the given CertPolicyId with a qualifier. ACM Private CA supports the certification practice statement (CPS) qualifier.
+     */
+    PolicyQualifiers?: PolicyQualifierInfoList;
+  }
+  export type PolicyQualifierId = "CPS"|string;
+  export interface PolicyQualifierInfo {
+    /**
+     * Identifies the qualifier modifying a CertPolicyId.
+     */
+    PolicyQualifierId: PolicyQualifierId;
+    /**
+     * Defines the qualifier type. ACM Private CA supports the use of a URI for a CPS qualifier in this field.
+     */
+    Qualifier: Qualifier;
+  }
+  export type PolicyQualifierInfoList = PolicyQualifierInfo[];
   export type PositiveLong = number;
   export type Principal = string;
   export interface PutPolicyRequest {
@@ -872,9 +938,15 @@ declare namespace ACMPCA {
      */
     ResourceArn: Arn;
     /**
-     * The path and filename of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the PutPolicy action returns an InvalidPolicyException. For information about IAM policy and statement structure, see Overview of JSON Policies.
+     * The path and file name of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the PutPolicy action returns an InvalidPolicyException. For information about IAM policy and statement structure, see Overview of JSON Policies.
      */
     Policy: AWSPolicy;
+  }
+  export interface Qualifier {
+    /**
+     * Contains a pointer to a certification practice statement (CPS) published by the CA.
+     */
+    CpsUri: String256;
   }
   export type ResourceOwner = "SELF"|"OTHER_ACCOUNTS"|string;
   export interface RestoreCertificateAuthorityRequest {
@@ -972,7 +1044,7 @@ declare namespace ACMPCA {
      */
     Value: PositiveLong;
     /**
-     * Determines how ACM Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.   END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.   Sample input value: 491231235959 (UTCTime format)   Output expiration date/time: 12/31/2049 23:59:59    ABSOLUTE: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch.    Sample input value: 2524608000   Output expiration date/time: 01/01/2050 00:00:00    DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.  Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:   Sample input value: 90   Output expiration date: 01/10/2020 12:34:54 UTC   The minimum validity duration for a certificate using relative time (DAYS) is one day. The minimum validity for a certificate using absolute time (ABSOLUTE or END_DATE) is one second.
+     * Determines how ACM Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.   END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.   Sample input value: 491231235959 (UTCTime format)   Output expiration date/time: 12/31/2049 23:59:59    ABSOLUTE: The specific date and time when the validity of a certificate will start or expire, expressed in seconds since the Unix Epoch.    Sample input value: 2524608000   Output expiration date/time: 01/01/2050 00:00:00    DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.  Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:   Sample input value: 90   Output expiration date: 01/10/2020 12:34:54 UTC   The minimum validity duration for a certificate using relative time (DAYS) is one day. The minimum validity for a certificate using absolute time (ABSOLUTE or END_DATE) is one second.
      */
     Type: ValidityPeriodType;
   }
