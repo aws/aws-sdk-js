@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.829.0-->
+<!--LATEST=2.830.0-->
 <!--ENTRYINSERT-->
+
+## 2.830.0
+* feature: Kafka: Amazon MSK has added a new API that allows you to update all the brokers in the cluster to the specified type.
+* feature: ResourceGroupsTaggingAPI: This release adds a new parameter ResourceARNList to Resource Groups Tagging api GetResources api to allow customers retrieve tag data for specific resources.
+* feature: SecurityHub: This release of ASFF adds a new Action object and a new resource details object - AwsSsmPatchCompliance. It also adds several new attributes for the AwsEc2NetworkInterface resource type.
 
 ## 2.829.0
 * feature: ACMPCA: ACM Private CA is launching additional certificate templates and API parameters. This allows customers to create custom certificates for their identity and secure communication use cases.

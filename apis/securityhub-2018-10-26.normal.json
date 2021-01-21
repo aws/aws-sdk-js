@@ -1462,6 +1462,96 @@
         "shape": "NonEmptyString"
       }
     },
+    "Action": {
+      "type": "structure",
+      "members": {
+        "ActionType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of action that was detected. The possible action types are:</p> <ul> <li> <p> <code>NETWORK_CONNECTION</code> </p> </li> <li> <p> <code>AWS_API_CALL</code> </p> </li> <li> <p> <code>DNS_REQUEST</code> </p> </li> <li> <p> <code>PORT_PROBE</code> </p> </li> </ul>"
+        },
+        "NetworkConnectionAction": {
+          "shape": "NetworkConnectionAction",
+          "documentation": "<p>Included if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. Provides details about the network connection that was detected.</p>"
+        },
+        "AwsApiCallAction": {
+          "shape": "AwsApiCallAction",
+          "documentation": "<p>Included if <code>ActionType</code> is <code>AWS_API_CALL</code>. Provides details about the API call that was detected. </p>"
+        },
+        "DnsRequestAction": {
+          "shape": "DnsRequestAction",
+          "documentation": "<p>Included if <code>ActionType</code> is <code>DNS_REQUEST</code>. Provides details about the DNS request that was detected. </p>"
+        },
+        "PortProbeAction": {
+          "shape": "PortProbeAction",
+          "documentation": "<p>Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about the port probe that was detected. </p>"
+        }
+      },
+      "documentation": "<p>Provides details about one of the following actions that were detected for the finding:</p> <ul> <li> <p>A remote IP address issued an AWS API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>"
+    },
+    "ActionLocalIpDetails": {
+      "type": "structure",
+      "members": {
+        "IpAddressV4": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IP address.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the IP address where the scanned port is located.</p>"
+    },
+    "ActionLocalPortDetails": {
+      "type": "structure",
+      "members": {
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The number of the port.</p>"
+        },
+        "PortName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The port name of the local connection.</p>"
+        }
+      },
+      "documentation": "<p>For <code>NetworkConnectionAction</code> and <code>PortProbeDetails</code>, <code>LocalPortDetails</code> provides information about the local port that was involved in the action.</p>"
+    },
+    "ActionRemoteIpDetails": {
+      "type": "structure",
+      "members": {
+        "IpAddressV4": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IP address.</p>"
+        },
+        "Organization": {
+          "shape": "IpOrganizationDetails",
+          "documentation": "<p>The internet service provider (ISP) organization associated with the remote IP address.</p>"
+        },
+        "Country": {
+          "shape": "Country",
+          "documentation": "<p>The country where the remote IP address is located.</p>"
+        },
+        "City": {
+          "shape": "City",
+          "documentation": "<p>The city where the remote IP address is located.</p>"
+        },
+        "GeoLocation": {
+          "shape": "GeoLocation",
+          "documentation": "<p>The coordinates of the location of the remote IP address.</p>"
+        }
+      },
+      "documentation": "<p>For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and <code>PortProbeAction</code>, <code>RemoteIpDetails</code> provides information about the remote IP address that was involved in the action.</p>"
+    },
+    "ActionRemotePortDetails": {
+      "type": "structure",
+      "members": {
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The number of the port.</p>"
+        },
+        "PortName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The port name of the remote connection.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the remote port that was involved in an attempted network connection.</p>"
+    },
     "ActionTarget": {
       "type": "structure",
       "required": [
@@ -1548,6 +1638,54 @@
       "member": {
         "shape": "AvailabilityZone"
       }
+    },
+    "AwsApiCallAction": {
+      "type": "structure",
+      "members": {
+        "Api": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the API method that was issued.</p>"
+        },
+        "ServiceName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the AWS service that the API method belongs to.</p>"
+        },
+        "CallerType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether the API call originated from a remote IP address (<code>remoteip</code>) or from a DNS domain (<code>domain</code>).</p>"
+        },
+        "RemoteIpDetails": {
+          "shape": "ActionRemoteIpDetails",
+          "documentation": "<p>Provided if <code>CallerType</code> is <code>remoteIp</code>. Provides information about the remote IP address that the API call originated from.</p>"
+        },
+        "DomainDetails": {
+          "shape": "AwsApiCallActionDomainDetails",
+          "documentation": "<p>Provided if <code>CallerType</code> is <code>domain</code>. Provides information about the DNS domain that the API call originated from.</p>"
+        },
+        "AffectedResources": {
+          "shape": "FieldMap",
+          "documentation": "<p>Identifies the resources that were affected by the API call.</p>"
+        },
+        "FirstSeen": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the API call was first observed.</p>"
+        },
+        "LastSeen": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the API call was most recently observed.</p>"
+        }
+      },
+      "documentation": "<p>Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details about the API call that was detected.</p>"
+    },
+    "AwsApiCallActionDomainDetails": {
+      "type": "structure",
+      "members": {
+        "Domain": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the DNS domain that issued the API call.</p>"
+        }
+      },
+      "documentation": "<p>Provided if <code>CallerType</code> is <code>domain</code>. It provides information about the DNS domain that issued the API call.</p>"
     },
     "AwsApiGatewayAccessLogSettings": {
       "type": "structure",
@@ -3069,9 +3207,61 @@
         "SourceDestCheck": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether traffic to or from the instance is validated.</p>"
+        },
+        "IpV6Addresses": {
+          "shape": "AwsEc2NetworkInterfaceIpV6AddressList",
+          "documentation": "<p>The IPv6 addresses associated with the network interface.</p>"
+        },
+        "PrivateIpAddresses": {
+          "shape": "AwsEc2NetworkInterfacePrivateIpAddressList",
+          "documentation": "<p>The private IPv4 addresses associated with the network interface.</p>"
+        },
+        "PublicDnsName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The public DNS name of the network interface.</p>"
+        },
+        "PublicIp": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The address of the Elastic IP address bound to the network interface.</p>"
         }
       },
       "documentation": "<p>Details about the network interface</p>"
+    },
+    "AwsEc2NetworkInterfaceIpV6AddressDetail": {
+      "type": "structure",
+      "members": {
+        "IpV6Address": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPV6 address.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an IPV6 address that is associated with the network interface.</p>"
+    },
+    "AwsEc2NetworkInterfaceIpV6AddressList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2NetworkInterfaceIpV6AddressDetail"
+      }
+    },
+    "AwsEc2NetworkInterfacePrivateIpAddressDetail": {
+      "type": "structure",
+      "members": {
+        "PrivateIpAddress": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IP address.</p>"
+        },
+        "PrivateDnsName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The private DNS name for the IP address.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a private IPv4 address that is with the network interface.</p>"
+    },
+    "AwsEc2NetworkInterfacePrivateIpAddressList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2NetworkInterfacePrivateIpAddressDetail"
+      }
     },
     "AwsEc2NetworkInterfaceSecurityGroup": {
       "type": "structure",
@@ -4743,7 +4933,7 @@
         },
         "Engine": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the database engine that you want to use for this DB instance.</p>"
         },
         "AllocatedStorage": {
           "shape": "Integer",
@@ -5136,14 +5326,14 @@
       "members": {
         "OptionGroupName": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the option group.</p>"
         },
         "Status": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The status of the option group membership.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>An option group membership.</p>"
     },
     "AwsRdsDbOptionGroupMemberships": {
       "type": "list",
@@ -5156,14 +5346,14 @@
       "members": {
         "DbParameterGroupName": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the parameter group.</p>"
         },
         "ParameterApplyStatus": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The status of parameter updates.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information about a parameter group for a DB instance.</p>"
     },
     "AwsRdsDbParameterGroups": {
       "type": "list",
@@ -5176,80 +5366,80 @@
       "members": {
         "DbInstanceClass": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new DB instance class for the DB instance.</p>"
         },
         "AllocatedStorage": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The new value of the allocated storage for the DB instance.</p>"
         },
         "MasterUserPassword": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new master user password for the DB instance.</p>"
         },
         "Port": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The new port for the DB instance.</p>"
         },
         "BackupRetentionPeriod": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The new backup retention period for the DB instance.</p>"
         },
         "MultiAZ": {
           "shape": "Boolean",
-          "documentation": "<p/>"
+          "documentation": "<p>Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment.</p>"
         },
         "EngineVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new engine version for the DB instance.</p>"
         },
         "LicenseModel": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new license model value for the DB instance.</p>"
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The new provisioned IOPS value for the DB instance.</p>"
         },
         "DbInstanceIdentifier": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new DB instance identifier for the DB instance.</p>"
         },
         "StorageType": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new storage type for the DB instance.</p>"
         },
         "CaCertificateIdentifier": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The new CA certificate identifier for the DB instance.</p>"
         },
         "DbSubnetGroupName": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the new subnet group for the DB instance.</p>"
         },
         "PendingCloudWatchLogsExports": {
           "shape": "AwsRdsPendingCloudWatchLogsExports",
-          "documentation": "<p/>"
+          "documentation": "<p>A list of log types that are being enabled or disabled.</p>"
         },
         "ProcessorFeatures": {
           "shape": "AwsRdsDbProcessorFeatures",
-          "documentation": "<p/>"
+          "documentation": "<p>Processor features that are being updated.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Changes to a DB instance that are currently pending.</p>"
     },
     "AwsRdsDbProcessorFeature": {
       "type": "structure",
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the processor feature.</p>"
         },
         "Value": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The value of the processor feature.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>A processor feature.</p>"
     },
     "AwsRdsDbProcessorFeatures": {
       "type": "list",
@@ -5262,114 +5452,114 @@
       "members": {
         "DbSnapshotIdentifier": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name or ARN of the DB snapshot that is used to restore the DB instance.</p>"
         },
         "DbInstanceIdentifier": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>A name for the DB instance.</p>"
         },
         "SnapshotCreateTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>When the snapshot was taken in Coordinated Universal Time (UTC).</p>"
         },
         "Engine": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The name of the database engine to use for this DB instance.</p>"
         },
         "AllocatedStorage": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The amount of storage (in gigabytes) to be initially allocated for the database instance.</p>"
         },
         "Status": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The status of this DB snapshot.</p>"
         },
         "Port": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The port that the database engine was listening on at the time of the snapshot.</p>"
         },
         "AvailabilityZone": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot.</p>"
         },
         "VpcId": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The VPC ID associated with the DB snapshot.</p>"
         },
         "InstanceCreateTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.</p>"
         },
         "MasterUsername": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The master user name for the DB snapshot.</p>"
         },
         "EngineVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The version of the database engine.</p>"
         },
         "LicenseModel": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>License model information for the restored DB instance.</p>"
         },
         "SnapshotType": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The type of the DB snapshot.</p>"
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.</p>"
         },
         "OptionGroupName": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The option group name for the DB snapshot.</p>"
         },
         "PercentProgress": {
           "shape": "Integer",
-          "documentation": "<p/>"
+          "documentation": "<p>The percentage of the estimated data that has been transferred.</p>"
         },
         "SourceRegion": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The AWS Region that the DB snapshot was created in or copied from.</p>"
         },
         "SourceDbSnapshotIdentifier": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The DB snapshot ARN that the DB snapshot was copied from.</p>"
         },
         "StorageType": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The storage type associated with the DB snapshot.</p>"
         },
         "TdeCredentialArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>"
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p/>"
+          "documentation": "<p>Whether the DB snapshot is encrypted.</p>"
         },
         "KmsKeyId": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.</p>"
         },
         "Timezone": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The time zone of the DB snapshot.</p>"
         },
         "IamDatabaseAuthenticationEnabled": {
           "shape": "Boolean",
-          "documentation": "<p/>"
+          "documentation": "<p>Whether mapping of IAM accounts to database accounts is enabled.</p>"
         },
         "ProcessorFeatures": {
           "shape": "AwsRdsDbProcessorFeatures",
-          "documentation": "<p/>"
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
         },
         "DbiResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>The identifier for the source DB instance.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides details about an Amazon RDS DB cluster snapshot.</p>"
     },
     "AwsRdsDbStatusInfo": {
       "type": "structure",
@@ -6265,6 +6455,10 @@
         "PatchSummary": {
           "shape": "PatchSummary",
           "documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected compliance standard.</p>"
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>Provides details about an action that was detected for the finding.</p>"
         }
       },
       "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>"
@@ -6578,7 +6772,7 @@
         },
         "WorkflowStatus": {
           "shape": "StringFilterList",
-          "documentation": "<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>"
+          "documentation": "<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>"
         },
         "RecordState": {
           "shape": "StringFilterList",
@@ -6704,6 +6898,104 @@
         }
       },
       "documentation": "<p>Data about a queue.</p>"
+    },
+    "AwsSsmComplianceSummary": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current patch compliance status.</p> <p>The possible status values are:</p> <ul> <li> <p> <code>COMPLIANT</code> </p> </li> <li> <p> <code>NON_COMPLIANT</code> </p> </li> <li> <p> <code>UNSPECIFIED_DATA</code> </p> </li> </ul>"
+        },
+        "CompliantCriticalCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>CRITICAL</code>.</p>"
+        },
+        "CompliantHighCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>HIGH</code>.</p>"
+        },
+        "CompliantMediumCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>MEDIUM</code>.</p>"
+        },
+        "ExecutionType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of execution that was used determine compliance.</p>"
+        },
+        "NonCompliantCriticalCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patch items that are noncompliant, the number of items that have a severity of <code>CRITICAL</code>.</p>"
+        },
+        "CompliantInformationalCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>INFORMATIONAL</code>.</p>"
+        },
+        "NonCompliantInformationalCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are noncompliant, the number that have a severity of <code>INFORMATIONAL</code>.</p>"
+        },
+        "CompliantUnspecifiedCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>UNSPECIFIED</code>.</p>"
+        },
+        "NonCompliantLowCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are noncompliant, the number that have a severity of <code>LOW</code>.</p>"
+        },
+        "NonCompliantHighCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are noncompliant, the number that have a severity of <code>HIGH</code>.</p>"
+        },
+        "CompliantLowCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are compliant, the number that have a severity of <code>LOW</code>.</p>"
+        },
+        "ComplianceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of resource for which the compliance was determined. For <code>AwsSsmPatchCompliance</code>, <code>ComplianceType</code> is <code>Patch</code>. </p>"
+        },
+        "PatchBaselineId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the patch baseline. The patch baseline lists the patches that are approved for installation.</p>"
+        },
+        "OverallSeverity": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The highest severity for the patches.</p>"
+        },
+        "NonCompliantMediumCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are noncompliant, the number that have a severity of <code>MEDIUM</code>.</p>"
+        },
+        "NonCompliantUnspecifiedCount": {
+          "shape": "Integer",
+          "documentation": "<p>For the patches that are noncompliant, the number that have a severity of <code>UNSPECIFIED</code>.</p>"
+        },
+        "PatchGroup": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the patch group for which compliance was determined. A patch group uses tags to group EC2 instances that should have the same patch compliance.</p>"
+        }
+      },
+      "documentation": "<p>Provides the details about the compliance status for a patch.</p>"
+    },
+    "AwsSsmPatch": {
+      "type": "structure",
+      "members": {
+        "ComplianceSummary": {
+          "shape": "AwsSsmComplianceSummary",
+          "documentation": "<p>The compliance status details for the patch.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about the compliance for a patch.</p>"
+    },
+    "AwsSsmPatchComplianceDetails": {
+      "type": "structure",
+      "members": {
+        "Patch": {
+          "shape": "AwsSsmPatch",
+          "documentation": "<p>Information about the status of a patch.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.</p>"
     },
     "AwsWafWebAclDetails": {
       "type": "structure",
@@ -6964,6 +7256,16 @@
         "shape": "CidrBlockAssociation"
       }
     },
+    "City": {
+      "type": "structure",
+      "members": {
+        "CityName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the city.</p>"
+        }
+      },
+      "documentation": "<p>Information about a city.</p>"
+    },
     "Compliance": {
       "type": "structure",
       "members": {
@@ -7019,6 +7321,20 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "Country": {
+      "type": "structure",
+      "members": {
+        "CountryCode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The 2-letter ISO 3166 country code for the country.</p>"
+        },
+        "CountryName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the country.</p>"
+        }
+      },
+      "documentation": "<p>Information about a country.</p>"
     },
     "CreateActionTargetRequest": {
       "type": "structure",
@@ -7543,6 +7859,24 @@
       "type": "structure",
       "members": {}
     },
+    "DnsRequestAction": {
+      "type": "structure",
+      "members": {
+        "Domain": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The DNS domain that is associated with the DNS request.</p>"
+        },
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol that was used for the DNS request.</p>"
+        },
+        "Blocked": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the DNS request was blocked.</p>"
+        }
+      },
+      "documentation": "<p>Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details about the DNS request that was detected.</p>"
+    },
     "Double": {
       "type": "double"
     },
@@ -7608,6 +7942,20 @@
       "value": {
         "shape": "NonEmptyString"
       }
+    },
+    "GeoLocation": {
+      "type": "structure",
+      "members": {
+        "Lon": {
+          "shape": "Double",
+          "documentation": "<p>The longitude of the location.</p>"
+        },
+        "Lat": {
+          "shape": "Double",
+          "documentation": "<p>The latitude of the location.</p>"
+        }
+      },
+      "documentation": "<p>Provides the latitude and longitude coordinates of a location.</p>"
     },
     "GetEnabledStandardsRequest": {
       "type": "structure",
@@ -7976,6 +8324,28 @@
       "member": {
         "shape": "IpFilter"
       }
+    },
+    "IpOrganizationDetails": {
+      "type": "structure",
+      "members": {
+        "Asn": {
+          "shape": "Integer",
+          "documentation": "<p>The Autonomous System Number (ASN) of the internet provider</p>"
+        },
+        "AsnOrg": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the organization that registered the ASN.</p>"
+        },
+        "Isp": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ISP information for the internet provider.</p>"
+        },
+        "Org": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the internet provider.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an internet provider.</p>"
     },
     "Ipv6CidrBlockAssociation": {
       "type": "structure",
@@ -8368,6 +8738,36 @@
       },
       "documentation": "<p>The details of network-related information about a finding.</p>"
     },
+    "NetworkConnectionAction": {
+      "type": "structure",
+      "members": {
+        "ConnectionDirection": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The direction of the network connection request (<code>IN</code> or <code>OUT</code>).</p>"
+        },
+        "RemoteIpDetails": {
+          "shape": "ActionRemoteIpDetails",
+          "documentation": "<p>Information about the remote IP address that issued the network connection request.</p>"
+        },
+        "RemotePortDetails": {
+          "shape": "ActionRemotePortDetails",
+          "documentation": "<p>Information about the port on the remote IP address.</p>"
+        },
+        "LocalPortDetails": {
+          "shape": "ActionLocalPortDetails",
+          "documentation": "<p>Information about the port on the EC2 instance.</p>"
+        },
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol used to make the network connection request.</p>"
+        },
+        "Blocked": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the network connection attempt was blocked.</p>"
+        }
+      },
+      "documentation": "<p>Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides details about the attempted network connection that was detected.</p>"
+    },
     "NetworkDirection": {
       "type": "string",
       "enum": [
@@ -8574,6 +8974,44 @@
       },
       "documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected compliance standard.</p>"
     },
+    "PortProbeAction": {
+      "type": "structure",
+      "members": {
+        "PortProbeDetails": {
+          "shape": "PortProbeDetailList",
+          "documentation": "<p>Information about the ports affected by the port probe.</p>"
+        },
+        "Blocked": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the port probe was blocked.</p>"
+        }
+      },
+      "documentation": "<p>Provided if <code>ActionType</code> is <code>PORT_PROBE</code>. It provides details about the attempted port probe that was detected.</p>"
+    },
+    "PortProbeDetail": {
+      "type": "structure",
+      "members": {
+        "LocalPortDetails": {
+          "shape": "ActionLocalPortDetails",
+          "documentation": "<p>Provides information about the port that was scanned.</p>"
+        },
+        "LocalIpDetails": {
+          "shape": "ActionLocalIpDetails",
+          "documentation": "<p>Provides information about the IP address where the scanned port is located.</p>"
+        },
+        "RemoteIpDetails": {
+          "shape": "ActionRemoteIpDetails",
+          "documentation": "<p>Provides information about the remote IP address that performed the scan.</p>"
+        }
+      },
+      "documentation": "<p>A port scan that was part of the port probe. For each scan, PortProbeDetails provides information about the local IP address and port that were scanned, and the remote IP address that the scan originated from.</p>"
+    },
+    "PortProbeDetailList": {
+      "type": "list",
+      "member": {
+        "shape": "PortProbeDetail"
+      }
+    },
     "PortRange": {
       "type": "structure",
       "members": {
@@ -8772,7 +9210,7 @@
         },
         "ResourceRole": {
           "shape": "NonEmptyString",
-          "documentation": "<p/>"
+          "documentation": "<p>Identifies the role of the resource in the finding. A resource is either the actor or target of the finding activity,</p>"
         },
         "Tags": {
           "shape": "FieldMap",
@@ -8862,11 +9300,11 @@
         },
         "AwsApiGatewayV2Stage": {
           "shape": "AwsApiGatewayV2StageDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides information about a version 2 stage for Amazon API Gateway.</p>"
         },
         "AwsApiGatewayV2Api": {
           "shape": "AwsApiGatewayV2ApiDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides information about a version 2 API in Amazon API Gateway.</p>"
         },
         "AwsDynamoDbTable": {
           "shape": "AwsDynamoDbTableDetails",
@@ -8874,31 +9312,35 @@
         },
         "AwsApiGatewayStage": {
           "shape": "AwsApiGatewayStageDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides information about a version 1 Amazon API Gateway stage.</p>"
         },
         "AwsApiGatewayRestApi": {
           "shape": "AwsApiGatewayRestApiDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides information about a REST API in version 1 of Amazon API Gateway.</p>"
         },
         "AwsCloudTrailTrail": {
           "shape": "AwsCloudTrailTrailDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides details about a CloudTrail trail.</p>"
+        },
+        "AwsSsmPatchCompliance": {
+          "shape": "AwsSsmPatchComplianceDetails",
+          "documentation": "<p>Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.</p>"
         },
         "AwsCertificateManagerCertificate": {
           "shape": "AwsCertificateManagerCertificateDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Provides details about an AWS Certificate Manager (ACM) certificate.</p>"
         },
         "AwsRedshiftCluster": {
           "shape": "AwsRedshiftClusterDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Contains details about an Amazon Redshift cluster.</p>"
         },
         "AwsElbLoadBalancer": {
           "shape": "AwsElbLoadBalancerDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>contains details about a Classic Load Balancer.</p>"
         },
         "AwsIamGroup": {
           "shape": "AwsIamGroupDetails",
-          "documentation": "<p/>"
+          "documentation": "<p>Contains details about an IAM group.</p>"
         },
         "AwsIamRole": {
           "shape": "AwsIamRoleDetails",
@@ -9230,7 +9672,7 @@
         },
         "StandardsStatus": {
           "shape": "StandardsStatus",
-          "documentation": "<p>The status of the standards subscription.</p>"
+          "documentation": "<p>The status of the standard subscription.</p> <p>The status values are as follows:</p> <ul> <li> <p> <code>PENDING</code> - Standard is in the process of being enabled.</p> </li> <li> <p> <code>READY</code> - Standard is enabled.</p> </li> <li> <p> <code>INCOMPLETE</code> - Standard could not be enabled completely. Some controls may not be available.</p> </li> <li> <p> <code>DELETING</code> - Standard is in the process of being disabled.</p> </li> <li> <p> <code>FAILED</code> - Standard could not be disabled.</p> </li> </ul>"
         }
       },
       "documentation": "<p>A resource that represents your subscription to a supported standard.</p>"
@@ -9735,7 +10177,7 @@
       "members": {
         "Status": {
           "shape": "WorkflowStatus",
-          "documentation": "<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>"
+          "documentation": "<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p> <code>RecordState</code> changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p> <code>ComplianceStatus</code> changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>"
         }
       },
       "documentation": "<p>Provides information about the status of the investigation into a finding.</p>"
@@ -9766,7 +10208,7 @@
       "members": {
         "Status": {
           "shape": "WorkflowStatus",
-          "documentation": "<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>"
+          "documentation": "<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Used to update information about the investigation into the finding.</p>"

@@ -422,6 +422,76 @@ declare namespace SecurityHub {
   export type AccountDetailsList = AccountDetails[];
   export type AccountId = string;
   export type AccountIdList = NonEmptyString[];
+  export interface Action {
+    /**
+     * The type of action that was detected. The possible action types are:    NETWORK_CONNECTION     AWS_API_CALL     DNS_REQUEST     PORT_PROBE   
+     */
+    ActionType?: NonEmptyString;
+    /**
+     * Included if ActionType is NETWORK_CONNECTION. Provides details about the network connection that was detected.
+     */
+    NetworkConnectionAction?: NetworkConnectionAction;
+    /**
+     * Included if ActionType is AWS_API_CALL. Provides details about the API call that was detected. 
+     */
+    AwsApiCallAction?: AwsApiCallAction;
+    /**
+     * Included if ActionType is DNS_REQUEST. Provides details about the DNS request that was detected. 
+     */
+    DnsRequestAction?: DnsRequestAction;
+    /**
+     * Included if ActionType is PORT_PROBE. Provides details about the port probe that was detected. 
+     */
+    PortProbeAction?: PortProbeAction;
+  }
+  export interface ActionLocalIpDetails {
+    /**
+     * The IP address.
+     */
+    IpAddressV4?: NonEmptyString;
+  }
+  export interface ActionLocalPortDetails {
+    /**
+     * The number of the port.
+     */
+    Port?: Integer;
+    /**
+     * The port name of the local connection.
+     */
+    PortName?: NonEmptyString;
+  }
+  export interface ActionRemoteIpDetails {
+    /**
+     * The IP address.
+     */
+    IpAddressV4?: NonEmptyString;
+    /**
+     * The internet service provider (ISP) organization associated with the remote IP address.
+     */
+    Organization?: IpOrganizationDetails;
+    /**
+     * The country where the remote IP address is located.
+     */
+    Country?: Country;
+    /**
+     * The city where the remote IP address is located.
+     */
+    City?: City;
+    /**
+     * The coordinates of the location of the remote IP address.
+     */
+    GeoLocation?: GeoLocation;
+  }
+  export interface ActionRemotePortDetails {
+    /**
+     * The number of the port.
+     */
+    Port?: Integer;
+    /**
+     * The port name of the remote connection.
+     */
+    PortName?: NonEmptyString;
+  }
   export interface ActionTarget {
     /**
      * The ARN for the target action.
@@ -462,6 +532,46 @@ declare namespace SecurityHub {
     SubnetId?: NonEmptyString;
   }
   export type AvailabilityZones = AvailabilityZone[];
+  export interface AwsApiCallAction {
+    /**
+     * The name of the API method that was issued.
+     */
+    Api?: NonEmptyString;
+    /**
+     * The name of the AWS service that the API method belongs to.
+     */
+    ServiceName?: NonEmptyString;
+    /**
+     * Indicates whether the API call originated from a remote IP address (remoteip) or from a DNS domain (domain).
+     */
+    CallerType?: NonEmptyString;
+    /**
+     * Provided if CallerType is remoteIp. Provides information about the remote IP address that the API call originated from.
+     */
+    RemoteIpDetails?: ActionRemoteIpDetails;
+    /**
+     * Provided if CallerType is domain. Provides information about the DNS domain that the API call originated from.
+     */
+    DomainDetails?: AwsApiCallActionDomainDetails;
+    /**
+     * Identifies the resources that were affected by the API call.
+     */
+    AffectedResources?: FieldMap;
+    /**
+     * An ISO8601-formatted timestamp that indicates when the API call was first observed.
+     */
+    FirstSeen?: NonEmptyString;
+    /**
+     * An ISO8601-formatted timestamp that indicates when the API call was most recently observed.
+     */
+    LastSeen?: NonEmptyString;
+  }
+  export interface AwsApiCallActionDomainDetails {
+    /**
+     * The name of the DNS domain that issued the API call.
+     */
+    Domain?: NonEmptyString;
+  }
   export interface AwsApiGatewayAccessLogSettings {
     /**
      * A single-line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.
@@ -1699,7 +1809,41 @@ declare namespace SecurityHub {
      * Indicates whether traffic to or from the instance is validated.
      */
     SourceDestCheck?: Boolean;
+    /**
+     * The IPv6 addresses associated with the network interface.
+     */
+    IpV6Addresses?: AwsEc2NetworkInterfaceIpV6AddressList;
+    /**
+     * The private IPv4 addresses associated with the network interface.
+     */
+    PrivateIpAddresses?: AwsEc2NetworkInterfacePrivateIpAddressList;
+    /**
+     * The public DNS name of the network interface.
+     */
+    PublicDnsName?: NonEmptyString;
+    /**
+     * The address of the Elastic IP address bound to the network interface.
+     */
+    PublicIp?: NonEmptyString;
   }
+  export interface AwsEc2NetworkInterfaceIpV6AddressDetail {
+    /**
+     * The IPV6 address.
+     */
+    IpV6Address?: NonEmptyString;
+  }
+  export type AwsEc2NetworkInterfaceIpV6AddressList = AwsEc2NetworkInterfaceIpV6AddressDetail[];
+  export interface AwsEc2NetworkInterfacePrivateIpAddressDetail {
+    /**
+     * The IP address.
+     */
+    PrivateIpAddress?: NonEmptyString;
+    /**
+     * The private DNS name for the IP address.
+     */
+    PrivateDnsName?: NonEmptyString;
+  }
+  export type AwsEc2NetworkInterfacePrivateIpAddressList = AwsEc2NetworkInterfacePrivateIpAddressDetail[];
   export interface AwsEc2NetworkInterfaceSecurityGroup {
     /**
      * The name of the security group.
@@ -2991,7 +3135,7 @@ declare namespace SecurityHub {
      */
     SnapshotCreateTime?: NonEmptyString;
     /**
-     * 
+     * The name of the database engine that you want to use for this DB instance.
      */
     Engine?: NonEmptyString;
     /**
@@ -3343,206 +3487,206 @@ declare namespace SecurityHub {
   export type AwsRdsDbInstanceVpcSecurityGroups = AwsRdsDbInstanceVpcSecurityGroup[];
   export interface AwsRdsDbOptionGroupMembership {
     /**
-     * 
+     * The name of the option group.
      */
     OptionGroupName?: NonEmptyString;
     /**
-     * 
+     * The status of the option group membership.
      */
     Status?: NonEmptyString;
   }
   export type AwsRdsDbOptionGroupMemberships = AwsRdsDbOptionGroupMembership[];
   export interface AwsRdsDbParameterGroup {
     /**
-     * 
+     * The name of the parameter group.
      */
     DbParameterGroupName?: NonEmptyString;
     /**
-     * 
+     * The status of parameter updates.
      */
     ParameterApplyStatus?: NonEmptyString;
   }
   export type AwsRdsDbParameterGroups = AwsRdsDbParameterGroup[];
   export interface AwsRdsDbPendingModifiedValues {
     /**
-     * 
+     * The new DB instance class for the DB instance.
      */
     DbInstanceClass?: NonEmptyString;
     /**
-     * 
+     * The new value of the allocated storage for the DB instance.
      */
     AllocatedStorage?: Integer;
     /**
-     * 
+     * The new master user password for the DB instance.
      */
     MasterUserPassword?: NonEmptyString;
     /**
-     * 
+     * The new port for the DB instance.
      */
     Port?: Integer;
     /**
-     * 
+     * The new backup retention period for the DB instance.
      */
     BackupRetentionPeriod?: Integer;
     /**
-     * 
+     * Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment.
      */
     MultiAZ?: Boolean;
     /**
-     * 
+     * The new engine version for the DB instance.
      */
     EngineVersion?: NonEmptyString;
     /**
-     * 
+     * The new license model value for the DB instance.
      */
     LicenseModel?: NonEmptyString;
     /**
-     * 
+     * The new provisioned IOPS value for the DB instance.
      */
     Iops?: Integer;
     /**
-     * 
+     * The new DB instance identifier for the DB instance.
      */
     DbInstanceIdentifier?: NonEmptyString;
     /**
-     * 
+     * The new storage type for the DB instance.
      */
     StorageType?: NonEmptyString;
     /**
-     * 
+     * The new CA certificate identifier for the DB instance.
      */
     CaCertificateIdentifier?: NonEmptyString;
     /**
-     * 
+     * The name of the new subnet group for the DB instance.
      */
     DbSubnetGroupName?: NonEmptyString;
     /**
-     * 
+     * A list of log types that are being enabled or disabled.
      */
     PendingCloudWatchLogsExports?: AwsRdsPendingCloudWatchLogsExports;
     /**
-     * 
+     * Processor features that are being updated.
      */
     ProcessorFeatures?: AwsRdsDbProcessorFeatures;
   }
   export interface AwsRdsDbProcessorFeature {
     /**
-     * 
+     * The name of the processor feature.
      */
     Name?: NonEmptyString;
     /**
-     * 
+     * The value of the processor feature.
      */
     Value?: NonEmptyString;
   }
   export type AwsRdsDbProcessorFeatures = AwsRdsDbProcessorFeature[];
   export interface AwsRdsDbSnapshotDetails {
     /**
-     * 
+     * The name or ARN of the DB snapshot that is used to restore the DB instance.
      */
     DbSnapshotIdentifier?: NonEmptyString;
     /**
-     * 
+     * A name for the DB instance.
      */
     DbInstanceIdentifier?: NonEmptyString;
     /**
-     * 
+     * When the snapshot was taken in Coordinated Universal Time (UTC).
      */
     SnapshotCreateTime?: NonEmptyString;
     /**
-     * 
+     * The name of the database engine to use for this DB instance.
      */
     Engine?: NonEmptyString;
     /**
-     * 
+     * The amount of storage (in gigabytes) to be initially allocated for the database instance.
      */
     AllocatedStorage?: Integer;
     /**
-     * 
+     * The status of this DB snapshot.
      */
     Status?: NonEmptyString;
     /**
-     * 
+     * The port that the database engine was listening on at the time of the snapshot.
      */
     Port?: Integer;
     /**
-     * 
+     * Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot.
      */
     AvailabilityZone?: NonEmptyString;
     /**
-     * 
+     * The VPC ID associated with the DB snapshot.
      */
     VpcId?: NonEmptyString;
     /**
-     * 
+     * Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.
      */
     InstanceCreateTime?: NonEmptyString;
     /**
-     * 
+     * The master user name for the DB snapshot.
      */
     MasterUsername?: NonEmptyString;
     /**
-     * 
+     * The version of the database engine.
      */
     EngineVersion?: NonEmptyString;
     /**
-     * 
+     * License model information for the restored DB instance.
      */
     LicenseModel?: NonEmptyString;
     /**
-     * 
+     * The type of the DB snapshot.
      */
     SnapshotType?: NonEmptyString;
     /**
-     * 
+     * The provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
      */
     Iops?: Integer;
     /**
-     * 
+     * The option group name for the DB snapshot.
      */
     OptionGroupName?: NonEmptyString;
     /**
-     * 
+     * The percentage of the estimated data that has been transferred.
      */
     PercentProgress?: Integer;
     /**
-     * 
+     * The AWS Region that the DB snapshot was created in or copied from.
      */
     SourceRegion?: NonEmptyString;
     /**
-     * 
+     * The DB snapshot ARN that the DB snapshot was copied from.
      */
     SourceDbSnapshotIdentifier?: NonEmptyString;
     /**
-     * 
+     * The storage type associated with the DB snapshot.
      */
     StorageType?: NonEmptyString;
     /**
-     * 
+     * The ARN from the key store with which to associate the instance for TDE encryption.
      */
     TdeCredentialArn?: NonEmptyString;
     /**
-     * 
+     * Whether the DB snapshot is encrypted.
      */
     Encrypted?: Boolean;
     /**
-     * 
+     * If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.
      */
     KmsKeyId?: NonEmptyString;
     /**
-     * 
+     * The time zone of the DB snapshot.
      */
     Timezone?: NonEmptyString;
     /**
-     * 
+     * Whether mapping of IAM accounts to database accounts is enabled.
      */
     IamDatabaseAuthenticationEnabled?: Boolean;
     /**
-     * 
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
      */
     ProcessorFeatures?: AwsRdsDbProcessorFeatures;
     /**
-     * 
+     * The identifier for the source DB instance.
      */
     DbiResourceId?: NonEmptyString;
   }
@@ -4267,6 +4411,10 @@ declare namespace SecurityHub {
      * Provides an overview of the patch compliance status for an instance against a selected compliance standard.
      */
     PatchSummary?: PatchSummary;
+    /**
+     * Provides details about an action that was detected for the finding.
+     */
+    Action?: Action;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -4574,7 +4722,7 @@ declare namespace SecurityHub {
      */
     WorkflowState?: StringFilterList;
     /**
-     * The status of the investigation into a finding. Allowed values are the following.    NEW - The initial state of a finding, before it is reviewed.    NOTIFIED - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
+     * The status of the investigation into a finding. Allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in the following cases:   The record state changes from ARCHIVED to ACTIVE.   The compliance status changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
      */
     WorkflowStatus?: StringFilterList;
     /**
@@ -4664,6 +4812,92 @@ declare namespace SecurityHub {
      * The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of maxReceiveCount is exceeded. 
      */
     DeadLetterTargetArn?: NonEmptyString;
+  }
+  export interface AwsSsmComplianceSummary {
+    /**
+     * The current patch compliance status. The possible status values are:    COMPLIANT     NON_COMPLIANT     UNSPECIFIED_DATA   
+     */
+    Status?: NonEmptyString;
+    /**
+     * For the patches that are compliant, the number that have a severity of CRITICAL.
+     */
+    CompliantCriticalCount?: Integer;
+    /**
+     * For the patches that are compliant, the number that have a severity of HIGH.
+     */
+    CompliantHighCount?: Integer;
+    /**
+     * For the patches that are compliant, the number that have a severity of MEDIUM.
+     */
+    CompliantMediumCount?: Integer;
+    /**
+     * The type of execution that was used determine compliance.
+     */
+    ExecutionType?: NonEmptyString;
+    /**
+     * For the patch items that are noncompliant, the number of items that have a severity of CRITICAL.
+     */
+    NonCompliantCriticalCount?: Integer;
+    /**
+     * For the patches that are compliant, the number that have a severity of INFORMATIONAL.
+     */
+    CompliantInformationalCount?: Integer;
+    /**
+     * For the patches that are noncompliant, the number that have a severity of INFORMATIONAL.
+     */
+    NonCompliantInformationalCount?: Integer;
+    /**
+     * For the patches that are compliant, the number that have a severity of UNSPECIFIED.
+     */
+    CompliantUnspecifiedCount?: Integer;
+    /**
+     * For the patches that are noncompliant, the number that have a severity of LOW.
+     */
+    NonCompliantLowCount?: Integer;
+    /**
+     * For the patches that are noncompliant, the number that have a severity of HIGH.
+     */
+    NonCompliantHighCount?: Integer;
+    /**
+     * For the patches that are compliant, the number that have a severity of LOW.
+     */
+    CompliantLowCount?: Integer;
+    /**
+     * The type of resource for which the compliance was determined. For AwsSsmPatchCompliance, ComplianceType is Patch. 
+     */
+    ComplianceType?: NonEmptyString;
+    /**
+     * The identifier of the patch baseline. The patch baseline lists the patches that are approved for installation.
+     */
+    PatchBaselineId?: NonEmptyString;
+    /**
+     * The highest severity for the patches.
+     */
+    OverallSeverity?: NonEmptyString;
+    /**
+     * For the patches that are noncompliant, the number that have a severity of MEDIUM.
+     */
+    NonCompliantMediumCount?: Integer;
+    /**
+     * For the patches that are noncompliant, the number that have a severity of UNSPECIFIED.
+     */
+    NonCompliantUnspecifiedCount?: Integer;
+    /**
+     * The identifier of the patch group for which compliance was determined. A patch group uses tags to group EC2 instances that should have the same patch compliance.
+     */
+    PatchGroup?: NonEmptyString;
+  }
+  export interface AwsSsmPatch {
+    /**
+     * The compliance status details for the patch.
+     */
+    ComplianceSummary?: AwsSsmComplianceSummary;
+  }
+  export interface AwsSsmPatchComplianceDetails {
+    /**
+     * Information about the status of a patch.
+     */
+    Patch?: AwsSsmPatch;
   }
   export interface AwsWafWebAclDetails {
     /**
@@ -4835,6 +5069,12 @@ declare namespace SecurityHub {
     CidrBlockState?: NonEmptyString;
   }
   export type CidrBlockAssociationList = CidrBlockAssociation[];
+  export interface City {
+    /**
+     * The name of the city.
+     */
+    CityName?: NonEmptyString;
+  }
   export interface Compliance {
     /**
      * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was NOT_APPLICABLE. If the AWS Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
@@ -4869,6 +5109,16 @@ declare namespace SecurityHub {
     LaunchedAt?: NonEmptyString;
   }
   export type ControlStatus = "ENABLED"|"DISABLED"|string;
+  export interface Country {
+    /**
+     * The 2-letter ISO 3166 country code for the country.
+     */
+    CountryCode?: NonEmptyString;
+    /**
+     * The name of the country.
+     */
+    CountryName?: NonEmptyString;
+  }
   export interface CreateActionTargetRequest {
     /**
      * The name of the custom action target.
@@ -5175,6 +5425,20 @@ declare namespace SecurityHub {
   }
   export interface DisassociateMembersResponse {
   }
+  export interface DnsRequestAction {
+    /**
+     * The DNS domain that is associated with the DNS request.
+     */
+    Domain?: NonEmptyString;
+    /**
+     * The protocol that was used for the DNS request.
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * Indicates whether the DNS request was blocked.
+     */
+    Blocked?: Boolean;
+  }
   export type Double = number;
   export interface EnableImportFindingsForProductRequest {
     /**
@@ -5209,6 +5473,16 @@ declare namespace SecurityHub {
   export interface EnableSecurityHubResponse {
   }
   export type FieldMap = {[key: string]: NonEmptyString};
+  export interface GeoLocation {
+    /**
+     * The longitude of the location.
+     */
+    Lon?: Double;
+    /**
+     * The latitude of the location.
+     */
+    Lat?: Double;
+  }
   export interface GetEnabledStandardsRequest {
     /**
      * The list of the standards subscription ARNs for the standards to retrieve.
@@ -5429,6 +5703,24 @@ declare namespace SecurityHub {
     Cidr?: NonEmptyString;
   }
   export type IpFilterList = IpFilter[];
+  export interface IpOrganizationDetails {
+    /**
+     * The Autonomous System Number (ASN) of the internet provider
+     */
+    Asn?: Integer;
+    /**
+     * The name of the organization that registered the ASN.
+     */
+    AsnOrg?: NonEmptyString;
+    /**
+     * The ISP information for the internet provider.
+     */
+    Isp?: NonEmptyString;
+    /**
+     * The name of the internet provider.
+     */
+    Org?: NonEmptyString;
+  }
   export interface Ipv6CidrBlockAssociation {
     /**
      * The association ID for the IPv6 CIDR block.
@@ -5673,6 +5965,32 @@ declare namespace SecurityHub {
      */
     DestinationDomain?: NonEmptyString;
   }
+  export interface NetworkConnectionAction {
+    /**
+     * The direction of the network connection request (IN or OUT).
+     */
+    ConnectionDirection?: NonEmptyString;
+    /**
+     * Information about the remote IP address that issued the network connection request.
+     */
+    RemoteIpDetails?: ActionRemoteIpDetails;
+    /**
+     * Information about the port on the remote IP address.
+     */
+    RemotePortDetails?: ActionRemotePortDetails;
+    /**
+     * Information about the port on the EC2 instance.
+     */
+    LocalPortDetails?: ActionLocalPortDetails;
+    /**
+     * The protocol used to make the network connection request.
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * Indicates whether the network connection attempt was blocked.
+     */
+    Blocked?: Boolean;
+  }
   export type NetworkDirection = "IN"|"OUT"|string;
   export interface NetworkHeader {
     /**
@@ -5806,6 +6124,31 @@ declare namespace SecurityHub {
      */
     Operation?: NonEmptyString;
   }
+  export interface PortProbeAction {
+    /**
+     * Information about the ports affected by the port probe.
+     */
+    PortProbeDetails?: PortProbeDetailList;
+    /**
+     * Indicates whether the port probe was blocked.
+     */
+    Blocked?: Boolean;
+  }
+  export interface PortProbeDetail {
+    /**
+     * Provides information about the port that was scanned.
+     */
+    LocalPortDetails?: ActionLocalPortDetails;
+    /**
+     * Provides information about the IP address where the scanned port is located.
+     */
+    LocalIpDetails?: ActionLocalIpDetails;
+    /**
+     * Provides information about the remote IP address that performed the scan.
+     */
+    RemoteIpDetails?: ActionRemoteIpDetails;
+  }
+  export type PortProbeDetailList = PortProbeDetail[];
   export interface PortRange {
     /**
      * The first port in the port range.
@@ -5931,7 +6274,7 @@ declare namespace SecurityHub {
      */
     Region?: NonEmptyString;
     /**
-     * 
+     * Identifies the role of the resource in the finding. A resource is either the actor or target of the finding activity,
      */
     ResourceRole?: NonEmptyString;
     /**
@@ -6014,11 +6357,11 @@ declare namespace SecurityHub {
      */
     AwsIamPolicy?: AwsIamPolicyDetails;
     /**
-     * 
+     * Provides information about a version 2 stage for Amazon API Gateway.
      */
     AwsApiGatewayV2Stage?: AwsApiGatewayV2StageDetails;
     /**
-     * 
+     * Provides information about a version 2 API in Amazon API Gateway.
      */
     AwsApiGatewayV2Api?: AwsApiGatewayV2ApiDetails;
     /**
@@ -6026,31 +6369,35 @@ declare namespace SecurityHub {
      */
     AwsDynamoDbTable?: AwsDynamoDbTableDetails;
     /**
-     * 
+     * Provides information about a version 1 Amazon API Gateway stage.
      */
     AwsApiGatewayStage?: AwsApiGatewayStageDetails;
     /**
-     * 
+     * Provides information about a REST API in version 1 of Amazon API Gateway.
      */
     AwsApiGatewayRestApi?: AwsApiGatewayRestApiDetails;
     /**
-     * 
+     * Provides details about a CloudTrail trail.
      */
     AwsCloudTrailTrail?: AwsCloudTrailTrailDetails;
     /**
-     * 
+     * Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.
+     */
+    AwsSsmPatchCompliance?: AwsSsmPatchComplianceDetails;
+    /**
+     * Provides details about an AWS Certificate Manager (ACM) certificate.
      */
     AwsCertificateManagerCertificate?: AwsCertificateManagerCertificateDetails;
     /**
-     * 
+     * Contains details about an Amazon Redshift cluster.
      */
     AwsRedshiftCluster?: AwsRedshiftClusterDetails;
     /**
-     * 
+     * contains details about a Classic Load Balancer.
      */
     AwsElbLoadBalancer?: AwsElbLoadBalancerDetails;
     /**
-     * 
+     * Contains details about an IAM group.
      */
     AwsIamGroup?: AwsIamGroupDetails;
     /**
@@ -6267,7 +6614,7 @@ declare namespace SecurityHub {
      */
     StandardsInput: StandardsInputParameterMap;
     /**
-     * The status of the standards subscription.
+     * The status of the standard subscription. The status values are as follows:    PENDING - Standard is in the process of being enabled.    READY - Standard is enabled.    INCOMPLETE - Standard could not be enabled completely. Some controls may not be available.    DELETING - Standard is in the process of being disabled.    FAILED - Standard could not be disabled.  
      */
     StandardsStatus: StandardsStatus;
   }
@@ -6522,7 +6869,7 @@ declare namespace SecurityHub {
   }
   export interface Workflow {
     /**
-     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed.    NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
+     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in the following cases:    RecordState changes from ARCHIVED to ACTIVE.    ComplianceStatus changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
      */
     Status?: WorkflowStatus;
   }
@@ -6530,7 +6877,7 @@ declare namespace SecurityHub {
   export type WorkflowStatus = "NEW"|"NOTIFIED"|"RESOLVED"|"SUPPRESSED"|string;
   export interface WorkflowUpdate {
     /**
-     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed.    NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.  
+     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the following cases:   The record state changes from ARCHIVED to ACTIVE.   The compliance status changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.  
      */
     Status?: WorkflowStatus;
   }
