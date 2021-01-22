@@ -68,11 +68,11 @@ declare class GreengrassV2 extends Service {
    */
   getComponent(callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentResponse) => void): Request<GreengrassV2.Types.GetComponentResponse, AWSError>;
   /**
-   * Gets the pre-signed URL to a component artifact in an S3 bucket. Core devices can call this operation to identify the URL that they can use to download an artifact to install.
+   * Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.
    */
   getComponentVersionArtifact(params: GreengrassV2.Types.GetComponentVersionArtifactRequest, callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentVersionArtifactResponse) => void): Request<GreengrassV2.Types.GetComponentVersionArtifactResponse, AWSError>;
   /**
-   * Gets the pre-signed URL to a component artifact in an S3 bucket. Core devices can call this operation to identify the URL that they can use to download an artifact to install.
+   * Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.
    */
   getComponentVersionArtifact(callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentVersionArtifactResponse) => void): Request<GreengrassV2.Types.GetComponentVersionArtifactResponse, AWSError>;
   /**
@@ -478,7 +478,7 @@ declare namespace GreengrassV2 {
      */
     timeoutInSeconds?: OptionalInteger;
     /**
-     * Whether or not to notify components and wait for components to become safe to update. Choose from the following options:    NOTIFY_COMPONENTS – The deployment notifies each component before it stops and updates that component. Components can use the SubscribeToComponentUpdates IPC operation to receive these notifications. Then, components can respond with the DeferComponentUpdate IPC operation. For more information, see the Create deployments in the AWS IoT Greengrass V2 Developer Guide.    SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait for them to be safe to update.   Default: NOTIFY_COMPONENTS 
+     * Whether or not to notify components and wait for components to become safe to update. Choose from the following options:    NOTIFY_COMPONENTS – The deployment notifies each component before it stops and updates that component. Components can use the SubscribeToComponentUpdates IPC operation to receive these notifications. Then, components can respond with the DeferComponentUpdate IPC operation. For more information, see Create deployments in the AWS IoT Greengrass V2 Developer Guide.    SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait for them to be safe to update.   Default: NOTIFY_COMPONENTS 
      */
     action?: DeploymentComponentUpdatePolicyAction;
   }
@@ -642,17 +642,17 @@ declare namespace GreengrassV2 {
   }
   export interface GetComponentVersionArtifactRequest {
     /**
-     * The ARN of the component version.
+     * The ARN of the component version. Specify the ARN of a public component version.
      */
     arn: ComponentVersionARN;
     /**
-     * The name of the artifact.
+     * The name of the artifact. You can use the GetComponent operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI greengrass:SomeArtifact.zip, the artifact name is SomeArtifact.zip.
      */
     artifactName: NonEmptyString;
   }
   export interface GetComponentVersionArtifactResponse {
     /**
-     * The URL to the artifact.
+     * The URL of the artifact.
      */
     preSignedUrl: NonEmptyString;
   }

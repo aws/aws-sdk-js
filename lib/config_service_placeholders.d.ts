@@ -257,6 +257,8 @@ export abstract class ConfigurationServicePlaceholders {
   iotwireless?: AWS.IoTWireless.Types.ClientConfiguration;
   location?: AWS.Location.Types.ClientConfiguration;
   wellarchitected?: AWS.WellArchitected.Types.ClientConfiguration;
+  lexmodelsv2?: AWS.LexModelsV2.Types.ClientConfiguration;
+  lexruntimev2?: AWS.LexRuntimeV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -516,4 +518,6 @@ export interface ConfigurationServiceApiVersions {
   iotwireless?: AWS.IoTWireless.Types.apiVersion;
   location?: AWS.Location.Types.apiVersion;
   wellarchitected?: AWS.WellArchitected.Types.apiVersion;
+  lexmodelsv2?: AWS.LexModelsV2.Types.apiVersion;
+  lexruntimev2?: AWS.LexRuntimeV2.Types.apiVersion;
 }

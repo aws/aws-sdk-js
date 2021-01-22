@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.830.0-->
+<!--LATEST=2.831.0-->
 <!--ENTRYINSERT-->
+
+## 2.831.0
+* feature: EC2: Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation.
+* feature: LexModelsV2: This release adds support for Amazon Lex V2 APIs for model building.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: Redshift: Update VPC endpoint field names.
 
 ## 2.830.0
 * feature: Kafka: Amazon MSK has added a new API that allows you to update all the brokers in the cluster to the specified type.

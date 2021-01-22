@@ -111,7 +111,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass deploys that group's deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+      "documentation": "<p>Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass deploys that group's deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
     },
     "DeleteComponent": {
       "name": "DeleteComponent",
@@ -268,7 +268,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Gets the pre-signed URL to a component artifact in an S3 bucket. Core devices can call this operation to identify the URL that they can use to download an artifact to install.</p>"
+      "documentation": "<p>Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.</p>"
     },
     "GetCoreDevice": {
       "name": "GetCoreDevice",
@@ -566,7 +566,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to identify the components to install.</p> <p>This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component <code>A</code> requires version <code>&gt;2.0.0</code> and component <code>B</code> requires version <code>&lt;2.0.0</code> of a component dependency.</p> <p>When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's digest from the core device with the component's digest in the AWS Cloud. If the digests don't match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.</p> <important> <p>To use this operation, you must use the data plane API endpoint and authenticate with an AWS IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/general/latest/gr/greengrass.html\">AWS IoT Greengrass endpoints and quotas</a>.</p> </important>"
+      "documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to identify the components to install.</p> <p>This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component <code>A</code> requires version <code>&gt;2.0.0</code> and component <code>B</code> requires version <code>&lt;2.0.0</code> of a component dependency.</p> <p>When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's digest from the core device with the component's digest in the AWS Cloud. If the digests don't match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.</p> <important> <p>To use this operation, you must use the data plane API endpoint and authenticate with an AWS IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/greengrass.html\">AWS IoT Greengrass endpoints and quotas</a>.</p> </important>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -985,7 +985,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1048,7 +1048,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1146,7 +1146,7 @@
         },
         "action": {
           "shape": "DeploymentComponentUpdatePolicyAction",
-          "documentation": "<p>Whether or not to notify components and wait for components to become safe to update. Choose from the following options:</p> <ul> <li> <p> <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> </li> <li> <p> <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components or wait for them to be safe to update.</p> </li> </ul> <p>Default: <code>NOTIFY_COMPONENTS</code> </p>"
+          "documentation": "<p>Whether or not to notify components and wait for components to become safe to update. Choose from the following options:</p> <ul> <li> <p> <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> </li> <li> <p> <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components or wait for them to be safe to update.</p> </li> </ul> <p>Default: <code>NOTIFY_COMPONENTS</code> </p>"
         }
       },
       "documentation": "<p>Contains information about a deployment's policy that defines when components are safe to update.</p> <p>Each component on a device can report whether or not it's ready to update. After a component and its dependencies are ready, they can apply the update in the deployment. You can configure whether or not the deployment notifies components of an update and waits for a response. You specify the amount of time each component has to respond to the update notification.</p>"
@@ -1167,7 +1167,7 @@
           "box": true
         }
       },
-      "documentation": "<p>Contains information about how long a component on a core device can validate its configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+      "documentation": "<p>Contains information about how long a component on a core device can validate its configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
     },
     "DeploymentFailureHandlingPolicy": {
       "type": "string",
@@ -1292,7 +1292,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1425,7 +1425,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1438,13 +1438,13 @@
       "members": {
         "arn": {
           "shape": "ComponentVersionARN",
-          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version.</p>",
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version. Specify the ARN of a public component version.</p>",
           "location": "uri",
           "locationName": "arn"
         },
         "artifactName": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the artifact.</p>",
+          "documentation": "<p>The name of the artifact.</p> <p>You can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html\">GetComponent</a> operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI <code>greengrass:SomeArtifact.zip</code>, the artifact name is <code>SomeArtifact.zip</code>.</p>",
           "location": "uri",
           "locationName": "artifactName"
         }
@@ -1458,7 +1458,7 @@
       "members": {
         "preSignedUrl": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The URL to the artifact.</p>"
+          "documentation": "<p>The URL of the artifact.</p>"
         }
       }
     },
@@ -1505,7 +1505,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1576,7 +1576,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -2333,7 +2333,7 @@
       "members": {
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
@@ -2484,7 +2484,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+          "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
         }
       }
     },
