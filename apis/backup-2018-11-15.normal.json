@@ -379,7 +379,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>The current feature settings for the AWS Account.</p>"
+      "documentation": "<p>Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.</p>"
     },
     "DescribeProtectedResource": {
       "name": "DescribeProtectedResource",
@@ -1349,7 +1349,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Updates the current global settings for the AWS Account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.</p>"
+      "documentation": "<p>Updates the current global settings for the AWS account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.</p>"
     },
     "UpdateRecoveryPointLifecycle": {
       "name": "UpdateRecoveryPointLifecycle",
@@ -1377,7 +1377,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>",
+      "documentation": "<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>",
       "idempotent": true
     },
     "UpdateRegionSettings": {
@@ -1416,7 +1416,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2.</p> <p>Valid values: <code>EC2</code>.</p>"
+          "documentation": "<p>Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html\">sample CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User Guide</i>.</p> <p>Valid values: <code>EC2</code>.</p>"
         },
         "BackupOptions": {
           "shape": "BackupOptions",
@@ -1484,7 +1484,7 @@
         },
         "IamRoleArn": {
           "shape": "IAMRoleArn",
-          "documentation": "<p>Specifies the IAM role ARN used to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>"
+          "documentation": "<p>Specifies the IAM role ARN used to create the target recovery point. IAM roles other than the default role must include either <code>AWSBackup</code> or <code>AwsBackup</code> in the role name. For example, <code>arn:aws:iam::123456789012:role/AWSBackupRDSAccess</code>. Role names without those strings lack permissions to perform backup jobs.</p>"
         },
         "CreatedBy": {
           "shape": "RecoveryPointCreator",
@@ -1703,7 +1703,7 @@
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "RecoveryPointTags": {
           "shape": "Tags",
@@ -1749,7 +1749,7 @@
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "RecoveryPointTags": {
           "shape": "Tags",
@@ -1799,7 +1799,7 @@
         },
         "ListOfTags": {
           "shape": "ListOfTags",
-          "documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>.</p>"
+          "documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>. Assigns the backup plan to every resource with at least one matching tag.</p>"
         }
       },
       "documentation": "<p>Used to specify a set of resources to a backup plan.</p>"
@@ -1925,7 +1925,7 @@
           "documentation": "<p>A timestamp that specifies when to delete a recovery point.</p>"
         }
       },
-      "documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>"
+      "documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
     },
     "Condition": {
       "type": "structure",
@@ -2157,7 +2157,7 @@
       "members": {
         "BackupVaultName": {
           "shape": "BackupVaultName",
-          "documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+          "documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of letters, numbers, and hyphens.</p>",
           "location": "uri",
           "locationName": "backupVaultName"
         },
@@ -2492,7 +2492,7 @@
         },
         "LastUpdateTime": {
           "shape": "timestamp",
-          "documentation": "<p>The date and time that the global settings was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+          "documentation": "<p>The date and time that the global settings were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
         }
       }
     },
@@ -2605,7 +2605,7 @@
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "EncryptionKeyArn": {
           "shape": "ARN",
@@ -2992,7 +2992,7 @@
       "members": {
         "ResourceTypes": {
           "shape": "ResourceTypes",
-          "documentation": "<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>"
+          "documentation": "<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>"
         }
       }
     },
@@ -3032,7 +3032,7 @@
           "documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.</p>"
         }
       },
-      "documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>"
+      "documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
     },
     "ListBackupJobsInput": {
       "type": "structure",
@@ -3081,13 +3081,13 @@
         },
         "ByResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
+          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
           "location": "querystring",
           "locationName": "resourceType"
         },
         "ByAccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p>",
+          "documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p> <p>If used from an AWS Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>",
           "location": "querystring",
           "locationName": "accountId"
         }
@@ -3321,7 +3321,7 @@
         },
         "ByResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
+          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
           "location": "querystring",
           "locationName": "resourceType"
         },
@@ -3736,7 +3736,7 @@
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "EncryptionKeyArn": {
           "shape": "ARN",
@@ -3954,15 +3954,15 @@
         },
         "StartWindowMinutes": {
           "shape": "WindowMinutes",
-          "documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.</p>"
+          "documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours.</p>"
         },
         "CompleteWindowMinutes": {
           "shape": "WindowMinutes",
-          "documentation": "<p>A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.</p>"
+          "documentation": "<p>A value in minutes during which a successfully started backup must complete, or else AWS Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>"
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "RecoveryPointTags": {
           "shape": "Tags",
@@ -3987,7 +3987,7 @@
         },
         "CreationDate": {
           "shape": "timestamp",
-          "documentation": "<p>The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+          "documentation": "<p>The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
         }
       }
     },
@@ -4034,7 +4034,7 @@
         },
         "CreationDate": {
           "shape": "timestamp",
-          "documentation": "<p>The date and time that a copy job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+          "documentation": "<p>The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
         }
       }
     },
@@ -4052,7 +4052,7 @@
         },
         "Metadata": {
           "shape": "Metadata",
-          "documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: A serialized list of up to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional.</p> </li> </ul>"
+          "documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> <li> <p> <code>ItemsToRestore </code>: An array of one to five strings where each string is a file path. Use <code>ItemsToRestore</code> to restore specific files or directories rather than the entire file system. This parameter is optional. For example, <code>\"itemsToRestore\":\"[\\\"/my.test\\\"]\"</code>.</p> </li> </ul>"
         },
         "IamRoleArn": {
           "shape": "IAMRoleArn",
@@ -4064,7 +4064,7 @@
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>"
+          "documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>"
         }
       }
     },
@@ -4251,7 +4251,7 @@
         },
         "Lifecycle": {
           "shape": "Lifecycle",
-          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
+          "documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
         },
         "CalculatedLifecycle": {
           "shape": "CalculatedLifecycle",
