@@ -2,7 +2,7 @@ name: git-sync-with-mirror
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
