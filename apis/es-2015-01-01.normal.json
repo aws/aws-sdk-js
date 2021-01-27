@@ -4100,6 +4100,14 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "NodeToNodeEncryptionOptions": {
+          "shape": "NodeToNodeEncryptionOptions",
+          "documentation": "<p>Specifies the NodeToNodeEncryptionOptions.</p>"
+        },
+        "EncryptionAtRestOptions": {
+          "shape": "EncryptionAtRestOptions",
+          "documentation": "<p>Specifies the Encryption At Rest Options.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"

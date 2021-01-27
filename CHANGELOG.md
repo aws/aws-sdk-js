@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.831.0-->
+<!--LATEST=2.832.0-->
 <!--ENTRYINSERT-->
+
+## 2.832.0
+* feature: AccessAnalyzer: This release adds Secrets Manager secrets as a supported resource in IAM Access Analyzer to help you identify secrets that can be accessed from outside your account or AWS organization.
+* feature: CustomerProfiles: This release makes Uri a required parameter in GetIntegrationRequest and DeleteIntegrationRequest.
+* feature: ES: Amazon Elasticsearch Service adds support for node-to-node encryption and encryption at rest for existing domains running Elasticsearch version 6.7 and above
+* feature: ElastiCache: Add support to pass ParameterGroup name as part updating Engine Version of Global Datastore.
+* feature: SESV2: This release includes the ability to assign a configuration set to an email identity (a domain or email address), which allows the settings from the configuration set to be applied to the identity.
 
 ## 2.831.0
 * feature: EC2: Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation.

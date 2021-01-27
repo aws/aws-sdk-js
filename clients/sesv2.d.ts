@@ -68,11 +68,11 @@ declare class SESV2 extends Service {
    */
   createDeliverabilityTestReport(callback?: (err: AWSError, data: SESV2.Types.CreateDeliverabilityTestReportResponse) => void): Request<SESV2.Types.CreateDeliverabilityTestReportResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(params: SESV2.Types.CreateEmailIdentityRequest, callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
@@ -515,6 +515,14 @@ declare class SESV2 extends Service {
    * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   putDeliverabilityDashboardOption(callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
+  /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(params: SESV2.Types.PutEmailIdentityConfigurationSetAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
+  /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
   /**
    * Used to enable or disable DKIM authentication for an email identity.
    */
@@ -1017,6 +1025,10 @@ declare namespace SESV2 {
      * If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, Easy DKIM. You can only specify this object if the email identity is a domain, as opposed to an address.
      */
     DkimSigningAttributes?: DkimSigningAttributes;
+    /**
+     * The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence. 
+     */
+    ConfigurationSetName?: ConfigurationSetName;
   }
   export interface CreateEmailIdentityResponse {
     /**
@@ -1897,6 +1909,10 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that are associated with the email identity.
      */
     Tags?: TagList;
+    /**
+     * The configuration set used by default when sending from this identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
   }
   export interface GetEmailTemplateRequest {
     /**
@@ -2596,6 +2612,18 @@ declare namespace SESV2 {
     SubscribedDomains?: DomainDeliverabilityTrackingOptions;
   }
   export interface PutDeliverabilityDashboardOptionResponse {
+  }
+  export interface PutEmailIdentityConfigurationSetAttributesRequest {
+    /**
+     * The email address or domain that you want to associate with a configuration set.
+     */
+    EmailIdentity: Identity;
+    /**
+     * The configuration set that you want to associate with an email identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+  }
+  export interface PutEmailIdentityConfigurationSetAttributesResponse {
   }
   export interface PutEmailIdentityDkimAttributesRequest {
     /**

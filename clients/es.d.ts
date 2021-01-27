@@ -1996,6 +1996,14 @@ declare namespace ES {
      * Specifies advanced security options.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
+    /**
+     * Specifies the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+    /**
+     * Specifies the Encryption At Rest Options.
+     */
+    EncryptionAtRestOptions?: EncryptionAtRestOptions;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
