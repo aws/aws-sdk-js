@@ -12,307 +12,307 @@ declare class DataBrew extends Service {
   constructor(options?: DataBrew.Types.ClientConfiguration)
   config: Config & DataBrew.Types.ClientConfiguration;
   /**
-   * Deletes one or more versions of a recipe at a time.
+   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The verision list is empty.   The version list size exceeds 50.   The verison list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
    */
   batchDeleteRecipeVersion(params: DataBrew.Types.BatchDeleteRecipeVersionRequest, callback?: (err: AWSError, data: DataBrew.Types.BatchDeleteRecipeVersionResponse) => void): Request<DataBrew.Types.BatchDeleteRecipeVersionResponse, AWSError>;
   /**
-   * Deletes one or more versions of a recipe at a time.
+   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The verision list is empty.   The version list size exceeds 50.   The verison list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
    */
   batchDeleteRecipeVersion(callback?: (err: AWSError, data: DataBrew.Types.BatchDeleteRecipeVersionResponse) => void): Request<DataBrew.Types.BatchDeleteRecipeVersionResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew dataset for this AWS account.
+   * Creates a new DataBrew dataset.
    */
   createDataset(params: DataBrew.Types.CreateDatasetRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateDatasetResponse) => void): Request<DataBrew.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew dataset for this AWS account.
+   * Creates a new DataBrew dataset.
    */
   createDataset(callback?: (err: AWSError, data: DataBrew.Types.CreateDatasetResponse) => void): Request<DataBrew.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a new job to profile an AWS Glue DataBrew dataset that exists in the current AWS account.
+   * Creates a new job to analyze a dataset and create its data profile.
    */
   createProfileJob(params: DataBrew.Types.CreateProfileJobRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateProfileJobResponse) => void): Request<DataBrew.Types.CreateProfileJobResponse, AWSError>;
   /**
-   * Creates a new job to profile an AWS Glue DataBrew dataset that exists in the current AWS account.
+   * Creates a new job to analyze a dataset and create its data profile.
    */
   createProfileJob(callback?: (err: AWSError, data: DataBrew.Types.CreateProfileJobResponse) => void): Request<DataBrew.Types.CreateProfileJobResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew project in the current AWS account.
+   * Creates a new DataBrew project.
    */
   createProject(params: DataBrew.Types.CreateProjectRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateProjectResponse) => void): Request<DataBrew.Types.CreateProjectResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew project in the current AWS account.
+   * Creates a new DataBrew project.
    */
   createProject(callback?: (err: AWSError, data: DataBrew.Types.CreateProjectResponse) => void): Request<DataBrew.Types.CreateProjectResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew recipe for the current AWS account.
+   * Creates a new DataBrew recipe.
    */
   createRecipe(params: DataBrew.Types.CreateRecipeRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeResponse) => void): Request<DataBrew.Types.CreateRecipeResponse, AWSError>;
   /**
-   * Creates a new AWS Glue DataBrew recipe for the current AWS account.
+   * Creates a new DataBrew recipe.
    */
   createRecipe(callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeResponse) => void): Request<DataBrew.Types.CreateRecipeResponse, AWSError>;
   /**
-   * Creates a new job for an existing AWS Glue DataBrew recipe in the current AWS account. You can create a standalone job using either a project, or a combination of a recipe and a dataset.
+   * Creates a new job to transform input data, using steps defined in an existing AWS Glue DataBrew recipe
    */
   createRecipeJob(params: DataBrew.Types.CreateRecipeJobRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeJobResponse) => void): Request<DataBrew.Types.CreateRecipeJobResponse, AWSError>;
   /**
-   * Creates a new job for an existing AWS Glue DataBrew recipe in the current AWS account. You can create a standalone job using either a project, or a combination of a recipe and a dataset.
+   * Creates a new job to transform input data, using steps defined in an existing AWS Glue DataBrew recipe
    */
   createRecipeJob(callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeJobResponse) => void): Request<DataBrew.Types.CreateRecipeJobResponse, AWSError>;
   /**
-   * Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.
+   * Creates a new schedule for one or more DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.
    */
   createSchedule(params: DataBrew.Types.CreateScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateScheduleResponse) => void): Request<DataBrew.Types.CreateScheduleResponse, AWSError>;
   /**
-   * Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.
+   * Creates a new schedule for one or more DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.
    */
   createSchedule(callback?: (err: AWSError, data: DataBrew.Types.CreateScheduleResponse) => void): Request<DataBrew.Types.CreateScheduleResponse, AWSError>;
   /**
-   * Deletes a dataset from AWS Glue DataBrew.
+   * Deletes a dataset from DataBrew.
    */
   deleteDataset(params: DataBrew.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteDatasetResponse) => void): Request<DataBrew.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes a dataset from AWS Glue DataBrew.
+   * Deletes a dataset from DataBrew.
    */
   deleteDataset(callback?: (err: AWSError, data: DataBrew.Types.DeleteDatasetResponse) => void): Request<DataBrew.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes the specified AWS Glue DataBrew job from the current AWS account. The job can be for a recipe or for a profile.
+   * Deletes the specified DataBrew job.
    */
   deleteJob(params: DataBrew.Types.DeleteJobRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteJobResponse) => void): Request<DataBrew.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes the specified AWS Glue DataBrew job from the current AWS account. The job can be for a recipe or for a profile.
+   * Deletes the specified DataBrew job.
    */
   deleteJob(callback?: (err: AWSError, data: DataBrew.Types.DeleteJobResponse) => void): Request<DataBrew.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes an existing AWS Glue DataBrew project from the current AWS account.
+   * Deletes an existing DataBrew project.
    */
   deleteProject(params: DataBrew.Types.DeleteProjectRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteProjectResponse) => void): Request<DataBrew.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes an existing AWS Glue DataBrew project from the current AWS account.
+   * Deletes an existing DataBrew project.
    */
   deleteProject(callback?: (err: AWSError, data: DataBrew.Types.DeleteProjectResponse) => void): Request<DataBrew.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes a single version of an AWS Glue DataBrew recipe.
+   * Deletes a single version of a DataBrew recipe.
    */
   deleteRecipeVersion(params: DataBrew.Types.DeleteRecipeVersionRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteRecipeVersionResponse) => void): Request<DataBrew.Types.DeleteRecipeVersionResponse, AWSError>;
   /**
-   * Deletes a single version of an AWS Glue DataBrew recipe.
+   * Deletes a single version of a DataBrew recipe.
    */
   deleteRecipeVersion(callback?: (err: AWSError, data: DataBrew.Types.DeleteRecipeVersionResponse) => void): Request<DataBrew.Types.DeleteRecipeVersionResponse, AWSError>;
   /**
-   * Deletes the specified AWS Glue DataBrew schedule from the current AWS account.
+   * Deletes the specified DataBrew schedule.
    */
   deleteSchedule(params: DataBrew.Types.DeleteScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteScheduleResponse) => void): Request<DataBrew.Types.DeleteScheduleResponse, AWSError>;
   /**
-   * Deletes the specified AWS Glue DataBrew schedule from the current AWS account.
+   * Deletes the specified DataBrew schedule.
    */
   deleteSchedule(callback?: (err: AWSError, data: DataBrew.Types.DeleteScheduleResponse) => void): Request<DataBrew.Types.DeleteScheduleResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew dataset that is in the current AWS account.
+   * Returns the definition of a specific DataBrew dataset.
    */
   describeDataset(params: DataBrew.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeDatasetResponse) => void): Request<DataBrew.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew dataset that is in the current AWS account.
+   * Returns the definition of a specific DataBrew dataset.
    */
   describeDataset(callback?: (err: AWSError, data: DataBrew.Types.DescribeDatasetResponse) => void): Request<DataBrew.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew job that is in the current AWS account.
+   * Returns the definition of a specific DataBrew job.
    */
   describeJob(params: DataBrew.Types.DescribeJobRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeJobResponse) => void): Request<DataBrew.Types.DescribeJobResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew job that is in the current AWS account.
+   * Returns the definition of a specific DataBrew job.
    */
   describeJob(callback?: (err: AWSError, data: DataBrew.Types.DescribeJobResponse) => void): Request<DataBrew.Types.DescribeJobResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew project that is in the current AWS account.
+   * Returns the definition of a specific DataBrew project.
    */
   describeProject(params: DataBrew.Types.DescribeProjectRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeProjectResponse) => void): Request<DataBrew.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew project that is in the current AWS account.
+   * Returns the definition of a specific DataBrew project.
    */
   describeProject(callback?: (err: AWSError, data: DataBrew.Types.DescribeProjectResponse) => void): Request<DataBrew.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew recipe that is in the current AWS account.
+   * Returns the definition of a specific DataBrew recipe corresponding to a particular version.
    */
   describeRecipe(params: DataBrew.Types.DescribeRecipeRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeRecipeResponse) => void): Request<DataBrew.Types.DescribeRecipeResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew recipe that is in the current AWS account.
+   * Returns the definition of a specific DataBrew recipe corresponding to a particular version.
    */
   describeRecipe(callback?: (err: AWSError, data: DataBrew.Types.DescribeRecipeResponse) => void): Request<DataBrew.Types.DescribeRecipeResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew schedule that is in the current AWS account.
+   * Returns the definition of a specific DataBrew schedule.
    */
   describeSchedule(params: DataBrew.Types.DescribeScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeScheduleResponse) => void): Request<DataBrew.Types.DescribeScheduleResponse, AWSError>;
   /**
-   * Returns the definition of a specific AWS Glue DataBrew schedule that is in the current AWS account.
+   * Returns the definition of a specific DataBrew schedule.
    */
   describeSchedule(callback?: (err: AWSError, data: DataBrew.Types.DescribeScheduleResponse) => void): Request<DataBrew.Types.DescribeScheduleResponse, AWSError>;
   /**
-   * Lists all of the AWS Glue DataBrew datasets for the current AWS account.
+   * Lists all of the DataBrew datasets.
    */
   listDatasets(params: DataBrew.Types.ListDatasetsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListDatasetsResponse) => void): Request<DataBrew.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Lists all of the AWS Glue DataBrew datasets for the current AWS account.
+   * Lists all of the DataBrew datasets.
    */
   listDatasets(callback?: (err: AWSError, data: DataBrew.Types.ListDatasetsResponse) => void): Request<DataBrew.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Lists all of the previous runs of a particular AWS Glue DataBrew job in the current AWS account.
+   * Lists all of the previous runs of a particular DataBrew job.
    */
   listJobRuns(params: DataBrew.Types.ListJobRunsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListJobRunsResponse) => void): Request<DataBrew.Types.ListJobRunsResponse, AWSError>;
   /**
-   * Lists all of the previous runs of a particular AWS Glue DataBrew job in the current AWS account.
+   * Lists all of the previous runs of a particular DataBrew job.
    */
   listJobRuns(callback?: (err: AWSError, data: DataBrew.Types.ListJobRunsResponse) => void): Request<DataBrew.Types.ListJobRunsResponse, AWSError>;
   /**
-   * Lists the AWS Glue DataBrew jobs in the current AWS account.
+   * Lists all of the DataBrew jobs that are defined.
    */
   listJobs(params: DataBrew.Types.ListJobsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListJobsResponse) => void): Request<DataBrew.Types.ListJobsResponse, AWSError>;
   /**
-   * Lists the AWS Glue DataBrew jobs in the current AWS account.
+   * Lists all of the DataBrew jobs that are defined.
    */
   listJobs(callback?: (err: AWSError, data: DataBrew.Types.ListJobsResponse) => void): Request<DataBrew.Types.ListJobsResponse, AWSError>;
   /**
-   * Lists all of the DataBrew projects in the current AWS account.
+   * Lists all of the DataBrew projects that are defined.
    */
   listProjects(params: DataBrew.Types.ListProjectsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListProjectsResponse) => void): Request<DataBrew.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists all of the DataBrew projects in the current AWS account.
+   * Lists all of the DataBrew projects that are defined.
    */
   listProjects(callback?: (err: AWSError, data: DataBrew.Types.ListProjectsResponse) => void): Request<DataBrew.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists all of the versions of a particular AWS Glue DataBrew recipe in the current AWS account.
+   * Lists the versions of a particular DataBrew recipe, except for LATEST_WORKING.
    */
   listRecipeVersions(params: DataBrew.Types.ListRecipeVersionsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListRecipeVersionsResponse) => void): Request<DataBrew.Types.ListRecipeVersionsResponse, AWSError>;
   /**
-   * Lists all of the versions of a particular AWS Glue DataBrew recipe in the current AWS account.
+   * Lists the versions of a particular DataBrew recipe, except for LATEST_WORKING.
    */
   listRecipeVersions(callback?: (err: AWSError, data: DataBrew.Types.ListRecipeVersionsResponse) => void): Request<DataBrew.Types.ListRecipeVersionsResponse, AWSError>;
   /**
-   * Lists all of the AWS Glue DataBrew recipes in the current AWS account.
+   * Lists all of the DataBrew recipes that are defined.
    */
   listRecipes(params: DataBrew.Types.ListRecipesRequest, callback?: (err: AWSError, data: DataBrew.Types.ListRecipesResponse) => void): Request<DataBrew.Types.ListRecipesResponse, AWSError>;
   /**
-   * Lists all of the AWS Glue DataBrew recipes in the current AWS account.
+   * Lists all of the DataBrew recipes that are defined.
    */
   listRecipes(callback?: (err: AWSError, data: DataBrew.Types.ListRecipesResponse) => void): Request<DataBrew.Types.ListRecipesResponse, AWSError>;
   /**
-   * Lists the AWS Glue DataBrew schedules in the current AWS account.
+   * Lists the DataBrew schedules that are defined.
    */
   listSchedules(params: DataBrew.Types.ListSchedulesRequest, callback?: (err: AWSError, data: DataBrew.Types.ListSchedulesResponse) => void): Request<DataBrew.Types.ListSchedulesResponse, AWSError>;
   /**
-   * Lists the AWS Glue DataBrew schedules in the current AWS account.
+   * Lists the DataBrew schedules that are defined.
    */
   listSchedules(callback?: (err: AWSError, data: DataBrew.Types.ListSchedulesResponse) => void): Request<DataBrew.Types.ListSchedulesResponse, AWSError>;
   /**
-   * Lists all the tags for an AWS Glue DataBrew resource. 
+   * Lists all the tags for a DataBrew resource. 
    */
   listTagsForResource(params: DataBrew.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DataBrew.Types.ListTagsForResourceResponse) => void): Request<DataBrew.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all the tags for an AWS Glue DataBrew resource. 
+   * Lists all the tags for a DataBrew resource. 
    */
   listTagsForResource(callback?: (err: AWSError, data: DataBrew.Types.ListTagsForResourceResponse) => void): Request<DataBrew.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Publishes a new major version of an AWS Glue DataBrew recipe that exists in the current AWS account.
+   * Publishes a new version of a DataBrew recipe.
    */
   publishRecipe(params: DataBrew.Types.PublishRecipeRequest, callback?: (err: AWSError, data: DataBrew.Types.PublishRecipeResponse) => void): Request<DataBrew.Types.PublishRecipeResponse, AWSError>;
   /**
-   * Publishes a new major version of an AWS Glue DataBrew recipe that exists in the current AWS account.
+   * Publishes a new version of a DataBrew recipe.
    */
   publishRecipe(callback?: (err: AWSError, data: DataBrew.Types.PublishRecipeResponse) => void): Request<DataBrew.Types.PublishRecipeResponse, AWSError>;
   /**
-   * Performs a recipe step within an interactive AWS Glue DataBrew session that's currently open.
+   * Performs a recipe step within an interactive DataBrew session that's currently open.
    */
   sendProjectSessionAction(params: DataBrew.Types.SendProjectSessionActionRequest, callback?: (err: AWSError, data: DataBrew.Types.SendProjectSessionActionResponse) => void): Request<DataBrew.Types.SendProjectSessionActionResponse, AWSError>;
   /**
-   * Performs a recipe step within an interactive AWS Glue DataBrew session that's currently open.
+   * Performs a recipe step within an interactive DataBrew session that's currently open.
    */
   sendProjectSessionAction(callback?: (err: AWSError, data: DataBrew.Types.SendProjectSessionActionResponse) => void): Request<DataBrew.Types.SendProjectSessionActionResponse, AWSError>;
   /**
-   * Runs an AWS Glue DataBrew job that exists in the current AWS account.
+   * Runs a DataBrew job.
    */
   startJobRun(params: DataBrew.Types.StartJobRunRequest, callback?: (err: AWSError, data: DataBrew.Types.StartJobRunResponse) => void): Request<DataBrew.Types.StartJobRunResponse, AWSError>;
   /**
-   * Runs an AWS Glue DataBrew job that exists in the current AWS account.
+   * Runs a DataBrew job.
    */
   startJobRun(callback?: (err: AWSError, data: DataBrew.Types.StartJobRunResponse) => void): Request<DataBrew.Types.StartJobRunResponse, AWSError>;
   /**
-   * Creates an interactive session, enabling you to manipulate an AWS Glue DataBrew project.
+   * Creates an interactive session, enabling you to manipulate data in a DataBrew project.
    */
   startProjectSession(params: DataBrew.Types.StartProjectSessionRequest, callback?: (err: AWSError, data: DataBrew.Types.StartProjectSessionResponse) => void): Request<DataBrew.Types.StartProjectSessionResponse, AWSError>;
   /**
-   * Creates an interactive session, enabling you to manipulate an AWS Glue DataBrew project.
+   * Creates an interactive session, enabling you to manipulate data in a DataBrew project.
    */
   startProjectSession(callback?: (err: AWSError, data: DataBrew.Types.StartProjectSessionResponse) => void): Request<DataBrew.Types.StartProjectSessionResponse, AWSError>;
   /**
-   * Stops the specified job from running in the current AWS account.
+   * Stops a particular run of a job.
    */
   stopJobRun(params: DataBrew.Types.StopJobRunRequest, callback?: (err: AWSError, data: DataBrew.Types.StopJobRunResponse) => void): Request<DataBrew.Types.StopJobRunResponse, AWSError>;
   /**
-   * Stops the specified job from running in the current AWS account.
+   * Stops a particular run of a job.
    */
   stopJobRun(callback?: (err: AWSError, data: DataBrew.Types.StopJobRunResponse) => void): Request<DataBrew.Types.StopJobRunResponse, AWSError>;
   /**
-   * Adds metadata tags to an AWS Glue DataBrew resource, such as a dataset, job, project, or recipe.
+   * Adds metadata tags to a DataBrew resource, such as a dataset, project, recipe, job, or schedule.
    */
   tagResource(params: DataBrew.Types.TagResourceRequest, callback?: (err: AWSError, data: DataBrew.Types.TagResourceResponse) => void): Request<DataBrew.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds metadata tags to an AWS Glue DataBrew resource, such as a dataset, job, project, or recipe.
+   * Adds metadata tags to a DataBrew resource, such as a dataset, project, recipe, job, or schedule.
    */
   tagResource(callback?: (err: AWSError, data: DataBrew.Types.TagResourceResponse) => void): Request<DataBrew.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes metadata tags from an AWS Glue DataBrew resource.
+   * Removes metadata tags from a DataBrew resource.
    */
   untagResource(params: DataBrew.Types.UntagResourceRequest, callback?: (err: AWSError, data: DataBrew.Types.UntagResourceResponse) => void): Request<DataBrew.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes metadata tags from an AWS Glue DataBrew resource.
+   * Removes metadata tags from a DataBrew resource.
    */
   untagResource(callback?: (err: AWSError, data: DataBrew.Types.UntagResourceResponse) => void): Request<DataBrew.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew dataset in the current AWS account.
+   * Modifies the definition of an existing DataBrew dataset.
    */
   updateDataset(params: DataBrew.Types.UpdateDatasetRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateDatasetResponse) => void): Request<DataBrew.Types.UpdateDatasetResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew dataset in the current AWS account.
+   * Modifies the definition of an existing DataBrew dataset.
    */
   updateDataset(callback?: (err: AWSError, data: DataBrew.Types.UpdateDatasetResponse) => void): Request<DataBrew.Types.UpdateDatasetResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew job in the current AWS account.
+   * Modifies the definition of an existing profile job.
    */
   updateProfileJob(params: DataBrew.Types.UpdateProfileJobRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateProfileJobResponse) => void): Request<DataBrew.Types.UpdateProfileJobResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew job in the current AWS account.
+   * Modifies the definition of an existing profile job.
    */
   updateProfileJob(callback?: (err: AWSError, data: DataBrew.Types.UpdateProfileJobResponse) => void): Request<DataBrew.Types.UpdateProfileJobResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew project in the current AWS account.
+   * Modifies the definition of an existing DataBrew project.
    */
   updateProject(params: DataBrew.Types.UpdateProjectRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateProjectResponse) => void): Request<DataBrew.Types.UpdateProjectResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew project in the current AWS account.
+   * Modifies the definition of an existing DataBrew project.
    */
   updateProject(callback?: (err: AWSError, data: DataBrew.Types.UpdateProjectResponse) => void): Request<DataBrew.Types.UpdateProjectResponse, AWSError>;
   /**
-   * Modifies the definition of the latest working version of an AWS Glue DataBrew recipe in the current AWS account.
+   * Modifies the definition of the LATEST_WORKING version of a DataBrew recipe.
    */
   updateRecipe(params: DataBrew.Types.UpdateRecipeRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateRecipeResponse) => void): Request<DataBrew.Types.UpdateRecipeResponse, AWSError>;
   /**
-   * Modifies the definition of the latest working version of an AWS Glue DataBrew recipe in the current AWS account.
+   * Modifies the definition of the LATEST_WORKING version of a DataBrew recipe.
    */
   updateRecipe(callback?: (err: AWSError, data: DataBrew.Types.UpdateRecipeResponse) => void): Request<DataBrew.Types.UpdateRecipeResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew recipe job in the current AWS account.
+   * Modifies the definition of an existing DataBrew recipe job.
    */
   updateRecipeJob(params: DataBrew.Types.UpdateRecipeJobRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateRecipeJobResponse) => void): Request<DataBrew.Types.UpdateRecipeJobResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew recipe job in the current AWS account.
+   * Modifies the definition of an existing DataBrew recipe job.
    */
   updateRecipeJob(callback?: (err: AWSError, data: DataBrew.Types.UpdateRecipeJobResponse) => void): Request<DataBrew.Types.UpdateRecipeJobResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew schedule in the current AWS account.
+   * Modifies the definition of an existing DataBrew schedule.
    */
   updateSchedule(params: DataBrew.Types.UpdateScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateScheduleResponse) => void): Request<DataBrew.Types.UpdateScheduleResponse, AWSError>;
   /**
-   * Modifies the definition of an existing AWS Glue DataBrew schedule in the current AWS account.
+   * Modifies the definition of an existing DataBrew schedule.
    */
   updateSchedule(callback?: (err: AWSError, data: DataBrew.Types.UpdateScheduleResponse) => void): Request<DataBrew.Types.UpdateScheduleResponse, AWSError>;
 }
@@ -324,11 +324,11 @@ declare namespace DataBrew {
   export type Attempt = number;
   export interface BatchDeleteRecipeVersionRequest {
     /**
-     * The name of the recipe to be modified.
+     * The name of the recipe whose versions are to be deleted.
      */
     Name: RecipeName;
     /**
-     * An array of version identifiers to be deleted.
+     * An array of version identifiers, for the recipe versions to be deleted. You can specify numeric versions (X.Y) or LATEST_WORKING. LATEST_PUBLISHED is not supported.
      */
     RecipeVersions: RecipeVersionList;
   }
@@ -338,7 +338,7 @@ declare namespace DataBrew {
      */
     Name: RecipeName;
     /**
-     * Errors, if any, that were encountered when deleting the recipe versions.
+     * Errors, if any, that occurred while attempting to delete the recipe versions.
      */
     Errors?: RecipeErrorList;
   }
@@ -360,7 +360,7 @@ declare namespace DataBrew {
      */
     Value?: ConditionValue;
     /**
-     * A column to apply this condition to, within an AWS Glue DataBrew dataset.
+     * A column to apply this condition to.
      */
     TargetColumn: TargetColumn;
   }
@@ -368,7 +368,7 @@ declare namespace DataBrew {
   export type ConditionValue = string;
   export interface CreateDatasetRequest {
     /**
-     * The name of the dataset to be created.
+     * The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: DatasetName;
     FormatOptions?: FormatOptions;
@@ -398,11 +398,11 @@ declare namespace DataBrew {
      */
     EncryptionMode?: EncryptionMode;
     /**
-     * The name of the job to be created.
+     * The name of the job to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: JobName;
     /**
-     * A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.
+     * Enables or disables Amazon CloudWatch logging for the job. If logging is enabled, CloudWatch writes one log stream for each job run.
      */
     LogSubscription?: LogSubscription;
     /**
@@ -415,7 +415,7 @@ declare namespace DataBrew {
     MaxRetries?: MaxRetries;
     OutputLocation: S3Location;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -435,11 +435,11 @@ declare namespace DataBrew {
   }
   export interface CreateProjectRequest {
     /**
-     * The name of the dataset to associate this project with.
+     * The name of an existing dataset to associate this project with.
      */
     DatasetName: DatasetName;
     /**
-     * A unique name for the new project.
+     * A unique name for the new project. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: ProjectName;
     /**
@@ -476,11 +476,11 @@ declare namespace DataBrew {
      */
     EncryptionMode?: EncryptionMode;
     /**
-     * A unique name for the job.
+     * A unique name for the job. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: JobName;
     /**
-     * A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.
+     * Enables or disables Amazon CloudWatch logging for the job. If logging is enabled, CloudWatch writes one log stream for each job run.
      */
     LogSubscription?: LogSubscription;
     /**
@@ -501,11 +501,11 @@ declare namespace DataBrew {
     ProjectName?: ProjectName;
     RecipeReference?: RecipeReference;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
-     * Metadata tags to apply to this job dataset.
+     * Metadata tags to apply to this job.
      */
     Tags?: TagMap;
     /**
@@ -525,7 +525,7 @@ declare namespace DataBrew {
      */
     Description?: RecipeDescription;
     /**
-     * A unique name for the recipe.
+     * A unique name for the recipe. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: RecipeName;
     /**
@@ -549,7 +549,7 @@ declare namespace DataBrew {
      */
     JobNames?: JobNameList;
     /**
-     * The date or dates and time or times, in cron format, when the jobs are to be run.
+     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
      */
     CronExpression: CronExpression;
     /**
@@ -557,7 +557,7 @@ declare namespace DataBrew {
      */
     Tags?: TagMap;
     /**
-     * A unique name for the schedule.
+     * A unique name for the schedule. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: ScheduleName;
   }
@@ -569,6 +569,18 @@ declare namespace DataBrew {
   }
   export type CreatedBy = string;
   export type CronExpression = string;
+  export interface CsvOptions {
+    /**
+     * A single character that specifies the delimiter being used in the Csv file.
+     */
+    Delimiter?: Delimiter;
+  }
+  export interface CsvOutputOptions {
+    /**
+     * A single character that specifies the delimiter used to create Csv job output.
+     */
+    Delimiter?: Delimiter;
+  }
   export interface DataCatalogInputDefinition {
     /**
      * The unique identifier of the AWS account that holds the Data Catalog that stores the data.
@@ -594,7 +606,7 @@ declare namespace DataBrew {
      */
     AccountId?: AccountId;
     /**
-     * The identifier (the user name) of the user who created the dataset.
+     * The Amazon Resource Name (ARN) of the user who created the dataset.
      */
     CreatedBy?: CreatedBy;
     /**
@@ -618,7 +630,7 @@ declare namespace DataBrew {
      */
     LastModifiedDate?: _Date;
     /**
-     * The identifier (the user name) of the user who last modified the dataset.
+     * The Amazon Resource Name (ARN) of the user who last modified the dataset.
      */
     LastModifiedBy?: LastModifiedBy;
     /**
@@ -675,11 +687,11 @@ declare namespace DataBrew {
   }
   export interface DeleteRecipeVersionRequest {
     /**
-     * The name of the recipe to be deleted.
+     * The name of the recipe.
      */
     Name: RecipeName;
     /**
-     * The version of the recipe to be deleted.
+     * The version of the recipe to be deleted. You can specify a numeric versions (X.Y) or LATEST_WORKING. LATEST_PUBLISHED is not supported.
      */
     RecipeVersion: RecipeVersion;
   }
@@ -705,6 +717,7 @@ declare namespace DataBrew {
      */
     Name: ScheduleName;
   }
+  export type Delimiter = string;
   export interface DescribeDatasetRequest {
     /**
      * The name of the dataset to be described.
@@ -791,11 +804,11 @@ declare namespace DataBrew {
      */
     LastModifiedDate?: _Date;
     /**
-     * A value that indicates whether Amazon CloudWatch logging is enabled for this job.
+     * Indicates whether Amazon CloudWatch logging is enabled for this job.
      */
     LogSubscription?: LogSubscription;
     /**
-     * The maximum number of nodes that AWS Glue DataBrew can consume when the job processes data.
+     * The maximum number of compute nodes that DataBrew can consume when the job processes data.
      */
     MaxCapacity?: MaxCapacity;
     /**
@@ -816,7 +829,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this request.
+     * The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn?: Arn;
     /**
@@ -869,7 +882,7 @@ declare namespace DataBrew {
     ResourceArn?: Arn;
     Sample?: Sample;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this request.
+     * The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn?: Arn;
     /**
@@ -985,7 +998,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The date or dates and time or times, in cron format, when the jobs are to be run for the schedule.
+     * The date or dates and time or times when the jobs are to be run for the schedule. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
      */
     CronExpression?: CronExpression;
     /**
@@ -1020,6 +1033,10 @@ declare namespace DataBrew {
      * Options that define how Excel input is to be interpreted by DataBrew.
      */
     Excel?: ExcelOptions;
+    /**
+     * Options that define how Csv input is to be interpreted by DataBrew.
+     */
+    Csv?: CsvOptions;
   }
   export type HiddenColumnList = ColumnName[];
   export interface Input {
@@ -1038,7 +1055,7 @@ declare namespace DataBrew {
      */
     AccountId?: AccountId;
     /**
-     * The identifier (the user name) of the user who created the job.
+     * The Amazon Resource Name (ARN) of the user who created the job.
      */
     CreatedBy?: CreatedBy;
     /**
@@ -1050,7 +1067,7 @@ declare namespace DataBrew {
      */
     DatasetName?: DatasetName;
     /**
-     * The Amazon Resource Name (ARN) of an encryption key that is used to protect a job.
+     * The Amazon Resource Name (ARN) of an encryption key that is used to protect the job output. For more information, see Encrypting data written by DataBrew jobs 
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
@@ -1066,7 +1083,7 @@ declare namespace DataBrew {
      */
     Type?: JobType;
     /**
-     * The identifier (the user name) of the user who last modified the job.
+     * The Amazon Resource Name (ARN) of the user who last modified the job.
      */
     LastModifiedBy?: LastModifiedBy;
     /**
@@ -1167,7 +1184,7 @@ declare namespace DataBrew {
      */
     RecipeReference?: RecipeReference;
     /**
-     * The identifier (the user name) of the user who initiated the job run. 
+     * The Amazon Resource Name (ARN) of the user who initiated the job run. 
      */
     StartedBy?: StartedBy;
     /**
@@ -1194,17 +1211,17 @@ declare namespace DataBrew {
      */
     MaxResults?: MaxResults100;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
   export interface ListDatasetsResponse {
     /**
-     * A list of datasets that are defined in the current AWS account.
+     * A list of datasets that are defined.
      */
     Datasets: DatasetList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1218,7 +1235,7 @@ declare namespace DataBrew {
      */
     MaxResults?: MaxResults100;
     /**
-     * A token generated by AWS Glue DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1228,7 +1245,7 @@ declare namespace DataBrew {
      */
     JobRuns: JobRunList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1252,17 +1269,17 @@ declare namespace DataBrew {
   }
   export interface ListJobsResponse {
     /**
-     * A list of jobs that are defined in the current AWS account.
+     * A list of jobs that are defined.
      */
     Jobs: JobList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
   export interface ListProjectsRequest {
     /**
-     * A pagination token that can be used in a subsequent request.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -1272,11 +1289,11 @@ declare namespace DataBrew {
   }
   export interface ListProjectsResponse {
     /**
-     * A list of projects that are defined in the current AWS account.
+     * A list of projects that are defined .
      */
     Projects: ProjectList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1286,7 +1303,7 @@ declare namespace DataBrew {
      */
     MaxResults?: MaxResults100;
     /**
-     * A pagination token that can be used in a subsequent request.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -1296,7 +1313,7 @@ declare namespace DataBrew {
   }
   export interface ListRecipeVersionsResponse {
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -1310,21 +1327,21 @@ declare namespace DataBrew {
      */
     MaxResults?: MaxResults100;
     /**
-     * A pagination token that can be used in a subsequent request.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
-     * A version identifier. Using this parameter indicates to return only those recipes that have this version identifier.
+     * Return only those recipes with a version identifier of LATEST_WORKING or LATEST_PUBLISHED. If RecipeVersion is omitted, ListRecipes returns all of the LATEST_PUBLISHED recipe versions. Valid values: LATEST_WORKING | LATEST_PUBLISHED 
      */
     RecipeVersion?: RecipeVersion;
   }
   export interface ListRecipesResponse {
     /**
-     * A list of recipes that are defined in the current AWS account.
+     * A list of recipes that are defined.
      */
     Recipes: RecipeList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1338,17 +1355,17 @@ declare namespace DataBrew {
      */
     MaxResults?: MaxResults100;
     /**
-     * A pagination token that can be used in a subsequent request.
+     * The token returned by a previous call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
   export interface ListSchedulesResponse {
     /**
-     * A list of schedules in the current AWS account.
+     * A list of schedules that are defined.
      */
     Schedules: ScheduleList;
     /**
-     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. 
+     * A token that you can use in a subsequent call to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -1394,8 +1411,18 @@ declare namespace DataBrew {
      * A value that, if true, means that any data in the location specified for output is overwritten with new output.
      */
     Overwrite?: OverwriteOutput;
+    /**
+     * Options that define how DataBrew formats job output files.
+     */
+    FormatOptions?: OutputFormatOptions;
   }
   export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|string;
+  export interface OutputFormatOptions {
+    /**
+     * Options that define how DataBrew writes Csv output.
+     */
+    Csv?: CsvOutputOptions;
+  }
   export type OutputList = Output[];
   export type OverwriteOutput = boolean;
   export type ParameterMap = {[key: string]: ParameterValue};
@@ -1412,7 +1439,7 @@ declare namespace DataBrew {
      */
     CreateDate?: _Date;
     /**
-     * The identifier (the user name) of the user who crated the project.
+     * The Amazon Resource Name (ARN) of the user who crated the project.
      */
     CreatedBy?: CreatedBy;
     /**
@@ -1424,7 +1451,7 @@ declare namespace DataBrew {
      */
     LastModifiedDate?: _Date;
     /**
-     * The identifier (user name) of the user who last modified the project.
+     * The Amazon Resource Name (ARN) of the user who last modified the project.
      */
     LastModifiedBy?: LastModifiedBy;
     /**
@@ -1452,7 +1479,7 @@ declare namespace DataBrew {
      */
     RoleArn?: Arn;
     /**
-     * The identifier (the user name) of the user that opened the project for use.
+     * The Amazon Resource Name (ARN) of the user that opened the project for use.
      */
     OpenedBy?: OpenedBy;
     /**
@@ -1481,7 +1508,7 @@ declare namespace DataBrew {
   export type PublishedBy = string;
   export interface Recipe {
     /**
-     * The identifier (the user name) of the user who created the recipe.
+     * The Amazon Resource Name (ARN) of the user who created the recipe.
      */
     CreatedBy?: CreatedBy;
     /**
@@ -1489,7 +1516,7 @@ declare namespace DataBrew {
      */
     CreateDate?: _Date;
     /**
-     * The identifier (user name) of the user who last modified the recipe.
+     * The Amazon Resource Name (ARN) of the user who last modified the recipe.
      */
     LastModifiedBy?: LastModifiedBy;
     /**
@@ -1501,7 +1528,7 @@ declare namespace DataBrew {
      */
     ProjectName?: ProjectName;
     /**
-     * The identifier (the user name) of the user who published the recipe.
+     * The Amazon Resource Name (ARN) of the user who published the recipe.
      */
     PublishedBy?: PublishedBy;
     /**
@@ -1529,7 +1556,7 @@ declare namespace DataBrew {
      */
     Tags?: TagMap;
     /**
-     * The identifier for the version for the recipe. 
+     * The identifier for the version for the recipe. Must be one of the following:   Numeric version (X.Y) - X and Y stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both X and Y are required, and "0.0" is not a valid version.    LATEST_WORKING - the most recent valid version being developed in a DataBrew project.    LATEST_PUBLISHED - the most recent published version.  
      */
     RecipeVersion?: RecipeVersion;
   }
@@ -1614,7 +1641,7 @@ declare namespace DataBrew {
      */
     AccountId?: AccountId;
     /**
-     * The identifier (the user name) of the user who created the schedule.
+     * The Amazon Resource Name (ARN) of the user who created the schedule.
      */
     CreatedBy?: CreatedBy;
     /**
@@ -1626,7 +1653,7 @@ declare namespace DataBrew {
      */
     JobNames?: JobNameList;
     /**
-     * The identifier (the user name) of the user who last modified the schedule.
+     * The Amazon Resource Name (ARN) of the user who last modified the schedule.
      */
     LastModifiedBy?: LastModifiedBy;
     /**
@@ -1638,7 +1665,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The date(s) and time(s), in cron format, when the job will run.
+     * The date(s) and time(s) when the job will run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
      */
     CronExpression?: CronExpression;
     /**
@@ -1654,7 +1681,7 @@ declare namespace DataBrew {
   export type ScheduleName = string;
   export interface SendProjectSessionActionRequest {
     /**
-     * Returns the result of the recipe step, without applying it. The result isn't added to the view frame stack.
+     * If true, the result of the recipe step will be returned, but not applied.
      */
     Preview?: Preview;
     /**
@@ -1764,7 +1791,7 @@ declare namespace DataBrew {
   export type Timeout = number;
   export interface UntagResourceRequest {
     /**
-     * An DataBrew resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN). 
+     * A DataBrew resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN). 
      */
     ResourceArn: Arn;
     /**
@@ -1802,11 +1829,11 @@ declare namespace DataBrew {
      */
     Name: JobName;
     /**
-     * A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.
+     * Enables or disables Amazon CloudWatch logging for the job. If logging is enabled, CloudWatch writes one log stream for each job run.
      */
     LogSubscription?: LogSubscription;
     /**
-     * The maximum number of nodes that DataBrew can use when the job processes data.
+     * The maximum number of compute nodes that DataBrew can use when the job processes data.
      */
     MaxCapacity?: MaxCapacity;
     /**
@@ -1815,7 +1842,7 @@ declare namespace DataBrew {
     MaxRetries?: MaxRetries;
     OutputLocation: S3Location;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -1864,7 +1891,7 @@ declare namespace DataBrew {
      */
     Name: JobName;
     /**
-     * A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.
+     * Enables or disables Amazon CloudWatch logging for the job. If logging is enabled, CloudWatch writes one log stream for each job run.
      */
     LogSubscription?: LogSubscription;
     /**
@@ -1880,7 +1907,7 @@ declare namespace DataBrew {
      */
     Outputs: OutputList;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -1920,7 +1947,7 @@ declare namespace DataBrew {
      */
     JobNames?: JobNameList;
     /**
-     * The date or dates and time or times, in cron format, when the jobs are to be run.
+     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
      */
     CronExpression: CronExpression;
     /**

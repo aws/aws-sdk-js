@@ -28,11 +28,11 @@ declare class ManagedBlockchain extends Service {
    */
   createNetwork(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNetworkOutput) => void): Request<ManagedBlockchain.Types.CreateNetworkOutput, AWSError>;
   /**
-   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum.
+   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
    */
   createNode(params: ManagedBlockchain.Types.CreateNodeInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNodeOutput) => void): Request<ManagedBlockchain.Types.CreateNodeOutput, AWSError>;
   /**
-   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum.
+   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
    */
   createNode(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNodeOutput) => void): Request<ManagedBlockchain.Types.CreateNodeOutput, AWSError>;
   /**
@@ -140,6 +140,14 @@ declare class ManagedBlockchain extends Service {
    */
   listProposals(callback?: (err: AWSError, data: ManagedBlockchain.Types.ListProposalsOutput) => void): Request<ManagedBlockchain.Types.ListProposalsOutput, AWSError>;
   /**
+   * Returns a list of tags for the specified resource. Each tag consists of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  listTagsForResource(params: ManagedBlockchain.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ManagedBlockchain.Types.ListTagsForResourceResponse) => void): Request<ManagedBlockchain.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags for the specified resource. Each tag consists of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ManagedBlockchain.Types.ListTagsForResourceResponse) => void): Request<ManagedBlockchain.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network. Applies only to Hyperledger Fabric.
    */
   rejectInvitation(params: ManagedBlockchain.Types.RejectInvitationInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.RejectInvitationOutput) => void): Request<ManagedBlockchain.Types.RejectInvitationOutput, AWSError>;
@@ -147,6 +155,22 @@ declare class ManagedBlockchain extends Service {
    * Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network. Applies only to Hyperledger Fabric.
    */
   rejectInvitation(callback?: (err: AWSError, data: ManagedBlockchain.Types.RejectInvitationOutput) => void): Request<ManagedBlockchain.Types.RejectInvitationOutput, AWSError>;
+  /**
+   * Adds or overwrites the specified tags for the specified Amazon Managed Blockchain resource. Each tag consists of a key and optional value. When you specify a tag key that already exists, the tag value is overwritten with the new value. Use UntagResource to remove tag keys. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  tagResource(params: ManagedBlockchain.Types.TagResourceRequest, callback?: (err: AWSError, data: ManagedBlockchain.Types.TagResourceResponse) => void): Request<ManagedBlockchain.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or overwrites the specified tags for the specified Amazon Managed Blockchain resource. Each tag consists of a key and optional value. When you specify a tag key that already exists, the tag value is overwritten with the new value. Use UntagResource to remove tag keys. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: ManagedBlockchain.Types.TagResourceResponse) => void): Request<ManagedBlockchain.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the Amazon Managed Blockchain resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  untagResource(params: ManagedBlockchain.Types.UntagResourceRequest, callback?: (err: AWSError, data: ManagedBlockchain.Types.UntagResourceResponse) => void): Request<ManagedBlockchain.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the Amazon Managed Blockchain resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: ManagedBlockchain.Types.UntagResourceResponse) => void): Request<ManagedBlockchain.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates a member configuration with new parameters. Applies only to Hyperledger Fabric.
    */
@@ -187,6 +211,7 @@ declare namespace ManagedBlockchain {
      */
     ThresholdComparator?: ThresholdComparator;
   }
+  export type ArnString = string;
   export type AvailabilityZoneString = string;
   export type ClientRequestTokenString = string;
   export interface CreateMemberInput {
@@ -246,6 +271,10 @@ declare namespace ManagedBlockchain {
      * Configuration properties for the first member within the network.
      */
     MemberConfiguration: MemberConfiguration;
+    /**
+     * Tags to assign to the network. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: InputTagMap;
   }
   export interface CreateNetworkOutput {
     /**
@@ -274,6 +303,10 @@ declare namespace ManagedBlockchain {
      * The properties of a node configuration.
      */
     NodeConfiguration: NodeConfiguration;
+    /**
+     * Tags to assign to the node. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: InputTagMap;
   }
   export interface CreateNodeOutput {
     /**
@@ -302,6 +335,10 @@ declare namespace ManagedBlockchain {
      * A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."
      */
     Description?: DescriptionString;
+    /**
+     * Tags to assign to the proposal. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: InputTagMap;
   }
   export interface CreateProposalOutput {
     /**
@@ -406,6 +443,7 @@ declare namespace ManagedBlockchain {
      */
     Proposal?: Proposal;
   }
+  export type InputTagMap = {[key: string]: TagValue};
   export type InstanceTypeString = string;
   export interface Invitation {
     /**
@@ -425,6 +463,10 @@ declare namespace ManagedBlockchain {
      */
     Status?: InvitationStatus;
     NetworkSummary?: NetworkSummary;
+    /**
+     * The Amazon Resource Name (ARN) of the invitation. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export type InvitationList = Invitation[];
   export type InvitationStatus = "PENDING"|"ACCEPTED"|"ACCEPTING"|"REJECTED"|"EXPIRED"|string;
@@ -608,6 +650,18 @@ declare namespace ManagedBlockchain {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    ResourceArn: ArnString;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags assigned to the resource.
+     */
+    Tags?: OutputTagMap;
+  }
   export interface LogConfiguration {
     /**
      * Indicates whether logging is enabled.
@@ -653,6 +707,14 @@ declare namespace ManagedBlockchain {
      * The date and time that the member was created.
      */
     CreationDate?: Timestamp;
+    /**
+     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: OutputTagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export interface MemberConfiguration {
     /**
@@ -671,6 +733,10 @@ declare namespace ManagedBlockchain {
      * Configuration properties for logging events associated with a member of a Managed Blockchain network.
      */
     LogPublishingConfiguration?: MemberLogPublishingConfiguration;
+    /**
+     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.
+     */
+    Tags?: InputTagMap;
   }
   export interface MemberFabricAttributes {
     /**
@@ -743,6 +809,10 @@ declare namespace ManagedBlockchain {
      * An indicator of whether the member is owned by your AWS account or a different AWS account.
      */
     IsOwned?: IsOwned;
+    /**
+     * The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export type MemberSummaryList = MemberSummary[];
   export type NameString = string;
@@ -787,6 +857,14 @@ declare namespace ManagedBlockchain {
      * The date and time that the network was created.
      */
     CreationDate?: Timestamp;
+    /**
+     * Tags assigned to the network. Each tag consists of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: OutputTagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export interface NetworkEthereumAttributes {
     /**
@@ -816,7 +894,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NetworkFabricAttributes;
     /**
-     * Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network.
+     * Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. Ethereum on Managed Blockchain is in preview release and is subject to change.
      */
     Ethereum?: NetworkEthereumAttributes;
   }
@@ -858,6 +936,10 @@ declare namespace ManagedBlockchain {
      * The date and time that the network was created.
      */
     CreationDate?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export type NetworkSummaryList = NetworkSummary[];
   export interface Node {
@@ -878,7 +960,7 @@ declare namespace ManagedBlockchain {
      */
     InstanceType?: InstanceTypeString;
     /**
-     * The Availability Zone in which the node exists.
+     * The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.
      */
     AvailabilityZone?: AvailabilityZoneString;
     /**
@@ -901,6 +983,14 @@ declare namespace ManagedBlockchain {
      * The date and time that the node was created.
      */
     CreationDate?: Timestamp;
+    /**
+     * Tags assigned to the node. Each tag consists of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: OutputTagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export interface NodeConfiguration {
     /**
@@ -908,7 +998,7 @@ declare namespace ManagedBlockchain {
      */
     InstanceType: InstanceTypeString;
     /**
-     * The Availability Zone in which the node exists.
+     * The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.
      */
     AvailabilityZone?: AvailabilityZoneString;
     /**
@@ -956,7 +1046,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NodeFabricAttributes;
     /**
-     * Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum.
+     * Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
      */
     Ethereum?: NodeEthereumAttributes;
   }
@@ -989,8 +1079,13 @@ declare namespace ManagedBlockchain {
      * The EC2 instance type for the node.
      */
     InstanceType?: InstanceTypeString;
+    /**
+     * The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export type NodeSummaryList = NodeSummary[];
+  export type OutputTagMap = {[key: string]: TagValue};
   export type PaginationToken = string;
   export type PasswordString = string;
   export type PrincipalString = string;
@@ -1043,6 +1138,14 @@ declare namespace ManagedBlockchain {
      *  The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of YES votes and NO votes. 
      */
     OutstandingVoteCount?: VoteCount;
+    /**
+     * Tags assigned to the proposal. Each tag consists of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: OutputTagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export interface ProposalActions {
     /**
@@ -1086,6 +1189,10 @@ declare namespace ManagedBlockchain {
      *  The date and time that the proposal expires. This is the CreationDate plus the ProposalDurationInHours that is specified in the ProposalThresholdPolicy. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is EXPIRED and Actions are not carried out. 
      */
     ExpirationDate?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    Arn?: ArnString;
   }
   export type ProposalSummaryList = ProposalSummary[];
   export type ProposalVoteList = VoteSummary[];
@@ -1107,9 +1214,36 @@ declare namespace ManagedBlockchain {
   export type ResourceIdString = string;
   export type StateDBType = "LevelDB"|"CouchDB"|string;
   export type String = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    ResourceArn: ArnString;
+    /**
+     * The tags to assign to the specified resource. Tag values can be empty, for example, "MyTagKey" : "". You can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.
+     */
+    Tags: InputTagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type ThresholdComparator = "GREATER_THAN"|"GREATER_THAN_OR_EQUAL_TO"|string;
   export type ThresholdPercentageInt = number;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    ResourceArn: ArnString;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateMemberInput {
     /**
      * The unique identifier of the Managed Blockchain network to which the member belongs.
