@@ -20,11 +20,11 @@ declare class Connect extends Service {
    */
   associateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(params: Connect.Types.AssociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
   /**
@@ -43,6 +43,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a set of quick connects with a queue.
+   */
+  associateQueueQuickConnects(params: Connect.Types.AssociateQueueQuickConnectsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Associates a set of quick connects with a queue.
+   */
+  associateQueueQuickConnects(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates a set of queues with a routing profile.
    */
@@ -68,11 +76,11 @@ declare class Connect extends Service {
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. 
    */
   createInstance(params: Connect.Types.CreateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. 
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
@@ -83,6 +91,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.
+   */
+  createQueue(params: Connect.Types.CreateQueueRequest, callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.
+   */
+  createQueue(callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates a quick connect for the specified Amazon Connect instance.
    */
@@ -180,11 +196,19 @@ declare class Connect extends Service {
    */
   describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the hours of operation.
+   */
+  describeHoursOfOperation(params: Connect.Types.DescribeHoursOfOperationRequest, callback?: (err: AWSError, data: Connect.Types.DescribeHoursOfOperationResponse) => void): Request<Connect.Types.DescribeHoursOfOperationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the hours of operation.
+   */
+  describeHoursOfOperation(callback?: (err: AWSError, data: Connect.Types.DescribeHoursOfOperationResponse) => void): Request<Connect.Types.DescribeHoursOfOperationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status, if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
    */
   describeInstance(params: Connect.Types.DescribeInstanceRequest, callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status, if applicable.  If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.
    */
   describeInstance(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceResponse) => void): Request<Connect.Types.DescribeInstanceResponse, AWSError>;
   /**
@@ -203,6 +227,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.
    */
   describeInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified queue.
+   */
+  describeQueue(params: Connect.Types.DescribeQueueRequest, callback?: (err: AWSError, data: Connect.Types.DescribeQueueResponse) => void): Request<Connect.Types.DescribeQueueResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified queue.
+   */
+  describeQueue(callback?: (err: AWSError, data: Connect.Types.DescribeQueueResponse) => void): Request<Connect.Types.DescribeQueueResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes the quick connect.
    */
@@ -260,11 +292,11 @@ declare class Connect extends Service {
    */
   disassociateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant contact flow blocks.
    */
   disassociateLambdaFunction(params: Connect.Types.DisassociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant contact flow blocks.
    */
   disassociateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -275,6 +307,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex bot.
    */
   disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Disassociates a set of quick connects from a queue.
+   */
+  disassociateQueueQuickConnects(params: Connect.Types.DisassociateQueueQuickConnectsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Disassociates a set of quick connects from a queue.
+   */
+  disassociateQueueQuickConnects(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disassociates a set of queues from a routing profile.
    */
@@ -380,11 +420,11 @@ declare class Connect extends Service {
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant contact flow blocks.
    */
   listLambdaFunctions(params: Connect.Types.ListLambdaFunctionsRequest, callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant contact flow blocks.
    */
   listLambdaFunctions(callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
@@ -412,6 +452,14 @@ declare class Connect extends Service {
    */
   listPrompts(callback?: (err: AWSError, data: Connect.Types.ListPromptsResponse) => void): Request<Connect.Types.ListPromptsResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the quick connects associated with a queue.
+   */
+  listQueueQuickConnects(params: Connect.Types.ListQueueQuickConnectsRequest, callback?: (err: AWSError, data: Connect.Types.ListQueueQuickConnectsResponse) => void): Request<Connect.Types.ListQueueQuickConnectsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the quick connects associated with a queue.
+   */
+  listQueueQuickConnects(callback?: (err: AWSError, data: Connect.Types.ListQueueQuickConnectsResponse) => void): Request<Connect.Types.ListQueueQuickConnectsResponse, AWSError>;
+  /**
    * Provides information about the queues for the specified Amazon Connect instance. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
    */
   listQueues(params: Connect.Types.ListQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
@@ -428,11 +476,11 @@ declare class Connect extends Service {
    */
   listQuickConnects(callback?: (err: AWSError, data: Connect.Types.ListQuickConnectsResponse) => void): Request<Connect.Types.ListQuickConnectsResponse, AWSError>;
   /**
-   * List the queues associated with a routing profile.
+   * Lists the queues associated with a routing profile.
    */
   listRoutingProfileQueues(params: Connect.Types.ListRoutingProfileQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfileQueuesResponse) => void): Request<Connect.Types.ListRoutingProfileQueuesResponse, AWSError>;
   /**
-   * List the queues associated with a routing profile.
+   * Lists the queues associated with a routing profile.
    */
   listRoutingProfileQueues(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfileQueuesResponse) => void): Request<Connect.Types.ListRoutingProfileQueuesResponse, AWSError>;
   /**
@@ -468,11 +516,11 @@ declare class Connect extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. List the use cases. 
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the use cases. 
    */
   listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. List the use cases. 
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the use cases. 
    */
   listUseCases(callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
@@ -500,27 +548,27 @@ declare class Connect extends Service {
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about how chat works, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(params: Connect.Types.StartChatContactRequest, callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about how chat works, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * This API starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording. You can use this API to override the recording behavior configured in the Set recording behavior block. Only voice recordings are supported at this time.
+   * Starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording. You can use this API to override the recording behavior configured in the Set recording behavior block. Only voice recordings are supported at this time.
    */
   startContactRecording(params: Connect.Types.StartContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
   /**
-   * This API starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording. You can use this API to override the recording behavior configured in the Set recording behavior block. Only voice recordings are supported at this time.
+   * Starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording. You can use this API to override the recording behavior configured in the Set recording behavior block. Only voice recordings are supported at this time.
    */
   startContactRecording(callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
   /**
-   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
@@ -540,11 +588,11 @@ declare class Connect extends Service {
    */
   stopContact(callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
-   * When a contact is being recorded, this API stops recording the call. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording. Only voice recordings are supported at this time.
+   * Stops recording a call when a contact is being recorded. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording. Only voice recordings are supported at this time.
    */
   stopContactRecording(params: Connect.Types.StopContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.StopContactRecordingResponse) => void): Request<Connect.Types.StopContactRecordingResponse, AWSError>;
   /**
-   * When a contact is being recorded, this API stops recording the call. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording. Only voice recordings are supported at this time.
+   * Stops recording a call when a contact is being recorded. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording. Only voice recordings are supported at this time.
    */
   stopContactRecording(callback?: (err: AWSError, data: Connect.Types.StopContactRecordingResponse) => void): Request<Connect.Types.StopContactRecordingResponse, AWSError>;
   /**
@@ -556,11 +604,11 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -572,11 +620,11 @@ declare class Connect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
@@ -611,6 +659,46 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation for the specified queue.
+   */
+  updateQueueHoursOfOperation(params: Connect.Types.UpdateQueueHoursOfOperationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation for the specified queue.
+   */
+  updateQueueHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the maximum number of contacts allowed in a queue before it is considered full.
+   */
+  updateQueueMaxContacts(params: Connect.Types.UpdateQueueMaxContactsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the maximum number of contacts allowed in a queue before it is considered full.
+   */
+  updateQueueMaxContacts(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a queue. At least Name or Description must be provided.
+   */
+  updateQueueName(params: Connect.Types.UpdateQueueNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a queue. At least Name or Description must be provided.
+   */
+  updateQueueName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.
+   */
+  updateQueueOutboundCallerConfig(params: Connect.Types.UpdateQueueOutboundCallerConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.
+   */
+  updateQueueOutboundCallerConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the status of the queue.
+   */
+  updateQueueStatus(params: Connect.Types.UpdateQueueStatusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the status of the queue.
+   */
+  updateQueueStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates the configuration settings for the specified quick connect.
    */
@@ -684,11 +772,11 @@ declare class Connect extends Service {
    */
   updateUserHierarchyStructure(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the identity information for the specified user.  Someone with the ability to invoke UpdateUserIndentityInfo can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke UpdateUserIndentityInfo. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
+   * Updates the identity information for the specified user.  We strongly recommend limiting who has the ability to invoke UpdateUserIdentityInfo. Someone with that ability can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
    */
   updateUserIdentityInfo(params: Connect.Types.UpdateUserIdentityInfoRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the identity information for the specified user.  Someone with the ability to invoke UpdateUserIndentityInfo can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke UpdateUserIndentityInfo. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
+   * Updates the identity information for the specified user.  We strongly recommend limiting who has the ability to invoke UpdateUserIdentityInfo. Someone with that ability can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
    */
   updateUserIdentityInfo(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -772,6 +860,20 @@ declare namespace Connect {
      */
     LexBot: LexBot;
   }
+  export interface AssociateQueueQuickConnectsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The quick connects to associate with this queue.
+     */
+    QuickConnectIds: QuickConnectsList;
+  }
   export interface AssociateRoutingProfileQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -826,7 +928,7 @@ declare namespace Connect {
   export type ChatContentType = string;
   export interface ChatMessage {
     /**
-     * The type of the content. Supported types are text/plain.
+     * The type of the content. Supported types are text and plain.
      */
     ContentType: ChatContentType;
     /**
@@ -835,6 +937,8 @@ declare namespace Connect {
     Content: ChatContent;
   }
   export type ClientToken = string;
+  export type CommonDescriptionLength250 = string;
+  export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
   export type Concurrency = number;
   export interface ContactFlow {
@@ -948,11 +1052,11 @@ declare namespace Connect {
      */
     DirectoryId?: DirectoryId;
     /**
-     * Whether your contact center handles incoming contacts.
+     * Your contact center handles incoming contacts.
      */
     InboundCallsEnabled: InboundCallsEnabled;
     /**
-     * Whether your contact center allows outbound calls.
+     * Your contact center allows outbound calls.
      */
     OutboundCallsEnabled: OutboundCallsEnabled;
   }
@@ -1001,6 +1105,50 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) for the association.
      */
     IntegrationAssociationArn?: ARN;
+  }
+  export interface CreateQueueRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the queue.
+     */
+    Name: CommonNameLength127;
+    /**
+     * The description of the queue.
+     */
+    Description?: QueueDescription;
+    /**
+     * The outbound caller ID name, number, and outbound whisper flow.
+     */
+    OutboundCallerConfig?: OutboundCallerConfig;
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId: HoursOfOperationId;
+    /**
+     * The maximum number of contacts that can be in the queue before it is considered full.
+     */
+    MaxContacts?: QueueMaxContacts;
+    /**
+     * The quick connects available to agents who are working the queue.
+     */
+    QuickConnectIds?: QuickConnectsList;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateQueueResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the queue.
+     */
+    QueueArn?: ARN;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId?: QueueId;
   }
   export interface CreateQuickConnectRequest {
     /**
@@ -1052,11 +1200,11 @@ declare namespace Connect {
      */
     DefaultOutboundQueueId: QueueId;
     /**
-     * The inbound queues associated with the routing profile. If no queue is added, the agent can only make outbound calls.
+     * The inbound queues associated with the routing profile. If no queue is added, the agent can make only outbound calls.
      */
     QueueConfigs?: RoutingProfileQueueConfigList;
     /**
-     * The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+     * The channels that agents can handle in the Contact Control Panel (CCP) for this routing profile.
      */
     MediaConcurrencies: MediaConcurrencies;
     /**
@@ -1303,6 +1451,22 @@ declare namespace Connect {
      */
     ContactFlow?: ContactFlow;
   }
+  export interface DescribeHoursOfOperationRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId: HoursOfOperationId;
+  }
+  export interface DescribeHoursOfOperationResponse {
+    /**
+     * The hours of operation.
+     */
+    HoursOfOperation?: HoursOfOperation;
+  }
   export interface DescribeInstanceAttributeRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1350,6 +1514,22 @@ declare namespace Connect {
      * A valid storage type.
      */
     StorageConfig?: InstanceStorageConfig;
+  }
+  export interface DescribeQueueRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+  }
+  export interface DescribeQueueResponse {
+    /**
+     * The name of the queue.
+     */
+    Queue?: Queue;
   }
   export interface DescribeQuickConnectRequest {
     /**
@@ -1490,6 +1670,20 @@ declare namespace Connect {
      */
     LexRegion: LexRegion;
   }
+  export interface DisassociateQueueQuickConnectsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The quick connects to disassociate from the queue.
+     */
+    QuickConnectIds: QuickConnectsList;
+  }
   export interface DisassociateRoutingProfileQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1577,7 +1771,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
   }
@@ -1637,7 +1831,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
   }
@@ -1823,6 +2017,53 @@ declare namespace Connect {
   export type HistoricalMetricResults = HistoricalMetricResult[];
   export type HistoricalMetrics = HistoricalMetric[];
   export type Hours = number;
+  export type Hours24Format = number;
+  export interface HoursOfOperation {
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId?: HoursOfOperationId;
+    /**
+     * The Amazon Resource Name (ARN) for the hours of operation.
+     */
+    HoursOfOperationArn?: ARN;
+    /**
+     * The name for the hours of operation.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * The description for the hours of operation.
+     */
+    Description?: CommonDescriptionLength250;
+    /**
+     * The time zone for the hours of operation.
+     */
+    TimeZone?: TimeZone;
+    /**
+     * Configuration information for the hours of operation.
+     */
+    Config?: HoursOfOperationConfigList;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface HoursOfOperationConfig {
+    /**
+     * The day that the hours of operation applies to.
+     */
+    Day?: HoursOfOperationDays;
+    /**
+     * The start time that your contact center is open.
+     */
+    StartTime?: HoursOfOperationTimeSlice;
+    /**
+     * The end time that your contact center is closes.
+     */
+    EndTime?: HoursOfOperationTimeSlice;
+  }
+  export type HoursOfOperationConfigList = HoursOfOperationConfig[];
+  export type HoursOfOperationDays = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export type HoursOfOperationId = string;
   export type HoursOfOperationName = string;
   export interface HoursOfOperationSummary {
@@ -1840,6 +2081,16 @@ declare namespace Connect {
     Name?: HoursOfOperationName;
   }
   export type HoursOfOperationSummaryList = HoursOfOperationSummary[];
+  export interface HoursOfOperationTimeSlice {
+    /**
+     * The hours.
+     */
+    Hours?: Hours24Format;
+    /**
+     * The minutes.
+     */
+    Minutes?: MinutesLimit60;
+  }
   export type InboundCallsEnabled = boolean;
   export interface Instance {
     /**
@@ -1903,7 +2154,7 @@ declare namespace Connect {
      */
     StorageType: StorageType;
     /**
-     * The S3 configuration.
+     * The S3 bucket configuration.
      */
     S3Config?: S3Config;
     /**
@@ -2030,7 +2281,7 @@ declare namespace Connect {
      */
     Name?: BotName;
     /**
-     * The Region the Amazon Lex bot was created in.
+     * The Region that the Amazon Lex bot was created in.
      */
     LexRegion?: LexRegion;
   }
@@ -2046,7 +2297,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult25;
   }
@@ -2074,7 +2325,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2098,7 +2349,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2122,7 +2373,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult7;
   }
@@ -2150,7 +2401,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult10;
   }
@@ -2170,7 +2421,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult10;
   }
@@ -2194,7 +2445,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
   }
@@ -2218,7 +2469,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult25;
   }
@@ -2242,13 +2493,13 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult25;
   }
   export interface ListLexBotsResponse {
     /**
-     * The the names and regions of the Amazon Lex bots associated with the specified instance.
+     * The names and Regions of the Amazon Lex bots associated with the specified instance.
      */
     LexBots?: LexBotsList;
     /**
@@ -2274,7 +2525,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2312,6 +2563,34 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListQueueQuickConnectsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface ListQueueQuickConnectsResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the quick connects.
+     */
+    QuickConnectSummaryList?: QuickConnectSummaryList;
+  }
   export interface ListQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -2326,7 +2605,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2350,7 +2629,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
     /**
@@ -2382,7 +2661,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
   }
@@ -2406,7 +2685,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2430,7 +2709,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult2;
   }
@@ -2454,7 +2733,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2494,7 +2773,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
   }
@@ -2518,7 +2797,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2542,7 +2821,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult1000;
   }
@@ -2573,10 +2852,26 @@ declare namespace Connect {
      */
     Concurrency: Concurrency;
   }
+  export type MinutesLimit60 = number;
   export type Name = string;
   export type NextToken = string;
   export type Origin = string;
   export type OriginsList = Origin[];
+  export interface OutboundCallerConfig {
+    /**
+     * The caller ID name.
+     */
+    OutboundCallerIdName?: OutboundCallerIdName;
+    /**
+     * The caller ID number.
+     */
+    OutboundCallerIdNumberId?: PhoneNumberId;
+    /**
+     * The outbound whisper flow to be used during an outbound call.
+     */
+    OutboundFlowId?: ContactFlowId;
+  }
+  export type OutboundCallerIdName = string;
   export type OutboundCallsEnabled = boolean;
   export type PEM = string;
   export interface ParticipantDetails {
@@ -2643,11 +2938,51 @@ declare namespace Connect {
     Name?: PromptName;
   }
   export type PromptSummaryList = PromptSummary[];
+  export interface Queue {
+    /**
+     * The name of the queue.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * The Amazon Resource Name (ARN) for the queue.
+     */
+    QueueArn?: ARN;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId?: QueueId;
+    /**
+     * The description of the queue.
+     */
+    Description?: QueueDescription;
+    /**
+     * The outbound caller ID name, number, and outbound whisper flow.
+     */
+    OutboundCallerConfig?: OutboundCallerConfig;
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId?: HoursOfOperationId;
+    /**
+     * The maximum number of contacts that can be in the queue before it is considered full.
+     */
+    MaxContacts?: QueueMaxContacts;
+    /**
+     * The status of the queue.
+     */
+    Status?: QueueStatus;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export type QueueDescription = string;
   export type QueueId = string;
+  export type QueueMaxContacts = number;
   export type QueueName = string;
   export interface QueueQuickConnectConfig {
     /**
-     * The identifier of the queue.
+     * The identifier for the queue.
      */
     QueueId: QueueId;
     /**
@@ -2665,6 +3000,7 @@ declare namespace Connect {
      */
     Arn?: ARN;
   }
+  export type QueueStatus = "ENABLED"|"DISABLED"|string;
   export interface QueueSummary {
     /**
      * The identifier of the queue.
@@ -2740,11 +3076,11 @@ declare namespace Connect {
      */
     Id?: QuickConnectId;
     /**
-     * The Amazon Resource Name (ARN).
+     * The Amazon Resource Name (ARN) of the quick connect.
      */
     Arn?: ARN;
     /**
-     * The name.
+     * The name of the quick connect.
      */
     Name?: QuickConnectName;
     /**
@@ -2755,9 +3091,10 @@ declare namespace Connect {
   export type QuickConnectSummaryList = QuickConnectSummary[];
   export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string;
   export type QuickConnectTypes = QuickConnectType[];
+  export type QuickConnectsList = QuickConnectId[];
   export interface Reference {
     /**
-     * A formatted URL that will be shown to an agent in the Contact Control Panel (CCP)
+     * A formatted URL that displays to an agent in the Contact Control Panel (CCP)
      */
     Value: ReferenceValue;
     /**
@@ -2838,7 +3175,7 @@ declare namespace Connect {
   export type RoutingProfileQueueConfigList = RoutingProfileQueueConfig[];
   export interface RoutingProfileQueueConfigSummary {
     /**
-     * The identifier of the queue.
+     * The identifier for the queue.
      */
     QueueId: QueueId;
     /**
@@ -2865,7 +3202,7 @@ declare namespace Connect {
   export type RoutingProfileQueueConfigSummaryList = RoutingProfileQueueConfigSummary[];
   export interface RoutingProfileQueueReference {
     /**
-     * The identifier of the queue.
+     * The identifier for the queue.
      */
     QueueId: QueueId;
     /**
@@ -2899,7 +3236,7 @@ declare namespace Connect {
      */
     BucketPrefix: Prefix;
     /**
-     * The S3 encryption configuration.
+     * The Amazon S3 encryption configuration.
      */
     EncryptionConfig?: EncryptionConfig;
   }
@@ -2949,7 +3286,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.  There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in contact flows just like any other contact attributes.  There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes?: Attributes;
     /**
@@ -2993,7 +3330,7 @@ declare namespace Connect {
      */
     InitialContactId: ContactId;
     /**
-     * Who is being recorded.
+     * The person being recorded.
      */
     VoiceRecordingConfiguration: VoiceRecordingConfiguration;
   }
@@ -3147,6 +3484,7 @@ declare namespace Connect {
     ThresholdValue?: ThresholdValue;
   }
   export type ThresholdValue = number;
+  export type TimeZone = string;
   export type Timestamp = Date;
   export type URI = string;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
@@ -3237,6 +3575,80 @@ declare namespace Connect {
     ResourceType: InstanceStorageResourceType;
     StorageConfig: InstanceStorageConfig;
   }
+  export interface UpdateQueueHoursOfOperationRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId: HoursOfOperationId;
+  }
+  export interface UpdateQueueMaxContactsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The maximum number of contacts that can be in the queue before it is considered full.
+     */
+    MaxContacts: QueueMaxContacts;
+  }
+  export interface UpdateQueueNameRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The name of the queue.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * The description of the queue.
+     */
+    Description?: QueueDescription;
+  }
+  export interface UpdateQueueOutboundCallerConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The outbound caller ID name, number, and outbound whisper flow.
+     */
+    OutboundCallerConfig: OutboundCallerConfig;
+  }
+  export interface UpdateQueueStatusRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The status of the queue.
+     */
+    Status: QueueStatus;
+  }
   export interface UpdateQuickConnectConfigRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -3279,7 +3691,7 @@ declare namespace Connect {
      */
     RoutingProfileId: RoutingProfileId;
     /**
-     * The channels agents can handle in the Contact Control Panel (CCP).
+     * The channels that agents can handle in the Contact Control Panel (CCP).
      */
     MediaConcurrencies: MediaConcurrencies;
   }

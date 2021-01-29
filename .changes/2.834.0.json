@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Lex Models V2",
+        "description": "Lex Models V2 service requires Content-Type header to be application/x-amz-json-1.1"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Added API to manage queues or get hours of operation for a queue programmatically, which can be used to create new/update queues, or take actions when skills are outside of their hours of operation."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API adds support for using object prefixes to refine the scope of a classification job."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "\"AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC.\""
+    }
+]

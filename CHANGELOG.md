@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.833.0-->
+<!--LATEST=2.834.0-->
 <!--ENTRYINSERT-->
+
+## 2.834.0
+* bugfix: Lex Models V2: Lex Models V2 service requires Content-Type header to be application/x-amz-json-1.1
+* feature: Connect: Added API to manage queues or get hours of operation for a queue programmatically, which can be used to create new/update queues, or take actions when skills are outside of their hours of operation.
+* feature: Macie2: This release of the Amazon Macie API adds support for using object prefixes to refine the scope of a classification job.
+* feature: MediaLive: "AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC."
 
 ## 2.833.0
 * feature: CloudWatch: Update to SDK to support label time zones in CloudWatch GetMetricData

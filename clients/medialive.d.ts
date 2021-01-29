@@ -1281,6 +1281,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
@@ -1347,6 +1351,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1395,6 +1403,10 @@ creating multiple resources.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface CreateChannelResponse {
     Channel?: Channel;
@@ -1591,6 +1603,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface DeleteInputRequest {
     /**
@@ -1851,6 +1867,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface DescribeInputDeviceRequest {
     /**
@@ -5755,6 +5775,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface StartMultiplexRequest {
     /**
@@ -5940,6 +5964,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface StopMultiplexRequest {
     /**
@@ -6428,6 +6456,26 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export interface VideoSelectorSettings {
     VideoSelectorPid?: VideoSelectorPid;
     VideoSelectorProgramId?: VideoSelectorProgramId;
+  }
+  export interface VpcOutputSettings {
+    /**
+     * List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+
+     */
+    PublicAddressAllocationIds?: __listOf__string;
+    /**
+     * A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+If none are specified then the VPC default security group will be used
+
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+
+     */
+    SubnetIds: __listOf__string;
   }
   export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
   export interface WavSettings {
