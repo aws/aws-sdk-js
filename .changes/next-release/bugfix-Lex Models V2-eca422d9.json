@@ -1,5 +1,5 @@
 {
   "type": "bugfix",
   "category": "Lex Models V2",
-  "description": "Lex Models V2 service requires Content-Type header to be application/x-amz-json-1.1 other than other normal rest-json services"
+  "description": "Lex Models V2 service requires Content-Type header to be application/x-amz-json-1.1"
 }
