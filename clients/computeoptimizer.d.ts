@@ -248,7 +248,7 @@ declare namespace ComputeOptimizer {
   export type EBSUtilizationMetrics = EBSUtilizationMetric[];
   export interface ExportAutoScalingGroupRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to export Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     * The IDs of the AWS accounts for which to export Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
      */
     accountIds?: AccountIds;
     /**
@@ -290,7 +290,7 @@ declare namespace ComputeOptimizer {
   }
   export interface ExportEC2InstanceRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to export instance recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     * The IDs of the AWS accounts for which to export instance recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
      */
     accountIds?: AccountIds;
     /**
@@ -351,7 +351,7 @@ declare namespace ComputeOptimizer {
   export type FunctionVersion = string;
   export interface GetAutoScalingGroupRecommendationsRequest {
     /**
-     * The IDs of the AWS accounts for which to return Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
+     * The ID of the AWS account for which to return Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -403,7 +403,7 @@ declare namespace ComputeOptimizer {
      */
     filters?: EBSFilters;
     /**
-     * The IDs of the AWS accounts for which to return volume recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return volume recommendations. Only one account ID can be specified per request.
+     * The ID of the AWS account for which to return volume recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return volume recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
   }
@@ -439,7 +439,7 @@ declare namespace ComputeOptimizer {
      */
     filters?: Filters;
     /**
-     * The IDs of the AWS accounts for which to return instance recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations. Only one account ID can be specified per request.
+     * The ID of the AWS account for which to return instance recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return instance recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
   }
@@ -507,7 +507,7 @@ declare namespace ComputeOptimizer {
      */
     functionArns?: FunctionArns;
     /**
-     * The IDs of the AWS accounts for which to return function recommendations. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return function recommendations. Only one account ID can be specified per request.
+     * The ID of the AWS account for which to return function recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return function recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -550,7 +550,7 @@ declare namespace ComputeOptimizer {
   export type GetRecommendationErrors = GetRecommendationError[];
   export interface GetRecommendationSummariesRequest {
     /**
-     * The IDs of the AWS accounts for which to return recommendation summaries. If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries. Only one account ID can be specified per request.
+     * The ID of the AWS account for which to return recommendation summaries. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return recommendation summaries. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -726,7 +726,7 @@ declare namespace ComputeOptimizer {
      */
     finding?: LambdaFunctionRecommendationFinding;
     /**
-     * The reason for the finding classification of the function.  Functions that have a finding classification of Optimized don't have a finding reason code.  Reason codes include:     MemoryOverprovisioned  — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the NotOptimized finding classification.     MemoryUnderprovisioned  — The function is under-provisioned when its memory configuration doesn't meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the NotOptimized finding classification.     InsufficientData  — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide. This finding reason code is part of the Unavailable finding classification.     Inconclusive  — The function does not qualify for a recommendation, or there was an internal error. This finding reason code is part of the Unavailable finding classification.  
+     * The reason for the finding classification of the function.  Functions that have a finding classification of Optimized don't have a finding reason code.  Reason codes include:     MemoryOverprovisioned  — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the NotOptimized finding classification.     MemoryUnderprovisioned  — The function is under-provisioned when its memory configuration doesn't meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the NotOptimized finding classification.     InsufficientData  — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the Supported resources and requirements in the AWS Compute Optimizer User Guide. This finding reason code is part of the Unavailable finding classification.     Inconclusive  — The function does not qualify for a recommendation because Compute Optimizer cannot generate a recommendation with a high degree of confidence. This finding reason code is part of the Unavailable finding classification.  
      */
     findingReasonCodes?: LambdaFunctionRecommendationFindingReasonCodes;
     /**

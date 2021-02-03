@@ -371,6 +371,28 @@
       ],
       "documentation": "<p>Returns the definition of a specific DataBrew job.</p>"
     },
+    "DescribeJobRun": {
+      "name": "DescribeJobRun",
+      "http": {
+        "method": "GET",
+        "requestUri": "/jobs/{name}/jobRun/{runId}"
+      },
+      "input": {
+        "shape": "DescribeJobRunRequest"
+      },
+      "output": {
+        "shape": "DescribeJobRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Represents one run of a DataBrew job.</p>"
+    },
     "DescribeProject": {
       "name": "DescribeProject",
       "http": {
@@ -1380,7 +1402,7 @@
           "documentation": "<p>A single character that specifies the delimiter used to create Csv job output.</p>"
         }
       },
-      "documentation": "<p>Options that define how DataBrew will write a Csv file a.</p>"
+      "documentation": "<p>Options that define how DataBrew will write a Csv file.</p>"
     },
     "DataCatalogInputDefinition": {
       "type": "structure",
@@ -1783,6 +1805,90 @@
         "Timeout": {
           "shape": "Timeout",
           "documentation": "<p>The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.</p>"
+        }
+      }
+    },
+    "DescribeJobRunRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "RunId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "JobName",
+          "documentation": "<p>The name of the job being processed during this run.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "RunId": {
+          "shape": "JobRunId",
+          "documentation": "<p>The unique identifier of the job run.</p>",
+          "location": "uri",
+          "locationName": "runId"
+        }
+      }
+    },
+    "DescribeJobRunResponse": {
+      "type": "structure",
+      "required": [
+        "JobName"
+      ],
+      "members": {
+        "Attempt": {
+          "shape": "Attempt",
+          "documentation": "<p>The number of times that DataBrew has attempted to run the job.</p>"
+        },
+        "CompletedOn": {
+          "shape": "Date",
+          "documentation": "<p>The date and time when the job completed processing.</p>"
+        },
+        "DatasetName": {
+          "shape": "DatasetName",
+          "documentation": "<p>The name of the dataset for the job to process.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "JobRunErrorMessage",
+          "documentation": "<p>A message indicating an error (if any) that was encountered when the job ran.</p>"
+        },
+        "ExecutionTime": {
+          "shape": "ExecutionTime",
+          "documentation": "<p>The amount of time, in seconds, during which a job run consumed resources.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name of the job being processed during this run.</p>"
+        },
+        "RunId": {
+          "shape": "JobRunId",
+          "documentation": "<p>The unique identifier of the job run.</p>"
+        },
+        "State": {
+          "shape": "JobRunState",
+          "documentation": "<p>The current state of the job run entity itself.</p>"
+        },
+        "LogSubscription": {
+          "shape": "LogSubscription",
+          "documentation": "<p>The current status of Amazon CloudWatch logging for the job run.</p>"
+        },
+        "LogGroupName": {
+          "shape": "LogGroupName",
+          "documentation": "<p>The name of an Amazon CloudWatch log group, where the job writes diagnostic messages when it runs.</p>"
+        },
+        "Outputs": {
+          "shape": "OutputList",
+          "documentation": "<p>One or more output artifacts from a job run.</p>"
+        },
+        "RecipeReference": {
+          "shape": "RecipeReference"
+        },
+        "StartedBy": {
+          "shape": "StartedBy",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user who initiated the job run.</p>"
+        },
+        "StartedOn": {
+          "shape": "Date",
+          "documentation": "<p>The date and time when the job run began.</p>"
         }
       }
     },

@@ -156,11 +156,11 @@ declare class CodeBuild extends Service {
    */
   describeTestCases(callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
   /**
-   * 
+   * Analyzes and accumulates test report values for the specified test reports.
    */
   getReportGroupTrend(params: CodeBuild.Types.GetReportGroupTrendInput, callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
   /**
-   * 
+   * Analyzes and accumulates test report values for the specified test reports.
    */
   getReportGroupTrend(callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class CodeBuild extends Service {
    */
   listBuilds(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsOutput) => void): Request<CodeBuild.Types.ListBuildsOutput, AWSError>;
   /**
-   * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
+   * Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
    */
   listBuildsForProject(params: CodeBuild.Types.ListBuildsForProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
   /**
-   * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
+   * Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
    */
   listBuildsForProject(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
   /**
@@ -1314,12 +1314,27 @@ declare namespace CodeBuild {
   export type FilterGroup = WebhookFilter[];
   export type FilterGroups = FilterGroup[];
   export interface GetReportGroupTrendInput {
+    /**
+     * The ARN of the report group that contains the reports to analyze.
+     */
     reportGroupArn: NonEmptyString;
+    /**
+     * The number of reports to analyze. This operation always retrieves the most recent reports. If this parameter is omitted, the most recent 100 reports are analyzed.
+     */
     numOfReports?: PageSize;
+    /**
+     * The test report value to accumulate. This must be one of the following values:  Test reports:   DURATION  Accumulate the test run times for the specified reports.  PASS_RATE  Accumulate the percentage of tests that passed for the specified test reports.  TOTAL  Accumulate the total number of tests for the specified test reports.      Code coverage reports:   BRANCH_COVERAGE  Accumulate the branch coverage percentages for the specified test reports.  BRANCHES_COVERED  Accumulate the branches covered values for the specified test reports.  BRANCHES_MISSED  Accumulate the branches missed values for the specified test reports.  LINE_COVERAGE  Accumulate the line coverage percentages for the specified test reports.  LINES_COVERED  Accumulate the lines covered values for the specified test reports.  LINES_MISSED  Accumulate the lines not covered values for the specified test reports.    
+     */
     trendField: ReportGroupTrendFieldType;
   }
   export interface GetReportGroupTrendOutput {
+    /**
+     * Contains the accumulated trend data.
+     */
     stats?: ReportGroupTrendStats;
+    /**
+     * An array that contains the raw data for each report.
+     */
     rawData?: ReportGroupTrendRawDataList;
   }
   export interface GetResourcePolicyInput {
@@ -1448,7 +1463,7 @@ declare namespace CodeBuild {
      */
     projectName: NonEmptyString;
     /**
-     * The order to list build IDs. Valid values include:    ASCENDING: List the build IDs in ascending order by build ID.    DESCENDING: List the build IDs in descending order by build ID.  
+     * The order to list results in. The results are sorted by build number, not the build identifier. Valid values include:    ASCENDING: List the build IDs in ascending order by build ID.    DESCENDING: List the build IDs in descending order by build ID.   If the project has more than 100 builds, setting the sort order will result in an error. 
      */
     sortOrder?: SortOrderType;
     /**
@@ -2010,7 +2025,7 @@ declare namespace CodeBuild {
      */
     auth?: SourceAuth;
     /**
-     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.    The status of a build triggered by a webhook is always reported to your source provider.  
+     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the AWS CodeBuild User Guide.   The status of a build triggered by a webhook is always reported to your source provider.  
      */
     reportBuildStatus?: WrapperBoolean;
     /**
@@ -2135,33 +2150,36 @@ declare namespace CodeBuild {
   }
   export interface ReportGroup {
     /**
-     *  The ARN of a ReportGroup. 
+     * The ARN of the ReportGroup. 
      */
     arn?: NonEmptyString;
     /**
-     *  The name of a ReportGroup. 
+     * The name of the ReportGroup. 
      */
     name?: ReportGroupName;
     /**
-     *  The type of the ReportGroup. The one valid value is TEST. 
+     * The type of the ReportGroup. This can be one of the following values:  CODE_COVERAGE  The report group contains code coverage reports.  TEST  The report group contains test reports.  
      */
     type?: ReportType;
     /**
-     *  Information about the destination where the raw data of this ReportGroup is exported. 
+     * Information about the destination where the raw data of this ReportGroup is exported. 
      */
     exportConfig?: ReportExportConfig;
     /**
-     *  The date and time this ReportGroup was created. 
+     * The date and time this ReportGroup was created. 
      */
     created?: Timestamp;
     /**
-     *  The date and time this ReportGroup was last modified. 
+     * The date and time this ReportGroup was last modified. 
      */
     lastModified?: Timestamp;
     /**
-     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     * A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
      */
     tags?: TagList;
+    /**
+     * The status of the report group. This property is read-only. This can be one of the following values:  ACTIVE  The report group is active.  DELETING  The report group is in the process of being deleted.  
+     */
     status?: ReportGroupStatusType;
   }
   export type ReportGroupArns = NonEmptyString[];
@@ -2171,8 +2189,17 @@ declare namespace CodeBuild {
   export type ReportGroupTrendFieldType = "PASS_RATE"|"DURATION"|"TOTAL"|"LINE_COVERAGE"|"LINES_COVERED"|"LINES_MISSED"|"BRANCH_COVERAGE"|"BRANCHES_COVERED"|"BRANCHES_MISSED"|string;
   export type ReportGroupTrendRawDataList = ReportWithRawData[];
   export interface ReportGroupTrendStats {
+    /**
+     * Contains the average of all values analyzed.
+     */
     average?: String;
+    /**
+     * Contains the maximum value analyzed.
+     */
     max?: String;
+    /**
+     * Contains the minimum value analyzed.
+     */
     min?: String;
   }
   export type ReportGroups = ReportGroup[];
@@ -2181,7 +2208,13 @@ declare namespace CodeBuild {
   export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
   export type ReportType = "TEST"|"CODE_COVERAGE"|string;
   export interface ReportWithRawData {
+    /**
+     * The ARN of the report.
+     */
     reportArn?: NonEmptyString;
+    /**
+     * The value of the requested data field from the report.
+     */
     data?: String;
   }
   export type Reports = Report[];
@@ -2485,7 +2518,7 @@ declare namespace CodeBuild {
      */
     insecureSslOverride?: WrapperBoolean;
     /**
-     *  Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.    The status of a build triggered by a webhook is always reported to your source provider.  
+     *  Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the AWS CodeBuild User Guide.   The status of a build triggered by a webhook is always reported to your source provider.  
      */
     reportBuildStatusOverride?: WrapperBoolean;
     /**

@@ -1221,11 +1221,11 @@ declare class EC2 extends Service {
    */
   deleteVpcEndpointServiceConfigurations(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
+   * Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.    Gateway endpoint,   Gateway Load Balancer endpoint,   Interface endpoint   The following rules apply when you delete a VPC endpoint:   When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.   When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces.  You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.   When you delete an interface endpoint, we delete the endpoint network interfaces.  
    */
   deleteVpcEndpoints(params: EC2.Types.DeleteVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
+   * Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.    Gateway endpoint,   Gateway Load Balancer endpoint,   Interface endpoint   The following rules apply when you delete a VPC endpoint:   When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.   When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces.  You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.   When you delete an interface endpoint, we delete the endpoint network interfaces.  
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
@@ -1316,6 +1316,14 @@ declare class EC2 extends Service {
    * Describes the specified Elastic IP addresses or all of your Elastic IP addresses. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAddresses(callback?: (err: AWSError, data: EC2.Types.DescribeAddressesResult) => void): Request<EC2.Types.DescribeAddressesResult, AWSError>;
+  /**
+   * Describes the attributes of the specified Elastic IP addresses. For requirements, see Using reverse DNS for email applications.
+   */
+  describeAddressesAttribute(params: EC2.Types.DescribeAddressesAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAddressesAttributeResult) => void): Request<EC2.Types.DescribeAddressesAttributeResult, AWSError>;
+  /**
+   * Describes the attributes of the specified Elastic IP addresses. For requirements, see Using reverse DNS for email applications.
+   */
+  describeAddressesAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeAddressesAttributeResult) => void): Request<EC2.Types.DescribeAddressesAttributeResult, AWSError>;
   /**
    * Describes the longer ID format settings for all resource types in a specific Region. This request is useful for performing a quick audit to determine whether a specific Region is fully opted in for longer IDs (17-character IDs). This request only returns information about resource types that support longer IDs. The following resource types support longer IDs: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.
    */
@@ -2205,11 +2213,11 @@ declare class EC2 extends Service {
    */
   describeVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.DescribeVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   * Describes available services to which you can create a VPC endpoint. When the service provider and the consumer have different accounts multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses us-east-1a and us-east-1c and the consumer uses us-east-1a and us-east-1a and us-east-1b, the response includes the VPC endpoint services in the common Availability Zone, us-east-1a.
+   * Describes available services to which you can create a VPC endpoint. When the service provider and the consumer have different accounts in multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses us-east-1a and us-east-1c and the consumer uses us-east-1a and us-east-1b, the response includes the VPC endpoint services in the common Availability Zone, us-east-1a.
    */
   describeVpcEndpointServices(params: EC2.Types.DescribeVpcEndpointServicesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicesResult) => void): Request<EC2.Types.DescribeVpcEndpointServicesResult, AWSError>;
   /**
-   * Describes available services to which you can create a VPC endpoint. When the service provider and the consumer have different accounts multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses us-east-1a and us-east-1c and the consumer uses us-east-1a and us-east-1a and us-east-1b, the response includes the VPC endpoint services in the common Availability Zone, us-east-1a.
+   * Describes available services to which you can create a VPC endpoint. When the service provider and the consumer have different accounts in multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses us-east-1a and us-east-1c and the consumer uses us-east-1a and us-east-1b, the response includes the VPC endpoint services in the common Availability Zone, us-east-1a.
    */
   describeVpcEndpointServices(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicesResult) => void): Request<EC2.Types.DescribeVpcEndpointServicesResult, AWSError>;
   /**
@@ -2716,6 +2724,14 @@ declare class EC2 extends Service {
    * Creates an import volume task using metadata from the specified disk image.For more information, see Importing Disks to Amazon EBS. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
+  /**
+   * Modifies an attribute of the specified Elastic IP address. For requirements, see Using reverse DNS for email applications.
+   */
+  modifyAddressAttribute(params: EC2.Types.ModifyAddressAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyAddressAttributeResult) => void): Request<EC2.Types.ModifyAddressAttributeResult, AWSError>;
+  /**
+   * Modifies an attribute of the specified Elastic IP address. For requirements, see Using reverse DNS for email applications.
+   */
+  modifyAddressAttribute(callback?: (err: AWSError, data: EC2.Types.ModifyAddressAttributeResult) => void): Request<EC2.Types.ModifyAddressAttributeResult, AWSError>;
   /**
    * Changes the opt-in status of the Local Zone and Wavelength Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
    */
@@ -3276,6 +3292,14 @@ declare class EC2 extends Service {
    * Creates a Spot Instance request. For more information, see Spot Instance requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
+  /**
+   * Resets the attribute of the specified IP address. For requirements, see Using reverse DNS for email applications.
+   */
+  resetAddressAttribute(params: EC2.Types.ResetAddressAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ResetAddressAttributeResult) => void): Request<EC2.Types.ResetAddressAttributeResult, AWSError>;
+  /**
+   * Resets the attribute of the specified IP address. For requirements, see Using reverse DNS for email applications.
+   */
+  resetAddressAttribute(callback?: (err: AWSError, data: EC2.Types.ResetAddressAttributeResult) => void): Request<EC2.Types.ResetAddressAttributeResult, AWSError>;
   /**
    * Resets the default customer master key (CMK) for EBS encryption for your account in this Region to the AWS managed CMK for EBS. After resetting the default CMK to the AWS managed CMK, you can continue to encrypt by a customer managed CMK by specifying it when you create the volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -3984,7 +4008,28 @@ declare namespace EC2 {
      */
     CarrierIp?: String;
   }
+  export interface AddressAttribute {
+    /**
+     * The public IP address.
+     */
+    PublicIp?: PublicIpAddress;
+    /**
+     * [EC2-VPC] The allocation ID.
+     */
+    AllocationId?: AllocationId;
+    /**
+     * The pointer (PTR) record for the IP address.
+     */
+    PtrRecord?: String;
+    /**
+     * The updated PTR record for the IP address.
+     */
+    PtrRecordUpdate?: PtrUpdateStatus;
+  }
+  export type AddressAttributeName = "domain-name"|string;
   export type AddressList = Address[];
+  export type AddressMaxResults = number;
+  export type AddressSet = AddressAttribute[];
   export interface AdvertiseByoipCidrRequest {
     /**
      * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.
@@ -4108,6 +4153,7 @@ declare namespace EC2 {
   }
   export type AllocationId = string;
   export type AllocationIdList = AllocationId[];
+  export type AllocationIds = AllocationId[];
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|"pending"|string;
   export type AllocationStrategy = "lowestPrice"|"diversified"|"capacityOptimized"|string;
   export interface AllowedPrincipal {
@@ -8085,7 +8131,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * (Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: true 
+     * (Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes.  Private DNS is not supported for Amazon S3 interface endpoints.  Default: true for supported endpoints
      */
     PrivateDnsEnabled?: Boolean;
     /**
@@ -9373,6 +9419,38 @@ declare namespace EC2 {
      * Information about the account attributes.
      */
     AccountAttributes?: AccountAttributeList;
+  }
+  export interface DescribeAddressesAttributeRequest {
+    /**
+     * [EC2-VPC] The allocation IDs.
+     */
+    AllocationIds?: AllocationIds;
+    /**
+     * The attribute of the IP address.
+     */
+    Attribute?: AddressAttributeName;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: AddressMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeAddressesAttributeResult {
+    /**
+     * Information about the IP addresses.
+     */
+    Addresses?: AddressSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeAddressesRequest {
     /**
@@ -18917,6 +18995,26 @@ declare namespace EC2 {
   }
   export type MemorySize = number;
   export type MillisecondDateTime = Date;
+  export interface ModifyAddressAttributeRequest {
+    /**
+     * [EC2-VPC] The allocation ID.
+     */
+    AllocationId: AllocationId;
+    /**
+     * The domain name to modify for the IP address.
+     */
+    DomainName?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyAddressAttributeResult {
+    /**
+     * Information about the Elastic IP address.
+     */
+    Address?: AddressAttribute;
+  }
   export interface ModifyAvailabilityZoneGroupRequest {
     /**
      * The name of the Availability Zone group, Local Zone group, or Wavelength Zone group.
@@ -20004,7 +20102,7 @@ declare namespace EC2 {
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
-     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.  Private DNS is not supported for Amazon S3 interface endpoints. 
      */
     PrivateDnsEnabled?: Boolean;
   }
@@ -21508,6 +21606,20 @@ declare namespace EC2 {
      */
     Status?: String;
   }
+  export interface PtrUpdateStatus {
+    /**
+     * The value for the PTR record update.
+     */
+    Value?: String;
+    /**
+     * The status of the PTR record update.
+     */
+    Status?: String;
+    /**
+     * The reason for the PTR record update.
+     */
+    Reason?: String;
+  }
   export type PublicIpAddress = string;
   export type PublicIpStringList = String[];
   export interface PublicIpv4Pool {
@@ -22824,6 +22936,26 @@ declare namespace EC2 {
   export type ReservedInstancesOfferingIdStringList = ReservedInstancesOfferingId[];
   export type ReservedInstancesOfferingList = ReservedInstancesOffering[];
   export type ReservedIntancesIds = ReservedInstancesId[];
+  export interface ResetAddressAttributeRequest {
+    /**
+     * [EC2-VPC] The allocation ID.
+     */
+    AllocationId: AllocationId;
+    /**
+     * The attribute of the IP address.
+     */
+    Attribute: AddressAttributeName;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ResetAddressAttributeResult {
+    /**
+     * Information about the IP address.
+     */
+    Address?: AddressAttribute;
+  }
   export interface ResetEbsDefaultKmsKeyIdRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.835.0-->
+<!--LATEST=2.836.0-->
 <!--ENTRYINSERT-->
+
+## 2.836.0
+* feature: AuditManager: This release adds AccessDeniedException to GetServicesInScope API.
+* feature: DataBrew: This release adds the DescribeJobRun API to allow customers retrieve details of a given job run
+* feature: EC2: EC2 Public IP now supports API for setting PTR records on Elastic IP address.
+* feature: IoTSiteWise: Update AccessPolicy API input to support IAM role for IAM mode. Iam role is added as part of accessPolicyIdentity.
+* feature: Lambda: Support for creating Lambda Functions using 'nodejs14.x'
+* feature: SecurityHub: Added a ProductArn parameter to DescribeProducts. ProductArn is used to identify the integration to return details for.
+* feature: WorkMail: Increased maximum length of ipRanges values for Access Control Rules from 10 to 1024.
 
 ## 2.835.0
 * feature: AppMesh: App Mesh now supports mutual TLS with two-way peer authentication. You can specify client certificates, server-side TLS validation, and matching of Subject Alternative Names.

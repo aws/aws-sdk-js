@@ -140,11 +140,11 @@ declare class SecurityHub extends Service {
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: SecurityHub.Types.DescribeOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.
+   * Returns information about product integrations in Security Hub. You can optionally provide an integration ARN. If you provide an integration ARN, then the results only include that integration. If you do not provide an integration ARN, then the results include all of the available product integrations. 
    */
   describeProducts(params: SecurityHub.Types.DescribeProductsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
-   * Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.
+   * Returns information about product integrations in Security Hub. You can optionally provide an integration ARN. If you provide an integration ARN, then the results only include that integration. If you do not provide an integration ARN, then the results include all of the available product integrations. 
    */
   describeProducts(callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
@@ -4412,7 +4412,7 @@ declare namespace SecurityHub {
      */
     PatchSummary?: PatchSummary;
     /**
-     * Provides details about an action that was detected for the finding.
+     * Provides details about an action that affects or that was taken on a resource.
      */
     Action?: Action;
   }
@@ -5338,6 +5338,10 @@ declare namespace SecurityHub {
      * The maximum number of results to return.
      */
     MaxResults?: MaxResults;
+    /**
+     * The ARN of the integration to return.
+     */
+    ProductArn?: NonEmptyString;
   }
   export interface DescribeProductsResponse {
     /**

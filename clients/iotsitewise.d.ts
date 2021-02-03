@@ -93,6 +93,14 @@ declare class IoTSiteWise extends Service {
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
+   * 
+   */
+  createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
+  /**
+   * 
+   */
+  createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
+  /**
    * Creates a project in the specified portal.
    */
   createProject(params: IoTSiteWise.Types.CreateProjectRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateProjectResponse) => void): Request<IoTSiteWise.Types.CreateProjectResponse, AWSError>;
@@ -1311,6 +1319,14 @@ declare namespace IoTSiteWise {
      */
     ssoApplicationId: SSOApplicationId;
   }
+  export interface CreatePresignedPortalUrlRequest {
+    portalId: ID;
+    sessionDurationSeconds?: SessionDurationSeconds;
+    state?: state;
+  }
+  export interface CreatePresignedPortalUrlResponse {
+    presignedPortalUrl: Url;
+  }
   export interface CreateProjectRequest {
     /**
      * The ID of the portal in which to create the project.
@@ -2068,6 +2084,12 @@ declare namespace IoTSiteWise {
      */
     id: IdentityId;
   }
+  export interface IAMRoleIdentity {
+    /**
+     * The ARN of the IAM role. For more information, see IAM ARNs in the IAM User Guide.
+     */
+    arn: ARN;
+  }
   export interface IAMUserIdentity {
     /**
      * The ARN of the IAM user. For more information, see IAM ARNs in the IAM User Guide.  If you delete the IAM user, access policies that contain this identity include an empty arn. You can delete the access policy for the IAM user that no longer exists. 
@@ -2089,6 +2111,10 @@ declare namespace IoTSiteWise {
      * An IAM user identity.
      */
     iamUser?: IAMUserIdentity;
+    /**
+     * An IAM role identity.
+     */
+    iamRole?: IAMRoleIdentity;
   }
   export type IdentityId = string;
   export type IdentityType = "USER"|"GROUP"|"IAM"|string;
@@ -2659,6 +2685,7 @@ declare namespace IoTSiteWise {
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
   export type SSOApplicationId = string;
+  export type SessionDurationSeconds = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2968,6 +2995,7 @@ declare namespace IoTSiteWise {
      */
     booleanValue?: PropertyValueBooleanValue;
   }
+  export type state = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

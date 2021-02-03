@@ -124,6 +124,14 @@ declare class DataBrew extends Service {
    */
   describeJob(callback?: (err: AWSError, data: DataBrew.Types.DescribeJobResponse) => void): Request<DataBrew.Types.DescribeJobResponse, AWSError>;
   /**
+   * Represents one run of a DataBrew job.
+   */
+  describeJobRun(params: DataBrew.Types.DescribeJobRunRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeJobRunResponse) => void): Request<DataBrew.Types.DescribeJobRunResponse, AWSError>;
+  /**
+   * Represents one run of a DataBrew job.
+   */
+  describeJobRun(callback?: (err: AWSError, data: DataBrew.Types.DescribeJobRunResponse) => void): Request<DataBrew.Types.DescribeJobRunResponse, AWSError>;
+  /**
    * Returns the definition of a specific DataBrew project.
    */
   describeProject(params: DataBrew.Types.DescribeProjectRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeProjectResponse) => void): Request<DataBrew.Types.DescribeProjectResponse, AWSError>;
@@ -840,6 +848,71 @@ declare namespace DataBrew {
      * The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of TIMEOUT.
      */
     Timeout?: Timeout;
+  }
+  export interface DescribeJobRunRequest {
+    /**
+     * The name of the job being processed during this run.
+     */
+    Name: JobName;
+    /**
+     * The unique identifier of the job run.
+     */
+    RunId: JobRunId;
+  }
+  export interface DescribeJobRunResponse {
+    /**
+     * The number of times that DataBrew has attempted to run the job.
+     */
+    Attempt?: Attempt;
+    /**
+     * The date and time when the job completed processing.
+     */
+    CompletedOn?: _Date;
+    /**
+     * The name of the dataset for the job to process.
+     */
+    DatasetName?: DatasetName;
+    /**
+     * A message indicating an error (if any) that was encountered when the job ran.
+     */
+    ErrorMessage?: JobRunErrorMessage;
+    /**
+     * The amount of time, in seconds, during which a job run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+    /**
+     * The name of the job being processed during this run.
+     */
+    JobName: JobName;
+    /**
+     * The unique identifier of the job run.
+     */
+    RunId?: JobRunId;
+    /**
+     * The current state of the job run entity itself.
+     */
+    State?: JobRunState;
+    /**
+     * The current status of Amazon CloudWatch logging for the job run.
+     */
+    LogSubscription?: LogSubscription;
+    /**
+     * The name of an Amazon CloudWatch log group, where the job writes diagnostic messages when it runs.
+     */
+    LogGroupName?: LogGroupName;
+    /**
+     * One or more output artifacts from a job run.
+     */
+    Outputs?: OutputList;
+    RecipeReference?: RecipeReference;
+    /**
+     * The Amazon Resource Name (ARN) of the user who initiated the job run.
+     */
+    StartedBy?: StartedBy;
+    /**
+     * The date and time when the job run began.
+     */
+    StartedOn?: _Date;
   }
   export interface DescribeProjectRequest {
     /**

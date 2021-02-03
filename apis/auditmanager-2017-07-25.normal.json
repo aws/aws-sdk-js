@@ -854,6 +854,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
