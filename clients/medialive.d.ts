@@ -2678,6 +2678,8 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     Destination: OutputLocationRef;
   }
+  export interface FrameCaptureHlsSettings {
+  }
   export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string;
   export interface FrameCaptureOutputSettings {
     /**
@@ -2689,7 +2691,7 @@ If you disable the feature on an existing schedule, make sure that you first del
     /**
      * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
      */
-    CaptureInterval: __integerMin1Max3600000;
+    CaptureInterval?: __integerMin1Max3600000;
     /**
      * Unit for the frame capture interval.
      */
@@ -3469,6 +3471,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
     Fmp4HlsSettings?: Fmp4HlsSettings;
+    FrameCaptureHlsSettings?: FrameCaptureHlsSettings;
     StandardHlsSettings?: StandardHlsSettings;
   }
   export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;

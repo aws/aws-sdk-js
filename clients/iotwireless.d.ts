@@ -871,7 +871,7 @@ declare namespace IoTWireless {
   export type DrMin = number;
   export type EndPoint = string;
   export type Expression = string;
-  export type ExpressionType = "RuleName"|string;
+  export type ExpressionType = "RuleName"|"MqttTopic"|string;
   export type FNwkSIntKey = string;
   export type FPort = number;
   export type FactoryPresetFreqsList = PresetFreq[];
@@ -1076,6 +1076,10 @@ declare namespace IoTWireless {
      * The ID of the certificate associated with the wireless gateway.
      */
     IotCertificateId?: IotCertificateId;
+    /**
+     * The ID of the certificate associated with the wireless gateway and used for LoRaWANNetworkServer endpoint.
+     */
+    LoRaWANNetworkServerCertificateId?: IotCertificateId;
   }
   export interface GetWirelessGatewayFirmwareInformationRequest {
     /**
@@ -1747,7 +1751,7 @@ declare namespace IoTWireless {
      */
     Id: WirelessDeviceId;
     /**
-     * The transmit mode to use to send data to the wireless device. Can be: 0 for UM (unacknowledge mode), 1 for AM (acknowledge mode), or 2 for (TM) transparent mode.
+     * The transmit mode to use to send data to the wireless device. Can be: 0 for UM (unacknowledge mode) or 1 for AM (acknowledge mode).
      */
     TransmitMode: TransmitMode;
     /**
@@ -1828,7 +1832,7 @@ declare namespace IoTWireless {
      */
     AmazonId?: AmazonId;
     /**
-     * Fingerprint for Sidewalk application server private key.
+     * The fingerprint of the Sidewalk application server private key.
      */
     Fingerprint?: Fingerprint;
   }

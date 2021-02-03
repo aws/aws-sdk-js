@@ -13,131 +13,155 @@ declare class LookoutVision extends Service {
   constructor(options?: LookoutVision.Types.ClientConfiguration)
   config: Config & LookoutVision.Types.ClientConfiguration;
   /**
-   * Creates a new dataset in an Amazon Lookout for Vision project. CreateDataset can create a training or a test dataset from a valid dataset source (DatasetSource). If you want a single dataset project, specify train for the value of DatasetType. To have a project with separate training and test datasets, call CreateDataset twice. On the first call, specify train for the value of DatasetType. On the second call, specify test for the value of DatasetType. of dataset with 
+   * Creates a new dataset in an Amazon Lookout for Vision project. CreateDataset can create a training or a test dataset from a valid dataset source (DatasetSource). If you want a single dataset project, specify train for the value of DatasetType. To have a project with separate training and test datasets, call CreateDataset twice. On the first call, specify train for the value of DatasetType. On the second call, specify test for the value of DatasetType.  This operation requires permissions to perform the lookoutvision:CreateDataset operation.
    */
   createDataset(params: LookoutVision.Types.CreateDatasetRequest, callback?: (err: AWSError, data: LookoutVision.Types.CreateDatasetResponse) => void): Request<LookoutVision.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a new dataset in an Amazon Lookout for Vision project. CreateDataset can create a training or a test dataset from a valid dataset source (DatasetSource). If you want a single dataset project, specify train for the value of DatasetType. To have a project with separate training and test datasets, call CreateDataset twice. On the first call, specify train for the value of DatasetType. On the second call, specify test for the value of DatasetType. of dataset with 
+   * Creates a new dataset in an Amazon Lookout for Vision project. CreateDataset can create a training or a test dataset from a valid dataset source (DatasetSource). If you want a single dataset project, specify train for the value of DatasetType. To have a project with separate training and test datasets, call CreateDataset twice. On the first call, specify train for the value of DatasetType. On the second call, specify test for the value of DatasetType.  This operation requires permissions to perform the lookoutvision:CreateDataset operation.
    */
   createDataset(callback?: (err: AWSError, data: LookoutVision.Types.CreateDatasetResponse) => void): Request<LookoutVision.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a new version of a model within an an Amazon Lookout for Vision project. CreateModel is an asynchronous operation in which Amazon Lookout for Vision trains, tests, and evaluates a new version of a model.  To get the current status, check the Status field returned in the response from DescribeModel. If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset to create a training and a test dataset. If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test the model.  After training completes, the evaluation metrics are stored at the location specified in OutputConfig. 
+   * Creates a new version of a model within an an Amazon Lookout for Vision project. CreateModel is an asynchronous operation in which Amazon Lookout for Vision trains, tests, and evaluates a new version of a model.  To get the current status, check the Status field returned in the response from DescribeModel. If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset to create a training and a test dataset. If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test the model.  After training completes, the evaluation metrics are stored at the location specified in OutputConfig.  This operation requires permissions to perform the lookoutvision:CreateModel operation. If you want to tag your model, you also require permission to the lookoutvision:TagResource operation.
    */
   createModel(params: LookoutVision.Types.CreateModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.CreateModelResponse) => void): Request<LookoutVision.Types.CreateModelResponse, AWSError>;
   /**
-   * Creates a new version of a model within an an Amazon Lookout for Vision project. CreateModel is an asynchronous operation in which Amazon Lookout for Vision trains, tests, and evaluates a new version of a model.  To get the current status, check the Status field returned in the response from DescribeModel. If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset to create a training and a test dataset. If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test the model.  After training completes, the evaluation metrics are stored at the location specified in OutputConfig. 
+   * Creates a new version of a model within an an Amazon Lookout for Vision project. CreateModel is an asynchronous operation in which Amazon Lookout for Vision trains, tests, and evaluates a new version of a model.  To get the current status, check the Status field returned in the response from DescribeModel. If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset to create a training and a test dataset. If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test the model.  After training completes, the evaluation metrics are stored at the location specified in OutputConfig.  This operation requires permissions to perform the lookoutvision:CreateModel operation. If you want to tag your model, you also require permission to the lookoutvision:TagResource operation.
    */
   createModel(callback?: (err: AWSError, data: LookoutVision.Types.CreateModelResponse) => void): Request<LookoutVision.Types.CreateModelResponse, AWSError>;
   /**
-   * Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling CreateDataset.
+   * Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling CreateDataset. This operation requires permissions to perform the lookoutvision:CreateProject operation.
    */
   createProject(params: LookoutVision.Types.CreateProjectRequest, callback?: (err: AWSError, data: LookoutVision.Types.CreateProjectResponse) => void): Request<LookoutVision.Types.CreateProjectResponse, AWSError>;
   /**
-   * Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling CreateDataset.
+   * Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling CreateDataset. This operation requires permissions to perform the lookoutvision:CreateProject operation.
    */
   createProject(callback?: (err: AWSError, data: LookoutVision.Types.CreateProjectResponse) => void): Request<LookoutVision.Types.CreateProjectResponse, AWSError>;
   /**
-   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset. 
+   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset.  This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
    */
   deleteDataset(params: LookoutVision.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteDatasetResponse) => void): Request<LookoutVision.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset. 
+   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset.  This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
    */
   deleteDataset(callback?: (err: AWSError, data: LookoutVision.Types.DeleteDatasetResponse) => void): Request<LookoutVision.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(params: LookoutVision.Types.DeleteModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision project. To delete a project, you must first delete each version of the model associated with the project. To delete a model use the DeleteModel operation. The training and test datasets are deleted automatically for you. The images referenced by the training and test datasets aren't deleted. 
+   * Deletes an Amazon Lookout for Vision project. To delete a project, you must first delete each version of the model associated with the project. To delete a model use the DeleteModel operation. You also have to delete the dataset(s) associated with the model. For more information, see DeleteDataset. The images referenced by the training and test datasets aren't deleted.  This operation requires permissions to perform the lookoutvision:DeleteProject operation.
    */
   deleteProject(params: LookoutVision.Types.DeleteProjectRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteProjectResponse) => void): Request<LookoutVision.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision project. To delete a project, you must first delete each version of the model associated with the project. To delete a model use the DeleteModel operation. The training and test datasets are deleted automatically for you. The images referenced by the training and test datasets aren't deleted. 
+   * Deletes an Amazon Lookout for Vision project. To delete a project, you must first delete each version of the model associated with the project. To delete a model use the DeleteModel operation. You also have to delete the dataset(s) associated with the model. For more information, see DeleteDataset. The images referenced by the training and test datasets aren't deleted.  This operation requires permissions to perform the lookoutvision:DeleteProject operation.
    */
   deleteProject(callback?: (err: AWSError, data: LookoutVision.Types.DeleteProjectResponse) => void): Request<LookoutVision.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Describe an Amazon Lookout for Vision dataset.
+   * Describe an Amazon Lookout for Vision dataset. This operation requires permissions to perform the lookoutvision:DescribeDataset operation.
    */
   describeDataset(params: LookoutVision.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: LookoutVision.Types.DescribeDatasetResponse) => void): Request<LookoutVision.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Describe an Amazon Lookout for Vision dataset.
+   * Describe an Amazon Lookout for Vision dataset. This operation requires permissions to perform the lookoutvision:DescribeDataset operation.
    */
   describeDataset(callback?: (err: AWSError, data: LookoutVision.Types.DescribeDatasetResponse) => void): Request<LookoutVision.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Describes a version of an Amazon Lookout for Vision model.
+   * Describes a version of an Amazon Lookout for Vision model. This operation requires permissions to perform the lookoutvision:DescribeModel operation.
    */
   describeModel(params: LookoutVision.Types.DescribeModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.DescribeModelResponse) => void): Request<LookoutVision.Types.DescribeModelResponse, AWSError>;
   /**
-   * Describes a version of an Amazon Lookout for Vision model.
+   * Describes a version of an Amazon Lookout for Vision model. This operation requires permissions to perform the lookoutvision:DescribeModel operation.
    */
   describeModel(callback?: (err: AWSError, data: LookoutVision.Types.DescribeModelResponse) => void): Request<LookoutVision.Types.DescribeModelResponse, AWSError>;
   /**
-   * Describes an Amazon Lookout for Vision project.
+   * Describes an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:DescribeProject operation.
    */
   describeProject(params: LookoutVision.Types.DescribeProjectRequest, callback?: (err: AWSError, data: LookoutVision.Types.DescribeProjectResponse) => void): Request<LookoutVision.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Describes an Amazon Lookout for Vision project.
+   * Describes an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:DescribeProject operation.
    */
   describeProject(callback?: (err: AWSError, data: LookoutVision.Types.DescribeProjectResponse) => void): Request<LookoutVision.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.  
+   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
    */
   detectAnomalies(params: LookoutVision.Types.DetectAnomaliesRequest, callback?: (err: AWSError, data: LookoutVision.Types.DetectAnomaliesResponse) => void): Request<LookoutVision.Types.DetectAnomaliesResponse, AWSError>;
   /**
-   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.  
+   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
    */
   detectAnomalies(callback?: (err: AWSError, data: LookoutVision.Types.DetectAnomaliesResponse) => void): Request<LookoutVision.Types.DetectAnomaliesResponse, AWSError>;
   /**
-   * Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly information for a single image, including the image location and the assigned label.
+   * Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly information for a single image, including the image location and the assigned label. This operation requires permissions to perform the lookoutvision:ListDatasetEntries operation.
    */
   listDatasetEntries(params: LookoutVision.Types.ListDatasetEntriesRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListDatasetEntriesResponse) => void): Request<LookoutVision.Types.ListDatasetEntriesResponse, AWSError>;
   /**
-   * Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly information for a single image, including the image location and the assigned label.
+   * Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly information for a single image, including the image location and the assigned label. This operation requires permissions to perform the lookoutvision:ListDatasetEntries operation.
    */
   listDatasetEntries(callback?: (err: AWSError, data: LookoutVision.Types.ListDatasetEntriesResponse) => void): Request<LookoutVision.Types.ListDatasetEntriesResponse, AWSError>;
   /**
-   * Lists the versions of a model in an Amazon Lookout for Vision project.
+   * Lists the versions of a model in an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:ListModels operation.
    */
   listModels(params: LookoutVision.Types.ListModelsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the versions of a model in an Amazon Lookout for Vision project.
+   * Lists the versions of a model in an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:ListModels operation.
    */
   listModels(callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account.
+   * Lists the Amazon Lookout for Vision projects in your AWS account. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(params: LookoutVision.Types.ListProjectsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account.
+   * Lists the Amazon Lookout for Vision projects in your AWS account. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
-   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel. 
+   * Returns a list of tags attached to the specified Amazon Lookout for Vision model. This operation requires permissions to perform the lookoutvision:ListTagsForResource operation.
+   */
+  listTagsForResource(params: LookoutVision.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListTagsForResourceResponse) => void): Request<LookoutVision.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags attached to the specified Amazon Lookout for Vision model. This operation requires permissions to perform the lookoutvision:ListTagsForResource operation.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: LookoutVision.Types.ListTagsForResourceResponse) => void): Request<LookoutVision.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
    */
   startModel(params: LookoutVision.Types.StartModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.StartModelResponse) => void): Request<LookoutVision.Types.StartModelResponse, AWSError>;
   /**
-   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel. 
+   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
    */
   startModel(callback?: (err: AWSError, data: LookoutVision.Types.StartModelResponse) => void): Request<LookoutVision.Types.StartModelResponse, AWSError>;
   /**
-   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel. 
+   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  This operation requires permissions to perform the lookoutvision:StopModel operation.
    */
   stopModel(params: LookoutVision.Types.StopModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.StopModelResponse) => void): Request<LookoutVision.Types.StopModelResponse, AWSError>;
   /**
-   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel. 
+   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  This operation requires permissions to perform the lookoutvision:StopModel operation.
    */
   stopModel(callback?: (err: AWSError, data: LookoutVision.Types.StopModelResponse) => void): Request<LookoutVision.Types.StopModelResponse, AWSError>;
   /**
-   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response.
+   * Adds one or more key-value tags to an Amazon Lookout for Vision model. For more information, see Tagging a model in the Amazon Lookout for Vision Developer Guide.  This operation requires permissions to perform the lookoutvision:TagResource operation.
+   */
+  tagResource(params: LookoutVision.Types.TagResourceRequest, callback?: (err: AWSError, data: LookoutVision.Types.TagResourceResponse) => void): Request<LookoutVision.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more key-value tags to an Amazon Lookout for Vision model. For more information, see Tagging a model in the Amazon Lookout for Vision Developer Guide.  This operation requires permissions to perform the lookoutvision:TagResource operation.
+   */
+  tagResource(callback?: (err: AWSError, data: LookoutVision.Types.TagResourceResponse) => void): Request<LookoutVision.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from an Amazon Lookout for Vision model. For more information, see Tagging a model in the Amazon Lookout for Vision Developer Guide.  This operation requires permissions to perform the lookoutvision:UntagResource operation.
+   */
+  untagResource(params: LookoutVision.Types.UntagResourceRequest, callback?: (err: AWSError, data: LookoutVision.Types.UntagResourceResponse) => void): Request<LookoutVision.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from an Amazon Lookout for Vision model. For more information, see Tagging a model in the Amazon Lookout for Vision Developer Guide.  This operation requires permissions to perform the lookoutvision:UntagResource operation.
+   */
+  untagResource(callback?: (err: AWSError, data: LookoutVision.Types.UntagResourceResponse) => void): Request<LookoutVision.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
    */
   updateDatasetEntries(params: LookoutVision.Types.UpdateDatasetEntriesRequest, callback?: (err: AWSError, data: LookoutVision.Types.UpdateDatasetEntriesResponse) => void): Request<LookoutVision.Types.UpdateDatasetEntriesResponse, AWSError>;
   /**
-   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response.
+   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
    */
   updateDatasetEntries(callback?: (err: AWSError, data: LookoutVision.Types.UpdateDatasetEntriesResponse) => void): Request<LookoutVision.Types.UpdateDatasetEntriesResponse, AWSError>;
 }
@@ -178,7 +202,7 @@ declare namespace LookoutVision {
     /**
      * A description for the version of the model.
      */
-    Description?: ModelDescription;
+    Description?: ModelDescriptionMessage;
     /**
      * ClientToken is an idempotency token that ensures a call to CreateModel completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from CreateModel. In this case, safely retry your call to CreateModel by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateModel. An idempotency token is active for 8 hours.
      */
@@ -191,6 +215,10 @@ declare namespace LookoutVision {
      * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encypting the model. If this parameter is not specified, the model is encrypted by a key that AWS owns and manages.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * A set of tags (key-value pairs) that you want to attach to the model.
+     */
+    Tags?: TagList;
   }
   export interface CreateModelResponse {
     /**
@@ -200,7 +228,7 @@ declare namespace LookoutVision {
   }
   export interface CreateProjectRequest {
     /**
-     * S nsme for the project.
+     * The name for the project.
      */
     ProjectName: ProjectName;
     /**
@@ -552,6 +580,18 @@ declare namespace LookoutVision {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model for which you want to list tags. 
+     */
+    ResourceArn: TagArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A map of tag keys and values attached to the specified model.
+     */
+    Tags?: TagList;
+  }
   export type ModelArn = string;
   export interface ModelDescription {
     /**
@@ -631,7 +671,7 @@ declare namespace LookoutVision {
      */
     StatusMessage?: ModelStatusMessage;
     /**
-     * Performance metrics for the model. Created during training.
+     * Performance metrics for the model. Not available until training has successfully completed.
      */
     Performance?: ModelPerformance;
   }
@@ -766,6 +806,45 @@ declare namespace LookoutVision {
     Status?: ModelHostingStatus;
   }
   export type Stream = Buffer|Uint8Array|Blob|string|Readable;
+  export interface Tag {
+    /**
+     * The key of the tag that is attached to the specified model.
+     */
+    Key: TagKey;
+    /**
+     * The value of the tag that is attached to the specified model.
+     */
+    Value: TagValue;
+  }
+  export type TagArn = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model to assign the tags.
+     */
+    ResourceArn: TagArn;
+    /**
+     * The key-value tags to assign to the model.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model from which you want to remove tags. 
+     */
+    ResourceArn: TagArn;
+    /**
+     * A list of the keys of the tags that you want to remove.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDatasetEntriesRequest {
     /**
      * The name of the project that contains the dataset that you want to update.
