@@ -4509,6 +4509,10 @@
           "shape": "ColumnGroupList",
           "documentation": "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
         },
+        "FieldFolders": {
+          "shape": "FieldFolderMap",
+          "documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
+        },
         "Permissions": {
           "shape": "ResourcePermissionList",
           "documentation": "<p>A list of resource permissions on the dataset.</p>"
@@ -4582,7 +4586,7 @@
         },
         "Type": {
           "shape": "DataSourceType",
-          "documentation": "<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p>"
+          "documentation": "<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>"
         },
         "DataSourceParameters": {
           "shape": "DataSourceParameters",
@@ -5592,6 +5596,10 @@
         "ColumnGroups": {
           "shape": "ColumnGroupList",
           "documentation": "<p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+        },
+        "FieldFolders": {
+          "shape": "FieldFolderMap",
+          "documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
@@ -7724,6 +7732,38 @@
       "max": 4096,
       "min": 1
     },
+    "FieldFolder": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "shape": "FieldFolderDescription",
+          "documentation": "<p>The description for a field folder.</p>"
+        },
+        "columns": {
+          "shape": "FolderColumnList",
+          "documentation": "<p>A folder has a list of columns. A column can only be in one folder.</p>"
+        }
+      },
+      "documentation": "<p>A FieldFolder element is a folder that contains fields and nested subfolders.</p>"
+    },
+    "FieldFolderDescription": {
+      "type": "string",
+      "max": 500
+    },
+    "FieldFolderMap": {
+      "type": "map",
+      "key": {
+        "shape": "FieldFolderPath"
+      },
+      "value": {
+        "shape": "FieldFolder"
+      }
+    },
+    "FieldFolderPath": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
+    },
     "FileFormat": {
       "type": "string",
       "enum": [
@@ -7753,6 +7793,13 @@
       "enum": [
         "StringEquals"
       ]
+    },
+    "FolderColumnList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      },
+      "max": 5000
     },
     "GeoSpatialColumnGroup": {
       "type": "structure",
@@ -11864,6 +11911,10 @@
         "ColumnGroups": {
           "shape": "ColumnGroupList",
           "documentation": "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+        },
+        "FieldFolders": {
+          "shape": "FieldFolderMap",
+          "documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",

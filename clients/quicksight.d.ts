@@ -1364,6 +1364,10 @@ declare namespace QuickSight {
      */
     ColumnGroups?: ColumnGroupList;
     /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
+    /**
      * A list of resource permissions on the dataset.
      */
     Permissions?: ResourcePermissionList;
@@ -1420,7 +1424,7 @@ declare namespace QuickSight {
      */
     Name: ResourceName;
     /**
-     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.
+     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.  AMAZON_ELASTICSEARCH is for Amazon managed Elasticsearch Service.
      */
     Type: DataSourceType;
     /**
@@ -2137,6 +2141,10 @@ declare namespace QuickSight {
      * Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.
      */
     ColumnGroups?: ColumnGroupList;
+    /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
     /**
      * The row-level security configuration for the dataset.
      */
@@ -3464,6 +3472,19 @@ declare namespace QuickSight {
     AvailabilityStatus?: DashboardBehavior;
   }
   export type Expression = string;
+  export interface FieldFolder {
+    /**
+     * The description for a field folder.
+     */
+    description?: FieldFolderDescription;
+    /**
+     * A folder has a list of columns. A column can only be in one folder.
+     */
+    columns?: FolderColumnList;
+  }
+  export type FieldFolderDescription = string;
+  export type FieldFolderMap = {[key: string]: FieldFolder};
+  export type FieldFolderPath = string;
   export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
   export interface FilterOperation {
     /**
@@ -3472,6 +3493,7 @@ declare namespace QuickSight {
     ConditionExpression: Expression;
   }
   export type FilterOperator = "StringEquals"|string;
+  export type FolderColumnList = String[];
   export interface GeoSpatialColumnGroup {
     /**
      * A display name for the hierarchy.
@@ -5947,6 +5969,10 @@ declare namespace QuickSight {
      * Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.
      */
     ColumnGroups?: ColumnGroupList;
+    /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
     /**
      * The row-level security configuration for the data you want to create.
      */

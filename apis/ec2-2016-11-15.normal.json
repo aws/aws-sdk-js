@@ -580,7 +580,7 @@
       "output": {
         "shape": "CopyImageResult"
       },
-      "documentation": "<p>Initiates the copy of an AMI from the specified source Region to the current Region. You specify the destination Region by using its endpoint when making the request.</p> <p>Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p/> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CopySnapshot": {
       "name": "CopySnapshot",
@@ -594,7 +594,7 @@
       "output": {
         "shape": "CopySnapshotResult"
       },
-      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy a snapshot within the same Region, from one Region to another, or from a Region to an Outpost. You can't copy a snapshot from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p> <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCapacityReservation": {
       "name": "CreateCapacityReservation",
@@ -1053,7 +1053,7 @@
       "output": {
         "shape": "Snapshot"
       },
-      "documentation": "<p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance.</p> <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>You can tag your snapshots during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance.</p> <p>You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost.</p> <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>You can tag your snapshots during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateSnapshots": {
       "name": "CreateSnapshots",
@@ -1067,7 +1067,7 @@
       "output": {
         "shape": "CreateSnapshotsResult"
       },
-      "documentation": "<p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. </p>"
+      "documentation": "<p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. </p> <p>You can create multi-volume snapshots of instances in a Region and instances on an Outpost. If you create snapshots from an instance in a Region, the snapshots must be stored in the same Region as the instance. If you create snapshots from an instance on an Outpost, the snapshots can be stored on the same Outpost as the instance, or in the Region for that Outpost.</p>"
     },
     "CreateSpotDatafeedSubscription": {
       "name": "CreateSpotDatafeedSubscription",
@@ -2060,7 +2060,7 @@
       "output": {
         "shape": "DeleteVpcEndpointsResult"
       },
-      "documentation": "<p>Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints. </p> <ul> <li> <p>Gateway endpoint,</p> </li> <li> <p>Gateway Load Balancer endpoint,</p> </li> <li> <p>Interface endpoint</p> </li> </ul> <p>The following rules apply when you delete a VPC endpoint:</p> <ul> <li> <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.</p> </li> <li> <p>When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces. </p> <p>You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p> </li> <li> <p>When you delete an interface endpoint, we delete the endpoint network interfaces.</p> </li> </ul>"
+      "documentation": "<p>Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.</p>"
     },
     "DeleteVpcPeeringConnection": {
       "name": "DeleteVpcPeeringConnection",
@@ -2203,20 +2203,6 @@
         "shape": "DescribeAddressesResult"
       },
       "documentation": "<p>Describes the specified Elastic IP addresses or all of your Elastic IP addresses.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
-    },
-    "DescribeAddressesAttribute": {
-      "name": "DescribeAddressesAttribute",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "DescribeAddressesAttributeRequest"
-      },
-      "output": {
-        "shape": "DescribeAddressesAttributeResult"
-      },
-      "documentation": "<p>Describes the attributes of the specified Elastic IP addresses. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>"
     },
     "DescribeAggregateIdFormat": {
       "name": "DescribeAggregateIdFormat",
@@ -3784,7 +3770,7 @@
       "output": {
         "shape": "DescribeVpcEndpointServicesResult"
       },
-      "documentation": "<p>Describes available services to which you can create a VPC endpoint.</p> <p>When the service provider and the consumer have different accounts in multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the consumer uses <code>us-east-1a</code> and <code>us-east-1b</code>, the response includes the VPC endpoint services in the common Availability Zone, <code>us-east-1a</code>.</p>"
+      "documentation": "<p>Describes available services to which you can create a VPC endpoint.</p> <p>When the service provider and the consumer have different accounts multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the consumer uses <code>us-east-1a</code> and us-east-1a and us-east-1b, the response includes the VPC endpoint services in the common Availability Zone, <code>us-east-1a</code>.</p>"
     },
     "DescribeVpcEndpoints": {
       "name": "DescribeVpcEndpoints",
@@ -4643,20 +4629,6 @@
         "shape": "ImportVolumeResult"
       },
       "documentation": "<p>Creates an import volume task using metadata from the specified disk image.For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html\">Importing Disks to Amazon EBS</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
-    },
-    "ModifyAddressAttribute": {
-      "name": "ModifyAddressAttribute",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "ModifyAddressAttributeRequest"
-      },
-      "output": {
-        "shape": "ModifyAddressAttributeResult"
-      },
-      "documentation": "<p>Modifies an attribute of the specified Elastic IP address. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>"
     },
     "ModifyAvailabilityZoneGroup": {
       "name": "ModifyAvailabilityZoneGroup",
@@ -5596,20 +5568,6 @@
       },
       "documentation": "<p>Creates a Spot Instance request.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
     },
-    "ResetAddressAttribute": {
-      "name": "ResetAddressAttribute",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "ResetAddressAttributeRequest"
-      },
-      "output": {
-        "shape": "ResetAddressAttributeResult"
-      },
-      "documentation": "<p>Resets the attribute of the specified IP address. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>"
-    },
     "ResetEbsDefaultKmsKeyId": {
       "name": "ResetEbsDefaultKmsKeyId",
       "http": {
@@ -6371,54 +6329,10 @@
       },
       "documentation": "<p>Describes an Elastic IP address, or a carrier IP address.</p>"
     },
-    "AddressAttribute": {
-      "type": "structure",
-      "members": {
-        "PublicIp": {
-          "shape": "PublicIpAddress",
-          "documentation": "<p>The public IP address.</p>",
-          "locationName": "publicIp"
-        },
-        "AllocationId": {
-          "shape": "AllocationId",
-          "documentation": "<p>[EC2-VPC] The allocation ID.</p>",
-          "locationName": "allocationId"
-        },
-        "PtrRecord": {
-          "shape": "String",
-          "documentation": "<p>The pointer (PTR) record for the IP address.</p>",
-          "locationName": "ptrRecord"
-        },
-        "PtrRecordUpdate": {
-          "shape": "PtrUpdateStatus",
-          "documentation": "<p>The updated PTR record for the IP address.</p>",
-          "locationName": "ptrRecordUpdate"
-        }
-      },
-      "documentation": "<p>The attributes associated with an Elastic IP address.</p>"
-    },
-    "AddressAttributeName": {
-      "type": "string",
-      "enum": [
-        "domain-name"
-      ]
-    },
     "AddressList": {
       "type": "list",
       "member": {
         "shape": "Address",
-        "locationName": "item"
-      }
-    },
-    "AddressMaxResults": {
-      "type": "integer",
-      "max": 1000,
-      "min": 1
-    },
-    "AddressSet": {
-      "type": "list",
-      "member": {
-        "shape": "AddressAttribute",
         "locationName": "item"
       }
     },
@@ -6601,13 +6515,6 @@
       "member": {
         "shape": "AllocationId",
         "locationName": "AllocationId"
-      }
-    },
-    "AllocationIds": {
-      "type": "list",
-      "member": {
-        "shape": "AllocationId",
-        "locationName": "item"
       }
     },
     "AllocationState": {
@@ -10083,6 +9990,10 @@
           "shape": "String",
           "documentation": "<p>The name of the Region that contains the AMI to copy.</p>"
         },
+        "DestinationOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis\"> Copying AMIs from an AWS Region to an Outpost</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
@@ -10112,6 +10023,10 @@
         "Description": {
           "shape": "String",
           "documentation": "<p>A description for the EBS snapshot.</p>"
+        },
+        "DestinationOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot. Only specify this parameter when copying a snapshot from an AWS Region to an Outpost. The snapshot must be in the Region for the destination Outpost. You cannot copy a snapshot from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots\"> Copying snapshots from an AWS Region to an Outpost</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "DestinationRegion": {
           "shape": "String",
@@ -10764,7 +10679,7 @@
         },
         "ReplaceUnhealthyInstances": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>"
+          "documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for fleets of type <code>maintain</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks\">EC2 Fleet health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -11868,6 +11783,10 @@
           "shape": "String",
           "documentation": "<p>A description for the snapshot.</p>"
         },
+        "OutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create a local snapshot.</p> <ul> <li> <p>To create a snapshot of a volume in a Region, omit this parameter. The snapshot is created in the same Region as the volume.</p> </li> <li> <p>To create a snapshot of a volume on an Outpost and store the snapshot in the Region, omit this parameter. The snapshot is created in the Region for the Outpost.</p> </li> <li> <p>To create a snapshot of a volume on an Outpost and store the snapshot on an Outpost, specify the ARN of the destination Outpost. The snapshot must be created on the same Outpost as the volume.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot\"> Creating local snapshots from volumes on an Outpost</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
         "VolumeId": {
           "shape": "VolumeId",
           "documentation": "<p>The ID of the EBS volume.</p>"
@@ -11897,6 +11816,10 @@
         "InstanceSpecification": {
           "shape": "InstanceSpecification",
           "documentation": "<p>The instance to specify which volumes should be included in the snapshots.</p>"
+        },
+        "OutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create the local snapshots.</p> <ul> <li> <p>To create snapshots from an instance in a Region, omit this parameter. The snapshots are created in the same Region as the instance.</p> </li> <li> <p>To create snapshots from an instance on an Outpost and store the snapshots in the Region, omit this parameter. The snapshots are created in the Region for the Outpost.</p> </li> <li> <p>To create snapshots from an instance on an Outpost and store the snapshots on an Outpost, specify the ARN of the destination Outpost. The snapshots must be created on the same Outpost as the instance.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot\"> Creating multi-volume local snapshots from instances on an Outpost</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -12855,7 +12778,7 @@
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>(Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, <code>kinesis.us-east-1.amazonaws.com</code>), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <important> <p>Private DNS is not supported for Amazon S3 interface endpoints.</p> </important> <p>Default: <code>true</code> for supported endpoints</p>"
+          "documentation": "<p>(Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, <code>kinesis.us-east-1.amazonaws.com</code>), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -14964,47 +14887,6 @@
         }
       }
     },
-    "DescribeAddressesAttributeRequest": {
-      "type": "structure",
-      "members": {
-        "AllocationIds": {
-          "shape": "AllocationIds",
-          "documentation": "<p>[EC2-VPC] The allocation IDs.</p>",
-          "locationName": "AllocationId"
-        },
-        "Attribute": {
-          "shape": "AddressAttributeName",
-          "documentation": "<p>The attribute of the IP address.</p>"
-        },
-        "NextToken": {
-          "shape": "NextToken",
-          "documentation": "<p>The token for the next page of results.</p>"
-        },
-        "MaxResults": {
-          "shape": "AddressMaxResults",
-          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
-        },
-        "DryRun": {
-          "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-        }
-      }
-    },
-    "DescribeAddressesAttributeResult": {
-      "type": "structure",
-      "members": {
-        "Addresses": {
-          "shape": "AddressSet",
-          "documentation": "<p>Information about the IP addresses.</p>",
-          "locationName": "addressSet"
-        },
-        "NextToken": {
-          "shape": "NextToken",
-          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
-          "locationName": "nextToken"
-        }
-      }
-    },
     "DescribeAddressesRequest": {
       "type": "structure",
       "members": {
@@ -16591,7 +16473,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code> | <code>arm64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>io2</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - The owner alias, from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code>). This is not the user-configured AWS account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the related parameter instead of this filter.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code> | <code>arm64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>io2</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - The owner alias (<code>amazon</code> | <code>aws-marketplace</code>). The valid aliases are defined in an Amazon-maintained list. This is not the AWS account alias that can be set using the IAM console. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ImageIds": {
@@ -21222,6 +21104,11 @@
           "documentation": "<p>The throughput that the volume supports, in MiB/s.</p> <p>This parameter is valid only for <code>gp3</code> volumes.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>",
           "locationName": "throughput"
         },
+        "OutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the Outpost on which the snapshot is stored.</p>",
+          "locationName": "outpostArn"
+        },
         "Encrypted": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters\">Amazon EBS encryption</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>In no case can you remove encryption from an encrypted volume.</p> <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>.</p> <p>This parameter is not returned by .</p>",
@@ -22870,7 +22757,7 @@
         },
         "ReplaceUnhealthyInstances": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>",
+          "documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for fleets of type <code>maintain</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks\">EC2 Fleet health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>",
           "locationName": "replaceUnhealthyInstances"
         },
         "SpotOptions": {
@@ -28391,7 +28278,7 @@
         },
         "UserId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p> <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>",
           "locationName": "userId"
         }
       },
@@ -30251,36 +30138,6 @@
     "MillisecondDateTime": {
       "type": "timestamp"
     },
-    "ModifyAddressAttributeRequest": {
-      "type": "structure",
-      "required": [
-        "AllocationId"
-      ],
-      "members": {
-        "AllocationId": {
-          "shape": "AllocationId",
-          "documentation": "<p>[EC2-VPC] The allocation ID.</p>"
-        },
-        "DomainName": {
-          "shape": "String",
-          "documentation": "<p>The domain name to modify for the IP address.</p>"
-        },
-        "DryRun": {
-          "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-        }
-      }
-    },
-    "ModifyAddressAttributeResult": {
-      "type": "structure",
-      "members": {
-        "Address": {
-          "shape": "AddressAttribute",
-          "documentation": "<p>Information about the Elastic IP address.</p>",
-          "locationName": "address"
-        }
-      }
-    },
     "ModifyAvailabilityZoneGroupRequest": {
       "type": "structure",
       "required": [
@@ -31778,7 +31635,7 @@
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>(Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.</p> <important> <p>Private DNS is not supported for Amazon S3 interface endpoints.</p> </important>"
+          "documentation": "<p>(Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for ModifyVpcEndpoint.</p>"
@@ -34471,27 +34328,6 @@
       },
       "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
     },
-    "PtrUpdateStatus": {
-      "type": "structure",
-      "members": {
-        "Value": {
-          "shape": "String",
-          "documentation": "<p>The value for the PTR record update.</p>",
-          "locationName": "value"
-        },
-        "Status": {
-          "shape": "String",
-          "documentation": "<p>The status of the PTR record update.</p>",
-          "locationName": "status"
-        },
-        "Reason": {
-          "shape": "String",
-          "documentation": "<p>The reason for the PTR record update.</p>",
-          "locationName": "reason"
-        }
-      },
-      "documentation": "<p>The status of an updated pointer (PTR) record for an Elastic IP address.</p>"
-    },
     "PublicIpAddress": {
       "type": "string"
     },
@@ -34935,7 +34771,7 @@
         },
         "BlockDeviceMappings": {
           "shape": "BlockDeviceMappingRequestList",
-          "documentation": "<p>The block device mapping entries.</p>",
+          "documentation": "<p>The block device mapping entries.</p> <p>If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost only. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "BlockDeviceMapping"
         },
         "Description": {
@@ -36571,37 +36407,6 @@
       "member": {
         "shape": "ReservedInstancesId",
         "locationName": "item"
-      }
-    },
-    "ResetAddressAttributeRequest": {
-      "type": "structure",
-      "required": [
-        "AllocationId",
-        "Attribute"
-      ],
-      "members": {
-        "AllocationId": {
-          "shape": "AllocationId",
-          "documentation": "<p>[EC2-VPC] The allocation ID.</p>"
-        },
-        "Attribute": {
-          "shape": "AddressAttributeName",
-          "documentation": "<p>The attribute of the IP address.</p>"
-        },
-        "DryRun": {
-          "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-        }
-      }
-    },
-    "ResetAddressAttributeResult": {
-      "type": "structure",
-      "members": {
-        "Address": {
-          "shape": "AddressAttribute",
-          "documentation": "<p>Information about the IP address.</p>",
-          "locationName": "address"
-        }
       }
     },
     "ResetEbsDefaultKmsKeyIdRequest": {
@@ -38830,6 +38635,11 @@
           "documentation": "<p>The AWS owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not the user-configured AWS account alias set using the IAM console.</p>",
           "locationName": "ownerAlias"
         },
+        "OutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html\">EBS Local Snapshot on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "outpostArn"
+        },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Any tags assigned to the snapshot.</p>",
@@ -38992,6 +38802,11 @@
           "shape": "String",
           "documentation": "<p>Snapshot id that can be used to describe this snapshot.</p>",
           "locationName": "snapshotId"
+        },
+        "OutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html\">EBS Local Snapshot on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "outpostArn"
         }
       },
       "documentation": "<p>Information about a snapshot.</p>"
