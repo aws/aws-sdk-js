@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.837.0-->
+<!--LATEST=2.838.0-->
 <!--ENTRYINSERT-->
+
+## 2.838.0
+* feature: Appflow: Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
+* feature: Athena: Adds the Athena ListEngineVersions action and the EngineVersion data type. ListEngineVersions returns the available Athena engine versions, including Auto, as a list of EngineVersion objects.
+* feature: DLM: Provide support for EBS Local Snapshots on AWS Outpost in Data Lifecycle Manager (DLM).
+* feature: EC2: AWS Outposts now supports EBS local snapshots on Outposts that allows customers to store snapshots of EBS volumes and AMIs locally on S3 on Outposts.
+* feature: EMRcontainers: This release is to correct the timestamp format to ISO8601 for the date parameters in the describe and list API response objects of Job Run and Virtual Clusters.
+* feature: QuickSight: API release for field folders feature.
 
 ## 2.837.0
 * feature: Appflow: Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
