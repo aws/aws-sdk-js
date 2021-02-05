@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.838.0-->
+<!--LATEST=2.839.0-->
 <!--ENTRYINSERT-->
+
+## 2.839.0
+* feature: Organizations: Added support for a few additional exception codes for some AWS Organizations APIs.
 
 ## 2.838.0
 * feature: Appflow: Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
