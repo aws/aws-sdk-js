@@ -653,7 +653,7 @@
           futureExpiration = AWS.util.date.unixTimestamp() + 900;
           futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "' + futureExpiration + '"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           creds = new AWS.ProcessCredentials();
