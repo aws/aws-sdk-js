@@ -576,7 +576,7 @@
           mockConfig = '[default]\ncredential_process=federated_cli_mock';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
         });
@@ -608,7 +608,7 @@
         it('throws error if version is not 1', function(done) {
           var child_process = require('child_process');
           mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -623,7 +623,7 @@
           var expired;
           expired = AWS.util.date.iso8601(new Date(0));
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "' + expired +'"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -637,7 +637,7 @@
           var child_process = require('child_process');
           var mockErr;
           mockErr = 'foo Error';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(mockErr, undefined, undefined);
           });
           var creds = new AWS.ProcessCredentials();
