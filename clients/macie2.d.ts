@@ -455,7 +455,7 @@ declare namespace Macie2 {
   }
   export interface AccountLevelPermissions {
     /**
-     * The block public access settings for the bucket.
+     * The block public access settings for the AWS account that owns the bucket.
      */
     blockPublicAccess?: BlockPublicAccess;
   }
@@ -606,15 +606,15 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEncryptionType {
     /**
-     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) by default to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
      */
     kmsManaged?: __long;
     /**
-     * The total number of buckets that use an Amazon S3 managed key by default to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
+     * The total number of buckets that use an Amazon S3 managed key to encrypt new objects by default. These buckets use Amazon S3 managed encryption (SSE-S3).
      */
     s3Managed?: __long;
     /**
-     * The total number of buckets that don't encrypt objects by default. Default encryption is disabled for these buckets.
+     * The total number of buckets that don't encrypt new objects by default. Default encryption is disabled for these buckets.
      */
     unencrypted?: __long;
   }
@@ -723,7 +723,7 @@ declare namespace Macie2 {
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
-     * Specifies whether the bucket is publicly accessible. If this value is true, an access control list (ACL), bucket policy, or block public access settings allow the bucket to be accessed by the general public.
+     * Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket, and provides information about those settings.
      */
     publicAccess?: BucketPublicAccess;
     /**
@@ -734,6 +734,10 @@ declare namespace Macie2 {
      * Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.
      */
     replicationDetails?: ReplicationDetails;
+    /**
+     * Specifies whether the bucket encrypts new objects by default and, if so, the type of server-side encryption that's used.
+     */
+    serverSideEncryption?: BucketServerSideEncryption;
     /**
      *  Specifies whether the bucket is shared with another AWS account. Possible values are: EXTERNAL - The bucket is shared with an AWS account that isn't part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
      */
@@ -792,6 +796,16 @@ declare namespace Macie2 {
      * The account-level and bucket-level permissions for the bucket.
      */
     permissionConfiguration?: BucketPermissionConfiguration;
+  }
+  export interface BucketServerSideEncryption {
+    /**
+     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.
+     */
+    kmsMasterKeyId?: __string;
+    /**
+     * The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are: AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3). aws:kms - New objects are encrypted with an AWS KMS CMK, specified by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS). NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.
+     */
+    type?: Type;
   }
   export interface BucketSortCriteria {
     /**
@@ -1568,7 +1582,7 @@ declare namespace Macie2 {
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
-     * The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that don't encrypt objects by default.
+     * The total number of buckets, grouped by default server-side encryption type. This object also reports the total number of buckets that don't encrypt new objects by default.
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
@@ -1830,7 +1844,7 @@ declare namespace Macie2 {
   }
   export interface GetUsageStatisticsRequest {
     /**
-     * An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.
+     * An array of objects, one for each condition to use to filter the query results. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.
      */
     filterBy?: __listOfUsageStatisticsFilter;
     /**
@@ -1845,6 +1859,10 @@ declare namespace Macie2 {
      * The criteria to use to sort the query results.
      */
     sortBy?: UsageStatisticsSortBy;
+    /**
+     * The inclusive time period to query usage data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don't specify a value, Amazon Macie provides usage data for the preceding 30 days.
+     */
+    timeRange?: TimeRange;
   }
   export interface GetUsageStatisticsResponse {
     /**
@@ -1855,10 +1873,22 @@ declare namespace Macie2 {
      * An array of objects that contains the results of the query. Each object contains the data for an account that meets the filter criteria specified in the request.
      */
     records?: __listOfUsageRecord;
+    /**
+     * The inclusive time period that the usage data applies to. Possible values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days.
+     */
+    timeRange?: TimeRange;
   }
   export interface GetUsageTotalsRequest {
+    /**
+     * The time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don’t specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.
+     */
+    timeRange?: __string;
   }
   export interface GetUsageTotalsResponse {
+    /**
+     * The inclusive time period that the usage data applies to. Possible values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days.
+     */
+    timeRange?: TimeRange;
     /**
      * An array of objects that contains the results of the query. Each object contains the data for a specific usage metric.
      */
@@ -2334,15 +2364,15 @@ declare namespace Macie2 {
   }
   export interface ObjectCountByEncryptionType {
     /**
-     * The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side (SSE-C) encryption.
+     * The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).
      */
     customerManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+     * The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
      */
     kmsManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed (SSE-S3) encryption.
+     * The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
      */
     s3Managed?: __long;
     /**
@@ -2809,6 +2839,8 @@ declare namespace Macie2 {
      */
     matchCount?: __integer;
   }
+  export type TimeRange = "MONTH_TO_DATE"|"PAST_30_DAYS"|string;
+  export type Type = "NONE"|"AES256"|"aws:kms"|string;
   export type Unit = "TERABYTES"|string;
   export interface UnprocessedAccount {
     /**
@@ -2930,7 +2962,7 @@ declare namespace Macie2 {
      */
     serviceLimit?: ServiceLimit;
     /**
-     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive data.
+     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.
      */
     type?: UsageType;
   }
@@ -2985,7 +3017,7 @@ declare namespace Macie2 {
      */
     estimatedCost?: __string;
     /**
-     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive data.
+     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.
      */
     type?: UsageType;
   }

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.839.0-->
+<!--LATEST=2.840.0-->
 <!--ENTRYINSERT-->
+
+## 2.840.0
+* feature: CloudTrail: ConflictException is now thrown when certain operations are called on resources before CloudTrail has time to load the resources. Two new exceptions have been added to the PutInsightSelectors API.
+* feature: DataExchange: This release introduces the new ExportRevision job type, which allows for the export of an entire revision.
+* feature: GlobalAccelerator: Global Accelerator now supports bringing your own IP addresses for custom routing accelerators
+* feature: IVS: Fixed an issue where StreamStartTime could not be unmarshalled from response. Changed DeleteChannel and DeleteStreamKey response codes to 204.
+* feature: IoTSiteWise: Recall CreatePresignedPortalUrl API
+* feature: Macie2: This release of the Amazon Macie API adds support for specifying a time range in queries for usage data.
 
 ## 2.839.0
 * feature: Organizations: Added support for a few additional exception codes for some AWS Organizations APIs.

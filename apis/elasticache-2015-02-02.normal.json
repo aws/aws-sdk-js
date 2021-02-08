@@ -735,7 +735,7 @@
           "shape": "CacheSubnetGroupNotFoundFault"
         }
       ],
-      "documentation": "<p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any clusters.</p> </note>"
+      "documentation": "<p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a default cache subnet group or one that is associated with any clusters.</p> </note>"
     },
     "DeleteGlobalReplicationGroup": {
       "name": "DeleteGlobalReplicationGroup",
@@ -1740,7 +1740,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.</p>"
+      "documentation": "<p>Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.</p>"
     },
     "ModifyUser": {
       "name": "ModifyUser",
@@ -2995,7 +2995,7 @@
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p> <p>Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:23:00-mon:01:30</code> </p>"
+          "documentation": "<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -3218,7 +3218,7 @@
         },
         "Engine": {
           "shape": "String",
-          "documentation": "<p>The name of the cache engine to be used for the clusters in this replication group.</p>"
+          "documentation": "<p>The name of the cache engine to be used for the clusters in this replication group. Must be Redis.</p>"
         },
         "EngineVersion": {
           "shape": "String",

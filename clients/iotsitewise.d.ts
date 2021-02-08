@@ -93,14 +93,6 @@ declare class IoTSiteWise extends Service {
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
-   * 
-   */
-  createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
-  /**
-   * 
-   */
-  createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
-  /**
    * Creates a project in the specified portal.
    */
   createProject(params: IoTSiteWise.Types.CreateProjectRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateProjectResponse) => void): Request<IoTSiteWise.Types.CreateProjectResponse, AWSError>;
@@ -1318,14 +1310,6 @@ declare namespace IoTSiteWise {
      * The associated AWS SSO application ID, if the portal uses AWS SSO.
      */
     ssoApplicationId: SSOApplicationId;
-  }
-  export interface CreatePresignedPortalUrlRequest {
-    portalId: ID;
-    sessionDurationSeconds?: SessionDurationSeconds;
-    state?: state;
-  }
-  export interface CreatePresignedPortalUrlResponse {
-    presignedPortalUrl: Url;
   }
   export interface CreateProjectRequest {
     /**
@@ -2685,7 +2669,6 @@ declare namespace IoTSiteWise {
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
   export type SSOApplicationId = string;
-  export type SessionDurationSeconds = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2995,7 +2978,6 @@ declare namespace IoTSiteWise {
      */
     booleanValue?: PropertyValueBooleanValue;
   }
-  export type state = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
