@@ -31,7 +31,7 @@ describe('AWS.DocDB', function() {
       expect(req.params).to.eql({
         SourceDBClusterSnapshotIdentifier: 'source_id',
         TargetDBClusterSnapshotIdentifier: 'target_id',
-        PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=copyDBClusterSnapshot&DestinationRegion=us-west-2&SourceDBClusterSnapshotIdentifier=source_id&TargetDBClusterSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
+        PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBClusterSnapshot&DestinationRegion=us-west-2&SourceDBClusterSnapshotIdentifier=source_id&TargetDBClusterSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=b14e9105480608d8958613670c8978b683aaedd08af0f660bafb826e22605e7f&X-Amz-SignedHeaders=host'
       });
       return expect(req.httpRequest.endpoint.href).to.equal('https://rds.us-west-2.amazonaws.com/');
     });
@@ -47,7 +47,7 @@ describe('AWS.DocDB', function() {
       expect(req.params).to.eql({
         SourceDBClusterSnapshotIdentifier: 'source_id',
         TargetDBClusterSnapshotIdentifier: 'target_id',
-        PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=copyDBClusterSnapshot&DestinationRegion=us-west-2&SourceDBClusterSnapshotIdentifier=source_id&TargetDBClusterSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=d3b9491de565d0ff1bf94d518060ec4796dc1006e7413754c7e25e3539eccf09&X-Amz-SignedHeaders=host'
+        PreSignedUrl: 'https://rds.eu-central-1.amazonaws.com/?Action=CopyDBClusterSnapshot&DestinationRegion=us-west-2&SourceDBClusterSnapshotIdentifier=source_id&TargetDBClusterSnapshotIdentifier=target_id&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Feu-central-1%2Frds%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&X-Amz-Signature=b14e9105480608d8958613670c8978b683aaedd08af0f660bafb826e22605e7f&X-Amz-SignedHeaders=host'
       });
       return expect(req.httpRequest.endpoint.href).to.equal('https://rds.us-west-2.amazonaws.com/');
     });
