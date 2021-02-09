@@ -36,7 +36,7 @@
       });
     });
     return describe('copyDBSnapshot cross-region copying', function() {
-      var cb, err, rds, ref, spy;
+      var cb, err, rds, ref;
       ref = [], rds = ref[0], err = ref[2];
       cb = function(e) {
         return err = e;
