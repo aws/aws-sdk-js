@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.840.0-->
+<!--LATEST=2.841.0-->
 <!--ENTRYINSERT-->
+
+## 2.841.0
+* feature: GameLift: GameLift FleetIQ users can now use AMD instance families in supported Regions. In addition, FlexMatch matchmaking notification now supports SNS FIFO topics.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for WMA audio only ingest, SMPTE-TT text and image caption ingest, and MPEG-2 video in MXF OP1a outputs.
+* feature: QLDBSession: This release adds CapacityExceededException to the AWS QLDBSession API.
+* feature: QuickSight: QuickSight now supports Python's paginators for Exploration APIs.
+* feature: SageMaker: Add a new optional FrameworkVersion field to Sagemaker Neo CreateCompilationJob API
 
 ## 2.840.0
 * feature: CloudTrail: ConflictException is now thrown when certain operations are called on resources before CloudTrail has time to load the resources. Two new exceptions have been added to the PutInsightSelectors API.

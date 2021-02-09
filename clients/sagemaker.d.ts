@@ -8153,6 +8153,7 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
   export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"|string;
+  export type FrameworkVersion = string;
   export type GenerateCandidateDefinitionsOnly = boolean;
   export interface GetDeviceFleetReportRequest {
     /**
@@ -8759,6 +8760,10 @@ declare namespace SageMaker {
      * Identifies the framework in which the model was trained. For example: TENSORFLOW.
      */
     Framework: Framework;
+    /**
+     * Specifies the framework version to use. This API field is only supported for PyTorch framework versions 1.4, 1.5, and 1.6 for cloud instance target devices: ml_c4, ml_c5, ml_m4, ml_m5, ml_p2, ml_p3, and ml_g4dn.
+     */
+    FrameworkVersion?: FrameworkVersion;
   }
   export type InputDataConfig = Channel[];
   export type InputMode = "Pipe"|"File"|string;

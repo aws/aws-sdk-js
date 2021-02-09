@@ -3741,8 +3741,7 @@
     "AnalysisName": {
       "type": "string",
       "max": 2048,
-      "min": 1,
-      "pattern": "[\\u0020-\\u00FF]+"
+      "min": 1
     },
     "AnalysisSearchFilter": {
       "type": "structure",
@@ -3767,7 +3766,8 @@
       "member": {
         "shape": "AnalysisSearchFilter"
       },
-      "max": 1
+      "max": 1,
+      "min": 1
     },
     "AnalysisSourceEntity": {
       "type": "structure",
@@ -4586,7 +4586,7 @@
         },
         "Type": {
           "shape": "DataSourceType",
-          "documentation": "<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>"
+          "documentation": "<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p>"
         },
         "DataSourceParameters": {
           "shape": "DataSourceParameters",
@@ -5324,8 +5324,7 @@
     "DashboardName": {
       "type": "string",
       "max": 2048,
-      "min": 1,
-      "pattern": "[\\u0020-\\u00FF]+"
+      "min": 1
     },
     "DashboardPublishOptions": {
       "type": "structure",
@@ -5371,7 +5370,8 @@
       "member": {
         "shape": "DashboardSearchFilter"
       },
-      "max": 1
+      "max": 1,
+      "min": 1
     },
     "DashboardSourceEntity": {
       "type": "structure",
@@ -10814,8 +10814,7 @@
     "TemplateName": {
       "type": "string",
       "max": 2048,
-      "min": 1,
-      "pattern": "[\\u0020-\\u00FF]+"
+      "min": 1
     },
     "TemplateSourceAnalysis": {
       "type": "structure",
