@@ -5305,7 +5305,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *       failing to establish a connection with the server after
 	 *       `connectTimeout` milliseconds. This timeout has no effect once a socket
 	 *       connection has been established.
-	 *     * **lookup** [Function] &mdash; Custom DNS lookup function.
 	 *     * **timeout** [Integer] &mdash; The number of milliseconds a request can
 	 *       take before automatically being terminated.
 	 *       Defaults to two minutes (120000).
