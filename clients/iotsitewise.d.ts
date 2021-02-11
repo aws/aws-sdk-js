@@ -2068,6 +2068,12 @@ declare namespace IoTSiteWise {
      */
     id: IdentityId;
   }
+  export interface IAMRoleIdentity {
+    /**
+     * The ARN of the IAM role. For more information, see IAM ARNs in the IAM User Guide.
+     */
+    arn: ARN;
+  }
   export interface IAMUserIdentity {
     /**
      * The ARN of the IAM user. For more information, see IAM ARNs in the IAM User Guide.  If you delete the IAM user, access policies that contain this identity include an empty arn. You can delete the access policy for the IAM user that no longer exists. 
@@ -2089,6 +2095,10 @@ declare namespace IoTSiteWise {
      * An IAM user identity.
      */
     iamUser?: IAMUserIdentity;
+    /**
+     * An IAM role identity.
+     */
+    iamRole?: IAMRoleIdentity;
   }
   export type IdentityId = string;
   export type IdentityType = "USER"|"GROUP"|"IAM"|string;

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern"
+    }
+]

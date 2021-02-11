@@ -477,7 +477,7 @@ declare namespace CustomerProfiles {
     /**
      * The URI of the S3 bucket or any other type of data source.
      */
-    Uri?: string1To255;
+    Uri: string1To255;
   }
   export interface DeleteIntegrationResponse {
     /**
@@ -636,7 +636,7 @@ declare namespace CustomerProfiles {
     /**
      * The URI of the S3 bucket or any other type of data source.
      */
-    Uri?: string1To255;
+    Uri: string1To255;
   }
   export interface GetIntegrationResponse {
     /**

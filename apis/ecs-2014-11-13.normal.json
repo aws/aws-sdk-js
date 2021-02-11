@@ -2049,7 +2049,7 @@
         },
         "environmentFiles": {
           "shape": "EnvironmentFiles",
-          "documentation": "<p>A list of files containing the environment variables to pass to a container. This parameter maps to the <code>--env-file</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <p>You can specify up to ten environment files. The file must have a <code>.env</code> file extension. Each line in an environment file should contain an environment variable in <code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated as comments and are ignored. For more information on the environment variable file syntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default environment variables in file</a>.</p> <p>If there are environment variables specified using the <code>environment</code> parameter in a container definition, they take precedence over the variables contained within an environment file. If multiple environment files are specified that contain the same variable, they are processed from the top down. It is recommended to use unique variable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying Environment Variables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>This field is not valid for containers in tasks using the Fargate launch type.</p>"
+          "documentation": "<p>A list of files containing the environment variables to pass to a container. This parameter maps to the <code>--env-file</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <p>You can specify up to ten environment files. The file must have a <code>.env</code> file extension. Each line in an environment file should contain an environment variable in <code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated as comments and are ignored. For more information on the environment variable file syntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default environment variables in file</a>.</p> <p>If there are environment variables specified using the <code>environment</code> parameter in a container definition, they take precedence over the variables contained within an environment file. If multiple environment files are specified that contain the same variable, they are processed from the top down. It is recommended to use unique variable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying Environment Variables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
         "mountPoints": {
           "shape": "MountPointList",
@@ -5658,6 +5658,18 @@
         "proxyConfiguration": {
           "shape": "ProxyConfiguration",
           "documentation": "<p>The configuration details for the App Mesh proxy.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the <code>ecs-init</code> package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+        },
+        "registeredAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix timestamp for when the task definition was registered.</p>"
+        },
+        "deregisteredAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix timestamp for when the task definition was deregistered.</p>"
+        },
+        "registeredBy": {
+          "shape": "String",
+          "documentation": "<p>The principal that registered the task definition.</p>"
         }
       },
       "documentation": "<p>The details of a task definition which describes the container and volume definitions of an Amazon Elastic Container Service task. You can specify which Docker images to use, the required resources, and other configurations related to launching the task definition through an Amazon ECS service or task.</p>"
@@ -6004,11 +6016,11 @@
       "members": {
         "name": {
           "shape": "String",
-          "documentation": "<p>An object representing the parameters to update for the Auto Scaling group capacity provider.</p>"
+          "documentation": "<p>The name of the capacity provider to update.</p>"
         },
         "autoScalingGroupProvider": {
           "shape": "AutoScalingGroupProviderUpdate",
-          "documentation": "<p>The name of the capacity provider to update.</p>"
+          "documentation": "<p>An object representing the parameters to update for the Auto Scaling group capacity provider.</p>"
         }
       }
     },

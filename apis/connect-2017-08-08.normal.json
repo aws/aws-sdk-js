@@ -45,7 +45,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates an approved origin to an Amazon Connect instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates an approved origin to an Amazon Connect instance.</p>"
     },
     "AssociateInstanceStorageConfig": {
       "name": "AssociateInstanceStorageConfig",
@@ -79,7 +79,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an S3 bucket, exists when being used for association.</p>"
     },
     "AssociateLambdaFunction": {
       "name": "AssociateLambdaFunction",
@@ -113,7 +113,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>"
     },
     "AssociateLexBot": {
       "name": "AssociateLexBot",
@@ -147,7 +147,38 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>"
+    },
+    "AssociateQueueQuickConnects": {
+      "name": "AssociateQueueQuickConnects",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/associate-quick-connects"
+      },
+      "input": {
+        "shape": "AssociateQueueQuickConnectsRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a set of quick connects with a queue.</p>"
     },
     "AssociateRoutingProfileQueues": {
       "name": "AssociateRoutingProfileQueues",
@@ -212,7 +243,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associates a security key to the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a security key to the instance.</p>"
     },
     "CreateContactFlow": {
       "name": "CreateContactFlow",
@@ -283,7 +314,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. </p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. </p>"
     },
     "CreateIntegrationAssociation": {
       "name": "CreateIntegrationAssociation",
@@ -314,7 +345,81 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with anAmazon Connect instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with an Amazon Connect instance.</p>"
+    },
+    "CreateQueue": {
+      "name": "CreateQueue",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/queues/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateQueueRequest"
+      },
+      "output": {
+        "shape": "CreateQueueResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a new queue for the specified Amazon Connect instance.</p>"
+    },
+    "CreateQuickConnect": {
+      "name": "CreateQuickConnect",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/quick-connects/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateQuickConnectRequest"
+      },
+      "output": {
+        "shape": "CreateQuickConnectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a quick connect for the specified Amazon Connect instance.</p>"
     },
     "CreateRoutingProfile": {
       "name": "CreateRoutingProfile",
@@ -505,6 +610,34 @@
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.</p>"
     },
+    "DeleteQuickConnect": {
+      "name": "DeleteQuickConnect",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input": {
+        "shape": "DeleteQuickConnectRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes a quick connect.</p>"
+    },
     "DeleteUseCase": {
       "name": "DeleteUseCase",
       "http": {
@@ -623,6 +756,37 @@
       ],
       "documentation": "<p>Describes the specified contact flow.</p> <p>You can also create and update contact flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>"
     },
+    "DescribeHoursOfOperation": {
+      "name": "DescribeHoursOfOperation",
+      "http": {
+        "method": "GET",
+        "requestUri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
+      },
+      "input": {
+        "shape": "DescribeHoursOfOperationRequest"
+      },
+      "output": {
+        "shape": "DescribeHoursOfOperationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the hours of operation.</p>"
+    },
     "DescribeInstance": {
       "name": "DescribeInstance",
       "http": {
@@ -646,7 +810,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status, if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>"
     },
     "DescribeInstanceAttribute": {
       "name": "DescribeInstanceAttribute",
@@ -677,7 +841,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes the specified instance attribute.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified instance attribute.</p>"
     },
     "DescribeInstanceStorageConfig": {
       "name": "DescribeInstanceStorageConfig",
@@ -708,7 +872,69 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.</p>"
+    },
+    "DescribeQueue": {
+      "name": "DescribeQueue",
+      "http": {
+        "method": "GET",
+        "requestUri": "/queues/{InstanceId}/{QueueId}"
+      },
+      "input": {
+        "shape": "DescribeQueueRequest"
+      },
+      "output": {
+        "shape": "DescribeQueueResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified queue.</p>"
+    },
+    "DescribeQuickConnect": {
+      "name": "DescribeQuickConnect",
+      "http": {
+        "method": "GET",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}"
+      },
+      "input": {
+        "shape": "DescribeQuickConnectRequest"
+      },
+      "output": {
+        "shape": "DescribeQuickConnectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the quick connect.</p>"
     },
     "DescribeRoutingProfile": {
       "name": "DescribeRoutingProfile",
@@ -860,7 +1086,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Revokes access to integrated applications from Amazon Connect.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes access to integrated applications from Amazon Connect.</p>"
     },
     "DisassociateInstanceStorageConfig": {
       "name": "DisassociateInstanceStorageConfig",
@@ -888,7 +1114,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Removes the storage type configurations for the specified resource type and association ID.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Removes the storage type configurations for the specified resource type and association ID.</p>"
     },
     "DisassociateLambdaFunction": {
       "name": "DisassociateLambdaFunction",
@@ -916,7 +1142,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Remove the Lambda function from the dropdown options available in the relevant contact flow blocks.</p>"
     },
     "DisassociateLexBot": {
       "name": "DisassociateLexBot",
@@ -944,7 +1170,35 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>"
+    },
+    "DisassociateQueueQuickConnects": {
+      "name": "DisassociateQueueQuickConnects",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/disassociate-quick-connects"
+      },
+      "input": {
+        "shape": "DisassociateQueueQuickConnectsRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Disassociates a set of quick connects from a queue.</p>"
     },
     "DisassociateRoutingProfileQueues": {
       "name": "DisassociateRoutingProfileQueues",
@@ -1000,7 +1254,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes the specified security key.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes the specified security key.</p>"
     },
     "GetContactAttributes": {
       "name": "GetContactAttributes",
@@ -1152,7 +1406,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all approved origins associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all approved origins associated with the instance.</p>"
     },
     "ListContactFlows": {
       "name": "ListContactFlows",
@@ -1357,7 +1611,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant contact flow blocks.</p>"
     },
     "ListLexBots": {
       "name": "ListLexBots",
@@ -1388,7 +1642,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all the Amazon Lex bots currently associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all the Amazon Lex bots currently associated with the instance.</p>"
     },
     "ListPhoneNumbers": {
       "name": "ListPhoneNumbers",
@@ -1452,6 +1706,37 @@
       ],
       "documentation": "<p>Provides information about the prompts for the specified Amazon Connect instance.</p>"
     },
+    "ListQueueQuickConnects": {
+      "name": "ListQueueQuickConnects",
+      "http": {
+        "method": "GET",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/quick-connects"
+      },
+      "input": {
+        "shape": "ListQueueQuickConnectsRequest"
+      },
+      "output": {
+        "shape": "ListQueueQuickConnectsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Lists the quick connects associated with a queue.</p>"
+    },
     "ListQueues": {
       "name": "ListQueues",
       "http": {
@@ -1483,6 +1768,37 @@
       ],
       "documentation": "<p>Provides information about the queues for the specified Amazon Connect instance.</p> <p>For more information about queues, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html\">Queues: Standard and Agent</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
+    "ListQuickConnects": {
+      "name": "ListQuickConnects",
+      "http": {
+        "method": "GET",
+        "requestUri": "/quick-connects/{InstanceId}"
+      },
+      "input": {
+        "shape": "ListQuickConnectsRequest"
+      },
+      "output": {
+        "shape": "ListQuickConnectsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>"
+    },
     "ListRoutingProfileQueues": {
       "name": "ListRoutingProfileQueues",
       "http": {
@@ -1512,7 +1828,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>List the queues associated with a routing profile.</p>"
+      "documentation": "<p>Lists the queues associated with a routing profile.</p>"
     },
     "ListRoutingProfiles": {
       "name": "ListRoutingProfiles",
@@ -1574,7 +1890,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a paginated list of all security keys associated with the instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all security keys associated with the instance.</p>"
     },
     "ListSecurityProfiles": {
       "name": "ListSecurityProfiles",
@@ -1664,7 +1980,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>List the use cases. </p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Lists the use cases. </p>"
     },
     "ListUserHierarchyGroups": {
       "name": "ListUserHierarchyGroups",
@@ -1782,7 +2098,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p> <p>When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>A 429 error occurs in two situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception from the API Gateway.</p> </li> <li> <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>For more information about how chat works, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p> <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>A 429 error occurs in two situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception from the API Gateway.</p> </li> <li> <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "StartContactRecording": {
       "name": "StartContactRecording",
@@ -1810,7 +2126,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>This API starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p> <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording behavior</a> block.</p> <p>Only voice recordings are supported at this time.</p>"
+      "documentation": "<p>Starts recording the contact when the agent joins the call. StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p> <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording behavior</a> block.</p> <p>Only voice recordings are supported at this time.</p>"
     },
     "StartOutboundVoiceContact": {
       "name": "StartOutboundVoiceContact",
@@ -1847,7 +2163,7 @@
           "shape": "OutboundContactNotPermittedException"
         }
       ],
-      "documentation": "<p>This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p> <p>Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case.</p> <p>There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p> <note> <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note>"
+      "documentation": "<p>Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p> <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case.</p> <p>There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p> <note> <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note>"
     },
     "StartTaskContact": {
       "name": "StartTaskContact",
@@ -1937,7 +2253,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>When a contact is being recorded, this API stops recording the call. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording.</p> <p>Only voice recordings are supported at this time.</p>"
+      "documentation": "<p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording.</p> <p>Only voice recordings are supported at this time.</p>"
     },
     "SuspendContactRecording": {
       "name": "SuspendContactRecording",
@@ -1990,7 +2306,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, and contact flows.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, queues, quick connects, and contact flows.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -2046,7 +2362,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>"
+      "documentation": "<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>"
     },
     "UpdateContactFlowContent": {
       "name": "UpdateContactFlowContent",
@@ -2165,6 +2481,205 @@
         }
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates an existing configuration for a resource type. This API is idempotent.</p>"
+    },
+    "UpdateQueueHoursOfOperation": {
+      "name": "UpdateQueueHoursOfOperation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/hours-of-operation"
+      },
+      "input": {
+        "shape": "UpdateQueueHoursOfOperationRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the hours of operation for the specified queue.</p>"
+    },
+    "UpdateQueueMaxContacts": {
+      "name": "UpdateQueueMaxContacts",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/max-contacts"
+      },
+      "input": {
+        "shape": "UpdateQueueMaxContactsRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the maximum number of contacts allowed in a queue before it is considered full.</p>"
+    },
+    "UpdateQueueName": {
+      "name": "UpdateQueueName",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/name"
+      },
+      "input": {
+        "shape": "UpdateQueueNameRequest"
+      },
+      "errors": [
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the name and description of a queue. At least <code>Name</code> or <code>Description</code> must be provided.</p>"
+    },
+    "UpdateQueueOutboundCallerConfig": {
+      "name": "UpdateQueueOutboundCallerConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/outbound-caller-config"
+      },
+      "input": {
+        "shape": "UpdateQueueOutboundCallerConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.</p>"
+    },
+    "UpdateQueueStatus": {
+      "name": "UpdateQueueStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/queues/{InstanceId}/{QueueId}/status"
+      },
+      "input": {
+        "shape": "UpdateQueueStatusRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the status of the queue.</p>"
+    },
+    "UpdateQuickConnectConfig": {
+      "name": "UpdateQuickConnectConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}/config"
+      },
+      "input": {
+        "shape": "UpdateQuickConnectConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the configuration settings for the specified quick connect.</p>"
+    },
+    "UpdateQuickConnectName": {
+      "name": "UpdateQuickConnectName",
+      "http": {
+        "method": "POST",
+        "requestUri": "/quick-connects/{InstanceId}/{QuickConnectId}/name"
+      },
+      "input": {
+        "shape": "UpdateQuickConnectNameRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least <code>Name</code> or <code>Description</code> must be provided.</p>"
     },
     "UpdateRoutingProfileConcurrency": {
       "name": "UpdateRoutingProfileConcurrency",
@@ -2397,7 +2912,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Updates the identity information for the specified user.</p> <important> <p>Someone with the ability to invoke <code>UpdateUserIndentityInfo</code> can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke <code>UpdateUserIndentityInfo</code>. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html\">Best Practices for Security Profiles</a> in the <i>Amazon Connect Administrator Guide</i>.</p> </important>"
+      "documentation": "<p>Updates the identity information for the specified user.</p> <important> <p>We strongly recommend limiting who has the ability to invoke <code>UpdateUserIdentityInfo</code>. Someone with that ability can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html\">Best Practices for Security Profiles</a> in the <i>Amazon Connect Administrator Guide</i>.</p> </important>"
     },
     "UpdateUserPhoneConfig": {
       "name": "UpdateUserPhoneConfig",
@@ -2597,6 +3112,32 @@
         }
       }
     },
+    "AssociateQueueQuickConnectsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "QuickConnectIds"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "QuickConnectIds": {
+          "shape": "QuickConnectsList",
+          "documentation": "<p>The quick connects to associate with this queue.</p>"
+        }
+      }
+    },
     "AssociateRoutingProfileQueuesRequest": {
       "type": "structure",
       "required": [
@@ -2720,7 +3261,7 @@
       "member": {
         "shape": "Channel"
       },
-      "max": 3
+      "max": 1
     },
     "ChatContent": {
       "type": "string",
@@ -2741,7 +3282,7 @@
       "members": {
         "ContentType": {
           "shape": "ChatContentType",
-          "documentation": "<p>The type of the content. Supported types are text/plain.</p>"
+          "documentation": "<p>The type of the content. Supported types are text and plain.</p>"
         },
         "Content": {
           "shape": "ChatContent",
@@ -2753,6 +3294,16 @@
     "ClientToken": {
       "type": "string",
       "max": 500
+    },
+    "CommonDescriptionLength250": {
+      "type": "string",
+      "max": 250,
+      "min": 0
+    },
+    "CommonNameLength127": {
+      "type": "string",
+      "max": 127,
+      "min": 1
     },
     "Comparison": {
       "type": "string",
@@ -2952,11 +3503,11 @@
         },
         "InboundCallsEnabled": {
           "shape": "InboundCallsEnabled",
-          "documentation": "<p>Whether your contact center handles incoming contacts.</p>"
+          "documentation": "<p>Your contact center handles incoming contacts.</p>"
         },
         "OutboundCallsEnabled": {
           "shape": "OutboundCallsEnabled",
-          "documentation": "<p>Whether your contact center allows outbound calls.</p>"
+          "documentation": "<p>Your contact center allows outbound calls.</p>"
         }
       }
     },
@@ -3025,6 +3576,109 @@
         }
       }
     },
+    "CreateQueueRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "Name",
+        "HoursOfOperationId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name of the queue.</p>"
+        },
+        "Description": {
+          "shape": "QueueDescription",
+          "documentation": "<p>The description of the queue.</p>"
+        },
+        "OutboundCallerConfig": {
+          "shape": "OutboundCallerConfig",
+          "documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>"
+        },
+        "MaxContacts": {
+          "shape": "QueueMaxContacts",
+          "documentation": "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>",
+          "box": true
+        },
+        "QuickConnectIds": {
+          "shape": "QuickConnectsList",
+          "documentation": "<p>The quick connects available to agents who are working the queue.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateQueueResponse": {
+      "type": "structure",
+      "members": {
+        "QueueArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the queue.</p>"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>"
+        }
+      }
+    },
+    "CreateQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "Name",
+        "QuickConnectConfig"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description of the quick connect.</p>"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Configuration settings for the quick connect.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateQuickConnectResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnectARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the quick connect. </p>"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        }
+      }
+    },
     "CreateRoutingProfileRequest": {
       "type": "structure",
       "required": [
@@ -3055,11 +3709,11 @@
         },
         "QueueConfigs": {
           "shape": "RoutingProfileQueueConfigList",
-          "documentation": "<p>The inbound queues associated with the routing profile. If no queue is added, the agent can only make outbound calls.</p>"
+          "documentation": "<p>The inbound queues associated with the routing profile. If no queue is added, the agent can make only outbound calls.</p>"
         },
         "MediaConcurrencies": {
           "shape": "MediaConcurrencies",
-          "documentation": "<p>The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.</p>"
+          "documentation": "<p>The channels that agents can handle in the Contact Control Panel (CCP) for this routing profile.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3364,6 +4018,27 @@
         }
       }
     },
+    "DeleteQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        }
+      }
+    },
     "DeleteUseCaseRequest": {
       "type": "structure",
       "required": [
@@ -3464,6 +4139,36 @@
         }
       }
     },
+    "DescribeHoursOfOperationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "HoursOfOperationId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>",
+          "location": "uri",
+          "locationName": "HoursOfOperationId"
+        }
+      }
+    },
+    "DescribeHoursOfOperationResponse": {
+      "type": "structure",
+      "members": {
+        "HoursOfOperation": {
+          "shape": "HoursOfOperation",
+          "documentation": "<p>The hours of operation.</p>"
+        }
+      }
+    },
     "DescribeInstanceAttributeRequest": {
       "type": "structure",
       "required": [
@@ -3551,6 +4256,66 @@
         "StorageConfig": {
           "shape": "InstanceStorageConfig",
           "documentation": "<p>A valid storage type.</p>"
+        }
+      }
+    },
+    "DescribeQueueRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        }
+      }
+    },
+    "DescribeQueueResponse": {
+      "type": "structure",
+      "members": {
+        "Queue": {
+          "shape": "Queue",
+          "documentation": "<p>The name of the queue.</p>"
+        }
+      }
+    },
+    "DescribeQuickConnectRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        }
+      }
+    },
+    "DescribeQuickConnectResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnect": {
+          "shape": "QuickConnect",
+          "documentation": "<p>Information about the quick connect.</p>"
         }
       }
     },
@@ -3808,6 +4573,32 @@
         }
       }
     },
+    "DisassociateQueueQuickConnectsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "QuickConnectIds"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "QuickConnectIds": {
+          "shape": "QuickConnectsList",
+          "documentation": "<p>The quick connects to disassociate from the queue.</p>"
+        }
+      }
+    },
     "DisassociateRoutingProfileQueuesRequest": {
       "type": "structure",
       "required": [
@@ -3974,7 +4765,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult100",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true
         }
       }
@@ -4061,7 +4852,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult100",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true
         }
       }
@@ -4370,6 +5161,81 @@
       "max": 87600,
       "min": 0
     },
+    "Hours24Format": {
+      "type": "integer",
+      "max": 23,
+      "min": 0
+    },
+    "HoursOfOperation": {
+      "type": "structure",
+      "members": {
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>"
+        },
+        "HoursOfOperationArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the hours of operation.</p>"
+        },
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name for the hours of operation.</p>"
+        },
+        "Description": {
+          "shape": "CommonDescriptionLength250",
+          "documentation": "<p>The description for the hours of operation.</p>"
+        },
+        "TimeZone": {
+          "shape": "TimeZone",
+          "documentation": "<p>The time zone for the hours of operation.</p>"
+        },
+        "Config": {
+          "shape": "HoursOfOperationConfigList",
+          "documentation": "<p>Configuration information for the hours of operation.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      },
+      "documentation": "<p>Information about of the hours of operation.</p>"
+    },
+    "HoursOfOperationConfig": {
+      "type": "structure",
+      "members": {
+        "Day": {
+          "shape": "HoursOfOperationDays",
+          "documentation": "<p>The day that the hours of operation applies to.</p>"
+        },
+        "StartTime": {
+          "shape": "HoursOfOperationTimeSlice",
+          "documentation": "<p>The start time that your contact center is open.</p>"
+        },
+        "EndTime": {
+          "shape": "HoursOfOperationTimeSlice",
+          "documentation": "<p>The end time that your contact center is closes.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the hours of operation.</p>"
+    },
+    "HoursOfOperationConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "HoursOfOperationConfig"
+      }
+    },
+    "HoursOfOperationDays": {
+      "type": "string",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ]
+    },
     "HoursOfOperationId": {
       "type": "string"
     },
@@ -4399,6 +5265,20 @@
       "member": {
         "shape": "HoursOfOperationSummary"
       }
+    },
+    "HoursOfOperationTimeSlice": {
+      "type": "structure",
+      "members": {
+        "Hours": {
+          "shape": "Hours24Format",
+          "documentation": "<p>The hours.</p>"
+        },
+        "Minutes": {
+          "shape": "MinutesLimit60",
+          "documentation": "<p>The minutes.</p>"
+        }
+      },
+      "documentation": "<p>The start time or end time for an hours of operation.</p>"
     },
     "InboundCallsEnabled": {
       "type": "boolean"
@@ -4505,7 +5385,7 @@
         },
         "S3Config": {
           "shape": "S3Config",
-          "documentation": "<p>The S3 configuration.</p>"
+          "documentation": "<p>The S3 bucket configuration.</p>"
         },
         "KinesisVideoStreamConfig": {
           "shape": "KinesisVideoStreamConfig",
@@ -4658,7 +5538,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the delivery stream.</p>"
         }
       },
-      "documentation": "<p>Configuration information of a Kinesis Firehose delivery stream.</p>"
+      "documentation": "<p>Configuration information of a Kinesis Data Firehose delivery stream.</p>"
     },
     "KinesisStreamConfig": {
       "type": "structure",
@@ -4705,7 +5585,7 @@
         },
         "LexRegion": {
           "shape": "LexRegion",
-          "documentation": "<p>The Region the Amazon Lex bot was created in.</p>"
+          "documentation": "<p>The Region that the Amazon Lex bot was created in.</p>"
         }
       },
       "documentation": "<p>Configuration information of an Amazon Lex bot.</p>"
@@ -4740,7 +5620,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult25",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -4786,7 +5666,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -4825,7 +5705,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -4864,7 +5744,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult7",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -4911,7 +5791,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult10",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -4942,7 +5822,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult10",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -4982,7 +5862,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult100",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5022,7 +5902,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult25",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5062,7 +5942,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult25",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5074,7 +5954,7 @@
       "members": {
         "LexBots": {
           "shape": "LexBotsList",
-          "documentation": "<p>The the names and regions of the Amazon Lex bots associated with the specified instance.</p>"
+          "documentation": "<p>The names and Regions of the Amazon Lex bots associated with the specified instance.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -5114,7 +5994,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -5173,6 +6053,53 @@
         }
       }
     },
+    "ListQueueQuickConnectsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResult100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListQueueQuickConnectsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "QuickConnectSummaryList": {
+          "shape": "QuickConnectSummaryList",
+          "documentation": "<p>Information about the quick connects.</p>"
+        }
+      }
+    },
     "ListQueuesRequest": {
       "type": "structure",
       "required": [
@@ -5199,7 +6126,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -5211,6 +6138,52 @@
         "QueueSummaryList": {
           "shape": "QueueSummaryList",
           "documentation": "<p>Information about the queues.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        }
+      }
+    },
+    "ListQuickConnectsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResult1000",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "QuickConnectTypes": {
+          "shape": "QuickConnectTypes",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>",
+          "location": "querystring",
+          "locationName": "QuickConnectTypes"
+        }
+      }
+    },
+    "ListQuickConnectsResponse": {
+      "type": "structure",
+      "members": {
+        "QuickConnectSummaryList": {
+          "shape": "QuickConnectSummaryList",
+          "documentation": "<p>Information about the quick connects.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -5245,7 +6218,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult100",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5285,7 +6258,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5325,7 +6298,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult2",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5365,7 +6338,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5435,7 +6408,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult100",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5476,7 +6449,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5516,7 +6489,7 @@
         },
         "MaxResults": {
           "shape": "MaxResult1000",
-          "documentation": "<p>The maximimum number of results to return per page.</p>",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
@@ -5590,6 +6563,11 @@
       },
       "documentation": "<p>Contains information about which channels are supported, and how many contacts an agent can have on a channel simultaneously.</p>"
     },
+    "MinutesLimit60": {
+      "type": "integer",
+      "max": 59,
+      "min": 0
+    },
     "Name": {
       "type": "string",
       "max": 512,
@@ -5607,6 +6585,29 @@
       "member": {
         "shape": "Origin"
       }
+    },
+    "OutboundCallerConfig": {
+      "type": "structure",
+      "members": {
+        "OutboundCallerIdName": {
+          "shape": "OutboundCallerIdName",
+          "documentation": "<p>The caller ID name.</p>"
+        },
+        "OutboundCallerIdNumberId": {
+          "shape": "PhoneNumberId",
+          "documentation": "<p>The caller ID number.</p>"
+        },
+        "OutboundFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The outbound whisper flow to be used during an outbound call.</p>"
+        }
+      },
+      "documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
+    },
+    "OutboundCallerIdName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "OutboundCallsEnabled": {
       "type": "boolean"
@@ -5898,6 +6899,19 @@
     "PhoneNumberId": {
       "type": "string"
     },
+    "PhoneNumberQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "PhoneNumber"
+      ],
+      "members": {
+        "PhoneNumber": {
+          "shape": "PhoneNumber",
+          "documentation": "<p>The phone number in E.164 format.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a phone number for a quick connect.</p>"
+    },
     "PhoneNumberSummary": {
       "type": "structure",
       "members": {
@@ -5995,13 +7009,83 @@
         "shape": "PromptSummary"
       }
     },
+    "Queue": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name of the queue.</p>"
+        },
+        "QueueArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the queue.</p>"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>"
+        },
+        "Description": {
+          "shape": "QueueDescription",
+          "documentation": "<p>The description of the queue.</p>"
+        },
+        "OutboundCallerConfig": {
+          "shape": "OutboundCallerConfig",
+          "documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>"
+        },
+        "MaxContacts": {
+          "shape": "QueueMaxContacts",
+          "documentation": "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>",
+          "box": true
+        },
+        "Status": {
+          "shape": "QueueStatus",
+          "documentation": "<p>The status of the queue.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a queue.</p>"
+    },
+    "QueueDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 1
+    },
     "QueueId": {
       "type": "string"
+    },
+    "QueueMaxContacts": {
+      "type": "integer",
+      "min": 0
     },
     "QueueName": {
       "type": "string",
       "max": 256,
       "min": 1
+    },
+    "QueueQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "QueueId",
+        "ContactFlowId"
+      ],
+      "members": {
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>"
+        },
+        "ContactFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The identifier of the contact flow.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a queue for a quick connect. The contact flow must be of type Transfer to Queue.</p>"
     },
     "QueueReference": {
       "type": "structure",
@@ -6016,6 +7100,13 @@
         }
       },
       "documentation": "<p>Contains information about a queue resource for which metrics are returned.</p>"
+    },
+    "QueueStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "QueueSummary": {
       "type": "structure",
@@ -6067,6 +7158,125 @@
       "max": 100,
       "min": 1
     },
+    "QuickConnect": {
+      "type": "structure",
+      "members": {
+        "QuickConnectARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the quick connect.</p>"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description.</p>"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Contains information about the quick connect.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a quick connect.</p>"
+    },
+    "QuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "QuickConnectType"
+      ],
+      "members": {
+        "QuickConnectType": {
+          "shape": "QuickConnectType",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). </p>"
+        },
+        "UserConfig": {
+          "shape": "UserQuickConnectConfig",
+          "documentation": "<p>The user configuration. This is required only if QuickConnectType is USER.</p>"
+        },
+        "QueueConfig": {
+          "shape": "QueueQuickConnectConfig",
+          "documentation": "<p>The queue configuration. This is required only if QuickConnectType is QUEUE.</p>"
+        },
+        "PhoneConfig": {
+          "shape": "PhoneNumberQuickConnectConfig",
+          "documentation": "<p>The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.</p>"
+        }
+      },
+      "documentation": "<p>Contains configuration settings for a quick connect.</p>"
+    },
+    "QuickConnectDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 0
+    },
+    "QuickConnectId": {
+      "type": "string"
+    },
+    "QuickConnectName": {
+      "type": "string",
+      "max": 127,
+      "min": 1
+    },
+    "QuickConnectSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>"
+        },
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the quick connect.</p>"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "QuickConnectType": {
+          "shape": "QuickConnectType",
+          "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>"
+        }
+      },
+      "documentation": "<p>Contains summary information about a quick connect.</p>"
+    },
+    "QuickConnectSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "QuickConnectSummary"
+      }
+    },
+    "QuickConnectType": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "QUEUE",
+        "PHONE_NUMBER"
+      ]
+    },
+    "QuickConnectTypes": {
+      "type": "list",
+      "member": {
+        "shape": "QuickConnectType"
+      },
+      "max": 3
+    },
+    "QuickConnectsList": {
+      "type": "list",
+      "member": {
+        "shape": "QuickConnectId"
+      },
+      "max": 50,
+      "min": 1
+    },
     "Reference": {
       "type": "structure",
       "required": [
@@ -6076,7 +7286,7 @@
       "members": {
         "Value": {
           "shape": "ReferenceValue",
-          "documentation": "<p>A formatted URL that will be shown to an agent in the Contact Control Panel (CCP)</p>"
+          "documentation": "<p>A formatted URL that displays to an agent in the Contact Control Panel (CCP)</p>"
         },
         "Type": {
           "shape": "ReferenceType",
@@ -6224,7 +7434,7 @@
       "members": {
         "QueueId": {
           "shape": "QueueId",
-          "documentation": "<p>The identifier of the queue.</p>"
+          "documentation": "<p>The identifier for the queue.</p>"
         },
         "QueueArn": {
           "shape": "ARN",
@@ -6264,7 +7474,7 @@
       "members": {
         "QueueId": {
           "shape": "QueueId",
-          "documentation": "<p>The identifier of the queue.</p>"
+          "documentation": "<p>The identifier for the queue.</p>"
         },
         "Channel": {
           "shape": "Channel",
@@ -6320,10 +7530,10 @@
         },
         "EncryptionConfig": {
           "shape": "EncryptionConfig",
-          "documentation": "<p>The S3 encryption configuration.</p>"
+          "documentation": "<p>The Amazon S3 encryption configuration.</p>"
         }
       },
-      "documentation": "<p>Information about the S3 storage type.</p>"
+      "documentation": "<p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>"
     },
     "SecurityKey": {
       "type": "structure",
@@ -6422,7 +7632,7 @@
         },
         "Attributes": {
           "shape": "Attributes",
-          "documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. </p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>"
+          "documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in contact flows just like any other contact attributes. </p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>"
         },
         "ParticipantDetails": {
           "shape": "ParticipantDetails",
@@ -6479,7 +7689,7 @@
         },
         "VoiceRecordingConfiguration": {
           "shape": "VoiceRecordingConfiguration",
-          "documentation": "<p>Who is being recorded.</p>"
+          "documentation": "<p>The person being recorded.</p>"
         }
       }
     },
@@ -6746,6 +7956,9 @@
     "ThresholdValue": {
       "type": "double"
     },
+    "TimeZone": {
+      "type": "string"
+    },
     "Timestamp": {
       "type": "timestamp"
     },
@@ -6922,6 +8135,195 @@
         }
       }
     },
+    "UpdateQueueHoursOfOperationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "HoursOfOperationId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>"
+        }
+      }
+    },
+    "UpdateQueueMaxContactsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "MaxContacts"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "MaxContacts": {
+          "shape": "QueueMaxContacts",
+          "documentation": "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>",
+          "box": true
+        }
+      }
+    },
+    "UpdateQueueNameRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name of the queue.</p>"
+        },
+        "Description": {
+          "shape": "QueueDescription",
+          "documentation": "<p>The description of the queue.</p>"
+        }
+      }
+    },
+    "UpdateQueueOutboundCallerConfigRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "OutboundCallerConfig"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "OutboundCallerConfig": {
+          "shape": "OutboundCallerConfig",
+          "documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
+        }
+      }
+    },
+    "UpdateQueueStatusRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QueueId",
+        "Status"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier for the queue.</p>",
+          "location": "uri",
+          "locationName": "QueueId"
+        },
+        "Status": {
+          "shape": "QueueStatus",
+          "documentation": "<p>The status of the queue.</p>"
+        }
+      }
+    },
+    "UpdateQuickConnectConfigRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId",
+        "QuickConnectConfig"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        },
+        "QuickConnectConfig": {
+          "shape": "QuickConnectConfig",
+          "documentation": "<p>Information about the configuration settings for the quick connect.</p>"
+        }
+      }
+    },
+    "UpdateQuickConnectNameRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "QuickConnectId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "QuickConnectId": {
+          "shape": "QuickConnectId",
+          "documentation": "<p>The identifier for the quick connect.</p>",
+          "location": "uri",
+          "locationName": "QuickConnectId"
+        },
+        "Name": {
+          "shape": "QuickConnectName",
+          "documentation": "<p>The name of the quick connect.</p>"
+        },
+        "Description": {
+          "shape": "QuickConnectDescription",
+          "documentation": "<p>The description of the quick connect.</p>"
+        }
+      }
+    },
     "UpdateRoutingProfileConcurrencyRequest": {
       "type": "structure",
       "required": [
@@ -6944,7 +8346,7 @@
         },
         "MediaConcurrencies": {
           "shape": "MediaConcurrencies",
-          "documentation": "<p>The channels agents can handle in the Contact Control Panel (CCP).</p>"
+          "documentation": "<p>The channels that agents can handle in the Contact Control Panel (CCP).</p>"
         }
       }
     },
@@ -7330,6 +8732,24 @@
       },
       "documentation": "<p>Contains information about the phone configuration settings for a user.</p>"
     },
+    "UserQuickConnectConfig": {
+      "type": "structure",
+      "required": [
+        "UserId",
+        "ContactFlowId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The identifier of the user.</p>"
+        },
+        "ContactFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The identifier of the contact flow.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the quick connect configuration settings for a user. The contact flow must be of type Transfer to Agent.</p>"
+    },
     "UserSummary": {
       "type": "structure",
       "members": {
@@ -7379,5 +8799,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center and provide reliable customer engagement at any scale.</p> <p>Amazon Connect provides rich metrics and real-time reporting that allow you to optimize contact routing. You can also resolve customer issues more efficiently by putting customers in touch with the right agents.</p> <p>There are limits to the number of Amazon Connect resources that you can create and limits to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <p>To connect programmatically to an AWS service, you use an endpoint. For a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p> <note> <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p> </note>"
+  "documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer contact center and provide reliable customer engagement at any scale.</p> <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing. You can also resolve customer issues more efficiently by getting customers in touch with the appropriate agents.</p> <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <p>You can connect programmatically to an AWS service by using an endpoint. For a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p> <note> <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p> </note>"
 }

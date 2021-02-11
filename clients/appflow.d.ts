@@ -771,7 +771,7 @@ declare namespace Appflow {
   }
   export interface DescribeConnectorsRequest {
     /**
-     *  The type of connector, such as Salesforce, Amplitude, and so on. 
+     *  The type of connector, such as Salesforce, Amplitude, and so on.    Locke refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination.  
      */
     connectorTypes?: ConnectorTypeList;
     /**
@@ -1042,6 +1042,14 @@ declare namespace Appflow {
      *  Specifies the time of the most recent update. 
      */
     lastUpdatedAt?: _Date;
+    /**
+     *  The timestamp that determines the first new or updated record to be transferred in the flow run. 
+     */
+    dataPullStartTime?: _Date;
+    /**
+     *  The timestamp that indicates the last new or updated record to be transferred in the flow run. 
+     */
+    dataPullEndTime?: _Date;
   }
   export interface ExecutionResult {
     /**
@@ -1490,6 +1498,7 @@ declare namespace Appflow {
   }
   export type ScheduleExpression = string;
   export type ScheduleFrequencyType = "BYMINUTE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"ONCE"|string;
+  export type ScheduleOffset = number;
   export interface ScheduledTriggerProperties {
     /**
      *  The scheduling expression that determines the rate at which the schedule will run, for example rate(5minutes). 
@@ -1508,9 +1517,13 @@ declare namespace Appflow {
      */
     scheduleEndTime?: _Date;
     /**
-     *  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. 
+     *  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York. 
      */
     timezone?: Timezone;
+    /**
+     *  Specifies the optional offset that is added to the time interval for a schedule-triggered flow. 
+     */
+    scheduleOffset?: ScheduleOffset;
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];
   export type SecretKey = string;

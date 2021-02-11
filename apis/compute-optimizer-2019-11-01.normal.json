@@ -327,6 +327,46 @@
       ],
       "documentation": "<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is the management account of an organization, this action also confirms the enrollment status of member accounts within the organization.</p>"
     },
+    "GetLambdaFunctionRecommendations": {
+      "name": "GetLambdaFunctionRecommendations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetLambdaFunctionRecommendationsRequest"
+      },
+      "output": {
+        "shape": "GetLambdaFunctionRecommendationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OptInRequiredException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingAuthenticationToken"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Returns AWS Lambda function recommendations.</p> <p>AWS Compute Optimizer generates recommendations for functions that meet a specific set of requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>"
+    },
     "GetRecommendationSummaries": {
       "name": "GetRecommendationSummaries",
       "http": {
@@ -648,7 +688,7 @@
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
+          "documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
         },
         "filters": {
           "shape": "Filters",
@@ -703,7 +743,7 @@
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
+          "documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
         },
         "filters": {
           "shape": "Filters",
@@ -886,12 +926,31 @@
         "NotOptimized"
       ]
     },
+    "FindingReasonCode": {
+      "type": "string",
+      "enum": [
+        "MemoryOverprovisioned",
+        "MemoryUnderprovisioned"
+      ]
+    },
+    "FunctionArn": {
+      "type": "string"
+    },
+    "FunctionArns": {
+      "type": "list",
+      "member": {
+        "shape": "FunctionArn"
+      }
+    },
+    "FunctionVersion": {
+      "type": "string"
+    },
     "GetAutoScalingGroupRecommendationsRequest": {
       "type": "structure",
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The ID of the AWS account for which to return Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>"
         },
         "autoScalingGroupArns": {
           "shape": "AutoScalingGroupArns",
@@ -949,7 +1008,7 @@
         },
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to return volume recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return volume recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The ID of the AWS account for which to return volume recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to return volume recommendations.</p> <p>Only one account ID can be specified per request.</p>"
         }
       }
     },
@@ -991,7 +1050,7 @@
         },
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to return instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The ID of the AWS account for which to return instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>"
         }
       }
     },
@@ -1074,6 +1133,44 @@
         }
       }
     },
+    "GetLambdaFunctionRecommendationsRequest": {
+      "type": "structure",
+      "members": {
+        "functionArns": {
+          "shape": "FunctionArns",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the functions for which to return recommendations.</p> <p>You can specify a qualified or unqualified ARN. If you specify an unqualified ARN without a function version suffix, Compute Optimizer will return recommendations for the latest (<code>$LATEST</code>) version of the function. If you specify a qualified ARN with a version suffix, Compute Optimizer will return recommendations for the specified function version. For more information about using function versions, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using\">Using versions</a> in the <i>AWS Lambda Developer Guide</i>.</p>"
+        },
+        "accountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>The ID of the AWS account for which to return function recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to return function recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+        },
+        "filters": {
+          "shape": "LambdaFunctionRecommendationFilters",
+          "documentation": "<p>An array of objects that describe a filter that returns a more specific list of function recommendations.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to advance to the next page of function recommendations.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of function recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>"
+        }
+      }
+    },
+    "GetLambdaFunctionRecommendationsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to advance to the next page of function recommendations.</p> <p>This value is null when there are no more pages of function recommendations to return.</p>"
+        },
+        "lambdaFunctionRecommendations": {
+          "shape": "LambdaFunctionRecommendations",
+          "documentation": "<p>An array of objects that describe function recommendations.</p>"
+        }
+      }
+    },
     "GetRecommendationError": {
       "type": "structure",
       "members": {
@@ -1103,7 +1200,7 @@
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The IDs of the AWS accounts for which to return recommendation summaries.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The ID of the AWS account for which to return recommendation summaries.</p> <p>If your account is the management account of an organization, use this parameter to specify the member account for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1268,6 +1365,212 @@
         "Failed"
       ]
     },
+    "LambdaFunctionMemoryMetricName": {
+      "type": "string",
+      "enum": [
+        "Duration"
+      ]
+    },
+    "LambdaFunctionMemoryMetricStatistic": {
+      "type": "string",
+      "enum": [
+        "LowerBound",
+        "UpperBound",
+        "Expected"
+      ]
+    },
+    "LambdaFunctionMemoryProjectedMetric": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "LambdaFunctionMemoryMetricName",
+          "documentation": "<p>The name of the projected utilization metric.</p>"
+        },
+        "statistic": {
+          "shape": "LambdaFunctionMemoryMetricStatistic",
+          "documentation": "<p>The statistic of the projected utilization metric.</p>"
+        },
+        "value": {
+          "shape": "MetricValue",
+          "documentation": "<p>The values of the projected utilization metrics.</p>"
+        }
+      },
+      "documentation": "<p>Describes a projected utilization metric of an AWS Lambda function recommendation option.</p>"
+    },
+    "LambdaFunctionMemoryProjectedMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionMemoryProjectedMetric"
+      }
+    },
+    "LambdaFunctionMemoryRecommendationOption": {
+      "type": "structure",
+      "members": {
+        "rank": {
+          "shape": "Rank",
+          "documentation": "<p>The rank of the function recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>"
+        },
+        "memorySize": {
+          "shape": "MemorySize",
+          "documentation": "<p>The memory size, in MB, of the function recommendation option.</p>"
+        },
+        "projectedUtilizationMetrics": {
+          "shape": "LambdaFunctionMemoryProjectedMetrics",
+          "documentation": "<p>An array of objects that describe the projected utilization metrics of the function recommendation option.</p>"
+        }
+      },
+      "documentation": "<p>Describes a recommendation option for an AWS Lambda function.</p>"
+    },
+    "LambdaFunctionMemoryRecommendationOptions": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionMemoryRecommendationOption"
+      }
+    },
+    "LambdaFunctionMetricName": {
+      "type": "string",
+      "enum": [
+        "Duration",
+        "Memory"
+      ]
+    },
+    "LambdaFunctionMetricStatistic": {
+      "type": "string",
+      "enum": [
+        "Maximum",
+        "Average"
+      ]
+    },
+    "LambdaFunctionRecommendation": {
+      "type": "structure",
+      "members": {
+        "functionArn": {
+          "shape": "FunctionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the current function.</p>"
+        },
+        "functionVersion": {
+          "shape": "FunctionVersion",
+          "documentation": "<p>The version number of the current function.</p>"
+        },
+        "accountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID of the function.</p>"
+        },
+        "currentMemorySize": {
+          "shape": "MemorySize",
+          "documentation": "<p>The amount of memory, in MB, that's allocated to the current function.</p>"
+        },
+        "numberOfInvocations": {
+          "shape": "NumberOfInvocations",
+          "documentation": "<p>The number of times your function code was executed during the look-back period.</p>"
+        },
+        "utilizationMetrics": {
+          "shape": "LambdaFunctionUtilizationMetrics",
+          "documentation": "<p>An array of objects that describe the utilization metrics of the function.</p>"
+        },
+        "lookbackPeriodInDays": {
+          "shape": "LookBackPeriodInDays",
+          "documentation": "<p>The number of days for which utilization metrics were analyzed for the function.</p>"
+        },
+        "lastRefreshTimestamp": {
+          "shape": "LastRefreshTimestamp",
+          "documentation": "<p>The time stamp of when the function recommendation was last refreshed.</p>"
+        },
+        "finding": {
+          "shape": "LambdaFunctionRecommendationFinding",
+          "documentation": "<p>The finding classification for the function.</p> <p>Findings for functions include:</p> <ul> <li> <p> <b> <code>Optimized</code> </b> — The function is correctly provisioned to run your workload based on its current configuration and its utilization history. This finding classification does not include finding reason codes.</p> </li> <li> <p> <b> <code>NotOptimized</code> </b> — The function is performing at a higher level (over-provisioned) or at a lower level (under-provisioned) than required for your workload because its current configuration is not optimal. Over-provisioned resources might lead to unnecessary infrastructure cost, and under-provisioned resources might lead to poor application performance. This finding classification can include the <code>MemoryUnderprovisioned</code> and <code>MemoryUnderprovisioned</code> finding reason codes.</p> </li> <li> <p> <b> <code>Unavailable</code> </b> — Compute Optimizer was unable to generate a recommendation for the function. This could be because the function has not accumulated sufficient metric data, or the function does not qualify for a recommendation. This finding classification can include the <code>InsufficientData</code> and <code>Inconclusive</code> finding reason codes.</p> <note> <p>Functions with a finding of unavailable are not returned unless you specify the <code>filter</code> parameter with a value of <code>Unavailable</code> in your <code>GetLambdaFunctionRecommendations</code> request.</p> </note> </li> </ul>"
+        },
+        "findingReasonCodes": {
+          "shape": "LambdaFunctionRecommendationFindingReasonCodes",
+          "documentation": "<p>The reason for the finding classification of the function.</p> <note> <p>Functions that have a finding classification of <code>Optimized</code> don't have a finding reason code.</p> </note> <p>Reason codes include:</p> <ul> <li> <p> <b> <code>MemoryOverprovisioned</code> </b> — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the <code>NotOptimized</code> finding classification.</p> </li> <li> <p> <b> <code>MemoryUnderprovisioned</code> </b> — The function is under-provisioned when its memory configuration doesn't meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the <code>NotOptimized</code> finding classification.</p> </li> <li> <p> <b> <code>InsufficientData</code> </b> — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>. This finding reason code is part of the <code>Unavailable</code> finding classification.</p> </li> <li> <p> <b> <code>Inconclusive</code> </b> — The function does not qualify for a recommendation because Compute Optimizer cannot generate a recommendation with a high degree of confidence. This finding reason code is part of the <code>Unavailable</code> finding classification.</p> </li> </ul>"
+        },
+        "memorySizeRecommendationOptions": {
+          "shape": "LambdaFunctionMemoryRecommendationOptions",
+          "documentation": "<p>An array of objects that describe the memory configuration recommendation options for the function.</p>"
+        }
+      },
+      "documentation": "<p>Describes an AWS Lambda function recommendation.</p>"
+    },
+    "LambdaFunctionRecommendationFilter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "LambdaFunctionRecommendationFilterName",
+          "documentation": "<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific finding classification (e.g., <code>NotOptimized</code>).</p> <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code (e.g., <code>MemoryUnderprovisioned</code>).</p>"
+        },
+        "values": {
+          "shape": "FilterValues",
+          "documentation": "<p>The value of the filter.</p> <p>The valid values for this parameter are as follows, depending on what you specify for the <code>name</code> parameter:</p> <ul> <li> <p>Specify <code>Optimized</code>, <code>NotOptimized</code>, or <code>Unavailable</code> if you specified the <code>name</code> parameter as <code>Finding</code>.</p> </li> <li> <p>Specify <code>MemoryOverprovisioned</code>, <code>MemoryUnderprovisioned</code>, <code>InsufficientData</code>, or <code>Inconclusive</code> if you specified the <code>name</code> parameter as <code>FindingReasonCode</code>.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes a filter that returns a more specific list of AWS Lambda function recommendations.</p>"
+    },
+    "LambdaFunctionRecommendationFilterName": {
+      "type": "string",
+      "enum": [
+        "Finding",
+        "FindingReasonCode"
+      ]
+    },
+    "LambdaFunctionRecommendationFilters": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionRecommendationFilter"
+      }
+    },
+    "LambdaFunctionRecommendationFinding": {
+      "type": "string",
+      "enum": [
+        "Optimized",
+        "NotOptimized",
+        "Unavailable"
+      ]
+    },
+    "LambdaFunctionRecommendationFindingReasonCode": {
+      "type": "string",
+      "enum": [
+        "MemoryOverprovisioned",
+        "MemoryUnderprovisioned",
+        "InsufficientData",
+        "Inconclusive"
+      ]
+    },
+    "LambdaFunctionRecommendationFindingReasonCodes": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionRecommendationFindingReasonCode"
+      }
+    },
+    "LambdaFunctionRecommendations": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionRecommendation"
+      }
+    },
+    "LambdaFunctionUtilizationMetric": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "LambdaFunctionMetricName",
+          "documentation": "<p>The name of the utilization metric.</p>"
+        },
+        "statistic": {
+          "shape": "LambdaFunctionMetricStatistic",
+          "documentation": "<p>The statistic of the utilization metric.</p>"
+        },
+        "value": {
+          "shape": "MetricValue",
+          "documentation": "<p>The value of the utilization metric.</p>"
+        }
+      },
+      "documentation": "<p>Describes a utilization metric of an AWS Lambda function.</p>"
+    },
+    "LambdaFunctionUtilizationMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "LambdaFunctionUtilizationMetric"
+      }
+    },
     "LastRefreshTimestamp": {
       "type": "timestamp"
     },
@@ -1286,6 +1589,9 @@
     },
     "MemberAccountsEnrolled": {
       "type": "boolean"
+    },
+    "MemorySize": {
+      "type": "integer"
     },
     "Message": {
       "type": "string"
@@ -1325,6 +1631,9 @@
     },
     "NextToken": {
       "type": "string"
+    },
+    "NumberOfInvocations": {
+      "type": "long"
     },
     "PerformanceRisk": {
       "type": "double",
@@ -1366,6 +1675,26 @@
     },
     "Rank": {
       "type": "integer"
+    },
+    "ReasonCodeSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ReasonCodeSummary"
+      }
+    },
+    "ReasonCodeSummary": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "FindingReasonCode",
+          "documentation": "<p>The name of the finding reason code.</p>"
+        },
+        "value": {
+          "shape": "SummaryValue",
+          "documentation": "<p>The value of the finding reason code summary.</p>"
+        }
+      },
+      "documentation": "<p>A summary of a finding reason code.</p>"
     },
     "RecommendationExportJob": {
       "type": "structure",
@@ -1435,7 +1764,8 @@
       "enum": [
         "Ec2Instance",
         "AutoScalingGroup",
-        "EbsVolume"
+        "EbsVolume",
+        "LambdaFunction"
       ]
     },
     "RecommendationSources": {
@@ -1562,6 +1892,10 @@
         "value": {
           "shape": "SummaryValue",
           "documentation": "<p>The value of the recommendation summary.</p>"
+        },
+        "reasonCodeSummaries": {
+          "shape": "ReasonCodeSummaries",
+          "documentation": "<p>An array of objects that summarize a finding reason code.</p>"
         }
       },
       "documentation": "<p>The summary of a recommendation.</p>"
@@ -1757,5 +2091,5 @@
       "type": "string"
     }
   },
-  "documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>"
+  "documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, AWS Lambda functions, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>"
 }

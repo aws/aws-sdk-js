@@ -4564,6 +4564,19 @@
       },
       "documentation": "<p>Contains information for a group identity in an access policy.</p>"
     },
+    "IAMRoleIdentity": {
+      "type": "structure",
+      "required": [
+        "arn"
+      ],
+      "members": {
+        "arn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the <i>IAM User Guide</i>.</p>"
+    },
     "IAMUserIdentity": {
       "type": "structure",
       "required": [
@@ -4605,6 +4618,10 @@
         "iamUser": {
           "shape": "IAMUserIdentity",
           "documentation": "<p>An IAM user identity.</p>"
+        },
+        "iamRole": {
+          "shape": "IAMRoleIdentity",
+          "documentation": "<p>An IAM role identity.</p>"
         }
       },
       "documentation": "<p>Contains an identity that can access an AWS IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find the AWS SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">AWS SSO console</a>.</p> </note>"
@@ -5192,7 +5209,7 @@
     "Measurement": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Contains an asset measurement property. This structure is empty. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+      "documentation": "<p>Contains an asset measurement property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
     },
     "Metric": {
       "type": "structure",

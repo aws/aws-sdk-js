@@ -1043,6 +1043,9 @@
           "shape": "InvalidMarkerException"
         },
         {
+          "shape": "InvalidGrantIdException"
+        },
+        {
           "shape": "InvalidArnException"
         },
         {
@@ -1052,7 +1055,7 @@
           "shape": "KMSInvalidStateException"
         }
       ],
-      "documentation": "<p>Gets a list of all grants for the specified customer master key (CMK).</p> <note> <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the user or role designated as the grantee principal in the grant. However, when the grantee principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service principal</a>, which might represent several different grantee principals.</p> </note> <p> <b>Cross-account use</b>: Yes. To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the <code>KeyId</code> parameter.</p> <p> <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListGrants</a> (key policy)</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>CreateGrant</a> </p> </li> <li> <p> <a>ListRetirableGrants</a> </p> </li> <li> <p> <a>RetireGrant</a> </p> </li> <li> <p> <a>RevokeGrant</a> </p> </li> </ul>"
+      "documentation": "<p>Gets a list of all grants for the specified customer master key (CMK). </p> <p>You must specify the CMK in all requests. You can filter the grant list by grant ID or grantee principal.</p> <note> <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the user or role designated as the grantee principal in the grant. However, when the grantee principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service principal</a>, which might represent several different grantee principals.</p> </note> <p> <b>Cross-account use</b>: Yes. To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the <code>KeyId</code> parameter.</p> <p> <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListGrants</a> (key policy)</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>CreateGrant</a> </p> </li> <li> <p> <a>ListRetirableGrants</a> </p> </li> <li> <p> <a>RetireGrant</a> </p> </li> <li> <p> <a>RevokeGrant</a> </p> </li> </ul>"
     },
     "ListKeyPolicies": {
       "name": "ListKeyPolicies",
@@ -1618,15 +1621,13 @@
         },
         "TargetKeyId": {
           "shape": "KeyIdType",
-          "documentation": "<p>String that contains the key identifier of the CMK associated with the alias.</p>"
+          "documentation": "<p>String that contains the key identifier referred to by the alias.</p>"
         },
         "CreationDate": {
-          "shape": "DateType",
-          "documentation": "<p>Date and time that the alias was most recently created in the account and Region. Formatted as Unix time.</p>"
+          "shape": "DateType"
         },
         "LastUpdatedDate": {
-          "shape": "DateType",
-          "documentation": "<p>Date and time that the alias was most recently associated with a CMK in the account and Region. Formatted as Unix time.</p>"
+          "shape": "DateType"
         }
       },
       "documentation": "<p>Contains information about an alias.</p>"
@@ -1816,7 +1817,7 @@
         },
         "GrantId": {
           "shape": "GrantIdType",
-          "documentation": "<p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a subsequent <a>RetireGrant</a> or <a>RevokeGrant</a> operation.</p>"
+          "documentation": "<p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a <a>ListGrants</a>, <a>RetireGrant</a>, or <a>RevokeGrant</a> operation.</p>"
         }
       }
     },
@@ -2925,7 +2926,15 @@
         },
         "KeyId": {
           "shape": "KeyIdType",
-          "documentation": "<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>"
+          "documentation": "<p>Returns only grants for the specified customer master key (CMK). This parameter is required.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>"
+        },
+        "GrantId": {
+          "shape": "GrantIdType",
+          "documentation": "<p>Returns only the grant with the specified grant ID. The grant ID uniquely identifies the grant. </p>"
+        },
+        "GranteePrincipal": {
+          "shape": "PrincipalIdType",
+          "documentation": "<p>Returns only grants where the specified principal is the grantee principal for the grant.</p>"
         }
       }
     },

@@ -881,7 +881,12 @@ declare namespace CloudWatch {
      * The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.
      */
     MaxDatapoints?: GetMetricDataMaxDatapoints;
+    /**
+     * This structure includes the Timezone parameter, which you can use to specify your time zone so that the labels of returned data display the correct time for your time zone. 
+     */
+    LabelOptions?: LabelOptions;
   }
+  export type GetMetricDataLabelTimezone = string;
   export type GetMetricDataMaxDatapoints = number;
   export interface GetMetricDataOutput {
     /**
@@ -1061,6 +1066,12 @@ declare namespace CloudWatch {
   export type InsightRuleUnboundInteger = number;
   export type InsightRuleUnboundLong = number;
   export type InsightRules = InsightRule[];
+  export interface LabelOptions {
+    /**
+     * The time zone to use for metric data return in this operation. The format is + or - followed by four digits. The first two digits indicate the number of hours ahead or behind of UTC, and the final two digits are the number of minutes. For example, +0130 indicates a time zone that is 1 hour and 30 minutes ahead of UTC. The default is +0000. 
+     */
+    Timezone?: GetMetricDataLabelTimezone;
+  }
   export type LastModified = Date;
   export interface ListDashboardsInput {
     /**
@@ -1282,7 +1293,7 @@ declare namespace CloudWatch {
      */
     Expression?: MetricExpression;
     /**
-     * A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.
+     * A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default. You can put dynamic expressions into a label, so that it is more descriptive. For more information, see Using Dynamic Labels.
      */
     Label?: MetricLabel;
     /**

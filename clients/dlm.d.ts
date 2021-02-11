@@ -126,6 +126,10 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
+     * Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource.  If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.
+     */
+    Location?: LocationValues;
+    /**
      * The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.
      */
     Interval?: Interval;
@@ -167,9 +171,13 @@ declare namespace DLM {
   }
   export interface CrossRegionCopyRule {
     /**
-     * The target Region.
+     * The target Region for the snapshot copies. If you specify a target Region, you must omit Target. You cannot specify a target Region and a target Outpost in the same rule.
      */
-    TargetRegion: TargetRegion;
+    TargetRegion?: TargetRegion;
+    /**
+     * The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies. If you specify an ARN, you must omit TargetRegion. You cannot specify a target Region and a target Outpost in the same rule.
+     */
+    Target?: Target;
     /**
      * To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.
      */
@@ -374,6 +382,7 @@ declare namespace DLM {
      */
     Tags?: TagMap;
   }
+  export type LocationValues = "CLOUD"|"OUTPOST_LOCAL"|string;
   export type NoReboot = boolean;
   export interface Parameters {
     /**
@@ -396,6 +405,10 @@ declare namespace DLM {
      * The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance. This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.
      */
     ResourceTypes?: ResourceTypeValuesList;
+    /**
+     * The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an AWS Outpost in your account, specify OUTPOST.  If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.
+     */
+    ResourceLocations?: ResourceLocationList;
     /**
      * The single tag that identifies targeted resources for this policy. This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.
      */
@@ -420,6 +433,8 @@ declare namespace DLM {
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
   export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|"IMAGE_MANAGEMENT"|"EVENT_BASED_POLICY"|string;
+  export type ResourceLocationList = ResourceLocationValues[];
+  export type ResourceLocationValues = "CLOUD"|"OUTPOST"|string;
   export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
@@ -467,7 +482,7 @@ declare namespace DLM {
      */
     FastRestoreRule?: FastRestoreRule;
     /**
-     * The rule for cross-Region snapshot copies.
+     * The rule for cross-Region snapshot copies. You can only specify cross-Region copy rules for policies that create snapshots in a Region. If the policy creates snapshots on an Outpost, then you cannot copy the snapshots to a Region or to an Outpost. If the policy creates snapshots in a Region, then snapshots can be copied to up to three Regions or Outposts.
      */
     CrossRegionCopyRules?: CrossRegionCopyRules;
     /**

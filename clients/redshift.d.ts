@@ -2698,7 +2698,7 @@ declare namespace Redshift {
     /**
      * Describes a connection endpoint.
      */
-    VpcEndpoints?: SpartaProxyVpcEndpointList;
+    VpcEndpoints?: VpcEndpointsList;
   }
   export interface Event {
     /**
@@ -4355,13 +4355,6 @@ declare namespace Redshift {
   export type SortByOrder = "ASC"|"DESC"|string;
   export type SourceIdsList = String[];
   export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action"|string;
-  export interface SpartaProxyVpcEndpoint {
-    /**
-     * The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
-     */
-    VpcEndpointId?: String;
-  }
-  export type SpartaProxyVpcEndpointList = SpartaProxyVpcEndpoint[];
   export type String = string;
   export interface Subnet {
     /**
@@ -4577,6 +4570,13 @@ declare namespace Redshift {
   export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string;
   export type UsageLimits = UsageLimit[];
   export type ValueStringList = String[];
+  export interface VpcEndpoint {
+    /**
+     * The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+     */
+    VpcEndpointId?: String;
+  }
+  export type VpcEndpointsList = VpcEndpoint[];
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

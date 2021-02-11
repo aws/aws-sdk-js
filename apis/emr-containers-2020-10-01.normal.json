@@ -634,7 +634,8 @@
       }
     },
     "Date": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "DeleteManagedEndpointRequest": {
       "type": "structure",

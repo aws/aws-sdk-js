@@ -94,6 +94,12 @@
           string3: 'xyz'
         });
       });
+      it('accepts null and undefined values for params not described in the input', function() {
+        return expectValid({
+          string3: null,
+          string4: undefined
+        });
+      });
       return it('rejects nested params that are not described in the input', function() {
         expectValid({
           hash: {

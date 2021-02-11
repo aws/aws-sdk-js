@@ -12,45 +12,61 @@ declare class HealthLake extends Service {
   constructor(options?: HealthLake.Types.ClientConfiguration)
   config: Config & HealthLake.Types.ClientConfiguration;
   /**
-   * Creates a datastore that can ingest and export FHIR data.
+   * Creates a Data Store that can ingest and export FHIR formatted data.
    */
   createFHIRDatastore(params: HealthLake.Types.CreateFHIRDatastoreRequest, callback?: (err: AWSError, data: HealthLake.Types.CreateFHIRDatastoreResponse) => void): Request<HealthLake.Types.CreateFHIRDatastoreResponse, AWSError>;
   /**
-   * Creates a datastore that can ingest and export FHIR data.
+   * Creates a Data Store that can ingest and export FHIR formatted data.
    */
   createFHIRDatastore(callback?: (err: AWSError, data: HealthLake.Types.CreateFHIRDatastoreResponse) => void): Request<HealthLake.Types.CreateFHIRDatastoreResponse, AWSError>;
   /**
-   * Deletes a datastore. 
+   * Deletes a Data Store. 
    */
   deleteFHIRDatastore(params: HealthLake.Types.DeleteFHIRDatastoreRequest, callback?: (err: AWSError, data: HealthLake.Types.DeleteFHIRDatastoreResponse) => void): Request<HealthLake.Types.DeleteFHIRDatastoreResponse, AWSError>;
   /**
-   * Deletes a datastore. 
+   * Deletes a Data Store. 
    */
   deleteFHIRDatastore(callback?: (err: AWSError, data: HealthLake.Types.DeleteFHIRDatastoreResponse) => void): Request<HealthLake.Types.DeleteFHIRDatastoreResponse, AWSError>;
   /**
-   * Gets the properties associated with the FHIR datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.
+   * Gets the properties associated with the FHIR Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
    */
   describeFHIRDatastore(params: HealthLake.Types.DescribeFHIRDatastoreRequest, callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRDatastoreResponse) => void): Request<HealthLake.Types.DescribeFHIRDatastoreResponse, AWSError>;
   /**
-   * Gets the properties associated with the FHIR datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.
+   * Gets the properties associated with the FHIR Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
    */
   describeFHIRDatastore(callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRDatastoreResponse) => void): Request<HealthLake.Types.DescribeFHIRDatastoreResponse, AWSError>;
   /**
-   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the datastore.
+   * Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
+   */
+  describeFHIRExportJob(params: HealthLake.Types.DescribeFHIRExportJobRequest, callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRExportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRExportJobResponse, AWSError>;
+  /**
+   * Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
+   */
+  describeFHIRExportJob(callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRExportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRExportJobResponse, AWSError>;
+  /**
+   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job.
    */
   describeFHIRImportJob(params: HealthLake.Types.DescribeFHIRImportJobRequest, callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRImportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRImportJobResponse, AWSError>;
   /**
-   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the datastore.
+   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job.
    */
   describeFHIRImportJob(callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRImportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRImportJobResponse, AWSError>;
   /**
-   * Lists all FHIR datastores that are in the user’s account, regardless of datastore status.
+   * Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.
    */
   listFHIRDatastores(params: HealthLake.Types.ListFHIRDatastoresRequest, callback?: (err: AWSError, data: HealthLake.Types.ListFHIRDatastoresResponse) => void): Request<HealthLake.Types.ListFHIRDatastoresResponse, AWSError>;
   /**
-   * Lists all FHIR datastores that are in the user’s account, regardless of datastore status.
+   * Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.
    */
   listFHIRDatastores(callback?: (err: AWSError, data: HealthLake.Types.ListFHIRDatastoresResponse) => void): Request<HealthLake.Types.ListFHIRDatastoresResponse, AWSError>;
+  /**
+   * Begins a FHIR export job.
+   */
+  startFHIRExportJob(params: HealthLake.Types.StartFHIRExportJobRequest, callback?: (err: AWSError, data: HealthLake.Types.StartFHIRExportJobResponse) => void): Request<HealthLake.Types.StartFHIRExportJobResponse, AWSError>;
+  /**
+   * Begins a FHIR export job.
+   */
+  startFHIRExportJob(callback?: (err: AWSError, data: HealthLake.Types.StartFHIRExportJobResponse) => void): Request<HealthLake.Types.StartFHIRExportJobResponse, AWSError>;
   /**
    * Begins a FHIR Import job.
    */
@@ -65,15 +81,15 @@ declare namespace HealthLake {
   export type ClientTokenString = string;
   export interface CreateFHIRDatastoreRequest {
     /**
-     * The user generated name for the datastore.
+     * The user generated name for the Data Store.
      */
     DatastoreName?: DatastoreName;
     /**
-     * The FHIR version of the datastore. The only supported version is R4.
+     * The FHIR version of the Data Store. The only supported version is R4.
      */
     DatastoreTypeVersion: FHIRVersion;
     /**
-     * Optional parameter to preload data upon creation of the datastore. Currently, the only supported preloaded data is synthetic data generated from Synthea.
+     * Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.
      */
     PreloadDataConfig?: PreloadDataConfig;
     /**
@@ -83,38 +99,38 @@ declare namespace HealthLake {
   }
   export interface CreateFHIRDatastoreResponse {
     /**
-     * The AWS-generated datastore id. This id is in the output from the initial datastore creation call.
+     * The AWS-generated Data Store id. This id is in the output from the initial Data Store creation call.
      */
     DatastoreId: DatastoreId;
     /**
-     * The datastore ARN is generated during the creation of the datastore and can be found in the output from the initial datastore creation call.
+     * The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
      */
     DatastoreArn: DatastoreArn;
     /**
-     * The status of the FHIR datastore. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.
+     * The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.
      */
     DatastoreStatus: DatastoreStatus;
     /**
-     * The AWS endpoint for the created datastore. For preview, only US-east-1 endpoints are supported.
+     * The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.
      */
     DatastoreEndpoint: BoundedLengthString;
   }
   export type DatastoreArn = string;
   export interface DatastoreFilter {
     /**
-     * Allows the user to filter datastore results by name.
+     * Allows the user to filter Data Store results by name.
      */
     DatastoreName?: DatastoreName;
     /**
-     * Allows the user to filter datastore results by status.
+     * Allows the user to filter Data Store results by status.
      */
     DatastoreStatus?: DatastoreStatus;
     /**
-     * A filter that allows the user to set cutoff dates for records. All datastores created before the specified date will be included in the results. 
+     * A filter that allows the user to set cutoff dates for records. All Data Stores created before the specified date will be included in the results. 
      */
     CreatedBefore?: Timestamp;
     /**
-     * A filter that allows the user to set cutoff dates for records. All datastores created after the specified date will be included in the results.
+     * A filter that allows the user to set cutoff dates for records. All Data Stores created after the specified date will be included in the results.
      */
     CreatedAfter?: Timestamp;
   }
@@ -122,23 +138,23 @@ declare namespace HealthLake {
   export type DatastoreName = string;
   export interface DatastoreProperties {
     /**
-     * The AWS-generated ID number for the datastore.
+     * The AWS-generated ID number for the Data Store.
      */
     DatastoreId: DatastoreId;
     /**
-     * The Amazon Resource Name used in the creation of the datastore.
+     * The Amazon Resource Name used in the creation of the Data Store.
      */
     DatastoreArn: DatastoreArn;
     /**
-     * The user-generated name for the datastore.
+     * The user-generated name for the Data Store.
      */
     DatastoreName?: DatastoreName;
     /**
-     * The status of the datastore. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
+     * The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
      */
     DatastoreStatus: DatastoreStatus;
     /**
-     * The time that a datastore was created. 
+     * The time that a Data Store was created. 
      */
     CreatedAt?: Timestamp;
     /**
@@ -146,11 +162,11 @@ declare namespace HealthLake {
      */
     DatastoreTypeVersion: FHIRVersion;
     /**
-     * The AWS endpoint for the datastore. Each datastore will have it's own endpoint with datastore ID in the endpoint URL.
+     * The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
      */
     DatastoreEndpoint: String;
     /**
-     * The preloaded data configuration for the datastore. Only data preloaded from Synthea is supported.
+     * The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
      */
     PreloadDataConfig?: PreloadDataConfig;
   }
@@ -158,13 +174,13 @@ declare namespace HealthLake {
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
   export interface DeleteFHIRDatastoreRequest {
     /**
-     *  The AWS-generated ID for the datastore to be deleted.
+     *  The AWS-generated ID for the Data Store to be deleted.
      */
     DatastoreId?: DatastoreId;
   }
   export interface DeleteFHIRDatastoreResponse {
     /**
-     * The AWS-generated ID for the datastore to be deleted.
+     * The AWS-generated ID for the Data Store to be deleted.
      */
     DatastoreId: DatastoreId;
     /**
@@ -172,29 +188,45 @@ declare namespace HealthLake {
      */
     DatastoreArn: DatastoreArn;
     /**
-     * The status of the datastore that the user has requested to be deleted. 
+     * The status of the Data Store that the user has requested to be deleted. 
      */
     DatastoreStatus: DatastoreStatus;
     /**
-     * The AWS endpoint for the datastore the user has requested to be deleted.
+     * The AWS endpoint for the Data Store the user has requested to be deleted.
      */
     DatastoreEndpoint: BoundedLengthString;
   }
   export interface DescribeFHIRDatastoreRequest {
     /**
-     * The AWS-generated datastore id. This is part of the ‘CreateFHIRDatastore’ output.
+     * The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
      */
     DatastoreId?: DatastoreId;
   }
   export interface DescribeFHIRDatastoreResponse {
     /**
-     * All properties associated with a datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.
+     * All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
      */
     DatastoreProperties: DatastoreProperties;
   }
+  export interface DescribeFHIRExportJobRequest {
+    /**
+     * The AWS generated ID for the Data Store from which files are being exported from for an export job.
+     */
+    DatastoreId: DatastoreId;
+    /**
+     * The AWS generated ID for an export job.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeFHIRExportJobResponse {
+    /**
+     * Displays the properties of the export job, including the ID, Arn, Name, and the status of the job. 
+     */
+    ExportJobProperties: ExportJobProperties;
+  }
   export interface DescribeFHIRImportJobRequest {
     /**
-     * The AWS-generated ID of the datastore.
+     * The AWS-generated ID of the Data Store.
      */
     DatastoreId: DatastoreId;
     /**
@@ -204,9 +236,47 @@ declare namespace HealthLake {
   }
   export interface DescribeFHIRImportJobResponse {
     /**
-     * The properties of the Import job request, including the ID, ARN, name, and the status of the datastore.
+     * The properties of the Import job request, including the ID, ARN, name, and the status of the job.
      */
     ImportJobProperties: ImportJobProperties;
+  }
+  export interface ExportJobProperties {
+    /**
+     * The AWS generated ID for an export job.
+     */
+    JobId: JobId;
+    /**
+     * The user generated name for an export job.
+     */
+    JobName?: JobName;
+    /**
+     * The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    JobStatus: JobStatus;
+    /**
+     * The time an export job was initiated.
+     */
+    SubmitTime: Timestamp;
+    /**
+     * The time an export job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The AWS generated ID for the Data Store from which files are being exported for an export job.
+     */
+    DatastoreId: DatastoreId;
+    /**
+     * The output data configuration that was supplied when the export job was created.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name used during the initiation of the job.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * An explanation of any errors that may have occurred during the export job.
+     */
+    Message?: Message;
   }
   export type FHIRVersion = "R4"|string;
   export type IamRoleArn = string;
@@ -259,21 +329,21 @@ declare namespace HealthLake {
   export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
   export interface ListFHIRDatastoresRequest {
     /**
-     * Lists all filters associated with a FHIR datastore request.
+     * Lists all filters associated with a FHIR Data Store request.
      */
     Filter?: DatastoreFilter;
     /**
-     * Fetches the next page of datastores when results are paginated.
+     * Fetches the next page of Data Stores when results are paginated.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of datastores returned in a single page of a ListFHIRDatastoresRequest call.
+     * The maximum number of Data Stores returned in a single page of a ListFHIRDatastoresRequest call.
      */
     MaxResults?: MaxResultsInteger;
   }
   export interface ListFHIRDatastoresResponse {
     /**
-     * All properties associated with the listed datastores.
+     * All properties associated with the listed Data Stores.
      */
     DatastorePropertiesList: DatastorePropertiesList;
     /**
@@ -284,6 +354,12 @@ declare namespace HealthLake {
   export type MaxResultsInteger = number;
   export type Message = string;
   export type NextToken = string;
+  export interface OutputDataConfig {
+    /**
+     * The S3Uri is the user specified S3 location to which data will be exported from a FHIR Data Store.
+     */
+    S3Uri?: S3Uri;
+  }
   export interface PreloadDataConfig {
     /**
      * The type of preloaded data. Only Synthea preloaded data is supported.
@@ -292,6 +368,42 @@ declare namespace HealthLake {
   }
   export type PreloadDataType = "SYNTHEA"|string;
   export type S3Uri = string;
+  export interface StartFHIRExportJobRequest {
+    /**
+     * The user generated name for an export job.
+     */
+    JobName?: JobName;
+    /**
+     * The output data configuration that was supplied when the export job was created.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The AWS generated ID for the Data Store from which files are being exported for an export job.
+     */
+    DatastoreId: DatastoreId;
+    /**
+     * The Amazon Resource Name used during the initiation of the job.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * An optional user provided token used for ensuring idempotency.
+     */
+    ClientToken: ClientTokenString;
+  }
+  export interface StartFHIRExportJobResponse {
+    /**
+     * The AWS generated ID for an export job.
+     */
+    JobId: JobId;
+    /**
+     * The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    JobStatus: JobStatus;
+    /**
+     * The AWS generated ID for the Data Store from which files are being exported for an export job.
+     */
+    DatastoreId?: DatastoreId;
+  }
   export interface StartFHIRImportJobRequest {
     /**
      * The name of the FHIR Import job in the StartFHIRImport job request.
@@ -302,7 +414,7 @@ declare namespace HealthLake {
      */
     InputDataConfig: InputDataConfig;
     /**
-     * The AWS-generated datastore ID.
+     * The AWS-generated Data Store ID.
      */
     DatastoreId: DatastoreId;
     /**
@@ -324,7 +436,7 @@ declare namespace HealthLake {
      */
     JobStatus: JobStatus;
     /**
-     * The AWS-generated datastore ID.
+     * The AWS-generated Data Store ID.
      */
     DatastoreId?: DatastoreId;
   }

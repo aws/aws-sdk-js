@@ -781,7 +781,7 @@ declare namespace ECS {
      */
     environment?: EnvironmentVariables;
     /**
-     * A list of files containing the environment variables to pass to a container. This parameter maps to the --env-file option to docker run. You can specify up to ten environment files. The file must have a .env file extension. Each line in an environment file should contain an environment variable in VARIABLE=VALUE format. Lines beginning with # are treated as comments and are ignored. For more information on the environment variable file syntax, see Declare default environment variables in file. If there are environment variables specified using the environment parameter in a container definition, they take precedence over the variables contained within an environment file. If multiple environment files are specified that contain the same variable, they are processed from the top down. It is recommended to use unique variable names. For more information, see Specifying Environment Variables in the Amazon Elastic Container Service Developer Guide. This field is not valid for containers in tasks using the Fargate launch type.
+     * A list of files containing the environment variables to pass to a container. This parameter maps to the --env-file option to docker run. You can specify up to ten environment files. The file must have a .env file extension. Each line in an environment file should contain an environment variable in VARIABLE=VALUE format. Lines beginning with # are treated as comments and are ignored. For more information on the environment variable file syntax, see Declare default environment variables in file. If there are environment variables specified using the environment parameter in a container definition, they take precedence over the variables contained within an environment file. If multiple environment files are specified that contain the same variable, they are processed from the top down. It is recommended to use unique variable names. For more information, see Specifying Environment Variables in the Amazon Elastic Container Service Developer Guide.
      */
     environmentFiles?: EnvironmentFiles;
     /**
@@ -3293,6 +3293,18 @@ declare namespace ECS {
      * The configuration details for the App Mesh proxy. Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the ecs-init package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide.
      */
     proxyConfiguration?: ProxyConfiguration;
+    /**
+     * The Unix timestamp for when the task definition was registered.
+     */
+    registeredAt?: Timestamp;
+    /**
+     * The Unix timestamp for when the task definition was deregistered.
+     */
+    deregisteredAt?: Timestamp;
+    /**
+     * The principal that registered the task definition.
+     */
+    registeredBy?: String;
   }
   export type TaskDefinitionFamilyStatus = "ACTIVE"|"INACTIVE"|"ALL"|string;
   export type TaskDefinitionField = "TAGS"|string;
@@ -3484,11 +3496,11 @@ declare namespace ECS {
   }
   export interface UpdateCapacityProviderRequest {
     /**
-     * An object representing the parameters to update for the Auto Scaling group capacity provider.
+     * The name of the capacity provider to update.
      */
     name: String;
     /**
-     * The name of the capacity provider to update.
+     * An object representing the parameters to update for the Auto Scaling group capacity provider.
      */
     autoScalingGroupProvider: AutoScalingGroupProviderUpdate;
   }

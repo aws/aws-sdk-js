@@ -132,19 +132,27 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.
+   * Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.
+   */
+  syncResource(params: ServiceCatalogAppRegistry.Types.SyncResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.SyncResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.SyncResourceResponse, AWSError>;
+  /**
+   * Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.
+   */
+  syncResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.SyncResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.SyncResourceResponse, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value. This operation returns an empty response if the call was successful.
    */
   tagResource(params: ServiceCatalogAppRegistry.Types.TagResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.TagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.
+   * Assigns one or more tags (key-value pairs) to the specified resource. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value. This operation returns an empty response if the call was successful.
    */
   tagResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.TagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags from a resource.
+   * Removes tags from a resource. This operation returns an empty response if the call was successful.
    */
   untagResource(params: ServiceCatalogAppRegistry.Types.UntagResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UntagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes tags from a resource.
+   * Removes tags from a resource. This operation returns an empty response if the call was successful.
    */
   untagResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UntagResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.UntagResourceResponse, AWSError>;
   /**
@@ -652,6 +660,31 @@ declare namespace ServiceCatalogAppRegistry {
   export type ResourceType = "CFN_STACK"|string;
   export type Resources = ResourceInfo[];
   export type StackArn = string;
+  export type SyncAction = "START_SYNC"|"NO_ACTION"|string;
+  export interface SyncResourceRequest {
+    /**
+     * The type of resource of which the application will be associated.
+     */
+    resourceType: ResourceType;
+    /**
+     * An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.
+     */
+    resource: ResourceSpecifier;
+  }
+  export interface SyncResourceResponse {
+    /**
+     * The Amazon resource name (ARN) that specifies the application.
+     */
+    applicationArn?: ApplicationArn;
+    /**
+     * The Amazon resource name (ARN) that specifies the resource.
+     */
+    resourceArn?: Arn;
+    /**
+     * The results of the output if an application is associated with an ARN value, which could be syncStarted or None.
+     */
+    actionTaken?: SyncAction;
+  }
   export type TagKey = string;
   export type TagKeys = TagKey[];
   export interface TagResourceRequest {

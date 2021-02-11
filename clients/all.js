@@ -256,5 +256,7 @@ module.exports = {
   IoTFleetHub: require('./iotfleethub'),
   IoTWireless: require('./iotwireless'),
   Location: require('./location'),
-  WellArchitected: require('./wellarchitected')
+  WellArchitected: require('./wellarchitected'),
+  LexModelsV2: require('./lexmodelsv2'),
+  LexRuntimeV2: require('./lexruntimev2')
 };

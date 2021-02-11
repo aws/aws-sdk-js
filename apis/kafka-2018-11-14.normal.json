@@ -934,6 +934,52 @@
       ],
       "documentation": "\n            <p>Updates the number of broker nodes in the cluster.</p>\n         "
     },
+    "UpdateBrokerType": {
+      "name": "UpdateBrokerType",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/nodes/type",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateBrokerTypeRequest"
+      },
+      "output": {
+        "shape": "UpdateBrokerTypeResponse",
+        "documentation": "\n            <p>Successful response.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n            "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n            "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n            "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n            "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n            "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n            "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n            "
+        }
+      ],
+      "documentation": "\n            <p>Updates EC2 instance type.</p>\n         "
+    },
     "UpdateBrokerStorage": {
       "name": "UpdateBrokerStorage",
       "http": {
@@ -2583,6 +2629,11 @@
         "LoggingInfo": {
           "shape": "LoggingInfo",
           "locationName": "loggingInfo"
+        },
+        "InstanceType": {
+          "shape": "__stringMin5Max32",
+          "locationName": "instanceType",
+          "documentation": "\n            <p>Information about the Amazon MSK broker type.</p>\n            "
         }
       },
       "documentation": "\n            <p>Information about cluster attributes that can be updated via update APIs.</p>\n         "
@@ -2948,6 +2999,47 @@
       ]
     },
     "UpdateBrokerCountResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n         "
+        }
+      }
+    },
+    "UpdateBrokerTypeRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>\n         "
+        },
+        "CurrentVersion": {
+          "shape": "__string",
+          "locationName": "currentVersion",
+          "documentation": "\n            <p>The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.</p>\n         "
+        },
+        "TargetInstanceType": {
+          "shape": "__string",
+          "locationName": "targetInstanceType",
+          "documentation": "\n            <p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>\n         "
+        }
+      },
+      "required": [
+        "ClusterArn",
+        "CurrentVersion",
+        "TargetInstanceType"
+      ]
+    },
+    "UpdateBrokerTypeResponse": {
       "type": "structure",
       "members": {
         "ClusterArn": {

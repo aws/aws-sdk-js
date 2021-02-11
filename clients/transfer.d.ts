@@ -182,6 +182,7 @@ declare namespace Transfer {
      * The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required when Protocols is set to FTPS. To request a new public certificate, see Request a public certificate in the  AWS Certificate Manager User Guide. To import an existing certificate into ACM, see Importing certificates into ACM in the  AWS Certificate Manager User Guide. To request a private certificate to use FTPS through private IP addresses, see Request a private certificate in the  AWS Certificate Manager User Guide. Certificates with the following cryptographic algorithms and key sizes are supported:   2048-bit RSA (RSA_2048)   4096-bit RSA (RSA_4096)   Elliptic Prime Curve 256 bit (EC_prime256v1)   Elliptic Prime Curve 384 bit (EC_secp384r1)   Elliptic Prime Curve 521 bit (EC_secp521r1)    The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP address specified and information about the issuer. 
      */
     Certificate?: Certificate;
+    Domain?: Domain;
     /**
      * The virtual private cloud (VPC) endpoint settings that are configured for your server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.
      */
@@ -242,6 +243,7 @@ declare namespace Transfer {
      * A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Creating a scope-down policy. For more information, see AssumeRole in the AWS Security Token Service API Reference. 
      */
     Policy?: Policy;
+    PosixProfile?: PosixProfile;
     /**
      * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
      */
@@ -383,6 +385,7 @@ declare namespace Transfer {
      * Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required when Protocols is set to FTPS.
      */
     Certificate?: Certificate;
+    Domain?: Domain;
     /**
      * Specifies the virtual private cloud (VPC) endpoint settings that you configured for your server.
      */
@@ -453,6 +456,7 @@ declare namespace Transfer {
      * Specifies the name of the policy in use for the described user.
      */
     Policy?: Policy;
+    PosixProfile?: PosixProfile;
     /**
      * Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a server to access your resources when servicing your users' transfer requests.
      */
@@ -470,6 +474,7 @@ declare namespace Transfer {
      */
     UserName?: UserName;
   }
+  export type Domain = "S3"|"EFS"|string;
   export interface EndpointDetails {
     /**
      * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
@@ -649,6 +654,7 @@ declare namespace Transfer {
      * Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
      */
     Arn: Arn;
+    Domain?: Domain;
     /**
      * Specifies the authentication method used to validate a user for a server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
      */
@@ -709,10 +715,17 @@ declare namespace Transfer {
   export type NextToken = string;
   export type NullableRole = string;
   export type Policy = string;
+  export type PosixId = number;
+  export interface PosixProfile {
+    Uid: PosixId;
+    Gid: PosixId;
+    SecondaryGids?: SecondaryGids;
+  }
   export type Protocol = "SFTP"|"FTP"|"FTPS"|string;
   export type Protocols = Protocol[];
   export type Response = string;
   export type Role = string;
+  export type SecondaryGids = PosixId[];
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SecurityPolicyName = string;
@@ -890,6 +903,7 @@ declare namespace Transfer {
      * Allows you to supply a scope-down policy for your user so you can use the same IAM role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Creating a scope-down policy. For more information, see AssumeRole in the AWS Security Token Service API Reference. 
      */
     Policy?: Policy;
+    PosixProfile?: PosixProfile;
     /**
      * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
      */

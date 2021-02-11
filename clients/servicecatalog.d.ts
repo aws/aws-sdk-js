@@ -742,8 +742,7 @@ declare namespace ServiceCatalog {
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export type AddTags = Tag[];
-  export type AllowedValue = string;
-  export type AllowedValues = AllowedValue[];
+  export type AllowedValues = String[];
   export type ApproximateCount = number;
   export interface AssociateBudgetWithResourceInput {
     /**
@@ -2709,6 +2708,30 @@ declare namespace ServiceCatalog {
      * The values that the administrator has allowed for the parameter.
      */
     AllowedValues?: AllowedValues;
+    /**
+     * A regular expression that represents the patterns that allow for String types. The pattern must match the entire parameter value provided.
+     */
+    AllowedPattern?: String;
+    /**
+     * A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of [A-Za-z0-9]+ displays the following error message when the user specifies an invalid value:  Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+  By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:  Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers. 
+     */
+    ConstraintDescription?: String;
+    /**
+     * An integer value that determines the largest number of characters you want to allow for String types. 
+     */
+    MaxLength?: String;
+    /**
+     * An integer value that determines the smallest number of characters you want to allow for String types.
+     */
+    MinLength?: String;
+    /**
+     * A numeric value that determines the largest numeric value you want to allow for Number types.
+     */
+    MaxValue?: String;
+    /**
+     * A numeric value that determines the smallest numeric value you want to allow for Number types. 
+     */
+    MinValue?: String;
   }
   export type ParameterKey = string;
   export type ParameterType = string;
@@ -3863,6 +3886,7 @@ declare namespace ServiceCatalog {
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type StatusDetail = string;
   export type StatusMessage = string;
+  export type String = string;
   export type SuccessfulShares = AccountId[];
   export type SupportDescription = string;
   export type SupportEmail = string;

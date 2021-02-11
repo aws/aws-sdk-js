@@ -333,6 +333,10 @@
     "CreateRule": {
       "type": "structure",
       "members": {
+        "Location": {
+          "shape": "LocationValues",
+          "documentation": "<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create snapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this parameter, <code>CLOUD</code> is used by default.</p> <p>If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. </p> <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.</p>"
+        },
         "Interval": {
           "shape": "Interval",
           "documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.</p>"
@@ -404,13 +408,16 @@
     "CrossRegionCopyRule": {
       "type": "structure",
       "required": [
-        "TargetRegion",
         "Encrypted"
       ],
       "members": {
         "TargetRegion": {
           "shape": "TargetRegion",
-          "documentation": "<p>The target Region.</p>"
+          "documentation": "<p>The target Region for the snapshot copies.</p> <p>If you specify a target Region, you must omit <b>Target</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>"
+        },
+        "Target": {
+          "shape": "Target",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies.</p> <p>If you specify an ARN, you must omit <b>TargetRegion</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>"
         },
         "Encrypted": {
           "shape": "Encrypted",
@@ -755,6 +762,13 @@
         }
       }
     },
+    "LocationValues": {
+      "type": "string",
+      "enum": [
+        "CLOUD",
+        "OUTPOST_LOCAL"
+      ]
+    },
     "NoReboot": {
       "type": "boolean"
     },
@@ -794,6 +808,10 @@
         "ResourceTypes": {
           "shape": "ResourceTypeValuesList",
           "documentation": "<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>"
+        },
+        "ResourceLocations": {
+          "shape": "ResourceLocationList",
+          "documentation": "<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>"
         },
         "TargetTags": {
           "shape": "TargetTagList",
@@ -836,6 +854,21 @@
         "EBS_SNAPSHOT_MANAGEMENT",
         "IMAGE_MANAGEMENT",
         "EVENT_BASED_POLICY"
+      ]
+    },
+    "ResourceLocationList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceLocationValues"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "ResourceLocationValues": {
+      "type": "string",
+      "enum": [
+        "CLOUD",
+        "OUTPOST"
       ]
     },
     "ResourceTypeValues": {
@@ -913,7 +946,7 @@
         },
         "CrossRegionCopyRules": {
           "shape": "CrossRegionCopyRules",
-          "documentation": "<p>The rule for cross-Region snapshot copies.</p>"
+          "documentation": "<p>The rule for cross-Region snapshot copies.</p> <p>You can only specify cross-Region copy rules for policies that create snapshots in a Region. If the policy creates snapshots on an Outpost, then you cannot copy the snapshots to a Region or to an Outpost. If the policy creates snapshots in a Region, then snapshots can be copied to up to three Regions or Outposts.</p>"
         },
         "ShareRules": {
           "shape": "ShareRules",
@@ -1094,9 +1127,9 @@
     },
     "Target": {
       "type": "string",
-      "max": 16,
+      "max": 2048,
       "min": 0,
-      "pattern": "^[\\\\w:\\\\-\\\\/\\\\*]+$"
+      "pattern": "^[\\w:\\-\\/\\*]+$"
     },
     "TargetRegion": {
       "type": "string",

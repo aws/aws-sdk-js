@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ComputeOptimizer",
+        "description": "This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for lambda functions."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "AWS DMS launches support for AWS Secrets Manager to manage Oracle ASM Database credentials"
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroups",
+        "description": "Add operation `PutGroupConfiguration`. Support dedicated hosts and add `Pending` in operations `Un/GroupResources`. Add `Resources` in `ListGroupResources` and deprecate `ResourceIdentifiers`."
+    }
+]

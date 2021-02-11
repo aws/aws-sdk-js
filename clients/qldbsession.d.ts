@@ -12,11 +12,11 @@ declare class QLDBSession extends Service {
   constructor(options?: QLDBSession.Types.ClientConfiguration)
   config: Config & QLDBSession.Types.ClientConfiguration;
   /**
-   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this qldbsession data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB Shell.   
+   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend using the QLDB driver or the QLDB shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB driver. The driver provides a high-level abstraction layer above this QLDB Session data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB shell. The shell is a command line interface that uses the QLDB driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB shell.   
    */
   sendCommand(params: QLDBSession.Types.SendCommandRequest, callback?: (err: AWSError, data: QLDBSession.Types.SendCommandResult) => void): Request<QLDBSession.Types.SendCommandResult, AWSError>;
   /**
-   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this qldbsession data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB Shell.   
+   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend using the QLDB driver or the QLDB shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB driver. The driver provides a high-level abstraction layer above this QLDB Session data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB shell. The shell is a command line interface that uses the QLDB driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB shell.   
    */
   sendCommand(callback?: (err: AWSError, data: QLDBSession.Types.SendCommandResult) => void): Request<QLDBSession.Types.SendCommandResult, AWSError>;
 }
@@ -24,6 +24,10 @@ declare namespace QLDBSession {
   export interface AbortTransactionRequest {
   }
   export interface AbortTransactionResult {
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
   }
   export type CommitDigest = Buffer|Uint8Array|Blob|string;
   export interface CommitTransactionRequest {
@@ -32,7 +36,7 @@ declare namespace QLDBSession {
      */
     TransactionId: TransactionId;
     /**
-     * Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates CommitDigest and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.
+     * Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates CommitDigest and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB. The purpose of the CommitDigest parameter is to ensure that QLDB commits a transaction if and only if the server has processed the exact set of statements sent by the client, in the same order that client sent them, and with no duplicates.
      */
     CommitDigest: CommitDigest;
   }
@@ -45,10 +49,22 @@ declare namespace QLDBSession {
      * The commit digest of the committed transaction.
      */
     CommitDigest?: CommitDigest;
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
+    /**
+     * Contains metrics about the number of I/O requests that were consumed.
+     */
+    ConsumedIOs?: IOUsage;
   }
   export interface EndSessionRequest {
   }
   export interface EndSessionResult {
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
   }
   export interface ExecuteStatementRequest {
     /**
@@ -69,6 +85,14 @@ declare namespace QLDBSession {
      * Contains the details of the first fetched page.
      */
     FirstPage?: Page;
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
+    /**
+     * Contains metrics about the number of I/O requests that were consumed.
+     */
+    ConsumedIOs?: IOUsage;
   }
   export interface FetchPageRequest {
     /**
@@ -85,6 +109,24 @@ declare namespace QLDBSession {
      * Contains details of the fetched page.
      */
     Page?: Page;
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
+    /**
+     * Contains metrics about the number of I/O requests that were consumed.
+     */
+    ConsumedIOs?: IOUsage;
+  }
+  export interface IOUsage {
+    /**
+     * The number of read I/O requests that the command made.
+     */
+    ReadIOs?: ReadIOs;
+    /**
+     * The number of write I/O requests that the command made.
+     */
+    WriteIOs?: WriteIOs;
   }
   export type IonBinary = Buffer|Uint8Array|Blob|string;
   export type IonText = string;
@@ -100,6 +142,8 @@ declare namespace QLDBSession {
     NextPageToken?: PageToken;
   }
   export type PageToken = string;
+  export type ProcessingTimeMilliseconds = number;
+  export type ReadIOs = number;
   export interface SendCommandRequest {
     /**
      * Specifies the session token for the current command. A session token is constant throughout the life of the session. To obtain a session token, run the StartSession command. This SessionToken is required for every subsequent command that is issued during the current session.
@@ -176,6 +220,10 @@ declare namespace QLDBSession {
      * Session token of the started session. This SessionToken is required for every subsequent command that is issued during the current session.
      */
     SessionToken?: SessionToken;
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
   }
   export interface StartTransactionRequest {
   }
@@ -184,9 +232,19 @@ declare namespace QLDBSession {
      * The transaction ID of the started transaction.
      */
     TransactionId?: TransactionId;
+    /**
+     * Contains server-side performance information for the command.
+     */
+    TimingInformation?: TimingInformation;
   }
   export type Statement = string;
   export type StatementParameters = ValueHolder[];
+  export interface TimingInformation {
+    /**
+     * The amount of time that QLDB spent on processing the command, measured in milliseconds.
+     */
+    ProcessingTimeMilliseconds?: ProcessingTimeMilliseconds;
+  }
   export type TransactionId = string;
   export interface ValueHolder {
     /**
@@ -199,6 +257,7 @@ declare namespace QLDBSession {
     IonText?: IonText;
   }
   export type ValueHolders = ValueHolder[];
+  export type WriteIOs = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

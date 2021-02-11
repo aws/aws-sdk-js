@@ -1177,7 +1177,8 @@
     "DeleteIntegrationRequest": {
       "type": "structure",
       "required": [
-        "DomainName"
+        "DomainName",
+        "Uri"
       ],
       "members": {
         "DomainName": {
@@ -1461,7 +1462,8 @@
     "GetIntegrationRequest": {
       "type": "structure",
       "required": [
-        "DomainName"
+        "DomainName",
+        "Uri"
       ],
       "members": {
         "DomainName": {

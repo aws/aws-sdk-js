@@ -13,11 +13,11 @@ declare class Route53 extends Service {
   constructor(options?: Route53.Types.ClientConfiguration)
   config: Config & Route53.Types.ClientConfiguration;
   /**
-   * Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to ACTIVE.
+   * Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to ACTIVE.
    */
   activateKeySigningKey(params: Route53.Types.ActivateKeySigningKeyRequest, callback?: (err: AWSError, data: Route53.Types.ActivateKeySigningKeyResponse) => void): Request<Route53.Types.ActivateKeySigningKeyResponse, AWSError>;
   /**
-   * Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to ACTIVE.
+   * Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to ACTIVE.
    */
   activateKeySigningKey(callback?: (err: AWSError, data: Route53.Types.ActivateKeySigningKeyResponse) => void): Request<Route53.Types.ActivateKeySigningKeyResponse, AWSError>;
   /**
@@ -61,11 +61,11 @@ declare class Route53 extends Service {
    */
   createHostedZone(callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
-   * Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.
+   * Creates a new key-signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.
    */
   createKeySigningKey(params: Route53.Types.CreateKeySigningKeyRequest, callback?: (err: AWSError, data: Route53.Types.CreateKeySigningKeyResponse) => void): Request<Route53.Types.CreateKeySigningKeyResponse, AWSError>;
   /**
-   * Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.
+   * Creates a new key-signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.
    */
   createKeySigningKey(callback?: (err: AWSError, data: Route53.Types.CreateKeySigningKeyResponse) => void): Request<Route53.Types.CreateKeySigningKeyResponse, AWSError>;
   /**
@@ -117,11 +117,11 @@ declare class Route53 extends Service {
    */
   createVPCAssociationAuthorization(callback?: (err: AWSError, data: Route53.Types.CreateVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.CreateVPCAssociationAuthorizationResponse, AWSError>;
   /**
-   * Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to INACTIVE.
+   * Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to INACTIVE.
    */
   deactivateKeySigningKey(params: Route53.Types.DeactivateKeySigningKeyRequest, callback?: (err: AWSError, data: Route53.Types.DeactivateKeySigningKeyResponse) => void): Request<Route53.Types.DeactivateKeySigningKeyResponse, AWSError>;
   /**
-   * Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to INACTIVE.
+   * Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to INACTIVE.
    */
   deactivateKeySigningKey(callback?: (err: AWSError, data: Route53.Types.DeactivateKeySigningKeyResponse) => void): Request<Route53.Types.DeactivateKeySigningKeyResponse, AWSError>;
   /**
@@ -141,11 +141,11 @@ declare class Route53 extends Service {
    */
   deleteHostedZone(callback?: (err: AWSError, data: Route53.Types.DeleteHostedZoneResponse) => void): Request<Route53.Types.DeleteHostedZoneResponse, AWSError>;
   /**
-   * Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.
+   * Deletes a key-signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.
    */
   deleteKeySigningKey(params: Route53.Types.DeleteKeySigningKeyRequest, callback?: (err: AWSError, data: Route53.Types.DeleteKeySigningKeyResponse) => void): Request<Route53.Types.DeleteKeySigningKeyResponse, AWSError>;
   /**
-   * Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.
+   * Deletes a key-signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.
    */
   deleteKeySigningKey(callback?: (err: AWSError, data: Route53.Types.DeleteKeySigningKeyResponse) => void): Request<Route53.Types.DeleteKeySigningKeyResponse, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class Route53 extends Service {
    */
   deleteVPCAssociationAuthorization(callback?: (err: AWSError, data: Route53.Types.DeleteVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.DeleteVPCAssociationAuthorizationResponse, AWSError>;
   /**
-   * Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs) that are active in the hosted zone.
+   * Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key-signing keys (KSKs) that are active in the hosted zone.
    */
   disableHostedZoneDNSSEC(params: Route53.Types.DisableHostedZoneDNSSECRequest, callback?: (err: AWSError, data: Route53.Types.DisableHostedZoneDNSSECResponse) => void): Request<Route53.Types.DisableHostedZoneDNSSECResponse, AWSError>;
   /**
-   * Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs) that are active in the hosted zone.
+   * Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key-signing keys (KSKs) that are active in the hosted zone.
    */
   disableHostedZoneDNSSEC(callback?: (err: AWSError, data: Route53.Types.DisableHostedZoneDNSSECResponse) => void): Request<Route53.Types.DisableHostedZoneDNSSECResponse, AWSError>;
   /**
@@ -229,27 +229,27 @@ declare class Route53 extends Service {
    */
   getChange(callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
   /**
-   *   GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see IP Address Ranges of Amazon Route 53 Servers in the Amazon Route 53 Developer Guide. 
+   * Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.   GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see IP Address Ranges of Amazon Route 53 Servers in the Amazon Route 53 Developer Guide. 
    */
   getCheckerIpRanges(params: Route53.Types.GetCheckerIpRangesRequest, callback?: (err: AWSError, data: Route53.Types.GetCheckerIpRangesResponse) => void): Request<Route53.Types.GetCheckerIpRangesResponse, AWSError>;
   /**
-   *   GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see IP Address Ranges of Amazon Route 53 Servers in the Amazon Route 53 Developer Guide. 
+   * Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.   GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see IP Address Ranges of Amazon Route 53 Servers in the Amazon Route 53 Developer Guide. 
    */
   getCheckerIpRanges(callback?: (err: AWSError, data: Route53.Types.GetCheckerIpRangesResponse) => void): Request<Route53.Types.GetCheckerIpRangesResponse, AWSError>;
   /**
-   * Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted zone.
+   * Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.
    */
   getDNSSEC(params: Route53.Types.GetDNSSECRequest, callback?: (err: AWSError, data: Route53.Types.GetDNSSECResponse) => void): Request<Route53.Types.GetDNSSECResponse, AWSError>;
   /**
-   * Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted zone.
+   * Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.
    */
   getDNSSEC(callback?: (err: AWSError, data: Route53.Types.GetDNSSECResponse) => void): Request<Route53.Types.GetDNSSECResponse, AWSError>;
   /**
-   * Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets. Use the following syntax to determine whether a continent is supported for geolocation:  GET /2013-04-01/geolocation?continentcode=two-letter abbreviation for a continent   Use the following syntax to determine whether a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code   Use the following syntax to determine whether a subdivision of a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code&amp;subdivisioncode=subdivision code  
+   * Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets. Route 53 does not perform authorization for this API because it retrieves information that is already available to the public. Use the following syntax to determine whether a continent is supported for geolocation:  GET /2013-04-01/geolocation?continentcode=two-letter abbreviation for a continent   Use the following syntax to determine whether a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code   Use the following syntax to determine whether a subdivision of a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code&amp;subdivisioncode=subdivision code  
    */
   getGeoLocation(params: Route53.Types.GetGeoLocationRequest, callback?: (err: AWSError, data: Route53.Types.GetGeoLocationResponse) => void): Request<Route53.Types.GetGeoLocationResponse, AWSError>;
   /**
-   * Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets. Use the following syntax to determine whether a continent is supported for geolocation:  GET /2013-04-01/geolocation?continentcode=two-letter abbreviation for a continent   Use the following syntax to determine whether a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code   Use the following syntax to determine whether a subdivision of a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code&amp;subdivisioncode=subdivision code  
+   * Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets. Route 53 does not perform authorization for this API because it retrieves information that is already available to the public. Use the following syntax to determine whether a continent is supported for geolocation:  GET /2013-04-01/geolocation?continentcode=two-letter abbreviation for a continent   Use the following syntax to determine whether a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code   Use the following syntax to determine whether a subdivision of a country is supported for geolocation:  GET /2013-04-01/geolocation?countrycode=two-character country code&amp;subdivisioncode=subdivision code  
    */
   getGeoLocation(callback?: (err: AWSError, data: Route53.Types.GetGeoLocationResponse) => void): Request<Route53.Types.GetGeoLocationResponse, AWSError>;
   /**
@@ -357,11 +357,11 @@ declare class Route53 extends Service {
    */
   getTrafficPolicyInstanceCount(callback?: (err: AWSError, data: Route53.Types.GetTrafficPolicyInstanceCountResponse) => void): Request<Route53.Types.GetTrafficPolicyInstanceCountResponse, AWSError>;
   /**
-   * Retrieves a list of supported geographic locations. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. For a list of supported geolocation codes, see the GeoLocation data type.
+   * Retrieves a list of supported geographic locations. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. Route 53 does not perform authorization for this API because it retrieves information that is already available to the public. For a list of supported geolocation codes, see the GeoLocation data type.
    */
   listGeoLocations(params: Route53.Types.ListGeoLocationsRequest, callback?: (err: AWSError, data: Route53.Types.ListGeoLocationsResponse) => void): Request<Route53.Types.ListGeoLocationsResponse, AWSError>;
   /**
-   * Retrieves a list of supported geographic locations. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. For a list of supported geolocation codes, see the GeoLocation data type.
+   * Retrieves a list of supported geographic locations. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. Route 53 does not perform authorization for this API because it retrieves information that is already available to the public. For a list of supported geolocation codes, see the GeoLocation data type.
    */
   listGeoLocations(callback?: (err: AWSError, data: Route53.Types.ListGeoLocationsResponse) => void): Request<Route53.Types.ListGeoLocationsResponse, AWSError>;
   /**
@@ -552,7 +552,7 @@ declare namespace Route53 {
      */
     HostedZoneId: ResourceId;
     /**
-     * An alphanumeric string used to identify a key signing key (KSK).
+     * A string used to identify a key-signing key (KSK). Name can include numbers, letters, and underscores (_). Name must be unique for each key-signing key in the same hosted zone.
      */
     Name: SigningKeyName;
   }
@@ -561,7 +561,7 @@ declare namespace Route53 {
   }
   export interface AlarmIdentifier {
     /**
-     * For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in. For the current list of CloudWatch regions, see Amazon CloudWatch in the AWS Service Endpoints chapter of the Amazon Web Services General Reference.
+     * For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in. For the current list of CloudWatch regions, see Amazon CloudWatch endpoints and quotas in the Amazon Web Services General Reference.
      */
     Region: CloudWatchRegion;
     /**
@@ -573,7 +573,7 @@ declare namespace Route53 {
   export type AliasHealthEnabled = boolean;
   export interface AliasTarget {
     /**
-     *  Alias resource records sets only: The value used depends on where you want to route traffic:  Amazon API Gateway custom regional APIs and edge-optimized APIs  Specify the hosted zone ID for your API. You can get the applicable value using the AWS CLI command get-domain-names:   For regional APIs, specify the value of regionalHostedZoneId.   For edge-optimized APIs, specify the value of distributionHostedZoneId.    Amazon Virtual Private Cloud interface VPC endpoint  Specify the hosted zone ID for your interface endpoint. You can get the value of HostedZoneId using the AWS CLI command describe-vpc-endpoints.  CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront can't be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region that you created the environment in. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see AWS Elastic Beanstalk in the "AWS Service Endpoints" chapter of the Amazon Web Services General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:    Service Endpoints table in the "Elastic Load Balancing Endpoints and Quotas" topic in the Amazon Web Services General Reference: Use the value that corresponds with the region that you created your load balancer in. Note that there are separate columns for Application and Classic Load Balancers and for Network Load Balancers.    AWS Management Console: Go to the Amazon EC2 page, choose Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted zone field on the Description tab.    Elastic Load Balancing API: Use DescribeLoadBalancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneId.      AWS CLI: Use describe-load-balancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneId.      AWS Global Accelerator accelerator  Specify Z2BJ6XQ5FK7U4H.  An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the region that you created the bucket in. For more information about valid values, see the table Amazon S3 Website Endpoints in the Amazon Web Services General Reference.  Another Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set can't reference a resource record set in a different hosted zone.)  
+     *  Alias resource records sets only: The value used depends on where you want to route traffic:  Amazon API Gateway custom regional APIs and edge-optimized APIs  Specify the hosted zone ID for your API. You can get the applicable value using the AWS CLI command get-domain-names:   For regional APIs, specify the value of regionalHostedZoneId.   For edge-optimized APIs, specify the value of distributionHostedZoneId.    Amazon Virtual Private Cloud interface VPC endpoint  Specify the hosted zone ID for your interface endpoint. You can get the value of HostedZoneId using the AWS CLI command describe-vpc-endpoints.  CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront can't be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region that you created the environment in. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see AWS Elastic Beanstalk endpoints and quotas in the the Amazon Web Services General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:    Elastic Load Balancing endpoints and quotas topic in the Amazon Web Services General Reference: Use the value that corresponds with the region that you created your load balancer in. Note that there are separate columns for Application and Classic Load Balancers and for Network Load Balancers.    AWS Management Console: Go to the Amazon EC2 page, choose Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted zone field on the Description tab.    Elastic Load Balancing API: Use DescribeLoadBalancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneId.      AWS CLI: Use describe-load-balancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneId.      AWS Global Accelerator accelerator  Specify Z2BJ6XQ5FK7U4H.  An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the region that you created the bucket in. For more information about valid values, see the table Amazon S3 Website Endpoints in the Amazon Web Services General Reference.  Another Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set can't reference a resource record set in a different hosted zone.)  
      */
     HostedZoneId: ResourceId;
     /**
@@ -796,26 +796,26 @@ declare namespace Route53 {
      */
     HostedZoneId: ResourceId;
     /**
-     * The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone. To see an example of KeyManagementServiceArn that grants the correct permissions for DNSSEC, scroll down to Example.  You must configure the CMK as follows:  Status  Enabled  Key spec  ECC_NIST_P256  Key usage  Sign and verify  Key policy  The key policy must give permission for the following actions:   DescribeKey   GetPublicKey   Sign   The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:    "Service": "api-service.dnssec.route53.aws.internal"      For more information about working with CMK in KMS, see AWS Key Management Service concepts.
+     * The Amazon resource name (ARN) for a customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS). The KeyManagementServiceArn must be unique for each key-signing key (KSK) in a single hosted zone. To see an example of KeyManagementServiceArn that grants the correct permissions for DNSSEC, scroll down to Example.  You must configure the customer managed CMK as follows:  Status  Enabled  Key spec  ECC_NIST_P256  Key usage  Sign and verify  Key policy  The key policy must give permission for the following actions:   DescribeKey   GetPublicKey   Sign   The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:    "Service": "api-service.dnssec.route53.aws.internal"      For more information about working with a customer managed CMK in AWS KMS, see AWS Key Management Service concepts.
      */
     KeyManagementServiceArn: SigningKeyString;
     /**
-     * An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.
+     * A string used to identify a key-signing key (KSK). Name can include numbers, letters, and underscores (_). Name must be unique for each key-signing key in the same hosted zone.
      */
     Name: SigningKeyName;
     /**
-     * A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.
+     * A string specifying the initial status of the key-signing key (KSK). You can set the value to ACTIVE or INACTIVE.
      */
     Status: SigningKeyStatus;
   }
   export interface CreateKeySigningKeyResponse {
     ChangeInfo: ChangeInfo;
     /**
-     * The key signing key (KSK) that the request creates.
+     * The key-signing key (KSK) that the request creates.
      */
     KeySigningKey: KeySigningKey;
     /**
-     * The unique URL representing the new key signing key (KSK).
+     * The unique URL representing the new key-signing key (KSK).
      */
     Location: ResourceURI;
   }
@@ -963,7 +963,7 @@ declare namespace Route53 {
   export type DNSRCode = string;
   export interface DNSSECStatus {
     /**
-     * Indicates your hosted zone signging status: SIGNING, NOT_SIGNING, or INTERNAL_FAILURE. If the status is INTERNAL_FAILURE, see StatusMessage for information about steps that you can take to correct the problem. A status INTERNAL_FAILURE means there was an error during a request. Before you can continue to work with DNSSEC signing, including working with key signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for the hosted zone.
+     * A string that represents the current hosted zone signing status. Status can have one of the following values:  SIGNING  DNSSEC signing is enabled for the hosted zone.  NOT_SIGNING  DNSSEC signing is not enabled for the hosted zone.  DELETING  DNSSEC signing is in the process of being removed for the hosted zone.  ACTION_NEEDED  There is a problem with signing in the hosted zone that requires you to take action to resolve. For example, the customer managed customer master key (CMK) might have been deleted, or the permissions for the customer managed CMK might have been changed.  INTERNAL_FAILURE  There was an error during a request. Before you can continue to work with DNSSEC signing, including with key-signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for the hosted zone.  
      */
     ServeSignature?: ServeSignature;
     /**
@@ -977,7 +977,7 @@ declare namespace Route53 {
      */
     HostedZoneId: ResourceId;
     /**
-     * An alphanumeric string used to identify a key signing key (KSK).
+     * A string used to identify a key-signing key (KSK).
      */
     Name: SigningKeyName;
   }
@@ -1026,7 +1026,7 @@ declare namespace Route53 {
      */
     HostedZoneId: ResourceId;
     /**
-     * An alphanumeric string used to identify a key signing key (KSK).
+     * A string used to identify a key-signing key (KSK).
      */
     Name: SigningKeyName;
   }
@@ -1173,7 +1173,7 @@ declare namespace Route53 {
      */
     CountryName?: GeoLocationCountryName;
     /**
-     * The code for the subdivision. Route 53 currently supports only states in the United States.
+     * The code for the subdivision, such as a particular state within the United States. For a list of US state abbreviations, see Appendix B: Two–Letter State and Possession Abbreviations on the United States Postal Service website. For a list of all supported subdivision codes, use the ListGeoLocations API.
      */
     SubdivisionCode?: GeoLocationSubdivisionCode;
     /**
@@ -1232,7 +1232,7 @@ declare namespace Route53 {
      */
     Status: DNSSECStatus;
     /**
-     * The key signing keys (KSKs) in your account.
+     * The key-signing keys (KSKs) in your account.
      */
     KeySigningKeys: KeySigningKeys;
   }
@@ -1246,7 +1246,7 @@ declare namespace Route53 {
      */
     CountryCode?: GeoLocationCountryCode;
     /**
-     * For SubdivisionCode, Amazon Route 53 supports only states of the United States. For a list of state abbreviations, see Appendix B: Two–Letter State and Possession Abbreviations on the United States Postal Service website.  If you specify subdivisioncode, you must also specify US for CountryCode. 
+     * The code for the subdivision, such as a particular state within the United States. For a list of US state abbreviations, see Appendix B: Two–Letter State and Possession Abbreviations on the United States Postal Service website. For a list of all supported subdivision codes, use the ListGeoLocations API.
      */
     SubdivisionCode?: GeoLocationSubdivisionCode;
   }
@@ -1430,7 +1430,7 @@ declare namespace Route53 {
   }
   export interface HealthCheck {
     /**
-     * The identifier that Amazon Route 53assigned to the health check when you created it. When you add or update a resource record set, you use this value to specify which health check to use. The value can be up to 64 characters long. 
+     * The identifier that Amazon Route 53 assigned to the health check when you created it. When you add or update a resource record set, you use this value to specify which health check to use. The value can be up to 64 characters long. 
      */
     Id: HealthCheckId;
     /**
@@ -1631,15 +1631,15 @@ declare namespace Route53 {
   export type IsPrivateZone = boolean;
   export interface KeySigningKey {
     /**
-     * An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.
+     * A string used to identify a key-signing key (KSK). Name can include numbers, letters, and underscores (_). Name must be unique for each key-signing key in the same hosted zone.
      */
     Name?: SigningKeyName;
     /**
-     * The Amazon resource name (ARN) used to identify the customer managed key (CMK) in AWS Key Management Service (KMS). The KmsArn must be unique for each key signing key (KSK) in a single hosted zone. You must configure the CMK as follows:  Status  Enabled  Key spec  ECC_NIST_P256  Key usage  Sign and verify  Key policy  The key policy must give permission for the following actions:   DescribeKey   GetPublicKey   Sign   The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:    "Service": "api-service.dnssec.route53.aws.internal"      For more information about working with the customer managed key (CMK) in KMS, see AWS Key Management Service concepts.
+     * The Amazon resource name (ARN) used to identify the customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS). The KmsArn must be unique for each key-signing key (KSK) in a single hosted zone. You must configure the CMK as follows:  Status  Enabled  Key spec  ECC_NIST_P256  Key usage  Sign and verify  Key policy  The key policy must give permission for the following actions:   DescribeKey   GetPublicKey   Sign   The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:    "Service": "api-service.dnssec.route53.aws.internal"      For more information about working with the customer managed CMK in AWS KMS, see AWS Key Management Service concepts.
      */
     KmsArn?: SigningKeyString;
     /**
-     * An integer that specifies how the key is used. For key signing key (KSK), this value is always 257.
+     * An integer that specifies how the key is used. For key-signing key (KSK), this value is always 257.
      */
     Flag?: SigningKeyInteger;
     /**
@@ -1679,19 +1679,19 @@ declare namespace Route53 {
      */
     DNSKEYRecord?: SigningKeyString;
     /**
-     * A string that represents the current key signing key (KSK) status. Status can have one of the following values:  ACTIVE  The KSK is being used for signing.  INACTIVE  The KSK is not being used for signing.  ACTION_NEEDED  There is an error in the KSK that requires you to take action to resolve.  INTERNAL_FAILURE  There was an error during a request. Before you can continue to work with DNSSEC signing, including actions that involve this KSK, you must correct the problem. For example, you may need to activate or deactivate the KSK.  
+     * A string that represents the current key-signing key (KSK) status. Status can have one of the following values:  ACTIVE  The KSK is being used for signing.  INACTIVE  The KSK is not being used for signing.  DELETING  The KSK is in the process of being deleted.  ACTION_NEEDED  There is a problem with the KSK that requires you to take action to resolve. For example, the customer managed customer master key (CMK) might have been deleted, or the permissions for the customer managed CMK might have been changed.  INTERNAL_FAILURE  There was an error during a request. Before you can continue to work with DNSSEC signing, including actions that involve this KSK, you must correct the problem. For example, you may need to activate or deactivate the KSK.  
      */
     Status?: SigningKeyStatus;
     /**
-     * The status message provided for the following key signing key (KSK) statuses: ACTION_NEEDED or INTERNAL_FAILURE. The status message includes information about what the problem might be and steps that you can take to correct the issue.
+     * The status message provided for the following key-signing key (KSK) statuses: ACTION_NEEDED or INTERNAL_FAILURE. The status message includes information about what the problem might be and steps that you can take to correct the issue.
      */
     StatusMessage?: SigningKeyStatusMessage;
     /**
-     * The date when the key signing key (KSK) was created.
+     * The date when the key-signing key (KSK) was created.
      */
     CreatedDate?: TimeStamp;
     /**
-     * The last time that the key signing key (KSK) was changed.
+     * The last time that the key-signing key (KSK) was changed.
      */
     LastModifiedDate?: TimeStamp;
   }
@@ -2306,7 +2306,7 @@ declare namespace Route53 {
      */
     Name: DNSName;
     /**
-     * The DNS record type. For information about different record types and how data is encoded for them, see Supported DNS Resource Record Types in the Amazon Route 53 Developer Guide. Valid values for basic resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geolocation, and failover resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT. When creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the resource record sets in the group. Valid values for multivalue answer resource record sets: A | AAAA | MX | NAPTR | PTR | SPF | SRV | TXT   SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create resource record sets for which the value of Type is SPF. RFC 7208, Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1, has been updated to say, "...[I]ts existence and mechanism defined in [RFC4408] have led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to use it." In RFC 7208, see section 14.1, The SPF DNS Record Type.  Values for alias resource record sets:    Amazon API Gateway custom regional APIs and edge-optimized APIs: A     CloudFront distributions: A  If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution, one with a value of A and one with a value of AAAA.     Amazon API Gateway environment that has a regionalized subdomain: A     ELB load balancers: A | AAAA     Amazon S3 buckets: A     Amazon Virtual Private Cloud interface VPC endpoints A     Another resource record set in this hosted zone: Specify the type of the resource record set that you're creating the alias for. All values are supported except NS and SOA.  If you're creating an alias record that has the same name as the hosted zone (known as the zone apex), you can't route traffic to a record for which the value of Type is CNAME. This is because the alias record must have the same type as the record you're routing traffic to, and creating a CNAME record for the zone apex isn't supported even for an alias record.   
+     * The DNS record type. For information about different record types and how data is encoded for them, see Supported DNS Resource Record Types in the Amazon Route 53 Developer Guide. Valid values for basic resource record sets: A | AAAA | CAA | CNAME | DS |MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT  Values for weighted, latency, geolocation, and failover resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT. When creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the resource record sets in the group. Valid values for multivalue answer resource record sets: A | AAAA | MX | NAPTR | PTR | SPF | SRV | TXT   SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create resource record sets for which the value of Type is SPF. RFC 7208, Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1, has been updated to say, "...[I]ts existence and mechanism defined in [RFC4408] have led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to use it." In RFC 7208, see section 14.1, The SPF DNS Record Type.  Values for alias resource record sets:    Amazon API Gateway custom regional APIs and edge-optimized APIs: A     CloudFront distributions: A  If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution, one with a value of A and one with a value of AAAA.     Amazon API Gateway environment that has a regionalized subdomain: A     ELB load balancers: A | AAAA     Amazon S3 buckets: A     Amazon Virtual Private Cloud interface VPC endpoints A     Another resource record set in this hosted zone: Specify the type of the resource record set that you're creating the alias for. All values are supported except NS and SOA.  If you're creating an alias record that has the same name as the hosted zone (known as the zone apex), you can't route traffic to a record for which the value of Type is CNAME. This is because the alias record must have the same type as the record you're routing traffic to, and creating a CNAME record for the zone apex isn't supported even for an alias record.   
      */
     Type: RRType;
     /**

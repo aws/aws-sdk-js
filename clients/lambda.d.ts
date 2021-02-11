@@ -803,7 +803,7 @@ declare namespace Lambda {
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     * (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
@@ -901,7 +901,7 @@ declare namespace Lambda {
      */
     FileSystemConfigs?: FileSystemConfigList;
     /**
-     * Configuration values that override the container image Dockerfile.
+     *  Container image configuration values that override the values in the container image Dockerfile.
      */
     ImageConfig?: ImageConfig;
     /**
@@ -1120,7 +1120,7 @@ declare namespace Lambda {
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     * (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
@@ -2335,7 +2335,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -2351,7 +2351,7 @@ declare namespace Lambda {
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * The type of authentication protocol or the VPC components for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (MQ) The Secrets Manager secret that stores your broker credentials.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your Kafka brokers.    SASL_SCRAM_256_AUTH - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.    SASL_SCRAM_512_AUTH - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.  
+     * The type of authentication protocol or the VPC components for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (MQ) The Secrets Manager secret that stores your broker credentials.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.  
      */
     Type?: SourceAccessType;
     /**
@@ -2510,7 +2510,7 @@ declare namespace Lambda {
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
     /**
-     * (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+     * (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
@@ -2618,7 +2618,7 @@ declare namespace Lambda {
      */
     FileSystemConfigs?: FileSystemConfigList;
     /**
-     * Configuration values that override the container image Dockerfile.
+     *  Container image configuration values that override the values in the container image Dockerfile.
      */
     ImageConfig?: ImageConfig;
   }

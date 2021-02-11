@@ -4069,6 +4069,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for Channel"
@@ -4180,6 +4185,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for ChannelSummary"
@@ -4251,6 +4261,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "A request to create a channel"
@@ -4568,6 +4583,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for DeleteChannelResponse"
@@ -4983,6 +5003,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for DescribeChannelResponse"
@@ -6449,6 +6474,11 @@
         "Destination"
       ]
     },
+    "FrameCaptureHlsSettings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Frame Capture Hls Settings"
+    },
     "FrameCaptureIntervalUnit": {
       "type": "string",
       "documentation": "Frame Capture Interval Unit",
@@ -6482,10 +6512,7 @@
           "documentation": "Unit for the frame capture interval."
         }
       },
-      "documentation": "Frame Capture Settings",
-      "required": [
-        "CaptureInterval"
-      ]
+      "documentation": "Frame Capture Settings"
     },
     "GlobalConfiguration": {
       "type": "structure",
@@ -7901,6 +7928,10 @@
         "Fmp4HlsSettings": {
           "shape": "Fmp4HlsSettings",
           "locationName": "fmp4HlsSettings"
+        },
+        "FrameCaptureHlsSettings": {
+          "shape": "FrameCaptureHlsSettings",
+          "locationName": "frameCaptureHlsSettings"
         },
         "StandardHlsSettings": {
           "shape": "StandardHlsSettings",
@@ -12211,6 +12242,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for StartChannelResponse"
@@ -12486,6 +12522,11 @@
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "A collection of key-value pairs."
+        },
+        "Vpc": {
+          "shape": "VpcOutputSettings",
+          "locationName": "vpc",
+          "documentation": "Settings for VPC output"
         }
       },
       "documentation": "Placeholder documentation for StopChannelResponse"
@@ -13390,6 +13431,30 @@
         }
       },
       "documentation": "Video Selector Settings"
+    },
+    "VpcOutputSettings": {
+      "type": "structure",
+      "members": {
+        "PublicAddressAllocationIds": {
+          "shape": "__listOf__string",
+          "locationName": "publicAddressAllocationIds",
+          "documentation": "List of public address allocation ids to associate with ENIs that will be created in Output VPC.\nMust specify one for SINGLE_PIPELINE, two for STANDARD channels\n"
+        },
+        "SecurityGroupIds": {
+          "shape": "__listOf__string",
+          "locationName": "securityGroupIds",
+          "documentation": "A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.\nIf none are specified then the VPC default security group will be used\n"
+        },
+        "SubnetIds": {
+          "shape": "__listOf__string",
+          "locationName": "subnetIds",
+          "documentation": "A list of VPC subnet IDs from the same VPC.\nIf STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).\n"
+        }
+      },
+      "documentation": "The properties for a private VPC Output\nWhen this property is specified, the output egress addresses will be created in a user specified VPC\n",
+      "required": [
+        "SubnetIds"
+      ]
     },
     "WavCodingMode": {
       "type": "string",

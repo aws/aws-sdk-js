@@ -1,6 +1,175 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.813.0-->
+<!--LATEST=2.842.0-->
 <!--ENTRYINSERT-->
+
+## 2.842.0
+* feature: DataBrew: This release adds support for profile job sampling, which determines the number of rows on which the profile job will be executed.
+* feature: RDS: Adding support for RDS Aurora Global Database Failover
+* feature: RDS: Support cross-region copying in DocDB and Neptune
+
+## 2.841.0
+* feature: GameLift: GameLift FleetIQ users can now use AMD instance families in supported Regions. In addition, FlexMatch matchmaking notification now supports SNS FIFO topics.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for WMA audio only ingest, SMPTE-TT text and image caption ingest, and MPEG-2 video in MXF OP1a outputs.
+* feature: QLDBSession: This release adds CapacityExceededException to the AWS QLDBSession API.
+* feature: QuickSight: QuickSight now supports Python's paginators for Exploration APIs.
+* feature: SageMaker: Add a new optional FrameworkVersion field to Sagemaker Neo CreateCompilationJob API
+
+## 2.840.0
+* feature: CloudTrail: ConflictException is now thrown when certain operations are called on resources before CloudTrail has time to load the resources. Two new exceptions have been added to the PutInsightSelectors API.
+* feature: DataExchange: This release introduces the new ExportRevision job type, which allows for the export of an entire revision.
+* feature: GlobalAccelerator: Global Accelerator now supports bringing your own IP addresses for custom routing accelerators
+* feature: IVS: Fixed an issue where StreamStartTime could not be unmarshalled from response. Changed DeleteChannel and DeleteStreamKey response codes to 204.
+* feature: IoTSiteWise: Recall CreatePresignedPortalUrl API
+* feature: Macie2: This release of the Amazon Macie API adds support for specifying a time range in queries for usage data.
+
+## 2.839.0
+* feature: Organizations: Added support for a few additional exception codes for some AWS Organizations APIs.
+
+## 2.838.0
+* feature: Appflow: Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
+* feature: Athena: Adds the Athena ListEngineVersions action and the EngineVersion data type. ListEngineVersions returns the available Athena engine versions, including Auto, as a list of EngineVersion objects.
+* feature: DLM: Provide support for EBS Local Snapshots on AWS Outpost in Data Lifecycle Manager (DLM).
+* feature: EC2: AWS Outposts now supports EBS local snapshots on Outposts that allows customers to store snapshots of EBS volumes and AMIs locally on S3 on Outposts.
+* feature: EMRcontainers: This release is to correct the timestamp format to ISO8601 for the date parameters in the describe and list API response objects of Job Run and Virtual Clusters.
+* feature: QuickSight: API release for field folders feature.
+
+## 2.837.0
+* feature: Appflow: Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
+* feature: Athena: Adds the Athena ListEngineVersions action and the EngineVersion data type. ListEngineVersions returns the available Athena engine versions, including Auto, as a list of EngineVersion objects.
+* feature: DLM: Provide support for EBS Local Snapshots on AWS Outpost in Data Lifecycle Manager (DLM).
+* feature: EC2: AWS Outposts now supports EBS local snapshots on Outposts that allows customers to store snapshots of EBS volumes and AMIs locally on S3 on Outposts.
+* feature: EMRcontainers: This release is to correct the timestamp format to ISO8601 for the date parameters in the describe and list API response objects of Job Run and Virtual Clusters.
+* feature: QuickSight: API release for field folders feature.
+
+## 2.836.0
+* feature: AuditManager: This release adds AccessDeniedException to GetServicesInScope API.
+* feature: DataBrew: This release adds the DescribeJobRun API to allow customers retrieve details of a given job run
+* feature: EC2: EC2 Public IP now supports API for setting PTR records on Elastic IP address.
+* feature: IoTSiteWise: Update AccessPolicy API input to support IAM role for IAM mode. Iam role is added as part of accessPolicyIdentity.
+* feature: Lambda: Support for creating Lambda Functions using 'nodejs14.x'
+* feature: SecurityHub: Added a ProductArn parameter to DescribeProducts. ProductArn is used to identify the integration to return details for.
+* feature: WorkMail: Increased maximum length of ipRanges values for Access Control Rules from 10 to 1024.
+
+## 2.835.0
+* feature: AppMesh: App Mesh now supports mutual TLS with two-way peer authentication. You can specify client certificates, server-side TLS validation, and matching of Subject Alternative Names.
+* feature: ApplicationAutoScaling: With this release, scheduled actions of Application Auto Scaling can be created in the local time zone and automatically adjusted according to daylight saving changes.
+* feature: IoTWireless: Add enum value MqttTopic for Destination ExpressionType, add LoRaWANNetworkServerCertificateId for GetWirelessGatewayCertificate API
+* feature: LookoutVision: This release includes the General Availability (GA) SDK for Amazon Lookout for Vision. New for GA is tagging support for Amazon Lookout for Vision models.
+* feature: MediaLive: AWS Elemental MediaLive now supports Image Media Playlists on HLS outputs, version 0.4 (trick-mode).
+* feature: RDSDataService: With the Data API, you can now use UUID and JSON data types as input to your database. Also with the Data API, you can now have a LONG type value returned from your database as a STRING value.
+* feature: S3Control: Amazon S3 Batch Operations now supports Delete Object Tagging
+
+## 2.834.0
+* bugfix: Lex Models V2: Lex Models V2 service requires Content-Type header to be application/x-amz-json-1.1
+* feature: Connect: Added API to manage queues or get hours of operation for a queue programmatically, which can be used to create new/update queues, or take actions when skills are outside of their hours of operation.
+* feature: Macie2: This release of the Amazon Macie API adds support for using object prefixes to refine the scope of a classification job.
+* feature: MediaLive: "AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC."
+
+## 2.833.0
+* feature: CloudWatch: Update to SDK to support label time zones in CloudWatch GetMetricData
+* feature: DataBrew: This SDK release adds support for specifying a custom delimiter for input CSV datasets and for CSV job outputs.
+* feature: ManagedBlockchain: This release supports tagging on Amazon Managed Blockchain resources.
+* feature: RoboMaker: This release allows Robomaker customers to specify configuration for uploading logs and artifacts generated by their simulation jobs.
+
+## 2.832.0
+* feature: AccessAnalyzer: This release adds Secrets Manager secrets as a supported resource in IAM Access Analyzer to help you identify secrets that can be accessed from outside your account or AWS organization.
+* feature: CustomerProfiles: This release makes Uri a required parameter in GetIntegrationRequest and DeleteIntegrationRequest.
+* feature: ES: Amazon Elasticsearch Service adds support for node-to-node encryption and encryption at rest for existing domains running Elasticsearch version 6.7 and above
+* feature: ElastiCache: Add support to pass ParameterGroup name as part updating Engine Version of Global Datastore.
+* feature: SESV2: This release includes the ability to assign a configuration set to an email identity (a domain or email address), which allows the settings from the configuration set to be applied to the identity.
+
+## 2.831.0
+* feature: EC2: Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation.
+* feature: LexModelsV2: This release adds support for Amazon Lex V2 APIs for model building.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: Redshift: Update VPC endpoint field names.
+
+## 2.830.0
+* feature: Kafka: Amazon MSK has added a new API that allows you to update all the brokers in the cluster to the specified type.
+* feature: ResourceGroupsTaggingAPI: This release adds a new parameter ResourceARNList to Resource Groups Tagging api GetResources api to allow customers retrieve tag data for specific resources.
+* feature: SecurityHub: This release of ASFF adds a new Action object and a new resource details object - AwsSsmPatchCompliance. It also adds several new attributes for the AwsEc2NetworkInterface resource type.
+
+## 2.829.0
+* feature: ACMPCA: ACM Private CA is launching additional certificate templates and API parameters. This allows customers to create custom certificates for their identity and secure communication use cases.
+* feature: Chime: Add support for specifying ChimeBearer header as part of the request for Amazon Chime SDK messaging APIs. Documentation updates.
+* feature: ECS: This release adds support to include task definition metadata information such as registeredAt, deregisteredAt, registeredBy as part of DescribeTaskDefinition API.
+
+## 2.828.0
+* feature: CognitoIdentity: Add Attributes For Access Control support for Amazon Cognito Identity Pools to facilitate access to AWS resources based on attributes from social and corporate identity providers
+* feature: Pinpoint: Customers can create segments using 5 new filters. Filters can check for the presence of a substring in attributes and can perform time-based comparisons formatted as ISO_INSTANT datetimes.
+* feature: S3Control: Amazon S3 Batch Operations now supports restoring objects from the S3 Intelligent-Tiering Archive Access and Deep Archive Access tiers.
+* feature: SageMaker: This feature allows customers to enable/disable model caching on Multi-Model endpoints.
+
+## 2.827.0
+* feature: FraudDetector: Added support for cancelling a model version that is TRAINING_IN_PROGRESS.
+
+## 2.826.0
+* feature: AppStream: Adds support for the Smart Card Redirection feature
+* feature: AuditManager: This release introduces tag support for assessment frameworks. You can now add, remove, and get tags from existing frameworks, and specify the tags to apply when creating a custom framework.
+* feature: Lightsail: This release adds IPv6 support for Amazon Lightsail instances, container services, CDN distributions, and load balancers.
+* feature: SSM: AWS Systems Manager adds pagination support for DescribeDocumentPermission API
+
+## 2.825.0
+* feature: KMS: Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
+* feature: RDS: This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
+
+## 2.824.0
+* feature: CodePipeline: Adding cancelled status and summary for executions aborted by pipeline updates.
+* feature: DevOpsGuru: Add resourceHours field in GetAccountHealth API to show total number of resource hours AWS Dev Ops Guru has done work for in the last hour.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for I-Frame-only HLS manifest generation in CMAF outputs.
+
+## 2.823.0
+* feature: Transfer: This release adds support for Amazon EFS, so customers can transfer files over SFTP, FTPS and FTP in and out of Amazon S3 as well as Amazon EFS.
+
+## 2.822.0
+* feature: CostExplorer: - ### Features    - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api
+* feature: ParamValidator: Updated validateStructure to accept null and undefined values for params not described in the input shape
+
+## 2.821.0
+* feature: CloudSearch: This release adds support for new Amazon CloudSearch instances.
+* feature: HealthLake: Amazon HealthLake now supports exporting data from FHIR Data Stores in Preview.
+
+## 2.820.0
+* feature: ServiceCatalog: Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern
+
+## 2.819.0
+* feature: ACMPCA: This release adds a new parameter "CsrExtensions" in the "CertificateAuthorityConfiguration" data structure, which allows customers to add the addition of KU and SIA into the CA CSR.
+* feature: ApiGatewayV2: Amazon API Gateway now supports data mapping for HTTP APIs which allows customers to modify HTTP Request before sending it to their integration and HTTP Response before sending it to the invoker.
+
+## 2.818.0
+* feature: CloudFront: Amazon CloudFront has deprecated the CreateStreamingDistribution and CreateStreamingDistributionWithTags APIs as part of discontinuing support for Real-Time Messaging Protocol (RTMP) distributions.
+
+## 2.817.0
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for lambda functions.
+* feature: DMS: AWS DMS launches support for AWS Secrets Manager to manage Oracle ASM Database credentials
+* feature: ResourceGroups: Add operation `PutGroupConfiguration`. Support dedicated hosts and add `Pending` in operations `Un/GroupResources`. Add `Resources` in `ListGroupResources` and deprecate `ResourceIdentifiers`.
+
+## 2.816.0
+* feature: Connect: This release adds support for quick connects. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+* feature: CostExplorer: This release adds additional metadata that may be applicable to the Rightsizing Recommendations.
+* feature: Glue: AWS Glue Find Matches machine learning transforms now support column importance scores.
+* feature: IoTWireless: Adding the ability to use Fingerprint in GetPartnerAccount and ListPartnerAccounts API responses to protect sensitive customer account information.
+* feature: RDS: Adds customer-owned IP address (CoIP) support to Amazon RDS on AWS Outposts.
+* feature: SSM: SSM Maintenance Window support for registering/updating maintenance window tasks without targets.
+
+## 2.815.0
+* feature: ConfigService: AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery
+* feature: ConnectParticipant: This release adds three new APIs: StartAttachmentUpload, CompleteAttachmentUpload, and GetAttachment. For Amazon Connect Chat, you can use these APIs to share files in chat conversations.
+* feature: DMS: AWS DMS launches support for AWS Secrets Manager to manage source and target database credentials.
+* feature: EC2: This release adds Tag On Create feature support for the AllocateAddress API.
+* feature: Glue: Add 4 connection properties: SECRET_ID, CONNECTOR_URL, CONNECTOR_TYPE, CONNECTOR_CLASS_NAME. Add two connection types: MARKETPLACE, CUSTOM
+* feature: ManagedBlockchain: Added support for provisioning and managing public Ethereum nodes on main and test networks supporting secure access using Sigv4 and standard open-source Ethereum APIs.
+* feature: Outposts: In this release, AWS Outposts adds support for three new APIs: TagResource, UntagResource, and ListTagsForResource. Customers can now manage tags for their resources through the SDK.
+* feature: QLDBSession: Adds "TimingInformation" to all SendCommand API results and "IOUsage" to ExecuteStatementResult, FetchPageResult and CommitTransactionResult.
+* feature: S3: Format GetObject's Expires header to be an http-date instead of iso8601
+* feature: ServiceCatalogAppRegistry: New API `SyncResouce` to update AppRegistry system tags.
+* feature: ServiceQuotas: Added the ability to tag applied quotas.
+
+## 2.814.0
+* bugfix: Credentials: SDK will throw if shared ini file's profile name can be resolved to __proto__
+* feature: EC2: EBS io2 volumes now supports Multi-Attach
+* feature: PersonalizeRuntime: Updated FilterValues regex pattern to align with Filter Expression.
+* feature: RDS: Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API.
 
 ## 2.813.0
 * feature: ConfigService: Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config

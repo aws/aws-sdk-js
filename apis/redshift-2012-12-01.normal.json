@@ -5272,7 +5272,7 @@
           "documentation": "<p>The port that the database engine is listening on.</p>"
         },
         "VpcEndpoints": {
-          "shape": "SpartaProxyVpcEndpointList",
+          "shape": "VpcEndpointsList",
           "documentation": "<p>Describes a connection endpoint.</p>"
         }
       },
@@ -7694,23 +7694,6 @@
         "scheduled-action"
       ]
     },
-    "SpartaProxyVpcEndpoint": {
-      "type": "structure",
-      "members": {
-        "VpcEndpointId": {
-          "shape": "String",
-          "documentation": "<p>The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.</p>"
-        }
-      },
-      "documentation": "<p>The connection endpoint for connecting an Amazon Redshift cluster through the proxy.</p>"
-    },
-    "SpartaProxyVpcEndpointList": {
-      "type": "list",
-      "member": {
-        "shape": "SpartaProxyVpcEndpoint",
-        "locationName": "SpartaProxyVpcEndpoint"
-      }
-    },
     "String": {
       "type": "string",
       "max": 2147483647
@@ -8083,6 +8066,23 @@
       "member": {
         "shape": "String",
         "locationName": "item"
+      }
+    },
+    "VpcEndpoint": {
+      "type": "structure",
+      "members": {
+        "VpcEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.</p>"
+        }
+      },
+      "documentation": "<p>The connection endpoint for connecting an Amazon Redshift cluster through the proxy.</p>"
+    },
+    "VpcEndpointsList": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpoint",
+        "locationName": "VpcEndpoint"
       }
     },
     "VpcSecurityGroupIdList": {
