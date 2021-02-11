@@ -2129,6 +2129,35 @@
       ],
       "documentation": "<p>Forces a failover for a DB cluster.</p> <p>A failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer).</p> <p>Amazon Aurora will automatically fail over to an Aurora Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.</p> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>"
     },
+    "FailoverGlobalCluster": {
+      "name": "FailoverGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "FailoverGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "FailoverGlobalClusterResult",
+        "resultWrapper": "FailoverGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Initiates the failover process for an Aurora global database (<a>GlobalCluster</a>).</p> <p>A failover for an Aurora global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected (target) DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Aurora global database.</p> <p>For more information about failing over an Amazon Aurora global database, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover\">Managed planned failover for Amazon Aurora global databases</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action applies to <a>GlobalCluster</a> (Aurora global databases) only. Use this action only on healthy Aurora global databases with running Aurora DB clusters and no Region-wide outages, to test disaster recovery scenarios or to reconfigure your Aurora global database topology. </p> </note>"
+    },
     "ImportInstallationMedia": {
       "name": "ImportInstallationMedia",
       "http": {
@@ -4633,7 +4662,7 @@
         },
         "EnableGlobalWriteForwarding": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.</p>"
+          "documentation": "<p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.</p> <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then. </p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -5803,6 +5832,12 @@
           "documentation": "<p>Contains the details of the endpoints associated with the cluster and matching any filter conditions.</p>"
         }
       }
+    },
+    "DBClusterIdentifier": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "[A-Za-z][0-9A-Za-z-:._]*"
     },
     "DBClusterList": {
       "type": "list",
@@ -9186,6 +9221,58 @@
         }
       }
     },
+    "FailoverGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier",
+        "TargetDbClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>Identifier of the Aurora global database (<a>GlobalCluster</a>) that should be failed over. The identifier is the unique key assigned by the user when the Aurora global database was created. In other words, it's the name of the Aurora global database that you want to fail over. </p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <a>GlobalCluster</a> (Aurora global database).</p> </li> </ul>"
+        },
+        "TargetDbClusterIdentifier": {
+          "shape": "DBClusterIdentifier",
+          "documentation": "<p>Identifier of the secondary Aurora DB cluster that you want to promote to primary for the Aurora global database (<a>GlobalCluster</a>.) Use the Amazon Resource Name (ARN) for the identifier so that Aurora can locate the cluster in its AWS Region. </p>"
+        }
+      }
+    },
+    "FailoverGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
+      }
+    },
+    "FailoverState": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "FailoverStatus",
+          "documentation": "<p>The current status of the Aurora global database (<a>GlobalCluster</a>). Possible values are as follows: </p> <ul> <li> <p>pending &#x96; A request to fail over the Aurora global database (<a>GlobalCluster</a>) has been received by the service. The <code>GlobalCluster</code>'s primary DB cluster and the specified secondary DB cluster are being verified before the failover process can start.</p> </li> <li> <p>failing-over &#x96; This status covers the range of Aurora internal operations that take place during the failover process, such as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB, and synchronizing replicas. </p> </li> <li> <p>cancelling &#x96; The request to fail over the Aurora global database (<a>GlobalCluster</a>) was cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states. </p> </li> </ul>"
+        },
+        "FromDbClusterArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being demoted, and which is associated with this state. </p>"
+        },
+        "ToDbClusterArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being promoted, and which is associated with this state.</p>"
+        }
+      },
+      "documentation": "<p>Contains the state of scheduled or in-process failover operations on an Aurora global database (<a>GlobalCluster</a>). This Data type is empty unless a failover operation is scheduled or is currently underway on the Aurora global database. </p>",
+      "wrapper": true
+    },
+    "FailoverStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "failing-over",
+        "cancelling"
+      ]
+    },
     "FeatureNameList": {
       "type": "list",
       "member": {
@@ -9266,10 +9353,20 @@
         "GlobalClusterMembers": {
           "shape": "GlobalClusterMemberList",
           "documentation": "<p> The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. </p>"
+        },
+        "FailoverState": {
+          "shape": "FailoverState",
+          "documentation": "<p>A data object containing all properties for the current state of an in-process or pending failover process for this Aurora global database. This object is empty unless the <a>FailoverGlobalCluster</a> API operation has been called on this Aurora global database (<a>GlobalCluster</a>). </p>"
         }
       },
       "documentation": "<p>A data type representing an Aurora global database.</p>",
       "wrapper": true
+    },
+    "GlobalClusterIdentifier": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "[A-Za-z][0-9A-Za-z-:._]*"
     },
     "GlobalClusterList": {
       "type": "list",
@@ -9685,7 +9782,7 @@
         },
         "EnableGlobalWriteForwarding": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.</p>"
+          "documentation": "<p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.</p> <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then. </p>"
         }
       },
       "documentation": "<p/>"

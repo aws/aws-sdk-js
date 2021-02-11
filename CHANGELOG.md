@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.841.0-->
+<!--LATEST=2.842.0-->
 <!--ENTRYINSERT-->
+
+## 2.842.0
+* feature: DataBrew: This release adds support for profile job sampling, which determines the number of rows on which the profile job will be executed.
+* feature: RDS: Adding support for RDS Aurora Global Database Failover
+* feature: RDS: Support cross-region copying in DocDB and Neptune
 
 ## 2.841.0
 * feature: GameLift: GameLift FleetIQ users can now use AMD instance families in supported Regions. In addition, FlexMatch matchmaking notification now supports SNS FIFO topics.

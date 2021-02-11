@@ -12,11 +12,11 @@ declare class DataBrew extends Service {
   constructor(options?: DataBrew.Types.ClientConfiguration)
   config: Config & DataBrew.Types.ClientConfiguration;
   /**
-   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The verision list is empty.   The version list size exceeds 50.   The verison list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
+   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The version list is empty.   The version list size exceeds 50.   The version list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
    */
   batchDeleteRecipeVersion(params: DataBrew.Types.BatchDeleteRecipeVersionRequest, callback?: (err: AWSError, data: DataBrew.Types.BatchDeleteRecipeVersionResponse) => void): Request<DataBrew.Types.BatchDeleteRecipeVersionResponse, AWSError>;
   /**
-   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The verision list is empty.   The version list size exceeds 50.   The verison list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
+   * Deletes one or more versions of a recipe at a time. The entire request will be rejected if:   The recipe does not exist.   There is an invalid version identifier in the list of versions.   The version list is empty.   The version list size exceeds 50.   The version list contains duplicate entries.   The request will complete successfully, but with partial failures, if:   A version does not exist.   A version is being used by a job.   You specify LATEST_WORKING, but it's being used by a project.   The version fails to be deleted.   The LATEST_WORKING version will only be deleted if the recipe has no other versions. If you try to delete LATEST_WORKING while other versions exist (or if they can't be deleted), then LATEST_WORKING will be listed as partial failure in the response.
    */
   batchDeleteRecipeVersion(callback?: (err: AWSError, data: DataBrew.Types.BatchDeleteRecipeVersionResponse) => void): Request<DataBrew.Types.BatchDeleteRecipeVersionResponse, AWSError>;
   /**
@@ -402,7 +402,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - para&gt;SSE-KMS - server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -434,6 +434,10 @@ declare namespace DataBrew {
      * The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of TIMEOUT.
      */
     Timeout?: Timeout;
+    /**
+     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     */
+    JobSample?: JobSample;
   }
   export interface CreateProfileJobResponse {
     /**
@@ -480,7 +484,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -792,7 +796,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -848,6 +852,10 @@ declare namespace DataBrew {
      * The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of TIMEOUT.
      */
     Timeout?: Timeout;
+    /**
+     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed.
+     */
+    JobSample?: JobSample;
   }
   export interface DescribeJobRunRequest {
     /**
@@ -877,7 +885,7 @@ declare namespace DataBrew {
      */
     ErrorMessage?: JobRunErrorMessage;
     /**
-     * The amount of time, in seconds, during which a job run consumed resources.
+     * The amount of time, in seconds, during which the job run consumed resources.
      */
     ExecutionTime?: ExecutionTime;
     /**
@@ -906,13 +914,17 @@ declare namespace DataBrew {
     Outputs?: OutputList;
     RecipeReference?: RecipeReference;
     /**
-     * The Amazon Resource Name (ARN) of the user who initiated the job run.
+     * The Amazon Resource Name (ARN) of the user who started the job run.
      */
     StartedBy?: StartedBy;
     /**
      * The date and time when the job run began.
      */
     StartedOn?: _Date;
+    /**
+     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     */
+    JobSample?: JobSample;
   }
   export interface DescribeProjectRequest {
     /**
@@ -1203,6 +1215,10 @@ declare namespace DataBrew {
      * Metadata tags that have been applied to the job.
      */
     Tags?: TagMap;
+    /**
+     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     */
+    JobSample?: JobSample;
   }
   export type JobList = Job[];
   export type JobName = string;
@@ -1264,11 +1280,26 @@ declare namespace DataBrew {
      * The date and time when the job run began. 
      */
     StartedOn?: _Date;
+    /**
+     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     */
+    JobSample?: JobSample;
   }
   export type JobRunErrorMessage = string;
   export type JobRunId = string;
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
+  export interface JobSample {
+    /**
+     * Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:   FULL_DATASET: Profile job will be executed on the entire dataset.   CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.  
+     */
+    Mode?: SampleMode;
+    /**
+     * Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
+     */
+    Size?: JobSize;
+  }
+  export type JobSize = number;
   export type JobType = "PROFILE"|"RECIPE"|string;
   export interface JsonOptions {
     /**
@@ -1706,6 +1737,7 @@ declare namespace DataBrew {
      */
     Type: SampleType;
   }
+  export type SampleMode = "FULL_DATASET"|"CUSTOM_ROWS"|string;
   export type SampleSize = number;
   export type SampleType = "FIRST_N"|"LAST_N"|"RANDOM"|string;
   export interface Schedule {
@@ -1894,7 +1926,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -1922,6 +1954,10 @@ declare namespace DataBrew {
      * The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of TIMEOUT.
      */
     Timeout?: Timeout;
+    /**
+     * Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     */
+    JobSample?: JobSample;
   }
   export interface UpdateProfileJobResponse {
     /**
@@ -1956,7 +1992,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**

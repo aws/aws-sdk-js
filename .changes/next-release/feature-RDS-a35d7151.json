@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "RDS",
-  "description": "Support cross-region copying in DocDB and Neptune"
-}
