@@ -1666,6 +1666,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. </p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       }
     },
@@ -2192,6 +2195,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.</p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       },
       "documentation": "<p>A function is a reusable entity. Multiple functions can be used to compose the resolver logic.</p>"
@@ -3433,6 +3439,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. </p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       }
     },

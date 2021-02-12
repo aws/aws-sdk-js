@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.842.0-->
+<!--LATEST=2.843.0-->
 <!--ENTRYINSERT-->
+
+## 2.843.0
+* feature: AppSync: Approve release for appsync local on pipeline resolver
+* feature: CodePipeline: The release provides new GetActionType and UpdateActionType APIs for viewing and editing action types in CodePipeline.
+* feature: Detective: The API definition now indicates that the format for timestamps is an ISO 8601 date-time string
+* feature: EKS: Amazon EKS now supports OpenId Connect (OIDC) compatible identity providers as a user authentication option
+* feature: IAM: AWS Identity and Access Management now supports tagging for the following resources: customer managed policies, identity providers, instance profiles, server certificates, and virtual MFA devices.
+* feature: Macie2: This release of the Amazon Macie API replaces the term master account with the term administrator account, including deprecating APIs that use the previous term and adding APIs that use the new term.
+* feature: PersonalizeEvents: Increased maximum char size of PutUsers and PutItems properties.
+* feature: RDS: EngineMode in the response of DescribeDBClusterSnapshots. SupportedEngineModes, SupportsParallelQuery and SupportsGlobalDatabases in ValidUpgradeTarget of DBEngineVersions in DescribeDBEngineVersions.
+* feature: WAFV2: Added the option to inspect the web request body as parsed and filtered JSON (new FieldToMatch type JsonBody), in addition to the existing option to inspect the web request body as plain text.
 
 ## 2.842.0
 * feature: DataBrew: This release adds support for profile job sampling, which determines the number of rows on which the profile job will be executed.

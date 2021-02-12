@@ -2795,9 +2795,13 @@ declare namespace RDS {
      */
     SnapshotCreateTime?: TStamp;
     /**
-     * Specifies the name of the database engine.
+     * Specifies the name of the database engine for this DB cluster snapshot.
      */
     Engine?: String;
+    /**
+     * Provides the engine mode of the database engine for this DB cluster snapshot.
+     */
+    EngineMode?: String;
     /**
      * Specifies the allocated storage size in gibibytes (GiB).
      */
@@ -2819,7 +2823,7 @@ declare namespace RDS {
      */
     ClusterCreateTime?: TStamp;
     /**
-     * Provides the master username for the DB cluster snapshot.
+     * Provides the master username for this DB cluster snapshot.
      */
     MasterUsername?: String;
     /**
@@ -8024,9 +8028,21 @@ declare namespace RDS {
      */
     AutoUpgrade?: Boolean;
     /**
-     * A value that indicates whether a database engine is upgraded to a major version.
+     * A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.
      */
     IsMajorVersionUpgrade?: Boolean;
+    /**
+     * A list of the supported DB engine modes for the target engine version.
+     */
+    SupportedEngineModes?: EngineModeList;
+    /**
+     * A value that indicates whether you can use Aurora parallel query with the target engine version.
+     */
+    SupportsParallelQuery?: BooleanOptional;
+    /**
+     * A value that indicates whether you can use Aurora global databases with the target engine version.
+     */
+    SupportsGlobalDatabases?: BooleanOptional;
   }
   export interface UserAuthConfig {
     /**

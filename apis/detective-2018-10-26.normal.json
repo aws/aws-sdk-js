@@ -723,7 +723,8 @@
       }
     },
     "Timestamp": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "UnprocessedAccount": {
       "type": "structure",

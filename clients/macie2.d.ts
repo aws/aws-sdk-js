@@ -52,19 +52,19 @@ declare class Macie2 extends Service {
    */
   createFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.CreateFindingsFilterResponse) => void): Request<Macie2.Types.CreateFindingsFilterResponse, AWSError>;
   /**
-   *  Sends an Amazon Macie membership invitation to one or more accounts.
+   * Sends an Amazon Macie membership invitation to one or more accounts.
    */
   createInvitations(params: Macie2.Types.CreateInvitationsRequest, callback?: (err: AWSError, data: Macie2.Types.CreateInvitationsResponse) => void): Request<Macie2.Types.CreateInvitationsResponse, AWSError>;
   /**
-   *  Sends an Amazon Macie membership invitation to one or more accounts.
+   * Sends an Amazon Macie membership invitation to one or more accounts.
    */
   createInvitations(callback?: (err: AWSError, data: Macie2.Types.CreateInvitationsResponse) => void): Request<Macie2.Types.CreateInvitationsResponse, AWSError>;
   /**
-   *  Associates an account with an Amazon Macie master account.
+   * Associates an account with an Amazon Macie administrator account.
    */
   createMember(params: Macie2.Types.CreateMemberRequest, callback?: (err: AWSError, data: Macie2.Types.CreateMemberResponse) => void): Request<Macie2.Types.CreateMemberResponse, AWSError>;
   /**
-   *  Associates an account with an Amazon Macie master account.
+   * Associates an account with an Amazon Macie administrator account.
    */
   createMember(callback?: (err: AWSError, data: Macie2.Types.CreateMemberResponse) => void): Request<Macie2.Types.CreateMemberResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Macie2 extends Service {
    */
   deleteInvitations(callback?: (err: AWSError, data: Macie2.Types.DeleteInvitationsResponse) => void): Request<Macie2.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes the association between an Amazon Macie master account and an account.
+   * Deletes the association between an Amazon Macie administrator account and an account.
    */
   deleteMember(params: Macie2.Types.DeleteMemberRequest, callback?: (err: AWSError, data: Macie2.Types.DeleteMemberResponse) => void): Request<Macie2.Types.DeleteMemberResponse, AWSError>;
   /**
-   * Deletes the association between an Amazon Macie master account and an account.
+   * Deletes the association between an Amazon Macie administrator account and an account.
    */
   deleteMember(callback?: (err: AWSError, data: Macie2.Types.DeleteMemberResponse) => void): Request<Macie2.Types.DeleteMemberResponse, AWSError>;
   /**
@@ -156,19 +156,27 @@ declare class Macie2 extends Service {
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disassociates a member account from its Amazon Macie master account.
+   * Disassociates a member account from its Amazon Macie administrator account.
+   */
+  disassociateFromAdministratorAccount(params: Macie2.Types.DisassociateFromAdministratorAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisassociateFromAdministratorAccountResponse) => void): Request<Macie2.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates a member account from its Amazon Macie administrator account.
+   */
+  disassociateFromAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.DisassociateFromAdministratorAccountResponse) => void): Request<Macie2.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account.
    */
   disassociateFromMasterAccount(params: Macie2.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisassociateFromMasterAccountResponse) => void): Request<Macie2.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates a member account from its Amazon Macie master account.
+   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: Macie2.Types.DisassociateFromMasterAccountResponse) => void): Request<Macie2.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates an Amazon Macie master account from a member account.
+   * Disassociates an Amazon Macie administrator account from a member account.
    */
   disassociateMember(params: Macie2.Types.DisassociateMemberRequest, callback?: (err: AWSError, data: Macie2.Types.DisassociateMemberResponse) => void): Request<Macie2.Types.DisassociateMemberResponse, AWSError>;
   /**
-   * Disassociates an Amazon Macie master account from a member account.
+   * Disassociates an Amazon Macie administrator account from a member account.
    */
   disassociateMember(callback?: (err: AWSError, data: Macie2.Types.DisassociateMemberResponse) => void): Request<Macie2.Types.DisassociateMemberResponse, AWSError>;
   /**
@@ -187,6 +195,14 @@ declare class Macie2 extends Service {
    * Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
+  /**
+   * Retrieves information about the Amazon Macie administrator account for an account.
+   */
+  getAdministratorAccount(params: Macie2.Types.GetAdministratorAccountRequest, callback?: (err: AWSError, data: Macie2.Types.GetAdministratorAccountResponse) => void): Request<Macie2.Types.GetAdministratorAccountResponse, AWSError>;
+  /**
+   * Retrieves information about the Amazon Macie administrator account for an account.
+   */
+  getAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.GetAdministratorAccountResponse) => void): Request<Macie2.Types.GetAdministratorAccountResponse, AWSError>;
   /**
    *  Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.
    */
@@ -252,19 +268,19 @@ declare class Macie2 extends Service {
    */
   getMacieSession(callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie master account for an account.
+   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account.
    */
   getMasterAccount(params: Macie2.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: Macie2.Types.GetMasterAccountResponse) => void): Request<Macie2.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie master account for an account.
+   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account.
    */
   getMasterAccount(callback?: (err: AWSError, data: Macie2.Types.GetMasterAccountResponse) => void): Request<Macie2.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Retrieves information about a member account that's associated with an Amazon Macie master account.
+   * Retrieves information about an account that's associated with an Amazon Macie administrator account.
    */
   getMember(params: Macie2.Types.GetMemberRequest, callback?: (err: AWSError, data: Macie2.Types.GetMemberResponse) => void): Request<Macie2.Types.GetMemberResponse, AWSError>;
   /**
-   * Retrieves information about a member account that's associated with an Amazon Macie master account.
+   * Retrieves information about an account that's associated with an Amazon Macie administrator account.
    */
   getMember(callback?: (err: AWSError, data: Macie2.Types.GetMemberResponse) => void): Request<Macie2.Types.GetMemberResponse, AWSError>;
   /**
@@ -324,11 +340,11 @@ declare class Macie2 extends Service {
    */
   listInvitations(callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Retrieves information about the accounts that are associated with an Amazon Macie master account.
+   * Retrieves information about the accounts that are associated with an Amazon Macie administrator account.
    */
   listMembers(params: Macie2.Types.ListMembersRequest, callback?: (err: AWSError, data: Macie2.Types.ListMembersResponse) => void): Request<Macie2.Types.ListMembersResponse, AWSError>;
   /**
-   * Retrieves information about the accounts that are associated with an Amazon Macie master account.
+   * Retrieves information about the accounts that are associated with an Amazon Macie administrator account.
    */
   listMembers(callback?: (err: AWSError, data: Macie2.Types.ListMembersResponse) => void): Request<Macie2.Types.ListMembersResponse, AWSError>;
   /**
@@ -404,11 +420,11 @@ declare class Macie2 extends Service {
    */
   updateMacieSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMacieSessionResponse) => void): Request<Macie2.Types.UpdateMacieSessionResponse, AWSError>;
   /**
-   *  Enables an Amazon Macie master account to suspend or re-enable a member account.
+   * Enables an Amazon Macie administrator to suspend or re-enable a member account.
    */
   updateMemberSession(params: Macie2.Types.UpdateMemberSessionRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
-   *  Enables an Amazon Macie master account to suspend or re-enable a member account.
+   * Enables an Amazon Macie administrator to suspend or re-enable a member account.
    */
   updateMemberSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
@@ -423,13 +439,17 @@ declare class Macie2 extends Service {
 declare namespace Macie2 {
   export interface AcceptInvitationRequest {
     /**
+     * The AWS account ID for the account that sent the invitation.
+     */
+    administratorAccountId?: __string;
+    /**
      * The unique identifier for the invitation to accept.
      */
     invitationId: __string;
     /**
-     * The AWS account ID for the account that sent the invitation.
+     * (Deprecated) The AWS account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
-    masterAccount: __string;
+    masterAccount?: __string;
   }
   export interface AcceptInvitationResponse {
   }
@@ -465,7 +485,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The current status of the account as a delegated administrator of Amazon Macie for the organization.
+     * The current status of the account as the delegated administrator of Amazon Macie for the organization.
      */
     status?: AdminStatus;
   }
@@ -1050,7 +1070,7 @@ declare namespace Macie2 {
   }
   export interface CreateMemberRequest {
     /**
-     * The details for the account to associate with the master account.
+     * The details for the account to associate with the administrator account.
      */
     account: AccountDetail;
     /**
@@ -1060,7 +1080,7 @@ declare namespace Macie2 {
   }
   export interface CreateMemberResponse {
     /**
-     * The Amazon Resource Name (ARN) of the account that was associated with the master account.
+     * The Amazon Resource Name (ARN) of the account that was associated with the administrator account.
      */
     arn?: __string;
   }
@@ -1347,11 +1367,15 @@ declare namespace Macie2 {
   }
   export interface DisableOrganizationAdminAccountRequest {
     /**
-     * The AWS account ID of the delegated administrator account.
+     * The AWS account ID of the delegated Amazon Macie administrator account.
      */
     adminAccountId: __string;
   }
   export interface DisableOrganizationAdminAccountResponse {
+  }
+  export interface DisassociateFromAdministratorAccountRequest {
+  }
+  export interface DisassociateFromAdministratorAccountResponse {
   }
   export interface DisassociateFromMasterAccountRequest {
   }
@@ -1382,7 +1406,7 @@ declare namespace Macie2 {
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * Specifies the status for the account. To enable Amazon Macie and start all Amazon Macie activities for the account, set this value to ENABLED.
+     * Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.
      */
     status?: MacieStatus;
   }
@@ -1565,6 +1589,14 @@ declare namespace Macie2 {
      * A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.
      */
     tags?: TagMap;
+  }
+  export interface GetAdministratorAccountRequest {
+  }
+  export interface GetAdministratorAccountResponse {
+    /**
+     * The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
+     */
+    administrator?: Invitation;
   }
   export interface GetBucketStatisticsRequest {
     /**
@@ -1778,19 +1810,19 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
+     * The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.
      */
     serviceRole?: __string;
     /**
-     * The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Amazon Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Amazon Macie activities are enabled for the account.
+     * The current status of the Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.
      */
     status?: MacieStatus;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Amazon Macie account.
+     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Macie account.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -1798,7 +1830,7 @@ declare namespace Macie2 {
   }
   export interface GetMasterAccountResponse {
     /**
-     * The AWS account ID for the master account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent and accepted to establish the relationship between the accounts.
+     * (Deprecated) The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
      */
     master?: Invitation;
   }
@@ -1814,6 +1846,10 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
+     * The AWS account ID for the administrator account.
+     */
+    administratorAccountId?: __string;
+    /**
      * The Amazon Resource Name (ARN) of the account.
      */
     arn?: __string;
@@ -1826,11 +1862,11 @@ declare namespace Macie2 {
      */
     invitedAt?: __timestampIso8601;
     /**
-     * The AWS account ID for the master account.
+     * (Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
     masterAccountId?: __string;
     /**
-     * The current status of the relationship between the account and the master account.
+     * The current status of the relationship between the account and the administrator account.
      */
     relationshipStatus?: RelationshipStatus;
     /**
@@ -1838,7 +1874,7 @@ declare namespace Macie2 {
      */
     tags?: TagMap;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the master account.
+     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the administrator account.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -2274,13 +2310,13 @@ declare namespace Macie2 {
      */
     nextToken?: __string;
     /**
-     * Specifies which accounts to include in the response, based on the status of an account's relationship with the master account. By default, the response includes only current member accounts. To include all accounts, set the value for this parameter to false.
+     * Specifies which accounts to include in the response, based on the status of an account's relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set the value for this parameter to false.
      */
     onlyAssociated?: __string;
   }
   export interface ListMembersResponse {
     /**
-     * An array of objects, one for each account that's associated with the master account and meets the criteria specified by the onlyAssociated request parameter.
+     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified by the onlyAssociated request parameter.
      */
     members?: __listOfMember;
     /**
@@ -2328,6 +2364,10 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
+     * The AWS account ID for the administrator account.
+     */
+    administratorAccountId?: __string;
+    /**
      * The Amazon Resource Name (ARN) of the account.
      */
     arn?: __string;
@@ -2340,11 +2380,11 @@ declare namespace Macie2 {
      */
     invitedAt?: __timestampIso8601;
     /**
-     * The AWS account ID for the master account.
+     * (Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
     masterAccountId?: __string;
     /**
-     * The current status of the relationship between the account and the master account.
+     * The current status of the relationship between the account and the administrator account.
      */
     relationshipStatus?: RelationshipStatus;
     /**
@@ -2352,7 +2392,7 @@ declare namespace Macie2 {
      */
     tags?: TagMap;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the master account.
+     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the administrator account.
      */
     updatedAt?: __timestampIso8601;
   }

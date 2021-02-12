@@ -6025,7 +6025,11 @@
         },
         "Engine": {
           "shape": "String",
-          "documentation": "<p>Specifies the name of the database engine.</p>"
+          "documentation": "<p>Specifies the name of the database engine for this DB cluster snapshot.</p>"
+        },
+        "EngineMode": {
+          "shape": "String",
+          "documentation": "<p>Provides the engine mode of the database engine for this DB cluster snapshot.</p>"
         },
         "AllocatedStorage": {
           "shape": "Integer",
@@ -6049,7 +6053,7 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>Provides the master username for the DB cluster snapshot.</p>"
+          "documentation": "<p>Provides the master username for this DB cluster snapshot.</p>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -13086,7 +13090,19 @@
         },
         "IsMajorVersionUpgrade": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates whether a database engine is upgraded to a major version.</p>"
+          "documentation": "<p>A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.</p>"
+        },
+        "SupportedEngineModes": {
+          "shape": "EngineModeList",
+          "documentation": "<p>A list of the supported DB engine modes for the target engine version.</p>"
+        },
+        "SupportsParallelQuery": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether you can use Aurora parallel query with the target engine version.</p>"
+        },
+        "SupportsGlobalDatabases": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether you can use Aurora global databases with the target engine version.</p>"
         }
       },
       "documentation": "<p>The version of the database engine that a DB instance can be upgraded to.</p>"
