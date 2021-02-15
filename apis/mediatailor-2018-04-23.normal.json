@@ -193,6 +193,30 @@
       },
       "type": "structure"
     },
+    "ConfigurationAliasesRequest": {
+      "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+      "key": {
+        "documentation": "<p>The dynamic variable that has aliases.</p>",
+        "shape": "__string"
+      },
+      "type": "map",
+      "value": {
+        "documentation": "<p>Map of aliases to the value to be used at request time.</p>",
+        "shape": "__mapOf__string"
+      }
+    },
+    "ConfigurationAliasesResponse": {
+      "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+      "key": {
+        "documentation": "<p>The dynamic variable that has aliases.</p>",
+        "shape": "__string"
+      },
+      "type": "map",
+      "value": {
+        "documentation": "<p>Map of aliases to the value to be used at request time.</p>",
+        "shape": "__mapOf__string"
+      }
+    },
     "DashConfiguration": {
       "documentation": "<p>The configuration for DASH content. </p>",
       "members": {
@@ -274,6 +298,10 @@
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
+        },
+        "ConfigurationAliases": {
+          "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+          "shape": "ConfigurationAliasesResponse"
         },
         "DashConfiguration": {
           "documentation": "<p>The configuration for DASH content. </p>",
@@ -437,6 +465,10 @@
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
         },
+        "ConfigurationAliases": {
+          "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+          "shape": "ConfigurationAliasesResponse"
+        },
         "DashConfiguration": {
           "documentation": "<p>The configuration for DASH content. </p>",
           "shape": "DashConfiguration"
@@ -521,6 +553,10 @@
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
         },
+        "ConfigurationAliases": {
+          "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+          "shape": "ConfigurationAliasesRequest"
+        },
         "DashConfiguration": {
           "documentation": "<p>The configuration for DASH content. </p>",
           "shape": "DashConfigurationForPut"
@@ -578,6 +614,10 @@
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
+        },
+        "ConfigurationAliases": {
+          "documentation": "<p>Predefined aliases for dynamic variables.</p>",
+          "shape": "ConfigurationAliasesResponse"
         },
         "DashConfiguration": {
           "documentation": "<p>The configuration for DASH content. </p>",

@@ -102,6 +102,14 @@ declare class MediaLive extends Service {
    */
   createMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexProgramResponse) => void): Request<MediaLive.Types.CreateMultiplexProgramResponse, AWSError>;
   /**
+   * Create a partner input
+   */
+  createPartnerInput(params: MediaLive.Types.CreatePartnerInputRequest, callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
+  /**
+   * Create a partner input
+   */
+  createPartnerInput(callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
+  /**
    * Create tags for a resource
    */
   createTags(params: MediaLive.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1531,6 +1539,25 @@ resources.
      */
     Multiplex?: Multiplex;
   }
+  export interface CreatePartnerInputRequest {
+    /**
+     * Unique ID of the input.
+     */
+    InputId: __string;
+    /**
+     * Unique identifier of the request to ensure the request is handled
+exactly once in case of retries.
+
+     */
+    RequestId?: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface CreatePartnerInputResponse {
+    Input?: Input;
+  }
   export interface CreateTagsRequest {
     ResourceArn: __string;
     Tags?: Tags;
@@ -1993,6 +2020,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      * Settings for the input devices.
      */
     InputDevices?: __listOfInputDeviceSettings;
+    /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
@@ -3536,6 +3567,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      * Settings for the input devices.
      */
     InputDevices?: __listOfInputDeviceSettings;
+    /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.

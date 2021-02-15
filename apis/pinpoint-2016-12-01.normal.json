@@ -6439,6 +6439,10 @@
           "shape": "MessageType",
           "documentation": "<p>The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).</p>"
         },
+        "OriginationNumber": {
+          "shape": "__string",
+          "documentation": "<p>The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.</p>"
+        },
         "SenderId": {
           "shape": "__string",
           "documentation": "<p>The sender ID to display on recipients' devices when they receive the SMS message.</p>"
@@ -10975,6 +10979,10 @@
         "MessageType": {
           "shape": "MessageType",
           "documentation": "<p>The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).</p>"
+        },
+        "OriginationNumber": {
+          "shape": "__string",
+          "documentation": "<p>The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.</p>"
         },
         "SenderId": {
           "shape": "__string",

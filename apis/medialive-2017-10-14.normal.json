@@ -554,6 +554,48 @@
       ],
       "documentation": "Create a new program in the multiplex."
     },
+    "CreatePartnerInput": {
+      "name": "CreatePartnerInput",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/inputs/{inputId}/partners",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreatePartnerInputRequest"
+      },
+      "output": {
+        "shape": "CreatePartnerInputResponse",
+        "documentation": "Successfully created the input."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal Service Error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "Access was denied"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Limit exceeded"
+        }
+      ],
+      "documentation": "Create a partner input"
+    },
     "CreateTags": {
       "name": "CreateTags",
       "http": {
@@ -4470,6 +4512,42 @@
       },
       "documentation": "Placeholder documentation for CreateMultiplexResponse"
     },
+    "CreatePartnerInputRequest": {
+      "type": "structure",
+      "members": {
+        "InputId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputId",
+          "documentation": "Unique ID of the input."
+        },
+        "RequestId": {
+          "shape": "__string",
+          "locationName": "requestId",
+          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.\n",
+          "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs."
+        }
+      },
+      "documentation": "A request to create a partner input",
+      "required": [
+        "InputId"
+      ]
+    },
+    "CreatePartnerInputResponse": {
+      "type": "structure",
+      "members": {
+        "Input": {
+          "shape": "Input",
+          "locationName": "input"
+        }
+      },
+      "documentation": "Placeholder documentation for CreatePartnerInputResponse"
+    },
     "CreateTagsRequest": {
       "type": "structure",
       "members": {
@@ -5198,6 +5276,11 @@
           "shape": "__listOfInputDeviceSettings",
           "locationName": "inputDevices",
           "documentation": "Settings for the input devices."
+        },
+        "InputPartnerIds": {
+          "shape": "__listOf__string",
+          "locationName": "inputPartnerIds",
+          "documentation": "A list of IDs for all Inputs which are partners of this one."
         },
         "InputSourceType": {
           "shape": "InputSourceType",
@@ -8063,6 +8146,11 @@
           "shape": "__listOfInputDeviceSettings",
           "locationName": "inputDevices",
           "documentation": "Settings for the input devices."
+        },
+        "InputPartnerIds": {
+          "shape": "__listOf__string",
+          "locationName": "inputPartnerIds",
+          "documentation": "A list of IDs for all Inputs which are partners of this one."
         },
         "InputSourceType": {
           "shape": "InputSourceType",

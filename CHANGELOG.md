@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.843.0-->
+<!--LATEST=2.844.0-->
 <!--ENTRYINSERT-->
+
+## 2.844.0
+* feature: ConfigService: Added option to provide KMS key to AWS Config DeliveryChannel
+* feature: KinesisVideoArchivedMedia: The ListFragments and GetMediaForFragmentList APIs now support StreamName or StreamARN as input parameters.
+* feature: MediaLive: AWS MediaLive now supports Automatic-Input-Failover for CDI Inputs.
+* feature: MediaTailor: MediaTailor now supports specifying aliases for dynamic variables. This allows use cases such as binding multiple origin domains to a single MediaTailor playback configuration.
+* feature: Pinpoint: Lets customers use origination number when specifying SMS message configuration for Campaigns and Journeys.
+* feature: RedshiftData: This release enables fine grant access control in ListStatements, GetStatementResult, CancelStatement and DescribeStatement.
+* feature: WorkMailMessageFlow: This release allows customers to update email messages as they flow in and out of Amazon WorkMail
 
 ## 2.843.0
 * feature: AppSync: Approve release for appsync local on pipeline resolver

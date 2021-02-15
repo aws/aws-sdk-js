@@ -140,11 +140,11 @@ declare class ConfigService extends Service {
    */
   deleteRetentionConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the stored query for an AWS account in an AWS Region. 
+   * Deletes the stored query for a single AWS account and a single AWS Region.
    */
   deleteStoredQuery(params: ConfigService.Types.DeleteStoredQueryRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteStoredQueryResponse) => void): Request<ConfigService.Types.DeleteStoredQueryResponse, AWSError>;
   /**
-   * Deletes the stored query for an AWS account in an AWS Region. 
+   * Deletes the stored query for a single AWS account and a single AWS Region.
    */
   deleteStoredQuery(callback?: (err: AWSError, data: ConfigService.Types.DeleteStoredQueryResponse) => void): Request<ConfigService.Types.DeleteStoredQueryResponse, AWSError>;
   /**
@@ -480,11 +480,11 @@ declare class ConfigService extends Service {
    */
   listDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
   /**
-   * List the stored queries for an AWS account in an AWS Region. The default is 100. 
+   * Lists the stored queries for a single AWS account and a single AWS Region. The default is 100. 
    */
   listStoredQueries(params: ConfigService.Types.ListStoredQueriesRequest, callback?: (err: AWSError, data: ConfigService.Types.ListStoredQueriesResponse) => void): Request<ConfigService.Types.ListStoredQueriesResponse, AWSError>;
   /**
-   * List the stored queries for an AWS account in an AWS Region. The default is 100. 
+   * Lists the stored queries for a single AWS account and a single AWS Region. The default is 100. 
    */
   listStoredQueries(callback?: (err: AWSError, data: ConfigService.Types.ListStoredQueriesResponse) => void): Request<ConfigService.Types.ListStoredQueriesResponse, AWSError>;
   /**
@@ -512,11 +512,11 @@ declare class ConfigService extends Service {
    */
   putConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the master account and all features must be enabled in your organization. AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations.  
+   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations. If the caller is a registered delegated administrator, AWS Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the AWS Config developer guide.  
    */
   putConfigurationAggregator(params: ConfigService.Types.PutConfigurationAggregatorRequest, callback?: (err: AWSError, data: ConfigService.Types.PutConfigurationAggregatorResponse) => void): Request<ConfigService.Types.PutConfigurationAggregatorResponse, AWSError>;
   /**
-   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the master account and all features must be enabled in your organization. AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations.  
+   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations. If the caller is a registered delegated administrator, AWS Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the AWS Config developer guide.  
    */
   putConfigurationAggregator(callback?: (err: AWSError, data: ConfigService.Types.PutConfigurationAggregatorResponse) => void): Request<ConfigService.Types.PutConfigurationAggregatorResponse, AWSError>;
   /**
@@ -552,11 +552,11 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
-   * 
+   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the AWS Config rule is provided.
    */
   putExternalEvaluation(params: ConfigService.Types.PutExternalEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
   /**
-   * 
+   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the AWS Config rule is provided.
    */
   putExternalEvaluation(callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
   /**
@@ -584,11 +584,11 @@ declare class ConfigService extends Service {
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(params: ConfigService.Types.PutRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
@@ -608,11 +608,11 @@ declare class ConfigService extends Service {
    */
   putRetentionConfiguration(callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
   /**
-   * Saves a new query or updates an existing saved query. The QueryName must be unique for an AWS account in an AWS Region. You can create upto 300 queries in an AWS account in an AWS Region.
+   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single AWS account and a single AWS Region. You can create upto 300 queries in a single AWS account and a single AWS Region.
    */
   putStoredQuery(params: ConfigService.Types.PutStoredQueryRequest, callback?: (err: AWSError, data: ConfigService.Types.PutStoredQueryResponse) => void): Request<ConfigService.Types.PutStoredQueryResponse, AWSError>;
   /**
-   * Saves a new query or updates an existing saved query. The QueryName must be unique for an AWS account in an AWS Region. You can create upto 300 queries in an AWS account in an AWS Region.
+   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single AWS account and a single AWS Region. You can create upto 300 queries in a single AWS account and a single AWS Region.
    */
   putStoredQuery(callback?: (err: AWSError, data: ConfigService.Types.PutStoredQueryResponse) => void): Request<ConfigService.Types.PutStoredQueryResponse, AWSError>;
   /**
@@ -1253,7 +1253,7 @@ declare namespace ConfigService {
      */
     configurationItemMD5Hash?: ConfigurationItemMD5Hash;
     /**
-     * accoun
+     * Amazon Resource Name (ARN) associated with the resource.
      */
     arn?: ARN;
     /**
@@ -1396,11 +1396,11 @@ declare namespace ConfigService {
      */
     ConformancePackId: ConformancePackId;
     /**
-     * Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket.
+     * The prefix for the Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -1667,6 +1667,10 @@ declare namespace ConfigService {
      * The prefix for the specified Amazon S3 bucket.
      */
     s3KeyPrefix?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer managed key (CMK) used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
+     */
+    s3KmsKeyArn?: String;
     /**
      * The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes. If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see Permissions for the Amazon SNS Topic in the AWS Config Developer Guide.
      */
@@ -2321,10 +2325,25 @@ declare namespace ConfigService {
   }
   export type Expression = string;
   export interface ExternalEvaluation {
+    /**
+     * The evaluated compliance resource type. AWS Config accepts AWS::::Account resource type.
+     */
     ComplianceResourceType: StringWithCharLimit256;
+    /**
+     * The evaluated compliance resource ID. AWS Config accepts only AWS account ID.
+     */
     ComplianceResourceId: BaseResourceId;
+    /**
+     * The compliance of the AWS resource. The valid values are COMPLIANT, NON_COMPLIANT,  and NOT_APPLICABLE.
+     */
     ComplianceType: ComplianceType;
+    /**
+     * Supplementary information about the reason of compliance. For example, this task was completed on a specific date.
+     */
     Annotation?: StringWithCharLimit256;
+    /**
+     * The time when the compliance was recorded. 
+     */
     OrderingTimestamp: OrderingTimestamp;
   }
   export interface FailedDeleteRemediationExceptionsBatch {
@@ -2797,7 +2816,7 @@ declare namespace ConfigService {
      */
     Filters?: ResourceFilters;
     /**
-     * The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -3007,11 +3026,11 @@ declare namespace ConfigService {
      */
     OrganizationConformancePackArn: StringWithCharLimit256;
     /**
-     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. 
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * Any folder structure you want to add to an Amazon S3 bucket.
+     * Any folder structure you want to add to an Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3255,11 +3274,11 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * AWS Config stores intermediate files while processing conformance pack template.
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket. 
+     * The prefix for the Amazon S3 bucket.   This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3300,7 +3319,13 @@ declare namespace ConfigService {
     FailedEvaluations?: Evaluations;
   }
   export interface PutExternalEvaluationRequest {
+    /**
+     * The name of the AWS Config rule.
+     */
     ConfigRuleName: ConfigRuleName;
+    /**
+     * An ExternalEvaluation object that provides details about compliance.
+     */
     ExternalEvaluation: ExternalEvaluation;
   }
   export interface PutExternalEvaluationResponse {
@@ -3343,11 +3368,11 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.  The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see Permissions for cross account bucket access.
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
-     * The prefix for the Amazon S3 bucket.
+     * The prefix for the Amazon S3 bucket.  This field is optional. 
      */
     DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
     /**
@@ -3441,7 +3466,7 @@ declare namespace ConfigService {
   }
   export interface PutStoredQueryRequest {
     /**
-     * A list of StoredQuery objects. The mandatory fields are QueryName and Expression.
+     * A list of StoredQuery objects. The mandatory fields are QueryName and Expression.  When you are creating a query, you must provide a query name and an expression. When you are updating a query, you must provide a query name but updating the description is optional. 
      */
     StoredQuery: StoredQuery;
     /**
@@ -3451,7 +3476,7 @@ declare namespace ConfigService {
   }
   export interface PutStoredQueryResponse {
     /**
-     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.
+     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
      */
     QueryArn?: QueryArn;
   }
@@ -3478,7 +3503,7 @@ declare namespace ConfigService {
      */
     includeGlobalResourceTypes?: IncludeGlobalResourceTypes;
     /**
-     * A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). Before you can set this option to true, you must set the allSupported option to false. If you set this option to true, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported AWS Resource Types.
+     * A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to false. If you set this option to true, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported AWS Resource Types.
      */
     resourceTypes?: ResourceTypeList;
   }
@@ -3938,7 +3963,7 @@ declare namespace ConfigService {
      */
     QueryId?: QueryId;
     /**
-     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.
+     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
      */
     QueryArn?: QueryArn;
     /**
@@ -3960,7 +3985,7 @@ declare namespace ConfigService {
      */
     QueryId: QueryId;
     /**
-     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.
+     * Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
      */
     QueryArn: QueryArn;
     /**

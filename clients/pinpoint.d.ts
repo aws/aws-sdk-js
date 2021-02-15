@@ -2071,6 +2071,10 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
@@ -4584,6 +4588,10 @@ declare namespace Pinpoint {
      * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
      */
     MessageType?: MessageType;
+    /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
     /**
      * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
      */
