@@ -140,6 +140,38 @@
       ],
       "documentation": "<p> Returns details about an anomaly that you specify using its ID. </p>"
     },
+    "DescribeFeedback": {
+      "name": "DescribeFeedback",
+      "http": {
+        "method": "POST",
+        "requestUri": "/feedback",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeFeedbackRequest"
+      },
+      "output": {
+        "shape": "DescribeFeedbackResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p> Returns the most recent feedback submitted in the current AWS account and Region. </p>"
+    },
     "DescribeInsight": {
       "name": "DescribeInsight",
       "http": {
@@ -883,6 +915,23 @@
         "ReactiveAnomaly": {
           "shape": "ReactiveAnomaly",
           "documentation": "<p> An <code>ProactiveAnomaly</code> object that represents the requested anomaly. </p>"
+        }
+      }
+    },
+    "DescribeFeedbackRequest": {
+      "type": "structure",
+      "members": {
+        "InsightId": {
+          "shape": "InsightId",
+          "documentation": "<p> The ID of the insight for which the feedback was provided. </p>"
+        }
+      }
+    },
+    "DescribeFeedbackResponse": {
+      "type": "structure",
+      "members": {
+        "InsightFeedback": {
+          "shape": "InsightFeedback"
         }
       }
     },

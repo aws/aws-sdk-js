@@ -1868,7 +1868,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1893,6 +1893,10 @@
         "buildBatchConfig": {
           "shape": "ProjectBuildBatchConfig",
           "documentation": "<p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build options for the project.</p>"
+        },
+        "concurrentBuildLimit": {
+          "shape": "WrapperInt",
+          "documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p> <p>New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.</p>"
         }
       }
     },
@@ -3073,7 +3077,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
         },
         "tags": {
           "shape": "TagList",
@@ -3110,6 +3114,10 @@
         "buildBatchConfig": {
           "shape": "ProjectBuildBatchConfig",
           "documentation": "<p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build options for the project.</p>"
+        },
+        "concurrentBuildLimit": {
+          "shape": "WrapperInt",
+          "documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p> <p>New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.</p>"
         }
       },
       "documentation": "<p>Information about a build project.</p>"
@@ -3184,7 +3192,7 @@
         },
         "badgeRequestUrl": {
           "shape": "String",
-          "documentation": "<p>The publicly-accessible URL through which you can access the build badge for your project. </p> <p>The publicly accessible URL through which you can access the build badge for your project. </p>"
+          "documentation": "<p>The publicly-accessible URL through which you can access the build badge for your project. </p>"
         }
       },
       "documentation": "<p>Information about the build badge for the build project.</p>"
@@ -4468,7 +4476,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
         },
         "tags": {
           "shape": "TagList",
@@ -4492,6 +4500,10 @@
         },
         "buildBatchConfig": {
           "shape": "ProjectBuildBatchConfig"
+        },
+        "concurrentBuildLimit": {
+          "shape": "WrapperInt",
+          "documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p> <p>New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.</p> <p>To remove this limit, set this value to -1.</p>"
         }
       }
     },

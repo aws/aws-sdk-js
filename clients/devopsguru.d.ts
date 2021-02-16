@@ -44,6 +44,14 @@ declare class DevOpsGuru extends Service {
    */
   describeAnomaly(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAnomalyResponse) => void): Request<DevOpsGuru.Types.DescribeAnomalyResponse, AWSError>;
   /**
+   *  Returns the most recent feedback submitted in the current AWS account and Region. 
+   */
+  describeFeedback(params: DevOpsGuru.Types.DescribeFeedbackRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeFeedbackResponse) => void): Request<DevOpsGuru.Types.DescribeFeedbackResponse, AWSError>;
+  /**
+   *  Returns the most recent feedback submitted in the current AWS account and Region. 
+   */
+  describeFeedback(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeFeedbackResponse) => void): Request<DevOpsGuru.Types.DescribeFeedbackResponse, AWSError>;
+  /**
    *  Returns details about an insight that you specify using its ID. 
    */
   describeInsight(params: DevOpsGuru.Types.DescribeInsightRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeInsightResponse) => void): Request<DevOpsGuru.Types.DescribeInsightResponse, AWSError>;
@@ -317,6 +325,15 @@ declare namespace DevOpsGuru {
      *  An ProactiveAnomaly object that represents the requested anomaly. 
      */
     ReactiveAnomaly?: ReactiveAnomaly;
+  }
+  export interface DescribeFeedbackRequest {
+    /**
+     *  The ID of the insight for which the feedback was provided. 
+     */
+    InsightId?: InsightId;
+  }
+  export interface DescribeFeedbackResponse {
+    InsightFeedback?: InsightFeedback;
   }
   export interface DescribeInsightRequest {
     /**

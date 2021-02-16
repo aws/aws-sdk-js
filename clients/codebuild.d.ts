@@ -1008,7 +1008,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). 
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -1035,6 +1035,10 @@ declare namespace CodeBuild {
      * A ProjectBuildBatchConfig object that defines the batch build options for the project.
      */
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.
+     */
+    concurrentBuildLimit?: WrapperInt;
   }
   export interface CreateProjectOutput {
     /**
@@ -1814,7 +1818,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). 
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -1853,6 +1857,10 @@ declare namespace CodeBuild {
      * A ProjectBuildBatchConfig object that defines the batch build options for the project.
      */
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.
+     */
+    concurrentBuildLimit?: WrapperInt;
   }
   export type ProjectArns = NonEmptyString[];
   export interface ProjectArtifacts {
@@ -1900,7 +1908,7 @@ declare namespace CodeBuild {
      */
     badgeEnabled?: Boolean;
     /**
-     * The publicly-accessible URL through which you can access the build badge for your project.  The publicly accessible URL through which you can access the build badge for your project. 
+     * The publicly-accessible URL through which you can access the build badge for your project. 
      */
     badgeRequestUrl?: String;
   }
@@ -2742,7 +2750,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). 
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -2766,6 +2774,10 @@ declare namespace CodeBuild {
      */
     fileSystemLocations?: ProjectFileSystemLocations;
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run. To remove this limit, set this value to -1.
+     */
+    concurrentBuildLimit?: WrapperInt;
   }
   export interface UpdateProjectOutput {
     /**

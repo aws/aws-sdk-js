@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.844.0-->
+<!--LATEST=2.845.0-->
 <!--ENTRYINSERT-->
+
+## 2.845.0
+* feature: CodeBuild: This release provides per-project limits for the number of concurrent builds
+* feature: DevOpsGuru: Amazon DevOps Guru is GA ready. This API update added a describeFeedback Api allows users to view submitted insight feedback. The release date is 02/16/2021
+* feature: LexRuntimeV2: Enable CORS
 
 ## 2.844.0
 * feature: ConfigService: Added option to provide KMS key to AWS Config DeliveryChannel
