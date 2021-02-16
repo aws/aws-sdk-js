@@ -77,6 +77,7 @@ AWS Key Management Service | AWS.KMS | 2014-11-01 | :tada: |
 AWS Lambda | AWS.Lambda | 2015-03-31 | :tada: |
 AWS Lambda | AWS.Lambda | 2014-11-11 | :tada: |
 Amazon Lex Runtime Service | AWS.LexRuntime | 2016-11-28 | :tada: |
+Amazon Lex Runtime V2 | AWS.LexRuntimeV2 | 2020-08-07 | :tada: |
 Amazon Lightsail | AWS.Lightsail | 2016-11-28 |  |
 Amazon Machine Learning | AWS.MachineLearning | 2014-12-12 | :tada: |
 AWS Marketplace Commerce Analytics | AWS.MarketplaceCommerceAnalytics | 2015-07-01 | :tada: |
