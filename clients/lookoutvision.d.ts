@@ -37,19 +37,19 @@ declare class LookoutVision extends Service {
    */
   createProject(callback?: (err: AWSError, data: LookoutVision.Types.CreateProjectResponse) => void): Request<LookoutVision.Types.CreateProjectResponse, AWSError>;
   /**
-   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset.  This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
+   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
    */
   deleteDataset(params: LookoutVision.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteDatasetResponse) => void): Request<LookoutVision.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   It might take a while to delete the dataset. To check the current status, check the Status field in the response from a call to DescribeDataset.  This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
+   * Deletes an existing Amazon Lookout for Vision dataset.  If your the project has a single dataset, you must create a new dataset before you can create a model. If you project has a training dataset and a test dataset consider the following.    If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.   If you delete the training dataset, you must create a training dataset before you can create a model.   This operation requires permissions to perform the lookoutvision:DeleteDataset operation.
    */
   deleteDataset(callback?: (err: AWSError, data: LookoutVision.Types.DeleteDatasetResponse) => void): Request<LookoutVision.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. This operation requires permissions to perform the lookoutvision:DeleteModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListProjects and check if the version of the model (ModelVersion) is in the Models array.  This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(params: LookoutVision.Types.DeleteModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. This operation requires permissions to perform the lookoutvision:DeleteModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListProjects and check if the version of the model (ModelVersion) is in the Models array.  This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
@@ -125,19 +125,19 @@ declare class LookoutVision extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: LookoutVision.Types.ListTagsForResourceResponse) => void): Request<LookoutVision.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
+   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. A model is ready to use when its status is HOSTED. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
    */
   startModel(params: LookoutVision.Types.StartModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.StartModelResponse) => void): Request<LookoutVision.Types.StartModelResponse, AWSError>;
   /**
-   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
+   * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. A model is ready to use when its status is HOSTED. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
    */
   startModel(callback?: (err: AWSError, data: LookoutVision.Types.StartModelResponse) => void): Request<LookoutVision.Types.StartModelResponse, AWSError>;
   /**
-   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  This operation requires permissions to perform the lookoutvision:StopModel operation.
+   * Stops the hosting of a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  After the model hosting stops, the Status of the model is TRAINED. This operation requires permissions to perform the lookoutvision:StopModel operation.
    */
   stopModel(params: LookoutVision.Types.StopModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.StopModelResponse) => void): Request<LookoutVision.Types.StopModelResponse, AWSError>;
   /**
-   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  This operation requires permissions to perform the lookoutvision:StopModel operation.
+   * Stops the hosting of a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  After the model hosting stops, the Status of the model is TRAINED. This operation requires permissions to perform the lookoutvision:StopModel operation.
    */
   stopModel(callback?: (err: AWSError, data: LookoutVision.Types.StopModelResponse) => void): Request<LookoutVision.Types.StopModelResponse, AWSError>;
   /**
@@ -212,7 +212,7 @@ declare namespace LookoutVision {
      */
     OutputConfig: OutputConfig;
     /**
-     * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encypting the model. If this parameter is not specified, the model is encrypted by a key that AWS owns and manages.
+     * The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -644,7 +644,7 @@ declare namespace LookoutVision {
     KmsKeyId?: KmsKeyId;
   }
   export type ModelDescriptionMessage = string;
-  export type ModelHostingStatus = "RUNNING"|"STARTING"|"STOPPED"|"FAILED"|string;
+  export type ModelHostingStatus = "STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|string;
   export interface ModelMetadata {
     /**
      * The unix timestamp for the date and time that the model was created. 
@@ -751,11 +751,11 @@ declare namespace LookoutVision {
   export type S3KeyPrefix = string;
   export interface S3Location {
     /**
-     * The S3 bucket that contain the manifest file.
+     * The S3 bucket that contains the training output.
      */
     Bucket: S3BucketName;
     /**
-     * The path and name of the manifest file with the S3 bucket.
+     * The path of the folder, within the S3 bucket, that contains the training output.
      */
     Prefix?: S3KeyPrefix;
   }

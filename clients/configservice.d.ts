@@ -1380,7 +1380,7 @@ declare namespace ConfigService {
     ConformancePackComplianceStatus: ConformancePackComplianceType;
   }
   export type ConformancePackComplianceSummaryList = ConformancePackComplianceSummary[];
-  export type ConformancePackComplianceType = "COMPLIANT"|"NON_COMPLIANT"|string;
+  export type ConformancePackComplianceType = "COMPLIANT"|"NON_COMPLIANT"|"INSUFFICIENT_DATA"|string;
   export type ConformancePackConfigRuleNames = StringWithCharLimit64[];
   export interface ConformancePackDetail {
     /**

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.845.0-->
+<!--LATEST=2.846.0-->
 <!--ENTRYINSERT-->
+
+## 2.846.0
+* feature: ConfigService: Added INSUFFICIENT_DATA in ConformancePackComplianceType.
+* feature: LookoutVision: This release for Amazon Lookout for Vision includes documentation updates and a correction to the Status field returned in the response from StartModel and StopModel.
 
 ## 2.845.0
 * feature: CodeBuild: This release provides per-project limits for the number of concurrent builds
