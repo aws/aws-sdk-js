@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.846.0-->
+<!--LATEST=2.847.0-->
 <!--ENTRYINSERT-->
+
+## 2.847.0
+* feature: CloudFormation: Adding the 'callAs' parameter to all CloudFormation StackSets APIs except getTemplateSummary to support creating and managing service-managed StackSets with AWS Organizations Delegated Administrators
+* feature: CodeBuild: AWS CodeBuild now allows you to specify a separate bucket owner as part of the S3 destination in a report group.
+* feature: SageMaker: This release adds expires-in-seconds parameter to the CreatePresignedDomainUrl API for support of a configurable TTL.
 
 ## 2.846.0
 * feature: ConfigService: Added INSUFFICIENT_DATA in ConformancePackComplianceType.
