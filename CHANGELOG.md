@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.847.0-->
+<!--LATEST=2.848.0-->
 <!--ENTRYINSERT-->
+
+## 2.848.0
+* feature: RDS: Added awsBackupRecoveryPointArn in ModifyDBInstanceRequest and in the response of ModifyDBInstance.
 
 ## 2.847.0
 * feature: CloudFormation: Adding the 'callAs' parameter to all CloudFormation StackSets APIs except getTemplateSummary to support creating and managing service-managed StackSets with AWS Organizations Delegated Administrators

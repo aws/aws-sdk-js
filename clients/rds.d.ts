@@ -1272,6 +1272,7 @@ declare namespace RDS {
     AllowedValues?: String;
   }
   export type AvailableProcessorFeatureList = AvailableProcessorFeature[];
+  export type AwsBackupRecoveryPointArn = string;
   export interface BacktrackDBClusterMessage {
     /**
      * The DB cluster identifier of the DB cluster to be backtracked. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
@@ -1689,7 +1690,7 @@ declare namespace RDS {
      */
     BacktrackWindow?: LongOptional;
     /**
-     * The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.  Aurora MySQL  Possible values are audit, error, general, and slowquery.   Aurora PostgreSQL  Possible values are postgresql and upgrade. 
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.  Aurora MySQL  Possible values are audit, error, general, and slowquery.   Aurora PostgreSQL  Possible value is postgresql. 
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -3231,6 +3232,10 @@ declare namespace RDS {
      * Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance. A CoIP provides local or external connectivity to resources in your Outpost subnets through your on-premises network. For some use cases, a CoIP can provide lower latency for connections to the DB instance from outside of its virtual private cloud (VPC) on your local network. For more information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts in the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned IP addresses in the AWS Outposts User Guide.
      */
     CustomerOwnedIpEnabled?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+     */
+    AwsBackupRecoveryPointArn?: String;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -5808,6 +5813,10 @@ declare namespace RDS {
      * A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance. A CoIP provides local or external connectivity to resources in your Outpost subnets through your on-premises network. For some use cases, a CoIP can provide lower latency for connections to the DB instance from outside of its virtual private cloud (VPC) on your local network. For more information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts in the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned IP addresses in the AWS Outposts User Guide.
      */
     EnableCustomerOwnedIp?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+     */
+    AwsBackupRecoveryPointArn?: AwsBackupRecoveryPointArn;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
