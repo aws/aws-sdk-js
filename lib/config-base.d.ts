@@ -64,7 +64,6 @@ export interface HTTPOptions {
     /**
      * Custom DNS lookup function.
      * Defaults to dns.lookup.
-     * Used in Node.js (>= v12.x) environment only.
      */
     lookup?: (hostname: string, options: any, callback: (err: NodeJS.ErrnoException | null, address: string, family: number) => void) => void;
     /**
