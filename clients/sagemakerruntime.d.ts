@@ -56,6 +56,10 @@ declare namespace SageMakerRuntime {
      */
     TargetVariant?: TargetVariantHeader;
     /**
+     * If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
+     */
+    TargetContainerHostname?: TargetContainerHostnameHeader;
+    /**
      * If you provide a value, it is added to the captured data when you enable data capture on the endpoint. For information about data capture, see Capture Data.
      */
     InferenceId?: InferenceId;
@@ -78,6 +82,7 @@ declare namespace SageMakerRuntime {
      */
     CustomAttributes?: CustomAttributesHeader;
   }
+  export type TargetContainerHostnameHeader = string;
   export type TargetModelHeader = string;
   export type TargetVariantHeader = string;
   /**
