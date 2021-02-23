@@ -1393,7 +1393,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2455,7 +2455,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3832,7 +3832,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3878,7 +3878,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"

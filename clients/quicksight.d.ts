@@ -1424,7 +1424,7 @@ declare namespace QuickSight {
      */
     Name: ResourceName;
     /**
-     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.
+     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.  AMAZON_ELASTICSEARCH is for Amazon managed Elasticsearch Service.
      */
     Type: DataSourceType;
     /**
@@ -4896,15 +4896,15 @@ declare namespace QuickSight {
   }
   export interface RowLevelPermissionDataSet {
     /**
-     * The namespace associated with the row-level permissions dataset.
+     * The namespace associated with the dataset that contains permissions for RLS.
      */
     Namespace?: Namespace;
     /**
-     * The Amazon Resource Name (ARN) of the permission dataset.
+     * The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
      */
     Arn: Arn;
     /**
-     * Permission policy.
+     * The type of permissions to use when interpretting the permissions for RLS. DENY_ACCESS is included for backward compatibility only.
      */
     PermissionPolicy: RowLevelPermissionPolicy;
   }
@@ -4919,7 +4919,7 @@ declare namespace QuickSight {
   }
   export interface S3Source {
     /**
-     * The amazon Resource Name (ARN) for the data source.
+     * The Amazon Resource Name (ARN) for the data source.
      */
     DataSourceArn: Arn;
     /**

@@ -1701,6 +1701,7 @@ declare namespace Glue {
      */
     TableName: NameString;
   }
+  export type CatalogGetterPageSize = number;
   export type CatalogIdString = string;
   export interface CatalogImportStatus {
     /**
@@ -4076,7 +4077,7 @@ declare namespace Glue {
     /**
      * The maximum number of databases to return in one response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: CatalogGetterPageSize;
     /**
      * Allows you to specify that you want to list the databases shared with your account. The allowable values are FOREIGN or ALL.    If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
      */
@@ -4529,6 +4530,7 @@ declare namespace Glue {
      * The maximum number of partitions to return in a single response.
      */
     MaxResults?: PageSize;
+    ExcludeColumnSchema?: BooleanNullable;
   }
   export interface GetPartitionsResponse {
     /**
@@ -4910,7 +4912,7 @@ declare namespace Glue {
     /**
      * The maximum number of table versions to return in one response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: CatalogGetterPageSize;
   }
   export interface GetTableVersionsResponse {
     /**
@@ -4942,7 +4944,7 @@ declare namespace Glue {
     /**
      * The maximum number of tables to return in a single response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: CatalogGetterPageSize;
   }
   export interface GetTablesResponse {
     /**
@@ -5042,7 +5044,7 @@ declare namespace Glue {
     /**
      * The maximum number of functions to return in one response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: CatalogGetterPageSize;
   }
   export interface GetUserDefinedFunctionsResponse {
     /**

@@ -237,9 +237,13 @@ declare namespace RedshiftData {
      */
     ClusterIdentifier: Location;
     /**
-     * The name of the database. This parameter is required when authenticating using temporary credentials.
+     * A database name. The connected database is specified when you connect with your authentication credentials. 
      */
-    Database?: String;
+    ConnectedDatabase?: String;
+    /**
+     * The name of the database that contains the tables to be described. If ConnectedDatabase is not specified, this is also the database to connect to with your authentication credentials.
+     */
+    Database: String;
     /**
      * The database user name. This parameter is required when authenticating using temporary credentials. 
      */
@@ -433,7 +437,11 @@ declare namespace RedshiftData {
      */
     ClusterIdentifier: Location;
     /**
-     * The name of the database. This parameter is required when authenticating using temporary credentials. 
+     * A database name. The connected database is specified when you connect with your authentication credentials. 
+     */
+    ConnectedDatabase?: String;
+    /**
+     * The name of the database that contains the schemas to list. If ConnectedDatabase is not specified, this is also the database to connect to with your authentication credentials.
      */
     Database: String;
     /**
@@ -506,7 +514,11 @@ declare namespace RedshiftData {
      */
     ClusterIdentifier: Location;
     /**
-     * The name of the database. This parameter is required when authenticating using temporary credentials.
+     * A database name. The connected database is specified when you connect with your authentication credentials. 
+     */
+    ConnectedDatabase?: String;
+    /**
+     * The name of the database that contains the tables to list. If ConnectedDatabase is not specified, this is also the database to connect to with your authentication credentials.
      */
     Database: String;
     /**

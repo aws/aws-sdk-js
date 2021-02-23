@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.849.0-->
+<!--LATEST=2.850.0-->
 <!--ENTRYINSERT-->
+
+## 2.850.0
+* feature: AutoScaling: Adds a new optional IncludeDeletedGroups parameter to the DescribeScalingActivities API.
+* feature: Glue: Updating the page size for Glue catalog getter APIs.
+* feature: IoTEvents: This release adds an Analyze feature to AWS IoT Events that lets customers analyze their detector models for runtime issues.
+* feature: Pinpoint: Enables AWS Pinpoint customers to use Entity Id and Template Id when sending SMS message. These parameters can be obtained from the regulatory body of the country where you are trying to send the SMS.
+* feature: RedshiftData: This release adds an additional parameter 'ConnectedDatabase' into ListSchemasRequest, ListTablesRequest and DescribeTableRequest to support the metadata sharing across databases.
 
 ## 2.849.0
 * feature: SageMaker: Amazon SageMaker now supports core dump for SageMaker Endpoints and direct invocation of a single container in a SageMaker Endpoint that hosts multiple containers.

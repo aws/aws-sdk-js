@@ -5308,6 +5308,12 @@
       },
       "documentation": "<p>Specifies a table definition in the AWS Glue Data Catalog.</p>"
     },
+    "CatalogGetterPageSize": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
+    },
     "CatalogIdString": {
       "type": "string",
       "max": 255,
@@ -8846,7 +8852,7 @@
           "documentation": "<p>A continuation token, if this is a continuation call.</p>"
         },
         "MaxResults": {
-          "shape": "PageSize",
+          "shape": "CatalogGetterPageSize",
           "documentation": "<p>The maximum number of databases to return in one response.</p>"
         },
         "ResourceShareType": {
@@ -9447,6 +9453,9 @@
         "MaxResults": {
           "shape": "PageSize",
           "documentation": "<p>The maximum number of partitions to return in a single response.</p>"
+        },
+        "ExcludeColumnSchema": {
+          "shape": "BooleanNullable"
         }
       }
     },
@@ -9950,7 +9959,7 @@
           "documentation": "<p>A continuation token, if this is not the first call.</p>"
         },
         "MaxResults": {
-          "shape": "PageSize",
+          "shape": "CatalogGetterPageSize",
           "documentation": "<p>The maximum number of table versions to return in one response.</p>"
         }
       }
@@ -9991,7 +10000,7 @@
           "documentation": "<p>A continuation token, included if this is a continuation call.</p>"
         },
         "MaxResults": {
-          "shape": "PageSize",
+          "shape": "CatalogGetterPageSize",
           "documentation": "<p>The maximum number of tables to return in a single response.</p>"
         }
       }
@@ -10134,7 +10143,7 @@
           "documentation": "<p>A continuation token, if this is a continuation call.</p>"
         },
         "MaxResults": {
-          "shape": "PageSize",
+          "shape": "CatalogGetterPageSize",
           "documentation": "<p>The maximum number of functions to return in one response.</p>"
         }
       }

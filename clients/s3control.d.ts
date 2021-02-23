@@ -630,7 +630,7 @@ declare namespace S3Control {
   }
   export interface DescribeJobRequest {
     /**
-     * 
+     * The AWS account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1219,7 +1219,7 @@ declare namespace S3Control {
   }
   export interface ListJobsRequest {
     /**
-     * 
+     * The AWS account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1930,7 +1930,7 @@ declare namespace S3Control {
   export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export interface UpdateJobPriorityRequest {
     /**
-     * 
+     * The AWS account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1954,7 +1954,7 @@ declare namespace S3Control {
   }
   export interface UpdateJobStatusRequest {
     /**
-     * 
+     * The AWS account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**

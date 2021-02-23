@@ -6446,6 +6446,14 @@
         "SenderId": {
           "shape": "__string",
           "documentation": "<p>The sender ID to display on recipients' devices when they receive the SMS message.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the content and settings for an SMS message that's sent to recipients of a campaign.</p>"
@@ -10987,6 +10995,14 @@
         "SenderId": {
           "shape": "__string",
           "documentation": "<p>The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html\">Supported Countries and Regions</a> in the Amazon Pinpoint User Guide.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.</p>"
@@ -12147,6 +12163,14 @@
         "Substitutions": {
           "shape": "MapOfListOf__string",
           "documentation": "<p>The message variables to use in the SMS message. You can override the default variables with individual address variables.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.</p>"

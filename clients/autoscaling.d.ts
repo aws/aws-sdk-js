@@ -240,11 +240,11 @@ declare class AutoScaling extends Service {
    */
   describePolicies(callback?: (err: AWSError, data: AutoScaling.Types.PoliciesType) => void): Request<AutoScaling.Types.PoliciesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group.
+   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
    */
   describeScalingActivities(params: AutoScaling.Types.DescribeScalingActivitiesType, callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group.
+   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
    */
   describeScalingActivities(callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
@@ -493,6 +493,14 @@ declare namespace AutoScaling {
      * The details about the activity.
      */
     Details?: XmlString;
+    /**
+     * The state of the Auto Scaling group, which is either InService or Deleted.
+     */
+    AutoScalingGroupState?: AutoScalingGroupState;
+    /**
+     * The Amazon Resource Name (ARN) of the Auto Scaling group.
+     */
+    AutoScalingGroupARN?: ResourceName;
   }
   export type ActivityIds = XmlString[];
   export interface ActivityType {
@@ -683,6 +691,7 @@ declare namespace AutoScaling {
      */
     MaxRecords?: MaxRecords;
   }
+  export type AutoScalingGroupState = string;
   export type AutoScalingGroups = AutoScalingGroup[];
   export interface AutoScalingGroupsType {
     /**
@@ -1310,6 +1319,10 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName?: XmlStringMaxLen255;
     /**
+     * Indicates whether to include scaling activity from deleted Auto Scaling groups.
+     */
+    IncludeDeletedGroups?: IncludeDeletedGroups;
+    /**
      * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
     MaxRecords?: MaxRecords;
@@ -1561,6 +1574,7 @@ declare namespace AutoScaling {
   export type HealthCheckGracePeriod = number;
   export type HeartbeatTimeout = number;
   export type HonorCooldown = boolean;
+  export type IncludeDeletedGroups = boolean;
   export interface Instance {
     /**
      * The ID of the instance.

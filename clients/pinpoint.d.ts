@@ -2078,6 +2078,14 @@ declare namespace Pinpoint {
      * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface CampaignState {
     /**
@@ -4596,6 +4604,14 @@ declare namespace Pinpoint {
      * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface JourneySchedule {
     /**
@@ -5399,6 +5415,14 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface SMSMessageActivity {
     /**

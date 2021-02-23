@@ -425,16 +425,21 @@
     "DescribeTableRequest": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier"
+        "ClusterIdentifier",
+        "Database"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
           "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
         },
+        "ConnectedDatabase": {
+          "shape": "String",
+          "documentation": "<p>A database name. The connected database is specified when you connect with your authentication credentials. </p>"
+        },
         "Database": {
           "shape": "String",
-          "documentation": "<p>The name of the database. This parameter is required when authenticating using temporary credentials.</p>"
+          "documentation": "<p>The name of the database that contains the tables to be described. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>"
         },
         "DbUser": {
           "shape": "String",
@@ -681,9 +686,13 @@
           "shape": "Location",
           "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
         },
+        "ConnectedDatabase": {
+          "shape": "String",
+          "documentation": "<p>A database name. The connected database is specified when you connect with your authentication credentials. </p>"
+        },
         "Database": {
           "shape": "String",
-          "documentation": "<p>The name of the database. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The name of the database that contains the schemas to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>"
         },
         "DbUser": {
           "shape": "String",
@@ -777,9 +786,13 @@
           "shape": "Location",
           "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
         },
+        "ConnectedDatabase": {
+          "shape": "String",
+          "documentation": "<p>A database name. The connected database is specified when you connect with your authentication credentials. </p>"
+        },
         "Database": {
           "shape": "String",
-          "documentation": "<p>The name of the database. This parameter is required when authenticating using temporary credentials.</p>"
+          "documentation": "<p>The name of the database that contains the tables to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>"
         },
         "DbUser": {
           "shape": "String",

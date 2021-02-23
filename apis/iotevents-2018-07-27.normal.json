@@ -180,6 +180,37 @@
       ],
       "documentation": "<p>Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned.</p>"
     },
+    "DescribeDetectorModelAnalysis": {
+      "name": "DescribeDetectorModelAnalysis",
+      "http": {
+        "method": "GET",
+        "requestUri": "/analysis/detector-models/{analysisId}"
+      },
+      "input": {
+        "shape": "DescribeDetectorModelAnalysisRequest"
+      },
+      "output": {
+        "shape": "DescribeDetectorModelAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieves execution information about a detector model analysis</p>"
+    },
     "DescribeInput": {
       "name": "DescribeInput",
       "http": {
@@ -244,6 +275,37 @@
         }
       ],
       "documentation": "<p>Retrieves the current settings of the AWS IoT Events logging options.</p>"
+    },
+    "GetDetectorModelAnalysisResults": {
+      "name": "GetDetectorModelAnalysisResults",
+      "http": {
+        "method": "GET",
+        "requestUri": "/analysis/detector-models/{analysisId}/results"
+      },
+      "input": {
+        "shape": "GetDetectorModelAnalysisResultsRequest"
+      },
+      "output": {
+        "shape": "GetDetectorModelAnalysisResultsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieves one or more analysis results of the detector model.</p>"
     },
     "ListDetectorModelVersions": {
       "name": "ListDetectorModelVersions",
@@ -393,6 +455,37 @@
         }
       ],
       "documentation": "<p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.</p>"
+    },
+    "StartDetectorModelAnalysis": {
+      "name": "StartDetectorModelAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/analysis/detector-models/"
+      },
+      "input": {
+        "shape": "StartDetectorModelAnalysisRequest"
+      },
+      "output": {
+        "shape": "StartDetectorModelAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Performs an analysis of your detector model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -574,11 +667,11 @@
         },
         "dynamoDB": {
           "shape": "DynamoDBAction",
-          "documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>.</p>"
+          "documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>.</p>"
         },
         "dynamoDBv2": {
           "shape": "DynamoDBv2Action",
-          "documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>.</p>"
+          "documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>.</p>"
         },
         "iotSiteWise": {
           "shape": "IotSiteWiseAction",
@@ -597,6 +690,78 @@
       "type": "string",
       "max": 2048,
       "min": 1
+    },
+    "AnalysisId": {
+      "type": "string"
+    },
+    "AnalysisMessage": {
+      "type": "string"
+    },
+    "AnalysisResult": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "shape": "AnalysisType",
+          "documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p> <ul> <li> <p> <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p> </li> <li> <p> <code>service-limits</code> - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.</p> </li> <li> <p> <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p> </li> <li> <p> <code>expression-syntax</code> - Your expression must follow the required syntax.</p> </li> <li> <p> <code>data-type</code> - Data types referenced in the detector model must be compatible.</p> </li> <li> <p> <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p> </li> <li> <p> <code>referenced-resource</code> - Resources that the detector model uses must be available.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+        },
+        "level": {
+          "shape": "AnalysisResultLevel",
+          "documentation": "<p>The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:</p> <ul> <li> <p> <code>INFO</code> - An information result informs you about a significant field in your detector model. This type of result usually doesn't require immediate action.</p> </li> <li> <p> <code>WARNING</code> - A warning result draws special attention to fields that are potentially damaging to your detector model. We recommend that you review warnings and take necessary actions before you use your detetor model in production environments. Otherwise, the detector model may not fully function as expected.</p> </li> <li> <p> <code>ERROR</code> - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.</p> </li> </ul>"
+        },
+        "message": {
+          "shape": "AnalysisMessage",
+          "documentation": "<p>Contains additional information about the analysis result.</p>"
+        },
+        "locations": {
+          "shape": "AnalysisResultLocations",
+          "documentation": "<p>Contains one or more locations that you can use to locate the fields in your detector model that the analysis result references.</p>"
+        }
+      },
+      "documentation": "<p>Contains the result of the analysis.</p>"
+    },
+    "AnalysisResultLevel": {
+      "type": "string",
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR"
+      ]
+    },
+    "AnalysisResultLocation": {
+      "type": "structure",
+      "members": {
+        "path": {
+          "shape": "AnalysisResultLocationPath",
+          "documentation": "<p>A <a href=\"https://github.com/json-path/JsonPath\">JsonPath</a> expression that identifies the error field in your detector model.</p>"
+        }
+      },
+      "documentation": "<p>Contains information that you can use to locate the field in your detector model that the analysis result references.</p>"
+    },
+    "AnalysisResultLocationPath": {
+      "type": "string"
+    },
+    "AnalysisResultLocations": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisResultLocation"
+      }
+    },
+    "AnalysisResults": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisResult"
+      }
+    },
+    "AnalysisStatus": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
+    "AnalysisType": {
+      "type": "string"
     },
     "AssetId": {
       "type": "string"
@@ -639,14 +804,14 @@
       "members": {
         "timeInSeconds": {
           "shape": "AssetPropertyTimeInSeconds",
-          "documentation": "<p>The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199. You can also specify an expression.</p>"
+          "documentation": "<p>The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.</p>"
         },
         "offsetInNanos": {
           "shape": "AssetPropertyOffsetInNanos",
-          "documentation": "<p>The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is between 0-999999999. You can also specify an expression.</p>"
+          "documentation": "<p>The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is between 0-999999999.</p>"
         }
       },
-      "documentation": "<p>A structure that contains timestamp information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html\">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>For parameters that are string data type, you can specify the following options:</p> <ul> <li> <p>Use a string. For example, the <code>timeInSeconds</code> value can be <code>'1586400675'</code>.</p> </li> <li> <p>Use an expression. For example, the <code>timeInSeconds</code> value can be <code>'${$input.TemperatureInput.sensorData.timestamp/1000}'</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> </li> </ul>"
+      "documentation": "<p>A structure that contains timestamp information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html\">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyTimestamp</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>timeInSeconds</code> parameter can be <code>'1586400675'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>offsetInNanos</code> parameter can be <code>$variable.time</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>timeInSeconds</code> parameter uses a substitution template.</p> <p> <code>'${$input.TemperatureInput.sensorData.timestamp / 1000}'</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
     },
     "AssetPropertyValue": {
       "type": "structure",
@@ -664,32 +829,32 @@
         },
         "quality": {
           "shape": "AssetPropertyQuality",
-          "documentation": "<p>The quality of the asset property value. The value must be <code>GOOD</code>, <code>BAD</code>, or <code>UNCERTAIN</code>. You can also specify an expression.</p>"
+          "documentation": "<p>The quality of the asset property value. The value must be <code>'GOOD'</code>, <code>'BAD'</code>, or <code>'UNCERTAIN'</code>.</p>"
         }
       },
-      "documentation": "<p>A structure that contains value information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html\">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>For parameters that are string data type, you can specify the following options: </p> <ul> <li> <p>Use a string. For example, the <code>quality</code> value can be <code>'GOOD'</code>.</p> </li> <li> <p>Use an expression. For example, the <code>quality</code> value can be <code>$input.TemperatureInput.sensorData.quality</code> .</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> </li> </ul>"
+      "documentation": "<p>A structure that contains value information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html\">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyValue</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>quality</code> parameter can be <code>'GOOD'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>quality</code> parameter can be <code>$input.TemperatureInput.sensorData.quality</code>.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
     },
     "AssetPropertyVariant": {
       "type": "structure",
       "members": {
         "stringValue": {
           "shape": "AssetPropertyStringValue",
-          "documentation": "<p>The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.</p>"
+          "documentation": "<p>The asset property value is a string. You must use an expression, and the evaluated result should be a string.</p>"
         },
         "integerValue": {
           "shape": "AssetPropertyIntegerValue",
-          "documentation": "<p>The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.</p>"
+          "documentation": "<p>The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.</p>"
         },
         "doubleValue": {
           "shape": "AssetPropertyDoubleValue",
-          "documentation": "<p>The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.</p>"
+          "documentation": "<p>The asset property value is a double. You must use an expression, and the evaluated result should be a double.</p>"
         },
         "booleanValue": {
           "shape": "AssetPropertyBooleanValue",
-          "documentation": "<p>The asset property value is a Boolean value that must be <code>TRUE</code> or <code>FALSE</code>. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.</p>"
+          "documentation": "<p>The asset property value is a Boolean value that must be <code>'TRUE'</code> or <code>'FALSE'</code>. You must use an expression, and the evaluated result should be a Boolean value.</p>"
         }
       },
-      "documentation": "<p>A structure that contains an asset property value. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html\">Variant</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <important> <p>You must specify one of the following value types, depending on the <code>dataType</code> of the specified asset property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html\">AssetProperty</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> </important> <p>For parameters that are string data type, you can specify the following options:</p> <ul> <li> <p>Use a string. For example, the <code>doubleValue</code> value can be <code>'47.9'</code>.</p> </li> <li> <p>Use an expression. For example, the <code>doubleValue</code> value can be <code>$input.TemperatureInput.sensorData.temperature</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> </li> </ul>"
+      "documentation": "<p>A structure that contains an asset property value. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html\">Variant</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyVariant</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>integerValue</code> parameter can be <code>'100'</code>.</p> </li> <li> <p>For references, you must specify either variables or parameters. For example, the value for the <code>booleanValue</code> parameter can be <code>$variable.offline</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates. </p> <p>In the following example, the value for the <code>doubleValue</code> parameter uses a substitution template. </p> <p> <code>'${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You must specify one of the following value types, depending on the <code>dataType</code> of the specified asset property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html\">AssetProperty</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>"
     },
     "Attribute": {
       "type": "structure",
@@ -858,6 +1023,29 @@
     },
     "DeliveryStreamName": {
       "type": "string"
+    },
+    "DescribeDetectorModelAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "analysisId"
+      ],
+      "members": {
+        "analysisId": {
+          "shape": "AnalysisId",
+          "documentation": "<p>The ID of the analysis result that you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "analysisId"
+        }
+      }
+    },
+    "DescribeDetectorModelAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "AnalysisStatus",
+          "documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model .</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p> </li> </ul>"
+        }
+      }
     },
     "DescribeDetectorModelRequest": {
       "type": "structure",
@@ -1134,11 +1322,11 @@
       "members": {
         "hashKeyType": {
           "shape": "DynamoKeyType",
-          "documentation": "<p>The data type for the hash key (also called the partition key). You can specify the following values:</p> <ul> <li> <p> <code>STRING</code> - The hash key is a string.</p> </li> <li> <p> <code>NUMBER</code> - The hash key is a number.</p> </li> </ul> <p>If you don't specify <code>hashKeyType</code>, the default value is <code>STRING</code>.</p>"
+          "documentation": "<p>The data type for the hash key (also called the partition key). You can specify the following values:</p> <ul> <li> <p> <code>'STRING'</code> - The hash key is a string.</p> </li> <li> <p> <code>'NUMBER'</code> - The hash key is a number.</p> </li> </ul> <p>If you don't specify <code>hashKeyType</code>, the default value is <code>'STRING'</code>.</p>"
         },
         "hashKeyField": {
           "shape": "DynamoKeyField",
-          "documentation": "<p>The name of the hash key (also called the partition key).</p>"
+          "documentation": "<p>The name of the hash key (also called the partition key). The <code>hashKeyField</code> value must match the partition key of the target DynamoDB table.</p>"
         },
         "hashKeyValue": {
           "shape": "DynamoKeyValue",
@@ -1146,11 +1334,11 @@
         },
         "rangeKeyType": {
           "shape": "DynamoKeyType",
-          "documentation": "<p>The data type for the range key (also called the sort key), You can specify the following values:</p> <ul> <li> <p> <code>STRING</code> - The range key is a string.</p> </li> <li> <p> <code>NUMBER</code> - The range key is number.</p> </li> </ul> <p>If you don't specify <code>rangeKeyField</code>, the default value is <code>STRING</code>.</p>"
+          "documentation": "<p>The data type for the range key (also called the sort key), You can specify the following values:</p> <ul> <li> <p> <code>'STRING'</code> - The range key is a string.</p> </li> <li> <p> <code>'NUMBER'</code> - The range key is number.</p> </li> </ul> <p>If you don't specify <code>rangeKeyField</code>, the default value is <code>'STRING'</code>.</p>"
         },
         "rangeKeyField": {
           "shape": "DynamoKeyField",
-          "documentation": "<p>The name of the range key (also called the sort key).</p>"
+          "documentation": "<p>The name of the range key (also called the sort key). The <code>rangeKeyField</code> value must match the sort key of the target DynamoDB table. </p>"
         },
         "rangeKeyValue": {
           "shape": "DynamoKeyValue",
@@ -1158,7 +1346,7 @@
         },
         "operation": {
           "shape": "DynamoOperation",
-          "documentation": "<p>The type of operation to perform. You can specify the following values: </p> <ul> <li> <p> <code>INSERT</code> - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.</p> </li> <li> <p> <code>UPDATE</code> - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> <li> <p> <code>DELETE</code> - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> </ul> <p>If you don't specify this parameter, AWS IoT Events triggers the <code>INSERT</code> operation.</p>"
+          "documentation": "<p>The type of operation to perform. You can specify the following values: </p> <ul> <li> <p> <code>'INSERT'</code> - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.</p> </li> <li> <p> <code>'UPDATE'</code> - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> <li> <p> <code>'DELETE'</code> - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> </ul> <p>If you don't specify this parameter, AWS IoT Events triggers the <code>'INSERT'</code> operation.</p>"
         },
         "payloadField": {
           "shape": "DynamoKeyField",
@@ -1166,13 +1354,13 @@
         },
         "tableName": {
           "shape": "DynamoTableName",
-          "documentation": "<p>The name of the DynamoDB table.</p>"
+          "documentation": "<p>The name of the DynamoDB table. The <code>tableName</code> value must match the table name of the target DynamoDB table. </p>"
         },
         "payload": {
           "shape": "Payload"
         }
       },
-      "documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify.</p> <p>The <code>tableName</code> and <code>hashKeyField</code> values must match the table name and the partition key of the DynamoDB table. </p> <note> <p>If the DynamoDB table also has a sort key, you must specify <code>rangeKeyField</code>. The <code>rangeKeyField</code> value must match the sort key.</p> </note> <p/> <p>The <code>hashKeyValue</code> and <code>rangeKeyValue</code> use substitution templates. These templates provide data at runtime. The syntax is <code>${sql-expression}</code>.</p> <p>You can use expressions for parameters that are string data type. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <note> <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text. The <code>payloadField</code> is <code>&lt;payload-field&gt;_raw</code>.</p> </note>"
+      "documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBAction</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>hashKeyType</code> parameter can be <code>'STRING'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>hashKeyField</code> parameter can be <code>$input.GreenhouseInput.name</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>hashKeyValue</code> parameter uses a substitution template. </p> <p> <code>'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text. The value for the <code>payloadField</code> parameter is <code>&lt;payload-field&gt;_raw</code>.</p>"
     },
     "DynamoDBv2Action": {
       "type": "structure",
@@ -1188,7 +1376,7 @@
           "shape": "Payload"
         }
       },
-      "documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <important> <p>The <code>type</code> value for <code>Payload</code> must be <code>JSON</code>.</p> </important> <p>You can use expressions for parameters that are strings. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+      "documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>tableName</code> parameter can be <code>'GreenhouseTemperatureTable'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>tableName</code> parameter can be <code>$variable.ddbtableName</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>contentExpression</code> parameter in <code>Payload</code> uses a substitution template. </p> <p> <code>'{\\\"sensorID\\\": \\\"${$input.GreenhouseInput.sensor_id}\\\", \\\"temperature\\\": \\\"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\\\"}'</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>The value for the <code>type</code> parameter in <code>Payload</code> must be <code>JSON</code>.</p>"
     },
     "DynamoKeyField": {
       "type": "string"
@@ -1267,6 +1455,45 @@
     "FirehoseSeparator": {
       "type": "string",
       "pattern": "([\\n\\t])|(\\r\\n)|(,)"
+    },
+    "GetDetectorModelAnalysisResultsRequest": {
+      "type": "structure",
+      "required": [
+        "analysisId"
+      ],
+      "members": {
+        "analysisId": {
+          "shape": "AnalysisId",
+          "documentation": "<p>The ID of the analysis result that you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "analysisId"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxAnalysisResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "GetDetectorModelAnalysisResultsResponse": {
+      "type": "structure",
+      "members": {
+        "analysisResults": {
+          "shape": "AnalysisResults",
+          "documentation": "<p>Contains information about one or more analysis results.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
     },
     "Input": {
       "type": "structure",
@@ -1415,26 +1642,26 @@
       "members": {
         "entryId": {
           "shape": "AssetPropertyEntryId",
-          "documentation": "<p>A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.</p>"
+          "documentation": "<p>A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.</p>"
         },
         "assetId": {
           "shape": "AssetId",
-          "documentation": "<p>The ID of the asset that has the specified property. You can specify an expression.</p>"
+          "documentation": "<p>The ID of the asset that has the specified property.</p>"
         },
         "propertyId": {
           "shape": "AssetPropertyId",
-          "documentation": "<p>The ID of the asset property. You can specify an expression.</p>"
+          "documentation": "<p>The ID of the asset property.</p>"
         },
         "propertyAlias": {
           "shape": "AssetPropertyAlias",
-          "documentation": "<p>The alias of the asset property. You can also specify an expression.</p>"
+          "documentation": "<p>The alias of the asset property.</p>"
         },
         "propertyValue": {
           "shape": "AssetPropertyValue",
           "documentation": "<p>The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. </p>"
         }
       },
-      "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <important> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> </important> <p>For parameters that are string data type, you can specify the following options: </p> <ul> <li> <p>Use a string. For example, the <code>propertyAlias</code> value can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>Use an expression. For example, the <code>propertyAlias</code> value can be <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/${$input.TemperatureInput.sensorData.turbineID}/temperature'</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> </li> </ul>"
+      "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The expressions accept literals, operators, functions, references, and substitutions templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>propertyAlias</code> parameter can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>assetId</code> parameter can be <code>$input.TurbineInput.assetId1</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>propertyAlias</code> parameter uses a substitution template. </p> <p> <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/ ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code> </p> </li> </ul> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
     },
     "IotTopicPublishAction": {
       "type": "structure",
@@ -1490,13 +1717,13 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of results.</p>",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -1511,7 +1738,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>"
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
         }
       }
     },
@@ -1520,13 +1747,13 @@
       "members": {
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of results.</p>",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -1541,7 +1768,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>"
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
         }
       }
     },
@@ -1550,13 +1777,13 @@
       "members": {
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of results.</p>",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -1571,7 +1798,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>"
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
         }
       }
     },
@@ -1640,6 +1867,9 @@
       "type": "string",
       "max": 128,
       "min": 1
+    },
+    "MaxAnalysisResults": {
+      "type": "integer"
     },
     "MaxResults": {
       "type": "integer",
@@ -1819,6 +2049,26 @@
         }
       },
       "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.</p>"
+    },
+    "StartDetectorModelAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "detectorModelDefinition"
+      ],
+      "members": {
+        "detectorModelDefinition": {
+          "shape": "DetectorModelDefinition"
+        }
+      }
+    },
+    "StartDetectorModelAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "analysisId": {
+          "shape": "AnalysisId",
+          "documentation": "<p>The ID that you can use to retrieve the analysis result.</p>"
+        }
+      }
     },
     "State": {
       "type": "structure",

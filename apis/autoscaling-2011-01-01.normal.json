@@ -678,7 +678,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p> <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the <b>Activity history</b>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html\">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DescribeScalingProcessTypes": {
       "name": "DescribeScalingProcessTypes",
@@ -1264,6 +1264,14 @@
         "Details": {
           "shape": "XmlString",
           "documentation": "<p>The details about the activity.</p>"
+        },
+        "AutoScalingGroupState": {
+          "shape": "AutoScalingGroupState",
+          "documentation": "<p>The state of the Auto Scaling group, which is either <code>InService</code> or <code>Deleted</code>.</p>"
+        },
+        "AutoScalingGroupARN": {
+          "shape": "ResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
         }
       },
       "documentation": "<p>Describes scaling activity, which is a long-running process that represents a change to your Auto Scaling group, such as changing its size or replacing an instance.</p>"
@@ -1541,6 +1549,11 @@
           "documentation": "<p>The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.</p>"
         }
       }
+    },
+    "AutoScalingGroupState": {
+      "type": "string",
+      "max": 32,
+      "min": 1
     },
     "AutoScalingGroups": {
       "type": "list",
@@ -2423,6 +2436,10 @@
           "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
+        "IncludeDeletedGroups": {
+          "shape": "IncludeDeletedGroups",
+          "documentation": "<p>Indicates whether to include scaling activity from deleted Auto Scaling groups.</p>"
+        },
         "MaxRecords": {
           "shape": "MaxRecords",
           "documentation": "<p>The maximum number of items to return with this call. The default value is <code>100</code> and the maximum value is <code>100</code>.</p>"
@@ -2799,6 +2816,9 @@
       "type": "integer"
     },
     "HonorCooldown": {
+      "type": "boolean"
+    },
+    "IncludeDeletedGroups": {
       "type": "boolean"
     },
     "Instance": {
