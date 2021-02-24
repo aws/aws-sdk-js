@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.850.0-->
+<!--LATEST=2.851.0-->
 <!--ENTRYINSERT-->
+
+## 2.851.0
+* feature: Appflow: # Adding 'Amazon Honeycode' , 'Amazon Lookout for Metrics' and  'Amazon Connect Customer Profiles' as Destinations.
+* feature: ECRPUBLIC: This release adds support for AWS tags on Amazon ECR Public repositories.
+* feature: ES: Amazon Elasticsearch Service now supports Auto-Tune, which monitors performance metrics and automatically optimizes domains
+* feature: MediaPackageVod: AWS Elemental MediaPackage provides access logs that capture detailed information about requests sent to a customer's MediaPackage VOD packaging group.
 
 ## 2.850.0
 * feature: AutoScaling: Adds a new optional IncludeDeletedGroups parameter to the DescribeScalingActivities API.

@@ -349,6 +349,34 @@
       ],
       "documentation": "<p>Delete the package.</p>"
     },
+    "DescribeDomainAutoTunes": {
+      "name": "DescribeDomainAutoTunes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/autoTunes"
+      },
+      "input": {
+        "shape": "DescribeDomainAutoTunesRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainAutoTunesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.</p>"
+    },
     "DescribeElasticsearchDomain": {
       "name": "DescribeElasticsearchDomain",
       "http": {
@@ -1331,6 +1359,189 @@
       },
       "documentation": "<p> Container for response returned by <code> <a>AssociatePackage</a> </code> operation. </p>"
     },
+    "AutoTune": {
+      "type": "structure",
+      "members": {
+        "AutoTuneType": {
+          "shape": "AutoTuneType",
+          "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>"
+        },
+        "AutoTuneDetails": {
+          "shape": "AutoTuneDetails",
+          "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune type and Auto-Tune action details. </p>"
+    },
+    "AutoTuneDate": {
+      "type": "timestamp",
+      "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+    },
+    "AutoTuneDesiredState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "AutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "ScheduledAutoTuneDetails": {
+          "shape": "ScheduledAutoTuneDetails"
+        }
+      },
+      "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "AutoTuneList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTune"
+      }
+    },
+    "AutoTuneMaintenanceSchedule": {
+      "type": "structure",
+      "members": {
+        "StartAt": {
+          "shape": "StartAt",
+          "documentation": "<p>Specifies timestamp at which Auto-Tune maintenance schedule start. </p>"
+        },
+        "Duration": {
+          "shape": "Duration",
+          "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "CronExpressionForRecurrence": {
+          "shape": "String",
+          "documentation": "<p>Specifies cron expression for a recurring maintenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune maitenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "AutoTuneMaintenanceScheduleList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTuneMaintenanceSchedule"
+      },
+      "max": 100
+    },
+    "AutoTuneOptions": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "RollbackOnDisable": {
+          "shape": "RollbackOnDisable",
+          "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsInput": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsOutput": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsStatus": {
+      "type": "structure",
+      "members": {
+        "Options": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p> Specifies Auto-Tune options for the specified Elasticsearch domain.</p>"
+        },
+        "Status": {
+          "shape": "AutoTuneStatus",
+          "documentation": "<p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>"
+    },
+    "AutoTuneState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a>.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ENABLE_IN_PROGRESS",
+        "DISABLE_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_SCHEDULED",
+        "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_COMPLETE",
+        "DISABLED_AND_ROLLBACK_ERROR",
+        "ERROR"
+      ]
+    },
+    "AutoTuneStatus": {
+      "type": "structure",
+      "required": [
+        "CreationDate",
+        "UpdateDate",
+        "State"
+      ],
+      "members": {
+        "CreationDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options creation date .</p>"
+        },
+        "UpdateDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options last updated time.</p>"
+        },
+        "UpdateVersion": {
+          "shape": "UIntValue",
+          "documentation": "<p>Specifies the Auto-Tune options latest version.</p>"
+        },
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune options.</p>"
+        },
+        "PendingDeletion": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Elasticsearch domain is being deleted.</p>"
+        }
+      },
+      "documentation": "<p>Provides the current status of the Auto-Tune options. </p>"
+    },
+    "AutoTuneType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>",
+      "enum": [
+        "SCHEDULED_ACTION"
+      ]
+    },
     "BackendRole": {
       "type": "string",
       "max": 256,
@@ -1494,6 +1705,10 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsInput",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
         }
       }
     },
@@ -1714,6 +1929,43 @@
         "NOT_ELIGIBLE",
         "ELIGIBLE"
       ]
+    },
+    "DescribeDomainAutoTunesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Specifies the domain name for which you want Auto-Tune action details.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>"
+    },
+    "DescribeDomainAutoTunesResponse": {
+      "type": "structure",
+      "members": {
+        "AutoTunes": {
+          "shape": "AutoTuneList",
+          "documentation": "<p>Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Specifies an identifier to allow retrieval of paginated results.</p>"
+        }
+      },
+      "documentation": "<p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
     },
     "DescribeElasticsearchDomainConfigRequest": {
       "type": "structure",
@@ -2239,6 +2491,26 @@
     "Double": {
       "type": "double"
     },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "DurationValue",
+          "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "Unit": {
+          "shape": "TimeUnit",
+          "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "DurationValue": {
+      "type": "long",
+      "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "max": 24,
+      "min": 1
+    },
     "EBSOptions": {
       "type": "structure",
       "members": {
@@ -2467,6 +2739,10 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsStatus",
           "documentation": "<p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsStatus",
+          "documentation": "<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>"
         }
       },
       "documentation": "<p>The configuration of an Elasticsearch domain.</p>"
@@ -2570,6 +2846,10 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptions",
           "documentation": "<p>The current status of the Elasticsearch domain's advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsOutput",
+          "documentation": "<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>"
         }
       },
       "documentation": "<p>The current status of an Elasticsearch domain.</p>"
@@ -3750,6 +4030,14 @@
       "max": 2048,
       "min": 20
     },
+    "RollbackOnDisable": {
+      "type": "string",
+      "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.</p>",
+      "enum": [
+        "NO_ROLLBACK",
+        "DEFAULT_ROLLBACK"
+      ]
+    },
     "S3BucketName": {
       "type": "string",
       "max": 63,
@@ -3846,6 +4134,49 @@
       },
       "documentation": "<p>Describes the SAML application configured for the domain.</p>"
     },
+    "ScheduledAutoTuneActionType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>",
+      "enum": [
+        "JVM_HEAP_SIZE_TUNING",
+        "JVM_YOUNG_GEN_TUNING"
+      ]
+    },
+    "ScheduledAutoTuneDescription": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action description. </p>"
+    },
+    "ScheduledAutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "AutoTuneDate",
+          "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+        },
+        "ActionType": {
+          "shape": "ScheduledAutoTuneActionType",
+          "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>"
+        },
+        "Action": {
+          "shape": "ScheduledAutoTuneDescription",
+          "documentation": "<p>Specifies Auto-Tune action description. </p>"
+        },
+        "Severity": {
+          "shape": "ScheduledAutoTuneSeverityType",
+          "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>"
+        }
+      },
+      "documentation": "<p>Specifies details of the scheduled Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "ScheduledAutoTuneSeverityType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
     "ServiceSoftwareOptions": {
       "type": "structure",
       "members": {
@@ -3915,6 +4246,9 @@
         }
       },
       "documentation": "<p>Status of a daily automated snapshot.</p>"
+    },
+    "StartAt": {
+      "type": "timestamp"
     },
     "StartElasticsearchServiceSoftwareUpdateRequest": {
       "type": "structure",
@@ -4045,6 +4379,13 @@
       "max": 256,
       "min": 0
     },
+    "TimeUnit": {
+      "type": "string",
+      "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "enum": [
+        "HOURS"
+      ]
+    },
     "UIntValue": {
       "type": "integer",
       "min": 0
@@ -4108,6 +4449,10 @@
         "EncryptionAtRestOptions": {
           "shape": "EncryptionAtRestOptions",
           "documentation": "<p>Specifies the Encryption At Rest Options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"

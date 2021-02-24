@@ -352,6 +352,8 @@ declare namespace Appflow {
      *  The connector metadata specific to Upsolver. 
      */
     Upsolver?: UpsolverMetadata;
+    CustomerProfiles?: CustomerProfilesMetadata;
+    Honeycode?: HoneycodeMetadata;
   }
   export interface ConnectorOAuthRequest {
     /**
@@ -483,6 +485,7 @@ declare namespace Appflow {
      *  The connector-specific credentials required when using Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileCredentials;
+    Honeycode?: HoneycodeConnectorProfileCredentials;
     /**
      *  The connector-specific credentials required when using Infor Nexus. 
      */
@@ -548,6 +551,7 @@ declare namespace Appflow {
      *  The connector-specific properties required Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileProperties;
+    Honeycode?: HoneycodeConnectorProfileProperties;
     /**
      *  The connector-specific properties required by Infor Nexus. 
      */
@@ -593,7 +597,7 @@ declare namespace Appflow {
      */
     Zendesk?: ZendeskConnectorProfileProperties;
   }
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"Upsolver"|string;
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|string;
   export type ConnectorTypeList = ConnectorType[];
   export interface CreateConnectorProfileRequest {
     /**
@@ -668,6 +672,12 @@ declare namespace Appflow {
     flowStatus?: FlowStatus;
   }
   export type CreatedBy = string;
+  export interface CustomerProfilesDestinationProperties {
+    domainName: DomainName;
+    objectTypeName?: ObjectTypeName;
+  }
+  export interface CustomerProfilesMetadata {
+  }
   export type DataPullMode = "Incremental"|"Complete"|string;
   export type DatabaseUrl = string;
   export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
@@ -907,10 +917,13 @@ declare namespace Appflow {
      *  The properties required to query Amazon EventBridge. 
      */
     EventBridge?: EventBridgeDestinationProperties;
+    LookoutMetrics?: LookoutMetricsDestinationProperties;
     /**
      *  The properties required to query Upsolver. 
      */
     Upsolver?: UpsolverDestinationProperties;
+    Honeycode?: HoneycodeDestinationProperties;
+    CustomerProfiles?: CustomerProfilesDestinationProperties;
   }
   export type DestinationField = string;
   export interface DestinationFieldProperties {
@@ -950,6 +963,7 @@ declare namespace Appflow {
     destinationConnectorProperties: DestinationConnectorProperties;
   }
   export type DestinationFlowConfigList = DestinationFlowConfig[];
+  export type DomainName = string;
   export type DynatraceConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface DynatraceConnectorProfileCredentials {
     /**
@@ -1186,6 +1200,20 @@ declare namespace Appflow {
     object: Object;
   }
   export type Group = string;
+  export interface HoneycodeConnectorProfileCredentials {
+    accessToken?: AccessToken;
+    refreshToken?: RefreshToken;
+    oAuthRequest?: ConnectorOAuthRequest;
+  }
+  export interface HoneycodeConnectorProfileProperties {
+  }
+  export interface HoneycodeDestinationProperties {
+    object: Object;
+    errorHandlingConfig?: ErrorHandlingConfig;
+  }
+  export interface HoneycodeMetadata {
+    oAuthScopes?: OAuthScopeList;
+  }
   export type IdFieldNameList = Name[];
   export type Identifier = string;
   export interface IncrementalPullConfig {
@@ -1284,6 +1312,8 @@ declare namespace Appflow {
     tags?: TagMap;
   }
   export type Long = number;
+  export interface LookoutMetricsDestinationProperties {
+  }
   export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface MarketoConnectorProfileCredentials {
     /**
@@ -1324,6 +1354,7 @@ declare namespace Appflow {
   export type OAuthScope = string;
   export type OAuthScopeList = OAuthScope[];
   export type Object = string;
+  export type ObjectTypeName = string;
   export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type Password = string;
@@ -1524,6 +1555,7 @@ declare namespace Appflow {
      *  Specifies the optional offset that is added to the time interval for a schedule-triggered flow. 
      */
     scheduleOffset?: ScheduleOffset;
+    firstExecutionFrom?: _Date;
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];
   export type SecretKey = string;
