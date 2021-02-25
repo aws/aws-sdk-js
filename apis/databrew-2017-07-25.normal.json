@@ -1093,6 +1093,10 @@
           "shape": "DatasetName",
           "documentation": "<p>The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.</p>"
         },
+        "Format": {
+          "shape": "InputFormat",
+          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+        },
         "FormatOptions": {
           "shape": "FormatOptions"
         },
@@ -1394,6 +1398,10 @@
         "Delimiter": {
           "shape": "Delimiter",
           "documentation": "<p>A single character that specifies the delimiter being used in the Csv file.</p>"
+        },
+        "HeaderRow": {
+          "shape": "HeaderRow",
+          "documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.</p>"
         }
       },
       "documentation": "<p>Options that define how DataBrew will read a Csv file when creating a dataset from that file.</p>"
@@ -1461,6 +1469,10 @@
         "Name": {
           "shape": "DatasetName",
           "documentation": "<p>The unique name of the dataset.</p>"
+        },
+        "Format": {
+          "shape": "InputFormat",
+          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions",
@@ -1686,6 +1698,10 @@
         "Name": {
           "shape": "DatasetName",
           "documentation": "<p>The name of the dataset.</p>"
+        },
+        "Format": {
+          "shape": "InputFormat",
+          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions"
@@ -2145,6 +2161,10 @@
         "SheetIndexes": {
           "shape": "SheetIndexList",
           "documentation": "<p>Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.</p>"
+        },
+        "HeaderRow": {
+          "shape": "HeaderRow",
+          "documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.</p>"
         }
       },
       "documentation": "<p>Options that define how DataBrew will interpret a Microsoft Excel file, when creating a dataset from that file.</p>"
@@ -2170,6 +2190,9 @@
       },
       "documentation": "<p>Options that define the structure of either Csv, Excel, or JSON input.</p>"
     },
+    "HeaderRow": {
+      "type": "boolean"
+    },
     "HiddenColumnList": {
       "type": "list",
       "member": {
@@ -2189,6 +2212,15 @@
         }
       },
       "documentation": "<p>Information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.</p>"
+    },
+    "InputFormat": {
+      "type": "string",
+      "enum": [
+        "CSV",
+        "JSON",
+        "PARQUET",
+        "EXCEL"
+      ]
     },
     "Job": {
       "type": "structure",
@@ -3566,6 +3598,10 @@
           "documentation": "<p>The name of the dataset to be updated.</p>",
           "location": "uri",
           "locationName": "name"
+        },
+        "Format": {
+          "shape": "InputFormat",
+          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions"

@@ -379,6 +379,10 @@ declare namespace DataBrew {
      * The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: DatasetName;
+    /**
+     * Specifies the file format of a dataset created from an S3 file or folder.
+     */
+    Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
     /**
@@ -586,6 +590,10 @@ declare namespace DataBrew {
      * A single character that specifies the delimiter being used in the Csv file.
      */
     Delimiter?: Delimiter;
+    /**
+     * A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.
+     */
+    HeaderRow?: HeaderRow;
   }
   export interface CsvOutputOptions {
     /**
@@ -629,6 +637,10 @@ declare namespace DataBrew {
      * The unique name of the dataset.
      */
     Name: DatasetName;
+    /**
+     * Specifies the file format of a dataset created from an S3 file or folder.
+     */
+    Format?: InputFormat;
     /**
      * Options that define how DataBrew interprets the data in the dataset.
      */
@@ -749,6 +761,10 @@ declare namespace DataBrew {
      * The name of the dataset.
      */
     Name: DatasetName;
+    /**
+     * Specifies the file format of a dataset created from an S3 file or folder.
+     */
+    Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
     /**
@@ -1107,6 +1123,10 @@ declare namespace DataBrew {
      * Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.
      */
     SheetIndexes?: SheetIndexList;
+    /**
+     * A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.
+     */
+    HeaderRow?: HeaderRow;
   }
   export type ExecutionTime = number;
   export interface FormatOptions {
@@ -1123,6 +1143,7 @@ declare namespace DataBrew {
      */
     Csv?: CsvOptions;
   }
+  export type HeaderRow = boolean;
   export type HiddenColumnList = ColumnName[];
   export interface Input {
     /**
@@ -1134,6 +1155,7 @@ declare namespace DataBrew {
      */
     DataCatalogInputDefinition?: DataCatalogInputDefinition;
   }
+  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|string;
   export interface Job {
     /**
      * The ID of the AWS account that owns the job.
@@ -1911,6 +1933,10 @@ declare namespace DataBrew {
      * The name of the dataset to be updated.
      */
     Name: DatasetName;
+    /**
+     * Specifies the file format of a dataset created from an S3 file or folder.
+     */
+    Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
   }

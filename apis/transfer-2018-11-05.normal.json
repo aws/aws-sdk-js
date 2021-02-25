@@ -1891,7 +1891,7 @@
     },
     "UserPassword": {
       "type": "string",
-      "max": 2048,
+      "max": 1024,
       "sensitive": true
     },
     "VpcEndpointId": {

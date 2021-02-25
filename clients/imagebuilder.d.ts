@@ -268,6 +268,14 @@ declare class Imagebuilder extends Service {
    */
   listImageBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListImageBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListImageBuildVersionsResponse, AWSError>;
   /**
+   * List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.
+   */
+  listImagePackages(params: Imagebuilder.Types.ListImagePackagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePackagesResponse) => void): Request<Imagebuilder.Types.ListImagePackagesResponse, AWSError>;
+  /**
+   * List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.
+   */
+  listImagePackages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePackagesResponse) => void): Request<Imagebuilder.Types.ListImagePackagesResponse, AWSError>;
+  /**
    *  Returns a list of images created by the specified pipeline. 
    */
   listImagePipelineImages(params: Imagebuilder.Types.ListImagePipelineImagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePipelineImagesResponse) => void): Request<Imagebuilder.Types.ListImagePipelineImagesResponse, AWSError>;
@@ -1399,7 +1407,7 @@ declare namespace Imagebuilder {
   }
   export type EbsIopsInteger = number;
   export type EbsVolumeSizeInteger = number;
-  export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"sc1"|"st1"|string;
+  export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"gp3"|"sc1"|"st1"|string;
   export type EmptyString = string;
   export interface Filter {
     /**
@@ -1667,6 +1675,17 @@ declare namespace Imagebuilder {
   }
   export type ImageBuildVersionArn = string;
   export type ImageBuilderArn = string;
+  export interface ImagePackage {
+    /**
+     * The name of the package as reported to the operating system package manager.
+     */
+    packageName?: NonEmptyString;
+    /**
+     * The version of the package as reported to the operating system package manager.
+     */
+    packageVersion?: NonEmptyString;
+  }
+  export type ImagePackageList = ImagePackage[];
   export interface ImagePipeline {
     /**
      * The Amazon Resource Name (ARN) of the image pipeline.
@@ -2016,7 +2035,7 @@ declare namespace Imagebuilder {
     /**
      * The instance profile of the infrastructure configuration.
      */
-    instanceProfileName?: NonEmptyString;
+    instanceProfileName?: InstanceProfileNameType;
     /**
      * The security group IDs of the infrastructure configuration.
      */
@@ -2088,6 +2107,14 @@ declare namespace Imagebuilder {
      * The tags of the infrastructure configuration.
      */
     tags?: TagMap;
+    /**
+     * The instance types of the infrastructure configuration.
+     */
+    instanceTypes?: InstanceTypeList;
+    /**
+     * The instance profile of the infrastructure configuration.
+     */
+    instanceProfileName?: InstanceProfileNameType;
   }
   export type InfrastructureConfigurationSummaryList = InfrastructureConfigurationSummary[];
   export type InlineComponentData = string;
@@ -2111,6 +2138,7 @@ declare namespace Imagebuilder {
     noDevice?: EmptyString;
   }
   export type InstanceBlockDeviceMappings = InstanceBlockDeviceMapping[];
+  export type InstanceProfileNameType = string;
   export type InstanceType = string;
   export type InstanceTypeList = InstanceType[];
   export interface LaunchPermissionConfiguration {
@@ -2278,6 +2306,34 @@ declare namespace Imagebuilder {
     imageSummaryList?: ImageSummaryList;
     /**
      * The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImagePackagesRequest {
+    /**
+     * Filter results for the ListImagePackages request by the Image Build Version ARN
+     */
+    imageBuildVersionArn: ImageBuildVersionArn;
+    /**
+     * The maxiumum number of results to return from the ListImagePackages request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImagePackagesResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The list of Image Packages returned in the response.
+     */
+    imagePackageList?: ImagePackageList;
+    /**
+     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -2579,6 +2635,10 @@ declare namespace Imagebuilder {
      */
     scheduleExpression?: NonEmptyString;
     /**
+     * The timezone that applies to the scheduling expression. For example, "Etc/UTC", "America/Los_Angeles" in the IANA timezone format. If not specified this defaults to UTC.
+     */
+    timezone?: Timezone;
+    /**
      * The condition configures when the pipeline should trigger a new image build. When the pipelineExecutionStartCondition is set to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see CreateComponent in the  EC2 Image Builder API Reference.
      */
     pipelineExecutionStartCondition?: PipelineExecutionStartCondition;
@@ -2636,6 +2696,7 @@ declare namespace Imagebuilder {
      */
     repositoryName: NonEmptyString;
   }
+  export type Timezone = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to untag. 

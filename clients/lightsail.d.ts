@@ -3179,7 +3179,7 @@ declare namespace Lightsail {
      */
     state?: DiskSnapshotState;
     /**
-     * The progress of the disk snapshot operation.
+     * The progress of the snapshot.
      */
     progress?: string;
     /**
@@ -4856,7 +4856,7 @@ declare namespace Lightsail {
      */
     state?: InstanceSnapshotState;
     /**
-     * The progress of the snapshot.
+     * The progress of the snapshot.  This is populated only for disk snapshots, and is null for instance snapshots. 
      */
     progress?: string;
     /**

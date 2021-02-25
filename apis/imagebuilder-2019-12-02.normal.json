@@ -1248,6 +1248,46 @@
       ],
       "documentation": "<p> Returns a list of image build versions. </p>"
     },
+    "ListImagePackages": {
+      "name": "ListImagePackages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/ListImagePackages"
+      },
+      "input": {
+        "shape": "ListImagePackagesRequest"
+      },
+      "output": {
+        "shape": "ListImagePackagesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidPaginationTokenException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "CallRateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.</p>"
+    },
     "ListImagePipelineImages": {
       "name": "ListImagePipelineImages",
       "http": {
@@ -3215,6 +3255,7 @@
         "io1",
         "io2",
         "gp2",
+        "gp3",
         "sc1",
         "st1"
       ]
@@ -3646,6 +3687,26 @@
     "ImageBuilderArn": {
       "type": "string",
       "pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\\d+)\\.(?:x|\\d+)\\.(?:x|\\d+))(?:/\\d+)?)?$"
+    },
+    "ImagePackage": {
+      "type": "structure",
+      "members": {
+        "packageName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the package as reported to the operating system package manager.</p>"
+        },
+        "packageVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the package as reported to the operating system package manager.</p>"
+        }
+      },
+      "documentation": "<p>Represents a package installed on an Image Builder image.</p>"
+    },
+    "ImagePackageList": {
+      "type": "list",
+      "member": {
+        "shape": "ImagePackage"
+      }
     },
     "ImagePipeline": {
       "type": "structure",
@@ -4096,7 +4157,7 @@
           "documentation": "<p>The instance types of the infrastructure configuration.</p>"
         },
         "instanceProfileName": {
-          "shape": "NonEmptyString",
+          "shape": "InstanceProfileNameType",
           "documentation": "<p>The instance profile of the infrastructure configuration.</p>"
         },
         "securityGroupIds": {
@@ -4176,6 +4237,14 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags of the infrastructure configuration.</p>"
+        },
+        "instanceTypes": {
+          "shape": "InstanceTypeList",
+          "documentation": "<p>The instance types of the infrastructure configuration.</p>"
+        },
+        "instanceProfileName": {
+          "shape": "InstanceProfileNameType",
+          "documentation": "<p>The instance profile of the infrastructure configuration.</p>"
         }
       },
       "documentation": "<p>The infrastructure used when building EC2 AMIs.</p>"
@@ -4225,6 +4294,12 @@
       "member": {
         "shape": "InstanceBlockDeviceMapping"
       }
+    },
+    "InstanceProfileNameType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^[\\w+=,.@-]+$"
     },
     "InstanceType": {
       "type": "string"
@@ -4455,6 +4530,44 @@
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. </p>"
+        }
+      }
+    },
+    "ListImagePackagesRequest": {
+      "type": "structure",
+      "required": [
+        "imageBuildVersionArn"
+      ],
+      "members": {
+        "imageBuildVersionArn": {
+          "shape": "ImageBuildVersionArn",
+          "documentation": "<p>Filter results for the ListImagePackages request by the Image Build Version ARN</p>"
+        },
+        "maxResults": {
+          "shape": "RestrictedInteger",
+          "documentation": "<p>The maxiumum number of results to return from the ListImagePackages request.</p>",
+          "box": true
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response.</p>"
+        }
+      }
+    },
+    "ListImagePackagesResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The request ID that uniquely identifies this request.</p>"
+        },
+        "imagePackageList": {
+          "shape": "ImagePackageList",
+          "documentation": "<p>The list of Image Packages returned in the response.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response.</p>"
         }
       }
     },
@@ -4929,6 +5042,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html\">Use cron expressions in EC2 Image Builder</a>.</p>"
         },
+        "timezone": {
+          "shape": "Timezone",
+          "documentation": "<p>The timezone that applies to the scheduling expression. For example, \"Etc/UTC\", \"America/Los_Angeles\" in the <a href=\"https://www.joda.org/joda-time/timezones.html\">IANA timezone format</a>. If not specified this defaults to UTC.</p>"
+        },
         "pipelineExecutionStartCondition": {
           "shape": "PipelineExecutionStartCondition",
           "documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.</p>"
@@ -5056,6 +5173,12 @@
         }
       },
       "documentation": "<p>The container repository where the output container image is stored.</p>"
+    },
+    "Timezone": {
+      "type": "string",
+      "max": 100,
+      "min": 3,
+      "pattern": "[a-zA-Z0-9]{2,}(?:\\/[a-zA-z0-9-_+]+)*"
     },
     "UntagResourceRequest": {
       "type": "structure",

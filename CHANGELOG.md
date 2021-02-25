@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.851.0-->
+<!--LATEST=2.852.0-->
 <!--ENTRYINSERT-->
+
+## 2.852.0
+* feature: DataBrew: This SDK release adds two new dataset features: 1) support for specifying the file format for a dataset, and 2) support for specifying whether the first row of a CSV or Excel file contains a header.
+* feature: Detective: Changed "master account" to "administrator account." A new AdministratorId field replaces the deprecated MasterId field. Added an option to disable email notifications for member account invitations.
+* feature: Imagebuilder: This release introduces a new API (ListImagePackages) for listing packages installed on an image, and adds support for GP3 volume types, and for specifying a time zone in an image pipeline schedule.
+* feature: Transfer: Corrected the upper limit for TestIdentityProvider input lengths to 1024 characters
 
 ## 2.851.0
 * feature: Appflow: # Adding 'Amazon Honeycode' , 'Amazon Lookout for Metrics' and  'Amazon Connect Customer Profiles' as Destinations.
