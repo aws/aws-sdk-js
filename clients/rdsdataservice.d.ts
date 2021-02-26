@@ -233,7 +233,7 @@ declare namespace RDSDataService {
     transactionStatus?: TransactionStatus;
   }
   export type DbName = string;
-  export type DecimalReturnType = "DOUBLE_OR_LONG"|"STRING"|string;
+  export type DecimalReturnType = "STRING"|"DOUBLE_OR_LONG"|string;
   export type DoubleArray = BoxedDouble[];
   export interface ExecuteSqlRequest {
     /**
@@ -289,7 +289,7 @@ declare namespace RDSDataService {
      */
     resultSetOptions?: ResultSetOptions;
     /**
-     * The name of the database schema.
+     * The name of the database schema.  Currently, the schema parameter isn't supported. 
      */
     schema?: DbName;
     /**
@@ -421,7 +421,7 @@ declare namespace RDSDataService {
      */
     name?: ParameterName;
     /**
-     * A hint that specifies the correct object type for data type mapping.  Values:     DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.    TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].    TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF].    DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD.  
+     * A hint that specifies the correct object type for data type mapping. Possible values are as follows:    DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD.    DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.    JSON - The corresponding String parameter value is sent as an object of JSON type to the database.    TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF].    TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].    UUID - The corresponding String parameter value is sent as an object of UUID type to the database.   
      */
     typeHint?: TypeHint;
     /**
@@ -453,7 +453,7 @@ declare namespace RDSDataService {
     attributes?: ArrayValueList;
   }
   export type TransactionStatus = string;
-  export type TypeHint = "DATE"|"DECIMAL"|"TIME"|"TIMESTAMP"|string;
+  export type TypeHint = "JSON"|"UUID"|"TIMESTAMP"|"DATE"|"TIME"|"DECIMAL"|string;
   export interface UpdateResult {
     /**
      * Values for fields generated during the request.

@@ -853,6 +853,12 @@
         "Upsolver": {
           "shape": "UpsolverMetadata",
           "documentation": "<p> The connector metadata specific to Upsolver. </p>"
+        },
+        "CustomerProfiles": {
+          "shape": "CustomerProfilesMetadata"
+        },
+        "Honeycode": {
+          "shape": "HoneycodeMetadata"
         }
       },
       "documentation": "<p> A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. </p>"
@@ -1013,6 +1019,9 @@
           "shape": "GoogleAnalyticsConnectorProfileCredentials",
           "documentation": "<p> The connector-specific credentials required when using Google Analytics. </p>"
         },
+        "Honeycode": {
+          "shape": "HoneycodeConnectorProfileCredentials"
+        },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileCredentials",
           "documentation": "<p> The connector-specific credentials required when using Infor Nexus. </p>"
@@ -1098,6 +1107,9 @@
           "shape": "GoogleAnalyticsConnectorProfileProperties",
           "documentation": "<p> The connector-specific properties required Google Analytics. </p>"
         },
+        "Honeycode": {
+          "shape": "HoneycodeConnectorProfileProperties"
+        },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileProperties",
           "documentation": "<p> The connector-specific properties required by Infor Nexus. </p>"
@@ -1165,7 +1177,10 @@
         "Amplitude",
         "Veeva",
         "EventBridge",
-        "Upsolver"
+        "LookoutMetrics",
+        "Upsolver",
+        "Honeycode",
+        "CustomerProfiles"
       ]
     },
     "ConnectorTypeList": {
@@ -1277,6 +1292,24 @@
       "type": "string",
       "max": 256,
       "pattern": "\\S+"
+    },
+    "CustomerProfilesDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "domainName"
+      ],
+      "members": {
+        "domainName": {
+          "shape": "DomainName"
+        },
+        "objectTypeName": {
+          "shape": "ObjectTypeName"
+        }
+      }
+    },
+    "CustomerProfilesMetadata": {
+      "type": "structure",
+      "members": {}
     },
     "DataPullMode": {
       "type": "string",
@@ -1478,7 +1511,7 @@
       "members": {
         "connectorTypes": {
           "shape": "ConnectorTypeList",
-          "documentation": "<p> The type of connector, such as Salesforce, Amplitude, and so on. </p>"
+          "documentation": "<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1641,9 +1674,18 @@
           "shape": "EventBridgeDestinationProperties",
           "documentation": "<p> The properties required to query Amazon EventBridge. </p>"
         },
+        "LookoutMetrics": {
+          "shape": "LookoutMetricsDestinationProperties"
+        },
         "Upsolver": {
           "shape": "UpsolverDestinationProperties",
           "documentation": "<p> The properties required to query Upsolver. </p>"
+        },
+        "Honeycode": {
+          "shape": "HoneycodeDestinationProperties"
+        },
+        "CustomerProfiles": {
+          "shape": "CustomerProfilesDestinationProperties"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -1706,6 +1748,11 @@
       "member": {
         "shape": "DestinationFlowConfig"
       }
+    },
+    "DomainName": {
+      "type": "string",
+      "max": 64,
+      "pattern": "\\S+"
     },
     "DynatraceConnectorOperator": {
       "type": "string",
@@ -1879,6 +1926,14 @@
         "lastUpdatedAt": {
           "shape": "Date",
           "documentation": "<p> Specifies the time of the most recent update. </p>"
+        },
+        "dataPullStartTime": {
+          "shape": "Date",
+          "documentation": "<p> The timestamp that determines the first new or updated record to be transferred in the flow run. </p>"
+        },
+        "dataPullEndTime": {
+          "shape": "Date",
+          "documentation": "<p> The timestamp that indicates the last new or updated record to be transferred in the flow run. </p>"
         }
       },
       "documentation": "<p> Specifies information about the past flow run instances for a given flow. </p>"
@@ -2123,6 +2178,46 @@
       "max": 128,
       "pattern": "\\S+"
     },
+    "HoneycodeConnectorProfileCredentials": {
+      "type": "structure",
+      "members": {
+        "accessToken": {
+          "shape": "AccessToken"
+        },
+        "refreshToken": {
+          "shape": "RefreshToken"
+        },
+        "oAuthRequest": {
+          "shape": "ConnectorOAuthRequest"
+        }
+      }
+    },
+    "HoneycodeConnectorProfileProperties": {
+      "type": "structure",
+      "members": {}
+    },
+    "HoneycodeDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "object"
+      ],
+      "members": {
+        "object": {
+          "shape": "Object"
+        },
+        "errorHandlingConfig": {
+          "shape": "ErrorHandlingConfig"
+        }
+      }
+    },
+    "HoneycodeMetadata": {
+      "type": "structure",
+      "members": {
+        "oAuthScopes": {
+          "shape": "OAuthScopeList"
+        }
+      }
+    },
     "IdFieldNameList": {
       "type": "list",
       "member": {
@@ -2328,6 +2423,10 @@
     "Long": {
       "type": "long"
     },
+    "LookoutMetricsDestinationProperties": {
+      "type": "structure",
+      "members": {}
+    },
     "MarketoConnectorOperator": {
       "type": "string",
       "enum": [
@@ -2440,6 +2539,11 @@
     "Object": {
       "type": "string",
       "max": 512,
+      "pattern": "\\S+"
+    },
+    "ObjectTypeName": {
+      "type": "string",
+      "max": 255,
       "pattern": "\\S+"
     },
     "Operator": {
@@ -2855,6 +2959,11 @@
         "ONCE"
       ]
     },
+    "ScheduleOffset": {
+      "type": "long",
+      "max": 36000,
+      "min": 0
+    },
     "ScheduledTriggerProperties": {
       "type": "structure",
       "required": [
@@ -2879,7 +2988,15 @@
         },
         "timezone": {
           "shape": "Timezone",
-          "documentation": "<p> Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. </p>"
+          "documentation": "<p> Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>. </p>"
+        },
+        "scheduleOffset": {
+          "shape": "ScheduleOffset",
+          "documentation": "<p> Specifies the optional offset that is added to the time interval for a schedule-triggered flow. </p>",
+          "box": true
+        },
+        "firstExecutionFrom": {
+          "shape": "Date"
         }
       },
       "documentation": "<p> Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. </p>"

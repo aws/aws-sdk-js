@@ -955,5 +955,49 @@
   "customerprofiles": {
     "prefix": "customer-profiles",
     "name": "CustomerProfiles"
+  },
+  "auditmanager": {
+    "name": "AuditManager"
+  },
+  "emrcontainers": {
+    "prefix": "emr-containers",
+    "name": "EMRcontainers"
+  },
+  "healthlake": {
+    "name": "HealthLake"
+  },
+  "sagemakeredge": {
+    "prefix": "sagemaker-edge",
+    "name": "SagemakerEdge"
+  },
+  "amp": {
+    "name": "Amp"
+  },
+  "greengrassv2": {
+    "name": "GreengrassV2"
+  },
+  "iotdeviceadvisor": {
+    "name": "IotDeviceAdvisor"
+  },
+  "iotfleethub": {
+    "name": "IoTFleetHub"
+  },
+  "iotwireless": {
+    "name": "IoTWireless"
+  },
+  "location": {
+    "name": "Location"
+  },
+  "wellarchitected": {
+    "name": "WellArchitected"
+  },
+  "lexmodelsv2": {
+    "prefix": "models.lex.v2",
+    "name": "LexModelsV2"
+  },
+  "lexruntimev2": {
+    "prefix": "runtime.lex.v2",
+    "name": "LexRuntimeV2",
+    "cors": true
   }
 }

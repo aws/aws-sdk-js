@@ -84,11 +84,11 @@ declare class Athena extends Service {
    */
   getDataCatalog(callback?: (err: AWSError, data: Athena.Types.GetDataCatalogOutput) => void): Request<Athena.Types.GetDataCatalogOutput, AWSError>;
   /**
-   * Returns a database object for the specfied database and data catalog.
+   * Returns a database object for the specified database and data catalog.
    */
   getDatabase(params: Athena.Types.GetDatabaseInput, callback?: (err: AWSError, data: Athena.Types.GetDatabaseOutput) => void): Request<Athena.Types.GetDatabaseOutput, AWSError>;
   /**
-   * Returns a database object for the specfied database and data catalog.
+   * Returns a database object for the specified database and data catalog.
    */
   getDatabase(callback?: (err: AWSError, data: Athena.Types.GetDatabaseOutput) => void): Request<Athena.Types.GetDatabaseOutput, AWSError>;
   /**
@@ -147,6 +147,14 @@ declare class Athena extends Service {
    * Lists the databases in the specified data catalog.
    */
   listDatabases(callback?: (err: AWSError, data: Athena.Types.ListDatabasesOutput) => void): Request<Athena.Types.ListDatabasesOutput, AWSError>;
+  /**
+   * Returns a list of engine versions that are available to choose from, including the Auto option.
+   */
+  listEngineVersions(params: Athena.Types.ListEngineVersionsInput, callback?: (err: AWSError, data: Athena.Types.ListEngineVersionsOutput) => void): Request<Athena.Types.ListEngineVersionsOutput, AWSError>;
+  /**
+   * Returns a list of engine versions that are available to choose from, including the Auto option.
+   */
+  listEngineVersions(callback?: (err: AWSError, data: Athena.Types.ListEngineVersionsOutput) => void): Request<Athena.Types.ListEngineVersionsOutput, AWSError>;
   /**
    * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
@@ -340,7 +348,7 @@ declare namespace Athena {
      */
     Name: CatalogNameString;
     /**
-     * The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     * The type of data catalog to create: LAMBDA for a federated catalog or HIVE for an external hive metastore.  Do not use the GLUE type. This refers to the AwsDataCatalog that already exists in your account, of which you can have only one. Specifying the GLUE type will result in an INVALID_INPUT error. 
      */
     Type: DataCatalogType;
     /**
@@ -348,7 +356,7 @@ declare namespace Athena {
      */
     Description?: DescriptionString;
     /**
-     * Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     * Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn      
      */
     Parameters?: ParametersMap;
     /**
@@ -420,11 +428,11 @@ declare namespace Athena {
      */
     Description?: DescriptionString;
     /**
-     * The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     * The type of data catalog: LAMBDA for a federated catalog or HIVE for an external hive metastore. GLUE refers to the AwsDataCatalog that already exists in your account, of which you can have only one.
      */
     Type: DataCatalogType;
     /**
-     * Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     * Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn      
      */
     Parameters?: ParametersMap;
   }
@@ -485,7 +493,7 @@ declare namespace Athena {
      */
     WorkGroup: WorkGroupName;
     /**
-     * The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+     * The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions.
      */
     RecursiveDeleteOption?: BoxedBoolean;
   }
@@ -503,6 +511,17 @@ declare namespace Athena {
     KmsKey?: String;
   }
   export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string;
+  export interface EngineVersion {
+    /**
+     * The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+     */
+    SelectedEngineVersion?: NameString;
+    /**
+     * Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
+     */
+    EffectiveEngineVersion?: NameString;
+  }
+  export type EngineVersionsList = EngineVersion[];
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export type ExpressionString = string;
@@ -665,6 +684,26 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface ListEngineVersionsInput {
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of engine versions to return in this request.
+     */
+    MaxResults?: MaxEngineVersionsCount;
+  }
+  export interface ListEngineVersionsOutput {
+    /**
+     * A list of engine versions that are available to choose from.
+     */
+    EngineVersions?: EngineVersionsList;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+  }
   export interface ListNamedQueriesInput {
     /**
      * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
@@ -781,7 +820,7 @@ declare namespace Athena {
   }
   export interface ListWorkGroupsOutput {
     /**
-     * The list of workgroups, including their names, descriptions, creation times, and states.
+     * A list of WorkGroupSummary objects that include the names, descriptions, creation times, and states for each workgroup.
      */
     WorkGroups?: WorkGroupsList;
     /**
@@ -792,6 +831,7 @@ declare namespace Athena {
   export type Long = number;
   export type MaxDataCatalogsCount = number;
   export type MaxDatabasesCount = number;
+  export type MaxEngineVersionsCount = number;
   export type MaxNamedQueriesCount = number;
   export type MaxQueryExecutionsCount = number;
   export type MaxQueryResults = number;
@@ -863,6 +903,10 @@ declare namespace Athena {
      * The name of the workgroup in which the query ran.
      */
     WorkGroup?: WorkGroupName;
+    /**
+     * The engine version that executed the query.
+     */
+    EngineVersion?: EngineVersion;
   }
   export interface QueryExecutionContext {
     /**
@@ -1125,7 +1169,7 @@ declare namespace Athena {
      */
     Name: CatalogNameString;
     /**
-     * Specifies the type of data catalog to update. Specify LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     * Specifies the type of data catalog to update. Specify LAMBDA for a federated catalog or HIVE for an external hive metastore.  Do not use the GLUE type. This refers to the AwsDataCatalog that already exists in your account, of which you can have only one. Specifying the GLUE type will result in an INVALID_INPUT error. 
      */
     Type: DataCatalogType;
     /**
@@ -1133,7 +1177,7 @@ declare namespace Athena {
      */
     Description?: DescriptionString;
     /**
-     * Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     * Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn      
      */
     Parameters?: ParametersMap;
   }
@@ -1202,6 +1246,10 @@ declare namespace Athena {
      * If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false. For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
      */
     RequesterPaysEnabled?: BoxedBoolean;
+    /**
+     * The engine version that all queries running on the workgroup use. Queries on the AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless of this setting.
+     */
+    EngineVersion?: EngineVersion;
   }
   export interface WorkGroupConfigurationUpdates {
     /**
@@ -1228,6 +1276,10 @@ declare namespace Athena {
      * If set to true, allows members assigned to a workgroup to specify Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false. For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
      */
     RequesterPaysEnabled?: BoxedBoolean;
+    /**
+     * The engine version requested when a workgroup is updated. After the update, all queries on the workgroup run on the requested engine version. If no value was previously set, the default is Auto. Queries on the AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless of this setting.
+     */
+    EngineVersion?: EngineVersion;
   }
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
@@ -1249,6 +1301,10 @@ declare namespace Athena {
      * The workgroup creation date and time.
      */
     CreationTime?: _Date;
+    /**
+     * The engine version setting for all queries on the workgroup. Queries on the AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless of this setting.
+     */
+    EngineVersion?: EngineVersion;
   }
   export type WorkGroupsList = WorkGroupSummary[];
   export type datumList = Datum[];

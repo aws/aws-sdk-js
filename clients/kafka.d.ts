@@ -297,6 +297,18 @@ declare class Kafka extends Service {
   updateBrokerCount(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerCountResponse) => void): Request<Kafka.Types.UpdateBrokerCountResponse, AWSError>;
   /**
    * 
+            Updates EC2 instance type.
+         
+   */
+  updateBrokerType(params: Kafka.Types.UpdateBrokerTypeRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerTypeResponse) => void): Request<Kafka.Types.UpdateBrokerTypeResponse, AWSError>;
+  /**
+   * 
+            Updates EC2 instance type.
+         
+   */
+  updateBrokerType(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerTypeResponse) => void): Request<Kafka.Types.UpdateBrokerTypeResponse, AWSError>;
+  /**
+   * 
             Updates the EBS storage associated with MSK brokers.
          
    */
@@ -592,7 +604,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     NumberOfBrokerNodes?: __integer;
     /**
      * 
-            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -706,7 +718,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     StepStatus?: __string;
   }
-  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string;
+  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"HEALING"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string;
   export interface CompatibleKafkaVersion {
     /**
      * 
@@ -878,7 +890,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ClusterName?: __string;
     /**
      * 
-            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -965,7 +977,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ClusterArn?: __string;
     /**
      * 
-            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -1551,6 +1563,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     KafkaVersion?: __string;
     LoggingInfo?: LoggingInfo;
+    /**
+     * 
+            Information about the Amazon MSK broker type.
+            
+     */
+    InstanceType?: __stringMin5Max32;
   }
   export interface NodeExporter {
     /**
@@ -1824,6 +1842,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     TargetNumberOfBrokerNodes: __integerMin1Max15;
   }
   export interface UpdateBrokerCountResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
+  }
+  export interface UpdateBrokerTypeRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            The Amazon MSK broker type that you want all of the brokers in this cluster to be.
+         
+     */
+    TargetInstanceType: __string;
+  }
+  export interface UpdateBrokerTypeResponse {
     /**
      * 
             The Amazon Resource Name (ARN) of the cluster.

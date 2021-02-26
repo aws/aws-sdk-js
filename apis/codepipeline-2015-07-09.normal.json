@@ -269,6 +269,28 @@
       ],
       "documentation": "<p>Enables artifacts in a pipeline to transition to a stage in a pipeline.</p>"
     },
+    "GetActionType": {
+      "name": "GetActionType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetActionTypeInput"
+      },
+      "output": {
+        "shape": "GetActionTypeOutput"
+      },
+      "errors": [
+        {
+          "shape": "ActionTypeNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can have been created with any supported integration model.</p>"
+    },
     "GetJobDetails": {
       "name": "GetJobDetails",
       "http": {
@@ -958,6 +980,28 @@
       ],
       "documentation": "<p>Removes tags from an AWS resource.</p>"
     },
+    "UpdateActionType": {
+      "name": "UpdateActionType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateActionTypeInput"
+      },
+      "errors": [
+        {
+          "shape": "RequestFailedException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ActionTypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates an action type that has been created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and <code>UpdateActionType</code> to provide the full structure.</p>"
+    },
     "UpdatePipeline": {
       "name": "UpdatePipeline",
       "http": {
@@ -1024,7 +1068,8 @@
       "sensitive": true
     },
     "AccessKeyId": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "AccountId": {
       "type": "string",
@@ -1466,7 +1511,7 @@
     },
     "ActionProvider": {
       "type": "string",
-      "max": 25,
+      "max": 35,
       "min": 1,
       "pattern": "[0-9A-Za-z_-]+"
     },
@@ -1561,6 +1606,99 @@
       },
       "documentation": "<p>Returns information about the details of an action type.</p>"
     },
+    "ActionTypeArtifactDetails": {
+      "type": "structure",
+      "required": [
+        "minimumCount",
+        "maximumCount"
+      ],
+      "members": {
+        "minimumCount": {
+          "shape": "MinimumActionTypeArtifactCount",
+          "documentation": "<p>The minimum allowed number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
+        },
+        "maximumCount": {
+          "shape": "MaximumActionTypeArtifactCount",
+          "documentation": "<p>The maximum allowed number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
+        }
+      },
+      "documentation": "<p>Information about parameters for artifacts associated with the action type, such as the minimum and maximum artifacts allowed.</p>"
+    },
+    "ActionTypeDeclaration": {
+      "type": "structure",
+      "required": [
+        "executor",
+        "id",
+        "inputArtifactDetails",
+        "outputArtifactDetails"
+      ],
+      "members": {
+        "description": {
+          "shape": "ActionTypeDescription",
+          "documentation": "<p>The description for the action type to be updated.</p>"
+        },
+        "executor": {
+          "shape": "ActionTypeExecutor",
+          "documentation": "<p>Information about the executor for an action type that was created with any supported integration model.</p>"
+        },
+        "id": {
+          "shape": "ActionTypeIdentifier",
+          "documentation": "<p>The action ID is composed of the action category, owner, provider, and version of the action type to be updated.</p>"
+        },
+        "inputArtifactDetails": {
+          "shape": "ActionTypeArtifactDetails",
+          "documentation": "<p>Details for the artifacts, such as application files, to be worked on by the action. For example, the minimum and maximum number of input artifacts allowed.</p>"
+        },
+        "outputArtifactDetails": {
+          "shape": "ActionTypeArtifactDetails",
+          "documentation": "<p>Details for the output artifacts, such as a built application, that are the result of the action. For example, the minimum and maximum number of output artifacts allowed.</p>"
+        },
+        "permissions": {
+          "shape": "ActionTypePermissions",
+          "documentation": "<p>Details identifying the accounts with permissions to use the action type.</p>"
+        },
+        "properties": {
+          "shape": "ActionTypeProperties",
+          "documentation": "<p>The properties of the action type to be updated.</p>"
+        },
+        "urls": {
+          "shape": "ActionTypeUrls",
+          "documentation": "<p>The links associated with the action type to be updated.</p>"
+        }
+      },
+      "documentation": "<p>The parameters for the action type definition that are provided when the action type is created or updated.</p>"
+    },
+    "ActionTypeDescription": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "ActionTypeExecutor": {
+      "type": "structure",
+      "required": [
+        "configuration",
+        "type"
+      ],
+      "members": {
+        "configuration": {
+          "shape": "ExecutorConfiguration",
+          "documentation": "<p>The action configuration properties for the action type. These properties are specified in the action definition when the action type is created.</p>"
+        },
+        "type": {
+          "shape": "ExecutorType",
+          "documentation": "<p>The integration model used to create and update the action type, such as the Lambda integration model. Each integration type has a related action engine, or executor. The available executor types are <code>Lambda</code> and <code>JobWorker</code>.</p>"
+        },
+        "policyStatementsTemplate": {
+          "shape": "PolicyStatementsTemplate",
+          "documentation": "<p>The policy statement that specifies the permissions in the CodePipeline customer’s account that are needed to successfully run an action execution.</p> <p>To grant permission to another account, specify the account ID as the Principal. For AWS services, the Principal is a domain-style identifier defined by the service, like <code>codepipeline.amazonaws.com</code>.</p> <note> <p>The size of the passed JSON policy document cannot exceed 2048 characters.</p> </note>"
+        },
+        "jobTimeout": {
+          "shape": "JobTimeout",
+          "documentation": "<p>The timeout in seconds for the job. An action execution can consist of multiple jobs. This is the timeout for a single job, and not for the entire action execution.</p>"
+        }
+      },
+      "documentation": "<p>The action engine, or executor, for an action type created for a provider, where the action is to be used by customers of the provider. The action engine is associated with the model used to create and update the action, such as the Lambda integration model.</p>"
+    },
     "ActionTypeId": {
       "type": "structure",
       "required": [
@@ -1589,11 +1727,99 @@
       },
       "documentation": "<p>Represents information about an action type.</p>"
     },
+    "ActionTypeIdentifier": {
+      "type": "structure",
+      "required": [
+        "category",
+        "owner",
+        "provider",
+        "version"
+      ],
+      "members": {
+        "category": {
+          "shape": "ActionCategory",
+          "documentation": "<p>A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
+        },
+        "owner": {
+          "shape": "ActionTypeOwner",
+          "documentation": "<p>The creator of the action type being called. There are two valid values for the <code>owner</code> field: <code>AWS</code> and <code>ThirdParty</code>.</p>"
+        },
+        "provider": {
+          "shape": "ActionProvider",
+          "documentation": "<p>The provider of the action type being called. The provider name is supplied when the action type is created.</p>"
+        },
+        "version": {
+          "shape": "Version",
+          "documentation": "<p>A string that describes the action type version.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the category, owner, provider, and version of the action type.</p>"
+    },
     "ActionTypeList": {
       "type": "list",
       "member": {
         "shape": "ActionType"
       }
+    },
+    "ActionTypeOwner": {
+      "type": "string",
+      "pattern": "AWS|ThirdParty"
+    },
+    "ActionTypePermissions": {
+      "type": "structure",
+      "required": [
+        "allowedAccounts"
+      ],
+      "members": {
+        "allowedAccounts": {
+          "shape": "AllowedAccounts",
+          "documentation": "<p>A list of AWS account IDs with allow access to use the action type in their pipelines.</p>"
+        }
+      },
+      "documentation": "<p>Details identifying the users with permissions to use the action type.</p>"
+    },
+    "ActionTypeProperties": {
+      "type": "list",
+      "member": {
+        "shape": "ActionTypeProperty"
+      },
+      "max": 10
+    },
+    "ActionTypeProperty": {
+      "type": "structure",
+      "required": [
+        "name",
+        "optional",
+        "key",
+        "noEcho"
+      ],
+      "members": {
+        "name": {
+          "shape": "ActionConfigurationKey",
+          "documentation": "<p>The property name. This represents a field name that is displayed to users.</p>"
+        },
+        "optional": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the configuration property is an optional value.</p>"
+        },
+        "key": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the configuration property is a key.</p>"
+        },
+        "noEcho": {
+          "shape": "Boolean",
+          "documentation": "<p>Determines whether the field value entered by the customer is logged. If <code>noEcho</code> is <code>true</code>, the value is not shown in CloudTrail logs for the action execution.</p>"
+        },
+        "queryable": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates that the property is used with polling. An action type can have up to one queryable property. If it has one, that property must be both required and not secret.</p>"
+        },
+        "description": {
+          "shape": "PropertyDescription",
+          "documentation": "<p>The description of the property that is displayed to users.</p>"
+        }
+      },
+      "documentation": "<p>Represents information about each property specified in the action configuration, such as the description and key name that display for the customer using the action type.</p>"
     },
     "ActionTypeSettings": {
       "type": "structure",
@@ -1616,6 +1842,40 @@
         }
       },
       "documentation": "<p>Returns information about the settings for an action type.</p>"
+    },
+    "ActionTypeUrls": {
+      "type": "structure",
+      "members": {
+        "configurationUrl": {
+          "shape": "Url",
+          "documentation": "<p>The URL returned to the CodePipeline console that contains a link to the page where customers can configure the external action.</p>"
+        },
+        "entityUrlTemplate": {
+          "shape": "UrlTemplate",
+          "documentation": "<p>The URL returned to the CodePipeline console that provides a deep link to the resources of the external system, such as a status page. This link is provided as part of the action display in the pipeline.</p>"
+        },
+        "executionUrlTemplate": {
+          "shape": "UrlTemplate",
+          "documentation": "<p>The link to an execution page for the action type in progress. For example, for a CodeDeploy action, this link is shown on the pipeline view page in the CodePipeline console, and it links to a CodeDeploy status page.</p>"
+        },
+        "revisionUrlTemplate": {
+          "shape": "UrlTemplate",
+          "documentation": "<p>The URL returned to the CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.</p>"
+        }
+      },
+      "documentation": "<p>Returns information about URLs for web pages that display to customers as links on the pipeline view, such as an external configuration page for the action type.</p>"
+    },
+    "AllowedAccount": {
+      "type": "string",
+      "pattern": "[0-9]{12}|\\*"
+    },
+    "AllowedAccounts": {
+      "type": "list",
+      "member": {
+        "shape": "AllowedAccount"
+      },
+      "max": 1000,
+      "min": 1
     },
     "ApprovalResult": {
       "type": "structure",
@@ -2207,6 +2467,27 @@
       },
       "documentation": "<p>The interaction or event that started a pipeline execution.</p>"
     },
+    "ExecutorConfiguration": {
+      "type": "structure",
+      "members": {
+        "lambdaExecutorConfiguration": {
+          "shape": "LambdaExecutorConfiguration",
+          "documentation": "<p>Details about the <code>Lambda</code> executor of the action type.</p>"
+        },
+        "jobWorkerExecutorConfiguration": {
+          "shape": "JobWorkerExecutorConfiguration",
+          "documentation": "<p>Details about the <code>JobWorker</code> executor of the action type.</p>"
+        }
+      },
+      "documentation": "<p>The action engine, or executor, related to the supported integration model used to create and update the action type. The available executor types are <code>Lambda</code> and <code>JobWorker</code>.</p>"
+    },
+    "ExecutorType": {
+      "type": "string",
+      "enum": [
+        "JobWorker",
+        "Lambda"
+      ]
+    },
     "ExternalExecutionId": {
       "type": "string"
     },
@@ -2245,6 +2526,42 @@
         "RevisionUnavailable",
         "SystemUnavailable"
       ]
+    },
+    "GetActionTypeInput": {
+      "type": "structure",
+      "required": [
+        "category",
+        "owner",
+        "provider",
+        "version"
+      ],
+      "members": {
+        "category": {
+          "shape": "ActionCategory",
+          "documentation": "<p>A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
+        },
+        "owner": {
+          "shape": "ActionTypeOwner",
+          "documentation": "<p>The creator of an action type that has been created with any supported integration model. There are two valid values for the <code>owner</code> field in the action type category: <code>AWS</code> and <code>ThirdParty</code>.</p>"
+        },
+        "provider": {
+          "shape": "ActionProvider",
+          "documentation": "<p>The provider of the action type being called. The provider name is specified when the action type is created.</p>"
+        },
+        "version": {
+          "shape": "Version",
+          "documentation": "<p>A string that describes the action type version.</p>"
+        }
+      }
+    },
+    "GetActionTypeOutput": {
+      "type": "structure",
+      "members": {
+        "actionType": {
+          "shape": "ActionTypeDeclaration",
+          "documentation": "<p>The action type information for the requested action type, such as the action type ID.</p>"
+        }
+      }
     },
     "GetJobDetailsInput": {
       "type": "structure",
@@ -2514,10 +2831,48 @@
         "Failed"
       ]
     },
+    "JobTimeout": {
+      "type": "integer",
+      "max": 43200,
+      "min": 60
+    },
+    "JobWorkerExecutorConfiguration": {
+      "type": "structure",
+      "members": {
+        "pollingAccounts": {
+          "shape": "PollingAccountList",
+          "documentation": "<p>The accounts in which the job worker is configured and might poll for jobs as part of the action execution.</p>"
+        },
+        "pollingServicePrincipals": {
+          "shape": "PollingServicePrincipalList",
+          "documentation": "<p>The service Principals in which the job worker is configured and might poll for jobs as part of the action execution.</p>"
+        }
+      },
+      "documentation": "<p>Details about the polling configuration for the <code>JobWorker</code> action engine, or executor.</p>"
+    },
     "JsonPath": {
       "type": "string",
       "max": 150,
       "min": 1
+    },
+    "LambdaExecutorConfiguration": {
+      "type": "structure",
+      "required": [
+        "lambdaFunctionArn"
+      ],
+      "members": {
+        "lambdaFunctionArn": {
+          "shape": "LambdaFunctionArn",
+          "documentation": "<p>The ARN of the Lambda function used by the action engine.</p>"
+        }
+      },
+      "documentation": "<p>Details about the configuration for the <code>Lambda</code> action engine, or executor.</p>"
+    },
+    "LambdaFunctionArn": {
+      "type": "string",
+      "max": 140,
+      "min": 1,
+      "pattern": "arn:aws(-[\\w]+)*:lambda:.+:[0-9]{12}:function:.+"
     },
     "LastChangedAt": {
       "type": "timestamp"
@@ -2575,6 +2930,10 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.</p>"
+        },
+        "regionFilter": {
+          "shape": "AWSRegionName",
+          "documentation": "<p>The Region to filter on for the list of action types.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ListActionTypes</code> action.</p>"
@@ -2766,6 +3125,11 @@
       "max": 100,
       "min": 1
     },
+    "MaximumActionTypeArtifactCount": {
+      "type": "integer",
+      "max": 10,
+      "min": 0
+    },
     "MaximumArtifactCount": {
       "type": "integer",
       "max": 5,
@@ -2775,6 +3139,11 @@
       "type": "string",
       "max": 5000,
       "min": 1
+    },
+    "MinimumActionTypeArtifactCount": {
+      "type": "integer",
+      "max": 10,
+      "min": 0
     },
     "MinimumArtifactCount": {
       "type": "integer",
@@ -2913,7 +3282,11 @@
         },
         "status": {
           "shape": "PipelineExecutionStatus",
-          "documentation": "<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded\">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>"
+          "documentation": "<p>The status of the pipeline execution.</p> <ul> <li> <p>Cancelled: The pipeline’s definition was updated before the pipeline execution could be completed.</p> </li> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded\">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>"
+        },
+        "statusSummary": {
+          "shape": "PipelineExecutionStatusSummary",
+          "documentation": "<p>A summary that contains a description of the pipeline execution status.</p>"
         },
         "artifactRevisions": {
           "shape": "ArtifactRevisionList",
@@ -2929,6 +3302,7 @@
     "PipelineExecutionStatus": {
       "type": "string",
       "enum": [
+        "Cancelled",
         "InProgress",
         "Stopped",
         "Stopping",
@@ -2936,6 +3310,9 @@
         "Superseded",
         "Failed"
       ]
+    },
+    "PipelineExecutionStatusSummary": {
+      "type": "string"
     },
     "PipelineExecutionSummary": {
       "type": "structure",
@@ -3039,6 +3416,11 @@
       "type": "integer",
       "min": 1
     },
+    "PolicyStatementsTemplate": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
     "PollForJobsInput": {
       "type": "structure",
       "required": [
@@ -3096,6 +3478,27 @@
         }
       },
       "documentation": "<p>Represents the output of a <code>PollForThirdPartyJobs</code> action.</p>"
+    },
+    "PollingAccountList": {
+      "type": "list",
+      "member": {
+        "shape": "AccountId"
+      },
+      "max": 1000,
+      "min": 1
+    },
+    "PollingServicePrincipalList": {
+      "type": "list",
+      "member": {
+        "shape": "ServicePrincipal"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "PropertyDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 1
     },
     "PutActionRevisionInput": {
       "type": "structure",
@@ -3451,10 +3854,17 @@
       "type": "string"
     },
     "SecretAccessKey": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
+    },
+    "ServicePrincipal": {
+      "type": "string",
+      "max": 128,
+      "min": 1
     },
     "SessionToken": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "SourceRevision": {
       "type": "structure",
@@ -3544,7 +3954,7 @@
         },
         "status": {
           "shape": "StageExecutionStatus",
-          "documentation": "<p>The status of the stage, or for a completed stage, the last status of the stage.</p>"
+          "documentation": "<p>The status of the stage, or for a completed stage, the last status of the stage.</p> <note> <p>A status of cancelled means that the pipeline’s definition was updated before the stage execution could be completed.</p> </note>"
         }
       },
       "documentation": "<p>Represents information about the run of a stage.</p>"
@@ -3552,6 +3962,7 @@
     "StageExecutionStatus": {
       "type": "string",
       "enum": [
+        "Cancelled",
         "InProgress",
         "Failed",
         "Stopped",
@@ -3894,6 +4305,15 @@
     "UntagResourceOutput": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateActionTypeInput": {
+      "type": "structure",
+      "members": {
+        "actionType": {
+          "shape": "ActionTypeDeclaration",
+          "documentation": "<p>The action type definition for the action type to be updated.</p>"
+        }
+      }
     },
     "UpdatePipelineInput": {
       "type": "structure",

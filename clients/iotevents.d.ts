@@ -52,6 +52,14 @@ declare class IoTEvents extends Service {
    */
   describeDetectorModel(callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelResponse, AWSError>;
   /**
+   * Retrieves execution information about a detector model analysis
+   */
+  describeDetectorModelAnalysis(params: IoTEvents.Types.DescribeDetectorModelAnalysisRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelAnalysisResponse, AWSError>;
+  /**
+   * Retrieves execution information about a detector model analysis
+   */
+  describeDetectorModelAnalysis(callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelAnalysisResponse, AWSError>;
+  /**
    * Describes an input.
    */
   describeInput(params: IoTEvents.Types.DescribeInputRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeInputResponse) => void): Request<IoTEvents.Types.DescribeInputResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class IoTEvents extends Service {
    * Retrieves the current settings of the AWS IoT Events logging options.
    */
   describeLoggingOptions(callback?: (err: AWSError, data: IoTEvents.Types.DescribeLoggingOptionsResponse) => void): Request<IoTEvents.Types.DescribeLoggingOptionsResponse, AWSError>;
+  /**
+   * Retrieves one or more analysis results of the detector model.
+   */
+  getDetectorModelAnalysisResults(params: IoTEvents.Types.GetDetectorModelAnalysisResultsRequest, callback?: (err: AWSError, data: IoTEvents.Types.GetDetectorModelAnalysisResultsResponse) => void): Request<IoTEvents.Types.GetDetectorModelAnalysisResultsResponse, AWSError>;
+  /**
+   * Retrieves one or more analysis results of the detector model.
+   */
+  getDetectorModelAnalysisResults(callback?: (err: AWSError, data: IoTEvents.Types.GetDetectorModelAnalysisResultsResponse) => void): Request<IoTEvents.Types.GetDetectorModelAnalysisResultsResponse, AWSError>;
   /**
    * Lists all the versions of a detector model. Only the metadata associated with each detector model version is returned.
    */
@@ -107,6 +123,14 @@ declare class IoTEvents extends Service {
    * Sets or updates the AWS IoT Events logging options. If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Performs an analysis of your detector model. For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+   */
+  startDetectorModelAnalysis(params: IoTEvents.Types.StartDetectorModelAnalysisRequest, callback?: (err: AWSError, data: IoTEvents.Types.StartDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.StartDetectorModelAnalysisResponse, AWSError>;
+  /**
+   * Performs an analysis of your detector model. For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+   */
+  startDetectorModelAnalysis(callback?: (err: AWSError, data: IoTEvents.Types.StartDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.StartDetectorModelAnalysisResponse, AWSError>;
   /**
    * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
    */
@@ -183,11 +207,11 @@ declare namespace IoTEvents {
      */
     firehose?: FirehoseAction;
     /**
-     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the payload. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
+     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the payload. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
      */
     dynamoDB?: DynamoDBAction;
     /**
-     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the payload. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
+     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the payload. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
      */
     dynamoDBv2?: DynamoDBv2Action;
     /**
@@ -197,6 +221,38 @@ declare namespace IoTEvents {
   }
   export type Actions = Action[];
   export type AmazonResourceName = string;
+  export type AnalysisId = string;
+  export type AnalysisMessage = string;
+  export interface AnalysisResult {
+    /**
+     * The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:    supported-actions - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.    service-limits - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.    structure - The detector model must follow a structure that AWS IoT Events supports.     expression-syntax - Your expression must follow the required syntax.    data-type - Data types referenced in the detector model must be compatible.    referenced-data - You must define the data referenced in your detector model before you can use the data.    referenced-resource - Resources that the detector model uses must be available.   For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+     */
+    type?: AnalysisType;
+    /**
+     * The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:    INFO - An information result informs you about a significant field in your detector model. This type of result usually doesn't require immediate action.    WARNING - A warning result draws special attention to fields that are potentially damaging to your detector model. We recommend that you review warnings and take necessary actions before you use your detetor model in production environments. Otherwise, the detector model may not fully function as expected.    ERROR - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.  
+     */
+    level?: AnalysisResultLevel;
+    /**
+     * Contains additional information about the analysis result.
+     */
+    message?: AnalysisMessage;
+    /**
+     * Contains one or more locations that you can use to locate the fields in your detector model that the analysis result references.
+     */
+    locations?: AnalysisResultLocations;
+  }
+  export type AnalysisResultLevel = "INFO"|"WARNING"|"ERROR"|string;
+  export interface AnalysisResultLocation {
+    /**
+     * A JsonPath expression that identifies the error field in your detector model.
+     */
+    path?: AnalysisResultLocationPath;
+  }
+  export type AnalysisResultLocationPath = string;
+  export type AnalysisResultLocations = AnalysisResultLocation[];
+  export type AnalysisResults = AnalysisResult[];
+  export type AnalysisStatus = "RUNNING"|"COMPLETE"|"FAILED"|string;
+  export type AnalysisType = string;
   export type AssetId = string;
   export type AssetPropertyAlias = string;
   export type AssetPropertyBooleanValue = string;
@@ -210,11 +266,11 @@ declare namespace IoTEvents {
   export type AssetPropertyTimeInSeconds = string;
   export interface AssetPropertyTimestamp {
     /**
-     * The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199. You can also specify an expression.
+     * The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.
      */
     timeInSeconds: AssetPropertyTimeInSeconds;
     /**
-     * The nanosecond offset converted from timeInSeconds. The valid range is between 0-999999999. You can also specify an expression.
+     * The nanosecond offset converted from timeInSeconds. The valid range is between 0-999999999.
      */
     offsetInNanos?: AssetPropertyOffsetInNanos;
   }
@@ -228,25 +284,25 @@ declare namespace IoTEvents {
      */
     timestamp?: AssetPropertyTimestamp;
     /**
-     * The quality of the asset property value. The value must be GOOD, BAD, or UNCERTAIN. You can also specify an expression.
+     * The quality of the asset property value. The value must be 'GOOD', 'BAD', or 'UNCERTAIN'.
      */
     quality?: AssetPropertyQuality;
   }
   export interface AssetPropertyVariant {
     /**
-     * The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+     * The asset property value is a string. You must use an expression, and the evaluated result should be a string.
      */
     stringValue?: AssetPropertyStringValue;
     /**
-     * The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+     * The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.
      */
     integerValue?: AssetPropertyIntegerValue;
     /**
-     * The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+     * The asset property value is a double. You must use an expression, and the evaluated result should be a double.
      */
     doubleValue?: AssetPropertyDoubleValue;
     /**
-     * The asset property value is a Boolean value that must be TRUE or FALSE. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+     * The asset property value is a Boolean value that must be 'TRUE' or 'FALSE'. You must use an expression, and the evaluated result should be a Boolean value.
      */
     booleanValue?: AssetPropertyBooleanValue;
   }
@@ -343,6 +399,18 @@ declare namespace IoTEvents {
   export interface DeleteInputResponse {
   }
   export type DeliveryStreamName = string;
+  export interface DescribeDetectorModelAnalysisRequest {
+    /**
+     * The ID of the analysis result that you want to retrieve.
+     */
+    analysisId: AnalysisId;
+  }
+  export interface DescribeDetectorModelAnalysisResponse {
+    /**
+     * The status of the analysis activity. The status can be one of the following values:    RUNNING - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.    COMPLETE - AWS IoT Events finished analyzing your detector model .    FAILED - AWS IoT Events couldn't analyze your detector model. Try again later.  
+     */
+    status?: AnalysisStatus;
+  }
   export interface DescribeDetectorModelRequest {
     /**
      * The name of the detector model.
@@ -509,11 +577,11 @@ declare namespace IoTEvents {
   }
   export interface DynamoDBAction {
     /**
-     * The data type for the hash key (also called the partition key). You can specify the following values:    STRING - The hash key is a string.    NUMBER - The hash key is a number.   If you don't specify hashKeyType, the default value is STRING.
+     * The data type for the hash key (also called the partition key). You can specify the following values:    'STRING' - The hash key is a string.    'NUMBER' - The hash key is a number.   If you don't specify hashKeyType, the default value is 'STRING'.
      */
     hashKeyType?: DynamoKeyType;
     /**
-     * The name of the hash key (also called the partition key).
+     * The name of the hash key (also called the partition key). The hashKeyField value must match the partition key of the target DynamoDB table.
      */
     hashKeyField: DynamoKeyField;
     /**
@@ -521,11 +589,11 @@ declare namespace IoTEvents {
      */
     hashKeyValue: DynamoKeyValue;
     /**
-     * The data type for the range key (also called the sort key), You can specify the following values:    STRING - The range key is a string.    NUMBER - The range key is number.   If you don't specify rangeKeyField, the default value is STRING.
+     * The data type for the range key (also called the sort key), You can specify the following values:    'STRING' - The range key is a string.    'NUMBER' - The range key is number.   If you don't specify rangeKeyField, the default value is 'STRING'.
      */
     rangeKeyType?: DynamoKeyType;
     /**
-     * The name of the range key (also called the sort key).
+     * The name of the range key (also called the sort key). The rangeKeyField value must match the sort key of the target DynamoDB table. 
      */
     rangeKeyField?: DynamoKeyField;
     /**
@@ -533,7 +601,7 @@ declare namespace IoTEvents {
      */
     rangeKeyValue?: DynamoKeyValue;
     /**
-     * The type of operation to perform. You can specify the following values:     INSERT - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.    UPDATE - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.    DELETE - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.   If you don't specify this parameter, AWS IoT Events triggers the INSERT operation.
+     * The type of operation to perform. You can specify the following values:     'INSERT' - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.    'UPDATE' - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.    'DELETE' - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.   If you don't specify this parameter, AWS IoT Events triggers the 'INSERT' operation.
      */
     operation?: DynamoOperation;
     /**
@@ -541,7 +609,7 @@ declare namespace IoTEvents {
      */
     payloadField?: DynamoKeyField;
     /**
-     * The name of the DynamoDB table.
+     * The name of the DynamoDB table. The tableName value must match the table name of the target DynamoDB table. 
      */
     tableName: DynamoTableName;
     payload?: Payload;
@@ -590,6 +658,30 @@ declare namespace IoTEvents {
     payload?: Payload;
   }
   export type FirehoseSeparator = string;
+  export interface GetDetectorModelAnalysisResultsRequest {
+    /**
+     * The ID of the analysis result that you want to retrieve.
+     */
+    analysisId: AnalysisId;
+    /**
+     * The token that you can use to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    maxResults?: MaxAnalysisResults;
+  }
+  export interface GetDetectorModelAnalysisResultsResponse {
+    /**
+     * Contains information about one or more analysis results.
+     */
+    analysisResults?: AnalysisResults;
+    /**
+     * The token that you can use to return the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
   export interface Input {
     /**
      * Information about the configuration of an input.
@@ -675,19 +767,19 @@ declare namespace IoTEvents {
   }
   export interface IotSiteWiseAction {
     /**
-     * A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+     * A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.
      */
     entryId?: AssetPropertyEntryId;
     /**
-     * The ID of the asset that has the specified property. You can specify an expression.
+     * The ID of the asset that has the specified property.
      */
     assetId?: AssetId;
     /**
-     * The ID of the asset property. You can specify an expression.
+     * The ID of the asset property.
      */
     propertyId?: AssetPropertyId;
     /**
-     * The alias of the asset property. You can also specify an expression.
+     * The alias of the asset property.
      */
     propertyAlias?: AssetPropertyAlias;
     /**
@@ -722,11 +814,11 @@ declare namespace IoTEvents {
      */
     detectorModelName: DetectorModelName;
     /**
-     * The token for the next set of results.
+     * The token that you can use to return the next set of results.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return at one time.
+     * The maximum number of results to be returned per request.
      */
     maxResults?: MaxResults;
   }
@@ -736,17 +828,17 @@ declare namespace IoTEvents {
      */
     detectorModelVersionSummaries?: DetectorModelVersionSummaries;
     /**
-     * A token to retrieve the next set of results, or null if there are no additional results.
+     * The token that you can use to return the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListDetectorModelsRequest {
     /**
-     * The token for the next set of results.
+     * The token that you can use to return the next set of results.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return at one time.
+     * The maximum number of results to be returned per request.
      */
     maxResults?: MaxResults;
   }
@@ -756,17 +848,17 @@ declare namespace IoTEvents {
      */
     detectorModelSummaries?: DetectorModelSummaries;
     /**
-     * A token to retrieve the next set of results, or null if there are no additional results.
+     * The token that you can use to return the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListInputsRequest {
     /**
-     * The token for the next set of results.
+     * The token that you can use to return the next set of results.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return at one time.
+     * The maximum number of results to be returned per request.
      */
     maxResults?: MaxResults;
   }
@@ -776,7 +868,7 @@ declare namespace IoTEvents {
      */
     inputSummaries?: InputSummaries;
     /**
-     * A token to retrieve the next set of results, or null if there are no additional results.
+     * The token that you can use to return the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
@@ -813,6 +905,7 @@ declare namespace IoTEvents {
     detectorDebugOptions?: DetectorDebugOptions;
   }
   export type MQTTTopic = string;
+  export type MaxAnalysisResults = number;
   export type MaxResults = number;
   export type NextToken = string;
   export interface OnEnterLifecycle {
@@ -909,6 +1002,15 @@ declare namespace IoTEvents {
      * You can configure the action payload when you send a message to an Amazon SQS queue.
      */
     payload?: Payload;
+  }
+  export interface StartDetectorModelAnalysisRequest {
+    detectorModelDefinition: DetectorModelDefinition;
+  }
+  export interface StartDetectorModelAnalysisResponse {
+    /**
+     * The ID that you can use to retrieve the analysis result.
+     */
+    analysisId?: AnalysisId;
   }
   export interface State {
     /**

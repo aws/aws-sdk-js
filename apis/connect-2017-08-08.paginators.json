@@ -76,11 +76,23 @@
       "output_token": "NextToken",
       "result_key": "PromptSummaryList"
     },
+    "ListQueueQuickConnects": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "QuickConnectSummaryList"
+    },
     "ListQueues": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "QueueSummaryList"
+    },
+    "ListQuickConnects": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "QuickConnectSummaryList"
     },
     "ListRoutingProfileQueues": {
       "input_token": "NextToken",

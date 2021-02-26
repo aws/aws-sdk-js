@@ -213,7 +213,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Generates a one time challenge code to authenticate a user into your Amplify Admin UI.</p>"
+      "documentation": "<p>Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.</p>"
     },
     "DeleteBackend": {
       "name": "DeleteBackend",
@@ -247,7 +247,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Removes an existing environment from your Ampify project.</p>"
+      "documentation": "<p>Removes an existing environment from your Amplify project.</p>"
     },
     "DeleteBackendAPI": {
       "name": "DeleteBackendAPI",
@@ -417,7 +417,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Provides project level details for your Amplify UI project.</p>"
+      "documentation": "<p>Provides project-level details for your Amplify UI project.</p>"
     },
     "GetBackendAPI": {
       "name": "GetBackendAPI",
@@ -451,7 +451,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Gets the details for a backend api.</p>"
+      "documentation": "<p>Gets the details for a backend API.</p>"
     },
     "GetBackendAPIModels": {
       "name": "GetBackendAPIModels",
@@ -519,7 +519,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Gets a backend auth details.</p>"
+      "documentation": "<p>Gets backend auth details.</p>"
     },
     "GetBackendJob": {
       "name": "GetBackendJob",
@@ -689,7 +689,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Removes the AWS resources required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Removes the AWS resources that are required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendAPI": {
       "name": "UpdateBackendAPI",
@@ -791,7 +791,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Updates the AWS resources required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Updates the AWS resources that are required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendJob": {
       "name": "UpdateBackendJob",
@@ -842,17 +842,17 @@
         "CognitoUserPoolId": {
           "shape": "__string",
           "locationName": "cognitoUserPoolId",
-          "documentation": "<p>The Amazon Cognito user pool id, if Amazon Cognito was used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.</p>"
         },
         "Description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "<p>The api key description for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
         },
         "ExpirationTime": {
           "shape": "__double",
           "locationName": "expirationTime",
-          "documentation": "<p>The api key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
         },
         "OpenIDAuthTTL": {
           "shape": "__string",
@@ -862,7 +862,7 @@
         "OpenIDClientId": {
           "shape": "__string",
           "locationName": "openIDClientId",
-          "documentation": "<p>The clientID for openID, if openID was used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The clientID for openID, if openID is used as an authentication setting to access your data models.</p>"
         },
         "OpenIDIatTTL": {
           "shape": "__string",
@@ -872,12 +872,12 @@
         "OpenIDIssueURL": {
           "shape": "__string",
           "locationName": "openIDIssueURL",
-          "documentation": "<p>The openID issuer URL, if openID was used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The openID issuer URL, if openID is used as an authentication setting to access your data models.</p>"
         },
         "OpenIDProviderName": {
           "shape": "__string",
           "locationName": "openIDProviderName",
-          "documentation": "<p>The open id provider name, if openID was used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The openID provider name, if openID is used as an authentication mechanism to access your data models.</p>"
         }
       },
       "documentation": "<p>The authentication settings for accessing provisioned data models in your Amplify project.</p>"
@@ -907,7 +907,7 @@
           "documentation": "<p>The strategy for conflict resolution.</p>"
         }
       },
-      "documentation": "<p>Describes the conflict resolution configuration for your data model configured in your Amplify project.</p>"
+      "documentation": "<p>Describes the conflict resolution configuration for the data model configured in your Amplify project.</p>"
     },
     "BackendAPIResourceConfig": {
       "type": "structure",
@@ -915,22 +915,22 @@
         "AdditionalAuthTypes": {
           "shape": "ListOfBackendAPIAuthType",
           "locationName": "additionalAuthTypes",
-          "documentation": "<p>Addition authentication methods used to interact with your data models.</p>"
+          "documentation": "<p>Additional authentication methods used to interact with your data models.</p>"
         },
         "ApiName": {
           "shape": "__string",
           "locationName": "apiName",
-          "documentation": "<p>The API name used to interact with the data model, configured as a part of the amplify project.</p>"
+          "documentation": "<p>The API name used to interact with the data model, configured as a part of the Amplify project.</p>"
         },
         "ConflictResolution": {
           "shape": "BackendAPIConflictResolution",
           "locationName": "conflictResolution",
-          "documentation": "<p>The conflict resoultion strategy for your data stored in the data models.</p>"
+          "documentation": "<p>The conflict resolution strategy for your data stored in the data models.</p>"
         },
         "DefaultAuthType": {
           "shape": "BackendAPIAuthType",
           "locationName": "defaultAuthType",
-          "documentation": "<p>The default authentication type for interacting with the configured data models in your amplify project.</p>"
+          "documentation": "<p>The default authentication type for interacting with the configured data models in your Amplify project.</p>"
         },
         "Service": {
           "shape": "__string",
@@ -940,10 +940,10 @@
         "TransformSchema": {
           "shape": "__string",
           "locationName": "transformSchema",
-          "documentation": "<p>The definition of the data model in the annotated transform of the graphql schema.</p>"
+          "documentation": "<p>The definition of the data model in the annotated transform of the GraphQL schema.</p>"
         }
       },
-      "documentation": "<p>The resource config for the data model,configured as a part of the Amplify project.</p>"
+      "documentation": "<p>The resource configuration for the data model, configured as a part of the Amplify project.</p>"
     },
     "BackendAuthSocialProviderConfig": {
       "type": "structure",
@@ -951,15 +951,15 @@
         "ClientId": {
           "shape": "__string",
           "locationName": "client_id",
-          "documentation": "<p>Describes the client_id which can be obtained from the third party social federation provider.</p>"
+          "documentation": "<p>Describes the client_id that can be obtained from the third-party social federation provider.</p>"
         },
         "ClientSecret": {
           "shape": "__string",
           "locationName": "client_secret",
-          "documentation": "<p>Describes the client_secret which can be obtained from third party social federation providers.</p>"
+          "documentation": "<p>Describes the client_secret that can be obtained from third-party social federation providers.</p>"
         }
       },
-      "documentation": "<p>Describes third party social federation configurations for allowing your app users to sign in using OAuth.</p>"
+      "documentation": "<p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>"
     },
     "BackendJobRespObj": {
       "type": "structure",
@@ -1148,7 +1148,7 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
@@ -1161,7 +1161,7 @@
           "documentation": "<p>The configuration for the SMS message sent when an app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amlify app.</p>",
+      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>",
       "required": [
         "DeliveryMethod"
       ]
@@ -1180,7 +1180,7 @@
           "documentation": "<p>Set to true or false based on whether you want to enable guest authorization to your Amplify app.</p>"
         }
       },
-      "documentation": "<p>Describes authorization configurations for the auth resources, configures as a part of your Amplify project.</p>",
+      "documentation": "<p>Describes authorization configurations for the auth resources, configured as a part of your Amplify project.</p>",
       "required": [
         "UnauthenticatedLogin",
         "IdentityPoolName"
@@ -1191,7 +1191,7 @@
       "members": {
         "MFAMode": {
           "shape": "MFAMode",
-          "documentation": "<p>Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.</p>"
+          "documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>"
         },
         "Settings": {
           "shape": "Settings",
@@ -1199,7 +1199,7 @@
           "documentation": "<p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>"
         }
       },
-      "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
+      "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
       "required": [
         "MFAMode"
       ]
@@ -1215,27 +1215,27 @@
         "OAuthGrantType": {
           "shape": "OAuthGrantType",
           "locationName": "oAuthGrantType",
-          "documentation": "<p>The OAuth grant type which you use to allow app users to authenticate from your Amplify app.</p>"
+          "documentation": "<p>The OAuth grant type that you use to allow app users to authenticate from your Amplify app.</p>"
         },
         "OAuthScopes": {
           "shape": "ListOfOAuthScopesElement",
           "locationName": "oAuthScopes",
-          "documentation": "<p>List of OAuth related flows which use to allow your app users to authenticate from your Amplify app.</p>"
+          "documentation": "<p>List of OAuth-related flows that allow your app users to authenticate from your Amplify app.</p>"
         },
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignInURIs",
-          "documentation": "<p>The redirected URI for sigining into your Amplify app.</p>"
+          "documentation": "<p>The redirected URI for signing in to your Amplify app.</p>"
         },
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
           "locationName": "socialProviderSettings",
-          "documentation": "<p>The settings for using the social providers for access to your Amplify app.</p>"
+          "documentation": "<p>The settings for using social identity providers for access to your Amplify app.</p>"
         }
       },
       "documentation": "<p>Creates the OAuth configuration for your Amplify project.</p>",
@@ -1252,15 +1252,15 @@
         "AdditionalConstraints": {
           "shape": "ListOfAdditionalConstraintsElement",
           "locationName": "additionalConstraints",
-          "documentation": "<p>Additional constraints for the pasword used to access the backend of your Amplify project.</p>"
+          "documentation": "<p>Additional constraints for the password used to access the backend of your Amplify project.</p>"
         },
         "MinimumLength": {
           "shape": "__double",
           "locationName": "minimumLength",
-          "documentation": "<p>The minimum length of password used to access the backend of your Amplify project.</p>"
+          "documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>The password policy configuration for the backend to your Amplify project.</p>",
+      "documentation": "<p>The password policy configuration for the backend of your Amplify project.</p>",
       "required": [
         "MinimumLength"
       ]
@@ -1309,7 +1309,7 @@
         "IdentityPoolConfigs": {
           "shape": "CreateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -1319,7 +1319,7 @@
         "UserPoolConfigs": {
           "shape": "CreateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
+          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when creating an auth resource in your Amplify project.</p>",
@@ -1375,7 +1375,7 @@
         "Mfa": {
           "shape": "CreateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "CreateBackendAuthOAuthConfig",
@@ -1390,12 +1390,12 @@
         "RequiredSignUpAttributes": {
           "shape": "ListOfRequiredSignUpAttributesElement",
           "locationName": "requiredSignUpAttributes",
-          "documentation": "<p>The required attributes to sign up new users in the user pool.</p>"
+          "documentation": "<p>The required attributes to sign up new users in the Amazon Cognito user pool.</p>"
         },
         "SignInMethod": {
           "shape": "SignInMethod",
           "locationName": "signInMethod",
-          "documentation": "<p>Describes the sign-in methods that your Amplify app users to login using the Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
         },
         "UserPoolName": {
           "shape": "__string",
@@ -1476,7 +1476,7 @@
         "ResourceConfig": {
           "shape": "ResourceConfig",
           "locationName": "resourceConfig",
-          "documentation": "<p>The resource configuration for the create backend request.</p>"
+          "documentation": "<p>The resource configuration for the backend creation request.</p>"
         },
         "ResourceName": {
           "shape": "__string",
@@ -1551,17 +1551,17 @@
         "ChallengeCode": {
           "shape": "__string",
           "locationName": "challengeCode",
-          "documentation": "<p>One time challenge code for authenticating into Amplify Admin UI.</p>"
+          "documentation": "<p>One-time challenge code for authenticating into the Amplify Admin UI.</p>"
         },
         "SessionId": {
           "shape": "__string",
           "locationName": "sessionId",
-          "documentation": "<p>A unique identifier provided when creating a new challenge token.</p>"
+          "documentation": "<p>A unique ID provided when creating a new challenge token.</p>"
         },
         "Ttl": {
           "shape": "__string",
           "locationName": "ttl",
-          "documentation": "<p>The expiry time for the one time generated token code.</p>"
+          "documentation": "<p>The expiry time for the one-time generated token code.</p>"
         }
       }
     },
@@ -1765,7 +1765,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "sessionId",
-          "documentation": "<p>The session Id.</p>"
+          "documentation": "<p>The session ID.</p>"
         }
       },
       "required": [
@@ -1903,7 +1903,7 @@
         "Models": {
           "shape": "__string",
           "locationName": "models",
-          "documentation": "<p>Stringified JSON of the datastore model.</p>"
+          "documentation": "<p>Stringified JSON of the DataStore model.</p>"
         },
         "Status": {
           "shape": "Status",
@@ -2132,7 +2132,7 @@
         "AmplifyMetaConfig": {
           "shape": "__string",
           "locationName": "amplifyMetaConfig",
-          "documentation": "<p>A stringified version of the current configs for your Amplify project.</p>"
+          "documentation": "<p>A stringified version of the current configurations for your Amplify project.</p>"
         },
         "AppId": {
           "shape": "__string",
@@ -2174,7 +2174,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "sessionId",
-          "documentation": "<p>The session Id.</p>"
+          "documentation": "<p>The session ID.</p>"
         }
       },
       "required": [
@@ -2193,17 +2193,17 @@
         "ChallengeCode": {
           "shape": "__string",
           "locationName": "challengeCode",
-          "documentation": "<p>The one time challenge code for authenticating into Amplify Admin UI.</p>"
+          "documentation": "<p>The one-time challenge code for authenticating into the Amplify Admin UI.</p>"
         },
         "SessionId": {
           "shape": "__string",
           "locationName": "sessionId",
-          "documentation": "<p>A unique identifier provided when creating a new challenge token.</p>"
+          "documentation": "<p>A unique ID provided when creating a new challenge token.</p>"
         },
         "Ttl": {
           "shape": "__string",
           "locationName": "ttl",
-          "documentation": "<p>The expiry time for the one time generated token code.</p>"
+          "documentation": "<p>The expiry time for the one-time generated token code.</p>"
         }
       }
     },
@@ -2230,7 +2230,7 @@
         "MaxResults": {
           "shape": "__integerMin1Max25",
           "locationName": "maxResults",
-          "documentation": "<p>The maximum number of results you want in the response.</p>"
+          "documentation": "<p>The maximum number of results that you want in the response.</p>"
         },
         "NextToken": {
           "shape": "__string",
@@ -2240,12 +2240,12 @@
         "Operation": {
           "shape": "__string",
           "locationName": "operation",
-          "documentation": "<p>Filters the list of response objects to only include those with the specified operation name.</p>"
+          "documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>"
         },
         "Status": {
           "shape": "__string",
           "locationName": "status",
-          "documentation": "<p>Filters the list of response objects to only include those with the specified status.</p>"
+          "documentation": "<p>Filters the list of response objects to include only those with the specified status.</p>"
         }
       },
       "documentation": "<p>The request body for ListBackendJobs.</p>",
@@ -2275,22 +2275,22 @@
         "AwsCognitoIdentityPoolId": {
           "shape": "__string",
           "locationName": "aws_cognito_identity_pool_id",
-          "documentation": "<p>Amazon Cognito identitypool id used for the Amplify Admin UI login authorization.</p>"
+          "documentation": "<p>The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.</p>"
         },
         "AwsCognitoRegion": {
           "shape": "__string",
           "locationName": "aws_cognito_region",
-          "documentation": "<p>The AWS Region for the the Amplify Admin login.</p>"
+          "documentation": "<p>The AWS Region for the Amplify Admin UI login.</p>"
         },
         "AwsUserPoolsId": {
           "shape": "__string",
           "locationName": "aws_user_pools_id",
-          "documentation": "<p>The Amazon Cognito userpool id used for Amplify Admin UI login authentication.</p>"
+          "documentation": "<p>The Amazon Cognito user pool ID used for Amplify Admin UI login authentication.</p>"
         },
         "AwsUserPoolsWebClientId": {
           "shape": "__string",
           "locationName": "aws_user_pools_web_client_id",
-          "documentation": "<p>The web client ID for the Amazon Cognito userpools.</p>"
+          "documentation": "<p>The web client ID for the Amazon Cognito user pools.</p>"
         }
       },
       "documentation": "<p>The request object for this operation.</p>"
@@ -2419,7 +2419,7 @@
         "MfaTypes": {
           "shape": "ListOfMfaTypesElement",
           "locationName": "mfaTypes",
-          "documentation": "<p>The supported MFA types</p>"
+          "documentation": "<p>The supported MFA types.</p>"
         },
         "SmsMessage": {
           "shape": "__string",
@@ -2462,7 +2462,7 @@
           "shape": "BackendAuthSocialProviderConfig"
         }
       },
-      "documentation": "<p>The settings for using the social providers for access to your Amplify app.</p>"
+      "documentation": "<p>The settings for using the social identity providers for access to your Amplify app.</p>"
     },
     "Status": {
       "type": "string",
@@ -2545,7 +2545,7 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
@@ -2558,7 +2558,7 @@
           "documentation": "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amlify app.</p>"
+      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
     },
     "UpdateBackendAuthIdentityPoolConfig": {
       "type": "structure",
@@ -2566,7 +2566,7 @@
         "UnauthenticatedLogin": {
           "shape": "__boolean",
           "locationName": "unauthenticatedLogin",
-          "documentation": "<p>A boolean value which can be set to allow or disallow guest level authorization into your Amplify app.</p>"
+          "documentation": "<p>A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.</p>"
         }
       },
       "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
@@ -2602,22 +2602,22 @@
         "OAuthScopes": {
           "shape": "ListOfOAuthScopesElement",
           "locationName": "oAuthScopes",
-          "documentation": "<p>The list of OAuth related flows which can allow users to authenticate from your Amplify app.</p>"
+          "documentation": "<p>The list of OAuth-related flows that can allow users to authenticate from your Amplify app.</p>"
         },
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignInURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs in to an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs in to an Amplify app.</p>"
         },
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
           "locationName": "socialProviderSettings",
-          "documentation": "<p>Describes third party social federation configurations for allowing your users to sign in with OAuth.</p>"
+          "documentation": "<p>Describes third-party social federation configurations for allowing your users to sign in with OAuth.</p>"
         }
       },
       "documentation": "<p>The OAuth configurations for authenticating users into your Amplify app.</p>"
@@ -2628,15 +2628,15 @@
         "AdditionalConstraints": {
           "shape": "ListOfAdditionalConstraintsElement",
           "locationName": "additionalConstraints",
-          "documentation": "<p>Describes additional constrains on password requirements to sign in into the auth resource, configured as a part of your Ampify project.</p>"
+          "documentation": "<p>Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         },
         "MinimumLength": {
           "shape": "__double",
           "locationName": "minimumLength",
-          "documentation": "<p>Describes the minimum length of password required to sign in into the auth resource, configured as a part of your Ampify project.</p>"
+          "documentation": "<p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
     },
     "UpdateBackendAuthRequest": {
       "type": "structure",
@@ -2683,7 +2683,7 @@
         "IdentityPoolConfigs": {
           "shape": "UpdateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -2693,7 +2693,7 @@
         "UserPoolConfigs": {
           "shape": "UpdateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito userpool, provisioned as a part of your auth resource in the Amplify project.</p>"
+          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when updating an authentication resource in your Amplify project.</p>",
@@ -2749,7 +2749,7 @@
         "Mfa": {
           "shape": "UpdateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "UpdateBackendAuthOAuthConfig",
@@ -2762,7 +2762,7 @@
           "documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
+      "documentation": "<p>Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.</p>"
     },
     "UpdateBackendConfigRequest": {
       "type": "structure",
@@ -2805,7 +2805,7 @@
         "LoginAuthConfig": {
           "shape": "LoginAuthConfigReqObj",
           "locationName": "loginAuthConfig",
-          "documentation": "<p>Describes the Amazon Cognito configurations for the Admin UI auth resource to login with.</p>"
+          "documentation": "<p>Describes the Amazon Cognito configurations for the Admin UI auth resource to log in with.</p>"
         }
       }
     },
@@ -2833,12 +2833,12 @@
         "Operation": {
           "shape": "__string",
           "locationName": "operation",
-          "documentation": "<p>Filters the list of response objects to only include those with the specified operation name.</p>"
+          "documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>"
         },
         "Status": {
           "shape": "__string",
           "locationName": "status",
-          "documentation": "<p>Filters the list of response objects to only include those with the specified status.</p>"
+          "documentation": "<p>Filters the list of response objects to include only those with the specified status.</p>"
         }
       },
       "documentation": "<p>The request body for GetBackendJob.</p>",
@@ -2998,13 +2998,5 @@
       "type": "string"
     }
   },
-  "documentation": "<p>AWS Amplify Admin API</p>",
-  "pagination": {
-    "ListBackendJobs": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "Jobs"
-    }
-  }
+  "documentation": "<p>AWS Amplify Admin API</p>"
 }

@@ -164,11 +164,11 @@ declare class DirectoryService extends Service {
    */
   deleteTrust(callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
   /**
-   * Deletes from the system the certificate that was registered for a secured LDAP connection.
+   * Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.
    */
   deregisterCertificate(params: DirectoryService.Types.DeregisterCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeregisterCertificateResult) => void): Request<DirectoryService.Types.DeregisterCertificateResult, AWSError>;
   /**
-   * Deletes from the system the certificate that was registered for a secured LDAP connection.
+   * Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.
    */
   deregisterCertificate(callback?: (err: AWSError, data: DirectoryService.Types.DeregisterCertificateResult) => void): Request<DirectoryService.Types.DeregisterCertificateResult, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class DirectoryService extends Service {
    */
   deregisterEventTopic(callback?: (err: AWSError, data: DirectoryService.Types.DeregisterEventTopicResult) => void): Request<DirectoryService.Types.DeregisterEventTopicResult, AWSError>;
   /**
-   * Displays information about the certificate registered for a secured LDAP connection.
+   * Displays information about the certificate registered for secure LDAP or client certificate authentication.
    */
   describeCertificate(params: DirectoryService.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeCertificateResult) => void): Request<DirectoryService.Types.DescribeCertificateResult, AWSError>;
   /**
-   * Displays information about the certificate registered for a secured LDAP connection.
+   * Displays information about the certificate registered for secure LDAP or client certificate authentication.
    */
   describeCertificate(callback?: (err: AWSError, data: DirectoryService.Types.DescribeCertificateResult) => void): Request<DirectoryService.Types.DescribeCertificateResult, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class DirectoryService extends Service {
    */
   describeTrusts(callback?: (err: AWSError, data: DirectoryService.Types.DescribeTrustsResult) => void): Request<DirectoryService.Types.DescribeTrustsResult, AWSError>;
   /**
-   * Disable client authentication for smart cards.
+   * Disables alternative client authentication methods for the specified directory. 
    */
   disableClientAuthentication(params: DirectoryService.Types.DisableClientAuthenticationRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableClientAuthenticationResult) => void): Request<DirectoryService.Types.DisableClientAuthenticationResult, AWSError>;
   /**
-   * Disable client authentication for smart cards.
+   * Disables alternative client authentication methods for the specified directory. 
    */
   disableClientAuthentication(callback?: (err: AWSError, data: DirectoryService.Types.DisableClientAuthenticationResult) => void): Request<DirectoryService.Types.DisableClientAuthenticationResult, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class DirectoryService extends Service {
    */
   disableSso(callback?: (err: AWSError, data: DirectoryService.Types.DisableSsoResult) => void): Request<DirectoryService.Types.DisableSsoResult, AWSError>;
   /**
-   * Enable client authentication for smardtcards.
+   * Enables alternative client authentication methods for the specified directory.
    */
   enableClientAuthentication(params: DirectoryService.Types.EnableClientAuthenticationRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableClientAuthenticationResult) => void): Request<DirectoryService.Types.EnableClientAuthenticationResult, AWSError>;
   /**
-   * Enable client authentication for smardtcards.
+   * Enables alternative client authentication methods for the specified directory.
    */
   enableClientAuthentication(callback?: (err: AWSError, data: DirectoryService.Types.EnableClientAuthenticationResult) => void): Request<DirectoryService.Types.EnableClientAuthenticationResult, AWSError>;
   /**
@@ -340,11 +340,11 @@ declare class DirectoryService extends Service {
    */
   getSnapshotLimits(callback?: (err: AWSError, data: DirectoryService.Types.GetSnapshotLimitsResult) => void): Request<DirectoryService.Types.GetSnapshotLimitsResult, AWSError>;
   /**
-   * For the specified directory, lists all the certificates registered for a secured LDAP connection.
+   * For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.
    */
   listCertificates(params: DirectoryService.Types.ListCertificatesRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListCertificatesResult) => void): Request<DirectoryService.Types.ListCertificatesResult, AWSError>;
   /**
-   * For the specified directory, lists all the certificates registered for a secured LDAP connection.
+   * For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.
    */
   listCertificates(callback?: (err: AWSError, data: DirectoryService.Types.ListCertificatesResult) => void): Request<DirectoryService.Types.ListCertificatesResult, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class DirectoryService extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Registers a certificate for secured LDAP connection.
+   * Registers a certificate for a secure LDAP or client certificate authentication.
    */
   registerCertificate(params: DirectoryService.Types.RegisterCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.RegisterCertificateResult) => void): Request<DirectoryService.Types.RegisterCertificateResult, AWSError>;
   /**
-   * Registers a certificate for secured LDAP connection.
+   * Registers a certificate for a secure LDAP or client certificate authentication.
    */
   registerCertificate(callback?: (err: AWSError, data: DirectoryService.Types.RegisterCertificateResult) => void): Request<DirectoryService.Types.RegisterCertificateResult, AWSError>;
   /**
@@ -619,11 +619,11 @@ declare namespace DirectoryService {
      */
     ExpiryDateTime?: CertificateExpiryDateTime;
     /**
-     * Select ClientCertAuth for smart card integration.
+     * The function that the registered certificate performs. Valid values include ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
      */
     Type?: CertificateType;
     /**
-     * Provides information about the client certificate authentication settings. The default value is ClientLDAPS.
+     * A ClientCertAuthSettings object that contains client certificate authentication settings.
      */
     ClientCertAuthSettings?: ClientCertAuthSettings;
   }
@@ -649,7 +649,7 @@ declare namespace DirectoryService {
      */
     ExpiryDateTime?: CertificateExpiryDateTime;
     /**
-     * Displays the type of certificate.
+     * The function that the registered certificate performs. Valid values include ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
      */
     Type?: CertificateType;
   }
@@ -663,7 +663,7 @@ declare namespace DirectoryService {
   export type ClientAuthenticationType = "SmartCard"|string;
   export interface ClientCertAuthSettings {
     /**
-     * Specifies the URL of the default OCSP server used to check for revocation status.
+     * Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
      */
     OCSPUrl?: OCSPUrl;
   }
@@ -1487,11 +1487,11 @@ declare namespace DirectoryService {
   }
   export interface DisableClientAuthenticationRequest {
     /**
-     * Disable client authentication in a specified directory for smart cards. 
+     * The identifier of the directory 
      */
     DirectoryId: DirectoryId;
     /**
-     * Disable the type of client authentication request. 
+     * The type of client authentication to disable. Currently, only the parameter, SmartCard is supported.
      */
     Type: ClientAuthenticationType;
   }
@@ -1583,11 +1583,11 @@ declare namespace DirectoryService {
   export type DomainControllers = DomainController[];
   export interface EnableClientAuthenticationRequest {
     /**
-     * Enable client authentication in a specified directory for smart cards. 
+     * The identifier of the specified directory. 
      */
     DirectoryId: DirectoryId;
     /**
-     * Enable the type of client authentication request. 
+     * The type of client authentication to enable. Currently only the value SmartCard is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in the on-premises AD. 
      */
     Type: ClientAuthenticationType;
   }
@@ -2009,9 +2009,12 @@ declare namespace DirectoryService {
      */
     CertificateData: CertificateData;
     /**
-     * The certificate type to register for the request.
+     * The function that the registered certificate performs. Valid values include ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
      */
     Type?: CertificateType;
+    /**
+     * A ClientCertAuthSettings object that contains client certificate authentication settings.
+     */
     ClientCertAuthSettings?: ClientCertAuthSettings;
   }
   export interface RegisterCertificateResult {

@@ -102,6 +102,14 @@ declare class MediaLive extends Service {
    */
   createMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexProgramResponse) => void): Request<MediaLive.Types.CreateMultiplexProgramResponse, AWSError>;
   /**
+   * Create a partner input
+   */
+  createPartnerInput(params: MediaLive.Types.CreatePartnerInputRequest, callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
+  /**
+   * Create a partner input
+   */
+  createPartnerInput(callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
+  /**
    * Create tags for a resource
    */
   createTags(params: MediaLive.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -819,6 +827,16 @@ Alternate rendition that the client will not try to play back by default. Repres
     AudioPidSelection?: AudioPidSelection;
     AudioTrackSelection?: AudioTrackSelection;
   }
+  export interface AudioSilenceFailoverSettings {
+    /**
+     * The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+     */
+    AudioSelectorName: __string;
+    /**
+     * The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
+     */
+    AudioSilenceThresholdMsec?: __integerMin1000;
+  }
   export interface AudioTrack {
     /**
      * 1-based integer value that maps to a specific audio track
@@ -1271,6 +1289,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
@@ -1337,6 +1359,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1385,6 +1411,10 @@ creating multiple resources.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface CreateChannelResponse {
     Channel?: Channel;
@@ -1509,6 +1539,25 @@ resources.
      */
     Multiplex?: Multiplex;
   }
+  export interface CreatePartnerInputRequest {
+    /**
+     * Unique ID of the input.
+     */
+    InputId: __string;
+    /**
+     * Unique identifier of the request to ensure the request is handled
+exactly once in case of retries.
+
+     */
+    RequestId?: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface CreatePartnerInputResponse {
+    Input?: Input;
+  }
   export interface CreateTagsRequest {
     ResourceArn: __string;
     Tags?: Tags;
@@ -1581,6 +1630,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface DeleteInputRequest {
     /**
@@ -1841,6 +1894,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface DescribeInputDeviceRequest {
     /**
@@ -1893,6 +1950,10 @@ one destination per packager.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -1959,6 +2020,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      * Settings for the input devices.
      */
     InputDevices?: __listOfInputDeviceSettings;
+    /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
@@ -2569,9 +2634,17 @@ You specify only the font family. All other style information (color, bold, posi
   }
   export interface FailoverConditionSettings {
     /**
+     * MediaLive will perform a failover if the specified audio selector is silent for the specified period.
+     */
+    AudioSilenceSettings?: AudioSilenceFailoverSettings;
+    /**
      * MediaLive will perform a failover if content is not detected in this input for the specified period.
      */
     InputLossSettings?: InputLossFailoverSettings;
+    /**
+     * MediaLive will perform a failover if content is considered black for the specified period.
+     */
+    VideoBlackSettings?: VideoBlackFailoverSettings;
   }
   export interface FeatureActivations {
     /**
@@ -2636,6 +2709,8 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     Destination: OutputLocationRef;
   }
+  export interface FrameCaptureHlsSettings {
+  }
   export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string;
   export interface FrameCaptureOutputSettings {
     /**
@@ -2647,7 +2722,7 @@ If you disable the feature on an existing schedule, make sure that you first del
     /**
      * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
      */
-    CaptureInterval: __integerMin1Max3600000;
+    CaptureInterval?: __integerMin1Max3600000;
     /**
      * Unit for the frame capture interval.
      */
@@ -3427,6 +3502,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
     Fmp4HlsSettings?: Fmp4HlsSettings;
+    FrameCaptureHlsSettings?: FrameCaptureHlsSettings;
     StandardHlsSettings?: StandardHlsSettings;
   }
   export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;
@@ -3491,6 +3567,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      * Settings for the input devices.
      */
     InputDevices?: __listOfInputDeviceSettings;
+    /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
@@ -3738,9 +3818,47 @@ to.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|string;
+  export interface InputDeviceUhdSettings {
+    /**
+     * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
+     */
+    ActiveInput?: InputDeviceActiveInput;
+    /**
+     * The source at the input device that is currently active. You can specify this source.
+     */
+    ConfiguredInput?: InputDeviceConfiguredInput;
+    /**
+     * The state of the input device.
+     */
+    DeviceState?: InputDeviceState;
+    /**
+     * The frame rate of the video source.
+     */
+    Framerate?: __double;
+    /**
+     * The height of the video source, in pixels.
+     */
+    Height?: __integer;
+    /**
+     * The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.
+     */
+    MaxBitrate?: __integer;
+    /**
+     * The scan type of the video source.
+     */
+    ScanType?: InputDeviceScanType;
+    /**
+     * The width of the video source, in pixels.
+     */
+    Width?: __integer;
+  }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
     /**
@@ -5695,6 +5813,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface StartMultiplexRequest {
     /**
@@ -5880,6 +6002,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface StopMultiplexRequest {
     /**
@@ -6107,7 +6233,7 @@ one destination per packager.
   }
   export interface UpdateInputDeviceRequest {
     /**
-     * The settings that you want to apply to the input device.
+     * The settings that you want to apply to the HD input device.
      */
     HdDeviceSettings?: InputDeviceConfigurableSettings;
     /**
@@ -6118,6 +6244,10 @@ one destination per packager.
      * The name that you assigned to this input device (not the unique ID).
      */
     Name?: __string;
+    /**
+     * The settings that you want to apply to the UHD input device.
+     */
+    UhdDeviceSettings?: InputDeviceConfigurableSettings;
   }
   export interface UpdateInputDeviceResponse {
     /**
@@ -6164,6 +6294,10 @@ one destination per packager.
      * The type of the input device.
      */
     Type?: InputDeviceType;
+    /**
+     * Settings that describe an input device that is type UHD.
+     */
+    UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export interface UpdateInputRequest {
     /**
@@ -6278,6 +6412,16 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface UpdateReservationResponse {
     Reservation?: Reservation;
   }
+  export interface VideoBlackFailoverSettings {
+    /**
+     * A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
+     */
+    BlackDetectThreshold?: __doubleMin0Max1;
+    /**
+     * The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
+     */
+    VideoBlackThresholdMsec?: __integerMin1000;
+  }
   export interface VideoCodecSettings {
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
@@ -6351,6 +6495,26 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
     VideoSelectorPid?: VideoSelectorPid;
     VideoSelectorProgramId?: VideoSelectorProgramId;
   }
+  export interface VpcOutputSettings {
+    /**
+     * List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+
+     */
+    PublicAddressAllocationIds?: __listOf__string;
+    /**
+     * A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+If none are specified then the VPC default security group will be used
+
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+
+     */
+    SubnetIds: __listOf__string;
+  }
   export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
   export interface WavSettings {
     /**
@@ -6370,6 +6534,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   }
   export type __double = number;
   export type __doubleMin0 = number;
+  export type __doubleMin0Max1 = number;
   export type __doubleMin1 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;

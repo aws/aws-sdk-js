@@ -246,6 +246,19 @@ export abstract class ConfigurationServicePlaceholders {
   lookoutvision?: AWS.LookoutVision.Types.ClientConfiguration;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.ClientConfiguration;
   customerprofiles?: AWS.CustomerProfiles.Types.ClientConfiguration;
+  auditmanager?: AWS.AuditManager.Types.ClientConfiguration;
+  emrcontainers?: AWS.EMRcontainers.Types.ClientConfiguration;
+  healthlake?: AWS.HealthLake.Types.ClientConfiguration;
+  sagemakeredge?: AWS.SagemakerEdge.Types.ClientConfiguration;
+  amp?: AWS.Amp.Types.ClientConfiguration;
+  greengrassv2?: AWS.GreengrassV2.Types.ClientConfiguration;
+  iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.ClientConfiguration;
+  iotfleethub?: AWS.IoTFleetHub.Types.ClientConfiguration;
+  iotwireless?: AWS.IoTWireless.Types.ClientConfiguration;
+  location?: AWS.Location.Types.ClientConfiguration;
+  wellarchitected?: AWS.WellArchitected.Types.ClientConfiguration;
+  lexmodelsv2?: AWS.LexModelsV2.Types.ClientConfiguration;
+  lexruntimev2?: AWS.LexRuntimeV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -494,4 +507,17 @@ export interface ConfigurationServiceApiVersions {
   lookoutvision?: AWS.LookoutVision.Types.apiVersion;
   sagemakerfeaturestoreruntime?: AWS.SageMakerFeatureStoreRuntime.Types.apiVersion;
   customerprofiles?: AWS.CustomerProfiles.Types.apiVersion;
+  auditmanager?: AWS.AuditManager.Types.apiVersion;
+  emrcontainers?: AWS.EMRcontainers.Types.apiVersion;
+  healthlake?: AWS.HealthLake.Types.apiVersion;
+  sagemakeredge?: AWS.SagemakerEdge.Types.apiVersion;
+  amp?: AWS.Amp.Types.apiVersion;
+  greengrassv2?: AWS.GreengrassV2.Types.apiVersion;
+  iotdeviceadvisor?: AWS.IotDeviceAdvisor.Types.apiVersion;
+  iotfleethub?: AWS.IoTFleetHub.Types.apiVersion;
+  iotwireless?: AWS.IoTWireless.Types.apiVersion;
+  location?: AWS.Location.Types.apiVersion;
+  wellarchitected?: AWS.WellArchitected.Types.apiVersion;
+  lexmodelsv2?: AWS.LexModelsV2.Types.apiVersion;
+  lexruntimev2?: AWS.LexRuntimeV2.Types.apiVersion;
 }

@@ -585,6 +585,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently the supported value is 2018-05-29. 
      */
     functionVersion: String;
+    syncConfig?: SyncConfig;
   }
   export interface CreateFunctionResponse {
     /**
@@ -913,6 +914,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
      */
     functionVersion?: String;
+    syncConfig?: SyncConfig;
   }
   export type Functions = FunctionConfiguration[];
   export type FunctionsIds = String[];
@@ -1645,6 +1647,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently the supported value is 2018-05-29. 
      */
     functionVersion: String;
+    syncConfig?: SyncConfig;
   }
   export interface UpdateFunctionResponse {
     /**

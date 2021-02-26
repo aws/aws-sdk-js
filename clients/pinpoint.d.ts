@@ -1720,7 +1720,7 @@ declare namespace Pinpoint {
   }
   export interface AttributeDimension {
     /**
-     * The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.
+     * The type of segment dimension to use. Valid values are: INCLUSIVE - endpoints that have attributes matching the values are included in the segment.EXCLUSIVE - endpoints that have attributes matching the values are excluded in the segment.CONTAINS - endpoints that have attributes' substrings match the values are included in the segment.BEFORE - endpoints with attributes read as ISO_INSTANT datetimes before the value are included in the segment.AFTER - endpoints with attributes read as ISO_INSTANT datetimes after the value are included in the segment.ON - endpoints with attributes read as ISO_INSTANT dates on the value are included in the segment. Time is ignored in this comparison.BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between the values are included in the segment.
      */
     AttributeType?: AttributeType;
     /**
@@ -1728,7 +1728,7 @@ declare namespace Pinpoint {
      */
     Values: ListOf__string;
   }
-  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|"CONTAINS"|"BEFORE"|"AFTER"|"ON"|"BETWEEN"|string;
   export interface AttributesResource {
     /**
      * The unique identifier for the application.
@@ -2071,9 +2071,21 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface CampaignState {
     /**
@@ -4585,9 +4597,21 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface JourneySchedule {
     /**
@@ -5391,6 +5415,14 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface SMSMessageActivity {
     /**

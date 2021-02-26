@@ -420,11 +420,11 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedding Amazon QuickSight in the Amazon QuickSight User Guide .
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
    */
   getDashboardEmbedUrl(params: QuickSight.Types.GetDashboardEmbedUrlRequest, callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedding Amazon QuickSight in the Amazon QuickSight User Guide .
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
    */
   getDashboardEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
@@ -1364,6 +1364,10 @@ declare namespace QuickSight {
      */
     ColumnGroups?: ColumnGroupList;
     /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
+    /**
      * A list of resource permissions on the dataset.
      */
     Permissions?: ResourcePermissionList;
@@ -1420,7 +1424,7 @@ declare namespace QuickSight {
      */
     Name: ResourceName;
     /**
-     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.
+     * The type of the data source. Currently, the supported types for this operation are: ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to return a list of all data sources.  AMAZON_ELASTICSEARCH is for Amazon managed Elasticsearch Service.
      */
     Type: DataSourceType;
     /**
@@ -2126,7 +2130,7 @@ declare namespace QuickSight {
      */
     OutputColumns?: OutputColumnList;
     /**
-     * Indicates whether you want to import the data into SPICE.
+     * A value that indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
@@ -2137,6 +2141,10 @@ declare namespace QuickSight {
      * Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.
      */
     ColumnGroups?: ColumnGroupList;
+    /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
     /**
      * The row-level security configuration for the dataset.
      */
@@ -2203,7 +2211,7 @@ declare namespace QuickSight {
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * Indicates whether you want to import the data into SPICE.
+     * A value that indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
@@ -2211,7 +2219,7 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
-     * Indicates if the dataset has column level permission configured.
+     * A value that indicates if the dataset has column level permission configured.
      */
     ColumnLevelPermissionRulesApplied?: Boolean;
   }
@@ -3464,6 +3472,19 @@ declare namespace QuickSight {
     AvailabilityStatus?: DashboardBehavior;
   }
   export type Expression = string;
+  export interface FieldFolder {
+    /**
+     * The description for a field folder.
+     */
+    description?: FieldFolderDescription;
+    /**
+     * A folder has a list of columns. A column can only be in one folder.
+     */
+    columns?: FolderColumnList;
+  }
+  export type FieldFolderDescription = string;
+  export type FieldFolderMap = {[key: string]: FieldFolder};
+  export type FieldFolderPath = string;
   export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
   export interface FilterOperation {
     /**
@@ -3472,6 +3493,7 @@ declare namespace QuickSight {
     ConditionExpression: Expression;
   }
   export type FilterOperator = "StringEquals"|string;
+  export type FolderColumnList = String[];
   export interface GeoSpatialColumnGroup {
     /**
      * A display name for the hierarchy.
@@ -3494,7 +3516,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to the IAM policy.
+     * The ID for the dashboard, also added to the AWS Identity and Access Management (IAM) policy.
      */
     DashboardId: RestrictiveResourceId;
     /**
@@ -3514,7 +3536,7 @@ declare namespace QuickSight {
      */
     ResetDisabled?: Boolean;
     /**
-     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
+     * Adds persistence of state for the user session in an embedded dashboard. Persistence applies to the sheet and the parameter settings. These are control settings that the dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is set to TRUE, the settings are the same when the subscriber reopens the same dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is not persisted. The default is FALSE.
      */
     StatePersistenceEnabled?: Boolean;
     /**
@@ -3526,7 +3548,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. IdentityType must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
+     * A list of one or more dashboard IDs that you want to add to a session that includes anonymous users. The IdentityType parameter must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight or IAM users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three dashboards. 
      */
     AdditionalDashboardIds?: AdditionalDashboardIdList;
   }
@@ -3558,7 +3580,7 @@ declare namespace QuickSight {
      */
     SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
     /**
-     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group – IAM users and IAM role-based sessions.
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
      */
     UserArn?: Arn;
   }
@@ -3739,21 +3761,35 @@ declare namespace QuickSight {
   }
   export interface JoinInstruction {
     /**
-     * Left operand.
+     * The operand on the left side of a join.
      */
     LeftOperand: LogicalTableId;
     /**
-     * Right operand.
+     * The operand on the right side of a join.
      */
     RightOperand: LogicalTableId;
     /**
-     * Type.
+     * Join key properties of the left operand.
+     */
+    LeftJoinKeyProperties?: JoinKeyProperties;
+    /**
+     * Join key properties of the right operand.
+     */
+    RightJoinKeyProperties?: JoinKeyProperties;
+    /**
+     * The type of join that it is.
      */
     Type: JoinType;
     /**
-     * On Clause.
+     * The join instructions provided in the ON clause of a join.
      */
     OnClause: OnClause;
+  }
+  export interface JoinKeyProperties {
+    /**
+     * A value that indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.
+     */
+    UniqueKey?: Boolean;
   }
   export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
   export interface ListAnalysesRequest {
@@ -4774,6 +4810,10 @@ declare namespace QuickSight {
      */
     DataSourceArn: Arn;
     /**
+     * The catalog associated with a table.
+     */
+    Catalog?: RelationalTableCatalog;
+    /**
      * The schema name. This name applies to certain relational database engines.
      */
     Schema?: RelationalTableSchema;
@@ -4786,6 +4826,7 @@ declare namespace QuickSight {
      */
     InputColumns: InputColumnList;
   }
+  export type RelationalTableCatalog = string;
   export type RelationalTableName = string;
   export type RelationalTableSchema = string;
   export interface RenameColumnOperation {
@@ -4855,15 +4896,15 @@ declare namespace QuickSight {
   }
   export interface RowLevelPermissionDataSet {
     /**
-     * The namespace associated with the row-level permissions dataset.
+     * The namespace associated with the dataset that contains permissions for RLS.
      */
     Namespace?: Namespace;
     /**
-     * The Amazon Resource Name (ARN) of the permission dataset.
+     * The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
      */
     Arn: Arn;
     /**
-     * Permission policy.
+     * The type of permissions to use when interpretting the permissions for RLS. DENY_ACCESS is included for backward compatibility only.
      */
     PermissionPolicy: RowLevelPermissionPolicy;
   }
@@ -4878,7 +4919,7 @@ declare namespace QuickSight {
   }
   export interface S3Source {
     /**
-     * The amazon Resource Name (ARN) for the data source.
+     * The Amazon Resource Name (ARN) for the data source.
      */
     DataSourceArn: Arn;
     /**
@@ -5928,6 +5969,10 @@ declare namespace QuickSight {
      * Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.
      */
     ColumnGroups?: ColumnGroupList;
+    /**
+     * The folder that contains fields and nested subfolders for your dataset.
+     */
+    FieldFolders?: FieldFolderMap;
     /**
      * The row-level security configuration for the data you want to create.
      */

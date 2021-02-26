@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "CloudTrailInvalidClientTokenIdException is now thrown when a call results in the InvalidClientTokenId error code. The Name parameter of the AdvancedEventSelector data type is now optional."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "Added the ListAssetRelationships operation and support for composite asset models, which represent structured sets of properties within asset models."
+    }
+]

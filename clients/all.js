@@ -245,5 +245,18 @@ module.exports = {
   ECRPUBLIC: require('./ecrpublic'),
   LookoutVision: require('./lookoutvision'),
   SageMakerFeatureStoreRuntime: require('./sagemakerfeaturestoreruntime'),
-  CustomerProfiles: require('./customerprofiles')
+  CustomerProfiles: require('./customerprofiles'),
+  AuditManager: require('./auditmanager'),
+  EMRcontainers: require('./emrcontainers'),
+  HealthLake: require('./healthlake'),
+  SagemakerEdge: require('./sagemakeredge'),
+  Amp: require('./amp'),
+  GreengrassV2: require('./greengrassv2'),
+  IotDeviceAdvisor: require('./iotdeviceadvisor'),
+  IoTFleetHub: require('./iotfleethub'),
+  IoTWireless: require('./iotwireless'),
+  Location: require('./location'),
+  WellArchitected: require('./wellarchitected'),
+  LexModelsV2: require('./lexmodelsv2'),
+  LexRuntimeV2: require('./lexruntimev2')
 };

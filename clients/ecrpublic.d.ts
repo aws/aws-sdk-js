@@ -132,6 +132,14 @@ declare class ECRPUBLIC extends Service {
    */
   initiateLayerUpload(callback?: (err: AWSError, data: ECRPUBLIC.Types.InitiateLayerUploadResponse) => void): Request<ECRPUBLIC.Types.InitiateLayerUploadResponse, AWSError>;
   /**
+   * List the tags for an Amazon ECR Public resource.
+   */
+  listTagsForResource(params: ECRPUBLIC.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ECRPUBLIC.Types.ListTagsForResourceResponse) => void): Request<ECRPUBLIC.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an Amazon ECR Public resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ECRPUBLIC.Types.ListTagsForResourceResponse) => void): Request<ECRPUBLIC.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Creates or updates the image manifest and tags associated with an image. When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.  This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(params: ECRPUBLIC.Types.PutImageRequest, callback?: (err: AWSError, data: ECRPUBLIC.Types.PutImageResponse) => void): Request<ECRPUBLIC.Types.PutImageResponse, AWSError>;
@@ -163,6 +171,22 @@ declare class ECRPUBLIC extends Service {
    * Applies a repository policy to the specified public repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECRPUBLIC.Types.SetRepositoryPolicyResponse) => void): Request<ECRPUBLIC.Types.SetRepositoryPolicyResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(params: ECRPUBLIC.Types.TagResourceRequest, callback?: (err: AWSError, data: ECRPUBLIC.Types.TagResourceResponse) => void): Request<ECRPUBLIC.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(callback?: (err: AWSError, data: ECRPUBLIC.Types.TagResourceResponse) => void): Request<ECRPUBLIC.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: ECRPUBLIC.Types.UntagResourceRequest, callback?: (err: AWSError, data: ECRPUBLIC.Types.UntagResourceResponse) => void): Request<ECRPUBLIC.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ECRPUBLIC.Types.UntagResourceResponse) => void): Request<ECRPUBLIC.Types.UntagResourceResponse, AWSError>;
   /**
    * Uploads an image layer part to Amazon ECR. When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.  This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
@@ -283,6 +307,10 @@ declare namespace ECRPUBLIC {
      * The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
      */
     catalogData?: RepositoryCatalogDataInput;
+    /**
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    tags?: TagList;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -669,6 +697,18 @@ declare namespace ECRPUBLIC {
   export type LayerList = Layer[];
   export type LayerPartBlob = Buffer|Uint8Array|Blob|string;
   export type LayerSizeInBytes = number;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagList;
+  }
   export type LogoImageBlob = Buffer|Uint8Array|Blob|string;
   export type MarketplaceCertified = boolean;
   export type MaxResults = number;
@@ -934,6 +974,44 @@ declare namespace ECRPUBLIC {
      * The JSON repository policy text applied to the repository.
      */
     policyText?: RepositoryPolicyText;
+  }
+  export interface Tag {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key?: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
   }
   export type UploadId = string;
   export interface UploadLayerPartRequest {

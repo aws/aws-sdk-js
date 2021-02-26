@@ -52,6 +52,14 @@ declare class Kendra extends Service {
    */
   createIndex(callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
+   * Creates a thesaurus for an index. The thesaurus contains a list of synonyms in Solr format.
+   */
+  createThesaurus(params: Kendra.Types.CreateThesaurusRequest, callback?: (err: AWSError, data: Kendra.Types.CreateThesaurusResponse) => void): Request<Kendra.Types.CreateThesaurusResponse, AWSError>;
+  /**
+   * Creates a thesaurus for an index. The thesaurus contains a list of synonyms in Solr format.
+   */
+  createThesaurus(callback?: (err: AWSError, data: Kendra.Types.CreateThesaurusResponse) => void): Request<Kendra.Types.CreateThesaurusResponse, AWSError>;
+  /**
    * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the operation is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -76,6 +84,14 @@ declare class Kendra extends Service {
    */
   deleteIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an existing Amazon Kendra thesaurus. 
+   */
+  deleteThesaurus(params: Kendra.Types.DeleteThesaurusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing Amazon Kendra thesaurus. 
+   */
+  deleteThesaurus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Gets information about a Amazon Kendra data source.
    */
   describeDataSource(params: Kendra.Types.DescribeDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeDataSourceResponse) => void): Request<Kendra.Types.DescribeDataSourceResponse, AWSError>;
@@ -99,6 +115,14 @@ declare class Kendra extends Service {
    * Describes an existing Amazon Kendra index
    */
   describeIndex(callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
+  /**
+   * Describes an existing Amazon Kendra thesaurus.
+   */
+  describeThesaurus(params: Kendra.Types.DescribeThesaurusRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeThesaurusResponse) => void): Request<Kendra.Types.DescribeThesaurusResponse, AWSError>;
+  /**
+   * Describes an existing Amazon Kendra thesaurus.
+   */
+  describeThesaurus(callback?: (err: AWSError, data: Kendra.Types.DescribeThesaurusResponse) => void): Request<Kendra.Types.DescribeThesaurusResponse, AWSError>;
   /**
    * Gets statistics about synchronizing Amazon Kendra with a data source.
    */
@@ -139,6 +163,14 @@ declare class Kendra extends Service {
    * Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.
    */
   listTagsForResource(callback?: (err: AWSError, data: Kendra.Types.ListTagsForResourceResponse) => void): Request<Kendra.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the Amazon Kendra thesauri associated with an index.
+   */
+  listThesauri(params: Kendra.Types.ListThesauriRequest, callback?: (err: AWSError, data: Kendra.Types.ListThesauriResponse) => void): Request<Kendra.Types.ListThesauriResponse, AWSError>;
+  /**
+   * Lists the Amazon Kendra thesauri associated with an index.
+   */
+  listThesauri(callback?: (err: AWSError, data: Kendra.Types.ListThesauriResponse) => void): Request<Kendra.Types.ListThesauriResponse, AWSError>;
   /**
    * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
@@ -203,6 +235,14 @@ declare class Kendra extends Service {
    * Updates an existing Amazon Kendra index.
    */
   updateIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a thesaurus file associated with an index.
+   */
+  updateThesaurus(params: Kendra.Types.UpdateThesaurusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a thesaurus file associated with an index.
+   */
+  updateThesaurus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Kendra {
   export interface AccessControlListConfiguration {
@@ -703,6 +743,42 @@ declare namespace Kendra {
      */
     Id?: IndexId;
   }
+  export interface CreateThesaurusRequest {
+    /**
+     * The unique identifier of the index for the new thesaurus. 
+     */
+    IndexId: IndexId;
+    /**
+     * The name for the new thesaurus.
+     */
+    Name: ThesaurusName;
+    /**
+     * The description for the new thesaurus.
+     */
+    Description?: Description;
+    /**
+     * An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in SourceS3Path. 
+     */
+    RoleArn: RoleArn;
+    /**
+     * A list of key-value pairs that identify the thesaurus. You can use the tags to identify and organize your resources and to control access to resources. 
+     */
+    Tags?: TagList;
+    /**
+     * The thesaurus file Amazon S3 source path. 
+     */
+    SourceS3Path: S3Path;
+    /**
+     * A token that you provide to identify the request to create a thesaurus. Multiple calls to the CreateThesaurus operation with the same client token will create only one index. 
+     */
+    ClientToken?: ClientTokenName;
+  }
+  export interface CreateThesaurusResponse {
+    /**
+     * The unique identifier of the thesaurus. 
+     */
+    Id?: ThesaurusId;
+  }
   export interface DataSourceConfiguration {
     /**
      * Provides information to create a data source connector for a document repository in an Amazon S3 bucket.
@@ -721,7 +797,7 @@ declare namespace Kendra {
      */
     SalesforceConfiguration?: SalesforceConfiguration;
     /**
-     * Provided configuration for data sources that connect to Microsoft OneDrive.
+     * Provides configuration for data sources that connect to Microsoft OneDrive.
      */
     OneDriveConfiguration?: OneDriveConfiguration;
     /**
@@ -732,6 +808,10 @@ declare namespace Kendra {
      * Provides configuration information for connecting to a Confluence data source.
      */
     ConfluenceConfiguration?: ConfluenceConfiguration;
+    /**
+     * Provides configuration for data sources that connect to Google Drive. 
+     */
+    GoogleDriveConfiguration?: GoogleDriveConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -851,7 +931,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -914,6 +994,16 @@ declare namespace Kendra {
      * The identifier of the index to delete.
      */
     Id: IndexId;
+  }
+  export interface DeleteThesaurusRequest {
+    /**
+     * The identifier of the thesaurus to delete.
+     */
+    Id: ThesaurusId;
+    /**
+     * The identifier of the index associated with the thesaurus to delete.
+     */
+    IndexId: IndexId;
   }
   export interface DescribeDataSourceRequest {
     /**
@@ -1040,7 +1130,7 @@ declare namespace Kendra {
      */
     Name?: IndexName;
     /**
-     * the name of the index.
+     * The name of the index.
      */
     Id?: IndexId;
     /**
@@ -1095,6 +1185,67 @@ declare namespace Kendra {
      * The user context policy for the Amazon Kendra index.
      */
     UserContextPolicy?: UserContextPolicy;
+  }
+  export interface DescribeThesaurusRequest {
+    /**
+     * The identifier of the thesaurus to describe.
+     */
+    Id: ThesaurusId;
+    /**
+     * The identifier of the index associated with the thesaurus to describe.
+     */
+    IndexId: IndexId;
+  }
+  export interface DescribeThesaurusResponse {
+    /**
+     * The identifier of the thesaurus.
+     */
+    Id?: ThesaurusId;
+    /**
+     * The identifier of the index associated with the thesaurus to describe.
+     */
+    IndexId?: IndexId;
+    /**
+     * The thesaurus name.
+     */
+    Name?: ThesaurusName;
+    /**
+     * The thesaurus description.
+     */
+    Description?: Description;
+    /**
+     * The current status of the thesaurus. When the value is ACTIVE, queries are able to use the thesaurus. If the Status field value is FAILED, the ErrorMessage field provides more information.  If the status is ACTIVE_BUT_UPDATE_FAILED, it means that Amazon Kendra could not ingest the new thesaurus file. The old thesaurus file is still active. 
+     */
+    Status?: ThesaurusStatus;
+    /**
+     * When the Status field value is FAILED, the ErrorMessage field provides more information. 
+     */
+    ErrorMessage?: ErrorMessage;
+    /**
+     * The Unix datetime that the thesaurus was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The Unix datetime that the thesaurus was last updated.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     * An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in SourceS3Path. 
+     */
+    RoleArn?: RoleArn;
+    SourceS3Path?: S3Path;
+    /**
+     * The size of the thesaurus file in bytes.
+     */
+    FileSizeBytes?: Long;
+    /**
+     * The number of unique terms in the thesaurus file. For example, the synonyms a,b,c and a=&gt;d, the term count would be 4. 
+     */
+    TermCount?: Long;
+    /**
+     * The number of synonym rules in the thesaurus file.
+     */
+    SynonymRuleCount?: Long;
   }
   export type Description = string;
   export interface Document {
@@ -1202,6 +1353,9 @@ declare namespace Kendra {
   export type Duration = string;
   export type ErrorCode = "InternalError"|"InvalidRequest"|string;
   export type ErrorMessage = string;
+  export type ExcludeMimeTypesList = MimeType[];
+  export type ExcludeSharedDrivesList = SharedDriveId[];
+  export type ExcludeUserAccountsList = UserAccount[];
   export interface Facet {
     /**
      * The unique key for the document attribute.
@@ -1261,6 +1415,37 @@ declare namespace Kendra {
     FileFormat?: FaqFileFormat;
   }
   export type FaqSummaryItems = FaqSummary[];
+  export type FeedbackToken = string;
+  export interface GoogleDriveConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see Using a Google Workspace Drive data source.
+     */
+    SecretArn: SecretArn;
+    /**
+     * A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users' My Drives. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users' My Drives. Items that don't match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Defines mapping between a field in the Google Drive and a Amazon Kendra index field. If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the UpdateIndex operation.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of MIME types to exclude from the index. All documents matching the specified MIME type are excluded.  For a list of MIME types, see Using a Google Workspace Drive data source.
+     */
+    ExcludeMimeTypes?: ExcludeMimeTypesList;
+    /**
+     * A list of email addresses of the users. Documents owned by these users are excluded from the index. Documents shared with excluded users are indexed unless they are excluded in another way.
+     */
+    ExcludeUserAccounts?: ExcludeUserAccountsList;
+    /**
+     * A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.
+     */
+    ExcludeSharedDrives?: ExcludeSharedDrivesList;
+  }
   export type GroupAttributeField = string;
   export interface Highlight {
     /**
@@ -1275,8 +1460,13 @@ declare namespace Kendra {
      * Indicates whether the response is the best response. True if this is the best response; otherwise, false.
      */
     TopAnswer?: Boolean;
+    /**
+     * The highlight type. 
+     */
+    Type?: HighlightType;
   }
   export type HighlightList = Highlight[];
+  export type HighlightType = "STANDARD"|"THESAURUS_SYNONYM"|string;
   export type Importance = number;
   export interface IndexConfigurationSummary {
     /**
@@ -1483,16 +1673,42 @@ declare namespace Kendra {
      */
     Tags?: TagList;
   }
+  export interface ListThesauriRequest {
+    /**
+     * The identifier of the index associated with the thesaurus to list.
+     */
+    IndexId: IndexId;
+    /**
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of thesauri (ThesaurusSummaryItems). 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of thesauri to return.
+     */
+    MaxResults?: MaxResultsIntegerForListThesauriRequest;
+  }
+  export interface ListThesauriResponse {
+    /**
+     * If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of thesauri. 
+     */
+    NextToken?: NextToken;
+    /**
+     * An array of summary information for one or more thesauruses.
+     */
+    ThesaurusSummaryItems?: ThesaurusSummaryItems;
+  }
   export type Long = number;
   export type MaxResultsIntegerForListDataSourceSyncJobsRequest = number;
   export type MaxResultsIntegerForListDataSourcesRequest = number;
   export type MaxResultsIntegerForListFaqsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
+  export type MaxResultsIntegerForListThesauriRequest = number;
   export type MetricValue = string;
+  export type MimeType = string;
   export type NextToken = string;
   export interface OneDriveConfiguration {
     /**
-     * Tha Azure Active Directory domain of the organization. 
+     * The Azure Active Directory domain of the organization. 
      */
     TenantDomain: TenantDomain;
     /**
@@ -1594,6 +1810,10 @@ declare namespace Kendra {
      * The user context token.
      */
     UserContext?: UserContext;
+    /**
+     * Provides an identifier for a specific user. The VisitorId should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the VisitorId.
+     */
+    VisitorId?: VisitorId;
   }
   export interface QueryResult {
     /**
@@ -1650,6 +1870,10 @@ declare namespace Kendra {
      * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine if a response meets the confidence needed for your application. The field is only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not confident that the result matches the query.
      */
     ScoreAttributes?: ScoreAttributes;
+    /**
+     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see  Submitting feedback .
+     */
+    FeedbackToken?: FeedbackToken;
   }
   export type QueryResultItemList = QueryResultItem[];
   export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
@@ -1711,7 +1935,7 @@ declare namespace Kendra {
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     DocumentsMetadataConfiguration?: DocumentsMetadataConfiguration;
     /**
-     * Provides the path to the S3 bucket that contains the user context filtering files for the data source.
+     * Provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see Access control for S3 data sources.
      */
     AccessControlListConfiguration?: AccessControlListConfiguration;
   }
@@ -2019,6 +2243,7 @@ declare namespace Kendra {
   }
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
+  export type SharedDriveId = string;
   export type SortOrder = "DESC"|"ASC"|string;
   export interface SortingConfiguration {
     /**
@@ -2132,6 +2357,32 @@ declare namespace Kendra {
      */
     Highlights?: HighlightList;
   }
+  export type ThesaurusId = string;
+  export type ThesaurusName = string;
+  export type ThesaurusStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"ACTIVE_BUT_UPDATE_FAILED"|"FAILED"|string;
+  export interface ThesaurusSummary {
+    /**
+     * The identifier of the thesaurus.
+     */
+    Id?: ThesaurusId;
+    /**
+     * The name of the thesaurus.
+     */
+    Name?: ThesaurusName;
+    /**
+     * The status of the thesaurus.
+     */
+    Status?: ThesaurusStatus;
+    /**
+     * The Unix datetime that the thesaurus was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The Unix datetime that the thesaurus was last updated.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type ThesaurusSummaryItems = ThesaurusSummary[];
   export interface TimeRange {
     /**
      * The UNIX datetime of the beginning of the time range.
@@ -2218,7 +2469,31 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
   }
+  export interface UpdateThesaurusRequest {
+    /**
+     * The identifier of the thesaurus to update.
+     */
+    Id: ThesaurusId;
+    /**
+     * The updated name of the thesaurus.
+     */
+    Name?: ThesaurusName;
+    /**
+     * The identifier of the index associated with the thesaurus to update.
+     */
+    IndexId: IndexId;
+    /**
+     * The updated description of the thesaurus.
+     */
+    Description?: Description;
+    /**
+     * The updated role ARN of the thesaurus.
+     */
+    RoleArn?: RoleArn;
+    SourceS3Path?: S3Path;
+  }
   export type Url = string;
+  export type UserAccount = string;
   export interface UserContext {
     /**
      * The user context token. It must be a JWT or a JSON token.
@@ -2240,6 +2515,7 @@ declare namespace Kendra {
   export type UserTokenConfigurationList = UserTokenConfiguration[];
   export type ValueImportanceMap = {[key: string]: Importance};
   export type ValueImportanceMapKey = string;
+  export type VisitorId = string;
   export type VpcSecurityGroupId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

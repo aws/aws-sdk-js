@@ -68,11 +68,11 @@ declare class AutoScaling extends Service {
    */
   completeLifecycleAction(callback?: (err: AWSError, data: AutoScaling.Types.CompleteLifecycleActionAnswer) => void): Request<AutoScaling.Types.CompleteLifecycleActionAnswer, AWSError>;
   /**
-   * Creates an Auto Scaling group with the specified name and attributes.  If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the DescribeAccountLimits API. For information about updating this limit, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling and Tutorial: Set up a scaled and load-balanced application in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto Scaling groups in the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size parameters (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
+   *  We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.  Creates an Auto Scaling group with the specified name and attributes.  If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the DescribeAccountLimits API. For information about updating this limit, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling and Tutorial: Set up a scaled and load-balanced application in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto Scaling groups in the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size parameters (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
    */
   createAutoScalingGroup(params: AutoScaling.Types.CreateAutoScalingGroupType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an Auto Scaling group with the specified name and attributes.  If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the DescribeAccountLimits API. For information about updating this limit, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling and Tutorial: Set up a scaled and load-balanced application in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto Scaling groups in the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size parameters (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
+   *  We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.  Creates an Auto Scaling group with the specified name and attributes.  If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the DescribeAccountLimits API. For information about updating this limit, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling and Tutorial: Set up a scaled and load-balanced application in the Amazon EC2 Auto Scaling User Guide. For more information, see Auto Scaling groups in the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size parameters (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
    */
   createAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -240,11 +240,11 @@ declare class AutoScaling extends Service {
    */
   describePolicies(callback?: (err: AWSError, data: AutoScaling.Types.PoliciesType) => void): Request<AutoScaling.Types.PoliciesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group.
+   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
    */
   describeScalingActivities(params: AutoScaling.Types.DescribeScalingActivitiesType, callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group.
+   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
    */
   describeScalingActivities(callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
@@ -432,11 +432,11 @@ declare class AutoScaling extends Service {
    */
   terminateInstanceInAutoScalingGroup(callback?: (err: AWSError, data: AutoScaling.Types.ActivityType) => void): Request<AutoScaling.Types.ActivityType, AWSError>;
   /**
-   * Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns.  If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application. Note the following about changing DesiredCapacity, MaxSize, or MinSize:   If a scale-in activity occurs as a result of a new DesiredCapacity value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, this sets the group's DesiredCapacity to the new MinSize value.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, this sets the group's DesiredCapacity to the new MaxSize value.   To see which parameters have been set, call the DescribeAutoScalingGroups API. To view the scaling policies for an Auto Scaling group, call the DescribePolicies API. If the group has scaling policies, you can update them by calling the PutScalingPolicy API.
+   *  We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.  Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns.  If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application. Note the following about changing DesiredCapacity, MaxSize, or MinSize:   If a scale-in activity occurs as a result of a new DesiredCapacity value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, this sets the group's DesiredCapacity to the new MinSize value.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, this sets the group's DesiredCapacity to the new MaxSize value.   To see which parameters have been set, call the DescribeAutoScalingGroups API. To view the scaling policies for an Auto Scaling group, call the DescribePolicies API. If the group has scaling policies, you can update them by calling the PutScalingPolicy API.
    */
   updateAutoScalingGroup(params: AutoScaling.Types.UpdateAutoScalingGroupType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns.  If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application. Note the following about changing DesiredCapacity, MaxSize, or MinSize:   If a scale-in activity occurs as a result of a new DesiredCapacity value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, this sets the group's DesiredCapacity to the new MinSize value.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, this sets the group's DesiredCapacity to the new MaxSize value.   To see which parameters have been set, call the DescribeAutoScalingGroups API. To view the scaling policies for an Auto Scaling group, call the DescribePolicies API. If the group has scaling policies, you can update them by calling the PutScalingPolicy API.
+   *  We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.  Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns.  If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application. Note the following about changing DesiredCapacity, MaxSize, or MinSize:   If a scale-in activity occurs as a result of a new DesiredCapacity value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, this sets the group's DesiredCapacity to the new MinSize value.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, this sets the group's DesiredCapacity to the new MaxSize value.   To see which parameters have been set, call the DescribeAutoScalingGroups API. To view the scaling policies for an Auto Scaling group, call the DescribePolicies API. If the group has scaling policies, you can update them by calling the PutScalingPolicy API.
    */
   updateAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -493,6 +493,14 @@ declare namespace AutoScaling {
      * The details about the activity.
      */
     Details?: XmlString;
+    /**
+     * The state of the Auto Scaling group, which is either InService or Deleted.
+     */
+    AutoScalingGroupState?: AutoScalingGroupState;
+    /**
+     * The Amazon Resource Name (ARN) of the Auto Scaling group.
+     */
+    AutoScalingGroupARN?: ResourceName;
   }
   export type ActivityIds = XmlString[];
   export interface ActivityType {
@@ -529,7 +537,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface AttachLoadBalancerTargetGroupsResultType {
   }
@@ -537,7 +545,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups. To get the ARN of a target group, use the Elastic Load Balancing DescribeTargetGroups API operation.
      */
@@ -549,7 +557,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
@@ -668,7 +676,7 @@ declare namespace AutoScaling {
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
   export type AutoScalingGroupMinSize = number;
-  export type AutoScalingGroupNames = ResourceName[];
+  export type AutoScalingGroupNames = XmlStringMaxLen255[];
   export interface AutoScalingGroupNamesType {
     /**
      * The names of the Auto Scaling groups. By default, you can only specify up to 50 names. You can optionally increase this limit using the MaxRecords parameter. If you omit this parameter, all Auto Scaling groups are described.
@@ -683,6 +691,7 @@ declare namespace AutoScaling {
      */
     MaxRecords?: MaxRecords;
   }
+  export type AutoScalingGroupState = string;
   export type AutoScalingGroups = AutoScalingGroup[];
   export interface AutoScalingGroupsType {
     /**
@@ -712,7 +721,7 @@ declare namespace AutoScaling {
      */
     AvailabilityZone: XmlStringMaxLen255;
     /**
-     * The lifecycle state for the instance.
+     * The lifecycle state for the instance. The Quarantined state is not used. For information about lifecycle states, see Instance lifecycle in the Amazon EC2 Auto Scaling User Guide.  Valid Values: Pending | Pending:Wait | Pending:Proceed | Quarantined | InService | Terminating | Terminating:Wait | Terminating:Proceed | Terminated | Detaching | Detached | EnteringStandby | Standby 
      */
     LifecycleState: XmlStringMaxLen32;
     /**
@@ -759,7 +768,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the scheduled actions to delete. The maximum number allowed is 50. 
      */
@@ -775,7 +784,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * One or more scheduled actions. The maximum number allowed is 50.
      */
@@ -852,7 +861,7 @@ declare namespace AutoScaling {
     /**
      * The name of the launch configuration to use to launch instances.  Conditional: You must specify either a launch template (LaunchTemplate or MixedInstancesPolicy) or a launch configuration (LaunchConfigurationName or InstanceId).
      */
-    LaunchConfigurationName?: ResourceName;
+    LaunchConfigurationName?: XmlStringMaxLen255;
     /**
      * Parameters used to specify the launch template and version to use to launch instances.  Conditional: You must specify either a launch template (LaunchTemplate or MixedInstancesPolicy) or a launch configuration (LaunchConfigurationName or InstanceId).  The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see Creating a launch template for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. 
      */
@@ -964,7 +973,7 @@ declare namespace AutoScaling {
      */
     ClassicLinkVPCSecurityGroups?: ClassicLinkVPCSecurityGroups;
     /**
-     * The Base64-encoded user data to make available to the launched EC2 instances. For more information, see Instance metadata and user data in the Amazon EC2 User Guide for Linux Instances.
+     * The user data to make available to the launched EC2 instances. For more information, see Instance metadata and user data (Linux) and Instance metadata and user data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
      */
     UserData?: XmlStringUserData;
     /**
@@ -972,7 +981,7 @@ declare namespace AutoScaling {
      */
     InstanceId?: XmlStringMaxLen19;
     /**
-     * Specifies the instance type of the EC2 instance. For information about available instance types, see Available Instance Types in the Amazon EC2 User Guide for Linux Instances.  If you do not specify InstanceId, you must specify InstanceType.
+     * Specifies the instance type of the EC2 instance. For information about available instance types, see Available Instance Types in the Amazon EC2 User Guide for Linux Instances. If you do not specify InstanceId, you must specify InstanceType.
      */
     InstanceType?: XmlStringMaxLen255;
     /**
@@ -1048,7 +1057,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
      */
@@ -1064,23 +1073,23 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface DeleteNotificationConfigurationType {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN: ResourceName;
+    TopicARN: XmlStringMaxLen255;
   }
   export interface DeletePolicyType {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The name or Amazon Resource Name (ARN) of the policy.
      */
@@ -1090,11 +1099,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the action to delete.
      */
-    ScheduledActionName: ResourceName;
+    ScheduledActionName: XmlStringMaxLen255;
   }
   export interface DeleteTagsType {
     /**
@@ -1190,7 +1199,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.
      */
@@ -1200,7 +1209,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
@@ -1224,7 +1233,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
@@ -1282,7 +1291,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
      */
@@ -1308,7 +1317,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
+    /**
+     * Indicates whether to include scaling activity from deleted Auto Scaling groups.
+     */
+    IncludeDeletedGroups?: IncludeDeletedGroups;
     /**
      * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
@@ -1322,7 +1335,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.
      */
@@ -1378,7 +1391,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
      */
@@ -1390,7 +1403,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
      */
@@ -1402,7 +1415,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
@@ -1412,7 +1425,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies one or more of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity    If you omit this parameter, all metrics are disabled. 
      */
@@ -1450,7 +1463,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Specifies which group-level metrics to start collecting. You can specify one or more of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances    The instance weighting feature supports the following additional metrics:     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity    If you omit this parameter, all metrics are enabled. 
      */
@@ -1485,7 +1498,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to Standby mode.
      */
@@ -1496,7 +1509,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The name or ARN of the policy.
      */
@@ -1528,7 +1541,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export interface FailedScheduledUpdateGroupActionRequest {
     /**
@@ -1561,6 +1574,7 @@ declare namespace AutoScaling {
   export type HealthCheckGracePeriod = number;
   export type HeartbeatTimeout = number;
   export type HonorCooldown = boolean;
+  export type IncludeDeletedGroups = boolean;
   export interface Instance {
     /**
      * The ID of the instance.
@@ -1575,7 +1589,7 @@ declare namespace AutoScaling {
      */
     AvailabilityZone: XmlStringMaxLen255;
     /**
-     * A description of the current lifecycle state. The Quarantined state is not used.
+     * A description of the current lifecycle state. The Quarantined state is not used. For information about lifecycle states, see Instance lifecycle in the Amazon EC2 Auto Scaling User Guide. 
      */
     LifecycleState: LifecycleState;
     /**
@@ -1609,7 +1623,7 @@ declare namespace AutoScaling {
      */
     HttpTokens?: InstanceMetadataHttpTokensState;
     /**
-     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1 Possible values: Integers from 1 to 64
+     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1
      */
     HttpPutResponseHopLimit?: InstanceMetadataHttpPutResponseHopLimit;
     /**
@@ -1720,11 +1734,11 @@ declare namespace AutoScaling {
      */
     ClassicLinkVPCSecurityGroups?: ClassicLinkVPCSecurityGroups;
     /**
-     * The Base64-encoded user data to make available to the launched EC2 instances. For more information, see Instance metadata and user data in the Amazon EC2 User Guide for Linux Instances.
+     * The user data to make available to the launched EC2 instances. For more information, see Instance metadata and user data (Linux) and Instance metadata and user data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
      */
     UserData?: XmlStringUserData;
     /**
-     * The instance type for the instances. For information about available instance types, see Available Instance Types in the Amazon EC2 User Guide for Linux Instances. 
+     * The instance type for the instances. For information about available instance types, see Available Instance Types in the Amazon EC2 User Guide for Linux Instances.
      */
     InstanceType: XmlStringMaxLen255;
     /**
@@ -1776,9 +1790,9 @@ declare namespace AutoScaling {
     /**
      * The name of the launch configuration.
      */
-    LaunchConfigurationName: ResourceName;
+    LaunchConfigurationName: XmlStringMaxLen255;
   }
-  export type LaunchConfigurationNames = ResourceName[];
+  export type LaunchConfigurationNames = XmlStringMaxLen255[];
   export interface LaunchConfigurationNamesType {
     /**
      * The launch configuration names. If you omit this parameter, all launch configurations are described.
@@ -1853,7 +1867,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group for the lifecycle hook.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The state of the EC2 instance to which to attach the lifecycle hook. The following are possible values:   autoscaling:EC2_INSTANCE_LAUNCHING   autoscaling:EC2_INSTANCE_TERMINATING  
      */
@@ -1861,11 +1875,11 @@ declare namespace AutoScaling {
     /**
      * The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.
      */
-    NotificationTargetARN?: ResourceName;
+    NotificationTargetARN?: NotificationTargetResourceName;
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
     /**
      * Additional information that is included any time Amazon EC2 Auto Scaling sends a message to the notification target.
      */
@@ -1912,7 +1926,7 @@ declare namespace AutoScaling {
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
   }
   export type LifecycleHookSpecifications = LifecycleHookSpecification[];
   export type LifecycleHooks = LifecycleHook[];
@@ -1998,11 +2012,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: ResourceName;
+    AutoScalingGroupName?: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN?: ResourceName;
+    TopicARN?: XmlStringMaxLen255;
     /**
      * One of the following event notification types:    autoscaling:EC2_INSTANCE_LAUNCH     autoscaling:EC2_INSTANCE_LAUNCH_ERROR     autoscaling:EC2_INSTANCE_TERMINATE     autoscaling:EC2_INSTANCE_TERMINATE_ERROR     autoscaling:TEST_NOTIFICATION   
      */
@@ -2075,7 +2089,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The instance state to which you want to attach the lifecycle hook. The valid values are:   autoscaling:EC2_INSTANCE_LAUNCHING   autoscaling:EC2_INSTANCE_TERMINATING   Required for new lifecycle hooks, but optional when updating existing hooks.
      */
@@ -2083,7 +2097,7 @@ declare namespace AutoScaling {
     /**
      * The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue. Required for new lifecycle hooks, but optional when updating existing hooks.
      */
-    RoleARN?: ResourceName;
+    RoleARN?: XmlStringMaxLen255;
     /**
      * The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic. If you specify an empty string, this overrides the current ARN. This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key-value pair format when sending notifications to an Amazon SNS topic. When you specify a notification target, Amazon EC2 Auto Scaling sends it a test message. Test messages contain the following additional key-value pair: "Event": "autoscaling:TEST_NOTIFICATION".
      */
@@ -2105,11 +2119,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
      */
-    TopicARN: ResourceName;
+    TopicARN: XmlStringMaxLen255;
     /**
      * The type of event that causes the notification to be sent. To query the notification types supported by Amazon EC2 Auto Scaling, call the DescribeAutoScalingNotificationTypes API.
      */
@@ -2119,7 +2133,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the policy.
      */
@@ -2173,7 +2187,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of this scaling action.
      */
@@ -2309,13 +2323,13 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * One or more of the following processes:    Launch     Terminate     AddToLoadBalancer     AlarmNotification     AZRebalance     HealthCheck     InstanceRefresh     ReplaceUnhealthy     ScheduledActions    If you omit this parameter, all processes are specified.
      */
     ScalingProcesses?: ProcessNames;
   }
-  export type ScheduledActionNames = ResourceName[];
+  export type ScheduledActionNames = XmlStringMaxLen255[];
   export interface ScheduledActionsType {
     /**
      * The scheduled actions.
@@ -2405,7 +2419,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The desired capacity is the initial capacity of the Auto Scaling group after this operation completes and the capacity it attempts to maintain.
      */
@@ -2439,7 +2453,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
      */
@@ -2588,11 +2602,11 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName: ResourceName;
+    AutoScalingGroupName: XmlStringMaxLen255;
     /**
      * The name of the launch configuration. If you specify LaunchConfigurationName in your update request, you can't specify LaunchTemplate or MixedInstancesPolicy.
      */
-    LaunchConfigurationName?: ResourceName;
+    LaunchConfigurationName?: XmlStringMaxLen255;
     /**
      * The launch template and version to use to specify the updates. If you specify LaunchTemplate in your update request, you can't specify LaunchConfigurationName or MixedInstancesPolicy.
      */

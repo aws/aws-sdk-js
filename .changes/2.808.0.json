@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "TGW connect simplifies connectivity of SD-WAN appliances; IGMP support for TGW multicast; VPC Reachability Analyzer for VPC resources connectivity analysis."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now supports adding synonyms to an index through the new Thesaurus resource."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkManager",
+        "description": "This release adds API support for Transit Gateway Connect integration into AWS Network Manager."
+    }
+]

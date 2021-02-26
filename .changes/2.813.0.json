@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config"
+    },
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Provide Cross-account copy event based policy support in DataLifecycleManager (DLM)"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances"
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "This release adds support for building and distributing container images within EC2 Image Builder."
+    },
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "Added CreationDate and LastUpdatedDate timestamps to ListAliases API response"
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "This release adds support for DNSSEC signing in Amazon Route 53."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Resolver",
+        "description": "Route 53 Resolver adds support for enabling resolver DNSSEC validation in virtual private cloud (VPC)."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "Amazon SQS adds queue attributes to enable high throughput FIFO."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Support TagOptions sharing with Service Catalog portfolio sharing."
+    }
+]

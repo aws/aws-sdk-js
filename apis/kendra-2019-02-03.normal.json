@@ -199,6 +199,43 @@
       ],
       "documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to . The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the operation or using one of the supported data sources. </p>"
     },
+    "CreateThesaurus": {
+      "name": "CreateThesaurus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateThesaurusRequest"
+      },
+      "output": {
+        "shape": "CreateThesaurusResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a thesaurus for an index. The thesaurus contains a list of synonyms in Solr format.</p>"
+    },
     "DeleteDataSource": {
       "name": "DeleteDataSource",
       "http": {
@@ -292,6 +329,37 @@
       ],
       "documentation": "<p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <a>DescribeIndex</a> operation is set to <code>DELETING</code>.</p>"
     },
+    "DeleteThesaurus": {
+      "name": "DeleteThesaurus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteThesaurusRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes an existing Amazon Kendra thesaurus. </p>"
+    },
     "DescribeDataSource": {
       "name": "DescribeDataSource",
       "http": {
@@ -384,6 +452,37 @@
         }
       ],
       "documentation": "<p>Describes an existing Amazon Kendra index</p>"
+    },
+    "DescribeThesaurus": {
+      "name": "DescribeThesaurus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeThesaurusRequest"
+      },
+      "output": {
+        "shape": "DescribeThesaurusResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes an existing Amazon Kendra thesaurus.</p>"
     },
     "ListDataSourceSyncJobs": {
       "name": "ListDataSourceSyncJobs",
@@ -539,6 +638,37 @@
         }
       ],
       "documentation": "<p>Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.</p>"
+    },
+    "ListThesauri": {
+      "name": "ListThesauri",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListThesauriRequest"
+      },
+      "output": {
+        "shape": "ListThesauriResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the Amazon Kendra thesauri associated with an index.</p>"
     },
     "Query": {
       "name": "Query",
@@ -799,6 +929,37 @@
         }
       ],
       "documentation": "<p>Updates an existing Amazon Kendra index.</p>"
+    },
+    "UpdateThesaurus": {
+      "name": "UpdateThesaurus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateThesaurusRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates a thesaurus file associated with an index.</p>"
     }
   },
   "shapes": {
@@ -810,7 +971,7 @@
           "documentation": "<p>Path to the AWS S3 bucket that contains the ACL files.</p>"
         }
       },
-      "documentation": "<p>Access Control List files for the documents in a data source.</p>"
+      "documentation": "<p>Access Control List files for the documents in a data source. For the format of the file, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html\">Access control for S3 data sources</a>.</p>"
     },
     "AclConfiguration": {
       "type": "structure",
@@ -1639,6 +1800,55 @@
         }
       }
     },
+    "CreateThesaurusRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "Name",
+        "RoleArn",
+        "SourceS3Path"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The unique identifier of the index for the new thesaurus. </p>"
+        },
+        "Name": {
+          "shape": "ThesaurusName",
+          "documentation": "<p>The name for the new thesaurus.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description for the new thesaurus.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in <code>SourceS3Path</code>. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of key-value pairs that identify the thesaurus. You can use the tags to identify and organize your resources and to control access to resources. </p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path",
+          "documentation": "<p>The thesaurus file Amazon S3 source path. </p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenName",
+          "documentation": "<p>A token that you provide to identify the request to create a thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation with the same client token will create only one index. </p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateThesaurusResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The unique identifier of the thesaurus. </p>"
+        }
+      }
+    },
     "DataSourceConfiguration": {
       "type": "structure",
       "members": {
@@ -1660,7 +1870,7 @@
         },
         "OneDriveConfiguration": {
           "shape": "OneDriveConfiguration",
-          "documentation": "<p>Provided configuration for data sources that connect to Microsoft OneDrive.</p>"
+          "documentation": "<p>Provides configuration for data sources that connect to Microsoft OneDrive.</p>"
         },
         "ServiceNowConfiguration": {
           "shape": "ServiceNowConfiguration",
@@ -1669,6 +1879,10 @@
         "ConfluenceConfiguration": {
           "shape": "ConfluenceConfiguration",
           "documentation": "<p>Provides configuration information for connecting to a Confluence data source.</p>"
+        },
+        "GoogleDriveConfiguration": {
+          "shape": "GoogleDriveConfiguration",
+          "documentation": "<p>Provides configuration for data sources that connect to Google Drive. </p>"
         }
       },
       "documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
@@ -1902,7 +2116,8 @@
         "ONEDRIVE",
         "SERVICENOW",
         "CUSTOM",
-        "CONFLUENCE"
+        "CONFLUENCE",
+        "GOOGLEDRIVE"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -2025,6 +2240,23 @@
         "Id": {
           "shape": "IndexId",
           "documentation": "<p>The identifier of the index to delete.</p>"
+        }
+      }
+    },
+    "DeleteThesaurusRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "IndexId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The identifier of the thesaurus to delete.</p>"
+        },
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index associated with the thesaurus to delete.</p>"
         }
       }
     },
@@ -2184,7 +2416,7 @@
         },
         "Id": {
           "shape": "IndexId",
-          "documentation": "<p>the name of the index.</p>"
+          "documentation": "<p>The name of the index.</p>"
         },
         "Edition": {
           "shape": "IndexEdition",
@@ -2237,6 +2469,79 @@
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
           "documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+        }
+      }
+    },
+    "DescribeThesaurusRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "IndexId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The identifier of the thesaurus to describe.</p>"
+        },
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index associated with the thesaurus to describe.</p>"
+        }
+      }
+    },
+    "DescribeThesaurusResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The identifier of the thesaurus.</p>"
+        },
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index associated with the thesaurus to describe.</p>"
+        },
+        "Name": {
+          "shape": "ThesaurusName",
+          "documentation": "<p>The thesaurus name.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The thesaurus description.</p>"
+        },
+        "Status": {
+          "shape": "ThesaurusStatus",
+          "documentation": "<p>The current status of the thesaurus. When the value is <code>ACTIVE</code>, queries are able to use the thesaurus. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field provides more information. </p> <p>If the status is <code>ACTIVE_BUT_UPDATE_FAILED</code>, it means that Amazon Kendra could not ingest the new thesaurus file. The old thesaurus file is still active. </p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field provides more information. </p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix datetime that the thesaurus was created.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix datetime that the thesaurus was last updated.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in <code>SourceS3Path</code>. </p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path"
+        },
+        "FileSizeBytes": {
+          "shape": "Long",
+          "documentation": "<p>The size of the thesaurus file in bytes.</p>"
+        },
+        "TermCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of unique terms in the thesaurus file. For example, the synonyms <code>a,b,c</code> and <code>a=&gt;d</code>, the term count would be 4. </p>"
+        },
+        "SynonymRuleCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of synonym rules in the thesaurus file.</p>"
         }
       }
     },
@@ -2474,6 +2779,30 @@
       "min": 1,
       "pattern": "^\\P{C}*$"
     },
+    "ExcludeMimeTypesList": {
+      "type": "list",
+      "member": {
+        "shape": "MimeType"
+      },
+      "max": 30,
+      "min": 0
+    },
+    "ExcludeSharedDrivesList": {
+      "type": "list",
+      "member": {
+        "shape": "SharedDriveId"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ExcludeUserAccountsList": {
+      "type": "list",
+      "member": {
+        "shape": "UserAccount"
+      },
+      "max": 100,
+      "min": 0
+    },
     "Facet": {
       "type": "structure",
       "members": {
@@ -2593,6 +2922,49 @@
         "shape": "FaqSummary"
       }
     },
+    "FeedbackToken": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^\\P{C}*.\\P{C}*$"
+    },
+    "GoogleDriveConfiguration": {
+      "type": "structure",
+      "required": [
+        "SecretArn"
+      ],
+      "members": {
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
+        },
+        "InclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users' My Drives. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.</p>"
+        },
+        "ExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users' My Drives. Items that don't match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <a>UpdateIndex</a> operation.</p>"
+        },
+        "ExcludeMimeTypes": {
+          "shape": "ExcludeMimeTypesList",
+          "documentation": "<p>A list of MIME types to exclude from the index. All documents matching the specified MIME type are excluded. </p> <p>For a list of MIME types, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
+        },
+        "ExcludeUserAccounts": {
+          "shape": "ExcludeUserAccountsList",
+          "documentation": "<p>A list of email addresses of the users. Documents owned by these users are excluded from the index. Documents shared with excluded users are indexed unless they are excluded in another way.</p>"
+        },
+        "ExcludeSharedDrives": {
+          "shape": "ExcludeSharedDrivesList",
+          "documentation": "<p>A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for data sources that connect to Google Drive.</p>"
+    },
     "GroupAttributeField": {
       "type": "string",
       "max": 100,
@@ -2617,6 +2989,10 @@
         "TopAnswer": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the response is the best response. True if this is the best response; otherwise, false.</p>"
+        },
+        "Type": {
+          "shape": "HighlightType",
+          "documentation": "<p>The highlight type. </p>"
         }
       },
       "documentation": "<p>Provides information that you can use to highlight a search result so that your users can quickly identify terms in the response.</p>"
@@ -2626,6 +3002,13 @@
       "member": {
         "shape": "Highlight"
       }
+    },
+    "HighlightType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "THESAURUS_SYNONYM"
+      ]
     },
     "Importance": {
       "type": "integer",
@@ -2975,6 +3358,39 @@
         }
       }
     },
+    "ListThesauriRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index associated with the thesaurus to list.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of thesauri (<code>ThesaurusSummaryItems</code>). </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsIntegerForListThesauriRequest",
+          "documentation": "<p>The maximum number of thesauri to return.</p>"
+        }
+      }
+    },
+    "ListThesauriResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of thesauri. </p>"
+        },
+        "ThesaurusSummaryItems": {
+          "shape": "ThesaurusSummaryItems",
+          "documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+        }
+      }
+    },
     "Long": {
       "type": "long"
     },
@@ -2998,9 +3414,20 @@
       "max": 100,
       "min": 1
     },
+    "MaxResultsIntegerForListThesauriRequest": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
     "MetricValue": {
       "type": "string",
       "pattern": "(([1-9][0-9]*)|0)"
+    },
+    "MimeType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
     },
     "NextToken": {
       "type": "string",
@@ -3017,7 +3444,7 @@
       "members": {
         "TenantDomain": {
           "shape": "TenantDomain",
-          "documentation": "<p>Tha Azure Active Directory domain of the organization. </p>"
+          "documentation": "<p>The Azure Active Directory domain of the organization. </p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
@@ -3130,7 +3557,8 @@
     "QueryId": {
       "type": "string",
       "max": 36,
-      "min": 1
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9-]*"
     },
     "QueryIdentifiersEnclosingOption": {
       "type": "string",
@@ -3185,6 +3613,10 @@
         "UserContext": {
           "shape": "UserContext",
           "documentation": "<p>The user context token.</p>"
+        },
+        "VisitorId": {
+          "shape": "VisitorId",
+          "documentation": "<p>Provides an identifier for a specific user. The <code>VisitorId</code> should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the <code>VisitorId</code>.</p>"
         }
       }
     },
@@ -3247,6 +3679,10 @@
         "ScoreAttributes": {
           "shape": "ScoreAttributes",
           "documentation": "<p>Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, <code>VERY_HIGH</code>, <code>HIGH</code>, <code>MEDIUM</code> and <code>LOW</code>. You can use the score to determine if a response meets the confidence needed for your application.</p> <p>The field is only set to <code>LOW</code> when the <code>Type</code> field is set to <code>DOCUMENT</code> and Amazon Kendra is not confident that the result matches the query.</p>"
+        },
+        "FeedbackToken": {
+          "shape": "FeedbackToken",
+          "documentation": "<p>A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html\"> Submitting feedback </a>.</p>"
         }
       },
       "documentation": "<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>"
@@ -3379,7 +3815,7 @@
         },
         "AccessControlListConfiguration": {
           "shape": "AccessControlListConfiguration",
-          "documentation": "<p>Provides the path to the S3 bucket that contains the user context filtering files for the data source.</p>"
+          "documentation": "<p>Provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html\">Access control for S3 data sources</a>.</p>"
         }
       },
       "documentation": "<p>Provides configuration information for a data source to index documents in an Amazon S3 bucket.</p>"
@@ -3908,6 +4344,12 @@
         "SHAREPOINT_ONLINE"
       ]
     },
+    "SharedDriveId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
     "SortOrder": {
       "type": "string",
       "enum": [
@@ -4143,6 +4585,61 @@
       },
       "documentation": "<p>Provides text and information about where to highlight the text.</p>"
     },
+    "ThesaurusId": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+    },
+    "ThesaurusName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+    },
+    "ThesaurusStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "DELETING",
+        "UPDATING",
+        "ACTIVE_BUT_UPDATE_FAILED",
+        "FAILED"
+      ]
+    },
+    "ThesaurusSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The identifier of the thesaurus.</p>"
+        },
+        "Name": {
+          "shape": "ThesaurusName",
+          "documentation": "<p>The name of the thesaurus.</p>"
+        },
+        "Status": {
+          "shape": "ThesaurusStatus",
+          "documentation": "<p>The status of the thesaurus.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix datetime that the thesaurus was created.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The Unix datetime that the thesaurus was last updated.</p>"
+        }
+      },
+      "documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+    },
+    "ThesaurusSummaryItems": {
+      "type": "list",
+      "member": {
+        "shape": "ThesaurusSummary"
+      }
+    },
     "TimeRange": {
       "type": "structure",
       "members": {
@@ -4266,11 +4763,49 @@
         }
       }
     },
+    "UpdateThesaurusRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "IndexId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "ThesaurusId",
+          "documentation": "<p>The identifier of the thesaurus to update.</p>"
+        },
+        "Name": {
+          "shape": "ThesaurusName",
+          "documentation": "<p>The updated name of the thesaurus.</p>"
+        },
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index associated with the thesaurus to update.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The updated description of the thesaurus.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The updated role ARN of the thesaurus.</p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path"
+        }
+      }
+    },
     "Url": {
       "type": "string",
       "max": 2048,
       "min": 1,
       "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
+    },
+    "UserAccount": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
     },
     "UserContext": {
       "type": "structure",
@@ -4329,6 +4864,12 @@
       "type": "string",
       "max": 50,
       "min": 1
+    },
+    "VisitorId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
     },
     "VpcSecurityGroupId": {
       "type": "string",

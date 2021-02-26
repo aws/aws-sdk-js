@@ -85,7 +85,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>S3 Batch Operations performs large-scale Batch Operations on Amazon S3 objects. Batch Operations can run a single operation or action on lists of Amazon S3 objects that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>This operation creates an S3 Batch Operations job.</p> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html\">ListJobs</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a> </p> </li> </ul>",
+      "documentation": "<p>You can use S3 Batch Operations to perform large-scale batch operations on Amazon S3 objects. Batch Operations can run a single operation on lists of Amazon S3 objects that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>This operation creates a S3 Batch Operations job.</p> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html\">ListJobs</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html\">JobOperation</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -141,7 +141,7 @@
       "input": {
         "shape": "DeleteBucketLifecycleConfigurationRequest"
       },
-      "documentation": "<note> <p>This API action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>To use this operation, you must have permission to perform the <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\"> Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This API action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>To use this operation, you must have permission to perform the <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -155,7 +155,7 @@
       "input": {
         "shape": "DeleteBucketPolicyRequest"
       },
-      "documentation": "<note> <p>This API operation deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>This implementation of the DELETE operation uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this operation, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This API operation deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>This implementation of the DELETE operation uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this operation, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -226,7 +226,7 @@
       "input": {
         "shape": "DeleteStorageLensConfigurationRequest"
       },
-      "documentation": "<p>Deletes the Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:DeleteStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Deletes the Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:DeleteStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -243,7 +243,7 @@
       "output": {
         "shape": "DeleteStorageLensConfigurationTaggingResult"
       },
-      "documentation": "<p>Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:DeleteStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:DeleteStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -460,7 +460,7 @@
       "output": {
         "shape": "GetStorageLensConfigurationResult"
       },
-      "documentation": "<p>Gets the Amazon S3 Storage Lens configuration. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Gets the Amazon S3 Storage Lens configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -477,7 +477,7 @@
       "output": {
         "shape": "GetStorageLensConfigurationTaggingResult"
       },
-      "documentation": "<p>Gets the tags of Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:GetStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Gets the tags of Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:GetStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -556,7 +556,7 @@
       "output": {
         "shape": "ListStorageLensConfigurationsResult"
       },
-      "documentation": "<p>Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:ListStorageLensConfigurations</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:ListStorageLensConfigurations</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -622,7 +622,7 @@
       "input": {
         "shape": "PutBucketTaggingRequest"
       },
-      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Sets the tags for an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost Allocation and Tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html\">Using Cost Allocation in Amazon S3 Bucket Tags</a>.</p> </note> <p>To use this operation, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> AWS-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional operation is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Sets the tags for an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <p>Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost Allocation and Tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html\"> Using Cost Allocation in Amazon S3 Bucket Tags</a>.</p> </note> <p>To use this operation, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> AWS-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional operation is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -690,7 +690,7 @@
           "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
         }
       },
-      "documentation": "<p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:PutStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:PutStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -711,7 +711,7 @@
       "output": {
         "shape": "PutStorageLensConfigurationTaggingResult"
       },
-      "documentation": "<p>Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:PutStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
+      "documentation": "<p>Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:PutStorageLensConfigurationTagging</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p> </note>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -1108,7 +1108,7 @@
         },
         "Operation": {
           "shape": "JobOperation",
-          "documentation": "<p>The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html\">Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+          "documentation": "<p>The operation that you want this job to perform on every object listed in the manifest. For more information about the available operations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html\">Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
         },
         "Report": {
           "shape": "JobReport",
@@ -1134,7 +1134,7 @@
         },
         "RoleArn": {
           "shape": "IAMRoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that Batch Operations will use to run this job's operation on each object in the manifest.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that Batch Operations will use to run this job's operation on every object in the manifest.</p>"
         },
         "Tags": {
           "shape": "S3TagSet",
@@ -1393,7 +1393,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2007,7 +2007,7 @@
         },
         "Operation": {
           "shape": "OperationName",
-          "documentation": "<p>The operation that the specified job is configured to run on each object listed in the manifest.</p>"
+          "documentation": "<p>The operation that the specified job is configured to run on every object listed in the manifest.</p>"
         },
         "Priority": {
           "shape": "JobPriority",
@@ -2087,7 +2087,7 @@
       "members": {
         "ObjectArn": {
           "shape": "S3KeyArnString",
-          "documentation": "<p>The Amazon Resource Name (ARN) for a manifest object.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for a manifest object.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\"> XML related object key constraints</a>.</p> </important>"
         },
         "ObjectVersionId": {
           "shape": "S3ObjectVersionId",
@@ -2132,27 +2132,32 @@
       "members": {
         "LambdaInvoke": {
           "shape": "LambdaInvokeOperation",
-          "documentation": "<p>Directs the specified job to invoke an AWS Lambda function on each object in the manifest.</p>",
+          "documentation": "<p>Directs the specified job to invoke an AWS Lambda function on every object in the manifest.</p>",
           "box": true
         },
         "S3PutObjectCopy": {
           "shape": "S3CopyObjectOperation",
-          "documentation": "<p>Directs the specified job to run a PUT Copy object call on each object in the manifest.</p>",
+          "documentation": "<p>Directs the specified job to run a PUT Copy object call on every object in the manifest.</p>",
           "box": true
         },
         "S3PutObjectAcl": {
           "shape": "S3SetObjectAclOperation",
-          "documentation": "<p>Directs the specified job to run a PUT Object acl call on each object in the manifest.</p>",
+          "documentation": "<p>Directs the specified job to run a PUT Object acl call on every object in the manifest.</p>",
           "box": true
         },
         "S3PutObjectTagging": {
           "shape": "S3SetObjectTaggingOperation",
-          "documentation": "<p>Directs the specified job to run a PUT Object tagging call on each object in the manifest.</p>",
+          "documentation": "<p>Directs the specified job to run a PUT Object tagging call on every object in the manifest.</p>",
+          "box": true
+        },
+        "S3DeleteObjectTagging": {
+          "shape": "S3DeleteObjectTaggingOperation",
+          "documentation": "<p>Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.</p>",
           "box": true
         },
         "S3InitiateRestoreObject": {
           "shape": "S3InitiateRestoreObjectOperation",
-          "documentation": "<p>Directs the specified job to run an Initiate Glacier Restore call on each object in the manifest.</p>",
+          "documentation": "<p>Directs the specified job to initiate restore requests for every archived object in the manifest.</p>",
           "box": true
         },
         "S3PutObjectLegalHold": {
@@ -2164,7 +2169,7 @@
           "box": true
         }
       },
-      "documentation": "<p>The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html\">Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+      "documentation": "<p>The operation that you want this job to perform on every object listed in the manifest. For more information about the available operations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html\">Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
     },
     "JobPriority": {
       "type": "integer",
@@ -2284,7 +2289,7 @@
       "members": {
         "FunctionArn": {
           "shape": "FunctionArnString",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke on every object in the manifest.</p>"
         }
       },
       "documentation": "<p>Contains the configuration parameters for a <code>Lambda Invoke</code> operation.</p>"
@@ -2377,7 +2382,7 @@
       "members": {
         "Prefix": {
           "shape": "Prefix",
-          "documentation": "<p>Prefix identifying one or more objects to which the rule applies.</p>"
+          "documentation": "<p>Prefix identifying one or more objects to which the rule applies.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\"> XML related object key constraints</a>.</p> </important>"
         },
         "Tag": {
           "shape": "S3Tag"
@@ -2450,7 +2455,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2681,6 +2686,7 @@
         "S3PutObjectCopy",
         "S3PutObjectAcl",
         "S3PutObjectTagging",
+        "S3DeleteObjectTagging",
         "S3InitiateRestoreObject",
         "S3PutObjectLegalHold",
         "S3PutObjectRetention"
@@ -3234,7 +3240,12 @@
           "documentation": "<p>The date when the applied object retention configuration expires on all objects in the Batch Operations job.</p>"
         }
       },
-      "documentation": "<p>Contains the configuration parameters for a PUT Copy object operation. S3 Batch Operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html\">PUT Object - Copy</a>.</p>"
+      "documentation": "<p>Contains the configuration parameters for a PUT Copy object operation. S3 Batch Operations passes every object to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html\">PUT Object - Copy</a>.</p>"
+    },
+    "S3DeleteObjectTaggingOperation": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Contains no configuration parameters because the DELETE Object tagging API only accepts the bucket name and key name as parameters, which are defined in the job's manifest.</p>"
     },
     "S3ExpirationInDays": {
       "type": "integer",
@@ -3299,14 +3310,15 @@
       "members": {
         "ExpirationInDays": {
           "shape": "S3ExpirationInDays",
-          "documentation": "<p/>"
+          "documentation": "<p>This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier and S3 Glacier Deep Archive objects require <code>ExpirationInDays</code> set to 1 or greater.</p> <p>Conversely, do <i>not</i> set <code>ExpirationInDays</code> when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying <code>ExpirationInDays</code> results in restore request failure.</p> <p>S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you <i>must</i> create separate Batch Operations jobs. </p>",
+          "box": true
         },
         "GlacierJobTier": {
           "shape": "S3GlacierJobTier",
-          "documentation": "<p/>"
+          "documentation": "<p>S3 Batch Operations supports <code>STANDARD</code> and <code>BULK</code> retrieval tiers, but not the <code>EXPEDITED</code> retrieval tier.</p>"
         }
       },
-      "documentation": "<p>Contains the configuration parameters for an Initiate Glacier Restore job. S3 Batch Operations passes each value through to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request\">RestoreObject</a>.</p>"
+      "documentation": "<p>Contains the configuration parameters for an S3 Initiate Restore Object job. S3 Batch Operations passes every object to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request\">RestoreObject</a>.</p>"
     },
     "S3KeyArnString": {
       "type": "string",
@@ -3469,7 +3481,7 @@
           "documentation": "<p/>"
         }
       },
-      "documentation": "<p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations passes each value through to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html\">PUT Object acl</a>.</p>"
+      "documentation": "<p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations passes every object to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html\">PUT Object acl</a>.</p>"
     },
     "S3SetObjectLegalHoldOperation": {
       "type": "structure",
@@ -3482,7 +3494,7 @@
           "documentation": "<p>Contains the Object Lock legal hold status to be applied to all objects in the Batch Operations job.</p>"
         }
       },
-      "documentation": "<p>Contains the configuration for an S3 Object Lock legal hold operation that an S3 Batch Operations job passes each object through to the underlying <code>PutObjectLegalHold</code> API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html\">Using S3 Object Lock legal hold with S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+      "documentation": "<p>Contains the configuration for an S3 Object Lock legal hold operation that an S3 Batch Operations job passes every object to the underlying <code>PutObjectLegalHold</code> API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html\">Using S3 Object Lock legal hold with S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
     },
     "S3SetObjectRetentionOperation": {
       "type": "structure",
@@ -3500,7 +3512,7 @@
           "documentation": "<p>Contains the Object Lock retention mode to be applied to all objects in the Batch Operations job. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html\">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Contains the configuration parameters for the Object Lock retention action for an S3 Batch Operations job. Batch Operations passes each value through to the underlying <code>PutObjectRetention</code> API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html\">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+      "documentation": "<p>Contains the configuration parameters for the Object Lock retention action for an S3 Batch Operations job. Batch Operations passes every object to the underlying <code>PutObjectRetention</code> API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html\">Using S3 Object Lock retention with S3 Batch Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
     },
     "S3SetObjectTaggingOperation": {
       "type": "structure",
@@ -3510,7 +3522,7 @@
           "documentation": "<p/>"
         }
       },
-      "documentation": "<p>Contains the configuration parameters for a Set Object Tagging operation. S3 Batch Operations passes each value through to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html\">PUT Object tagging</a>.</p>"
+      "documentation": "<p>Contains the configuration parameters for a Set Object Tagging operation. S3 Batch Operations passes every object to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html\">PUT Object tagging</a>.</p>"
     },
     "S3StorageClass": {
       "type": "string",
@@ -3679,7 +3691,7 @@
       "members": {
         "S3BucketDestination": {
           "shape": "S3BucketDestination",
-          "documentation": "<p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p>"
+          "documentation": "<p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p> <note> <p>This bucket must be located in the same Region as the storage lens configuration. </p> </note>"
         }
       },
       "documentation": "<p>A container to specify the properties of your S3 Storage Lens metrics export, including the destination, schema, and format.</p>"
@@ -3820,7 +3832,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3866,7 +3878,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The AWS account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"

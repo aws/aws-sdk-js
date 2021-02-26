@@ -85,6 +85,14 @@ declare class SSM extends Service {
    */
   createOpsItem(callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
   /**
+   * If you create a new application in Application Manager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   */
+  createOpsMetadata(params: SSM.Types.CreateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
+  /**
+   * If you create a new application in Application Manager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   */
+  createOpsMetadata(callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
+  /**
    * Creates a patch baseline.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   createPatchBaseline(params: SSM.Types.CreatePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
@@ -140,6 +148,14 @@ declare class SSM extends Service {
    * Deletes a maintenance window.
    */
   deleteMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.DeleteMaintenanceWindowResult) => void): Request<SSM.Types.DeleteMaintenanceWindowResult, AWSError>;
+  /**
+   * Delete OpsMetadata related to an application.
+   */
+  deleteOpsMetadata(params: SSM.Types.DeleteOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
+  /**
+   * Delete OpsMetadata related to an application.
+   */
+  deleteOpsMetadata(callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
   /**
    * Delete a parameter from the system.
    */
@@ -381,11 +397,11 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowTargets(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTargetsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTargetsResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(params: SSM.Types.DescribeMaintenanceWindowTasksRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
@@ -445,11 +461,11 @@ declare class SSM extends Service {
    */
   describePatchGroups(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupsResult) => void): Request<SSM.Types.DescribePatchGroupsResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
    */
   describePatchProperties(params: SSM.Types.DescribePatchPropertiesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
    */
   describePatchProperties(callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
@@ -565,11 +581,11 @@ declare class SSM extends Service {
    */
   getMaintenanceWindowExecutionTaskInvocation(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(params: SSM.Types.GetMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
@@ -580,6 +596,14 @@ declare class SSM extends Service {
    * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
    */
   getOpsItem(callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
+  /**
+   * View operational metadata related to an application in Application Manager.
+   */
+  getOpsMetadata(params: SSM.Types.GetOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsMetadataResult) => void): Request<SSM.Types.GetOpsMetadataResult, AWSError>;
+  /**
+   * View operational metadata related to an application in Application Manager.
+   */
+  getOpsMetadata(callback?: (err: AWSError, data: SSM.Types.GetOpsMetadataResult) => void): Request<SSM.Types.GetOpsMetadataResult, AWSError>;
   /**
    * View a summary of OpsItems based on specified filters and aggregators.
    */
@@ -701,6 +725,14 @@ declare class SSM extends Service {
    */
   listComplianceSummaries(callback?: (err: AWSError, data: SSM.Types.ListComplianceSummariesResult) => void): Request<SSM.Types.ListComplianceSummariesResult, AWSError>;
   /**
+   * Information about approval reviews for a version of an SSM document.
+   */
+  listDocumentMetadataHistory(params: SSM.Types.ListDocumentMetadataHistoryRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
+  /**
+   * Information about approval reviews for a version of an SSM document.
+   */
+  listDocumentMetadataHistory(callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
+  /**
    * List all versions for a document.
    */
   listDocumentVersions(params: SSM.Types.ListDocumentVersionsRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentVersionsResult) => void): Request<SSM.Types.ListDocumentVersionsResult, AWSError>;
@@ -724,6 +756,22 @@ declare class SSM extends Service {
    * A list of inventory items returned by the request.
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
+  /**
+   * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   */
+  listOpsItemEvents(params: SSM.Types.ListOpsItemEventsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
+  /**
+   * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   */
+  listOpsItemEvents(callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
+  /**
+   * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
+   */
+  listOpsMetadata(params: SSM.Types.ListOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
+  /**
+   * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
+   */
+  listOpsMetadata(callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
   /**
    * Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
    */
@@ -869,6 +917,14 @@ declare class SSM extends Service {
    */
   startAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StartAutomationExecutionResult) => void): Request<SSM.Types.StartAutomationExecutionResult, AWSError>;
   /**
+   * Creates a change request for Change Manager. The runbooks (Automation documents) specified in the change request run only after all required approvals for the change request have been received.
+   */
+  startChangeRequestExecution(params: SSM.Types.StartChangeRequestExecutionRequest, callback?: (err: AWSError, data: SSM.Types.StartChangeRequestExecutionResult) => void): Request<SSM.Types.StartChangeRequestExecutionResult, AWSError>;
+  /**
+   * Creates a change request for Change Manager. The runbooks (Automation documents) specified in the change request run only after all required approvals for the change request have been received.
+   */
+  startChangeRequestExecution(callback?: (err: AWSError, data: SSM.Types.StartChangeRequestExecutionResult) => void): Request<SSM.Types.StartChangeRequestExecutionResult, AWSError>;
+  /**
    * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  AWS CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the AWS CLI in the AWS Systems Manager User Guide. AWS Tools for PowerShell usage: Start-SSMSession is not currently supported by AWS Tools for PowerShell on Windows local machines. 
    */
   startSession(params: SSM.Types.StartSessionRequest, callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
@@ -925,6 +981,14 @@ declare class SSM extends Service {
    */
   updateDocumentDefaultVersion(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentDefaultVersionResult) => void): Request<SSM.Types.UpdateDocumentDefaultVersionResult, AWSError>;
   /**
+   * Updates information related to approval reviews for a specific version of a document.
+   */
+  updateDocumentMetadata(params: SSM.Types.UpdateDocumentMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
+  /**
+   * Updates information related to approval reviews for a specific version of a document.
+   */
+  updateDocumentMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
+  /**
    * Updates an existing maintenance window. Only specified parameters are modified.  The value you specify for Duration determines the specific end time for the maintenance window based on the time it begins. No maintenance window tasks are permitted to start after the resulting endtime minus the number of hours you specify for Cutoff. For example, if the maintenance window starts at 3 PM, the duration is three hours, and the value you specify for Cutoff is one hour, no maintenance window tasks can start after 5 PM. 
    */
   updateMaintenanceWindow(params: SSM.Types.UpdateMaintenanceWindowRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowResult) => void): Request<SSM.Types.UpdateMaintenanceWindowResult, AWSError>;
@@ -941,11 +1005,11 @@ declare class SSM extends Service {
    */
   updateMaintenanceWindowTarget(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(params: SSM.Types.UpdateMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors   If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
@@ -964,6 +1028,14 @@ declare class SSM extends Service {
    * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
    */
   updateOpsItem(callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
+  /**
+   * Systems Manager calls this API action when you edit OpsMetadata in Application Manager.
+   */
+  updateOpsMetadata(params: SSM.Types.UpdateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
+  /**
+   * Systems Manager calls this API action when you edit OpsMetadata in Application Manager.
+   */
+  updateOpsMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
   /**
    * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
@@ -1209,9 +1281,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The combination of AWS Regions and AWS accounts where you want to run the association.
+     */
+    TargetLocations?: TargetLocations;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1433,9 +1509,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The combination of AWS Regions and AWS accounts where you wanted to run the association when this association version was created.
+     */
+    TargetLocations?: TargetLocations;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export interface AttachmentContent {
@@ -1595,10 +1675,34 @@ declare namespace SSM {
      * An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
      */
     ProgressCounters?: ProgressCounters;
+    /**
+     * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
+     */
+    AutomationSubtype?: AutomationSubtype;
+    /**
+     * The date and time the Automation operation is scheduled to start.
+     */
+    ScheduledTime?: DateTime;
+    /**
+     * Information about the Automation runbooks (Automation documents) that are run as part of a runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     */
+    Runbooks?: Runbooks;
+    /**
+     * The ID of an OpsItem that is created to represent a Change Manager change request.
+     */
+    OpsItemId?: String;
+    /**
+     * The ID of a State Manager association used in the Automation operation.
+     */
+    AssociationId?: String;
+    /**
+     * The name of the Change Manager change request.
+     */
+    ChangeRequestName?: ChangeRequestName;
   }
   export interface AutomationExecutionFilter {
     /**
-     * One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.
+     * One or more keys to limit the results.
      */
     Key: AutomationExecutionFilterKey;
     /**
@@ -1606,7 +1710,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|"TargetResourceGroup"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|"TargetResourceGroup"|"AutomationSubtype"|"OpsItemId"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -1700,13 +1804,38 @@ declare namespace SSM {
      * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions and accounts. For more information, see Running Automation workflows in multiple AWS Regions and accounts in the AWS Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
+    /**
+     * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
+     */
+    AutomationSubtype?: AutomationSubtype;
+    /**
+     * The date and time the Automation operation is scheduled to start.
+     */
+    ScheduledTime?: DateTime;
+    /**
+     * Information about the Automation runbooks (Automation documents) that are run during a runbook workflow in Change Manager.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     */
+    Runbooks?: Runbooks;
+    /**
+     * The ID of an OpsItem that is created to represent a Change Manager change request.
+     */
+    OpsItemId?: String;
+    /**
+     * The ID of a State Manager association used in the Automation operation.
+     */
+    AssociationId?: String;
+    /**
+     * The name of the Change Manager change request.
+     */
+    ChangeRequestName?: ChangeRequestName;
   }
   export type AutomationExecutionMetadataList = AutomationExecutionMetadata[];
-  export type AutomationExecutionStatus = "Pending"|"InProgress"|"Waiting"|"Success"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|string;
+  export type AutomationExecutionStatus = "Pending"|"InProgress"|"Waiting"|"Success"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"PendingApproval"|"Approved"|"Rejected"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"CompletedWithSuccess"|"CompletedWithFailure"|string;
   export type AutomationParameterKey = string;
   export type AutomationParameterMap = {[key: string]: AutomationParameterValueList};
   export type AutomationParameterValue = string;
   export type AutomationParameterValueList = AutomationParameterValue[];
+  export type AutomationSubtype = "ChangeRequest"|string;
   export type AutomationTargetParameterName = string;
   export type AutomationType = "CrossAccount"|"Local"|string;
   export type BaselineDescription = string;
@@ -1741,6 +1870,7 @@ declare namespace SSM {
      */
     WindowExecutionId?: MaintenanceWindowExecutionId;
   }
+  export type ChangeRequestName = string;
   export type ClientToken = string;
   export type CloudWatchLogGroupName = string;
   export interface CloudWatchOutputConfig {
@@ -2225,9 +2355,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * Use this action to create an association in multiple Regions and multiple accounts.
+     */
+    TargetLocations?: TargetLocations;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2293,9 +2427,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
+     */
+    TargetLocations?: TargetLocations;
   }
   export interface CreateAssociationResult {
     /**
@@ -2369,11 +2507,11 @@ declare namespace SSM {
      */
     Schedule: MaintenanceWindowSchedule;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.  cron(0 30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -2408,6 +2546,10 @@ declare namespace SSM {
      * Information about the OpsItem. 
      */
     Description: OpsItemDescription;
+    /**
+     * The type of OpsItem to create. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     */
+    OpsItemType?: OpsItemType;
     /**
      * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see Creating OpsItems manually in the AWS Systems Manager User Guide.
      */
@@ -2444,12 +2586,44 @@ declare namespace SSM {
      * Specify a severity to assign to an OpsItem.
      */
     Severity?: OpsItemSeverity;
+    /**
+     * The time a runbook workflow started. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualStartTime?: DateTime;
+    /**
+     * The time a runbook workflow ended. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualEndTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedStartTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedEndTime?: DateTime;
   }
   export interface CreateOpsItemResponse {
     /**
      * The ID of the OpsItem.
      */
     OpsItemId?: String;
+  }
+  export interface CreateOpsMetadataRequest {
+    /**
+     * A resource ID for a new Application Manager application.
+     */
+    ResourceId: OpsMetadataResourceId;
+    /**
+     * Metadata for a new Application Manager application. 
+     */
+    Metadata?: MetadataMap;
+  }
+  export interface CreateOpsMetadataResult {
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
   }
   export interface CreatePatchBaselineRequest {
     /**
@@ -2622,6 +2796,14 @@ declare namespace SSM {
      * The ID of the deleted maintenance window.
      */
     WindowId?: MaintenanceWindowId;
+  }
+  export interface DeleteOpsMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+  }
+  export interface DeleteOpsMetadataResult {
   }
   export interface DeleteParameterRequest {
     /**
@@ -2953,6 +3135,14 @@ declare namespace SSM {
      * The permission type for the document. The permission type can be Share.
      */
     PermissionType: DocumentPermissionType;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: DocumentPermissionMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeDocumentPermissionResponse {
     /**
@@ -2963,6 +3153,10 @@ declare namespace SSM {
      * A list of AWS accounts where the current document is shared and the version shared with each account.
      */
     AccountSharingInfoList?: AccountSharingInfoList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeDocumentRequest {
     /**
@@ -3574,7 +3768,7 @@ declare namespace SSM {
      */
     Property: PatchProperty;
     /**
-     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for Linux operating systems.
+     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for the Linux or macOS operating systems.
      */
     PatchSet?: PatchSet;
     /**
@@ -3626,6 +3820,7 @@ declare namespace SSM {
   }
   export type DescriptionInDocument = string;
   export type DocumentARN = string;
+  export type DocumentAuthor = string;
   export type DocumentContent = string;
   export interface DocumentDefaultVersionDescription {
     /**
@@ -3730,6 +3925,26 @@ declare namespace SSM {
      * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
      */
     Requires?: DocumentRequiresList;
+    /**
+     * The user in your organization who created the document.
+     */
+    Author?: DocumentAuthor;
+    /**
+     * Details about the review of a document.
+     */
+    ReviewInformation?: ReviewInformationList;
+    /**
+     * The version of the document currently approved for use in the organization.
+     */
+    ApprovedVersion?: DocumentVersion;
+    /**
+     * The version of the document that is currently under review.
+     */
+    PendingReviewVersion?: DocumentVersion;
+    /**
+     * The current status of the review.
+     */
+    ReviewStatus?: ReviewStatus;
   }
   export interface DocumentFilter {
     /**
@@ -3792,6 +4007,14 @@ declare namespace SSM {
      * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
      */
     Requires?: DocumentRequiresList;
+    /**
+     * The current status of a document review.
+     */
+    ReviewStatus?: ReviewStatus;
+    /**
+     * The user in your organization who created the document.
+     */
+    Author?: DocumentAuthor;
   }
   export type DocumentIdentifierList = DocumentIdentifier[];
   export interface DocumentKeyValuesFilter {
@@ -3808,6 +4031,13 @@ declare namespace SSM {
   export type DocumentKeyValuesFilterList = DocumentKeyValuesFilter[];
   export type DocumentKeyValuesFilterValue = string;
   export type DocumentKeyValuesFilterValues = DocumentKeyValuesFilterValue[];
+  export type DocumentMetadataEnum = "DocumentReviews"|string;
+  export interface DocumentMetadataResponseInfo {
+    /**
+     * Details about a reviewer's response to a document review request.
+     */
+    ReviewerResponse?: DocumentReviewerResponseList;
+  }
   export type DocumentName = string;
   export type DocumentOwner = string;
   export interface DocumentParameter {
@@ -3833,6 +4063,7 @@ declare namespace SSM {
   export type DocumentParameterList = DocumentParameter[];
   export type DocumentParameterName = string;
   export type DocumentParameterType = "String"|"StringList"|string;
+  export type DocumentPermissionMaxResults = number;
   export type DocumentPermissionType = "Share"|string;
   export interface DocumentRequires {
     /**
@@ -3845,11 +4076,58 @@ declare namespace SSM {
     Version?: DocumentVersion;
   }
   export type DocumentRequiresList = DocumentRequires[];
+  export type DocumentReviewAction = "SendForReview"|"UpdateReview"|"Approve"|"Reject"|string;
+  export type DocumentReviewComment = string;
+  export type DocumentReviewCommentList = DocumentReviewCommentSource[];
+  export interface DocumentReviewCommentSource {
+    /**
+     * The type of information added to a review request. Currently, only the value Comment is supported.
+     */
+    Type?: DocumentReviewCommentType;
+    /**
+     * The content of a comment entered by a user who requests a review of a new document version, or who reviews the new version.
+     */
+    Content?: DocumentReviewComment;
+  }
+  export type DocumentReviewCommentType = "Comment"|string;
+  export type DocumentReviewerResponseList = DocumentReviewerResponseSource[];
+  export interface DocumentReviewerResponseSource {
+    /**
+     * The date and time that a reviewer entered a response to a document review request.
+     */
+    CreateTime?: DateTime;
+    /**
+     * The date and time that a reviewer last updated a response to a document review request.
+     */
+    UpdatedTime?: DateTime;
+    /**
+     * The current review status of a new custom SSM document created by a member of your organization, or of the latest version of an existing SSM document. Only one version of a document can be in the APPROVED state at a time. When a new version is approved, the status of the previous version changes to REJECTED. Only one version of a document can be in review, or PENDING, at a time.
+     */
+    ReviewStatus?: ReviewStatus;
+    /**
+     * The comment entered by a reviewer as part of their document review response.
+     */
+    Comment?: DocumentReviewCommentList;
+    /**
+     * The user in your organization assigned to review a document request.
+     */
+    Reviewer?: Reviewer;
+  }
+  export interface DocumentReviews {
+    /**
+     * The action to take on a document approval review request.
+     */
+    Action: DocumentReviewAction;
+    /**
+     * A comment entered by a user in your organization about the document review request.
+     */
+    Comment?: DocumentReviewCommentList;
+  }
   export type DocumentSchemaVersion = string;
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -3884,6 +4162,10 @@ declare namespace SSM {
      * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
      */
     StatusInformation?: DocumentStatusInformation;
+    /**
+     * The current status of the approval review for the latest version of the document.
+     */
+    ReviewStatus?: ReviewStatus;
   }
   export type DocumentVersionList = DocumentVersionInfo[];
   export type DocumentVersionName = string;
@@ -4174,6 +4456,10 @@ declare namespace SSM {
      * A description of the document attachments, including names, locations, sizes, and so on.
      */
     AttachmentsContent?: AttachmentContentList;
+    /**
+     * The current review status of a new custom Systems Manager document (SSM document) created by a member of your organization, or of the latest version of an existing SSM document. Only one version of an SSM document can be in the APPROVED state at a time. When a new version is approved, the status of the previous version changes to REJECTED. Only one version of an SSM document can be in review, or PENDING, at a time.
+     */
+    ReviewStatus?: ReviewStatus;
   }
   export interface GetInventoryRequest {
     /**
@@ -4432,7 +4718,7 @@ declare namespace SSM {
      */
     Schedule?: MaintenanceWindowSchedule;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
@@ -4516,11 +4802,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets allowed to run this task in parallel.
+     * The maximum number of targets allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the task stops being scheduled.
+     * The maximum number of errors allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -4547,6 +4833,35 @@ declare namespace SSM {
      * The OpsItem.
      */
     OpsItem?: OpsItem;
+  }
+  export type GetOpsMetadataMaxResults = number;
+  export interface GetOpsMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: GetOpsMetadataMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetOpsMetadataResult {
+    /**
+     * The resource ID of the Application Manager application.
+     */
+    ResourceId?: OpsMetadataResourceId;
+    /**
+     * OpsMetadata for an Application Manager application.
+     */
+    Metadata?: MetadataMap;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
   }
   export interface GetOpsSummaryRequest {
     /**
@@ -4631,7 +4946,7 @@ declare namespace SSM {
   export type GetParametersByPathMaxResults = number;
   export interface GetParametersByPathRequest {
     /**
-     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33 
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierachy is the parameter name except the last part of the parameter. For the API call to succeeed, the last part of the parameter name cannot be in the path. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33  
      */
     Path: PSParameterName;
     /**
@@ -4901,7 +5216,7 @@ declare namespace SSM {
      */
     PingStatus?: PingStatus;
     /**
-     * The date and time when agent last pinged Systems Manager service. 
+     * The date and time when the agent last pinged the Systems Manager service. 
      */
     LastPingDateTime?: DateTime;
     /**
@@ -5517,6 +5832,50 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
   }
+  export interface ListDocumentMetadataHistoryRequest {
+    /**
+     * The name of the document.
+     */
+    Name: DocumentName;
+    /**
+     * The version of the document.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * The type of data for which details are being requested. Currently, the only supported value is DocumentReviews.
+     */
+    Metadata: DocumentMetadataEnum;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListDocumentMetadataHistoryResponse {
+    /**
+     * The name of the document.
+     */
+    Name?: DocumentName;
+    /**
+     * The version of the document.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * The user ID of the person in the organization who requested the document review.
+     */
+    Author?: DocumentAuthor;
+    /**
+     * Information about the response to the document approval request.
+     */
+    Metadata?: DocumentMetadataResponseInfo;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDocumentVersionsRequest {
     /**
      * The name of the document. You can specify an Amazon Resource Name (ARN).
@@ -5547,7 +5906,7 @@ declare namespace SSM {
      */
     DocumentFilterList?: DocumentFilterList;
     /**
-     * One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include Owner, Name, PlatformTypes, DocumentType, and TargetType. For example, to return documents you own use Key=Owner,Values=Self. To specify a custom key-value pair, use the format Key=tag:tagName,Values=valueName.
+     * One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include Owner, Name, PlatformTypes, DocumentType, and TargetType. For example, to return documents you own use Key=Owner,Values=Self. To specify a custom key-value pair, use the format Key=tag:tagName,Values=valueName.  This API action only supports filtering documents by using a single tag key and one or more tag values. For example: Key=tag:tagName,Values=valueName1,valueName2  
      */
     Filters?: DocumentKeyValuesFilterList;
     /**
@@ -5614,6 +5973,55 @@ declare namespace SSM {
     Entries?: InventoryItemEntryList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOpsItemEventsRequest {
+    /**
+     * One or more OpsItem filters. Use a filter to return a more specific list of results. 
+     */
+    Filters?: OpsItemEventFilters;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. 
+     */
+    MaxResults?: OpsItemEventMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: String;
+  }
+  export interface ListOpsItemEventsResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results. 
+     */
+    NextToken?: String;
+    /**
+     * A list of event information for the specified OpsItems.
+     */
+    Summaries?: OpsItemEventSummaries;
+  }
+  export type ListOpsMetadataMaxResults = number;
+  export interface ListOpsMetadataRequest {
+    /**
+     * One or more filters to limit the number of OpsMetadata objects returned by the call.
+     */
+    Filters?: OpsMetadataFilterList;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: ListOpsMetadataMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOpsMetadataResult {
+    /**
+     * Returns a list of OpsMetadata objects.
+     */
+    OpsMetadataList?: OpsMetadataList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -6115,6 +6523,16 @@ declare namespace SSM {
   export type MaxErrors = string;
   export type MaxResults = number;
   export type MaxResultsEC2Compatible = number;
+  export type MetadataKey = string;
+  export type MetadataKeysToDeleteList = MetadataKey[];
+  export type MetadataMap = {[key: string]: MetadataValue};
+  export interface MetadataValue {
+    /**
+     * Metadata value to assign to an Application Manager application.
+     */
+    Value?: MetadataValueString;
+  }
+  export type MetadataValueString = string;
   export interface ModifyDocumentPermissionRequest {
     /**
      * The name of the document that you want to share.
@@ -6169,7 +6587,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|string;
   export interface OpsAggregator {
     /**
      * Either a Range or Count aggregator for limiting an OpsItem summary.
@@ -6255,6 +6673,10 @@ declare namespace SSM {
      */
     CreatedBy?: String;
     /**
+     * The type of OpsItem. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     */
+    OpsItemType?: OpsItemType;
+    /**
      * The date and time the OpsItem was created.
      */
     CreatedTime?: DateTime;
@@ -6314,6 +6736,22 @@ declare namespace SSM {
      * The severity of the OpsItem. Severity options range from 1 to 4.
      */
     Severity?: OpsItemSeverity;
+    /**
+     * The time a runbook workflow started. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualStartTime?: DateTime;
+    /**
+     * The time a runbook workflow ended. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualEndTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedStartTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedEndTime?: DateTime;
   }
   export type OpsItemCategory = string;
   export type OpsItemDataKey = string;
@@ -6330,6 +6768,57 @@ declare namespace SSM {
   }
   export type OpsItemDataValueString = string;
   export type OpsItemDescription = string;
+  export interface OpsItemEventFilter {
+    /**
+     * The name of the filter key. Currently, the only supported value is OpsItemId.
+     */
+    Key: OpsItemEventFilterKey;
+    /**
+     * The values for the filter, consisting of one or more OpsItem IDs.
+     */
+    Values: OpsItemEventFilterValues;
+    /**
+     * The operator used by the filter call. Currently, the only supported value is Equal.
+     */
+    Operator: OpsItemEventFilterOperator;
+  }
+  export type OpsItemEventFilterKey = "OpsItemId"|string;
+  export type OpsItemEventFilterOperator = "Equal"|string;
+  export type OpsItemEventFilterValue = string;
+  export type OpsItemEventFilterValues = OpsItemEventFilterValue[];
+  export type OpsItemEventFilters = OpsItemEventFilter[];
+  export type OpsItemEventMaxResults = number;
+  export type OpsItemEventSummaries = OpsItemEventSummary[];
+  export interface OpsItemEventSummary {
+    /**
+     * The ID of the OpsItem.
+     */
+    OpsItemId?: String;
+    /**
+     * The ID of the OpsItem event.
+     */
+    EventId?: String;
+    /**
+     * The source of the OpsItem event.
+     */
+    Source?: String;
+    /**
+     * The type of information provided as a detail.
+     */
+    DetailType?: String;
+    /**
+     * Specific information about the OpsItem event.
+     */
+    Detail?: String;
+    /**
+     * Information about the user or resource that created the OpsItem event.
+     */
+    CreatedBy?: OpsItemIdentity;
+    /**
+     * The date and time the OpsItem event was created.
+     */
+    CreatedTime?: DateTime;
+  }
   export interface OpsItemFilter {
     /**
      * The name of the filter.
@@ -6344,12 +6833,18 @@ declare namespace SSM {
      */
     Operator: OpsItemFilterOperator;
   }
-  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|string;
+  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"ActualStartTime"|"ActualEndTime"|"PlannedStartTime"|"PlannedEndTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|"OpsItemType"|"ChangeRequestByRequesterArn"|"ChangeRequestByRequesterName"|"ChangeRequestByApproverArn"|"ChangeRequestByApproverName"|"ChangeRequestByTemplate"|"ChangeRequestByTargetsResourceGroup"|string;
   export type OpsItemFilterOperator = "Equal"|"Contains"|"GreaterThan"|"LessThan"|string;
   export type OpsItemFilterValue = string;
   export type OpsItemFilterValues = OpsItemFilterValue[];
   export type OpsItemFilters = OpsItemFilter[];
   export type OpsItemId = string;
+  export interface OpsItemIdentity {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.
+     */
+    Arn?: String;
+  }
   export type OpsItemMaxResults = number;
   export interface OpsItemNotification {
     /**
@@ -6363,7 +6858,7 @@ declare namespace SSM {
   export type OpsItemPriority = number;
   export type OpsItemSeverity = string;
   export type OpsItemSource = string;
-  export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|string;
+  export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|"Pending"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"CompletedWithSuccess"|"CompletedWithFailure"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"PendingApproval"|"Approved"|"Rejected"|string;
   export type OpsItemSummaries = OpsItemSummary[];
   export interface OpsItemSummary {
     /**
@@ -6414,8 +6909,68 @@ declare namespace SSM {
      * A list of OpsItems by severity.
      */
     Severity?: OpsItemSeverity;
+    /**
+     * The type of OpsItem. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     */
+    OpsItemType?: OpsItemType;
+    /**
+     * The time a runbook workflow started. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualStartTime?: DateTime;
+    /**
+     * The time a runbook workflow ended. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualEndTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedStartTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedEndTime?: DateTime;
   }
   export type OpsItemTitle = string;
+  export type OpsItemType = string;
+  export interface OpsMetadata {
+    /**
+     * The ID of the Application Manager application.
+     */
+    ResourceId?: OpsMetadataResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
+    /**
+     * The date the OpsMetadata object was last updated.
+     */
+    LastModifiedDate?: DateTime;
+    /**
+     * The user name who last updated the OpsMetadata object.
+     */
+    LastModifiedUser?: String;
+    /**
+     * The date the OpsMetadata objects was created.
+     */
+    CreationDate?: DateTime;
+  }
+  export type OpsMetadataArn = string;
+  export interface OpsMetadataFilter {
+    /**
+     * A filter key.
+     */
+    Key: OpsMetadataFilterKey;
+    /**
+     * A filter value.
+     */
+    Values: OpsMetadataFilterValueList;
+  }
+  export type OpsMetadataFilterKey = string;
+  export type OpsMetadataFilterList = OpsMetadataFilter[];
+  export type OpsMetadataFilterValue = string;
+  export type OpsMetadataFilterValueList = OpsMetadataFilterValue[];
+  export type OpsMetadataList = OpsMetadata[];
+  export type OpsMetadataResourceId = string;
   export interface OpsResultAttribute {
     /**
      * Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation, AWS:OpsItemTrendline, or AWS:ComplianceSummary.
@@ -6704,7 +7259,7 @@ declare namespace SSM {
      */
     BugzillaIds?: PatchBugzillaIdList;
     /**
-     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-1999-0067. Applies to Linux-based instances only.
+     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based instances only.
      */
     CVEIds?: PatchCVEIdList;
     /**
@@ -6919,7 +7474,7 @@ declare namespace SSM {
      */
     Products: PatchSourceProductList;
     /**
-     * The value of the yum repo configuration. For example:  [main]   cachedir=/var/cache/yum/$basesearch$releasever   keepcache=0   debuglevel=2 
+     * The value of the yum repo configuration. For example:  [main]   name=MyCustomRepository   baseurl=https://my-custom-repository   enabled=1   For information about other options available for your yum repository configuration, see dnf.conf(5). 
      */
     Configuration: PatchSourceConfiguration;
   }
@@ -7155,9 +7710,9 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * The targets (either instances or maintenance window targets). Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
+     * The targets (either instances or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
      */
-    Targets: Targets;
+    Targets?: Targets;
     /**
      * The ARN of the task to run.
      */
@@ -7183,13 +7738,13 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets this task can be run for in parallel.
+     * The maximum number of targets this task can be run for in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
      */
-    MaxConcurrency: MaxConcurrency;
+    MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.
+     * The maximum number of errors allowed before this task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
      */
-    MaxErrors: MaxErrors;
+    MaxErrors?: MaxErrors;
     /**
      * A structure containing information about an S3 bucket to write instance-level logs to.    LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
@@ -7478,6 +8033,58 @@ declare namespace SSM {
      */
     StreamUrl?: StreamUrl;
   }
+  export interface ReviewInformation {
+    /**
+     * The time that the reviewer took action on the document review request.
+     */
+    ReviewedTime?: DateTime;
+    /**
+     * The current status of the document review request.
+     */
+    Status?: ReviewStatus;
+    /**
+     * The reviewer assigned to take action on the document review request.
+     */
+    Reviewer?: Reviewer;
+  }
+  export type ReviewInformationList = ReviewInformation[];
+  export type ReviewStatus = "APPROVED"|"NOT_REVIEWED"|"PENDING"|"REJECTED"|string;
+  export type Reviewer = string;
+  export interface Runbook {
+    /**
+     * The name of the Automation runbook (Automation document) used in a runbook workflow.
+     */
+    DocumentName: DocumentARN;
+    /**
+     * The version of the Automation runbook (Automation document) used in a runbook workflow.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * The key-value map of execution parameters, which were supplied when calling StartChangeRequestExecution.
+     */
+    Parameters?: AutomationParameterMap;
+    /**
+     * The name of the parameter used as the target resource for the rate-controlled runbook workflow. Required if you specify Targets. 
+     */
+    TargetParameterName?: AutomationParameterKey;
+    /**
+     * A key-value mapping to target resources that the Runbook operation performs tasks on. Required if you specify TargetParameterName.
+     */
+    Targets?: Targets;
+    /**
+     * The MaxConcurrency value specified by the user when the operation started, indicating the maximum number of resources that the runbook operation can run on at the same time.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The MaxErrors value specified by the user when the execution started, indicating the maximum number of errors that can occur during the operation before the updates are stopped or rolled back.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * Information about the AWS Regions and accounts targeted by the current Runbook operation.
+     */
+    TargetLocations?: TargetLocations;
+  }
+  export type Runbooks = Runbook[];
   export type S3BucketName = string;
   export type S3KeyPrefix = string;
   export interface S3OutputLocation {
@@ -7543,7 +8150,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * Required. The name of the Systems Manager document to run. This can be a public document or a custom document.
+     * The name of the Systems Manager document to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see Using shared SSM documents in the AWS Systems Manager User Guide.
      */
     DocumentName: DocumentARN;
     /**
@@ -7755,7 +8362,7 @@ declare namespace SSM {
   }
   export interface StartAutomationExecutionRequest {
     /**
-     * The name of the Automation document to use for this execution.
+     * The name of the Systems Manager document to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see Using shared SSM documents in the AWS Systems Manager User Guide.
      */
     DocumentName: DocumentARN;
     /**
@@ -7806,6 +8413,46 @@ declare namespace SSM {
   export interface StartAutomationExecutionResult {
     /**
      * The unique ID of a newly scheduled automation execution.
+     */
+    AutomationExecutionId?: AutomationExecutionId;
+  }
+  export interface StartChangeRequestExecutionRequest {
+    /**
+     * The date and time specified in the change request to run the Automation runbooks.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     */
+    ScheduledTime?: DateTime;
+    /**
+     * The name of the change template document to run during the runbook workflow.
+     */
+    DocumentName: DocumentARN;
+    /**
+     * The version of the change template document to run during the runbook workflow.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * A key-value map of parameters that match the declared parameters in the change template document.
+     */
+    Parameters?: AutomationParameterMap;
+    /**
+     * The name of the change request associated with the runbook workflow to be run.
+     */
+    ChangeRequestName?: ChangeRequestName;
+    /**
+     * The user-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.
+     */
+    ClientToken?: IdempotencyToken;
+    /**
+     * Information about the Automation runbooks (Automation documents) that are run during the runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     */
+    Runbooks: Runbooks;
+    /**
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
+     */
+    Tags?: TagList;
+  }
+  export interface StartChangeRequestExecutionResult {
+    /**
+     * The unique ID of a runbook workflow operation. (A runbook workflow is a type of Automation operation.) 
      */
     AutomationExecutionId?: AutomationExecutionId;
   }
@@ -7998,15 +8645,15 @@ declare namespace SSM {
      */
     Regions?: Regions;
     /**
-     * The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently 
+     * The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently.
      */
     TargetLocationMaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation. 
+     * The maximum number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation.
      */
     TargetLocationMaxErrors?: MaxErrors;
     /**
-     * The Automation execution role used by the currently running Automation.
+     * The Automation execution role used by the currently running Automation. If not specified, the default value is AWS-SystemsManager-AutomationExecutionRole.
      */
     ExecutionRoleName?: ExecutionRoleName;
   }
@@ -8095,9 +8742,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
+     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
+     */
+    TargetLocations?: TargetLocations;
   }
   export interface UpdateAssociationResult {
     /**
@@ -8140,6 +8791,22 @@ declare namespace SSM {
      * The description of a custom document that you want to set as the default version.
      */
     Description?: DocumentDefaultVersionDescription;
+  }
+  export interface UpdateDocumentMetadataRequest {
+    /**
+     * The name of the document for which a version is to be updated.
+     */
+    Name: DocumentName;
+    /**
+     * The version of a document to update.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * The document review details to update.
+     */
+    DocumentReviews: DocumentReviews;
+  }
+  export interface UpdateDocumentMetadataResponse {
   }
   export interface UpdateDocumentRequest {
     /**
@@ -8191,7 +8858,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
@@ -8203,11 +8870,11 @@ declare namespace SSM {
      */
     Schedule?: MaintenanceWindowSchedule;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.  cron(0 30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -8257,7 +8924,7 @@ declare namespace SSM {
      */
     Schedule?: MaintenanceWindowSchedule;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
@@ -8347,7 +9014,7 @@ declare namespace SSM {
      */
     WindowTaskId: MaintenanceWindowTaskId;
     /**
-     * The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. 
+     * The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide. 
      */
     Targets?: Targets;
     /**
@@ -8371,11 +9038,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.
+     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.
+     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -8506,8 +9173,44 @@ declare namespace SSM {
      * Specify a new severity for an OpsItem.
      */
     Severity?: OpsItemSeverity;
+    /**
+     * The time a runbook workflow started. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualStartTime?: DateTime;
+    /**
+     * The time a runbook workflow ended. Currently reported only for the OpsItem type /aws/changerequest.
+     */
+    ActualEndTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedStartTime?: DateTime;
+    /**
+     * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
+     */
+    PlannedEndTime?: DateTime;
   }
   export interface UpdateOpsItemResponse {
+  }
+  export interface UpdateOpsMetadataRequest {
+    /**
+     * The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+     */
+    OpsMetadataArn: OpsMetadataArn;
+    /**
+     * Metadata to add to an OpsMetadata object.
+     */
+    MetadataToUpdate?: MetadataMap;
+    /**
+     * The metadata keys to delete from the OpsMetadata object. 
+     */
+    KeysToDelete?: MetadataKeysToDeleteList;
+  }
+  export interface UpdateOpsMetadataResult {
+    /**
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.
+     */
+    OpsMetadataArn?: OpsMetadataArn;
   }
   export interface UpdatePatchBaselineRequest {
     /**

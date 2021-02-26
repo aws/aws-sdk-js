@@ -12,6 +12,14 @@ declare class MediaPackageVod extends Service {
   constructor(options?: MediaPackageVod.Types.ClientConfiguration)
   config: Config & MediaPackageVod.Types.ClientConfiguration;
   /**
+   * Changes the packaging group's properities to configure log subscription
+   */
+  configureLogs(params: MediaPackageVod.Types.ConfigureLogsRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.ConfigureLogsResponse) => void): Request<MediaPackageVod.Types.ConfigureLogsResponse, AWSError>;
+  /**
+   * Changes the packaging group's properities to configure log subscription
+   */
+  configureLogs(callback?: (err: AWSError, data: MediaPackageVod.Types.ConfigureLogsResponse) => void): Request<MediaPackageVod.Types.ConfigureLogsResponse, AWSError>;
+  /**
    * Creates a new MediaPackage VOD Asset resource.
    */
   createAsset(params: MediaPackageVod.Types.CreateAssetRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.CreateAssetResponse) => void): Request<MediaPackageVod.Types.CreateAssetResponse, AWSError>;
@@ -199,6 +207,30 @@ rounded to the nearest multiple of the source fragment duration.
      */
     SegmentDurationSeconds?: __integer;
   }
+  export interface ConfigureLogsRequest {
+    EgressAccessLogs?: EgressAccessLogs;
+    /**
+     * The ID of a MediaPackage VOD PackagingGroup resource.
+     */
+    Id: __string;
+  }
+  export interface ConfigureLogsResponse {
+    /**
+     * The ARN of the PackagingGroup.
+     */
+    Arn?: __string;
+    Authorization?: Authorization;
+    /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
+    /**
+     * The ID of the PackagingGroup.
+     */
+    Id?: __string;
+    Tags?: Tags;
+  }
   export interface CreateAssetRequest {
     /**
      * The unique identifier for the Asset.
@@ -293,6 +325,7 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface CreatePackagingGroupRequest {
     Authorization?: Authorization;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -309,6 +342,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -468,11 +502,18 @@ rounded to the nearest multiple of the source segment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
     Id?: __string;
     Tags?: Tags;
+  }
+  export interface EgressAccessLogs {
+    /**
+     * Customize the log group name.
+     */
+    LogGroupName?: __string;
   }
   export interface EgressEndpoint {
     /**
@@ -685,6 +726,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -762,6 +804,7 @@ MediaPackage will assume when accessing the key provider service.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */

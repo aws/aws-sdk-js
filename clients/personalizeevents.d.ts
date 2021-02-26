@@ -12,27 +12,27 @@ declare class PersonalizeEvents extends Service {
   constructor(options?: PersonalizeEvents.Types.ClientConfiguration)
   config: Config & PersonalizeEvents.Types.ClientConfiguration;
   /**
-   * Records user interaction event data. For more information see event-record-api.
+   * Records user interaction event data. For more information see Recording Events.
    */
   putEvents(params: PersonalizeEvents.Types.PutEventsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Records user interaction event data. For more information see event-record-api.
+   * Records user interaction event data. For more information see Recording Events.
    */
   putEvents(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more items to an Items dataset. For more information see importing-items.
+   * Adds one or more items to an Items dataset. For more information see Importing Items Incrementally. 
    */
   putItems(params: PersonalizeEvents.Types.PutItemsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more items to an Items dataset. For more information see importing-items.
+   * Adds one or more items to an Items dataset. For more information see Importing Items Incrementally. 
    */
   putItems(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more users to a Users dataset. For more information see importing-users.
+   * Adds one or more users to a Users dataset. For more information see Importing Users Incrementally.
    */
   putUsers(params: PersonalizeEvents.Types.PutUsersRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more users to a Users dataset. For more information see importing-users.
+   * Adds one or more users to a Users dataset. For more information see Importing Users Incrementally.
    */
   putUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -83,7 +83,7 @@ declare namespace PersonalizeEvents {
      */
     itemId: StringType;
     /**
-     * A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example,   {"numberOfRatings": "12"}  The keys use camel case names that match the fields in the Items schema. In the above example, the numberOfRatings would match the 'NUMBER_OF_RATINGS' field defined in the Items schema.
+     * A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, {"numberOfRatings": "12"}. The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the numberOfRatings matches the 'NUMBER_OF_RATINGS' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (|). For example, \"Horror|Action\".
      */
     properties?: ItemProperties;
   }
@@ -100,7 +100,7 @@ declare namespace PersonalizeEvents {
      */
     userId?: UserId;
     /**
-     * The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see event-record-api.
+     * The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see Recording Events.
      */
     sessionId: StringType;
     /**
@@ -110,7 +110,7 @@ declare namespace PersonalizeEvents {
   }
   export interface PutItemsRequest {
     /**
-     * The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.
+     * The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.
      */
     datasetArn: Arn;
     /**
@@ -120,7 +120,7 @@ declare namespace PersonalizeEvents {
   }
   export interface PutUsersRequest {
     /**
-     * The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.
+     * The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.
      */
     datasetArn: Arn;
     /**
@@ -136,7 +136,7 @@ declare namespace PersonalizeEvents {
      */
     userId: StringType;
     /**
-     * A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example,   {"numberOfVideosWatched": "45"}  The keys use camel case names that match the fields in the Users schema. In the above example, the numberOfVideosWatched would match the 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema.
+     * A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, {"numberOfVideosWatched": "45"}. The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the numberOfVideosWatched matches the 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (|). For example, \"Member|Frequent shopper\".
      */
     properties?: UserProperties;
   }

@@ -12,19 +12,19 @@ declare class GuardDuty extends Service {
   constructor(options?: GuardDuty.Types.ClientConfiguration)
   config: Config & GuardDuty.Types.ClientConfiguration;
   /**
-   * Accepts the invitation to be monitored by a master GuardDuty account.
+   * Accepts the invitation to be monitored by a GuardDuty administrator account.
    */
   acceptInvitation(params: GuardDuty.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Accepts the invitation to be monitored by a master GuardDuty account.
+   * Accepts the invitation to be monitored by a GuardDuty administrator account.
    */
   acceptInvitation(callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Archives GuardDuty findings that are specified by the list of finding IDs.  Only the master account can archive findings. Member accounts don't have permission to archive findings from their accounts. 
+   * Archives GuardDuty findings that are specified by the list of finding IDs.  Only the administrator account can archive findings. Member accounts don't have permission to archive findings from their accounts. 
    */
   archiveFindings(params: GuardDuty.Types.ArchiveFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
-   * Archives GuardDuty findings that are specified by the list of finding IDs.  Only the master account can archive findings. Member accounts don't have permission to archive findings from their accounts. 
+   * Archives GuardDuty findings that are specified by the list of finding IDs.  Only the administrator account can archive findings. Member accounts don't have permission to archive findings from their accounts. 
    */
   archiveFindings(callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class GuardDuty extends Service {
    */
   createFilter(callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
   /**
-   * Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are included in IPSets. Only users from the master account can use this operation.
+   * Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are included in IPSets. Only users from the administrator account can use this operation.
    */
   createIPSet(params: GuardDuty.Types.CreateIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
-   * Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are included in IPSets. Only users from the master account can use this operation.
+   * Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are included in IPSets. Only users from the administrator account can use this operation.
    */
   createIPSet(callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
-   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
+   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
    */
   createMembers(params: GuardDuty.Types.CreateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
+   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
    */
   createMembers(callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class GuardDuty extends Service {
    */
   createSampleFindings(callback?: (err: AWSError, data: GuardDuty.Types.CreateSampleFindingsResponse) => void): Request<GuardDuty.Types.CreateSampleFindingsResponse, AWSError>;
   /**
-   * Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the master account can use this operation.
+   * Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the administrator account can use this operation.
    */
   createThreatIntelSet(params: GuardDuty.Types.CreateThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateThreatIntelSetResponse) => void): Request<GuardDuty.Types.CreateThreatIntelSetResponse, AWSError>;
   /**
-   * Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the master account can use this operation.
+   * Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the administrator account can use this operation.
    */
   createThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.CreateThreatIntelSetResponse) => void): Request<GuardDuty.Types.CreateThreatIntelSetResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class GuardDuty extends Service {
    */
   deleteInvitations(callback?: (err: AWSError, data: GuardDuty.Types.DeleteInvitationsResponse) => void): Request<GuardDuty.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   deleteMembers(params: GuardDuty.Types.DeleteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   deleteMembers(callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
   /**
@@ -172,19 +172,19 @@ declare class GuardDuty extends Service {
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisableOrganizationAdminAccountResponse) => void): Request<GuardDuty.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disassociates the current GuardDuty member account from its master account.
+   * Disassociates the current GuardDuty member account from its administrator account.
    */
   disassociateFromMasterAccount(params: GuardDuty.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates the current GuardDuty member account from its master account.
+   * Disassociates the current GuardDuty member account from its administrator account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class GuardDuty extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
    */
   getMasterAccount(params: GuardDuty.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
    */
   getMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class GuardDuty extends Service {
    */
   getMemberDetectors(callback?: (err: AWSError, data: GuardDuty.Types.GetMemberDetectorsResponse) => void): Request<GuardDuty.Types.GetMemberDetectorsResponse, AWSError>;
   /**
-   * Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Retrieves GuardDuty member accounts (of the current GuardDuty administrator account) specified by the account IDs.
    */
   getMembers(params: GuardDuty.Types.GetMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
-   * Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+   * Retrieves GuardDuty member accounts (of the current GuardDuty administrator account) specified by the account IDs.
    */
   getMembers(callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class GuardDuty extends Service {
    */
   getUsageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
-   * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
+   * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts' findings on their behalf as the GuardDuty administrator account.
    */
   inviteMembers(params: GuardDuty.Types.InviteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
+   * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts' findings on their behalf as the GuardDuty administrator account.
    */
   inviteMembers(callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class GuardDuty extends Service {
    */
   listFindings(callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
   /**
-   * Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated master account.
+   * Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated administrator account.
    */
   listIPSets(params: GuardDuty.Types.ListIPSetsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListIPSetsResponse) => void): Request<GuardDuty.Types.ListIPSetsResponse, AWSError>;
   /**
-   * Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated master account.
+   * Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated administrator account.
    */
   listIPSets(callback?: (err: AWSError, data: GuardDuty.Types.ListIPSetsResponse) => void): Request<GuardDuty.Types.ListIPSetsResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class GuardDuty extends Service {
    */
   listInvitations(callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty administrator account.
    */
   listMembers(params: GuardDuty.Types.ListMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty administrator account.
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
@@ -364,11 +364,11 @@ declare class GuardDuty extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: GuardDuty.Types.ListTagsForResourceResponse) => void): Request<GuardDuty.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the master account are returned.
+   * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the administrator account are returned.
    */
   listThreatIntelSets(params: GuardDuty.Types.ListThreatIntelSetsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
   /**
-   * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the master account are returned.
+   * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the administrator account are returned.
    */
   listThreatIntelSets(callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
   /**
@@ -483,11 +483,11 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * The account ID of the master GuardDuty account whose invitation you're accepting.
+     * The account ID of the GuardDuty administrator account whose invitation you're accepting.
      */
     MasterId: String;
     /**
-     * The value that is used to validate the master account to the member account.
+     * The value that is used to validate the administrator account to the member account.
      */
     InvitationId: String;
   }
@@ -739,11 +739,11 @@ declare namespace GuardDuty {
      */
     ClientToken?: ClientToken;
     /**
-     * An enum value that specifies how frequently updated findings are exported.
+     * A value that specifies how frequently updated findings are exported.
      */
     FindingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * An object that describes which data sources will be enabled for the detector.
+     * Describes which data sources will be enabled for the detector.
      */
     DataSources?: DataSourceConfigurations;
     /**
@@ -759,11 +759,11 @@ declare namespace GuardDuty {
   }
   export interface CreateFilterRequest {
     /**
-     * The unique ID of the detector of the GuardDuty account that you want to create a filter for.
+     * The ID of the detector belonging to the GuardDuty account that you want to create a filter for.
      */
     DetectorId: DetectorId;
     /**
-     * The name of the filter.
+     * The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are not allowed.
      */
     Name: FilterName;
     /**
@@ -779,7 +779,7 @@ declare namespace GuardDuty {
      */
     Rank?: FilterRank;
     /**
-     * Represents the criteria to be used in the filter for querying findings. You can only use the following attributes to query findings:   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.outpostArn   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to TRUE, only archived findings are listed. When it's set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.  
+     * Represents the criteria to be used in the filter for querying findings. You can only use the following attributes to query findings:   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.outpostArn   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.errorCode   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to TRUE, only archived findings are listed. When it's set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.  
      */
     FindingCriteria: FindingCriteria;
     /**
@@ -839,7 +839,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
+     * A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.
      */
     AccountDetails: AccountDetails;
   }
@@ -1073,11 +1073,11 @@ declare namespace GuardDuty {
      */
     AutoEnable: Boolean;
     /**
-     * Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
+     * Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator account for your organization.
      */
     MemberAccountLimitReached: Boolean;
     /**
-     * An object that describes which data sources are enabled automatically for member accounts.
+     * Describes which data sources are enabled automatically for member accounts.
      */
     DataSources?: OrganizationDataSourceConfigurationsResult;
   }
@@ -1160,11 +1160,11 @@ declare namespace GuardDuty {
   }
   export interface DisassociateMembersRequest {
     /**
-     * The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the master account.
+     * The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.
      */
     DetectorId: DetectorId;
     /**
-     * A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
+     * A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.
      */
     AccountIds: AccountIds;
   }
@@ -1330,7 +1330,7 @@ declare namespace GuardDuty {
      */
     UpdatedAt?: String;
     /**
-     * An object that describes which data sources are enabled for the detector.
+     * Describes which data sources are enabled for the detector.
      */
     DataSources?: DataSourceConfigurationsResult;
     /**
@@ -1462,13 +1462,13 @@ declare namespace GuardDuty {
   }
   export interface GetMasterAccountResponse {
     /**
-     * The master account details.
+     * The administrator account details.
      */
     Master: Master;
   }
   export interface GetMemberDetectorsRequest {
     /**
-     * The detector ID for the master account.
+     * The detector ID for the administrator account.
      */
     DetectorId: DetectorId;
     /**
@@ -1847,7 +1847,7 @@ declare namespace GuardDuty {
   }
   export interface ListOrganizationAdminAccountsResponse {
     /**
-     * An AdminAccounts object that includes a list of accounts configured as GuardDuty delegated administrators.
+     * A list of accounts configured as GuardDuty delegated administrators.
      */
     AdminAccounts?: AdminAccounts;
     /**
@@ -1935,15 +1935,15 @@ declare namespace GuardDuty {
   export type Long = number;
   export interface Master {
     /**
-     * The ID of the account used as the master account.
+     * The ID of the account used as the administrator account.
      */
     AccountId?: AccountId;
     /**
-     * The value used to validate the master account to the member account.
+     * The value used to validate the administrator account to the member account.
      */
     InvitationId?: String;
     /**
-     * The status of the relationship between the master and member accounts.
+     * The status of the relationship between the administrator and member accounts.
      */
     RelationshipStatus?: String;
     /**
@@ -1962,7 +1962,7 @@ declare namespace GuardDuty {
      */
     DetectorId?: DetectorId;
     /**
-     * The master account ID.
+     * The administrator account ID.
      */
     MasterId: String;
     /**
@@ -1970,7 +1970,7 @@ declare namespace GuardDuty {
      */
     Email: Email;
     /**
-     * The status of the relationship between the member and the master.
+     * The status of the relationship between the member and the administrator.
      */
     RelationshipStatus: String;
     /**
@@ -2350,7 +2350,7 @@ declare namespace GuardDuty {
   }
   export interface StartMonitoringMembersRequest {
     /**
-     * The unique ID of the detector of the GuardDuty master account associated with the member accounts to monitor.
+     * The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
      */
     DetectorId: DetectorId;
     /**
@@ -2366,7 +2366,7 @@ declare namespace GuardDuty {
   }
   export interface StopMonitoringMembersRequest {
     /**
-     * The unique ID of the detector associated with the GuardDuty master account that is monitoring member accounts.
+     * The unique ID of the detector associated with the GuardDuty administrator account that is monitoring member accounts.
      */
     DetectorId: DetectorId;
     /**
@@ -2483,7 +2483,7 @@ declare namespace GuardDuty {
      */
     FindingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * An object that describes which data sources will be updated.
+     * Describes which data sources will be updated.
      */
     DataSources?: DataSourceConfigurations;
   }
@@ -2567,7 +2567,7 @@ declare namespace GuardDuty {
   }
   export interface UpdateMemberDetectorsRequest {
     /**
-     * The detector ID of the master account.
+     * The detector ID of the administrator account.
      */
     DetectorId: DetectorId;
     /**
@@ -2575,7 +2575,7 @@ declare namespace GuardDuty {
      */
     AccountIds: AccountIds;
     /**
-     * An object describes which data sources will be updated.
+     * Describes which data sources will be updated.
      */
     DataSources?: DataSourceConfigurations;
   }
@@ -2595,7 +2595,7 @@ declare namespace GuardDuty {
      */
     AutoEnable: Boolean;
     /**
-     * An object describes which data sources will be updated.
+     * Describes which data sources will be updated.
      */
     DataSources?: OrganizationDataSourceConfigurations;
   }
@@ -2631,7 +2631,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The updated URI of the file that contains the ThreateIntelSet.
      */
     Location?: Location;
     /**

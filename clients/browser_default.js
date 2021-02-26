@@ -85,5 +85,6 @@ module.exports = {
   PersonalizeRuntime: require('./personalizeruntime'),
   ForecastService: require('./forecastservice'),
   ForecastQueryService: require('./forecastqueryservice'),
-  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels')
+  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
+  LexRuntimeV2: require('./lexruntimev2')
 };

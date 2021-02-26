@@ -12,52 +12,116 @@ declare class ConnectParticipant extends Service {
   constructor(options?: ConnectParticipant.Types.ClientConfiguration)
   config: Config & ConnectParticipant.Types.ClientConfiguration;
   /**
-   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until the they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.
+   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. 
+   */
+  completeAttachmentUpload(params: ConnectParticipant.Types.CompleteAttachmentUploadRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.CompleteAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.CompleteAttachmentUploadResponse, AWSError>;
+  /**
+   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. 
+   */
+  completeAttachmentUpload(callback?: (err: AWSError, data: ConnectParticipant.Types.CompleteAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.CompleteAttachmentUploadResponse, AWSError>;
+  /**
+   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   createParticipantConnection(params: ConnectParticipant.Types.CreateParticipantConnectionRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.CreateParticipantConnectionResponse) => void): Request<ConnectParticipant.Types.CreateParticipantConnectionResponse, AWSError>;
   /**
-   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until the they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.
+   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   createParticipantConnection(callback?: (err: AWSError, data: ConnectParticipant.Types.CreateParticipantConnectionResponse) => void): Request<ConnectParticipant.Types.CreateParticipantConnectionResponse, AWSError>;
   /**
-   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   disconnectParticipant(params: ConnectParticipant.Types.DisconnectParticipantRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.DisconnectParticipantResponse) => void): Request<ConnectParticipant.Types.DisconnectParticipantResponse, AWSError>;
   /**
-   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   disconnectParticipant(callback?: (err: AWSError, data: ConnectParticipant.Types.DisconnectParticipantResponse) => void): Request<ConnectParticipant.Types.DisconnectParticipantResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.
+   */
+  getAttachment(params: ConnectParticipant.Types.GetAttachmentRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.GetAttachmentResponse) => void): Request<ConnectParticipant.Types.GetAttachmentResponse, AWSError>;
+  /**
+   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.
+   */
+  getAttachment(callback?: (err: AWSError, data: ConnectParticipant.Types.GetAttachmentResponse) => void): Request<ConnectParticipant.Types.GetAttachmentResponse, AWSError>;
+  /**
+   * Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(params: ConnectParticipant.Types.GetTranscriptRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
-   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendEvent(params: ConnectParticipant.Types.SendEventRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.SendEventResponse) => void): Request<ConnectParticipant.Types.SendEventResponse, AWSError>;
   /**
-   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendEvent(callback?: (err: AWSError, data: ConnectParticipant.Types.SendEventResponse) => void): Request<ConnectParticipant.Types.SendEventResponse, AWSError>;
   /**
-   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   sendMessage(params: ConnectParticipant.Types.SendMessageRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.SendMessageResponse) => void): Request<ConnectParticipant.Types.SendMessageResponse, AWSError>;
   /**
-   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   sendMessage(callback?: (err: AWSError, data: ConnectParticipant.Types.SendMessageResponse) => void): Request<ConnectParticipant.Types.SendMessageResponse, AWSError>;
+  /**
+   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+   */
+  startAttachmentUpload(params: ConnectParticipant.Types.StartAttachmentUploadRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.StartAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.StartAttachmentUploadResponse, AWSError>;
+  /**
+   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+   */
+  startAttachmentUpload(callback?: (err: AWSError, data: ConnectParticipant.Types.StartAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.StartAttachmentUploadResponse, AWSError>;
 }
 declare namespace ConnectParticipant {
+  export type ArtifactId = string;
+  export type ArtifactStatus = "APPROVED"|"REJECTED"|"IN_PROGRESS"|string;
+  export type AttachmentIdList = ArtifactId[];
+  export interface AttachmentItem {
+    /**
+     * Describes the MIME file type of the attachment. For a list of supported file types, see Feature specifications in the Amazon Connect Administrator Guide.
+     */
+    ContentType?: ContentType;
+    /**
+     * A unique identifier for the attachment.
+     */
+    AttachmentId?: ArtifactId;
+    /**
+     * A case-sensitive name of the attachment being uploaded.
+     */
+    AttachmentName?: AttachmentName;
+    /**
+     * Status of the attachment.
+     */
+    Status?: ArtifactStatus;
+  }
+  export type AttachmentName = string;
+  export type AttachmentSizeInBytes = number;
+  export type Attachments = AttachmentItem[];
   export type ChatContent = string;
   export type ChatContentType = string;
   export type ChatItemId = string;
-  export type ChatItemType = "MESSAGE"|"EVENT"|"CONNECTION_ACK"|string;
+  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|string;
   export type ClientToken = string;
+  export interface CompleteAttachmentUploadRequest {
+    /**
+     * A list of unique identifiers for the attachments.
+     */
+    AttachmentIds: AttachmentIdList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: NonEmptyClientToken;
+    /**
+     * The authentication token associated with the participant's connection.
+     */
+    ConnectionToken: ParticipantToken;
+  }
+  export interface CompleteAttachmentUploadResponse {
+  }
   export interface ConnectionCredentials {
     /**
      * The connection token.
@@ -71,13 +135,14 @@ declare namespace ConnectParticipant {
   export type ConnectionType = "WEBSOCKET"|"CONNECTION_CREDENTIALS"|string;
   export type ConnectionTypeList = ConnectionType[];
   export type ContactId = string;
+  export type ContentType = string;
   export interface CreateParticipantConnectionRequest {
     /**
      * Type of connection information required.
      */
     Type: ConnectionTypeList;
     /**
-     * Participant Token as obtained from StartChatContact API response.
+     * This is a header parameter. The Participant Token as obtained from StartChatContact API response.
      */
     ParticipantToken: ParticipantToken;
   }
@@ -104,6 +169,26 @@ declare namespace ConnectParticipant {
   export interface DisconnectParticipantResponse {
   }
   export type DisplayName = string;
+  export interface GetAttachmentRequest {
+    /**
+     * A unique identifier for the attachment.
+     */
+    AttachmentId: ArtifactId;
+    /**
+     * The authentication token associated with the participant's connection.
+     */
+    ConnectionToken: ParticipantToken;
+  }
+  export interface GetAttachmentResponse {
+    /**
+     * The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+     */
+    Url?: PreSignedAttachmentUrl;
+    /**
+     * The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+     */
+    UrlExpiry?: ISO8601Datetime;
+  }
   export interface GetTranscriptRequest {
     /**
      * The contactId from the current contact chain for which transcript is needed.
@@ -183,13 +268,19 @@ declare namespace ConnectParticipant {
      * The role of the sender. For example, is it a customer, agent, or system.
      */
     ParticipantRole?: ParticipantRole;
+    /**
+     * Provides information about the attachments.
+     */
+    Attachments?: Attachments;
   }
   export type MaxResults = number;
   export type MostRecent = number;
   export type NextToken = string;
+  export type NonEmptyClientToken = string;
   export type ParticipantId = string;
   export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|string;
   export type ParticipantToken = string;
+  export type PreSignedAttachmentUrl = string;
   export type PreSignedConnectionUrl = string;
   export type ScanDirection = "FORWARD"|"BACKWARD"|string;
   export interface SendEventRequest {
@@ -249,6 +340,38 @@ declare namespace ConnectParticipant {
     AbsoluteTime?: Instant;
   }
   export type SortKey = "DESCENDING"|"ASCENDING"|string;
+  export interface StartAttachmentUploadRequest {
+    /**
+     * Describes the MIME file type of the attachment. For a list of supported file types, see Feature specifications in the Amazon Connect Administrator Guide.
+     */
+    ContentType: ContentType;
+    /**
+     * The size of the attachment in bytes.
+     */
+    AttachmentSizeInBytes: AttachmentSizeInBytes;
+    /**
+     * A case-sensitive name of the attachment being uploaded.
+     */
+    AttachmentName: AttachmentName;
+    /**
+     * A unique case sensitive identifier to support idempotency of request.
+     */
+    ClientToken: NonEmptyClientToken;
+    /**
+     * The authentication token associated with the participant's connection.
+     */
+    ConnectionToken: ParticipantToken;
+  }
+  export interface StartAttachmentUploadResponse {
+    /**
+     * A unique identifier for the attachment.
+     */
+    AttachmentId?: ArtifactId;
+    /**
+     * Fields to be used while uploading the attachment.
+     */
+    UploadMetadata?: UploadMetadata;
+  }
   export interface StartPosition {
     /**
      * The ID of the message or event where to start. 
@@ -264,6 +387,24 @@ declare namespace ConnectParticipant {
     MostRecent?: MostRecent;
   }
   export type Transcript = Item[];
+  export interface UploadMetadata {
+    /**
+     * The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+     */
+    Url?: UploadMetadataUrl;
+    /**
+     * The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+     */
+    UrlExpiry?: ISO8601Datetime;
+    /**
+     * The headers to be provided while uploading the file to the URL.
+     */
+    HeadersToInclude?: UploadMetadataSignedHeaders;
+  }
+  export type UploadMetadataSignedHeaders = {[key: string]: UploadMetadataSignedHeadersValue};
+  export type UploadMetadataSignedHeadersKey = string;
+  export type UploadMetadataSignedHeadersValue = string;
+  export type UploadMetadataUrl = string;
   export interface Websocket {
     /**
      * The URL of the websocket.

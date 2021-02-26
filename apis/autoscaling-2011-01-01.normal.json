@@ -191,7 +191,7 @@
           "shape": "ServiceLinkedRoleFailure"
         }
       ],
-      "documentation": "<p>Creates an Auto Scaling group with the specified name and attributes. </p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the <a>DescribeAccountLimits</a> API. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For introductory exercises for creating an Auto Scaling group, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html\">Getting started with Amazon EC2 Auto Scaling</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html\">Tutorial: Set up a scaled and load-balanced application</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html\">Auto Scaling groups</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Every Auto Scaling group has three size parameters (<code>DesiredCapacity</code>, <code>MaxSize</code>, and <code>MinSize</code>). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.</p>"
+      "documentation": "<p> <b>We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b> </p> <p>Creates an Auto Scaling group with the specified name and attributes. </p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit, call the <a>DescribeAccountLimits</a> API. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For introductory exercises for creating an Auto Scaling group, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html\">Getting started with Amazon EC2 Auto Scaling</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html\">Tutorial: Set up a scaled and load-balanced application</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html\">Auto Scaling groups</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Every Auto Scaling group has three size parameters (<code>DesiredCapacity</code>, <code>MaxSize</code>, and <code>MinSize</code>). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.</p>"
     },
     "CreateLaunchConfiguration": {
       "name": "CreateLaunchConfiguration",
@@ -678,7 +678,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p> <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the <b>Activity history</b>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html\">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DescribeScalingProcessTypes": {
       "name": "DescribeScalingProcessTypes",
@@ -1189,7 +1189,7 @@
           "shape": "ServiceLinkedRoleFailure"
         }
       ],
-      "documentation": "<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns. </p> <p>If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application.</p> <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>, or <code>MinSize</code>:</p> <ul> <li> <p>If a scale-in activity occurs as a result of a new <code>DesiredCapacity</code> value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.</p> </li> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, this sets the group's <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, this sets the group's <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p> </li> </ul> <p>To see which parameters have been set, call the <a>DescribeAutoScalingGroups</a> API. To view the scaling policies for an Auto Scaling group, call the <a>DescribePolicies</a> API. If the group has scaling policies, you can update them by calling the <a>PutScalingPolicy</a> API.</p>"
+      "documentation": "<p> <b>We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b> </p> <p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don't specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns. </p> <p>If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application.</p> <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>, or <code>MinSize</code>:</p> <ul> <li> <p>If a scale-in activity occurs as a result of a new <code>DesiredCapacity</code> value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.</p> </li> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, this sets the group's <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, this sets the group's <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p> </li> </ul> <p>To see which parameters have been set, call the <a>DescribeAutoScalingGroups</a> API. To view the scaling policies for an Auto Scaling group, call the <a>DescribePolicies</a> API. If the group has scaling policies, you can update them by calling the <a>PutScalingPolicy</a> API.</p>"
     }
   },
   "shapes": {
@@ -1264,6 +1264,14 @@
         "Details": {
           "shape": "XmlString",
           "documentation": "<p>The details about the activity.</p>"
+        },
+        "AutoScalingGroupState": {
+          "shape": "AutoScalingGroupState",
+          "documentation": "<p>The state of the Auto Scaling group, which is either <code>InService</code> or <code>Deleted</code>.</p>"
+        },
+        "AutoScalingGroupARN": {
+          "shape": "ResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
         }
       },
       "documentation": "<p>Describes scaling activity, which is a long-running process that represents a change to your Auto Scaling group, such as changing its size or replacing an instance.</p>"
@@ -1339,7 +1347,7 @@
           "documentation": "<p>The IDs of the instances. You can specify up to 20 instances.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         }
       }
@@ -1356,7 +1364,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "TargetGroupARNs": {
@@ -1377,7 +1385,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "LoadBalancerNames": {
@@ -1522,7 +1530,7 @@
     "AutoScalingGroupNames": {
       "type": "list",
       "member": {
-        "shape": "ResourceName"
+        "shape": "XmlStringMaxLen255"
       }
     },
     "AutoScalingGroupNamesType": {
@@ -1541,6 +1549,11 @@
           "documentation": "<p>The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.</p>"
         }
       }
+    },
+    "AutoScalingGroupState": {
+      "type": "string",
+      "max": 32,
+      "min": 1
     },
     "AutoScalingGroups": {
       "type": "list",
@@ -1593,7 +1606,7 @@
         },
         "LifecycleState": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The lifecycle state for the instance.</p>"
+          "documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used. For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> | <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> | <code>Terminating</code> | <code>Terminating:Wait</code> | <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code> | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> </p>"
         },
         "HealthStatus": {
           "shape": "XmlStringMaxLen32",
@@ -1647,8 +1660,7 @@
       "type": "list",
       "member": {
         "shape": "XmlStringMaxLen255"
-      },
-      "min": 1
+      }
     },
     "BatchDeleteScheduledActionAnswer": {
       "type": "structure",
@@ -1667,7 +1679,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionNames": {
@@ -1693,7 +1705,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledUpdateGroupActions": {
@@ -1834,12 +1846,12 @@
           "documentation": "<p>The name of the Auto Scaling group. This name must be unique per Region per account.</p>"
         },
         "LaunchConfigurationName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the launch configuration to use to launch instances. </p> <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>) or a launch configuration (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>"
         },
         "LaunchTemplate": {
           "shape": "LaunchTemplateSpecification",
-          "documentation": "<p>Parameters used to specify the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html\">launch template</a> and version to use to launch instances. </p> <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>) or a launch configuration (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p> <note> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> </note>"
+          "documentation": "<p>Parameters used to specify the launch template and version to use to launch instances. </p> <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>) or a launch configuration (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p> <note> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> </note>"
         },
         "MixedInstancesPolicy": {
           "shape": "MixedInstancesPolicy",
@@ -1955,7 +1967,7 @@
         },
         "UserData": {
           "shape": "XmlStringUserData",
-          "documentation": "<p>The Base64-encoded user data to make available to the launched EC2 instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+          "documentation": "<p>The user data to make available to the launched EC2 instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.</p>"
         },
         "InstanceId": {
           "shape": "XmlStringMaxLen19",
@@ -1963,7 +1975,7 @@
         },
         "InstanceType": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>Specifies the instance type of the EC2 instance.</p> <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances.</i> </p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>InstanceType</code>.</p>"
+          "documentation": "<p>Specifies the instance type of the EC2 instance.</p> <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>InstanceType</code>.</p>"
         },
         "KernelId": {
           "shape": "XmlStringMaxLen255",
@@ -2057,7 +2069,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ForceDelete": {
@@ -2082,7 +2094,7 @@
           "documentation": "<p>The name of the lifecycle hook.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         }
       }
@@ -2095,11 +2107,11 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "TopicARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.</p>"
         }
       }
@@ -2111,7 +2123,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName": {
@@ -2128,11 +2140,11 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the action to delete.</p>"
         }
       }
@@ -2267,7 +2279,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleHookNames": {
@@ -2283,7 +2295,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "NextToken": {
@@ -2316,7 +2328,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "NextToken": {
@@ -2392,7 +2404,7 @@
       "type": "structure",
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyNames": {
@@ -2421,8 +2433,12 @@
           "documentation": "<p>The activity IDs of the desired scaling activities. You can specify up to 50 IDs. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
+        },
+        "IncludeDeletedGroups": {
+          "shape": "IncludeDeletedGroups",
+          "documentation": "<p>Indicates whether to include scaling activity from deleted Auto Scaling groups.</p>"
         },
         "MaxRecords": {
           "shape": "MaxRecords",
@@ -2438,7 +2454,7 @@
       "type": "structure",
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionNames": {
@@ -2510,7 +2526,7 @@
           "documentation": "<p>The IDs of the instances. You can specify up to 20 instances.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ShouldDecrementDesiredCapacity": {
@@ -2531,7 +2547,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "TargetGroupARNs": {
@@ -2552,7 +2568,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "LoadBalancerNames": {
@@ -2568,7 +2584,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "Metrics": {
@@ -2621,7 +2637,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "Metrics": {
@@ -2675,7 +2691,7 @@
           "documentation": "<p>The IDs of the instances. You can specify up to 20 instances.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ShouldDecrementDesiredCapacity": {
@@ -2694,7 +2710,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName": {
@@ -2735,7 +2751,7 @@
           "documentation": "<p>The IDs of the instances. You can specify up to 20 instances.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         }
       }
@@ -2802,6 +2818,9 @@
     "HonorCooldown": {
       "type": "boolean"
     },
+    "IncludeDeletedGroups": {
+      "type": "boolean"
+    },
     "Instance": {
       "type": "structure",
       "required": [
@@ -2826,7 +2845,7 @@
         },
         "LifecycleState": {
           "shape": "LifecycleState",
-          "documentation": "<p>A description of the current lifecycle state. The <code>Quarantined</code> state is not used.</p>"
+          "documentation": "<p>A description of the current lifecycle state. The <code>Quarantined</code> state is not used. For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
         },
         "HealthStatus": {
           "shape": "XmlStringMaxLen32",
@@ -2885,7 +2904,7 @@
         },
         "HttpPutResponseHopLimit": {
           "shape": "InstanceMetadataHttpPutResponseHopLimit",
-          "documentation": "<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>"
+          "documentation": "<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p>"
         },
         "HttpEndpoint": {
           "shape": "InstanceMetadataEndpointState",
@@ -3052,11 +3071,11 @@
         },
         "UserData": {
           "shape": "XmlStringUserData",
-          "documentation": "<p>The Base64-encoded user data to make available to the launched EC2 instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+          "documentation": "<p>The user data to make available to the launched EC2 instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.</p>"
         },
         "InstanceType": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>The instance type for the instances.</p> <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances.</i> </p>"
+          "documentation": "<p>The instance type for the instances.</p> <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
         },
         "KernelId": {
           "shape": "XmlStringMaxLen255",
@@ -3112,7 +3131,7 @@
       ],
       "members": {
         "LaunchConfigurationName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the launch configuration.</p>"
         }
       }
@@ -3120,7 +3139,7 @@
     "LaunchConfigurationNames": {
       "type": "list",
       "member": {
-        "shape": "ResourceName"
+        "shape": "XmlStringMaxLen255"
       }
     },
     "LaunchConfigurationNamesType": {
@@ -3198,7 +3217,7 @@
           "documentation": "<p>Provides the launch template to be used when launching the instance type. For example, some instance types might require a launch template with a different AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html\">Specifying a different launch template for an instance type</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
         }
       },
-      "documentation": "<p>Describes an override for a launch template. The maximum number of instance types that can be associated with an Auto Scaling group is 20. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+      "documentation": "<p>Describes an override for a launch template. The maximum number of instance types that can be associated with an Auto Scaling group is 40. The maximum number of distinct launch templates you can define for an Auto Scaling group is 20. For more information about configuring overrides, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
     },
     "LaunchTemplateSpecification": {
       "type": "structure",
@@ -3234,7 +3253,7 @@
           "documentation": "<p>The name of the lifecycle hook.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group for the lifecycle hook.</p>"
         },
         "LifecycleTransition": {
@@ -3242,11 +3261,11 @@
           "documentation": "<p>The state of the EC2 instance to which to attach the lifecycle hook. The following are possible values:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>"
         },
         "NotificationTargetARN": {
-          "shape": "ResourceName",
+          "shape": "NotificationTargetResourceName",
           "documentation": "<p>The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.</p>"
         },
         "RoleARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.</p>"
         },
         "NotificationMetadata": {
@@ -3307,7 +3326,7 @@
           "documentation": "<p>The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.</p>"
         },
         "RoleARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p>"
         }
       },
@@ -3539,11 +3558,11 @@
       "type": "structure",
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "TopicARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.</p>"
         },
         "NotificationType": {
@@ -3561,7 +3580,7 @@
     },
     "NotificationTargetResourceName": {
       "type": "string",
-      "max": 1600,
+      "max": 255,
       "min": 0,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
@@ -3701,7 +3720,7 @@
           "documentation": "<p>The name of the lifecycle hook.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleTransition": {
@@ -3709,7 +3728,7 @@
           "documentation": "<p>The instance state to which you want to attach the lifecycle hook. The valid values are:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul> <p>Required for new lifecycle hooks, but optional when updating existing hooks.</p>"
         },
         "RoleARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p> <p>Required for new lifecycle hooks, but optional when updating existing hooks.</p>"
         },
         "NotificationTargetARN": {
@@ -3739,11 +3758,11 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "TopicARN": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.</p>"
         },
         "NotificationTypes": {
@@ -3760,7 +3779,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName": {
@@ -3821,7 +3840,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionName": {
@@ -4016,7 +4035,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ScalingProcesses": {
@@ -4028,7 +4047,7 @@
     "ScheduledActionNames": {
       "type": "list",
       "member": {
-        "shape": "ResourceName"
+        "shape": "XmlStringMaxLen255"
       }
     },
     "ScheduledActionsType": {
@@ -4153,7 +4172,7 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "DesiredCapacity": {
@@ -4204,7 +4223,7 @@
           "documentation": "<p>One or more instance IDs. You can specify up to 50 instances.</p>"
         },
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ProtectedFromScaleIn": {
@@ -4459,11 +4478,11 @@
       ],
       "members": {
         "AutoScalingGroupName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "LaunchConfigurationName": {
-          "shape": "ResourceName",
+          "shape": "XmlStringMaxLen255",
           "documentation": "<p>The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request, you can't specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p>"
         },
         "LaunchTemplate": {

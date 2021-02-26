@@ -20,31 +20,31 @@ declare class Detective extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the master account for one behavior graph within a Region. If the same account calls CreateGraph with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
+   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
   createGraph(callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
   /**
-   * Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the master account for a behavior graph.   CreateMembers verifies the accounts and then sends invitations to the verified accounts. The request provides the behavior graph ARN and the list of accounts to invite. The response separates the requested accounts into two lists:   The accounts that CreateMembers was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are being sent an invitation, and that have failed verification.   The accounts that CreateMembers was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.  
+   * Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the administrator account for a behavior graph.   CreateMembers verifies the accounts and then invites the verified accounts. The administrator can optionally specify to not send invitation emails to the member accounts. This would be used when the administrator manages their member accounts centrally. The request provides the behavior graph ARN and the list of accounts to invite. The response separates the requested accounts into two lists:   The accounts that CreateMembers was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are to be invited, and that have failed verification.   The accounts that CreateMembers was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.  
    */
   createMembers(params: Detective.Types.CreateMembersRequest, callback?: (err: AWSError, data: Detective.Types.CreateMembersResponse) => void): Request<Detective.Types.CreateMembersResponse, AWSError>;
   /**
-   * Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the master account for a behavior graph.   CreateMembers verifies the accounts and then sends invitations to the verified accounts. The request provides the behavior graph ARN and the list of accounts to invite. The response separates the requested accounts into two lists:   The accounts that CreateMembers was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are being sent an invitation, and that have failed verification.   The accounts that CreateMembers was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.  
+   * Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the administrator account for a behavior graph.   CreateMembers verifies the accounts and then invites the verified accounts. The administrator can optionally specify to not send invitation emails to the member accounts. This would be used when the administrator manages their member accounts centrally. The request provides the behavior graph ARN and the list of accounts to invite. The response separates the requested accounts into two lists:   The accounts that CreateMembers was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are to be invited, and that have failed verification.   The accounts that CreateMembers was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.  
    */
   createMembers(callback?: (err: AWSError, data: Detective.Types.CreateMembersResponse) => void): Request<Detective.Types.CreateMembersResponse, AWSError>;
   /**
-   * Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.  DeleteGraph can only be called by the master account for a behavior graph.
+   * Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.  DeleteGraph can only be called by the administrator account for a behavior graph.
    */
   deleteGraph(params: Detective.Types.DeleteGraphRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.  DeleteGraph can only be called by the master account for a behavior graph.
+   * Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.  DeleteGraph can only be called by the administrator account for a behavior graph.
    */
   deleteGraph(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
+   * Deletes one or more member accounts from the administrator account's behavior graph. This operation can only be called by a Detective administrator account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the administrator account uses the DeleteGraph API method.
    */
   deleteMembers(params: Detective.Types.DeleteMembersRequest, callback?: (err: AWSError, data: Detective.Types.DeleteMembersResponse) => void): Request<Detective.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
+   * Deletes one or more member accounts from the administrator account's behavior graph. This operation can only be called by a Detective administrator account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the administrator account uses the DeleteGraph API method.
    */
   deleteMembers(callback?: (err: AWSError, data: Detective.Types.DeleteMembersResponse) => void): Request<Detective.Types.DeleteMembersResponse, AWSError>;
   /**
@@ -64,11 +64,11 @@ declare class Detective extends Service {
    */
   getMembers(callback?: (err: AWSError, data: Detective.Types.GetMembersResponse) => void): Request<Detective.Types.GetMembersResponse, AWSError>;
   /**
-   * Returns the list of behavior graphs that the calling account is a master of. This operation can only be called by a master account. Because an account can currently only be the master of one behavior graph within a Region, the results always contain a single graph.
+   * Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account. Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.
    */
   listGraphs(params: Detective.Types.ListGraphsRequest, callback?: (err: AWSError, data: Detective.Types.ListGraphsResponse) => void): Request<Detective.Types.ListGraphsResponse, AWSError>;
   /**
-   * Returns the list of behavior graphs that the calling account is a master of. This operation can only be called by a master account. Because an account can currently only be the master of one behavior graph within a Region, the results always contain a single graph.
+   * Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account. Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.
    */
   listGraphs(callback?: (err: AWSError, data: Detective.Types.ListGraphsResponse) => void): Request<Detective.Types.ListGraphsResponse, AWSError>;
   /**
@@ -124,6 +124,7 @@ declare namespace Detective {
   export type AccountId = string;
   export type AccountIdList = AccountId[];
   export type AccountList = Account[];
+  export type Boolean = boolean;
   export interface CreateGraphResponse {
     /**
      * The ARN of the new behavior graph.
@@ -139,6 +140,10 @@ declare namespace Detective {
      * Customized message text to include in the invitation email message to the invited member accounts.
      */
     Message?: EmailMessage;
+    /**
+     * if set to true, then the member accounts do not receive email notifications. By default, this is set to false, and the member accounts receive email notifications.
+     */
+    DisableEmailNotification?: Boolean;
     /**
      * The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.
      */
@@ -232,7 +237,7 @@ declare namespace Detective {
   }
   export interface ListGraphsResponse {
     /**
-     * A list of behavior graphs that the account is a master for.
+     * A list of behavior graphs that the account is an administrator account for.
      */
     GraphList?: GraphList;
     /**
@@ -298,9 +303,13 @@ declare namespace Detective {
      */
     GraphArn?: GraphArn;
     /**
-     * The AWS account identifier of the master account for the behavior graph.
+     * Deprecated. Instead of MasterId, use AdministratorId. The AWS account identifier of the administrator account for the behavior graph.
      */
     MasterId?: AccountId;
+    /**
+     * The AWS account identifier of the administrator account for the behavior graph.
+     */
+    AdministratorId?: AccountId;
     /**
      * The current membership status of the member account. The status can have one of the following values:    INVITED - Indicates that the member was sent an invitation but has not yet responded.    VERIFICATION_IN_PROGRESS - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don't match, then the member cannot be added to the behavior graph.    VERIFICATION_FAILED - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.    ENABLED - Indicates that the member account accepted the invitation to contribute to the behavior graph.    ACCEPTED_BUT_DISABLED - Indicates that the member account accepted the invitation but is prevented from contributing data to the behavior graph. DisabledReason provides the reason why the member account is not enabled.   Member accounts that declined an invitation or that were removed from the behavior graph are not included.
      */

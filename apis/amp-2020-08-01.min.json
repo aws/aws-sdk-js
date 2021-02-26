@@ -1,0 +1,211 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-08-01",
+    "endpointPrefix": "aps",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon Prometheus Service",
+    "serviceId": "amp",
+    "signatureVersion": "v4",
+    "signingName": "aps",
+    "uid": "amp-2020-08-01"
+  },
+  "operations": {
+    "CreateWorkspace": {
+      "http": {
+        "requestUri": "/workspaces",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "alias": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "status",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "status": {
+            "shape": "S6"
+          },
+          "workspaceId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteWorkspace": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true,
+            "location": "querystring",
+            "locationName": "clientToken"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DescribeWorkspace": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "workspace"
+        ],
+        "members": {
+          "workspace": {
+            "type": "structure",
+            "required": [
+              "arn",
+              "createdAt",
+              "status",
+              "workspaceId"
+            ],
+            "members": {
+              "alias": {},
+              "arn": {},
+              "createdAt": {
+                "type": "timestamp"
+              },
+              "prometheusEndpoint": {},
+              "status": {
+                "shape": "S6"
+              },
+              "workspaceId": {}
+            }
+          }
+        }
+      }
+    },
+    "ListWorkspaces": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "alias": {
+            "location": "querystring",
+            "locationName": "alias"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "workspaces"
+        ],
+        "members": {
+          "nextToken": {},
+          "workspaces": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createdAt",
+                "status",
+                "workspaceId"
+              ],
+              "members": {
+                "alias": {},
+                "arn": {},
+                "createdAt": {
+                  "type": "timestamp"
+                },
+                "status": {
+                  "shape": "S6"
+                },
+                "workspaceId": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "UpdateWorkspaceAlias": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/alias",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "alias": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "structure",
+      "required": [
+        "statusCode"
+      ],
+      "members": {
+        "statusCode": {}
+      }
+    }
+  }
+}

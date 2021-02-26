@@ -13,6 +13,40 @@
     "uid": "eks-2017-11-01"
   },
   "operations": {
+    "AssociateIdentityProviderConfig": {
+      "name": "AssociateIdentityProviderConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/clusters/{name}/identity-provider-configs/associate"
+      },
+      "input": {
+        "shape": "AssociateIdentityProviderConfigRequest"
+      },
+      "output": {
+        "shape": "AssociateIdentityProviderConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Associate an identity provider configuration to a cluster.</p> <p>If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes <code>roles</code> and <code>clusterroles</code> to assign permissions to the roles, and then bind the roles to the identities using Kubernetes <code>rolebindings</code> and <code>clusterrolebindings</code>. For more information see <a href=\"https://kubernetes.io/docs/reference/access-authn-authz/rbac/\">Using RBAC Authorization</a> in the Kubernetes documentation.</p>"
+    },
     "CreateAddon": {
       "name": "CreateAddon",
       "http": {
@@ -82,7 +116,7 @@
           "shape": "UnsupportedAvailabilityZoneException"
         }
       ],
-      "documentation": "<p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in an account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its own set of Amazon EC2 instances.</p> <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the worker nodes (for example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data flows).</p> <p>Amazon EKS worker nodes run in your AWS account and connect to your cluster's control plane via the Kubernetes API server endpoint and a certificate file that is created for your cluster.</p> <p>You can use the <code>endpointPublicAccess</code> and <code>endpointPrivateAccess</code> parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>. </p> <p>You can use the <code>logging</code> parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> </note> <p>Cluster creation typically takes between 10 and 15 minutes. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch worker nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS Worker Nodes</a> in the <i>Amazon EKS User Guide</i>.</p>"
+      "documentation": "<p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in an account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its own set of Amazon EC2 instances.</p> <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data flows).</p> <p>Amazon EKS nodes run in your AWS account and connect to your cluster's control plane via the Kubernetes API server endpoint and a certificate file that is created for your cluster.</p> <p>You can use the <code>endpointPublicAccess</code> and <code>endpointPrivateAccess</code> parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>. </p> <p>You can use the <code>logging</code> parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> </note> <p>Cluster creation typically takes between 10 and 15 minutes. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>"
     },
     "CreateFargateProfile": {
       "name": "CreateFargateProfile",
@@ -153,7 +187,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates a managed worker node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a>.</p> <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>"
+      "documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a>.</p> <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>"
     },
     "DeleteAddon": {
       "name": "DeleteAddon",
@@ -391,6 +425,37 @@
       ],
       "documentation": "<p>Returns descriptive information about an AWS Fargate profile.</p>"
     },
+    "DescribeIdentityProviderConfig": {
+      "name": "DescribeIdentityProviderConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/clusters/{name}/identity-provider-configs/describe"
+      },
+      "input": {
+        "shape": "DescribeIdentityProviderConfigRequest"
+      },
+      "output": {
+        "shape": "DescribeIdentityProviderConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns descriptive information about an identity provider configuration.</p>"
+    },
     "DescribeNodegroup": {
       "name": "DescribeNodegroup",
       "http": {
@@ -449,6 +514,40 @@
         }
       ],
       "documentation": "<p>Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group.</p> <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an update fails, the status is <code>Failed</code>, and an error detail explains the reason for the failure.</p>"
+    },
+    "DisassociateIdentityProviderConfig": {
+      "name": "DisassociateIdentityProviderConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/clusters/{name}/identity-provider-configs/disassociate"
+      },
+      "input": {
+        "shape": "DisassociateIdentityProviderConfigRequest"
+      },
+      "output": {
+        "shape": "DisassociateIdentityProviderConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with AWS IAM users.</p>"
     },
     "ListAddons": {
       "name": "ListAddons",
@@ -536,6 +635,37 @@
         }
       ],
       "documentation": "<p>Lists the AWS Fargate profiles associated with the specified cluster in your AWS account in the specified Region.</p>"
+    },
+    "ListIdentityProviderConfigs": {
+      "name": "ListIdentityProviderConfigs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/clusters/{name}/identity-provider-configs"
+      },
+      "input": {
+        "shape": "ListIdentityProviderConfigsRequest"
+      },
+      "output": {
+        "shape": "ListIdentityProviderConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>A list of identity provider configurations.</p>"
     },
     "ListNodegroups": {
       "name": "ListNodegroups",
@@ -638,7 +768,7 @@
           "shape": "NotFoundException"
         }
       ],
-      "documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. Tags that you create for Amazon EKS resources do not propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag does not automatically propagate to the subnets and worker nodes associated with the cluster.</p>"
+      "documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. Tags that you create for Amazon EKS resources do not propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag does not automatically propagate to the subnets and nodes associated with the cluster.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -992,6 +1122,46 @@
         "shape": "AddonInfo"
       }
     },
+    "AssociateIdentityProviderConfigRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName",
+        "oidc"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The name of the cluster to associate the configuration to.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "oidc": {
+          "shape": "OidcIdentityProviderConfigRequest",
+          "documentation": "<p>An object that represents an OpenID Connect (OIDC) identity provider configuration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "AssociateIdentityProviderConfigResponse": {
+      "type": "structure",
+      "members": {
+        "update": {
+          "shape": "Update"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      }
+    },
     "AutoScalingGroup": {
       "type": "structure",
       "members": {
@@ -1338,7 +1508,7 @@
         },
         "instanceTypes": {
           "shape": "StringList",
-          "documentation": "<p>Specify the instance types for a node group. If you specify a GPU instance type, be sure to specify <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter. If you specify <code>launchTemplate</code>, then you can specify zero or one instance type in your launch template <i>or</i> you can specify 0-20 instance types for <code>instanceTypes</code>. If however, you specify an instance type in your launch template <i>and</i> specify any <code>instanceTypes</code>, the node group deployment will fail. If you don't specify an instance type in a launch template or for <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying multiple values for <code>instanceTypes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/managed-node-groups.html#managed-node-group-capacity-types\">Managed node group capacity types</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+          "documentation": "<p>Specify the instance types for a node group. If you specify a GPU instance type, be sure to specify <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter. If you specify <code>launchTemplate</code>, then you can specify zero or one instance type in your launch template <i>or</i> you can specify 0-20 instance types for <code>instanceTypes</code>. If however, you specify an instance type in your launch template <i>and</i> specify any <code>instanceTypes</code>, the node group deployment will fail. If you don't specify an instance type in a launch template or for <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying multiple values for <code>instanceTypes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types\">Managed node group capacity types</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "amiType": {
           "shape": "AMITypes",
@@ -1350,7 +1520,7 @@
         },
         "nodeRole": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch worker nodes and register them into a cluster, you must create an IAM role for those worker nodes to use when they are launched. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS Worker Node IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify <code>launchTemplate</code>, then don't specify <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\"> <code>IamInstanceProfile</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies. Before you can launch nodes and register them into a cluster, you must create an IAM role for those nodes to use when they are launched. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS node IAM role</a> in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify <code>launchTemplate</code>, then don't specify <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\"> <code>IamInstanceProfile</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
         },
         "labels": {
           "shape": "labelsMap",
@@ -1634,6 +1804,34 @@
         }
       }
     },
+    "DescribeIdentityProviderConfigRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName",
+        "identityProviderConfig"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The cluster name that the identity provider configuration is associated to.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "identityProviderConfig": {
+          "shape": "IdentityProviderConfig",
+          "documentation": "<p>An object that represents an identity provider configuration.</p>"
+        }
+      }
+    },
+    "DescribeIdentityProviderConfigResponse": {
+      "type": "structure",
+      "members": {
+        "identityProviderConfig": {
+          "shape": "IdentityProviderConfigResponse",
+          "documentation": "<p>The object that represents an OpenID Connect (OIDC) identity provider configuration.</p>"
+        }
+      }
+    },
     "DescribeNodegroupRequest": {
       "type": "structure",
       "required": [
@@ -1703,6 +1901,38 @@
         "update": {
           "shape": "Update",
           "documentation": "<p>The full description of the specified update.</p>"
+        }
+      }
+    },
+    "DisassociateIdentityProviderConfigRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName",
+        "identityProviderConfig"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The name of the cluster to disassociate an identity provider from.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "identityProviderConfig": {
+          "shape": "IdentityProviderConfig",
+          "documentation": "<p>An object that represents an identity provider configuration.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "String",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "DisassociateIdentityProviderConfigResponse": {
+      "type": "structure",
+      "members": {
+        "update": {
+          "shape": "Update"
         }
       }
     },
@@ -1862,17 +2092,51 @@
       "members": {
         "oidc": {
           "shape": "OIDC",
-          "documentation": "<p>The <a href=\"https://openid.net/connect/\">OpenID Connect</a> identity provider information for the cluster.</p>"
+          "documentation": "<p>An object representing the <a href=\"https://openid.net/connect/\">OpenID Connect</a> identity provider information.</p>"
         }
       },
-      "documentation": "<p>An object representing an identity provider for authentication credentials.</p>"
+      "documentation": "<p>An object representing an identity provider.</p>"
+    },
+    "IdentityProviderConfig": {
+      "type": "structure",
+      "required": [
+        "type",
+        "name"
+      ],
+      "members": {
+        "type": {
+          "shape": "String",
+          "documentation": "<p>The type of the identity provider configuration.</p>"
+        },
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the identity provider configuration.</p>"
+        }
+      },
+      "documentation": "<p>An object representing an identity provider configuration.</p>"
+    },
+    "IdentityProviderConfigResponse": {
+      "type": "structure",
+      "members": {
+        "oidc": {
+          "shape": "OidcIdentityProviderConfig",
+          "documentation": "<p>An object that represents an OpenID Connect (OIDC) identity provider configuration.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents an identity configuration.</p>"
+    },
+    "IdentityProviderConfigs": {
+      "type": "list",
+      "member": {
+        "shape": "IdentityProviderConfig"
+      }
     },
     "Issue": {
       "type": "structure",
       "members": {
         "code": {
           "shape": "NodegroupIssueCode",
-          "documentation": "<p>A brief description of the error.</p> <ul> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>ClusterUnreachable</b>: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests. </p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn't find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SubnetInvalidConfiguration</b>: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the <code>auto-assign public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying the public IPv4 addressing attribute for your subnet</a> in the Amazon VPC User Guide.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">worker node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> </ul>"
+          "documentation": "<p>A brief description of the error.</p> <ul> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>ClusterUnreachable</b>: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests. </p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn't find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SubnetInvalidConfiguration</b>: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the <code>auto-assign public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying the public IPv4 addressing attribute for your subnet</a> in the Amazon VPC User Guide.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> </ul>"
         },
         "message": {
           "shape": "String",
@@ -2046,6 +2310,51 @@
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListFargateProfiles</code> request. When the results of a <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListIdentityProviderConfigsRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The cluster name that you want to list identity provider configurations for.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "maxResults": {
+          "shape": "ListIdentityProviderConfigsRequestMaxResults",
+          "documentation": "<p>The maximum number of identity provider configurations returned by <code>ListIdentityProviderConfigs</code> in paginated output. When you use this parameter, <code>ListIdentityProviderConfigs</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListIdentityProviderConfigs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If you don't use this parameter, <code>ListIdentityProviderConfigs</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>IdentityProviderConfigsRequest</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListIdentityProviderConfigsRequestMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
+    },
+    "ListIdentityProviderConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "identityProviderConfigs": {
+          "shape": "IdentityProviderConfigs",
+          "documentation": "<p>The identity provider configurations for the cluster.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListIdentityProviderConfigsResponse</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -2281,7 +2590,7 @@
         },
         "nodeRole": {
           "shape": "String",
-          "documentation": "<p>The IAM role associated with your node group. The Amazon EKS worker node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions for these API calls through an IAM instance profile and associated policies.</p>"
+          "documentation": "<p>The IAM role associated with your node group. The Amazon EKS node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies.</p>"
         },
         "labels": {
           "shape": "labelsMap",
@@ -2352,7 +2661,7 @@
         },
         "remoteAccessSecurityGroup": {
           "shape": "String",
-          "documentation": "<p>The remote access security group associated with the node group. This security group controls SSH access to the worker nodes.</p>"
+          "documentation": "<p>The remote access security group associated with the node group. This security group controls SSH access to the nodes.</p>"
         }
       },
       "documentation": "<p>An object representing the resources associated with the node group, such as Auto Scaling groups and security groups for remote access.</p>"
@@ -2362,15 +2671,15 @@
       "members": {
         "minSize": {
           "shape": "Capacity",
-          "documentation": "<p>The minimum number of worker nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
+          "documentation": "<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
         },
         "maxSize": {
           "shape": "Capacity",
-          "documentation": "<p>The maximum number of worker nodes that the managed node group can scale out to. Managed node groups can support up to 100 nodes by default.</p>"
+          "documentation": "<p>The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html\">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "desiredSize": {
           "shape": "Capacity",
-          "documentation": "<p>The current number of worker nodes that the managed node group should maintain.</p>"
+          "documentation": "<p>The current number of nodes that the managed node group should maintain.</p>"
         }
       },
       "documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. If you specify a value for any property, then you must specify values for all of the properties.</p>"
@@ -2392,10 +2701,107 @@
       "members": {
         "issuer": {
           "shape": "String",
-          "documentation": "<p>The issuer URL for the OpenID Connect identity provider.</p>"
+          "documentation": "<p>The issuer URL for the OIDC identity provider.</p>"
         }
       },
-      "documentation": "<p>An object representing the <a href=\"https://openid.net/connect/\">OpenID Connect</a> identity provider information for the cluster.</p>"
+      "documentation": "<p>An object representing the <a href=\"https://openid.net/connect/\">OpenID Connect</a> (OIDC) identity provider information for the cluster.</p>"
+    },
+    "OidcIdentityProviderConfig": {
+      "type": "structure",
+      "members": {
+        "identityProviderConfigName": {
+          "shape": "String",
+          "documentation": "<p>The name of the configuration.</p>"
+        },
+        "identityProviderConfigArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the configuration.</p>"
+        },
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The cluster that the configuration is associated to.</p>"
+        },
+        "issuerUrl": {
+          "shape": "String",
+          "documentation": "<p>The URL of the OIDC identity provider that allows the API server to discover public signing keys for verifying tokens.</p>"
+        },
+        "clientId": {
+          "shape": "String",
+          "documentation": "<p>This is also known as <i>audience</i>. The ID of the client application that makes authentication requests to the OIDC identity provider.</p>"
+        },
+        "usernameClaim": {
+          "shape": "String",
+          "documentation": "<p>The JSON Web token (JWT) claim that is used as the username.</p>"
+        },
+        "usernamePrefix": {
+          "shape": "String",
+          "documentation": "<p>The prefix that is prepended to username claims to prevent clashes with existing names. The prefix can't contain <code>system:</code> </p>"
+        },
+        "groupsClaim": {
+          "shape": "String",
+          "documentation": "<p>The JSON web token (JWT) claim that the provider uses to return your groups.</p>"
+        },
+        "groupsPrefix": {
+          "shape": "String",
+          "documentation": "<p>The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> creates group names like <code>oidc:engineering</code> and <code>oidc:infra</code>. The prefix can't contain <code>system:</code> </p>"
+        },
+        "requiredClaims": {
+          "shape": "requiredClaimsMap",
+          "documentation": "<p>The key-value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.</p>"
+        },
+        "status": {
+          "shape": "configStatus",
+          "documentation": "<p>The status of the OIDC identity provider.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the configuration for an OpenID Connect (OIDC) identity provider. </p>"
+    },
+    "OidcIdentityProviderConfigRequest": {
+      "type": "structure",
+      "required": [
+        "identityProviderConfigName",
+        "issuerUrl",
+        "clientId"
+      ],
+      "members": {
+        "identityProviderConfigName": {
+          "shape": "String",
+          "documentation": "<p>The name of the OIDC provider configuration.</p>"
+        },
+        "issuerUrl": {
+          "shape": "String",
+          "documentation": "<p>The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider's OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.</p>"
+        },
+        "clientId": {
+          "shape": "String",
+          "documentation": "<p>This is also known as <i>audience</i>. The ID for the client application that makes authentication requests to the OpenID identity provider.</p>"
+        },
+        "usernameClaim": {
+          "shape": "String",
+          "documentation": "<p>The JSON Web Token (JWT) claim to use as the username. The default is <code>sub</code>, which is expected to be a unique identifier of the end user. You can choose other claims, such as <code>email</code> or <code>name</code>, depending on the OpenID identity provider. Claims other than <code>email</code> are prefixed with the issuer URL to prevent naming clashes with other plug-ins.</p>"
+        },
+        "usernamePrefix": {
+          "shape": "String",
+          "documentation": "<p>The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and <code>username</code> is a value other than <code>email</code>, the prefix defaults to <code>issuerurl#</code>. You can use the value <code>-</code> to disable all prefixing.</p>"
+        },
+        "groupsClaim": {
+          "shape": "String",
+          "documentation": "<p>The JWT claim that the provider uses to return your groups.</p>"
+        },
+        "groupsPrefix": {
+          "shape": "String",
+          "documentation": "<p>The prefix that is prepended to group claims to prevent clashes with existing names (such as <code>system:</code> groups). For example, the value<code> oidc:</code> will create group names like <code>oidc:engineering</code> and <code>oidc:infra</code>.</p>"
+        },
+        "requiredClaims": {
+          "shape": "requiredClaimsMap",
+          "documentation": "<p>The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html\">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>An object representing an OpenID Connect (OIDC) configuration. Before associating an OIDC identity provider to your cluster, review the considerations in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html\">Authenticating users for your cluster from an OpenID Connect identity provider</a> in the <i>Amazon EKS User Guide</i>.</p>"
     },
     "Provider": {
       "type": "structure",
@@ -2412,11 +2818,11 @@
       "members": {
         "ec2SshKey": {
           "shape": "String",
-          "documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the worker nodes in the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
+          "documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
         },
         "sourceSecurityGroups": {
           "shape": "StringList",
-          "documentation": "<p>The security groups that are allowed SSH access (port 22) to the worker nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+          "documentation": "<p>The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
         }
       },
       "documentation": "<p>An object representing the remote access configuration for the managed node group.</p>"
@@ -2799,6 +3205,7 @@
         "MinSize",
         "ReleaseVersion",
         "PublicAccessCidrs",
+        "IdentityProviderConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
         "ResolveConflicts"
@@ -2826,6 +3233,8 @@
         "EndpointAccessUpdate",
         "LoggingUpdate",
         "ConfigUpdate",
+        "AssociateIdentityProviderConfig",
+        "DisassociateIdentityProviderConfig",
         "AddonUpdate"
       ]
     },
@@ -2834,11 +3243,11 @@
       "members": {
         "subnetIds": {
           "shape": "StringList",
-          "documentation": "<p>Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.</p>"
+          "documentation": "<p>Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.</p>"
         },
         "securityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         },
         "endpointPublicAccess": {
           "shape": "BoxedBoolean",
@@ -2846,11 +3255,11 @@
         },
         "endpointPrivateAccess": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the worker nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         },
         "publicAccessCidrs": {
           "shape": "StringList",
-          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         }
       },
       "documentation": "<p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>"
@@ -2864,7 +3273,7 @@
         },
         "securityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.</p>"
+          "documentation": "<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>"
         },
         "clusterSecurityGroupId": {
           "shape": "String",
@@ -2880,14 +3289,22 @@
         },
         "endpointPrivateAccess": {
           "shape": "Boolean",
-          "documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have worker nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the worker nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         },
         "publicAccessCidrs": {
           "shape": "StringList",
-          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"
+    },
+    "configStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "DELETING",
+        "ACTIVE"
+      ]
     },
     "labelKey": {
       "type": "string",
@@ -2913,6 +3330,25 @@
       "value": {
         "shape": "labelValue"
       }
+    },
+    "requiredClaimsKey": {
+      "type": "string",
+      "max": 63,
+      "min": 1
+    },
+    "requiredClaimsMap": {
+      "type": "map",
+      "key": {
+        "shape": "requiredClaimsKey"
+      },
+      "value": {
+        "shape": "requiredClaimsValue"
+      }
+    },
+    "requiredClaimsValue": {
+      "type": "string",
+      "max": 253,
+      "min": 1
     }
   },
   "documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>"

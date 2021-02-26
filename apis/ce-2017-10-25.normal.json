@@ -299,6 +299,37 @@
       ],
       "documentation": "<p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in AWS Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p> <note> <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html\">Controlling Access for Cost Explorer</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> </note>"
     },
+    "GetCostCategories": {
+      "name": "GetCostCategories",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetCostCategoriesRequest"
+      },
+      "output": {
+        "shape": "GetCostCategoriesResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "BillExpirationException"
+        },
+        {
+          "shape": "DataUnavailableException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "RequestChangedException"
+        }
+      ],
+      "documentation": "<p>Retrieves an array of Cost Category names and values incurred cost.</p> <note> <p>If some Cost Category names and values are not associated with any cost, they will not be returned by this API.</p> </note>"
+    },
     "GetCostForecast": {
       "name": "GetCostForecast",
       "http": {
@@ -891,7 +922,7 @@
           "documentation": "<p> Your unique account identifier. </p>"
         },
         "MonitorArnList": {
-          "shape": "Values",
+          "shape": "MonitorArnList",
           "documentation": "<p> A list of cost anomaly monitors. </p>"
         },
         "Subscribers": {
@@ -1006,6 +1037,12 @@
       "max": 255,
       "min": 1,
       "pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
+    },
+    "CostCategoryNamesList": {
+      "type": "list",
+      "member": {
+        "shape": "CostCategoryName"
+      }
     },
     "CostCategoryProcessingStatus": {
       "type": "structure",
@@ -1130,10 +1167,10 @@
         },
         "MatchOptions": {
           "shape": "MatchOptions",
-          "documentation": "<p> The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>. </p>"
+          "documentation": "<p> The match options that you can use to filter your results. MatchOptions is only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>. </p>"
         }
       },
-      "documentation": "<p>The Cost Categories values used for filtering the costs.</p>"
+      "documentation": "<p>The Cost Categories values used for filtering the costs.</p> <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to all Cost Categories. That is, filtering on resources that are not mapped to any Cost Categories.</p> <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to the Cost Categories <code>Key</code> only. That is, filtering on resources without the given Cost Categories key.</p>"
     },
     "CostCategoryValuesList": {
       "type": "list",
@@ -1383,14 +1420,14 @@
       "members": {
         "Start": {
           "shape": "YearMonthDay",
-          "documentation": "<p>The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date.</p>"
+          "documentation": "<p>The beginning of the time period. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.</p>"
         },
         "End": {
           "shape": "YearMonthDay",
-          "documentation": "<p>The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>"
+          "documentation": "<p>The end of the time period. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>"
         }
       },
-      "documentation": "<p>The time period that you want the usage and costs for. </p>"
+      "documentation": "<p>The time period of the request. </p>"
     },
     "DeleteAnomalyMonitorRequest": {
       "type": "structure",
@@ -1504,7 +1541,9 @@
         "RIGHTSIZING_TYPE",
         "SAVINGS_PLANS_TYPE",
         "SAVINGS_PLAN_ARN",
-        "PAYMENT_OPTION"
+        "PAYMENT_OPTION",
+        "AGREEMENT_END_DATE_TIME_AFTER",
+        "AGREEMENT_END_DATE_TIME_BEFORE"
       ]
     },
     "DimensionValues": {
@@ -1769,7 +1808,7 @@
           "documentation": "<p>The filter based on <code>CostCategory</code> values.</p>"
         }
       },
-      "documentation": "<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>. The <code>Expression</code> example looks like:</p> <p> <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR'd together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\": \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { \"And\": [ ... ], \"DimensionValues\": { \"Dimension\": \"USAGE_TYPE\", \"Values\": [ \"DataTransfer\" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren't supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>"
+      "documentation": "<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>. The <code>Expression</code> example looks like:</p> <p> <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR'd together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\": \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { \"And\": [ ... ], \"DimensionValues\": { \"Dimension\": \"USAGE_TYPE\", \"Values\": [ \"DataTransfer\" ] } } </code> </p> </li> </ul> <note> <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren't supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR are not supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p> </note>"
     },
     "Expressions": {
       "type": "list",
@@ -1982,6 +2021,10 @@
         "ResultsByTime": {
           "shape": "ResultsByTime",
           "documentation": "<p>The time period that is covered by the results in the response.</p>"
+        },
+        "DimensionValueAttributes": {
+          "shape": "DimensionValuesWithAttributesList",
+          "documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.</p>"
         }
       }
     },
@@ -2032,6 +2075,72 @@
         "ResultsByTime": {
           "shape": "ResultsByTime",
           "documentation": "<p>The time period that is covered by the results in the response.</p>"
+        },
+        "DimensionValueAttributes": {
+          "shape": "DimensionValuesWithAttributesList",
+          "documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.</p>"
+        }
+      }
+    },
+    "GetCostCategoriesRequest": {
+      "type": "structure",
+      "required": [
+        "TimePeriod"
+      ],
+      "members": {
+        "SearchString": {
+          "shape": "SearchString",
+          "documentation": "<p>The value that you want to search the filter values for.</p> <p>If you do not specify a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category names that match the <code>SearchString</code> pattern. If you do specifiy a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>"
+        },
+        "TimePeriod": {
+          "shape": "DateInterval"
+        },
+        "CostCategoryName": {
+          "shape": "CostCategoryName"
+        },
+        "Filter": {
+          "shape": "Expression"
+        },
+        "SortBy": {
+          "shape": "SortDefinitions",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>This field is only used when <code>SortBy</code> is provided in the request.</p> <p>The maximum number of objects that to be returned for this request. If <code>MaxResults</code> is not specified with <code>SortBy</code>, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetCostCategories</code>, MaxResults has an upper limit of 1000.</p>"
+        },
+        "NextPageToken": {
+          "shape": "NextPageToken",
+          "documentation": "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.</p>"
+        }
+      }
+    },
+    "GetCostCategoriesResponse": {
+      "type": "structure",
+      "required": [
+        "ReturnSize",
+        "TotalSize"
+      ],
+      "members": {
+        "NextPageToken": {
+          "shape": "NextPageToken",
+          "documentation": "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        },
+        "CostCategoryNames": {
+          "shape": "CostCategoryNamesList",
+          "documentation": "<p>The names of the Cost Categories.</p>"
+        },
+        "CostCategoryValues": {
+          "shape": "CostCategoryValuesList",
+          "documentation": "<p>The Cost Category values.</p> <p> <code>CostCategoryValues</code> are not returned if <code>CostCategoryName</code> is not specified in the request. </p>"
+        },
+        "ReturnSize": {
+          "shape": "PageSize",
+          "documentation": "<p>The number of objects returned.</p>"
+        },
+        "TotalSize": {
+          "shape": "PageSize",
+          "documentation": "<p>The total number of objects.</p>"
         }
       }
     },
@@ -2057,7 +2166,7 @@
         },
         "Filter": {
           "shape": "Expression",
-          "documentation": "<p>The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.</p>"
+          "documentation": "<p>The filters that you want to use to filter your forecast. The <code>GetCostForecast</code> API supports filtering by the following dimensions:</p> <ul> <li> <p> <code>AZ</code> </p> </li> <li> <p> <code>INSTANCE_TYPE</code> </p> </li> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>LINKED_ACCOUNT_NAME</code> </p> </li> <li> <p> <code>OPERATION</code> </p> </li> <li> <p> <code>PURCHASE_TYPE</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>USAGE_TYPE</code> </p> </li> <li> <p> <code>USAGE_TYPE_GROUP</code> </p> </li> <li> <p> <code>RECORD_TYPE</code> </p> </li> <li> <p> <code>OPERATING_SYSTEM</code> </p> </li> <li> <p> <code>TENANCY</code> </p> </li> <li> <p> <code>SCOPE</code> </p> </li> <li> <p> <code>PLATFORM</code> </p> </li> <li> <p> <code>SUBSCRIPTION_ID</code> </p> </li> <li> <p> <code>LEGAL_ENTITY_NAME</code> </p> </li> <li> <p> <code>DEPLOYMENT_OPTION</code> </p> </li> <li> <p> <code>DATABASE_ENGINE</code> </p> </li> <li> <p> <code>INSTANCE_TYPE_FAMILY</code> </p> </li> <li> <p> <code>BILLING_ENTITY</code> </p> </li> <li> <p> <code>RESERVATION_ID</code> </p> </li> <li> <p> <code>SAVINGS_PLAN_ARN</code> </p> </li> </ul>"
         },
         "PredictionIntervalLevel": {
           "shape": "PredictionIntervalLevel",
@@ -2100,6 +2209,17 @@
         "Context": {
           "shape": "Context",
           "documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>"
+        },
+        "Filter": {
+          "shape": "Expression"
+        },
+        "SortBy": {
+          "shape": "SortDefinitions",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When you specify a <code>SortBy</code> paramater, the context must be <code>COST_AND_USAGE</code>. Further, when using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>"
         },
         "NextPageToken": {
           "shape": "NextPageToken",
@@ -2162,6 +2282,15 @@
         "NextPageToken": {
           "shape": "NextPageToken",
           "documentation": "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+        },
+        "SortBy": {
+          "shape": "SortDefinition",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>OnDemandCost</code> </p> </li> <li> <p> <code>CoverageHoursPercentage</code> </p> </li> <li> <p> <code>OnDemandHours</code> </p> </li> <li> <p> <code>ReservedHours</code> </p> </li> <li> <p> <code>TotalRunningHours</code> </p> </li> <li> <p> <code>CoverageNormalizedUnitsPercentage</code> </p> </li> <li> <p> <code>OnDemandNormalizedUnits</code> </p> </li> <li> <p> <code>ReservedNormalizedUnits</code> </p> </li> <li> <p> <code>TotalRunningNormalizedUnits</code> </p> </li> <li> <p> <code>Time</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>",
+          "box": true
         }
       },
       "documentation": "<p>You can use the following request parameters to query for how much of your instance usage a reservation covered.</p>"
@@ -2199,6 +2328,9 @@
         "Service": {
           "shape": "GenericString",
           "documentation": "<p>The specific service that you want recommendations for.</p>"
+        },
+        "Filter": {
+          "shape": "Expression"
         },
         "AccountScope": {
           "shape": "AccountScope",
@@ -2269,9 +2401,18 @@
           "shape": "Expression",
           "documentation": "<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>SCOPE</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationUtilization</code> uses the same <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR'd together.</p>"
         },
+        "SortBy": {
+          "shape": "SortDefinition",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>UtilizationPercentageInUnits</code> </p> </li> <li> <p> <code>PurchasedHours</code> </p> </li> <li> <p> <code>PurchasedUnits</code> </p> </li> <li> <p> <code>TotalActualHours</code> </p> </li> <li> <p> <code>TotalActualUnits</code> </p> </li> <li> <p> <code>UnusedHours</code> </p> </li> <li> <p> <code>UnusedUnits</code> </p> </li> <li> <p> <code>OnDemandCostOfRIHoursUsed</code> </p> </li> <li> <p> <code>NetRISavings</code> </p> </li> <li> <p> <code>TotalPotentialRISavings</code> </p> </li> <li> <p> <code>AmortizedUpfrontFee</code> </p> </li> <li> <p> <code>AmortizedRecurringFee</code> </p> </li> <li> <p> <code>TotalAmortizedFee</code> </p> </li> <li> <p> <code>RICostForUnusedHours</code> </p> </li> <li> <p> <code>RealizedSavings</code> </p> </li> <li> <p> <code>UnrealizedSavings</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
+        },
         "NextPageToken": {
           "shape": "NextPageToken",
           "documentation": "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>",
+          "box": true
         }
       }
     },
@@ -2381,6 +2522,10 @@
           "shape": "MaxResults",
           "documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>",
           "box": true
+        },
+        "SortBy": {
+          "shape": "SortDefinition",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>SpendCoveredBySavingsPlan</code> </p> </li> <li> <p> <code>OnDemandCost</code> </p> </li> <li> <p> <code>CoveragePercentage</code> </p> </li> <li> <p> <code>TotalCost</code> </p> </li> <li> <p> <code>InstanceFamily</code> </p> </li> <li> <p> <code>Region</code> </p> </li> <li> <p> <code>Service</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
         }
       }
     },
@@ -2474,6 +2619,10 @@
           "shape": "Expression",
           "documentation": "<p>Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>SAVINGS_PLAN_ARN</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>PAYMENT_OPTION</code> </p> </li> <li> <p> <code>INSTANCE_TYPE_FAMILY</code> </p> </li> </ul> <p> <code>GetSavingsPlansUtilizationDetails</code> uses the same <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension.</p>"
         },
+        "DataType": {
+          "shape": "SavingsPlansDataTypes",
+          "documentation": "<p>The data type.</p>"
+        },
         "NextToken": {
           "shape": "NextPageToken",
           "documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
@@ -2482,6 +2631,10 @@
           "shape": "MaxResults",
           "documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>",
           "box": true
+        },
+        "SortBy": {
+          "shape": "SortDefinition",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> <li> <p> <code>AmortizedRecurringCommitment</code> </p> </li> <li> <p> <code>AmortizedUpfrontCommitment</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
         }
       }
     },
@@ -2526,6 +2679,10 @@
         "Filter": {
           "shape": "Expression",
           "documentation": "<p>Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>SAVINGS_PLAN_ARN</code> </p> </li> <li> <p> <code>SAVINGS_PLANS_TYPE</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>PAYMENT_OPTION</code> </p> </li> <li> <p> <code>INSTANCE_TYPE_FAMILY</code> </p> </li> </ul> <p> <code>GetSavingsPlansUtilization</code> uses the same <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension.</p>"
+        },
+        "SortBy": {
+          "shape": "SortDefinition",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
         }
       }
     },
@@ -2562,6 +2719,17 @@
         "TagKey": {
           "shape": "TagKey",
           "documentation": "<p>The key of the tag that you want to return values for.</p>"
+        },
+        "Filter": {
+          "shape": "Expression"
+        },
+        "SortBy": {
+          "shape": "SortDefinitions",
+          "documentation": "<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetTags</code>, MaxResults has an upper limit of 1000.</p>"
         },
         "NextPageToken": {
           "shape": "NextPageToken",
@@ -2617,7 +2785,7 @@
         },
         "Filter": {
           "shape": "Expression",
-          "documentation": "<p>The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.</p>"
+          "documentation": "<p>The filters that you want to use to filter your forecast. The <code>GetUsageForecast</code> API supports filtering by the following dimensions:</p> <ul> <li> <p> <code>AZ</code> </p> </li> <li> <p> <code>INSTANCE_TYPE</code> </p> </li> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>LINKED_ACCOUNT_NAME</code> </p> </li> <li> <p> <code>OPERATION</code> </p> </li> <li> <p> <code>PURCHASE_TYPE</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>USAGE_TYPE</code> </p> </li> <li> <p> <code>USAGE_TYPE_GROUP</code> </p> </li> <li> <p> <code>RECORD_TYPE</code> </p> </li> <li> <p> <code>OPERATING_SYSTEM</code> </p> </li> <li> <p> <code>TENANCY</code> </p> </li> <li> <p> <code>SCOPE</code> </p> </li> <li> <p> <code>PLATFORM</code> </p> </li> <li> <p> <code>SUBSCRIPTION_ID</code> </p> </li> <li> <p> <code>LEGAL_ENTITY_NAME</code> </p> </li> <li> <p> <code>DEPLOYMENT_OPTION</code> </p> </li> <li> <p> <code>DATABASE_ENGINE</code> </p> </li> <li> <p> <code>INSTANCE_TYPE_FAMILY</code> </p> </li> <li> <p> <code>BILLING_ENTITY</code> </p> </li> <li> <p> <code>RESERVATION_ID</code> </p> </li> <li> <p> <code>SAVINGS_PLAN_ARN</code> </p> </li> </ul>"
         },
         "PredictionIntervalLevel": {
           "shape": "PredictionIntervalLevel",
@@ -2795,6 +2963,7 @@
       "type": "string",
       "enum": [
         "EQUALS",
+        "ABSENT",
         "STARTS_WITH",
         "ENDS_WITH",
         "CONTAINS",
@@ -2874,6 +3043,12 @@
         }
       },
       "documentation": "<p> Details on the modification recommendation.</p>"
+    },
+    "MonitorArnList": {
+      "type": "list",
+      "member": {
+        "shape": "Arn"
+      }
     },
     "MonitorDimension": {
       "type": "string",
@@ -3031,6 +3206,12 @@
       },
       "documentation": "<p>Details about the Amazon RDS instances that AWS recommends that you purchase.</p>"
     },
+    "RICostForUnusedHours": {
+      "type": "string"
+    },
+    "RealizedSavings": {
+      "type": "string"
+    },
     "RecommendationTarget": {
       "type": "string",
       "enum": [
@@ -3122,6 +3303,18 @@
         "TotalAmortizedFee": {
           "shape": "TotalAmortizedFee",
           "documentation": "<p>The total cost of your reservation, amortized over the reservation period.</p>"
+        },
+        "RICostForUnusedHours": {
+          "shape": "RICostForUnusedHours",
+          "documentation": "<p>The cost of unused hours for your reservation.</p>"
+        },
+        "RealizedSavings": {
+          "shape": "RealizedSavings",
+          "documentation": "<p>The realized savings due to purchasing and using a reservation.</p>"
+        },
+        "UnrealizedSavings": {
+          "shape": "UnrealizedSavings",
+          "documentation": "<p>The unrealized savings due to purchasing and using a reservation.</p>"
         }
       },
       "documentation": "<p>The aggregated numbers for your reservation usage.</p>"
@@ -3458,6 +3651,10 @@
         "LookbackPeriodInDays": {
           "shape": "LookbackPeriodInDays",
           "documentation": "<p> How many days of previous usage that AWS considers when making this recommendation.</p>"
+        },
+        "AdditionalMetadata": {
+          "shape": "GenericString",
+          "documentation": "<p>Additional metadata that may be applicable to the recommendation.</p>"
         }
       },
       "documentation": "<p>Metadata for this recommendation set.</p>"
@@ -3583,6 +3780,21 @@
       "type": "list",
       "member": {
         "shape": "SavingsPlansCoverage"
+      }
+    },
+    "SavingsPlansDataType": {
+      "type": "string",
+      "enum": [
+        "ATTRIBUTES",
+        "UTILIZATION",
+        "AMORTIZED_COMMITMENT",
+        "SAVINGS"
+      ]
+    },
+    "SavingsPlansDataTypes": {
+      "type": "list",
+      "member": {
+        "shape": "SavingsPlansDataType"
       }
     },
     "SavingsPlansDetails": {
@@ -3917,6 +4129,42 @@
       },
       "documentation": "<p>Hardware specifications for the service that you want recommendations for.</p>"
     },
+    "SortDefinition": {
+      "type": "structure",
+      "required": [
+        "Key"
+      ],
+      "members": {
+        "Key": {
+          "shape": "SortDefinitionKey",
+          "documentation": "<p>The key by which to sort the data.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>The order in which to sort the data.</p>"
+        }
+      },
+      "documentation": "<p>The details of how to sort the data.</p>"
+    },
+    "SortDefinitionKey": {
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": "[\\S\\s]*"
+    },
+    "SortDefinitions": {
+      "type": "list",
+      "member": {
+        "shape": "SortDefinition"
+      }
+    },
+    "SortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING"
+      ]
+    },
     "Subscriber": {
       "type": "structure",
       "members": {
@@ -3996,7 +4244,7 @@
           "documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>"
         }
       },
-      "documentation": "<p>The values that are available for a tag.</p>"
+      "documentation": "<p>The values that are available for a tag.</p> <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to all tags. That is, filtering on resources with no tags.</p> <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, filtering on resources without the given tag key.</p>"
     },
     "TagValuesList": {
       "type": "list",
@@ -4101,6 +4349,9 @@
     "TotalRunningNormalizedUnits": {
       "type": "string"
     },
+    "UnrealizedSavings": {
+      "type": "string"
+    },
     "UnusedHours": {
       "type": "string"
     },
@@ -4154,8 +4405,8 @@
           "documentation": "<p> The update to the frequency value at which subscribers will receive notifications. </p>"
         },
         "MonitorArnList": {
-          "shape": "Values",
-          "documentation": "<p> A list of cost anomaly subscription ARNs. </p>"
+          "shape": "MonitorArnList",
+          "documentation": "<p> A list of cost anomaly monitor ARNs. </p>"
         },
         "Subscribers": {
           "shape": "Subscribers",

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Adding cancelled status and summary for executions aborted by pipeline updates."
+    },
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "Add resourceHours field in GetAccountHealth API to show total number of resource hours AWS Dev Ops Guru has done work for in the last hour."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added support for I-Frame-only HLS manifest generation in CMAF outputs."
+    }
+]

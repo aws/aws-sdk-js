@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Adding the 'callAs' parameter to all CloudFormation StackSets APIs except getTemplateSummary to support creating and managing service-managed StackSets with AWS Organizations Delegated Administrators"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild now allows you to specify a separate bucket owner as part of the S3 destination in a report group."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds expires-in-seconds parameter to the CreatePresignedDomainUrl API for support of a configurable TTL."
+    }
+]

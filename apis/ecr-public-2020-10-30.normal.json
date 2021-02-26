@@ -133,6 +133,12 @@
           "shape": "InvalidParameterException"
         },
         {
+          "shape": "InvalidTagParameterException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
           "shape": "RepositoryAlreadyExistsException"
         },
         {
@@ -428,6 +434,31 @@
       ],
       "documentation": "<p>Notifies Amazon ECR that you intend to upload an image layer.</p> <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ServerException"
+        }
+      ],
+      "documentation": "<p>List the tags for an Amazon ECR Public resource.</p>"
+    },
     "PutImage": {
       "name": "PutImage",
       "http": {
@@ -551,6 +582,68 @@
         }
       ],
       "documentation": "<p>Applies a repository policy to the specified public repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidTagParameterException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ServerException"
+        }
+      ],
+      "documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidTagParameterException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ServerException"
+        }
+      ],
+      "documentation": "<p>Deletes specified tags from a resource.</p>"
     },
     "UploadLayerPart": {
       "name": "UploadLayerPart",
@@ -772,6 +865,10 @@
         "catalogData": {
           "shape": "RepositoryCatalogDataInput",
           "documentation": "<p>The details about the repository that are publicly visible in the Amazon ECR Public Gallery.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
         }
       }
     },
@@ -1384,6 +1481,27 @@
     "LayerSizeInBytes": {
       "type": "long"
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      }
+    },
     "LogoImageBlob": {
       "type": "blob",
       "max": 512000,
@@ -1822,6 +1940,88 @@
           "documentation": "<p>The JSON repository policy text applied to the repository.</p>"
         }
       }
+    },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).</p>"
+        }
+      },
+      "documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.</p>"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags to be removed.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UploadId": {
       "type": "string",

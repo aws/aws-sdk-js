@@ -643,6 +643,9 @@
         },
         {
           "shape": "ScheduleDefinitionTypeUnsupportedFault"
+        },
+        {
+          "shape": "InvalidTagFault"
         }
       ],
       "documentation": "<p>Create a snapshot schedule that can be associated to a cluster and which overrides the default system backup schedule. </p>"
@@ -665,6 +668,9 @@
         },
         {
           "shape": "InvalidTagFault"
+        },
+        {
+          "shape": "InvalidClusterStateFault"
         }
       ],
       "documentation": "<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>"
@@ -2324,7 +2330,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
+      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.xlplus</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
     },
     "RestoreFromClusterSnapshot": {
       "name": "RestoreFromClusterSnapshot",
@@ -2475,6 +2481,9 @@
         },
         {
           "shape": "InvalidClusterStateFault"
+        },
+        {
+          "shape": "InsufficientClusterCapacityFault"
         }
       ],
       "documentation": "<p>Resumes a paused cluster.</p>"
@@ -3037,6 +3046,10 @@
           "shape": "ResizeInfo",
           "documentation": "<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>"
         },
+        "AvailabilityZoneRelocationStatus": {
+          "shape": "String",
+          "documentation": "<p>Describes the status of the Availability Zone relocation operation.</p>"
+        },
         "ClusterNamespaceArn": {
           "shape": "String",
           "documentation": "<p>The namespace Amazon Resource Name (ARN) of the cluster.</p>"
@@ -3545,7 +3558,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The node type to be provisioned for the cluster. For information about node types, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
+          "documentation": "<p>The node type to be provisioned for the cluster. For information about node types, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
         },
         "MasterUsername": {
           "shape": "String",
@@ -3650,6 +3663,10 @@
         "SnapshotScheduleIdentifier": {
           "shape": "String",
           "documentation": "<p>A unique identifier for the snapshot schedule.</p>"
+        },
+        "AvailabilityZoneRelocation": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5253,6 +5270,10 @@
         "Port": {
           "shape": "Integer",
           "documentation": "<p>The port that the database engine is listening on.</p>"
+        },
+        "VpcEndpoints": {
+          "shape": "VpcEndpointsList",
+          "documentation": "<p>Describes a connection endpoint.</p>"
         }
       },
       "documentation": "<p>Describes a connection endpoint.</p>"
@@ -5854,7 +5875,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
+          "documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
         },
         "NumberOfNodes": {
           "shape": "IntegerOptional",
@@ -5931,6 +5952,18 @@
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.</p>"
+        },
+        "AvailabilityZoneRelocation": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The option to initiate relocation for an Amazon Redshift cluster to the target Availability Zone.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>"
         }
       },
       "documentation": "<p/>"
@@ -6723,7 +6756,7 @@
           "documentation": "<p>The new node type for the nodes you are adding. If not specified, the cluster's current node type is used.</p>"
         },
         "NumberOfNodes": {
-          "shape": "Integer",
+          "shape": "IntegerOptional",
           "documentation": "<p>The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.</p>"
         },
         "Classic": {
@@ -6942,6 +6975,10 @@
         "NumberOfNodes": {
           "shape": "IntegerOptional",
           "documentation": "<p>The number of nodes specified when provisioning the restored cluster.</p>"
+        },
+        "AvailabilityZoneRelocation": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7366,6 +7403,10 @@
           "shape": "String",
           "documentation": "<p>The version ID of the Amazon Redshift engine that is running on the cluster.</p>"
         },
+        "EngineFullVersion": {
+          "shape": "String",
+          "documentation": "<p>The cluster version of the cluster used to create the snapshot. For example, 1.0.15503. </p>"
+        },
         "SnapshotType": {
           "shape": "String",
           "documentation": "<p>The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> are of type \"manual\". </p>"
@@ -7654,7 +7695,8 @@
       ]
     },
     "String": {
-      "type": "string"
+      "type": "string",
+      "max": 2147483647
     },
     "Subnet": {
       "type": "structure",
@@ -8024,6 +8066,23 @@
       "member": {
         "shape": "String",
         "locationName": "item"
+      }
+    },
+    "VpcEndpoint": {
+      "type": "structure",
+      "members": {
+        "VpcEndpointId": {
+          "shape": "String",
+          "documentation": "<p>The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.</p>"
+        }
+      },
+      "documentation": "<p>The connection endpoint for connecting an Amazon Redshift cluster through the proxy.</p>"
+    },
+    "VpcEndpointsList": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpoint",
+        "locationName": "VpcEndpoint"
       }
     },
     "VpcSecurityGroupIdList": {

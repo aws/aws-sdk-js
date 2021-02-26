@@ -26,7 +26,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Records user interaction event data. For more information see <a>event-record-api</a>.</p>"
+      "documentation": "<p>Records user interaction event data. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>"
     },
     "PutItems": {
       "name": "PutItems",
@@ -43,9 +43,12 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Adds one or more items to an Items dataset. For more information see <a>importing-items</a>.</p>"
+      "documentation": "<p>Adds one or more items to an Items dataset. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>. </p>"
     },
     "PutUsers": {
       "name": "PutUsers",
@@ -62,9 +65,12 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Adds one or more users to a Users dataset. For more information see <a>importing-users</a>.</p>"
+      "documentation": "<p>Adds one or more users to a Users dataset. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>"
     }
   },
   "shapes": {
@@ -155,11 +161,11 @@
         },
         "properties": {
           "shape": "ItemProperties",
-          "documentation": "<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{\"numberOfRatings\": \"12\"}</code> </p> <p>The keys use camel case names that match the fields in the Items schema. In the above example, the <code>numberOfRatings</code> would match the 'NUMBER_OF_RATINGS' field defined in the Items schema.</p>",
+          "documentation": "<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{\"numberOfRatings\": \"12\"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the <code>numberOfRatings</code> matches the 'NUMBER_OF_RATINGS' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (<code>|</code>). For example, <code>\\\"Horror|Action\\\"</code>.</p>",
           "jsonvalue": true
         }
       },
-      "documentation": "<p>Represents item metadata added to an Items dataset using the <code>PutItems</code> API.</p>"
+      "documentation": "<p>Represents item metadata added to an Items dataset using the <code>PutItems</code> API. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>. </p>"
     },
     "ItemId": {
       "type": "string",
@@ -176,7 +182,7 @@
     },
     "ItemProperties": {
       "type": "string",
-      "max": 1024,
+      "max": 4096,
       "min": 1
     },
     "PutEventsRequest": {
@@ -197,7 +203,7 @@
         },
         "sessionId": {
           "shape": "StringType",
-          "documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.</p>"
+          "documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>"
         },
         "eventList": {
           "shape": "EventList",
@@ -214,7 +220,7 @@
       "members": {
         "datasetArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.</p>"
         },
         "items": {
           "shape": "ItemList",
@@ -231,7 +237,7 @@
       "members": {
         "datasetArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.</p>"
         },
         "users": {
           "shape": "UserList",
@@ -261,11 +267,11 @@
         },
         "properties": {
           "shape": "UserProperties",
-          "documentation": "<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{\"numberOfVideosWatched\": \"45\"}</code> </p> <p>The keys use camel case names that match the fields in the Users schema. In the above example, the <code>numberOfVideosWatched</code> would match the 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema.</p>",
+          "documentation": "<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{\"numberOfVideosWatched\": \"45\"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). For example, <code>\\\"Member|Frequent shopper\\\"</code>.</p>",
           "jsonvalue": true
         }
       },
-      "documentation": "<p>Represents user metadata added to a Users dataset using the <code>PutUsers</code> API.</p>"
+      "documentation": "<p>Represents user metadata added to a Users dataset using the <code>PutUsers</code> API. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>"
     },
     "UserId": {
       "type": "string",
@@ -282,9 +288,9 @@
     },
     "UserProperties": {
       "type": "string",
-      "max": 1024,
+      "max": 4096,
       "min": 1
     }
   },
-  "documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use it for model training either alone or combined with historical data. For more information see <a>recording-events</a>.</p>"
+  "documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use it for model training either alone or combined with historical data. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>"
 }

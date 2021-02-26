@@ -13,6 +13,42 @@
     "uid": "mediapackage-vod-2018-11-07"
   },
   "operations": {
+    "ConfigureLogs": {
+      "documentation": "Changes the packaging group's properities to configure log subscription",
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "http": {
+        "method": "PUT",
+        "requestUri": "/packaging_groups/{id}/configure_logs",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ConfigureLogsRequest"
+      },
+      "name": "ConfigureLogs",
+      "output": {
+        "documentation": "The updated MediaPackage VOD PackagingGroup resource.",
+        "shape": "ConfigureLogsResponse"
+      }
+    },
     "CreateAsset": {
       "documentation": "Creates a new MediaPackage VOD Asset resource.",
       "errors": [
@@ -635,6 +671,57 @@
       ],
       "type": "structure"
     },
+    "ConfigureLogsRequest": {
+      "documentation": "The option to configure log subscription.",
+      "members": {
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
+        "Id": {
+          "documentation": "The ID of a MediaPackage VOD PackagingGroup resource.",
+          "location": "uri",
+          "locationName": "id",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "Id"
+      ],
+      "type": "structure"
+    },
+    "ConfigureLogsResponse": {
+      "members": {
+        "Arn": {
+          "documentation": "The ARN of the PackagingGroup.",
+          "locationName": "arn",
+          "shape": "__string"
+        },
+        "Authorization": {
+          "locationName": "authorization",
+          "shape": "Authorization"
+        },
+        "DomainName": {
+          "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
+          "locationName": "domainName",
+          "shape": "__string"
+        },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
+        "Id": {
+          "documentation": "The ID of the PackagingGroup.",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "Tags": {
+          "locationName": "tags",
+          "shape": "Tags"
+        }
+      },
+      "type": "structure"
+    },
     "CreateAssetRequest": {
       "documentation": "A new MediaPackage VOD Asset configuration.",
       "members": {
@@ -812,6 +899,10 @@
           "locationName": "authorization",
           "shape": "Authorization"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "Id": {
           "documentation": "The ID of the PackagingGroup.",
           "locationName": "id",
@@ -842,6 +933,10 @@
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
           "locationName": "domainName",
           "shape": "__string"
+        },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
         },
         "Id": {
           "documentation": "The ID of the PackagingGroup.",
@@ -1132,6 +1227,10 @@
           "locationName": "domainName",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "Id": {
           "documentation": "The ID of the PackagingGroup.",
           "locationName": "id",
@@ -1140,6 +1239,17 @@
         "Tags": {
           "locationName": "tags",
           "shape": "Tags"
+        }
+      },
+      "type": "structure"
+    },
+    "EgressAccessLogs": {
+      "documentation": "Configure egress access logging.",
+      "members": {
+        "LogGroupName": {
+          "documentation": "Customize the log group name.",
+          "locationName": "logGroupName",
+          "shape": "__string"
         }
       },
       "type": "structure"
@@ -1506,6 +1616,10 @@
           "locationName": "domainName",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "Id": {
           "documentation": "The ID of the PackagingGroup.",
           "locationName": "id",
@@ -1673,6 +1787,10 @@
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
           "locationName": "domainName",
           "shape": "__string"
+        },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
         },
         "Id": {
           "documentation": "The ID of the PackagingGroup.",

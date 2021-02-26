@@ -67,9 +67,34 @@ declare class Outposts extends Service {
    * Lists the sites for the specified AWS account.
    */
   listSites(callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(params: Outposts.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds tags to the specified resource.
+   */
+  tagResource(params: Outposts.Types.TagResourceRequest, callback?: (err: AWSError, data: Outposts.Types.TagResourceResponse) => void): Request<Outposts.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Outposts.Types.TagResourceResponse) => void): Request<Outposts.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(params: Outposts.Types.UntagResourceRequest, callback?: (err: AWSError, data: Outposts.Types.UntagResourceResponse) => void): Request<Outposts.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Outposts.Types.UntagResourceResponse) => void): Request<Outposts.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace Outposts {
   export type AccountId = string;
+  export type Arn = string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
   export interface CreateOutpostInput {
@@ -135,6 +160,18 @@ declare namespace Outposts {
     Sites?: siteListDefinition;
     NextToken?: Token;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The resource tags.
+     */
+    Tags?: TagMap;
+  }
   export type MaxResults1000 = number;
   export interface Outpost {
     OutpostId?: OutpostId;
@@ -170,9 +207,34 @@ declare namespace Outposts {
   export type SiteId = string;
   export type SiteName = string;
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tags to add to the resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
   export type TagValue = string;
   export type Token = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];
   /**

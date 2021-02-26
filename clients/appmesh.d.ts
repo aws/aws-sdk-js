@@ -376,6 +376,10 @@ declare namespace AppMesh {
   }
   export interface ClientPolicyTls {
     /**
+     * A reference to an object that represents a client's TLS certificate.
+     */
+    certificate?: ClientTlsCertificate;
+    /**
      * Whether the policy is enforced. The default is True, if a value isn't specified.
      */
     enforce?: Boolean;
@@ -387,6 +391,13 @@ declare namespace AppMesh {
      * A reference to an object that represents a TLS validation context.
      */
     validation: TlsValidationContext;
+  }
+  export interface ClientTlsCertificate {
+    file?: ListenerTlsFileCertificate;
+    /**
+     * A reference to an object that represents a client's TLS Secret Discovery Service certificate.
+     */
+    sds?: ListenerTlsSdsCertificate;
   }
   export interface CreateGatewayRouteInput {
     /**
@@ -1593,13 +1604,17 @@ declare namespace AppMesh {
   }
   export interface ListenerTls {
     /**
-     * A reference to an object that represents a listener's TLS certificate.
+     * A reference to an object that represents a listener's Transport Layer Security (TLS) certificate.
      */
     certificate: ListenerTlsCertificate;
     /**
      * Specify one of the following modes.    STRICT – Listener only accepts connections with TLS enabled.     PERMISSIVE – Listener accepts connections with or without TLS enabled.    DISABLED – Listener only accepts connections without TLS.   
      */
     mode: ListenerTlsMode;
+    /**
+     * A reference to an object that represents a listener's Transport Layer Security (TLS) validation context.
+     */
+    validation?: ListenerTlsValidationContext;
   }
   export interface ListenerTlsAcmCertificate {
     /**
@@ -1616,6 +1631,10 @@ declare namespace AppMesh {
      * A reference to an object that represents a local file certificate.
      */
     file?: ListenerTlsFileCertificate;
+    /**
+     * A reference to an object that represents a listener's Secret Discovery Service certificate.
+     */
+    sds?: ListenerTlsSdsCertificate;
   }
   export interface ListenerTlsFileCertificate {
     /**
@@ -1628,6 +1647,29 @@ declare namespace AppMesh {
     privateKey: FilePath;
   }
   export type ListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string;
+  export interface ListenerTlsSdsCertificate {
+    /**
+     * A reference to an object that represents the name of the secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+     */
+    secretName: SdsSecretName;
+  }
+  export interface ListenerTlsValidationContext {
+    /**
+     * A reference to an object that represents the SANs for a listener's Transport Layer Security (TLS) validation context.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNames;
+    /**
+     * A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
+     */
+    trust: ListenerTlsValidationContextTrust;
+  }
+  export interface ListenerTlsValidationContextTrust {
+    file?: TlsValidationContextFileTrust;
+    /**
+     * A reference to an object that represents a listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    sds?: TlsValidationContextSdsTrust;
+  }
   export type Listeners = Listener[];
   export interface Logging {
     /**
@@ -1873,6 +1915,7 @@ declare namespace AppMesh {
     status: RouteStatusCode;
   }
   export type RouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type SdsSecretName = string;
   export interface ServiceDiscovery {
     /**
      * Specifies any AWS Cloud Map information for the virtual node.
@@ -1885,6 +1928,20 @@ declare namespace AppMesh {
   }
   export type ServiceName = string;
   export type String = string;
+  export type SubjectAlternativeName = string;
+  export type SubjectAlternativeNameList = SubjectAlternativeName[];
+  export interface SubjectAlternativeNameMatchers {
+    /**
+     * The values sent must match the specified values exactly.
+     */
+    exact: SubjectAlternativeNameList;
+  }
+  export interface SubjectAlternativeNames {
+    /**
+     * An object that represents the criteria for determining a SANs match.
+     */
+    match: SubjectAlternativeNameMatchers;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = TagRef[];
@@ -1939,7 +1996,11 @@ declare namespace AppMesh {
   export type Timestamp = Date;
   export interface TlsValidationContext {
     /**
-     * A reference to an object that represents a TLS validation context trust.
+     * A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNames;
+    /**
+     * A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
      */
     trust: TlsValidationContextTrust;
   }
@@ -1955,15 +2016,25 @@ declare namespace AppMesh {
      */
     certificateChain: FilePath;
   }
+  export interface TlsValidationContextSdsTrust {
+    /**
+     * A reference to an object that represents the name of the secret for a Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    secretName: SdsSecretName;
+  }
   export interface TlsValidationContextTrust {
     /**
-     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
      */
     acm?: TlsValidationContextAcmTrust;
     /**
-     * An object that represents a TLS validation context trust for a local file.
+     * An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
      */
     file?: TlsValidationContextFileTrust;
+    /**
+     * A reference to an object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    sds?: TlsValidationContextSdsTrust;
   }
   export interface UntagResourceInput {
     /**
@@ -2191,6 +2262,10 @@ declare namespace AppMesh {
   }
   export interface VirtualGatewayClientPolicyTls {
     /**
+     * A reference to an object that represents a virtual gateway's client's Transport Layer Security (TLS) certificate.
+     */
+    certificate?: VirtualGatewayClientTlsCertificate;
+    /**
      * Whether the policy is enforced. The default is True, if a value isn't specified.
      */
     enforce?: Boolean;
@@ -2199,9 +2274,16 @@ declare namespace AppMesh {
      */
     ports?: PortSet;
     /**
-     * A reference to an object that represents a TLS validation context.
+     * A reference to an object that represents a Transport Layer Security (TLS) validation context.
      */
     validation: VirtualGatewayTlsValidationContext;
+  }
+  export interface VirtualGatewayClientTlsCertificate {
+    file?: VirtualGatewayListenerTlsFileCertificate;
+    /**
+     * A reference to an object that represents a virtual gateway's client's Secret Discovery Service certificate.
+     */
+    sds?: VirtualGatewayListenerTlsSdsCertificate;
   }
   export interface VirtualGatewayConnectionPool {
     /**
@@ -2325,6 +2407,10 @@ declare namespace AppMesh {
      * Specify one of the following modes.    STRICT – Listener only accepts connections with TLS enabled.     PERMISSIVE – Listener accepts connections with or without TLS enabled.    DISABLED – Listener only accepts connections without TLS.   
      */
     mode: VirtualGatewayListenerTlsMode;
+    /**
+     * A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.
+     */
+    validation?: VirtualGatewayListenerTlsValidationContext;
   }
   export interface VirtualGatewayListenerTlsAcmCertificate {
     /**
@@ -2341,6 +2427,10 @@ declare namespace AppMesh {
      * A reference to an object that represents a local file certificate.
      */
     file?: VirtualGatewayListenerTlsFileCertificate;
+    /**
+     * A reference to an object that represents a virtual gateway's listener's Secret Discovery Service certificate.
+     */
+    sds?: VirtualGatewayListenerTlsSdsCertificate;
   }
   export interface VirtualGatewayListenerTlsFileCertificate {
     /**
@@ -2353,6 +2443,29 @@ declare namespace AppMesh {
     privateKey: FilePath;
   }
   export type VirtualGatewayListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string;
+  export interface VirtualGatewayListenerTlsSdsCertificate {
+    /**
+     * A reference to an object that represents the name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+     */
+    secretName: VirtualGatewaySdsSecretName;
+  }
+  export interface VirtualGatewayListenerTlsValidationContext {
+    /**
+     * A reference to an object that represents the SANs for a virtual gateway listener's Transport Layer Security (TLS) validation context.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNames;
+    /**
+     * A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
+     */
+    trust: VirtualGatewayListenerTlsValidationContextTrust;
+  }
+  export interface VirtualGatewayListenerTlsValidationContextTrust {
+    file?: VirtualGatewayTlsValidationContextFileTrust;
+    /**
+     * A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    sds?: VirtualGatewayTlsValidationContextSdsTrust;
+  }
   export type VirtualGatewayListeners = VirtualGatewayListener[];
   export interface VirtualGatewayLogging {
     /**
@@ -2405,6 +2518,7 @@ declare namespace AppMesh {
      */
     virtualGatewayName: ResourceName;
   }
+  export type VirtualGatewaySdsSecretName = string;
   export interface VirtualGatewaySpec {
     /**
      * A reference to an object that represents the defaults for backends.
@@ -2425,7 +2539,11 @@ declare namespace AppMesh {
   export type VirtualGatewayStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
   export interface VirtualGatewayTlsValidationContext {
     /**
-     * A reference to an object that represents a TLS validation context trust.
+     * A reference to an object that represents the SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNames;
+    /**
+     * A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
      */
     trust: VirtualGatewayTlsValidationContextTrust;
   }
@@ -2441,15 +2559,25 @@ declare namespace AppMesh {
      */
     certificateChain: FilePath;
   }
+  export interface VirtualGatewayTlsValidationContextSdsTrust {
+    /**
+     * A reference to an object that represents the name of the secret for a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    secretName: VirtualGatewaySdsSecretName;
+  }
   export interface VirtualGatewayTlsValidationContextTrust {
     /**
-     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
      */
     acm?: VirtualGatewayTlsValidationContextAcmTrust;
     /**
-     * An object that represents a TLS validation context trust for a local file.
+     * An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
      */
     file?: VirtualGatewayTlsValidationContextFileTrust;
+    /**
+     * A reference to an object that represents a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+     */
+    sds?: VirtualGatewayTlsValidationContextSdsTrust;
   }
   export interface VirtualNodeConnectionPool {
     /**

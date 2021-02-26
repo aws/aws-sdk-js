@@ -60,7 +60,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie Classic for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account. </p>"
+      "documentation": "<p>Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account. </p>"
     },
     "DisassociateMemberAccount": {
       "name": "DisassociateMemberAccount",
@@ -104,7 +104,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn't specified, the action removes specified S3 resources from Macie Classic for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.</p>"
+      "documentation": "<p>Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn't specified, the action removes specified S3 resources from Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.</p>"
     },
     "ListMemberAccounts": {
       "name": "ListMemberAccounts",
@@ -126,7 +126,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Lists all Amazon Macie Classic member accounts for the current Amazon Macie Classic master account.</p>"
+      "documentation": "<p>Lists all Amazon Macie Classic member accounts for the current Macie Classic administrator account.</p>"
     },
     "ListS3Resources": {
       "name": "ListS3Resources",
@@ -151,7 +151,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie Classic for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie Classic for the specified member account. </p>"
+      "documentation": "<p>Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn't specified, the action lists the S3 resources associated with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action lists the S3 resources associated with Macie Classic for the specified member account. </p>"
     },
     "UpdateS3Resources": {
       "name": "UpdateS3Resources",
@@ -176,7 +176,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the specified member account. </p>"
+      "documentation": "<p>Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Macie Classic for the specified member account. </p>"
     }
   },
   "shapes": {
@@ -238,7 +238,7 @@
         },
         "continuous": {
           "shape": "S3ContinuousClassificationType",
-          "documentation": "<p>A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Amazon Macie Classic. </p>"
+          "documentation": "<p>A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. </p>"
         }
       },
       "documentation": "<p>The classification type that Amazon Macie Classic applies to the associated S3 resources. </p>"
@@ -252,7 +252,7 @@
         },
         "continuous": {
           "shape": "S3ContinuousClassificationType",
-          "documentation": "<p>A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Amazon Macie Classic. </p>"
+          "documentation": "<p>A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. </p>"
         }
       },
       "documentation": "<p>The classification type that Amazon Macie Classic applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. </p>"
@@ -277,7 +277,7 @@
       "members": {
         "memberAccountId": {
           "shape": "AWSAccountId",
-          "documentation": "<p>The ID of the Amazon Macie Classic member account whose resources you want to remove from being monitored by Amazon Macie Classic. </p>"
+          "documentation": "<p>The ID of the Amazon Macie Classic member account whose resources you want to remove from being monitored by Macie Classic. </p>"
         },
         "associatedS3Resources": {
           "shape": "S3Resources",
@@ -345,7 +345,7 @@
       "members": {
         "memberAccounts": {
           "shape": "MemberAccounts",
-          "documentation": "<p>A list of the Amazon Macie Classic member accounts returned by the action. The current master account is also included in this list. </p>"
+          "documentation": "<p>A list of the Amazon Macie Classic member accounts returned by the action. The current Macie Classic administrator account is also included in this list. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -530,5 +530,5 @@
       }
     }
   },
-  "documentation": "<fullname>Amazon Macie Classic</fullname> <p>Amazon Macie Classic is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie Classic recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. For more information, see the <a href=\"https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html\">Amazon Macie Classic User Guide</a>. </p> <p>A new Amazon Macie is now available with significant design improvements and additional features, at a lower price and in most AWS Regions. We encourage you to explore and use the new and improved features, and benefit from the reduced cost. To learn about features and pricing for the new Amazon Macie, see <a href=\"https://aws.amazon.com/macie/\">Amazon Macie</a>.</p>"
+  "documentation": "<fullname>Amazon Macie Classic</fullname> <p>Amazon Macie Classic is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie Classic recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. For more information, see the <a href=\"https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html\">Amazon Macie Classic User Guide</a>. </p>"
 }
