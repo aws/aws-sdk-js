@@ -1,5 +1,5 @@
 {
   "type": "bugfix",
-  "category": "Bugfixing the s3 arn endpoint parser",
+  "category": "s3",
   "description": "Bugfixing the s3 arn endpoint parser"
 }
