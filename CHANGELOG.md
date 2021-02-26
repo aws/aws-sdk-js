@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.852.0-->
+<!--LATEST=2.853.0-->
 <!--ENTRYINSERT-->
+
+## 2.853.0
+* bugfix: s3: Bugfixing the s3 arn endpoint parser
+* feature: EKS: Amazon EKS now supports adding KMS envelope encryption to existing clusters to enhance security for secrets
+* feature: EMR: Added UpdateStudio API that allows updating a few attributes of an EMR Studio.
+* feature: S3: Add RequestPayer to GetObjectTagging and PutObjectTagging.
+* feature: SSOAdmin: Relax constraint on List* API pagination tokens to include underscore character
 
 ## 2.852.0
 * feature: DataBrew: This SDK release adds two new dataset features: 1) support for specifying the file format for a dataset, and 2) support for specifying whether the first row of a CSV or Excel file contains a header.

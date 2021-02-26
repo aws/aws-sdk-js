@@ -61,19 +61,19 @@ declare class EMR extends Service {
    */
   createSecurityConfiguration(callback?: (err: AWSError, data: EMR.Types.CreateSecurityConfigurationOutput) => void): Request<EMR.Types.CreateSecurityConfigurationOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Creates a new Amazon EMR Studio.
+   * Creates a new Amazon EMR Studio.
    */
   createStudio(params: EMR.Types.CreateStudioInput, callback?: (err: AWSError, data: EMR.Types.CreateStudioOutput) => void): Request<EMR.Types.CreateStudioOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Creates a new Amazon EMR Studio.
+   * Creates a new Amazon EMR Studio.
    */
   createStudio(callback?: (err: AWSError, data: EMR.Types.CreateStudioOutput) => void): Request<EMR.Types.CreateStudioOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
+   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
    */
   createStudioSessionMapping(params: EMR.Types.CreateStudioSessionMappingInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
+   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
    */
   createStudioSessionMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -85,19 +85,19 @@ declare class EMR extends Service {
    */
   deleteSecurityConfiguration(callback?: (err: AWSError, data: EMR.Types.DeleteSecurityConfigurationOutput) => void): Request<EMR.Types.DeleteSecurityConfigurationOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Removes an Amazon EMR Studio from the Studio metadata store.
+   * Removes an Amazon EMR Studio from the Studio metadata store.
    */
   deleteStudio(params: EMR.Types.DeleteStudioInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Removes an Amazon EMR Studio from the Studio metadata store.
+   * Removes an Amazon EMR Studio from the Studio metadata store.
    */
   deleteStudio(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Removes a user or group from an Amazon EMR Studio.
+   * Removes a user or group from an Amazon EMR Studio.
    */
   deleteStudioSessionMapping(params: EMR.Types.DeleteStudioSessionMappingInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Removes a user or group from an Amazon EMR Studio.
+   * Removes a user or group from an Amazon EMR Studio.
    */
   deleteStudioSessionMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -141,11 +141,11 @@ declare class EMR extends Service {
    */
   describeStep(callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio access URL, and so on.
+   * Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio access URL, and so on.
    */
   describeStudio(params: EMR.Types.DescribeStudioInput, callback?: (err: AWSError, data: EMR.Types.DescribeStudioOutput) => void): Request<EMR.Types.DescribeStudioOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio access URL, and so on.
+   * Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio access URL, and so on.
    */
   describeStudio(callback?: (err: AWSError, data: EMR.Types.DescribeStudioOutput) => void): Request<EMR.Types.DescribeStudioOutput, AWSError>;
   /**
@@ -165,11 +165,11 @@ declare class EMR extends Service {
    */
   getManagedScalingPolicy(callback?: (err: AWSError, data: EMR.Types.GetManagedScalingPolicyOutput) => void): Request<EMR.Types.GetManagedScalingPolicyOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Fetches mapping details for the specified Amazon EMR Studio and identity (user or group).
+   * Fetches mapping details for the specified Amazon EMR Studio and identity (user or group).
    */
   getStudioSessionMapping(params: EMR.Types.GetStudioSessionMappingInput, callback?: (err: AWSError, data: EMR.Types.GetStudioSessionMappingOutput) => void): Request<EMR.Types.GetStudioSessionMappingOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Fetches mapping details for the specified Amazon EMR Studio and identity (user or group).
+   * Fetches mapping details for the specified Amazon EMR Studio and identity (user or group).
    */
   getStudioSessionMapping(callback?: (err: AWSError, data: EMR.Types.GetStudioSessionMappingOutput) => void): Request<EMR.Types.GetStudioSessionMappingOutput, AWSError>;
   /**
@@ -229,27 +229,27 @@ declare class EMR extends Service {
    */
   listSecurityConfigurations(callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of 10 stepIDs.
    */
   listSteps(params: EMR.Types.ListStepsInput, callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of 10 stepIDs.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns a list of all user or group session mappings for the EMR Studio specified by StudioId.
+   * Returns a list of all user or group session mappings for the Amazon EMR Studio specified by StudioId.
    */
   listStudioSessionMappings(params: EMR.Types.ListStudioSessionMappingsInput, callback?: (err: AWSError, data: EMR.Types.ListStudioSessionMappingsOutput) => void): Request<EMR.Types.ListStudioSessionMappingsOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns a list of all user or group session mappings for the EMR Studio specified by StudioId.
+   * Returns a list of all user or group session mappings for the Amazon EMR Studio specified by StudioId.
    */
   listStudioSessionMappings(callback?: (err: AWSError, data: EMR.Types.ListStudioSessionMappingsOutput) => void): Request<EMR.Types.ListStudioSessionMappingsOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(params: EMR.Types.ListStudiosInput, callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
@@ -373,11 +373,19 @@ declare class EMR extends Service {
    */
   terminateJobFlows(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Updates the session policy attached to the user or group for the specified Amazon EMR Studio.
+   * Updates an Amazon EMR Studio configuration, including attributes such as name, description, and subnets.
+   */
+  updateStudio(params: EMR.Types.UpdateStudioInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an Amazon EMR Studio configuration, including attributes such as name, description, and subnets.
+   */
+  updateStudio(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the session policy attached to the user or group for the specified Amazon EMR Studio.
    */
   updateStudioSessionMapping(params: EMR.Types.UpdateStudioSessionMappingInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.  Updates the session policy attached to the user or group for the specified Amazon EMR Studio.
+   * Updates the session policy attached to the user or group for the specified Amazon EMR Studio.
    */
   updateStudioSessionMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -936,7 +944,7 @@ declare namespace EMR {
      */
     Name: XmlStringMaxLen256;
     /**
-     * A detailed description of the Studio.
+     * A detailed description of the Amazon EMR Studio.
      */
     Description?: XmlStringMaxLen256;
     /**
@@ -948,7 +956,7 @@ declare namespace EMR {
      */
     VpcId: XmlStringMaxLen256;
     /**
-     * A list of subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.
+     * A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can have a maximum of 5 subnets. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.
      */
     SubnetIds: SubnetIdList;
     /**
@@ -956,7 +964,7 @@ declare namespace EMR {
      */
     ServiceRole: XmlString;
     /**
-     * The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
+     * The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
      */
     UserRole: XmlString;
     /**
@@ -968,11 +976,11 @@ declare namespace EMR {
      */
     EngineSecurityGroupId: XmlStringMaxLen256;
     /**
-     * The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
+     * The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
      */
-    DefaultS3Location?: XmlString;
+    DefaultS3Location: XmlString;
     /**
-     * A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
+     * A list of tags to associate with the Amazon EMR Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
      */
     Tags?: TagList;
   }
@@ -1000,7 +1008,7 @@ declare namespace EMR {
      */
     IdentityName?: XmlStringMaxLen256;
     /**
-     * Specifies whether the identity to map to the Studio is a user or a group.
+     * Specifies whether the identity to map to the Amazon EMR Studio is a user or a group.
      */
     IdentityType: IdentityType;
     /**
@@ -1033,11 +1041,11 @@ declare namespace EMR {
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user name or group to remove from the Studio. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user name or group to remove from the Amazon EMR Studio. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
-     * Specifies whether the identity to delete from the Studio is a user or a group.
+     * Specifies whether the identity to delete from the Amazon EMR Studio is a user or a group.
      */
     IdentityType: IdentityType;
   }
@@ -1307,7 +1315,7 @@ declare namespace EMR {
   }
   export interface HadoopJarStepConfig {
     /**
-     * A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
+     * A list of Java properties that are set when the step runs. You can use these properties to pass key-value pairs to your main function.
      */
     Properties?: KeyValueList;
     /**
@@ -1415,7 +1423,7 @@ declare namespace EMR {
      */
     TargetOnDemandCapacity?: WholeNumber;
     /**
-     * The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When a Spot instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use InstanceFleet$ProvisionedSpotCapacity to determine the Spot capacity units that have been provisioned for the instance fleet.  If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
+     * The target capacity of Spot units for the instance fleet, which determines how many Spot Instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot Instances as specified by InstanceTypeConfig. Each instance configuration has a specified WeightedCapacity. When a Spot instance is provisioned, the WeightedCapacity units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use InstanceFleet$ProvisionedSpotCapacity to determine the Spot capacity units that have been provisioned for the instance fleet.  If not specified or set to 0, only On-Demand Instances are provisioned for the instance fleet. At least one of TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and its value must be 1. 
      */
     TargetSpotCapacity?: WholeNumber;
     /**
@@ -1441,7 +1449,7 @@ declare namespace EMR {
      */
     Name?: XmlStringMaxLen256;
     /**
-     * The node type that the instance fleet hosts. Valid values are MASTER,CORE,and TASK.
+     * The node type that the instance fleet hosts. Valid values are MASTER, CORE, and TASK.
      */
     InstanceFleetType: InstanceFleetType;
     /**
@@ -1613,7 +1621,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The bid price for each EC2 Spot Instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * The bid price for each EC2 Spot Instance as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1656,7 +1664,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The bid price for each EC2 Spot Instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * The bid price for each EC2 Spot Instance as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -2351,7 +2359,7 @@ declare namespace EMR {
   }
   export interface ListStudioSessionMappingsOutput {
     /**
-     * A list of session mapping summary objects. Each object includes session mapping details such as creation time, identity type (user or group), and Studio ID.
+     * A list of session mapping summary objects. Each object includes session mapping details such as creation time, identity type (user or group), and Amazon EMR Studio ID.
      */
     SessionMappings?: SessionMappingSummaryList;
     /**
@@ -2585,7 +2593,7 @@ declare namespace EMR {
      */
     AutoScalingPolicy?: AutoScalingPolicyDescription;
     /**
-     * The Amazon Resource Name of the cluster.
+     * The Amazon Resource Name (ARN) of the cluster.
      */
     ClusterArn?: ArnType;
   }
@@ -2685,7 +2693,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the Amazon EMR Developer Guide. Supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the Amazon EMR Developer Guide. Supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analytics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
@@ -2755,11 +2763,11 @@ declare namespace EMR {
   }
   export interface RunJobFlowOutput {
     /**
-     * An unique identifier for the job flow.
+     * A unique identifier for the job flow.
      */
     JobFlowId?: XmlStringMaxLen256;
     /**
-     * The Amazon Resource Name of the cluster.
+     * The Amazon Resource Name (ARN) of the cluster.
      */
     ClusterArn?: ArnType;
   }
@@ -2845,7 +2853,7 @@ declare namespace EMR {
      */
     IdentityName?: XmlStringMaxLen256;
     /**
-     * Specifies whether the identity mapped to the Studio is a user or a group.
+     * Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.
      */
     IdentityType?: IdentityType;
     /**
@@ -2875,7 +2883,7 @@ declare namespace EMR {
      */
     IdentityName?: XmlStringMaxLen256;
     /**
-     * Specifies whether the identity mapped to the Studio is a user or a group.
+     * Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.
      */
     IdentityType?: IdentityType;
     /**
@@ -2943,7 +2951,7 @@ declare namespace EMR {
      */
     TimeoutAction: SpotProvisioningTimeoutAction;
     /**
-     * The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot Instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. 
+     * The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot Instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. 
      */
     BlockDurationMinutes?: WholeNumber;
     /**
@@ -3146,27 +3154,27 @@ declare namespace EMR {
   export type StringMap = {[key: string]: String};
   export interface Studio {
     /**
-     * The ID of the EMR Studio.
+     * The ID of the Amazon EMR Studio.
      */
     StudioId?: XmlStringMaxLen256;
     /**
-     * The Amazon Resource Name (ARN) of the EMR Studio.
+     * The Amazon Resource Name (ARN) of the Amazon EMR Studio.
      */
     StudioArn?: XmlStringMaxLen256;
     /**
-     * The name of the EMR Studio.
+     * The name of the Amazon EMR Studio.
      */
     Name?: XmlStringMaxLen256;
     /**
-     * The detailed description of the EMR Studio.
+     * The detailed description of the Amazon EMR Studio.
      */
     Description?: XmlStringMaxLen256;
     /**
-     * Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM.
+     * Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or IAM.
      */
     AuthMode?: AuthMode;
     /**
-     * The ID of the VPC associated with the EMR Studio.
+     * The ID of the VPC associated with the Amazon EMR Studio.
      */
     VpcId?: XmlStringMaxLen256;
     /**
@@ -3220,7 +3228,7 @@ declare namespace EMR {
      */
     VpcId?: XmlStringMaxLen256;
     /**
-     * The detailed description of the EMR Studio.
+     * The detailed description of the Amazon EMR Studio.
      */
     Description?: XmlStringMaxLen256;
     /**
@@ -3263,9 +3271,31 @@ declare namespace EMR {
     JobFlowIds: XmlStringList;
   }
   export type Unit = "NONE"|"SECONDS"|"MICRO_SECONDS"|"MILLI_SECONDS"|"BYTES"|"KILO_BYTES"|"MEGA_BYTES"|"GIGA_BYTES"|"TERA_BYTES"|"BITS"|"KILO_BITS"|"MEGA_BITS"|"GIGA_BITS"|"TERA_BITS"|"PERCENT"|"COUNT"|"BYTES_PER_SECOND"|"KILO_BYTES_PER_SECOND"|"MEGA_BYTES_PER_SECOND"|"GIGA_BYTES_PER_SECOND"|"TERA_BYTES_PER_SECOND"|"BITS_PER_SECOND"|"KILO_BITS_PER_SECOND"|"MEGA_BITS_PER_SECOND"|"GIGA_BITS_PER_SECOND"|"TERA_BITS_PER_SECOND"|"COUNT_PER_SECOND"|string;
+  export interface UpdateStudioInput {
+    /**
+     * The ID of the Amazon EMR Studio to update.
+     */
+    StudioId: XmlStringMaxLen256;
+    /**
+     * A descriptive name for the Amazon EMR Studio.
+     */
+    Name?: XmlStringMaxLen256;
+    /**
+     * A detailed description to assign to the Amazon EMR Studio.
+     */
+    Description?: XmlStringMaxLen256;
+    /**
+     * A list of subnet IDs to associate with the Amazon EMR Studio. The list can include new subnet IDs, but must also include all of the subnet IDs previously associated with the Studio. The list order does not matter. A Studio can have a maximum of 5 subnets. The subnets must belong to the same VPC as the Studio. 
+     */
+    SubnetIds?: SubnetIdList;
+    /**
+     * A default Amazon S3 location to back up Workspaces and notebook files for the Amazon EMR Studio. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
+     */
+    DefaultS3Location?: XmlString;
+  }
   export interface UpdateStudioSessionMappingInput {
     /**
-     * The ID of the EMR Studio.
+     * The ID of the Amazon EMR Studio.
      */
     StudioId: XmlStringMaxLen256;
     /**
