@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3 Object Lambda",
-  "description": "Add support for s3 object lambda request type"
-}
