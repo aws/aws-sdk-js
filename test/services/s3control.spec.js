@@ -139,7 +139,7 @@ describe('AWS.S3Control', function() {
         request.send(function(err, data) {
           expect(err).to.exist;
           expect(err.name).to.equal('InvalidARN');
-          expect(err.message).to.equal('expect \'s3\' or \'s3-outposts\' in ARN service component');
+          expect(err.message).to.equal('expect \'s3\' or \'s3-outposts\' or \'s3-object-lambda\' in ARN service component');
           done();
         });
       });
