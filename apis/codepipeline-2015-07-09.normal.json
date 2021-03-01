@@ -289,7 +289,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can have been created with any supported integration model.</p>"
+      "documentation": "<p>Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model.</p>"
     },
     "GetJobDetails": {
       "name": "GetJobDetails",
@@ -1000,7 +1000,7 @@
           "shape": "ActionTypeNotFoundException"
         }
       ],
-      "documentation": "<p>Updates an action type that has been created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and <code>UpdateActionType</code> to provide the full structure.</p>"
+      "documentation": "<p>Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and <code>UpdateActionType</code> to provide the full structure.</p>"
     },
     "UpdatePipeline": {
       "name": "UpdatePipeline",
@@ -1615,11 +1615,11 @@
       "members": {
         "minimumCount": {
           "shape": "MinimumActionTypeArtifactCount",
-          "documentation": "<p>The minimum allowed number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
+          "documentation": "<p>The minimum number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
         },
         "maximumCount": {
           "shape": "MaximumActionTypeArtifactCount",
-          "documentation": "<p>The maximum allowed number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
+          "documentation": "<p>The maximum number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of <code>source</code>.</p>"
         }
       },
       "documentation": "<p>Information about parameters for artifacts associated with the action type, such as the minimum and maximum artifacts allowed.</p>"
@@ -1643,7 +1643,7 @@
         },
         "id": {
           "shape": "ActionTypeIdentifier",
-          "documentation": "<p>The action ID is composed of the action category, owner, provider, and version of the action type to be updated.</p>"
+          "documentation": "<p>The action category, owner, provider, and version of the action type to be updated.</p>"
         },
         "inputArtifactDetails": {
           "shape": "ActionTypeArtifactDetails",
@@ -1686,15 +1686,15 @@
         },
         "type": {
           "shape": "ExecutorType",
-          "documentation": "<p>The integration model used to create and update the action type, such as the Lambda integration model. Each integration type has a related action engine, or executor. The available executor types are <code>Lambda</code> and <code>JobWorker</code>.</p>"
+          "documentation": "<p>The integration model used to create and update the action type, <code>Lambda</code> or <code>JobWorker</code>. </p>"
         },
         "policyStatementsTemplate": {
           "shape": "PolicyStatementsTemplate",
-          "documentation": "<p>The policy statement that specifies the permissions in the CodePipeline customer’s account that are needed to successfully run an action execution.</p> <p>To grant permission to another account, specify the account ID as the Principal. For AWS services, the Principal is a domain-style identifier defined by the service, like <code>codepipeline.amazonaws.com</code>.</p> <note> <p>The size of the passed JSON policy document cannot exceed 2048 characters.</p> </note>"
+          "documentation": "<p>The policy statement that specifies the permissions in the CodePipeline customer’s account that are needed to successfully run an action.</p> <p>To grant permission to another account, specify the account ID as the Principal, a domain-style identifier defined by the service, for example <code>codepipeline.amazonaws.com</code>.</p> <note> <p>The size of the passed JSON policy document cannot exceed 2048 characters.</p> </note>"
         },
         "jobTimeout": {
           "shape": "JobTimeout",
-          "documentation": "<p>The timeout in seconds for the job. An action execution can consist of multiple jobs. This is the timeout for a single job, and not for the entire action execution.</p>"
+          "documentation": "<p>The timeout in seconds for the job. An action execution can have multiple jobs. This is the timeout for a single job, not the entire action execution.</p>"
         }
       },
       "documentation": "<p>The action engine, or executor, for an action type created for a provider, where the action is to be used by customers of the provider. The action engine is associated with the model used to create and update the action, such as the Lambda integration model.</p>"
@@ -1738,11 +1738,11 @@
       "members": {
         "category": {
           "shape": "ActionCategory",
-          "documentation": "<p>A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
+          "documentation": "<p>Defines what kind of action can be taken in the stage, one of the following:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
         },
         "owner": {
           "shape": "ActionTypeOwner",
-          "documentation": "<p>The creator of the action type being called. There are two valid values for the <code>owner</code> field: <code>AWS</code> and <code>ThirdParty</code>.</p>"
+          "documentation": "<p>The creator of the action type being called: <code>AWS</code> or <code>ThirdParty</code>.</p>"
         },
         "provider": {
           "shape": "ActionProvider",
@@ -1773,7 +1773,7 @@
       "members": {
         "allowedAccounts": {
           "shape": "AllowedAccounts",
-          "documentation": "<p>A list of AWS account IDs with allow access to use the action type in their pipelines.</p>"
+          "documentation": "<p>A list of AWS account IDs with access to use the action type in their pipelines.</p>"
         }
       },
       "documentation": "<p>Details identifying the users with permissions to use the action type.</p>"
@@ -1796,7 +1796,7 @@
       "members": {
         "name": {
           "shape": "ActionConfigurationKey",
-          "documentation": "<p>The property name. This represents a field name that is displayed to users.</p>"
+          "documentation": "<p>The property name that is displayed to users.</p>"
         },
         "optional": {
           "shape": "Boolean",
@@ -1808,7 +1808,7 @@
         },
         "noEcho": {
           "shape": "Boolean",
-          "documentation": "<p>Determines whether the field value entered by the customer is logged. If <code>noEcho</code> is <code>true</code>, the value is not shown in CloudTrail logs for the action execution.</p>"
+          "documentation": "<p>Whether to omit the field value entered by the customer in the log. If <code>true</code>, the value is not saved in CloudTrail logs for the action execution.</p>"
         },
         "queryable": {
           "shape": "Boolean",
@@ -2538,11 +2538,11 @@
       "members": {
         "category": {
           "shape": "ActionCategory",
-          "documentation": "<p>A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
+          "documentation": "<p>Defines what kind of action can be taken in the stage. The following are the valid values:</p> <ul> <li> <p> <code>Source</code> </p> </li> <li> <p> <code>Build</code> </p> </li> <li> <p> <code>Test</code> </p> </li> <li> <p> <code>Deploy</code> </p> </li> <li> <p> <code>Approval</code> </p> </li> <li> <p> <code>Invoke</code> </p> </li> </ul>"
         },
         "owner": {
           "shape": "ActionTypeOwner",
-          "documentation": "<p>The creator of an action type that has been created with any supported integration model. There are two valid values for the <code>owner</code> field in the action type category: <code>AWS</code> and <code>ThirdParty</code>.</p>"
+          "documentation": "<p>The creator of an action type that was created with any supported integration model. There are two valid values: <code>AWS</code> and <code>ThirdParty</code>.</p>"
         },
         "provider": {
           "shape": "ActionProvider",
@@ -2996,6 +2996,10 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxPipelines",
+          "documentation": "<p>The maximum number of pipelines to return in a single call. To retrieve the remaining pipelines, make another call with the returned nextToken value. The minimum value you can specify is 1. The maximum accepted value is 1000.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ListPipelines</code> action.</p>"
@@ -3118,6 +3122,11 @@
     },
     "MaxBatchSize": {
       "type": "integer",
+      "min": 1
+    },
+    "MaxPipelines": {
+      "type": "integer",
+      "max": 1000,
       "min": 1
     },
     "MaxResults": {

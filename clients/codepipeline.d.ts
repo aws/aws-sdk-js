@@ -92,11 +92,11 @@ declare class CodePipeline extends Service {
    */
   enableStageTransition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can have been created with any supported integration model.
+   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model.
    */
   getActionType(params: CodePipeline.Types.GetActionTypeInput, callback?: (err: AWSError, data: CodePipeline.Types.GetActionTypeOutput) => void): Request<CodePipeline.Types.GetActionTypeOutput, AWSError>;
   /**
-   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can have been created with any supported integration model.
+   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model.
    */
   getActionType(callback?: (err: AWSError, data: CodePipeline.Types.GetActionTypeOutput) => void): Request<CodePipeline.Types.GetActionTypeOutput, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class CodePipeline extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CodePipeline.Types.UntagResourceOutput) => void): Request<CodePipeline.Types.UntagResourceOutput, AWSError>;
   /**
-   * Updates an action type that has been created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
+   * Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
    */
   updateActionType(params: CodePipeline.Types.UpdateActionTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an action type that has been created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
+   * Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
    */
   updateActionType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -684,11 +684,11 @@ declare namespace CodePipeline {
   }
   export interface ActionTypeArtifactDetails {
     /**
-     * The minimum allowed number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
+     * The minimum number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
      */
     minimumCount: MinimumActionTypeArtifactCount;
     /**
-     * The maximum allowed number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
+     * The maximum number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
      */
     maximumCount: MaximumActionTypeArtifactCount;
   }
@@ -702,7 +702,7 @@ declare namespace CodePipeline {
      */
     executor: ActionTypeExecutor;
     /**
-     * The action ID is composed of the action category, owner, provider, and version of the action type to be updated.
+     * The action category, owner, provider, and version of the action type to be updated.
      */
     id: ActionTypeIdentifier;
     /**
@@ -733,15 +733,15 @@ declare namespace CodePipeline {
      */
     configuration: ExecutorConfiguration;
     /**
-     * The integration model used to create and update the action type, such as the Lambda integration model. Each integration type has a related action engine, or executor. The available executor types are Lambda and JobWorker.
+     * The integration model used to create and update the action type, Lambda or JobWorker. 
      */
     type: ExecutorType;
     /**
-     * The policy statement that specifies the permissions in the CodePipeline customer’s account that are needed to successfully run an action execution. To grant permission to another account, specify the account ID as the Principal. For AWS services, the Principal is a domain-style identifier defined by the service, like codepipeline.amazonaws.com.  The size of the passed JSON policy document cannot exceed 2048 characters. 
+     * The policy statement that specifies the permissions in the CodePipeline customer’s account that are needed to successfully run an action. To grant permission to another account, specify the account ID as the Principal, a domain-style identifier defined by the service, for example codepipeline.amazonaws.com.  The size of the passed JSON policy document cannot exceed 2048 characters. 
      */
     policyStatementsTemplate?: PolicyStatementsTemplate;
     /**
-     * The timeout in seconds for the job. An action execution can consist of multiple jobs. This is the timeout for a single job, and not for the entire action execution.
+     * The timeout in seconds for the job. An action execution can have multiple jobs. This is the timeout for a single job, not the entire action execution.
      */
     jobTimeout?: JobTimeout;
   }
@@ -765,11 +765,11 @@ declare namespace CodePipeline {
   }
   export interface ActionTypeIdentifier {
     /**
-     * A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:    Source     Build     Test     Deploy     Approval     Invoke   
+     * Defines what kind of action can be taken in the stage, one of the following:    Source     Build     Test     Deploy     Approval     Invoke   
      */
     category: ActionCategory;
     /**
-     * The creator of the action type being called. There are two valid values for the owner field: AWS and ThirdParty.
+     * The creator of the action type being called: AWS or ThirdParty.
      */
     owner: ActionTypeOwner;
     /**
@@ -785,14 +785,14 @@ declare namespace CodePipeline {
   export type ActionTypeOwner = string;
   export interface ActionTypePermissions {
     /**
-     * A list of AWS account IDs with allow access to use the action type in their pipelines.
+     * A list of AWS account IDs with access to use the action type in their pipelines.
      */
     allowedAccounts: AllowedAccounts;
   }
   export type ActionTypeProperties = ActionTypeProperty[];
   export interface ActionTypeProperty {
     /**
-     * The property name. This represents a field name that is displayed to users.
+     * The property name that is displayed to users.
      */
     name: ActionConfigurationKey;
     /**
@@ -804,7 +804,7 @@ declare namespace CodePipeline {
      */
     key: Boolean;
     /**
-     * Determines whether the field value entered by the customer is logged. If noEcho is true, the value is not shown in CloudTrail logs for the action execution.
+     * Whether to omit the field value entered by the customer in the log. If true, the value is not saved in CloudTrail logs for the action execution.
      */
     noEcho: Boolean;
     /**
@@ -1208,11 +1208,11 @@ declare namespace CodePipeline {
   export type FailureType = "JobFailed"|"ConfigurationError"|"PermissionError"|"RevisionOutOfSync"|"RevisionUnavailable"|"SystemUnavailable"|string;
   export interface GetActionTypeInput {
     /**
-     * A category defines what kind of action can be taken in the stage. Valid categories are limited to one of the following values:    Source     Build     Test     Deploy     Approval     Invoke   
+     * Defines what kind of action can be taken in the stage. The following are the valid values:    Source     Build     Test     Deploy     Approval     Invoke   
      */
     category: ActionCategory;
     /**
-     * The creator of an action type that has been created with any supported integration model. There are two valid values for the owner field in the action type category: AWS and ThirdParty.
+     * The creator of an action type that was created with any supported integration model. There are two valid values: AWS and ThirdParty.
      */
     owner: ActionTypeOwner;
     /**
@@ -1501,6 +1501,10 @@ declare namespace CodePipeline {
      * An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of pipelines to return in a single call. To retrieve the remaining pipelines, make another call with the returned nextToken value. The minimum value you can specify is 1. The maximum accepted value is 1000.
+     */
+    maxResults?: MaxPipelines;
   }
   export interface ListPipelinesOutput {
     /**
@@ -1588,6 +1592,7 @@ declare namespace CodePipeline {
   }
   export type MatchEquals = string;
   export type MaxBatchSize = number;
+  export type MaxPipelines = number;
   export type MaxResults = number;
   export type MaximumActionTypeArtifactCount = number;
   export type MaximumArtifactCount = number;

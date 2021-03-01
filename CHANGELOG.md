@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.853.0-->
+<!--LATEST=2.854.0-->
 <!--ENTRYINSERT-->
+
+## 2.854.0
+* feature: AlexaForBusiness: Added support for optional tags in CreateAddressBook, CreateConferenceProvider, CreateContact, CreateGatewayGroup, CreateNetworkProfile and RegisterAVSDevice APIs.
+* feature: CodePipeline: Added a new field to the ListPipelines API to allow maximum search results of 1000
+* feature: EKS: Adding new error code AdmissionRequestDenied for Addons in EKS
+* feature: SSM: Add Support for Patch Manger Baseline Override parameter.
 
 ## 2.853.0
 * bugfix: s3: Bugfixing the s3 arn endpoint parser
