@@ -100,7 +100,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for an Amazon FSx for Windows file system.</p>"
+      "documentation": "<p>Creates an endpoint for an Amazon FSx for Windows File Server file system.</p>"
     },
     "CreateLocationNfs": {
       "name": "CreateLocationNfs",
@@ -210,7 +210,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.</p>"
+      "documentation": "<p>Creates a task.</p> <p>A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer.</p> <p>When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region.</p> <p>You can transfer data between commercial AWS Regions except for China, or between AWS GovCloud (US-East and US-West) Regions.</p> <important> <p>When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see <a href=\"http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer\">Data Transfer pricing</a>. </p> </important>"
     },
     "DeleteAgent": {
       "name": "DeleteAgent",
@@ -342,7 +342,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows location.</p>"
+      "documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.</p>"
     },
     "DescribeLocationNfs": {
       "name": "DescribeLocationNfs",
@@ -674,6 +674,72 @@
       ],
       "documentation": "<p>Updates the name of an agent.</p>"
     },
+    "UpdateLocationNfs": {
+      "name": "UpdateLocationNfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLocationNfsRequest"
+      },
+      "output": {
+        "shape": "UpdateLocationNfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see <a>create-nfs-location</a>.</p>"
+    },
+    "UpdateLocationObjectStorage": {
+      "name": "UpdateLocationObjectStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLocationObjectStorageRequest"
+      },
+      "output": {
+        "shape": "UpdateLocationObjectStorageResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see <a>create-object-location</a>.</p>"
+    },
+    "UpdateLocationSmb": {
+      "name": "UpdateLocationSmb",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLocationSmbRequest"
+      },
+      "output": {
+        "shape": "UpdateLocationSmbResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see <a>create-smb-location</a>.</p>"
+    },
     "UpdateTask": {
       "name": "UpdateTask",
       "http": {
@@ -716,7 +782,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Updates execution of a task.</p> <p>You can modify bandwidth throttling for a task execution that is running or queued. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p> <note> <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> is <code> <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a> </code>.</p> </note>"
+      "documentation": "<p>Updates execution of a task.</p> <p>You can modify bandwidth throttling for a task execution that is running or queued. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p> <note> <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> is <code> <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a> </code>.</p> </note>"
     }
   },
   "shapes": {
@@ -887,15 +953,15 @@
       "members": {
         "Subdirectory": {
           "shape": "FsxWindowsSubdirectory",
-          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.</p>"
+          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.</p>"
         },
         "FsxFilesystemArn": {
           "shape": "FsxFilesystemArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows file system.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.</p>"
         },
         "SecurityGroupArns": {
           "shape": "Ec2SecurityGroupArnList",
-          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.</p>"
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows File Server file system.</p>"
         },
         "Tags": {
           "shape": "InputTagList",
@@ -903,15 +969,15 @@
         },
         "User": {
           "shape": "SmbUser",
-          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File Server file system.</p>"
         },
         "Domain": {
           "shape": "SmbDomain",
-          "documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+          "documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
         },
         "Password": {
           "shape": "SmbPassword",
-          "documentation": "<p>The password of the user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+          "documentation": "<p>The password of the user who has the permissions to access files and folders in the FSx for Windows File Server file system.</p>"
         }
       }
     },
@@ -920,7 +986,7 @@
       "members": {
         "LocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location that is created.</p>"
         }
       }
     },
@@ -1312,7 +1378,7 @@
       "members": {
         "LocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows location to describe.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server location to describe.</p>"
         }
       }
     },
@@ -1321,27 +1387,27 @@
       "members": {
         "LocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows location that was described.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server location that was described.</p>"
         },
         "LocationUri": {
           "shape": "LocationUri",
-          "documentation": "<p>The URL of the FSx for Windows location that was described.</p>"
+          "documentation": "<p>The URL of the FSx for Windows File Server location that was described.</p>"
         },
         "SecurityGroupArns": {
           "shape": "Ec2SecurityGroupArnList",
-          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows file system.</p>"
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows File Server file system.</p>"
         },
         "CreationTime": {
           "shape": "Time",
-          "documentation": "<p>The time that the FSx for Windows location was created.</p>"
+          "documentation": "<p>The time that the FSx for Windows File Server location was created.</p>"
         },
         "User": {
           "shape": "SmbUser",
-          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File Server file system.</p>"
         },
         "Domain": {
           "shape": "SmbDomain",
-          "documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+          "documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
         }
       }
     },
@@ -2715,6 +2781,111 @@
       "documentation": "<p>UpdateAgentRequest</p>"
     },
     "UpdateAgentResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateLocationNfsRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the NFS location to update.</p>"
+        },
+        "Subdirectory": {
+          "shape": "NfsSubdirectory",
+          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.</p> <p>To see all the paths exported by your NFS server, run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash</code>, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
+        },
+        "OnPremConfig": {
+          "shape": "OnPremConfig"
+        },
+        "MountOptions": {
+          "shape": "NfsMountOptions"
+        }
+      }
+    },
+    "UpdateLocationNfsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateLocationObjectStorageRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the self-managed object storage server location to be updated.</p>"
+        },
+        "ServerPort": {
+          "shape": "ObjectStorageServerPort",
+          "documentation": "<p>The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.</p>"
+        },
+        "ServerProtocol": {
+          "shape": "ObjectStorageServerProtocol",
+          "documentation": "<p>The protocol that the object storage server uses to communicate. Valid values are <code>HTTP</code> or <code>HTTPS</code>.</p>"
+        },
+        "Subdirectory": {
+          "shape": "S3Subdirectory",
+          "documentation": "<p>The subdirectory in the self-managed object storage server that is used to read data from.</p>"
+        },
+        "AccessKey": {
+          "shape": "ObjectStorageAccessKey",
+          "documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name and password, respectively.</p>"
+        },
+        "SecretKey": {
+          "shape": "ObjectStorageSecretKey",
+          "documentation": "<p>Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name and password, respectively.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.</p>"
+        }
+      }
+    },
+    "UpdateLocationObjectStorageResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateLocationSmbRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SMB location to update.</p>"
+        },
+        "Subdirectory": {
+          "shape": "SmbSubdirectory",
+          "documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example, <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to mount the SMB share and to access all the data in that share. To ensure this, do either of the following:</p> <ul> <li> <p>Ensure that the user/password specified belongs to the user who can mount the share and who has the appropriate permissions for all of the files and directories that you want DataSync to access.</p> </li> <li> <p>Use credentials of a member of the Backup Operators group to mount the share. </p> </li> </ul> <p>Doing either of these options enables the agent to access the data. For the agent to access directories, you must also enable all execute access.</p>"
+        },
+        "User": {
+          "shape": "SmbUser",
+          "documentation": "<p>The user who can mount the share has the permissions to access files and folders in the SMB share.</p>"
+        },
+        "Domain": {
+          "shape": "SmbDomain",
+          "documentation": "<p>The name of the Windows domain that the SMB server belongs to.</p>"
+        },
+        "Password": {
+          "shape": "SmbPassword",
+          "documentation": "<p>The password of the user who can mount the share has the permissions to access files and folders in the SMB share.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.</p>"
+        },
+        "MountOptions": {
+          "shape": "SmbMountOptions"
+        }
+      }
+    },
+    "UpdateLocationSmbResponse": {
       "type": "structure",
       "members": {}
     },

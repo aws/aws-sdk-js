@@ -28,11 +28,11 @@ declare class ManagedBlockchain extends Service {
    */
   createNetwork(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNetworkOutput) => void): Request<ManagedBlockchain.Types.CreateNetworkOutput, AWSError>;
   /**
-   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
+   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum.
    */
   createNode(params: ManagedBlockchain.Types.CreateNodeInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNodeOutput) => void): Request<ManagedBlockchain.Types.CreateNodeOutput, AWSError>;
   /**
-   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
+   * Creates a node on the specified blockchain network. Applies to Hyperledger Fabric and Ethereum.
    */
   createNode(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateNodeOutput) => void): Request<ManagedBlockchain.Types.CreateNodeOutput, AWSError>;
   /**
@@ -272,7 +272,7 @@ declare namespace ManagedBlockchain {
      */
     MemberConfiguration: MemberConfiguration;
     /**
-     * Tags to assign to the network. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the network. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -304,7 +304,7 @@ declare namespace ManagedBlockchain {
      */
     NodeConfiguration: NodeConfiguration;
     /**
-     * Tags to assign to the node. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the node. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -336,7 +336,7 @@ declare namespace ManagedBlockchain {
      */
     Description?: DescriptionString;
     /**
-     * Tags to assign to the proposal. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the proposal. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -734,7 +734,7 @@ declare namespace ManagedBlockchain {
      */
     LogPublishingConfiguration?: MemberLogPublishingConfiguration;
     /**
-     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.
+     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.
      */
     Tags?: InputTagMap;
   }
@@ -894,7 +894,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NetworkFabricAttributes;
     /**
-     * Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. Ethereum on Managed Blockchain is in preview release and is subject to change.
+     * Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. 
      */
     Ethereum?: NetworkEthereumAttributes;
   }
@@ -960,7 +960,7 @@ declare namespace ManagedBlockchain {
      */
     InstanceType?: InstanceTypeString;
     /**
-     * The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.
+     * The Availability Zone in which the node exists. Required for Ethereum nodes. 
      */
     AvailabilityZone?: AvailabilityZoneString;
     /**
@@ -998,7 +998,7 @@ declare namespace ManagedBlockchain {
      */
     InstanceType: InstanceTypeString;
     /**
-     * The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.
+     * The Availability Zone in which the node exists. Required for Ethereum nodes. 
      */
     AvailabilityZone?: AvailabilityZoneString;
     /**
@@ -1046,7 +1046,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NodeFabricAttributes;
     /**
-     * Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.
+     * Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. 
      */
     Ethereum?: NodeEthereumAttributes;
   }
@@ -1222,7 +1222,7 @@ declare namespace ManagedBlockchain {
      */
     ResourceArn: ArnString;
     /**
-     * The tags to assign to the specified resource. Tag values can be empty, for example, "MyTagKey" : "". You can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.
+     * The tags to assign to the specified resource. Tag values can be empty, for example, "MyTagKey" : "". You can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.
      */
     Tags: InputTagMap;
   }

@@ -84,11 +84,11 @@ declare class ComputeOptimizer extends Service {
    */
   getLambdaFunctionRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse, AWSError>;
   /**
-   * Returns the optimization findings for an account. For example, it returns the number of Amazon EC2 instances in an account that are under-provisioned, over-provisioned, or optimized. It also returns the number of Auto Scaling groups in an account that are not optimized, or optimized.
+   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
    */
   getRecommendationSummaries(params: ComputeOptimizer.Types.GetRecommendationSummariesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
-   * Returns the optimization findings for an account. For example, it returns the number of Amazon EC2 instances in an account that are under-provisioned, over-provisioned, or optimized. It also returns the number of Auto Scaling groups in an account that are not optimized, or optimized.
+   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
    */
   getRecommendationSummaries(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
@@ -237,7 +237,7 @@ declare namespace ComputeOptimizer {
      */
     name?: EBSMetricName;
     /**
-     * The statistic of the utilization metric. The following statistics are available:    Average - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.  
+     * The statistic of the utilization metric. The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the AWS Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
      */
     statistic?: MetricStatistic;
     /**
@@ -756,7 +756,7 @@ declare namespace ComputeOptimizer {
      */
     name?: LambdaFunctionMetricName;
     /**
-     * The statistic of the utilization metric.
+     * The statistic of the utilization metric. The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the AWS Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
      */
     statistic?: LambdaFunctionMetricStatistic;
     /**
@@ -958,7 +958,7 @@ declare namespace ComputeOptimizer {
      */
     name?: MetricName;
     /**
-     * The statistic of the utilization metric. The following statistics are available:    Average - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.  
+     * The statistic of the utilization metric. The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the AWS Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
      */
     statistic?: MetricStatistic;
     /**

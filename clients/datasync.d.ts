@@ -36,11 +36,11 @@ declare class DataSync extends Service {
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows file system.
+   * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows file system.
+   * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
+   * Creates a task. A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer. When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region. You can transfer data between commercial AWS Regions except for China, or between AWS GovCloud (US-East and US-West) Regions.  When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see Data Transfer pricing.  
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
+   * Creates a task. A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer. When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region. You can transfer data between commercial AWS Regions except for China, or between AWS GovCloud (US-East and US-West) Regions.  When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see Data Transfer pricing.  
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class DataSync extends Service {
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
    */
   describeLocationFsxWindows(params: DataSync.Types.DescribeLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
    */
   describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
@@ -252,6 +252,30 @@ declare class DataSync extends Service {
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
+   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see create-nfs-location.
+   */
+  updateLocationNfs(params: DataSync.Types.UpdateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see create-nfs-location.
+   */
+  updateLocationNfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see create-object-location.
+   */
+  updateLocationObjectStorage(params: DataSync.Types.UpdateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see create-object-location.
+   */
+  updateLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see create-smb-location.
+   */
+  updateLocationSmb(params: DataSync.Types.UpdateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see create-smb-location.
+   */
+  updateLocationSmb(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
+  /**
    * Updates the metadata associated with a task.
    */
   updateTask(params: DataSync.Types.UpdateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
@@ -356,15 +380,15 @@ declare namespace DataSync {
   }
   export interface CreateLocationFsxWindowsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.
+     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
      */
     Subdirectory?: FsxWindowsSubdirectory;
     /**
-     * The Amazon Resource Name (ARN) for the FSx for Windows file system.
+     * The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.
+     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows File Server file system.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
@@ -372,21 +396,21 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     * The user who has the permissions to access files and folders in the FSx for Windows File Server file system.
      */
     User: SmbUser;
     /**
-     * The name of the Windows domain that the FSx for Windows server belongs to.
+     * The name of the Windows domain that the FSx for Windows File Server belongs to.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
+     * The password of the user who has the permissions to access files and folders in the FSx for Windows File Server file system.
      */
     Password: SmbPassword;
   }
   export interface CreateLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.
+     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location that is created.
      */
     LocationArn?: LocationArn;
   }
@@ -654,33 +678,33 @@ declare namespace DataSync {
   }
   export interface DescribeLocationFsxWindowsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
+     * The Amazon Resource Name (ARN) of the FSx for Windows File Server location to describe.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows location that was described.
+     * The Amazon Resource Name (ARN) of the FSx for Windows File Server location that was described.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the FSx for Windows location that was described.
+     * The URL of the FSx for Windows File Server location that was described.
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows file system.
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows File Server file system.
      */
     SecurityGroupArns?: Ec2SecurityGroupArnList;
     /**
-     * The time that the FSx for Windows location was created.
+     * The time that the FSx for Windows File Server location was created.
      */
     CreationTime?: Time;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     * The user who has the permissions to access files and folders in the FSx for Windows File Server file system.
      */
     User?: SmbUser;
     /**
-     * The name of the Windows domain that the FSx for Windows server belongs to.
+     * The name of the Windows domain that the FSx for Windows File Server belongs to.
      */
     Domain?: SmbDomain;
   }
@@ -1404,6 +1428,81 @@ declare namespace DataSync {
     Name?: TagValue;
   }
   export interface UpdateAgentResponse {
+  }
+  export interface UpdateLocationNfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the NFS location to update.
+     */
+    LocationArn: LocationArn;
+    /**
+     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
+     */
+    Subdirectory?: NfsSubdirectory;
+    OnPremConfig?: OnPremConfig;
+    MountOptions?: NfsMountOptions;
+  }
+  export interface UpdateLocationNfsResponse {
+  }
+  export interface UpdateLocationObjectStorageRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the self-managed object storage server location to be updated.
+     */
+    LocationArn: LocationArn;
+    /**
+     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.
+     */
+    ServerPort?: ObjectStorageServerPort;
+    /**
+     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     */
+    ServerProtocol?: ObjectStorageServerProtocol;
+    /**
+     * The subdirectory in the self-managed object storage server that is used to read data from.
+     */
+    Subdirectory?: S3Subdirectory;
+    /**
+     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     */
+    AccessKey?: ObjectStorageAccessKey;
+    /**
+     * Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     */
+    SecretKey?: ObjectStorageSecretKey;
+    /**
+     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     */
+    AgentArns?: AgentArnList;
+  }
+  export interface UpdateLocationObjectStorageResponse {
+  }
+  export interface UpdateLocationSmbRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the SMB location to update.
+     */
+    LocationArn: LocationArn;
+    /**
+     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder that you specified, DataSync must have permissions to mount the SMB share and to access all the data in that share. To ensure this, do either of the following:   Ensure that the user/password specified belongs to the user who can mount the share and who has the appropriate permissions for all of the files and directories that you want DataSync to access.   Use credentials of a member of the Backup Operators group to mount the share.    Doing either of these options enables the agent to access the data. For the agent to access directories, you must also enable all execute access.
+     */
+    Subdirectory?: SmbSubdirectory;
+    /**
+     * The user who can mount the share has the permissions to access files and folders in the SMB share.
+     */
+    User?: SmbUser;
+    /**
+     * The name of the Windows domain that the SMB server belongs to.
+     */
+    Domain?: SmbDomain;
+    /**
+     * The password of the user who can mount the share has the permissions to access files and folders in the SMB share.
+     */
+    Password?: SmbPassword;
+    /**
+     * The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
+     */
+    AgentArns?: AgentArnList;
+    MountOptions?: SmbMountOptions;
+  }
+  export interface UpdateLocationSmbResponse {
   }
   export interface UpdateTaskExecutionRequest {
     /**

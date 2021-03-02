@@ -458,12 +458,20 @@ declare namespace IoTWireless {
      * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     */
+    Tags?: TagList;
   }
   export interface AssociateAwsAccountWithPartnerAccountResponse {
     /**
      * The Sidewalk account credentials.
      */
     Sidewalk?: SidewalkAccountInfo;
+    /**
+     * The Amazon Resource Name of the resource.
+     */
+    Arn?: PartnerAccountArn;
   }
   export interface AssociateWirelessDeviceWithThingRequest {
     /**
@@ -693,12 +701,20 @@ declare namespace IoTWireless {
      * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     */
+    Tags?: TagList;
   }
   export interface CreateWirelessGatewayTaskDefinitionResponse {
     /**
      * The ID of the new wireless gateway task definition.
      */
     Id?: WirelessGatewayTaskDefinitionId;
+    /**
+     * The Amazon Resource Name of the resource.
+     */
+    Arn?: WirelessGatewayTaskDefinitionArn;
   }
   export interface CreateWirelessGatewayTaskRequest {
     /**
@@ -1077,7 +1093,7 @@ declare namespace IoTWireless {
      */
     IotCertificateId?: IotCertificateId;
     /**
-     * The ID of the certificate associated with the wireless gateway and used for LoRaWANNetworkServer endpoint.
+     * The ID of the certificate that is associated with the wireless gateway and used for the LoRaWANNetworkServer endpoint.
      */
     LoRaWANNetworkServerCertificateId?: IotCertificateId;
   }
@@ -1168,6 +1184,10 @@ declare namespace IoTWireless {
      * Information about the gateways to update.
      */
     Update?: UpdateWirelessGatewayTaskCreate;
+    /**
+     * The Amazon Resource Name of the resource.
+     */
+    Arn?: WirelessGatewayTaskDefinitionArn;
   }
   export interface GetWirelessGatewayTaskRequest {
     /**
@@ -1725,6 +1745,7 @@ declare namespace IoTWireless {
     JoinEui?: JoinEui;
   }
   export type PackageVersion = string;
+  export type PartnerAccountArn = string;
   export type PartnerAccountId = string;
   export type PartnerType = "Sidewalk"|string;
   export type PayloadData = string;
@@ -1835,6 +1856,10 @@ declare namespace IoTWireless {
      * The fingerprint of the Sidewalk application server private key.
      */
     Fingerprint?: Fingerprint;
+    /**
+     * The Amazon Resource Name of the resource.
+     */
+    Arn?: PartnerAccountArn;
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
   export interface SidewalkListDevice {
@@ -2022,6 +2047,10 @@ declare namespace IoTWireless {
      * The properties that relate to the LoRaWAN wireless gateway.
      */
     LoRaWAN?: LoRaWANUpdateGatewayTaskEntry;
+    /**
+     * The Amazon Resource Name of the resource.
+     */
+    Arn?: WirelessGatewayTaskDefinitionArn;
   }
   export type WirelessDeviceArn = string;
   export type WirelessDeviceId = string;
@@ -2095,6 +2124,7 @@ declare namespace IoTWireless {
     LastUplinkReceivedAt?: ISODateTimeString;
   }
   export type WirelessGatewayStatisticsList = WirelessGatewayStatistics[];
+  export type WirelessGatewayTaskDefinitionArn = string;
   export type WirelessGatewayTaskDefinitionId = string;
   export type WirelessGatewayTaskDefinitionList = UpdateWirelessGatewayTaskEntry[];
   export type WirelessGatewayTaskDefinitionType = "UPDATE"|string;

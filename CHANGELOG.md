@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.854.0-->
+<!--LATEST=2.855.0-->
 <!--ENTRYINSERT-->
+
+## 2.855.0
+* feature: DataSync: Additional API Support to update NFS/SMB/ObjectStorage locations
+* feature: EventBridge: Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation.
+* feature: IoTWireless: Add ARN & Tags for PartnerAccount related APIs and WirelessGatewayTaskDefinition related APIs
 
 ## 2.854.0
 * feature: AlexaForBusiness: Added support for optional tags in CreateAddressBook, CreateConferenceProvider, CreateContact, CreateGatewayGroup, CreateNetworkProfile and RegisterAVSDevice APIs.

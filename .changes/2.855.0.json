@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Additional API Support to update NFS/SMB/ObjectStorage locations"
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation."
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Add ARN & Tags for PartnerAccount related APIs and WirelessGatewayTaskDefinition related APIs"
+    }
+]

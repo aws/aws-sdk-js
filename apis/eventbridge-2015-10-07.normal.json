@@ -1375,13 +1375,13 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "([a-zA-Z0-9]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
+      "pattern": "([a-zA-Z0-9_+.-@]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
     },
     "DbUser": {
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "([a-zA-Z0-9]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
+      "pattern": "([a-zA-Z0-9_+.-@]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
     },
     "DeactivateEventSourceRequest": {
       "type": "structure",
@@ -2509,6 +2509,10 @@
         "EventBusName": {
           "shape": "NonPartnerEventBusNameOrArn",
           "documentation": "<p>The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.</p>"
+        },
+        "TraceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p> <p>To learn more about X-Ray trace headers, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the AWS X-Ray Developer Guide.</p>"
         }
       },
       "documentation": "<p>Represents an event to be submitted.</p>"
@@ -3460,7 +3464,7 @@
         },
         "Event": {
           "shape": "String",
-          "documentation": "<p>The event, in JSON format, to test against the event pattern.</p>"
+          "documentation": "<p>The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html\">AWS Events</a>, and the following fields are mandatory:</p> <ul> <li> <p> <code>id</code> </p> </li> <li> <p> <code>account</code> </p> </li> <li> <p> <code>source</code> </p> </li> <li> <p> <code>time</code> </p> </li> <li> <p> <code>region</code> </p> </li> <li> <p> <code>resources</code> </p> </li> <li> <p> <code>detail-type</code> </p> </li> </ul>"
         }
       }
     },
@@ -3475,6 +3479,11 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TraceHeader": {
+      "type": "string",
+      "max": 500,
+      "min": 1
     },
     "TransformerInput": {
       "type": "string",

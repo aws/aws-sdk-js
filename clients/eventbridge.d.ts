@@ -1292,6 +1292,10 @@ declare namespace EventBridge {
      * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.
      */
     EventBusName?: NonPartnerEventBusNameOrArn;
+    /**
+     * An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event. To learn more about X-Ray trace headers, see Tracing header in the AWS X-Ray Developer Guide.
+     */
+    TraceHeader?: TraceHeader;
   }
   export type PutEventsRequestEntryList = PutEventsRequestEntry[];
   export interface PutEventsResponse {
@@ -1854,7 +1858,7 @@ declare namespace EventBridge {
      */
     EventPattern: EventPattern;
     /**
-     * The event, in JSON format, to test against the event pattern.
+     * The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in AWS Events, and the following fields are mandatory:    id     account     source     time     region     resources     detail-type   
      */
     Event: String;
   }
@@ -1865,6 +1869,7 @@ declare namespace EventBridge {
     Result?: Boolean;
   }
   export type Timestamp = Date;
+  export type TraceHeader = string;
   export type TransformerInput = string;
   export type TransformerPaths = {[key: string]: TargetInputPath};
   export interface UntagResourceRequest {

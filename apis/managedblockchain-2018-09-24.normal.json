@@ -134,7 +134,7 @@
           "shape": "TooManyTagsException"
         }
       ],
-      "documentation": "<p>Creates a node on the specified blockchain network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p> <p>Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+      "documentation": "<p>Creates a node on the specified blockchain network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>"
     },
     "CreateProposal": {
       "name": "CreateProposal",
@@ -878,7 +878,7 @@
         },
         "Tags": {
           "shape": "InputTagMap",
-          "documentation": "<p>Tags to assign to the network. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+          "documentation": "<p>Tags to assign to the network. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
         }
       }
     },
@@ -924,7 +924,7 @@
         },
         "Tags": {
           "shape": "InputTagMap",
-          "documentation": "<p>Tags to assign to the node. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+          "documentation": "<p>Tags to assign to the node. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
         }
       }
     },
@@ -971,7 +971,7 @@
         },
         "Tags": {
           "shape": "InputTagMap",
-          "documentation": "<p>Tags to assign to the proposal. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+          "documentation": "<p>Tags to assign to the proposal. Each tag consists of a key and optional value.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
         }
       }
     },
@@ -1653,7 +1653,7 @@
         },
         "Tags": {
           "shape": "InputTagMap",
-          "documentation": "<p>Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.</p>"
+          "documentation": "<p>Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p> <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>"
         }
       },
       "documentation": "<p>Configuration properties of the member.</p> <p>Applies only to Hyperledger Fabric.</p>"
@@ -1855,7 +1855,7 @@
           "documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p> <ul> <li> <p>mainnet = <code>1</code> </p> </li> <li> <p>rinkeby = <code>4</code> </p> </li> <li> <p>ropsten = <code>3</code> </p> </li> </ul>"
         }
       },
-      "documentation": "<p>Attributes of Ethereum for a network. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+      "documentation": "<p>Attributes of Ethereum for a network. </p>"
     },
     "NetworkFabricAttributes": {
       "type": "structure",
@@ -1893,7 +1893,7 @@
         },
         "Ethereum": {
           "shape": "NetworkEthereumAttributes",
-          "documentation": "<p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+          "documentation": "<p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. </p>"
         }
       },
       "documentation": "<p>Attributes relevant to the network for the blockchain framework that the network uses.</p>"
@@ -1995,7 +1995,7 @@
         },
         "AvailabilityZone": {
           "shape": "AvailabilityZoneString",
-          "documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+          "documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. </p>"
         },
         "FrameworkAttributes": {
           "shape": "NodeFrameworkAttributes",
@@ -2040,7 +2040,7 @@
         },
         "AvailabilityZone": {
           "shape": "AvailabilityZoneString",
-          "documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+          "documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. </p>"
         },
         "LogPublishingConfiguration": {
           "shape": "NodeLogPublishingConfiguration",
@@ -2065,7 +2065,7 @@
           "documentation": "<p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSockets connections from a client. Use this endpoint in client code for smart contracts when using a WebSockets connection. Connections to this endpoint are authenticated using <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>"
         }
       },
-      "documentation": "<p>Attributes of an Ethereum node. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+      "documentation": "<p>Attributes of an Ethereum node.</p>"
     },
     "NodeFabricAttributes": {
       "type": "structure",
@@ -2104,7 +2104,7 @@
         },
         "Ethereum": {
           "shape": "NodeEthereumAttributes",
-          "documentation": "<p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. Ethereum on Managed Blockchain is in preview release and is subject to change.</p>"
+          "documentation": "<p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. </p>"
         }
       },
       "documentation": "<p>Attributes relevant to a node on a Managed Blockchain network for the blockchain framework that the network uses.</p>"
@@ -2427,7 +2427,7 @@
         },
         "Tags": {
           "shape": "InputTagMap",
-          "documentation": "<p>The tags to assign to the specified resource. Tag values can be empty, for example, <code>\"MyTagKey\" : \"\"</code>. You can specify multiple key-value pairs in a single request, with an overall maximum of 50 added to each resource.</p>"
+          "documentation": "<p>The tags to assign to the specified resource. Tag values can be empty, for example, <code>\"MyTagKey\" : \"\"</code>. You can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>"
         }
       }
     },
@@ -2625,5 +2625,5 @@
       "documentation": "<p> The voting rules for the network to decide if a proposal is accepted </p> <p>Applies only to Hyperledger Fabric.</p>"
     }
   },
-  "documentation": "<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open-source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority.</p> <p>Managed Blockchain supports the Hyperledger Fabric and Ethereum open-source frameworks. Ethereum on Managed Blockchain is in preview release and is subject to change. Because of fundamental differences between the frameworks, some API actions or data types may only apply in the context of one framework and not the other. For example, actions related to Hyperledger Fabric network members such as <code>CreateMember</code> and <code>DeleteMember</code> do not apply to Ethereum.</p> <p>The description for each action indicates the framework or frameworks to which it applies. Data types and properties that apply only in the context of a particular framework are similarly indicated.</p>"
+  "documentation": "<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open-source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority.</p> <p>Managed Blockchain supports the Hyperledger Fabric and Ethereum open-source frameworks. Because of fundamental differences between the frameworks, some API actions or data types may only apply in the context of one framework and not the other. For example, actions related to Hyperledger Fabric network members such as <code>CreateMember</code> and <code>DeleteMember</code> do not apply to Ethereum.</p> <p>The description for each action indicates the framework or frameworks to which it applies. Data types and properties that apply only in the context of a particular framework are similarly indicated.</p>"
 }
