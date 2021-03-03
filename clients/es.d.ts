@@ -655,6 +655,10 @@ declare namespace ES {
      * Specifies Auto-Tune options.
      */
     AutoTuneOptions?: AutoTuneOptionsInput;
+    /**
+     * A list of Tag added during domain creation.
+     */
+    TagList?: TagList;
   }
   export interface CreateElasticsearchDomainResponse {
     /**

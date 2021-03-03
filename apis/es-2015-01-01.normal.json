@@ -1709,6 +1709,10 @@
         "AutoTuneOptions": {
           "shape": "AutoTuneOptionsInput",
           "documentation": "<p>Specifies Auto-Tune options.</p>"
+        },
+        "TagList": {
+          "shape": "TagList",
+          "documentation": "<p>A list of <code>Tag</code> added during domain creation.</p>"
         }
       }
     },

@@ -252,6 +252,14 @@ declare class ForecastService extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ForecastService.Types.ListTagsForResourceResponse) => void): Request<ForecastService.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Stops a resource. The resource undergoes the following states: CREATE_STOPPING and CREATE_STOPPED. You cannot resume a resource once it has been stopped. This operation can be applied to the following resources (and their corresponding child resources):   Dataset Import Job   Predictor Job   Forecast Job   Forecast Export Job   Predictor Backtest Export Job  
+   */
+  stopResource(params: ForecastService.Types.StopResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a resource. The resource undergoes the following states: CREATE_STOPPING and CREATE_STOPPED. You cannot resume a resource once it has been stopped. This operation can be applied to the following resources (and their corresponding child resources):   Dataset Import Job   Predictor Job   Forecast Job   Forecast Export Job   Predictor Backtest Export Job  
+   */
+  stopResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.
    */
   tagResource(params: ForecastService.Types.TagResourceRequest, callback?: (err: AWSError, data: ForecastService.Types.TagResourceResponse) => void): Request<ForecastService.Types.TagResourceResponse, AWSError>;
@@ -585,7 +593,7 @@ declare namespace ForecastService {
      */
     DataSource?: DataSource;
     /**
-     * The status of the dataset import job. The status is reflected in the status of the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the status of the dataset is UPDATE_IN_PROGRESS. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     * The status of the dataset import job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED   
      */
     Status?: Status;
     /**
@@ -597,7 +605,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * The last time that the dataset was modified. The time depends on the status of the job, as follows:    CREATE_PENDING - The same time as CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -756,7 +764,7 @@ declare namespace ForecastService {
      */
     DataSize?: Double;
     /**
-     * The status of the dataset import job. The status is reflected in the status of the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the status of the dataset is UPDATE_IN_PROGRESS. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     * The status of the dataset import job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED   
      */
     Status?: Status;
     /**
@@ -768,7 +776,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * The last time that the dataset was modified. The time depends on the status of the job, as follows:    CREATE_PENDING - The same time as CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -848,7 +856,7 @@ declare namespace ForecastService {
      */
     Message?: Message;
     /**
-     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
+     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
      */
     Status?: Status;
     /**
@@ -856,7 +864,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the last successful export job finished.
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -888,7 +896,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
-     * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
+     * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
      */
     Status?: String;
     /**
@@ -900,7 +908,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Initially, the same as CreationTime (status is CREATE_PENDING). Updated when inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS), and when inference is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -929,7 +937,7 @@ declare namespace ForecastService {
      */
     Message?: Message;
     /**
-     * The status of the predictor backtest export job. States include:     ACTIVE     CREATE_PENDING     CREATE_IN_PROGRESS     CREATE_FAILED     DELETE_PENDING     DELETE_IN_PROGRESS     DELETE_FAILED   
+     * The status of the predictor backtest export job. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
      */
     Status?: Status;
     /**
@@ -937,7 +945,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the last successful export job finished.
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1013,7 +1021,7 @@ declare namespace ForecastService {
      */
     AutoMLAlgorithmArns?: ArnList;
     /**
-     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
+     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
     Status?: Status;
     /**
@@ -1025,7 +1033,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Initially, the same as CreationTime (when the status is CREATE_PENDING). This value is updated when training starts (when the status changes to CREATE_IN_PROGRESS), and when training has completed (when the status changes to ACTIVE) or fails (when the status changes to CREATE_FAILED).
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1148,7 +1156,7 @@ declare namespace ForecastService {
      */
     Destination?: DataDestination;
     /**
-     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
+     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
      */
     Status?: Status;
     /**
@@ -1160,7 +1168,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the last successful export job finished.
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1183,7 +1191,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: String;
     /**
-     * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
+     * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
      */
     Status?: Status;
     /**
@@ -1195,7 +1203,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Initially, the same as CreationTime (status is CREATE_PENDING). Updated when inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS), and when inference is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1375,7 +1383,7 @@ declare namespace ForecastService {
      */
     MaxResults?: MaxResults;
     /**
-     * An array of filters. For each filter, provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the predictor backtest export jobs that match the statement from the list. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the predictor backtest export jobs that match the statement, specify IS. To exclude matching predictor backtest export jobs, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are PredictorBacktestExportJobArn and Status.    Value - The value to match.  
+     * An array of filters. For each filter, provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the predictor backtest export jobs that match the statement from the list. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the predictor backtest export jobs that match the statement, specify IS. To exclude matching predictor backtest export jobs, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are PredictorArn and Status.    Value - The value to match.  
      */
     Filters?: Filters;
   }
@@ -1470,7 +1478,7 @@ declare namespace ForecastService {
     PredictorBacktestExportJobName?: Name;
     Destination?: DataDestination;
     /**
-     * The status of the predictor backtest export job. States include:     ACTIVE     CREATE_PENDING     CREATE_IN_PROGRESS     CREATE_FAILED     DELETE_PENDING     DELETE_IN_PROGRESS     DELETE_FAILED   
+     * The status of the predictor backtest export job. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
      */
     Status?: Status;
     /**
@@ -1482,7 +1490,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the last successful export job finished.
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1519,7 +1527,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
-     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
+     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
     Status?: Status;
     /**
@@ -1531,7 +1539,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Initially, the same as CreationTime (status is CREATE_PENDING). Updated when training starts (status changed to CREATE_IN_PROGRESS), and when training is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -1604,6 +1612,12 @@ declare namespace ForecastService {
     Stddev?: Double;
   }
   export type Status = string;
+  export interface StopResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource to stop. The supported ARNs are DatasetImportJobArn, PredictorArn, PredictorBacktestExportJobArn, ForecastArn, and ForecastExportJobArn. 
+     */
+    ResourceArn: Arn;
+  }
   export type String = string;
   export interface SupplementaryFeature {
     /**

@@ -172,6 +172,14 @@ declare class WellArchitected extends Service {
    */
   listShareInvitations(callback?: (err: AWSError, data: WellArchitected.Types.ListShareInvitationsOutput) => void): Request<WellArchitected.Types.ListShareInvitationsOutput, AWSError>;
   /**
+   * List the tags for a resource.
+   */
+  listTagsForResource(params: WellArchitected.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * List the tags for a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * List the workload shares associated with the workload.
    */
   listWorkloadShares(params: WellArchitected.Types.ListWorkloadSharesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListWorkloadSharesOutput) => void): Request<WellArchitected.Types.ListWorkloadSharesOutput, AWSError>;
@@ -188,11 +196,27 @@ declare class WellArchitected extends Service {
    */
   listWorkloads(callback?: (err: AWSError, data: WellArchitected.Types.ListWorkloadsOutput) => void): Request<WellArchitected.Types.ListWorkloadsOutput, AWSError>;
   /**
-   * Update the answer.
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(params: WellArchitected.Types.TagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: WellArchitected.Types.UntagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Update the answer to a specific question in a workload review.
    */
   updateAnswer(params: WellArchitected.Types.UpdateAnswerInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateAnswerOutput) => void): Request<WellArchitected.Types.UpdateAnswerOutput, AWSError>;
   /**
-   * Update the answer.
+   * Update the answer to a specific question in a workload review.
    */
   updateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.UpdateAnswerOutput) => void): Request<WellArchitected.Types.UpdateAnswerOutput, AWSError>;
   /**
@@ -302,6 +326,10 @@ declare namespace WellArchitected {
     Lenses: WorkloadLenses;
     Notes?: Notes;
     ClientRequestToken: ClientRequestToken;
+    /**
+     * The tags to be associated with the workload.
+     */
+    Tags?: TagMap;
   }
   export interface CreateWorkloadOutput {
     WorkloadId?: WorkloadId;
@@ -573,6 +601,15 @@ declare namespace WellArchitected {
     ShareInvitationSummaries?: ShareInvitationSummaries;
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceInput {
+    WorkloadArn: WorkloadArn;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * The tags for the resource.
+     */
+    Tags?: TagMap;
+  }
   export interface ListWorkloadSharesInput {
     WorkloadId: WorkloadId;
     /**
@@ -697,7 +734,29 @@ declare namespace WellArchitected {
   export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|string;
   export type SharedWith = string;
   export type SharedWithPrefix = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceInput {
+    WorkloadArn: WorkloadArn;
+    /**
+     * The tags for the resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceInput {
+    WorkloadArn: WorkloadArn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   export interface UpdateAnswerInput {
     WorkloadId: WorkloadId;
     LensAlias: LensAlias;
@@ -807,6 +866,10 @@ declare namespace WellArchitected {
      * The ID assigned to the share invitation.
      */
     ShareInvitationId?: ShareInvitationId;
+    /**
+     * The tags associated with the workload.
+     */
+    Tags?: TagMap;
   }
   export type WorkloadAccountIds = AwsAccountId[];
   export type WorkloadArchitecturalDesign = string;

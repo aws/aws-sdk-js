@@ -1422,6 +1422,10 @@
         "buildGroups": {
           "shape": "BuildGroups",
           "documentation": "<p>An array of <code>BuildGroup</code> objects that define the build groups for the batch build.</p>"
+        },
+        "debugSessionEnabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p/> <p>Specifies if session debugging is enabled for this batch build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
         }
       },
       "documentation": "<p>Contains information about a batch build.</p>"
@@ -3364,7 +3368,7 @@
       "members": {
         "type": {
           "shape": "SourceType",
-          "documentation": "<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 input bucket.</p> </li> </ul>"
+          "documentation": "<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 bucket.</p> </li> </ul>"
         },
         "location": {
           "shape": "String",
@@ -3400,7 +3404,7 @@
         },
         "sourceIdentifier": {
           "shape": "String",
-          "documentation": "<p> An identifier for this project source. </p>"
+          "documentation": "<p>An identifier for this project source. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. </p>"
         }
       },
       "documentation": "<p>Information about the build input source code for the build project.</p>"
@@ -3414,7 +3418,7 @@
       "members": {
         "sourceIdentifier": {
           "shape": "String",
-          "documentation": "<p>An identifier for a source in the build project.</p>"
+          "documentation": "<p>An identifier for a source in the build project. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. </p>"
         },
         "sourceVersion": {
           "shape": "String",
@@ -4094,6 +4098,10 @@
         "buildBatchConfigOverride": {
           "shape": "ProjectBuildBatchConfig",
           "documentation": "<p>A <code>BuildBatchConfigOverride</code> object that contains batch build configuration overrides.</p>"
+        },
+        "debugSessionEnabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p>Specifies if session debugging is enabled for this batch build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
         }
       }
     },

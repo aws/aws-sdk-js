@@ -732,6 +732,10 @@ declare namespace CodeBuild {
      * An array of BuildGroup objects that define the build groups for the batch build.
      */
     buildGroups?: BuildGroups;
+    /**
+     *  Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
+     */
+    debugSessionEnabled?: WrapperBoolean;
   }
   export interface BuildBatchFilter {
     /**
@@ -2009,7 +2013,7 @@ declare namespace CodeBuild {
   export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ProjectSource {
     /**
-     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an AWS CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 input bucket.  
+     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an AWS CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 bucket.  
      */
     type: SourceType;
     /**
@@ -2045,13 +2049,13 @@ declare namespace CodeBuild {
      */
     insecureSsl?: WrapperBoolean;
     /**
-     *  An identifier for this project source. 
+     * An identifier for this project source. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. 
      */
     sourceIdentifier?: String;
   }
   export interface ProjectSourceVersion {
     /**
-     * An identifier for a source in the build project.
+     * An identifier for a source in the build project. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. 
      */
     sourceIdentifier: String;
     /**
@@ -2465,6 +2469,10 @@ declare namespace CodeBuild {
      * A BuildBatchConfigOverride object that contains batch build configuration overrides.
      */
     buildBatchConfigOverride?: ProjectBuildBatchConfig;
+    /**
+     * Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
+     */
+    debugSessionEnabled?: WrapperBoolean;
   }
   export interface StartBuildBatchOutput {
     /**

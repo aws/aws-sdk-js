@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.855.0-->
+<!--LATEST=2.856.0-->
 <!--ENTRYINSERT-->
+
+## 2.856.0
+* feature: ACM: Adds 2 new APIs to add and retrieve account configuration in AWS Certificate Manager.
+* feature: CloudWatchEvents: Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation.
+* feature: CodeBuild: AWS CodeBuild now supports Session Manager debugging for batch builds.
+* feature: ES: AWS ElasticSearch Feature : Support for adding tags in elastic search domain during domain creation
+* feature: ForecastService: Added new StopResource operation that stops Amazon Forecast resource jobs that are in progress.
+* feature: SecretsManager: Added support for multi-Region secrets APIs ReplicateSecretToRegions, RemoveRegionsFromReplication, and StopReplicationToReplica
+* feature: WellArchitected: This release supports tagging on AWS Well-Architected workloads.
 
 ## 2.855.0
 * feature: DataSync: Additional API Support to update NFS/SMB/ObjectStorage locations

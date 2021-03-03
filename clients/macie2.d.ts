@@ -164,11 +164,11 @@ declare class Macie2 extends Service {
    */
   disassociateFromAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.DisassociateFromAdministratorAccountResponse) => void): Request<Macie2.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
   /**
-   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account.
+   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account. This operation has been replaced by the DisassociateFromAdministratorAccount operation.
    */
   disassociateFromMasterAccount(params: Macie2.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisassociateFromMasterAccountResponse) => void): Request<Macie2.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account.
+   * (Deprecated) Disassociates a member account from its Amazon Macie administrator account. This operation has been replaced by the DisassociateFromAdministratorAccount operation.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: Macie2.Types.DisassociateFromMasterAccountResponse) => void): Request<Macie2.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class Macie2 extends Service {
    */
   getMacieSession(callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
-   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account.
+   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account. This operation has been replaced by the GetAdministratorAccount operation.
    */
   getMasterAccount(params: Macie2.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: Macie2.Types.GetMasterAccountResponse) => void): Request<Macie2.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account.
+   * (Deprecated) Retrieves information about the Amazon Macie administrator account for an account. This operation has been replaced by the GetAdministratorAccount operation.
    */
   getMasterAccount(callback?: (err: AWSError, data: Macie2.Types.GetMasterAccountResponse) => void): Request<Macie2.Types.GetMasterAccountResponse, AWSError>;
   /**
@@ -723,7 +723,7 @@ declare namespace Macie2 {
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
      */
     classifiableSizeInBytes?: __long;
     /**
@@ -731,7 +731,7 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the bucket from Amazon S3.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the bucket.
      */
     lastUpdated?: __timestampIso8601;
     /**
@@ -763,11 +763,11 @@ declare namespace Macie2 {
      */
     sharedAccess?: SharedAccess;
     /**
-     * The total storage size, in bytes, of the bucket.
+     * The total storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the bucket.
+     * The total compressed storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -829,11 +829,11 @@ declare namespace Macie2 {
   }
   export interface BucketSortCriteria {
     /**
-     * The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.
+     * The name of the bucket property to sort the results by. This value can be one of the following properties that Amazon Macie defines as bucket metadata: accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes, objectCount, or sizeInBytes.
      */
     attributeName?: __string;
     /**
-     * The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.
+     * The sort order to apply to the results, based on the value specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.
      */
     orderBy?: OrderBy;
   }
@@ -1626,11 +1626,11 @@ declare namespace Macie2 {
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.
+     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.
      */
     classifiableSizeInBytes?: __long;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the buckets from Amazon S3.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the buckets.
      */
     lastUpdated?: __timestampIso8601;
     /**
@@ -1638,11 +1638,11 @@ declare namespace Macie2 {
      */
     objectCount?: __long;
     /**
-     * The total storage size, in bytes, of the buckets.
+     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the buckets.
+     * The total compressed storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -1650,7 +1650,7 @@ declare namespace Macie2 {
      */
     unclassifiableObjectCount?: ObjectLevelStatistics;
     /**
-     * The total storage size, in bytes, of all the objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
+     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
      */
     unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
   }
@@ -1916,7 +1916,7 @@ declare namespace Macie2 {
   }
   export interface GetUsageTotalsRequest {
     /**
-     * The time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don’t specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.
+     * The inclusive time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don't specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.
      */
     timeRange?: __string;
   }
@@ -2310,7 +2310,7 @@ declare namespace Macie2 {
      */
     nextToken?: __string;
     /**
-     * Specifies which accounts to include in the response, based on the status of an account's relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set the value for this parameter to false.
+     * Specifies which accounts to include in the response, based on the status of an account's relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set this value to false.
      */
     onlyAssociated?: __string;
   }
@@ -2398,7 +2398,7 @@ declare namespace Macie2 {
   }
   export interface MonthlySchedule {
     /**
-     * The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31. If this value exceeds the number of days in a certain month, Macie runs the job on the last day of that month. For example, if this value is 31 and a month has only 30 days, Macie runs the job on day 30 of that month.
+     * The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31. If this value exceeds the number of days in a certain month, Macie doesn't run the job that month. Macie runs the job only during months that have the specified day. For example, if this value is 31 and a month has only 30 days, Macie doesn't run the job that month. To run the job every month, specify a value that's less than 29.
      */
     dayOfMonth?: __integer;
   }
@@ -2649,7 +2649,7 @@ declare namespace Macie2 {
      */
     publicAccess?: __boolean;
     /**
-     * The type of server-side encryption that's used for the object.
+     * The type of server-side encryption that's used to encrypt the object.
      */
     serverSideEncryption?: ServerSideEncryption;
     /**
@@ -2698,11 +2698,11 @@ declare namespace Macie2 {
   export type SensitiveDataItemCategory = "FINANCIAL_INFORMATION"|"PERSONAL_INFORMATION"|"CREDENTIALS"|"CUSTOM_IDENTIFIER"|string;
   export interface ServerSideEncryption {
     /**
-     * The server-side encryption algorithm that's used when storing data in the bucket or object. If encryption is disabled for the bucket or object, this value is NONE.
+     * The server-side encryption algorithm that's used when storing data in the bucket or object. If default encryption is disabled for the bucket or the object isn't encrypted using server-side encryption, this value is NONE.
      */
     encryptionType?: EncryptionType;
     /**
-     * The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.
+     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used to encrypt data in the bucket or the object. If an AWS KMS CMK isn't used, this value is null.
      */
     kmsMasterKeyId?: __string;
   }
@@ -2962,7 +2962,7 @@ declare namespace Macie2 {
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * Specifies whether to change the status of the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.
+     * Specifies a new status for the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.
      */
     status?: MacieStatus;
   }
@@ -2982,7 +2982,7 @@ declare namespace Macie2 {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * Specifies whether Amazon Macie is enabled automatically for each account, when the account is added to the AWS organization.
+     * Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.
      */
     autoEnable: __boolean;
   }
@@ -3030,7 +3030,7 @@ declare namespace Macie2 {
      */
     key?: UsageStatisticsFilterKey;
     /**
-     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an AWS account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current, estimated month-to-date cost for an account.
+     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an AWS account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current estimated cost for an account.
      */
     values?: __listOf__string;
   }

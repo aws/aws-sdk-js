@@ -639,6 +639,28 @@
       ],
       "documentation": "<p>List the workload invitations.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{WorkloadArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>List the tags for a resource.</p>"
+    },
     "ListWorkloadShares": {
       "name": "ListWorkloadShares",
       "http": {
@@ -698,6 +720,50 @@
       ],
       "documentation": "<p>List workloads. Paginated.</p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{WorkloadArn}"
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds one or more tags to the specified resource.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{WorkloadArn}"
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes specified tags from a resource.</p>"
+    },
     "UpdateAnswer": {
       "name": "UpdateAnswer",
       "http": {
@@ -730,7 +796,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Update the answer.</p>"
+      "documentation": "<p>Update the answer to a specific question in a workload review.</p>"
     },
     "UpdateLensReview": {
       "name": "UpdateLensReview",
@@ -1143,6 +1209,10 @@
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
           "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be associated with the workload.</p>"
         }
       },
       "documentation": "<p>Input for workload creation.</p>"
@@ -2026,6 +2096,28 @@
       },
       "documentation": "<p>Input for List Share Invitations</p>"
     },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "WorkloadArn"
+      ],
+      "members": {
+        "WorkloadArn": {
+          "shape": "WorkloadArn",
+          "location": "uri",
+          "locationName": "WorkloadArn"
+        }
+      }
+    },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      }
+    },
     "ListWorkloadSharesInput": {
       "type": "structure",
       "required": [
@@ -2435,9 +2527,84 @@
       "type": "string",
       "max": 100
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "WorkloadArn",
+        "Tags"
+      ],
+      "members": {
+        "WorkloadArn": {
+          "shape": "WorkloadArn",
+          "location": "uri",
+          "locationName": "WorkloadArn"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      }
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Timestamp": {
       "type": "timestamp",
       "documentation": "<p>The date and time recorded.</p>"
+    },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "WorkloadArn",
+        "TagKeys"
+      ],
+      "members": {
+        "WorkloadArn": {
+          "shape": "WorkloadArn",
+          "location": "uri",
+          "locationName": "WorkloadArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags to be removed.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateAnswerInput": {
       "type": "structure",
@@ -2763,6 +2930,10 @@
         "ShareInvitationId": {
           "shape": "ShareInvitationId",
           "documentation": "<p>The ID assigned to the share invitation.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags associated with the workload.</p>"
         }
       },
       "documentation": "<p>A workload return object.</p>"

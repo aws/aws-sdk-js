@@ -28,19 +28,19 @@ declare class SecretsManager extends Service {
    */
   createSecret(callback?: (err: AWSError, data: SecretsManager.Types.CreateSecretResponse) => void): Request<SecretsManager.Types.CreateSecretResponse, AWSError>;
   /**
-   * Deletes the resource-based permission policy attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that's attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Deletes the resource-based permission policy attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   deleteResourcePolicy(params: SecretsManager.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes the resource-based permission policy attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy that's attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Deletes the resource-based permission policy attached to the secret.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteResourcePolicy    Related operations    To attach a resource policy to a secret, use PutResourcePolicy.   To retrieve the current resource-based policy attached to a secret, use GetResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.DeleteResourcePolicyResponse) => void): Request<SecretsManager.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes an entire secret and all of its versions. You can optionally include a recovery window during which you can restore the secret. If you don't specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a DeletionDate stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently. At any time before recovery window ends, you can use RestoreSecret to remove the DeletionDate and cancel the deletion of the secret. You cannot access the encrypted secret information in any secret that is scheduled for deletion. If you need to access that information, you must cancel the deletion with RestoreSecret and then retrieve the information.    There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the VersionStage field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions that do not have any staging labels do not show up in ListSecretVersionIds unless you specify IncludeDeprecated.   The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteSecret    Related operations    To create a secret, use CreateSecret.   To cancel deletion of a version of a secret before the recovery window has expired, use RestoreSecret.  
+   * Deletes an entire secret and all of the versions. You can optionally include a recovery window during which you can restore the secret. If you don't specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a DeletionDate stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently. At any time before recovery window ends, you can use RestoreSecret to remove the DeletionDate and cancel the deletion of the secret. You cannot access the encrypted secret information in any secret scheduled for deletion. If you need to access that information, you must cancel the deletion with RestoreSecret and then retrieve the information.    There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the VersionStage field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions without any staging labels do not show up in ListSecretVersionIds unless you specify IncludeDeprecated.   The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteSecret    Related operations    To create a secret, use CreateSecret.   To cancel deletion of a version of a secret before the recovery window has expired, use RestoreSecret.  
    */
   deleteSecret(params: SecretsManager.Types.DeleteSecretRequest, callback?: (err: AWSError, data: SecretsManager.Types.DeleteSecretResponse) => void): Request<SecretsManager.Types.DeleteSecretResponse, AWSError>;
   /**
-   * Deletes an entire secret and all of its versions. You can optionally include a recovery window during which you can restore the secret. If you don't specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a DeletionDate stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently. At any time before recovery window ends, you can use RestoreSecret to remove the DeletionDate and cancel the deletion of the secret. You cannot access the encrypted secret information in any secret that is scheduled for deletion. If you need to access that information, you must cancel the deletion with RestoreSecret and then retrieve the information.    There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the VersionStage field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions that do not have any staging labels do not show up in ListSecretVersionIds unless you specify IncludeDeprecated.   The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteSecret    Related operations    To create a secret, use CreateSecret.   To cancel deletion of a version of a secret before the recovery window has expired, use RestoreSecret.  
+   * Deletes an entire secret and all of the versions. You can optionally include a recovery window during which you can restore the secret. If you don't specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a DeletionDate stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently. At any time before recovery window ends, you can use RestoreSecret to remove the DeletionDate and cancel the deletion of the secret. You cannot access the encrypted secret information in any secret scheduled for deletion. If you need to access that information, you must cancel the deletion with RestoreSecret and then retrieve the information.    There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the VersionStage field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions without any staging labels do not show up in ListSecretVersionIds unless you specify IncludeDeprecated.   The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:DeleteSecret    Related operations    To create a secret, use CreateSecret.   To cancel deletion of a version of a secret before the recovery window has expired, use RestoreSecret.  
    */
   deleteSecret(callback?: (err: AWSError, data: SecretsManager.Types.DeleteSecretResponse) => void): Request<SecretsManager.Types.DeleteSecretResponse, AWSError>;
   /**
@@ -92,21 +92,37 @@ declare class SecretsManager extends Service {
    */
   listSecrets(callback?: (err: AWSError, data: SecretsManager.Types.ListSecretsResponse) => void): Request<SecretsManager.Types.ListSecretsResponse, AWSError>;
   /**
-   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   putResourcePolicy(params: SecretsManager.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy that's attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
+   * Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret's Amazon Resource Name (ARN) in the policy statement's Resources element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see Using Resource-Based Policies for AWS Secrets Manager. For the complete description of the AWS policy syntax and grammar, see IAM JSON Policy Reference in the IAM User Guide.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutResourcePolicy    Related operations    To retrieve the resource policy attached to a secret, use GetResourcePolicy.   To delete the resource-based policy attached to a secret, use DeleteResourcePolicy.   To list all of the currently available secrets, use ListSecrets.  
    */
   putResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.PutResourcePolicyResponse) => void): Request<SecretsManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new SecretString value or a new SecretBinary value. You can also specify the staging labels that are initially attached to the new version.  The Secrets Manager console uses only the SecretString field. To add binary data to a secret with the SecretBinary field you must use the AWS CLI or one of the AWS SDKs.    If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label AWSCURRENT to the new version.   If another version of this secret already exists, then this operation does not automatically move any staging labels other than those that you explicitly specify in the VersionStages parameter.   If this operation moves the staging label AWSCURRENT from another version to this version (because you included it in the StagingLabels parameter) then Secrets Manager also automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT was removed from.   This operation is idempotent. If a version with a VersionId with the same value as the ClientRequestToken parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.      If you call an operation to encrypt or decrypt the SecretString or SecretBinary for a secret in the same account as the calling user and that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses the account's default AWS managed customer master key (CMK) with the alias aws/secretsmanager. If this key doesn't already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account's AWS-managed CMK, it can result in a one-time significant delay in returning the result.   If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can't access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString or SecretBinary using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account's user or role for both the kms:GenerateDataKey and kms:Decrypt operations.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutSecretValue   kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To retrieve the encrypted value you store in the version of a secret, use GetSecretValue.   To create a secret, use CreateSecret.   To get the details for a secret, use DescribeSecret.   To list the versions attached to a secret, use ListSecretVersionIds.  
+   * Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new SecretString value or a new SecretBinary value. You can also specify the staging labels that are initially attached to the new version.  The Secrets Manager console uses only the SecretString field. To add binary data to a secret with the SecretBinary field you must use the AWS CLI or one of the AWS SDKs.    If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label AWSCURRENT to the new version.   If you do not specify a value for VersionStages then Secrets Manager automatically moves the staging label AWSCURRENT to this new version.   If this operation moves the staging label AWSCURRENT from another version to this version, then Secrets Manager also automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT was removed from.   This operation is idempotent. If a version with a VersionId with the same value as the ClientRequestToken parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.      If you call an operation to encrypt or decrypt the SecretString or SecretBinary for a secret in the same account as the calling user and that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses the account's default AWS managed customer master key (CMK) with the alias aws/secretsmanager. If this key doesn't already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account's AWS-managed CMK, it can result in a one-time significant delay in returning the result.   If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can't access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString or SecretBinary using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account's user or role for both the kms:GenerateDataKey and kms:Decrypt operations.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutSecretValue   kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To retrieve the encrypted value you store in the version of a secret, use GetSecretValue.   To create a secret, use CreateSecret.   To get the details for a secret, use DescribeSecret.   To list the versions attached to a secret, use ListSecretVersionIds.  
    */
   putSecretValue(params: SecretsManager.Types.PutSecretValueRequest, callback?: (err: AWSError, data: SecretsManager.Types.PutSecretValueResponse) => void): Request<SecretsManager.Types.PutSecretValueResponse, AWSError>;
   /**
-   * Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new SecretString value or a new SecretBinary value. You can also specify the staging labels that are initially attached to the new version.  The Secrets Manager console uses only the SecretString field. To add binary data to a secret with the SecretBinary field you must use the AWS CLI or one of the AWS SDKs.    If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label AWSCURRENT to the new version.   If another version of this secret already exists, then this operation does not automatically move any staging labels other than those that you explicitly specify in the VersionStages parameter.   If this operation moves the staging label AWSCURRENT from another version to this version (because you included it in the StagingLabels parameter) then Secrets Manager also automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT was removed from.   This operation is idempotent. If a version with a VersionId with the same value as the ClientRequestToken parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.      If you call an operation to encrypt or decrypt the SecretString or SecretBinary for a secret in the same account as the calling user and that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses the account's default AWS managed customer master key (CMK) with the alias aws/secretsmanager. If this key doesn't already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account's AWS-managed CMK, it can result in a one-time significant delay in returning the result.   If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can't access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString or SecretBinary using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account's user or role for both the kms:GenerateDataKey and kms:Decrypt operations.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutSecretValue   kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To retrieve the encrypted value you store in the version of a secret, use GetSecretValue.   To create a secret, use CreateSecret.   To get the details for a secret, use DescribeSecret.   To list the versions attached to a secret, use ListSecretVersionIds.  
+   * Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new SecretString value or a new SecretBinary value. You can also specify the staging labels that are initially attached to the new version.  The Secrets Manager console uses only the SecretString field. To add binary data to a secret with the SecretBinary field you must use the AWS CLI or one of the AWS SDKs.    If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label AWSCURRENT to the new version.   If you do not specify a value for VersionStages then Secrets Manager automatically moves the staging label AWSCURRENT to this new version.   If this operation moves the staging label AWSCURRENT from another version to this version, then Secrets Manager also automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT was removed from.   This operation is idempotent. If a version with a VersionId with the same value as the ClientRequestToken parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.      If you call an operation to encrypt or decrypt the SecretString or SecretBinary for a secret in the same account as the calling user and that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses the account's default AWS managed customer master key (CMK) with the alias aws/secretsmanager. If this key doesn't already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account's AWS-managed CMK, it can result in a one-time significant delay in returning the result.   If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can't access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString or SecretBinary using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account's user or role for both the kms:GenerateDataKey and kms:Decrypt operations.     Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:PutSecretValue   kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.    Related operations    To retrieve the encrypted value you store in the version of a secret, use GetSecretValue.   To create a secret, use CreateSecret.   To get the details for a secret, use DescribeSecret.   To list the versions attached to a secret, use ListSecretVersionIds.  
    */
   putSecretValue(callback?: (err: AWSError, data: SecretsManager.Types.PutSecretValueResponse) => void): Request<SecretsManager.Types.PutSecretValueResponse, AWSError>;
+  /**
+   * Remove regions from replication.
+   */
+  removeRegionsFromReplication(params: SecretsManager.Types.RemoveRegionsFromReplicationRequest, callback?: (err: AWSError, data: SecretsManager.Types.RemoveRegionsFromReplicationResponse) => void): Request<SecretsManager.Types.RemoveRegionsFromReplicationResponse, AWSError>;
+  /**
+   * Remove regions from replication.
+   */
+  removeRegionsFromReplication(callback?: (err: AWSError, data: SecretsManager.Types.RemoveRegionsFromReplicationResponse) => void): Request<SecretsManager.Types.RemoveRegionsFromReplicationResponse, AWSError>;
+  /**
+   * Converts an existing secret to a multi-Region secret and begins replication the secret to a list of new regions. 
+   */
+  replicateSecretToRegions(params: SecretsManager.Types.ReplicateSecretToRegionsRequest, callback?: (err: AWSError, data: SecretsManager.Types.ReplicateSecretToRegionsResponse) => void): Request<SecretsManager.Types.ReplicateSecretToRegionsResponse, AWSError>;
+  /**
+   * Converts an existing secret to a multi-Region secret and begins replication the secret to a list of new regions. 
+   */
+  replicateSecretToRegions(callback?: (err: AWSError, data: SecretsManager.Types.ReplicateSecretToRegionsResponse) => void): Request<SecretsManager.Types.ReplicateSecretToRegionsResponse, AWSError>;
   /**
    * Cancels the scheduled deletion of a secret by removing the DeletedDate time stamp. This makes the secret accessible to query once again.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:RestoreSecret    Related operations    To delete a secret, use DeleteSecret.  
    */
@@ -123,6 +139,14 @@ declare class SecretsManager extends Service {
    * Configures and starts the asynchronous process of rotating this secret. If you include the configuration parameters, the operation sets those values for the secret and then immediately starts a rotation. If you do not include the configuration parameters, the operation starts a rotation with the values already stored in the secret. After the rotation completes, the protected service and its clients all use the new version of the secret.  This required configuration information includes the ARN of an AWS Lambda function and the time between scheduled rotations. The Lambda rotation function creates a new version of the secret and creates or updates the credentials on the protected service to match. After testing the new credentials, the function marks the new secret with the staging label AWSCURRENT so that your clients all immediately begin to use the new version. For more information about rotating secrets and how to configure a Lambda function to rotate the secrets for your protected service, see Rotating Secrets in AWS Secrets Manager in the AWS Secrets Manager User Guide. Secrets Manager schedules the next rotation when the previous one completes. Secrets Manager schedules the date by adding the rotation interval (number of days) to the actual date of the last rotation. The service chooses the hour within that 24-hour date window randomly. The minute is also chosen somewhat randomly, but weighted towards the top of the hour and influenced by a variety of factors that help distribute load. The rotation function must end with the versions of the secret in one of two states:   The AWSPENDING and AWSCURRENT staging labels are attached to the same version of the secret, or   The AWSPENDING staging label is not attached to any version of the secret.   If the AWSPENDING staging label is present but not attached to the same version as AWSCURRENT then any later invocation of RotateSecret assumes that a previous rotation request is still in progress and returns an error.  Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:RotateSecret   lambda:InvokeFunction (on the function specified in the secret's metadata)    Related operations    To list the secrets in your account, use ListSecrets.   To get the details for a version of a secret, use DescribeSecret.   To create a new version of a secret, use CreateSecret.   To attach staging labels to or remove staging labels from a version of a secret, use UpdateSecretVersionStage.  
    */
   rotateSecret(callback?: (err: AWSError, data: SecretsManager.Types.RotateSecretResponse) => void): Request<SecretsManager.Types.RotateSecretResponse, AWSError>;
+  /**
+   * Removes the secret from replication and promotes the secret to a regional secret in the replica Region.
+   */
+  stopReplicationToReplica(params: SecretsManager.Types.StopReplicationToReplicaRequest, callback?: (err: AWSError, data: SecretsManager.Types.StopReplicationToReplicaResponse) => void): Request<SecretsManager.Types.StopReplicationToReplicaResponse, AWSError>;
+  /**
+   * Removes the secret from replication and promotes the secret to a regional secret in the replica Region.
+   */
+  stopReplicationToReplica(callback?: (err: AWSError, data: SecretsManager.Types.StopReplicationToReplicaResponse) => void): Request<SecretsManager.Types.StopReplicationToReplicaResponse, AWSError>;
   /**
    * Attaches one or more tags, each consisting of a key name and a value, to the specified secret. Tags are part of the secret's overall metadata, and are not associated with any specific version of the secret. This operation only appends tags to the existing list of tags. To remove tags, you must use UntagResource. The following basic restrictions apply to tags:   Maximum number of tags per secret—50   Maximum key length—127 Unicode characters in UTF-8   Maximum value length—255 Unicode characters in UTF-8   Tag keys and values are case sensitive.   Do not use the aws: prefix in your tag names or values because AWS reserves it for AWS use. You can't edit or delete tag names or values with this prefix. Tags with this prefix do not count against your tags per secret limit.   If you use your tagging schema across multiple services and resources, remember other services might have restrictions on allowed characters. Generally allowed characters: letters, spaces, and numbers representable in UTF-8, plus the following special characters: + - = . _ : / @.    If you use tags as part of your security strategy, then adding or removing a tag can change permissions. If successfully completing this operation would result in you losing your permissions for this secret, then the operation is blocked and returns an Access Denied error.   Minimum permissions  To run this command, you must have the following permissions:   secretsmanager:TagResource    Related operations    To remove one or more tags from the collection attached to a secret, use UntagResource.   To view the list of tags attached to a secret, use DescribeSecret.  
    */
@@ -156,15 +180,16 @@ declare class SecretsManager extends Service {
    */
   updateSecretVersionStage(callback?: (err: AWSError, data: SecretsManager.Types.UpdateSecretVersionStageResponse) => void): Request<SecretsManager.Types.UpdateSecretVersionStageResponse, AWSError>;
   /**
-   * Validates the JSON text of the resource-based policy document attached to the specified secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional.
+   * Validates that the resource policy does not grant a wide range of IAM principals access to your secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional for secrets. The API performs three checks when validating the secret:   Sends a call to Zelkova, an automated reasoning engine, to ensure your Resource Policy does not allow broad access to your secret.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.    Minimum Permissions  You must have the permissions required to access the following APIs:    secretsmanager:PutResourcePolicy     secretsmanager:ValidateResourcePolicy   
    */
   validateResourcePolicy(params: SecretsManager.Types.ValidateResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.ValidateResourcePolicyResponse) => void): Request<SecretsManager.Types.ValidateResourcePolicyResponse, AWSError>;
   /**
-   * Validates the JSON text of the resource-based policy document attached to the specified secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional.
+   * Validates that the resource policy does not grant a wide range of IAM principals access to your secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional for secrets. The API performs three checks when validating the secret:   Sends a call to Zelkova, an automated reasoning engine, to ensure your Resource Policy does not allow broad access to your secret.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.    Minimum Permissions  You must have the permissions required to access the following APIs:    secretsmanager:PutResourcePolicy     secretsmanager:ValidateResourcePolicy   
    */
   validateResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.ValidateResourcePolicyResponse) => void): Request<SecretsManager.Types.ValidateResourcePolicyResponse, AWSError>;
 }
 declare namespace SecretsManager {
+  export type AddReplicaRegionListType = ReplicaRegionType[];
   export type AutomaticallyRotateAfterDaysType = number;
   export type BooleanType = boolean;
   export interface CancelRotateSecretRequest {
@@ -194,7 +219,7 @@ declare namespace SecretsManager {
      */
     Name: NameType;
     /**
-     * (Optional) If you include SecretString or SecretBinary, then an initial version is created as part of the secret, and this parameter specifies a unique identifier for the new version.   If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes it as the value for this parameter in the request. If you don't use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for the new version and include the value in the request.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during a rotation. We recommend that you generate a UUID-type value to ensure uniqueness of your versions within the specified secret.    If the ClientRequestToken value isn't already associated with a version of the secret then a new version of the secret is created.    If a version with this value already exists and the version SecretString and SecretBinary values are the same as those in the request, then the request is ignored.   If a version with this value already exists and that version's SecretString and SecretBinary values are different from those in the request then the request fails because you cannot modify an existing version. Instead, use PutSecretValue to create a new version.   This value becomes the VersionId of the new version.
+     * (Optional) If you include SecretString or SecretBinary, then an initial version is created as part of the secret, and this parameter specifies a unique identifier for the new version.   If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes it as the value for this parameter in the request. If you don't use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for the new version and include the value in the request.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during a rotation. We recommend that you generate a UUID-type value to ensure uniqueness of your versions within the specified secret.    If the ClientRequestToken value isn't already associated with a version of the secret then a new version of the secret is created.    If a version with this value already exists and the version SecretString and SecretBinary values are the same as those in the request, then the request is ignored.   If a version with this value already exists and that version's SecretString and SecretBinary values are different from those in the request, then the request fails because you cannot modify an existing version. Instead, use PutSecretValue to create a new version.   This value becomes the VersionId of the new version.
      */
     ClientRequestToken?: ClientRequestTokenType;
     /**
@@ -217,6 +242,14 @@ declare namespace SecretsManager {
      * (Optional) Specifies a list of user-defined tags that are attached to the secret. Each tag is a "Key" and "Value" pair of strings. This operation only appends tags to the existing list of tags. To remove tags, you must use UntagResource.    Secrets Manager tag key names are case sensitive. A tag with the key "ABC" is a different tag from one with key "abc".   If you check tags in IAM policy Condition elements as part of your security strategy, then adding or removing a tag can change permissions. If the successful completion of this operation would result in you losing your permissions for this secret, then this operation is blocked and returns an Access Denied error.    This parameter requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide. For example:  [{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]  If your command-line tool or SDK requires quotation marks around the parameter, you should use single quotes to avoid confusion with the double quotes required in the JSON text.  The following basic restrictions apply to tags:   Maximum number of tags per secret—50   Maximum key length—127 Unicode characters in UTF-8   Maximum value length—255 Unicode characters in UTF-8   Tag keys and values are case sensitive.   Do not use the aws: prefix in your tag names or values because AWS reserves it for AWS use. You can't edit or delete tag names or values with this prefix. Tags with this prefix do not count against your tags per secret limit.   If you use your tagging schema across multiple services and resources, remember other services might have restrictions on allowed characters. Generally allowed characters: letters, spaces, and numbers representable in UTF-8, plus the following special characters: + - = . _ : / @.  
      */
     Tags?: TagListType;
+    /**
+     * (Optional) Add a list of regions to replicate secrets. Secrets Manager replicates the KMSKeyID objects to the list of regions specified in the parameter.
+     */
+    AddReplicaRegions?: AddReplicaRegionListType;
+    /**
+     * (Optional) If set, the replication overwrites a secret with the same name in the destination region.
+     */
+    ForceOverwriteReplicaSecret?: BooleanType;
   }
   export interface CreateSecretResponse {
     /**
@@ -231,6 +264,10 @@ declare namespace SecretsManager {
      * The unique identifier associated with the version of the secret you just created.
      */
     VersionId?: SecretVersionIdType;
+    /**
+     * Describes a list of replication status objects as InProgress, Failed or InSync.
+     */
+    ReplicationStatus?: ReplicationStatusListType;
   }
   export type CreatedDateType = Date;
   export interface DeleteResourcePolicyRequest {
@@ -251,15 +288,15 @@ declare namespace SecretsManager {
   }
   export interface DeleteSecretRequest {
     /**
-     * Specifies the secret that you want to delete. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
+     * Specifies the secret to delete. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
      */
     SecretId: SecretIdType;
     /**
-     * (Optional) Specifies the number of days that Secrets Manager waits before it can delete the secret. You can't use both this parameter and the ForceDeleteWithoutRecovery parameter in the same API call. This value can range from 7 to 30 days. The default value is 30.
+     * (Optional) Specifies the number of days that Secrets Manager waits before Secrets Manager can delete the secret. You can't use both this parameter and the ForceDeleteWithoutRecovery parameter in the same API call. This value can range from 7 to 30 days with a default value of 30.
      */
     RecoveryWindowInDays?: RecoveryWindowInDaysType;
     /**
-     * (Optional) Specifies that the secret is to be deleted without any recovery window. You can't use both this parameter and the RecoveryWindowInDays parameter in the same API call. An asynchronous background process performs the actual deletion, so there can be a short delay before the operation completes. If you write code to delete and then immediately recreate a secret with the same name, ensure that your code includes appropriate back off and retry logic.  Use this parameter with caution. This parameter causes the operation to skip the normal waiting period before the permanent deletion that AWS would normally impose with the RecoveryWindowInDays parameter. If you delete a secret with the ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the secret. It is permanently lost. 
+     * (Optional) Specifies that the secret is to be deleted without any recovery window. You can't use both this parameter and the RecoveryWindowInDays parameter in the same API call. An asynchronous background process performs the actual deletion, so there can be a short delay before the operation completes. If you write code to delete and then immediately recreate a secret with the same name, ensure that your code includes appropriate back off and retry logic.  Use this parameter with caution. This parameter causes the operation to skip the normal waiting period before the permanent deletion that AWS would normally impose with the RecoveryWindowInDays parameter. If you delete a secret with the ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the secret. You lose the secret permanently.   If you use this parameter and include a previously deleted or nonexistent secret, the operation does not return the error ResourceNotFoundException in order to correctly handle retries. 
      */
     ForceDeleteWithoutRecovery?: BooleanType;
   }
@@ -269,7 +306,7 @@ declare namespace SecretsManager {
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret that is now scheduled for deletion.
+     * The friendly name of the secret currently scheduled for deletion.
      */
     Name?: SecretNameType;
     /**
@@ -311,11 +348,11 @@ declare namespace SecretsManager {
      */
     RotationLambdaARN?: RotationLambdaARNType;
     /**
-     * A structure that contains the rotation configuration for this secret.
+     * A structure with the rotation configuration for this secret.
      */
     RotationRules?: RotationRulesType;
     /**
-     * The most recent date and time that the Secrets Manager rotation process was successfully completed. This value is null if the secret has never rotated.
+     * The last date and time that the rotation process for this secret was invoked. The most recent date and time that the Secrets Manager rotation process successfully completed. If the secret doesn't rotate, Secrets Manager returns a null value.
      */
     LastRotatedDate?: LastRotatedDateType;
     /**
@@ -343,9 +380,17 @@ declare namespace SecretsManager {
      */
     OwningService?: OwningServiceType;
     /**
-     * The date that the secret was created.
+     * The date you created the secret.
      */
     CreatedDate?: TimestampType;
+    /**
+     * Specifies the primary region for secret replication. 
+     */
+    PrimaryRegion?: RegionType;
+    /**
+     * Describes a list of replication status objects as InProgress, Failed or InSync.P 
+     */
+    ReplicationStatus?: ReplicationStatusListType;
   }
   export type DescriptionType = string;
   export type ErrorMessage = string;
@@ -360,11 +405,11 @@ declare namespace SecretsManager {
      */
     Key?: FilterNameStringType;
     /**
-     * Filters your list of secrets by a specific value.
+     * Filters your list of secrets by a specific value. You can prefix your search value with an exclamation mark (!) in order to perform negation filters. 
      */
     Values?: FilterValuesStringList;
   }
-  export type FilterNameStringType = "description"|"name"|"tag-key"|"tag-value"|"all"|string;
+  export type FilterNameStringType = "description"|"name"|"tag-key"|"tag-value"|"primary-region"|"all"|string;
   export type FilterValueStringType = string;
   export type FilterValuesStringList = FilterValueStringType[];
   export type FiltersListType = Filter[];
@@ -434,11 +479,11 @@ declare namespace SecretsManager {
      */
     SecretId: SecretIdType;
     /**
-     * Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don't specify VersionStage. If you don't specify either a VersionStage or VersionId then the default is to perform the operation on the version with the VersionStage value of AWSCURRENT. This value is typically a UUID-type value with 32 hexadecimal digits.
+     * Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify both this parameter and VersionStage, the two parameters must refer to the same secret version. If you don't specify either a VersionStage or VersionId then the default is to perform the operation on the version with the VersionStage value of AWSCURRENT. This value is typically a UUID-type value with 32 hexadecimal digits.
      */
     VersionId?: SecretVersionIdType;
     /**
-     * Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don't specify VersionId. If you don't specify either a VersionStage or VersionId, then the default is to perform the operation on the version with the VersionStage value of AWSCURRENT.
+     * Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you specify both this parameter and VersionId, the two parameters must refer to the same secret version . If you don't specify either a VersionStage or VersionId, then the default is to perform the operation on the version with the VersionStage value of AWSCURRENT.
      */
     VersionStage?: SecretVersionStageType;
   }
@@ -549,15 +594,15 @@ declare namespace SecretsManager {
   export type PasswordLengthType = number;
   export interface PutResourcePolicyRequest {
     /**
-     * Specifies the secret that you want to attach the resource-based policy to. You can specify either the ARN or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
+     * Specifies the secret that you want to attach the resource-based policy. You can specify either the ARN or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
      */
     SecretId: SecretIdType;
     /**
-     * A JSON-formatted string that's constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.
+     * A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.
      */
     ResourcePolicy: NonEmptyResourcePolicyType;
     /**
-     * Makes an optional API call to Zelkova to validate the Resource Policy to prevent broad access to your secret.
+     * (Optional) If you set the parameter, BlockPublicPolicy to true, then you block resource-based policies that allow broad access to the secret.
      */
     BlockPublicPolicy?: BooleanType;
   }
@@ -567,7 +612,7 @@ declare namespace SecretsManager {
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret that the retrieved by the resource-based policy.
+     * The friendly name of the secret retrieved by the resource-based policy.
      */
     Name?: NameType;
   }
@@ -613,6 +658,85 @@ declare namespace SecretsManager {
   }
   export type RandomPasswordType = string;
   export type RecoveryWindowInDaysType = number;
+  export type RegionType = string;
+  export interface RemoveRegionsFromReplicationRequest {
+    /**
+     * Remove a secret by SecretId from replica Regions.
+     */
+    SecretId: SecretIdType;
+    /**
+     * Remove replication from specific Regions.
+     */
+    RemoveReplicaRegions: RemoveReplicaRegionListType;
+  }
+  export interface RemoveRegionsFromReplicationResponse {
+    /**
+     * The secret ARN removed from replication regions.
+     */
+    ARN?: SecretARNType;
+    /**
+     * Describes the remaining replication status after you remove regions from the replication list.
+     */
+    ReplicationStatus?: ReplicationStatusListType;
+  }
+  export type RemoveReplicaRegionListType = RegionType[];
+  export interface ReplicaRegionType {
+    /**
+     * Describes a single instance of Region objects.
+     */
+    Region?: RegionType;
+    /**
+     * Can be an ARN, Key ID, or Alias. 
+     */
+    KmsKeyId?: KmsKeyIdType;
+  }
+  export interface ReplicateSecretToRegionsRequest {
+    /**
+     * Use the Secret Id to replicate a secret to regions.
+     */
+    SecretId: SecretIdType;
+    /**
+     * Add Regions to replicate the secret.
+     */
+    AddReplicaRegions: AddReplicaRegionListType;
+    /**
+     * (Optional) If set, Secrets Manager replication overwrites a secret with the same name in the destination region.
+     */
+    ForceOverwriteReplicaSecret?: BooleanType;
+  }
+  export interface ReplicateSecretToRegionsResponse {
+    /**
+     * Replicate a secret based on the ReplicaRegionType&gt; consisting of a Region(required) and a KMSKeyId (optional) which can be the ARN, KeyID, or Alias. 
+     */
+    ARN?: SecretARNType;
+    /**
+     * Describes the secret replication status as PENDING, SUCCESS or FAIL.
+     */
+    ReplicationStatus?: ReplicationStatusListType;
+  }
+  export type ReplicationStatusListType = ReplicationStatusType[];
+  export interface ReplicationStatusType {
+    /**
+     * The Region where replication occurs.
+     */
+    Region?: RegionType;
+    /**
+     * Can be an ARN, Key ID, or Alias. 
+     */
+    KmsKeyId?: KmsKeyIdType;
+    /**
+     * The status can be InProgress, Failed, or InSync.
+     */
+    Status?: StatusType;
+    /**
+     * Status message such as "Secret with this name already exists in this region".
+     */
+    StatusMessage?: StatusMessageType;
+    /**
+     * The date that you last accessed the secret in the Region. 
+     */
+    LastAccessedDate?: LastAccessedDateType;
+  }
   export type RequireEachIncludedTypeType = boolean;
   export interface RestoreSecretRequest {
     /**
@@ -703,7 +827,7 @@ declare namespace SecretsManager {
      */
     RotationRules?: RotationRulesType;
     /**
-     * The last date and time that the rotation process for this secret was invoked.
+     * The most recent date and time that the Secrets Manager rotation process was successfully completed. This value is null if the secret hasn't ever rotated.
      */
     LastRotatedDate?: LastRotatedDateType;
     /**
@@ -734,6 +858,10 @@ declare namespace SecretsManager {
      * The date and time when a secret was created.
      */
     CreatedDate?: TimestampType;
+    /**
+     * The Region where Secrets Manager originated the secret.
+     */
+    PrimaryRegion?: RegionType;
   }
   export type SecretListType = SecretListEntry[];
   export type SecretNameType = string;
@@ -762,6 +890,20 @@ declare namespace SecretsManager {
   export type SecretVersionsListType = SecretVersionsListEntry[];
   export type SecretVersionsToStagesMapType = {[key: string]: SecretVersionStagesType};
   export type SortOrderType = "asc"|"desc"|string;
+  export type StatusMessageType = string;
+  export type StatusType = "InSync"|"Failed"|"InProgress"|string;
+  export interface StopReplicationToReplicaRequest {
+    /**
+     * Response to StopReplicationToReplica of a secret, based on the SecretId.
+     */
+    SecretId: SecretIdType;
+  }
+  export interface StopReplicationToReplicaResponse {
+    /**
+     * Response StopReplicationToReplica of a secret, based on the ARN,.
+     */
+    ARN?: SecretARNType;
+  }
   export interface Tag {
     /**
      * The key identifier, or name, of the tag.
@@ -781,7 +923,7 @@ declare namespace SecretsManager {
      */
     SecretId: SecretIdType;
     /**
-     * The tags to attach to the secret. Each element in the list consists of a Key and a Value. This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide. For the AWS CLI, you can also use the syntax: --Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…] 
+     * The tags to attach to the secret. Each element in the list consists of a Key and a Value. This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide. For the AWS CLI, you can also use the syntax: --Tags Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…] 
      */
     Tags: TagListType;
   }
@@ -867,11 +1009,11 @@ declare namespace SecretsManager {
   }
   export interface ValidateResourcePolicyRequest {
     /**
-     *  The identifier for the secret that you want to validate a resource policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
+     *  (Optional) The identifier of the secret with the resource-based policy you want to validate. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.  If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters. If you specify an incomplete ARN without the random suffix, and instead provide the 'friendly name', you must not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException or an AccessDeniedException error, depending on your permissions. 
      */
     SecretId?: SecretIdType;
     /**
-     * Identifies the Resource Policy attached to the secret.
+     * A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see Using JSON for Parameters in the AWS CLI User Guide.publi
      */
     ResourcePolicy: NonEmptyResourcePolicyType;
   }
