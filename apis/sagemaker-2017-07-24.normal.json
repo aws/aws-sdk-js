@@ -2278,7 +2278,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Returns information about a training job.</p>"
+      "documentation": "<p>Returns information about a training job. </p> <p>Some of the attributes below only appear if the training job successfully starts. If the training job fails, <code>TrainingJobStatus</code> is <code>Failed</code> and, depending on the <code>FailureReason</code>, attributes like <code>TrainingStartTime</code>, <code>TrainingTimeInSeconds</code>, <code>TrainingEndTime</code>, and <code>BillableTimeInSeconds</code> may not be present in the response.</p>"
     },
     "DescribeTransformJob": {
       "name": "DescribeTransformJob",
@@ -15050,7 +15050,7 @@
           "documentation": "<p>How containers in a multi-container are run. The following values are valid.</p> <ul> <li> <p> <code>SERIAL</code> - Containers run as a serial pipeline.</p> </li> <li> <p> <code>DIRECT</code> - Only the individual container that you specify is run.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Specifies details about how containers in a multi-container are run.</p>"
+      "documentation": "<p>Specifies details about how containers in a multi-container endpoint are run.</p>"
     },
     "InferenceExecutionMode": {
       "type": "string",
@@ -22588,6 +22588,10 @@
         "KmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the <code>OfflineStore</code> S3 location.</p> <p>The IAM <code>roleARN</code> that is passed as a parameter to <code>CreateFeatureGroup</code> must have below permissions to the <code>KmsKeyId</code>:</p> <ul> <li> <p> <code>\"kms:GenerateDataKey\"</code> </p> </li> </ul>"
+        },
+        "ResolvedOutputS3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The S3 path where offline records are written.</p>"
         }
       },
       "documentation": "<p>The Amazon Simple Storage (Amazon S3) location and and security configuration for <code>OfflineStore</code>.</p>"

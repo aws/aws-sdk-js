@@ -427,6 +427,10 @@
           "shape": "MaxWorkers",
           "documentation": "<p>The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in this field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the one worker that is included with your environment.</p>"
         },
+        "MinWorkers": {
+          "shape": "MinWorkers",
+          "documentation": "<p>The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in the <code>MaxWorkers</code> field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the worker count you specify in the <code>MinWorkers</code> field.</p>"
+        },
         "Name": {
           "shape": "EnvironmentName",
           "documentation": "<p>The name of your MWAA environment.</p>",
@@ -601,7 +605,11 @@
         },
         "MaxWorkers": {
           "shape": "MaxWorkers",
-          "documentation": "<p>The Maximum Workers of the Amazon MWAA Environment.</p>"
+          "documentation": "<p>The maximum number of workers to run in your Amazon MWAA Environment.</p>"
+        },
+        "MinWorkers": {
+          "shape": "MinWorkers",
+          "documentation": "<p>The minimum number of workers to run in your Amazon MWAA Environment.</p>"
         },
         "Name": {
           "shape": "EnvironmentName",
@@ -925,6 +933,11 @@
       },
       "documentation": "<p>Internal only API.</p>"
     },
+    "MinWorkers": {
+      "type": "integer",
+      "box": true,
+      "min": 1
+    },
     "ModuleLoggingConfiguration": {
       "type": "structure",
       "members": {
@@ -1013,7 +1026,7 @@
       "type": "string",
       "max": 1224,
       "min": 1,
-      "pattern": "^arn:aws(-[a-z]+)?:s3:::airflow-[a-z0-9.\\-]+$"
+      "pattern": "^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"
     },
     "S3ObjectVersion": {
       "type": "string",
@@ -1251,7 +1264,11 @@
         },
         "MaxWorkers": {
           "shape": "MaxWorkers",
-          "documentation": "<p>The Maximum Workers to update of your Amazon MWAA environment.</p>"
+          "documentation": "<p>The maximum number of workers to update of your Amazon MWAA environment.</p>"
+        },
+        "MinWorkers": {
+          "shape": "MinWorkers",
+          "documentation": "<p>The minimum number of workers to update of your Amazon MWAA environment.</p>"
         },
         "Name": {
           "shape": "EnvironmentName",

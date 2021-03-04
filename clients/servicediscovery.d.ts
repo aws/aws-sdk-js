@@ -207,7 +207,7 @@ declare namespace ServiceDiscovery {
     /**
      * The name that you want to assign to this namespace.
      */
-    Name: NamespaceName;
+    Name: NamespaceNameHttp;
     /**
      * A unique string that identifies the request and that allows failed CreateHttpNamespace requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp.
      */
@@ -231,7 +231,7 @@ declare namespace ServiceDiscovery {
     /**
      * The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.
      */
-    Name: NamespaceName;
+    Name: NamespaceNamePrivate;
     /**
      * A unique string that identifies the request and that allows failed CreatePrivateDnsNamespace requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp.
      */
@@ -259,7 +259,7 @@ declare namespace ServiceDiscovery {
     /**
      * The name that you want to assign to this namespace.
      */
-    Name: NamespaceName;
+    Name: NamespaceNamePublic;
     /**
      * A unique string that identifies the request and that allows failed CreatePublicDnsNamespace requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp.
      */
@@ -281,7 +281,7 @@ declare namespace ServiceDiscovery {
   }
   export interface CreateServiceRequest {
     /**
-     * The name that you want to assign to the service. If you want AWS Cloud Map to create an SRV record when you register an instance, and if you're using a system that requires a specific SRV format, such as HAProxy, specify the following for Name:   Start the name with an underscore (_), such as _exampleservice    End the name with ._protocol, such as ._tcp    When you register an instance, AWS Cloud Map creates an SRV record and assigns a name to the record by concatenating the service name and the namespace name, for example:  _exampleservice._tcp.example.com 
+     * The name that you want to assign to the service. If you want AWS Cloud Map to create an SRV record when you register an instance, and if you're using a system that requires a specific SRV format, such as HAProxy, specify the following for Name:   Start the name with an underscore (_), such as _exampleservice    End the name with ._protocol, such as ._tcp    When you register an instance, AWS Cloud Map creates an SRV record and assigns a name to the record by concatenating the service name and the namespace name, for example:  _exampleservice._tcp.example.com   For a single DNS namespace, you cannot create two services with names that differ only by case (such as EXAMPLE and example). Otherwise, these services will have the same DNS name. However, you can create multiple HTTP services with names that differ only by case because HTTP services are case sensitive. 
      */
     Name: ServiceName;
     /**
@@ -312,6 +312,10 @@ declare namespace ServiceDiscovery {
      * The tags to add to the service. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     Tags?: TagList;
+    /**
+     * If present, specifies that the service instances are only discoverable using the DiscoverInstances API operation. No DNS records will be registered for the service instances. The only valid value is HTTP.
+     */
+    Type?: ServiceTypeOption;
   }
   export interface CreateServiceResponse {
     /**
@@ -541,7 +545,7 @@ declare namespace ServiceDiscovery {
     /**
      * The name of the namespace that you specified when you registered the instance.
      */
-    NamespaceName?: NamespaceName;
+    NamespaceName?: NamespaceNameHttp;
     /**
      * The name of the service that you specified when you registered the instance.
      */
@@ -754,6 +758,9 @@ declare namespace ServiceDiscovery {
   export type NamespaceFilterName = "TYPE"|string;
   export type NamespaceFilters = NamespaceFilter[];
   export type NamespaceName = string;
+  export type NamespaceNameHttp = string;
+  export type NamespaceNamePrivate = string;
+  export type NamespaceNamePublic = string;
   export interface NamespaceProperties {
     /**
      * A complex type that contains the ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.
@@ -925,6 +932,10 @@ declare namespace ServiceDiscovery {
      */
     DnsConfig?: DnsConfig;
     /**
+     * Describes the systems that can be used to discover the service instances.  DNS_HTTP  The service instances can be discovered using either DNS queries or the DiscoverInstances API operation.  HTTP  The service instances can only be discovered using the DiscoverInstances API operation.  DNS  Reserved.  
+     */
+    Type?: ServiceType;
+    /**
      *  Public DNS and HTTP namespaces only. A complex type that contains settings for an optional health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records that you specify in DnsConfig. For information about the charges for health checks, see Amazon Route 53 Pricing.
      */
     HealthCheckConfig?: HealthCheckConfig;
@@ -984,6 +995,10 @@ declare namespace ServiceDiscovery {
      */
     Name?: ServiceName;
     /**
+     * Describes the systems that can be used to discover the service instances.  DNS_HTTP  The service instances can be discovered using either DNS queries or the DiscoverInstances API operation.  HTTP  The service instances can only be discovered using the DiscoverInstances API operation.  DNS  Reserved.  
+     */
+    Type?: ServiceType;
+    /**
      * The description that you specify when you create the service.
      */
     Description?: ResourceDescription;
@@ -999,6 +1014,8 @@ declare namespace ServiceDiscovery {
      */
     CreateDate?: Timestamp;
   }
+  export type ServiceType = "HTTP"|"DNS_HTTP"|"DNS"|string;
+  export type ServiceTypeOption = "HTTP"|string;
   export interface Tag {
     /**
      * The key identifier, or name, of the tag.

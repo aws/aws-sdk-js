@@ -156,6 +156,10 @@ declare namespace MWAA {
      */
     MaxWorkers?: MaxWorkers;
     /**
+     * The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in the MaxWorkers field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the worker count you specify in the MinWorkers field.
+     */
+    MinWorkers?: MinWorkers;
+    /**
      * The name of your MWAA environment.
      */
     Name: EnvironmentName;
@@ -278,9 +282,13 @@ declare namespace MWAA {
      */
     LoggingConfiguration?: LoggingConfiguration;
     /**
-     * The Maximum Workers of the Amazon MWAA Environment.
+     * The maximum number of workers to run in your Amazon MWAA Environment.
      */
     MaxWorkers?: MaxWorkers;
+    /**
+     * The minimum number of workers to run in your Amazon MWAA Environment.
+     */
+    MinWorkers?: MinWorkers;
     /**
      * The name of the Amazon MWAA Environment.
      */
@@ -442,6 +450,7 @@ declare namespace MWAA {
      */
     Value?: Double;
   }
+  export type MinWorkers = number;
   export interface ModuleLoggingConfiguration {
     /**
      * Provides the ARN for the CloudWatch group where the logs will be published.
@@ -576,9 +585,13 @@ declare namespace MWAA {
      */
     LoggingConfiguration?: LoggingConfigurationInput;
     /**
-     * The Maximum Workers to update of your Amazon MWAA environment.
+     * The maximum number of workers to update of your Amazon MWAA environment.
      */
     MaxWorkers?: MaxWorkers;
+    /**
+     * The minimum number of workers to update of your Amazon MWAA environment.
+     */
+    MinWorkers?: MinWorkers;
     /**
      * The name of your Amazon MWAA environment that you wish to update.
      */

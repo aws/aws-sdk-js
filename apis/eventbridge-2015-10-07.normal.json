@@ -68,6 +68,34 @@
       ],
       "documentation": "<p>Cancels the specified replay.</p>"
     },
+    "CreateApiDestination": {
+      "name": "CreateApiDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateApiDestinationRequest"
+      },
+      "output": {
+        "shape": "CreateApiDestinationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an API destination, which is an HTTP invocation endpoint configured as a target for events.</p>"
+    },
     "CreateArchive": {
       "name": "CreateArchive",
       "http": {
@@ -101,6 +129,31 @@
         }
       ],
       "documentation": "<p>Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.</p>"
+    },
+    "CreateConnection": {
+      "name": "CreateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateConnectionRequest"
+      },
+      "output": {
+        "shape": "CreateConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates a connection. A connection defines the authorization type and credentials to use for authorization with an API destination HTTP endpoint.</p>"
     },
     "CreateEventBus": {
       "name": "CreateEventBus",
@@ -198,6 +251,56 @@
       ],
       "documentation": "<p>You can use this operation to temporarily stop receiving events from the specified partner event source. The matching event bus is not deleted. </p> <p>When you deactivate a partner event source, the source goes into PENDING state. If it remains in PENDING state for more than two weeks, it is deleted.</p> <p>To activate a deactivated partner event source, use <a>ActivateEventSource</a>.</p>"
     },
+    "DeauthorizeConnection": {
+      "name": "DeauthorizeConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeauthorizeConnectionRequest"
+      },
+      "output": {
+        "shape": "DeauthorizeConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Removes all authorization parameters from the connection. This lets you remove the secret from the connection so you can reuse it without having to create a new connection.</p>"
+    },
+    "DeleteApiDestination": {
+      "name": "DeleteApiDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteApiDestinationRequest"
+      },
+      "output": {
+        "shape": "DeleteApiDestinationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified API destination.</p>"
+    },
     "DeleteArchive": {
       "name": "DeleteArchive",
       "http": {
@@ -222,6 +325,31 @@
         }
       ],
       "documentation": "<p>Deletes the specified archive.</p>"
+    },
+    "DeleteConnection": {
+      "name": "DeleteConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteConnectionRequest"
+      },
+      "output": {
+        "shape": "DeleteConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Deletes a connection.</p>"
     },
     "DeleteEventBus": {
       "name": "DeleteEventBus",
@@ -289,6 +417,28 @@
       ],
       "documentation": "<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p> <p>Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the <code>Force</code> option, but you should do so only if you are sure the other service is not still using that rule.</p>"
     },
+    "DescribeApiDestination": {
+      "name": "DescribeApiDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeApiDestinationRequest"
+      },
+      "output": {
+        "shape": "DescribeApiDestinationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves details about an API destination.</p>"
+    },
     "DescribeArchive": {
       "name": "DescribeArchive",
       "http": {
@@ -313,6 +463,28 @@
         }
       ],
       "documentation": "<p>Retrieves details about an archive.</p>"
+    },
+    "DescribeConnection": {
+      "name": "DescribeConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeConnectionRequest"
+      },
+      "output": {
+        "shape": "DescribeConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves details about a connection.</p>"
     },
     "DescribeEventBus": {
       "name": "DescribeEventBus",
@@ -480,6 +652,25 @@
       ],
       "documentation": "<p>Enables the specified rule. If the rule does not exist, the operation fails.</p> <p>When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Allow a short period of time for changes to take effect.</p>"
     },
+    "ListApiDestinations": {
+      "name": "ListApiDestinations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListApiDestinationsRequest"
+      },
+      "output": {
+        "shape": "ListApiDestinationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of API destination in the account in the current Region.</p>"
+    },
     "ListArchives": {
       "name": "ListArchives",
       "http": {
@@ -501,6 +692,25 @@
         }
       ],
       "documentation": "<p>Lists your archives. You can either list all the archives or you can provide a prefix to match to the archive names. Filter parameters are exclusive.</p>"
+    },
+    "ListConnections": {
+      "name": "ListConnections",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListConnectionsRequest"
+      },
+      "output": {
+        "shape": "ListConnectionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of connections from the account.</p>"
     },
     "ListEventBuses": {
       "name": "ListEventBuses",
@@ -829,7 +1039,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <p>You can configure the following as targets for Events:</p> <ul> <li> <p>EC2 instances</p> </li> <li> <p>SSM Run Command</p> </li> <li> <p>SSM Automation</p> </li> <li> <p>AWS Lambda functions</p> </li> <li> <p>Data streams in Amazon Kinesis Data Streams</p> </li> <li> <p>Data delivery streams in Amazon Kinesis Data Firehose</p> </li> <li> <p>Amazon ECS tasks</p> </li> <li> <p>AWS Step Functions state machines</p> </li> <li> <p>AWS Batch jobs</p> </li> <li> <p>AWS CodeBuild projects</p> </li> <li> <p>Pipelines in AWS CodePipeline</p> </li> <li> <p>Amazon Inspector assessment templates</p> </li> <li> <p>Amazon SNS topics</p> </li> <li> <p>Amazon SQS queues, including FIFO queues</p> </li> <li> <p>The default event bus of another AWS account</p> </li> <li> <p>Amazon API Gateway REST APIs</p> </li> <li> <p>Redshift Clusters to invoke Data API ExecuteStatement on</p> </li> </ul> <p>Creating rules with built-in targets is supported only in the AWS Management Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API call</code>. </p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon EventBridge (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>If another AWS account is in the same region and has granted you permission (using <code>PutPermission</code>), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the <code>Arn</code> value when you run <code>PutTargets</code>. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events) Pricing</a>.</p> <note> <p> <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not available with <code>PutTarget</code> if the target is an event bus of a different AWS account.</p> </note> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b>, and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+      "documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <p>You can configure the following as targets for Events:</p> <ul> <li> <p>EC2 instances</p> </li> <li> <p>SSM Run Command</p> </li> <li> <p>SSM Automation</p> </li> <li> <p>AWS Lambda functions</p> </li> <li> <p>Data streams in Amazon Kinesis Data Streams</p> </li> <li> <p>Data delivery streams in Amazon Kinesis Data Firehose</p> </li> <li> <p>Amazon ECS tasks</p> </li> <li> <p>AWS Step Functions state machines</p> </li> <li> <p>AWS Batch jobs</p> </li> <li> <p>AWS CodeBuild projects</p> </li> <li> <p>Pipelines in AWS CodePipeline</p> </li> <li> <p>Amazon Inspector assessment templates</p> </li> <li> <p>Amazon SNS topics</p> </li> <li> <p>Amazon SQS queues, including FIFO queues</p> </li> <li> <p>The default event bus of another AWS account</p> </li> <li> <p>Amazon API Gateway REST APIs</p> </li> <li> <p>Redshift Clusters to invoke Data API ExecuteStatement on</p> </li> <li> <p>Custom/SaaS HTTPS APIs via EventBridge API Destinations</p> </li> </ul> <p>Creating rules with built-in targets is supported only in the AWS Management Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API call</code>. </p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon EventBridge (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>If another AWS account is in the same region and has granted you permission (using <code>PutPermission</code>), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the <code>Arn</code> value when you run <code>PutTargets</code>. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events) Pricing</a>.</p> <note> <p> <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not available with <code>PutTarget</code> if the target is an event bus of a different AWS account.</p> </note> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b>, and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
     },
     "RemovePermission": {
       "name": "RemovePermission",
@@ -993,6 +1203,34 @@
       ],
       "documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge (CloudWatch Events, rules and event buses can be tagged.</p>"
     },
+    "UpdateApiDestination": {
+      "name": "UpdateApiDestination",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateApiDestinationRequest"
+      },
+      "output": {
+        "shape": "UpdateApiDestinationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Updates an API destination.</p>"
+    },
     "UpdateArchive": {
       "name": "UpdateArchive",
       "http": {
@@ -1023,6 +1261,34 @@
         }
       ],
       "documentation": "<p>Updates the specified archive.</p>"
+    },
+    "UpdateConnection": {
+      "name": "UpdateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateConnectionRequest"
+      },
+      "output": {
+        "shape": "UpdateConnectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Updates settings for a connection.</p>"
     }
   },
   "shapes": {
@@ -1049,6 +1315,94 @@
           "documentation": "<p>The name of the partner event source to activate.</p>"
         }
       }
+    },
+    "ApiDestination": {
+      "type": "structure",
+      "members": {
+        "ApiDestinationArn": {
+          "shape": "ApiDestinationArn",
+          "documentation": "<p>The ARN of the API destination.</p>"
+        },
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name of the API destination.</p>"
+        },
+        "ApiDestinationState": {
+          "shape": "ApiDestinationState",
+          "documentation": "<p>The state of the API destination.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection specified for the API destination.</p>"
+        },
+        "InvocationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the endpoint for the API destination.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ApiDestinationHttpMethod",
+          "documentation": "<p>The method to use to connect to the HTTP endpoint.</p>"
+        },
+        "InvocationRateLimitPerSecond": {
+          "shape": "ApiDestinationInvocationRateLimitPerSecond",
+          "documentation": "<p>The maximum number of invocations per second to send to the HTTP endpoint.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was last modified.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about an API destination.</p>"
+    },
+    "ApiDestinationArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$"
+    },
+    "ApiDestinationDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "ApiDestinationHttpMethod": {
+      "type": "string",
+      "enum": [
+        "POST",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "ApiDestinationInvocationRateLimitPerSecond": {
+      "type": "integer",
+      "min": 1
+    },
+    "ApiDestinationName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "ApiDestinationResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "ApiDestination"
+      }
+    },
+    "ApiDestinationState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
     },
     "Archive": {
       "type": "structure",
@@ -1138,6 +1492,12 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "AuthHeaderParameters": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "^[ \\t]*[^\\x00-\\x1F:\\x7F]+([ \\t]+[^\\x00-\\x1F:\\x7F]+)*[ \\t]*$"
     },
     "AwsVpcConfiguration": {
       "type": "structure",
@@ -1261,6 +1621,326 @@
       },
       "documentation": "<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>'{\"Type\" : \"StringEquals\", \"Key\": \"aws:PrincipalOrgID\", \"Value\": \"o-1234567890\"}'</code> </p>"
     },
+    "Connection": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection.</p>"
+        },
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection.</p>"
+        },
+        "StateReason": {
+          "shape": "ConnectionStateReason",
+          "documentation": "<p>The reason that the connection is in the connection state.</p>"
+        },
+        "AuthorizationType": {
+          "shape": "ConnectionAuthorizationType",
+          "documentation": "<p>The authorization type specified for the connection.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last modified.</p>"
+        },
+        "LastAuthorizedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last authorized.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a connection.</p>"
+    },
+    "ConnectionApiKeyAuthResponseParameters": {
+      "type": "structure",
+      "members": {
+        "ApiKeyName": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The name of the header to use for the <code>APIKeyValue</code> used for authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the authorization parameters for the connection if API Key is specified as the authorization type.</p>"
+    },
+    "ConnectionArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$"
+    },
+    "ConnectionAuthResponseParameters": {
+      "type": "structure",
+      "members": {
+        "BasicAuthParameters": {
+          "shape": "ConnectionBasicAuthResponseParameters",
+          "documentation": "<p>The authorization parameters for Basic authorization.</p>"
+        },
+        "OAuthParameters": {
+          "shape": "ConnectionOAuthResponseParameters",
+          "documentation": "<p>The OAuth parameters to use for authorization.</p>"
+        },
+        "ApiKeyAuthParameters": {
+          "shape": "ConnectionApiKeyAuthResponseParameters",
+          "documentation": "<p>The API Key parameters to use for authorization.</p>"
+        },
+        "InvocationHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>Additional parameters for the connection that are passed through with every invocation to the HTTP endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Contains the authorization parameters to use for the connection.</p>"
+    },
+    "ConnectionAuthorizationType": {
+      "type": "string",
+      "enum": [
+        "BASIC",
+        "OAUTH_CLIENT_CREDENTIALS",
+        "API_KEY"
+      ]
+    },
+    "ConnectionBasicAuthResponseParameters": {
+      "type": "structure",
+      "members": {
+        "Username": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The user name to use for Basic authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the authorization parameters for the connection if Basic is specified as the authorization type.</p>"
+    },
+    "ConnectionBodyParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "String",
+          "documentation": "<p>The key for the parameter.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value associated with the key.</p>"
+        },
+        "IsValueSecret": {
+          "shape": "Boolean",
+          "documentation": "<p>Specified whether the value is secret.</p>"
+        }
+      },
+      "documentation": "<p>Additional parameter included in the body. You can include up to 100 additional body parameters per request. An event payload cannot exceed 64 KB.</p>"
+    },
+    "ConnectionBodyParametersList": {
+      "type": "list",
+      "member": {
+        "shape": "ConnectionBodyParameter"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ConnectionDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "ConnectionHeaderParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "HeaderKey",
+          "documentation": "<p>The key for the parameter.</p>"
+        },
+        "Value": {
+          "shape": "HeaderValue",
+          "documentation": "<p>The value associated with the key.</p>"
+        },
+        "IsValueSecret": {
+          "shape": "Boolean",
+          "documentation": "<p>Specified whether the value is a secret.</p>"
+        }
+      },
+      "documentation": "<p>Additional parameter included in the header. You can include up to 100 additional header parameters per request. An event payload cannot exceed 64 KB.</p>"
+    },
+    "ConnectionHeaderParametersList": {
+      "type": "list",
+      "member": {
+        "shape": "ConnectionHeaderParameter"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ConnectionHttpParameters": {
+      "type": "structure",
+      "members": {
+        "HeaderParameters": {
+          "shape": "ConnectionHeaderParametersList",
+          "documentation": "<p>Contains additional header parameters for the connection.</p>"
+        },
+        "QueryStringParameters": {
+          "shape": "ConnectionQueryStringParametersList",
+          "documentation": "<p>Contains additional query string parameters for the connection.</p>"
+        },
+        "BodyParameters": {
+          "shape": "ConnectionBodyParametersList",
+          "documentation": "<p>Contains additional body string parameters for the connection.</p>"
+        }
+      },
+      "documentation": "<p>Contains additional parameters for the connection.</p>"
+    },
+    "ConnectionName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "ConnectionOAuthClientResponseParameters": {
+      "type": "structure",
+      "members": {
+        "ClientID": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The client ID associated with the response to the connection request.</p>"
+        }
+      },
+      "documentation": "<p>Contains the client response parameters for the connection when OAuth is specified as the authorization type.</p>"
+    },
+    "ConnectionOAuthHttpMethod": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT"
+      ]
+    },
+    "ConnectionOAuthResponseParameters": {
+      "type": "structure",
+      "members": {
+        "ClientParameters": {
+          "shape": "ConnectionOAuthClientResponseParameters",
+          "documentation": "<p>A <code>ConnectionOAuthClientResponseParameters</code> object that contains details about the client parameters returned when OAuth is specified as the authorization type.</p>"
+        },
+        "AuthorizationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the HTTP endpoint that authorized the request.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ConnectionOAuthHttpMethod",
+          "documentation": "<p>The method used to connect to the HTTP endpoint.</p>"
+        },
+        "OAuthHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>The additional HTTP parameters used for the OAuth authorization request.</p>"
+        }
+      },
+      "documentation": "<p>Contains the response parameters when OAuth is specified as the authorization type.</p>"
+    },
+    "ConnectionQueryStringParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "QueryStringKey",
+          "documentation": "<p>The key for a query string parameter.</p>"
+        },
+        "Value": {
+          "shape": "QueryStringValue",
+          "documentation": "<p>The value associated with the key for the query string parameter.</p>"
+        },
+        "IsValueSecret": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the value is secret.</p>"
+        }
+      },
+      "documentation": "<p>Additional query string parameter for the connection. You can include up to 100 additional query string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB.</p>"
+    },
+    "ConnectionQueryStringParametersList": {
+      "type": "list",
+      "member": {
+        "shape": "ConnectionQueryStringParameter"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ConnectionResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "Connection"
+      }
+    },
+    "ConnectionState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "AUTHORIZED",
+        "DEAUTHORIZED",
+        "AUTHORIZING",
+        "DEAUTHORIZING"
+      ]
+    },
+    "ConnectionStateReason": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "CreateApiDestinationRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ConnectionArn",
+        "InvocationEndpoint",
+        "HttpMethod"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name for the API destination to create.</p>"
+        },
+        "Description": {
+          "shape": "ApiDestinationDescription",
+          "documentation": "<p>A description for the API destination to create.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection to use for the API destination. The destination endpoint must support the authorization type specified for the connection.</p>"
+        },
+        "InvocationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the HTTP invocation endpoint for the API destination.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ApiDestinationHttpMethod",
+          "documentation": "<p>The method to use for the request to the HTTP invocation endpoint.</p>"
+        },
+        "InvocationRateLimitPerSecond": {
+          "shape": "ApiDestinationInvocationRateLimitPerSecond",
+          "documentation": "<p>The maximum number of requests per second to send to the HTTP invocation endpoint.</p>"
+        }
+      }
+    },
+    "CreateApiDestinationResponse": {
+      "type": "structure",
+      "members": {
+        "ApiDestinationArn": {
+          "shape": "ApiDestinationArn",
+          "documentation": "<p>The ARN of the API destination that was created by the request.</p>"
+        },
+        "ApiDestinationState": {
+          "shape": "ApiDestinationState",
+          "documentation": "<p>The state of the API destination that was created by the request.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp indicating the time that the API destination was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp indicating the time that the API destination was last modified.</p>"
+        }
+      }
+    },
     "CreateArchiveRequest": {
       "type": "structure",
       "required": [
@@ -1308,6 +1988,156 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time at which the archive was created.</p>"
+        }
+      }
+    },
+    "CreateConnectionApiKeyAuthRequestParameters": {
+      "type": "structure",
+      "required": [
+        "ApiKeyName",
+        "ApiKeyValue"
+      ],
+      "members": {
+        "ApiKeyName": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The name of the API key to use for authorization.</p>"
+        },
+        "ApiKeyValue": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The value for the API key to use for authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the API key authorization parameters for the connection.</p>"
+    },
+    "CreateConnectionAuthRequestParameters": {
+      "type": "structure",
+      "members": {
+        "BasicAuthParameters": {
+          "shape": "CreateConnectionBasicAuthRequestParameters",
+          "documentation": "<p>A <code>CreateConnectionBasicAuthRequestParameters</code> object that contains the Basic authorization parameters to use for the connection.</p>"
+        },
+        "OAuthParameters": {
+          "shape": "CreateConnectionOAuthRequestParameters",
+          "documentation": "<p>A <code>CreateConnectionOAuthRequestParameters</code> object that contains the OAuth authorization parameters to use for the connection.</p>"
+        },
+        "ApiKeyAuthParameters": {
+          "shape": "CreateConnectionApiKeyAuthRequestParameters",
+          "documentation": "<p>A <code>CreateConnectionApiKeyAuthRequestParameters</code> object that contains the API key authorization parameters to use for the connection.</p>"
+        },
+        "InvocationHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>A <code>ConnectionHttpParameters</code> object that contains the API key authorization parameters to use for the connection. Note that if you include additional parameters for the target of a rule via <code>HttpParameters</code>, including query strings, the parameters added for the connection take precedence.</p>"
+        }
+      },
+      "documentation": "<p>Contains the authorization parameters for the connection.</p>"
+    },
+    "CreateConnectionBasicAuthRequestParameters": {
+      "type": "structure",
+      "required": [
+        "Username",
+        "Password"
+      ],
+      "members": {
+        "Username": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The user name to use for Basic authorization.</p>"
+        },
+        "Password": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The password associated with the user name to use for Basic authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the Basic authorization parameters to use for the connection.</p>"
+    },
+    "CreateConnectionOAuthClientRequestParameters": {
+      "type": "structure",
+      "required": [
+        "ClientID",
+        "ClientSecret"
+      ],
+      "members": {
+        "ClientID": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The client ID to use for OAuth authorization for the connection.</p>"
+        },
+        "ClientSecret": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The client secret associated with the client ID to use for OAuth authorization for the connection.</p>"
+        }
+      },
+      "documentation": "<p>Contains the Basic authorization parameters to use for the connection.</p>"
+    },
+    "CreateConnectionOAuthRequestParameters": {
+      "type": "structure",
+      "required": [
+        "ClientParameters",
+        "AuthorizationEndpoint",
+        "HttpMethod"
+      ],
+      "members": {
+        "ClientParameters": {
+          "shape": "CreateConnectionOAuthClientRequestParameters",
+          "documentation": "<p>A <code>CreateConnectionOAuthClientRequestParameters</code> object that contains the client parameters for OAuth authorization.</p>"
+        },
+        "AuthorizationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the authorization endpoint when OAuth is specified as the authorization type.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ConnectionOAuthHttpMethod",
+          "documentation": "<p>The method to use for the authorization request.</p>"
+        },
+        "OAuthHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>A <code>ConnectionHttpParameters</code> object that contains details about the additional parameters to use for the connection.</p>"
+        }
+      },
+      "documentation": "<p>Contains the OAuth authorization parameters to use for the connection.</p>"
+    },
+    "CreateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "AuthorizationType",
+        "AuthParameters"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name for the connection to create.</p>"
+        },
+        "Description": {
+          "shape": "ConnectionDescription",
+          "documentation": "<p>A description for the connection to create.</p>"
+        },
+        "AuthorizationType": {
+          "shape": "ConnectionAuthorizationType",
+          "documentation": "<p>The type of authorization to use for the connection.</p>"
+        },
+        "AuthParameters": {
+          "shape": "CreateConnectionAuthRequestParameters",
+          "documentation": "<p>A <code>CreateConnectionAuthRequestParameters</code> object that contains the authorization parameters to use to authorize with the endpoint. </p>"
+        }
+      }
+    },
+    "CreateConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection that was created by the request.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection that was created by the request.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last updated.</p>"
         }
       }
     },
@@ -1374,14 +2204,12 @@
     "Database": {
       "type": "string",
       "max": 64,
-      "min": 1,
-      "pattern": "([a-zA-Z0-9_+.-@]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
+      "min": 1
     },
     "DbUser": {
       "type": "string",
       "max": 128,
-      "min": 1,
-      "pattern": "([a-zA-Z0-9_+.-@]+)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
+      "min": 1
     },
     "DeactivateEventSourceRequest": {
       "type": "structure",
@@ -1405,6 +2233,59 @@
       },
       "documentation": "<p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue configuration.</p>"
     },
+    "DeauthorizeConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to remove authorization from.</p>"
+        }
+      }
+    },
+    "DeauthorizeConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection that authorization was removed from.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last updated.</p>"
+        },
+        "LastAuthorizedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last authorized.</p>"
+        }
+      }
+    },
+    "DeleteApiDestinationRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name of the destination to delete.</p>"
+        }
+      }
+    },
+    "DeleteApiDestinationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteArchiveRequest": {
       "type": "structure",
       "required": [
@@ -1420,6 +2301,43 @@
     "DeleteArchiveResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to delete.</p>"
+        }
+      }
+    },
+    "DeleteConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection that was deleted.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection before it was deleted.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last modified before it was deleted.</p>"
+        },
+        "LastAuthorizedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last authorized before it wa deleted.</p>"
+        }
+      }
     },
     "DeleteEventBusRequest": {
       "type": "structure",
@@ -1467,6 +2385,63 @@
         "Force": {
           "shape": "Boolean",
           "documentation": "<p>If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.</p>"
+        }
+      }
+    },
+    "DescribeApiDestinationRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name of the API destination to retrieve.</p>"
+        }
+      }
+    },
+    "DescribeApiDestinationResponse": {
+      "type": "structure",
+      "members": {
+        "ApiDestinationArn": {
+          "shape": "ApiDestinationArn",
+          "documentation": "<p>The ARN of the API destination retrieved.</p>"
+        },
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name of the API destination retrieved.</p>"
+        },
+        "Description": {
+          "shape": "ApiDestinationDescription",
+          "documentation": "<p>The description for the API destination retrieved.</p>"
+        },
+        "ApiDestinationState": {
+          "shape": "ApiDestinationState",
+          "documentation": "<p>The state of the API destination retrieved.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection specified for the API destination retrieved.</p>"
+        },
+        "InvocationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to use to connect to the HTTP endpoint.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ApiDestinationHttpMethod",
+          "documentation": "<p>The method to use to connect to the HTTP endpoint.</p>"
+        },
+        "InvocationRateLimitPerSecond": {
+          "shape": "ApiDestinationInvocationRateLimitPerSecond",
+          "documentation": "<p>The maximum number of invocations per second to specified for the API destination. Note that if you set the invocation rate maximum to a value lower the rate necessary to send all events received on to the destination HTTP endpoint, some events may not be delivered within the 24-hour retry window. If you plan to set the rate lower than the rate necessary to deliver all events, consider using a dead-letter queue to catch events that are not delivered within 24 hours.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was last modified.</p>"
         }
       }
     },
@@ -1528,6 +2503,67 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time at which the archive was created.</p>"
+        }
+      }
+    },
+    "DescribeConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to retrieve.</p>"
+        }
+      }
+    },
+    "DescribeConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection retrieved.</p>"
+        },
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection retrieved.</p>"
+        },
+        "Description": {
+          "shape": "ConnectionDescription",
+          "documentation": "<p>The description for the connection retrieved.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection retrieved.</p>"
+        },
+        "StateReason": {
+          "shape": "ConnectionStateReason",
+          "documentation": "<p>The reason that the connection is in the current connection state.</p>"
+        },
+        "AuthorizationType": {
+          "shape": "ConnectionAuthorizationType",
+          "documentation": "<p>The type of authorization specified for the connection.</p>"
+        },
+        "SecretArn": {
+          "shape": "SecretsManagerSecretArn",
+          "documentation": "<p>The ARN of the secret created from the authorization parameters specified for the connection.</p>"
+        },
+        "AuthParameters": {
+          "shape": "ConnectionAuthResponseParameters",
+          "documentation": "<p>The parameters to use for authorization for the connection.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last modified.</p>"
+        },
+        "LastAuthorizedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last authorized.</p>"
         }
       }
     },
@@ -1954,18 +2990,24 @@
       "members": {
         "PathParameterValues": {
           "shape": "PathParameterList",
-          "documentation": "<p>The path parameter values to be used to populate API Gateway REST API path wildcards (\"*\").</p>"
+          "documentation": "<p>The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards (\"*\").</p>"
         },
         "HeaderParameters": {
           "shape": "HeaderParametersMap",
-          "documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST API.</p>"
+          "documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.</p>"
         },
         "QueryStringParameters": {
           "shape": "QueryStringParametersMap",
-          "documentation": "<p>The query string keys/values that need to be sent as part of request invoking the API Gateway REST API.</p>"
+          "documentation": "<p>The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.</p>"
         }
       },
-      "documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST APIs.</p>"
+      "documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters specified on the Connection, with any values from the Connection taking precedence.</p>"
+    },
+    "HttpsEndpoint": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$"
     },
     "InputTransformer": {
       "type": "structure",
@@ -1975,11 +3017,11 @@
       "members": {
         "InputPathsMap": {
           "shape": "TransformerPaths",
-          "documentation": "<p>Map of JSON paths to be extracted from the event. You can then insert these in the template in <code>InputTemplate</code> to produce the output you want to be sent to the target.</p> <p> <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON path. You can have as many as 10 key-value pairs. You must use JSON dot notation, not bracket notation.</p> <p>The keys cannot start with \"AWS.\" </p>"
+          "documentation": "<p>Map of JSON paths to be extracted from the event. You can then insert these in the template in <code>InputTemplate</code> to produce the output you want to be sent to the target.</p> <p> <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket notation.</p> <p>The keys cannot start with \"AWS.\" </p>"
         },
         "InputTemplate": {
           "shape": "TransformerInput",
-          "documentation": "<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; The InputTemplate must be valid JSON.</p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> <li> <p>Object values cannot include quote marks.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> \"InputTransformer\":</code> </p> <p> <code>{</code> </p> <p> <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\": \"$.detail.status\"},</code> </p> <p> <code>\"InputTemplate\": \"&lt;instance&gt; is in state &lt;status&gt;\"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> \"InputTransformer\":</code> </p> <p> <code>{</code> </p> <p> <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\": \"$.detail.status\"},</code> </p> <p> <code>\"InputTemplate\": \"&lt;instance&gt; is in state \\\"&lt;status&gt;\\\"\"</code> </p> <p> <code>}</code> </p>"
+          "documentation": "<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; The InputTemplate must be valid JSON.</p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> \"InputTransformer\":</code> </p> <p> <code>{</code> </p> <p> <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\": \"$.detail.status\"},</code> </p> <p> <code>\"InputTemplate\": \"&lt;instance&gt; is in state &lt;status&gt;\"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> \"InputTransformer\":</code> </p> <p> <code>{</code> </p> <p> <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\": \"$.detail.status\"},</code> </p> <p> <code>\"InputTemplate\": \"&lt;instance&gt; is in state \\\"&lt;status&gt;\\\"\"</code> </p> <p> <code>}</code> </p> <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as in the following example:</p> <p> <code> \"InputTransformer\":</code> </p> <p> <code>{</code> </p> <p> <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\": \"$.detail.status\"},</code> </p> <p> <code>\"InputTemplate\": '{\"myInstance\": &lt;instance&gt;,\"myStatus\": \"&lt;instance&gt; is in state \\\"&lt;status&gt;\\\"\"}'</code> </p> <p> <code>}</code> </p>"
         }
       },
       "documentation": "<p>Contains the parameters needed for you to provide custom input to a target based on one or more pieces of data extracted from the event.</p>"
@@ -2022,6 +3064,40 @@
       "type": "integer",
       "min": 1
     },
+    "ListApiDestinationsRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>A name prefix to filter results returned. Only API destinations with a name that starts with the prefix are returned.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection specified for the API destination.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        },
+        "Limit": {
+          "shape": "LimitMax100",
+          "documentation": "<p>The maximum number of API destinations to include in the response.</p>"
+        }
+      }
+    },
+    "ListApiDestinationsResponse": {
+      "type": "structure",
+      "members": {
+        "ApiDestinations": {
+          "shape": "ApiDestinationResponseList",
+          "documentation": "<p>An array of <code>ApiDestination</code> objects that include information about an API destination.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token you can use in a subsequent request to retrieve the next set of results.</p>"
+        }
+      }
+    },
     "ListArchivesRequest": {
       "type": "structure",
       "members": {
@@ -2057,6 +3133,40 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        }
+      }
+    },
+    "ListConnectionsRequest": {
+      "type": "structure",
+      "members": {
+        "NamePrefix": {
+          "shape": "ConnectionName",
+          "documentation": "<p>A name prefix to filter results returned. Only connections with a name that starts with the prefix are returned.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>"
+        },
+        "Limit": {
+          "shape": "LimitMax100",
+          "documentation": "<p>The maximum number of connections to return.</p>"
+        }
+      }
+    },
+    "ListConnectionsResponse": {
+      "type": "structure",
+      "members": {
+        "Connections": {
+          "shape": "ConnectionResponseList",
+          "documentation": "<p>An array of connections objects that include details about the connections.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token you can use in a subsequent request to retrieve the next set of results.</p>"
         }
       }
     },
@@ -3189,6 +4299,12 @@
       "type": "string",
       "max": 256
     },
+    "SecretsManagerSecretArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:[\\/_+=\\.@\\-A-Za-z0-9]+$"
+    },
     "Sql": {
       "type": "string",
       "max": 100000,
@@ -3395,7 +4511,7 @@
         },
         "HttpParameters": {
           "shape": "HttpParameters",
-          "documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint.</p> <p>If you specify an API Gateway REST API as a target, you can use this parameter to specify headers, path parameter, query string keys/values as part of your target invoking request.</p>"
+          "documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination.</p> <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.</p>"
         },
         "RedshiftDataParameters": {
           "shape": "RedshiftDataParameters",
@@ -3521,6 +4637,59 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateApiDestinationRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ApiDestinationName",
+          "documentation": "<p>The name of the API destination to update.</p>"
+        },
+        "Description": {
+          "shape": "ApiDestinationDescription",
+          "documentation": "<p>The name of the API destination to update.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection to use for the API destination.</p>"
+        },
+        "InvocationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the endpoint to use for the API destination.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ApiDestinationHttpMethod",
+          "documentation": "<p>The method to use for the API destination.</p>"
+        },
+        "InvocationRateLimitPerSecond": {
+          "shape": "ApiDestinationInvocationRateLimitPerSecond",
+          "documentation": "<p>The maximum number of invocations per second to send to the API destination.</p>"
+        }
+      }
+    },
+    "UpdateApiDestinationResponse": {
+      "type": "structure",
+      "members": {
+        "ApiDestinationArn": {
+          "shape": "ApiDestinationArn",
+          "documentation": "<p>The ARN of the API destination that was updated.</p>"
+        },
+        "ApiDestinationState": {
+          "shape": "ApiDestinationState",
+          "documentation": "<p>The state of the API destination that was updated.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the API destination was last modified.</p>"
+        }
+      }
+    },
     "UpdateArchiveRequest": {
       "type": "structure",
       "required": [
@@ -3563,6 +4732,141 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time at which the archive was updated.</p>"
+        }
+      }
+    },
+    "UpdateConnectionApiKeyAuthRequestParameters": {
+      "type": "structure",
+      "members": {
+        "ApiKeyName": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The name of the API key to use for authorization.</p>"
+        },
+        "ApiKeyValue": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The value associated with teh API key to use for authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the API key authorization parameters to use to update the connection.</p>"
+    },
+    "UpdateConnectionAuthRequestParameters": {
+      "type": "structure",
+      "members": {
+        "BasicAuthParameters": {
+          "shape": "UpdateConnectionBasicAuthRequestParameters",
+          "documentation": "<p>A <code>UpdateConnectionBasicAuthRequestParameters</code> object that contains the authorization parameters for Basic authorization.</p>"
+        },
+        "OAuthParameters": {
+          "shape": "UpdateConnectionOAuthRequestParameters",
+          "documentation": "<p>A <code>UpdateConnectionOAuthRequestParameters</code> object that contains the authorization parameters for OAuth authorization.</p>"
+        },
+        "ApiKeyAuthParameters": {
+          "shape": "UpdateConnectionApiKeyAuthRequestParameters",
+          "documentation": "<p>A <code>UpdateConnectionApiKeyAuthRequestParameters</code> object that contains the authorization parameters for API key authorization.</p>"
+        },
+        "InvocationHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>A <code>ConnectionHttpParameters</code> object that contains the additional parameters to use for the connection.</p>"
+        }
+      },
+      "documentation": "<p>Contains the additional parameters to use for the connection.</p>"
+    },
+    "UpdateConnectionBasicAuthRequestParameters": {
+      "type": "structure",
+      "members": {
+        "Username": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The user name to use for Basic authorization.</p>"
+        },
+        "Password": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The password associated with the user name to use for Basic authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the Basic authorization parameters for the connection.</p>"
+    },
+    "UpdateConnectionOAuthClientRequestParameters": {
+      "type": "structure",
+      "members": {
+        "ClientID": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The client ID to use for OAuth authorization.</p>"
+        },
+        "ClientSecret": {
+          "shape": "AuthHeaderParameters",
+          "documentation": "<p>The client secret assciated with the client ID to use for OAuth authorization.</p>"
+        }
+      },
+      "documentation": "<p>Contains the OAuth authorization parameters to use for the connection.</p>"
+    },
+    "UpdateConnectionOAuthRequestParameters": {
+      "type": "structure",
+      "members": {
+        "ClientParameters": {
+          "shape": "UpdateConnectionOAuthClientRequestParameters",
+          "documentation": "<p>A <code>UpdateConnectionOAuthClientRequestParameters</code> object that contains the client parameters to use for the connection when OAuth is specified as the authorization type.</p>"
+        },
+        "AuthorizationEndpoint": {
+          "shape": "HttpsEndpoint",
+          "documentation": "<p>The URL to the authorization endpoint when OAuth is specified as the authorization type.</p>"
+        },
+        "HttpMethod": {
+          "shape": "ConnectionOAuthHttpMethod",
+          "documentation": "<p>The method used to connect to the HTTP endpoint.</p>"
+        },
+        "OAuthHttpParameters": {
+          "shape": "ConnectionHttpParameters",
+          "documentation": "<p>The additional HTTP parameters used for the OAuth authorization request.</p>"
+        }
+      },
+      "documentation": "<p>Contains the OAuth request parameters to use for the connection.</p>"
+    },
+    "UpdateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to update.</p>"
+        },
+        "Description": {
+          "shape": "ConnectionDescription",
+          "documentation": "<p>A description for the connection.</p>"
+        },
+        "AuthorizationType": {
+          "shape": "ConnectionAuthorizationType",
+          "documentation": "<p>The type of authorization to use for the connection.</p>"
+        },
+        "AuthParameters": {
+          "shape": "UpdateConnectionAuthRequestParameters",
+          "documentation": "<p>The authorization parameters to use for the connection.</p>"
+        }
+      }
+    },
+    "UpdateConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The ARN of the connection that was updated.</p>"
+        },
+        "ConnectionState": {
+          "shape": "ConnectionState",
+          "documentation": "<p>The state of the connection that was updated.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last modified.</p>"
+        },
+        "LastAuthorizedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A time stamp for the time that the connection was last authorized.</p>"
         }
       }
     }

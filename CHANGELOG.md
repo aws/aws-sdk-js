@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.856.0-->
+<!--LATEST=2.857.0-->
 <!--ENTRYINSERT-->
+
+## 2.857.0
+* feature: CloudWatchEvents: Introducing support for EventBridge Api Destinations - any HTTP APIs as Targets, with managed authorization via EventBridge Connections.
+* feature: EventBridge: Introducing support for EventBridge Api Destinations - any HTTP APIs as Targets, with managed authorization via EventBridge Connections.
+* feature: MWAA: This release introduces a new MinWorker parameter to the CreateEnvironment and UpdateEnvironment APIs. MinWorker allows the users to set a minimum worker count for worker auto-scaling operations.
+* feature: SageMaker: This release adds the ResolvedOutputS3Uri to the DescribeFeatureGroup API to indicate the S3 prefix where offline data is stored in a feature group
+* feature: ServiceDiscovery: Supports creating API-only services under DNS namespace.  Add namespace syntax validation.
 
 ## 2.856.0
 * feature: ACM: Adds 2 new APIs to add and retrieve account configuration in AWS Certificate Manager.

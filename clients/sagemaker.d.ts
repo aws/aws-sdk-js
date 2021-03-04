@@ -1005,11 +1005,11 @@ declare class SageMaker extends Service {
    */
   describeSubscribedWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DescribeSubscribedWorkteamResponse) => void): Request<SageMaker.Types.DescribeSubscribedWorkteamResponse, AWSError>;
   /**
-   * Returns information about a training job.
+   * Returns information about a training job.  Some of the attributes below only appear if the training job successfully starts. If the training job fails, TrainingJobStatus is Failed and, depending on the FailureReason, attributes like TrainingStartTime, TrainingTimeInSeconds, TrainingEndTime, and BillableTimeInSeconds may not be present in the response.
    */
   describeTrainingJob(params: SageMaker.Types.DescribeTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
   /**
-   * Returns information about a training job.
+   * Returns information about a training job.  Some of the attributes below only appear if the training job successfully starts. If the training job fails, TrainingJobStatus is Failed and, depending on the FailureReason, attributes like TrainingStartTime, TrainingTimeInSeconds, TrainingEndTime, and BillableTimeInSeconds may not be present in the response.
    */
   describeTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
   /**
@@ -13483,6 +13483,10 @@ declare namespace SageMaker {
      * The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location. The IAM roleARN that is passed as a parameter to CreateFeatureGroup must have below permissions to the KmsKeyId:    "kms:GenerateDataKey"   
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The S3 path where offline records are written.
+     */
+    ResolvedOutputS3Uri?: S3Uri;
   }
   export type S3Uri = string;
   export type SagemakerServicecatalogStatus = "Enabled"|"Disabled"|string;
