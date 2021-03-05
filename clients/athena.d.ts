@@ -44,6 +44,14 @@ declare class Athena extends Service {
    */
   createNamedQuery(callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
   /**
+   * Creates a prepared statement for use with SQL queries in Athena.
+   */
+  createPreparedStatement(params: Athena.Types.CreatePreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.CreatePreparedStatementOutput) => void): Request<Athena.Types.CreatePreparedStatementOutput, AWSError>;
+  /**
+   * Creates a prepared statement for use with SQL queries in Athena.
+   */
+  createPreparedStatement(callback?: (err: AWSError, data: Athena.Types.CreatePreparedStatementOutput) => void): Request<Athena.Types.CreatePreparedStatementOutput, AWSError>;
+  /**
    * Creates a workgroup with the specified name.
    */
   createWorkGroup(params: Athena.Types.CreateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
@@ -67,6 +75,14 @@ declare class Athena extends Service {
    * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   deleteNamedQuery(callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
+  /**
+   * Deletes the prepared statement with the specified name from the specified workgroup.
+   */
+  deletePreparedStatement(params: Athena.Types.DeletePreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.DeletePreparedStatementOutput) => void): Request<Athena.Types.DeletePreparedStatementOutput, AWSError>;
+  /**
+   * Deletes the prepared statement with the specified name from the specified workgroup.
+   */
+  deletePreparedStatement(callback?: (err: AWSError, data: Athena.Types.DeletePreparedStatementOutput) => void): Request<Athena.Types.DeletePreparedStatementOutput, AWSError>;
   /**
    * Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
    */
@@ -99,6 +115,14 @@ declare class Athena extends Service {
    * Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
    */
   getNamedQuery(callback?: (err: AWSError, data: Athena.Types.GetNamedQueryOutput) => void): Request<Athena.Types.GetNamedQueryOutput, AWSError>;
+  /**
+   * Retrieves the prepared statement with the specified name from the specified workgroup.
+   */
+  getPreparedStatement(params: Athena.Types.GetPreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.GetPreparedStatementOutput) => void): Request<Athena.Types.GetPreparedStatementOutput, AWSError>;
+  /**
+   * Retrieves the prepared statement with the specified name from the specified workgroup.
+   */
+  getPreparedStatement(callback?: (err: AWSError, data: Athena.Types.GetPreparedStatementOutput) => void): Request<Athena.Types.GetPreparedStatementOutput, AWSError>;
   /**
    * Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.
    */
@@ -163,6 +187,14 @@ declare class Athena extends Service {
    * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
+  /**
+   * Lists the prepared statements in the specfied workgroup.
+   */
+  listPreparedStatements(params: Athena.Types.ListPreparedStatementsInput, callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
+  /**
+   * Lists the prepared statements in the specfied workgroup.
+   */
+  listPreparedStatements(callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
    * Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
@@ -235,6 +267,14 @@ declare class Athena extends Service {
    * Updates the data catalog that has the specified name.
    */
   updateDataCatalog(callback?: (err: AWSError, data: Athena.Types.UpdateDataCatalogOutput) => void): Request<Athena.Types.UpdateDataCatalogOutput, AWSError>;
+  /**
+   * Updates a prepared statement.
+   */
+  updatePreparedStatement(params: Athena.Types.UpdatePreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.UpdatePreparedStatementOutput) => void): Request<Athena.Types.UpdatePreparedStatementOutput, AWSError>;
+  /**
+   * Updates a prepared statement.
+   */
+  updatePreparedStatement(callback?: (err: AWSError, data: Athena.Types.UpdatePreparedStatementOutput) => void): Request<Athena.Types.UpdatePreparedStatementOutput, AWSError>;
   /**
    * Updates the workgroup with the specified name. The workgroup's name cannot be changed.
    */
@@ -398,6 +438,26 @@ declare namespace Athena {
      */
     NamedQueryId?: NamedQueryId;
   }
+  export interface CreatePreparedStatementInput {
+    /**
+     * The name of the prepared statement.
+     */
+    StatementName: StatementName;
+    /**
+     * The name of the workgroup to which the prepared statement belongs.
+     */
+    WorkGroup: WorkGroupName;
+    /**
+     * The query string for the prepared statement.
+     */
+    QueryStatement: QueryString;
+    /**
+     * The description of the prepared statement.
+     */
+    Description?: DescriptionString;
+  }
+  export interface CreatePreparedStatementOutput {
+  }
   export interface CreateWorkGroupInput {
     /**
      * The workgroup name.
@@ -487,6 +547,18 @@ declare namespace Athena {
   }
   export interface DeleteNamedQueryOutput {
   }
+  export interface DeletePreparedStatementInput {
+    /**
+     * The name of the prepared statement to delete.
+     */
+    StatementName: StatementName;
+    /**
+     * The workgroup to which the statement to be deleted belongs.
+     */
+    WorkGroup: WorkGroupName;
+  }
+  export interface DeletePreparedStatementOutput {
+  }
   export interface DeleteWorkGroupInput {
     /**
      * The unique name of the workgroup to delete.
@@ -564,6 +636,22 @@ declare namespace Athena {
      * Information about the query.
      */
     NamedQuery?: NamedQuery;
+  }
+  export interface GetPreparedStatementInput {
+    /**
+     * The name of the prepared statement to retrieve.
+     */
+    StatementName: StatementName;
+    /**
+     * The workgroup to which the statement to be retrieved belongs.
+     */
+    WorkGroup: WorkGroupName;
+  }
+  export interface GetPreparedStatementOutput {
+    /**
+     * The name of the prepared statement that was retrieved.
+     */
+    PreparedStatement?: PreparedStatement;
   }
   export interface GetQueryExecutionInput {
     /**
@@ -728,6 +816,30 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface ListPreparedStatementsInput {
+    /**
+     * The workgroup to list the prepared statements for.
+     */
+    WorkGroup: WorkGroupName;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    MaxResults?: MaxPreparedStatementsCount;
+  }
+  export interface ListPreparedStatementsOutput {
+    /**
+     * The list of prepared statements for the workgroup.
+     */
+    PreparedStatements?: PreparedStatementsList;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+  }
   export interface ListQueryExecutionsInput {
     /**
      * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
@@ -833,6 +945,7 @@ declare namespace Athena {
   export type MaxDatabasesCount = number;
   export type MaxEngineVersionsCount = number;
   export type MaxNamedQueriesCount = number;
+  export type MaxPreparedStatementsCount = number;
   export type MaxQueryExecutionsCount = number;
   export type MaxQueryResults = number;
   export type MaxTableMetadataCount = number;
@@ -870,6 +983,39 @@ declare namespace Athena {
   export type NamedQueryList = NamedQuery[];
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
+  export interface PreparedStatement {
+    /**
+     * The name of the prepared statement.
+     */
+    StatementName?: StatementName;
+    /**
+     * The query string for the prepared statement.
+     */
+    QueryStatement?: QueryString;
+    /**
+     * The name of the workgroup to which the prepared statement belongs.
+     */
+    WorkGroupName?: WorkGroupName;
+    /**
+     * The description of the prepared statement.
+     */
+    Description?: DescriptionString;
+    /**
+     * The last modified time of the prepared statement.
+     */
+    LastModifiedTime?: _Date;
+  }
+  export interface PreparedStatementSummary {
+    /**
+     * The name of the prepared statement.
+     */
+    StatementName?: StatementName;
+    /**
+     * The last modified time of the prepared statement.
+     */
+    LastModifiedTime?: _Date;
+  }
+  export type PreparedStatementsList = PreparedStatementSummary[];
   export interface QueryExecution {
     /**
      * The unique identifier for each query execution.
@@ -1050,6 +1196,7 @@ declare namespace Athena {
      */
     QueryExecutionId?: QueryExecutionId;
   }
+  export type StatementName = string;
   export type StatementType = "DDL"|"DML"|"UTILITY"|string;
   export interface StopQueryExecutionInput {
     /**
@@ -1182,6 +1329,26 @@ declare namespace Athena {
     Parameters?: ParametersMap;
   }
   export interface UpdateDataCatalogOutput {
+  }
+  export interface UpdatePreparedStatementInput {
+    /**
+     * The name of the prepared statement.
+     */
+    StatementName: StatementName;
+    /**
+     * The workgroup for the prepared statement.
+     */
+    WorkGroup: WorkGroupName;
+    /**
+     * The query string for the prepared statement.
+     */
+    QueryStatement: QueryString;
+    /**
+     * The description of the prepared statement.
+     */
+    Description?: DescriptionString;
+  }
+  export interface UpdatePreparedStatementOutput {
   }
   export interface UpdateWorkGroupInput {
     /**

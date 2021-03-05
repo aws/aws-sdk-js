@@ -855,10 +855,12 @@
           "documentation": "<p> The connector metadata specific to Upsolver. </p>"
         },
         "CustomerProfiles": {
-          "shape": "CustomerProfilesMetadata"
+          "shape": "CustomerProfilesMetadata",
+          "documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
         },
         "Honeycode": {
-          "shape": "HoneycodeMetadata"
+          "shape": "HoneycodeMetadata",
+          "documentation": "<p> The connector metadata specific to Amazon Honeycode. </p>"
         }
       },
       "documentation": "<p> A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. </p>"
@@ -1020,7 +1022,8 @@
           "documentation": "<p> The connector-specific credentials required when using Google Analytics. </p>"
         },
         "Honeycode": {
-          "shape": "HoneycodeConnectorProfileCredentials"
+          "shape": "HoneycodeConnectorProfileCredentials",
+          "documentation": "<p> The connector-specific credentials required when using Amazon Honeycode. </p>"
         },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileCredentials",
@@ -1108,7 +1111,8 @@
           "documentation": "<p> The connector-specific properties required Google Analytics. </p>"
         },
         "Honeycode": {
-          "shape": "HoneycodeConnectorProfileProperties"
+          "shape": "HoneycodeConnectorProfileProperties",
+          "documentation": "<p> The connector-specific properties required by Amazon Honeycode. </p>"
         },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileProperties",
@@ -1300,16 +1304,20 @@
       ],
       "members": {
         "domainName": {
-          "shape": "DomainName"
+          "shape": "DomainName",
+          "documentation": "<p> The unique name of the Amazon Connect Customer Profiles domain. </p>"
         },
         "objectTypeName": {
-          "shape": "ObjectTypeName"
+          "shape": "ObjectTypeName",
+          "documentation": "<p> The object specified in the Amazon Connect Customer Profiles flow destination. </p>"
         }
-      }
+      },
+      "documentation": "<p> The properties that are applied when Amazon Connect Customer Profiles is used as a destination. </p>"
     },
     "CustomerProfilesMetadata": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
     },
     "DataPullMode": {
       "type": "string",
@@ -1511,7 +1519,7 @@
       "members": {
         "connectorTypes": {
           "shape": "ConnectorTypeList",
-          "documentation": "<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>"
+          "documentation": "<p> The type of connector, such as Salesforce, Amplitude, and so on. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1675,17 +1683,20 @@
           "documentation": "<p> The properties required to query Amazon EventBridge. </p>"
         },
         "LookoutMetrics": {
-          "shape": "LookoutMetricsDestinationProperties"
+          "shape": "LookoutMetricsDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Lookout for Metrics. </p>"
         },
         "Upsolver": {
           "shape": "UpsolverDestinationProperties",
           "documentation": "<p> The properties required to query Upsolver. </p>"
         },
         "Honeycode": {
-          "shape": "HoneycodeDestinationProperties"
+          "shape": "HoneycodeDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Honeycode. </p>"
         },
         "CustomerProfiles": {
-          "shape": "CustomerProfilesDestinationProperties"
+          "shape": "CustomerProfilesDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Connect Customer Profiles. </p>"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -2182,19 +2193,23 @@
       "type": "structure",
       "members": {
         "accessToken": {
-          "shape": "AccessToken"
+          "shape": "AccessToken",
+          "documentation": "<p> The credentials used to access protected Amazon Honeycode resources. </p>"
         },
         "refreshToken": {
-          "shape": "RefreshToken"
+          "shape": "RefreshToken",
+          "documentation": "<p> The credentials used to acquire new access tokens. </p>"
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest"
         }
-      }
+      },
+      "documentation": "<p> The connector-specific credentials required when using Amazon Honeycode. </p>"
     },
     "HoneycodeConnectorProfileProperties": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "documentation": "<p> The connector-specific properties required when using Amazon Honeycode. </p>"
     },
     "HoneycodeDestinationProperties": {
       "type": "structure",
@@ -2203,20 +2218,24 @@
       ],
       "members": {
         "object": {
-          "shape": "Object"
+          "shape": "Object",
+          "documentation": "<p> The object specified in the Amazon Honeycode flow destination. </p>"
         },
         "errorHandlingConfig": {
           "shape": "ErrorHandlingConfig"
         }
-      }
+      },
+      "documentation": "<p> The properties that are applied when Amazon Honeycode is used as a destination. </p>"
     },
     "HoneycodeMetadata": {
       "type": "structure",
       "members": {
         "oAuthScopes": {
-          "shape": "OAuthScopeList"
+          "shape": "OAuthScopeList",
+          "documentation": "<p> The desired authorization scope for the Amazon Honeycode account. </p>"
         }
-      }
+      },
+      "documentation": "<p> The connector metadata specific to Amazon Honeycode. </p>"
     },
     "IdFieldNameList": {
       "type": "list",
@@ -2425,7 +2444,8 @@
     },
     "LookoutMetricsDestinationProperties": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "documentation": "<p> The properties that are applied when Amazon Lookout for Metrics is used as a destination. </p>"
     },
     "MarketoConnectorOperator": {
       "type": "string",
@@ -2602,11 +2622,11 @@
       "members": {
         "prefixType": {
           "shape": "PrefixType",
-          "documentation": "<p> Determines the level of granularity that's included in the prefix. </p>"
+          "documentation": "<p> Determines the format of the prefix, and whether it applies to the file name, file path, or both. </p>"
         },
         "prefixFormat": {
           "shape": "PrefixFormat",
-          "documentation": "<p> Determines the format of the prefix, and whether it applies to the file name, file path, or both. </p>"
+          "documentation": "<p> Determines the level of granularity that's included in the prefix. </p>"
         }
       },
       "documentation": "<p> Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. </p>"
@@ -2996,7 +3016,8 @@
           "box": true
         },
         "firstExecutionFrom": {
-          "shape": "Date"
+          "shape": "Date",
+          "documentation": "<p> Specifies the date range for the records to import from the connector in the first flow run. </p>"
         }
       },
       "documentation": "<p> Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. </p>"

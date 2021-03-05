@@ -6112,6 +6112,10 @@ one destination per packager.
      */
     TargetCustomerId?: __string;
     /**
+     * The target AWS region to transfer the device.
+     */
+    TargetRegion?: __string;
+    /**
      * An optional message for the recipient. Maximum 280 characters.
      */
     TransferMessage?: __string;

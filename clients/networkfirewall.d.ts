@@ -765,7 +765,7 @@ declare namespace NetworkFirewall {
      */
     StatelessDefaultActions: StatelessActions;
     /**
-     * The actions to take on a fragmented packet if it doesn't match any of the stateless rules in the policy. If you want non-matching fragmented packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.  You must specify one of the standard actions: aws:pass, aws:drop, or aws:forward_to_sfe. In addition, you can specify custom actions that are compatible with your standard section choice. For example, you could specify ["aws:pass"] or you could specify ["aws:pass", “customActionName”]. For information about compatibility, see the custom action descriptions under CustomAction.
+     * The actions to take on a fragmented UDP packet if it doesn't match any of the stateless rules in the policy. Network Firewall only manages UDP packet fragments and silently drops packet fragments for other protocols. If you want non-matching fragmented UDP packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.  You must specify one of the standard actions: aws:pass, aws:drop, or aws:forward_to_sfe. In addition, you can specify custom actions that are compatible with your standard section choice. For example, you could specify ["aws:pass"] or you could specify ["aws:pass", “customActionName”]. For information about compatibility, see the custom action descriptions under CustomAction.
      */
     StatelessFragmentDefaultActions: StatelessActions;
     /**
@@ -835,7 +835,7 @@ declare namespace NetworkFirewall {
   export type HashMapValue = string;
   export interface Header {
     /**
-     * The protocol to inspect for. To match with any protocol, specify ANY. 
+     * The protocol to inspect for. 
      */
     Protocol: StatefulRuleProtocol;
     /**
@@ -1009,9 +1009,13 @@ declare namespace NetworkFirewall {
   export type PaginationToken = string;
   export interface PerObjectStatus {
     /**
-     * 
+     * Indicates whether this object is in sync with the version indicated in the update token.
      */
     SyncStatus?: PerObjectSyncStatus;
+    /**
+     * The current version of the object that is either in sync or pending synchronization. 
+     */
+    UpdateToken?: UpdateToken;
   }
   export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|string;
   export type PolicyString = string;
@@ -1152,7 +1156,7 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSource {
     /**
-     * Stateful inspection criteria, provided in Suricata compatible intrusion prevention system (IPS) rules. Suricata is an open-source network IPS that includes a standard rule-based language for network traffic inspection. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn't have a separate action setting. You can provide the rules from a file that you've stored in an Amazon S3 bucket, or by providing the rules in a Suricata rules string. To import from Amazon S3, provide the fully qualified name of the file that contains the rules definitions. To provide a Suricata rule string, provide the complete, Suricata compatible rule.
+     * Stateful inspection criteria, provided in Suricata compatible intrusion prevention system (IPS) rules. Suricata is an open-source network IPS that includes a standard rule-based language for network traffic inspection. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn't have a separate action setting.
      */
     RulesString?: RulesString;
     /**
@@ -1170,11 +1174,11 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSourceList {
     /**
-     * The domains that you want to inspect for in your traffic flows. To provide multiple domains, separate them with commas.
+     * The domains that you want to inspect for in your traffic flows. To provide multiple domains, separate them with commas. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
      */
     Targets: RuleTargets;
     /**
-     * 
+     * The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specity HTTP_HOST for HTTP. You can specify either or both. 
      */
     TargetTypes: TargetTypes;
     /**

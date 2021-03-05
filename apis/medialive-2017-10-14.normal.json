@@ -12822,6 +12822,11 @@
           "locationName": "targetCustomerId",
           "documentation": "The AWS account ID (12 digits) for the recipient of the device transfer."
         },
+        "TargetRegion": {
+          "shape": "__string",
+          "locationName": "targetRegion",
+          "documentation": "The target AWS region to transfer the device."
+        },
         "TransferMessage": {
           "shape": "__string",
           "locationName": "transferMessage",

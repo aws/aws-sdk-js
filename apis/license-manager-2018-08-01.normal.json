@@ -3740,7 +3740,6 @@
       "type": "structure",
       "required": [
         "ProductInformationFilterName",
-        "ProductInformationFilterValue",
         "ProductInformationFilterComparator"
       ],
       "members": {

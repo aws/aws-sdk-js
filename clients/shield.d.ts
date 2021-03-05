@@ -228,6 +228,30 @@ declare class Shield extends Service {
    */
   listResourcesInProtectionGroup(callback?: (err: AWSError, data: Shield.Types.ListResourcesInProtectionGroupResponse) => void): Request<Shield.Types.ListResourcesInProtectionGroupResponse, AWSError>;
   /**
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.
+   */
+  listTagsForResource(params: Shield.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Shield.Types.ListTagsForResourceResponse) => void): Request<Shield.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Shield.Types.ListTagsForResourceResponse) => void): Request<Shield.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds or updates tags for a resource in AWS Shield.
+   */
+  tagResource(params: Shield.Types.TagResourceRequest, callback?: (err: AWSError, data: Shield.Types.TagResourceResponse) => void): Request<Shield.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or updates tags for a resource in AWS Shield.
+   */
+  tagResource(callback?: (err: AWSError, data: Shield.Types.TagResourceResponse) => void): Request<Shield.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource in AWS Shield.
+   */
+  untagResource(params: Shield.Types.UntagResourceRequest, callback?: (err: AWSError, data: Shield.Types.UntagResourceResponse) => void): Request<Shield.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource in AWS Shield.
+   */
+  untagResource(callback?: (err: AWSError, data: Shield.Types.UntagResourceResponse) => void): Request<Shield.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
    */
   updateEmergencyContactSettings(params: Shield.Types.UpdateEmergencyContactSettingsRequest, callback?: (err: AWSError, data: Shield.Types.UpdateEmergencyContactSettingsResponse) => void): Request<Shield.Types.UpdateEmergencyContactSettingsResponse, AWSError>;
@@ -444,6 +468,10 @@ declare namespace Shield {
      * The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set Pattern to ARBITRARY and you must not set it for any other Pattern setting. 
      */
     Members?: ProtectionGroupMembers;
+    /**
+     * One or more tag key-value pairs for the protection group.
+     */
+    Tags?: TagList;
   }
   export interface CreateProtectionGroupResponse {
   }
@@ -456,6 +484,10 @@ declare namespace Shield {
      * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For an AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For an AWS Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id     For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
      */
     ResourceArn: ResourceArn;
+    /**
+     * One or more tag key-value pairs for the Protection object that is created.
+     */
+    Tags?: TagList;
   }
   export interface CreateProtectionResponse {
     /**
@@ -733,6 +765,18 @@ declare namespace Shield {
      */
     NextToken?: Token;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to get tags for.
+     */
+    ResourceARN: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag key and value pairs associated with the specified resource.
+     */
+    Tags?: TagList;
+  }
   export type LogBucket = string;
   export type LogBucketList = LogBucket[];
   export type Long = number;
@@ -764,6 +808,10 @@ declare namespace Shield {
      * The unique identifier (ID) for the Route 53 health check that's associated with the protection. 
      */
     HealthCheckIds?: HealthCheckIds;
+    /**
+     * The ARN (Amazon Resource Name) of the protection.
+     */
+    ProtectionArn?: ResourceArn;
   }
   export interface ProtectionGroup {
     /**
@@ -786,6 +834,10 @@ declare namespace Shield {
      * The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set Pattern to ARBITRARY and you must not set it for any other Pattern setting. 
      */
     Members: ProtectionGroupMembers;
+    /**
+     * The ARN (Amazon Resource Name) of the protection group.
+     */
+    ProtectionGroupArn?: ResourceArn;
   }
   export type ProtectionGroupAggregation = "SUM"|"MEAN"|"MAX"|string;
   export interface ProtectionGroupArbitraryPatternLimits {
@@ -877,6 +929,10 @@ declare namespace Shield {
      * Limits settings for your subscription. 
      */
     SubscriptionLimits: SubscriptionLimits;
+    /**
+     * The ARN (Amazon Resource Name) of the subscription.
+     */
+    SubscriptionArn?: ResourceArn;
   }
   export interface SubscriptionLimits {
     /**
@@ -927,6 +983,32 @@ declare namespace Shield {
     Unit?: String;
   }
   export type SummarizedCounterList = SummarizedCounter[];
+  export interface Tag {
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.
+     */
+    Key?: TagKey;
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.
+     */
+    ResourceARN: ResourceArn;
+    /**
+     * The tags that you want to modify or add to the resource.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export interface TimeRange {
     /**
      * The start time, in Unix time in seconds. For more information see timestamp.
@@ -941,6 +1023,18 @@ declare namespace Shield {
   export type Token = string;
   export type TopContributors = Contributor[];
   export type Unit = "BITS"|"BYTES"|"PACKETS"|"REQUESTS"|string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+     */
+    ResourceARN: ResourceArn;
+    /**
+     * The tag key for each tag that you want to remove from the resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateEmergencyContactSettingsRequest {
     /**
      * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support. If you have proactive engagement enabled, the contact list must include at least one phone number.

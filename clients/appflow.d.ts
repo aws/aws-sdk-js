@@ -352,7 +352,13 @@ declare namespace Appflow {
      *  The connector metadata specific to Upsolver. 
      */
     Upsolver?: UpsolverMetadata;
+    /**
+     *  The connector metadata specific to Amazon Connect Customer Profiles. 
+     */
     CustomerProfiles?: CustomerProfilesMetadata;
+    /**
+     *  The connector metadata specific to Amazon Honeycode. 
+     */
     Honeycode?: HoneycodeMetadata;
   }
   export interface ConnectorOAuthRequest {
@@ -485,6 +491,9 @@ declare namespace Appflow {
      *  The connector-specific credentials required when using Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileCredentials;
+    /**
+     *  The connector-specific credentials required when using Amazon Honeycode. 
+     */
     Honeycode?: HoneycodeConnectorProfileCredentials;
     /**
      *  The connector-specific credentials required when using Infor Nexus. 
@@ -551,6 +560,9 @@ declare namespace Appflow {
      *  The connector-specific properties required Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileProperties;
+    /**
+     *  The connector-specific properties required by Amazon Honeycode. 
+     */
     Honeycode?: HoneycodeConnectorProfileProperties;
     /**
      *  The connector-specific properties required by Infor Nexus. 
@@ -673,7 +685,13 @@ declare namespace Appflow {
   }
   export type CreatedBy = string;
   export interface CustomerProfilesDestinationProperties {
+    /**
+     *  The unique name of the Amazon Connect Customer Profiles domain. 
+     */
     domainName: DomainName;
+    /**
+     *  The object specified in the Amazon Connect Customer Profiles flow destination. 
+     */
     objectTypeName?: ObjectTypeName;
   }
   export interface CustomerProfilesMetadata {
@@ -781,7 +799,7 @@ declare namespace Appflow {
   }
   export interface DescribeConnectorsRequest {
     /**
-     *  The type of connector, such as Salesforce, Amplitude, and so on.    Locke refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination.  
+     *  The type of connector, such as Salesforce, Amplitude, and so on. 
      */
     connectorTypes?: ConnectorTypeList;
     /**
@@ -917,12 +935,21 @@ declare namespace Appflow {
      *  The properties required to query Amazon EventBridge. 
      */
     EventBridge?: EventBridgeDestinationProperties;
+    /**
+     *  The properties required to query Amazon Lookout for Metrics. 
+     */
     LookoutMetrics?: LookoutMetricsDestinationProperties;
     /**
      *  The properties required to query Upsolver. 
      */
     Upsolver?: UpsolverDestinationProperties;
+    /**
+     *  The properties required to query Amazon Honeycode. 
+     */
     Honeycode?: HoneycodeDestinationProperties;
+    /**
+     *  The properties required to query Amazon Connect Customer Profiles. 
+     */
     CustomerProfiles?: CustomerProfilesDestinationProperties;
   }
   export type DestinationField = string;
@@ -1201,17 +1228,29 @@ declare namespace Appflow {
   }
   export type Group = string;
   export interface HoneycodeConnectorProfileCredentials {
+    /**
+     *  The credentials used to access protected Amazon Honeycode resources. 
+     */
     accessToken?: AccessToken;
+    /**
+     *  The credentials used to acquire new access tokens. 
+     */
     refreshToken?: RefreshToken;
     oAuthRequest?: ConnectorOAuthRequest;
   }
   export interface HoneycodeConnectorProfileProperties {
   }
   export interface HoneycodeDestinationProperties {
+    /**
+     *  The object specified in the Amazon Honeycode flow destination. 
+     */
     object: Object;
     errorHandlingConfig?: ErrorHandlingConfig;
   }
   export interface HoneycodeMetadata {
+    /**
+     *  The desired authorization scope for the Amazon Honeycode account. 
+     */
     oAuthScopes?: OAuthScopeList;
   }
   export type IdFieldNameList = Name[];
@@ -1360,11 +1399,11 @@ declare namespace Appflow {
   export type Password = string;
   export interface PrefixConfig {
     /**
-     *  Determines the level of granularity that's included in the prefix. 
+     *  Determines the format of the prefix, and whether it applies to the file name, file path, or both. 
      */
     prefixType?: PrefixType;
     /**
-     *  Determines the format of the prefix, and whether it applies to the file name, file path, or both. 
+     *  Determines the level of granularity that's included in the prefix. 
      */
     prefixFormat?: PrefixFormat;
   }
@@ -1555,6 +1594,9 @@ declare namespace Appflow {
      *  Specifies the optional offset that is added to the time interval for a schedule-triggered flow. 
      */
     scheduleOffset?: ScheduleOffset;
+    /**
+     *  Specifies the date range for the records to import from the connector in the first flow run. 
+     */
     firstExecutionFrom?: _Date;
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];

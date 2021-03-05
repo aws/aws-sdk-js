@@ -101,6 +101,28 @@
       "documentation": "<p>Creates a named query in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
     },
+    "CreatePreparedStatement": {
+      "name": "CreatePreparedStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreatePreparedStatementInput"
+      },
+      "output": {
+        "shape": "CreatePreparedStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Creates a prepared statement for use with SQL queries in Athena.</p>"
+    },
     "CreateWorkGroup": {
       "name": "CreateWorkGroup",
       "http": {
@@ -167,6 +189,31 @@
       ],
       "documentation": "<p>Deletes the named query if you have access to the workgroup in which the query was saved.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
+    },
+    "DeletePreparedStatement": {
+      "name": "DeletePreparedStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeletePreparedStatementInput"
+      },
+      "output": {
+        "shape": "DeletePreparedStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes the prepared statement with the specified name from the specified workgroup.</p>"
     },
     "DeleteWorkGroup": {
       "name": "DeleteWorkGroup",
@@ -259,6 +306,31 @@
         }
       ],
       "documentation": "<p>Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.</p>"
+    },
+    "GetPreparedStatement": {
+      "name": "GetPreparedStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetPreparedStatementInput"
+      },
+      "output": {
+        "shape": "GetPreparedStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the prepared statement with the specified name from the specified workgroup.</p>"
     },
     "GetQueryExecution": {
       "name": "GetQueryExecution",
@@ -441,6 +513,28 @@
         }
       ],
       "documentation": "<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
+    },
+    "ListPreparedStatements": {
+      "name": "ListPreparedStatements",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListPreparedStatementsInput"
+      },
+      "output": {
+        "shape": "ListPreparedStatementsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Lists the prepared statements in the specfied workgroup.</p>"
     },
     "ListQueryExecutions": {
       "name": "ListQueryExecutions",
@@ -656,6 +750,31 @@
         }
       ],
       "documentation": "<p>Updates the data catalog that has the specified name.</p>"
+    },
+    "UpdatePreparedStatement": {
+      "name": "UpdatePreparedStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdatePreparedStatementInput"
+      },
+      "output": {
+        "shape": "UpdatePreparedStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates a prepared statement.</p>"
     },
     "UpdateWorkGroup": {
       "name": "UpdateWorkGroup",
@@ -926,6 +1045,36 @@
         }
       }
     },
+    "CreatePreparedStatementInput": {
+      "type": "structure",
+      "required": [
+        "StatementName",
+        "WorkGroup",
+        "QueryStatement"
+      ],
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup to which the prepared statement belongs.</p>"
+        },
+        "QueryStatement": {
+          "shape": "QueryString",
+          "documentation": "<p>The query string for the prepared statement.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>The description of the prepared statement.</p>"
+        }
+      }
+    },
+    "CreatePreparedStatementOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "CreateWorkGroupInput": {
       "type": "structure",
       "required": [
@@ -1086,6 +1235,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeletePreparedStatementInput": {
+      "type": "structure",
+      "required": [
+        "StatementName",
+        "WorkGroup"
+      ],
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement to delete.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup to which the statement to be deleted belongs.</p>"
+        }
+      }
+    },
+    "DeletePreparedStatementOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteWorkGroupInput": {
       "type": "structure",
       "required": [
@@ -1237,6 +1407,32 @@
         "NamedQuery": {
           "shape": "NamedQuery",
           "documentation": "<p>Information about the query.</p>"
+        }
+      }
+    },
+    "GetPreparedStatementInput": {
+      "type": "structure",
+      "required": [
+        "StatementName",
+        "WorkGroup"
+      ],
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement to retrieve.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup to which the statement to be retrieved belongs.</p>"
+        }
+      }
+    },
+    "GetPreparedStatementOutput": {
+      "type": "structure",
+      "members": {
+        "PreparedStatement": {
+          "shape": "PreparedStatement",
+          "documentation": "<p>The name of the prepared statement that was retrieved.</p>"
         }
       }
     },
@@ -1479,6 +1675,39 @@
         }
       }
     },
+    "ListPreparedStatementsInput": {
+      "type": "structure",
+      "required": [
+        "WorkGroup"
+      ],
+      "members": {
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup to list the prepared statements for.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxPreparedStatementsCount",
+          "documentation": "<p>The maximum number of results to return in this request.</p>"
+        }
+      }
+    },
+    "ListPreparedStatementsOutput": {
+      "type": "structure",
+      "members": {
+        "PreparedStatements": {
+          "shape": "PreparedStatementsList",
+          "documentation": "<p>The list of prepared statements for the workgroup.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.</p>"
+        }
+      }
+    },
     "ListQueryExecutionsInput": {
       "type": "structure",
       "members": {
@@ -1637,6 +1866,12 @@
       "max": 50,
       "min": 0
     },
+    "MaxPreparedStatementsCount": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 1
+    },
     "MaxQueryExecutionsCount": {
       "type": "integer",
       "box": true,
@@ -1735,6 +1970,54 @@
     "ParametersMapValue": {
       "type": "string",
       "max": 51200
+    },
+    "PreparedStatement": {
+      "type": "structure",
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement.</p>"
+        },
+        "QueryStatement": {
+          "shape": "QueryString",
+          "documentation": "<p>The query string for the prepared statement.</p>"
+        },
+        "WorkGroupName": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup to which the prepared statement belongs.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>The description of the prepared statement.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Date",
+          "documentation": "<p>The last modified time of the prepared statement.</p>"
+        }
+      },
+      "documentation": "<p>A prepared SQL statement for use with Athena.</p>"
+    },
+    "PreparedStatementSummary": {
+      "type": "structure",
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Date",
+          "documentation": "<p>The last modified time of the prepared statement.</p>"
+        }
+      },
+      "documentation": "<p>The name and last modified time of the prepared statement.</p>"
+    },
+    "PreparedStatementsList": {
+      "type": "list",
+      "member": {
+        "shape": "PreparedStatementSummary"
+      },
+      "max": 50,
+      "min": 0
     },
     "QueryExecution": {
       "type": "structure",
@@ -1994,6 +2277,12 @@
         }
       }
     },
+    "StatementName": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z_][a-zA-Z0-9_@:]{1,256}"
+    },
     "StatementType": {
       "type": "string",
       "enum": [
@@ -2235,6 +2524,36 @@
       }
     },
     "UpdateDataCatalogOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdatePreparedStatementInput": {
+      "type": "structure",
+      "required": [
+        "StatementName",
+        "WorkGroup",
+        "QueryStatement"
+      ],
+      "members": {
+        "StatementName": {
+          "shape": "StatementName",
+          "documentation": "<p>The name of the prepared statement.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup for the prepared statement.</p>"
+        },
+        "QueryStatement": {
+          "shape": "QueryString",
+          "documentation": "<p>The query string for the prepared statement.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>The description of the prepared statement.</p>"
+        }
+      }
+    },
+    "UpdatePreparedStatementOutput": {
       "type": "structure",
       "members": {}
     },

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "Adds APIs to create, list, update, and delete prepared SQL statements that have optional placeholder parameters. A prepared statement can use different values for these parameters each time it is run."
+    },
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Updated the parameters to make actionType required for UpdateActionType"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Expands EC2/Spot Fleet capacity-optimized allocation strategy to allow users to prioritize instance pools. Fleet attempts to fulfill priorities on a best-effort basis but optimizes for capacity first."
+    },
+    {
+        "type": "feature",
+        "category": "LicenseManager",
+        "description": "License Manager Automated Discovery now supports Exclusion Filters."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Medialive now supports the ability to transfer AWS Elemental Link devices to another region."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "Added a new UpdateToken output field to the PerObjectStatus as part of firewall sync state. This is added to track which version of the object the firewall is in sync or pending synchronization."
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "Add support for tagging of Shield protection and protection group resources."
+    }
+]

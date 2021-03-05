@@ -4155,7 +4155,7 @@ declare namespace EC2 {
   export type AllocationIdList = AllocationId[];
   export type AllocationIds = AllocationId[];
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|"pending"|string;
-  export type AllocationStrategy = "lowestPrice"|"diversified"|"capacityOptimized"|string;
+  export type AllocationStrategy = "lowestPrice"|"diversified"|"capacityOptimized"|"capacityOptimizedPrioritized"|string;
   export interface AllowedPrincipal {
     /**
      * The type of principal.
@@ -4575,13 +4575,13 @@ declare namespace EC2 {
   }
   export interface AssociateSubnetCidrBlockRequest {
     /**
-     * The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
-     */
-    Ipv6CidrBlock: String;
-    /**
      * The ID of your subnet.
      */
     SubnetId: SubnetId;
+    /**
+     * The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+     */
+    Ipv6CidrBlock: String;
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
@@ -7031,10 +7031,6 @@ declare namespace EC2 {
   }
   export interface CreateNatGatewayRequest {
     /**
-     * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
-     */
-    AllocationId: AllocationId;
-    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
      */
     ClientToken?: String;
@@ -7050,6 +7046,10 @@ declare namespace EC2 {
      * The tags to assign to the NAT gateway.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
+     */
+    AllocationId: AllocationId;
   }
   export interface CreateNatGatewayResult {
     /**
@@ -7504,10 +7504,6 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
-     */
-    CidrBlock: String;
-    /**
      * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
      */
     Ipv6CidrBlock?: String;
@@ -7523,6 +7519,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     */
+    CidrBlock: String;
   }
   export interface CreateSubnetResult {
     /**
@@ -10544,7 +10544,7 @@ declare namespace EC2 {
   }
   export interface DescribeImageAttributeRequest {
     /**
-     * The AMI attribute.  Note: Depending on your account privileges, the blockDeviceMapping attribute may return a Client.AuthFailure error. If this happens, use DescribeImages to get information about the block device mapping for the AMI.
+     * The AMI attribute.  Note: The blockDeviceMapping attribute is deprecated. Using this attribute returns the Client.AuthFailure error. To get information about the block device mappings for an AMI, use the DescribeImages action.
      */
     Attribute: ImageAttributeName;
     /**
@@ -14818,7 +14818,7 @@ declare namespace EC2 {
      */
     WeightedCapacity?: Double;
     /**
-     * The priority for the launch template override. If AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the override has the lowest priority.
+     * The priority for the launch template override. The highest priority is launched first. If the On-Demand AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. If the Spot AllocationStrategy is set to capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the override has the lowest priority. You can set the same priority for different launch template overrides.
      */
     Priority?: Double;
     /**
@@ -14850,7 +14850,7 @@ declare namespace EC2 {
      */
     WeightedCapacity?: Double;
     /**
-     * The priority for the launch template override. If AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.
+     * The priority for the launch template override. The highest priority is launched first. If the On-Demand AllocationStrategy is set to prioritized, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. If the Spot AllocationStrategy is set to capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.
      */
     Priority?: Double;
     /**
@@ -18459,7 +18459,7 @@ declare namespace EC2 {
      */
     WeightedCapacity?: Double;
     /**
-     * The priority for the launch template override. If OnDemandAllocationStrategy is set to prioritized, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.
+     * The priority for the launch template override. The highest priority is launched first. If OnDemandAllocationStrategy is set to prioritized, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. If the Spot AllocationStrategy is set to capacityOptimizedPrioritized, Spot Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.
      */
     Priority?: Double;
   }
@@ -24603,7 +24603,7 @@ declare namespace EC2 {
      */
     UserBucket?: UserBucketDetails;
   }
-  export type SpotAllocationStrategy = "lowest-price"|"diversified"|"capacity-optimized"|string;
+  export type SpotAllocationStrategy = "lowest-price"|"diversified"|"capacity-optimized"|"capacity-optimized-prioritized"|string;
   export interface SpotCapacityRebalance {
     /**
      * The replacement strategy to use. Only available for fleets of type maintain. You must specify a value, otherwise you get an error. To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify launch.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running. 
@@ -24740,7 +24740,7 @@ declare namespace EC2 {
   }
   export interface SpotFleetRequestConfigData {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request. If the allocation strategy is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, Spot Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request. If the allocation strategy is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, Spot Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized (recommended), Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacityOptimizedPrioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacityOptimizedPrioritized is supported only if your Spot Fleet uses a launch template. Note that if the OnDemandAllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
      */
     AllocationStrategy?: AllocationStrategy;
     /**
@@ -24988,7 +24988,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -25022,7 +25022,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**

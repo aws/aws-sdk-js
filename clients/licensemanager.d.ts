@@ -1910,7 +1910,7 @@ declare namespace LicenseManager {
     /**
      * Filter value.
      */
-    ProductInformationFilterValue: StringList;
+    ProductInformationFilterValue?: StringList;
     /**
      * Logical operator.
      */

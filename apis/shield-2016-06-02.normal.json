@@ -743,6 +743,87 @@
       ],
       "documentation": "<p>Retrieves the resources that are included in the protection group. </p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds or updates tags for a resource in AWS Shield.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a resource in AWS Shield.</p>"
+    },
     "UpdateEmergencyContactSettings": {
       "name": "UpdateEmergencyContactSettings",
       "http": {
@@ -1159,6 +1240,10 @@
         "Members": {
           "shape": "ProtectionGroupMembers",
           "documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>One or more tag key-value pairs for the protection group.</p>"
         }
       }
     },
@@ -1180,6 +1265,10 @@
         "ResourceArn": {
           "shape": "ResourceArn",
           "documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>One or more tag key-value pairs for the <a>Protection</a> object that is created.</p>"
         }
       }
     },
@@ -1658,6 +1747,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to get tags for.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tag key and value pairs associated with the specified resource.</p>"
+        }
+      }
+    },
     "LogBucket": {
       "type": "string",
       "max": 63,
@@ -1740,6 +1850,10 @@
         "HealthCheckIds": {
           "shape": "HealthCheckIds",
           "documentation": "<p>The unique identifier (ID) for the Route 53 health check that's associated with the protection. </p>"
+        },
+        "ProtectionArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the protection.</p>"
         }
       },
       "documentation": "<p>An object that represents a resource that is under DDoS protection.</p>"
@@ -1772,6 +1886,10 @@
         "Members": {
           "shape": "ProtectionGroupMembers",
           "documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+        },
+        "ProtectionGroupArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the protection group.</p>"
         }
       },
       "documentation": "<p>A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. </p>"
@@ -1982,6 +2100,10 @@
         "SubscriptionLimits": {
           "shape": "SubscriptionLimits",
           "documentation": "<p>Limits settings for your subscription. </p>"
+        },
+        "SubscriptionArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the subscription.</p>"
         }
       },
       "documentation": "<p>Information about the AWS Shield Advanced subscription for an account.</p>"
@@ -2070,6 +2192,67 @@
         "shape": "SummarizedCounter"
       }
     },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as \"customer.\" Tag keys are case-sensitive.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as \"companyA\" or \"companyB.\" Tag values are case-sensitive.</p>"
+        }
+      },
+      "documentation": "<p>A tag associated with an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as \"environment\", and the tag value represents a specific value within that category, such as \"test,\" \"development,\" or \"production\". Or you might set the tag key to \"customer\" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags that you want to modify or add to the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "TimeRange": {
       "type": "structure",
       "members": {
@@ -2107,6 +2290,27 @@
         "PACKETS",
         "REQUESTS"
       ]
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tag key for each tag that you want to remove from the resource.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateEmergencyContactSettingsRequest": {
       "type": "structure",

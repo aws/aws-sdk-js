@@ -2250,7 +2250,7 @@ declare namespace CodePipeline {
     /**
      * The action type definition for the action type to be updated.
      */
-    actionType?: ActionTypeDeclaration;
+    actionType: ActionTypeDeclaration;
   }
   export interface UpdatePipelineInput {
     /**

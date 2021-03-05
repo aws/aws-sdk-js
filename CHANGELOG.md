@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.857.0-->
+<!--LATEST=2.858.0-->
 <!--ENTRYINSERT-->
+
+## 2.858.0
+* feature: Athena: Adds APIs to create, list, update, and delete prepared SQL statements that have optional placeholder parameters. A prepared statement can use different values for these parameters each time it is run.
+* feature: CodePipeline: Updated the parameters to make actionType required for UpdateActionType
+* feature: EC2: Expands EC2/Spot Fleet capacity-optimized allocation strategy to allow users to prioritize instance pools. Fleet attempts to fulfill priorities on a best-effort basis but optimizes for capacity first.
+* feature: LicenseManager: License Manager Automated Discovery now supports Exclusion Filters.
+* feature: MediaLive: Medialive now supports the ability to transfer AWS Elemental Link devices to another region.
+* feature: NetworkFirewall: Added a new UpdateToken output field to the PerObjectStatus as part of firewall sync state. This is added to track which version of the object the firewall is in sync or pending synchronization.
+* feature: Shield: Add support for tagging of Shield protection and protection group resources.
 
 ## 2.857.0
 * feature: CloudWatchEvents: Introducing support for EventBridge Api Destinations - any HTTP APIs as Targets, with managed authorization via EventBridge Connections.
