@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.858.0-->
+<!--LATEST=2.859.0-->
 <!--ENTRYINSERT-->
+
+## 2.859.0
+* feature: EMR: Amazon EMR customers can now specify how EC2 On-Demand Capacity Reservations are used in their EMR clusters with instance fleets using allocation strategy.
+* feature: KinesisVideoArchivedMedia: Increase the maximum HLS and MPEG-DASH manifest size from 1,000 to 5,000 fragments.
+* feature: Lambda: Documentation updates for Lambda. Constraint updates to AddLayerVersionPermission's Action and OrganizationId parameters, and AddPermission's Principal and SourceAccount parameters.
 
 ## 2.858.0
 * feature: Athena: Adds APIs to create, list, update, and delete prepared SQL statements that have optional placeholder parameters. A prepared statement can use different values for these parameters each time it is run.

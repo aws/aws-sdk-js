@@ -1555,7 +1555,7 @@ declare namespace EMR {
      */
     InstanceGroupType?: InstanceGroupType;
     /**
-     * The bid price for each EC2 Spot Instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice to set the amount equal to the On-Demand price, or specify an amount in USD.
      */
     BidPrice?: String;
     /**
@@ -1621,7 +1621,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The bid price for each EC2 Spot Instance as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice to set the amount equal to the On-Demand price, or specify an amount in USD.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1664,7 +1664,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The bid price for each EC2 Spot Instance as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice to set the amount equal to the On-Demand price, or specify an amount in USD.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -2409,7 +2409,7 @@ declare namespace EMR {
      */
     ClusterId: String;
     /**
-     * The number of steps that can be executed concurrently. You can specify a maximum of 256 steps. 
+     * The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. 
      */
     StepConcurrencyLevel?: Integer;
   }
@@ -2523,12 +2523,28 @@ declare namespace EMR {
     EndTime?: _Date;
   }
   export type NotebookExecutionSummaryList = NotebookExecutionSummary[];
+  export interface OnDemandCapacityReservationOptions {
+    /**
+     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price). If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.
+     */
+    UsageStrategy?: OnDemandCapacityReservationUsageStrategy;
+    /**
+     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.  
+     */
+    CapacityReservationPreference?: OnDemandCapacityReservationPreference;
+  }
+  export type OnDemandCapacityReservationPreference = "open"|"none"|string;
+  export type OnDemandCapacityReservationUsageStrategy = "use-capacity-reservations-first"|string;
   export type OnDemandProvisioningAllocationStrategy = "lowest-price"|string;
   export interface OnDemandProvisioningSpecification {
     /**
-     *  Specifies the strategy to use in launching On-Demand Instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first. 
+     * Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first.
      */
     AllocationStrategy: OnDemandProvisioningAllocationStrategy;
+    /**
+     * The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy.
+     */
+    CapacityReservationOptions?: OnDemandCapacityReservationOptions;
   }
   export type OptionalArnType = string;
   export interface PlacementGroupConfig {
