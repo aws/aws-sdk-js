@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.859.0-->
+<!--LATEST=2.860.0-->
 <!--ENTRYINSERT-->
+
+## 2.860.0
+* feature: AutoScaling: EC2 Auto Scaling now supports setting a local time zone for cron expressions in scheduled actions, removing the need to adjust for Daylight Saving Time (DST)
+* feature: CodeGuruProfiler: Update documentation to include Python. Add ConflictException for DeleteProfilingGroup. Add FrameMetricValue.
+* feature: EFS: AWS EFS is introducing one-zone file systems.
+* feature: IoTWireless: Add max value to Seq in SendDataToWirelessDevice API"
+* feature: RDS: This release adds support for Amazon RDS Proxy endpoints.
 
 ## 2.859.0
 * feature: EMR: Amazon EMR customers can now specify how EC2 On-Demand Capacity Reservations are used in their EMR clusters with instance fleets using allocation strategy.

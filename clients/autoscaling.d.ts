@@ -44,11 +44,11 @@ declare class AutoScaling extends Service {
    */
   batchDeleteScheduledAction(callback?: (err: AWSError, data: AutoScaling.Types.BatchDeleteScheduledActionAnswer) => void): Request<AutoScaling.Types.BatchDeleteScheduledActionAnswer, AWSError>;
   /**
-   * Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.
+   * Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
    */
   batchPutScheduledUpdateGroupAction(params: AutoScaling.Types.BatchPutScheduledUpdateGroupActionType, callback?: (err: AWSError, data: AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer) => void): Request<AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer, AWSError>;
   /**
-   * Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.
+   * Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
    */
   batchPutScheduledUpdateGroupAction(callback?: (err: AWSError, data: AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer) => void): Request<AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer, AWSError>;
   /**
@@ -360,11 +360,11 @@ declare class AutoScaling extends Service {
    */
   putScalingPolicy(callback?: (err: AWSError, data: AutoScaling.Types.PolicyARNType) => void): Request<AutoScaling.Types.PolicyARNType, AWSError>;
   /**
-   * Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   putScheduledUpdateGroupAction(params: AutoScaling.Types.PutScheduledUpdateGroupActionType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   putScheduledUpdateGroupAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2201,11 +2201,11 @@ declare namespace AutoScaling {
      */
     StartTime?: TimestampType;
     /**
-     * The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+     * The date and time for the recurring schedule to end, in UTC.
      */
     EndTime?: TimestampType;
     /**
-     * The recurring schedule for this action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action starts and stops.
+     * The recurring schedule for this action. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action starts and stops. Cron expressions use Universal Coordinated Time (UTC) by default.
      */
     Recurrence?: XmlStringMaxLen255;
     /**
@@ -2220,6 +2220,10 @@ declare namespace AutoScaling {
      * The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. It can scale beyond this capacity if you add more scaling conditions. 
      */
     DesiredCapacity?: AutoScalingGroupDesiredCapacity;
+    /**
+     * Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default.  Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as Etc/GMT+9 or Pacific/Tahiti). For more information, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+     */
+    TimeZone?: XmlStringMaxLen255;
   }
   export interface RecordLifecycleActionHeartbeatAnswer {
   }
@@ -2381,6 +2385,10 @@ declare namespace AutoScaling {
      * The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
      */
     DesiredCapacity?: AutoScalingGroupDesiredCapacity;
+    /**
+     * The time zone for the cron expression.
+     */
+    TimeZone?: XmlStringMaxLen255;
   }
   export interface ScheduledUpdateGroupActionRequest {
     /**
@@ -2392,11 +2400,11 @@ declare namespace AutoScaling {
      */
     StartTime?: TimestampType;
     /**
-     * The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+     * The date and time for the recurring schedule to end, in UTC.
      */
     EndTime?: TimestampType;
     /**
-     * The recurring schedule for the action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action starts and stops.
+     * The recurring schedule for the action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action starts and stops. Cron expressions use Universal Coordinated Time (UTC) by default.
      */
     Recurrence?: XmlStringMaxLen255;
     /**
@@ -2411,6 +2419,10 @@ declare namespace AutoScaling {
      * The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
      */
     DesiredCapacity?: AutoScalingGroupDesiredCapacity;
+    /**
+     * Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default.  Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as Etc/GMT+9 or Pacific/Tahiti). For more information, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+     */
+    TimeZone?: XmlStringMaxLen255;
   }
   export type ScheduledUpdateGroupActionRequests = ScheduledUpdateGroupActionRequest[];
   export type ScheduledUpdateGroupActions = ScheduledUpdateGroupAction[];

@@ -746,6 +746,38 @@
       ],
       "documentation": "<p>Creates a new DB proxy.</p>"
     },
+    "CreateDBProxyEndpoint": {
+      "name": "CreateDBProxyEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDBProxyEndpointRequest"
+      },
+      "output": {
+        "shape": "CreateDBProxyEndpointResponse",
+        "resultWrapper": "CreateDBProxyEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidSubnet"
+        },
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyEndpointAlreadyExistsFault"
+        },
+        {
+          "shape": "DBProxyEndpointQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
+        }
+      ],
+      "documentation": "<p> Creates a <code>DBProxyEndpoint</code>. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy's default VPC. </p>"
+    },
     "CreateDBSecurityGroup": {
       "name": "CreateDBSecurityGroup",
       "http": {
@@ -1144,7 +1176,30 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<p>Deletes an existing proxy.</p>"
+      "documentation": "<p>Deletes an existing DB proxy.</p>"
+    },
+    "DeleteDBProxyEndpoint": {
+      "name": "DeleteDBProxyEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDBProxyEndpointRequest"
+      },
+      "output": {
+        "shape": "DeleteDBProxyEndpointResponse",
+        "resultWrapper": "DeleteDBProxyEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyEndpointNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyEndpointStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes a <code>DBProxyEndpoint</code>. Doing so removes the ability to access the DB proxy using the endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write or read-only operations, or using a different VPC than the DB proxy's default VPC.</p>"
     },
     "DeleteDBSecurityGroup": {
       "name": "DeleteDBSecurityGroup",
@@ -1656,6 +1711,29 @@
         }
       ],
       "documentation": "<p>Returns information about DB proxies.</p>"
+    },
+    "DescribeDBProxyEndpoints": {
+      "name": "DescribeDBProxyEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBProxyEndpointsRequest"
+      },
+      "output": {
+        "shape": "DescribeDBProxyEndpointsResponse",
+        "resultWrapper": "DescribeDBProxyEndpointsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyEndpointNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about DB proxy endpoints.</p>"
     },
     "DescribeDBProxyTargetGroups": {
       "name": "DescribeDBProxyTargetGroups",
@@ -2515,6 +2593,35 @@
         }
       ],
       "documentation": "<p>Changes the settings for an existing DB proxy.</p>"
+    },
+    "ModifyDBProxyEndpoint": {
+      "name": "ModifyDBProxyEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBProxyEndpointRequest"
+      },
+      "output": {
+        "shape": "ModifyDBProxyEndpointResponse",
+        "resultWrapper": "ModifyDBProxyEndpointResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyEndpointNotFoundFault"
+        },
+        {
+          "shape": "DBProxyEndpointAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidDBProxyEndpointStateFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
+        }
+      ],
+      "documentation": "<p>Changes the settings for an existing DB proxy endpoint.</p>"
     },
     "ModifyDBProxyTargetGroup": {
       "name": "ModifyDBProxyTargetGroup",
@@ -5144,6 +5251,48 @@
         }
       }
     },
+    "CreateDBProxyEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName",
+        "DBProxyEndpointName",
+        "VpcSubnetIds"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "DBProxyName",
+          "documentation": "<p>The name of the DB proxy associated with the DB proxy endpoint that you create.</p>"
+        },
+        "DBProxyEndpointName": {
+          "shape": "DBProxyEndpointName",
+          "documentation": "<p>The name of the DB proxy endpoint to create.</p>"
+        },
+        "VpcSubnetIds": {
+          "shape": "StringList",
+          "documentation": "<p>The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a different set of subnet IDs than for the original DB proxy.</p>"
+        },
+        "VpcSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>The VPC security group IDs for the DB proxy endpoint that you create. You can specify a different set of security group IDs than for the original DB proxy. The default is the default security group for the VPC.</p>"
+        },
+        "TargetRole": {
+          "shape": "DBProxyEndpointTargetRole",
+          "documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is <code>READ_WRITE</code>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "CreateDBProxyEndpointResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyEndpoint": {
+          "shape": "DBProxyEndpoint",
+          "documentation": "<p>The <code>DBProxyEndpoint</code> object that is created by the API operation. The DB proxy endpoint that you create might provide capabilities such as read/write or read-only operations, or using a different VPC than the proxy's default VPC.</p>"
+        }
+      }
+    },
     "CreateDBProxyRequest": {
       "type": "structure",
       "required": [
@@ -6854,6 +7003,10 @@
           "shape": "String",
           "documentation": "<p>The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.</p>"
         },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>Provides the VPC ID of the DB proxy.</p>"
+        },
         "VpcSecurityGroupIds": {
           "shape": "StringList",
           "documentation": "<p>Provides a list of VPC security groups that the proxy belongs to.</p>"
@@ -6872,7 +7025,7 @@
         },
         "Endpoint": {
           "shape": "String",
-          "documentation": "<p>The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.</p>"
+          "documentation": "<p>The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.</p>"
         },
         "RequireTLS": {
           "shape": "Boolean",
@@ -6897,11 +7050,97 @@
       },
       "documentation": "<p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
     },
+    "DBProxyEndpoint": {
+      "type": "structure",
+      "members": {
+        "DBProxyEndpointName": {
+          "shape": "String",
+          "documentation": "<p>The name for the DB proxy endpoint. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+        },
+        "DBProxyEndpointArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the DB proxy endpoint.</p>"
+        },
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the DB proxy that is associated with this DB proxy endpoint.</p>"
+        },
+        "Status": {
+          "shape": "DBProxyEndpointStatus",
+          "documentation": "<p>The current status of this DB proxy endpoint. A status of <code>available</code> means the endpoint is ready to handle requests. Other values indicate that you must wait for the endpoint to be ready, or take some action to resolve an issue.</p>"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>Provides the VPC ID of the DB proxy endpoint.</p>"
+        },
+        "VpcSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Provides a list of VPC security groups that the DB proxy endpoint belongs to.</p>"
+        },
+        "VpcSubnetIds": {
+          "shape": "StringList",
+          "documentation": "<p>The EC2 subnet IDs for the DB proxy endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.</p>"
+        },
+        "CreatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the DB proxy endpoint was first created.</p>"
+        },
+        "TargetRole": {
+          "shape": "DBProxyEndpointTargetRole",
+          "documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.</p>"
+        },
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.</p>"
+        }
+      },
+      "documentation": "<p>The data structure representing an endpoint associated with a DB proxy. RDS automatically creates one endpoint for each DB proxy. For Aurora DB clusters, you can associate additional endpoints with the same DB proxy. These endpoints can be read/write or read-only. They can also reside in different VPCs than the associated DB proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyEndpoints</code> operation.</p>"
+    },
+    "DBProxyEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "DBProxyEndpoint"
+      }
+    },
+    "DBProxyEndpointName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
+    },
+    "DBProxyEndpointStatus": {
+      "type": "string",
+      "enum": [
+        "available",
+        "modifying",
+        "incompatible-network",
+        "insufficient-resource-limits",
+        "creating",
+        "deleting"
+      ]
+    },
+    "DBProxyEndpointTargetRole": {
+      "type": "string",
+      "enum": [
+        "READ_WRITE",
+        "READ_ONLY"
+      ]
+    },
     "DBProxyList": {
       "type": "list",
       "member": {
         "shape": "DBProxy"
       }
+    },
+    "DBProxyName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
     },
     "DBProxyStatus": {
       "type": "string",
@@ -6943,6 +7182,10 @@
         "Type": {
           "shape": "TargetType",
           "documentation": "<p>Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.</p>"
+        },
+        "Role": {
+          "shape": "TargetRole",
+          "documentation": "<p>A value that indicates whether the target of the proxy can be used for read/write or read-only operations.</p>"
         },
         "TargetHealth": {
           "shape": "TargetHealth",
@@ -7467,6 +7710,27 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeleteDBProxyEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyEndpointName"
+      ],
+      "members": {
+        "DBProxyEndpointName": {
+          "shape": "DBProxyEndpointName",
+          "documentation": "<p>The name of the DB proxy endpoint to delete.</p>"
+        }
+      }
+    },
+    "DeleteDBProxyEndpointResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyEndpoint": {
+          "shape": "DBProxyEndpoint",
+          "documentation": "<p>The data structure representing the details of the DB proxy endpoint that you delete.</p>"
+        }
+      }
     },
     "DeleteDBProxyRequest": {
       "type": "structure",
@@ -8096,7 +8360,7 @@
       "members": {
         "DBProxyName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB proxy.</p>"
+          "documentation": "<p>The name of the DB proxy. If you omit this parameter, the output includes information about all DB proxies owned by your AWS account ID.</p>"
         },
         "Filters": {
           "shape": "FilterList",
@@ -8118,6 +8382,44 @@
         "DBProxies": {
           "shape": "DBProxyList",
           "documentation": "<p>A return value representing an arbitrary number of <code>DBProxy</code> data structures.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeDBProxyEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "DBProxyName": {
+          "shape": "DBProxyName",
+          "documentation": "<p>The name of the DB proxy whose endpoints you want to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with all your DB proxies.</p>"
+        },
+        "DBProxyEndpointName": {
+          "shape": "DBProxyEndpointName",
+          "documentation": "<p>The name of a DB proxy endpoint to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with the specified proxy.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "MaxRecords",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        }
+      }
+    },
+    "DescribeDBProxyEndpointsResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyEndpoints": {
+          "shape": "DBProxyEndpointList",
+          "documentation": "<p>The list of <code>ProxyEndpoint</code> objects returned by the API operation.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -10075,6 +10377,35 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "ModifyDBProxyEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyEndpointName"
+      ],
+      "members": {
+        "DBProxyEndpointName": {
+          "shape": "DBProxyEndpointName",
+          "documentation": "<p>The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.</p>"
+        },
+        "NewDBProxyEndpointName": {
+          "shape": "DBProxyEndpointName",
+          "documentation": "<p>The new identifier for the <code>DBProxyEndpoint</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+        },
+        "VpcSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint uses a different VPC than the original proxy, you also specify a different set of security group IDs than for the original proxy.</p>"
+        }
+      }
+    },
+    "ModifyDBProxyEndpointResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyEndpoint": {
+          "shape": "DBProxyEndpoint",
+          "documentation": "<p>The <code>DBProxyEndpoint</code> object representing the new settings for the DB proxy endpoint.</p>"
+        }
+      }
     },
     "ModifyDBProxyRequest": {
       "type": "structure",
@@ -13048,7 +13379,8 @@
         "UNREACHABLE",
         "CONNECTION_FAILED",
         "AUTH_FAILURE",
-        "PENDING_PROXY_CAPACITY"
+        "PENDING_PROXY_CAPACITY",
+        "INVALID_REPLICATION_STATE"
       ]
     },
     "TargetList": {
@@ -13056,6 +13388,14 @@
       "member": {
         "shape": "DBProxyTarget"
       }
+    },
+    "TargetRole": {
+      "type": "string",
+      "enum": [
+        "READ_WRITE",
+        "READ_ONLY",
+        "UNKNOWN"
+      ]
     },
     "TargetState": {
       "type": "string",

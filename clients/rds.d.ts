@@ -190,6 +190,14 @@ declare class RDS extends Service {
    */
   createDBProxy(callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
   /**
+   *  Creates a DBProxyEndpoint. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy's default VPC. 
+   */
+  createDBProxyEndpoint(params: RDS.Types.CreateDBProxyEndpointRequest, callback?: (err: AWSError, data: RDS.Types.CreateDBProxyEndpointResponse) => void): Request<RDS.Types.CreateDBProxyEndpointResponse, AWSError>;
+  /**
+   *  Creates a DBProxyEndpoint. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy's default VPC. 
+   */
+  createDBProxyEndpoint(callback?: (err: AWSError, data: RDS.Types.CreateDBProxyEndpointResponse) => void): Request<RDS.Types.CreateDBProxyEndpointResponse, AWSError>;
+  /**
    * Creates a new DB security group. DB security groups control access to a DB instance.  A DB security group controls access to EC2-Classic DB instances that are not in a VPC. 
    */
   createDBSecurityGroup(params: RDS.Types.CreateDBSecurityGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBSecurityGroupResult) => void): Request<RDS.Types.CreateDBSecurityGroupResult, AWSError>;
@@ -302,13 +310,21 @@ declare class RDS extends Service {
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing proxy.
+   * Deletes an existing DB proxy.
    */
   deleteDBProxy(params: RDS.Types.DeleteDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
   /**
-   * Deletes an existing proxy.
+   * Deletes an existing DB proxy.
    */
   deleteDBProxy(callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
+  /**
+   * Deletes a DBProxyEndpoint. Doing so removes the ability to access the DB proxy using the endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write or read-only operations, or using a different VPC than the DB proxy's default VPC.
+   */
+  deleteDBProxyEndpoint(params: RDS.Types.DeleteDBProxyEndpointRequest, callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyEndpointResponse) => void): Request<RDS.Types.DeleteDBProxyEndpointResponse, AWSError>;
+  /**
+   * Deletes a DBProxyEndpoint. Doing so removes the ability to access the DB proxy using the endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write or read-only operations, or using a different VPC than the DB proxy's default VPC.
+   */
+  deleteDBProxyEndpoint(callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyEndpointResponse) => void): Request<RDS.Types.DeleteDBProxyEndpointResponse, AWSError>;
   /**
    * Deletes a DB security group.  The specified DB security group must not be associated with any DB instances. 
    */
@@ -509,6 +525,14 @@ declare class RDS extends Service {
    * Returns information about DB proxies.
    */
   describeDBProxies(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
+  /**
+   * Returns information about DB proxy endpoints.
+   */
+  describeDBProxyEndpoints(params: RDS.Types.DescribeDBProxyEndpointsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyEndpointsResponse) => void): Request<RDS.Types.DescribeDBProxyEndpointsResponse, AWSError>;
+  /**
+   * Returns information about DB proxy endpoints.
+   */
+  describeDBProxyEndpoints(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyEndpointsResponse) => void): Request<RDS.Types.DescribeDBProxyEndpointsResponse, AWSError>;
   /**
    * Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
    */
@@ -797,6 +821,14 @@ declare class RDS extends Service {
    * Changes the settings for an existing DB proxy.
    */
   modifyDBProxy(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
+  /**
+   * Changes the settings for an existing DB proxy endpoint.
+   */
+  modifyDBProxyEndpoint(params: RDS.Types.ModifyDBProxyEndpointRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyEndpointResponse) => void): Request<RDS.Types.ModifyDBProxyEndpointResponse, AWSError>;
+  /**
+   * Changes the settings for an existing DB proxy endpoint.
+   */
+  modifyDBProxyEndpoint(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyEndpointResponse) => void): Request<RDS.Types.ModifyDBProxyEndpointResponse, AWSError>;
   /**
    * Modifies the properties of a DBProxyTargetGroup.
    */
@@ -2126,6 +2158,35 @@ declare namespace RDS {
   }
   export interface CreateDBParameterGroupResult {
     DBParameterGroup?: DBParameterGroup;
+  }
+  export interface CreateDBProxyEndpointRequest {
+    /**
+     * The name of the DB proxy associated with the DB proxy endpoint that you create.
+     */
+    DBProxyName: DBProxyName;
+    /**
+     * The name of the DB proxy endpoint to create.
+     */
+    DBProxyEndpointName: DBProxyEndpointName;
+    /**
+     * The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a different set of subnet IDs than for the original DB proxy.
+     */
+    VpcSubnetIds: StringList;
+    /**
+     * The VPC security group IDs for the DB proxy endpoint that you create. You can specify a different set of security group IDs than for the original DB proxy. The default is the default security group for the VPC.
+     */
+    VpcSecurityGroupIds?: StringList;
+    /**
+     * A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is READ_WRITE.
+     */
+    TargetRole?: DBProxyEndpointTargetRole;
+    Tags?: TagList;
+  }
+  export interface CreateDBProxyEndpointResponse {
+    /**
+     * The DBProxyEndpoint object that is created by the API operation. The DB proxy endpoint that you create might provide capabilities such as read/write or read-only operations, or using a different VPC than the proxy's default VPC.
+     */
+    DBProxyEndpoint?: DBProxyEndpoint;
   }
   export interface CreateDBProxyRequest {
     /**
@@ -3480,6 +3541,10 @@ declare namespace RDS {
      */
     EngineFamily?: String;
     /**
+     * Provides the VPC ID of the DB proxy.
+     */
+    VpcId?: String;
+    /**
      * Provides a list of VPC security groups that the proxy belongs to.
      */
     VpcSecurityGroupIds?: StringList;
@@ -3496,7 +3561,7 @@ declare namespace RDS {
      */
     RoleArn?: String;
     /**
-     * The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+     * The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
      */
     Endpoint?: String;
     /**
@@ -3520,7 +3585,58 @@ declare namespace RDS {
      */
     UpdatedDate?: TStamp;
   }
+  export interface DBProxyEndpoint {
+    /**
+     * The name for the DB proxy endpoint. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+     */
+    DBProxyEndpointName?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the DB proxy endpoint.
+     */
+    DBProxyEndpointArn?: String;
+    /**
+     * The identifier for the DB proxy that is associated with this DB proxy endpoint.
+     */
+    DBProxyName?: String;
+    /**
+     * The current status of this DB proxy endpoint. A status of available means the endpoint is ready to handle requests. Other values indicate that you must wait for the endpoint to be ready, or take some action to resolve an issue.
+     */
+    Status?: DBProxyEndpointStatus;
+    /**
+     * Provides the VPC ID of the DB proxy endpoint.
+     */
+    VpcId?: String;
+    /**
+     * Provides a list of VPC security groups that the DB proxy endpoint belongs to.
+     */
+    VpcSecurityGroupIds?: StringList;
+    /**
+     * The EC2 subnet IDs for the DB proxy endpoint.
+     */
+    VpcSubnetIds?: StringList;
+    /**
+     * The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
+     */
+    Endpoint?: String;
+    /**
+     * The date and time when the DB proxy endpoint was first created.
+     */
+    CreatedDate?: TStamp;
+    /**
+     * A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
+     */
+    TargetRole?: DBProxyEndpointTargetRole;
+    /**
+     * A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.
+     */
+    IsDefault?: Boolean;
+  }
+  export type DBProxyEndpointList = DBProxyEndpoint[];
+  export type DBProxyEndpointName = string;
+  export type DBProxyEndpointStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|string;
+  export type DBProxyEndpointTargetRole = "READ_WRITE"|"READ_ONLY"|string;
   export type DBProxyList = DBProxy[];
+  export type DBProxyName = string;
   export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|"suspended"|"suspending"|"reactivating"|string;
   export interface DBProxyTarget {
     /**
@@ -3547,6 +3663,10 @@ declare namespace RDS {
      * Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.
      */
     Type?: TargetType;
+    /**
+     * A value that indicates whether the target of the proxy can be used for read/write or read-only operations.
+     */
+    Role?: TargetRole;
     /**
      * Information about the connection health of the RDS Proxy target.
      */
@@ -3909,6 +4029,18 @@ declare namespace RDS {
      * The name of the DB parameter group. Constraints:   Must be the name of an existing DB parameter group   You can't delete a default DB parameter group   Can't be associated with any DB instances  
      */
     DBParameterGroupName: String;
+  }
+  export interface DeleteDBProxyEndpointRequest {
+    /**
+     * The name of the DB proxy endpoint to delete.
+     */
+    DBProxyEndpointName: DBProxyEndpointName;
+  }
+  export interface DeleteDBProxyEndpointResponse {
+    /**
+     * The data structure representing the details of the DB proxy endpoint that you delete.
+     */
+    DBProxyEndpoint?: DBProxyEndpoint;
   }
   export interface DeleteDBProxyRequest {
     /**
@@ -4363,7 +4495,7 @@ declare namespace RDS {
   }
   export interface DescribeDBProxiesRequest {
     /**
-     * The name of the DB proxy.
+     * The name of the DB proxy. If you omit this parameter, the output includes information about all DB proxies owned by your AWS account ID.
      */
     DBProxyName?: String;
     /**
@@ -4384,6 +4516,38 @@ declare namespace RDS {
      * A return value representing an arbitrary number of DBProxy data structures.
      */
     DBProxies?: DBProxyList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBProxyEndpointsRequest {
+    /**
+     * The name of the DB proxy whose endpoints you want to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with all your DB proxies.
+     */
+    DBProxyName?: DBProxyName;
+    /**
+     * The name of a DB proxy endpoint to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with the specified proxy.
+     */
+    DBProxyEndpointName?: DBProxyEndpointName;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeDBProxyEndpointsResponse {
+    /**
+     * The list of ProxyEndpoint objects returned by the API operation.
+     */
+    DBProxyEndpoints?: DBProxyEndpointList;
     /**
      *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
@@ -5830,6 +5994,26 @@ declare namespace RDS {
      * An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; later arguments are optional. A maximum of 20 parameters can be modified in a single request. Valid Values (for the application method): immediate | pending-reboot   You can use the immediate value with dynamic parameters only. You can use the pending-reboot value for both dynamic and static parameters, and changes are applied when you reboot the DB instance without failover. 
      */
     Parameters: ParametersList;
+  }
+  export interface ModifyDBProxyEndpointRequest {
+    /**
+     * The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.
+     */
+    DBProxyEndpointName: DBProxyEndpointName;
+    /**
+     * The new identifier for the DBProxyEndpoint. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+     */
+    NewDBProxyEndpointName?: DBProxyEndpointName;
+    /**
+     * The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint uses a different VPC than the original proxy, you also specify a different set of security group IDs than for the original proxy.
+     */
+    VpcSecurityGroupIds?: StringList;
+  }
+  export interface ModifyDBProxyEndpointResponse {
+    /**
+     * The DBProxyEndpoint object representing the new settings for the DB proxy endpoint.
+     */
+    DBProxyEndpoint?: DBProxyEndpoint;
   }
   export interface ModifyDBProxyRequest {
     /**
@@ -8009,8 +8193,9 @@ declare namespace RDS {
      */
     Description?: String;
   }
-  export type TargetHealthReason = "UNREACHABLE"|"CONNECTION_FAILED"|"AUTH_FAILURE"|"PENDING_PROXY_CAPACITY"|string;
+  export type TargetHealthReason = "UNREACHABLE"|"CONNECTION_FAILED"|"AUTH_FAILURE"|"PENDING_PROXY_CAPACITY"|"INVALID_REPLICATION_STATE"|string;
   export type TargetList = DBProxyTarget[];
+  export type TargetRole = "READ_WRITE"|"READ_ONLY"|"UNKNOWN"|string;
   export type TargetState = "REGISTERING"|"AVAILABLE"|"UNAVAILABLE"|string;
   export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER"|string;
   export interface Timezone {
