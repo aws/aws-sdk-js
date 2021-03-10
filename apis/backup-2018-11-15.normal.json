@@ -263,13 +263,16 @@
           "shape": "MissingParameterValueException"
         },
         {
+          "shape": "InvalidResourceStateException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Deletes the recovery point specified by a recovery point ID.</p>",
+      "documentation": "<p>Deletes the recovery point specified by a recovery point ID.</p> <p>If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.</p>",
       "idempotent": true
     },
     "DescribeBackupJob": {
@@ -375,6 +378,9 @@
         "shape": "DescribeGlobalSettingsOutput"
       },
       "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
         {
           "shape": "ServiceUnavailableException"
         }
@@ -490,6 +496,37 @@
       "documentation": "<p>Returns metadata associated with a restore job that is specified by a job ID.</p>",
       "idempotent": true
     },
+    "DisassociateRecoveryPoint": {
+      "name": "DisassociateRecoveryPoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/disassociate"
+      },
+      "input": {
+        "shape": "DisassociateRecoveryPointInput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingParameterValueException"
+        },
+        {
+          "shape": "InvalidResourceStateException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan.</p> <p>Does not support snapshot backup recovery points.</p>"
+    },
     "ExportBackupPlanTemplate": {
       "name": "ExportBackupPlanTemplate",
       "http": {
@@ -544,7 +581,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Returns <code>BackupPlan</code> details for the specified <code>BackupPlanId</code>. Returns the body of a backup plan in JSON format, in addition to plan metadata.</p>",
+      "documentation": "<p>Returns <code>BackupPlan</code> details for the specified <code>BackupPlanId</code>. The details are the body of a backup plan in JSON format, in addition to plan metadata.</p>",
       "idempotent": true
     },
     "GetBackupPlanFromJSON": {
@@ -758,7 +795,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Returns a list of existing backup jobs for an authenticated account.</p>",
+      "documentation": "<p>Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">monitoring tools</a>.</p>",
       "idempotent": true
     },
     "ListBackupPlanTemplates": {
@@ -1180,9 +1217,12 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Starts a job to create a one-time copy of the specified resource.</p>",
+      "documentation": "<p>Starts a job to create a one-time copy of the specified resource.</p> <p>Does not support continuous backups.</p>",
       "idempotent": true
     },
     "StartRestoreJob": {
@@ -1211,7 +1251,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Recovers the saved resource identified by an Amazon Resource Name (ARN). </p>",
+      "documentation": "<p>Recovers the saved resource identified by an Amazon Resource Name (ARN).</p>",
       "idempotent": true
     },
     "StopBackupJob": {
@@ -1377,7 +1417,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>",
+      "documentation": "<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p> <p>Does not support continuous backups.</p>",
       "idempotent": true
     },
     "UpdateRegionSettings": {
@@ -1716,6 +1756,10 @@
         "CopyActions": {
           "shape": "CopyActions",
           "documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.</p>"
+        },
+        "EnableContinuousBackup": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.</p>"
         }
       },
       "documentation": "<p>Specifies a scheduled task used to back up a selection of resources.</p>"
@@ -1758,6 +1802,10 @@
         "CopyActions": {
           "shape": "CopyActions",
           "documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.</p>"
+        },
+        "EnableContinuousBackup": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.</p>"
         }
       },
       "documentation": "<p>Specifies a scheduled task used to back up a selection of resources.</p>"
@@ -2044,7 +2092,7 @@
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. </p>"
+          "documentation": "<p>The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
         }
       },
       "documentation": "<p>Contains detailed information about a copy job.</p>"
@@ -2706,6 +2754,27 @@
         "ResourceType": {
           "shape": "ResourceType",
           "documentation": "<p>Returns metadata associated with a restore job listed by resource type.</p>"
+        }
+      }
+    },
+    "DisassociateRecoveryPointInput": {
+      "type": "structure",
+      "required": [
+        "BackupVaultName",
+        "RecoveryPointArn"
+      ],
+      "members": {
+        "BackupVaultName": {
+          "shape": "BackupVaultName",
+          "documentation": "<p>The unique name of an AWS Backup vault. Required.</p>",
+          "location": "uri",
+          "locationName": "backupVaultName"
+        },
+        "RecoveryPointArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point. Required.</p>",
+          "location": "uri",
+          "locationName": "recoveryPointArn"
         }
       }
     },
@@ -4124,7 +4193,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. </p>"
+          "documentation": "<p>Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.</p>"
         }
       }
     },

@@ -76,11 +76,11 @@ declare class Backup extends Service {
    */
   deleteBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the recovery point specified by a recovery point ID.
+   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
    */
   deleteRecoveryPoint(params: Backup.Types.DeleteRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the recovery point specified by a recovery point ID.
+   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
    */
   deleteRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -148,6 +148,14 @@ declare class Backup extends Service {
    */
   describeRestoreJob(callback?: (err: AWSError, data: Backup.Types.DescribeRestoreJobOutput) => void): Request<Backup.Types.DescribeRestoreJobOutput, AWSError>;
   /**
+   * Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
+   */
+  disassociateRecoveryPoint(params: Backup.Types.DisassociateRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
+   */
+  disassociateRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns the backup plan that is specified by the plan ID as a backup template.
    */
   exportBackupPlanTemplate(params: Backup.Types.ExportBackupPlanTemplateInput, callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
@@ -156,11 +164,11 @@ declare class Backup extends Service {
    */
   exportBackupPlanTemplate(callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
   /**
-   * Returns BackupPlan details for the specified BackupPlanId. Returns the body of a backup plan in JSON format, in addition to plan metadata.
+   * Returns BackupPlan details for the specified BackupPlanId. The details are the body of a backup plan in JSON format, in addition to plan metadata.
    */
   getBackupPlan(params: Backup.Types.GetBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
-   * Returns BackupPlan details for the specified BackupPlanId. Returns the body of a backup plan in JSON format, in addition to plan metadata.
+   * Returns BackupPlan details for the specified BackupPlanId. The details are the body of a backup plan in JSON format, in addition to plan metadata.
    */
   getBackupPlan(callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
@@ -216,11 +224,11 @@ declare class Backup extends Service {
    */
   getSupportedResourceTypes(callback?: (err: AWSError, data: Backup.Types.GetSupportedResourceTypesOutput) => void): Request<Backup.Types.GetSupportedResourceTypesOutput, AWSError>;
   /**
-   * Returns a list of existing backup jobs for an authenticated account.
+   * Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these monitoring tools.
    */
   listBackupJobs(params: Backup.Types.ListBackupJobsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
-   * Returns a list of existing backup jobs for an authenticated account.
+   * Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these monitoring tools.
    */
   listBackupJobs(callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
@@ -336,19 +344,19 @@ declare class Backup extends Service {
    */
   startBackupJob(callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
   /**
-   * Starts a job to create a one-time copy of the specified resource.
+   * Starts a job to create a one-time copy of the specified resource. Does not support continuous backups.
    */
   startCopyJob(params: Backup.Types.StartCopyJobInput, callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
   /**
-   * Starts a job to create a one-time copy of the specified resource.
+   * Starts a job to create a one-time copy of the specified resource. Does not support continuous backups.
    */
   startCopyJob(callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
   /**
-   * Recovers the saved resource identified by an Amazon Resource Name (ARN). 
+   * Recovers the saved resource identified by an Amazon Resource Name (ARN).
    */
   startRestoreJob(params: Backup.Types.StartRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
-   * Recovers the saved resource identified by an Amazon Resource Name (ARN). 
+   * Recovers the saved resource identified by an Amazon Resource Name (ARN).
    */
   startRestoreJob(callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
@@ -392,11 +400,11 @@ declare class Backup extends Service {
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
    */
   updateRecoveryPointLifecycle(params: Backup.Types.UpdateRecoveryPointLifecycleInput, callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
@@ -626,6 +634,10 @@ declare namespace Backup {
      * An array of CopyAction objects, which contains the details of the copy operation.
      */
     CopyActions?: CopyActions;
+    /**
+     * Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+     */
+    EnableContinuousBackup?: Boolean;
   }
   export interface BackupRuleInput {
     /**
@@ -660,6 +672,10 @@ declare namespace Backup {
      * An array of CopyAction objects, which contains the details of the copy operation.
      */
     CopyActions?: CopyActions;
+    /**
+     * Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+     */
+    EnableContinuousBackup?: Boolean;
   }
   export type BackupRuleName = string;
   export type BackupRules = BackupRule[];
@@ -831,7 +847,7 @@ declare namespace Backup {
     IamRoleArn?: IAMRoleArn;
     CreatedBy?: RecoveryPointCreator;
     /**
-     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. 
+     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceType?: ResourceType;
   }
@@ -1311,6 +1327,16 @@ declare namespace Backup {
      * Returns metadata associated with a restore job listed by resource type.
      */
     ResourceType?: ResourceType;
+  }
+  export interface DisassociateRecoveryPointInput {
+    /**
+     * The unique name of an AWS Backup vault. Required.
+     */
+    BackupVaultName: BackupVaultName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point. Required.
+     */
+    RecoveryPointArn: ARN;
   }
   export interface ExportBackupPlanTemplateInput {
     /**
@@ -2225,7 +2251,7 @@ declare namespace Backup {
      */
     ResourceArn: ARN;
     /**
-     * Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. 
+     * Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
      */
     Tags: Tags;
   }

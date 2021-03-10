@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.860.0-->
+<!--LATEST=2.861.0-->
 <!--ENTRYINSERT-->
+
+## 2.861.0
+* feature: AccessAnalyzer: This release adds support to preview IAM Access Analyzer findings for a resource before deploying resource permission changes.
+* feature: Backup: Added support for enabling continuous backups.
+* feature: S3: Adding ID element to the CORSRule schema
+* feature: SSM: Systems Manager support for tagging OpsMetadata.
 
 ## 2.860.0
 * feature: AutoScaling: EC2 Auto Scaling now supports setting a local time zone for cron expressions in scheduled actions, removing the need to adjust for Daylight Saving Time (DST)

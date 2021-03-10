@@ -978,6 +978,10 @@ declare namespace S3 {
   }
   export interface CORSRule {
     /**
+     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     */
+    ID?: ID;
+    /**
      * Headers that are specified in the Access-Control-Request-Headers header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.
      */
     AllowedHeaders?: AllowedHeaders;
