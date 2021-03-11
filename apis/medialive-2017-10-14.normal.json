@@ -2872,6 +2872,16 @@
       },
       "documentation": "Ancillary Source Settings"
     },
+    "ArchiveCdnSettings": {
+      "type": "structure",
+      "members": {
+        "ArchiveS3Settings": {
+          "shape": "ArchiveS3Settings",
+          "locationName": "archiveS3Settings"
+        }
+      },
+      "documentation": "Archive Cdn Settings"
+    },
     "ArchiveContainerSettings": {
       "type": "structure",
       "members": {
@@ -2889,6 +2899,11 @@
     "ArchiveGroupSettings": {
       "type": "structure",
       "members": {
+        "ArchiveCdnSettings": {
+          "shape": "ArchiveCdnSettings",
+          "locationName": "archiveCdnSettings",
+          "documentation": "Parameters that control interactions with the CDN."
+        },
         "Destination": {
           "shape": "OutputLocationRef",
           "locationName": "destination",
@@ -2928,6 +2943,17 @@
       "required": [
         "ContainerSettings"
       ]
+    },
+    "ArchiveS3Settings": {
+      "type": "structure",
+      "members": {
+        "CannedAcl": {
+          "shape": "S3CannedAcl",
+          "locationName": "cannedAcl",
+          "documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none."
+        }
+      },
+      "documentation": "Archive S3 Settings"
     },
     "AribDestinationSettings": {
       "type": "structure",
@@ -3950,6 +3976,38 @@
         "LanguageCode",
         "LanguageDescription",
         "CaptionChannel"
+      ]
+    },
+    "CaptionRectangle": {
+      "type": "structure",
+      "members": {
+        "Height": {
+          "shape": "__doubleMin0Max100",
+          "locationName": "height",
+          "documentation": "See the description in leftOffset.\nFor height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \\\"80\\\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.\nThis field corresponds to tts:extent - Y in the TTML standard."
+        },
+        "LeftOffset": {
+          "shape": "__doubleMin0Max100",
+          "locationName": "leftOffset",
+          "documentation": "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.\nIf you specify a value for one of these fields, you must specify a value for all of them.\nFor leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.\nThis field corresponds to tts:origin - X in the TTML standard."
+        },
+        "TopOffset": {
+          "shape": "__doubleMin0Max100",
+          "locationName": "topOffset",
+          "documentation": "See the description in leftOffset.\nFor topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.\nThis field corresponds to tts:origin - Y in the TTML standard."
+        },
+        "Width": {
+          "shape": "__doubleMin0Max100",
+          "locationName": "width",
+          "documentation": "See the description in leftOffset.\nFor width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \\\"80\\\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.\nThis field corresponds to tts:extent - X in the TTML standard."
+        }
+      },
+      "documentation": "Caption Rectangle",
+      "required": [
+        "TopOffset",
+        "Height",
+        "Width",
+        "LeftOffset"
       ]
     },
     "CaptionSelector": {
@@ -6217,6 +6275,11 @@
     "EbuTtDDestinationSettings": {
       "type": "structure",
       "members": {
+        "CopyrightHolder": {
+          "shape": "__stringMax1000",
+          "locationName": "copyrightHolder",
+          "documentation": "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML"
+        },
         "FillLineGap": {
           "shape": "EbuTtDFillLineGapControl",
           "locationName": "fillLineGap",
@@ -6543,6 +6606,16 @@
         "START"
       ]
     },
+    "FrameCaptureCdnSettings": {
+      "type": "structure",
+      "members": {
+        "FrameCaptureS3Settings": {
+          "shape": "FrameCaptureS3Settings",
+          "locationName": "frameCaptureS3Settings"
+        }
+      },
+      "documentation": "Frame Capture Cdn Settings"
+    },
     "FrameCaptureGroupSettings": {
       "type": "structure",
       "members": {
@@ -6550,6 +6623,11 @@
           "shape": "OutputLocationRef",
           "locationName": "destination",
           "documentation": "The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling-). The final file names consist of the prefix from the destination field (for example, \"curling-\") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curling-low.00001.jpg"
+        },
+        "FrameCaptureCdnSettings": {
+          "shape": "FrameCaptureCdnSettings",
+          "locationName": "frameCaptureCdnSettings",
+          "documentation": "Parameters that control interactions with the CDN."
         }
       },
       "documentation": "Frame Capture Group Settings",
@@ -6580,6 +6658,17 @@
         }
       },
       "documentation": "Frame Capture Output Settings"
+    },
+    "FrameCaptureS3Settings": {
+      "type": "structure",
+      "members": {
+        "CannedAcl": {
+          "shape": "S3CannedAcl",
+          "locationName": "cannedAcl",
+          "documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none."
+        }
+      },
+      "documentation": "Frame Capture S3 Settings"
     },
     "FrameCaptureSettings": {
       "type": "structure",
@@ -7028,7 +7117,7 @@
         "Softness": {
           "shape": "__integerMin0Max128",
           "locationName": "softness",
-          "documentation": "Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image."
+          "documentation": "Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.  If not set to zero, must be greater than 15."
         },
         "SpatialAq": {
           "shape": "H264SpatialAq",
@@ -7531,6 +7620,10 @@
           "shape": "HlsMediaStoreSettings",
           "locationName": "hlsMediaStoreSettings"
         },
+        "HlsS3Settings": {
+          "shape": "HlsS3Settings",
+          "locationName": "hlsS3Settings"
+        },
         "HlsWebdavSettings": {
           "shape": "HlsWebdavSettings",
           "locationName": "hlsWebdavSettings"
@@ -7992,6 +8085,17 @@
         "DISABLED",
         "ENABLED"
       ]
+    },
+    "HlsS3Settings": {
+      "type": "structure",
+      "members": {
+        "CannedAcl": {
+          "shape": "S3CannedAcl",
+          "locationName": "cannedAcl",
+          "documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none."
+        }
+      },
+      "documentation": "Hls S3 Settings"
     },
     "HlsSegmentationMode": {
       "type": "string",
@@ -11702,6 +11806,16 @@
         "Destination"
       ]
     },
+    "S3CannedAcl": {
+      "type": "string",
+      "documentation": "S3 Canned Acl",
+      "enum": [
+        "AUTHENTICATED_READ",
+        "BUCKET_OWNER_FULL_CONTROL",
+        "BUCKET_OWNER_READ",
+        "PUBLIC_READ"
+      ]
+    },
     "ScheduleAction": {
       "type": "structure",
       "members": {
@@ -12724,6 +12838,11 @@
     "TeletextSourceSettings": {
       "type": "structure",
       "members": {
+        "OutputRectangle": {
+          "shape": "CaptionRectangle",
+          "locationName": "outputRectangle",
+          "documentation": "Optionally defines a region where TTML style captions will be displayed"
+        },
         "PageNumber": {
           "shape": "__string",
           "locationName": "pageNumber",
@@ -13597,6 +13716,10 @@
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMin0Max1"
     },
+    "__doubleMin0Max100": {
+      "type": "double",
+      "documentation": "Placeholder documentation for __doubleMin0Max100"
+    },
     "__doubleMin1": {
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMin1"
@@ -14264,6 +14387,11 @@
     "__string": {
       "type": "string",
       "documentation": "Placeholder documentation for __string"
+    },
+    "__stringMax1000": {
+      "type": "string",
+      "max": 1000,
+      "documentation": "Placeholder documentation for __stringMax1000"
     },
     "__stringMax256": {
       "type": "string",

@@ -193,6 +193,34 @@
       ],
       "documentation": "<p>Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.</p>"
     },
+    "ContainsPiiEntities": {
+      "name": "ContainsPiiEntities",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ContainsPiiEntitiesRequest"
+      },
+      "output": {
+        "shape": "ContainsPiiEntitiesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TextSizeLimitExceededException"
+        },
+        {
+          "shape": "UnsupportedLanguageException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.</p>"
+    },
     "CreateDocumentClassifier": {
       "name": "CreateDocumentClassifier",
       "http": {
@@ -2185,6 +2213,32 @@
       "max": 256,
       "pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier|entity-recognizer)/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
+    "ContainsPiiEntitiesRequest": {
+      "type": "structure",
+      "required": [
+        "Text",
+        "LanguageCode"
+      ],
+      "members": {
+        "Text": {
+          "shape": "String",
+          "documentation": "<p>Creates a new document classification request to analyze a single document in real-time, returning personally identifiable information (PII) entity labels.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language of the input documents.</p>"
+        }
+      }
+    },
+    "ContainsPiiEntitiesResponse": {
+      "type": "structure",
+      "members": {
+        "Labels": {
+          "shape": "ListOfEntityLabels",
+          "documentation": "<p>The labels used in the document being analyzed. Individual labels represent personally identifiable information (PII) entity types.</p>"
+        }
+      }
+    },
     "CreateDocumentClassifierRequest": {
       "type": "structure",
       "required": [
@@ -3341,6 +3395,20 @@
       },
       "documentation": "<p>Provides information about an entity. </p> <p> </p>"
     },
+    "EntityLabel": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "PiiEntityType",
+          "documentation": "<p>The name of the label.</p>"
+        },
+        "Score": {
+          "shape": "Float",
+          "documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy of the detection.</p>"
+        }
+      },
+      "documentation": "<p>Specifies one of the label or labels that categorize the personally identifiable information (PII) entity being analyzed.</p>"
+    },
     "EntityRecognizerAnnotations": {
       "type": "structure",
       "required": [
@@ -3600,7 +3668,7 @@
     "EntityTypeName": {
       "type": "string",
       "max": 64,
-      "pattern": "^(?:(?!\\\\n+|\\\\t+|\\\\r+|[\\r\\t\\n\\s,]).)+$"
+      "pattern": "^(?:(?!\\\\n+|\\\\t+|\\\\r+|[\\r\\t\\n,]).)+$"
     },
     "EntityTypesEvaluationMetrics": {
       "type": "structure",
@@ -4203,6 +4271,12 @@
       "type": "list",
       "member": {
         "shape": "Entity"
+      }
+    },
+    "ListOfEntityLabels": {
+      "type": "list",
+      "member": {
+        "shape": "EntityLabel"
       }
     },
     "ListOfKeyPhrases": {

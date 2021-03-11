@@ -648,11 +648,18 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      */
     SourceAncillaryChannelNumber?: __integerMin1Max4;
   }
+  export interface ArchiveCdnSettings {
+    ArchiveS3Settings?: ArchiveS3Settings;
+  }
   export interface ArchiveContainerSettings {
     M2tsSettings?: M2tsSettings;
     RawSettings?: RawSettings;
   }
   export interface ArchiveGroupSettings {
+    /**
+     * Parameters that control interactions with the CDN.
+     */
+    ArchiveCdnSettings?: ArchiveCdnSettings;
     /**
      * A directory and base filename where archive files should be written.
      */
@@ -675,6 +682,12 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      * String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
      */
     NameModifier?: __string;
+  }
+  export interface ArchiveS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
   }
   export interface AribDestinationSettings {
   }
@@ -1196,6 +1209,33 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Textual description of language
      */
     LanguageDescription: __stringMin1;
+  }
+  export interface CaptionRectangle {
+    /**
+     * See the description in leftOffset.
+For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \"80\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.
+This field corresponds to tts:extent - Y in the TTML standard.
+     */
+    Height: __doubleMin0Max100;
+    /**
+     * Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.
+If you specify a value for one of these fields, you must specify a value for all of them.
+For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.
+This field corresponds to tts:origin - X in the TTML standard.
+     */
+    LeftOffset: __doubleMin0Max100;
+    /**
+     * See the description in leftOffset.
+For topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.
+This field corresponds to tts:origin - Y in the TTML standard.
+     */
+    TopOffset: __doubleMin0Max100;
+    /**
+     * See the description in leftOffset.
+For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \"80\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.
+This field corresponds to tts:extent - X in the TTML standard.
+     */
+    Width: __doubleMin0Max100;
   }
   export interface CaptionSelector {
     /**
@@ -2540,6 +2580,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
   export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
   export interface EbuTtDDestinationSettings {
     /**
+     * Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML
+     */
+    CopyrightHolder?: __stringMax1000;
+    /**
      * Specifies how to handle the gap between the lines (in multi-line captions).
 
 - enabled: Fill with the captions background color (as specified in the input captions).
@@ -2703,11 +2747,18 @@ If you disable the feature on an existing schedule, make sure that you first del
     ReferenceActionName: __string;
   }
   export type FollowPoint = "END"|"START"|string;
+  export interface FrameCaptureCdnSettings {
+    FrameCaptureS3Settings?: FrameCaptureS3Settings;
+  }
   export interface FrameCaptureGroupSettings {
     /**
      * The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling-). The final file names consist of the prefix from the destination field (for example, "curling-") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curling-low.00001.jpg
      */
     Destination: OutputLocationRef;
+    /**
+     * Parameters that control interactions with the CDN.
+     */
+    FrameCaptureCdnSettings?: FrameCaptureCdnSettings;
   }
   export interface FrameCaptureHlsSettings {
   }
@@ -2717,6 +2768,12 @@ If you disable the feature on an existing schedule, make sure that you first del
      * Required if the output group contains more than one output. This modifier forms part of the output file name.
      */
     NameModifier?: __string;
+  }
+  export interface FrameCaptureS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
   }
   export interface FrameCaptureSettings {
     /**
@@ -2955,7 +3012,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Slices?: __integerMin1Max32;
     /**
-     * Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.
+     * Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.  If not set to zero, must be greater than 15.
      */
     Softness?: __integerMin0Max128;
     /**
@@ -3213,6 +3270,7 @@ for any single frame within an encoded HDR video stream or file.
     HlsAkamaiSettings?: HlsAkamaiSettings;
     HlsBasicPutSettings?: HlsBasicPutSettings;
     HlsMediaStoreSettings?: HlsMediaStoreSettings;
+    HlsS3Settings?: HlsS3Settings;
     HlsWebdavSettings?: HlsWebdavSettings;
   }
   export type HlsClientCache = "DISABLED"|"ENABLED"|string;
@@ -3498,6 +3556,12 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
   }
   export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
   export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
+  export interface HlsS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
+  }
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
@@ -5497,6 +5561,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     NumRetries?: __integerMin0;
   }
+  export type S3CannedAcl = "AUTHENTICATED_READ"|"BUCKET_OWNER_FULL_CONTROL"|"BUCKET_OWNER_READ"|"PUBLIC_READ"|string;
   export interface ScheduleAction {
     /**
      * The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.
@@ -6070,6 +6135,10 @@ one destination per packager.
   }
   export interface TeletextSourceSettings {
     /**
+     * Optionally defines a region where TTML style captions will be displayed
+     */
+    OutputRectangle?: CaptionRectangle;
+    /**
      * Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
      */
     PageNumber?: __string;
@@ -6539,6 +6608,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
+  export type __doubleMin0Max100 = number;
   export type __doubleMin1 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;
@@ -6645,6 +6715,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
   export type __string = string;
+  export type __stringMax1000 = string;
   export type __stringMax256 = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;

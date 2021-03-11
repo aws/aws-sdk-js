@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.861.0-->
+<!--LATEST=2.862.0-->
 <!--ENTRYINSERT-->
+
+## 2.862.0
+* feature: Comprehend: ContainsPiiEntities API analyzes the input text for the presence of personally identifiable information(PII) and returns the labels of identified PII entity types such as name, address etc.
+* feature: MediaLive: MediaLive supports the ability to apply a canned ACL to output sent to an AWS S3 bucket; supports ability to specify position for EBU-TT and TTML output captions converted from Teletext source.
 
 ## 2.861.0
 * feature: AccessAnalyzer: This release adds support to preview IAM Access Analyzer findings for a resource before deploying resource permission changes.

@@ -60,6 +60,14 @@ declare class Comprehend extends Service {
    */
   classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
+   * Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
+   */
+  containsPiiEntities(params: Comprehend.Types.ContainsPiiEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
+  /**
+   * Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
+   */
+  containsPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
+  /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
@@ -749,6 +757,22 @@ declare namespace Comprehend {
   export type ComprehendEndpointArn = string;
   export type ComprehendEndpointName = string;
   export type ComprehendModelArn = string;
+  export interface ContainsPiiEntitiesRequest {
+    /**
+     * Creates a new document classification request to analyze a single document in real-time, returning personally identifiable information (PII) entity labels.
+     */
+    Text: String;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface ContainsPiiEntitiesResponse {
+    /**
+     * The labels used in the document being analyzed. Individual labels represent personally identifiable information (PII) entity types.
+     */
+    Labels?: ListOfEntityLabels;
+  }
   export interface CreateDocumentClassifierRequest {
     /**
      * The name of the document classifier.
@@ -1544,6 +1568,16 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
+  export interface EntityLabel {
+    /**
+     * The name of the label.
+     */
+    Name?: PiiEntityType;
+    /**
+     * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+     */
+    Score?: Float;
+  }
   export interface EntityRecognizerAnnotations {
     /**
      *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
@@ -2105,6 +2139,7 @@ declare namespace Comprehend {
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
+  export type ListOfEntityLabels = EntityLabel[];
   export type ListOfKeyPhrases = KeyPhrase[];
   export type ListOfLabels = DocumentLabel[];
   export type ListOfPiiEntities = PiiEntity[];
