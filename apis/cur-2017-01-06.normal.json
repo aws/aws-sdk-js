@@ -151,6 +151,11 @@
       },
       "documentation": "<p>A list of additional artifacts.</p>"
     },
+    "BillingViewArn": {
+      "type": "string",
+      "max": 128,
+      "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"
+    },
     "CompressionFormat": {
       "type": "string",
       "documentation": "<p>The compression format that AWS uses for the report.</p>",
@@ -311,6 +316,10 @@
         "ReportVersioning": {
           "shape": "ReportVersioning",
           "documentation": "<p>Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.</p>"
+        },
+        "BillingViewArn": {
+          "shape": "BillingViewArn",
+          "documentation": "<p> The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs. </p>"
         }
       },
       "documentation": "<p>The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition. </p>"

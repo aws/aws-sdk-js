@@ -68,6 +68,14 @@ declare class WorkSpaces extends Service {
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(params: WorkSpaces.Types.CreateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
@@ -99,6 +107,14 @@ declare class WorkSpaces extends Service {
    * Deletes the specified tags from the specified WorkSpaces resource.
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
+  /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(params: WorkSpaces.Types.DeleteWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
+  /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
   /**
    * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
    */
@@ -404,6 +420,14 @@ declare class WorkSpaces extends Service {
    */
   updateRulesOfIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
   /**
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(params: WorkSpaces.Types.UpdateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
    * Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.  For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
    */
   updateWorkspaceImagePermission(params: WorkSpaces.Types.UpdateWorkspaceImagePermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
@@ -656,6 +680,30 @@ declare namespace WorkSpaces {
   }
   export interface CreateTagsResult {
   }
+  export interface CreateWorkspaceBundleRequest {
+    /**
+     * The name of the bundle.
+     */
+    BundleName: WorkspaceBundleName;
+    /**
+     * The description of the bundle.
+     */
+    BundleDescription: WorkspaceBundleDescription;
+    /**
+     * The identifier of the image that is used to create the bundle.
+     */
+    ImageId: WorkspaceImageId;
+    ComputeType: ComputeType;
+    UserStorage: UserStorage;
+    RootStorage?: RootStorage;
+    /**
+     * The tags associated with the bundle.  To add tags at the same time that you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceBundleResult {
+    WorkspaceBundle?: WorkspaceBundle;
+  }
   export interface CreateWorkspacesRequest {
     /**
      * The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -732,6 +780,14 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsResult {
   }
+  export interface DeleteWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+  }
+  export interface DeleteWorkspaceBundleResult {
+  }
   export interface DeleteWorkspaceImageRequest {
     /**
      * The identifier of the image.
@@ -760,7 +816,7 @@ declare namespace WorkSpaces {
      */
     AccountModifications?: AccountModificationList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -812,7 +868,7 @@ declare namespace WorkSpaces {
      */
     ConnectionAliasPermissions?: ConnectionAliasPermissions;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -840,7 +896,7 @@ declare namespace WorkSpaces {
      */
     ConnectionAliases?: ConnectionAliasList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -864,7 +920,7 @@ declare namespace WorkSpaces {
      */
     Result?: WorkspacesIpGroupsList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -886,7 +942,7 @@ declare namespace WorkSpaces {
      */
     BundleIds?: BundleIdList;
     /**
-     * The owner of the bundles. You cannot combine this parameter with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+     * The owner of the bundles. You cannot combine this parameter with any other filter. To describe the bundles provided by AWS, specify AMAZON. To describe the bundles that belong to your account, don't specify a value.
      */
     Owner?: BundleOwner;
     /**
@@ -900,7 +956,7 @@ declare namespace WorkSpaces {
      */
     Bundles?: BundleList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
@@ -924,7 +980,7 @@ declare namespace WorkSpaces {
      */
     Directories?: DirectoryList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -952,7 +1008,7 @@ declare namespace WorkSpaces {
      */
     ImagePermissions?: ImagePermissions;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -980,7 +1036,7 @@ declare namespace WorkSpaces {
      */
     Images?: WorkspaceImageList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1016,7 +1072,7 @@ declare namespace WorkSpaces {
      */
     WorkspacesConnectionStatus?: WorkspaceConnectionStatusList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1052,7 +1108,7 @@ declare namespace WorkSpaces {
      */
     Workspaces?: WorkspaceList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1198,7 +1254,7 @@ declare namespace WorkSpaces {
      */
     ManagementCidrRanges?: DedicatedTenancyCidrRangeList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1559,6 +1615,18 @@ declare namespace WorkSpaces {
   }
   export interface UpdateRulesOfIpGroupResult {
   }
+  export interface UpdateWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+  }
+  export interface UpdateWorkspaceBundleResult {
+  }
   export interface UpdateWorkspaceImagePermissionRequest {
     /**
      * The identifier of the image.
@@ -1578,7 +1646,7 @@ declare namespace WorkSpaces {
   export type UserName = string;
   export interface UserStorage {
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
     Capacity?: NonEmptyString;
   }
@@ -1678,7 +1746,7 @@ declare namespace WorkSpaces {
   }
   export interface WorkspaceBundle {
     /**
-     * The bundle identifier.
+     * The identifier of the bundle.
      */
     BundleId?: BundleId;
     /**
@@ -1690,11 +1758,11 @@ declare namespace WorkSpaces {
      */
     Owner?: BundleOwner;
     /**
-     * A description.
+     * The description of the bundle.
      */
     Description?: Description;
     /**
-     * The image identifier of the bundle.
+     * The identifier of the image that was used to create the bundle.
      */
     ImageId?: WorkspaceImageId;
     /**
@@ -1702,18 +1770,24 @@ declare namespace WorkSpaces {
      */
     RootStorage?: RootStorage;
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
     UserStorage?: UserStorage;
     /**
-     * The compute type. For more information, see Amazon WorkSpaces Bundles.
+     * The compute type of the bundle. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeType?: ComputeType;
     /**
      * The last time that the bundle was updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * The time when the bundle was created.
+     */
+    CreationTime?: Timestamp;
   }
+  export type WorkspaceBundleDescription = string;
+  export type WorkspaceBundleName = string;
   export interface WorkspaceConnectionStatus {
     /**
      * The identifier of the WorkSpace.

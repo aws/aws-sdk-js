@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.862.0-->
+<!--LATEST=2.863.0-->
 <!--ENTRYINSERT-->
+
+## 2.863.0
+* feature: CUR: - Added optional billingViewArn field for OSG.
+* feature: MediaTailor: MediaTailor channel assembly is a new manifest-only service that allows you to assemble linear streams using your existing VOD content.
+* feature: WorkSpaces: Adds API support for WorkSpaces bundle management operations.
 
 ## 2.862.0
 * feature: Comprehend: ContainsPiiEntities API analyzes the input text for the presence of personally identifiable information(PII) and returns the labels of identified PII entity types such as name, address etc.

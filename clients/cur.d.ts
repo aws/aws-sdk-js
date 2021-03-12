@@ -48,6 +48,7 @@ declare namespace CUR {
   export type AWSRegion = "af-south-1"|"ap-east-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-north-1"|"eu-south-1"|"me-south-1"|"sa-east-1"|"us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"cn-north-1"|"cn-northwest-1"|string;
   export type AdditionalArtifact = "REDSHIFT"|"QUICKSIGHT"|"ATHENA"|string;
   export type AdditionalArtifactList = AdditionalArtifact[];
+  export type BillingViewArn = string;
   export type CompressionFormat = "ZIP"|"GZIP"|"Parquet"|string;
   export interface DeleteReportDefinitionRequest {
     /**
@@ -111,6 +112,10 @@ declare namespace CUR {
      * Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
      */
     ReportVersioning?: ReportVersioning;
+    /**
+     *  The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs. 
+     */
+    BillingViewArn?: BillingViewArn;
   }
   export type ReportDefinitionList = ReportDefinition[];
   export type ReportFormat = "textORcsv"|"Parquet"|string;

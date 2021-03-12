@@ -238,6 +238,40 @@
       ],
       "documentation": "<p>Creates the specified tags for the specified WorkSpaces resource.</p>"
     },
+    "CreateWorkspaceBundle": {
+      "name": "CreateWorkspaceBundle",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateWorkspaceBundleRequest"
+      },
+      "output": {
+        "shape": "CreateWorkspaceBundleResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html\"> Create a Custom WorkSpaces Image and Bundle</a>.</p>"
+    },
     "CreateWorkspaces": {
       "name": "CreateWorkspaces",
       "http": {
@@ -343,6 +377,34 @@
         }
       ],
       "documentation": "<p>Deletes the specified tags from the specified WorkSpaces resource.</p>"
+    },
+    "DeleteWorkspaceBundle": {
+      "name": "DeleteWorkspaceBundle",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteWorkspaceBundleRequest"
+      },
+      "output": {
+        "shape": "DeleteWorkspaceBundleResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAssociatedException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html\"> Delete a Custom WorkSpaces Bundle or Image</a>.</p>"
     },
     "DeleteWorkspaceImage": {
       "name": "DeleteWorkspaceImage",
@@ -1278,6 +1340,34 @@
       ],
       "documentation": "<p>Replaces the current rules of the specified IP access control group with the specified rules.</p>"
     },
+    "UpdateWorkspaceBundle": {
+      "name": "UpdateWorkspaceBundle",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateWorkspaceBundleRequest"
+      },
+      "output": {
+        "shape": "UpdateWorkspaceBundleResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html\"> Update a Custom WorkSpaces Bundle</a>.</p> <important> <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them.</p> </important>"
+    },
     "UpdateWorkspaceImagePermission": {
       "name": "UpdateWorkspaceImagePermission",
       "http": {
@@ -1532,7 +1622,7 @@
           "documentation": "<p>The compute type.</p>"
         }
       },
-      "documentation": "<p>Describes the compute type.</p>"
+      "documentation": "<p>Describes the compute type of the bundle.</p>"
     },
     "ComputerName": {
       "type": "string"
@@ -1787,6 +1877,51 @@
       "type": "structure",
       "members": {}
     },
+    "CreateWorkspaceBundleRequest": {
+      "type": "structure",
+      "required": [
+        "BundleName",
+        "BundleDescription",
+        "ImageId",
+        "ComputeType",
+        "UserStorage"
+      ],
+      "members": {
+        "BundleName": {
+          "shape": "WorkspaceBundleName",
+          "documentation": "<p>The name of the bundle.</p>"
+        },
+        "BundleDescription": {
+          "shape": "WorkspaceBundleDescription",
+          "documentation": "<p>The description of the bundle.</p>"
+        },
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image that is used to create the bundle.</p>"
+        },
+        "ComputeType": {
+          "shape": "ComputeType"
+        },
+        "UserStorage": {
+          "shape": "UserStorage"
+        },
+        "RootStorage": {
+          "shape": "RootStorage"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags associated with the bundle.</p> <note> <p>To add tags at the same time that you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p> </note>"
+        }
+      }
+    },
+    "CreateWorkspaceBundleResult": {
+      "type": "structure",
+      "members": {
+        "WorkspaceBundle": {
+          "shape": "WorkspaceBundle"
+        }
+      }
+    },
     "CreateWorkspacesRequest": {
       "type": "structure",
       "required": [
@@ -1929,6 +2064,19 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteWorkspaceBundleRequest": {
+      "type": "structure",
+      "members": {
+        "BundleId": {
+          "shape": "BundleId",
+          "documentation": "<p>The identifier of the bundle.</p>"
+        }
+      }
+    },
+    "DeleteWorkspaceBundleResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteWorkspaceImageRequest": {
       "type": "structure",
       "required": [
@@ -1979,7 +2127,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2054,7 +2202,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2088,7 +2236,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2118,7 +2266,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2152,7 +2300,7 @@
         },
         "Owner": {
           "shape": "BundleOwner",
-          "documentation": "<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>"
+          "documentation": "<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>To describe the bundles provided by AWS, specify <code>AMAZON</code>. To describe the bundles that belong to your account, don't specify a value.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
@@ -2169,7 +2317,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. This token is valid for one day and must be used within that time frame.</p>"
         }
       }
     },
@@ -2199,7 +2347,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2236,7 +2384,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2270,7 +2418,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2321,7 +2469,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2363,7 +2511,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -2667,7 +2815,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
         }
       }
     },
@@ -3399,6 +3547,23 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateWorkspaceBundleRequest": {
+      "type": "structure",
+      "members": {
+        "BundleId": {
+          "shape": "BundleId",
+          "documentation": "<p>The identifier of the bundle.</p>"
+        },
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        }
+      }
+    },
+    "UpdateWorkspaceBundleResult": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateWorkspaceImagePermissionRequest": {
       "type": "structure",
       "required": [
@@ -3435,10 +3600,10 @@
       "members": {
         "Capacity": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The size of the user storage.</p>"
+          "documentation": "<p>The size of the user volume.</p>"
         }
       },
-      "documentation": "<p>Describes the user storage for a WorkSpace bundle.</p>"
+      "documentation": "<p>Describes the user volume for a WorkSpace bundle.</p>"
     },
     "UserVolumeSizeGib": {
       "type": "integer"
@@ -3551,7 +3716,7 @@
       "members": {
         "BundleId": {
           "shape": "BundleId",
-          "documentation": "<p>The bundle identifier.</p>"
+          "documentation": "<p>The identifier of the bundle.</p>"
         },
         "Name": {
           "shape": "NonEmptyString",
@@ -3563,11 +3728,11 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>A description.</p>"
+          "documentation": "<p>The description of the bundle.</p>"
         },
         "ImageId": {
           "shape": "WorkspaceImageId",
-          "documentation": "<p>The image identifier of the bundle.</p>"
+          "documentation": "<p>The identifier of the image that was used to create the bundle.</p>"
         },
         "RootStorage": {
           "shape": "RootStorage",
@@ -3575,18 +3740,34 @@
         },
         "UserStorage": {
           "shape": "UserStorage",
-          "documentation": "<p>The size of the user storage.</p>"
+          "documentation": "<p>The size of the user volume.</p>"
         },
         "ComputeType": {
           "shape": "ComputeType",
-          "documentation": "<p>The compute type. For more information, see <a href=\"http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles\">Amazon WorkSpaces Bundles</a>.</p>"
+          "documentation": "<p>The compute type of the bundle. For more information, see <a href=\"http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles\">Amazon WorkSpaces Bundles</a>.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
           "documentation": "<p>The last time that the bundle was updated.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the bundle was created.</p>"
         }
       },
       "documentation": "<p>Describes a WorkSpace bundle.</p>"
+    },
+    "WorkspaceBundleDescription": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_./() -]+$"
+    },
+    "WorkspaceBundleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_./()\\\\-]+$"
     },
     "WorkspaceConnectionStatus": {
       "type": "structure",
