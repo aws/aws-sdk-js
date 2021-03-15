@@ -770,6 +770,10 @@ declare namespace CodeDeploy {
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
     /**
+     * Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.
+     */
+    outdatedInstancesStrategy?: OutdatedInstancesStrategy;
+    /**
      * Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.
      */
     deploymentStyle?: DeploymentStyle;
@@ -929,7 +933,7 @@ declare namespace CodeDeploy {
   }
   export type DeploymentConfigName = string;
   export type DeploymentConfigsList = DeploymentConfigName[];
-  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CloudFormation"|"CloudFormationRollback"|string;
+  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CodeDeployAutoUpdate"|"CloudFormation"|"CloudFormationRollback"|string;
   export type DeploymentGroupId = string;
   export interface DeploymentGroupInfo {
     /**
@@ -984,6 +988,10 @@ declare namespace CodeDeploy {
      * Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
      */
     deploymentStyle?: DeploymentStyle;
+    /**
+     * Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.
+     */
+    outdatedInstancesStrategy?: OutdatedInstancesStrategy;
     /**
      * Information about blue/green deployment options for a deployment group.
      */
@@ -1075,7 +1083,7 @@ declare namespace CodeDeploy {
      */
     description?: Description;
     /**
-     * The means by which the deployment was created:    user: A user created the deployment.    autoscaling: Amazon EC2 Auto Scaling created the deployment.    codeDeployRollback: A rollback process created the deployment.  
+     * The means by which the deployment was created:    user: A user created the deployment.    autoscaling: Amazon EC2 Auto Scaling created the deployment.    codeDeployRollback: A rollback process created the deployment.    CodeDeployAutoUpdate: An auto-update process created the deployment when it detected outdated EC2 instances.  
      */
     creator?: DeploymentCreator;
     /**
@@ -1134,6 +1142,7 @@ declare namespace CodeDeploy {
      * The unique ID for an external resource (for example, a CloudFormation stack ID) that is linked to this deployment.
      */
     externalId?: ExternalId;
+    relatedDeployments?: RelatedDeployments;
   }
   export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"|string;
   export interface DeploymentOverview {
@@ -1994,13 +2003,13 @@ declare namespace CodeDeploy {
   export type Message = string;
   export interface MinimumHealthyHosts {
     /**
-     * The minimum healthy instance value.
-     */
-    value?: MinimumHealthyHostsValue;
-    /**
      * The minimum healthy instance type:    HOST_COUNT: The minimum number of healthy instances as an absolute value.    FLEET_PERCENT: The minimum number of healthy instances as a percentage of the total number of instances in the deployment.   In an example of nine instances, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instances at a time. The deployment is successful if four or more instances are deployed to successfully. Otherwise, the deployment fails.  In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.  For more information, see AWS CodeDeploy Instance Health in the AWS CodeDeploy User Guide.
      */
     type?: MinimumHealthyHostsType;
+    /**
+     * The minimum healthy instance value.
+     */
+    value?: MinimumHealthyHostsValue;
   }
   export type MinimumHealthyHostsType = "HOST_COUNT"|"FLEET_PERCENT"|string;
   export type MinimumHealthyHostsValue = number;
@@ -2013,6 +2022,7 @@ declare namespace CodeDeploy {
     onPremisesTagSetList?: OnPremisesTagSetList;
   }
   export type OnPremisesTagSetList = TagFilterList[];
+  export type OutdatedInstancesStrategy = "UPDATE"|"IGNORE"|string;
   export type Percentage = number;
   export interface PutLifecycleEventHookExecutionStatusInput {
     /**
@@ -2024,7 +2034,7 @@ declare namespace CodeDeploy {
      */
     lifecycleEventHookExecutionId?: LifecycleEventHookExecutionId;
     /**
-     * The result of a Lambda function that validates a deployment lifecycle event (Succeeded or Failed).
+     * The result of a Lambda function that validates a deployment lifecycle event. Succeeded and Failed are the only valid values for status.
      */
     status?: LifecycleEventStatus;
   }
@@ -2075,6 +2085,16 @@ declare namespace CodeDeploy {
     iamUserArn?: IamUserArn;
   }
   export type RegistrationStatus = "Registered"|"Deregistered"|string;
+  export interface RelatedDeployments {
+    /**
+     * The deployment ID of the root deployment that triggered this deployment.
+     */
+    autoUpdateOutdatedInstancesRootDeploymentId?: DeploymentId;
+    /**
+     * The deployment IDs of 'auto-update outdated instances' deployments triggered by this deployment.
+     */
+    autoUpdateOutdatedInstancesDeploymentIds?: DeploymentsList;
+  }
   export interface RemoveTagsFromOnPremisesInstancesInput {
     /**
      * The tag key-value pairs to remove from the on-premises instances.
@@ -2413,6 +2433,10 @@ declare namespace CodeDeploy {
      * Information for an automatic rollback configuration that is added or changed when a deployment group is updated.
      */
     autoRollbackConfiguration?: AutoRollbackConfiguration;
+    /**
+     * Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.
+     */
+    outdatedInstancesStrategy?: OutdatedInstancesStrategy;
     /**
      * Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
      */

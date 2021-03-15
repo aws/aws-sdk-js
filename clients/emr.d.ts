@@ -976,7 +976,7 @@ declare namespace EMR {
      */
     EngineSecurityGroupId: XmlStringMaxLen256;
     /**
-     * The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
+     * The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
      */
     DefaultS3Location: XmlString;
     /**
@@ -2532,6 +2532,10 @@ declare namespace EMR {
      * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.  
      */
     CapacityReservationPreference?: OnDemandCapacityReservationPreference;
+    /**
+     * The ARN of the Capacity Reservation resource group in which to run the instance.
+     */
+    CapacityReservationResourceGroupArn?: XmlStringMaxLen256;
   }
   export type OnDemandCapacityReservationPreference = "open"|"none"|string;
   export type OnDemandCapacityReservationUsageStrategy = "use-capacity-reservations-first"|string;
@@ -3222,7 +3226,7 @@ declare namespace EMR {
      */
     CreationTime?: _Date;
     /**
-     * The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
+     * The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
      */
     DefaultS3Location?: XmlString;
     /**
@@ -3305,7 +3309,7 @@ declare namespace EMR {
      */
     SubnetIds?: SubnetIdList;
     /**
-     * A default Amazon S3 location to back up Workspaces and notebook files for the Amazon EMR Studio. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
+     * The Amazon S3 location to back up Workspaces and notebook files for the Amazon EMR Studio.
      */
     DefaultS3Location?: XmlString;
   }

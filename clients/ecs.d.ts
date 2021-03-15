@@ -173,6 +173,14 @@ declare class ECS extends Service {
    */
   discoverPollEndpoint(callback?: (err: AWSError, data: ECS.Types.DiscoverPollEndpointResponse) => void): Request<ECS.Types.DiscoverPollEndpointResponse, AWSError>;
   /**
+   * Runs a command remotely on a container within a task.
+   */
+  executeCommand(params: ECS.Types.ExecuteCommandRequest, callback?: (err: AWSError, data: ECS.Types.ExecuteCommandResponse) => void): Request<ECS.Types.ExecuteCommandResponse, AWSError>;
+  /**
+   * Runs a command remotely on a container within a task.
+   */
+  executeCommand(callback?: (err: AWSError, data: ECS.Types.ExecuteCommandResponse) => void): Request<ECS.Types.ExecuteCommandResponse, AWSError>;
+  /**
    * Lists the account settings for a specified principal.
    */
   listAccountSettings(params: ECS.Types.ListAccountSettingsRequest, callback?: (err: AWSError, data: ECS.Types.ListAccountSettingsResponse) => void): Request<ECS.Types.ListAccountSettingsResponse, AWSError>;
@@ -364,6 +372,14 @@ declare class ECS extends Service {
    * Modifies the parameters for a capacity provider.
    */
   updateCapacityProvider(callback?: (err: AWSError, data: ECS.Types.UpdateCapacityProviderResponse) => void): Request<ECS.Types.UpdateCapacityProviderResponse, AWSError>;
+  /**
+   * Updates the cluster.
+   */
+  updateCluster(params: ECS.Types.UpdateClusterRequest, callback?: (err: AWSError, data: ECS.Types.UpdateClusterResponse) => void): Request<ECS.Types.UpdateClusterResponse, AWSError>;
+  /**
+   * Updates the cluster.
+   */
+  updateCluster(callback?: (err: AWSError, data: ECS.Types.UpdateClusterResponse) => void): Request<ECS.Types.UpdateClusterResponse, AWSError>;
   /**
    * Modifies the settings to use for a cluster.
    */
@@ -576,11 +592,11 @@ declare namespace ECS {
      */
     capacityProvider: String;
     /**
-     * The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. For example, if you have a strategy that contains two capacity providers and both have a weight of 1, then when the base is satisfied, the tasks will be split evenly across the two capacity providers. Using that same logic, if you specify a weight of 1 for capacityProviderA and a weight of 4 for capacityProviderB, then for every one task that is run using capacityProviderA, four tasks would use capacityProviderB.
+     * The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. If no weight value is specified, the default value of 0 is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of 0 will not be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of 0, any RunTask or CreateService actions using the capacity provider strategy will fail. An example scenario for using weights is defining a strategy that contains two capacity providers and both have a weight of 1, then when the base is satisfied, the tasks will be split evenly across the two capacity providers. Using that same logic, if you specify a weight of 1 for capacityProviderA and a weight of 4 for capacityProviderB, then for every one task that is run using capacityProviderA, four tasks would use capacityProviderB.
      */
     weight?: CapacityProviderStrategyItemWeight;
     /**
-     * The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
+     * The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used.
      */
     base?: CapacityProviderStrategyItemBase;
   }
@@ -597,6 +613,10 @@ declare namespace ECS {
      * A user-generated string that you use to identify your cluster.
      */
     clusterName?: String;
+    /**
+     * The execute command configuration for the cluster.
+     */
+    configuration?: ClusterConfiguration;
     /**
      * The status of the cluster. The following are the possible states that will be returned.  ACTIVE  The cluster is ready to accept tasks and if applicable you can register container instances with the cluster.  PROVISIONING  The cluster has capacity providers associated with it and the resources needed for the capacity provider are being created.  DEPROVISIONING  The cluster has capacity providers associated with it and the resources needed for the capacity provider are being deleted.  FAILED  The cluster has capacity providers associated with it and the resources needed for the capacity provider have failed to create.  INACTIVE  The cluster has been deleted. Clusters with an INACTIVE status may remain discoverable in your account for a period of time. However, this behavior is subject to change in the future, so you should not rely on INACTIVE clusters persisting.  
      */
@@ -646,7 +666,13 @@ declare namespace ECS {
      */
     attachmentsStatus?: String;
   }
-  export type ClusterField = "ATTACHMENTS"|"SETTINGS"|"STATISTICS"|"TAGS"|string;
+  export interface ClusterConfiguration {
+    /**
+     * The details of the execute command configuration.
+     */
+    executeCommandConfiguration?: ExecuteCommandConfiguration;
+  }
+  export type ClusterField = "ATTACHMENTS"|"CONFIGURATIONS"|"SETTINGS"|"STATISTICS"|"TAGS"|string;
   export type ClusterFieldList = ClusterField[];
   export interface ClusterSetting {
     /**
@@ -713,6 +739,10 @@ declare namespace ECS {
      * The health status of the container. If health checks are not configured for this container in its task definition, then it reports the health status as UNKNOWN.
      */
     healthStatus?: HealthStatus;
+    /**
+     * The details of any Amazon ECS managed agents associated with the container.
+     */
+    managedAgents?: ManagedAgents;
     /**
      * The number of CPU units set for the container. The value will be 0 if no value was specified in the container definition when the task definition was registered.
      */
@@ -829,7 +859,7 @@ declare namespace ECS {
      */
     disableNetworking?: BoxedBoolean;
     /**
-     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This parameter maps to Privileged in the Create a container section of the Docker Remote API and the --privileged option to docker run.  This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This parameter maps to Privileged in the Create a container section of the Docker Remote API and the --privileged option to docker run.  This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     privileged?: BoxedBoolean;
     /**
@@ -1076,11 +1106,15 @@ declare namespace ECS {
      */
     settings?: ClusterSettings;
     /**
-     * The short name of one or more capacity providers to associate with the cluster. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created and not already associated with another cluster. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. The PutClusterCapacityProviders API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
+     * The execute command configuration for the cluster.
+     */
+    configuration?: ClusterConfiguration;
+    /**
+     * The short name of one or more capacity providers to associate with the cluster. A capacity provider must be associated with a cluster before it can be included as part of the default capacity provider strategy of the cluster or used in a capacity provider strategy when calling the CreateService or RunTask actions. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created and not already associated with another cluster. New Auto Scaling group capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. The PutClusterCapacityProviders API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
      */
     capacityProviders?: StringList;
     /**
-     * The capacity provider strategy to use by default for the cluster. When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used. A capacity provider strategy consists of one or more capacity providers along with the base and weight to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an ACTIVE or UPDATING status can be used. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the PutClusterCapacityProviders API operation.
+     * The capacity provider strategy to set as the default for the cluster. When a default capacity provider strategy is set for a cluster, when calling the RunTask or CreateService APIs wtih no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used. If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the PutClusterCapacityProviders API operation.
      */
     defaultCapacityProviderStrategy?: CapacityProviderStrategy;
   }
@@ -1104,11 +1138,11 @@ declare namespace ECS {
      */
     taskDefinition?: String;
     /**
-     * A load balancer object representing the load balancers to use with your service. For more information, see Service Load Balancing in the Amazon Elastic Container Service Developer Guide. If the service is using the rolling update (ECS) deployment controller and using either an Application Load Balancer or Network Load Balancer, you must specify one or more target group ARNs to attach to the service. The service-linked role is required for services that make use of multiple target groups. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide. If the service is using the CODE_DEPLOY deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When creating an AWS CodeDeploy deployment group, you specify two target groups (referred to as a targetGroupPair). During a deployment, AWS CodeDeploy determines which task set in your service has the status PRIMARY and associates one target group with it, and then associates the other target group with the replacement task set. The load balancer can also have up to two listeners: a required listener for production traffic and an optional listener that allows you perform validation tests with Lambda functions before routing production traffic to it. After you create a service using the ECS deployment controller, the load balancer name or target group ARN, container name, and container port specified in the service definition are immutable. If you are using the CODE_DEPLOY deployment controller, these values can be changed when updating the service. For Application Load Balancers and Network Load Balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. The load balancer name parameter must be omitted. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here. For Classic Load Balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. The target group ARN parameter must be omitted. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here. Services with tasks that use the awsvpc network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose ip as the target type, not instance, because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.
+     * A load balancer object representing the load balancers to use with your service. For more information, see Service Load Balancing in the Amazon Elastic Container Service Developer Guide. If the service is using the rolling update (ECS) deployment controller and using either an Application Load Balancer or Network Load Balancer, you must specify one or more target group ARNs to attach to the service. The service-linked role is required for services that make use of multiple target groups. For more information, see Using service-linked roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide. If the service is using the CODE_DEPLOY deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When creating an AWS CodeDeploy deployment group, you specify two target groups (referred to as a targetGroupPair). During a deployment, AWS CodeDeploy determines which task set in your service has the status PRIMARY and associates one target group with it, and then associates the other target group with the replacement task set. The load balancer can also have up to two listeners: a required listener for production traffic and an optional listener that allows you perform validation tests with Lambda functions before routing production traffic to it. After you create a service using the ECS deployment controller, the load balancer name or target group ARN, container name, and container port specified in the service definition are immutable. If you are using the CODE_DEPLOY deployment controller, these values can be changed when updating the service. For Application Load Balancers and Network Load Balancers, this object must contain the load balancer target group ARN, the container name (as it appears in a container definition), and the container port to access from the load balancer. The load balancer name parameter must be omitted. When a task from this service is placed on a container instance, the container instance and port combination is registered as a target in the target group specified here. For Classic Load Balancers, this object must contain the load balancer name, the container name (as it appears in a container definition), and the container port to access from the load balancer. The target group ARN parameter must be omitted. When a task from this service is placed on a container instance, the container instance is registered with the load balancer specified here. Services with tasks that use the awsvpc network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose ip as the target type, not instance, because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.
      */
     loadBalancers?: LoadBalancers;
     /**
-     * The details of the service discovery registries to assign to this service. For more information, see Service Discovery.  Service discovery is supported for Fargate tasks if you are using platform version v1.1.0 or later. For more information, see AWS Fargate Platform Versions. 
+     * The details of the service discovery registries to assign to this service. For more information, see Service discovery.  Service discovery is supported for Fargate tasks if you are using platform version v1.1.0 or later. For more information, see AWS Fargate platform versions. 
      */
     serviceRegistries?: ServiceRegistries;
     /**
@@ -1120,19 +1154,19 @@ declare namespace ECS {
      */
     clientToken?: String;
     /**
-     * The launch type on which to run your service. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
+     * The launch type on which to run your service. The accepted values are FARGATE and EC2. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are launched on Amazon EC2 instances registered to your cluster. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
      */
     launchType?: LaunchType;
     /**
-     * The capacity provider strategy to use for the service. A capacity provider strategy consists of one or more capacity providers along with the base and weight to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an ACTIVE or UPDATING status can be used. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. The PutClusterCapacityProviders API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
+     * The capacity provider strategy to use for the service. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used.
      */
     capacityProviderStrategy?: CapacityProviderStrategy;
     /**
-     * The platform version that your tasks in the service are running on. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     * The platform version that your tasks in the service are running on. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default. For more information, see AWS Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
     /**
-     * The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the awsvpc network mode. If you specify the role parameter, you must also specify a load balancer object with the loadBalancers parameter.  If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the awsvpc network mode or if the service is configured to use service discovery, an external deployment controller, multiple target groups, or Elastic Inference accelerators in which case you should not specify a role here. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide.  If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name bar has a path of /foo/ then you would specify /foo/bar as the role name. For more information, see Friendly Names and Paths in the IAM User Guide.
+     * The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the awsvpc network mode. If you specify the role parameter, you must also specify a load balancer object with the loadBalancers parameter.  If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the awsvpc network mode or if the service is configured to use service discovery, an external deployment controller, multiple target groups, or Elastic Inference accelerators in which case you should not specify a role here. For more information, see Using service-linked roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide.  If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name bar has a path of /foo/ then you would specify /foo/bar as the role name. For more information, see Friendly names and paths in the IAM User Guide.
      */
     role?: String;
     /**
@@ -1148,7 +1182,7 @@ declare namespace ECS {
      */
     placementStrategy?: PlacementStrategies;
     /**
-     * The network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.
+     * The network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see Task networking in the Amazon Elastic Container Service Developer Guide.
      */
     networkConfiguration?: NetworkConfiguration;
     /**
@@ -1175,6 +1209,10 @@ declare namespace ECS {
      * Specifies whether to propagate the tags from the task definition or the service to the tasks in the service. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the TagResource API action.
      */
     propagateTags?: PropagateTags;
+    /**
+     * Whether or not the execute command functionality is enabled for the service. If true, this enables execute command functionality on all containers in the service tasks.
+     */
+    enableExecuteCommand?: Boolean;
   }
   export interface CreateServiceResponse {
     /**
@@ -1735,6 +1773,91 @@ declare namespace ECS {
   export type EnvironmentFileType = "s3"|string;
   export type EnvironmentFiles = EnvironmentFile[];
   export type EnvironmentVariables = KeyValuePair[];
+  export interface ExecuteCommandConfiguration {
+    /**
+     * Specify an AWS Key Management Service key ID to encrypt the data between the local client and the container.
+     */
+    kmsKeyId?: String;
+    /**
+     * The log setting to use for redirecting logs for your execute command results. The following log settings are available.    NONE: The execute command session is not logged.    DEFAULT: The awslogs configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no awslogs log driver is configured in the task definition, the output won't be logged.    OVERRIDE: Specify the logging details as a part of logConfiguration. If the OVERRIDE logging option is specified, the logConfiguration is required.  
+     */
+    logging?: ExecuteCommandLogging;
+    /**
+     * The log configuration for the results of the execute command actions. The logs can be sent to CloudWatch Logs or an Amazon S3 bucket. When logging=OVERRIDE is specified, a logConfiguration must be provided.
+     */
+    logConfiguration?: ExecuteCommandLogConfiguration;
+  }
+  export interface ExecuteCommandLogConfiguration {
+    /**
+     * The name of the CloudWatch log group to send logs to.  The CloudWatch log group must already be created. 
+     */
+    cloudWatchLogGroupName?: String;
+    /**
+     * Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+     */
+    cloudWatchEncryptionEnabled?: Boolean;
+    /**
+     * The name of the S3 bucket to send logs to.  The S3 bucket must already be created. 
+     */
+    s3BucketName?: String;
+    /**
+     * Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+     */
+    s3EncryptionEnabled?: Boolean;
+    /**
+     * An optional folder in the S3 bucket to place logs in.
+     */
+    s3KeyPrefix?: String;
+  }
+  export type ExecuteCommandLogging = "NONE"|"DEFAULT"|"OVERRIDE"|string;
+  export interface ExecuteCommandRequest {
+    /**
+     * The Amazon Resource Name (ARN) or short name of the cluster the task is running in. If you do not specify a cluster, the default cluster is assumed.
+     */
+    cluster?: String;
+    /**
+     * The name of the container to execute the command on. A container name only needs to be specified for tasks containing multiple containers.
+     */
+    container?: String;
+    /**
+     * The command to run on the container.
+     */
+    command: String;
+    /**
+     * Use this flag to run your command in interactive mode.
+     */
+    interactive: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) or ID of the task the container is part of.
+     */
+    task: String;
+  }
+  export interface ExecuteCommandResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the cluster.
+     */
+    clusterArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the container.
+     */
+    containerArn?: String;
+    /**
+     * The name of the container.
+     */
+    containerName?: String;
+    /**
+     * Whether or not the execute command session is running in interactive mode.
+     */
+    interactive?: Boolean;
+    /**
+     * The details of the SSM session that was created for this instance of execute-command.
+     */
+    session?: Session;
+    /**
+     * The Amazon Resource Name (ARN) of the task.
+     */
+    taskArn?: String;
+  }
   export interface FSxWindowsFileServerAuthorizationConfig {
     /**
      * The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
@@ -1780,7 +1903,7 @@ declare namespace ECS {
      */
     type: FirelensConfigurationType;
     /**
-     * The options to use when configuring the log router. This field is optional and can be used to specify a custom configuration file or to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is "options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}. For more information, see Creating a Task Definition that Uses a FireLens Configuration in the Amazon Elastic Container Service Developer Guide.
+     * The options to use when configuring the log router. This field is optional and can be used to specify a custom configuration file or to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is "options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}. For more information, see Creating a Task Definition that Uses a FireLens Configuration in the Amazon Elastic Container Service Developer Guide.  Tasks hosted on AWS Fargate only support the file configuration file type. 
      */
     options?: FirelensConfigurationOptionsMap;
   }
@@ -2214,6 +2337,45 @@ declare namespace ECS {
   export type LogConfigurationOptionsMap = {[key: string]: String};
   export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk"|"awsfirelens"|string;
   export type Long = number;
+  export interface ManagedAgent {
+    /**
+     * The Unix timestamp for when the managed agent was last started.
+     */
+    lastStartedAt?: Timestamp;
+    /**
+     * The name of the managed agent. When the execute command feature is enabled, the managed agent name is ExecuteCommandAgent.
+     */
+    name?: ManagedAgentName;
+    /**
+     * The reason for why the managed agent is in the state it is in.
+     */
+    reason?: String;
+    /**
+     * The last known status of the managed agent.
+     */
+    lastStatus?: String;
+  }
+  export type ManagedAgentName = "ExecuteCommandAgent"|string;
+  export interface ManagedAgentStateChange {
+    /**
+     * The name of the container associated with the managed agent.
+     */
+    containerName: String;
+    /**
+     * The name of the managed agent.
+     */
+    managedAgentName: ManagedAgentName;
+    /**
+     * The status of the managed agent.
+     */
+    status: String;
+    /**
+     * The reason for the status of the managed agent.
+     */
+    reason?: String;
+  }
+  export type ManagedAgentStateChanges = ManagedAgentStateChange[];
+  export type ManagedAgents = ManagedAgent[];
   export interface ManagedScaling {
     /**
      * Whether or not to enable managed scaling for the capacity provider.
@@ -2506,7 +2668,7 @@ declare namespace ECS {
      */
     placementConstraints?: TaskDefinitionPlacementConstraints;
     /**
-     * The task launch type that Amazon ECS should validate the task definition against. This ensures that the task definition parameters are compatible with the specified launch type. If no value is specified, it defaults to EC2.
+     * The task launch type that Amazon ECS should validate the task definition against. A client exception is returned if the task definition doesn't validate against the compatibilities specified. If no value is specified, the parameter is omitted from the response.
      */
     requiresCompatibilities?: CompatibilityList;
     /**
@@ -2522,11 +2684,11 @@ declare namespace ECS {
      */
     tags?: Tags;
     /**
-     * The process namespace to use for the containers in the task. The valid values are host or task. If host is specified, then all containers within the tasks that specified the host PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see PID settings in the Docker run reference. If the host PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see Docker security.  This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * The process namespace to use for the containers in the task. The valid values are host or task. If host is specified, then all containers within the tasks that specified the host PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see PID settings in the Docker run reference. If the host PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see Docker security.  This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     pidMode?: PidMode;
     /**
-     * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     ipcMode?: IpcMode;
     proxyConfiguration?: ProxyConfiguration;
@@ -2593,7 +2755,7 @@ declare namespace ECS {
   export type Resources = Resource[];
   export interface RunTaskRequest {
     /**
-     * The capacity provider strategy to use for the task. A capacity provider strategy consists of one or more capacity providers along with the base and weight to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an ACTIVE or UPDATING status can be used. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. The PutClusterCapacityProviders API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
+     * The capacity provider strategy to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used.
      */
     capacityProviderStrategy?: CapacityProviderStrategy;
     /**
@@ -2609,11 +2771,15 @@ declare namespace ECS {
      */
     enableECSManagedTags?: Boolean;
     /**
+     * Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task.
+     */
+    enableExecuteCommand?: Boolean;
+    /**
      * The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).
      */
     group?: String;
     /**
-     * The launch type on which to run your task. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
+     * The launch type on which to run your task. The accepted values are FARGATE and EC2. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are launched on Amazon EC2 instances registered to your cluster. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
      */
     launchType?: LaunchType;
     /**
@@ -2691,6 +2857,7 @@ declare namespace ECS {
     valueFrom: String;
   }
   export type SecretList = Secret[];
+  export type SensitiveString = string;
   export interface Service {
     /**
      * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the AWS account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
@@ -2808,6 +2975,10 @@ declare namespace ECS {
      * Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.
      */
     propagateTags?: PropagateTags;
+    /**
+     * Whether or not the execute command functionality is enabled for the service. If true, the execute command functionality is enabled for all containers in tasks as part of the service.
+     */
+    enableExecuteCommand?: Boolean;
   }
   export interface ServiceEvent {
     /**
@@ -2846,6 +3017,20 @@ declare namespace ECS {
     containerPort?: BoxedInteger;
   }
   export type Services = Service[];
+  export interface Session {
+    /**
+     * The ID of the execute command session.
+     */
+    sessionId?: String;
+    /**
+     * A URL back to managed agent on the container that the SSM Session Manager client uses to send commands and receive output from the container.
+     */
+    streamUrl?: String;
+    /**
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the container.
+     */
+    tokenValue?: SensitiveString;
+  }
   export interface Setting {
     /**
      * The Amazon ECS resource name.
@@ -2877,6 +3062,10 @@ declare namespace ECS {
      * Specifies whether to enable Amazon ECS managed tags for the task. For more information, see Tagging Your Amazon ECS Resources in the Amazon Elastic Container Service Developer Guide.
      */
     enableECSManagedTags?: Boolean;
+    /**
+     * Whether or not the execute command functionality is enabled for the task. If true, this enables execute command functionality on all containers in the task.
+     */
+    enableExecuteCommand?: Boolean;
     /**
      * The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).
      */
@@ -3026,6 +3215,10 @@ declare namespace ECS {
      */
     attachments?: AttachmentStateChanges;
     /**
+     * The details for the managed agent associated with the task.
+     */
+    managedAgents?: ManagedAgentStateChanges;
+    /**
      * The Unix timestamp for when the container image pull began.
      */
     pullStartedAt?: Timestamp;
@@ -3132,6 +3325,10 @@ declare namespace ECS {
      */
     desiredStatus?: String;
     /**
+     * Whether or not execute command functionality is enabled for this task. If true, this enables execute command functionality on all containers in the task.
+     */
+    enableExecuteCommand?: Boolean;
+    /**
      * The Unix timestamp for when the task execution stopped.
      */
     executionStoppedAt?: Timestamp;
@@ -3230,7 +3427,7 @@ declare namespace ECS {
      */
     family?: String;
     /**
-     * The short name or full Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf. For more information, see Amazon ECS Task Role in the Amazon Elastic Container Service Developer Guide. IAM roles for tasks on Windows require that the -EnableTaskIAMRole option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see Windows IAM Roles for Tasks in the Amazon Elastic Container Service Developer Guide.
+     * The short name or full Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf. For more information, see Amazon ECS Task Role in the Amazon Elastic Container Service Developer Guide. IAM roles for tasks on Windows require that the -EnableTaskIAMRole option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see Windows IAM roles for tasks in the Amazon Elastic Container Service Developer Guide.
      */
     taskRoleArn?: String;
     /**
@@ -3246,7 +3443,7 @@ declare namespace ECS {
      */
     revision?: Integer;
     /**
-     * The list of volume definitions for the task. If your tasks are using the Fargate launch type, the host and sourcePath parameters are not supported. For more information about volume definition parameters and defaults, see Amazon ECS Task Definitions in the Amazon Elastic Container Service Developer Guide.
+     * The list of data volume definitions for the task. For more information, see Using data volumes in tasks in the Amazon Elastic Container Service Developer Guide.  The host and sourcePath parameters are not supported for tasks run on AWS Fargate. 
      */
     volumes?: VolumeList;
     /**
@@ -3254,19 +3451,19 @@ declare namespace ECS {
      */
     status?: TaskDefinitionStatus;
     /**
-     * The container instance attributes required by your task. This field is not valid if you are using the Fargate launch type for your task.
+     * The container instance attributes required by your task. When an Amazon EC2 instance is registered to your cluster, the Amazon ECS container agent assigns some standard attributes to the instance. You can apply custom attributes, specified as key-value pairs using the Amazon ECS console or the PutAttributes API. These attributes are used when considering task placement for tasks hosted on Amazon EC2 instances. For more information, see Attributes in the Amazon Elastic Container Service Developer Guide.  This parameter is not supported for tasks run on AWS Fargate. 
      */
     requiresAttributes?: RequiresAttributes;
     /**
-     * An array of placement constraint objects to use for tasks. This field is not valid if you are using the Fargate launch type for your task.
+     * An array of placement constraint objects to use for tasks.  This parameter is not supported for tasks run on AWS Fargate. 
      */
     placementConstraints?: TaskDefinitionPlacementConstraints;
     /**
-     * The launch type to use with your task. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
+     * The task launch types the task definition validated against during task definition registration. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide.
      */
     compatibilities?: CompatibilityList;
     /**
-     * The launch type the task requires. If no value is specified, it will default to EC2. Valid values include EC2 and FARGATE.
+     * The task launch types the task definition was validated against. To determine which task launch types the task definition is validated for, see the TaskDefinition$compatibilities parameter.
      */
     requiresCompatibilities?: CompatibilityList;
     /**
@@ -3274,7 +3471,7 @@ declare namespace ECS {
      */
     cpu?: String;
     /**
-     * The amount (in MiB) of memory used by the task. If using the EC2 launch type, you must specify either a task-level memory value or a container-level memory value. This field is optional and any value can be used. If a task-level memory value is specified then the container-level memory value is optional. For more information regarding container-level memory and memory reservation, see ContainerDefinition. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25 vCPU)   1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)   2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)   Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)   Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)  
+     * The amount (in MiB) of memory used by the task. If your tasks will be run on Amazon EC2 instances, you must specify either a task-level memory value or a container-level memory value. This field is optional and any value can be used. If a task-level memory value is specified then the container-level memory value is optional. For more information regarding container-level memory and memory reservation, see ContainerDefinition. If your tasks will be run on AWS Fargate, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25 vCPU)   1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)   2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)   Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)   Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)  
      */
     memory?: String;
     /**
@@ -3282,11 +3479,11 @@ declare namespace ECS {
      */
     inferenceAccelerators?: InferenceAccelerators;
     /**
-     * The process namespace to use for the containers in the task. The valid values are host or task. If host is specified, then all containers within the tasks that specified the host PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see PID settings in the Docker run reference. If the host PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see Docker security.  This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * The process namespace to use for the containers in the task. The valid values are host or task. If host is specified, then all containers within the tasks that specified the host PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see PID settings in the Docker run reference. If the host PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see Docker security.  This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     pidMode?: PidMode;
     /**
-     * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     ipcMode?: IpcMode;
     /**
@@ -3315,7 +3512,7 @@ declare namespace ECS {
      */
     type?: TaskDefinitionPlacementConstraintType;
     /**
-     * A cluster query language expression to apply to the constraint. For more information, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.
+     * A cluster query language expression to apply to the constraint. For more information, see Cluster query language in the Amazon Elastic Container Service Developer Guide.
      */
     expression?: String;
   }
@@ -3404,7 +3601,7 @@ declare namespace ECS {
      */
     updatedAt?: Timestamp;
     /**
-     * The launch type the tasks in the task set are using. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
+     * The launch type the tasks in the task set are using. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide.
      */
     launchType?: LaunchType;
     /**
@@ -3412,7 +3609,7 @@ declare namespace ECS {
      */
     capacityProviderStrategy?: CapacityProviderStrategy;
     /**
-     * The platform version on which the tasks in the task set are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     * The AWS Fargate platform version on which the tasks in the task set are running. A platform version is only specified for tasks run on AWS Fargate. For more information, see AWS Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
     /**
@@ -3424,7 +3621,7 @@ declare namespace ECS {
      */
     loadBalancers?: LoadBalancers;
     /**
-     * The details of the service discovery registries to assign to this task set. For more information, see Service Discovery.
+     * The details of the service discovery registries to assign to this task set. For more information, see Service discovery.
      */
     serviceRegistries?: ServiceRegistries;
     /**
@@ -3506,6 +3703,23 @@ declare namespace ECS {
   }
   export interface UpdateCapacityProviderResponse {
     capacityProvider?: CapacityProvider;
+  }
+  export interface UpdateClusterRequest {
+    /**
+     * The name of the cluster to modify the settings for.
+     */
+    cluster: String;
+    /**
+     * The cluster settings for your cluster.
+     */
+    settings?: ClusterSettings;
+    /**
+     * The execute command configuration for the cluster.
+     */
+    configuration?: ClusterConfiguration;
+  }
+  export interface UpdateClusterResponse {
+    cluster?: Cluster;
   }
   export interface UpdateClusterSettingsRequest {
     /**
@@ -3623,6 +3837,10 @@ declare namespace ECS {
      * The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler ignores the Elastic Load Balancing health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
      */
     healthCheckGracePeriodSeconds?: BoxedInteger;
+    /**
+     * If true, this enables execute command functionality on all task containers. If you do not want to override the value that was set when the service was created, you can set this to null when performing this action.
+     */
+    enableExecuteCommand?: BoxedBoolean;
   }
   export interface UpdateServiceResponse {
     /**
@@ -3672,7 +3890,7 @@ declare namespace ECS {
      */
     host?: HostVolumeProperties;
     /**
-     * This parameter is specified when you are using Docker volumes. Docker volumes are only supported when you are using the EC2 launch type. Windows containers only support the use of the local driver. To use bind mounts, specify the host parameter instead.
+     * This parameter is specified when you are using Docker volumes. Windows containers only support the use of the local driver. To use bind mounts, specify the host parameter instead.  Docker volumes are not supported by tasks run on AWS Fargate. 
      */
     dockerVolumeConfiguration?: DockerVolumeConfiguration;
     /**

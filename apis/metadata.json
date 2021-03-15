@@ -999,5 +999,8 @@
     "prefix": "runtime.lex.v2",
     "name": "LexRuntimeV2",
     "cors": true
+  },
+  "fis": {
+    "name": "Fis"
   }
 }

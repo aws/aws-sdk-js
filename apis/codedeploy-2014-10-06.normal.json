@@ -2345,6 +2345,10 @@
           "shape": "AutoRollbackConfiguration",
           "documentation": "<p>Configuration information for an automatic rollback that is added when a deployment group is created.</p>"
         },
+        "outdatedInstancesStrategy": {
+          "shape": "OutdatedInstancesStrategy",
+          "documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision.</p> <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances.</p> <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.</p>"
+        },
         "deploymentStyle": {
           "shape": "DeploymentStyle",
           "documentation": "<p>Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.</p>"
@@ -2583,6 +2587,7 @@
         "autoscaling",
         "codeDeployRollback",
         "CodeDeploy",
+        "CodeDeployAutoUpdate",
         "CloudFormation",
         "CloudFormationRollback"
       ]
@@ -2644,6 +2649,10 @@
         "deploymentStyle": {
           "shape": "DeploymentStyle",
           "documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.</p>"
+        },
+        "outdatedInstancesStrategy": {
+          "shape": "OutdatedInstancesStrategy",
+          "documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision.</p> <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances.</p> <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.</p>"
         },
         "blueGreenDeploymentConfiguration": {
           "shape": "BlueGreenDeploymentConfiguration",
@@ -2757,7 +2766,7 @@
         },
         "creator": {
           "shape": "DeploymentCreator",
-          "documentation": "<p>The means by which the deployment was created:</p> <ul> <li> <p> <code>user</code>: A user created the deployment.</p> </li> <li> <p> <code>autoscaling</code>: Amazon EC2 Auto Scaling created the deployment.</p> </li> <li> <p> <code>codeDeployRollback</code>: A rollback process created the deployment.</p> </li> </ul>"
+          "documentation": "<p>The means by which the deployment was created:</p> <ul> <li> <p> <code>user</code>: A user created the deployment.</p> </li> <li> <p> <code>autoscaling</code>: Amazon EC2 Auto Scaling created the deployment.</p> </li> <li> <p> <code>codeDeployRollback</code>: A rollback process created the deployment.</p> </li> <li> <p> <code>CodeDeployAutoUpdate</code>: An auto-update process created the deployment when it detected outdated EC2 instances.</p> </li> </ul>"
         },
         "ignoreApplicationStopFailures": {
           "shape": "Boolean",
@@ -2814,6 +2823,9 @@
         "externalId": {
           "shape": "ExternalId",
           "documentation": "<p>The unique ID for an external resource (for example, a CloudFormation stack ID) that is linked to this deployment.</p>"
+        },
+        "relatedDeployments": {
+          "shape": "RelatedDeployments"
         }
       },
       "documentation": "<p>Information about a deployment.</p>"
@@ -4265,13 +4277,13 @@
     "MinimumHealthyHosts": {
       "type": "structure",
       "members": {
-        "value": {
-          "shape": "MinimumHealthyHostsValue",
-          "documentation": "<p>The minimum healthy instance value.</p>"
-        },
         "type": {
           "shape": "MinimumHealthyHostsType",
           "documentation": "<p>The minimum healthy instance type:</p> <ul> <li> <p> <code>HOST_COUNT</code>: The minimum number of healthy instances as an absolute value.</p> </li> <li> <p> <code>FLEET_PERCENT</code>: The minimum number of healthy instances as a percentage of the total number of instances in the deployment.</p> </li> </ul> <p>In an example of nine instances, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instances at a time. The deployment is successful if four or more instances are deployed to successfully. Otherwise, the deployment fails.</p> <note> <p>In a call to the <code>GetDeploymentConfig</code>, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
+        },
+        "value": {
+          "shape": "MinimumHealthyHostsValue",
+          "documentation": "<p>The minimum healthy instance value.</p>"
         }
       },
       "documentation": "<p>Information about minimum healthy instance.</p>"
@@ -4308,6 +4320,13 @@
         "shape": "TagFilterList"
       }
     },
+    "OutdatedInstancesStrategy": {
+      "type": "string",
+      "enum": [
+        "UPDATE",
+        "IGNORE"
+      ]
+    },
     "Percentage": {
       "type": "integer"
     },
@@ -4324,7 +4343,7 @@
         },
         "status": {
           "shape": "LifecycleEventStatus",
-          "documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event (<code>Succeeded</code> or <code>Failed</code>).</p>"
+          "documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event. <code>Succeeded</code> and <code>Failed</code> are the only valid values for <code>status</code>.</p>"
         }
       }
     },
@@ -4408,6 +4427,20 @@
         "Registered",
         "Deregistered"
       ]
+    },
+    "RelatedDeployments": {
+      "type": "structure",
+      "members": {
+        "autoUpdateOutdatedInstancesRootDeploymentId": {
+          "shape": "DeploymentId",
+          "documentation": "<p>The deployment ID of the root deployment that triggered this deployment.</p>"
+        },
+        "autoUpdateOutdatedInstancesDeploymentIds": {
+          "shape": "DeploymentsList",
+          "documentation": "<p>The deployment IDs of 'auto-update outdated instances' deployments triggered by this deployment.</p>"
+        }
+      },
+      "documentation": "<p>Information about deployments related to the specified deployment.</p>"
     },
     "RemoveTagsFromOnPremisesInstancesInput": {
       "type": "structure",
@@ -5011,6 +5044,10 @@
         "autoRollbackConfiguration": {
           "shape": "AutoRollbackConfiguration",
           "documentation": "<p>Information for an automatic rollback configuration that is added or changed when a deployment group is updated.</p>"
+        },
+        "outdatedInstancesStrategy": {
+          "shape": "OutdatedInstancesStrategy",
+          "documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not receive the deployed application revision.</p> <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new EC2 instances.</p> <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a deployment to update the new EC2 instances. This may result in instances having different revisions.</p>"
         },
         "deploymentStyle": {
           "shape": "DeploymentStyle",

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.863.0-->
+<!--LATEST=2.864.0-->
 <!--ENTRYINSERT-->
+
+## 2.864.0
+* feature: CodeDeploy: AWS CodeDeploy can now detect instances running an outdated revision of your application and automatically update them with the latest revision.
+* feature: ECS: This is for ecs exec feature release which includes two new APIs - execute-command and update-cluster and an AWS CLI customization for execute-command API
+* feature: EMR: Amazon EMR customers can now specify Resource Group to target Capacity Reservations in their EMR clusters with instance fleets using allocation strategy.
+* feature: Fis: Initial release of AWS Fault Injection Simulator, a managed service that enables you to perform fault injection experiments on your AWS workloads
 
 ## 2.863.0
 * feature: CUR: - Added optional billingViewArn field for OSG.
