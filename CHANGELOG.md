@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.864.0-->
+<!--LATEST=2.865.0-->
 <!--ENTRYINSERT-->
+
+## 2.865.0
+* feature: AccessAnalyzer: This release adds support for the ValidatePolicy API. IAM Access Analyzer is adding over 100 policy checks and actionable recommendations that help you validate your policies during authoring.
+* feature: GameLift: GameLift expands to six new AWS Regions, adds support for multi-location fleets to streamline management of hosting resources, and lets you customize more of the game session placement process.
+* feature: Lambda: Allow empty list for function response types
+* feature: MWAA: This release adds UPDATE_FAILED and UNAVAILABLE MWAA environment states.
+* feature: MediaConnect: This release adds support for the SRT-listener protocol on sources and outputs.
+* feature: MediaTailor: MediaTailor channel assembly is a new manifest-only service that allows you to assemble linear streams using your existing VOD content.
 
 ## 2.864.0
 * feature: CodeDeploy: AWS CodeDeploy can now detect instances running an outdated revision of your application and automatically update them with the latest revision.

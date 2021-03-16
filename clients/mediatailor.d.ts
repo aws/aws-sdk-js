@@ -164,14 +164,6 @@ declare class MediaTailor extends Service {
    */
   listPlaybackConfigurations(callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of programs on a specific channel.
-   */
-  listPrograms(params: MediaTailor.Types.ListProgramsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListProgramsResponse) => void): Request<MediaTailor.Types.ListProgramsResponse, AWSError>;
-  /**
-   * Retrieves a list of programs on a specific channel.
-   */
-  listPrograms(callback?: (err: AWSError, data: MediaTailor.Types.ListProgramsResponse) => void): Request<MediaTailor.Types.ListProgramsResponse, AWSError>;
-  /**
    * Retrieves a list of source locations.
    */
   listSourceLocations(params: MediaTailor.Types.ListSourceLocationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListSourceLocationsResponse) => void): Request<MediaTailor.Types.ListSourceLocationsResponse, AWSError>;
@@ -1036,30 +1028,6 @@ declare namespace MediaTailor {
      */
     NextToken?: __string;
   }
-  export interface ListProgramsRequest {
-    /**
-     * The identifier for the channel you are working on.
-     */
-    ChannelName: __string;
-    /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
-     */
-    MaxResults?: MaxResults;
-    /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
-     */
-    NextToken?: __string;
-  }
-  export interface ListProgramsResponse {
-    /**
-     * An array containing the programs for a channel.
-     */
-    Items?: __listOfProgram;
-    /**
-     * Pagination token from the list request. Use the token to fetch the next page of results.
-     */
-    NextToken?: __string;
-  }
   export interface ListSourceLocationsRequest {
     /**
      * Upper bound on number of records to return. The maximum number of results is 100.
@@ -1211,40 +1179,6 @@ declare namespace MediaTailor {
     VideoContentSourceUrl?: __string;
   }
   export type PlaybackMode = "LOOP"|string;
-  export interface Program {
-    /**
-     * The ad break configuration settings.
-     */
-    AdBreaks?: __listOfAdBreak;
-    /**
-     * The ARN of the program.
-     */
-    Arn: __string;
-    /**
-     * The name of the channel that the program belongs to.
-     */
-    ChannelName: __string;
-    /**
-     * The timestamp of when the program was created.
-     */
-    CreationTime?: __timestampUnix;
-    /**
-     * The timestamp of when the program was last modified.
-     */
-    LastModifiedTime?: __timestampUnix;
-    /**
-     * The name of the program.
-     */
-    ProgramName: __string;
-    /**
-     * The name of the source location.
-     */
-    SourceLocationName: __string;
-    /**
-     * The name that's used to refer to a VOD source.
-     */
-    VodSourceName: __string;
-  }
   export interface PutChannelPolicyRequest {
     /**
      * The identifier for the channel you are working on.
@@ -1757,7 +1691,6 @@ declare namespace MediaTailor {
   export type __listOfAdBreak = AdBreak[];
   export type __listOfChannel = Channel[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
-  export type __listOfProgram = Program[];
   export type __listOfScheduleEntry = ScheduleEntry[];
   export type __listOfSourceLocation = SourceLocation[];
   export type __listOfVodSource = VodSource[];

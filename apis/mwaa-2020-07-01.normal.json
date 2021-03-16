@@ -696,7 +696,9 @@
         "AVAILABLE",
         "UPDATING",
         "DELETING",
-        "DELETED"
+        "DELETED",
+        "UNAVAILABLE",
+        "UPDATE_FAILED"
       ]
     },
     "ErrorCode": {

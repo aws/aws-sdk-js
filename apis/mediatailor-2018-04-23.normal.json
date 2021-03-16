@@ -336,23 +336,6 @@
         "shape": "ListPlaybackConfigurationsResponse"
       }
     },
-    "ListPrograms": {
-      "documentation": "<p>Retrieves a list of programs on a specific channel.</p>",
-      "errors": [],
-      "http": {
-        "method": "GET",
-        "requestUri": "/channel/{channelName}/programs",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "ListProgramsRequest"
-      },
-      "name": "ListPrograms",
-      "output": {
-        "documentation": "<p>Success.</p>",
-        "shape": "ListProgramsResponse"
-      }
-    },
     "ListSourceLocations": {
       "documentation": "<p>Retrieves a list of source locations.</p>",
       "errors": [],
@@ -1690,45 +1673,6 @@
       },
       "type": "structure"
     },
-    "ListProgramsRequest": {
-      "members": {
-        "ChannelName": {
-          "documentation": "<p>The identifier for the channel you are working on.</p>",
-          "location": "uri",
-          "locationName": "channelName",
-          "shape": "__string"
-        },
-        "MaxResults": {
-          "documentation": "<p>Upper bound on number of records to return. The maximum number of results is 100.</p>",
-          "location": "querystring",
-          "locationName": "maxResults",
-          "shape": "MaxResults"
-        },
-        "NextToken": {
-          "documentation": "<p>Pagination token from the GET list request. Use the token to fetch the next page of results.</p>",
-          "location": "querystring",
-          "locationName": "nextToken",
-          "shape": "__string"
-        }
-      },
-      "required": [
-        "ChannelName"
-      ],
-      "type": "structure"
-    },
-    "ListProgramsResponse": {
-      "members": {
-        "Items": {
-          "documentation": "<p>An array containing the programs for a channel.</p>",
-          "shape": "__listOfProgram"
-        },
-        "NextToken": {
-          "documentation": "<p>Pagination token from the list request. Use the token to fetch the next page of results.</p>",
-          "shape": "__string"
-        }
-      },
-      "type": "structure"
-    },
     "ListSourceLocationsRequest": {
       "members": {
         "MaxResults": {
@@ -1955,51 +1899,6 @@
         "LOOP"
       ],
       "type": "string"
-    },
-    "Program": {
-      "documentation": "<p>Program configuration parameters.</p>",
-      "members": {
-        "AdBreaks": {
-          "documentation": "<p>The ad break configuration settings.</p>",
-          "shape": "__listOfAdBreak"
-        },
-        "Arn": {
-          "documentation": "<p>The ARN of the program.</p>",
-          "shape": "__string"
-        },
-        "ChannelName": {
-          "documentation": "<p>The name of the channel that the program belongs to.</p>",
-          "shape": "__string"
-        },
-        "CreationTime": {
-          "documentation": "<p>The timestamp of when the program was created.</p>",
-          "shape": "__timestampUnix"
-        },
-        "LastModifiedTime": {
-          "documentation": "<p>The timestamp of when the program was last modified.</p>",
-          "shape": "__timestampUnix"
-        },
-        "ProgramName": {
-          "documentation": "<p>The name of the program.</p>",
-          "shape": "__string"
-        },
-        "SourceLocationName": {
-          "documentation": "<p>The name of the source location.</p>",
-          "shape": "__string"
-        },
-        "VodSourceName": {
-          "documentation": "<p>The name that's used to refer to a VOD source.</p>",
-          "shape": "__string"
-        }
-      },
-      "required": [
-        "VodSourceName",
-        "ChannelName",
-        "SourceLocationName",
-        "Arn",
-        "ProgramName"
-      ],
-      "type": "structure"
     },
     "PutChannelPolicyRequest": {
       "members": {
@@ -2729,12 +2628,6 @@
     "__listOfPlaybackConfiguration": {
       "member": {
         "shape": "PlaybackConfiguration"
-      },
-      "type": "list"
-    },
-    "__listOfProgram": {
-      "member": {
-        "shape": "Program"
       },
       "type": "list"
     },

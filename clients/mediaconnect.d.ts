@@ -311,6 +311,10 @@ declare namespace MediaConnect {
      */
     MaxLatency?: __integer;
     /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
+    /**
      * The name of the output. This value must be unique within the current flow.
      */
     Name?: __string;
@@ -417,7 +421,7 @@ declare namespace MediaConnect {
     /**
      * The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
      */
-    Algorithm: Algorithm;
+    Algorithm?: Algorithm;
     /**
      * A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
      */
@@ -576,7 +580,7 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type KeyType = "speke"|"static-key"|string;
+  export type KeyType = "speke"|"static-key"|"srt-password"|string;
   export interface ListEntitlementsRequest {
     /**
      * The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.
@@ -797,7 +801,7 @@ declare namespace MediaConnect {
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"srt-listener"|string;
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -991,6 +995,10 @@ declare namespace MediaConnect {
      */
     MaxLatency?: __integer;
     /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
+    /**
      * The name of the source.
      */
     Name?: __string;
@@ -1115,6 +1123,10 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The protocol that is used by the source or output.
      */
@@ -1249,6 +1261,10 @@ declare namespace MediaConnect {
      */
     MaxLatency?: __integer;
     /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
+    /**
      * The ARN of the output that you want to update.
      */
     OutputArn: __string;
@@ -1326,6 +1342,10 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The protocol that is used by the source.
      */

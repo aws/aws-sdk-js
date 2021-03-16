@@ -36,11 +36,11 @@ declare class AccessAnalyzer extends Service {
    */
   createAnalyzer(callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAnalyzerResponse) => void): Request<AccessAnalyzer.Types.CreateAnalyzerResponse, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule. To learn about filter keys that you can use to create an archive rule, see Access Analyzer filter keys in the IAM User Guide.
    */
   createArchiveRule(params: AccessAnalyzer.Types.CreateArchiveRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule. To learn about filter keys that you can use to create an archive rule, see Access Analyzer filter keys in the IAM User Guide.
    */
   createArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -195,6 +195,14 @@ declare class AccessAnalyzer extends Service {
    * Updates the status for the specified findings.
    */
   updateFindings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices. 
+   */
+  validatePolicy(params: AccessAnalyzer.Types.ValidatePolicyRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.ValidatePolicyResponse) => void): Request<AccessAnalyzer.Types.ValidatePolicyResponse, AWSError>;
+  /**
+   * Requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices. 
+   */
+  validatePolicy(callback?: (err: AWSError, data: AccessAnalyzer.Types.ValidatePolicyResponse) => void): Request<AccessAnalyzer.Types.ValidatePolicyResponse, AWSError>;
 }
 declare namespace AccessAnalyzer {
   export type AccessPointArn = string;
@@ -837,6 +845,7 @@ declare namespace AccessAnalyzer {
   export type Integer = number;
   export interface InternetConfiguration {
   }
+  export type IssueCode = string;
   export type IssuingAccount = string;
   export type KmsConstraintsKey = string;
   export type KmsConstraintsMap = {[key: string]: KmsConstraintsValue};
@@ -888,6 +897,7 @@ declare namespace AccessAnalyzer {
   }
   export type KmsKeyPoliciesMap = {[key: string]: KmsKeyPolicy};
   export type KmsKeyPolicy = string;
+  export type LearnMoreLink = string;
   export interface ListAccessPreviewFindingsRequest {
     /**
      * The unique ID for the access preview.
@@ -1064,6 +1074,18 @@ declare namespace AccessAnalyzer {
      */
     tags?: TagsMap;
   }
+  export type Locale = "DE"|"EN"|"ES"|"FR"|"IT"|"JA"|"KO"|"PT_BR"|"ZH_CN"|"ZH_TW"|string;
+  export interface Location {
+    /**
+     * A path in a policy, represented as a sequence of path elements.
+     */
+    path: PathElementList;
+    /**
+     * A span in a policy.
+     */
+    span: Span;
+  }
+  export type LocationList = Location[];
   export type Name = string;
   export interface NetworkOriginConfiguration {
     /**
@@ -1073,7 +1095,42 @@ declare namespace AccessAnalyzer {
     vpcConfiguration?: VpcConfiguration;
   }
   export type OrderBy = "ASC"|"DESC"|string;
+  export interface PathElement {
+    /**
+     * Refers to an index in a JSON array.
+     */
+    index?: Integer;
+    /**
+     * Refers to a key in a JSON object.
+     */
+    key?: String;
+    /**
+     * Refers to a substring of a literal string in a JSON object.
+     */
+    substring?: Substring;
+    /**
+     * Refers to the value associated with a given key in a JSON object.
+     */
+    value?: String;
+  }
+  export type PathElementList = PathElement[];
+  export type PolicyDocument = string;
   export type PolicyName = string;
+  export type PolicyType = "IDENTITY_POLICY"|"RESOURCE_POLICY"|"SERVICE_CONTROL_POLICY"|string;
+  export interface Position {
+    /**
+     * The column of the position, starting from 0.
+     */
+    column: Integer;
+    /**
+     * The line of the position, starting from 1.
+     */
+    line: Integer;
+    /**
+     * The offset within the policy that corresponds to the position, starting from 0.
+     */
+    offset: Integer;
+  }
   export type PrincipalMap = {[key: string]: String};
   export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string;
   export type ResourceArn = string;
@@ -1157,6 +1214,16 @@ declare namespace AccessAnalyzer {
      */
     orderBy?: OrderBy;
   }
+  export interface Span {
+    /**
+     * The end position of the span (exclusive).
+     */
+    end: Position;
+    /**
+     * The start position of the span (inclusive).
+     */
+    start: Position;
+  }
   export interface SqsQueueConfiguration {
     /**
      *  The proposed resource policy for the SQS queue. 
@@ -1181,6 +1248,16 @@ declare namespace AccessAnalyzer {
     code: ReasonCode;
   }
   export type String = string;
+  export interface Substring {
+    /**
+     * The length of the substring.
+     */
+    length: Integer;
+    /**
+     * The start index of the substring, starting from 0.
+     */
+    start: Integer;
+  }
   export type TagKeys = String[];
   export interface TagResourceRequest {
     /**
@@ -1249,6 +1326,62 @@ declare namespace AccessAnalyzer {
      * The state represents the action to take to update the finding Status. Use ARCHIVE to change an Active finding to an Archived finding. Use ACTIVE to change an Archived finding to an Active finding.
      */
     status: FindingStatusUpdate;
+  }
+  export interface ValidatePolicyFinding {
+    /**
+     * A localized message that explains the finding and provides guidance on how to address it.
+     */
+    findingDetails: String;
+    /**
+     * The impact of the finding. Security warnings report when the policy allows access that we consider overly permissive. Errors report when a part of the policy is not functional. Warnings report non-security issues when a policy does not conform to policy writing best practices. Suggestions recommend stylistic improvements in the policy that do not impact access.
+     */
+    findingType: ValidatePolicyFindingType;
+    /**
+     * The issue code provides an identifier of the issue associated with this finding.
+     */
+    issueCode: IssueCode;
+    /**
+     * A link to additional documentation about the type of finding.
+     */
+    learnMoreLink: LearnMoreLink;
+    /**
+     * The list of locations in the policy document that are related to the finding. The issue code provides a summary of an issue identified by the finding.
+     */
+    locations: LocationList;
+  }
+  export type ValidatePolicyFindingList = ValidatePolicyFinding[];
+  export type ValidatePolicyFindingType = "ERROR"|"SECURITY_WARNING"|"SUGGESTION"|"WARNING"|string;
+  export interface ValidatePolicyRequest {
+    /**
+     * The locale to use for localizing the findings.
+     */
+    locale?: Locale;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    maxResults?: Integer;
+    /**
+     * A token used for pagination of results returned.
+     */
+    nextToken?: Token;
+    /**
+     * The JSON policy document to use as the content for the policy.
+     */
+    policyDocument: PolicyDocument;
+    /**
+     * The type of policy to validate. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups. They also include service-control policies (SCPs) that are attached to an AWS organization, organizational unit (OU), or an account. Resource policies grant permissions on AWS resources. Resource policies include trust policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or S3 bucket policy. 
+     */
+    policyType: PolicyType;
+  }
+  export interface ValidatePolicyResponse {
+    /**
+     * The list of findings in a policy returned by Access Analyzer based on its suite of policy checks.
+     */
+    findings: ValidatePolicyFindingList;
+    /**
+     * A token used for pagination of results returned.
+     */
+    nextToken?: Token;
   }
   export type ValueList = String[];
   export interface VpcConfiguration {
