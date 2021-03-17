@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.865.0-->
+<!--LATEST=2.866.0-->
 <!--ENTRYINSERT-->
+
+## 2.866.0
+* feature: Batch: Making serviceRole an optional parameter when creating a compute environment. If serviceRole is not provided then Service Linked Role will be created (or reused if it already exists).
+* feature: SageMaker: Support new target device ml_eia2 in SageMaker CreateCompilationJob API
 
 ## 2.865.0
 * feature: AccessAnalyzer: This release adds support for the ValidatePolicy API. IAM Access Analyzer is adding over 100 policy checks and actionable recommendations that help you validate your policies during authoring.
