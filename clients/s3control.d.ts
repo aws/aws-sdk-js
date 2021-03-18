@@ -13,19 +13,27 @@ declare class S3Control extends Service {
   constructor(options?: S3Control.Types.ClientConfiguration)
   config: Config & S3Control.Types.ClientConfiguration;
   /**
-   * Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service User Guide.   Using this action with Amazon S3 on Outposts  This action:    Requires a virtual private cloud (VPC) configuration as S3 on Outposts only supports VPC style access points.   Does not support ACL on S3 on Outposts buckets.   Does not support Public Access on S3 on Outposts buckets.   Does not support object lock for S3 on Outposts buckets.   For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide . All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints   
+   * Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service User Guide.   S3 on Outposts only supports VPC-style Access Points.  For more information, see  Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only Access Points in the Amazon Simple Storage Service User Guide.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints   
    */
   createAccessPoint(params: S3Control.Types.CreateAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessPointResult) => void): Request<S3Control.Types.CreateAccessPointResult, AWSError>;
   /**
-   * Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service User Guide.   Using this action with Amazon S3 on Outposts  This action:    Requires a virtual private cloud (VPC) configuration as S3 on Outposts only supports VPC style access points.   Does not support ACL on S3 on Outposts buckets.   Does not support Public Access on S3 on Outposts buckets.   Does not support object lock for S3 on Outposts buckets.   For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide . All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints   
+   * Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service User Guide.   S3 on Outposts only supports VPC-style Access Points.  For more information, see  Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only Access Points in the Amazon Simple Storage Service User Guide.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints   
    */
   createAccessPoint(callback?: (err: AWSError, data: S3Control.Types.CreateAccessPointResult) => void): Request<S3Control.Types.CreateAccessPointResult, AWSError>;
   /**
-   *  This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see Create Bucket in the Amazon Simple Storage Service API.   Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see Using Amazon S3 on Outposts in Amazon Simple Storage Service User Guide. Not every string is an acceptable bucket name. For information on bucket naming restrictions, see Working with Amazon S3 Buckets. S3 on Outposts buckets support:   Tags   LifecycleConfigurations for deleting expired objects   For a list of Amazon S3 features not supported by Amazon S3 on Outposts, see Unsupported Amazon S3 features. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your API request, see the Examples section. The following actions are related to CreateBucket for Amazon S3 on Outposts:    PutObject     GetBucket     DeleteBucket     CreateAccessPoint     PutAccessPointPolicy   
+   * Creates an Object Lambda Access Point. For more information, see Transforming objects with Object Lambda Access Points in the Amazon Simple Storage Service User Guide. The following actions are related to CreateAccessPointForObjectLambda:    DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  createAccessPointForObjectLambda(params: S3Control.Types.CreateAccessPointForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessPointForObjectLambdaResult) => void): Request<S3Control.Types.CreateAccessPointForObjectLambdaResult, AWSError>;
+  /**
+   * Creates an Object Lambda Access Point. For more information, see Transforming objects with Object Lambda Access Points in the Amazon Simple Storage Service User Guide. The following actions are related to CreateAccessPointForObjectLambda:    DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  createAccessPointForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.CreateAccessPointForObjectLambdaResult) => void): Request<S3Control.Types.CreateAccessPointForObjectLambdaResult, AWSError>;
+  /**
+   *  This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see Create Bucket in the Amazon Simple Storage Service API.   Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see Using Amazon S3 on Outposts in Amazon Simple Storage Service User Guide. Not every string is an acceptable bucket name. For information on bucket naming restrictions, see Working with Amazon S3 Buckets. S3 on Outposts buckets support:   Tags   LifecycleConfigurations for deleting expired objects   For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts, see  Amazon S3 on Outposts Restrictions and Limitations. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your API request, see the Examples section. The following actions are related to CreateBucket for Amazon S3 on Outposts:    PutObject     GetBucket     DeleteBucket     CreateAccessPoint     PutAccessPointPolicy   
    */
   createBucket(params: S3Control.Types.CreateBucketRequest, callback?: (err: AWSError, data: S3Control.Types.CreateBucketResult) => void): Request<S3Control.Types.CreateBucketResult, AWSError>;
   /**
-   *  This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see Create Bucket in the Amazon Simple Storage Service API.   Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see Using Amazon S3 on Outposts in Amazon Simple Storage Service User Guide. Not every string is an acceptable bucket name. For information on bucket naming restrictions, see Working with Amazon S3 Buckets. S3 on Outposts buckets support:   Tags   LifecycleConfigurations for deleting expired objects   For a list of Amazon S3 features not supported by Amazon S3 on Outposts, see Unsupported Amazon S3 features. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your API request, see the Examples section. The following actions are related to CreateBucket for Amazon S3 on Outposts:    PutObject     GetBucket     DeleteBucket     CreateAccessPoint     PutAccessPointPolicy   
+   *  This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see Create Bucket in the Amazon Simple Storage Service API.   Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see Using Amazon S3 on Outposts in Amazon Simple Storage Service User Guide. Not every string is an acceptable bucket name. For information on bucket naming restrictions, see Working with Amazon S3 Buckets. S3 on Outposts buckets support:   Tags   LifecycleConfigurations for deleting expired objects   For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts, see  Amazon S3 on Outposts Restrictions and Limitations. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your API request, see the Examples section. The following actions are related to CreateBucket for Amazon S3 on Outposts:    PutObject     GetBucket     DeleteBucket     CreateAccessPoint     PutAccessPointPolicy   
    */
   createBucket(callback?: (err: AWSError, data: S3Control.Types.CreateBucketResult) => void): Request<S3Control.Types.CreateBucketResult, AWSError>;
   /**
@@ -45,6 +53,14 @@ declare class S3Control extends Service {
    */
   deleteAccessPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified Object Lambda Access Point. The following actions are related to DeleteAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  deleteAccessPointForObjectLambda(params: S3Control.Types.DeleteAccessPointForObjectLambdaRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Object Lambda Access Point. The following actions are related to DeleteAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  deleteAccessPointForObjectLambda(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the access point policy for the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPointPolicy:    PutAccessPointPolicy     GetAccessPointPolicy   
    */
   deleteAccessPointPolicy(params: S3Control.Types.DeleteAccessPointPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -52,6 +68,14 @@ declare class S3Control extends Service {
    * Deletes the access point policy for the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPointPolicy:    PutAccessPointPolicy     GetAccessPointPolicy   
    */
   deleteAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the resource policy for an Object Lambda Access Point. The following actions are related to DeleteAccessPointPolicyForObjectLambda:    GetAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda   
+   */
+  deleteAccessPointPolicyForObjectLambda(params: S3Control.Types.DeleteAccessPointPolicyForObjectLambdaRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the resource policy for an Object Lambda Access Point. The following actions are related to DeleteAccessPointPolicyForObjectLambda:    GetAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda   
+   */
+  deleteAccessPointPolicyForObjectLambda(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  This action deletes an Amazon S3 on Outposts bucket. To delete an S3 bucket, see DeleteBucket in the Amazon Simple Storage Service API.   Deletes the Amazon S3 on Outposts bucket. All objects (including all object versions and delete markers) in the bucket must be deleted before the bucket itself can be deleted. For more information, see Using Amazon S3 on Outposts in Amazon Simple Storage Service User Guide. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.  Related Resources     CreateBucket     GetBucket     DeleteObject   
    */
@@ -133,6 +157,22 @@ declare class S3Control extends Service {
    */
   getAccessPoint(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointResult) => void): Request<S3Control.Types.GetAccessPointResult, AWSError>;
   /**
+   * Returns configuration for an Object Lambda Access Point. The following actions are related to GetAccessPointConfigurationForObjectLambda:    PutAccessPointConfigurationForObjectLambda   
+   */
+  getAccessPointConfigurationForObjectLambda(params: S3Control.Types.GetAccessPointConfigurationForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointConfigurationForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointConfigurationForObjectLambdaResult, AWSError>;
+  /**
+   * Returns configuration for an Object Lambda Access Point. The following actions are related to GetAccessPointConfigurationForObjectLambda:    PutAccessPointConfigurationForObjectLambda   
+   */
+  getAccessPointConfigurationForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointConfigurationForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointConfigurationForObjectLambdaResult, AWSError>;
+  /**
+   * Returns configuration information about the specified Object Lambda Access Point The following actions are related to GetAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  getAccessPointForObjectLambda(params: S3Control.Types.GetAccessPointForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointForObjectLambdaResult, AWSError>;
+  /**
+   * Returns configuration information about the specified Object Lambda Access Point The following actions are related to GetAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     ListAccessPointsForObjectLambda   
+   */
+  getAccessPointForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointForObjectLambdaResult, AWSError>;
+  /**
    * Returns the access point policy associated with the specified access point. The following actions are related to GetAccessPointPolicy:    PutAccessPointPolicy     DeleteAccessPointPolicy   
    */
   getAccessPointPolicy(params: S3Control.Types.GetAccessPointPolicyRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyResult) => void): Request<S3Control.Types.GetAccessPointPolicyResult, AWSError>;
@@ -140,6 +180,14 @@ declare class S3Control extends Service {
    * Returns the access point policy associated with the specified access point. The following actions are related to GetAccessPointPolicy:    PutAccessPointPolicy     DeleteAccessPointPolicy   
    */
   getAccessPointPolicy(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyResult) => void): Request<S3Control.Types.GetAccessPointPolicyResult, AWSError>;
+  /**
+   * Returns the resource policy for an Object Lambda Access Point. The following actions are related to GetAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda   
+   */
+  getAccessPointPolicyForObjectLambda(params: S3Control.Types.GetAccessPointPolicyForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointPolicyForObjectLambdaResult, AWSError>;
+  /**
+   * Returns the resource policy for an Object Lambda Access Point. The following actions are related to GetAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda   
+   */
+  getAccessPointPolicyForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointPolicyForObjectLambdaResult, AWSError>;
   /**
    * Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service Developer Guide.
    */
@@ -149,11 +197,19 @@ declare class S3Control extends Service {
    */
   getAccessPointPolicyStatus(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusResult, AWSError>;
   /**
-   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
+   * Returns the status of the resource policy associated with an Object Lambda Access Point.
+   */
+  getAccessPointPolicyStatusForObjectLambda(params: S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult, AWSError>;
+  /**
+   * Returns the status of the resource policy associated with an Object Lambda Access Point.
+   */
+  getAccessPointPolicyStatusForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult, AWSError>;
+  /**
+   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. If you are using an identity other than the root user of the AWS account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
    */
   getBucket(params: S3Control.Types.GetBucketRequest, callback?: (err: AWSError, data: S3Control.Types.GetBucketResult) => void): Request<S3Control.Types.GetBucketResult, AWSError>;
   /**
-   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
+   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. If you are using an identity other than the root user of the AWS account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
    */
   getBucket(callback?: (err: AWSError, data: S3Control.Types.GetBucketResult) => void): Request<S3Control.Types.GetBucketResult, AWSError>;
   /**
@@ -221,6 +277,14 @@ declare class S3Control extends Service {
    */
   listAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
+   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   */
+  listAccessPointsForObjectLambda(params: S3Control.Types.ListAccessPointsForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
+  /**
+   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   */
+  listAccessPointsForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
+  /**
    * Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the AWS account making the request. For more information, see S3 Batch Operations in the Amazon Simple Storage Service User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
    */
   listJobs(params: S3Control.Types.ListJobsRequest, callback?: (err: AWSError, data: S3Control.Types.ListJobsResult) => void): Request<S3Control.Types.ListJobsResult, AWSError>;
@@ -245,6 +309,14 @@ declare class S3Control extends Service {
    */
   listStorageLensConfigurations(callback?: (err: AWSError, data: S3Control.Types.ListStorageLensConfigurationsResult) => void): Request<S3Control.Types.ListStorageLensConfigurationsResult, AWSError>;
   /**
+   * Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda   
+   */
+  putAccessPointConfigurationForObjectLambda(params: S3Control.Types.PutAccessPointConfigurationForObjectLambdaRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda   
+   */
+  putAccessPointConfigurationForObjectLambda(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutAccessPointPolicy:    GetAccessPointPolicy     DeleteAccessPointPolicy   
    */
   putAccessPointPolicy(params: S3Control.Types.PutAccessPointPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -253,11 +325,19 @@ declare class S3Control extends Service {
    */
   putAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see PutBucketLifecycleConfiguration in the Amazon Simple Storage Service API.   Creates a new lifecycle configuration for the Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads. For more information, see Managing Lifecycle Permissions for Amazon S3 on Outposts.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketLifecycleConfiguration:    GetBucketLifecycleConfiguration     DeleteBucketLifecycleConfiguration   
+   * Creates or replaces resource policy for an Object Lambda Access Point. For an example policy, see Creating Object Lambda Access Points in the Amazon Simple Storage Service User Guide. The following actions are related to PutAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     GetAccessPointPolicyForObjectLambda   
+   */
+  putAccessPointPolicyForObjectLambda(params: S3Control.Types.PutAccessPointPolicyForObjectLambdaRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates or replaces resource policy for an Object Lambda Access Point. For an example policy, see Creating Object Lambda Access Points in the Amazon Simple Storage Service User Guide. The following actions are related to PutAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     GetAccessPointPolicyForObjectLambda   
+   */
+  putAccessPointPolicyForObjectLambda(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see PutBucketLifecycleConfiguration in the Amazon Simple Storage Service API.   Creates a new lifecycle configuration for the S3 on Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketLifecycleConfiguration:    GetBucketLifecycleConfiguration     DeleteBucketLifecycleConfiguration   
    */
   putBucketLifecycleConfiguration(params: S3Control.Types.PutBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see PutBucketLifecycleConfiguration in the Amazon Simple Storage Service API.   Creates a new lifecycle configuration for the Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads. For more information, see Managing Lifecycle Permissions for Amazon S3 on Outposts.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketLifecycleConfiguration:    GetBucketLifecycleConfiguration     DeleteBucketLifecycleConfiguration   
+   *  This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see PutBucketLifecycleConfiguration in the Amazon Simple Storage Service API.   Creates a new lifecycle configuration for the S3 on Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketLifecycleConfiguration:    GetBucketLifecycleConfiguration     DeleteBucketLifecycleConfiguration   
    */
   putBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -269,11 +349,11 @@ declare class S3Control extends Service {
    */
   putBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon Simple Storage Service API.   Sets the tags for an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost Allocation and Tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using Cost Allocation in Amazon S3 Bucket Tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  AWS-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
+   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon Simple Storage Service API.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  AWS-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
    */
   putBucketTagging(params: S3Control.Types.PutBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon Simple Storage Service API.   Sets the tags for an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost Allocation and Tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using Cost Allocation in Amazon S3 Bucket Tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  AWS-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
+   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon Simple Storage Service API.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon Simple Storage Service User Guide. Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  AWS-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
    */
   putBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -373,6 +453,17 @@ declare namespace S3Control {
      */
     IsEnabled?: IsEnabled;
   }
+  export interface AwsLambdaTransformation {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Lambda function.
+     */
+    FunctionArn: FunctionArnString;
+    /**
+     * Additional JSON that provides supplemental data to the Lambda function used to transform objects.
+     */
+    FunctionPayload?: AwsLambdaTransformationPayload;
+  }
+  export type AwsLambdaTransformationPayload = string;
   export type AwsOrgArn = string;
   export type Boolean = boolean;
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
@@ -393,6 +484,26 @@ declare namespace S3Control {
   export type ConfirmRemoveSelfBucketAccess = boolean;
   export type ConfirmationRequired = boolean;
   export type ContinuationToken = string;
+  export interface CreateAccessPointForObjectLambdaRequest {
+    /**
+     * The AWS account ID for owner of the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name you want to assign to this Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+    /**
+     * Object Lambda Access Point configuration as a JSON document.
+     */
+    Configuration: ObjectLambdaConfiguration;
+  }
+  export interface CreateAccessPointForObjectLambdaResult {
+    /**
+     * Specifies the ARN for the Object Lambda Access Point.
+     */
+    ObjectLambdaAccessPointArn?: ObjectLambdaAccessPointArn;
+  }
   export interface CreateAccessPointRequest {
     /**
      * The AWS account ID for the owner of the bucket for which you want to create an access point.
@@ -528,6 +639,26 @@ declare namespace S3Control {
   export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
+  export interface DeleteAccessPointForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the access point you want to delete.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
+  export interface DeleteAccessPointPolicyForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point you want to delete the policy for.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
   export interface DeleteAccessPointPolicyRequest {
     /**
      * The account ID for the account that owns the specified access point.
@@ -658,6 +789,62 @@ declare namespace S3Control {
   export type ExpiredObjectDeleteMarker = boolean;
   export type Format = "CSV"|"Parquet"|string;
   export type FunctionArnString = string;
+  export interface GetAccessPointConfigurationForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point you want to return the configuration for.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
+  export interface GetAccessPointConfigurationForObjectLambdaResult {
+    /**
+     * Object Lambda Access Point configuration document.
+     */
+    Configuration?: ObjectLambdaConfiguration;
+  }
+  export interface GetAccessPointForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
+  export interface GetAccessPointForObjectLambdaResult {
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name?: ObjectLambdaAccessPointName;
+    /**
+     * Configuration to block all public access. This setting is turned on and can not be edited. 
+     */
+    PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
+    /**
+     * The date and time when the specified Object Lambda Access Point was created.
+     */
+    CreationDate?: CreationDate;
+  }
+  export interface GetAccessPointPolicyForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
+  export interface GetAccessPointPolicyForObjectLambdaResult {
+    /**
+     * Object Lambda Access Point resource policy document.
+     */
+    Policy?: ObjectLambdaPolicy;
+  }
   export interface GetAccessPointPolicyRequest {
     /**
      * The account ID for the account that owns the specified access point.
@@ -673,6 +860,19 @@ declare namespace S3Control {
      * The access point policy associated with the specified access point.
      */
     Policy?: Policy;
+  }
+  export interface GetAccessPointPolicyStatusForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+  }
+  export interface GetAccessPointPolicyStatusForObjectLambdaResult {
+    PolicyStatus?: PolicyStatus;
   }
   export interface GetAccessPointPolicyStatusRequest {
     /**
@@ -1189,6 +1389,30 @@ declare namespace S3Control {
     And?: LifecycleRuleAndOperator;
   }
   export type LifecycleRules = LifecycleRule[];
+  export interface ListAccessPointsForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.
+     */
+    NextToken?: NonEmptyMaxLength1024String;
+    /**
+     * The maximum number of access points that you want to include in the list. If there are more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAccessPointsForObjectLambdaResult {
+    /**
+     * Returns list of Object Lambda Access Points.
+     */
+    ObjectLambdaAccessPointList?: ObjectLambdaAccessPointList;
+    /**
+     * If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.
+     */
+    NextToken?: NonEmptyMaxLength1024String;
+  }
   export interface ListAccessPointsRequest {
     /**
      * The AWS account ID for owner of the bucket whose access points you want to list.
@@ -1337,6 +1561,60 @@ declare namespace S3Control {
     StorageClass?: TransitionStorageClass;
   }
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
+  export interface ObjectLambdaAccessPoint {
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+    /**
+     * Specifies the ARN for the Object Lambda Access Point.
+     */
+    ObjectLambdaAccessPointArn?: ObjectLambdaAccessPointArn;
+  }
+  export type ObjectLambdaAccessPointArn = string;
+  export type ObjectLambdaAccessPointList = ObjectLambdaAccessPoint[];
+  export type ObjectLambdaAccessPointName = string;
+  export type ObjectLambdaAllowedFeature = "GetObject-Range"|"GetObject-PartNumber"|string;
+  export type ObjectLambdaAllowedFeaturesList = ObjectLambdaAllowedFeature[];
+  export interface ObjectLambdaConfiguration {
+    /**
+     * Standard access point associated with the Object Lambda Access Point.
+     */
+    SupportingAccessPoint: ObjectLambdaSupportingAccessPointArn;
+    /**
+     * A container for whether the CloudWatch metrics configuration is enabled.
+     */
+    CloudWatchMetricsEnabled?: Boolean;
+    /**
+     * A container for allowed features. Valid inputs are GetObject-Range and GetObject-PartNumber.
+     */
+    AllowedFeatures?: ObjectLambdaAllowedFeaturesList;
+    /**
+     * A container for transformation configurations for an Object Lambda Access Point.
+     */
+    TransformationConfigurations: ObjectLambdaTransformationConfigurationsList;
+  }
+  export interface ObjectLambdaContentTransformation {
+    /**
+     * A container for an AWS Lambda function.
+     */
+    AwsLambda?: AwsLambdaTransformation;
+  }
+  export type ObjectLambdaPolicy = string;
+  export type ObjectLambdaSupportingAccessPointArn = string;
+  export interface ObjectLambdaTransformationConfiguration {
+    /**
+     * A container for the action of an Object Lambda Access Point configuration.
+     */
+    Actions: ObjectLambdaTransformationConfigurationActionsList;
+    /**
+     * A container for the content transformation of an Object Lambda Access Point configuration.
+     */
+    ContentTransformation: ObjectLambdaContentTransformation;
+  }
+  export type ObjectLambdaTransformationConfigurationAction = "GetObject"|string;
+  export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
+  export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;
   export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|string;
   export type OutputSchemaVersion = "V_1"|string;
@@ -1380,6 +1658,34 @@ declare namespace S3Control {
     RestrictPublicBuckets?: Setting;
   }
   export type PublicAccessBlockEnabled = boolean;
+  export interface PutAccessPointConfigurationForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+    /**
+     * Object Lambda Access Point configuration document.
+     */
+    Configuration: ObjectLambdaConfiguration;
+  }
+  export interface PutAccessPointPolicyForObjectLambdaRequest {
+    /**
+     * The account ID for the account that owns the specified Object Lambda Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Object Lambda Access Point.
+     */
+    Name: ObjectLambdaAccessPointName;
+    /**
+     * Object Lambda Access Point resource policy document.
+     */
+    Policy: ObjectLambdaPolicy;
+  }
   export interface PutAccessPointPolicyRequest {
     /**
      * The AWS account ID for owner of the bucket associated with the specified access point.

@@ -1124,6 +1124,10 @@ declare namespace Redshift {
      * The namespace Amazon Resource Name (ARN) of the cluster.
      */
     ClusterNamespaceArn?: String;
+    /**
+     * The total storage capacity of the cluster in megabytes. 
+     */
+    TotalStorageCapacityInMegaBytes?: LongOptional;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1489,7 +1493,7 @@ declare namespace Redshift {
      */
     ClusterParameterGroupName?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: 1  Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: 1  Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -3114,7 +3118,7 @@ declare namespace Redshift {
      */
     ClusterParameterGroupName?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted. Default: Uses existing setting. Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted. You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: Uses existing setting. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -3351,6 +3355,25 @@ declare namespace Redshift {
      */
     BreachAction?: UsageLimitBreachAction;
   }
+  export interface NetworkInterface {
+    /**
+     * The network interface identifier. 
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The subnet identifier. 
+     */
+    SubnetId?: String;
+    /**
+     * The IPv4 address of the network interface within the subnet. 
+     */
+    PrivateIpAddress?: String;
+    /**
+     * The Availability Zone. 
+     */
+    AvailabilityZone?: String;
+  }
+  export type NetworkInterfaceList = NetworkInterface[];
   export interface NodeConfigurationOption {
     /**
      * The node type, such as, "ds2.8xlarge".
@@ -3432,7 +3455,7 @@ declare namespace Redshift {
      */
     ParameterName?: String;
     /**
-     * The value of the parameter.
+     * The value of the parameter. If ParameterName is wlm_json_configuration, then the maximum size of ParameterValue is 8000 characters.
      */
     ParameterValue?: String;
     /**
@@ -3853,7 +3876,7 @@ declare namespace Redshift {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: The value selected for the cluster from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: The value selected for the cluster from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -4575,6 +4598,14 @@ declare namespace Redshift {
      * The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
      */
     VpcEndpointId?: String;
+    /**
+     * The VPC identifier that the endpoint is associated. 
+     */
+    VpcId?: String;
+    /**
+     * One or more network interfaces of the endpoint. Also known as an interface endpoint. 
+     */
+    NetworkInterfaces?: NetworkInterfaceList;
   }
   export type VpcEndpointsList = VpcEndpoint[];
   export type VpcSecurityGroupIdList = String[];

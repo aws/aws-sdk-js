@@ -125,7 +125,7 @@
           "shape": "InvalidAccessException"
         }
       ],
-      "documentation": "<p>Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p> <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.</p> <ul> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p> <code>BatchImportFindings</code> can be used to update the following finding fields and objects only if they have not been updated using <code>BatchUpdateFindings</code>. After they are updated using <code>BatchUpdateFindings</code>, these fields cannot be updated using <code>BatchImportFindings</code>.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> </ul>"
+      "documentation": "<p>Imports security findings generated from an integrated product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p> <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.</p> <ul> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>Finding providers also should not use <code>BatchImportFindings</code> to update the following attributes.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> </ul> <p>Instead, finding providers use <code>FindingProviderFields</code> to provide values for these attributes.</p>"
     },
     "BatchUpdateFindings": {
       "name": "BatchUpdateFindings",
@@ -6163,6 +6163,28 @@
         "shape": "AwsRedshiftClusterVpcSecurityGroup"
       }
     },
+    "AwsS3AccountPublicAccessBlockDetails": {
+      "type": "structure",
+      "members": {
+        "BlockPublicAcls": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).</p>"
+        },
+        "BlockPublicPolicy": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to reject calls to update the access policy for an S3 bucket or access point if the policy allows public access.</p>"
+        },
+        "IgnorePublicAcls": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Amazon S3 ignores public ACLs that are associated with an S3 bucket.</p>"
+        },
+        "RestrictPublicBuckets": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.</p>"
+        }
+      },
+      "documentation": "<p>provides information about the Amazon S3 Public Access Block configuration for accounts.</p>"
+    },
     "AwsS3BucketDetails": {
       "type": "structure",
       "members": {
@@ -6181,6 +6203,10 @@
         "ServerSideEncryptionConfiguration": {
           "shape": "AwsS3BucketServerSideEncryptionConfiguration",
           "documentation": "<p>The encryption rules that are applied to the S3 bucket.</p>"
+        },
+        "PublicAccessBlockConfiguration": {
+          "shape": "AwsS3AccountPublicAccessBlockDetails",
+          "documentation": "<p>Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.</p>"
         }
       },
       "documentation": "<p>The details of an Amazon S3 bucket.</p>"
@@ -6311,10 +6337,8 @@
         "ProductArn",
         "GeneratorId",
         "AwsAccountId",
-        "Types",
         "CreatedAt",
         "UpdatedAt",
-        "Severity",
         "Title",
         "Description",
         "Resources"
@@ -6459,6 +6483,10 @@
         "Action": {
           "shape": "Action",
           "documentation": "<p>Provides details about an action that affects or that was taken on a resource.</p>"
+        },
+        "FindingProviderFields": {
+          "shape": "FindingProviderFields",
+          "documentation": "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.</p>"
         }
       },
       "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>"
@@ -6504,11 +6532,15 @@
         },
         "SeverityProduct": {
           "shape": "NumberFilterList",
-          "documentation": "<p>The native severity as defined by the security-findings provider's solution that generated the finding.</p>"
+          "documentation": "<p>The native severity as defined by the security-findings provider's solution that generated the finding.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This filter is deprecated, use FindingProviiltersSeverityOriginal instead."
         },
         "SeverityNormalized": {
           "shape": "NumberFilterList",
-          "documentation": "<p>The normalized severity of a finding.</p>"
+          "documentation": "<p>The normalized severity of a finding.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead."
         },
         "SeverityLabel": {
           "shape": "StringFilterList",
@@ -6801,6 +6833,34 @@
         "Keyword": {
           "shape": "KeywordFilterList",
           "documentation": "<p>A keyword for a finding.</p>"
+        },
+        "FindingProviderFieldsConfidence": {
+          "shape": "NumberFilterList",
+          "documentation": "<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>"
+        },
+        "FindingProviderFieldsCriticality": {
+          "shape": "NumberFilterList",
+          "documentation": "<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>"
+        },
+        "FindingProviderFieldsRelatedFindingsId": {
+          "shape": "StringFilterList",
+          "documentation": "<p>The finding identifier of a related finding that is identified by the finding provider.</p>"
+        },
+        "FindingProviderFieldsRelatedFindingsProductArn": {
+          "shape": "StringFilterList",
+          "documentation": "<p>The ARN of the solution that generated a related finding that is identified by the finding provider.</p>"
+        },
+        "FindingProviderFieldsSeverityLabel": {
+          "shape": "StringFilterList",
+          "documentation": "<p>The finding provider value for the severity label.</p>"
+        },
+        "FindingProviderFieldsSeverityOriginal": {
+          "shape": "StringFilterList",
+          "documentation": "<p>The finding provider's original value for the severity.</p>"
+        },
+        "FindingProviderFieldsTypes": {
+          "shape": "StringFilterList",
+          "documentation": "<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>"
         }
       },
       "documentation": "<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>"
@@ -7104,10 +7164,18 @@
       ],
       "members": {
         "Findings": {
-          "shape": "AwsSecurityFindingList",
+          "shape": "BatchImportFindingsRequestFindingList",
           "documentation": "<p>A list of findings to import. To successfully import a finding, it must follow the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">AWS Security Finding Format</a>. Maximum of 100 findings per request.</p>"
         }
       }
+    },
+    "BatchImportFindingsRequestFindingList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsSecurityFinding"
+      },
+      "max": 100,
+      "min": 1
     },
     "BatchImportFindingsResponse": {
       "type": "structure",
@@ -7232,6 +7300,34 @@
         "shape": "NonEmptyString"
       }
     },
+    "Cell": {
+      "type": "structure",
+      "members": {
+        "Column": {
+          "shape": "Long",
+          "documentation": "<p>The column number of the column that contains the data. For a Microsoft Excel workbook, the column number corresponds to the alphabetical column identifiers. For example, a value of 1 for Column corresponds to the A column in the workbook.</p>"
+        },
+        "Row": {
+          "shape": "Long",
+          "documentation": "<p>The row number of the row that contains the data.</p>"
+        },
+        "ColumnName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the column that contains the data.</p>"
+        },
+        "CellReference": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2.</p>"
+        }
+      },
+      "documentation": "<p>An occurrence of sensitive data detected in a Microsoft Excel workbook, comma-separated value (CSV) file, or tab-separated value (TSV) file.</p>"
+    },
+    "Cells": {
+      "type": "list",
+      "member": {
+        "shape": "Cell"
+      }
+    },
     "CidrBlockAssociation": {
       "type": "structure",
       "members": {
@@ -7265,6 +7361,50 @@
         }
       },
       "documentation": "<p>Information about a city.</p>"
+    },
+    "ClassificationResult": {
+      "type": "structure",
+      "members": {
+        "MimeType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of content that the finding applies to.</p>"
+        },
+        "SizeClassified": {
+          "shape": "Long",
+          "documentation": "<p>The total size in bytes of the affected data.</p>"
+        },
+        "AdditionalOccurrences": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.</p>"
+        },
+        "Status": {
+          "shape": "ClassificationStatus",
+          "documentation": "<p>The current status of the sensitive data detection.</p>"
+        },
+        "SensitiveData": {
+          "shape": "SensitiveDataResultList",
+          "documentation": "<p>Provides details about sensitive data that was identified based on built-in configuration.</p>"
+        },
+        "CustomDataIdentifiers": {
+          "shape": "CustomDataIdentifiersResult",
+          "documentation": "<p>Provides details about sensitive data that was identified based on customer-defined configuration.</p>"
+        }
+      },
+      "documentation": "<p>Details about the sensitive data that was detected on the resource.</p>"
+    },
+    "ClassificationStatus": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The code that represents the status of the sensitive data detection.</p>"
+        },
+        "Reason": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A longer description of the current status of the sensitive data detection.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about the current status of the sensitive data detection.</p>"
     },
     "Compliance": {
       "type": "structure",
@@ -7430,6 +7570,48 @@
       "max": 50,
       "min": 1
     },
+    "CustomDataIdentifiersDetections": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "Long",
+          "documentation": "<p>The total number of occurrences of sensitive data that were detected.</p>"
+        },
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the custom identifier that was used to detect the sensitive data.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>he name of the custom identifier that detected the sensitive data.</p>"
+        },
+        "Occurrences": {
+          "shape": "Occurrences",
+          "documentation": "<p>Details about the sensitive data that was detected.</p>"
+        }
+      },
+      "documentation": "<p>The list of detected instances of sensitive data.</p>"
+    },
+    "CustomDataIdentifiersDetectionsList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomDataIdentifiersDetections"
+      }
+    },
+    "CustomDataIdentifiersResult": {
+      "type": "structure",
+      "members": {
+        "Detections": {
+          "shape": "CustomDataIdentifiersDetectionsList",
+          "documentation": "<p>The list of detected instances of sensitive data.</p>"
+        },
+        "TotalCount": {
+          "shape": "Long",
+          "documentation": "<p>The total number of occurrences of sensitive data.</p>"
+        }
+      },
+      "documentation": "<p>Contains an instance of sensitive data that was detected by a customer-defined identifier.</p>"
+    },
     "Cvss": {
       "type": "structure",
       "members": {
@@ -7453,6 +7635,20 @@
       "member": {
         "shape": "Cvss"
       }
+    },
+    "DataClassificationDetails": {
+      "type": "structure",
+      "members": {
+        "DetailedResultsLocation": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the folder or file that contains the sensitive data.</p>"
+        },
+        "Result": {
+          "shape": "ClassificationResult",
+          "documentation": "<p>The details about the sensitive data that was detected on the resource.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about sensitive data that was detected on a resource.</p>"
     },
     "DateFilter": {
       "type": "structure",
@@ -7948,6 +8144,46 @@
       "value": {
         "shape": "NonEmptyString"
       }
+    },
+    "FindingProviderFields": {
+      "type": "structure",
+      "members": {
+        "Confidence": {
+          "shape": "RatioScale",
+          "documentation": "<p>A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>"
+        },
+        "Criticality": {
+          "shape": "RatioScale",
+          "documentation": "<p>The level of importance assigned to the resources associated with the finding.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.</p>"
+        },
+        "RelatedFindings": {
+          "shape": "RelatedFindingList",
+          "documentation": "<p>A list of findings that are related to the current finding.</p>"
+        },
+        "Severity": {
+          "shape": "FindingProviderSeverity",
+          "documentation": "<p>The severity of a finding.</p>"
+        },
+        "Types": {
+          "shape": "TypeList",
+          "documentation": "<p>One or more finding types in the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>"
+        }
+      },
+      "documentation": "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update values for confidence, criticality, related findings, severity, and types.</p>"
+    },
+    "FindingProviderSeverity": {
+      "type": "structure",
+      "members": {
+        "Label": {
+          "shape": "SeverityLabel",
+          "documentation": "<p>The severity label assigned to the finding by the finding provider.</p>"
+        },
+        "Original": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The finding provider's original value for the severity.</p>"
+        }
+      },
+      "documentation": "<p>The severity assigned to the finding by the finding provider.</p>"
     },
     "GeoLocation": {
       "type": "structure",
@@ -8919,6 +9155,56 @@
         "shape": "NumberFilter"
       }
     },
+    "Occurrences": {
+      "type": "structure",
+      "members": {
+        "LineRanges": {
+          "shape": "Ranges",
+          "documentation": "<p>Occurrences of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.</p>"
+        },
+        "OffsetRanges": {
+          "shape": "Ranges",
+          "documentation": "<p>Occurrences of sensitive data detected in a binary text file.</p>"
+        },
+        "Pages": {
+          "shape": "Pages",
+          "documentation": "<p>Occurrences of sensitive data in an Adobe Portable Document Format (PDF) file.</p>"
+        },
+        "Records": {
+          "shape": "Records",
+          "documentation": "<p>Occurrences of sensitive data in an Apache Avro object container or an Apache Parquet file.</p>"
+        },
+        "Cells": {
+          "shape": "Cells",
+          "documentation": "<p>Occurrences of sensitive data detected in Microsoft Excel workbooks, comma-separated value (CSV) files, or tab-separated value (TSV) files.</p>"
+        }
+      },
+      "documentation": "<p>The detected occurrences of sensitive data.</p>"
+    },
+    "Page": {
+      "type": "structure",
+      "members": {
+        "PageNumber": {
+          "shape": "Long",
+          "documentation": "<p>The page number of the page that contains the sensitive data.</p>"
+        },
+        "LineRange": {
+          "shape": "Range",
+          "documentation": "<p>An occurrence of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.</p>"
+        },
+        "OffsetRange": {
+          "shape": "Range",
+          "documentation": "<p>An occurrence of sensitive data detected in a binary text file.</p>"
+        }
+      },
+      "documentation": "<p>An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.</p>"
+    },
+    "Pages": {
+      "type": "list",
+      "member": {
+        "shape": "Page"
+      }
+    },
     "Partition": {
       "type": "string",
       "enum": [
@@ -9125,6 +9411,30 @@
         "shape": "Product"
       }
     },
+    "Range": {
+      "type": "structure",
+      "members": {
+        "Start": {
+          "shape": "Long",
+          "documentation": "<p>The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.</p>"
+        },
+        "End": {
+          "shape": "Long",
+          "documentation": "<p>The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.</p>"
+        },
+        "StartColumn": {
+          "shape": "Long",
+          "documentation": "<p>In the line where the sensitive data starts, the column within the line where the sensitive data starts.</p>"
+        }
+      },
+      "documentation": "<p>Identifies where the sensitive data begins and ends.</p>"
+    },
+    "Ranges": {
+      "type": "list",
+      "member": {
+        "shape": "Range"
+      }
+    },
     "RatioScale": {
       "type": "integer",
       "max": 100,
@@ -9144,12 +9454,32 @@
       },
       "documentation": "<p>A recommendation on how to remediate the issue identified in a finding.</p>"
     },
+    "Record": {
+      "type": "structure",
+      "members": {
+        "JsonPath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If the field name is longer than 20 characters, it is truncated. If the path is longer than 250 characters, it is truncated.</p>"
+        },
+        "RecordIndex": {
+          "shape": "Long",
+          "documentation": "<p>The record index, starting from 0, for the record that contains the data.</p>"
+        }
+      },
+      "documentation": "<p>An occurrence of sensitive data in an Apache Avro object container or an Apache Parquet file.</p>"
+    },
     "RecordState": {
       "type": "string",
       "enum": [
         "ACTIVE",
         "ARCHIVED"
       ]
+    },
+    "Records": {
+      "type": "list",
+      "member": {
+        "shape": "Record"
+      }
     },
     "RelatedFinding": {
       "type": "structure",
@@ -9222,6 +9552,10 @@
           "shape": "FieldMap",
           "documentation": "<p>A list of AWS tags associated with a resource at the time the finding was processed.</p>"
         },
+        "DataClassification": {
+          "shape": "DataClassificationDetails",
+          "documentation": "<p>Contains information about sensitive data that was detected on the resource.</p>"
+        },
         "Details": {
           "shape": "ResourceDetails",
           "documentation": "<p>Additional details about the resource related to a finding.</p>"
@@ -9283,6 +9617,10 @@
         "AwsS3Bucket": {
           "shape": "AwsS3BucketDetails",
           "documentation": "<p>Details about an Amazon S3 bucket related to a finding.</p>"
+        },
+        "AwsS3AccountPublicAccessBlock": {
+          "shape": "AwsS3AccountPublicAccessBlockDetails",
+          "documentation": "<p>Details about the Amazon S3 Public Access Block configuration for an account.</p>"
         },
         "AwsS3Object": {
           "shape": "AwsS3ObjectDetails",
@@ -9433,6 +9771,54 @@
       "type": "list",
       "member": {
         "shape": "NonEmptyString"
+      }
+    },
+    "SensitiveDataDetections": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "Long",
+          "documentation": "<p>The total number of occurrences of sensitive data that were detected.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of sensitive data that was detected. For example, the type might indicate that the data is an email address.</p>"
+        },
+        "Occurrences": {
+          "shape": "Occurrences",
+          "documentation": "<p>Details about the sensitive data that was detected.</p>"
+        }
+      },
+      "documentation": "<p>The list of detected instances of sensitive data.</p>"
+    },
+    "SensitiveDataDetectionsList": {
+      "type": "list",
+      "member": {
+        "shape": "SensitiveDataDetections"
+      }
+    },
+    "SensitiveDataResult": {
+      "type": "structure",
+      "members": {
+        "Category": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The category of sensitive data that was detected. For example, the category can indicate that the sensitive data involved credentials, financial information, or personal information.</p>"
+        },
+        "Detections": {
+          "shape": "SensitiveDataDetectionsList",
+          "documentation": "<p>The list of detected instances of sensitive data.</p>"
+        },
+        "TotalCount": {
+          "shape": "Long",
+          "documentation": "<p>The total number of occurrences of sensitive data.</p>"
+        }
+      },
+      "documentation": "<p>Contains a detected instance of sensitive data that are based on built-in identifiers.</p>"
+    },
+    "SensitiveDataResultList": {
+      "type": "list",
+      "member": {
+        "shape": "SensitiveDataResult"
       }
     },
     "Severity": {

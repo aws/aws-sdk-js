@@ -36,11 +36,11 @@ declare class SecurityHub extends Service {
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Note     UserDefinedFields     VerificationState     Workflow     BatchImportFindings can be used to update the following finding fields and objects only if they have not been updated using BatchUpdateFindings. After they are updated using BatchUpdateFindings, these fields cannot be updated using BatchImportFindings.    Confidence     Criticality     RelatedFindings     Severity     Types   
+   * Imports security findings generated from an integrated product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Note     UserDefinedFields     VerificationState     Workflow    Finding providers also should not use BatchImportFindings to update the following attributes.    Confidence     Criticality     RelatedFindings     Severity     Types    Instead, finding providers use FindingProviderFields to provide values for these attributes.
    */
   batchImportFindings(params: SecurityHub.Types.BatchImportFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Note     UserDefinedFields     VerificationState     Workflow     BatchImportFindings can be used to update the following finding fields and objects only if they have not been updated using BatchUpdateFindings. After they are updated using BatchUpdateFindings, these fields cannot be updated using BatchImportFindings.    Confidence     Criticality     RelatedFindings     Severity     Types   
+   * Imports security findings generated from an integrated product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Note     UserDefinedFields     VerificationState     Workflow    Finding providers also should not use BatchImportFindings to update the following attributes.    Confidence     Criticality     RelatedFindings     Severity     Types    Instead, finding providers use FindingProviderFields to provide values for these attributes.
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
@@ -4167,6 +4167,24 @@ declare namespace SecurityHub {
     VpcSecurityGroupId?: NonEmptyString;
   }
   export type AwsRedshiftClusterVpcSecurityGroups = AwsRedshiftClusterVpcSecurityGroup[];
+  export interface AwsS3AccountPublicAccessBlockDetails {
+    /**
+     * Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).
+     */
+    BlockPublicAcls?: Boolean;
+    /**
+     * Indicates whether to reject calls to update the access policy for an S3 bucket or access point if the policy allows public access.
+     */
+    BlockPublicPolicy?: Boolean;
+    /**
+     * Indicates whether Amazon S3 ignores public ACLs that are associated with an S3 bucket.
+     */
+    IgnorePublicAcls?: Boolean;
+    /**
+     * Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.
+     */
+    RestrictPublicBuckets?: Boolean;
+  }
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -4184,6 +4202,10 @@ declare namespace SecurityHub {
      * The encryption rules that are applied to the S3 bucket.
      */
     ServerSideEncryptionConfiguration?: AwsS3BucketServerSideEncryptionConfiguration;
+    /**
+     * Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.
+     */
+    PublicAccessBlockConfiguration?: AwsS3AccountPublicAccessBlockDetails;
   }
   export interface AwsS3BucketServerSideEncryptionByDefault {
     /**
@@ -4298,7 +4320,7 @@ declare namespace SecurityHub {
     /**
      * One or more finding types in the format of namespace/category/classifier that classify a finding. Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
      */
-    Types: TypeList;
+    Types?: TypeList;
     /**
      * Indicates when the security-findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
@@ -4318,7 +4340,7 @@ declare namespace SecurityHub {
     /**
      * A finding's severity.
      */
-    Severity: Severity;
+    Severity?: Severity;
     /**
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
      */
@@ -4415,6 +4437,10 @@ declare namespace SecurityHub {
      * Provides details about an action that affects or that was taken on a resource.
      */
     Action?: Action;
+    /**
+     * In a BatchImportFindings request, finding providers use FindingProviderFields to provide and update their own values for confidence, criticality, related findings, severity, and types.
+     */
+    FindingProviderFields?: FindingProviderFields;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -4753,6 +4779,34 @@ declare namespace SecurityHub {
      * A keyword for a finding.
      */
     Keyword?: KeywordFilterList;
+    /**
+     * The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     */
+    FindingProviderFieldsConfidence?: NumberFilterList;
+    /**
+     * The finding provider value for the level of importance assigned to the resources associated with the findings. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. 
+     */
+    FindingProviderFieldsCriticality?: NumberFilterList;
+    /**
+     * The finding identifier of a related finding that is identified by the finding provider.
+     */
+    FindingProviderFieldsRelatedFindingsId?: StringFilterList;
+    /**
+     * The ARN of the solution that generated a related finding that is identified by the finding provider.
+     */
+    FindingProviderFieldsRelatedFindingsProductArn?: StringFilterList;
+    /**
+     * The finding provider value for the severity label.
+     */
+    FindingProviderFieldsSeverityLabel?: StringFilterList;
+    /**
+     * The finding provider's original value for the severity.
+     */
+    FindingProviderFieldsSeverityOriginal?: StringFilterList;
+    /**
+     * One or more finding types that the finding provider assigned to the finding. Uses the format of namespace/category/classifier that classify a finding. Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+     */
+    FindingProviderFieldsTypes?: StringFilterList;
   }
   export interface AwsSecurityFindingIdentifier {
     /**
@@ -4972,8 +5026,9 @@ declare namespace SecurityHub {
     /**
      * A list of findings to import. To successfully import a finding, it must follow the AWS Security Finding Format. Maximum of 100 findings per request.
      */
-    Findings: AwsSecurityFindingList;
+    Findings: BatchImportFindingsRequestFindingList;
   }
+  export type BatchImportFindingsRequestFindingList = AwsSecurityFinding[];
   export interface BatchImportFindingsResponse {
     /**
      * The number of findings that failed to import.
@@ -5054,6 +5109,25 @@ declare namespace SecurityHub {
   export type BatchUpdateFindingsUnprocessedFindingsList = BatchUpdateFindingsUnprocessedFinding[];
   export type Boolean = boolean;
   export type CategoryList = NonEmptyString[];
+  export interface Cell {
+    /**
+     * The column number of the column that contains the data. For a Microsoft Excel workbook, the column number corresponds to the alphabetical column identifiers. For example, a value of 1 for Column corresponds to the A column in the workbook.
+     */
+    Column?: Long;
+    /**
+     * The row number of the row that contains the data.
+     */
+    Row?: Long;
+    /**
+     * The name of the column that contains the data.
+     */
+    ColumnName?: NonEmptyString;
+    /**
+     * For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2.
+     */
+    CellReference?: NonEmptyString;
+  }
+  export type Cells = Cell[];
   export interface CidrBlockAssociation {
     /**
      * The association ID for the IPv4 CIDR block.
@@ -5074,6 +5148,42 @@ declare namespace SecurityHub {
      * The name of the city.
      */
     CityName?: NonEmptyString;
+  }
+  export interface ClassificationResult {
+    /**
+     * The type of content that the finding applies to.
+     */
+    MimeType?: NonEmptyString;
+    /**
+     * The total size in bytes of the affected data.
+     */
+    SizeClassified?: Long;
+    /**
+     * Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.
+     */
+    AdditionalOccurrences?: Boolean;
+    /**
+     * The current status of the sensitive data detection.
+     */
+    Status?: ClassificationStatus;
+    /**
+     * Provides details about sensitive data that was identified based on built-in configuration.
+     */
+    SensitiveData?: SensitiveDataResultList;
+    /**
+     * Provides details about sensitive data that was identified based on customer-defined configuration.
+     */
+    CustomDataIdentifiers?: CustomDataIdentifiersResult;
+  }
+  export interface ClassificationStatus {
+    /**
+     * The code that represents the status of the sensitive data detection.
+     */
+    Code?: NonEmptyString;
+    /**
+     * A longer description of the current status of the sensitive data detection.
+     */
+    Reason?: NonEmptyString;
   }
   export interface Compliance {
     /**
@@ -5172,6 +5282,35 @@ declare namespace SecurityHub {
     UnprocessedAccounts?: ResultList;
   }
   export type CrossAccountMaxResults = number;
+  export interface CustomDataIdentifiersDetections {
+    /**
+     * The total number of occurrences of sensitive data that were detected.
+     */
+    Count?: Long;
+    /**
+     * The ARN of the custom identifier that was used to detect the sensitive data.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * he name of the custom identifier that detected the sensitive data.
+     */
+    Name?: NonEmptyString;
+    /**
+     * Details about the sensitive data that was detected.
+     */
+    Occurrences?: Occurrences;
+  }
+  export type CustomDataIdentifiersDetectionsList = CustomDataIdentifiersDetections[];
+  export interface CustomDataIdentifiersResult {
+    /**
+     * The list of detected instances of sensitive data.
+     */
+    Detections?: CustomDataIdentifiersDetectionsList;
+    /**
+     * The total number of occurrences of sensitive data.
+     */
+    TotalCount?: Long;
+  }
   export interface Cvss {
     /**
      * The version of CVSS for the CVSS score.
@@ -5187,6 +5326,16 @@ declare namespace SecurityHub {
     BaseVector?: NonEmptyString;
   }
   export type CvssList = Cvss[];
+  export interface DataClassificationDetails {
+    /**
+     * The path to the folder or file that contains the sensitive data.
+     */
+    DetailedResultsLocation?: NonEmptyString;
+    /**
+     * The details about the sensitive data that was detected on the resource.
+     */
+    Result?: ClassificationResult;
+  }
   export interface DateFilter {
     /**
      * A start date for the date filter.
@@ -5477,6 +5626,38 @@ declare namespace SecurityHub {
   export interface EnableSecurityHubResponse {
   }
   export type FieldMap = {[key: string]: NonEmptyString};
+  export interface FindingProviderFields {
+    /**
+     * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     */
+    Confidence?: RatioScale;
+    /**
+     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     */
+    Criticality?: RatioScale;
+    /**
+     * A list of findings that are related to the current finding.
+     */
+    RelatedFindings?: RelatedFindingList;
+    /**
+     * The severity of a finding.
+     */
+    Severity?: FindingProviderSeverity;
+    /**
+     * One or more finding types in the format of namespace/category/classifier that classify a finding. Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+     */
+    Types?: TypeList;
+  }
+  export interface FindingProviderSeverity {
+    /**
+     * The severity label assigned to the finding by the finding provider.
+     */
+    Label?: SeverityLabel;
+    /**
+     * The finding provider's original value for the severity.
+     */
+    Original?: NonEmptyString;
+  }
   export interface GeoLocation {
     /**
      * The longitude of the location.
@@ -6081,6 +6262,43 @@ declare namespace SecurityHub {
     Eq?: Double;
   }
   export type NumberFilterList = NumberFilter[];
+  export interface Occurrences {
+    /**
+     * Occurrences of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.
+     */
+    LineRanges?: Ranges;
+    /**
+     * Occurrences of sensitive data detected in a binary text file.
+     */
+    OffsetRanges?: Ranges;
+    /**
+     * Occurrences of sensitive data in an Adobe Portable Document Format (PDF) file.
+     */
+    Pages?: Pages;
+    /**
+     * Occurrences of sensitive data in an Apache Avro object container or an Apache Parquet file.
+     */
+    Records?: Records;
+    /**
+     * Occurrences of sensitive data detected in Microsoft Excel workbooks, comma-separated value (CSV) files, or tab-separated value (TSV) files.
+     */
+    Cells?: Cells;
+  }
+  export interface Page {
+    /**
+     * The page number of the page that contains the sensitive data.
+     */
+    PageNumber?: Long;
+    /**
+     * An occurrence of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.
+     */
+    LineRange?: Range;
+    /**
+     * An occurrence of sensitive data detected in a binary text file.
+     */
+    OffsetRange?: Range;
+  }
+  export type Pages = Page[];
   export type Partition = "aws"|"aws-cn"|"aws-us-gov"|string;
   export interface PatchSummary {
     /**
@@ -6230,6 +6448,21 @@ declare namespace SecurityHub {
   }
   export type ProductSubscriptionArnList = NonEmptyString[];
   export type ProductsList = Product[];
+  export interface Range {
+    /**
+     * The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.
+     */
+    Start?: Long;
+    /**
+     * The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.
+     */
+    End?: Long;
+    /**
+     * In the line where the sensitive data starts, the column within the line where the sensitive data starts.
+     */
+    StartColumn?: Long;
+  }
+  export type Ranges = Range[];
   export type RatioScale = number;
   export interface Recommendation {
     /**
@@ -6241,7 +6474,18 @@ declare namespace SecurityHub {
      */
     Url?: NonEmptyString;
   }
+  export interface Record {
+    /**
+     * The path, as a JSONPath expression, to the field in the record that contains the data. If the field name is longer than 20 characters, it is truncated. If the path is longer than 250 characters, it is truncated.
+     */
+    JsonPath?: NonEmptyString;
+    /**
+     * The record index, starting from 0, for the record that contains the data.
+     */
+    RecordIndex?: Long;
+  }
   export type RecordState = "ACTIVE"|"ARCHIVED"|string;
+  export type Records = Record[];
   export interface RelatedFinding {
     /**
      * The ARN of the product that generated a related finding.
@@ -6285,6 +6529,10 @@ declare namespace SecurityHub {
      * A list of AWS tags associated with a resource at the time the finding was processed.
      */
     Tags?: FieldMap;
+    /**
+     * Contains information about sensitive data that was detected on the resource.
+     */
+    DataClassification?: DataClassificationDetails;
     /**
      * Additional details about the resource related to a finding.
      */
@@ -6340,6 +6588,10 @@ declare namespace SecurityHub {
      * Details about an Amazon S3 bucket related to a finding.
      */
     AwsS3Bucket?: AwsS3BucketDetails;
+    /**
+     * Details about the Amazon S3 Public Access Block configuration for an account.
+     */
+    AwsS3AccountPublicAccessBlock?: AwsS3AccountPublicAccessBlockDetails;
     /**
      * Details about an Amazon S3 object related to a finding.
      */
@@ -6470,6 +6722,36 @@ declare namespace SecurityHub {
   }
   export type ResultList = Result[];
   export type SecurityGroups = NonEmptyString[];
+  export interface SensitiveDataDetections {
+    /**
+     * The total number of occurrences of sensitive data that were detected.
+     */
+    Count?: Long;
+    /**
+     * The type of sensitive data that was detected. For example, the type might indicate that the data is an email address.
+     */
+    Type?: NonEmptyString;
+    /**
+     * Details about the sensitive data that was detected.
+     */
+    Occurrences?: Occurrences;
+  }
+  export type SensitiveDataDetectionsList = SensitiveDataDetections[];
+  export interface SensitiveDataResult {
+    /**
+     * The category of sensitive data that was detected. For example, the category can indicate that the sensitive data involved credentials, financial information, or personal information.
+     */
+    Category?: NonEmptyString;
+    /**
+     * The list of detected instances of sensitive data.
+     */
+    Detections?: SensitiveDataDetectionsList;
+    /**
+     * The total number of occurrences of sensitive data.
+     */
+    TotalCount?: Long;
+  }
+  export type SensitiveDataResultList = SensitiveDataResult[];
   export interface Severity {
     /**
      * Deprecated. This attribute is being deprecated. Instead of providing Product, provide Original. The native severity as defined by the AWS service or integrated partner product that generated the finding.

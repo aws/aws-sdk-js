@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.866.0-->
+<!--LATEST=2.867.0-->
 <!--ENTRYINSERT-->
+
+## 2.867.0
+* feature: AutoScaling: Amazon EC2 Auto Scaling Instance Refresh now supports phased deployments.
+* feature: Redshift: Add new fields for additional information about VPC endpoint for clusters with reallocation enabled, and a new field for total storage capacity for all clusters.
+* feature: S3: S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+* feature: S3Control: S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+* feature: SecurityHub: New object for separate provider and customer values. New objects track S3 Public Access Block configuration and identify sensitive data. BatchImportFinding requests are limited to 100 findings.
 
 ## 2.866.0
 * feature: Batch: Making serviceRole an optional parameter when creating a compute environment. If serviceRole is not provided then Service Linked Role will be created (or reused if it already exists).

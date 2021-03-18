@@ -3053,6 +3053,10 @@
         "ClusterNamespaceArn": {
           "shape": "String",
           "documentation": "<p>The namespace Amazon Resource Name (ARN) of the cluster.</p>"
+        },
+        "TotalStorageCapacityInMegaBytes": {
+          "shape": "LongOptional",
+          "documentation": "<p>The total storage capacity of the cluster in megabytes. </p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -3594,7 +3598,7 @@
         },
         "AutomatedSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>"
+          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -5899,7 +5903,7 @@
         },
         "AutomatedSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
+          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -6224,6 +6228,35 @@
         }
       }
     },
+    "NetworkInterface": {
+      "type": "structure",
+      "members": {
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The network interface identifier. </p>"
+        },
+        "SubnetId": {
+          "shape": "String",
+          "documentation": "<p>The subnet identifier. </p>"
+        },
+        "PrivateIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 address of the network interface within the subnet. </p>"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone. </p>"
+        }
+      },
+      "documentation": "<p>Describes a network interface. </p>"
+    },
+    "NetworkInterfaceList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkInterface",
+        "locationName": "NetworkInterface"
+      }
+    },
     "NodeConfigurationOption": {
       "type": "structure",
       "members": {
@@ -6366,7 +6399,7 @@
         },
         "ParameterValue": {
           "shape": "String",
-          "documentation": "<p>The value of the parameter.</p>"
+          "documentation": "<p>The value of the parameter. If <code>ParameterName</code> is <code>wlm_json_configuration</code>, then the maximum size of <code>ParameterValue</code> is 8000 characters.</p>"
         },
         "Description": {
           "shape": "String",
@@ -6938,7 +6971,7 @@
         },
         "AutomatedSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
+          "documentation": "<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>"
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -8074,6 +8107,14 @@
         "VpcEndpointId": {
           "shape": "String",
           "documentation": "<p>The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.</p>"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>The VPC identifier that the endpoint is associated. </p>"
+        },
+        "NetworkInterfaces": {
+          "shape": "NetworkInterfaceList",
+          "documentation": "<p>One or more network interfaces of the endpoint. Also known as an interface endpoint. </p>"
         }
       },
       "documentation": "<p>The connection endpoint for connecting an Amazon Redshift cluster through the proxy.</p>"

@@ -27,7 +27,28 @@
       "output": {
         "shape": "CreateAccessPointResult"
       },
-      "documentation": "<p>Creates an access point and associates it with the specified bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p/> <p> <b>Using this action with Amazon S3 on Outposts</b> </p> <p>This action: </p> <ul> <li> <p>Requires a virtual private cloud (VPC) configuration as S3 on Outposts only supports VPC style access points.</p> </li> <li> <p>Does not support ACL on S3 on Outposts buckets.</p> </li> <li> <p>Does not support Public Access on S3 on Outposts buckets.</p> </li> <li> <p>Does not support object lock for S3 on Outposts buckets.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide </i>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p> <p/> <p>The following actions are related to <code>CreateAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a> </p> </li> </ul>",
+      "documentation": "<p>Creates an access point and associates it with the specified bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p/> <note> <p>S3 on Outposts only supports VPC-style Access Points. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </note> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples\">Examples</a> section.</p> <p/> <p>The following actions are related to <code>CreateAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html\">GetAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html\">DeleteAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html\">ListAccessPoints</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
+    "CreateAccessPointForObjectLambda": {
+      "name": "CreateAccessPointForObjectLambda",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}"
+      },
+      "input": {
+        "shape": "CreateAccessPointForObjectLambdaRequest",
+        "locationName": "CreateAccessPointForObjectLambdaRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "output": {
+        "shape": "CreateAccessPointForObjectLambdaResult"
+      },
+      "documentation": "<p>Creates an Object Lambda Access Point. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html\">Transforming objects with Object Lambda Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>The following actions are related to <code>CreateAccessPointForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html\">DeleteAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html\">GetAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html\">ListAccessPointsForObjectLambda</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -52,7 +73,7 @@
           "shape": "BucketAlreadyOwnedByYou"
         }
       ],
-      "documentation": "<note> <p>This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">Create Bucket</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>Not every string is an acceptable bucket name. For information on bucket naming restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules\">Working with Amazon S3 Buckets</a>.</p> <p>S3 on Outposts buckets support:</p> <ul> <li> <p>Tags</p> </li> <li> <p>LifecycleConfigurations for deleting expired objects</p> </li> </ul> <p>For a list of Amazon S3 features not supported by Amazon S3 on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html#S3OnOutpostsFeatureLimitations\">Unsupported Amazon S3 features</a>.</p> <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and <code>x-amz-outpost-id</code> in your API request, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>CreateBucket</code> for Amazon S3 on Outposts:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">Create Bucket</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Creates a new Outposts bucket. By creating the bucket, you become the bucket owner. To create an Outposts bucket, you must have S3 on Outposts. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>Not every string is an acceptable bucket name. For information on bucket naming restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules\">Working with Amazon S3 Buckets</a>.</p> <p>S3 on Outposts buckets support:</p> <ul> <li> <p>Tags</p> </li> <li> <p>LifecycleConfigurations for deleting expired objects</p> </li> </ul> <p>For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html\"> Amazon S3 on Outposts Restrictions and Limitations</a>.</p> <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and <code>x-amz-outpost-id</code> in your API request, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>CreateBucket</code> for Amazon S3 on Outposts:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html\">CreateAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html\">PutAccessPointPolicy</a> </p> </li> </ul>",
       "httpChecksumRequired": true
     },
     "CreateJob": {
@@ -104,6 +125,20 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "DeleteAccessPointForObjectLambda": {
+      "name": "DeleteAccessPointForObjectLambda",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}"
+      },
+      "input": {
+        "shape": "DeleteAccessPointForObjectLambdaRequest"
+      },
+      "documentation": "<p>Deletes the specified Object Lambda Access Point.</p> <p>The following actions are related to <code>DeleteAccessPointForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html\">CreateAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html\">GetAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html\">ListAccessPointsForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "DeleteAccessPointPolicy": {
       "name": "DeleteAccessPointPolicy",
       "http": {
@@ -118,6 +153,20 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "DeleteAccessPointPolicyForObjectLambda": {
+      "name": "DeleteAccessPointPolicyForObjectLambda",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/policy"
+      },
+      "input": {
+        "shape": "DeleteAccessPointPolicyForObjectLambdaRequest"
+      },
+      "documentation": "<p>Removes the resource policy for an Object Lambda Access Point.</p> <p>The following actions are related to <code>DeleteAccessPointPolicyForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html\">GetAccessPointPolicyForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html\">PutAccessPointPolicyForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "DeleteBucket": {
       "name": "DeleteBucket",
       "http": {
@@ -127,7 +176,7 @@
       "input": {
         "shape": "DeleteBucketRequest"
       },
-      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket. To delete an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html\">DeleteBucket</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the Amazon S3 on Outposts bucket. All objects (including all object versions and delete markers) in the bucket must be deleted before the bucket itself can be deleted. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples\">Examples</a> section.</p> <p class=\"title\"> <b>Related Resources</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket. To delete an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html\">DeleteBucket</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the Amazon S3 on Outposts bucket. All objects (including all object versions and delete markers) in the bucket must be deleted before the bucket itself can be deleted. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples\">Examples</a> section.</p> <p class=\"title\"> <b>Related Resources</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html\">GetBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -141,7 +190,7 @@
       "input": {
         "shape": "DeleteBucketLifecycleConfigurationRequest"
       },
-      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -155,7 +204,7 @@
       "input": {
         "shape": "DeleteBucketPolicyRequest"
       },
-      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -170,7 +219,7 @@
       "input": {
         "shape": "DeleteBucketTaggingRequest"
       },
-      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3 bucket tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html\">DeleteBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the tags from the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>PutBucketTagging</code> action. By default, the bucket owner has this permission and can grant this permission to others. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3 bucket tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html\">DeleteBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Deletes the tags from the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>PutBucketTagging</code> action. By default, the bucket owner has this permission and can grant this permission to others. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -296,6 +345,40 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "GetAccessPointConfigurationForObjectLambda": {
+      "name": "GetAccessPointConfigurationForObjectLambda",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/configuration"
+      },
+      "input": {
+        "shape": "GetAccessPointConfigurationForObjectLambdaRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointConfigurationForObjectLambdaResult"
+      },
+      "documentation": "<p>Returns configuration for an Object Lambda Access Point.</p> <p>The following actions are related to <code>GetAccessPointConfigurationForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html\">PutAccessPointConfigurationForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
+    "GetAccessPointForObjectLambda": {
+      "name": "GetAccessPointForObjectLambda",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}"
+      },
+      "input": {
+        "shape": "GetAccessPointForObjectLambdaRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointForObjectLambdaResult"
+      },
+      "documentation": "<p>Returns configuration information about the specified Object Lambda Access Point</p> <p>The following actions are related to <code>GetAccessPointForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html\">CreateAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html\">DeleteAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html\">ListAccessPointsForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "GetAccessPointPolicy": {
       "name": "GetAccessPointPolicy",
       "http": {
@@ -313,6 +396,23 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "GetAccessPointPolicyForObjectLambda": {
+      "name": "GetAccessPointPolicyForObjectLambda",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/policy"
+      },
+      "input": {
+        "shape": "GetAccessPointPolicyForObjectLambdaRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointPolicyForObjectLambdaResult"
+      },
+      "documentation": "<p>Returns the resource policy for an Object Lambda Access Point.</p> <p>The following actions are related to <code>GetAccessPointPolicyForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html\">DeleteAccessPointPolicyForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html\">PutAccessPointPolicyForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "GetAccessPointPolicyStatus": {
       "name": "GetAccessPointPolicyStatus",
       "http": {
@@ -325,7 +425,24 @@
       "output": {
         "shape": "GetAccessPointPolicyStatusResult"
       },
-      "documentation": "<p>Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
+      "documentation": "<p>Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
+    "GetAccessPointPolicyStatusForObjectLambda": {
+      "name": "GetAccessPointPolicyStatusForObjectLambda",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/policyStatus"
+      },
+      "input": {
+        "shape": "GetAccessPointPolicyStatusForObjectLambdaRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointPolicyStatusForObjectLambdaResult"
+      },
+      "documentation": "<p>Returns the status of the resource policy associated with an Object Lambda Access Point.</p>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -342,7 +459,7 @@
       "output": {
         "shape": "GetBucketResult"
       },
-      "documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\"> Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> </ul>",
+      "documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -359,7 +476,7 @@
       "output": {
         "shape": "GetBucketLifecycleConfigurationResult"
       },
-      "documentation": "<note> <p>This action gets an Amazon S3 on Outposts bucket's lifecycle configuration. To get an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the lifecycle configuration information set on the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> and for information about lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html\"> Object Lifecycle Management</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>s3-outposts:GetLifecycleConfiguration</code> action. The Outposts bucket owner has this permission, by default. The bucket owner can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p> <code>GetBucketLifecycleConfiguration</code> has the following special error:</p> <ul> <li> <p>Error code: <code>NoSuchLifecycleConfiguration</code> </p> <ul> <li> <p>Description: The lifecycle configuration does not exist.</p> </li> <li> <p>HTTP Status Code: 404 Not Found</p> </li> <li> <p>SOAP Fault Code Prefix: Client</p> </li> </ul> </li> </ul> <p>The following actions are related to <code>GetBucketLifecycleConfiguration</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action gets an Amazon S3 on Outposts bucket's lifecycle configuration. To get an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the lifecycle configuration information set on the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> and for information about lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html\"> Object Lifecycle Management</a> in <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>s3-outposts:GetLifecycleConfiguration</code> action. The Outposts bucket owner has this permission, by default. The bucket owner can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p> <code>GetBucketLifecycleConfiguration</code> has the following special error:</p> <ul> <li> <p>Error code: <code>NoSuchLifecycleConfiguration</code> </p> <ul> <li> <p>Description: The lifecycle configuration does not exist.</p> </li> <li> <p>HTTP Status Code: 404 Not Found</p> </li> <li> <p>SOAP Fault Code Prefix: Client</p> </li> </ul> </li> </ul> <p>The following actions are related to <code>GetBucketLifecycleConfiguration</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -376,7 +493,7 @@
       "output": {
         "shape": "GetBucketPolicyResult"
       },
-      "documentation": "<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -393,7 +510,7 @@
       "output": {
         "shape": "GetBucketTaggingResult"
       },
-      "documentation": "<note> <p>This action gets an Amazon S3 on Outposts bucket's tags. To get an S3 bucket tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html\">GetBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the tag set associated with the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>GetBucketTagging</code> action. By default, the bucket owner has this permission and can grant this permission to others.</p> <p> <code>GetBucketTagging</code> has the following special error:</p> <ul> <li> <p>Error code: <code>NoSuchTagSetError</code> </p> <ul> <li> <p>Description: There is no tag set associated with the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action gets an Amazon S3 on Outposts bucket's tags. To get an S3 bucket tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html\">GetBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Returns the tag set associated with the Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>To use this action, you must have permission to perform the <code>GetBucketTagging</code> action. By default, the bucket owner has this permission and can grant this permission to others.</p> <p> <code>GetBucketTagging</code> has the following special error:</p> <ul> <li> <p>Error code: <code>NoSuchTagSetError</code> </p> <ul> <li> <p>Description: There is no tag set associated with the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html\">PutBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -499,6 +616,23 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "ListAccessPointsForObjectLambda": {
+      "name": "ListAccessPointsForObjectLambda",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspointforobjectlambda"
+      },
+      "input": {
+        "shape": "ListAccessPointsForObjectLambdaRequest"
+      },
+      "output": {
+        "shape": "ListAccessPointsForObjectLambdaResult"
+      },
+      "documentation": "<p>Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in <code>maxResults</code>, whichever is less), the response will include a continuation token that you can use to list the additional access points.</p> <p>The following actions are related to <code>ListAccessPointsForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html\">CreateAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html\">DeleteAccessPointForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html\">GetAccessPointForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "ListJobs": {
       "name": "ListJobs",
       "http": {
@@ -539,7 +673,7 @@
       "output": {
         "shape": "ListRegionalBucketsResult"
       },
-      "documentation": "<p>Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and <code>x-amz-outpost-id</code> in your request, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples\">Examples</a> section.</p>",
+      "documentation": "<p>Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and <code>x-amz-outpost-id</code> in your request, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples\">Examples</a> section.</p>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -557,6 +691,24 @@
         "shape": "ListStorageLensConfigurationsResult"
       },
       "documentation": "<p>Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <note> <p>To use this action, you must have permission to perform the <code>s3:ListStorageLensConfigurations</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </note>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
+    "PutAccessPointConfigurationForObjectLambda": {
+      "name": "PutAccessPointConfigurationForObjectLambda",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/configuration"
+      },
+      "input": {
+        "shape": "PutAccessPointConfigurationForObjectLambdaRequest",
+        "locationName": "PutAccessPointConfigurationForObjectLambdaRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "documentation": "<p>Replaces configuration for an Object Lambda Access Point.</p> <p>The following actions are related to <code>PutAccessPointConfigurationForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html\">GetAccessPointConfigurationForObjectLambda</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -579,6 +731,24 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "PutAccessPointPolicyForObjectLambda": {
+      "name": "PutAccessPointPolicyForObjectLambda",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/accesspointforobjectlambda/{name}/policy"
+      },
+      "input": {
+        "shape": "PutAccessPointPolicyForObjectLambdaRequest",
+        "locationName": "PutAccessPointPolicyForObjectLambdaRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "documentation": "<p>Creates or replaces resource policy for an Object Lambda Access Point. For an example policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli\">Creating Object Lambda Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>The following actions are related to <code>PutAccessPointPolicyForObjectLambda</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html\">DeleteAccessPointPolicyForObjectLambda</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html\">GetAccessPointPolicyForObjectLambda</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      }
+    },
     "PutBucketLifecycleConfiguration": {
       "name": "PutBucketLifecycleConfiguration",
       "http": {
@@ -588,7 +758,7 @@
       "input": {
         "shape": "PutBucketLifecycleConfigurationRequest"
       },
-      "documentation": "<note> <p>This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Creates a new lifecycle configuration for the Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Managing Lifecycle Permissions for Amazon S3 on Outposts</a>.</p> <p/> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketLifecycleConfiguration</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket. To put a lifecycle configuration to an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Creates a new lifecycle configuration for the S3 on Outposts bucket or replaces an existing lifecycle configuration. Outposts buckets only support lifecycle configurations that delete/expire objects after a certain period of time and abort incomplete multipart uploads.</p> <p/> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketLifecycleConfiguration</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html\">DeleteBucketLifecycleConfiguration</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -607,7 +777,7 @@
           "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
         }
       },
-      "documentation": "<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action.</p> <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>If you are using an identity other than the root user of the AWS account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action.</p> <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the AWS account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -622,7 +792,7 @@
       "input": {
         "shape": "PutBucketTaggingRequest"
       },
-      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Sets the tags for an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost Allocation and Tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html\"> Using Cost Allocation in Amazon S3 Bucket Tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> AWS-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon Simple Storage Service API</i>. </p> </note> <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>Use tags to organize your AWS bill to reflect your own cost structure. To do this, sign up to get your AWS account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost allocation and tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\"> Using cost allocation in Amazon S3 bucket tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing access permissions to your Amazon S3 resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> AWS-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -868,6 +1038,26 @@
       },
       "documentation": "<p>A container for the activity metrics.</p>"
     },
+    "AwsLambdaTransformation": {
+      "type": "structure",
+      "required": [
+        "FunctionArn"
+      ],
+      "members": {
+        "FunctionArn": {
+          "shape": "FunctionArnString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function.</p>"
+        },
+        "FunctionPayload": {
+          "shape": "AwsLambdaTransformationPayload",
+          "documentation": "<p>Additional JSON that provides supplemental data to the Lambda function used to transform objects.</p>"
+        }
+      },
+      "documentation": "<p>AWS Lambda function used to transform objects through an Object Lambda Access Point.</p>"
+    },
+    "AwsLambdaTransformationPayload": {
+      "type": "string"
+    },
     "AwsOrgArn": {
       "type": "string",
       "max": 1024,
@@ -942,6 +1132,42 @@
     },
     "ContinuationToken": {
       "type": "string"
+    },
+    "CreateAccessPointForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name",
+        "Configuration"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for owner of the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name you want to assign to this Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Configuration": {
+          "shape": "ObjectLambdaConfiguration",
+          "documentation": "<p>Object Lambda Access Point configuration as a JSON document.</p>"
+        }
+      }
+    },
+    "CreateAccessPointForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "ObjectLambdaAccessPointArn": {
+          "shape": "ObjectLambdaAccessPointArn",
+          "documentation": "<p>Specifies the ARN for the Object Lambda Access Point.</p>"
+        }
+      }
     },
     "CreateAccessPointRequest": {
       "type": "structure",
@@ -1162,6 +1388,50 @@
     },
     "DaysAfterInitiation": {
       "type": "integer"
+    },
+    "DeleteAccessPointForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the access point you want to delete.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "DeleteAccessPointPolicyForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point you want to delete the policy for.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
     },
     "DeleteAccessPointPolicyRequest": {
       "type": "structure",
@@ -1452,6 +1722,107 @@
       "min": 1,
       "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
     },
+    "GetAccessPointConfigurationForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point you want to return the configuration for.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointConfigurationForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "Configuration": {
+          "shape": "ObjectLambdaConfiguration",
+          "documentation": "<p>Object Lambda Access Point configuration document.</p>"
+        }
+      }
+    },
+    "GetAccessPointForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>"
+        },
+        "PublicAccessBlockConfiguration": {
+          "shape": "PublicAccessBlockConfiguration",
+          "documentation": "<p>Configuration to block all public access. This setting is turned on and can not be edited. </p>"
+        },
+        "CreationDate": {
+          "shape": "CreationDate",
+          "documentation": "<p>The date and time when the specified Object Lambda Access Point was created.</p>"
+        }
+      }
+    },
+    "GetAccessPointPolicyForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointPolicyForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "shape": "ObjectLambdaPolicy",
+          "documentation": "<p>Object Lambda Access Point resource policy document.</p>"
+        }
+      }
+    },
     "GetAccessPointPolicyRequest": {
       "type": "structure",
       "required": [
@@ -1480,6 +1851,36 @@
         "Policy": {
           "shape": "Policy",
           "documentation": "<p>The access point policy associated with the specified access point.</p>"
+        }
+      }
+    },
+    "GetAccessPointPolicyStatusForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointPolicyStatusForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "PolicyStatus": {
+          "shape": "PolicyStatus"
         }
       }
     },
@@ -2401,6 +2802,46 @@
         "locationName": "Rule"
       }
     },
+    "ListAccessPointsForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of access points that you want to include in the list. If there are more than this number of access points, then the response will include a continuation token in the <code>NextToken</code> field that you can use to retrieve the next page of access points.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAccessPointsForObjectLambdaResult": {
+      "type": "structure",
+      "members": {
+        "ObjectLambdaAccessPointList": {
+          "shape": "ObjectLambdaAccessPointList",
+          "documentation": "<p>Returns list of Object Lambda Access Points.</p>"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.</p>"
+        }
+      }
+    },
     "ListAccessPointsRequest": {
       "type": "structure",
       "required": [
@@ -2676,6 +3117,140 @@
         "locationName": "NoncurrentVersionTransition"
       }
     },
+    "ObjectLambdaAccessPoint": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>"
+        },
+        "ObjectLambdaAccessPointArn": {
+          "shape": "ObjectLambdaAccessPointArn",
+          "documentation": "<p>Specifies the ARN for the Object Lambda Access Point.</p>"
+        }
+      },
+      "documentation": "<p>An access point with an attached AWS Lambda function used to access transformed data from an Amazon S3 bucket.</p>"
+    },
+    "ObjectLambdaAccessPointArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*"
+    },
+    "ObjectLambdaAccessPointList": {
+      "type": "list",
+      "member": {
+        "shape": "ObjectLambdaAccessPoint",
+        "locationName": "ObjectLambdaAccessPoint"
+      }
+    },
+    "ObjectLambdaAccessPointName": {
+      "type": "string",
+      "max": 45,
+      "min": 3,
+      "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"
+    },
+    "ObjectLambdaAllowedFeature": {
+      "type": "string",
+      "enum": [
+        "GetObject-Range",
+        "GetObject-PartNumber"
+      ]
+    },
+    "ObjectLambdaAllowedFeaturesList": {
+      "type": "list",
+      "member": {
+        "shape": "ObjectLambdaAllowedFeature",
+        "locationName": "AllowedFeature"
+      }
+    },
+    "ObjectLambdaConfiguration": {
+      "type": "structure",
+      "required": [
+        "SupportingAccessPoint",
+        "TransformationConfigurations"
+      ],
+      "members": {
+        "SupportingAccessPoint": {
+          "shape": "ObjectLambdaSupportingAccessPointArn",
+          "documentation": "<p>Standard access point associated with the Object Lambda Access Point.</p>"
+        },
+        "CloudWatchMetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A container for whether the CloudWatch metrics configuration is enabled.</p>"
+        },
+        "AllowedFeatures": {
+          "shape": "ObjectLambdaAllowedFeaturesList",
+          "documentation": "<p>A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.</p>"
+        },
+        "TransformationConfigurations": {
+          "shape": "ObjectLambdaTransformationConfigurationsList",
+          "documentation": "<p>A container for transformation configurations for an Object Lambda Access Point.</p>"
+        }
+      },
+      "documentation": "<p>A configuration used when creating an Object Lambda Access Point.</p>"
+    },
+    "ObjectLambdaContentTransformation": {
+      "type": "structure",
+      "members": {
+        "AwsLambda": {
+          "shape": "AwsLambdaTransformation",
+          "documentation": "<p>A container for an AWS Lambda function.</p>"
+        }
+      },
+      "documentation": "<p>A container for AwsLambdaTransformation.</p>",
+      "union": true
+    },
+    "ObjectLambdaPolicy": {
+      "type": "string"
+    },
+    "ObjectLambdaSupportingAccessPointArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:[^:]+:s3:[^:]*:\\d{12}:accesspoint/.*"
+    },
+    "ObjectLambdaTransformationConfiguration": {
+      "type": "structure",
+      "required": [
+        "Actions",
+        "ContentTransformation"
+      ],
+      "members": {
+        "Actions": {
+          "shape": "ObjectLambdaTransformationConfigurationActionsList",
+          "documentation": "<p>A container for the action of an Object Lambda Access Point configuration.</p>"
+        },
+        "ContentTransformation": {
+          "shape": "ObjectLambdaContentTransformation",
+          "documentation": "<p>A container for the content transformation of an Object Lambda Access Point configuration.</p>"
+        }
+      },
+      "documentation": "<p>A configuration used when creating an Object Lambda Access Point transformation.</p>"
+    },
+    "ObjectLambdaTransformationConfigurationAction": {
+      "type": "string",
+      "enum": [
+        "GetObject"
+      ]
+    },
+    "ObjectLambdaTransformationConfigurationActionsList": {
+      "type": "list",
+      "member": {
+        "shape": "ObjectLambdaTransformationConfigurationAction",
+        "locationName": "Action"
+      }
+    },
+    "ObjectLambdaTransformationConfigurationsList": {
+      "type": "list",
+      "member": {
+        "shape": "ObjectLambdaTransformationConfiguration",
+        "locationName": "TransformationConfiguration"
+      }
+    },
     "ObjectLockEnabledForBucket": {
       "type": "boolean"
     },
@@ -2770,6 +3345,60 @@
     "PublicAccessBlockEnabled": {
       "type": "boolean"
     },
+    "PutAccessPointConfigurationForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name",
+        "Configuration"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Configuration": {
+          "shape": "ObjectLambdaConfiguration",
+          "documentation": "<p>Object Lambda Access Point configuration document.</p>"
+        }
+      }
+    },
+    "PutAccessPointPolicyForObjectLambdaRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name",
+        "Policy"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified Object Lambda Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "ObjectLambdaAccessPointName",
+          "documentation": "<p>The name of the Object Lambda Access Point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Policy": {
+          "shape": "ObjectLambdaPolicy",
+          "documentation": "<p>Object Lambda Access Point resource policy document.</p>"
+        }
+      }
+    },
     "PutAccessPointPolicyRequest": {
       "type": "structure",
       "required": [
@@ -2793,7 +3422,7 @@
         },
         "Policy": {
           "shape": "Policy",
-          "documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing data access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+          "documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">Managing data access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
         }
       }
     },
