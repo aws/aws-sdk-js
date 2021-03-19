@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.867.0-->
+<!--LATEST=2.868.0-->
 <!--ENTRYINSERT-->
+
+## 2.868.0
+* feature: EC2: X2gd instances are the next generation of memory-optimized instances powered by AWS-designed, Arm-based AWS Graviton2 processors.
+* feature: SageMaker: Adding authentication support for pulling images stored in private Docker registries to build containers for real-time inference.
 
 ## 2.867.0
 * feature: AutoScaling: Amazon EC2 Auto Scaling Instance Refresh now supports phased deployments.
