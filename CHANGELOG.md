@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.868.0-->
+<!--LATEST=2.869.0-->
 <!--ENTRYINSERT-->
+
+## 2.869.0
+* feature: EC2: This release adds support for UEFI boot on selected AMD- and Intel-based EC2 instances.
+* feature: Macie2: This release of the Amazon Macie API adds support for publishing sensitive data findings to AWS Security Hub and specifying which categories of findings to publish to Security Hub.
+* feature: Redshift: Added support to enable AQUA in Amazon Redshift clusters.
 
 ## 2.868.0
 * feature: EC2: X2gd instances are the next generation of memory-optimized instances powered by AWS-designed, Arm-based AWS Graviton2 processors.

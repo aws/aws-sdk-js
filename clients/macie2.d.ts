@@ -252,6 +252,14 @@ declare class Macie2 extends Service {
    */
   getFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.GetFindingsFilterResponse) => void): Request<Macie2.Types.GetFindingsFilterResponse, AWSError>;
   /**
+   * Retrieves the configuration settings for publishing findings to AWS Security Hub.
+   */
+  getFindingsPublicationConfiguration(params: Macie2.Types.GetFindingsPublicationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.GetFindingsPublicationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the configuration settings for publishing findings to AWS Security Hub.
+   */
+  getFindingsPublicationConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.GetFindingsPublicationConfigurationResponse, AWSError>;
+  /**
    * Retrieves the count of Amazon Macie membership invitations that were received by an account.
    */
   getInvitationsCount(params: Macie2.Types.GetInvitationsCountRequest, callback?: (err: AWSError, data: Macie2.Types.GetInvitationsCountResponse) => void): Request<Macie2.Types.GetInvitationsCountResponse, AWSError>;
@@ -371,6 +379,14 @@ declare class Macie2 extends Service {
    * Creates or updates the configuration settings for storing data classification results.
    */
   putClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
+  /**
+   * Updates the configuration settings for publishing findings to AWS Security Hub.
+   */
+  putFindingsPublicationConfiguration(params: Macie2.Types.PutFindingsPublicationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.PutFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.PutFindingsPublicationConfigurationResponse, AWSError>;
+  /**
+   * Updates the configuration settings for publishing findings to AWS Security Hub.
+   */
+  putFindingsPublicationConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.PutFindingsPublicationConfigurationResponse, AWSError>;
   /**
    * Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
    */
@@ -847,7 +863,7 @@ declare namespace Macie2 {
      */
     column?: __long;
     /**
-     * The name of the column that contains the data, if available.
+     * The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.
      */
     columnName?: __string;
     /**
@@ -1406,7 +1422,7 @@ declare namespace Macie2 {
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.
+     * Specifies the new status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.
      */
     status?: MacieStatus;
   }
@@ -1777,6 +1793,14 @@ declare namespace Macie2 {
      * A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.
      */
     tags?: TagMap;
+  }
+  export interface GetFindingsPublicationConfigurationRequest {
+  }
+  export interface GetFindingsPublicationConfigurationResponse {
+    /**
+     * The configuration settings that determine which findings are published to AWS Security Hub.
+     */
+    securityHubConfiguration?: SecurityHubConfiguration;
   }
   export interface GetFindingsRequest {
     /**
@@ -2440,7 +2464,7 @@ declare namespace Macie2 {
      */
     cells?: Cells;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.
      */
     lineRanges?: Ranges;
     /**
@@ -2494,6 +2518,18 @@ declare namespace Macie2 {
      */
     configuration?: ClassificationExportConfiguration;
   }
+  export interface PutFindingsPublicationConfigurationRequest {
+    /**
+     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: __string;
+    /**
+     * The configuration settings that determine which findings to publish to AWS Security Hub.
+     */
+    securityHubConfiguration?: SecurityHubConfiguration;
+  }
+  export interface PutFindingsPublicationConfigurationResponse {
+  }
   export interface Range {
     /**
      * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.
@@ -2511,7 +2547,7 @@ declare namespace Macie2 {
   export type Ranges = Range[];
   export interface Record {
     /**
-     * The path, as a JSONPath expression, to the field in the record that contains the data. If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
+     * The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field. If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
      */
     jsonPath?: __string;
     /**
@@ -2679,6 +2715,16 @@ declare namespace Macie2 {
      * The property- or tag-based conditions that determine which objects to include in the analysis.
      */
     includes?: JobScopingBlock;
+  }
+  export interface SecurityHubConfiguration {
+    /**
+     * Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.
+     */
+    publishClassificationFindings: __boolean;
+    /**
+     * Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.
+     */
+    publishPolicyFindings: __boolean;
   }
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
@@ -2914,7 +2960,7 @@ declare namespace Macie2 {
      */
     jobId: __string;
     /**
-     * The new status for the job. Valid values are: CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED. If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it. RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED. If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job. USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job. If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The new status for the job. Valid values are: CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED. If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it. RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED. If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job. USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE, PAUSED, or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job. If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus: JobStatus;
   }

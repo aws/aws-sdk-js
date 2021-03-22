@@ -61,11 +61,11 @@ declare class CodeArtifact extends Service {
    */
   deleteDomainPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.DeleteDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.DeleteDomainPermissionsPolicyResult, AWSError>;
   /**
-   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example,  ListackageVersions ), but you can restore them using  UpdatePackageVersionsStatus . 
+   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
    */
   deletePackageVersions(params: CodeArtifact.Types.DeletePackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageVersionsResult) => void): Request<CodeArtifact.Types.DeletePackageVersionsResult, AWSError>;
   /**
-   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example,  ListackageVersions ), but you can restore them using  UpdatePackageVersionsStatus . 
+   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
    */
   deletePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageVersionsResult) => void): Request<CodeArtifact.Types.DeletePackageVersionsResult, AWSError>;
   /**
@@ -157,11 +157,11 @@ declare class CodeArtifact extends Service {
    */
   getPackageVersionReadme(callback?: (err: AWSError, data: CodeArtifact.Types.GetPackageVersionReadmeResult) => void): Request<CodeArtifact.Types.GetPackageVersionReadmeResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven     nuget   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven   
    */
   getRepositoryEndpoint(params: CodeArtifact.Types.GetRepositoryEndpointRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven     nuget   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven   
    */
   getRepositoryEndpoint(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class CodeArtifact extends Service {
    */
   getRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.GetRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   *  Returns a list of  DomainSummary  objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
+   *  Returns a list of DomainSummary objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(params: CodeArtifact.Types.ListDomainsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
   /**
-   *  Returns a list of  DomainSummary  objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
+   *  Returns a list of DomainSummary objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
   /**
@@ -320,7 +320,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.     public:nuget-org - for the NuGet Gallery.   
+     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.   
      */
     externalConnection: ExternalConnectionName;
   }
@@ -350,11 +350,11 @@ declare namespace CodeArtifact {
      */
     destinationRepository: RepositoryName;
     /**
-     *  The format of the package that is copied. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the package that is copied. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -410,7 +410,7 @@ declare namespace CodeArtifact {
   }
   export interface CreateRepositoryRequest {
     /**
-     *  The domain that contains the created repository. 
+     *  The name of the domain that contains the created repository. 
      */
     domain: DomainName;
     /**
@@ -490,11 +490,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package versions to delete. The valid values are:     npm     pypi     maven     nuget   
+     *  The format of the package versions to delete. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -591,11 +591,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the requested package version. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of the requested package version. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -609,7 +609,7 @@ declare namespace CodeArtifact {
   }
   export interface DescribePackageVersionResult {
     /**
-     *  A  PackageVersionDescription  object that contains information about the requested package version. 
+     *  A PackageVersionDescription object that contains information about the requested package version. 
      */
     packageVersion: PackageVersionDescription;
   }
@@ -672,11 +672,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of package versions you want to dispose. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of package versions you want to dispose. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -818,7 +818,7 @@ declare namespace CodeArtifact {
   }
   export interface GetPackageVersionAssetRequest {
     /**
-     *  The domain that contains the repository that contains the package version with the requested asset. 
+     *  The name of the domain that contains the repository that contains the package version with the requested asset. 
      */
     domain: DomainName;
     /**
@@ -830,11 +830,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package version with the requested asset file. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of the package version with the requested asset file. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -886,11 +886,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package version with the requested readme file. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of the package version with the requested readme file. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -904,11 +904,11 @@ declare namespace CodeArtifact {
   }
   export interface GetPackageVersionReadmeResult {
     /**
-     *  The format of the package with the requested readme file. Valid format types are:     npm     pypi     maven     nuget   
+     *  The format of the package with the requested readme file. Valid format types are:     npm     pypi     maven   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -942,7 +942,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  Returns which endpoint of a repository to return. A repository has one endpoint for each package format:     npm     pypi     maven     nuget   
+     *  Returns which endpoint of a repository to return. A repository has one endpoint for each package format:     npm     pypi     maven   
      */
     format: PackageFormat;
   }
@@ -999,7 +999,7 @@ declare namespace CodeArtifact {
   }
   export interface ListDomainsResult {
     /**
-     *  The returned list of  DomainSummary  objects. 
+     *  The returned list of DomainSummary objects. 
      */
     domains?: DomainSummaryList;
     /**
@@ -1022,11 +1022,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package that contains the returned package version assets. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the package that contains the returned package version assets. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1052,7 +1052,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1078,7 +1078,7 @@ declare namespace CodeArtifact {
   }
   export interface ListPackageVersionDependenciesRequest {
     /**
-     *  The domain that contains the repository that contains the requested package version dependencies. 
+     *  The name of the domain that contains the repository that contains the requested package version dependencies. 
      */
     domain: DomainName;
     /**
@@ -1090,11 +1090,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package with the requested dependencies. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the package with the requested dependencies. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1112,11 +1112,11 @@ declare namespace CodeArtifact {
   }
   export interface ListPackageVersionDependenciesResult {
     /**
-     *  A format that specifies the type of the package that contains the returned dependencies. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of the package that contains the returned dependencies. The valid values are:     npm     pypi     maven   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1155,11 +1155,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the returned packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the returned packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1189,11 +1189,11 @@ declare namespace CodeArtifact {
      */
     defaultDisplayVersion?: PackageVersion;
     /**
-     *  A format of the package. Valid package format values are:     npm     pypi     maven     nuget   
+     *  A format of the package. Valid package format values are:     npm     pypi     maven   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1212,7 +1212,7 @@ declare namespace CodeArtifact {
   export type ListPackagesMaxResults = number;
   export interface ListPackagesRequest {
     /**
-     *  The domain that contains the repository that contains the requested list of packages. 
+     *  The name of the domain that contains the repository that contains the requested list of packages. 
      */
     domain: DomainName;
     /**
@@ -1224,11 +1224,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1332,7 +1332,7 @@ declare namespace CodeArtifact {
   export type LongOptional = number;
   export interface PackageDependency {
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1354,11 +1354,11 @@ declare namespace CodeArtifact {
   export type PackageNamespace = string;
   export interface PackageSummary {
     /**
-     *  The format of the package. Valid values are:     npm     pypi     maven     nuget   
+     *  The format of the package. Valid values are:     npm     pypi     maven   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1370,11 +1370,11 @@ declare namespace CodeArtifact {
   export type PackageVersion = string;
   export interface PackageVersionDescription {
     /**
-     *  The format of the package version. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The format of the package version. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     format?: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1545,7 +1545,7 @@ declare namespace CodeArtifact {
      */
     externalConnectionName?: ExternalConnectionName;
     /**
-     *  The package format associated with a repository's external connection. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
+     *  The package format associated with a repository's external connection. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
      */
     packageFormat?: PackageFormat;
     /**
@@ -1650,7 +1650,7 @@ declare namespace CodeArtifact {
   }
   export interface UpdatePackageVersionsStatusRequest {
     /**
-     *  The domain that contains the repository that contains the package versions with a status to be updated. 
+     *  The name of the domain that contains the repository that contains the package versions with a status to be updated. 
      */
     domain: DomainName;
     /**
@@ -1662,11 +1662,11 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package with the statuses to update. The valid values are:     npm     pypi     maven     nuget   
+     *  A format that specifies the type of the package with the statuses to update. The valid values are:     npm     pypi     maven   
      */
     format: PackageFormat;
     /**
-     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.     A NuGet package does not contain a corresponding component, so NuGet packages do not have a namespace.   
+     *  The namespace of the package. The package component that specifies its namespace depends on its type. For example:     The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     A Python package does not contain a corresponding component, so Python packages do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**

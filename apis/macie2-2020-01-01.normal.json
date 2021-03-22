@@ -1388,6 +1388,52 @@
       ],
       "documentation": "<p>Retrieves the criteria and other settings for a findings filter.</p>"
     },
+    "GetFindingsPublicationConfiguration": {
+      "name": "GetFindingsPublicationConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/findings-publication-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetFindingsPublicationConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetFindingsPublicationConfigurationResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>The request failed because it contains a syntax error.</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure.</p>"
+        },
+        {
+          "shape": "ServiceQuotaExceededException",
+          "documentation": "<p>The request failed because fulfilling the request would exceed one or more service quotas for your account.</p>"
+        },
+        {
+          "shape": "AccessDeniedException",
+          "documentation": "<p>The request was denied because you don't have sufficient access to the specified resource.</p>"
+        },
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>The request failed because the specified resource wasn't found.</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>The request failed because you sent too many requests during a certain amount of time.</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the configuration settings for publishing findings to AWS Security Hub.</p>"
+    },
     "GetInvitationsCount": {
       "name": "GetInvitationsCount",
       "http": {
@@ -2048,6 +2094,52 @@
         }
       ],
       "documentation": "<p>Creates or updates the configuration settings for storing data classification results.</p>"
+    },
+    "PutFindingsPublicationConfiguration": {
+      "name": "PutFindingsPublicationConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/findings-publication-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutFindingsPublicationConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutFindingsPublicationConfigurationResponse",
+        "documentation": "<p>The request succeeded and there isn't any content to include in the body of the response (No Content).</p>"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>The request failed because it contains a syntax error.</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure.</p>"
+        },
+        {
+          "shape": "ServiceQuotaExceededException",
+          "documentation": "<p>The request failed because fulfilling the request would exceed one or more service quotas for your account.</p>"
+        },
+        {
+          "shape": "AccessDeniedException",
+          "documentation": "<p>The request was denied because you don't have sufficient access to the specified resource.</p>"
+        },
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>The request failed because the specified resource wasn't found.</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>The request failed because you sent too many requests during a certain amount of time.</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
+        }
+      ],
+      "documentation": "<p>Updates the configuration settings for publishing findings to AWS Security Hub.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -2982,7 +3074,7 @@
         "columnName": {
           "shape": "__string",
           "locationName": "columnName",
-          "documentation": "<p>The name of the column that contains the data, if available.</p>"
+          "documentation": "<p>The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.</p>"
         },
         "row": {
           "shape": "__long",
@@ -3905,7 +3997,7 @@
         "status": {
           "shape": "MacieStatus",
           "locationName": "status",
-          "documentation": "<p>Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.</p>"
+          "documentation": "<p>Specifies the new status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.</p>"
         }
       }
     },
@@ -4146,7 +4238,7 @@
     },
     "FindingPublishingFrequency": {
       "type": "string",
-      "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:</p>",
+      "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
       "enum": [
         "FIFTEEN_MINUTES",
         "ONE_HOUR",
@@ -4503,6 +4595,20 @@
           "shape": "TagMap",
           "locationName": "tags",
           "documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.</p>"
+        }
+      }
+    },
+    "GetFindingsPublicationConfigurationRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetFindingsPublicationConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "securityHubConfiguration": {
+          "shape": "SecurityHubConfiguration",
+          "locationName": "securityHubConfiguration",
+          "documentation": "<p>The configuration settings that determine which findings are published to AWS Security Hub.</p>"
         }
       }
     },
@@ -5599,7 +5705,7 @@
         "lineRanges": {
           "shape": "Ranges",
           "locationName": "lineRanges",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>"
         },
         "offsetRanges": {
           "shape": "Ranges",
@@ -5693,6 +5799,26 @@
         }
       }
     },
+    "PutFindingsPublicationConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "clientToken": {
+          "shape": "__string",
+          "locationName": "clientToken",
+          "documentation": "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        },
+        "securityHubConfiguration": {
+          "shape": "SecurityHubConfiguration",
+          "locationName": "securityHubConfiguration",
+          "documentation": "<p>The configuration settings that determine which findings to publish to AWS Security Hub.</p>"
+        }
+      }
+    },
+    "PutFindingsPublicationConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "Range": {
       "type": "structure",
       "members": {
@@ -5727,7 +5853,7 @@
         "jsonPath": {
           "shape": "__string",
           "locationName": "jsonPath",
-          "documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
+          "documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field.</p> <p>If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
         },
         "recordIndex": {
           "shape": "__long",
@@ -6008,6 +6134,26 @@
         }
       },
       "documentation": "<p>Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes. Exclude conditions take precedence over include conditions.</p>"
+    },
+    "SecurityHubConfiguration": {
+      "type": "structure",
+      "members": {
+        "publishClassificationFindings": {
+          "shape": "__boolean",
+          "locationName": "publishClassificationFindings",
+          "documentation": "<p>Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>"
+        },
+        "publishPolicyFindings": {
+          "shape": "__boolean",
+          "locationName": "publishPolicyFindings",
+          "documentation": "<p>Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>",
+      "required": [
+        "publishPolicyFindings",
+        "publishClassificationFindings"
+      ]
     },
     "SensitiveData": {
       "type": "list",
@@ -6454,7 +6600,7 @@
         "jobStatus": {
           "shape": "JobStatus",
           "locationName": "jobStatus",
-          "documentation": "<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
+          "documentation": "<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE, PAUSED, or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
         }
       },
       "required": [
