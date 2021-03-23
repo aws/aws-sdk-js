@@ -16,9 +16,9 @@ or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
 ## Table of Contents:
-* [Getting Started](_#Getting-Started_)
-* [Getting Help](_#Getting-Help_)
-* [Contributing](_#Contributing_)
+* [Getting Started](#getting-Started)
+* [Getting Help](#getting-help)
+* [Contributing](#contributing)
 
 ## Getting Started
 
