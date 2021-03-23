@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.869.0-->
+<!--LATEST=2.870.0-->
 <!--ENTRYINSERT-->
+
+## 2.870.0
+* feature: CostExplorer: You can now create cost categories with inherited value rules and specify default values for any uncategorized costs.
+* feature: Fis: Updated maximum allowed size of action parameter from 64 to 1024
+* feature: GameLift: GameLift adds support for using event notifications to monitor game session placements. Specify an SNS topic or use CloudWatch Events to track activity for a game session queue.
+* feature: Redshift: Removed APIs to control AQUA on clusters.
 
 ## 2.869.0
 * feature: EC2: This release adds support for UEFI boot on selected AMD- and Intel-based EC2 instances.

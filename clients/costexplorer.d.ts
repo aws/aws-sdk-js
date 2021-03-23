@@ -412,7 +412,19 @@ declare namespace CostExplorer {
      *  The list of processing statuses for Cost Management products for a specific cost category. 
      */
     ProcessingStatus?: CostCategoryProcessingStatusList;
+    DefaultValue?: CostCategoryValue;
   }
+  export interface CostCategoryInheritedValueDimension {
+    /**
+     * The name of dimension for which to group costs. If you specify LINKED_ACCOUNT_NAME, the cost category value will be based on account name. If you specify TAG, the cost category value will be based on the value of the specified tag key.
+     */
+    DimensionName?: CostCategoryInheritedValueDimensionName;
+    /**
+     * The key to extract cost category values.
+     */
+    DimensionKey?: GenericString;
+  }
+  export type CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"|"TAG"|string;
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
   export type CostCategoryNamesList = CostCategoryName[];
@@ -453,15 +465,25 @@ declare namespace CostExplorer {
      *  A list of unique cost category values in a specific cost category. 
      */
     Values?: CostCategoryValuesList;
+    DefaultValue?: CostCategoryValue;
   }
   export type CostCategoryReferencesList = CostCategoryReference[];
   export interface CostCategoryRule {
-    Value: CostCategoryValue;
+    Value?: CostCategoryValue;
     /**
      * An Expression object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR is not supported. We recommend that you create a separate rule instead.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the AWS Billing and Cost Management User Guide.
      */
-    Rule: Expression;
+    Rule?: Expression;
+    /**
+     * The value the line item will be categorized as, if the line item contains the matched dimension.
+     */
+    InheritedValue?: CostCategoryInheritedValueDimension;
+    /**
+     * You can define the CostCategoryRule rule type as either REGULAR or INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by CostCategoryInheritedValueDimension. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.
+     */
+    Type?: CostCategoryRuleType;
   }
+  export type CostCategoryRuleType = "REGULAR"|"INHERITED_VALUE"|string;
   export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
   export type CostCategoryRulesList = CostCategoryRule[];
   export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string;
@@ -583,6 +605,7 @@ declare namespace CostExplorer {
      * The Cost Category rules used to categorize costs. For more information, see CostCategoryRule.
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
   }
   export interface CreateCostCategoryDefinitionResponse {
     /**
@@ -2696,6 +2719,7 @@ declare namespace CostExplorer {
      * The Expression object used to categorize costs. For more information, see CostCategoryRule . 
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
   }
   export interface UpdateCostCategoryDefinitionResponse {
     /**

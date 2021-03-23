@@ -1778,29 +1778,6 @@
       ],
       "documentation": "<p>Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.</p>"
     },
-    "ModifyAquaConfiguration": {
-      "name": "ModifyAquaConfiguration",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "ModifyAquaInputMessage"
-      },
-      "output": {
-        "shape": "ModifyAquaOutputMessage",
-        "resultWrapper": "ModifyAquaConfigurationResult"
-      },
-      "errors": [
-        {
-          "shape": "ClusterNotFoundFault"
-        },
-        {
-          "shape": "UnsupportedOperationFault"
-        }
-      ],
-      "documentation": "<p>Modifies whether a cluster can use AQUA (Advanced Query Accelerator). </p>"
-    },
     "ModifyCluster": {
       "name": "ModifyCluster",
       "http": {
@@ -2669,36 +2646,6 @@
         "resize-cluster"
       ]
     },
-    "AquaConfiguration": {
-      "type": "structure",
-      "members": {
-        "AquaStatus": {
-          "shape": "AquaStatus",
-          "documentation": "<p>The value indicates the status of AQUA on the cluster. Possible values include the following.</p> <ul> <li> <p>enabled - AQUA is enabled.</p> </li> <li> <p>disabled - AQUA is not enabled. </p> </li> <li> <p>applying - AQUA status is being applied. </p> </li> </ul>"
-        },
-        "AquaConfigurationStatus": {
-          "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
-        }
-      },
-      "documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
-    },
-    "AquaConfigurationStatus": {
-      "type": "string",
-      "enum": [
-        "enabled",
-        "disabled",
-        "auto"
-      ]
-    },
-    "AquaStatus": {
-      "type": "string",
-      "enum": [
-        "enabled",
-        "disabled",
-        "applying"
-      ]
-    },
     "AssociatedClusterList": {
       "type": "list",
       "member": {
@@ -3110,10 +3057,6 @@
         "TotalStorageCapacityInMegaBytes": {
           "shape": "LongOptional",
           "documentation": "<p>The total storage capacity of the cluster in megabytes. </p>"
-        },
-        "AquaConfiguration": {
-          "shape": "AquaConfiguration",
-          "documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -3728,10 +3671,6 @@
         "AvailabilityZoneRelocation": {
           "shape": "BooleanOptional",
           "documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.</p>"
-        },
-        "AquaConfigurationStatus": {
-          "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -5830,31 +5769,6 @@
         "high-performance"
       ]
     },
-    "ModifyAquaInputMessage": {
-      "type": "structure",
-      "required": [
-        "ClusterIdentifier"
-      ],
-      "members": {
-        "ClusterIdentifier": {
-          "shape": "String",
-          "documentation": "<p>The identifier of the cluster to be modified.</p>"
-        },
-        "AquaConfigurationStatus": {
-          "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
-        }
-      }
-    },
-    "ModifyAquaOutputMessage": {
-      "type": "structure",
-      "members": {
-        "AquaConfiguration": {
-          "shape": "AquaConfiguration",
-          "documentation": "<p>The updated AQUA configuration of the cluster. </p>"
-        }
-      }
-    },
     "ModifyClusterDbRevisionMessage": {
       "type": "structure",
       "required": [
@@ -7098,10 +7012,6 @@
         "AvailabilityZoneRelocation": {
           "shape": "BooleanOptional",
           "documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.</p>"
-        },
-        "AquaConfigurationStatus": {
-          "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"

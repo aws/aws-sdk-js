@@ -93,11 +93,11 @@ declare class IAM extends Service {
    */
   createGroup(callback?: (err: AWSError, data: IAM.Types.CreateGroupResponse) => void): Request<IAM.Types.CreateGroupResponse, AWSError>;
   /**
-   *  Creates a new instance profile. For information about instance profiles, see About instance profiles.  For information about the number of instance profiles you can create, see IAM object quotas in the IAM User Guide.
+   *  Creates a new instance profile. For information about instance profiles, see Using roles for applications on Amazon EC2 in the IAM User Guide, and Instance profiles in the Amazon EC2 User Guide.  For information about the number of instance profiles you can create, see IAM object quotas in the IAM User Guide.
    */
   createInstanceProfile(params: IAM.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: IAM.Types.CreateInstanceProfileResponse) => void): Request<IAM.Types.CreateInstanceProfileResponse, AWSError>;
   /**
-   *  Creates a new instance profile. For information about instance profiles, see About instance profiles.  For information about the number of instance profiles you can create, see IAM object quotas in the IAM User Guide.
+   *  Creates a new instance profile. For information about instance profiles, see Using roles for applications on Amazon EC2 in the IAM User Guide, and Instance profiles in the Amazon EC2 User Guide.  For information about the number of instance profiles you can create, see IAM object quotas in the IAM User Guide.
    */
   createInstanceProfile(callback?: (err: AWSError, data: IAM.Types.CreateInstanceProfileResponse) => void): Request<IAM.Types.CreateInstanceProfileResponse, AWSError>;
   /**
