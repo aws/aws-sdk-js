@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.870.0-->
+<!--LATEST=2.871.0-->
 <!--ENTRYINSERT-->
+
+## 2.871.0
+* feature: EC2: maximumEfaInterfaces added to DescribeInstanceTypes API
+* feature: Greengrass: Updated the parameters to make name required for CreateGroup API.
+* feature: SSM: This release allows SSM Explorer customers to enable OpsData sources across their organization when creating a resource data sync.
 
 ## 2.870.0
 * feature: CostExplorer: You can now create cost categories with inherited value rules and specify default values for any uncategorized costs.

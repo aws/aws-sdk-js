@@ -521,6 +521,9 @@ declare namespace S3Control {
      * If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).  This is required for creating an access point for Amazon S3 on Outposts buckets. 
      */
     VpcConfiguration?: VpcConfiguration;
+    /**
+     *  The PublicAccessBlock configuration that you want to apply to the access point. 
+     */
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
   }
   export interface CreateAccessPointResult {
@@ -1604,7 +1607,7 @@ declare namespace S3Control {
   export type ObjectLambdaSupportingAccessPointArn = string;
   export interface ObjectLambdaTransformationConfiguration {
     /**
-     * A container for the action of an Object Lambda Access Point configuration.
+     * A container for the action of an Object Lambda Access Point configuration. Valid input is GetObject.
      */
     Actions: ObjectLambdaTransformationConfigurationActionsList;
     /**

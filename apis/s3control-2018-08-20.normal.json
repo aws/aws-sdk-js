@@ -1199,7 +1199,8 @@
           "documentation": "<p>If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p> <note> <p>This is required for creating an access point for Amazon S3 on Outposts buckets.</p> </note>"
         },
         "PublicAccessBlockConfiguration": {
-          "shape": "PublicAccessBlockConfiguration"
+          "shape": "PublicAccessBlockConfiguration",
+          "documentation": "<p> The <code>PublicAccessBlock</code> configuration that you want to apply to the access point. </p>"
         }
       }
     },
@@ -3222,7 +3223,7 @@
       "members": {
         "Actions": {
           "shape": "ObjectLambdaTransformationConfigurationActionsList",
-          "documentation": "<p>A container for the action of an Object Lambda Access Point configuration.</p>"
+          "documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.</p>"
         },
         "ContentTransformation": {
           "shape": "ObjectLambdaContentTransformation",

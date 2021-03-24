@@ -2308,7 +2308,7 @@ declare namespace SSM {
      */
     RegistrationLimit?: RegistrationLimit;
     /**
-     * The date by which this activation request should expire. The default value is 24 hours.
+     * The date by which this activation request should expire, in timestamp format, such as "2021-07-07T00:00:00". You can specify a date up to 30 days in advance. If you don't provide an expiration date, the activation code expires in 24 hours.
      */
     ExpirationDate?: ExpirationDate;
     /**
@@ -7912,6 +7912,7 @@ declare namespace SSM {
     DestinationDataSharingType?: ResourceDataSyncDestinationDataSharingType;
   }
   export type ResourceDataSyncDestinationDataSharingType = string;
+  export type ResourceDataSyncEnableAllOpsDataSources = boolean;
   export type ResourceDataSyncIncludeFutureRegions = boolean;
   export interface ResourceDataSyncItem {
     /**
@@ -8014,6 +8015,10 @@ declare namespace SSM {
      * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
+    /**
+     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     */
+    EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
   export type ResourceDataSyncSourceRegion = string;
   export type ResourceDataSyncSourceRegionList = ResourceDataSyncSourceRegion[];
@@ -8039,6 +8044,10 @@ declare namespace SSM {
      * The data type name for including resource data sync state. There are four sync states:  OrganizationNotExists: Your organization doesn't exist.  NoPermissions: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.  InvalidOrganizationalUnit: You specified or selected an invalid unit in the resource data sync configuration.  TrustedAccessDisabled: You disabled Systems Manager access in the organization in AWS Organizations.
      */
     State?: ResourceDataSyncState;
+    /**
+     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     */
+    EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
   export type ResourceDataSyncState = string;
   export type ResourceDataSyncType = string;
@@ -8669,7 +8678,7 @@ declare namespace SSM {
      */
     Key?: TargetKey;
     /**
-     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer. 
+     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer.  Depending on the type of Target, the maximum number of values for a Key might be lower than the global maximum of 50.
      */
     Values?: TargetValues;
   }

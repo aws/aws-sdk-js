@@ -1289,7 +1289,7 @@ declare namespace Greengrass {
     /**
      * The name of the group.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Tag(s) to add to the new resource.
      */
