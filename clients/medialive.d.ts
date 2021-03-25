@@ -6542,6 +6542,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     ColorSpace?: VideoSelectorColorSpace;
     /**
+     * Color space settings
+     */
+    ColorSpaceSettings?: VideoSelectorColorSpaceSettings;
+    /**
      * Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.
      */
     ColorSpaceUsage?: VideoSelectorColorSpaceUsage;
@@ -6550,7 +6554,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     SelectorSettings?: VideoSelectorSettings;
   }
-  export type VideoSelectorColorSpace = "FOLLOW"|"REC_601"|"REC_709"|string;
+  export type VideoSelectorColorSpace = "FOLLOW"|"HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
+  export interface VideoSelectorColorSpaceSettings {
+    Hdr10Settings?: Hdr10Settings;
+  }
   export type VideoSelectorColorSpaceUsage = "FALLBACK"|"FORCE"|string;
   export interface VideoSelectorPid {
     /**

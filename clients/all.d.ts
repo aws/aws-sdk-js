@@ -258,3 +258,4 @@ export import WellArchitected = require('./wellarchitected');
 export import LexModelsV2 = require('./lexmodelsv2');
 export import LexRuntimeV2 = require('./lexruntimev2');
 export import Fis = require('./fis');
+export import LookoutMetrics = require('./lookoutmetrics');

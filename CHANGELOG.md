@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.871.0-->
+<!--LATEST=2.872.0-->
 <!--ENTRYINSERT-->
+
+## 2.872.0
+* feature: AlexaForBusiness: Added support for enabling and disabling data retention in the CreateProfile and UpdateProfile APIs and retrieving the state of data retention for a profile in the GetProfile API.
+* feature: LookoutMetrics: Amazon Lookout for Metrics is now generally available. You can use Lookout for Metrics to monitor your data for anomalies. For more information, see the Amazon Lookout for Metrics Developer Guide.
+* feature: MediaLive: EML now supports handling HDR10 and HLG 2020 color space from a Link input.
+* feature: Rekognition: "This release introduces AWS tagging support for Amazon Rekognition collections, stream processors, and Custom Label models."
+* feature: SageMaker: This feature allows customer to specify the environment variables in their CreateTrainingJob requests.
 
 ## 2.871.0
 * feature: EC2: maximumEfaInterfaces added to DescribeInstanceTypes API

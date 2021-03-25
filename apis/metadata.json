@@ -1002,5 +1002,8 @@
   },
   "fis": {
     "name": "Fis"
+  },
+  "lookoutmetrics": {
+    "name": "LookoutMetrics"
   }
 }

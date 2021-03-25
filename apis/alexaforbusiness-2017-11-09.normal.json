@@ -2943,6 +2943,10 @@
           "shape": "Boolean",
           "documentation": "<p>Whether PSTN calling is enabled.</p>"
         },
+        "DataRetentionOptIn": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether data retention of the profile is enabled.</p>"
+        },
         "MeetingRoomConfiguration": {
           "shape": "CreateMeetingRoomConfiguration",
           "documentation": "<p>The meeting room settings of a room profile.</p>"
@@ -4982,6 +4986,10 @@
           "shape": "Boolean",
           "documentation": "<p>The PSTN setting of a room profile.</p>"
         },
+        "DataRetentionOptIn": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether data retention of the profile is enabled.</p>"
+        },
         "AddressBookArn": {
           "shape": "Arn",
           "documentation": "<p>The ARN of the address book.</p>"
@@ -6671,6 +6679,10 @@
         "PSTNEnabled": {
           "shape": "Boolean",
           "documentation": "<p>Whether the PSTN setting of the room profile is enabled.</p>"
+        },
+        "DataRetentionOptIn": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether data retention of the profile is enabled.</p>"
         },
         "MeetingRoomConfiguration": {
           "shape": "UpdateMeetingRoomConfiguration",

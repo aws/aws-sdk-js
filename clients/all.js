@@ -259,5 +259,6 @@ module.exports = {
   WellArchitected: require('./wellarchitected'),
   LexModelsV2: require('./lexmodelsv2'),
   LexRuntimeV2: require('./lexruntimev2'),
-  Fis: require('./fis')
+  Fis: require('./fis'),
+  LookoutMetrics: require('./lookoutmetrics')
 };
