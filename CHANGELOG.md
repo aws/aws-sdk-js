@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.872.0-->
+<!--LATEST=2.873.0-->
 <!--ENTRYINSERT-->
+
+## 2.873.0
+* bugfix: Lookout Metrics: Update Lookout Metrics to set Content-Type header to be application/x-amz-json-1.1
+* feature: LookoutMetrics: Allowing uppercase alphabets for RDS and Redshift database names.
 
 ## 2.872.0
 * feature: AlexaForBusiness: Added support for enabling and disabling data retention in the CreateProfile and UpdateProfile APIs and retrieving the state of data retention for a profile in the GetProfile API.

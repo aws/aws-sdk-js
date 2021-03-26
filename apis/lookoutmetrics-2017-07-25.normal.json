@@ -2406,7 +2406,7 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "[a-zA-Z0-9_]+"
+      "pattern": "[a-zA-Z0-9_.]+"
     },
     "RDSSourceConfig": {
       "type": "structure",
@@ -2467,7 +2467,7 @@
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "[a-z0-9]+"
+      "pattern": "[a-zA-Z0-9_.]+"
     },
     "RedshiftSourceConfig": {
       "type": "structure",
