@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Lookout Metrics",
+  "description": "Update Lookout Metrics to set Content-Type header to be application/x-amz-json-1.1"
+}
