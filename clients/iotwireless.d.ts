@@ -459,7 +459,7 @@ declare namespace IoTWireless {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -542,7 +542,7 @@ declare namespace IoTWireless {
      */
     RoleArn: RoleArn;
     /**
-     * The tags to attach to the new destination. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -570,7 +570,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANDeviceProfile;
     /**
-     * The tags to attach to the new device profile Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -598,7 +598,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANServiceProfile;
     /**
-     * The tags to attach to the new service profile. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -641,6 +641,10 @@ declare namespace IoTWireless {
      * The device configuration information to use to create the wireless device.
      */
     LoRaWAN?: LoRaWANDevice;
+    /**
+     * The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
+     */
+    Tags?: TagList;
   }
   export interface CreateWirelessDeviceResponse {
     /**
@@ -666,7 +670,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN: LoRaWANGateway;
     /**
-     * The tags to attach to the new wireless gateway. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -702,7 +706,7 @@ declare namespace IoTWireless {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -1305,13 +1309,13 @@ declare namespace IoTWireless {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the resource for which to list tags.
+     * The ARN of the resource for which you want to list tags.
      */
     ResourceArn: AmazonResourceName;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -1904,7 +1908,7 @@ declare namespace IoTWireless {
      */
     ResourceArn: AmazonResourceName;
     /**
-     * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+     * Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
      */
     Tags: TagList;
   }

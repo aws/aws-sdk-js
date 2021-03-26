@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.873.0-->
+<!--LATEST=2.874.0-->
 <!--ENTRYINSERT-->
+
+## 2.874.0
+* feature: CloudWatchEvents: Add support for SageMaker Model Builder Pipelines Targets to EventBridge
+* feature: CustomerProfiles: This release adds an optional parameter named FlowDefinition in PutIntegrationRequest.
+* feature: EventBridge: Add support for SageMaker Model Builder Pipelines Targets to EventBridge
+* feature: IoTWireless: Support tag-on-create for WirelessDevice.
+* feature: TranscribeService: Amazon Transcribe now supports tagging words that match your vocabulary filter for batch transcription.
 
 ## 2.873.0
 * bugfix: Lookout Metrics: Update Lookout Metrics to set Content-Type header to be application/x-amz-json-1.1

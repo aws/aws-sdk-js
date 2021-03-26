@@ -1876,7 +1876,7 @@
         },
         "VocabularyFilterMethod": {
           "shape": "VocabularyFilterMethod",
-          "documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text.</p>"
+          "documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text. Set to <code>tag</code> to mark the word in the transcription output that matches the vocabulary filter. When you set the filter method to <code>tag</code>, the words matching your vocabulary filter are not masked or removed.</p>"
         }
       },
       "documentation": "<p>Provides optional settings for the <code>StartTranscriptionJob</code> operation.</p>"
@@ -2358,7 +2358,8 @@
       "type": "string",
       "enum": [
         "remove",
-        "mask"
+        "mask",
+        "tag"
       ]
     },
     "VocabularyFilterName": {

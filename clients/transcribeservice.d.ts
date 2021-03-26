@@ -987,7 +987,7 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * Set to mask to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to remove to remove filtered text from the transcript without using placeholder text.
+     * Set to mask to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to remove to remove filtered text from the transcript without using placeholder text. Set to tag to mark the word in the transcription output that matches the vocabulary filter. When you set the filter method to tag, the words matching your vocabulary filter are not masked or removed.
      */
     VocabularyFilterMethod?: VocabularyFilterMethod;
   }
@@ -1352,7 +1352,7 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
   }
-  export type VocabularyFilterMethod = "remove"|"mask"|string;
+  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string;
   export type VocabularyFilterName = string;
   export type VocabularyFilters = VocabularyFilterInfo[];
   export interface VocabularyInfo {
