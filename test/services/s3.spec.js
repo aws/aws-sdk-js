@@ -392,9 +392,9 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({
         region: 'us-east-1'
       });
-      s3._parsedArn = { service: 'SERVICE_NAME' };
-      expect(s3.getSigningName()).to.equal(
-        s3._parsedArn.service
+      var req = { _parsedArn: { service: 'SERVICE_NAME' } };
+      expect(s3.getSigningName(req)).to.equal(
+        req._parsedArn.service
       );
       done();
     });
