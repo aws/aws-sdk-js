@@ -300,11 +300,11 @@ declare class WAFV2 extends Service {
    */
   untagResource(callback?: (err: AWSError, data: WAFV2.Types.UntagResourceResponse) => void): Request<WAFV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified IPSet.   This operation completely replaces any IP address specifications that you already have in the IP set with the ones that you provide to this call. If you want to add to or modify the addresses that are already in the IP set, retrieve those by calling GetIPSet, update them, and provide the complete updated array of IP addresses to this call. 
+   * Updates the specified IPSet.
    */
   updateIPSet(params: WAFV2.Types.UpdateIPSetRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateIPSetResponse) => void): Request<WAFV2.Types.UpdateIPSetResponse, AWSError>;
   /**
-   * Updates the specified IPSet.   This operation completely replaces any IP address specifications that you already have in the IP set with the ones that you provide to this call. If you want to add to or modify the addresses that are already in the IP set, retrieve those by calling GetIPSet, update them, and provide the complete updated array of IP addresses to this call. 
+   * Updates the specified IPSet.
    */
   updateIPSet(callback?: (err: AWSError, data: WAFV2.Types.UpdateIPSetResponse) => void): Request<WAFV2.Types.UpdateIPSetResponse, AWSError>;
   /**
@@ -339,6 +339,10 @@ declare namespace WAFV2 {
   export interface AllQueryArguments {
   }
   export interface AllowAction {
+    /**
+     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
   }
   export interface AndStatement {
     /**
@@ -359,6 +363,10 @@ declare namespace WAFV2 {
   export interface AssociateWebACLResponse {
   }
   export interface BlockAction {
+    /**
+     * Defines a custom response for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomResponse?: CustomResponse;
   }
   export interface Body {
   }
@@ -402,6 +410,10 @@ declare namespace WAFV2 {
   export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|string;
   export type ConsumedCapacity = number;
   export interface CountAction {
+    /**
+     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
   }
   export type Country = string;
   export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
@@ -495,6 +507,10 @@ declare namespace WAFV2 {
      * An array of key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface CreateRuleGroupResponse {
     /**
@@ -531,12 +547,60 @@ declare namespace WAFV2 {
      * An array of key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface CreateWebACLResponse {
     /**
      * High-level information about a WebACL, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a WebACL, and the ARN, that you provide to operations like AssociateWebACL.
      */
     Summary?: WebACLSummary;
+  }
+  export interface CustomHTTPHeader {
+    /**
+     * The name of the custom header.  For custom request header insertion, when AWS WAF inserts the header into the request, it prefixes this name x-amzn-waf-, to avoid confusion with the headers that are already in the request. For example, for the header name sample, AWS WAF inserts the header x-amzn-waf-sample.
+     */
+    Name: CustomHTTPHeaderName;
+    /**
+     * The value of the custom header.
+     */
+    Value: CustomHTTPHeaderValue;
+  }
+  export type CustomHTTPHeaderName = string;
+  export type CustomHTTPHeaderValue = string;
+  export type CustomHTTPHeaders = CustomHTTPHeader[];
+  export interface CustomRequestHandling {
+    /**
+     * The HTTP headers to insert into the request. Duplicate header names are not allowed.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    InsertHeaders: CustomHTTPHeaders;
+  }
+  export interface CustomResponse {
+    /**
+     * The HTTP status code to return to the client.  For a list of status codes that you can use in your custom reqponses, see Supported status codes for custom response in the AWS WAF Developer Guide. 
+     */
+    ResponseCode: ResponseStatusCode;
+    /**
+     * References the response body that you want AWS WAF to return to the web request client. You can define a custom response for a rule action or a default web ACL action that is set to block. To do this, you first define the response body key and value in the CustomResponseBodies setting for the WebACL or RuleGroup where you want to use it. Then, in the rule action or web ACL default action BlockAction setting, you reference the response body using this key. 
+     */
+    CustomResponseBodyKey?: EntityName;
+    /**
+     * The HTTP headers to use in the response. Duplicate header names are not allowed.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    ResponseHeaders?: CustomHTTPHeaders;
+  }
+  export type CustomResponseBodies = {[key: string]: CustomResponseBody};
+  export interface CustomResponseBody {
+    /**
+     * The type of content in the payload that you are defining in the Content string.
+     */
+    ContentType: ResponseContentType;
+    /**
+     * The payload of the custom response.  You can use JSON escape strings in JSON content. To do this, you must specify JSON content in the ContentType setting.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    Content: ResponseContent;
   }
   export interface DefaultAction {
     /**
@@ -1105,7 +1169,7 @@ declare namespace WAFV2 {
      */
     MatchScope: JsonMatchScope;
     /**
-     * What AWS WAF should do if it fails to completely parse the JSON body. The options are the following:    EVALUATE_AS_STRING - Inspect the body as plain text. AWS WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.    MATCH - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   If you don't provide this setting, AWS WAF parses and evaluates the content only up to the first parsing failure that it encounters.  AWS WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as invalid characters, duplicate keys, truncation, and any content whose root node isn't an object or an array.  AWS WAF parses the JSON in the following examples as two valid key, value pairs:    Missing comma: {"key1":"value1""key2":"value2"}    Missing colon: {"key1":"value1","key2""value2"}    Extra colons: {"key1"::"value1","key2""value2"}   
+     * The inspection behavior to fall back to if the JSON in the request body is invalid. For AWS WAF, invalid JSON is any content that isn't complete syntactical JSON, content whose root node isn't an object or an array, and duplicate keys in the content.  You can specify the following fallback behaviors:    MATCH - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.    EVALUATE_AS_STRING - Inspect the body as plain text. This option applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.    If you don't provide this setting, when AWS WAF encounters invalid JSON, it parses and inspects what it can, up to the first invalid JSON that it encounters. 
      */
     InvalidFallbackBehavior?: BodyParsingFallbackBehavior;
   }
@@ -1513,6 +1577,9 @@ declare namespace WAFV2 {
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
   export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|string;
+  export type ResponseContent = string;
+  export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
+  export type ResponseStatusCode = number;
   export interface Rule {
     /**
      * The name of the rule. You can't change the name of a Rule after you create it. 
@@ -1582,6 +1649,10 @@ declare namespace WAFV2 {
      * Defines and enables Amazon CloudWatch metrics and web request sample collection. 
      */
     VisibilityConfig: VisibilityConfig;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface RuleGroupReferenceStatement {
     /**
@@ -1648,6 +1719,14 @@ declare namespace WAFV2 {
      * The name of the Rule that the request matched. For managed rule groups, the format for this name is &lt;vendor name&gt;#&lt;managed rule group name&gt;#&lt;rule name&gt;. For your own rule groups, the format for this name is &lt;rule group name&gt;#&lt;rule name&gt;. If the rule is not in a rule group, this field is absent. 
      */
     RuleNameWithinRuleGroup?: EntityName;
+    /**
+     * Custom request headers inserted by AWS WAF into the request, according to the custom request configuration for the matching rule action.
+     */
+    RequestHeadersInserted?: HTTPHeaders;
+    /**
+     * The response code that was sent for the request.
+     */
+    ResponseCodeSent?: ResponseStatusCode;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
@@ -1914,6 +1993,10 @@ declare namespace WAFV2 {
      * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
      */
     LockToken: LockToken;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface UpdateRuleGroupResponse {
     /**
@@ -1954,6 +2037,10 @@ declare namespace WAFV2 {
      * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
      */
     LockToken: LockToken;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface UpdateWebACLResponse {
     /**
@@ -2023,6 +2110,10 @@ declare namespace WAFV2 {
      * Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. 
      */
     ManagedByFirewallManager?: Boolean;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {

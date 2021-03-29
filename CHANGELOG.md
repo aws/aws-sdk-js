@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.874.0-->
+<!--LATEST=2.875.0-->
 <!--ENTRYINSERT-->
+
+## 2.875.0
+* feature: DocDB: This release adds support for Event Subscriptions to DocumentDB.
+* feature: Glue: Allow Dots in Registry and Schema Names for CreateRegistry, CreateSchema; Fixed issue when duplicate keys are present and not returned as part of QuerySchemaVersionMetadata.
+* feature: IAM: AWS Identity and Access Management GetAccessKeyLastUsed API will throw a custom error if customer public key is not found for access keys.
+* feature: Location: Amazon Location added support for specifying pricing plan information on resources in alignment with our cost model.
+* feature: WAFV2: Added custom request handling and custom response support in rule actions and default action; Added the option to inspect the web request body as parsed and filtered JSON.
 
 ## 2.874.0
 * feature: CloudWatchEvents: Add support for SageMaker Model Builder Pipelines Targets to EventBridge

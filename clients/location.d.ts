@@ -12,11 +12,11 @@ declare class Location extends Service {
   constructor(options?: Location.Types.ClientConfiguration)
   config: Config & Location.Types.ClientConfiguration;
   /**
-   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.
+   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
    */
   associateTrackerConsumer(params: Location.Types.AssociateTrackerConsumerRequest, callback?: (err: AWSError, data: Location.Types.AssociateTrackerConsumerResponse) => void): Request<Location.Types.AssociateTrackerConsumerResponse, AWSError>;
   /**
-   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.
+   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
    */
   associateTrackerConsumer(callback?: (err: AWSError, data: Location.Types.AssociateTrackerConsumerResponse) => void): Request<Location.Types.AssociateTrackerConsumerResponse, AWSError>;
   /**
@@ -28,35 +28,35 @@ declare class Location extends Service {
    */
   batchDeleteGeofence(callback?: (err: AWSError, data: Location.Types.BatchDeleteGeofenceResponse) => void): Request<Location.Types.BatchDeleteGeofenceResponse, AWSError>;
   /**
-   * Used in geofence monitoring. Evaluates device positions against the position of geofences in a given geofence collection.
+   * Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.  The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update 
    */
   batchEvaluateGeofences(params: Location.Types.BatchEvaluateGeofencesRequest, callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * Used in geofence monitoring. Evaluates device positions against the position of geofences in a given geofence collection.
+   * Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.  The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update 
    */
   batchEvaluateGeofences(callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * A batch request to retrieve device positions.  The response will return the device positions from the last 24 hours. 
+   * A batch request to retrieve all device positions.
    */
   batchGetDevicePosition(params: Location.Types.BatchGetDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchGetDevicePositionResponse) => void): Request<Location.Types.BatchGetDevicePositionResponse, AWSError>;
   /**
-   * A batch request to retrieve device positions.  The response will return the device positions from the last 24 hours. 
+   * A batch request to retrieve all device positions.
    */
   batchGetDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchGetDevicePositionResponse) => void): Request<Location.Types.BatchGetDevicePositionResponse, AWSError>;
   /**
-   * A batch request for storing geofences into a given geofence collection.
+   * A batch request for storing geofence geometries into a given geofence collection.
    */
   batchPutGeofence(params: Location.Types.BatchPutGeofenceRequest, callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * A batch request for storing geofences into a given geofence collection.
+   * A batch request for storing geofence geometries into a given geofence collection.
    */
   batchPutGeofence(callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * Uploads a position update for one or more devices to a tracker resource. The data is used for API queries requesting the device position and position history.  Limitation — Location data is sampled at a fixed rate of 1 position per 30 second interval, and retained for 1 year before it is deleted. 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.  Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval, and retained for one year before it is deleted. 
    */
   batchUpdateDevicePosition(params: Location.Types.BatchUpdateDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   * Uploads a position update for one or more devices to a tracker resource. The data is used for API queries requesting the device position and position history.  Limitation — Location data is sampled at a fixed rate of 1 position per 30 second interval, and retained for 1 year before it is deleted. 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.  Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval, and retained for one year before it is deleted. 
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
@@ -156,27 +156,27 @@ declare class Location extends Service {
    */
   describeTracker(callback?: (err: AWSError, data: Location.Types.DescribeTrackerResponse) => void): Request<Location.Types.DescribeTrackerResponse, AWSError>;
   /**
-   * Removes the association bewteen a tracker resource and a geofence collection.  Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences. 
+   * Removes the association between a tracker resource and a geofence collection.  Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences. 
    */
   disassociateTrackerConsumer(params: Location.Types.DisassociateTrackerConsumerRequest, callback?: (err: AWSError, data: Location.Types.DisassociateTrackerConsumerResponse) => void): Request<Location.Types.DisassociateTrackerConsumerResponse, AWSError>;
   /**
-   * Removes the association bewteen a tracker resource and a geofence collection.  Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences. 
+   * Removes the association between a tracker resource and a geofence collection.  Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences. 
    */
   disassociateTrackerConsumer(callback?: (err: AWSError, data: Location.Types.DisassociateTrackerConsumerResponse) => void): Request<Location.Types.DisassociateTrackerConsumerResponse, AWSError>;
   /**
-   * Retrieves the latest device position.  Limitation — Device positions are deleted after one year. 
+   * Retrieves a device's most recent position according to its sample time.  Device positions are deleted after one year. 
    */
   getDevicePosition(params: Location.Types.GetDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.GetDevicePositionResponse) => void): Request<Location.Types.GetDevicePositionResponse, AWSError>;
   /**
-   * Retrieves the latest device position.  Limitation — Device positions are deleted after one year. 
+   * Retrieves a device's most recent position according to its sample time.  Device positions are deleted after one year. 
    */
   getDevicePosition(callback?: (err: AWSError, data: Location.Types.GetDevicePositionResponse) => void): Request<Location.Types.GetDevicePositionResponse, AWSError>;
   /**
-   * Retrieves the device position history from a tracker resource within a specified range of time.  Limitation — Device positions are deleted after one year. 
+   * Retrieves the device position history from a tracker resource within a specified range of time.  Device positions are deleted after 1 year. 
    */
   getDevicePositionHistory(params: Location.Types.GetDevicePositionHistoryRequest, callback?: (err: AWSError, data: Location.Types.GetDevicePositionHistoryResponse) => void): Request<Location.Types.GetDevicePositionHistoryResponse, AWSError>;
   /**
-   * Retrieves the device position history from a tracker resource within a specified range of time.  Limitation — Device positions are deleted after one year. 
+   * Retrieves the device position history from a tracker resource within a specified range of time.  Device positions are deleted after 1 year. 
    */
   getDevicePositionHistory(callback?: (err: AWSError, data: Location.Types.GetDevicePositionHistoryResponse) => void): Request<Location.Types.GetDevicePositionHistoryResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class Location extends Service {
    */
   listTrackers(callback?: (err: AWSError, data: Location.Types.ListTrackersResponse) => void): Request<Location.Types.ListTrackersResponse, AWSError>;
   /**
-   * Stores a geofence to a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
+   * Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request. 
    */
   putGeofence(params: Location.Types.PutGeofenceRequest, callback?: (err: AWSError, data: Location.Types.PutGeofenceResponse) => void): Request<Location.Types.PutGeofenceResponse, AWSError>;
   /**
-   * Stores a geofence to a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
+   * Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request. 
    */
   putGeofence(callback?: (err: AWSError, data: Location.Types.PutGeofenceResponse) => void): Request<Location.Types.PutGeofenceResponse, AWSError>;
   /**
@@ -439,7 +439,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * The geometry details for the geofence.
+     * Contains the polygon details to specify the position of the geofence.  Each geofence polygon can have a maximum of 1,000 vertices. 
      */
     Geometry: GeofenceGeometry;
   }
@@ -478,7 +478,7 @@ declare namespace Location {
      */
     Error: BatchItemError;
     /**
-     * The timestamp for when a position sample was attempted in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp at which the device position was determined. Uses  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     SampleTime: Timestamp;
   }
@@ -506,7 +506,7 @@ declare namespace Location {
   export type CountryCodeList = CountryCode[];
   export interface CreateGeofenceCollectionRequest {
     /**
-     * A custom name for the geofence collection. Requirements:   Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-), and underscores (_).    Must be a unique geofence collection name.   No spaces allowed. For example, ExampleGeofenceCollection.  
+     * A custom name for the geofence collection. Requirements:   Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-), periods (.), and underscores (_).    Must be a unique geofence collection name.   No spaces allowed. For example, ExampleGeofenceCollection.  
      */
     CollectionName: ResourceName;
     /**
@@ -514,9 +514,13 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Specifies the pricing plan for your geofence collection. There's three pricing plan options:    RequestBasedUsage — Selects the "Request-Based Usage" pricing plan.    MobileAssetTracking — Selects the "Mobile Asset Tracking" pricing plan.    MobileAssetManagement — Selects the "Mobile Asset Management" pricing plan.   For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
      */
     PricingPlan: PricingPlan;
+    /**
+     * Specifies the plan data source. Required if the Mobile Asset Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is selected. Billing is determined by the resource usage, the associated pricing plan, and the data source that was specified. For more information about each pricing plan option and restrictions, see the Amazon Location Service pricing page. Valid Values: Esri | Here 
+     */
+    PricingPlanDataSource?: String;
   }
   export interface CreateGeofenceCollectionResponse {
     /**
@@ -542,11 +546,11 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * The name for the map resource. Requirements:   Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), and underscores (_).    Must be a unique map resource name.    No spaces allowed. For example, ExampleMap.  
+     * The name for the map resource. Requirements:   Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).    Must be a unique map resource name.    No spaces allowed. For example, ExampleMap.  
      */
     MapName: ResourceName;
     /**
-     * Specifies the pricing plan for your map resource. There's three pricing plan options:    RequestBasedUsage — Selects the "Request-Based Usage" pricing plan.    MobileAssetTracking — Selects the "Mobile Asset Tracking" pricing plan.    MobileAssetManagement — Selects the "Mobile Asset Management" pricing plan.   For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your map resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
      */
     PricingPlan: PricingPlan;
   }
@@ -566,7 +570,7 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the data provider of geospatial data.
+     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE will return an error.  Valid values include:    Esri     Here    For additional details on data providers, see the Amazon Location Service data providers page.
      */
     DataSource: String;
     /**
@@ -578,11 +582,11 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * The name of the Place index resource.  Requirements:   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-) and underscores (_) ).   Must be a unique Place index resource name.   No spaces allowed. For example, ExamplePlaceIndex.  
+     * The name of the Place index resource.  Requirements:   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).   Must be a unique Place index resource name.   No spaces allowed. For example, ExamplePlaceIndex.  
      */
     IndexName: ResourceName;
     /**
-     * Specifies the pricing plan for your Place index resource. There's three pricing plan options:    RequestBasedUsage — Selects the "Request-Based Usage" pricing plan.    MobileAssetTracking — Selects the "Mobile Asset Tracking" pricing plan.    MobileAssetManagement — Selects the "Mobile Asset Management" pricing plan.   For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your Place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
      */
     PricingPlan: PricingPlan;
   }
@@ -606,11 +610,15 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Specifies the pricing plan for your tracker resource. There's three pricing plan options:    RequestBasedUsage — Selects the "Request-Based Usage" pricing plan.    MobileAssetTracking — Selects the "Mobile Asset Tracking" pricing plan.    MobileAssetManagement — Selects the "Mobile Asset Management" pricing plan.   For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
      */
     PricingPlan: PricingPlan;
     /**
-     * The name for the tracker resource. Requirements:   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-) and underscores (_).   Must be a unique tracker resource name.   No spaces allowed. For example, ExampleTracker.  
+     * Specifies the plan data source. Required if the Mobile Asset Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is selected. Billing is determined by the resource usage, the associated pricing plan, and data source that was specified. For more information about each pricing plan option and restrictions, see the Amazon Location Service pricing page. Valid Values: Esri | Here 
+     */
+    PricingPlanDataSource?: String;
+    /**
+     * The name for the tracker resource. Requirements:   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).   Must be a unique tracker resource name.   No spaces allowed. For example, ExampleTracker.  
      */
     TrackerName: ResourceName;
   }
@@ -690,6 +698,14 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
+     * The pricing plan selected for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
+    /**
+     * The data source selected for the geofence collection and associated pricing plan.
+     */
+    PricingPlanDataSource?: String;
+    /**
      * The timestamp for when the geofence collection was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
     UpdateTime: Timestamp;
@@ -726,6 +742,10 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
+     * The pricing plan selected for the specified map resource.  &lt;p&gt;For additional details and restrictions on each pricing plan option, see the &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing page&lt;/a&gt;.&lt;/p&gt; 
+     */
+    PricingPlan: PricingPlan;
+    /**
      * The timestamp for when the map resource was last update in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
     UpdateTime: Timestamp;
@@ -742,7 +762,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data.
+     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see the Amazon Location Service data providers page.
      */
     DataSource: String;
     /**
@@ -761,6 +781,10 @@ declare namespace Location {
      * The name of the Place index resource being described.
      */
     IndexName: ResourceName;
+    /**
+     * The pricing plan selected for the specified Place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
     /**
      * The timestamp for when the Place index resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -781,6 +805,14 @@ declare namespace Location {
      * The optional description for the tracker resource.
      */
     Description: ResourceDescription;
+    /**
+     * The pricing plan selected for the specified tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
+    /**
+     * The data source selected for the tracker resource and associated pricing plan.
+     */
+    PricingPlanDataSource?: String;
     /**
      * The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all AWS.
      */
@@ -804,11 +836,11 @@ declare namespace Location {
      */
     Position: Position;
     /**
-     * The timestamp for when the tracker resource recieved the position in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp for when the tracker resource received the device position in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     ReceivedTime: Timestamp;
     /**
-     * The timestamp for when the position was detected and sampled in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp at which the device's position was determined. Uses  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     SampleTime: Timestamp;
   }
@@ -819,11 +851,11 @@ declare namespace Location {
      */
     DeviceId: Id;
     /**
-     * The latest device position defined in WGS 84 format: [Xlongitude, Ylatitude].
+     * The latest device position defined in WGS 84 format: [X or longitude, Y or latitude].
      */
     Position: Position;
     /**
-     * The timestamp for when the position update was received in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
+     * The timestamp at which the device's position was determined. Uses ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
     SampleTime: Timestamp;
   }
@@ -852,7 +884,7 @@ declare namespace Location {
      */
     DeviceId: Id;
     /**
-     * Specify the end time for the position history in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.    The given time for EndTimeExclusive must be after the time for StartTimeInclusive.  
+     * Specify the end time for the position history in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be the time that the request is made. Requirement:   The time specified for EndTimeExclusive must be after the time for StartTimeInclusive.  
      */
     EndTimeExclusive?: Timestamp;
     /**
@@ -860,7 +892,7 @@ declare namespace Location {
      */
     NextToken?: Token;
     /**
-     * Specify the start time for the position history in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.    The given time for EndTimeExclusive must be after the time for StartTimeInclusive.  
+     * Specify the start time for the position history in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be 24 hours prior to the time that the request is made. Requirement:   The time specified for StartTimeInclusive must be before EndTimeExclusive.  
      */
     StartTimeInclusive?: Timestamp;
     /**
@@ -880,7 +912,7 @@ declare namespace Location {
   }
   export interface GetDevicePositionRequest {
     /**
-     * The device whose position you want to retreieve.
+     * The device whose position you want to retrieve.
      */
     DeviceId: Id;
     /**
@@ -898,11 +930,11 @@ declare namespace Location {
      */
     Position: Position;
     /**
-     * The timestamp for when the tracker resource recieved the position in  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp for when the tracker resource received the device position in  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     ReceivedTime: Timestamp;
     /**
-     * The timestamp for when the position was detected and sampled in  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp at which the device's position was determined. Uses  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     SampleTime: Timestamp;
   }
@@ -1070,6 +1102,14 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
+     * The pricing plan for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
+    /**
+     * The data source selected for the geofence collection and associated pricing plan.
+     */
+    PricingPlanDataSource?: String;
+    /**
      * Specifies a timestamp for when the resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
     UpdateTime: Timestamp;
@@ -1157,6 +1197,10 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
+     * The pricing plan for the specified map resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
+    /**
      * The timestamp for when the map resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
     UpdateTime: Timestamp;
@@ -1189,7 +1233,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data.
+     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see the Amazon Location Service data providers page.
      */
     DataSource: String;
     /**
@@ -1200,6 +1244,10 @@ declare namespace Location {
      * The name of the Place index resource.
      */
     IndexName: ResourceName;
+    /**
+     * The pricing plan for the specified Place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
     /**
      * The timestamp for when the Place index resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1262,11 +1310,19 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
+     * The pricing plan for the specified tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     */
+    PricingPlan: PricingPlan;
+    /**
+     * The data source selected for the tracker resource and associated pricing plan.
+     */
+    PricingPlanDataSource?: String;
+    /**
      * The name of the tracker resource.
      */
     TrackerName: ResourceName;
     /**
-     * The timestamp for when the position was detected and sampled in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     * The timestamp at which the device's position was determined. Uses  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     UpdateTime: Timestamp;
   }
@@ -1336,7 +1392,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains the polygon details to specify the position of the geofence.
+     * Contains the polygon details to specify the position of the geofence.  Each geofence polygon can have a maximum of 1,000 vertices. 
      */
     Geometry: GeofenceGeometry;
   }
@@ -1396,7 +1452,7 @@ declare namespace Location {
   }
   export interface SearchPlaceIndexForPositionSummary {
     /**
-     * The data provider of geospatial data for the Place index resource.
+     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see the Amazon Location Service data providers page.
      */
     DataSource: String;
     /**
@@ -1450,7 +1506,7 @@ declare namespace Location {
      */
     BiasPosition?: Position;
     /**
-     * The data provider of geospatial data for the Place index resource.
+     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see the Amazon Location Service data providers page.
      */
     DataSource: String;
     /**

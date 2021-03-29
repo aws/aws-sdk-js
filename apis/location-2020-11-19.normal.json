@@ -45,7 +45,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.</p>",
+      "documentation": "<p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.</p> <note> <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p> </note>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -115,7 +115,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Used in geofence monitoring. Evaluates device positions against the position of geofences in a given geofence collection.</p>",
+      "documentation": "<p>Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.</p> <note> <p>The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update</p> </note>",
       "endpoint": {
         "hostPrefix": "geofencing."
       }
@@ -150,7 +150,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>A batch request to retrieve device positions.</p> <note> <p>The response will return the device positions from the last 24 hours.</p> </note>",
+      "documentation": "<p>A batch request to retrieve all device positions.</p>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -185,7 +185,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>A batch request for storing geofences into a given geofence collection.</p>",
+      "documentation": "<p>A batch request for storing geofence geometries into a given geofence collection.</p>",
       "endpoint": {
         "hostPrefix": "geofencing."
       }
@@ -220,7 +220,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Uploads a position update for one or more devices to a tracker resource. The data is used for API queries requesting the device position and position history.</p> <note> <p>Limitation — Location data is sampled at a fixed rate of 1 position per 30 second interval, and retained for 1 year before it is deleted.</p> </note>",
+      "documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.</p> <note> <p>Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval, and retained for one year before it is deleted.</p> </note>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -683,7 +683,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Removes the association bewteen a tracker resource and a geofence collection.</p> <note> <p>Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences.</p> </note>",
+      "documentation": "<p>Removes the association between a tracker resource and a geofence collection.</p> <note> <p>Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences.</p> </note>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -718,7 +718,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the latest device position.</p> <note> <p>Limitation — Device positions are deleted after one year.</p> </note>",
+      "documentation": "<p>Retrieves a device's most recent position according to its sample time.</p> <note> <p>Device positions are deleted after one year.</p> </note>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -753,7 +753,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the device position history from a tracker resource within a specified range of time.</p> <note> <p>Limitation — Device positions are deleted after one year.</p> </note>",
+      "documentation": "<p>Retrieves the device position history from a tracker resource within a specified range of time.</p> <note> <p>Device positions are deleted after 1 year.</p> </note>",
       "endpoint": {
         "hostPrefix": "tracking."
       }
@@ -1164,7 +1164,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Stores a geofence to a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.</p>",
+      "documentation": "<p>Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request. </p>",
       "endpoint": {
         "hostPrefix": "geofencing."
       }
@@ -1569,10 +1569,10 @@
         },
         "Geometry": {
           "shape": "GeofenceGeometry",
-          "documentation": "<p>The geometry details for the geofence.</p>"
+          "documentation": "<p>Contains the polygon details to specify the position of the geofence.</p> <note> <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">geofence polygon</a> can have a maximum of 1,000 vertices.</p> </note>"
         }
       },
-      "documentation": "<p>Contains geofence details. </p>"
+      "documentation": "<p>Contains geofence geometry details. </p>"
     },
     "BatchPutGeofenceResponse": {
       "type": "structure",
@@ -1638,7 +1638,7 @@
         },
         "SampleTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when a position sample was attempted in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp at which the device position was determined. Uses <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         }
       },
       "documentation": "<p>Contains error details for each device that failed to update its position.</p>"
@@ -1721,7 +1721,7 @@
       "members": {
         "CollectionName": {
           "shape": "ResourceName",
-          "documentation": "<p>A custom name for the geofence collection.</p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-), and underscores (_). </p> </li> <li> <p>Must be a unique geofence collection name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExampleGeofenceCollection</code>.</p> </li> </ul>"
+          "documentation": "<p>A custom name for the geofence collection.</p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-), periods (.), and underscores (_). </p> </li> <li> <p>Must be a unique geofence collection name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExampleGeofenceCollection</code>.</p> </li> </ul>"
         },
         "Description": {
           "shape": "ResourceDescription",
@@ -1729,7 +1729,11 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your geofence collection. There's three pricing plan options:</p> <ul> <li> <p> <code>RequestBasedUsage</code> — Selects the \"Request-Based Usage\" pricing plan.</p> </li> <li> <p> <code>MobileAssetTracking</code> — Selects the \"Mobile Asset Tracking\" pricing plan.</p> </li> <li> <p> <code>MobileAssetManagement</code> — Selects the \"Mobile Asset Management\" pricing plan.</p> </li> </ul> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+          "documentation": "<p>Specifies the pricing plan for your geofence collection.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>Specifies the plan data source. Required if the Mobile Asset Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is selected.</p> <p>Billing is determined by the resource usage, the associated pricing plan, and the data source that was specified. For more information about each pricing plan option and restrictions, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p> <p>Valid Values: <code>Esri </code>| <code>Here</code> </p>"
         }
       }
     },
@@ -1773,11 +1777,11 @@
         },
         "MapName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name for the map resource.</p> <p>Requirements:</p> <ul> <li> <p>Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), and underscores (_). </p> </li> <li> <p>Must be a unique map resource name. </p> </li> <li> <p>No spaces allowed. For example, <code>ExampleMap</code>.</p> </li> </ul>"
+          "documentation": "<p>The name for the map resource.</p> <p>Requirements:</p> <ul> <li> <p>Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_). </p> </li> <li> <p>Must be a unique map resource name. </p> </li> <li> <p>No spaces allowed. For example, <code>ExampleMap</code>.</p> </li> </ul>"
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your map resource. There's three pricing plan options:</p> <ul> <li> <p> <code>RequestBasedUsage</code> — Selects the \"Request-Based Usage\" pricing plan.</p> </li> <li> <p> <code>MobileAssetTracking</code> — Selects the \"Mobile Asset Tracking\" pricing plan.</p> </li> <li> <p> <code>MobileAssetManagement</code> — Selects the \"Mobile Asset Management\" pricing plan.</p> </li> </ul> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+          "documentation": "<p>Specifies the pricing plan for your map resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         }
       }
     },
@@ -1813,7 +1817,7 @@
       "members": {
         "DataSource": {
           "shape": "String",
-          "documentation": "<p>Specifies the data provider of geospatial data.</p>"
+          "documentation": "<p>Specifies the data provider of geospatial data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> will return an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> </p> </li> <li> <p> <code>Here</code> </p> </li> </ul> <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>"
         },
         "DataSourceConfiguration": {
           "shape": "DataSourceConfiguration",
@@ -1825,11 +1829,11 @@
         },
         "IndexName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the Place index resource. </p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-) and underscores (_) ).</p> </li> <li> <p>Must be a unique Place index resource name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExamplePlaceIndex</code>.</p> </li> </ul>"
+          "documentation": "<p>The name of the Place index resource. </p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).</p> </li> <li> <p>Must be a unique Place index resource name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExamplePlaceIndex</code>.</p> </li> </ul>"
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your Place index resource. There's three pricing plan options:</p> <ul> <li> <p> <code>RequestBasedUsage</code> — Selects the \"Request-Based Usage\" pricing plan.</p> </li> <li> <p> <code>MobileAssetTracking</code> — Selects the \"Mobile Asset Tracking\" pricing plan.</p> </li> <li> <p> <code>MobileAssetManagement</code> — Selects the \"Mobile Asset Management\" pricing plan.</p> </li> </ul> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+          "documentation": "<p>Specifies the pricing plan for your Place index resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         }
       }
     },
@@ -1868,11 +1872,15 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your tracker resource. There's three pricing plan options:</p> <ul> <li> <p> <code>RequestBasedUsage</code> — Selects the \"Request-Based Usage\" pricing plan.</p> </li> <li> <p> <code>MobileAssetTracking</code> — Selects the \"Mobile Asset Tracking\" pricing plan.</p> </li> <li> <p> <code>MobileAssetManagement</code> — Selects the \"Mobile Asset Management\" pricing plan.</p> </li> </ul> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+          "documentation": "<p>Specifies the pricing plan for your tracker resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>Specifies the plan data source. Required if the Mobile Asset Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is selected.</p> <p>Billing is determined by the resource usage, the associated pricing plan, and data source that was specified. For more information about each pricing plan option and restrictions, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p> <p>Valid Values: <code>Esri</code> | <code>Here</code> </p>"
         },
         "TrackerName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name for the tracker resource.</p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-) and underscores (_).</p> </li> <li> <p>Must be a unique tracker resource name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExampleTracker</code>.</p> </li> </ul>"
+          "documentation": "<p>The name for the tracker resource.</p> <p>Requirements:</p> <ul> <li> <p>Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).</p> </li> <li> <p>Must be a unique tracker resource name.</p> </li> <li> <p>No spaces allowed. For example, <code>ExampleTracker</code>.</p> </li> </ul>"
         }
       }
     },
@@ -2001,6 +2009,7 @@
         "CollectionName",
         "CreateTime",
         "Description",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2019,6 +2028,14 @@
         "Description": {
           "shape": "ResourceDescription",
           "documentation": "<p>The optional description for the geofence collection.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan selected for the specified geofence collection.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>The data source selected for the geofence collection and associated pricing plan.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -2049,6 +2066,7 @@
         "Description",
         "MapArn",
         "MapName",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2075,6 +2093,10 @@
         "MapName": {
           "shape": "ResourceName",
           "documentation": "<p>The map style selected from an available provider.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan selected for the specified map resource.</p> <pre><code> &lt;p&gt;For additional details and restrictions on each pricing plan option, see the &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing page&lt;/a&gt;.&lt;/p&gt; </code></pre>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -2105,6 +2127,7 @@
         "Description",
         "IndexArn",
         "IndexName",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2114,7 +2137,7 @@
         },
         "DataSource": {
           "shape": "String",
-          "documentation": "<p>The data provider of geospatial data.</p>"
+          "documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p> <ul> <li> <p> <code>Esri</code> </p> </li> <li> <p> <code>Here</code> </p> </li> </ul> <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>"
         },
         "DataSourceConfiguration": {
           "shape": "DataSourceConfiguration",
@@ -2131,6 +2154,10 @@
         "IndexName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the Place index resource being described.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan selected for the specified Place index resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -2157,6 +2184,7 @@
       "required": [
         "CreateTime",
         "Description",
+        "PricingPlan",
         "TrackerArn",
         "TrackerName",
         "UpdateTime"
@@ -2169,6 +2197,14 @@
         "Description": {
           "shape": "ResourceDescription",
           "documentation": "<p>The optional description for the tracker resource.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan selected for the specified tracker resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>The data source selected for the tracker resource and associated pricing plan.</p>"
         },
         "TrackerArn": {
           "shape": "Arn",
@@ -2202,11 +2238,11 @@
         },
         "ReceivedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the tracker resource recieved the position in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp for when the tracker resource received the device position in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         },
         "SampleTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the position was detected and sampled in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp at which the device's position was determined. Uses <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         }
       },
       "documentation": "<p>Contains the device position details.</p>"
@@ -2231,11 +2267,11 @@
         },
         "Position": {
           "shape": "Position",
-          "documentation": "<p>The latest device position defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format: <code>[Xlongitude, Ylatitude]</code>.</p>"
+          "documentation": "<p>The latest device position defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format: <code>[X or longitude, Y or latitude]</code>.</p>"
         },
         "SampleTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the position update was received in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> </p>"
+          "documentation": "<p>The timestamp at which the device's position was determined. Uses <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> </p>"
         }
       },
       "documentation": "<p>Contains the position update details for a device.</p>"
@@ -2277,7 +2313,7 @@
           "documentation": "<p>An array of 1 or more linear rings. A linear ring is an array of 4 or more vertices, where the first and last vertex are the same to form a closed boundary. Each vertex is a 2-dimensional point of the form: <code>[longitude, latitude]</code>. </p> <p>The first linear ring is an outer ring, describing the polygon's boundary. Subsequent linear rings may be inner or outer rings to describe holes and islands. Outer rings must list their vertices in counter-clockwise order around the ring's center, where the left side is the polygon's exterior. Inner rings must list their vertices in clockwise order, where the left side is the polygon's interior.</p>"
         }
       },
-      "documentation": "<p>Contains the geofence geometry details.</p> <note> <p>Limitation — Amazon Location does not currently support polygons with holes, multipolygons, polygons that are wound clockwise, or that cross the antimeridian. </p> </note>"
+      "documentation": "<p>Contains the geofence geometry details.</p> <note> <p>Amazon Location does not currently support polygons with holes, multipolygons, polygons that are wound clockwise, or that cross the antimeridian. </p> </note>"
     },
     "GetDevicePositionHistoryRequest": {
       "type": "structure",
@@ -2294,7 +2330,7 @@
         },
         "EndTimeExclusive": {
           "shape": "Timestamp",
-          "documentation": "<p>Specify the end time for the position history in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p> <ul> <li> <p>The given time for <code>EndTimeExclusive</code> must be after the time for <code>StartTimeInclusive</code>.</p> </li> </ul>"
+          "documentation": "<p>Specify the end time for the position history in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. By default, the value will be the time that the request is made.</p> <p>Requirement:</p> <ul> <li> <p>The time specified for <code>EndTimeExclusive</code> must be after the time for <code>StartTimeInclusive</code>.</p> </li> </ul>"
         },
         "NextToken": {
           "shape": "Token",
@@ -2302,7 +2338,7 @@
         },
         "StartTimeInclusive": {
           "shape": "Timestamp",
-          "documentation": "<p>Specify the start time for the position history in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p> <ul> <li> <p>The given time for <code>EndTimeExclusive</code> must be after the time for <code>StartTimeInclusive</code>.</p> </li> </ul>"
+          "documentation": "<p>Specify the start time for the position history in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. By default, the value will be 24 hours prior to the time that the request is made.</p> <p>Requirement:</p> <ul> <li> <p>The time specified for <code>StartTimeInclusive</code> must be before <code>EndTimeExclusive</code>.</p> </li> </ul>"
         },
         "TrackerName": {
           "shape": "ResourceName",
@@ -2337,7 +2373,7 @@
       "members": {
         "DeviceId": {
           "shape": "Id",
-          "documentation": "<p>The device whose position you want to retreieve.</p>",
+          "documentation": "<p>The device whose position you want to retrieve.</p>",
           "location": "uri",
           "locationName": "DeviceId"
         },
@@ -2367,11 +2403,11 @@
         },
         "ReceivedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the tracker resource recieved the position in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601 </a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp for when the tracker resource received the device position in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601 </a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         },
         "SampleTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the position was detected and sampled in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601 </a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp at which the device's position was determined. Uses <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601 </a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         }
       }
     },
@@ -2678,6 +2714,7 @@
         "CollectionName",
         "CreateTime",
         "Description",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2692,6 +2729,14 @@
         "Description": {
           "shape": "ResourceDescription",
           "documentation": "<p>The description for the geofence collection</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan for the specified geofence collection.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>The data source selected for the geofence collection and associated pricing plan.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -2821,6 +2866,7 @@
         "DataSource",
         "Description",
         "MapName",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2839,6 +2885,10 @@
         "MapName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the associated map resource.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan for the specified map resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -2895,6 +2945,7 @@
         "DataSource",
         "Description",
         "IndexName",
+        "PricingPlan",
         "UpdateTime"
       ],
       "members": {
@@ -2904,7 +2955,7 @@
         },
         "DataSource": {
           "shape": "String",
-          "documentation": "<p>The data provider of geospatial data.</p>"
+          "documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p> <ul> <li> <p>Esri</p> </li> <li> <p>HERE</p> </li> </ul> <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>"
         },
         "Description": {
           "shape": "ResourceDescription",
@@ -2913,6 +2964,10 @@
         "IndexName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the Place index resource.</p>"
+        },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan for the specified Place index resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
@@ -3011,6 +3066,7 @@
       "required": [
         "CreateTime",
         "Description",
+        "PricingPlan",
         "TrackerName",
         "UpdateTime"
       ],
@@ -3023,13 +3079,21 @@
           "shape": "ResourceDescription",
           "documentation": "<p>The description for the tracker resource.</p>"
         },
+        "PricingPlan": {
+          "shape": "PricingPlan",
+          "documentation": "<p>The pricing plan for the specified tracker resource.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+        },
+        "PricingPlanDataSource": {
+          "shape": "String",
+          "documentation": "<p>The data source selected for the tracker resource and associated pricing plan.</p>"
+        },
         "TrackerName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the tracker resource.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp for when the position was detected and sampled in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
+          "documentation": "<p>The timestamp at which the device's position was determined. Uses <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. </p>"
         }
       },
       "documentation": "<p>Contains the tracker resource details.</p>"
@@ -3161,7 +3225,7 @@
         },
         "Geometry": {
           "shape": "GeofenceGeometry",
-          "documentation": "<p>Contains the polygon details to specify the position of the geofence.</p>"
+          "documentation": "<p>Contains the polygon details to specify the position of the geofence.</p> <note> <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">geofence polygon</a> can have a maximum of 1,000 vertices.</p> </note>"
         }
       }
     },
@@ -3285,7 +3349,7 @@
       "members": {
         "DataSource": {
           "shape": "String",
-          "documentation": "<p>The data provider of geospatial data for the Place index resource.</p>"
+          "documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p> <ul> <li> <p>Esri</p> </li> <li> <p>HERE</p> </li> </ul> <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>"
         },
         "MaxResults": {
           "shape": "PlaceIndexSearchResultLimit",
@@ -3363,7 +3427,7 @@
         },
         "DataSource": {
           "shape": "String",
-          "documentation": "<p>The data provider of geospatial data for the Place index resource.</p>"
+          "documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p> <ul> <li> <p>Esri</p> </li> <li> <p>HERE</p> </li> </ul> <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>"
         },
         "FilterBBox": {
           "shape": "BoundingBox",

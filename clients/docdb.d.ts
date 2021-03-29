@@ -13,6 +13,14 @@ declare class DocDB extends Service {
   constructor(options?: DocDB.Types.ClientConfiguration)
   config: Config & DocDB.Types.ClientConfiguration;
   /**
+   * Adds a source identifier to an existing event notification subscription.
+   */
+  addSourceIdentifierToSubscription(params: DocDB.Types.AddSourceIdentifierToSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<DocDB.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
+  /**
+   * Adds a source identifier to an existing event notification subscription.
+   */
+  addSourceIdentifierToSubscription(callback?: (err: AWSError, data: DocDB.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<DocDB.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
+  /**
    * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
   addTagsToResource(params: DocDB.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -85,6 +93,14 @@ declare class DocDB extends Service {
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
+   * Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console. You can specify the type of source (SourceType) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (SourceIds) that trigger the events, and you can provide a list of event categories (EventCategories) for events that you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds (such as SourceType = db-instance and SourceIdentifier = myDBInstance1), you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the SourceType or the SourceIdentifier, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.
+   */
+  createEventSubscription(params: DocDB.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console. You can specify the type of source (SourceType) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (SourceIds) that trigger the events, and you can provide a list of event categories (EventCategories) for events that you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds (such as SourceType = db-instance and SourceIdentifier = myDBInstance1), you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the SourceType or the SourceIdentifier, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.
+   */
+  createEventSubscription(callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
    * Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified cluster are not deleted. 
    */
   deleteDBCluster(params: DocDB.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
@@ -124,6 +140,14 @@ declare class DocDB extends Service {
    * Deletes a subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon DocumentDB event notification subscription.
+   */
+  deleteEventSubscription(params: DocDB.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Deletes an Amazon DocumentDB event notification subscription.
+   */
+  deleteEventSubscription(callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
    * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
    */
@@ -213,6 +237,14 @@ declare class DocDB extends Service {
    */
   describeEventCategories(callback?: (err: AWSError, data: DocDB.Types.EventCategoriesMessage) => void): Request<DocDB.Types.EventCategoriesMessage, AWSError>;
   /**
+   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
+   */
+  describeEventSubscriptions(params: DocDB.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: DocDB.Types.EventSubscriptionsMessage) => void): Request<DocDB.Types.EventSubscriptionsMessage, AWSError>;
+  /**
+   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
+   */
+  describeEventSubscriptions(callback?: (err: AWSError, data: DocDB.Types.EventSubscriptionsMessage) => void): Request<DocDB.Types.EventSubscriptionsMessage, AWSError>;
+  /**
    * Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
    */
   describeEvents(params: DocDB.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
@@ -293,6 +325,14 @@ declare class DocDB extends Service {
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
+   * Modifies an existing Amazon DocumentDB event notification subscription.
+   */
+  modifyEventSubscription(params: DocDB.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Modifies an existing Amazon DocumentDB event notification subscription.
+   */
+  modifyEventSubscription(callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
@@ -300,6 +340,14 @@ declare class DocDB extends Service {
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+   */
+  removeSourceIdentifierFromSubscription(params: DocDB.Types.RemoveSourceIdentifierFromSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
+  /**
+   * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+   */
+  removeSourceIdentifierFromSubscription(callback?: (err: AWSError, data: DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
   /**
    * Removes metadata tags from an Amazon DocumentDB resource.
    */
@@ -366,6 +414,19 @@ declare class DocDB extends Service {
   waitFor(state: "dBInstanceDeleted", callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
 }
 declare namespace DocDB {
+  export interface AddSourceIdentifierToSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.
+     */
+    SubscriptionName: String;
+    /**
+     * The identifier of the event source to be added:   If the source type is an instance, a DBInstanceIdentifier must be provided.   If the source type is a security group, a DBSecurityGroupName must be provided.   If the source type is a parameter group, a DBParameterGroupName must be provided.   If the source type is a snapshot, a DBSnapshotIdentifier must be provided.  
+     */
+    SourceIdentifier: String;
+  }
+  export interface AddSourceIdentifierToSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
   export interface AddTagsToResourceMessage {
     /**
      * The Amazon DocumentDB resource that the tags are added to. This value is an Amazon Resource Name .
@@ -682,6 +743,39 @@ declare namespace DocDB {
   }
   export interface CreateDBSubnetGroupResult {
     DBSubnetGroup?: DBSubnetGroup;
+  }
+  export interface CreateEventSubscriptionMessage {
+    /**
+     * The name of the subscription. Constraints: The name must be fewer than 255 characters.
+     */
+    SubscriptionName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.
+     */
+    SnsTopicArn: String;
+    /**
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-cluster, db-parameter-group, db-security-group, db-snapshot, db-cluster-snapshot 
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a SourceType that you want to subscribe to. 
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     * The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens. Constraints:   If SourceIds are provided, SourceType must also be provided.   If the source type is an instance, a DBInstanceIdentifier must be provided.   If the source type is a security group, a DBSecurityGroupName must be provided.   If the source type is a parameter group, a DBParameterGroupName must be provided.   If the source type is a snapshot, a DBSnapshotIdentifier must be provided.  
+     */
+    SourceIds?: SourceIdsList;
+    /**
+     *  A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it. 
+     */
+    Enabled?: BooleanOptional;
+    /**
+     * The tags to be assigned to the event subscription.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
   }
   export interface DBCluster {
     /**
@@ -1254,6 +1348,15 @@ declare namespace DocDB {
      */
     DBSubnetGroupName: String;
   }
+  export interface DeleteEventSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to delete.
+     */
+    SubscriptionName: String;
+  }
+  export interface DeleteEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
   export interface DescribeCertificatesMessage {
     /**
      * The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to MaxRecords certificates is returned. This parameter is not case sensitive. Constraints   Must match an existing CertificateIdentifier.  
@@ -1478,6 +1581,24 @@ declare namespace DocDB {
      */
     Filters?: FilterList;
   }
+  export interface DescribeEventSubscriptionsMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to describe.
+     */
+    SubscriptionName?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token (marker) is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeEventsMessage {
     /**
      * The identifier of the event source for which events are returned. If not specified, then all sources are included in the response. Constraints:   If SourceIdentifier is provided, SourceType must also be provided.   If the source type is DBInstance, a DBInstanceIdentifier must be provided.   If the source type is DBSecurityGroup, a DBSecurityGroupName must be provided.   If the source type is DBParameterGroup, a DBParameterGroupName must be provided.   If the source type is DBSnapshot, a DBSnapshotIdentifier must be provided.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1641,6 +1762,59 @@ declare namespace DocDB {
     EventCategoriesMapList?: EventCategoriesMapList;
   }
   export type EventList = Event[];
+  export interface EventSubscription {
+    /**
+     * The AWS customer account that is associated with the Amazon DocumentDB event notification subscription.
+     */
+    CustomerAwsId?: String;
+    /**
+     * The Amazon DocumentDB event notification subscription ID.
+     */
+    CustSubscriptionId?: String;
+    /**
+     * The topic ARN of the Amazon DocumentDB event notification subscription.
+     */
+    SnsTopicArn?: String;
+    /**
+     * The status of the Amazon DocumentDB event notification subscription. Constraints: Can be one of the following: creating, modifying, deleting, active, no-permission, topic-not-exist  The no-permission status indicates that Amazon DocumentDB no longer has permission to post to the SNS topic. The topic-not-exist status indicates that the topic was deleted after the subscription was created.
+     */
+    Status?: String;
+    /**
+     * The time at which the Amazon DocumentDB event notification subscription was created.
+     */
+    SubscriptionCreationTime?: String;
+    /**
+     * The source type for the Amazon DocumentDB event notification subscription.
+     */
+    SourceType?: String;
+    /**
+     * A list of source IDs for the Amazon DocumentDB event notification subscription.
+     */
+    SourceIdsList?: SourceIdsList;
+    /**
+     * A list of event categories for the Amazon DocumentDB event notification subscription.
+     */
+    EventCategoriesList?: EventCategoriesList;
+    /**
+     * A Boolean value indicating whether the subscription is enabled. A value of true indicates that the subscription is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) for the event subscription.
+     */
+    EventSubscriptionArn?: String;
+  }
+  export type EventSubscriptionsList = EventSubscription[];
+  export interface EventSubscriptionsMessage {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * A list of event subscriptions.
+     */
+    EventSubscriptionsList?: EventSubscriptionsList;
+  }
   export interface EventsMessage {
     /**
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -1831,6 +2005,31 @@ declare namespace DocDB {
   }
   export interface ModifyDBSubnetGroupResult {
     DBSubnetGroup?: DBSubnetGroup;
+  }
+  export interface ModifyEventSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription.
+     */
+    SubscriptionName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+     */
+    SnsTopicArn?: String;
+    /**
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-parameter-group, db-security-group, db-snapshot 
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a SourceType that you want to subscribe to.
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     *  A Boolean value; set to true to activate the subscription. 
+     */
+    Enabled?: BooleanOptional;
+  }
+  export interface ModifyEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
   }
   export interface OrderableDBInstanceOption {
     /**
@@ -2031,6 +2230,19 @@ declare namespace DocDB {
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
   }
+  export interface RemoveSourceIdentifierFromSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.
+     */
+    SubscriptionName: String;
+    /**
+     *  The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. 
+     */
+    SourceIdentifier: String;
+  }
+  export interface RemoveSourceIdentifierFromSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
   export interface RemoveTagsFromResourceMessage {
     /**
      * The Amazon DocumentDB resource that the tags are removed from. This value is an Amazon Resource Name (ARN).
@@ -2167,6 +2379,7 @@ declare namespace DocDB {
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
   }
+  export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
   export interface StartDBClusterMessage {
     /**

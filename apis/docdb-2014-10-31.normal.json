@@ -13,6 +13,29 @@
     "xmlNamespace": "http://rds.amazonaws.com/doc/2014-10-31/"
   },
   "operations": {
+    "AddSourceIdentifierToSubscription": {
+      "name": "AddSourceIdentifierToSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AddSourceIdentifierToSubscriptionMessage"
+      },
+      "output": {
+        "shape": "AddSourceIdentifierToSubscriptionResult",
+        "resultWrapper": "AddSourceIdentifierToSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Adds a source identifier to an existing event notification subscription.</p>"
+    },
     "AddTagsToResource": {
       "name": "AddTagsToResource",
       "http": {
@@ -333,6 +356,44 @@
       ],
       "documentation": "<p>Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.</p>"
     },
+    "CreateEventSubscription": {
+      "name": "CreateEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "CreateEventSubscriptionResult",
+        "resultWrapper": "CreateEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "EventSubscriptionQuotaExceededFault"
+        },
+        {
+          "shape": "SubscriptionAlreadyExistFault"
+        },
+        {
+          "shape": "SNSInvalidTopicFault"
+        },
+        {
+          "shape": "SNSNoAuthorizationFault"
+        },
+        {
+          "shape": "SNSTopicArnNotFoundFault"
+        },
+        {
+          "shape": "SubscriptionCategoryNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console.</p> <p>You can specify the type of source (<code>SourceType</code>) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (<code>SourceIds</code>) that trigger the events, and you can provide a list of event categories (<code>EventCategories</code>) for events that you want to be notified of. For example, you can specify <code>SourceType = db-instance</code>, <code>SourceIds = mydbinstance1, mydbinstance2</code> and <code>EventCategories = Availability, Backup</code>.</p> <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code> (such as <code>SourceType = db-instance</code> and <code>SourceIdentifier = myDBInstance1</code>), you are notified of all the <code>db-instance</code> events for the specified source. If you specify a <code>SourceType</code> but do not specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the <code>SourceType</code> or the <code>SourceIdentifier</code>, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.</p>"
+    },
     "DeleteDBCluster": {
       "name": "DeleteDBCluster",
       "http": {
@@ -460,6 +521,29 @@
         }
       ],
       "documentation": "<p>Deletes a subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>"
+    },
+    "DeleteEventSubscription": {
+      "name": "DeleteEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "DeleteEventSubscriptionResult",
+        "resultWrapper": "DeleteEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "InvalidEventSubscriptionStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon DocumentDB event notification subscription.</p>"
     },
     "DescribeCertificates": {
       "name": "DescribeCertificates",
@@ -665,6 +749,26 @@
         "resultWrapper": "DescribeEventCategoriesResult"
       },
       "documentation": "<p>Displays a list of categories for all event source types, or, if specified, for a specified source type. </p>"
+    },
+    "DescribeEventSubscriptions": {
+      "name": "DescribeEventSubscriptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEventSubscriptionsMessage"
+      },
+      "output": {
+        "shape": "EventSubscriptionsMessage",
+        "resultWrapper": "DescribeEventSubscriptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>.</p> <p>If you specify a <code>SubscriptionName</code>, lists the description for that subscription.</p>"
     },
     "DescribeEvents": {
       "name": "DescribeEvents",
@@ -955,6 +1059,41 @@
       ],
       "documentation": "<p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.</p>"
     },
+    "ModifyEventSubscription": {
+      "name": "ModifyEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "ModifyEventSubscriptionResult",
+        "resultWrapper": "ModifyEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "EventSubscriptionQuotaExceededFault"
+        },
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SNSInvalidTopicFault"
+        },
+        {
+          "shape": "SNSNoAuthorizationFault"
+        },
+        {
+          "shape": "SNSTopicArnNotFoundFault"
+        },
+        {
+          "shape": "SubscriptionCategoryNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Modifies an existing Amazon DocumentDB event notification subscription.</p>"
+    },
     "RebootDBInstance": {
       "name": "RebootDBInstance",
       "http": {
@@ -977,6 +1116,29 @@
         }
       ],
       "documentation": "<p>You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to <i>rebooting</i>. </p>"
+    },
+    "RemoveSourceIdentifierFromSubscription": {
+      "name": "RemoveSourceIdentifierFromSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveSourceIdentifierFromSubscriptionMessage"
+      },
+      "output": {
+        "shape": "RemoveSourceIdentifierFromSubscriptionResult",
+        "resultWrapper": "RemoveSourceIdentifierFromSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Removes a source identifier from an existing Amazon DocumentDB event notification subscription.</p>"
     },
     "RemoveTagsFromResource": {
       "name": "RemoveTagsFromResource",
@@ -1204,6 +1366,32 @@
     }
   },
   "shapes": {
+    "AddSourceIdentifierToSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SourceIdentifier"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.</p>"
+        },
+        "SourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the event source to be added:</p> <ul> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>. </p>"
+    },
+    "AddSourceIdentifierToSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
     "AddTagsToResourceMessage": {
       "type": "structure",
       "required": [
@@ -1689,6 +1877,52 @@
       "members": {
         "DBSubnetGroup": {
           "shape": "DBSubnetGroup"
+        }
+      }
+    },
+    "CreateEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SnsTopicArn"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the subscription.</p> <p>Constraints: The name must be fewer than 255 characters.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code>, <code>db-cluster-snapshot</code> </p>"
+        },
+        "EventCategories": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe to. </p>"
+        },
+        "SourceIds": {
+          "shape": "SourceIdsList",
+          "documentation": "<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be provided.</p> </li> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>"
+        },
+        "Enabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to be assigned to the event subscription.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>CreateEventSubscription</a>.</p>"
+    },
+    "CreateEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
         }
       }
     },
@@ -2456,6 +2690,27 @@
       },
       "documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>"
     },
+    "DeleteEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to delete.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>DeleteEventSubscription</a>.</p>"
+    },
+    "DeleteEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
     "DescribeCertificatesMessage": {
       "type": "structure",
       "members": {
@@ -2742,6 +2997,28 @@
       },
       "documentation": "<p>Represents the input to <a>DescribeEventCategories</a>.</p>"
     },
+    "DescribeEventSubscriptionsMessage": {
+      "type": "structure",
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to describe.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>"
+    },
     "DescribeEventsMessage": {
       "type": "structure",
       "members": {
@@ -2959,6 +3236,74 @@
         "shape": "Event",
         "locationName": "Event"
       }
+    },
+    "EventSubscription": {
+      "type": "structure",
+      "members": {
+        "CustomerAwsId": {
+          "shape": "String",
+          "documentation": "<p>The AWS customer account that is associated with the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "CustSubscriptionId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon DocumentDB event notification subscription ID.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The topic ARN of the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the Amazon DocumentDB event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: <code>creating</code>, <code>modifying</code>, <code>deleting</code>, <code>active</code>, <code>no-permission</code>, <code>topic-not-exist</code> </p> <p>The <code>no-permission</code> status indicates that Amazon DocumentDB no longer has permission to post to the SNS topic. The <code>topic-not-exist</code> status indicates that the topic was deleted after the subscription was created.</p>"
+        },
+        "SubscriptionCreationTime": {
+          "shape": "String",
+          "documentation": "<p>The time at which the Amazon DocumentDB event notification subscription was created.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The source type for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "SourceIdsList": {
+          "shape": "SourceIdsList",
+          "documentation": "<p>A list of source IDs for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "EventCategoriesList": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p>A list of event categories for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean value indicating whether the subscription is enabled. A value of <code>true</code> indicates that the subscription is enabled.</p>"
+        },
+        "EventSubscriptionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the event subscription.</p>"
+        }
+      },
+      "documentation": "<p>Detailed information about an event to which you have subscribed.</p>",
+      "wrapper": true
+    },
+    "EventSubscriptionsList": {
+      "type": "list",
+      "member": {
+        "shape": "EventSubscription",
+        "locationName": "EventSubscription"
+      }
+    },
+    "EventSubscriptionsMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "EventSubscriptionsList": {
+          "shape": "EventSubscriptionsList",
+          "documentation": "<p>A list of event subscriptions.</p>"
+        }
+      },
+      "documentation": "<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>"
     },
     "EventsMessage": {
       "type": "structure",
@@ -3263,6 +3608,43 @@
         }
       }
     },
+    "ModifyEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code> </p>"
+        },
+        "EventCategories": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe to.</p>"
+        },
+        "Enabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>ModifyEventSubscription</a>.</p>"
+    },
+    "ModifyEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
     "OrderableDBInstanceOption": {
       "type": "structure",
       "members": {
@@ -3527,6 +3909,32 @@
         }
       }
     },
+    "RemoveSourceIdentifierFromSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SourceIdentifier"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.</p>"
+        },
+        "SourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>"
+    },
+    "RemoveSourceIdentifierFromSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
     "RemoveTagsFromResourceMessage": {
       "type": "structure",
       "required": [
@@ -3708,6 +4116,13 @@
         "DBCluster": {
           "shape": "DBCluster"
         }
+      }
+    },
+    "SourceIdsList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "SourceId"
       }
     },
     "SourceType": {
