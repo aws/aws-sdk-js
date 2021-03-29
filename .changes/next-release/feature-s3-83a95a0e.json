@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "s3",
+  "description": "update writeGetObjectResponse to validate with and hit s3-object-lambda endpoint"
+}
