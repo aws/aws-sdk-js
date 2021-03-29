@@ -27,7 +27,7 @@ describe('AWS.S3', function() {
       s3client.makeRequest = function () {
         return { httpRequest: { endpoint: {} }};
       };
-      let req = s3client.writeGetObjectResponse({
+      var req = s3client.writeGetObjectResponse({
         RequestRoute: 'myroute',
         RequestToken: 'mytoken',
       });
