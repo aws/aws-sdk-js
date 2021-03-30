@@ -21,6 +21,20 @@ describe('AWS.S3', function() {
     return done();
   });
 
+  describe('writeGetObjectResponse', function() {
+    it('makes the request to object-lambda on writeGetObjectResponse', function() {
+      s3client = new AWS.S3({});
+      s3client.makeRequest = function () {
+        return { httpRequest: { endpoint: {} }};
+      };
+      var req = s3client.writeGetObjectResponse({
+        RequestRoute: 'myroute',
+        RequestToken: 'mytoken',
+      });
+      expect(req.httpRequest.endpoint.host).to.equal('s3-object-lambda.mock-region.amazonaws.com');
+    });
+  });
+
   describe('constructor', function() {
     it('requires endpoint if s3BucketEndpoint is passed', function() {
       expect(function() {
