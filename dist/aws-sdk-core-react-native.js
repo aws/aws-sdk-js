@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.875.0',
+	  VERSION: '2.876.0',
 
 	  /**
 	   * @api private
@@ -6707,7 +6707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var date = service.getSkewCorrectedDate();
 	          var SignerClass = service.getSignerClass(req);
 	          var signer = new SignerClass(req.httpRequest,
-	            service.getSigningName(),
+	            service.getSigningName(req),
 	            {
 	              signatureCache: service.config.signatureCache,
 	              operation: operation,

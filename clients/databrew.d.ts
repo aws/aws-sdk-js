@@ -374,17 +374,22 @@ declare namespace DataBrew {
   }
   export type ConditionExpressionList = ConditionExpression[];
   export type ConditionValue = string;
+  export type CreateColumn = boolean;
   export interface CreateDatasetRequest {
     /**
      * The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
      */
     Name: DatasetName;
     /**
-     * Specifies the file format of a dataset created from an S3 file or folder.
+     * The file format of a dataset that is created from an S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
+    /**
+     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     */
+    PathOptions?: PathOptions;
     /**
      * Metadata tags to apply to this dataset.
      */
@@ -587,17 +592,17 @@ declare namespace DataBrew {
   export type CronExpression = string;
   export interface CsvOptions {
     /**
-     * A single character that specifies the delimiter being used in the Csv file.
+     * A single character that specifies the delimiter being used in the CSV file.
      */
     Delimiter?: Delimiter;
     /**
-     * A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.
+     * A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.
      */
     HeaderRow?: HeaderRow;
   }
   export interface CsvOutputOptions {
     /**
-     * A single character that specifies the delimiter used to create Csv job output.
+     * A single character that specifies the delimiter used to create CSV job output.
      */
     Delimiter?: Delimiter;
   }
@@ -619,7 +624,19 @@ declare namespace DataBrew {
      */
     TempDirectory?: S3Location;
   }
+  export interface DatabaseInputDefinition {
+    /**
+     * The AWS Glue Connection that stores the connection information for the target database.
+     */
+    GlueConnectionName: GlueConnectionName;
+    /**
+     * The table within the target database.
+     */
+    DatabaseTableName: DatabaseTableName;
+    TempDirectory?: S3Location;
+  }
   export type DatabaseName = string;
+  export type DatabaseTableName = string;
   export interface Dataset {
     /**
      * The ID of the AWS account that owns the dataset.
@@ -638,11 +655,11 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * Specifies the file format of a dataset created from an S3 file or folder.
+     * The file format of a dataset that is created from an S3 file or folder.
      */
     Format?: InputFormat;
     /**
-     * Options that define how DataBrew interprets the data in the dataset.
+     * A set of options that define how DataBrew interprets the data in the dataset.
      */
     FormatOptions?: FormatOptions;
     /**
@@ -662,6 +679,10 @@ declare namespace DataBrew {
      */
     Source?: Source;
     /**
+     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     */
+    PathOptions?: PathOptions;
+    /**
      * Metadata tags that have been applied to the dataset.
      */
     Tags?: TagMap;
@@ -672,7 +693,44 @@ declare namespace DataBrew {
   }
   export type DatasetList = Dataset[];
   export type DatasetName = string;
+  export interface DatasetParameter {
+    /**
+     * The name of the parameter that is used in the dataset's S3 path.
+     */
+    Name: PathParameterName;
+    /**
+     * The type of the dataset parameter, can be one of a 'String', 'Number' or 'Datetime'.
+     */
+    Type: ParameterType;
+    /**
+     * Additional parameter options such as a format and a timezone. Required for datetime parameters.
+     */
+    DatetimeOptions?: DatetimeOptions;
+    /**
+     * Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.
+     */
+    CreateColumn?: CreateColumn;
+    /**
+     * The optional filter expression structure to apply additional matching criteria to the parameter.
+     */
+    Filter?: FilterExpression;
+  }
   export type _Date = Date;
+  export type DatetimeFormat = string;
+  export interface DatetimeOptions {
+    /**
+     * Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all litera a-z or A-Z character should be escaped with single quotes. E.g. "MM.dd.yyyy-'at'-HH:mm".
+     */
+    Format: DatetimeFormat;
+    /**
+     * Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.
+     */
+    TimezoneOffset?: TimezoneOffset;
+    /**
+     * Optional value for a non-US locale code, needed for correct interpretation of some date formats.
+     */
+    LocaleCode?: LocaleCode;
+  }
   export interface DeleteDatasetRequest {
     /**
      * The name of the dataset to be deleted.
@@ -762,7 +820,7 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * Specifies the file format of a dataset created from an S3 file or folder.
+     * The file format of a dataset that is created from an S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
@@ -779,6 +837,10 @@ declare namespace DataBrew {
      * The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.
      */
     Source?: Source;
+    /**
+     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     */
+    PathOptions?: PathOptions;
     /**
      * Metadata tags associated with this dataset.
      */
@@ -1116,19 +1178,44 @@ declare namespace DataBrew {
   export type ErrorCode = string;
   export interface ExcelOptions {
     /**
-     * Specifies one or more named sheets in the Excel file, which will be included in the dataset.
+     * One or more named sheets in the Excel file that will be included in the dataset.
      */
     SheetNames?: SheetNameList;
     /**
-     * Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.
+     * One or more sheet numbers in the Excel file that will be included in the dataset.
      */
     SheetIndexes?: SheetIndexList;
     /**
-     * A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.
+     * A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.
      */
     HeaderRow?: HeaderRow;
   }
   export type ExecutionTime = number;
+  export type Expression = string;
+  export interface FilesLimit {
+    /**
+     * The number of S3 files to select.
+     */
+    MaxFiles: MaxFiles;
+    /**
+     * A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
+     */
+    OrderedBy?: OrderedBy;
+    /**
+     * A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.
+     */
+    Order?: Order;
+  }
+  export interface FilterExpression {
+    /**
+     * The expression which includes condition names followed by substitution variables, possibly grouped and combined with other conditions. For example, "(starts_with :prefix1 or starts_with :prefix2) and (ends_with :suffix1 or ends_with :suffix2)". Substitution variables should start with ':' symbol.
+     */
+    Expression: Expression;
+    /**
+     * The map of substitution variable names to their values used in this filter expression.
+     */
+    ValuesMap: ValuesMap;
+  }
   export interface FormatOptions {
     /**
      * Options that define how JSON input is to be interpreted by DataBrew.
@@ -1139,10 +1226,11 @@ declare namespace DataBrew {
      */
     Excel?: ExcelOptions;
     /**
-     * Options that define how Csv input is to be interpreted by DataBrew.
+     * Options that define how CSV input is to be interpreted by DataBrew.
      */
     Csv?: CsvOptions;
   }
+  export type GlueConnectionName = string;
   export type HeaderRow = boolean;
   export type HiddenColumnList = ColumnName[];
   export interface Input {
@@ -1154,6 +1242,10 @@ declare namespace DataBrew {
      * The AWS Glue Data Catalog parameters for the data.
      */
     DataCatalogInputDefinition?: DataCatalogInputDefinition;
+    /**
+     * Connection information for dataset input files stored in a database.
+     */
+    DatabaseInputDefinition?: DatabaseInputDefinition;
   }
   export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|string;
   export interface Job {
@@ -1178,7 +1270,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -1226,7 +1318,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The Amazon Resource Name (ARN) of the role that will be assumed for this job.
+     * The Amazon Resource Name (ARN) of the role to be assumed for this job.
      */
     RoleArn?: Arn;
     /**
@@ -1238,7 +1330,7 @@ declare namespace DataBrew {
      */
     Tags?: TagMap;
     /**
-     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     * A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a JobSample value isn't provided, the default value is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.
      */
     JobSample?: JobSample;
   }
@@ -1303,7 +1395,7 @@ declare namespace DataBrew {
      */
     StartedOn?: _Date;
     /**
-     * Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.
+     * A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a JobSample value isn't provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.
      */
     JobSample?: JobSample;
   }
@@ -1313,11 +1405,11 @@ declare namespace DataBrew {
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
   export interface JobSample {
     /**
-     * Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:   FULL_DATASET: Profile job will be executed on the entire dataset.   CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.  
+     * A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:   FULL_DATASET - The profile job is run on the entire dataset.   CUSTOM_ROWS - The profile job is run on the number of rows specified in the Size parameter.  
      */
     Mode?: SampleMode;
     /**
-     * Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
+     * The Size parameter is only required when the mode is CUSTOM_ROWS. The profile job is run on the specified number of rows. The maximum value for size is Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
      */
     Size?: JobSize;
   }
@@ -1507,15 +1599,19 @@ declare namespace DataBrew {
      */
     Tags?: TagMap;
   }
+  export type LocaleCode = string;
   export type LogGroupName = string;
   export type LogSubscription = "ENABLE"|"DISABLE"|string;
   export type MaxCapacity = number;
+  export type MaxFiles = number;
   export type MaxResults100 = number;
   export type MaxRetries = number;
   export type MultiLine = boolean;
   export type NextToken = string;
   export type OpenedBy = string;
   export type Operation = string;
+  export type Order = "DESCENDING"|"ASCENDING"|string;
+  export type OrderedBy = "LAST_MODIFIED_DATE"|string;
   export interface Output {
     /**
      * The compression algorithm used to compress the output text of the job.
@@ -1538,14 +1634,14 @@ declare namespace DataBrew {
      */
     Overwrite?: OverwriteOutput;
     /**
-     * Options that define how DataBrew formats job output files.
+     * Represents options that define how DataBrew formats job output files.
      */
     FormatOptions?: OutputFormatOptions;
   }
   export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|string;
   export interface OutputFormatOptions {
     /**
-     * Options that define how DataBrew writes Csv output.
+     * Represents a set of options that define the structure of comma-separated value (CSV) job output.
      */
     Csv?: CsvOutputOptions;
   }
@@ -1553,7 +1649,24 @@ declare namespace DataBrew {
   export type OverwriteOutput = boolean;
   export type ParameterMap = {[key: string]: ParameterValue};
   export type ParameterName = string;
+  export type ParameterType = "Datetime"|"Number"|"String"|string;
   export type ParameterValue = string;
+  export interface PathOptions {
+    /**
+     * If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.
+     */
+    LastModifiedDateCondition?: FilterExpression;
+    /**
+     * If provided, this structure imposes a limit on a number of files that should be selected.
+     */
+    FilesLimit?: FilesLimit;
+    /**
+     * A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
+     */
+    Parameters?: PathParametersMap;
+  }
+  export type PathParameterName = string;
+  export type PathParametersMap = {[key: string]: DatasetParameter};
   export type Preview = boolean;
   export interface Project {
     /**
@@ -1593,7 +1706,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The sample size and sampling type to apply to the data. If this parameter isn't specified, then the sample will consiste of the first 500 rows from the dataset.
+     * The sample size and sampling type to apply to the data. If this parameter isn't specified, then the sample consists of the first 500 rows from the dataset.
      */
     Sample?: Sample;
     /**
@@ -1682,7 +1795,7 @@ declare namespace DataBrew {
      */
     Tags?: TagMap;
     /**
-     * The identifier for the version for the recipe. Must be one of the following:   Numeric version (X.Y) - X and Y stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both X and Y are required, and "0.0" is not a valid version.    LATEST_WORKING - the most recent valid version being developed in a DataBrew project.    LATEST_PUBLISHED - the most recent published version.  
+     * The identifier for the version for the recipe. Must be one of the following:   Numeric version (X.Y) - X and Y stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both X and Y are required, and "0.0" isn't a valid version.    LATEST_WORKING - the most recent valid version being developed in a DataBrew project.    LATEST_PUBLISHED - the most recent published version.  
      */
     RecipeVersion?: RecipeVersion;
   }
@@ -1717,7 +1830,7 @@ declare namespace DataBrew {
      */
     Action: RecipeAction;
     /**
-     * One or more conditions that must be met, in order for the recipe step to succeed.  All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation. 
+     * One or more conditions that must be met for the recipe step to succeed.  All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation. 
      */
     ConditionExpressions?: ConditionExpressionList;
   }
@@ -1792,7 +1905,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The date(s) and time(s) when the job will run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
+     * The dates and times when the job is to run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
      */
     CronExpression?: CronExpression;
     /**
@@ -1845,7 +1958,7 @@ declare namespace DataBrew {
   export type SheetIndexList = SheetIndex[];
   export type SheetName = string;
   export type SheetNameList = SheetName[];
-  export type Source = "S3"|"DATA-CATALOG"|string;
+  export type Source = "S3"|"DATA-CATALOG"|"DATABASE"|string;
   export type StartColumnIndex = number;
   export interface StartJobRunRequest {
     /**
@@ -1916,6 +2029,7 @@ declare namespace DataBrew {
   export type TagValue = string;
   export type TargetColumn = string;
   export type Timeout = number;
+  export type TimezoneOffset = string;
   export interface UntagResourceRequest {
     /**
      * A DataBrew resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN). 
@@ -1934,11 +2048,15 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * Specifies the file format of a dataset created from an S3 file or folder.
+     * The file format of a dataset that is created from an S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
+    /**
+     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     */
+    PathOptions?: PathOptions;
   }
   export interface UpdateDatasetResponse {
     /**
@@ -2096,6 +2214,8 @@ declare namespace DataBrew {
      */
     Name: ScheduleName;
   }
+  export type ValueReference = string;
+  export type ValuesMap = {[key: string]: ConditionValue};
   export interface ViewFrame {
     /**
      * The starting index for the range of columns to return in the view frame.

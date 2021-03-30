@@ -164,6 +164,14 @@ declare class ConfigService extends Service {
    */
   describeAggregateComplianceByConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse, AWSError>;
   /**
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   */
+  describeAggregateComplianceByConformancePacks(params: ConfigService.Types.DescribeAggregateComplianceByConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
+  /**
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   */
+  describeAggregateComplianceByConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
+  /**
    * Returns a list of authorizations granted to various aggregator accounts and regions.
    */
   describeAggregationAuthorizations(params: ConfigService.Types.DescribeAggregationAuthorizationsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregationAuthorizationsResponse) => void): Request<ConfigService.Types.DescribeAggregationAuthorizationsResponse, AWSError>;
@@ -363,6 +371,14 @@ declare class ConfigService extends Service {
    * Returns the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateConfigRuleComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse, AWSError>;
+  /**
+   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   */
+  getAggregateConformancePackComplianceSummary(params: ConfigService.Types.GetAggregateConformancePackComplianceSummaryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
+  /**
+   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   */
+  getAggregateConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
   /**
    * Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
    */
@@ -568,11 +584,11 @@ declare class ConfigService extends Service {
    */
   putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
-   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
+   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
    */
   putOrganizationConformancePack(params: ConfigService.Types.PutOrganizationConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
-   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
+   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
    */
   putOrganizationConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
@@ -718,6 +734,25 @@ declare namespace ConfigService {
     AwsRegion?: AwsRegion;
   }
   export type AggregateComplianceByConfigRuleList = AggregateComplianceByConfigRule[];
+  export interface AggregateComplianceByConformancePack {
+    /**
+     * The name of the conformance pack.
+     */
+    ConformancePackName?: ConformancePackName;
+    /**
+     * The compliance status of the conformance pack.
+     */
+    Compliance?: AggregateConformancePackCompliance;
+    /**
+     * The 12-digit AWS account ID of the source account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The source AWS Region from where the data is aggregated.
+     */
+    AwsRegion?: AwsRegion;
+  }
+  export type AggregateComplianceByConformancePackList = AggregateComplianceByConformancePack[];
   export interface AggregateComplianceCount {
     /**
      * The 12-digit account ID or region based on the GroupByKey value.
@@ -729,6 +764,74 @@ declare namespace ConfigService {
     ComplianceSummary?: ComplianceSummary;
   }
   export type AggregateComplianceCountList = AggregateComplianceCount[];
+  export interface AggregateConformancePackCompliance {
+    /**
+     * The compliance status of the conformance pack.
+     */
+    ComplianceType?: ConformancePackComplianceType;
+    /**
+     * The number of compliant AWS Config Rules.
+     */
+    CompliantRuleCount?: Integer;
+    /**
+     * The number of noncompliant AWS Config Rules.
+     */
+    NonCompliantRuleCount?: Integer;
+    /**
+     * Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.
+     */
+    TotalRuleCount?: Integer;
+  }
+  export interface AggregateConformancePackComplianceCount {
+    /**
+     * Number of compliant conformance packs.
+     */
+    CompliantConformancePackCount?: Integer;
+    /**
+     * Number of noncompliant conformance packs.
+     */
+    NonCompliantConformancePackCount?: Integer;
+  }
+  export interface AggregateConformancePackComplianceFilters {
+    /**
+     * The name of the conformance pack.
+     */
+    ConformancePackName?: ConformancePackName;
+    /**
+     * The compliance status of the conformance pack.
+     */
+    ComplianceType?: ConformancePackComplianceType;
+    /**
+     * The 12-digit AWS account ID of the source account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The source AWS Region from where the data is aggregated.
+     */
+    AwsRegion?: AwsRegion;
+  }
+  export interface AggregateConformancePackComplianceSummary {
+    /**
+     * Returns an AggregateConformancePackComplianceCount object. 
+     */
+    ComplianceSummary?: AggregateConformancePackComplianceCount;
+    /**
+     * Groups the result based on AWS Account ID or AWS Region.
+     */
+    GroupName?: StringWithCharLimit256;
+  }
+  export interface AggregateConformancePackComplianceSummaryFilters {
+    /**
+     * The 12-digit AWS account ID of the source account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The source AWS Region from where the data is aggregated.
+     */
+    AwsRegion?: AwsRegion;
+  }
+  export type AggregateConformancePackComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string;
+  export type AggregateConformancePackComplianceSummaryList = AggregateConformancePackComplianceSummary[];
   export interface AggregateEvaluationResult {
     /**
      * Uniquely identifies the evaluation result.
@@ -1364,7 +1467,7 @@ declare namespace ConfigService {
      */
     ConfigRuleNames?: ConformancePackConfigRuleNames;
     /**
-     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
      */
     ComplianceType?: ConformancePackComplianceType;
   }
@@ -1375,7 +1478,7 @@ declare namespace ConfigService {
      */
     ConformancePackName: ConformancePackName;
     /**
-     * The status of the conformance pack. The allowed values are COMPLIANT and NON_COMPLIANT. 
+     * The status of the conformance pack. The allowed values are COMPLIANT, NON_COMPLIANT and INSUFFICIENT_DATA.
      */
     ConformancePackComplianceStatus: ConformancePackComplianceType;
   }
@@ -1423,7 +1526,7 @@ declare namespace ConfigService {
      */
     ConfigRuleNames?: ConformancePackConfigRuleNames;
     /**
-     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
      */
     ComplianceType?: ConformancePackComplianceType;
     /**
@@ -1437,7 +1540,7 @@ declare namespace ConfigService {
   }
   export interface ConformancePackEvaluationResult {
     /**
-     * The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT. 
+     * The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
      */
     ComplianceType: ConformancePackComplianceType;
     EvaluationResultIdentifier: EvaluationResultIdentifier;
@@ -1475,9 +1578,13 @@ declare namespace ConfigService {
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * Compliance of the AWS Config rule The allowed values are COMPLIANT and NON_COMPLIANT.
+     * Compliance of the AWS Config rule. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
      */
     ComplianceType?: ConformancePackComplianceType;
+    /**
+     * Controls for the conformance pack. A control is a process to prevent or detect problems while meeting objectives. A control can align with a specific compliance regime or map to internal controls defined by an organization.
+     */
+    Controls?: ControlsList;
   }
   export type ConformancePackRuleComplianceList = ConformancePackRuleCompliance[];
   export type ConformancePackRuleEvaluationResultsList = ConformancePackEvaluationResult[];
@@ -1518,6 +1625,7 @@ declare namespace ConfigService {
   }
   export type ConformancePackStatusDetailsList = ConformancePackStatusDetail[];
   export type ConformancePackStatusReason = string;
+  export type ControlsList = StringWithCharLimit128[];
   export type CosmosPageLimit = number;
   export type _Date = Date;
   export interface DeleteAggregationAuthorizationRequest {
@@ -1727,6 +1835,34 @@ declare namespace ConfigService {
      * Returns a list of AggregateComplianceByConfigRule object.
      */
     AggregateComplianceByConfigRules?: AggregateComplianceByConfigRuleList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAggregateComplianceByConformancePacksRequest {
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * Filters the result by AggregateConformancePackComplianceFilters object.
+     */
+    Filters?: AggregateConformancePackComplianceFilters;
+    /**
+     * The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAggregateComplianceByConformancePacksResponse {
+    /**
+     * Returns the AggregateComplianceByConformancePack object.
+     */
+    AggregateComplianceByConformancePacks?: AggregateComplianceByConformancePackList;
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
@@ -2458,6 +2594,42 @@ declare namespace ConfigService {
      * Returns a list of AggregateComplianceCounts object.
      */
     AggregateComplianceCounts?: AggregateComplianceCountList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetAggregateConformancePackComplianceSummaryRequest {
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * Filters the results based on the AggregateConformancePackComplianceSummaryFilters object.
+     */
+    Filters?: AggregateConformancePackComplianceSummaryFilters;
+    /**
+     * Groups the result based on AWS Account ID or AWS Region.
+     */
+    GroupByKey?: AggregateConformancePackComplianceSummaryGroupKey;
+    /**
+     * The maximum number of results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetAggregateConformancePackComplianceSummaryResponse {
+    /**
+     * Returns a list of AggregateConformancePackComplianceSummary object.
+     */
+    AggregateConformancePackComplianceSummaries?: AggregateConformancePackComplianceSummaryList;
+    /**
+     * Groups the result based on AWS Account ID or AWS Region.
+     */
+    GroupByKey?: StringWithCharLimit256;
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
@@ -3368,7 +3540,7 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
+     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. If used, it must be prefixed with awsconfigconforms. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
@@ -3503,7 +3675,7 @@ declare namespace ConfigService {
      */
     includeGlobalResourceTypes?: IncludeGlobalResourceTypes;
     /**
-     * A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to false. If you set this option to true, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported AWS Resource Types.
+     * A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to true. If you set this option to false, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported AWS Resource Types.
      */
     resourceTypes?: ResourceTypeList;
   }
@@ -3752,7 +3924,7 @@ declare namespace ConfigService {
   }
   export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
-  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|string;
+  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ConformancePackCompliance"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypeString = string;
   export type ResourceTypes = StringWithCharLimit256[];

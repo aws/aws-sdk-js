@@ -133,11 +133,11 @@ declare class EC2 extends Service {
    */
   associateDhcpOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the AWS Nitro Enclaves User Guide. When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call kms:Decrypt on AWS KMS CMK returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the AWS Nitro Enclaves User Guide.
+   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the AWS Nitro Enclaves User Guide. When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call kms:Decrypt on the AWS KMS CMK returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the AWS Nitro Enclaves User Guide.
    */
   associateEnclaveCertificateIamRole(params: EC2.Types.AssociateEnclaveCertificateIamRoleRequest, callback?: (err: AWSError, data: EC2.Types.AssociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.AssociateEnclaveCertificateIamRoleResult, AWSError>;
   /**
-   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the AWS Nitro Enclaves User Guide. When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call kms:Decrypt on AWS KMS CMK returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the AWS Nitro Enclaves User Guide.
+   * Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see AWS Certificate Manager for Nitro Enclaves in the AWS Nitro Enclaves User Guide. When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy. To enable the IAM role to access the Amazon S3 object, you must grant it permission to call s3:GetObject on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call kms:Decrypt on the AWS KMS CMK returned by the command. For more information, see  Grant the role permission to access the certificate and encryption key in the AWS Nitro Enclaves User Guide.
    */
   associateEnclaveCertificateIamRole(callback?: (err: AWSError, data: EC2.Types.AssociateEnclaveCertificateIamRoleResult) => void): Request<EC2.Types.AssociateEnclaveCertificateIamRoleResult, AWSError>;
   /**
@@ -580,6 +580,14 @@ declare class EC2 extends Service {
    * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. A partition placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition. For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   createPlacementGroup(callback?: (err: AWSError, data: EC2.Types.CreatePlacementGroupResult) => void): Request<EC2.Types.CreatePlacementGroupResult, AWSError>;
+  /**
+   * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createReplaceRootVolumeTask(params: EC2.Types.CreateReplaceRootVolumeTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateReplaceRootVolumeTaskResult) => void): Request<EC2.Types.CreateReplaceRootVolumeTaskResult, AWSError>;
+  /**
+   * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createReplaceRootVolumeTask(callback?: (err: AWSError, data: EC2.Types.CreateReplaceRootVolumeTaskResult) => void): Request<EC2.Types.CreateReplaceRootVolumeTaskResult, AWSError>;
   /**
    * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon EC2 User Guide.
    */
@@ -1877,6 +1885,14 @@ declare class EC2 extends Service {
    */
   describeRegions(callback?: (err: AWSError, data: EC2.Types.DescribeRegionsResult) => void): Request<EC2.Types.DescribeRegionsResult, AWSError>;
   /**
+   * Describes a root volume replacement task. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeReplaceRootVolumeTasks(params: EC2.Types.DescribeReplaceRootVolumeTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeReplaceRootVolumeTasksResult) => void): Request<EC2.Types.DescribeReplaceRootVolumeTasksResult, AWSError>;
+  /**
+   * Describes a root volume replacement task. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeReplaceRootVolumeTasks(callback?: (err: AWSError, data: EC2.Types.DescribeReplaceRootVolumeTasksResult) => void): Request<EC2.Types.DescribeReplaceRootVolumeTasksResult, AWSError>;
+  /**
    * Describes one or more of the Reserved Instances that you purchased. For more information about Reserved Instances, see Reserved Instances in the Amazon EC2 User Guide.
    */
   describeReservedInstances(params: EC2.Types.DescribeReservedInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeReservedInstancesResult) => void): Request<EC2.Types.DescribeReservedInstancesResult, AWSError>;
@@ -2317,6 +2333,14 @@ declare class EC2 extends Service {
    */
   disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
   /**
+   * Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  disableSerialConsoleAccess(params: EC2.Types.DisableSerialConsoleAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
+  /**
+   * Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  disableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
+  /**
    * Disables the specified resource attachment from propagating routes to the specified propagation route table.
    */
   disableTransitGatewayRouteTablePropagation(params: EC2.Types.DisableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
@@ -2421,11 +2445,11 @@ declare class EC2 extends Service {
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
-   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
+   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
+   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
@@ -2436,6 +2460,14 @@ declare class EC2 extends Service {
    * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
   enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
+  /**
+   * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  enableSerialConsoleAccess(params: EC2.Types.EnableSerialConsoleAccessRequest, callback?: (err: AWSError, data: EC2.Types.EnableSerialConsoleAccessResult) => void): Request<EC2.Types.EnableSerialConsoleAccessResult, AWSError>;
+  /**
+   * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  enableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.EnableSerialConsoleAccessResult) => void): Request<EC2.Types.EnableSerialConsoleAccessResult, AWSError>;
   /**
    * Enables the specified attachment to propagate routes to the specified propagation route table.
    */
@@ -2636,6 +2668,14 @@ declare class EC2 extends Service {
    * Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use AcceptReservedInstancesExchangeQuote to perform the exchange.
    */
   getReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
+  /**
+   * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  getSerialConsoleAccessStatus(params: EC2.Types.GetSerialConsoleAccessStatusRequest, callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
+  /**
+   * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
+   */
+  getSerialConsoleAccessStatus(callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
   /**
    * Lists the route tables to which the specified resource attachment propagates routes.
    */
@@ -7275,6 +7315,34 @@ declare namespace EC2 {
   export interface CreatePlacementGroupResult {
     PlacementGroup?: PlacementGroup;
   }
+  export interface CreateReplaceRootVolumeTaskRequest {
+    /**
+     * The ID of the instance for which to replace the root volume.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The ID of the snapshot from which to restore the replacement root volume. If you want to restore the volume to the initial launch state, omit this parameter.
+     */
+    SnapshotId?: SnapshotId;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The tags to apply to the root volume replacement task.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreateReplaceRootVolumeTaskResult {
+    /**
+     * Information about the root volume replacement task.
+     */
+    ReplaceRootVolumeTask?: ReplaceRootVolumeTask;
+  }
   export interface CreateReservedInstancesListingRequest {
     /**
      * Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see Ensuring Idempotency.
@@ -11650,6 +11718,39 @@ declare namespace EC2 {
      */
     Regions?: RegionList;
   }
+  export type DescribeReplaceRootVolumeTasksMaxResults = number;
+  export interface DescribeReplaceRootVolumeTasksRequest {
+    /**
+     * The ID of the root volume replacement task to view.
+     */
+    ReplaceRootVolumeTaskIds?: ReplaceRootVolumeTaskIds;
+    /**
+     * Filter to use:    instance-id - The ID of the instance for which the root volume replacement task was created.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeReplaceRootVolumeTasksMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeReplaceRootVolumeTasksResult {
+    /**
+     * Information about the root volume replacement task.
+     */
+    ReplaceRootVolumeTasks?: ReplaceRootVolumeTasks;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeReservedInstancesListingsRequest {
     /**
      * One or more filters.    reserved-instances-id - The ID of the Reserved Instances.    reserved-instances-listing-id - The ID of the Reserved Instances listing.    status - The status of the Reserved Instance listing (pending | active | cancelled | closed).    status-message - The reason for the status.  
@@ -13415,6 +13516,18 @@ declare namespace EC2 {
      */
     Unsuccessful?: DisableFastSnapshotRestoreErrorSet;
   }
+  export interface DisableSerialConsoleAccessRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableSerialConsoleAccessResult {
+    /**
+     * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
+     */
+    SerialConsoleAccessEnabled?: Boolean;
+  }
   export interface DisableTransitGatewayRouteTablePropagationRequest {
     /**
      * The ID of the propagation route table.
@@ -14097,6 +14210,18 @@ declare namespace EC2 {
      * Information about the snapshots for which fast snapshot restores could not be enabled.
      */
     Unsuccessful?: EnableFastSnapshotRestoreErrorSet;
+  }
+  export interface EnableSerialConsoleAccessRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableSerialConsoleAccessResult {
+    /**
+     * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
+     */
+    SerialConsoleAccessEnabled?: Boolean;
   }
   export interface EnableTransitGatewayRouteTablePropagationRequest {
     /**
@@ -15558,6 +15683,18 @@ declare namespace EC2 {
      * Describes the reason why the exchange cannot be completed.
      */
     ValidationFailureReason?: String;
+  }
+  export interface GetSerialConsoleAccessStatusRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetSerialConsoleAccessStatusResult {
+    /**
+     * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
+     */
+    SerialConsoleAccessEnabled?: Boolean;
   }
   export interface GetTransitGatewayAttachmentPropagationsRequest {
     /**
@@ -20047,7 +20184,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * The target IOPS rate of the volume. This parameter is valid only for gp3, io1, and io2 volumes. The following are the supported values for each volume type:    gp3: 3,000-16,000 IOPS    io1: 100-64,000 IOPS    io2: 100-64,000 IOPS   Default: If no IOPS value is specified, the existing value is retained.
+     * The target IOPS rate of the volume. This parameter is valid only for gp3, io1, and io2 volumes. The following are the supported values for each volume type:    gp3: 3,000-16,000 IOPS    io1: 100-64,000 IOPS    io2: 100-64,000 IOPS   Default: If no IOPS value is specified, the existing value is retained, unless a volume type is modified that supports different values.
      */
     Iops?: Integer;
     /**
@@ -22250,6 +22387,36 @@ declare namespace EC2 {
      */
     RuleNumber: Integer;
   }
+  export interface ReplaceRootVolumeTask {
+    /**
+     * The ID of the root volume replacement task.
+     */
+    ReplaceRootVolumeTaskId?: ReplaceRootVolumeTaskId;
+    /**
+     * The ID of the instance for which the root volume replacement task was created.
+     */
+    InstanceId?: String;
+    /**
+     * The state of the task. The task can be in one of the following states:    pending - the replacement volume is being created.    in-progress - the original volume is being detached and the replacement volume is being attached.    succeeded - the replacement volume has been successfully attached to the instance and the instance is available.    failing - the replacement task is in the process of failing.    failed - the replacement task has failed but the original root volume is still attached.    failing-detached - the replacement task is in the process of failing. The instance might have no root volume attached.    failed-detached - the replacement task has failed and the instance has no root volume attached.  
+     */
+    TaskState?: ReplaceRootVolumeTaskState;
+    /**
+     * The time the task was started.
+     */
+    StartTime?: String;
+    /**
+     * The time the task completed.
+     */
+    CompleteTime?: String;
+    /**
+     * The tags assigned to the task.
+     */
+    Tags?: TagList;
+  }
+  export type ReplaceRootVolumeTaskId = string;
+  export type ReplaceRootVolumeTaskIds = ReplaceRootVolumeTaskId[];
+  export type ReplaceRootVolumeTaskState = "pending"|"in-progress"|"failing"|"succeeded"|"failed"|"failed-detached"|string;
+  export type ReplaceRootVolumeTasks = ReplaceRootVolumeTask[];
   export interface ReplaceRouteRequest {
     /**
      * The IPv4 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.

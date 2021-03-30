@@ -53,11 +53,11 @@ declare class SageMaker extends Service {
    */
   createAlgorithm(callback?: (err: AWSError, data: SageMaker.Types.CreateAlgorithmOutput) => void): Request<SageMaker.Types.CreateAlgorithmOutput, AWSError>;
   /**
-   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
+   * Creates a running app for the specified UserProfile. Supported apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
    */
   createApp(params: SageMaker.Types.CreateAppRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
+   * Creates a running app for the specified UserProfile. Supported apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
@@ -77,11 +77,11 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
@@ -733,11 +733,11 @@ declare class SageMaker extends Service {
    */
   describeArtifact(callback?: (err: AWSError, data: SageMaker.Types.DescribeArtifactResponse) => void): Request<SageMaker.Types.DescribeArtifactResponse, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker job.
+   * Returns information about an Amazon SageMaker AutoML job.
    */
   describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker job.
+   * Returns information about an Amazon SageMaker AutoML job.
    */
   describeAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
@@ -1173,11 +1173,11 @@ declare class SageMaker extends Service {
    */
   listAutoMLJobs(callback?: (err: AWSError, data: SageMaker.Types.ListAutoMLJobsResponse) => void): Request<SageMaker.Types.ListAutoMLJobsResponse, AWSError>;
   /**
-   * List the Candidates created for the job.
+   * List the candidates created for the job.
    */
   listCandidatesForAutoMLJob(params: SageMaker.Types.ListCandidatesForAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.ListCandidatesForAutoMLJobResponse) => void): Request<SageMaker.Types.ListCandidatesForAutoMLJobResponse, AWSError>;
   /**
-   * List the Candidates created for the job.
+   * List the candidates created for the job.
    */
   listCandidatesForAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.ListCandidatesForAutoMLJobResponse) => void): Request<SageMaker.Types.ListCandidatesForAutoMLJobResponse, AWSError>;
   /**
@@ -2406,6 +2406,10 @@ declare namespace SageMaker {
      * The failure reason.
      */
     FailureReason?: AutoMLFailureReason;
+    /**
+     * The AutoML candidate's properties.
+     */
+    CandidateProperties?: CandidateProperties;
   }
   export interface AutoMLCandidateStep {
     /**
@@ -2424,7 +2428,7 @@ declare namespace SageMaker {
   export type AutoMLCandidates = AutoMLCandidate[];
   export interface AutoMLChannel {
     /**
-     * The data source.
+     * The data source for an AutoML channel.
      */
     DataSource: AutoMLDataSource;
     /**
@@ -2432,21 +2436,21 @@ declare namespace SageMaker {
      */
     CompressionType?: CompressionType;
     /**
-     * The name of the target variable in supervised learning, a.k.a. 'y'.
+     * The name of the target variable in supervised learning, usually represented by 'y'.
      */
     TargetAttributeName: TargetAttributeName;
   }
   export interface AutoMLContainerDefinition {
     /**
-     * The ECR path of the container. Refer to ContainerDefinition for more details.
+     * The ECR path of the container. For more information, see .
      */
     Image: ContainerImage;
     /**
-     * The location of the model artifacts. Refer to ContainerDefinition for more details.
+     * The location of the model artifacts. For more information, see .
      */
     ModelDataUrl: Url;
     /**
-     * Environment variables to set in the container. Refer to ContainerDefinition for more details.
+     * Environment variables to set in the container. For more information, see .
      */
     Environment?: EnvironmentMap;
   }
@@ -2486,7 +2490,7 @@ declare namespace SageMaker {
   }
   export interface AutoMLJobConfig {
     /**
-     * How long a job is allowed to run, or how many candidates a job is allowed to generate.
+     * How long an AutoML job is allowed to run, or how many candidates a job is allowed to generate.
      */
     CompletionCriteria?: AutoMLJobCompletionCriteria;
     /**
@@ -2507,23 +2511,23 @@ declare namespace SageMaker {
   export type AutoMLJobSummaries = AutoMLJobSummary[];
   export interface AutoMLJobSummary {
     /**
-     * The name of the object you are requesting.
+     * The name of the AutoML you are requesting.
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * The ARN of the job.
+     * The ARN of the AutoML job.
      */
     AutoMLJobArn: AutoMLJobArn;
     /**
-     * The job's status.
+     * The status of the AutoML job.
      */
     AutoMLJobStatus: AutoMLJobStatus;
     /**
-     * The job's secondary status.
+     * The secondary status of the AutoML job.
      */
     AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
     /**
-     * When the job was created.
+     * When the AutoML job was created.
      */
     CreationTime: Timestamp;
     /**
@@ -2531,13 +2535,17 @@ declare namespace SageMaker {
      */
     EndTime?: Timestamp;
     /**
-     * When the job was last modified.
+     * When the AutoML job was last modified.
      */
     LastModifiedTime: Timestamp;
     /**
-     * The failure reason of a job.
+     * The failure reason of an AutoML job.
      */
     FailureReason?: AutoMLFailureReason;
+    /**
+     * The list of reasons for partial failures within an AutoML job.
+     */
+    PartialFailureReasons?: AutoMLPartialFailureReasons;
   }
   export type AutoMLMaxResults = number;
   export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|string;
@@ -2552,6 +2560,13 @@ declare namespace SageMaker {
      */
     S3OutputPath: S3Uri;
   }
+  export interface AutoMLPartialFailureReason {
+    /**
+     * The message containing the reason for a partial failure of an AutoML job.
+     */
+    PartialFailureMessage?: AutoMLFailureReason;
+  }
+  export type AutoMLPartialFailureReasons = AutoMLPartialFailureReason[];
   export interface AutoMLS3DataSource {
     /**
      * The data type.
@@ -2618,8 +2633,20 @@ declare namespace SageMaker {
      */
     SourcePipelineExecutionArn?: PipelineExecutionArn;
   }
+  export interface CandidateArtifactLocations {
+    /**
+     * The S3 prefix to the explainability artifacts generated for the AutoML candidate.
+     */
+    Explainability: ExplainabilityLocation;
+  }
   export type CandidateDefinitionNotebookLocation = string;
   export type CandidateName = string;
+  export interface CandidateProperties {
+    /**
+     * The S3 prefix to the artifacts generated for an AutoML candidate.
+     */
+    CandidateArtifactLocations?: CandidateArtifactLocations;
+  }
   export type CandidateSortBy = "CreationTime"|"Status"|"FinalObjectiveMetricValue"|string;
   export type CandidateStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export type CandidateStepArn = string;
@@ -3100,7 +3127,7 @@ declare namespace SageMaker {
      */
     UserProfileName: UserProfileName;
     /**
-     * The type of app.
+     * The type of app. Supported apps are JupyterServer and KernelGateway. TensorBoard is not supported.
      */
     AppType: AppType;
     /**
@@ -3153,27 +3180,27 @@ declare namespace SageMaker {
   }
   export interface CreateAutoMLJobRequest {
     /**
-     * Identifies an Autopilot job. Must be unique to your account and is case-insensitive.
+     * Identifies an Autopilot job. The name must be unique to your account and is case-insensitive.
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV. Minimum of 500 rows.
+     * An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to InputDataConfig supported by . Format(s) supported: CSV. Minimum of 500 rows.
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
-     * Similar to OutputDataConfig supported by Tuning. Format(s) supported: CSV.
+     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the kind of preprocessing and algorithms intended for the candidates. Options include: BinaryClassification, MulticlassClassification, and Regression.
+     * Defines the type of supervised learning available for the candidates. Options include: BinaryClassification, MulticlassClassification, and Regression. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the objective of a an AutoML job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it. If a metric is not specified, the most commonly used ObjectiveMetric for problem type is automaically selected.
+     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
-     * Contains CompletionCriteria and SecurityConfig.
+     * Contains CompletionCriteria and SecurityConfig settings for the AutoML job.
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
@@ -3181,7 +3208,7 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     * Generates possible candidates without training a model. A candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
+     * Generates possible candidates without training the models. A candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
@@ -3191,7 +3218,7 @@ declare namespace SageMaker {
   }
   export interface CreateAutoMLJobResponse {
     /**
-     * When a job is created, it is assigned a unique ARN.
+     * The unique ARN that is assigned to the AutoML job when it is created.
      */
     AutoMLJobArn: AutoMLJobArn;
   }
@@ -5333,21 +5360,21 @@ declare namespace SageMaker {
   }
   export interface DescribeAutoMLJobRequest {
     /**
-     * Request information about a job using that job's unique name.
+     * Requests information about an AutoML job using its unique name.
      */
     AutoMLJobName: AutoMLJobName;
   }
   export interface DescribeAutoMLJobResponse {
     /**
-     * Returns the name of a job.
+     * Returns the name of the AutoML job.
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * Returns the job's ARN.
+     * Returns the ARN of the AutoML job.
      */
     AutoMLJobArn: AutoMLJobArn;
     /**
-     * Returns the job's input data config.
+     * Returns the input data configuration for the AutoML job..
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
@@ -5367,15 +5394,15 @@ declare namespace SageMaker {
      */
     ProblemType?: ProblemType;
     /**
-     * Returns the job's config.
+     * Returns the configuration for the AutoML job.
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
-     * Returns the job's creation time.
+     * Returns the creation time of the AutoML job.
      */
     CreationTime: Timestamp;
     /**
-     * Returns the job's end time.
+     * Returns the end time of the AutoML job.
      */
     EndTime?: Timestamp;
     /**
@@ -5387,15 +5414,19 @@ declare namespace SageMaker {
      */
     FailureReason?: AutoMLFailureReason;
     /**
+     * Returns a list of reasons for partial failures within an AutoML job. 
+     */
+    PartialFailureReasons?: AutoMLPartialFailureReasons;
+    /**
      * Returns the job's BestCandidate.
      */
     BestCandidate?: AutoMLCandidate;
     /**
-     * Returns the job's AutoMLJobStatus.
+     * Returns the status of the AutoML job's AutoMLJobStatus.
      */
     AutoMLJobStatus: AutoMLJobStatus;
     /**
-     * Returns the job's AutoMLJobSecondaryStatus.
+     * Returns the secondary status of the AutoML job.
      */
     AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
     /**
@@ -5407,7 +5438,7 @@ declare namespace SageMaker {
      */
     AutoMLJobArtifacts?: AutoMLJobArtifacts;
     /**
-     * This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They're auto-inferred values, if not provided by you. If you do provide them, then they'll be the same as provided.
+     * This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, they are the values you provide.
      */
     ResolvedAttributes?: ResolvedAttributes;
   }
@@ -7956,6 +7987,7 @@ declare namespace SageMaker {
      */
     Report?: MetricsSource;
   }
+  export type ExplainabilityLocation = string;
   export type FailureReason = string;
   export interface FeatureDefinition {
     /**
@@ -9417,15 +9449,15 @@ declare namespace SageMaker {
   }
   export interface ListCandidatesForAutoMLJobRequest {
     /**
-     * List the Candidates created for the job by providing the job's name.
+     * List the candidates created for the job by providing the job's name.
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * List the Candidates for the job and filter by status.
+     * List the candidates for the job and filter by status.
      */
     StatusEquals?: CandidateStatus;
     /**
-     * List the Candidates for the job and filter by candidate name.
+     * List the candidates for the job and filter by candidate name.
      */
     CandidateNameEquals?: CandidateName;
     /**
@@ -9437,7 +9469,7 @@ declare namespace SageMaker {
      */
     SortBy?: CandidateSortBy;
     /**
-     * List the job's Candidates up to a specified limit.
+     * List the job's candidates up to a specified limit.
      */
     MaxResults?: AutoMLMaxResults;
     /**

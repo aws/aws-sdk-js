@@ -231,7 +231,7 @@
       "output": {
         "shape": "AssociateEnclaveCertificateIamRoleResult"
       },
-      "documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on AWS KMS CMK returned by the command. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>"
+      "documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on the AWS KMS CMK returned by the command. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>"
     },
     "AssociateIamInstanceProfile": {
       "name": "AssociateIamInstanceProfile",
@@ -984,6 +984,20 @@
         "shape": "CreatePlacementGroupResult"
       },
       "documentation": "<p>Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group. </p> <p>A <code>cluster</code> placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A <code>spread</code> placement group places instances on distinct hardware. A <code>partition</code> placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
+    "CreateReplaceRootVolumeTask": {
+      "name": "CreateReplaceRootVolumeTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateReplaceRootVolumeTaskRequest"
+      },
+      "output": {
+        "shape": "CreateReplaceRootVolumeTaskResult"
+      },
+      "documentation": "<p>Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/\">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateReservedInstancesListing": {
       "name": "CreateReservedInstancesListing",
@@ -3184,6 +3198,20 @@
       },
       "documentation": "<p>Describes the Regions that are enabled for your account, or all Regions.</p> <p>For a list of the Regions supported by Amazon EC2, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region\"> Regions and Endpoints</a>.</p> <p>For information about enabling and disabling Regions for your account, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the <i>AWS General Reference</i>.</p>"
     },
+    "DescribeReplaceRootVolumeTasks": {
+      "name": "DescribeReplaceRootVolumeTasks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReplaceRootVolumeTasksRequest"
+      },
+      "output": {
+        "shape": "DescribeReplaceRootVolumeTasksResult"
+      },
+      "documentation": "<p>Describes a root volume replacement task. For more information, see <a href=\"https://docs.aws.amazon.com/\">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "DescribeReservedInstances": {
       "name": "DescribeReservedInstances",
       "http": {
@@ -3945,6 +3973,20 @@
       },
       "documentation": "<p>Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p>"
     },
+    "DisableSerialConsoleAccess": {
+      "name": "DisableSerialConsoleAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableSerialConsoleAccessRequest"
+      },
+      "output": {
+        "shape": "DisableSerialConsoleAccessResult"
+      },
+      "documentation": "<p>Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
     "DisableTransitGatewayRouteTablePropagation": {
       "name": "DisableTransitGatewayRouteTablePropagation",
       "http": {
@@ -4130,7 +4172,7 @@
       "output": {
         "shape": "EnableEbsEncryptionByDefaultResult"
       },
-      "documentation": "<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>.</p>"
+      "documentation": "<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>.</p>"
     },
     "EnableFastSnapshotRestores": {
       "name": "EnableFastSnapshotRestores",
@@ -4145,6 +4187,20 @@
         "shape": "EnableFastSnapshotRestoresResult"
       },
       "documentation": "<p>Enables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p> <p>You get the full benefit of fast snapshot restores after they enter the <code>enabled</code> state. To get the current state of fast snapshot restores, use <a>DescribeFastSnapshotRestores</a>. To disable fast snapshot restores, use <a>DisableFastSnapshotRestores</a>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html\">Amazon EBS fast snapshot restore</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "EnableSerialConsoleAccess": {
+      "name": "EnableSerialConsoleAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableSerialConsoleAccessRequest"
+      },
+      "output": {
+        "shape": "EnableSerialConsoleAccessResult"
+      },
+      "documentation": "<p>Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "EnableTransitGatewayRouteTablePropagation": {
       "name": "EnableTransitGatewayRouteTablePropagation",
@@ -4489,6 +4545,20 @@
         "shape": "GetReservedInstancesExchangeQuoteResult"
       },
       "documentation": "<p>Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.</p>"
+    },
+    "GetSerialConsoleAccessStatus": {
+      "name": "GetSerialConsoleAccessStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetSerialConsoleAccessStatusRequest"
+      },
+      "output": {
+        "shape": "GetSerialConsoleAccessStatusResult"
+      },
+      "documentation": "<p>Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "GetTransitGatewayAttachmentPropagations": {
       "name": "GetTransitGatewayAttachmentPropagations",
@@ -11677,6 +11747,46 @@
         }
       }
     },
+    "CreateReplaceRootVolumeTaskRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The ID of the instance for which to replace the root volume.</p>"
+        },
+        "SnapshotId": {
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the snapshot from which to restore the replacement root volume. If you want to restore the volume to the initial launch state, omit this parameter.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
+          "idempotencyToken": true
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the root volume replacement task.</p>",
+          "locationName": "TagSpecification"
+        }
+      }
+    },
+    "CreateReplaceRootVolumeTaskResult": {
+      "type": "structure",
+      "members": {
+        "ReplaceRootVolumeTask": {
+          "shape": "ReplaceRootVolumeTask",
+          "documentation": "<p>Information about the root volume replacement task.</p>",
+          "locationName": "replaceRootVolumeTask"
+        }
+      }
+    },
     "CreateReservedInstancesListingRequest": {
       "type": "structure",
       "required": [
@@ -18117,6 +18227,53 @@
         }
       }
     },
+    "DescribeReplaceRootVolumeTasksMaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "DescribeReplaceRootVolumeTasksRequest": {
+      "type": "structure",
+      "members": {
+        "ReplaceRootVolumeTaskIds": {
+          "shape": "ReplaceRootVolumeTaskIds",
+          "documentation": "<p>The ID of the root volume replacement task to view.</p>",
+          "locationName": "ReplaceRootVolumeTaskId"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filter to use:</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance for which the root volume replacement task was created.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "DescribeReplaceRootVolumeTasksMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeReplaceRootVolumeTasksResult": {
+      "type": "structure",
+      "members": {
+        "ReplaceRootVolumeTasks": {
+          "shape": "ReplaceRootVolumeTasks",
+          "documentation": "<p>Information about the root volume replacement task.</p>",
+          "locationName": "replaceRootVolumeTaskSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeReservedInstancesListingsRequest": {
       "type": "structure",
       "members": {
@@ -20676,6 +20833,25 @@
         }
       }
     },
+    "DisableSerialConsoleAccessRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DisableSerialConsoleAccessResult": {
+      "type": "structure",
+      "members": {
+        "SerialConsoleAccessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.</p>",
+          "locationName": "serialConsoleAccessEnabled"
+        }
+      }
+    },
     "DisableTransitGatewayRouteTablePropagationRequest": {
       "type": "structure",
       "required": [
@@ -21868,6 +22044,25 @@
           "shape": "EnableFastSnapshotRestoreErrorSet",
           "documentation": "<p>Information about the snapshots for which fast snapshot restores could not be enabled.</p>",
           "locationName": "unsuccessful"
+        }
+      }
+    },
+    "EnableSerialConsoleAccessRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "EnableSerialConsoleAccessResult": {
+      "type": "structure",
+      "members": {
+        "SerialConsoleAccessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.</p>",
+          "locationName": "serialConsoleAccessEnabled"
         }
       }
     },
@@ -24221,6 +24416,25 @@
         }
       },
       "documentation": "<p>Contains the output of GetReservedInstancesExchangeQuote.</p>"
+    },
+    "GetSerialConsoleAccessStatusRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "GetSerialConsoleAccessStatusResult": {
+      "type": "structure",
+      "members": {
+        "SerialConsoleAccessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.</p>",
+          "locationName": "serialConsoleAccessEnabled"
+        }
+      }
     },
     "GetTransitGatewayAttachmentPropagationsRequest": {
       "type": "structure",
@@ -31733,7 +31947,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained.</p>"
+          "documentation": "<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained, unless a volume type is modified that supports different values.</p>"
         },
         "Throughput": {
           "shape": "Integer",
@@ -35531,6 +35745,70 @@
           "documentation": "<p>The rule number of the entry to replace.</p>",
           "locationName": "ruleNumber"
         }
+      }
+    },
+    "ReplaceRootVolumeTask": {
+      "type": "structure",
+      "members": {
+        "ReplaceRootVolumeTaskId": {
+          "shape": "ReplaceRootVolumeTaskId",
+          "documentation": "<p>The ID of the root volume replacement task.</p>",
+          "locationName": "replaceRootVolumeTaskId"
+        },
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the instance for which the root volume replacement task was created.</p>",
+          "locationName": "instanceId"
+        },
+        "TaskState": {
+          "shape": "ReplaceRootVolumeTaskState",
+          "documentation": "<p>The state of the task. The task can be in one of the following states:</p> <ul> <li> <p> <code>pending</code> - the replacement volume is being created.</p> </li> <li> <p> <code>in-progress</code> - the original volume is being detached and the replacement volume is being attached.</p> </li> <li> <p> <code>succeeded</code> - the replacement volume has been successfully attached to the instance and the instance is available.</p> </li> <li> <p> <code>failing</code> - the replacement task is in the process of failing.</p> </li> <li> <p> <code>failed</code> - the replacement task has failed but the original root volume is still attached.</p> </li> <li> <p> <code>failing-detached</code> - the replacement task is in the process of failing. The instance might have no root volume attached.</p> </li> <li> <p> <code>failed-detached</code> - the replacement task has failed and the instance has no root volume attached.</p> </li> </ul>",
+          "locationName": "taskState"
+        },
+        "StartTime": {
+          "shape": "String",
+          "documentation": "<p>The time the task was started.</p>",
+          "locationName": "startTime"
+        },
+        "CompleteTime": {
+          "shape": "String",
+          "documentation": "<p>The time the task completed.</p>",
+          "locationName": "completeTime"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the task.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Information about a root volume replacement task.</p>"
+    },
+    "ReplaceRootVolumeTaskId": {
+      "type": "string"
+    },
+    "ReplaceRootVolumeTaskIds": {
+      "type": "list",
+      "member": {
+        "shape": "ReplaceRootVolumeTaskId",
+        "locationName": "ReplaceRootVolumeTaskId"
+      }
+    },
+    "ReplaceRootVolumeTaskState": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in-progress",
+        "failing",
+        "succeeded",
+        "failed",
+        "failed-detached"
+      ]
+    },
+    "ReplaceRootVolumeTasks": {
+      "type": "list",
+      "member": {
+        "shape": "ReplaceRootVolumeTask",
+        "locationName": "item"
       }
     },
     "ReplaceRouteRequest": {

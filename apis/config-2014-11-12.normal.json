@@ -401,6 +401,34 @@
       ],
       "documentation": "<p>Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. </p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
     },
+    "DescribeAggregateComplianceByConformancePacks": {
+      "name": "DescribeAggregateComplianceByConformancePacks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAggregateComplianceByConformancePacksRequest"
+      },
+      "output": {
+        "shape": "DescribeAggregateComplianceByConformancePacksResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "NoSuchConfigurationAggregatorException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.</p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
+    },
     "DescribeAggregationAuthorizations": {
       "name": "DescribeAggregationAuthorizations",
       "http": {
@@ -1011,6 +1039,34 @@
         }
       ],
       "documentation": "<p>Returns the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator.</p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>"
+    },
+    "GetAggregateConformancePackComplianceSummary": {
+      "name": "GetAggregateConformancePackComplianceSummary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetAggregateConformancePackComplianceSummaryRequest"
+      },
+      "output": {
+        "shape": "GetAggregateConformancePackComplianceSummaryResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "NoSuchConfigurationAggregatorException"
+        }
+      ],
+      "documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.</p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>"
     },
     "GetAggregateDiscoveredResourceCounts": {
       "name": "GetAggregateDiscoveredResourceCounts",
@@ -1740,7 +1796,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p> </note>"
+      "documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p> </note>"
     },
     "PutRemediationConfigurations": {
       "name": "PutRemediationConfigurations",
@@ -2113,6 +2169,34 @@
         "shape": "AggregateComplianceByConfigRule"
       }
     },
+    "AggregateComplianceByConformancePack": {
+      "type": "structure",
+      "members": {
+        "ConformancePackName": {
+          "shape": "ConformancePackName",
+          "documentation": "<p>The name of the conformance pack.</p>"
+        },
+        "Compliance": {
+          "shape": "AggregateConformancePackCompliance",
+          "documentation": "<p>The compliance status of the conformance pack.</p>"
+        },
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+        },
+        "AwsRegion": {
+          "shape": "AwsRegion",
+          "documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+        }
+      },
+      "documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p> <p>A conformance pack is compliant if all of the rules in that conformance packs are compliant. It is noncompliant if any of the rules are not compliant.</p> <note> <p>If a conformance pack has rules that return INSUFFICIENT_DATA, the conformance pack returns INSUFFICIENT_DATA only if all the rules within that conformance pack return INSUFFICIENT_DATA. If some of the rules in a conformance pack are compliant and others return INSUFFICIENT_DATA, the conformance pack shows compliant.</p> </note>"
+    },
+    "AggregateComplianceByConformancePackList": {
+      "type": "list",
+      "member": {
+        "shape": "AggregateComplianceByConformancePack"
+      }
+    },
     "AggregateComplianceCount": {
       "type": "structure",
       "members": {
@@ -2131,6 +2215,105 @@
       "type": "list",
       "member": {
         "shape": "AggregateComplianceCount"
+      }
+    },
+    "AggregateConformancePackCompliance": {
+      "type": "structure",
+      "members": {
+        "ComplianceType": {
+          "shape": "ConformancePackComplianceType",
+          "documentation": "<p>The compliance status of the conformance pack.</p>"
+        },
+        "CompliantRuleCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of compliant AWS Config Rules.</p>"
+        },
+        "NonCompliantRuleCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of noncompliant AWS Config Rules.</p>"
+        },
+        "TotalRuleCount": {
+          "shape": "Integer",
+          "documentation": "<p>Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.</p>"
+        }
+      },
+      "documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack. Also provides the total count of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data. </p>"
+    },
+    "AggregateConformancePackComplianceCount": {
+      "type": "structure",
+      "members": {
+        "CompliantConformancePackCount": {
+          "shape": "Integer",
+          "documentation": "<p>Number of compliant conformance packs.</p>"
+        },
+        "NonCompliantConformancePackCount": {
+          "shape": "Integer",
+          "documentation": "<p>Number of noncompliant conformance packs.</p>"
+        }
+      },
+      "documentation": "<p>The number of conformance packs that are compliant and noncompliant.</p>"
+    },
+    "AggregateConformancePackComplianceFilters": {
+      "type": "structure",
+      "members": {
+        "ConformancePackName": {
+          "shape": "ConformancePackName",
+          "documentation": "<p>The name of the conformance pack.</p>"
+        },
+        "ComplianceType": {
+          "shape": "ConformancePackComplianceType",
+          "documentation": "<p>The compliance status of the conformance pack.</p>"
+        },
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+        },
+        "AwsRegion": {
+          "shape": "AwsRegion",
+          "documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+        }
+      },
+      "documentation": "<p>Filters the conformance packs based on an account ID, region, compliance type, and the name of the conformance pack.</p>"
+    },
+    "AggregateConformancePackComplianceSummary": {
+      "type": "structure",
+      "members": {
+        "ComplianceSummary": {
+          "shape": "AggregateConformancePackComplianceCount",
+          "documentation": "<p>Returns an <code>AggregateConformancePackComplianceCount</code> object. </p>"
+        },
+        "GroupName": {
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
+        }
+      },
+      "documentation": "<p>Provides a summary of compliance based on either account ID or region. </p>"
+    },
+    "AggregateConformancePackComplianceSummaryFilters": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+        },
+        "AwsRegion": {
+          "shape": "AwsRegion",
+          "documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+        }
+      },
+      "documentation": "<p>Filters the results based on account ID and region. </p>"
+    },
+    "AggregateConformancePackComplianceSummaryGroupKey": {
+      "type": "string",
+      "enum": [
+        "ACCOUNT_ID",
+        "AWS_REGION"
+      ]
+    },
+    "AggregateConformancePackComplianceSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "AggregateConformancePackComplianceSummary"
       }
     },
     "AggregateEvaluationResult": {
@@ -3108,7 +3291,7 @@
         },
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>"
         }
       },
       "documentation": "<p>Filters the conformance pack by compliance types and AWS Config rule names.</p>"
@@ -3134,7 +3317,7 @@
         },
         "ConformancePackComplianceStatus": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>The status of the conformance pack. The allowed values are COMPLIANT and NON_COMPLIANT. </p>"
+          "documentation": "<p>The status of the conformance pack. The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code> and <code>INSUFFICIENT_DATA</code>.</p>"
         }
       },
       "documentation": "<p>Summary includes the name and status of the conformance pack.</p>"
@@ -3223,7 +3406,7 @@
         },
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>"
         },
         "ResourceType": {
           "shape": "StringWithCharLimit256",
@@ -3247,7 +3430,7 @@
       "members": {
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. </p>"
+          "documentation": "<p>The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>"
         },
         "EvaluationResultIdentifier": {
           "shape": "EvaluationResultIdentifier"
@@ -3329,7 +3512,11 @@
         },
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>Compliance of the AWS Config rule</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+          "documentation": "<p>Compliance of the AWS Config rule.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>"
+        },
+        "Controls": {
+          "shape": "ControlsList",
+          "documentation": "<p>Controls for the conformance pack. A control is a process to prevent or detect problems while meeting objectives. A control can align with a specific compliance regime or map to internal controls defined by an organization.</p>"
         }
       },
       "documentation": "<p>Compliance information of one or more AWS Config rules within a conformance pack. You can filter using AWS Config rule names and compliance types.</p>"
@@ -3417,6 +3604,14 @@
     "ConformancePackStatusReason": {
       "type": "string",
       "max": 2000,
+      "min": 0
+    },
+    "ControlsList": {
+      "type": "list",
+      "member": {
+        "shape": "StringWithCharLimit128"
+      },
+      "max": 20,
       "min": 0
     },
     "CosmosPageLimit": {
@@ -3798,6 +3993,43 @@
         "AggregateComplianceByConfigRules": {
           "shape": "AggregateComplianceByConfigRuleList",
           "documentation": "<p>Returns a list of AggregateComplianceByConfigRule object.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeAggregateComplianceByConformancePacksRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationAggregatorName"
+      ],
+      "members": {
+        "ConfigurationAggregatorName": {
+          "shape": "ConfigurationAggregatorName",
+          "documentation": "<p>The name of the configuration aggregator.</p>"
+        },
+        "Filters": {
+          "shape": "AggregateConformancePackComplianceFilters",
+          "documentation": "<p>Filters the result by <code>AggregateConformancePackComplianceFilters</code> object.</p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeAggregateComplianceByConformancePacksResponse": {
+      "type": "structure",
+      "members": {
+        "AggregateComplianceByConformancePacks": {
+          "shape": "AggregateComplianceByConformancePackList",
+          "documentation": "<p>Returns the <code>AggregateComplianceByConformancePack</code> object.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -4844,6 +5076,51 @@
         "AggregateComplianceCounts": {
           "shape": "AggregateComplianceCountList",
           "documentation": "<p>Returns a list of AggregateComplianceCounts object.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetAggregateConformancePackComplianceSummaryRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationAggregatorName"
+      ],
+      "members": {
+        "ConfigurationAggregatorName": {
+          "shape": "ConfigurationAggregatorName",
+          "documentation": "<p>The name of the configuration aggregator.</p>"
+        },
+        "Filters": {
+          "shape": "AggregateConformancePackComplianceSummaryFilters",
+          "documentation": "<p>Filters the results based on the <code>AggregateConformancePackComplianceSummaryFilters</code> object.</p>"
+        },
+        "GroupByKey": {
+          "shape": "AggregateConformancePackComplianceSummaryGroupKey",
+          "documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "GetAggregateConformancePackComplianceSummaryResponse": {
+      "type": "structure",
+      "members": {
+        "AggregateConformancePackComplianceSummaries": {
+          "shape": "AggregateConformancePackComplianceSummaryList",
+          "documentation": "<p>Returns a list of <code>AggregateConformancePackComplianceSummary</code> object.</p>"
+        },
+        "GroupByKey": {
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -6283,7 +6560,7 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>"
+          "documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional. If used, it must be prefixed with <code>awsconfigconforms</code>.</p> </note>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
@@ -6510,7 +6787,7 @@
         },
         "resourceTypes": {
           "shape": "ResourceTypeList",
-          "documentation": "<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>To record all configuration changes, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resource Types</a>.</p>"
+          "documentation": "<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>To record all configuration changes, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>false</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resource Types</a>.</p>"
         }
       },
       "documentation": "<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don't want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported Resource Types</a>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html\">Selecting Which Resources AWS Config Records</a>.</p>"
@@ -7036,6 +7313,7 @@
         "AWS::SSM::PatchCompliance",
         "AWS::Shield::Protection",
         "AWS::ShieldRegional::Protection",
+        "AWS::Config::ConformancePackCompliance",
         "AWS::Config::ResourceCompliance",
         "AWS::ApiGateway::Stage",
         "AWS::ApiGateway::RestApi",

@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.875.0-->
+<!--LATEST=2.876.0-->
 <!--ENTRYINSERT-->
+
+## 2.876.0
+* feature: CloudWatch: SDK update for new Metric Streams feature
+* feature: ConfigService: Adding new APIs to support ConformancePack Compliance CI in Aggregators
+* feature: DataBrew: This SDK release adds two new dataset features: 1) support for specifying a database connection as a dataset input 2) support for dynamic datasets that accept configurable parameters in S3 path.
+* feature: EC2: ReplaceRootVolume feature enables customers to replace the EBS root volume of a running instance to a previously known state. Add support to grant account-level access to the EC2 serial console
+* feature: EC2InstanceConnect: Adding support to push SSH keys to the EC2 serial console in order to allow an SSH connection to your Amazon EC2 instance's serial port.
+* feature: FraudDetector: This release adds support for Batch Predictions in Amazon Fraud Detector.
+* feature: Pinpoint: Added support for journey pause/resume, journey updatable import segment and journey quiet time wait.
+* feature: SageMaker: Amazon SageMaker Autopilot now supports 1) feature importance reports for AutoML jobs and 2) PartialFailures for AutoML jobs
+* feature: s3: update writeGetObjectResponse to validate with and hit s3-object-lambda endpoint
 
 ## 2.875.0
 * feature: DocDB: This release adds support for Event Subscriptions to DocumentDB.

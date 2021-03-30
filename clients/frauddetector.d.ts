@@ -28,6 +28,22 @@ declare class FraudDetector extends Service {
    */
   batchGetVariable(callback?: (err: AWSError, data: FraudDetector.Types.BatchGetVariableResult) => void): Request<FraudDetector.Types.BatchGetVariableResult, AWSError>;
   /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(params: FraudDetector.Types.CancelBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(params: FraudDetector.Types.CreateBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
    * Creates a detector version. The detector version starts in a DRAFT status.
    */
   createDetectorVersion(params: FraudDetector.Types.CreateDetectorVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateDetectorVersionResult) => void): Request<FraudDetector.Types.CreateDetectorVersionResult, AWSError>;
@@ -67,6 +83,14 @@ declare class FraudDetector extends Service {
    * Creates a variable.
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
+  /**
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(params: FraudDetector.Types.DeleteBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
+  /**
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
   /**
    * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector. When you delete a detector, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
@@ -179,6 +203,14 @@ declare class FraudDetector extends Service {
    * Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. 
    */
   describeModelVersions(callback?: (err: AWSError, data: FraudDetector.Types.DescribeModelVersionsResult) => void): Request<FraudDetector.Types.DescribeModelVersionsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(params: FraudDetector.Types.GetBatchPredictionJobsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
   /**
    * Gets a particular detector version. 
    */
@@ -433,6 +465,7 @@ declare class FraudDetector extends Service {
   updateVariable(callback?: (err: AWSError, data: FraudDetector.Types.UpdateVariableResult) => void): Request<FraudDetector.Types.UpdateVariableResult, AWSError>;
 }
 declare namespace FraudDetector {
+  export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
   export interface BatchCreateVariableError {
     /**
      * The name.
@@ -494,6 +527,113 @@ declare namespace FraudDetector {
      * The errors from the request.
      */
     errors?: BatchGetVariableErrorList;
+  }
+  export interface BatchPrediction {
+    /**
+     * The job ID for the batch prediction.
+     */
+    jobId?: identifier;
+    /**
+     * The batch prediction status.
+     */
+    status?: AsyncJobStatus;
+    /**
+     * The reason a batch prediction job failed.
+     */
+    failureReason?: string;
+    /**
+     * Timestamp of when the batch prediction job started.
+     */
+    startTime?: time;
+    /**
+     * Timestamp of when the batch prediction job comleted.
+     */
+    completionTime?: time;
+    /**
+     * Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
+     */
+    lastHeartbeatTime?: time;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath?: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath?: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName?: identifier;
+    /**
+     * The detector version. 
+     */
+    detectorVersion?: floatVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn?: iamRoleArn;
+    /**
+     * The ARN of batch prediction job.
+     */
+    arn?: fraudDetectorArn;
+    /**
+     * The number of records processed by the batch prediction job.
+     */
+    processedRecordsCount?: Integer;
+    /**
+     * The total number of records in the batch prediction job.
+     */
+    totalRecordsCount?: Integer;
+  }
+  export type BatchPredictionList = BatchPrediction[];
+  export interface CancelBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to cancel.
+     */
+    jobId: identifier;
+  }
+  export interface CancelBatchPredictionJobResult {
+  }
+  export interface CreateBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job.
+     */
+    jobId: identifier;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName: identifier;
+    /**
+     * The detector version.
+     */
+    detectorVersion?: wholeNumberVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn: iamRoleArn;
+    /**
+     * A collection of key and value pairs.
+     */
+    tags?: tagList;
+  }
+  export interface CreateBatchPredictionJobResult {
   }
   export interface CreateDetectorVersionRequest {
     /**
@@ -687,6 +827,14 @@ declare namespace FraudDetector {
      * The field-specific model training validation messages.
      */
     fieldLevelMessages?: fieldValidationMessageList;
+  }
+  export interface DeleteBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to delete.
+     */
+    jobId: identifier;
+  }
+  export interface DeleteBatchPredictionJobResult {
   }
   export interface DeleteDetectorRequest {
     /**
@@ -1067,6 +1215,30 @@ declare namespace FraudDetector {
      * The message type.
      */
     type?: string;
+  }
+  export interface GetBatchPredictionJobsRequest {
+    /**
+     * The batch prediction job for which to get the details.
+     */
+    jobId?: identifier;
+    /**
+     * The maximum number of objects to return for the request.
+     */
+    maxResults?: batchPredictionsMaxPageSize;
+    /**
+     * The next token from the previous request.
+     */
+    nextToken?: string;
+  }
+  export interface GetBatchPredictionJobsResult {
+    /**
+     * An array containing the details of each batch prediction job.
+     */
+    batchPredictions?: BatchPredictionList;
+    /**
+     * The next token for the subsequent request.
+     */
+    nextToken?: string;
   }
   export interface GetDetectorVersionRequest {
     /**
@@ -1450,6 +1622,7 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export type Integer = number;
   export type JsonKeyToVariableMap = {[key: string]: string};
   export interface KMSKey {
     /**
@@ -2257,6 +2430,7 @@ declare namespace FraudDetector {
   export type VariableEntryList = VariableEntry[];
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
+  export type batchPredictionsMaxPageSize = number;
   export type blob = Buffer|Uint8Array|Blob|string;
   export type contentType = string;
   export type description = string;

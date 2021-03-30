@@ -68,6 +68,59 @@
       ],
       "documentation": "<p>Gets a batch of variables.</p>"
     },
+    "CancelBatchPredictionJob": {
+      "name": "CancelBatchPredictionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelBatchPredictionJobRequest"
+      },
+      "output": {
+        "shape": "CancelBatchPredictionJobResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Cancels the specified batch prediction job.</p>"
+    },
+    "CreateBatchPredictionJob": {
+      "name": "CreateBatchPredictionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateBatchPredictionJobRequest"
+      },
+      "output": {
+        "shape": "CreateBatchPredictionJobResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates a batch prediction job.</p>"
+    },
     "CreateDetectorVersion": {
       "name": "CreateDetectorVersion",
       "http": {
@@ -207,6 +260,34 @@
         }
       ],
       "documentation": "<p>Creates a variable.</p>"
+    },
+    "DeleteBatchPredictionJob": {
+      "name": "DeleteBatchPredictionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteBatchPredictionJobRequest"
+      },
+      "output": {
+        "shape": "DeleteBatchPredictionJobResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Deletes a batch prediction job.</p>"
     },
     "DeleteDetector": {
       "name": "DeleteDetector",
@@ -620,6 +701,34 @@
         }
       ],
       "documentation": "<p>Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. </p>"
+    },
+    "GetBatchPredictionJobs": {
+      "name": "GetBatchPredictionJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBatchPredictionJobsRequest"
+      },
+      "output": {
+        "shape": "GetBatchPredictionJobsResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.</p>"
     },
     "GetDetectorVersion": {
       "name": "GetDetectorVersion",
@@ -1534,6 +1643,17 @@
     }
   },
   "shapes": {
+    "AsyncJobStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS_INITIALIZING",
+        "IN_PROGRESS",
+        "CANCEL_IN_PROGRESS",
+        "CANCELED",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
     "BatchCreateVariableError": {
       "type": "structure",
       "members": {
@@ -1631,6 +1751,143 @@
           "documentation": "<p>The errors from the request.</p>"
         }
       }
+    },
+    "BatchPrediction": {
+      "type": "structure",
+      "members": {
+        "jobId": {
+          "shape": "identifier",
+          "documentation": "<p>The job ID for the batch prediction.</p>"
+        },
+        "status": {
+          "shape": "AsyncJobStatus",
+          "documentation": "<p>The batch prediction status.</p>"
+        },
+        "failureReason": {
+          "shape": "string",
+          "documentation": "<p>The reason a batch prediction job failed.</p>"
+        },
+        "startTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the batch prediction job started.</p>"
+        },
+        "completionTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the batch prediction job comleted.</p>"
+        },
+        "lastHeartbeatTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of most recent heartbeat indicating the batch prediction job was making progress.</p>"
+        },
+        "inputPath": {
+          "shape": "s3BucketLocation",
+          "documentation": "<p>The Amazon S3 location of your training file.</p>"
+        },
+        "outputPath": {
+          "shape": "s3BucketLocation",
+          "documentation": "<p>The Amazon S3 location of your output file.</p>"
+        },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the event type.</p>"
+        },
+        "detectorName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the detector.</p>"
+        },
+        "detectorVersion": {
+          "shape": "floatVersionString",
+          "documentation": "<p>The detector version. </p>"
+        },
+        "iamRoleArn": {
+          "shape": "iamRoleArn",
+          "documentation": "<p>The ARN of the IAM role to use for this job request.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The ARN of batch prediction job.</p>"
+        },
+        "processedRecordsCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of records processed by the batch prediction job.</p>"
+        },
+        "totalRecordsCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of records in the batch prediction job.</p>"
+        }
+      },
+      "documentation": "<p>The batch prediction details.</p>"
+    },
+    "BatchPredictionList": {
+      "type": "list",
+      "member": {
+        "shape": "BatchPrediction"
+      }
+    },
+    "CancelBatchPredictionJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobId"
+      ],
+      "members": {
+        "jobId": {
+          "shape": "identifier",
+          "documentation": "<p>The ID of the batch prediction job to cancel.</p>"
+        }
+      }
+    },
+    "CancelBatchPredictionJobResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "CreateBatchPredictionJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobId",
+        "inputPath",
+        "outputPath",
+        "eventTypeName",
+        "detectorName",
+        "iamRoleArn"
+      ],
+      "members": {
+        "jobId": {
+          "shape": "identifier",
+          "documentation": "<p>The ID of the batch prediction job.</p>"
+        },
+        "inputPath": {
+          "shape": "s3BucketLocation",
+          "documentation": "<p>The Amazon S3 location of your training file.</p>"
+        },
+        "outputPath": {
+          "shape": "s3BucketLocation",
+          "documentation": "<p>The Amazon S3 location of your output file.</p>"
+        },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the event type.</p>"
+        },
+        "detectorName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the detector.</p>"
+        },
+        "detectorVersion": {
+          "shape": "wholeNumberVersionString",
+          "documentation": "<p>The detector version.</p>"
+        },
+        "iamRoleArn": {
+          "shape": "iamRoleArn",
+          "documentation": "<p>The ARN of the IAM role to use for this job request.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
+        }
+      }
+    },
+    "CreateBatchPredictionJobResult": {
+      "type": "structure",
+      "members": {}
     },
     "CreateDetectorVersionRequest": {
       "type": "structure",
@@ -1907,6 +2164,22 @@
         }
       },
       "documentation": "<p>The model training validation messages.</p>"
+    },
+    "DeleteBatchPredictionJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobId"
+      ],
+      "members": {
+        "jobId": {
+          "shape": "identifier",
+          "documentation": "<p>The ID of the batch prediction job to delete.</p>"
+        }
+      }
+    },
+    "DeleteBatchPredictionJobResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteDetectorRequest": {
       "type": "structure",
@@ -2505,6 +2778,36 @@
       },
       "documentation": "<p>The message details.</p>"
     },
+    "GetBatchPredictionJobsRequest": {
+      "type": "structure",
+      "members": {
+        "jobId": {
+          "shape": "identifier",
+          "documentation": "<p>The batch prediction job for which to get the details.</p>"
+        },
+        "maxResults": {
+          "shape": "batchPredictionsMaxPageSize",
+          "documentation": "<p>The maximum number of objects to return for the request.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token from the previous request.</p>"
+        }
+      }
+    },
+    "GetBatchPredictionJobsResult": {
+      "type": "structure",
+      "members": {
+        "batchPredictions": {
+          "shape": "BatchPredictionList",
+          "documentation": "<p>An array containing the details of each batch prediction job.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token for the subsequent request.</p>"
+        }
+      }
+    },
     "GetDetectorVersionRequest": {
       "type": "structure",
       "required": [
@@ -2981,6 +3284,9 @@
           "documentation": "<p>The next page token to be used in subsequent requests. </p>"
         }
       }
+    },
+    "Integer": {
+      "type": "integer"
     },
     "JsonKeyToVariableMap": {
       "type": "map",
@@ -4238,6 +4544,12 @@
       "max": 100,
       "min": 50
     },
+    "batchPredictionsMaxPageSize": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 1
+    },
     "blob": {
       "type": "blob"
     },
@@ -4427,7 +4739,9 @@
       "min": 0
     },
     "time": {
-      "type": "string"
+      "type": "string",
+      "max": 30,
+      "min": 11
     },
     "variableName": {
       "type": "string",
