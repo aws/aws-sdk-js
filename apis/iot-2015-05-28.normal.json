@@ -16361,6 +16361,12 @@
           "documentation": "<p>The name of the thing type used to search for things.</p>",
           "location": "querystring",
           "locationName": "thingTypeName"
+        },
+        "usePrefixAttributeValue": {
+          "shape": "usePrefixAttributeValue",
+          "documentation": "<p>When <code>true</code>, the action returns the thing resources with attribute values that start with the <code>attributeValue</code> provided.</p> <p>When <code>false</code>, or not present, the action returns only the thing resources with attribute values that match the entire <code>attributeValue</code> provided. </p>",
+          "location": "querystring",
+          "locationName": "usePrefixAttributeValue"
         }
       },
       "documentation": "<p>The input for the ListThings operation.</p>"
@@ -21407,6 +21413,9 @@
     },
     "stringValue": {
       "type": "string"
+    },
+    "usePrefixAttributeValue": {
+      "type": "boolean"
     }
   },
   "documentation": "<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>The service endpoints that expose this API are listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">AWS IoT Core Endpoints and Quotas</a>. You must use the endpoint for the region that has the resources you want to access.</p> <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">AWS Signature Version 4</a> to sign the request is: <i>execute-api</i>.</p> <p>For more information about how AWS IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to AWS Services</a>.</p>"

@@ -543,6 +543,7 @@ declare namespace CloudFormation {
   }
   export type AccountLimitList = AccountLimit[];
   export type AccountList = Account[];
+  export type AccountsUrl = string;
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type Arn = string;
@@ -1012,6 +1013,7 @@ declare namespace CloudFormation {
      * The names of one or more AWS accounts for which you want to deploy stack set updates.
      */
     Accounts?: AccountList;
+    AccountsUrl?: AccountsUrl;
     /**
      * The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
      */
@@ -2192,6 +2194,7 @@ declare namespace CloudFormation {
   export interface RecordHandlerProgressOutput {
   }
   export type Region = string;
+  export type RegionConcurrencyType = "SEQUENTIAL"|"PARALLEL"|string;
   export type RegionList = Region[];
   export interface RegisterTypeInput {
     /**
@@ -3062,6 +3065,7 @@ declare namespace CloudFormation {
   }
   export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
+    RegionConcurrencyType?: RegionConcurrencyType;
     /**
      * The order of the Regions in where you want to perform the stack operation.
      */

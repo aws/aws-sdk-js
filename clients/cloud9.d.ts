@@ -143,6 +143,10 @@ declare namespace Cloud9 {
      */
     subnetId?: SubnetId;
     /**
+     * The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. You can specify the AMI for the instance using an AMI alias or an AWS Systems Manager (SSM) path. The default AMI is used if the parameter isn't explicitly assigned a value in the request.   AMI aliases     Amazon Linux 2: amazonlinux-2-x86_64    Ubuntu 18.04: ubuntu-18.04-x86_64    Amazon Linux (default): amazonlinux-1-x86_64     SSM paths    Amazon Linux 2: resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64    Ubuntu 18.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64    Amazon Linux (default): resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64   
+     */
+    imageId?: ImageId;
+    /**
      * The number of minutes until the running instance is shut down after the environment has last been used.
      */
     automaticStopTimeMinutes?: AutomaticStopTimeMinutes;
@@ -155,7 +159,7 @@ declare namespace Cloud9 {
      */
     tags?: TagList;
     /**
-     * The connection type used for connecting to an Amazon EC2 environment.
+     * The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT_SSH (default) and CONNECT_SSM (connected through AWS Systems Manager). For more information, see Accessing no-ingress EC2 instances with AWS Systems Manager in the AWS Cloud9 User Guide.
      */
     connectionType?: ConnectionType;
   }
@@ -183,7 +187,7 @@ declare namespace Cloud9 {
     /**
      * Information about the environment member that was added.
      */
-    membership?: EnvironmentMember;
+    membership: EnvironmentMember;
   }
   export interface DeleteEnvironmentMembershipRequest {
     /**
@@ -247,11 +251,11 @@ declare namespace Cloud9 {
     /**
      * The status of the environment. Available values include:    connecting: The environment is connecting.    creating: The environment is being created.    deleting: The environment is being deleted.    error: The environment is in an error state.    ready: The environment is ready.    stopped: The environment is stopped.    stopping: The environment is stopping.  
      */
-    status?: EnvironmentStatus;
+    status: EnvironmentStatus;
     /**
      * Any informational message about the status of the environment.
      */
-    message?: String;
+    message: String;
   }
   export interface DescribeEnvironmentsRequest {
     /**
@@ -281,23 +285,27 @@ declare namespace Cloud9 {
     /**
      * The type of environment. Valid values include the following:    ec2: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.    ssh: Your own server connects to the environment.  
      */
-    type?: EnvironmentType;
+    type: EnvironmentType;
     /**
-     * The connection type used for connecting to an Amazon EC2 environment.
+     * The connection type used for connecting to an Amazon EC2 environment. CONNECT_SSH is selected by default.
      */
     connectionType?: ConnectionType;
     /**
      * The Amazon Resource Name (ARN) of the environment.
      */
-    arn?: String;
+    arn: String;
     /**
      * The Amazon Resource Name (ARN) of the environment owner.
      */
-    ownerArn?: String;
+    ownerArn: String;
     /**
      * The state of the environment in its creation or deletion lifecycle.
      */
     lifecycle?: EnvironmentLifecycle;
+    /**
+     * Describes the status of AWS managed temporary credentials for the AWS Cloud9 environment. Available values are:    ENABLED_ON_CREATE     ENABLED_BY_OWNER     DISABLED_BY_DEFAULT     DISABLED_BY_OWNER     DISABLED_BY_COLLABORATOR     PENDING_REMOVAL_BY_COLLABORATOR     PENDING_REMOVAL_BY_OWNER     FAILED_REMOVAL_BY_COLLABORATOR     ENABLED_BY_OWNER     DISABLED_BY_DEFAULT   
+     */
+    managedCredentialsStatus?: ManagedCredentialsStatus;
   }
   export type EnvironmentArn = string;
   export type EnvironmentDescription = string;
@@ -323,19 +331,19 @@ declare namespace Cloud9 {
     /**
      * The type of environment member permissions associated with this environment member. Available values include:    owner: Owns the environment.    read-only: Has read-only access to the environment.    read-write: Has read-write access to the environment.  
      */
-    permissions?: Permissions;
+    permissions: Permissions;
     /**
      * The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
      */
-    userId?: String;
+    userId: String;
     /**
      * The Amazon Resource Name (ARN) of the environment member.
      */
-    userArn?: UserArn;
+    userArn: UserArn;
     /**
      * The ID of the environment for the environment member.
      */
-    environmentId?: EnvironmentId;
+    environmentId: EnvironmentId;
     /**
      * The time, expressed in epoch time format, when the environment member last opened the environment.
      */
@@ -345,6 +353,7 @@ declare namespace Cloud9 {
   export type EnvironmentName = string;
   export type EnvironmentStatus = "error"|"creating"|"connecting"|"ready"|"stopping"|"stopped"|"deleting"|string;
   export type EnvironmentType = "ssh"|"ec2"|string;
+  export type ImageId = string;
   export type InstanceType = string;
   export interface ListEnvironmentsRequest {
     /**
@@ -378,6 +387,7 @@ declare namespace Cloud9 {
      */
     Tags?: TagList;
   }
+  export type ManagedCredentialsStatus = "ENABLED_ON_CREATE"|"ENABLED_BY_OWNER"|"DISABLED_BY_DEFAULT"|"DISABLED_BY_OWNER"|"DISABLED_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_COLLABORATOR"|"PENDING_START_REMOVAL_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_OWNER"|"PENDING_START_REMOVAL_BY_OWNER"|"FAILED_REMOVAL_BY_COLLABORATOR"|"FAILED_REMOVAL_BY_OWNER"|string;
   export type MaxResults = number;
   export type MemberPermissions = "read-write"|"read-only"|string;
   export type Permissions = "owner"|"read-write"|"read-only"|string;

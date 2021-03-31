@@ -7540,6 +7540,10 @@ declare namespace Iot {
      * The name of the thing type used to search for things.
      */
     thingTypeName?: ThingTypeName;
+    /**
+     * When true, the action returns the thing resources with attribute values that start with the attributeValue provided. When false, or not present, the action returns only the thing resources with attribute values that match the entire attributeValue provided. 
+     */
+    usePrefixAttributeValue?: usePrefixAttributeValue;
   }
   export interface ListThingsResponse {
     /**
@@ -10506,6 +10510,7 @@ declare namespace Iot {
   export type VpcId = string;
   export type WaitingForDataCollectionChecksCount = number;
   export type stringValue = string;
+  export type usePrefixAttributeValue = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

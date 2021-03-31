@@ -745,7 +745,11 @@
     "CLMLanguageCode": {
       "type": "string",
       "enum": [
-        "en-US"
+        "en-US",
+        "hi-IN",
+        "es-US",
+        "en-GB",
+        "en-AU"
       ]
     },
     "ContentRedaction": {

@@ -231,7 +231,7 @@ declare class TranscribeService extends Service {
 declare namespace TranscribeService {
   export type BaseModelName = "NarrowBand"|"WideBand"|string;
   export type Boolean = boolean;
-  export type CLMLanguageCode = "en-US"|string;
+  export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|string;
   export interface ContentRedaction {
     /**
      * Request parameter that defines the entities to be redacted. The only accepted value is PII.

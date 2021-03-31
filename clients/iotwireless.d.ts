@@ -514,11 +514,24 @@ declare namespace IoTWireless {
   export interface AssociateWirelessGatewayWithThingResponse {
   }
   export type AutoCreateTasks = boolean;
+  export type BatteryLevel = "normal"|"low"|"critical"|string;
+  export interface CertificateList {
+    /**
+     * The certificate chain algorithm provided by sidewalk.
+     */
+    SigningAlg: SigningAlg;
+    /**
+     * The value of the chosen sidewalk certificate.
+     */
+    Value: CertificateValue;
+  }
   export type CertificatePEM = string;
+  export type CertificateValue = string;
   export type ChannelMask = string;
   export type ClassBTimeout = number;
   export type ClassCTimeout = number;
   export type ClientRequestToken = string;
+  export type ConnectionStatus = "Connected"|"Disconnected"|string;
   export type Crc = number;
   export interface CreateDestinationRequest {
     /**
@@ -829,6 +842,7 @@ declare namespace IoTWireless {
   export type DevAddr = string;
   export type DevEui = string;
   export type DevStatusReqFreq = number;
+  export type DeviceCertificateList = CertificateList[];
   export interface DeviceProfile {
     /**
      * The Amazon Resource Name of the resource.
@@ -847,6 +861,7 @@ declare namespace IoTWireless {
   export type DeviceProfileId = string;
   export type DeviceProfileList = DeviceProfile[];
   export type DeviceProfileName = string;
+  export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
      * The partner account ID to disassociate from the AWS account.
@@ -890,6 +905,7 @@ declare namespace IoTWireless {
   export type DrMax = number;
   export type DrMin = number;
   export type EndPoint = string;
+  export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
   export type Expression = string;
   export type ExpressionType = "RuleName"|"MqttTopic"|string;
   export type FNwkSIntKey = string;
@@ -1064,6 +1080,10 @@ declare namespace IoTWireless {
      * Information about the wireless device.
      */
     LoRaWAN?: LoRaWANDevice;
+    /**
+     * Sidewalk device object.
+     */
+    Sidewalk?: SidewalkDevice;
   }
   export interface GetWirelessDeviceStatisticsRequest {
     /**
@@ -1084,6 +1104,10 @@ declare namespace IoTWireless {
      * Information about the wireless device's operations.
      */
     LoRaWAN?: LoRaWANDeviceMetadata;
+    /**
+     * MetaData for Sidewalk device.
+     */
+    Sidewalk?: SidewalkDeviceMetadata;
   }
   export interface GetWirelessGatewayCertificateRequest {
     /**
@@ -1168,6 +1192,10 @@ declare namespace IoTWireless {
      * The date and time when the most recent uplink was received.
      */
     LastUplinkReceivedAt?: ISODateTimeString;
+    /**
+     * The connection status of the wireless gateway.
+     */
+    ConnectionStatus?: ConnectionStatus;
   }
   export interface GetWirelessGatewayTaskDefinitionRequest {
     /**
@@ -1866,12 +1894,58 @@ declare namespace IoTWireless {
     Arn?: PartnerAccountArn;
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
+  export interface SidewalkDevice {
+    /**
+     * The sidewalk device identification.
+     */
+    SidewalkId?: SidewalkId;
+    /**
+     * The Sidewalk manufacturing series number.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+    /**
+     * The sidewalk device certificates for Ed25519 and P256r1.
+     */
+    DeviceCertificates?: DeviceCertificateList;
+  }
+  export interface SidewalkDeviceMetadata {
+    /**
+     * The RSSI value.
+     */
+    Rssi?: Integer;
+    /**
+     * Sidewalk device battery level.
+     */
+    BatteryLevel?: BatteryLevel;
+    /**
+     * Sidewalk device status notification.
+     */
+    Event?: Event;
+    /**
+     * Device state defines the device status of sidewalk device.
+     */
+    DeviceState?: DeviceState;
+  }
+  export type SidewalkId = string;
   export interface SidewalkListDevice {
     /**
      * The Sidewalk Amazon ID.
      */
     AmazonId?: AmazonId;
+    /**
+     * The sidewalk device identification.
+     */
+    SidewalkId?: SidewalkId;
+    /**
+     * The Sidewalk manufacturing series number.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+    /**
+     * The sidewalk device certificates for Ed25519 and P256r1.
+     */
+    DeviceCertificates?: DeviceCertificateList;
   }
+  export type SidewalkManufacturingSn = string;
   export interface SidewalkSendDataToDevice {
     /**
      * The sequence number.
@@ -1884,6 +1958,7 @@ declare namespace IoTWireless {
      */
     AppServerPrivateKey?: AppServerPrivateKey;
   }
+  export type SigningAlg = "Ed25519"|"P256r1"|string;
   export type Station = string;
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;

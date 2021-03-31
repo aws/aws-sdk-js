@@ -1,6 +1,25 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.876.0-->
+<!--LATEST=2.877.0-->
 <!--ENTRYINSERT-->
+
+## 2.877.0
+* bugfix: S3/S3Control: fix the issue that previously resolved S3 ARN incorrectly cached in S3/S3Control client
+* feature: Batch: AWS Batch adds support for Amazon EFS File System
+* feature: Cloud9: Add ImageId input parameter to CreateEnvironmentEC2 endpoint. New parameter enables creation of environments with different AMIs.
+* feature: CloudFormation: 1. Added a new parameter "RegionConcurrencyType" in OperationPreferences. 2. Changed the name of "AccountUrl" to "AccountsUrl" in "DeploymentTargets" parameter.
+* feature: CloudHSM: Minor documentation and link updates.
+* feature: CognitoSync: Minor documentation updates and link updates.
+* feature: Comprehend: Support for customer managed KMS encryption of Comprehend custom models
+* feature: DataPipeline: Minor documentation updates and link updates.
+* feature: Detective: Added the ability to assign tag values to Detective behavior graphs. Tag values can be used for attribute-based access control, and for cost allocation for billing.
+* feature: DirectConnect: This release adds MACsec support to AWS Direct Connect
+* feature: IoTWireless: Add Sidewalk support to APIs: GetWirelessDevice, ListWirelessDevices, GetWirelessDeviceStatistics. Add Gateway connection status in GetWirelessGatewayStatistics API.
+* feature: Iot: Added ability to prefix search on attribute value for ListThings API.
+* feature: MachineLearning: Minor documentation updates and link updates.
+* feature: Pricing: Minor documentation and link updates.
+* feature: Redshift: Enable customers to share access to their Redshift clusters from other VPCs (including VPCs from other accounts).
+* feature: TranscribeService: Amazon Transcribe now supports creating custom language models in the following languages: British English (en-GB), Australian English (en-AU), Indian Hindi (hi-IN), and US Spanish (es-US).
+* feature: WorkMail: This release adds support for mobile device access rules management in Amazon WorkMail.
 
 ## 2.876.0
 * feature: CloudWatch: SDK update for new Metric Streams feature

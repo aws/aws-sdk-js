@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3/S3Control",
-  "description": "fix the issue that previously resolved S3 ARN incorrectly cached in S3/S3Control client"
-}
