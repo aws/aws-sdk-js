@@ -1853,9 +1853,13 @@ declare namespace Lightsail {
      */
     powerId?: string;
     /**
-     * The current state of the container service. The state can be:    Pending - The container service is being created.    Ready - The container service is created but does not have a container deployment.    Disabled - The container service is disabled.    Updating - The container service capacity or other setting is being updated.    Deploying - The container service is launching a container deployment.    Running - The container service is created and it has a container deployment.  
+     * The current state of the container service. The following container service states are possible:    PENDING - The container service is being created.    READY - The container service is running but it does not have an active container deployment.    DEPLOYING - The container service is launching a container deployment.    RUNNING - The container service is running and it has an active container deployment.    UPDATING - The container service capacity or its custom domains are being updated.    DELETING - The container service is being deleted.    DISABLED - The container service is disabled, and its active deployment and containers, if any, are shut down.  
      */
     state?: ContainerServiceState;
+    /**
+     * An object that describes the current state of the container service.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    stateDetail?: ContainerServiceStateDetail;
     /**
      * The scale specification of the container service. The scale specifies the allocated compute nodes of the container service.
      */
@@ -2029,7 +2033,18 @@ declare namespace Lightsail {
     registry?: string;
   }
   export type ContainerServiceScale = number;
-  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|string;
+  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|"DEPLOYING"|string;
+  export interface ContainerServiceStateDetail {
+    /**
+     * The state code of the container service. The following state codes are possible:   The following state codes are possible if your container service is in a DEPLOYING or UPDATING state:    CREATING_SYSTEM_RESOURCES - The system resources for your container service are being created.    CREATING_NETWORK_INFRASTRUCTURE - The network infrastructure for your container service are being created.    PROVISIONING_CERTIFICATE - The SSL/TLS certificate for your container service is being created.    PROVISIONING_SERVICE - Your container service is being provisioned.    CREATING_DEPLOYMENT - Your deployment is being created on your container service.    EVALUATING_HEALTH_CHECK - The health of your deployment is being evaluated.    ACTIVATING_DEPLOYMENT - Your deployment is being activated.     The following state codes are possible if your container service is in a PENDING state:    CERTIFICATE_LIMIT_EXCEEDED - The SSL/TLS certificate required for your container service exceeds the maximum number of certificates allowed for your account.    UNKNOWN_ERROR - An error was experienced when your container service was being created.    
+     */
+    code?: ContainerServiceStateDetailCode;
+    /**
+     * A message that provides more information for the state code.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    message?: string;
+  }
+  export type ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"|"CREATING_NETWORK_INFRASTRUCTURE"|"PROVISIONING_CERTIFICATE"|"PROVISIONING_SERVICE"|"CREATING_DEPLOYMENT"|"EVALUATING_HEALTH_CHECK"|"ACTIVATING_DEPLOYMENT"|"CERTIFICATE_LIMIT_EXCEEDED"|"UNKNOWN_ERROR"|string;
   export interface ContainerServicesListResult {
     /**
      * An array of objects that describe one or more container services.

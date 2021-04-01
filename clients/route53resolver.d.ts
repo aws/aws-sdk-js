@@ -12,6 +12,14 @@ declare class Route53Resolver extends Service {
   constructor(options?: Route53Resolver.Types.ClientConfiguration)
   config: Config & Route53Resolver.Types.ClientConfiguration;
   /**
+   * Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC. 
+   */
+  associateFirewallRuleGroup(params: Route53Resolver.Types.AssociateFirewallRuleGroupRequest, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.AssociateFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC. 
+   */
+  associateFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.AssociateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.AssociateFirewallRuleGroupResponse, AWSError>;
+  /**
    * Adds IP addresses to an inbound or an outbound Resolver endpoint. If you want to add more than one IP address, submit one AssociateResolverEndpointIpAddress request for each IP address. To remove an IP address from an endpoint, see DisassociateResolverEndpointIpAddress. 
    */
   associateResolverEndpointIpAddress(params: Route53Resolver.Types.AssociateResolverEndpointIpAddressRequest, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse, AWSError>;
@@ -35,6 +43,30 @@ declare class Route53Resolver extends Service {
    * Associates a Resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see CreateResolverRule. 
    */
   associateResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverRuleResponse) => void): Request<Route53Resolver.Types.AssociateResolverRuleResponse, AWSError>;
+  /**
+   * Creates an empty firewall domain list for use in DNS Firewall rules. You can populate the domains for the new list with a file, using ImportFirewallDomains, or with domain strings, using UpdateFirewallDomains. 
+   */
+  createFirewallDomainList(params: Route53Resolver.Types.CreateFirewallDomainListRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallDomainListResponse) => void): Request<Route53Resolver.Types.CreateFirewallDomainListResponse, AWSError>;
+  /**
+   * Creates an empty firewall domain list for use in DNS Firewall rules. You can populate the domains for the new list with a file, using ImportFirewallDomains, or with domain strings, using UpdateFirewallDomains. 
+   */
+  createFirewallDomainList(callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallDomainListResponse) => void): Request<Route53Resolver.Types.CreateFirewallDomainListResponse, AWSError>;
+  /**
+   * Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.
+   */
+  createFirewallRule(params: Route53Resolver.Types.CreateFirewallRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleResponse, AWSError>;
+  /**
+   * Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.
+   */
+  createFirewallRule(callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleResponse, AWSError>;
+  /**
+   * Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group by calling CreateFirewallRule. 
+   */
+  createFirewallRuleGroup(params: Route53Resolver.Types.CreateFirewallRuleGroupRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group by calling CreateFirewallRule. 
+   */
+  createFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleGroupResponse, AWSError>;
   /**
    * Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound and outbound:   An inbound Resolver endpoint forwards DNS queries to the DNS service for a VPC from your network.   An outbound Resolver endpoint forwards DNS queries from the DNS service for a VPC to your network.  
    */
@@ -60,6 +92,30 @@ declare class Route53Resolver extends Service {
    */
   createResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverRuleResponse) => void): Request<Route53Resolver.Types.CreateResolverRuleResponse, AWSError>;
   /**
+   * Deletes the specified domain list. 
+   */
+  deleteFirewallDomainList(params: Route53Resolver.Types.DeleteFirewallDomainListRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallDomainListResponse) => void): Request<Route53Resolver.Types.DeleteFirewallDomainListResponse, AWSError>;
+  /**
+   * Deletes the specified domain list. 
+   */
+  deleteFirewallDomainList(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallDomainListResponse) => void): Request<Route53Resolver.Types.DeleteFirewallDomainListResponse, AWSError>;
+  /**
+   * Deletes the specified firewall rule.
+   */
+  deleteFirewallRule(params: Route53Resolver.Types.DeleteFirewallRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallRuleResponse) => void): Request<Route53Resolver.Types.DeleteFirewallRuleResponse, AWSError>;
+  /**
+   * Deletes the specified firewall rule.
+   */
+  deleteFirewallRule(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallRuleResponse) => void): Request<Route53Resolver.Types.DeleteFirewallRuleResponse, AWSError>;
+  /**
+   * Deletes the specified firewall rule group. 
+   */
+  deleteFirewallRuleGroup(params: Route53Resolver.Types.DeleteFirewallRuleGroupRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.DeleteFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Deletes the specified firewall rule group. 
+   */
+  deleteFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.DeleteFirewallRuleGroupResponse, AWSError>;
+  /**
    * Deletes a Resolver endpoint. The effect of deleting a Resolver endpoint depends on whether it's an inbound or an outbound Resolver endpoint:    Inbound: DNS queries from your network are no longer routed to the DNS service for the specified VPC.    Outbound: DNS queries from a VPC are no longer routed to your network.  
    */
   deleteResolverEndpoint(params: Route53Resolver.Types.DeleteResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverEndpointResponse) => void): Request<Route53Resolver.Types.DeleteResolverEndpointResponse, AWSError>;
@@ -84,6 +140,14 @@ declare class Route53Resolver extends Service {
    */
   deleteResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverRuleResponse) => void): Request<Route53Resolver.Types.DeleteResolverRuleResponse, AWSError>;
   /**
+   * Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the VPC. 
+   */
+  disassociateFirewallRuleGroup(params: Route53Resolver.Types.DisassociateFirewallRuleGroupRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.DisassociateFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the VPC. 
+   */
+  disassociateFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.DisassociateFirewallRuleGroupResponse, AWSError>;
+  /**
    * Removes IP addresses from an inbound or an outbound Resolver endpoint. If you want to remove more than one IP address, submit one DisassociateResolverEndpointIpAddress request for each IP address. To add an IP address to an endpoint, see AssociateResolverEndpointIpAddress. 
    */
   disassociateResolverEndpointIpAddress(params: Route53Resolver.Types.DisassociateResolverEndpointIpAddressRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse, AWSError>;
@@ -107,6 +171,46 @@ declare class Route53Resolver extends Service {
    * Removes the association between a specified Resolver rule and a specified VPC.  If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS queries for the domain name that you specified in the Resolver rule.  
    */
   disassociateResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverRuleResponse) => void): Request<Route53Resolver.Types.DisassociateResolverRuleResponse, AWSError>;
+  /**
+   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   */
+  getFirewallConfig(params: Route53Resolver.Types.GetFirewallConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallConfigResponse) => void): Request<Route53Resolver.Types.GetFirewallConfigResponse, AWSError>;
+  /**
+   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   */
+  getFirewallConfig(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallConfigResponse) => void): Request<Route53Resolver.Types.GetFirewallConfigResponse, AWSError>;
+  /**
+   * Retrieves the specified firewall domain list.
+   */
+  getFirewallDomainList(params: Route53Resolver.Types.GetFirewallDomainListRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallDomainListResponse) => void): Request<Route53Resolver.Types.GetFirewallDomainListResponse, AWSError>;
+  /**
+   * Retrieves the specified firewall domain list.
+   */
+  getFirewallDomainList(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallDomainListResponse) => void): Request<Route53Resolver.Types.GetFirewallDomainListResponse, AWSError>;
+  /**
+   * Retrieves the specified firewall rule group. 
+   */
+  getFirewallRuleGroup(params: Route53Resolver.Types.GetFirewallRuleGroupRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified firewall rule group. 
+   */
+  getFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group. A VPC can have more than one firewall rule group association, and a rule group can be associated with more than one VPC.
+   */
+  getFirewallRuleGroupAssociation(params: Route53Resolver.Types.GetFirewallRuleGroupAssociationRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse, AWSError>;
+  /**
+   * Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group. A VPC can have more than one firewall rule group association, and a rule group can be associated with more than one VPC.
+   */
+  getFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse, AWSError>;
+  /**
+   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   */
+  getFirewallRuleGroupPolicy(params: Route53Resolver.Types.GetFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
+  /**
+   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   */
+  getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
    * Gets DNSSEC validation information for a specified resource.
    */
@@ -172,6 +276,62 @@ declare class Route53Resolver extends Service {
    */
   getResolverRulePolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.GetResolverRulePolicyResponse, AWSError>;
   /**
+   * Imports domain names from a file into a domain list, for use in a DNS firewall rule group.  Each domain specification in your domain list must satisfy the following requirements:    It can optionally start with * (asterisk).   With the exception of the optional starting asterisk, it must only contain the following characters: A-Z, a-z, 0-9, - (hyphen).   It must be from 1-255 characters in length.   
+   */
+  importFirewallDomains(params: Route53Resolver.Types.ImportFirewallDomainsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ImportFirewallDomainsResponse) => void): Request<Route53Resolver.Types.ImportFirewallDomainsResponse, AWSError>;
+  /**
+   * Imports domain names from a file into a domain list, for use in a DNS firewall rule group.  Each domain specification in your domain list must satisfy the following requirements:    It can optionally start with * (asterisk).   With the exception of the optional starting asterisk, it must only contain the following characters: A-Z, a-z, 0-9, - (hyphen).   It must be from 1-255 characters in length.   
+   */
+  importFirewallDomains(callback?: (err: AWSError, data: Route53Resolver.Types.ImportFirewallDomainsResponse) => void): Request<Route53Resolver.Types.ImportFirewallDomainsResponse, AWSError>;
+  /**
+   * Retrieves the firewall configurations that you have defined. DNS Firewall uses the configurations to manage firewall behavior for your VPCs.  A single call might return only a partial list of the configurations. For information, see MaxResults. 
+   */
+  listFirewallConfigs(params: Route53Resolver.Types.ListFirewallConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallConfigsResponse) => void): Request<Route53Resolver.Types.ListFirewallConfigsResponse, AWSError>;
+  /**
+   * Retrieves the firewall configurations that you have defined. DNS Firewall uses the configurations to manage firewall behavior for your VPCs.  A single call might return only a partial list of the configurations. For information, see MaxResults. 
+   */
+  listFirewallConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallConfigsResponse) => void): Request<Route53Resolver.Types.ListFirewallConfigsResponse, AWSError>;
+  /**
+   * Retrieves the firewall domain lists that you have defined. For each firewall domain list, you can retrieve the domains that are defined for a list by calling ListFirewallDomains.  A single call to this list operation might return only a partial list of the domain lists. For information, see MaxResults. 
+   */
+  listFirewallDomainLists(params: Route53Resolver.Types.ListFirewallDomainListsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallDomainListsResponse) => void): Request<Route53Resolver.Types.ListFirewallDomainListsResponse, AWSError>;
+  /**
+   * Retrieves the firewall domain lists that you have defined. For each firewall domain list, you can retrieve the domains that are defined for a list by calling ListFirewallDomains.  A single call to this list operation might return only a partial list of the domain lists. For information, see MaxResults. 
+   */
+  listFirewallDomainLists(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallDomainListsResponse) => void): Request<Route53Resolver.Types.ListFirewallDomainListsResponse, AWSError>;
+  /**
+   * Retrieves the domains that you have defined for the specified firewall domain list.  A single call might return only a partial list of the domains. For information, see MaxResults. 
+   */
+  listFirewallDomains(params: Route53Resolver.Types.ListFirewallDomainsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallDomainsResponse) => void): Request<Route53Resolver.Types.ListFirewallDomainsResponse, AWSError>;
+  /**
+   * Retrieves the domains that you have defined for the specified firewall domain list.  A single call might return only a partial list of the domains. For information, see MaxResults. 
+   */
+  listFirewallDomains(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallDomainsResponse) => void): Request<Route53Resolver.Types.ListFirewallDomainsResponse, AWSError>;
+  /**
+   * Retrieves the firewall rule group associations that you have defined. Each association enables DNS filtering for a VPC with one rule group.  A single call might return only a partial list of the associations. For information, see MaxResults. 
+   */
+  listFirewallRuleGroupAssociations(params: Route53Resolver.Types.ListFirewallRuleGroupAssociationsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRuleGroupAssociationsResponse) => void): Request<Route53Resolver.Types.ListFirewallRuleGroupAssociationsResponse, AWSError>;
+  /**
+   * Retrieves the firewall rule group associations that you have defined. Each association enables DNS filtering for a VPC with one rule group.  A single call might return only a partial list of the associations. For information, see MaxResults. 
+   */
+  listFirewallRuleGroupAssociations(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRuleGroupAssociationsResponse) => void): Request<Route53Resolver.Types.ListFirewallRuleGroupAssociationsResponse, AWSError>;
+  /**
+   * Retrieves the minimal high-level information for the rule groups that you have defined.  A single call might return only a partial list of the rule groups. For information, see MaxResults. 
+   */
+  listFirewallRuleGroups(params: Route53Resolver.Types.ListFirewallRuleGroupsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRuleGroupsResponse) => void): Request<Route53Resolver.Types.ListFirewallRuleGroupsResponse, AWSError>;
+  /**
+   * Retrieves the minimal high-level information for the rule groups that you have defined.  A single call might return only a partial list of the rule groups. For information, see MaxResults. 
+   */
+  listFirewallRuleGroups(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRuleGroupsResponse) => void): Request<Route53Resolver.Types.ListFirewallRuleGroupsResponse, AWSError>;
+  /**
+   * Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC.  A single call might return only a partial list of the rules. For information, see MaxResults. 
+   */
+  listFirewallRules(params: Route53Resolver.Types.ListFirewallRulesRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
+  /**
+   * Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC.  A single call might return only a partial list of the rules. For information, see MaxResults. 
+   */
+  listFirewallRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
+  /**
    * Lists the configurations for DNSSEC validation that are associated with the current AWS account.
    */
   listResolverDnssecConfigs(params: Route53Resolver.Types.ListResolverDnssecConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverDnssecConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverDnssecConfigsResponse, AWSError>;
@@ -236,6 +396,14 @@ declare class Route53Resolver extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Route53Resolver.Types.ListTagsForResourceResponse) => void): Request<Route53Resolver.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   */
+  putFirewallRuleGroupPolicy(params: Route53Resolver.Types.PutFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
+  /**
+   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   */
+  putFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
+  /**
    * Specifies an AWS account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
    */
   putResolverQueryLogConfigPolicy(params: Route53Resolver.Types.PutResolverQueryLogConfigPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse, AWSError>;
@@ -268,6 +436,38 @@ declare class Route53Resolver extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Route53Resolver.Types.UntagResourceResponse) => void): Request<Route53Resolver.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   */
+  updateFirewallConfig(params: Route53Resolver.Types.UpdateFirewallConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallConfigResponse) => void): Request<Route53Resolver.Types.UpdateFirewallConfigResponse, AWSError>;
+  /**
+   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   */
+  updateFirewallConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallConfigResponse) => void): Request<Route53Resolver.Types.UpdateFirewallConfigResponse, AWSError>;
+  /**
+   * Updates the firewall domain list from an array of domain specifications. 
+   */
+  updateFirewallDomains(params: Route53Resolver.Types.UpdateFirewallDomainsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallDomainsResponse) => void): Request<Route53Resolver.Types.UpdateFirewallDomainsResponse, AWSError>;
+  /**
+   * Updates the firewall domain list from an array of domain specifications. 
+   */
+  updateFirewallDomains(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallDomainsResponse) => void): Request<Route53Resolver.Types.UpdateFirewallDomainsResponse, AWSError>;
+  /**
+   * Updates the specified firewall rule. 
+   */
+  updateFirewallRule(params: Route53Resolver.Types.UpdateFirewallRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleResponse, AWSError>;
+  /**
+   * Updates the specified firewall rule. 
+   */
+  updateFirewallRule(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleResponse, AWSError>;
+  /**
+   * Changes the association of a FirewallRuleGroup with a VPC. The association enables DNS filtering for the VPC. 
+   */
+  updateFirewallRuleGroupAssociation(params: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse, AWSError>;
+  /**
+   * Changes the association of a FirewallRuleGroup with a VPC. The association enables DNS filtering for the VPC. 
+   */
+  updateFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse, AWSError>;
+  /**
    * Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.
    */
   updateResolverDnssecConfig(params: Route53Resolver.Types.UpdateResolverDnssecConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
@@ -294,7 +494,44 @@ declare class Route53Resolver extends Service {
 }
 declare namespace Route53Resolver {
   export type AccountId = string;
+  export type Action = "ALLOW"|"BLOCK"|"ALERT"|string;
   export type Arn = string;
+  export interface AssociateFirewallRuleGroupRequest {
+    /**
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     */
+    CreatorRequestId: CreatorRequestId;
+    /**
+     * The unique identifier of the firewall rule group. 
+     */
+    FirewallRuleGroupId: ResourceId;
+    /**
+     * The unique identifier of the VPC that you want to associate with the rule group. 
+     */
+    VpcId: ResourceId;
+    /**
+     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.
+     */
+    Priority: Priority;
+    /**
+     * A name that lets you identify the association, to manage and use it.
+     */
+    Name: Name;
+    /**
+     * If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. When you create the association, the default setting is DISABLED. 
+     */
+    MutationProtection?: MutationProtectionStatus;
+    /**
+     * A list of the tag keys and values that you want to associate with the rule group association. 
+     */
+    Tags?: TagList;
+  }
+  export interface AssociateFirewallRuleGroupResponse {
+    /**
+     * The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.
+     */
+    FirewallRuleGroupAssociation?: FirewallRuleGroupAssociation;
+  }
   export interface AssociateResolverEndpointIpAddressRequest {
     /**
      * The ID of the Resolver endpoint that you want to associate IP addresses with.
@@ -347,8 +584,100 @@ declare namespace Route53Resolver {
      */
     ResolverRuleAssociation?: ResolverRuleAssociation;
   }
+  export type BlockOverrideDnsType = "CNAME"|string;
+  export type BlockOverrideDomain = string;
+  export type BlockOverrideTtl = number;
+  export type BlockResponse = "NODATA"|"NXDOMAIN"|"OVERRIDE"|string;
   export type Boolean = boolean;
   export type Count = number;
+  export interface CreateFirewallDomainListRequest {
+    /**
+     * A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     */
+    CreatorRequestId: CreatorRequestId;
+    /**
+     * A name that lets you identify the domain list to manage and use it.
+     */
+    Name: Name;
+    /**
+     * A list of the tag keys and values that you want to associate with the domain list. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFirewallDomainListResponse {
+    /**
+     * The domain list that you just created.
+     */
+    FirewallDomainList?: FirewallDomainList;
+  }
+  export interface CreateFirewallRuleGroupRequest {
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId: CreatorRequestId;
+    /**
+     * A name that lets you identify the rule group, to manage and use it.
+     */
+    Name: Name;
+    /**
+     * A list of the tag keys and values that you want to associate with the rule group. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFirewallRuleGroupResponse {
+    /**
+     * A collection of rules used to filter DNS network traffic. 
+     */
+    FirewallRuleGroup?: FirewallRuleGroup;
+  }
+  export interface CreateFirewallRuleRequest {
+    /**
+     * A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     */
+    CreatorRequestId: CreatorRequestId;
+    /**
+     * The unique identifier of the firewall rule group where you want to create the rule. 
+     */
+    FirewallRuleGroupId: ResourceId;
+    /**
+     * The ID of the domain list that you want to use in the rule. 
+     */
+    FirewallDomainListId: ResourceId;
+    /**
+     * The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting. You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.
+     */
+    Priority: Priority;
+    /**
+     * The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request and send metrics and log to Cloud Watch.    BLOCK - Disallow the request. This option requires additional details in the rule's BlockResponse.   
+     */
+    Action: Action;
+    /**
+     * The way that you want DNS Firewall to block the request, used with the rule aciton setting BLOCK.     NODATA - Respond indicating that the query was successful, but no response is available for it.    NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.    OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.    This setting is required if the rule action setting is BLOCK.
+     */
+    BlockResponse?: BlockResponse;
+    /**
+     * The custom DNS record to send back in response to the query. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE. This setting is required if the BlockResponse setting is OVERRIDE.
+     */
+    BlockOverrideDomain?: BlockOverrideDomain;
+    /**
+     * The DNS record's type. This determines the format of the record value that you provided in BlockOverrideDomain. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE. This setting is required if the BlockResponse setting is OVERRIDE.
+     */
+    BlockOverrideDnsType?: BlockOverrideDnsType;
+    /**
+     * The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE. This setting is required if the BlockResponse setting is OVERRIDE.
+     */
+    BlockOverrideTtl?: BlockOverrideTtl;
+    /**
+     * A name that lets you identify the rule in the rule group.
+     */
+    Name: Name;
+  }
+  export interface CreateFirewallRuleResponse {
+    /**
+     * The firewall rule that you just created. 
+     */
+    FirewallRule?: FirewallRule;
+  }
   export interface CreateResolverEndpointRequest {
     /**
      * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
@@ -442,6 +771,46 @@ declare namespace Route53Resolver {
     ResolverRule?: ResolverRule;
   }
   export type CreatorRequestId = string;
+  export interface DeleteFirewallDomainListRequest {
+    /**
+     * The ID of the domain list that you want to delete. 
+     */
+    FirewallDomainListId: ResourceId;
+  }
+  export interface DeleteFirewallDomainListResponse {
+    /**
+     * The domain list that you just deleted. 
+     */
+    FirewallDomainList?: FirewallDomainList;
+  }
+  export interface DeleteFirewallRuleGroupRequest {
+    /**
+     * The unique identifier of the firewall rule group that you want to delete. 
+     */
+    FirewallRuleGroupId: ResourceId;
+  }
+  export interface DeleteFirewallRuleGroupResponse {
+    /**
+     * A collection of rules used to filter DNS network traffic. 
+     */
+    FirewallRuleGroup?: FirewallRuleGroup;
+  }
+  export interface DeleteFirewallRuleRequest {
+    /**
+     * The unique identifier of the firewall rule group that you want to delete the rule from. 
+     */
+    FirewallRuleGroupId: ResourceId;
+    /**
+     * The ID of the domain list that's used in the rule. 
+     */
+    FirewallDomainListId: ResourceId;
+  }
+  export interface DeleteFirewallRuleResponse {
+    /**
+     * The specification for the firewall rule that you just deleted.
+     */
+    FirewallRule?: FirewallRule;
+  }
   export interface DeleteResolverEndpointRequest {
     /**
      * The ID of the Resolver endpoint that you want to delete.
@@ -479,6 +848,18 @@ declare namespace Route53Resolver {
     ResolverRule?: ResolverRule;
   }
   export type DestinationArn = string;
+  export interface DisassociateFirewallRuleGroupRequest {
+    /**
+     * The identifier of the FirewallRuleGroupAssociation. 
+     */
+    FirewallRuleGroupAssociationId: ResourceId;
+  }
+  export interface DisassociateFirewallRuleGroupResponse {
+    /**
+     * The firewall rule group association that you just removed. 
+     */
+    FirewallRuleGroupAssociation?: FirewallRuleGroupAssociation;
+  }
   export interface DisassociateResolverEndpointIpAddressRequest {
     /**
      * The ID of the Resolver endpoint that you want to disassociate an IP address from.
@@ -527,6 +908,7 @@ declare namespace Route53Resolver {
      */
     ResolverRuleAssociation?: ResolverRuleAssociation;
   }
+  export type DomainListFileUrl = string;
   export type DomainName = string;
   export interface Filter {
     /**
@@ -542,6 +924,338 @@ declare namespace Route53Resolver {
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
+  export interface FirewallConfig {
+    /**
+     * The Id of the firewall configuration.
+     */
+    Id?: ResourceId;
+    /**
+     * The ID of the VPC that this firewall configuration applies to.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The AWS account ID of the owner of the VPC that this firewall configuration applies to.
+     */
+    OwnerId?: AccountId;
+    /**
+     * Determines how DNS Firewall operates during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.    By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query.    If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them.    This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. 
+     */
+    FirewallFailOpen?: FirewallFailOpenStatus;
+  }
+  export type FirewallConfigList = FirewallConfig[];
+  export type FirewallDomainImportOperation = "REPLACE"|string;
+  export interface FirewallDomainList {
+    /**
+     * The ID of the domain list. 
+     */
+    Id?: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the firewall domain list.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the domain list. 
+     */
+    Name?: Name;
+    /**
+     * The number of domain names that are specified in the domain list.
+     */
+    DomainCount?: Unsigned;
+    /**
+     * The status of the domain list. 
+     */
+    Status?: FirewallDomainListStatus;
+    /**
+     * Additional information about the status of the list, if available.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * The owner of the list, used only for lists that are not managed by you. For example, the managed domain list AWSManagedDomainsMalwareDomainList has the managed owner name Route 53 Resolver DNS Firewall.
+     */
+    ManagedOwnerName?: ServicePrinciple;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * The date and time that the domain list was created, in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    CreationTime?: Rfc3339TimeString;
+    /**
+     * The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    ModificationTime?: Rfc3339TimeString;
+  }
+  export interface FirewallDomainListMetadata {
+    /**
+     * The ID of the domain list. 
+     */
+    Id?: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the firewall domain list metadata.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the domain list. 
+     */
+    Name?: Name;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * The owner of the list, used only for lists that are not managed by you. For example, the managed domain list AWSManagedDomainsMalwareDomainList has the managed owner name Route 53 Resolver DNS Firewall.
+     */
+    ManagedOwnerName?: ServicePrinciple;
+  }
+  export type FirewallDomainListMetadataList = FirewallDomainListMetadata[];
+  export type FirewallDomainListStatus = "COMPLETE"|"COMPLETE_IMPORT_FAILED"|"IMPORTING"|"DELETING"|"UPDATING"|string;
+  export type FirewallDomainName = string;
+  export type FirewallDomainUpdateOperation = "ADD"|"REMOVE"|"REPLACE"|string;
+  export type FirewallDomains = FirewallDomainName[];
+  export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|string;
+  export interface FirewallRule {
+    /**
+     * The unique identifier of the firewall rule group of the rule. 
+     */
+    FirewallRuleGroupId?: ResourceId;
+    /**
+     * The ID of the domain list that's used in the rule. 
+     */
+    FirewallDomainListId?: ResourceId;
+    /**
+     * The name of the rule. 
+     */
+    Name?: Name;
+    /**
+     * The priority of the rule in the rule group. This value must be unique within the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.
+     */
+    Priority?: Priority;
+    /**
+     * The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request to go through but send an alert to the logs.    BLOCK - Disallow the request. If this is specified, additional handling details are provided in the rule's BlockResponse setting.   
+     */
+    Action?: Action;
+    /**
+     * The way that you want DNS Firewall to block the request. Used for the rule action setting BLOCK.    NODATA - Respond indicating that the query was successful, but no response is available for it.    NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.    OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.   
+     */
+    BlockResponse?: BlockResponse;
+    /**
+     * The custom DNS record to send back in response to the query. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideDomain?: BlockOverrideDomain;
+    /**
+     * The DNS record's type. This determines the format of the record value that you provided in BlockOverrideDomain. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideDnsType?: BlockOverrideDnsType;
+    /**
+     * The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideTtl?: Unsigned;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * The date and time that the rule was created, in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    CreationTime?: Rfc3339TimeString;
+    /**
+     * The date and time that the rule was last modified, in Unix time format and Coordinated Universal Time (UTC).
+     */
+    ModificationTime?: Rfc3339TimeString;
+  }
+  export interface FirewallRuleGroup {
+    /**
+     * The ID of the rule group. 
+     */
+    Id?: ResourceId;
+    /**
+     * The ARN (Amazon Resource Name) of the rule group.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the rule group.
+     */
+    Name?: Name;
+    /**
+     * The number of rules in the rule group.
+     */
+    RuleCount?: Unsigned;
+    /**
+     * The status of the domain list. 
+     */
+    Status?: FirewallRuleGroupStatus;
+    /**
+     * Additional information about the status of the rule group, if available.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
+     */
+    OwnerId?: AccountId;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).
+     */
+    ShareStatus?: ShareStatus;
+    /**
+     * The date and time that the rule group was created, in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    CreationTime?: Rfc3339TimeString;
+    /**
+     * The date and time that the rule group was last modified, in Unix time format and Coordinated Universal Time (UTC).
+     */
+    ModificationTime?: Rfc3339TimeString;
+  }
+  export interface FirewallRuleGroupAssociation {
+    /**
+     * The identifier for the association.
+     */
+    Id?: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the firewall rule group association.
+     */
+    Arn?: Arn;
+    /**
+     * The unique identifier of the firewall rule group. 
+     */
+    FirewallRuleGroupId?: ResourceId;
+    /**
+     * The unique identifier of the VPC that is associated with the rule group. 
+     */
+    VpcId?: ResourceId;
+    /**
+     * The name of the association.
+     */
+    Name?: Name;
+    /**
+     * The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. 
+     */
+    Priority?: Priority;
+    /**
+     * If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. 
+     */
+    MutationProtection?: MutationProtectionStatus;
+    /**
+     * The owner of the association, used only for associations that are not managed by you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this reports Firewall Manager as the managed owner.
+     */
+    ManagedOwnerName?: ServicePrinciple;
+    /**
+     * The current status of the association.
+     */
+    Status?: FirewallRuleGroupAssociationStatus;
+    /**
+     * Additional information about the status of the response, if available.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * The date and time that the association was created, in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    CreationTime?: Rfc3339TimeString;
+    /**
+     * The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).
+     */
+    ModificationTime?: Rfc3339TimeString;
+  }
+  export type FirewallRuleGroupAssociationStatus = "COMPLETE"|"DELETING"|"UPDATING"|string;
+  export type FirewallRuleGroupAssociations = FirewallRuleGroupAssociation[];
+  export interface FirewallRuleGroupMetadata {
+    /**
+     * The ID of the rule group. 
+     */
+    Id?: ResourceId;
+    /**
+     * The ARN (Amazon Resource Name) of the rule group.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the rule group.
+     */
+    Name?: Name;
+    /**
+     * The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
+     */
+    OwnerId?: AccountId;
+    /**
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).
+     */
+    ShareStatus?: ShareStatus;
+  }
+  export type FirewallRuleGroupMetadataList = FirewallRuleGroupMetadata[];
+  export type FirewallRuleGroupPolicy = string;
+  export type FirewallRuleGroupStatus = "COMPLETE"|"DELETING"|"UPDATING"|string;
+  export type FirewallRules = FirewallRule[];
+  export interface GetFirewallConfigRequest {
+    /**
+     * The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+     */
+    ResourceId: ResourceId;
+  }
+  export interface GetFirewallConfigResponse {
+    /**
+     * Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+     */
+    FirewallConfig?: FirewallConfig;
+  }
+  export interface GetFirewallDomainListRequest {
+    /**
+     * The ID of the domain list. 
+     */
+    FirewallDomainListId: ResourceId;
+  }
+  export interface GetFirewallDomainListResponse {
+    /**
+     * The domain list that you requested. 
+     */
+    FirewallDomainList?: FirewallDomainList;
+  }
+  export interface GetFirewallRuleGroupAssociationRequest {
+    /**
+     * The identifier of the FirewallRuleGroupAssociation. 
+     */
+    FirewallRuleGroupAssociationId: ResourceId;
+  }
+  export interface GetFirewallRuleGroupAssociationResponse {
+    /**
+     * The association that you requested. 
+     */
+    FirewallRuleGroupAssociation?: FirewallRuleGroupAssociation;
+  }
+  export interface GetFirewallRuleGroupPolicyRequest {
+    /**
+     * The ARN (Amazon Resource Name) for the rule group.
+     */
+    Arn: Arn;
+  }
+  export interface GetFirewallRuleGroupPolicyResponse {
+    /**
+     * The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+     */
+    FirewallRuleGroupPolicy?: FirewallRuleGroupPolicy;
+  }
+  export interface GetFirewallRuleGroupRequest {
+    /**
+     * The unique identifier of the firewall rule group. 
+     */
+    FirewallRuleGroupId: ResourceId;
+  }
+  export interface GetFirewallRuleGroupResponse {
+    /**
+     * A collection of rules used to filter DNS network traffic. 
+     */
+    FirewallRuleGroup?: FirewallRuleGroup;
+  }
   export interface GetResolverDnssecConfigRequest {
     /**
      * The ID of the virtual private cloud (VPC) for the DNSSEC validation status.
@@ -638,6 +1352,38 @@ declare namespace Route53Resolver {
      */
     ResolverRule?: ResolverRule;
   }
+  export interface ImportFirewallDomainsRequest {
+    /**
+     * The ID of the domain list that you want to modify with the import operation.
+     */
+    FirewallDomainListId: ResourceId;
+    /**
+     * What you want DNS Firewall to do with the domains that are listed in the file. This must be set to REPLACE, which updates the domain list to exactly match the list in the file. 
+     */
+    Operation: FirewallDomainImportOperation;
+    /**
+     * The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import. The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.
+     */
+    DomainFileUrl: DomainListFileUrl;
+  }
+  export interface ImportFirewallDomainsResponse {
+    /**
+     * The Id of the firewall domain list that DNS Firewall just updated.
+     */
+    Id?: ResourceId;
+    /**
+     * The name of the domain list. 
+     */
+    Name?: Name;
+    /**
+     *  
+     */
+    Status?: FirewallDomainListStatus;
+    /**
+     * Additional information about the status of the list, if available.
+     */
+    StatusMessage?: StatusMessage;
+  }
   export type Ip = string;
   export type IpAddressCount = number;
   export interface IpAddressRequest {
@@ -697,6 +1443,160 @@ declare namespace Route53Resolver {
   }
   export type IpAddressesRequest = IpAddressRequest[];
   export type IpAddressesResponse = IpAddressResponse[];
+  export type ListDomainMaxResults = number;
+  export type ListFirewallConfigsMaxResult = number;
+  export interface ListFirewallConfigsRequest {
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: ListFirewallConfigsMaxResult;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallConfigsResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). 
+     */
+    FirewallConfigs?: FirewallConfigList;
+  }
+  export interface ListFirewallDomainListsRequest {
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallDomainListsResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of the domain lists that you have defined.  This might be a parital list of the domain lists that you've defined. For information, see MaxResults. 
+     */
+    FirewallDomainLists?: FirewallDomainListMetadataList;
+  }
+  export interface ListFirewallDomainsRequest {
+    /**
+     * The ID of the domain list whose domains you want to retrieve. 
+     */
+    FirewallDomainListId: ResourceId;
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: ListDomainMaxResults;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallDomainsResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of the domains in the firewall domain list.  This might be a parital list of the domains that you've defined in the domain list. For information, see MaxResults. 
+     */
+    Domains?: FirewallDomains;
+  }
+  export interface ListFirewallRuleGroupAssociationsRequest {
+    /**
+     * The unique identifier of the firewall rule group that you want to retrieve the associations for. Leave this blank to retrieve associations for any rule group. 
+     */
+    FirewallRuleGroupId?: ResourceId;
+    /**
+     * The unique identifier of the VPC that you want to retrieve the associations for. Leave this blank to retrieve associations for any VPC. 
+     */
+    VpcId?: ResourceId;
+    /**
+     * The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. 
+     */
+    Priority?: Priority;
+    /**
+     * The association Status setting that you want DNS Firewall to filter on for the list. If you don't specify this, then DNS Firewall returns all associations, regardless of status.
+     */
+    Status?: FirewallRuleGroupAssociationStatus;
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallRuleGroupAssociationsResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of your firewall rule group associations. This might be a partial list of the associations that you have defined. For information, see MaxResults. 
+     */
+    FirewallRuleGroupAssociations?: FirewallRuleGroupAssociations;
+  }
+  export interface ListFirewallRuleGroupsRequest {
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallRuleGroupsResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of your firewall rule groups. This might be a partial list of the rule groups that you have defined. For information, see MaxResults. 
+     */
+    FirewallRuleGroups?: FirewallRuleGroupMetadataList;
+  }
+  export interface ListFirewallRulesRequest {
+    /**
+     * The unique identifier of the firewall rule group that you want to retrieve the rules for. 
+     */
+    FirewallRuleGroupId: ResourceId;
+    /**
+     * Optional additional filter for the rules to retrieve. The setting that determines the processing order of the rules in a rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.
+     */
+    Priority?: Priority;
+    /**
+     * Optional additional filter for the rules to retrieve. The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request to go through but send an alert to the logs.    BLOCK - Disallow the request. If this is specified, additional handling details are provided in the rule's BlockResponse setting.   
+     */
+    Action?: Action;
+    /**
+     * The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify a value for MaxResults, Resolver returns up to 100 objects. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in MaxResults. If more objects are available for retrieval, Resolver returns a NextToken value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFirewallRulesResponse {
+    /**
+     * If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of the rules that you have defined.  This might be a parital list of the firewall rules that you've defined. For information, see MaxResults. 
+     */
+    FirewallRules?: FirewallRules;
+  }
   export interface ListResolverDnssecConfigsRequest {
     /**
      *  Optional: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53 returns up to 100 configuration per page.
@@ -938,9 +1838,27 @@ declare namespace Route53Resolver {
     NextToken?: NextToken;
   }
   export type MaxResults = number;
+  export type MutationProtectionStatus = "ENABLED"|"DISABLED"|string;
   export type Name = string;
   export type NextToken = string;
   export type Port = number;
+  export type Priority = number;
+  export interface PutFirewallRuleGroupPolicyRequest {
+    /**
+     * The ARN (Amazon Resource Name) for the rule group that you want to share.
+     */
+    Arn: Arn;
+    /**
+     * The AWS Identity and Access Management (AWS IAM) policy to attach to the rule group.
+     */
+    FirewallRuleGroupPolicy: FirewallRuleGroupPolicy;
+  }
+  export interface PutFirewallRuleGroupPolicyResponse {
+    /**
+     * 
+     */
+    ReturnValue?: Boolean;
+  }
   export interface PutResolverQueryLogConfigPolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the account that you want to share rules with.
@@ -1233,6 +2151,7 @@ declare namespace Route53Resolver {
   export type Rfc3339TimeString = string;
   export type RuleTypeOption = "FORWARD"|"SYSTEM"|"RECURSIVE"|string;
   export type SecurityGroupIds = ResourceId[];
+  export type ServicePrinciple = string;
   export type ShareStatus = "NOT_SHARED"|"SHARED_WITH_ME"|"SHARED_BY_ME"|string;
   export type SortByKey = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
@@ -1275,6 +2194,7 @@ declare namespace Route53Resolver {
     Port?: Port;
   }
   export type TargetList = TargetAddress[];
+  export type Unsigned = number;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource that you want to remove tags from. To get the ARN for a resource, use the applicable Get or List command:     GetResolverEndpoint     GetResolverRule     GetResolverRuleAssociation     ListResolverEndpoints     ListResolverRuleAssociations     ListResolverRules   
@@ -1286,6 +2206,122 @@ declare namespace Route53Resolver {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateFirewallConfigRequest {
+    /**
+     * The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+     */
+    ResourceId: ResourceId;
+    /**
+     * Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.    By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall blocks queries that it is unable to evaluate properly.    If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them.    This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. 
+     */
+    FirewallFailOpen: FirewallFailOpenStatus;
+  }
+  export interface UpdateFirewallConfigResponse {
+    /**
+     * Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+     */
+    FirewallConfig?: FirewallConfig;
+  }
+  export interface UpdateFirewallDomainsRequest {
+    /**
+     * The ID of the domain list whose domains you want to update. 
+     */
+    FirewallDomainListId: ResourceId;
+    /**
+     * What you want DNS Firewall to do with the domains that you are providing:     ADD - Add the domains to the ones that are already in the domain list.     REMOVE - Search the domain list for the domains and remove them from the list.    REPLACE - Update the domain list to exactly match the list that you are providing.   
+     */
+    Operation: FirewallDomainUpdateOperation;
+    /**
+     * A list of domains to use in the update operation. Each domain specification in your domain list must satisfy the following requirements:    It can optionally start with * (asterisk).   With the exception of the optional starting asterisk, it must only contain the following characters: A-Z, a-z, 0-9, - (hyphen).   It must be from 1-255 characters in length.   
+     */
+    Domains: FirewallDomains;
+  }
+  export interface UpdateFirewallDomainsResponse {
+    /**
+     * The Id of the firewall domain list that DNS Firewall just updated.
+     */
+    Id?: ResourceId;
+    /**
+     * The name of the domain list. 
+     */
+    Name?: Name;
+    /**
+     *  
+     */
+    Status?: FirewallDomainListStatus;
+    /**
+     * Additional information about the status of the list, if available.
+     */
+    StatusMessage?: StatusMessage;
+  }
+  export interface UpdateFirewallRuleGroupAssociationRequest {
+    /**
+     * The identifier of the FirewallRuleGroupAssociation. 
+     */
+    FirewallRuleGroupAssociationId: ResourceId;
+    /**
+     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.
+     */
+    Priority?: Priority;
+    /**
+     * If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. 
+     */
+    MutationProtection?: MutationProtectionStatus;
+    /**
+     * The name of the rule group association.
+     */
+    Name?: Name;
+  }
+  export interface UpdateFirewallRuleGroupAssociationResponse {
+    /**
+     * The association that you just updated. 
+     */
+    FirewallRuleGroupAssociation?: FirewallRuleGroupAssociation;
+  }
+  export interface UpdateFirewallRuleRequest {
+    /**
+     * The unique identifier of the firewall rule group for the rule. 
+     */
+    FirewallRuleGroupId: ResourceId;
+    /**
+     * The ID of the domain list to use in the rule. 
+     */
+    FirewallDomainListId: ResourceId;
+    /**
+     * The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting. You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.
+     */
+    Priority?: Priority;
+    /**
+     * The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request to go through but send an alert to the logs.    BLOCK - Disallow the request. This option requires additional details in the rule's BlockResponse.   
+     */
+    Action?: Action;
+    /**
+     * The way that you want DNS Firewall to block the request. Used for the rule action setting BLOCK.    NODATA - Respond indicating that the query was successful, but no response is available for it.    NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.    OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.   
+     */
+    BlockResponse?: BlockResponse;
+    /**
+     * The custom DNS record to send back in response to the query. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideDomain?: BlockOverrideDomain;
+    /**
+     * The DNS record's type. This determines the format of the record value that you provided in BlockOverrideDomain. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideDnsType?: BlockOverrideDnsType;
+    /**
+     * The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action BLOCK with a BlockResponse setting of OVERRIDE.
+     */
+    BlockOverrideTtl?: BlockOverrideTtl;
+    /**
+     * The name of the rule.
+     */
+    Name?: Name;
+  }
+  export interface UpdateFirewallRuleResponse {
+    /**
+     * The firewall rule that you just updated. 
+     */
+    FirewallRule?: FirewallRule;
   }
   export interface UpdateResolverDnssecConfigRequest {
     /**

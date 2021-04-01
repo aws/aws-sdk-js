@@ -12,11 +12,11 @@ declare class Kendra extends Service {
   constructor(options?: Kendra.Types.ClientConfiguration)
   config: Config & Kendra.Types.ClientConfiguration;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages releated to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(params: Kendra.Types.BatchDeleteDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages releated to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class Kendra extends Service {
    */
   createFaq(callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
   /**
-   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to . The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the operation or using one of the supported data sources. 
+   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument operation or using one of the supported data sources. 
    */
   createIndex(params: Kendra.Types.CreateIndexRequest, callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
-   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to . The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the operation or using one of the supported data sources. 
+   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument operation or using one of the supported data sources. 
    */
   createIndex(callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class Kendra extends Service {
    */
   createThesaurus(callback?: (err: AWSError, data: Kendra.Types.CreateThesaurusResponse) => void): Request<Kendra.Types.CreateThesaurusResponse, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the operation is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource operation is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the operation is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource operation is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -453,7 +453,7 @@ declare namespace Kendra {
   export type ConfluenceAttachmentFieldName = "AUTHOR"|"CONTENT_TYPE"|"CREATED_DATE"|"DISPLAY_URL"|"FILE_SIZE"|"ITEM_TYPE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
   export interface ConfluenceAttachmentToIndexFieldMapping {
     /**
-     * The name of the field in the data source.  You must first create the index field using the operation. 
+     * The name of the field in the data source.  You must first create the index field using the UpdateIndex operation. 
      */
     DataSourceFieldName?: ConfluenceAttachmentFieldName;
     /**
@@ -842,7 +842,7 @@ declare namespace Kendra {
      */
     UpdatedAt?: Timestamp;
     /**
-     * The status of the data source. When the status is ATIVE the data source is ready to use.
+     * The status of the data source. When the status is ACTIVE the data source is ready to use.
      */
     Status?: DataSourceStatus;
   }
@@ -1174,7 +1174,7 @@ declare namespace Kendra {
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.
+     * For Enterprise edition indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
     /**
@@ -1771,7 +1771,7 @@ declare namespace Kendra {
   export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
   export interface QueryRequest {
     /**
-     * The unique identifier of the index to search. The identifier is returned in the response from the operation.
+     * The unique identifier of the index to search. The identifier is returned in the response from the CreateIndex operation.
      */
     IndexId: IndexId;
     /**
@@ -1984,7 +1984,7 @@ declare namespace Kendra {
      */
     StandardObjectConfigurations?: SalesforceStandardObjectConfigurationList;
     /**
-     * Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.
+     * Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.
      */
     KnowledgeArticleConfiguration?: SalesforceKnowledgeArticleConfiguration;
     /**
@@ -2078,7 +2078,7 @@ declare namespace Kendra {
      */
     DocumentDataFieldName: DataSourceFieldName;
     /**
-     * The name of the field in the standard object table that contains the document titleB.
+     * The name of the field in the standard object table that contains the document title.
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
@@ -2122,6 +2122,7 @@ declare namespace Kendra {
      */
     KmsKeyId?: KmsKeyId;
   }
+  export type ServiceNowAuthenticationType = "HTTP_BASIC"|"OAUTH2"|string;
   export type ServiceNowBuildVersionType = "LONDON"|"OTHERS"|string;
   export interface ServiceNowConfiguration {
     /**
@@ -2144,6 +2145,10 @@ declare namespace Kendra {
      * Provides configuration information for crawling service catalogs in the ServiceNow site.
      */
     ServiceCatalogConfiguration?: ServiceNowServiceCatalogConfiguration;
+    /**
+     * Determines the type of authentication used to connect to the ServiceNow instance. If you choose HTTP_BASIC, Amazon Kendra is authenticated using the user name and password provided in the AWS Secrets Manager secret in the SecretArn field. When you choose OAUTH2, Amazon Kendra is authenticated using the OAuth token and secret provided in the Secrets Manager secret, and the user name and password are used to determine which information Amazon Kendra has access to. When you use OAUTH2 authentication, you must generate a token and a client secret using the ServiceNow console. For more information, see Using a ServiceNow data source.
+     */
+    AuthenticationType?: ServiceNowAuthenticationType;
   }
   export type ServiceNowHostUrl = string;
   export interface ServiceNowKnowledgeArticleConfiguration {
@@ -2171,18 +2176,23 @@ declare namespace Kendra {
      * Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A query that selects the knowledge articles to index. The query can return articles from multiple knowledge bases, and the knowledge bases can be public or private. The query string must be one generated by the ServiceNow console. For more information, see Specifying documents to index with a query. 
+     */
+    FilterQuery?: ServiceNowKnowledgeArticleFilterQuery;
   }
+  export type ServiceNowKnowledgeArticleFilterQuery = string;
   export interface ServiceNowServiceCatalogConfiguration {
     /**
      * Indicates whether Amazon Kendra should crawl attachments to the service catalog items. 
      */
     CrawlAttachments?: Boolean;
     /**
-     * Determines the types of file attachments that are included in the index. 
+     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the file name of the attachment.
      */
     IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Determines the types of file attachments that are excluded from the index.
+     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the file name of the attachment.
      */
     ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -2229,7 +2239,7 @@ declare namespace Kendra {
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
+     * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the UpdateIndex operation before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -2295,7 +2305,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the operation.
+     * The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the Query operation.
      */
     QueryId: QueryId;
     /**
@@ -2457,7 +2467,7 @@ declare namespace Kendra {
      */
     DocumentMetadataConfigurationUpdates?: DocumentMetadataConfigurationList;
     /**
-     * Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day. If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.
+     * Sets the number of additional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day. If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
     /**

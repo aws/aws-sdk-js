@@ -2613,6 +2613,14 @@ declare class EC2 extends Service {
    */
   getEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.GetEbsEncryptionByDefaultResult) => void): Request<EC2.Types.GetEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. Based on the information that you provide, we configure resources in the template to do the following:   Create a table in Athena that maps fields to a custom log format   Create a Lambda function that updates the table with new partitions on a daily, weekly, or monthly basis   Create a table partitioned between two timestamps in the past   Create a set of named queries in Athena that you can use to get started quickly  
+   */
+  getFlowLogsIntegrationTemplate(params: EC2.Types.GetFlowLogsIntegrationTemplateRequest, callback?: (err: AWSError, data: EC2.Types.GetFlowLogsIntegrationTemplateResult) => void): Request<EC2.Types.GetFlowLogsIntegrationTemplateResult, AWSError>;
+  /**
+   * Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. Based on the information that you provide, we configure resources in the template to do the following:   Create a table in Athena that maps fields to a custom log format   Create a Lambda function that updates the table with new partitions on a daily, weekly, or monthly basis   Create a table partitioned between two timestamps in the past   Create a set of named queries in Athena that you can use to get started quickly  
+   */
+  getFlowLogsIntegrationTemplate(callback?: (err: AWSError, data: EC2.Types.GetFlowLogsIntegrationTemplateResult) => void): Request<EC2.Types.GetFlowLogsIntegrationTemplateResult, AWSError>;
+  /**
    * Lists the resource groups to which a Capacity Reservation has been added.
    */
   getGroupsForCapacityReservation(params: EC2.Types.GetGroupsForCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.GetGroupsForCapacityReservationResult) => void): Request<EC2.Types.GetGroupsForCapacityReservationResult, AWSError>;
@@ -4615,13 +4623,13 @@ declare namespace EC2 {
   }
   export interface AssociateSubnetCidrBlockRequest {
     /**
-     * The ID of your subnet.
-     */
-    SubnetId: SubnetId;
-    /**
      * The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
      */
     Ipv6CidrBlock: String;
+    /**
+     * The ID of your subnet.
+     */
+    SubnetId: SubnetId;
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
@@ -4760,6 +4768,25 @@ declare namespace EC2 {
     Message?: String;
   }
   export type AssociationStatusCode = "associating"|"associated"|"association-failed"|"disassociating"|"disassociated"|string;
+  export interface AthenaIntegration {
+    /**
+     * The location in Amazon S3 to store the generated CloudFormation template.
+     */
+    IntegrationResultS3DestinationArn: String;
+    /**
+     * The schedule for adding new partitions to the table.
+     */
+    PartitionLoadFrequency: PartitionLoadFrequency;
+    /**
+     * The start date for the partition.
+     */
+    PartitionStartDate?: MillisecondDateTime;
+    /**
+     * The end date for the partition.
+     */
+    PartitionEndDate?: MillisecondDateTime;
+  }
+  export type AthenaIntegrationsSet = AthenaIntegration[];
   export interface AttachClassicLinkVpcRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7575,6 +7602,10 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     */
+    CidrBlock: String;
+    /**
      * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
      */
     Ipv6CidrBlock?: String;
@@ -7590,10 +7621,6 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
-    /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
-     */
-    CidrBlock: String;
   }
   export interface CreateSubnetResult {
     /**
@@ -12365,7 +12392,7 @@ declare namespace EC2 {
   export type DescribeSubnetsMaxResults = number;
   export interface DescribeSubnetsRequest {
     /**
-     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone. You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    owner-id - The ID of the AWS account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
+     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone. You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the AWS account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
      */
     Filters?: FilterList;
     /**
@@ -15474,6 +15501,30 @@ declare namespace EC2 {
      */
     EbsEncryptionByDefault?: Boolean;
   }
+  export interface GetFlowLogsIntegrationTemplateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the flow log.
+     */
+    FlowLogId: VpcFlowLogId;
+    /**
+     * To store the CloudFormation template in Amazon S3, specify the location in Amazon S3.
+     */
+    ConfigDeliveryS3DestinationArn: String;
+    /**
+     * Information about the service integration.
+     */
+    IntegrateServices: IntegrateServices;
+  }
+  export interface GetFlowLogsIntegrationTemplateResult {
+    /**
+     * The generated CloudFormation template.
+     */
+    Result?: String;
+  }
   export interface GetGroupsForCapacityReservationRequest {
     /**
      * The ID of the Capacity Reservation.
@@ -17860,6 +17911,12 @@ declare namespace EC2 {
   }
   export type InstanceUsageSet = InstanceUsage[];
   export type Integer = number;
+  export interface IntegrateServices {
+    /**
+     * Information about the integration with Amazon Athena.
+     */
+    AthenaIntegrations?: AthenaIntegrationsSet;
+  }
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
   export interface InternetGateway {
     /**
@@ -21249,6 +21306,7 @@ declare namespace EC2 {
   }
   export type OperationType = "add"|"remove"|string;
   export type OwnerStringList = String[];
+  export type PartitionLoadFrequency = "none"|"daily"|"weekly"|"monthly"|string;
   export interface PathComponent {
     /**
      * The sequence number.

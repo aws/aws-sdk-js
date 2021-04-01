@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.877.0-->
+<!--LATEST=2.878.0-->
 <!--ENTRYINSERT-->
+
+## 2.878.0
+* feature: EC2: VPC Flow Logs Service adds a new API, GetFlowLogsIntegrationTemplate, which generates CloudFormation templates for Athena. For more info, see https://docs.aws.amazon.com/console/vpc/flow-logs/athena
+* feature: FMS: Added Firewall Manager policy support for AWS Route 53 Resolver DNS Firewall.
+* feature: Kendra: AWS Kendra's ServiceNow data source now supports OAuth 2.0 authentication and knowledge article filtering via a ServiceNow query.
+* feature: LexModelBuildingService: Lex now supports the ja-JP locale
+* feature: LexRuntime: Amazon Lex now supports base64-encoded message and input transcript fields.
+* feature: Lightsail: - This release adds support for state detail for Amazon Lightsail container services.
+* feature: MediaConvert: MediaConvert now supports HLS ingest, sidecar WebVTT ingest, Teletext color & style passthrough to TTML subtitles, TTML to WebVTT subtitle conversion with style, & DRC profiles in AC3 audio.
+* feature: Route53Resolver: Route 53 Resolver DNS Firewall is a firewall service that allows you to filter and regulate outbound DNS traffic for your VPCs.
+* feature: WAFV2: Added support for ScopeDownStatement for ManagedRuleGroups, Labels, LabelMatchStatement, and LoggingFilter. For more information on these features, see the AWS WAF Developer Guide.
 
 ## 2.877.0
 * bugfix: S3/S3Control: fix the issue that previously resolved S3 ARN incorrectly cached in S3/S3Control client

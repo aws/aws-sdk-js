@@ -755,9 +755,17 @@
         },
         "message": {
           "shape": "Text",
-          "documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>",
+          "documentation": "<p>You can only use this field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the <code>message</code> field is null. You should use the <code>encodedMessage</code> field instead.</p> <p>The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.",
           "location": "header",
           "locationName": "x-amz-lex-message"
+        },
+        "encodedMessage": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p> <p>The <code>encodedMessage</code> field is base-64 encoded. You must decode the field before you can use the value.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-encoded-message"
         },
         "messageFormat": {
           "shape": "MessageFormatType",
@@ -779,9 +787,17 @@
         },
         "inputTranscript": {
           "shape": "String",
-          "documentation": "<p>The text used to process the request.</p> <p>If the input was an audio stream, the <code>inputTranscript</code> field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex is correctly processing the audio that you send.</p>",
+          "documentation": "<p>The text used to process the request.</p> <p>You can use this field only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the <code>inputTranscript</code> field is null. You should use the <code>encodedInputTranscript</code> field instead.</p> <p>If the input was an audio stream, the <code>inputTranscript</code> field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex is correctly processing the audio that you send.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "The inputTranscript field is deprecated, use the encodedInputTranscript field instead. The inputTranscript field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.",
           "location": "header",
           "locationName": "x-amz-lex-input-transcript"
+        },
+        "encodedInputTranscript": {
+          "shape": "SensitiveStringUnbounded",
+          "documentation": "<p>The text used to process the request.</p> <p>If the input was an audio stream, the <code>encodedInputTranscript</code> field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex is correctly processing the audio that you send.</p> <p>The <code>encodedInputTranscript</code> field is base-64 encoded. You must decode the field before you can use the value.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-encoded-input-transcript"
         },
         "audioStream": {
           "shape": "BlobStream",
@@ -1014,9 +1030,17 @@
         },
         "message": {
           "shape": "Text",
-          "documentation": "<p>The next message that should be presented to the user.</p>",
+          "documentation": "<p>The next message that should be presented to the user.</p> <p>You can only use this field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the <code>message</code> field is null. You should use the <code>encodedMessage</code> field instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.",
           "location": "header",
           "locationName": "x-amz-lex-message"
+        },
+        "encodedMessage": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The next message that should be presented to the user.</p> <p>The <code>encodedMessage</code> field is base-64 encoded. You must decode the field before you can use the value.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-encoded-message"
         },
         "messageFormat": {
           "shape": "MessageFormatType",
@@ -1073,6 +1097,16 @@
         }
       },
       "documentation": "<p>If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).</p>"
+    },
+    "SensitiveString": {
+      "type": "string",
+      "max": 1366,
+      "min": 1,
+      "sensitive": true
+    },
+    "SensitiveStringUnbounded": {
+      "type": "string",
+      "sensitive": true
     },
     "SentimentLabel": {
       "type": "string"
