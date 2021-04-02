@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.878.0-->
+<!--LATEST=2.879.0-->
 <!--ENTRYINSERT-->
+
+## 2.879.0
+* bugfix: s3: handle 'continue' event only once
+* feature: Imagebuilder: This release adds support for Block Device Mappings for container image builds, and adds distribution configuration support for EC2 launch templates in AMI builds.
+* feature: MediaPackage: SPEKE v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.
 
 ## 2.878.0
 * feature: EC2: VPC Flow Logs Service adds a new API, GetFlowLogsIntegrationTemplate, which generates CloudFormation templates for Athena. For more info, see https://docs.aws.amazon.com/console/vpc/flow-logs/athena
