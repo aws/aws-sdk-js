@@ -2660,6 +2660,10 @@ You specify only the font family. All other style information (color, bold, posi
      */
     GlobalConfiguration?: GlobalConfiguration;
     /**
+     * Settings for motion graphics.
+     */
+    MotionGraphicsConfiguration?: MotionGraphicsConfiguration;
+    /**
      * Nielsen configuration settings.
      */
     NielsenConfiguration?: NielsenConfiguration;
@@ -3600,6 +3604,8 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
     RestartDelay?: __integerMin0Max15;
+  }
+  export interface HtmlMotionGraphicsSettings {
   }
   export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
   export interface ImmediateModeScheduleActionStartSettings {
@@ -4687,6 +4693,37 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
   }
   export interface MediaPackageOutputSettings {
   }
+  export interface MotionGraphicsActivateScheduleActionSettings {
+    /**
+     * Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.
+     */
+    Duration?: __longMin0Max86400000;
+    /**
+     * Key used to extract the password from EC2 Parameter store
+     */
+    PasswordParam?: __string;
+    /**
+     * URI of the HTML5 content to be rendered into the live stream.
+     */
+    Url?: __string;
+    /**
+     * Documentation update needed
+     */
+    Username?: __string;
+  }
+  export interface MotionGraphicsConfiguration {
+    MotionGraphicsInsertion?: MotionGraphicsInsertion;
+    /**
+     * Motion Graphics Settings
+     */
+    MotionGraphicsSettings: MotionGraphicsSettings;
+  }
+  export interface MotionGraphicsDeactivateScheduleActionSettings {
+  }
+  export type MotionGraphicsInsertion = "DISABLED"|"ENABLED"|string;
+  export interface MotionGraphicsSettings {
+    HtmlMotionGraphicsSettings?: HtmlMotionGraphicsSettings;
+  }
   export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
   export interface Mp2Settings {
     /**
@@ -5318,6 +5355,14 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ActiveInputSwitchActionName?: __string;
     /**
+     * The name of the motion graphics activate action that occurred most recently and that resulted in the current graphics URI for this pipeline.
+     */
+    ActiveMotionGraphicsActionName?: __string;
+    /**
+     * The current URI being used for HTML5 motion graphics for this pipeline.
+     */
+    ActiveMotionGraphicsUri?: __string;
+    /**
      * Pipeline ID
      */
     PipelineId?: __string;
@@ -5593,6 +5638,14 @@ Valid values: 1, 2, 4, 6, 8
      * Action to switch the input
      */
     InputSwitchSettings?: InputSwitchScheduleActionSettings;
+    /**
+     * Action to activate a motion graphics image overlay
+     */
+    MotionGraphicsImageActivateSettings?: MotionGraphicsActivateScheduleActionSettings;
+    /**
+     * Action to deactivate a motion graphics image overlay
+     */
+    MotionGraphicsImageDeactivateSettings?: MotionGraphicsDeactivateScheduleActionSettings;
     /**
      * Action to pause or unpause one or both channel pipelines
      */
@@ -6721,6 +6774,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __longMin0Max1099511627775 = number;
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
+  export type __longMin0Max86400000 = number;
   export type __string = string;
   export type __stringMax1000 = string;
   export type __stringMax256 = string;

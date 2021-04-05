@@ -1697,6 +1697,9 @@
         "CustomerProfiles": {
           "shape": "CustomerProfilesDestinationProperties",
           "documentation": "<p> The properties required to query Amazon Connect Customer Profiles. </p>"
+        },
+        "Zendesk": {
+          "shape": "ZendeskDestinationProperties"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -4063,6 +4066,26 @@
         }
       },
       "documentation": "<p> The connector-specific profile properties required when using Zendesk. </p>"
+    },
+    "ZendeskDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "object"
+      ],
+      "members": {
+        "object": {
+          "shape": "Object"
+        },
+        "idFieldNames": {
+          "shape": "IdFieldNameList"
+        },
+        "errorHandlingConfig": {
+          "shape": "ErrorHandlingConfig"
+        },
+        "writeOperationType": {
+          "shape": "WriteOperationType"
+        }
+      }
     },
     "ZendeskMetadata": {
       "type": "structure",

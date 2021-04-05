@@ -951,6 +951,7 @@ declare namespace Appflow {
      *  The properties required to query Amazon Connect Customer Profiles. 
      */
     CustomerProfiles?: CustomerProfilesDestinationProperties;
+    Zendesk?: ZendeskDestinationProperties;
   }
   export type DestinationField = string;
   export interface DestinationFieldProperties {
@@ -2094,6 +2095,12 @@ declare namespace Appflow {
      *  The location of the Zendesk resource. 
      */
     instanceUrl: InstanceUrl;
+  }
+  export interface ZendeskDestinationProperties {
+    object: Object;
+    idFieldNames?: IdFieldNameList;
+    errorHandlingConfig?: ErrorHandlingConfig;
+    writeOperationType?: WriteOperationType;
   }
   export interface ZendeskMetadata {
     /**

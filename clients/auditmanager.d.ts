@@ -1744,6 +1744,7 @@ declare namespace AuditManager {
   }
   export interface GetAssessmentResponse {
     assessment?: Assessment;
+    userRole?: Role;
   }
   export interface GetChangeLogsRequest {
     /**
@@ -2289,7 +2290,7 @@ declare namespace AuditManager {
      */
     keywordInputType?: KeywordInputType;
     /**
-     *  The value of the keyword used to search AWS CloudTrail logs when mapping a control data source. 
+     *  The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. 
      */
     keywordValue?: KeywordValue;
   }
