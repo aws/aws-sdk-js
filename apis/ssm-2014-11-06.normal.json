@@ -1575,7 +1575,7 @@
           "shape": "InvocationDoesNotExist"
         }
       ],
-      "documentation": "<p>Returns detailed information about command execution for an invocation or plugin. </p>"
+      "documentation": "<p>Returns detailed information about command execution for an invocation or plugin.</p> <p> <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use <a>ListCommandInvocations</a>. To get the command execution status across instances, use <a>ListCommands</a>.</p>"
     },
     "GetConnectionStatus": {
       "name": "GetConnectionStatus",
@@ -2125,7 +2125,7 @@
           "shape": "ParameterVersionLabelLimitExceeded"
         }
       ],
-      "documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
+      "documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
     },
     "ListAssociationVersions": {
       "name": "ListAssociationVersions",
@@ -3142,6 +3142,34 @@
       ],
       "documentation": "<p>Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.</p>"
     },
+    "UnlabelParameterVersion": {
+      "name": "UnlabelParameterVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UnlabelParameterVersionRequest"
+      },
+      "output": {
+        "shape": "UnlabelParameterVersionResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "TooManyUpdates"
+        },
+        {
+          "shape": "ParameterNotFound"
+        },
+        {
+          "shape": "ParameterVersionNotFound"
+        }
+      ],
+      "documentation": "<p>Remove a label or labels from a parameter.</p>"
+    },
     "UpdateAssociation": {
       "name": "UpdateAssociation",
       "http": {
@@ -3684,7 +3712,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p> One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
+          "documentation": "<p>One or more tags. The value parameter is required.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         }
       }
     },
@@ -3749,7 +3777,7 @@
         },
         "ScheduleExpression": {
           "shape": "ScheduleExpression",
-          "documentation": "<p>A cron expression that specifies a schedule when the association runs.</p>"
+          "documentation": "<p>A cron expression that specifies a schedule when the association runs. The schedule runs in Coordinated Universal Time (UTC).</p>"
         },
         "AssociationName": {
           "shape": "AssociationName",
@@ -4916,6 +4944,11 @@
           "documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
         }
       }
+    },
+    "ChangeDetailsValue": {
+      "type": "string",
+      "max": 32768,
+      "min": 1
     },
     "ChangeRequestName": {
       "type": "string",
@@ -6727,7 +6760,7 @@
         },
         "ReverseOrder": {
           "shape": "Boolean",
-          "documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.</p>",
+          "documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.</p>",
           "box": true
         }
       }
@@ -7582,6 +7615,21 @@
         "InstancesWithUnreportedNotApplicablePatches": {
           "shape": "Integer",
           "documentation": "<p>The number of instances with <code>NotApplicable</code> patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.</p>",
+          "box": true
+        },
+        "InstancesWithCriticalNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "InstancesWithSecurityNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "InstancesWithOtherNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\" or \"Security\" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.</p>",
           "box": true
         }
       }
@@ -8458,11 +8506,11 @@
         },
         "InstanceId": {
           "shape": "InstanceId",
-          "documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.</p>"
+          "documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.</p>"
         },
         "PluginName": {
           "shape": "CommandPluginName",
-          "documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin are returned. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p>"
+          "documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p> <p>To find the <code>PluginName</code>, check the document content and find the name of the plugin. Alternatively, use <a>ListCommandInvocations</a> with the <code>CommandId</code> and <code>Details</code> parameters. The <code>PluginName</code> is the <code>Name</code> attribute of the <code>CommandPlugin</code> object in the <code>CommandPlugins</code> list.</p>"
         }
       }
     },
@@ -8483,7 +8531,7 @@
         },
         "DocumentName": {
           "shape": "DocumentName",
-          "documentation": "<p>The name of the document that was run. For example, AWS-RunShellScript.</p>"
+          "documentation": "<p>The name of the document that was run. For example, <code>AWS-RunShellScript</code>.</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -8495,7 +8543,7 @@
         },
         "ResponseCode": {
           "shape": "ResponseCode",
-          "documentation": "<p>The error level response code for the plugin script. If the response code is -1, then the command has not started running on the instance, or it was not received by the instance.</p>"
+          "documentation": "<p>The error level response code for the plugin script. If the response code is <code>-1</code>, then the command has not started running on the instance, or it was not received by the instance.</p>"
         },
         "ExecutionStartDateTime": {
           "shape": "StringDateTime",
@@ -8503,35 +8551,35 @@
         },
         "ExecutionElapsedTime": {
           "shape": "StringDateTime",
-          "documentation": "<p>Duration since ExecutionStartDateTime.</p>"
+          "documentation": "<p>Duration since <code>ExecutionStartDateTime</code>.</p>"
         },
         "ExecutionEndDateTime": {
           "shape": "StringDateTime",
-          "documentation": "<p>The date and time the plugin was finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>"
+          "documentation": "<p>The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>"
         },
         "Status": {
           "shape": "CommandInvocationStatus",
-          "documentation": "<p>The status of this invocation plugin. This status can be different than StatusDetails.</p>"
+          "documentation": "<p>The status of this invocation plugin. This status can be different than <code>StatusDetails</code>.</p>"
         },
         "StatusDetails": {
           "shape": "StatusDetails",
-          "documentation": "<p>A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>"
+          "documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's <code>MaxErrors</code> limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>"
         },
         "StandardOutputContent": {
           "shape": "StandardOutputContent",
-          "documentation": "<p>The first 24,000 characters written by the plugin to stdout. If the command has not finished running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.</p>"
+          "documentation": "<p>The first 24,000 characters written by the plugin to <code>stdout</code>. If the command has not finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then this string is empty.</p>"
         },
         "StandardOutputUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was not specified, then this string is empty.</p>"
+          "documentation": "<p>The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.</p>"
         },
         "StandardErrorContent": {
           "shape": "StandardErrorContent",
-          "documentation": "<p>The first 8,000 characters written by the plugin to stderr. If the command has not finished running, then this string is empty.</p>"
+          "documentation": "<p>The first 8,000 characters written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.</p>"
         },
         "StandardErrorUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the complete text written by the plugin to stderr. If the command has not finished running, then this string is empty.</p>"
+          "documentation": "<p>The URL for the complete text written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.</p>"
         },
         "CloudWatchOutputConfig": {
           "shape": "CloudWatchOutputConfig",
@@ -9954,6 +10002,21 @@
         "RebootOption": {
           "shape": "RebootOption",
           "documentation": "<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>"
+        },
+        "CriticalNonCompliantCount": {
+          "shape": "PatchCriticalNonCompliantCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "SecurityNonCompliantCount": {
+          "shape": "PatchSecurityNonCompliantCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "OtherNonCompliantCount": {
+          "shape": "PatchOtherNonCompliantCount",
+          "documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\" or \"Security\" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.</p>",
+          "box": true
         }
       },
       "documentation": "<p>Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.</p>"
@@ -10651,7 +10714,7 @@
         },
         "Details": {
           "shape": "Boolean",
-          "documentation": "<p>(Optional) If set this returns the response of the command executions and any command output. By default this is set to False. </p>"
+          "documentation": "<p>(Optional) If set this returns the response of the command executions and any command output. The default value is 'false'. </p>"
         }
       }
     },
@@ -13499,6 +13562,9 @@
     "PatchContentUrl": {
       "type": "string"
     },
+    "PatchCriticalNonCompliantCount": {
+      "type": "integer"
+    },
     "PatchDeploymentStatus": {
       "type": "string",
       "enum": [
@@ -13722,6 +13788,9 @@
         "shape": "PatchOrchestratorFilterValue"
       }
     },
+    "PatchOtherNonCompliantCount": {
+      "type": "integer"
+    },
     "PatchProduct": {
       "type": "string"
     },
@@ -13812,6 +13881,9 @@
       },
       "max": 10,
       "min": 0
+    },
+    "PatchSecurityNonCompliantCount": {
+      "type": "integer"
     },
     "PatchSet": {
       "type": "string",
@@ -14065,7 +14137,7 @@
         },
         "Overwrite": {
           "shape": "Boolean",
-          "documentation": "<p>Overwrite an existing parameter. If not specified, will default to \"false\".</p>",
+          "documentation": "<p>Overwrite an existing parameter. The default value is 'false'.</p>",
           "box": true
         },
         "AllowedPattern": {
@@ -15481,6 +15553,14 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>"
+        },
+        "ScheduledEndTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time that the requester expects the runbook workflow related to the change request to complete. The time is an estimate only that the requester provides for reviewers.</p>"
+        },
+        "ChangeDetails": {
+          "shape": "ChangeDetailsValue",
+          "documentation": "<p>User-provided details about the change. If no details are provided, content specified in the <b>Template information</b> section of the associated change template is added.</p>"
         }
       }
     },
@@ -15949,6 +16029,42 @@
       "type": "string",
       "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
     },
+    "UnlabelParameterVersionRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ParameterVersion",
+        "Labels"
+      ],
+      "members": {
+        "Name": {
+          "shape": "PSParameterName",
+          "documentation": "<p>The parameter name of which you want to delete one or more labels.</p>"
+        },
+        "ParameterVersion": {
+          "shape": "PSParameterVersion",
+          "documentation": "<p>The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.</p>",
+          "box": true
+        },
+        "Labels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>One or more labels to delete from the specified parameter version.</p>"
+        }
+      }
+    },
+    "UnlabelParameterVersionResult": {
+      "type": "structure",
+      "members": {
+        "RemovedLabels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>A list of all labels deleted from the parameter.</p>"
+        },
+        "InvalidLabels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>The labels that are not attached to the given parameter version.</p>"
+        }
+      }
+    },
     "UpdateAssociationRequest": {
       "type": "structure",
       "required": [
@@ -16137,7 +16253,7 @@
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
-          "documentation": "<p>(Required) The latest version of the document that you want to update. The latest document version can be specified using the $LATEST variable or by the version number. Updating a previous version of a document is not supported.</p>"
+          "documentation": "<p>The version of the document that you want to update. Currently, Systems Manager supports updating only the latest version of the document. You can specify the version number of the latest version or use the <code>$LATEST</code> variable.</p>"
         },
         "DocumentFormat": {
           "shape": "DocumentFormat",

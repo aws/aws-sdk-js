@@ -580,7 +580,7 @@
       "output": {
         "shape": "CopyImageResult"
       },
-      "documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p/> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CopySnapshot": {
       "name": "CopySnapshot",
@@ -1013,6 +1013,20 @@
       },
       "documentation": "<p>Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <note> <p>Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.</p> </note> <p>The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
+    "CreateRestoreImageTask": {
+      "name": "CreateRestoreImageTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateRestoreImageTaskRequest"
+      },
+      "output": {
+        "shape": "CreateRestoreImageTaskResult"
+      },
+      "documentation": "<p>Starts a task that restores an AMI from an S3 object that was previously created by using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p> <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "CreateRoute": {
       "name": "CreateRoute",
       "http": {
@@ -1096,6 +1110,20 @@
         "shape": "CreateSpotDatafeedSubscriptionResult"
       },
       "documentation": "<p>Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html\">Spot Instance data feed</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+    },
+    "CreateStoreImageTask": {
+      "name": "CreateStoreImageTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateStoreImageTaskRequest"
+      },
+      "output": {
+        "shape": "CreateStoreImageTaskResult"
+      },
+      "documentation": "<p>Stores an AMI as a single object in an S3 bucket.</p> <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateSubnet": {
       "name": "CreateSubnet",
@@ -3463,6 +3491,20 @@
         "shape": "DescribeStaleSecurityGroupsResult"
       },
       "documentation": "<p>[VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.</p>"
+    },
+    "DescribeStoreImageTasks": {
+      "name": "DescribeStoreImageTasks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeStoreImageTasksRequest"
+      },
+      "output": {
+        "shape": "DescribeStoreImageTasksResult"
+      },
+      "documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days.</p> <p>For each AMI task, the response indicates if the task is <code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the response shows the estimated progress as a percentage.</p> <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed.</p> <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSubnets": {
       "name": "DescribeSubnets",
@@ -11879,6 +11921,46 @@
       },
       "documentation": "<p>Contains the output of CreateReservedInstancesListing.</p>"
     },
+    "CreateRestoreImageTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "ObjectKey"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "String",
+          "documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>"
+        },
+        "ObjectKey": {
+          "shape": "String",
+          "documentation": "<p>The name of the stored AMI object in the bucket.</p>"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the snapshots, or both.</p> <ul> <li> <p>To tag the AMI, the value for <code>ResourceType</code> must be <code>image</code>.</p> </li> <li> <p>To tag the snapshots, the value for <code>ResourceType</code> must be <code>snapshot</code>. The same tag is applied to all of the snapshots that are created.</p> </li> </ul>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateRestoreImageTaskResult": {
+      "type": "structure",
+      "members": {
+        "ImageId": {
+          "shape": "String",
+          "documentation": "<p>The AMI ID.</p>",
+          "locationName": "imageId"
+        }
+      }
+    },
     "CreateRouteRequest": {
       "type": "structure",
       "required": [
@@ -12154,6 +12236,42 @@
         }
       },
       "documentation": "<p>Contains the output of CreateSpotDatafeedSubscription.</p>"
+    },
+    "CreateStoreImageTaskRequest": {
+      "type": "structure",
+      "required": [
+        "ImageId",
+        "Bucket"
+      ],
+      "members": {
+        "ImageId": {
+          "shape": "ImageId",
+          "documentation": "<p>The ID of the AMI.</p>"
+        },
+        "Bucket": {
+          "shape": "String",
+          "documentation": "<p>The name of the S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. </p>"
+        },
+        "S3ObjectTags": {
+          "shape": "S3ObjectTagList",
+          "documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. </p>",
+          "locationName": "S3ObjectTag"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateStoreImageTaskResult": {
+      "type": "structure",
+      "members": {
+        "ObjectKey": {
+          "shape": "String",
+          "documentation": "<p>The name of the stored AMI object in the S3 bucket.</p>",
+          "locationName": "objectKey"
+        }
+      }
     },
     "CreateSubnetRequest": {
       "type": "structure",
@@ -19213,6 +19331,53 @@
         }
       }
     },
+    "DescribeStoreImageTasksRequest": {
+      "type": "structure",
+      "members": {
+        "ImageIds": {
+          "shape": "ImageIdList",
+          "documentation": "<p>The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a request.</p>",
+          "locationName": "ImageId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> | <code>Completed</code> | <code>Failed</code>)</p> </li> <li> <p> <code>bucket</code> - Returns task information for tasks that targeted a specific bucket. For the filter value, specify the bucket name.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeStoreImageTasksRequestMaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200. You cannot specify this parameter and the <code>ImageIDs</code> parameter in the same call.</p>"
+        }
+      }
+    },
+    "DescribeStoreImageTasksRequestMaxResults": {
+      "type": "integer",
+      "max": 200,
+      "min": 1
+    },
+    "DescribeStoreImageTasksResult": {
+      "type": "structure",
+      "members": {
+        "StoreImageTaskResults": {
+          "shape": "StoreImageTaskResultSet",
+          "documentation": "<p>The information about the AMI store tasks.</p>",
+          "locationName": "storeImageTaskResultSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeSubnetsMaxResults": {
       "type": "integer",
       "max": 1000,
@@ -25679,6 +25844,13 @@
     },
     "ImageId": {
       "type": "string"
+    },
+    "ImageIdList": {
+      "type": "list",
+      "member": {
+        "shape": "ImageId",
+        "locationName": "item"
+      }
     },
     "ImageIdStringList": {
       "type": "list",
@@ -38208,6 +38380,27 @@
       },
       "documentation": "<p>Contains the output of RunScheduledInstances.</p>"
     },
+    "S3ObjectTag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "String",
+          "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and can be up to 128 Unicode characters in length. May not begin with <code>aws</code>:.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and can be up to 256 Unicode characters in length.</p>"
+        }
+      },
+      "documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html\">Categorizing your storage using tags</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+    },
+    "S3ObjectTagList": {
+      "type": "list",
+      "member": {
+        "shape": "S3ObjectTag",
+        "locationName": "item"
+      }
+    },
     "S3Storage": {
       "type": "structure",
       "members": {
@@ -40598,6 +40791,54 @@
         }
       },
       "documentation": "<p>Describes a storage location in Amazon S3.</p>"
+    },
+    "StoreImageTaskResult": {
+      "type": "structure",
+      "members": {
+        "AmiId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AMI that is being stored.</p>",
+          "locationName": "amiId"
+        },
+        "TaskStartTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time the task started.</p>",
+          "locationName": "taskStartTime"
+        },
+        "Bucket": {
+          "shape": "String",
+          "documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>",
+          "locationName": "bucket"
+        },
+        "S3objectKey": {
+          "shape": "String",
+          "documentation": "<p>The name of the stored AMI object in the bucket.</p>",
+          "locationName": "s3objectKey"
+        },
+        "ProgressPercentage": {
+          "shape": "Integer",
+          "documentation": "<p>The progress of the task as a percentage.</p>",
+          "locationName": "progressPercentage"
+        },
+        "StoreTaskState": {
+          "shape": "String",
+          "documentation": "<p>The state of the store task (<code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>).</p>",
+          "locationName": "storeTaskState"
+        },
+        "StoreTaskFailureReason": {
+          "shape": "String",
+          "documentation": "<p>If the tasks fails, the reason for the failure is returned. If the task succeeds, <code>null</code> is returned.</p>",
+          "locationName": "storeTaskFailureReason"
+        }
+      },
+      "documentation": "<p>The information about the AMI store task, including the progress of the task.</p>"
+    },
+    "StoreImageTaskResultSet": {
+      "type": "list",
+      "member": {
+        "shape": "StoreImageTaskResult",
+        "locationName": "item"
+      }
     },
     "String": {
       "type": "string"
@@ -43095,19 +43336,19 @@
     "UnassignIpv6AddressesRequest": {
       "type": "structure",
       "required": [
-        "Ipv6Addresses",
-        "NetworkInterfaceId"
+        "NetworkInterfaceId",
+        "Ipv6Addresses"
       ],
       "members": {
-        "Ipv6Addresses": {
-          "shape": "Ipv6AddressList",
-          "documentation": "<p>The IPv6 addresses to unassign from the network interface.</p>",
-          "locationName": "ipv6Addresses"
-        },
         "NetworkInterfaceId": {
           "shape": "NetworkInterfaceId",
           "documentation": "<p>The ID of the network interface.</p>",
           "locationName": "networkInterfaceId"
+        },
+        "Ipv6Addresses": {
+          "shape": "Ipv6AddressList",
+          "documentation": "<p>The IPv6 addresses to unassign from the network interface.</p>",
+          "locationName": "ipv6Addresses"
         }
       }
     },

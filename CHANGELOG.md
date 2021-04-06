@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.880.0-->
+<!--LATEST=2.881.0-->
 <!--ENTRYINSERT-->
+
+## 2.881.0
+* bugfix: changelog/release: Sanitize type and category in next-release filename
+* feature: EC2: This release adds support for storing EBS-backed AMIs in S3 and restoring them from S3 to enable cross-partition copying of AMIs
+* feature: MediaLive: MediaLive VPC outputs update to include Availability Zones, Security groups, Elastic Network Interfaces, and Subnet Ids in channel response
+* feature: SSM: Supports removing a label or labels from a parameter, enables ScheduledEndTime and ChangeDetails for StartChangeRequestExecution API, supports critical/security/other noncompliant count for patch API.
 
 ## 2.880.0
 * feature: Appflow: Added destination properties for Zendesk.

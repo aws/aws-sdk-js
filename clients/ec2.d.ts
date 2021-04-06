@@ -341,11 +341,11 @@ declare class EC2 extends Service {
    */
   copyFpgaImage(callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.  For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   copyImage(params: EC2.Types.CopyImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.  For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
@@ -597,6 +597,14 @@ declare class EC2 extends Service {
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
+   * Starts a task that restores an AMI from an S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createRestoreImageTask(params: EC2.Types.CreateRestoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
+  /**
+   * Starts a task that restores an AMI from an S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createRestoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
+  /**
    * Creates a route in a route table within a VPC. You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway. When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address 192.0.2.3, and the route table includes the following two IPv4 routes:    192.0.2.0/24 (goes to some target A)    192.0.2.0/28 (goes to some target B)   Both routes apply to the traffic destined for 192.0.2.3. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   createRoute(params: EC2.Types.CreateRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateRouteResult) => void): Request<EC2.Types.CreateRouteResult, AWSError>;
@@ -644,6 +652,14 @@ declare class EC2 extends Service {
    * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance data feed in the Amazon EC2 User Guide for Linux Instances.
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
+  /**
+   * Stores an AMI as a single object in an S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createStoreImageTask(params: EC2.Types.CreateStoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
+  /**
+   * Stores an AMI as a single object in an S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  createStoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
    * Creates a subnet in a specified VPC. You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC. If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
@@ -2036,6 +2052,14 @@ declare class EC2 extends Service {
    * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
+  /**
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeStoreImageTasks(params: EC2.Types.DescribeStoreImageTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
+  /**
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeStoreImageTasks(callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
   /**
    * Describes one or more of your subnets. For more information, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
@@ -7394,6 +7418,34 @@ declare namespace EC2 {
      */
     ReservedInstancesListings?: ReservedInstancesListingList;
   }
+  export interface CreateRestoreImageTaskRequest {
+    /**
+     * The name of the S3 bucket that contains the stored AMI object.
+     */
+    Bucket: String;
+    /**
+     * The name of the stored AMI object in the bucket.
+     */
+    ObjectKey: String;
+    /**
+     * The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.
+     */
+    Name?: String;
+    /**
+     * The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the snapshots, or both.   To tag the AMI, the value for ResourceType must be image.   To tag the snapshots, the value for ResourceType must be snapshot. The same tag is applied to all of the snapshots that are created.  
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateRestoreImageTaskResult {
+    /**
+     * The AMI ID.
+     */
+    ImageId?: String;
+  }
   export interface CreateRouteRequest {
     /**
      * The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
@@ -7587,6 +7639,30 @@ declare namespace EC2 {
      * The Spot Instance data feed subscription.
      */
     SpotDatafeedSubscription?: SpotDatafeedSubscription;
+  }
+  export interface CreateStoreImageTaskRequest {
+    /**
+     * The ID of the AMI.
+     */
+    ImageId: ImageId;
+    /**
+     * The name of the S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. 
+     */
+    Bucket: String;
+    /**
+     * The tags to apply to the AMI object that will be stored in the S3 bucket. 
+     */
+    S3ObjectTags?: S3ObjectTagList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateStoreImageTaskResult {
+    /**
+     * The name of the stored AMI object in the S3 bucket.
+     */
+    ObjectKey?: String;
   }
   export interface CreateSubnetRequest {
     /**
@@ -12389,6 +12465,39 @@ declare namespace EC2 {
      */
     StaleSecurityGroupSet?: StaleSecurityGroupSet;
   }
+  export interface DescribeStoreImageTasksRequest {
+    /**
+     * The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a request.
+     */
+    ImageIds?: ImageIdList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The filters.    task-state - Returns tasks in a certain state (InProgress | Completed | Failed)    bucket - Returns task information for tasks that targeted a specific bucket. For the filter value, specify the bucket name.  
+     */
+    Filters?: FilterList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 1 and 200. You cannot specify this parameter and the ImageIDs parameter in the same call.
+     */
+    MaxResults?: DescribeStoreImageTasksRequestMaxResults;
+  }
+  export type DescribeStoreImageTasksRequestMaxResults = number;
+  export interface DescribeStoreImageTasksResult {
+    /**
+     * The information about the AMI store tasks.
+     */
+    StoreImageTaskResults?: StoreImageTaskResultSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export type DescribeSubnetsMaxResults = number;
   export interface DescribeSubnetsRequest {
     /**
@@ -16467,6 +16576,7 @@ declare namespace EC2 {
   }
   export type ImageDiskContainerList = ImageDiskContainer[];
   export type ImageId = string;
+  export type ImageIdList = ImageId[];
   export type ImageIdStringList = ImageId[];
   export type ImageList = Image[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
@@ -23946,6 +24056,17 @@ declare namespace EC2 {
      */
     InstanceIdSet?: InstanceIdSet;
   }
+  export interface S3ObjectTag {
+    /**
+     * The key of the tag. Constraints: Tag keys are case-sensitive and can be up to 128 Unicode characters in length. May not begin with aws:.
+     */
+    Key?: String;
+    /**
+     * The value of the tag. Constraints: Tag values are case-sensitive and can be up to 256 Unicode characters in length.
+     */
+    Value?: String;
+  }
+  export type S3ObjectTagList = S3ObjectTag[];
   export interface S3Storage {
     /**
      * The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in Best Practices for Managing AWS Access Keys.
@@ -25520,6 +25641,37 @@ declare namespace EC2 {
      */
     Key?: String;
   }
+  export interface StoreImageTaskResult {
+    /**
+     * The ID of the AMI that is being stored.
+     */
+    AmiId?: String;
+    /**
+     * The time the task started.
+     */
+    TaskStartTime?: MillisecondDateTime;
+    /**
+     * The name of the S3 bucket that contains the stored AMI object.
+     */
+    Bucket?: String;
+    /**
+     * The name of the stored AMI object in the bucket.
+     */
+    S3objectKey?: String;
+    /**
+     * The progress of the task as a percentage.
+     */
+    ProgressPercentage?: Integer;
+    /**
+     * The state of the store task (InProgress, Completed, or Failed).
+     */
+    StoreTaskState?: String;
+    /**
+     * If the tasks fails, the reason for the failure is returned. If the task succeeds, null is returned.
+     */
+    StoreTaskFailureReason?: String;
+  }
+  export type StoreImageTaskResultSet = StoreImageTaskResult[];
   export type String = string;
   export type StringList = String[];
   export interface Subnet {
@@ -26929,13 +27081,13 @@ declare namespace EC2 {
   export type TunnelOptionsList = TunnelOption[];
   export interface UnassignIpv6AddressesRequest {
     /**
-     * The IPv6 addresses to unassign from the network interface.
-     */
-    Ipv6Addresses: Ipv6AddressList;
-    /**
      * The ID of the network interface.
      */
     NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * The IPv6 addresses to unassign from the network interface.
+     */
+    Ipv6Addresses: Ipv6AddressList;
   }
   export interface UnassignIpv6AddressesResult {
     /**

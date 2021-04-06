@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "changelog/release",
-  "description": "Sanitize type and category in next-release filename"
-}

@@ -493,11 +493,11 @@ declare class SSM extends Service {
    */
   getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin. 
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
    */
   getCommandInvocation(params: SSM.Types.GetCommandInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin. 
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
@@ -669,11 +669,11 @@ declare class SSM extends Service {
    */
   getServiceSetting(callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(params: SSM.Types.LabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
@@ -949,6 +949,14 @@ declare class SSM extends Service {
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
+   * Remove a label or labels from a parameter.
+   */
+  unlabelParameterVersion(params: SSM.Types.UnlabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
+  /**
+   * Remove a label or labels from a parameter.
+   */
+  unlabelParameterVersion(callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
+  /**
    * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
    */
   updateAssociation(params: SSM.Types.UpdateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
@@ -1141,7 +1149,7 @@ declare namespace SSM {
      */
     ResourceId: ResourceId;
     /**
-     *  One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.   Do not enter personally identifiable information in this field. 
+     * One or more tags. The value parameter is required.  Do not enter personally identifiable information in this field. 
      */
     Tags: TagList;
   }
@@ -1186,7 +1194,7 @@ declare namespace SSM {
      */
     Overview?: AssociationOverview;
     /**
-     * A cron expression that specifies a schedule when the association runs.
+     * A cron expression that specifies a schedule when the association runs. The schedule runs in Coordinated Universal Time (UTC).
      */
     ScheduleExpression?: ScheduleExpression;
     /**
@@ -1902,6 +1910,7 @@ declare namespace SSM {
      */
     WindowExecutionId?: MaintenanceWindowExecutionId;
   }
+  export type ChangeDetailsValue = string;
   export type ChangeRequestName = string;
   export type ClientToken = string;
   export type CloudWatchLogGroupName = string;
@@ -3124,7 +3133,7 @@ declare namespace SSM {
      */
     MaxResults?: MaxResults;
     /**
-     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.
      */
     ReverseOrder?: Boolean;
   }
@@ -3769,6 +3778,18 @@ declare namespace SSM {
      * The number of instances with NotApplicable patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.
      */
     InstancesWithUnreportedNotApplicablePatches?: Integer;
+    /**
+     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithCriticalNonCompliantPatches?: InstancesCount;
+    /**
+     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithSecurityNonCompliantPatches?: InstancesCount;
+    /**
+     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithOtherNonCompliantPatches?: InstancesCount;
   }
   export interface DescribePatchGroupsRequest {
     /**
@@ -4295,11 +4316,11 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.
+     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.
      */
     InstanceId: InstanceId;
     /**
-     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin are returned. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents. For example, aws:RunShellScript is a plugin.
+     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents. For example, aws:RunShellScript is a plugin. To find the PluginName, check the document content and find the name of the plugin. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
      */
     PluginName?: CommandPluginName;
   }
@@ -4341,7 +4362,7 @@ declare namespace SSM {
      */
     ExecutionElapsedTime?: StringDateTime;
     /**
-     * The date and time the plugin was finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
+     * The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
      */
     ExecutionEndDateTime?: StringDateTime;
     /**
@@ -4357,7 +4378,7 @@ declare namespace SSM {
      */
     StandardOutputContent?: StandardOutputContent;
     /**
-     * The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was not specified, then this string is empty.
+     * The URL for the complete text written by the plugin to stdout in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.
      */
     StandardOutputUrl?: Url;
     /**
@@ -5428,6 +5449,18 @@ declare namespace SSM {
      * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots are not attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
      */
     RebootOption?: RebootOption;
+    /**
+     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    CriticalNonCompliantCount?: PatchCriticalNonCompliantCount;
+    /**
+     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    SecurityNonCompliantCount?: PatchSecurityNonCompliantCount;
+    /**
+     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     */
+    OtherNonCompliantCount?: PatchOtherNonCompliantCount;
   }
   export interface InstancePatchStateFilter {
     /**
@@ -5770,7 +5803,7 @@ declare namespace SSM {
      */
     Filters?: CommandFilterList;
     /**
-     * (Optional) If set this returns the response of the command executions and any command output. By default this is set to False. 
+     * (Optional) If set this returns the response of the command executions and any command output. The default value is 'false'. 
      */
     Details?: Boolean;
   }
@@ -7400,6 +7433,7 @@ declare namespace SSM {
   export type PatchComplianceLevel = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
   export type PatchComplianceMaxResults = number;
   export type PatchContentUrl = string;
+  export type PatchCriticalNonCompliantCount = number;
   export type PatchDeploymentStatus = "APPROVED"|"PENDING_APPROVAL"|"EXPLICIT_APPROVED"|"EXPLICIT_REJECTED"|string;
   export type PatchDescription = string;
   export type PatchEpoch = number;
@@ -7466,6 +7500,7 @@ declare namespace SSM {
   export type PatchOrchestratorFilterList = PatchOrchestratorFilter[];
   export type PatchOrchestratorFilterValue = string;
   export type PatchOrchestratorFilterValues = PatchOrchestratorFilterValue[];
+  export type PatchOtherNonCompliantCount = number;
   export type PatchProduct = string;
   export type PatchProductFamily = string;
   export type PatchPropertiesList = PatchPropertyEntry[];
@@ -7502,6 +7537,7 @@ declare namespace SSM {
     PatchRules: PatchRuleList;
   }
   export type PatchRuleList = PatchRule[];
+  export type PatchSecurityNonCompliantCount = number;
   export type PatchSet = "OS"|"APPLICATION"|string;
   export type PatchSeverity = string;
   export interface PatchSource {
@@ -7639,7 +7675,7 @@ declare namespace SSM {
      */
     KeyId?: ParameterKeyId;
     /**
-     * Overwrite an existing parameter. If not specified, will default to "false".
+     * Overwrite an existing parameter. The default value is 'false'.
      */
     Overwrite?: Boolean;
     /**
@@ -8498,6 +8534,14 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
+    /**
+     * The time that the requester expects the runbook workflow related to the change request to complete. The time is an estimate only that the requester provides for reviewers.
+     */
+    ScheduledEndTime?: DateTime;
+    /**
+     * User-provided details about the change. If no details are provided, content specified in the Template information section of the associated change template is added.
+     */
+    ChangeDetails?: ChangeDetailsValue;
   }
   export interface StartChangeRequestExecutionResult {
     /**
@@ -8733,6 +8777,30 @@ declare namespace SSM {
   export type TokenValue = string;
   export type TotalCount = number;
   export type UUID = string;
+  export interface UnlabelParameterVersionRequest {
+    /**
+     * The parameter name of which you want to delete one or more labels.
+     */
+    Name: PSParameterName;
+    /**
+     * The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.
+     */
+    ParameterVersion: PSParameterVersion;
+    /**
+     * One or more labels to delete from the specified parameter version.
+     */
+    Labels: ParameterLabelList;
+  }
+  export interface UnlabelParameterVersionResult {
+    /**
+     * A list of all labels deleted from the parameter.
+     */
+    RemovedLabels?: ParameterLabelList;
+    /**
+     * The labels that are not attached to the given parameter version.
+     */
+    InvalidLabels?: ParameterLabelList;
+  }
   export interface UpdateAssociationRequest {
     /**
      * The ID of the association you want to update. 
@@ -8875,7 +8943,7 @@ declare namespace SSM {
      */
     VersionName?: DocumentVersionName;
     /**
-     * (Required) The latest version of the document that you want to update. The latest document version can be specified using the $LATEST variable or by the version number. Updating a previous version of a document is not supported.
+     * The version of the document that you want to update. Currently, Systems Manager supports updating only the latest version of the document. You can specify the version number of the latest version or use the $LATEST variable.
      */
     DocumentVersion?: DocumentVersion;
     /**

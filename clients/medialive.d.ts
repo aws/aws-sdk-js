@@ -1332,7 +1332,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
@@ -1402,7 +1402,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1673,7 +1673,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DeleteInputRequest {
     /**
@@ -1937,7 +1937,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DescribeInputDeviceRequest {
     /**
@@ -5934,7 +5934,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface StartMultiplexRequest {
     /**
@@ -6123,7 +6123,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface StopMultiplexRequest {
     /**
@@ -6647,6 +6647,31 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
 
      */
     SubnetIds: __listOf__string;
+  }
+  export interface VpcOutputSettingsDescription {
+    /**
+     * The Availability Zones where the vpc subnets are located.
+The first Availability Zone applies to the first subnet in the list of subnets.
+The second Availability Zone applies to the second subnet.
+
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
+
+     */
+    NetworkInterfaceIds?: __listOf__string;
+    /**
+     * A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.
+
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+
+     */
+    SubnetIds?: __listOf__string;
   }
   export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
   export interface WavSettings {
