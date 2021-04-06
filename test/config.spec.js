@@ -150,6 +150,20 @@ describe('AWS.Config', function() {
           var config = new AWS.Config();
           expect(config.region).to.equal('us-east-1');
         });
+
+        it('non-existent credentials file returns empty', function() {
+          process.env.AWS_SDK_LOAD_CONFIG = '1';
+          var mock = '[default]\nregion = us-west-2';
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)) {
+              return mock;
+            } else {
+              throw new Error('File does not exist!');
+            }
+          });
+          var config = new AWS.Config();
+          expect(config.region).to.equal('us-west-2');
+        });
       });
     }
 
