@@ -260,5 +260,6 @@ module.exports = {
   LexModelsV2: require('./lexmodelsv2'),
   LexRuntimeV2: require('./lexruntimev2'),
   Fis: require('./fis'),
-  LookoutMetrics: require('./lookoutmetrics')
+  LookoutMetrics: require('./lookoutmetrics'),
+  Mgn: require('./mgn')
 };

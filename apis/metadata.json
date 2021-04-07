@@ -1005,5 +1005,8 @@
   },
   "lookoutmetrics": {
     "name": "LookoutMetrics"
+  },
+  "mgn": {
+    "name": "Mgn"
   }
 }

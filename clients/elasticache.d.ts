@@ -13,11 +13,11 @@ declare class ElastiCache extends Service {
   constructor(options?: ElastiCache.Types.ClientConfiguration)
   config: Config & ElastiCache.Types.ClientConfiguration;
   /**
-   * Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
+   * A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions.  For example, you can use cost-allocation tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
    */
   addTagsToResource(params: ElastiCache.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.  When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
+   * A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions.  For example, you can use cost-allocation tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see Using Cost Allocation Tags in Amazon ElastiCache in the ElastiCache User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -93,19 +93,19 @@ declare class ElastiCache extends Service {
    */
   createCacheSubnetGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheSubnetGroupResult) => void): Request<ElastiCache.Types.CreateCacheSubnetGroupResult, AWSError>;
   /**
-   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
+   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
    */
   createGlobalReplicationGroup(params: ElastiCache.Types.CreateGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.CreateGlobalReplicationGroupResult, AWSError>;
   /**
-   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
+   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
    */
   createGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.CreateGlobalReplicationGroupResult, AWSError>;
   /**
-   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore. A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.  The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see Creating a Subnet Group. For versions below 5.0.6, the limit is 250 per cluster. To request a limit increase, see AWS Service Limits and choose the limit type Nodes per cluster per instance type.  When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' scaling. For more information, see Scaling ElastiCache for Redis Clusters in the ElastiCache User Guide.  This operation is valid for Redis only. 
+   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore. A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.  The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see Creating a Subnet Group. For versions below 5.0.6, the limit is 250 per cluster. To request a limit increase, see AWS Service Limits and choose the limit type Nodes per cluster per instance type.  When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' scaling. For more information, see Scaling ElastiCache for Redis Clusters in the ElastiCache User Guide.  This operation is valid for Redis only. 
    */
   createReplicationGroup(params: ElastiCache.Types.CreateReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateReplicationGroupResult) => void): Request<ElastiCache.Types.CreateReplicationGroupResult, AWSError>;
   /**
-   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore. A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.  The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see Creating a Subnet Group. For versions below 5.0.6, the limit is 250 per cluster. To request a limit increase, see AWS Service Limits and choose the limit type Nodes per cluster per instance type.  When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' scaling. For more information, see Scaling ElastiCache for Redis Clusters in the ElastiCache User Guide.  This operation is valid for Redis only. 
+   * Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore. A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.  The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see Creating a Subnet Group. For versions below 5.0.6, the limit is 250 per cluster. To request a limit increase, see AWS Service Limits and choose the limit type Nodes per cluster per instance type.  When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' scaling. For more information, see Scaling ElastiCache for Redis Clusters in the ElastiCache User Guide.  This operation is valid for Redis only. 
    */
   createReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateReplicationGroupResult) => void): Request<ElastiCache.Types.CreateReplicationGroupResult, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class ElastiCache extends Service {
    */
   createUserGroup(callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
   /**
-   * Decreases the number of node groups in a Global Datastore
+   * Decreases the number of node groups in a Global datastore
    */
   decreaseNodeGroupsInGlobalReplicationGroup(params: ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult, AWSError>;
   /**
-   * Decreases the number of node groups in a Global Datastore
+   * Decreases the number of node groups in a Global datastore
    */
   decreaseNodeGroupsInGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult, AWSError>;
   /**
@@ -181,11 +181,11 @@ declare class ElastiCache extends Service {
    */
   deleteCacheSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
+   * Deleting a Global datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global datastore.   Once the Global datastore contains only the primary cluster, you can use the DeleteGlobalReplicationGroup API to delete the Global datastore while retainining the primary cluster using RetainPrimaryReplicationGroup=true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryReplicationGroup=true. The primary cluster is never deleted when deleting a Global Datastore. It can only be deleted when it no longer is associated with any Global Datastore. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
    */
   deleteGlobalReplicationGroup(params: ElastiCache.Types.DeleteGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DeleteGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DeleteGlobalReplicationGroupResult, AWSError>;
   /**
-   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
+   * Deleting a Global datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global datastore.   Once the Global datastore contains only the primary cluster, you can use the DeleteGlobalReplicationGroup API to delete the Global datastore while retainining the primary cluster using RetainPrimaryReplicationGroup=true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryReplicationGroup=true. The primary cluster is never deleted when deleting a Global Datastore. It can only be deleted when it no longer is associated with any Global Datastore. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
    */
   deleteGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.DeleteGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DeleteGlobalReplicationGroupResult, AWSError>;
   /**
@@ -285,11 +285,11 @@ declare class ElastiCache extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: ElastiCache.Types.EventsMessage) => void): Request<ElastiCache.Types.EventsMessage, AWSError>;
   /**
-   * Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. 
+   * Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores. 
    */
   describeGlobalReplicationGroups(params: ElastiCache.Types.DescribeGlobalReplicationGroupsMessage, callback?: (err: AWSError, data: ElastiCache.Types.DescribeGlobalReplicationGroupsResult) => void): Request<ElastiCache.Types.DescribeGlobalReplicationGroupsResult, AWSError>;
   /**
-   * Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. 
+   * Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores. 
    */
   describeGlobalReplicationGroups(callback?: (err: AWSError, data: ElastiCache.Types.DescribeGlobalReplicationGroupsResult) => void): Request<ElastiCache.Types.DescribeGlobalReplicationGroupsResult, AWSError>;
   /**
@@ -357,11 +357,11 @@ declare class ElastiCache extends Service {
    */
   describeUsers(callback?: (err: AWSError, data: ElastiCache.Types.DescribeUsersResult) => void): Request<ElastiCache.Types.DescribeUsersResult, AWSError>;
   /**
-   * Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.
+   * Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.
    */
   disassociateGlobalReplicationGroup(params: ElastiCache.Types.DisassociateGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DisassociateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DisassociateGlobalReplicationGroupResult, AWSError>;
   /**
-   * Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.
+   * Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.
    */
   disassociateGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.DisassociateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DisassociateGlobalReplicationGroupResult, AWSError>;
   /**
@@ -373,11 +373,11 @@ declare class ElastiCache extends Service {
    */
   failoverGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.FailoverGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.FailoverGlobalReplicationGroupResult, AWSError>;
   /**
-   * Increase the number of node groups in the Global Datastore
+   * Increase the number of node groups in the Global datastore
    */
   increaseNodeGroupsInGlobalReplicationGroup(params: ElastiCache.Types.IncreaseNodeGroupsInGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.IncreaseNodeGroupsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.IncreaseNodeGroupsInGlobalReplicationGroupResult, AWSError>;
   /**
-   * Increase the number of node groups in the Global Datastore
+   * Increase the number of node groups in the Global datastore
    */
   increaseNodeGroupsInGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.IncreaseNodeGroupsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.IncreaseNodeGroupsInGlobalReplicationGroupResult, AWSError>;
   /**
@@ -397,11 +397,11 @@ declare class ElastiCache extends Service {
    */
   listAllowedNodeTypeModifications(callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. If the cluster is not in the available state, ListTagsForResource returns an error. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Monitoring Costs with Tags.
+   * Lists all tags currently on a named resource.  A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions. If the cluster is not in the available state, ListTagsForResource returns an error.
    */
   listTagsForResource(params: ElastiCache.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs. If the cluster is not in the available state, ListTagsForResource returns an error. You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see Monitoring Costs with Tags.
+   * Lists all tags currently on a named resource.  A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions. If the cluster is not in the available state, ListTagsForResource returns an error.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -429,11 +429,11 @@ declare class ElastiCache extends Service {
    */
   modifyCacheSubnetGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyCacheSubnetGroupResult) => void): Request<ElastiCache.Types.ModifyCacheSubnetGroupResult, AWSError>;
   /**
-   * Modifies the settings for a Global Datastore.
+   * Modifies the settings for a Global datastore.
    */
   modifyGlobalReplicationGroup(params: ElastiCache.Types.ModifyGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.ModifyGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyGlobalReplicationGroupResult, AWSError>;
   /**
-   * Modifies the settings for a Global Datastore.
+   * Modifies the settings for a Global datastore.
    */
   modifyGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyGlobalReplicationGroupResult, AWSError>;
   /**
@@ -493,11 +493,11 @@ declare class ElastiCache extends Service {
    */
   rebootCacheCluster(callback?: (err: AWSError, data: ElastiCache.Types.RebootCacheClusterResult) => void): Request<ElastiCache.Types.RebootCacheClusterResult, AWSError>;
   /**
-   * Removes the tags identified by the TagKeys list from the named resource.
+   * Removes the tags identified by the TagKeys list from the named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions.
    */
   removeTagsFromResource(params: ElastiCache.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
-   * Removes the tags identified by the TagKeys list from the named resource.
+   * Removes the tags identified by the TagKeys list from the named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see Resource-level permissions.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: ElastiCache.Types.TagListMessage) => void): Request<ElastiCache.Types.TagListMessage, AWSError>;
   /**
@@ -574,7 +574,7 @@ declare namespace ElastiCache {
      */
     ResourceName: String;
     /**
-     * A list of cost allocation tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value.
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
      */
     Tags: TagList;
   }
@@ -948,7 +948,7 @@ declare namespace ElastiCache {
      */
     Description?: String;
     /**
-     * Indicates whether the parameter group is associated with a Global Datastore
+     * Indicates whether the parameter group is associated with a Global datastore
      */
     IsGlobal?: Boolean;
     /**
@@ -1129,6 +1129,10 @@ declare namespace ElastiCache {
      * The ID of the KMS key used to encrypt the target snapshot.
      */
     KmsKeyId?: String;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CopySnapshotResult {
     Snapshot?: Snapshot;
@@ -1187,7 +1191,7 @@ declare namespace ElastiCache {
      */
     SecurityGroupIds?: SecurityGroupIdsList;
     /**
-     * A list of cost allocation tags to be added to this resource.
+     * A list of tags to be added to this resource.
      */
     Tags?: TagList;
     /**
@@ -1255,6 +1259,10 @@ declare namespace ElastiCache {
      * A user-specified description for the cache parameter group.
      */
     Description: String;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CreateCacheParameterGroupResult {
     CacheParameterGroup?: CacheParameterGroup;
@@ -1268,6 +1276,10 @@ declare namespace ElastiCache {
      * A description for the cache security group.
      */
     Description: String;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CreateCacheSecurityGroupResult {
     CacheSecurityGroup?: CacheSecurityGroup;
@@ -1285,17 +1297,21 @@ declare namespace ElastiCache {
      * A list of VPC subnet IDs for the cache subnet group.
      */
     SubnetIds: SubnetIdentifierList;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CreateCacheSubnetGroupResult {
     CacheSubnetGroup?: CacheSubnetGroup;
   }
   export interface CreateGlobalReplicationGroupMessage {
     /**
-     * The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  For a full list of AWS Regions and their respective Global Datastore iD prefixes, see Using the AWS CLI with Global Datastores .
+     * The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  For a full list of AWS Regions and their respective Global datastore iD prefixes, see Using the AWS CLI with Global datastores .
      */
     GlobalReplicationGroupIdSuffix: String;
     /**
-     * Provides details of the Global Datastore
+     * Provides details of the Global datastore
      */
     GlobalReplicationGroupDescription?: String;
     /**
@@ -1316,7 +1332,7 @@ declare namespace ElastiCache {
      */
     ReplicationGroupDescription: String;
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId?: String;
     /**
@@ -1380,7 +1396,7 @@ declare namespace ElastiCache {
      */
     SecurityGroupIds?: SecurityGroupIdsList;
     /**
-     * A list of cost allocation tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.
+     * A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue. Tags on replication groups will be replicated to all nodes.
      */
     Tags?: TagList;
     /**
@@ -1456,6 +1472,10 @@ declare namespace ElastiCache {
      * The ID of the KMS key used to encrypt the snapshot.
      */
     KmsKeyId?: String;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CreateSnapshotResult {
     Snapshot?: Snapshot;
@@ -1473,6 +1493,10 @@ declare namespace ElastiCache {
      * The list of user IDs that belong to the user group.
      */
     UserIds?: UserIdListInput;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CreateUserMessage {
     /**
@@ -1499,6 +1523,10 @@ declare namespace ElastiCache {
      * Indicates a password is not required for this user.
      */
     NoPasswordRequired?: BooleanOptional;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface CustomerNodeEndpoint {
     /**
@@ -1513,7 +1541,7 @@ declare namespace ElastiCache {
   export type CustomerNodeEndpointList = CustomerNodeEndpoint[];
   export interface DecreaseNodeGroupsInGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
@@ -1594,7 +1622,7 @@ declare namespace ElastiCache {
   }
   export interface DeleteGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
@@ -1800,7 +1828,7 @@ declare namespace ElastiCache {
   }
   export interface DescribeGlobalReplicationGroupsMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId?: String;
     /**
@@ -1812,7 +1840,7 @@ declare namespace ElastiCache {
      */
     Marker?: String;
     /**
-     * Returns the list of members that comprise the Global Datastore.
+     * Returns the list of members that comprise the Global datastore.
      */
     ShowMemberInfo?: BooleanOptional;
   }
@@ -2062,15 +2090,15 @@ declare namespace ElastiCache {
   }
   export interface DisassociateGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
-     * The name of the secondary cluster you wish to remove from the Global Datastore
+     * The name of the secondary cluster you wish to remove from the Global datastore
      */
     ReplicationGroupId: String;
     /**
-     * The AWS region of secondary cluster you wish to remove from the Global Datastore
+     * The AWS region of secondary cluster you wish to remove from the Global datastore
      */
     ReplicationGroupRegion: String;
   }
@@ -2153,11 +2181,11 @@ declare namespace ElastiCache {
   }
   export interface FailoverGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
-     * The AWS region of the primary cluster of the Global Datastore
+     * The AWS region of the primary cluster of the Global datastore
      */
     PrimaryRegion: String;
     /**
@@ -2196,19 +2224,19 @@ declare namespace ElastiCache {
   export type GlobalNodeGroupList = GlobalNodeGroup[];
   export interface GlobalReplicationGroup {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId?: String;
     /**
-     * The optional description of the Global Datastore
+     * The optional description of the Global datastore
      */
     GlobalReplicationGroupDescription?: String;
     /**
-     * The status of the Global Datastore
+     * The status of the Global datastore
      */
     Status?: String;
     /**
-     * The cache node type of the Global Datastore
+     * The cache node type of the Global datastore
      */
     CacheNodeType?: String;
     /**
@@ -2220,11 +2248,11 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The replication groups that comprise the Global Datastore.
+     * The replication groups that comprise the Global datastore.
      */
     Members?: GlobalReplicationGroupMemberList;
     /**
-     * A flag that indicates whether the Global Datastore is cluster enabled.
+     * A flag that indicates whether the Global datastore is cluster enabled.
      */
     ClusterEnabled?: BooleanOptional;
     /**
@@ -2250,22 +2278,22 @@ declare namespace ElastiCache {
   }
   export interface GlobalReplicationGroupInfo {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId?: String;
     /**
-     * The role of the replication group in a Global Datastore. Can be primary or secondary.
+     * The role of the replication group in a Global datastore. Can be primary or secondary.
      */
     GlobalReplicationGroupMemberRole?: String;
   }
   export type GlobalReplicationGroupList = GlobalReplicationGroup[];
   export interface GlobalReplicationGroupMember {
     /**
-     * The replication group id of the Global Datastore member.
+     * The replication group id of the Global datastore member.
      */
     ReplicationGroupId?: String;
     /**
-     * The AWS region of the Global Datastore member.
+     * The AWS region of the Global datastore member.
      */
     ReplicationGroupRegion?: String;
     /**
@@ -2284,7 +2312,7 @@ declare namespace ElastiCache {
   export type GlobalReplicationGroupMemberList = GlobalReplicationGroupMember[];
   export interface IncreaseNodeGroupsInGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
@@ -2292,7 +2320,7 @@ declare namespace ElastiCache {
      */
     NodeGroupCount: Integer;
     /**
-     * Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global Datastore
+     * Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore
      */
     RegionalConfigurations?: RegionalConfigurationList;
     /**
@@ -2453,7 +2481,7 @@ declare namespace ElastiCache {
   }
   export interface ModifyGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
@@ -2461,11 +2489,11 @@ declare namespace ElastiCache {
      */
     ApplyImmediately: Boolean;
     /**
-     * A valid cache node type that you want to scale this Global Datastore to.
+     * A valid cache node type that you want to scale this Global datastore to.
      */
     CacheNodeType?: String;
     /**
-     * The upgraded version of the cache engine to be run on the clusters in the Global Datastore. 
+     * The upgraded version of the cache engine to be run on the clusters in the Global datastore. 
      */
     EngineVersion?: String;
     /**
@@ -2473,7 +2501,7 @@ declare namespace ElastiCache {
      */
     CacheParameterGroupName?: String;
     /**
-     * A description of the Global Datastore
+     * A description of the Global datastore
      */
     GlobalReplicationGroupDescription?: String;
     /**
@@ -2506,7 +2534,7 @@ declare namespace ElastiCache {
      */
     AutomaticFailoverEnabled?: BooleanOptional;
     /**
-     * A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see Minimizing Downtime: Multi-AZ.
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
      */
     MultiAZEnabled?: BooleanOptional;
     /**
@@ -2942,13 +2970,17 @@ declare namespace ElastiCache {
      * The number of cache node instances to reserve. Default: 1 
      */
     CacheNodeCount?: IntegerOptional;
+    /**
+     * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+     */
+    Tags?: TagList;
   }
   export interface PurchaseReservedCacheNodesOfferingResult {
     ReservedCacheNode?: ReservedCacheNode;
   }
   export interface RebalanceSlotsInGlobalReplicationGroupMessage {
     /**
-     * The name of the Global Datastore
+     * The name of the Global datastore
      */
     GlobalReplicationGroupId: String;
     /**
@@ -3020,7 +3052,7 @@ declare namespace ElastiCache {
      */
     Description?: String;
     /**
-     * The name of the Global Datastore and role of this replication group in the Global Datastore.
+     * The name of the Global datastore and role of this replication group in the Global datastore.
      */
     GlobalReplicationGroupInfo?: GlobalReplicationGroupInfo;
     /**
@@ -3544,7 +3576,7 @@ declare namespace ElastiCache {
   export type TagList = Tag[];
   export interface TagListMessage {
     /**
-     * A list of cost allocation tags as key-value pairs.
+     * A list of tags as key-value pairs.
      */
     TagList?: TagList;
   }

@@ -261,6 +261,7 @@ export abstract class ConfigurationServicePlaceholders {
   lexruntimev2?: AWS.LexRuntimeV2.Types.ClientConfiguration;
   fis?: AWS.Fis.Types.ClientConfiguration;
   lookoutmetrics?: AWS.LookoutMetrics.Types.ClientConfiguration;
+  mgn?: AWS.Mgn.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -524,4 +525,5 @@ export interface ConfigurationServiceApiVersions {
   lexruntimev2?: AWS.LexRuntimeV2.Types.apiVersion;
   fis?: AWS.Fis.Types.apiVersion;
   lookoutmetrics?: AWS.LookoutMetrics.Types.apiVersion;
+  mgn?: AWS.Mgn.Types.apiVersion;
 }

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.881.0-->
+<!--LATEST=2.882.0-->
 <!--ENTRYINSERT-->
+
+## 2.882.0
+* bugfix: Credentials: Do not require credentials file when loading region from config.
+* feature: AccessAnalyzer: IAM Access Analyzer now analyzes your CloudTrail events to identify actions and services that have been used by an IAM entity (user or role) and generates an IAM policy that is based on that activity.
+* feature: ElastiCache: This release adds tagging support for all AWS ElastiCache resources except Global Replication Groups.
+* feature: IVS: This release adds support for the Auto-Record to S3 feature. Amazon IVS now enables you to save your live video to Amazon S3.
+* feature: Mgn: Add new service - Application Migration Service.
+* feature: StorageGateway: File Gateway APIs now support FSx for Windows as a cloud storage.
 
 ## 2.881.0
 * bugfix: changelog/release: Sanitize type and category in next-release filename
