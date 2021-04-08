@@ -1,5 +1,5 @@
 {
   "type": "bugfix",
   "category": "ManagedUpload",
-  "description": "fix a bug that credentials refresh to frequently"
+  "description": "Use resolved credentials if customer supplies configured S3 Client"
 }
