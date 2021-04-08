@@ -312,10 +312,25 @@ declare namespace CustomerProfiles {
   export type BucketName = string;
   export type BucketPrefix = string;
   export interface ConnectorOperator {
+    /**
+     * The operation to be performed on the provided Marketo source fields.
+     */
     Marketo?: MarketoConnectorOperator;
+    /**
+     * The operation to be performed on the provided Amazon S3 source fields.
+     */
     S3?: S3ConnectorOperator;
+    /**
+     * The operation to be performed on the provided Salesforce source fields.
+     */
     Salesforce?: SalesforceConnectorOperator;
+    /**
+     * The operation to be performed on the provided ServiceNow source fields.
+     */
     ServiceNow?: ServiceNowConnectorOperator;
+    /**
+     * The operation to be performed on the provided Zendesk source fields.
+     */
     Zendesk?: ZendeskConnectorOperator;
   }
   export type ConnectorProfileName = string;
@@ -602,11 +617,29 @@ declare namespace CustomerProfiles {
   export type FieldMap = {[key: string]: ObjectTypeField};
   export type FieldNameList = name[];
   export interface FlowDefinition {
+    /**
+     * A description of the flow you want to create.
+     */
     Description?: FlowDescription;
+    /**
+     * The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
+     */
     FlowName: FlowName;
+    /**
+     * The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
+     */
     KmsArn: KmsArn;
+    /**
+     * The configuration that controls how Customer Profiles retrieves data from the source.
+     */
     SourceFlowConfig: SourceFlowConfig;
+    /**
+     * A list of tasks that Customer Profiles performs while transferring the data in the flow run.
+     */
     Tasks: Tasks;
+    /**
+     * The trigger settings that determine how and when the flow runs.
+     */
     TriggerConfig: TriggerConfig;
   }
   export type FlowDescription = string;
@@ -777,6 +810,9 @@ declare namespace CustomerProfiles {
     Keys?: KeyMap;
   }
   export interface IncrementalPullConfig {
+    /**
+     * A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
+     */
     DatetimeTypeFieldName?: DatetimeTypeFieldName;
   }
   export type IntegrationList = ListIntegrationItem[];
@@ -1034,6 +1070,9 @@ declare namespace CustomerProfiles {
   }
   export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface MarketoSourceProperties {
+    /**
+     * The object specified in the Marketo flow source.
+     */
     Object: Object;
   }
   export type Object = string;
@@ -1176,6 +1215,9 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+    /**
+     * The configuration that controls how Customer Profiles retrieves data from the source.
+     */
     FlowDefinition?: FlowDefinition;
   }
   export interface PutIntegrationResponse {
@@ -1314,24 +1356,60 @@ declare namespace CustomerProfiles {
   }
   export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface S3SourceProperties {
+    /**
+     * The Amazon S3 bucket name where the source files are stored.
+     */
     BucketName: BucketName;
+    /**
+     * The object key for the Amazon S3 bucket in which the source files are stored.
+     */
     BucketPrefix?: BucketPrefix;
   }
   export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface SalesforceSourceProperties {
+    /**
+     * The object specified in the Salesforce flow source.
+     */
     Object: Object;
+    /**
+     * The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
+     */
     EnableDynamicFieldUpdate?: boolean;
+    /**
+     * Indicates whether Amazon AppFlow includes deleted files in the flow run.
+     */
     IncludeDeletedRecords?: boolean;
   }
   export type ScheduleExpression = string;
   export type ScheduleOffset = number;
   export interface ScheduledTriggerProperties {
+    /**
+     * The scheduling expression that determines the rate at which the schedule will run, for example rate (5 minutes).
+     */
     ScheduleExpression: ScheduleExpression;
+    /**
+     * Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run.
+     */
     DataPullMode?: DataPullMode;
+    /**
+     * Specifies the scheduled start time for a scheduled-trigger flow.
+     */
     ScheduleStartTime?: _Date;
+    /**
+     * Specifies the scheduled end time for a scheduled-trigger flow.
+     */
     ScheduleEndTime?: _Date;
+    /**
+     * Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.
+     */
     Timezone?: Timezone;
+    /**
+     * Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
+     */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * Specifies the date range for the records to import from the connector in the first flow run.
+     */
     FirstExecutionFrom?: _Date;
   }
   export interface SearchProfilesRequest {
@@ -1368,21 +1446,51 @@ declare namespace CustomerProfiles {
   }
   export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ServiceNowSourceProperties {
+    /**
+     * The object specified in the ServiceNow flow source.
+     */
     Object: Object;
   }
   export interface SourceConnectorProperties {
+    /**
+     * The properties that are applied when Marketo is being used as a source.
+     */
     Marketo?: MarketoSourceProperties;
+    /**
+     * The properties that are applied when Amazon S3 is being used as the flow source.
+     */
     S3?: S3SourceProperties;
+    /**
+     * The properties that are applied when Salesforce is being used as a source.
+     */
     Salesforce?: SalesforceSourceProperties;
+    /**
+     * The properties that are applied when ServiceNow is being used as a source.
+     */
     ServiceNow?: ServiceNowSourceProperties;
+    /**
+     * The properties that are applied when using Zendesk as a flow source.
+     */
     Zendesk?: ZendeskSourceProperties;
   }
   export type SourceConnectorType = "Salesforce"|"Marketo"|"Zendesk"|"Servicenow"|"S3"|string;
   export type SourceFields = stringTo2048[];
   export interface SourceFlowConfig {
+    /**
+     * The name of the AppFlow connector profile. This name must be unique for each connector profile in the AWS account.
+     */
     ConnectorProfileName?: ConnectorProfileName;
+    /**
+     * The type of connector, such as Salesforce, Marketo, and so on.
+     */
     ConnectorType: SourceConnectorType;
+    /**
+     * Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull.
+     */
     IncrementalPullConfig?: IncrementalPullConfig;
+    /**
+     * Specifies the information that is required to query a particular source connector.
+     */
     SourceConnectorProperties: SourceConnectorProperties;
   }
   export type StandardIdentifier = "PROFILE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|string;
@@ -1405,10 +1513,25 @@ declare namespace CustomerProfiles {
   }
   export type TagValue = string;
   export interface Task {
+    /**
+     * The operation to be performed on the provided source fields.
+     */
     ConnectorOperator?: ConnectorOperator;
+    /**
+     * A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.
+     */
     DestinationField?: DestinationField;
+    /**
+     * The source fields to which a particular task is applied.
+     */
     SourceFields: SourceFields;
+    /**
+     * A map used to store task-related information. The service looks for particular information based on the TaskType.
+     */
     TaskProperties?: TaskPropertiesMap;
+    /**
+     * Specifies the particular task implementation that Amazon AppFlow performs.
+     */
     TaskType: TaskType;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
@@ -1416,10 +1539,19 @@ declare namespace CustomerProfiles {
   export type Tasks = Task[];
   export type Timezone = string;
   export interface TriggerConfig {
+    /**
+     * Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.
+     */
     TriggerType: TriggerType;
+    /**
+     * Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.
+     */
     TriggerProperties?: TriggerProperties;
   }
   export interface TriggerProperties {
+    /**
+     * Specifies the configuration details of a schedule-triggered flow that you define.
+     */
     Scheduled?: ScheduledTriggerProperties;
   }
   export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
@@ -1632,6 +1764,9 @@ declare namespace CustomerProfiles {
   }
   export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ZendeskSourceProperties {
+    /**
+     * The object specified in the Zendesk flow source.
+     */
     Object: Object;
   }
   export type encryptionKey = string;

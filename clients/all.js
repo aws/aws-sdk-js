@@ -261,5 +261,6 @@ module.exports = {
   LexRuntimeV2: require('./lexruntimev2'),
   Fis: require('./fis'),
   LookoutMetrics: require('./lookoutmetrics'),
-  Mgn: require('./mgn')
+  Mgn: require('./mgn'),
+  LookoutEquipment: require('./lookoutequipment')
 };

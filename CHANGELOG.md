@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.882.0-->
+<!--LATEST=2.883.0-->
 <!--ENTRYINSERT-->
+
+## 2.883.0
+* bugfix: ManagedUpload: Use resolved credentials if customer supplies configured S3 Client
+* feature: AppStream: This release provides support for image updates
+* feature: AutoScaling: Amazon EC2 Auto Scaling announces Warm Pools that help applications to scale out faster by pre-initializing EC2 instances and save money by requiring fewer continuously running instances
+* feature: LookoutEquipment: This release introduces support for Amazon Lookout for Equipment.
+* feature: RoboMaker: This release allows RoboMaker customers to specify custom tools to run with their simulation job
 
 ## 2.882.0
 * bugfix: Credentials: Do not require credentials file when loading region from config.

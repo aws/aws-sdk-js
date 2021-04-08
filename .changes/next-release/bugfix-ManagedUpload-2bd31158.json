@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ManagedUpload",
-  "description": "Use resolved credentials if customer supplies configured S3 Client"
-}

@@ -371,6 +371,35 @@
       ],
       "documentation": "<p>Deletes the specified tags.</p>"
     },
+    "DeleteWarmPool": {
+      "name": "DeleteWarmPool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteWarmPoolType"
+      },
+      "output": {
+        "shape": "DeleteWarmPoolAnswer",
+        "resultWrapper": "DeleteWarmPoolResult"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "ResourceContentionFault"
+        },
+        {
+          "shape": "ScalingActivityInProgressFault"
+        },
+        {
+          "shape": "ResourceInUseFault"
+        }
+      ],
+      "documentation": "<p>Deletes the warm pool for the specified Auto Scaling group.</p>"
+    },
     "DescribeAccountLimits": {
       "name": "DescribeAccountLimits",
       "http": {
@@ -760,6 +789,32 @@
       ],
       "documentation": "<p>Describes the termination policies supported by Amazon EC2 Auto Scaling.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html\">Controlling which Auto Scaling instances terminate during scale in</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
+    "DescribeWarmPool": {
+      "name": "DescribeWarmPool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeWarmPoolType"
+      },
+      "output": {
+        "shape": "DescribeWarmPoolAnswer",
+        "resultWrapper": "DescribeWarmPoolResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidNextToken"
+        },
+        {
+          "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "ResourceContentionFault"
+        }
+      ],
+      "documentation": "<p>Describes a warm pool and its instances.</p>"
+    },
     "DetachInstances": {
       "name": "DetachInstances",
       "http": {
@@ -1004,6 +1059,29 @@
       ],
       "documentation": "<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html\">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
+    "PutWarmPool": {
+      "name": "PutWarmPool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutWarmPoolType"
+      },
+      "output": {
+        "shape": "PutWarmPoolAnswer",
+        "resultWrapper": "PutWarmPoolResult"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "ResourceContentionFault"
+        }
+      ],
+      "documentation": "<p>Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances.</p> <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the <a>DeleteWarmPool</a> API.</p>"
+    },
     "RecordLifecycleActionHeartbeat": {
       "name": "RecordLifecycleActionHeartbeat",
       "http": {
@@ -1022,7 +1100,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using the <a>PutLifecycleHook</a> API call.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Auto Scaling lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using the <a>PutLifecycleHook</a> API call.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html\">Amazon EC2 Auto Scaling lifecycle hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "ResumeProcesses": {
       "name": "ResumeProcesses",
@@ -1099,7 +1177,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Updates the instance protection settings of the specified instances.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of instance IDs, which is 50 per Auto Scaling group, the call fails.</p>"
+      "documentation": "<p>Updates the instance protection settings of the specified instances. This operation cannot be called on instances in a warm pool.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of instance IDs, which is 50 per Auto Scaling group, the call fails.</p>"
     },
     "StartInstanceRefresh": {
       "name": "StartInstanceRefresh",
@@ -1125,7 +1203,7 @@
           "shape": "InstanceRefreshInProgressFault"
         }
       ],
-      "documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of all previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an instance refresh operation in progress, use the <a>CancelInstanceRefresh</a> API. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances based on an instance refresh</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an instance refresh operation in progress, use the <a>CancelInstanceRefresh</a> API. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances based on an instance refresh</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "SuspendProcesses": {
       "name": "SuspendProcesses",
@@ -1167,7 +1245,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. </p> <p>This call simply makes a termination request. The instance is not terminated immediately. When an instance is terminated, the instance status changes to <code>terminated</code>. You can't connect to or start an instance after you've terminated it.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are terminated. </p> <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage\">Rebalancing activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This operation cannot be called on instances in a warm pool.</p> <p>This call simply makes a termination request. The instance is not terminated immediately. When an instance is terminated, the instance status changes to <code>terminated</code>. You can't connect to or start an instance after you've terminated it.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are terminated. </p> <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage\">Rebalancing activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "UpdateAutoScalingGroup": {
       "name": "UpdateAutoScalingGroup",
@@ -1514,6 +1592,14 @@
         "CapacityRebalance": {
           "shape": "CapacityRebalanceEnabled",
           "documentation": "<p>Indicates whether Capacity Rebalancing is enabled.</p>"
+        },
+        "WarmPoolConfiguration": {
+          "shape": "WarmPoolConfiguration",
+          "documentation": "<p>The warm pool for the group.</p>"
+        },
+        "WarmPoolSize": {
+          "shape": "WarmPoolSize",
+          "documentation": "<p>The current size of the warm pool.</p>"
         }
       },
       "documentation": "<p>Describes an Auto Scaling group.</p>"
@@ -1606,7 +1692,7 @@
         },
         "LifecycleState": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used. For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> | <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> | <code>Terminating</code> | <code>Terminating:Wait</code> | <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code> | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> </p>"
+          "documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used. For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> | <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> | <code>Terminating</code> | <code>Terminating:Wait</code> | <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code> | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> | <code>Warmed:Pending</code> | <code>Warmed:Pending:Wait</code> | <code>Warmed:Pending:Proceed</code> | <code>Warmed:Terminating</code> | <code>Warmed:Terminating:Wait</code> | <code>Warmed:Terminating:Proceed</code> | <code>Warmed:Terminated</code> | <code>Warmed:Stopped</code> | <code>Warmed:Running</code> </p>"
         },
         "HealthStatus": {
           "shape": "XmlStringMaxLen32",
@@ -2085,7 +2171,7 @@
         },
         "ForceDelete": {
           "shape": "ForceDelete",
-          "documentation": "<p>Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.</p>"
+          "documentation": "<p>Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the group.</p>"
         }
       }
     },
@@ -2169,6 +2255,26 @@
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "DeleteWarmPoolAnswer": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteWarmPoolType": {
+      "type": "structure",
+      "required": [
+        "AutoScalingGroupName"
+      ],
+      "members": {
+        "AutoScalingGroupName": {
+          "shape": "XmlStringMaxLen255",
+          "documentation": "<p>The name of the Auto Scaling group.</p>"
+        },
+        "ForceDelete": {
+          "shape": "ForceDelete",
+          "documentation": "<p>Specifies that the warm pool is to be deleted along with all instances associated with the warm pool, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.</p>"
         }
       }
     },
@@ -2516,6 +2622,43 @@
         }
       }
     },
+    "DescribeWarmPoolAnswer": {
+      "type": "structure",
+      "members": {
+        "WarmPoolConfiguration": {
+          "shape": "WarmPoolConfiguration",
+          "documentation": "<p>The warm pool configuration details. </p>"
+        },
+        "Instances": {
+          "shape": "Instances",
+          "documentation": "<p>The instances that are currently in the warm pool.</p>"
+        },
+        "NextToken": {
+          "shape": "XmlString",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "DescribeWarmPoolType": {
+      "type": "structure",
+      "required": [
+        "AutoScalingGroupName"
+      ],
+      "members": {
+        "AutoScalingGroupName": {
+          "shape": "XmlStringMaxLen255",
+          "documentation": "<p>The name of the Auto Scaling group.</p>"
+        },
+        "MaxRecords": {
+          "shape": "MaxRecords",
+          "documentation": "<p>The maximum number of instances to return with this call. The maximum value is <code>50</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "XmlString",
+          "documentation": "<p>The token for the next set of instances to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
     "DetachInstancesAnswer": {
       "type": "structure",
       "members": {
@@ -2600,7 +2743,7 @@
         },
         "Metrics": {
           "shape": "Metrics",
-          "documentation": "<p>Specifies one or more of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> </ul> <p>If you omit this parameter, all metrics are disabled. </p>"
+          "documentation": "<p>Specifies one or more of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> <li> <p> <code>WarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>WarmPoolWarmedCapacity</code> </p> </li> <li> <p> <code>WarmPoolPendingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTerminatingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTotalCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolTotalCapacity</code> </p> </li> </ul> <p>If you omit this parameter, all metrics are disabled. </p>"
         }
       }
     },
@@ -2653,7 +2796,7 @@
         },
         "Metrics": {
           "shape": "Metrics",
-          "documentation": "<p>Specifies which group-level metrics to start collecting. You can specify one or more of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul> <p>The instance weighting feature supports the following additional metrics: </p> <ul> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> </ul> <p>If you omit this parameter, all metrics are enabled. </p>"
+          "documentation": "<p>Specifies which group-level metrics to start collecting. You can specify one or more of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul> <p>The instance weighting feature supports the following additional metrics: </p> <ul> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> </ul> <p>The warm pools feature supports the following additional metrics: </p> <ul> <li> <p> <code>WarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>WarmPoolWarmedCapacity</code> </p> </li> <li> <p> <code>WarmPoolPendingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTerminatingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTotalCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolTotalCapacity</code> </p> </li> </ul> <p>If you omit this parameter, all metrics are enabled. </p>"
         },
         "Granularity": {
           "shape": "XmlStringMaxLen255",
@@ -2666,7 +2809,7 @@
       "members": {
         "Metric": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>One of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> </ul>"
+          "documentation": "<p>One of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> <li> <p> <code>WarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>WarmPoolWarmedCapacity</code> </p> </li> <li> <p> <code>WarmPoolPendingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTerminatingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTotalCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolTotalCapacity</code> </p> </li> </ul>"
         },
         "Granularity": {
           "shape": "XmlStringMaxLen255",
@@ -2971,6 +3114,10 @@
         "InstancesToUpdate": {
           "shape": "InstancesToUpdate",
           "documentation": "<p>The number of instances remaining to update before the instance refresh is complete.</p>"
+        },
+        "ProgressDetails": {
+          "shape": "InstanceRefreshProgressDetails",
+          "documentation": "<p>Additional progress details for an Auto Scaling group that has a warm pool.</p>"
         }
       },
       "documentation": "<p>Describes an instance refresh for an Auto Scaling group. </p>"
@@ -2980,6 +3127,34 @@
       "member": {
         "shape": "XmlStringMaxLen255"
       }
+    },
+    "InstanceRefreshLivePoolProgress": {
+      "type": "structure",
+      "members": {
+        "PercentageComplete": {
+          "shape": "IntPercent",
+          "documentation": "<p>The percentage of instances in the Auto Scaling group that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.</p>"
+        },
+        "InstancesToUpdate": {
+          "shape": "InstancesToUpdate",
+          "documentation": "<p>The number of instances remaining to update.</p>"
+        }
+      },
+      "documentation": "<p>Reports the progress of an instance fresh on instances that are in the Auto Scaling group.</p>"
+    },
+    "InstanceRefreshProgressDetails": {
+      "type": "structure",
+      "members": {
+        "LivePoolProgress": {
+          "shape": "InstanceRefreshLivePoolProgress",
+          "documentation": "<p>Indicates the progress of an instance fresh on instances that are in the Auto Scaling group.</p>"
+        },
+        "WarmPoolProgress": {
+          "shape": "InstanceRefreshWarmPoolProgress",
+          "documentation": "<p>Indicates the progress of an instance fresh on instances that are in the warm pool.</p>"
+        }
+      },
+      "documentation": "<p>Reports the progress of an instance refresh on an Auto Scaling group that has a warm pool. This includes separate details for instances in the warm pool and instances in the Auto Scaling group (the live pool).</p>"
     },
     "InstanceRefreshStatus": {
       "type": "string",
@@ -2991,6 +3166,20 @@
         "Cancelling",
         "Cancelled"
       ]
+    },
+    "InstanceRefreshWarmPoolProgress": {
+      "type": "structure",
+      "members": {
+        "PercentageComplete": {
+          "shape": "IntPercent",
+          "documentation": "<p>The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.</p>"
+        },
+        "InstancesToUpdate": {
+          "shape": "InstancesToUpdate",
+          "documentation": "<p>The number of instances remaining to update.</p>"
+        }
+      },
+      "documentation": "<p>Reports the progress of an instance fresh on instances that are in the warm pool.</p>"
     },
     "InstanceRefreshes": {
       "type": "list",
@@ -3370,7 +3559,16 @@
         "Detaching",
         "Detached",
         "EnteringStandby",
-        "Standby"
+        "Standby",
+        "Warmed:Pending",
+        "Warmed:Pending:Wait",
+        "Warmed:Pending:Proceed",
+        "Warmed:Terminating",
+        "Warmed:Terminating:Wait",
+        "Warmed:Terminating:Proceed",
+        "Warmed:Terminated",
+        "Warmed:Stopped",
+        "Warmed:Running"
       ]
     },
     "LifecycleTransition": {
@@ -3422,6 +3620,10 @@
         "shape": "LoadBalancerTargetGroupState"
       }
     },
+    "MaxGroupPreparedCapacity": {
+      "type": "integer",
+      "min": -1
+    },
     "MaxInstanceLifetime": {
       "type": "integer"
     },
@@ -3439,7 +3641,7 @@
       "members": {
         "Metric": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>One of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> </ul>"
+          "documentation": "<p>One of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> <li> <p> <code>GroupInServiceCapacity</code> </p> </li> <li> <p> <code>GroupPendingCapacity</code> </p> </li> <li> <p> <code>GroupStandbyCapacity</code> </p> </li> <li> <p> <code>GroupTerminatingCapacity</code> </p> </li> <li> <p> <code>GroupTotalCapacity</code> </p> </li> <li> <p> <code>WarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>WarmPoolWarmedCapacity</code> </p> </li> <li> <p> <code>WarmPoolPendingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTerminatingCapacity</code> </p> </li> <li> <p> <code>WarmPoolTotalCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolDesiredCapacity</code> </p> </li> <li> <p> <code>GroupAndWarmPoolTotalCapacity</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a metric.</p>"
@@ -3894,6 +4096,34 @@
         "TimeZone": {
           "shape": "XmlStringMaxLen255",
           "documentation": "<p>Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default. </p> <p>Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as <code>Etc/GMT+9</code> or <code>Pacific/Tahiti</code>). For more information, see <a href=\"https://en.wikipedia.org/wiki/List_of_tz_database_time_zones\">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>"
+        }
+      }
+    },
+    "PutWarmPoolAnswer": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutWarmPoolType": {
+      "type": "structure",
+      "required": [
+        "AutoScalingGroupName"
+      ],
+      "members": {
+        "AutoScalingGroupName": {
+          "shape": "XmlStringMaxLen255",
+          "documentation": "<p>The name of the Auto Scaling group.</p>"
+        },
+        "MaxGroupPreparedCapacity": {
+          "shape": "MaxGroupPreparedCapacity",
+          "documentation": "<p>Specifies the total maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional property. Specify it only if the warm pool size should not be determined by the difference between the group's maximum capacity and its desired capacity. </p> <important> <p>Amazon EC2 Auto Scaling will launch and maintain either the difference between the group's maximum capacity and its desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is not specified, or the difference between the <code>MaxGroupPreparedCapacity</code> and the desired capacity, if a value for <code>MaxGroupPreparedCapacity</code> is specified. </p> <p>The size of the warm pool is dynamic. Only when <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the same value does the warm pool have an absolute size.</p> </important> <p>If the desired capacity of the Auto Scaling group is higher than the <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0. To remove a value that you previously set, include the property but specify -1 for the value. </p>"
+        },
+        "MinSize": {
+          "shape": "WarmPoolMinSize",
+          "documentation": "<p>Specifies the minimum number of instances to maintain in the warm pool. This helps you to ensure that there is always a certain number of warmed instances available to handle traffic spikes. Defaults to 0 if not specified.</p>"
+        },
+        "PoolState": {
+          "shape": "WarmPoolState",
+          "documentation": "<p>Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: <code>Stopped</code> (default) or <code>Running</code>.</p>"
         }
       }
     },
@@ -4592,6 +4822,48 @@
       "member": {
         "shape": "XmlString"
       }
+    },
+    "WarmPoolConfiguration": {
+      "type": "structure",
+      "members": {
+        "MaxGroupPreparedCapacity": {
+          "shape": "MaxGroupPreparedCapacity",
+          "documentation": "<p>The total maximum number of instances that are allowed to be in the warm pool or in any state except <code>Terminated</code> for the Auto Scaling group.</p>"
+        },
+        "MinSize": {
+          "shape": "WarmPoolMinSize",
+          "documentation": "<p>The minimum number of instances to maintain in the warm pool.</p>"
+        },
+        "PoolState": {
+          "shape": "WarmPoolState",
+          "documentation": "<p>The instance state to transition to after the lifecycle actions are complete: <code>Stopped</code> or <code>Running</code>.</p>"
+        },
+        "Status": {
+          "shape": "WarmPoolStatus",
+          "documentation": "<p>The status of a warm pool that is marked for deletion.</p>"
+        }
+      },
+      "documentation": "<p>Describes a warm pool configuration. </p>"
+    },
+    "WarmPoolMinSize": {
+      "type": "integer",
+      "min": 0
+    },
+    "WarmPoolSize": {
+      "type": "integer"
+    },
+    "WarmPoolState": {
+      "type": "string",
+      "enum": [
+        "Stopped",
+        "Running"
+      ]
+    },
+    "WarmPoolStatus": {
+      "type": "string",
+      "enum": [
+        "PendingDelete"
+      ]
     },
     "XmlString": {
       "type": "string",

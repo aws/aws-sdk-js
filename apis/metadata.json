@@ -1008,5 +1008,8 @@
   },
   "mgn": {
     "name": "Mgn"
+  },
+  "lookoutequipment": {
+    "name": "LookoutEquipment"
   }
 }

@@ -344,6 +344,43 @@
       ],
       "documentation": "<p>Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>"
     },
+    "CreateUpdatedImage": {
+      "name": "CreateUpdatedImage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUpdatedImageRequest"
+      },
+      "output": {
+        "shape": "CreateUpdatedImageResult"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccountStatusException"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "IncompatibleImageException"
+        }
+      ],
+      "documentation": "<p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p> <p>For more information, see the \"Update an Image by Using Managed AppStream 2.0 Image Updates\" section in <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html\">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+    },
     "CreateUsageReportSubscription": {
       "name": "CreateUsageReportSubscription",
       "http": {
@@ -1862,6 +1899,51 @@
         }
       }
     },
+    "CreateUpdatedImageRequest": {
+      "type": "structure",
+      "required": [
+        "existingImageName",
+        "newImageName"
+      ],
+      "members": {
+        "existingImageName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the image to update.</p>"
+        },
+        "newImageName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the new image. The name must be unique within the AWS account and Region.</p>"
+        },
+        "newImageDescription": {
+          "shape": "Description",
+          "documentation": "<p>The description to display for the new image.</p>"
+        },
+        "newImageDisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display for the new image.</p>"
+        },
+        "newImageTags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+        },
+        "dryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
+        }
+      }
+    },
+    "CreateUpdatedImageResult": {
+      "type": "structure",
+      "members": {
+        "image": {
+          "shape": "Image"
+        },
+        "canUpdateImage": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether a new image can be created.</p>"
+        }
+      }
+    },
     "CreateUsageReportSubscriptionRequest": {
       "type": "structure",
       "members": {}
@@ -2821,6 +2903,10 @@
         "ImagePermissions": {
           "shape": "ImagePermissions",
           "documentation": "<p>The permissions to provide to the destination AWS account for the specified image.</p>"
+        },
+        "ImageErrors": {
+          "shape": "ResourceErrors",
+          "documentation": "<p>Describes the errors that are returned when a new image can't be created.</p>"
         }
       },
       "documentation": "<p>Describes an image.</p>"
@@ -2922,7 +3008,9 @@
         "REBOOTING",
         "SNAPSHOTTING",
         "DELETING",
-        "FAILED"
+        "FAILED",
+        "UPDATING",
+        "PENDING_QUALIFICATION"
       ]
     },
     "ImageBuilderStateChangeReason": {
