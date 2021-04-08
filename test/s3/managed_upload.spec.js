@@ -68,6 +68,7 @@
         }
       });
     };
+
     it('defaults to using sigv4', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -76,6 +77,7 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('v4');
     });
+
     it('uses sigv4 if customer supplies a configured S3 client', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -85,6 +87,7 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('v4');
     });
+
     it('uses sigv2 if customer supplies a configured S3 client', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -94,7 +97,19 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('s3');
     });
-    return describe('send', function() {
+
+    it('uses resolved credential if customer supplies a configured S3 client', function() {
+      var credential = 'Some Credential Providers';
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: 'body'
+        },
+        service: new AWS.S3({credentials: credential })
+      });
+      expect(upload.service.config.credentials).to.be[credential];
+    });
+
+    describe('send', function() {
       it('default callback throws', function() {
         helpers.mockResponses([
           {
