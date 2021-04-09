@@ -4238,6 +4238,10 @@ declare namespace Redshift {
      * The name of the table to create as a result of the current request.
      */
     NewTableName: String;
+    /**
+     * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false (default), the names are not case sensitive.
+     */
+    EnableCaseSensitiveIdentifier?: BooleanOptional;
   }
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;

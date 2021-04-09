@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.883.0-->
+<!--LATEST=2.884.0-->
 <!--ENTRYINSERT-->
+
+## 2.884.0
+* feature: EC2: Add paginator support to DescribeStoreImageTasks and update documentation.
+* feature: Redshift: Add support for case sensitive table level restore
+* feature: Shield: CreateProtection now throws InvalidParameterException instead of InternalErrorException when system tags (tag with keys prefixed with "aws:") are passed in.
 
 ## 2.883.0
 * bugfix: ManagedUpload: Use resolved credentials if customer supplies configured S3 Client
