@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.884.0-->
+<!--LATEST=2.885.0-->
 <!--ENTRYINSERT-->
+
+## 2.885.0
+* feature: CodeBuild: AWS CodeBuild now allows you to set the access permissions for build artifacts, project artifacts, and log files that are uploaded to an Amazon S3 bucket that is owned by another account.
+* feature: FSx: Support for cross-region and cross-account backup copies
 
 ## 2.884.0
 * feature: EC2: Add paginator support to DescribeStoreImageTasks and update documentation.

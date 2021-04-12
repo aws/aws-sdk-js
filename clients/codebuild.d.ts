@@ -476,6 +476,7 @@ declare namespace CodeBuild {
     computeTypesAllowed?: ComputeTypesAllowed;
   }
   export type Boolean = boolean;
+  export type BucketOwnerAccess = "NONE"|"READ_ONLY"|"FULL"|string;
   export interface Build {
     /**
      * The unique ID for the build.
@@ -586,7 +587,7 @@ declare namespace CodeBuild {
      */
     encryptionKey?: NonEmptyString;
     /**
-     *  A list of exported environment variables for this build. 
+     * A list of exported environment variables for this build. Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see Working with variables in the AWS CodePipeline User Guide.
      */
     exportedEnvironmentVariables?: ExportedEnvironmentVariables;
     /**
@@ -631,6 +632,7 @@ declare namespace CodeBuild {
      *  An identifier for this artifact definition. 
      */
     artifactIdentifier?: String;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export type BuildArtifactsList = BuildArtifacts[];
   export interface BuildBatch {
@@ -733,7 +735,7 @@ declare namespace CodeBuild {
      */
     buildGroups?: BuildGroups;
     /**
-     *  Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
+     * Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
      */
     debugSessionEnabled?: WrapperBoolean;
   }
@@ -1309,11 +1311,11 @@ declare namespace CodeBuild {
   export type EnvironmentVariables = EnvironmentVariable[];
   export interface ExportedEnvironmentVariable {
     /**
-     *  The name of this exported environment variable. 
+     * The name of the exported environment variable.
      */
     name?: NonEmptyString;
     /**
-     *  The value assigned to this exported environment variable.    During a build, the value of a variable is available starting with the install phase. It can be updated between the start of the install phase and the end of the post_build phase. After the post_build phase ends, the value of exported variables cannot change. 
+     * The value assigned to the exported environment variable.
      */
     value?: String;
   }
@@ -1904,6 +1906,7 @@ declare namespace CodeBuild {
      *  An identifier for this artifact definition. 
      */
     artifactIdentifier?: String;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export type ProjectArtifactsList = ProjectArtifacts[];
   export interface ProjectBadge {
@@ -2289,6 +2292,7 @@ declare namespace CodeBuild {
      *  Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. 
      */
     encryptionDisabled?: WrapperBoolean;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export interface S3ReportExportConfig {
     /**

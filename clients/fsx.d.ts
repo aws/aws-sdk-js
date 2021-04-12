@@ -28,6 +28,14 @@ declare class FSx extends Service {
    */
   cancelDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
   /**
+   * Copies an existing backup within the same AWS account to another Region (cross-Region copy) or within the same Region (in-Region copy). You can have up to five backup copy requests in progress to a single destination Region per account. You can use cross-Region backup copies for cross-region disaster recovery. You periodically take backups and copy them to another Region so that in the event of a disaster in the primary Region, you can restore from backup and recover availability quickly in the other Region. You can make cross-Region copies only within your AWS partition.  You can also use backup copies to clone your file data set to another Region or within the same Region. You can use the SourceRegion parameter to specify the AWS Region from which the backup will be copied. For example, if you make the call from the us-west-1 Region and want to copy a backup from the us-east-2 Region, you specify us-east-2 in the SourceRegion parameter to make a cross-Region copy. If you don't specify a Region, the backup copy is created in the same Region where the request is sent from (in-Region copy). For more information on creating backup copies, see  Copying backups in the Amazon FSx for Windows User Guide and Copying backups in the Amazon FSx for Lustre User Guide.
+   */
+  copyBackup(params: FSx.Types.CopyBackupRequest, callback?: (err: AWSError, data: FSx.Types.CopyBackupResponse) => void): Request<FSx.Types.CopyBackupResponse, AWSError>;
+  /**
+   * Copies an existing backup within the same AWS account to another Region (cross-Region copy) or within the same Region (in-Region copy). You can have up to five backup copy requests in progress to a single destination Region per account. You can use cross-Region backup copies for cross-region disaster recovery. You periodically take backups and copy them to another Region so that in the event of a disaster in the primary Region, you can restore from backup and recover availability quickly in the other Region. You can make cross-Region copies only within your AWS partition.  You can also use backup copies to clone your file data set to another Region or within the same Region. You can use the SourceRegion parameter to specify the AWS Region from which the backup will be copied. For example, if you make the call from the us-west-1 Region and want to copy a backup from the us-east-2 Region, you specify us-east-2 in the SourceRegion parameter to make a cross-Region copy. If you don't specify a Region, the backup copy is created in the same Region where the request is sent from (in-Region copy). For more information on creating backup copies, see  Copying backups in the Amazon FSx for Windows User Guide and Copying backups in the Amazon FSx for Lustre User Guide.
+   */
+  copyBackup(callback?: (err: AWSError, data: FSx.Types.CopyBackupResponse) => void): Request<FSx.Types.CopyBackupResponse, AWSError>;
+  /**
    * Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system. For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:   a Persistent deployment type   is not linked to a data respository.   For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups. For more information about backing up Amazon FSx for Windows file systems, see Working with FSx for Windows backups. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
    */
   createBackup(params: FSx.Types.CreateBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
@@ -159,6 +167,7 @@ declare namespace FSx {
      * The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.
      */
     ActiveDirectoryId?: DirectoryId;
+    ResourceARN?: ResourceARN;
   }
   export type ActiveDirectoryFullyQualifiedName = string;
   export interface AdministrativeAction {
@@ -191,7 +200,7 @@ declare namespace FSx {
   export type AdministrativeActions = AdministrativeAction[];
   export interface Alias {
     /**
-     * The name of the DNS alias. The alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+     * The name of the DNS alias. The alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters, the underscore (_), and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
      */
     Name?: AlternateDNSName;
     /**
@@ -229,7 +238,7 @@ declare namespace FSx {
      */
     BackupId: BackupId;
     /**
-     * The lifecycle status of the backup.    AVAILABLE - The backup is fully available.    PENDING - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.    CREATING - Amazon FSx is creating the backup.    TRANSFERRING - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.    DELETED - Amazon FSx deleted the backup and it is no longer available.    FAILED - Amazon FSx could not complete the backup.  
+     * The lifecycle status of the backup.    AVAILABLE - The backup is fully available.    PENDING - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.    CREATING - Amazon FSx is creating the backup.    TRANSFERRING - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.    COPYING - Amazon FSx is copying the backup.    DELETED - Amazon FSx deleted the backup and it is no longer available.    FAILED - Amazon FSx could not complete the backup.  
      */
     Lifecycle: BackupLifecycle;
     /**
@@ -265,6 +274,12 @@ declare namespace FSx {
      * The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.
      */
     DirectoryInformation?: ActiveDirectoryBackupAttributes;
+    OwnerId?: AWSAccountId;
+    SourceBackupId?: BackupId;
+    /**
+     * The source Region of the backup. Specifies the Region from where this backup is copied.
+     */
+    SourceBackupRegion?: Region;
   }
   export interface BackupFailureDetails {
     /**
@@ -274,7 +289,7 @@ declare namespace FSx {
   }
   export type BackupId = string;
   export type BackupIds = BackupId[];
-  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|"PENDING"|string;
+  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|"PENDING"|"COPYING"|string;
   export type BackupType = "AUTOMATIC"|"USER_INITIATED"|"AWS_BACKUP"|string;
   export type Backups = Backup[];
   export interface CancelDataRepositoryTaskRequest {
@@ -311,6 +326,26 @@ declare namespace FSx {
      * Required if Enabled is set to true. Specifies the scope of the CompletionReport; FAILED_FILES_ONLY is the only scope currently supported. When Scope is set to FAILED_FILES_ONLY, the CompletionReport only contains information about files that the data repository task failed to process.
      */
     Scope?: ReportScope;
+  }
+  export interface CopyBackupRequest {
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The ID of the source backup. Specifies the ID of the backup that is being copied.
+     */
+    SourceBackupId: SourceBackupId;
+    /**
+     * The source AWS Region of the backup. Specifies the AWS Region from which the backup is being copied. The source and destination Regions must be in the same AWS partition. If you don't specify a Region, it defaults to the Region where the request is sent from (in-Region copy).
+     */
+    SourceRegion?: Region;
+    KmsKeyId?: KmsKeyId;
+    /**
+     * A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false. If you set CopyTags to true and the source backup has existing tags, you can use the Tags parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn't exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the Tags parameter take precedence.
+     */
+    CopyTags?: Flag;
+    Tags?: Tags;
+  }
+  export interface CopyBackupResponse {
+    Backup?: Backup;
   }
   export interface CreateBackupRequest {
     /**
@@ -382,6 +417,7 @@ declare namespace FSx {
      * Sets the storage type for the Windows file system you're creating from a backup. Valid values are SSD and HDD.   Set to SSD to use solid state drive storage. Supported on all Windows deployment types.   Set to HDD to use hard disk drive storage. Supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types.     Default value is SSD.   HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB.  
      */
     StorageType?: StorageType;
+    KmsKeyId?: KmsKeyId;
   }
   export interface CreateFileSystemFromBackupResponse {
     /**
@@ -447,7 +483,7 @@ declare namespace FSx {
      */
     StorageType?: StorageType;
     /**
-     * Specifies the IDs of the subnets that the file system will be accessible from. For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the WindowsConfiguration &gt; PreferredSubnetID property. For Windows SINGLE_AZ_1 and SINGLE_AZ_2 file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.
+     * Specifies the IDs of the subnets that the file system will be accessible from. For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the WindowsConfiguration &gt; PreferredSubnetID property. For more information, see  Availability and durability: Single-AZ and Multi-AZ file systems. For Windows SINGLE_AZ_1 and SINGLE_AZ_2 file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.
      */
     SubnetIds: SubnetIds;
     /**
@@ -506,7 +542,7 @@ declare namespace FSx {
      */
     CopyTagsToBackups?: Flag;
     /**
-     * An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload. For more information, see Working with DNS Aliases and Walkthrough 5: Using DNS aliases to access your file system, including additional steps you must take to be able to access your file system using a DNS alias. An alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+     * An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload. For more information, see Working with DNS Aliases and Walkthrough 5: Using DNS aliases to access your file system, including additional steps you must take to be able to access your file system using a DNS alias. An alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters, the underscore (_), and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
      */
     Aliases?: AlternateDNSNames;
   }
@@ -723,7 +759,7 @@ declare namespace FSx {
   }
   export interface DescribeBackupsResponse {
     /**
-     * Any array of backups.
+     * An array of backups.
      */
     Backups?: Backups;
     /**
@@ -988,6 +1024,7 @@ declare namespace FSx {
   export type OrganizationalUnitDistinguishedName = string;
   export type PerUnitStorageThroughput = number;
   export type ProgressPercent = number;
+  export type Region = string;
   export type ReportFormat = "REPORT_CSV_20191124"|string;
   export type ReportScope = "FAILED_FILES_ONLY"|string;
   export type RequestTime = Date;
@@ -1038,7 +1075,7 @@ declare namespace FSx {
      */
     Password: DirectoryPassword;
     /**
-     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in RFC 1918:   10.0.0.0 - 10.255.255.255 (10/8 prefix)   172.16.0.0 - 172.31.255.255 (172.16/12 prefix)   192.168.0.0 - 192.168.255.255 (192.168/16 prefix)  
+     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. 
      */
     DnsIps: DnsIps;
   }
@@ -1056,6 +1093,7 @@ declare namespace FSx {
      */
     DnsIps?: DnsIps;
   }
+  export type SourceBackupId = string;
   export type StartTime = Date;
   export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|string;
   export type StorageCapacity = number;
@@ -1168,7 +1206,7 @@ declare namespace FSx {
   export type WindowsDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
   export interface WindowsFileSystemConfiguration {
     /**
-     * The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
+     * The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.
      */
     ActiveDirectoryId?: DirectoryId;
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryAttributes;
@@ -1181,7 +1219,7 @@ declare namespace FSx {
      */
     RemoteAdministrationEndpoint?: DNSName;
     /**
-     * For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in SubnetIds property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server. For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this value is the same as that for SubnetIDs. For more information, see Availability and Durability: Single-AZ and Multi-AZ File Systems 
+     * For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in SubnetIds property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server. For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this value is the same as that for SubnetIDs. For more information, see Availability and durability: Single-AZ and Multi-AZ file systems.
      */
     PreferredSubnetId?: SubnetId;
     /**
@@ -1189,7 +1227,7 @@ declare namespace FSx {
      */
     PreferredFileServerIp?: IpAddress;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second.
+     * The throughput of the Amazon FSx file system, measured in megabytes per second.
      */
     ThroughputCapacity?: MegabytesPerSecond;
     /**
