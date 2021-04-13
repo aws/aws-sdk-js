@@ -68,19 +68,19 @@ declare class ComprehendMedical extends Service {
    */
   detectPHI(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
-   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferICD10CM(params: ComprehendMedical.Types.InferICD10CMRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
   /**
-   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferICD10CM(callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
   /**
-   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferRxNorm(params: ComprehendMedical.Types.InferRxNormRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
   /**
-   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferRxNorm(callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
   /**
@@ -496,9 +496,17 @@ declare namespace ComprehendMedical {
      * The contextual information for the attribute. The traits recognized by InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
      */
     Traits?: ICD10CMTraitList;
+    /**
+     * The category of attribute. Can be either of DX_NAME or TIME_EXPRESSION.
+     */
+    Category?: ICD10CMEntityType;
+    /**
+     * The type of relationship between the entity and attribute. Type for the relationship can be either of OVERLAP or SYSTEM_ORGAN_SITE.
+     */
+    RelationshipType?: ICD10CMRelationshipType;
   }
   export type ICD10CMAttributeList = ICD10CMAttribute[];
-  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|string;
+  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|"TIME_TO_DX_NAME"|"TIME_EXPRESSION"|string;
   export interface ICD10CMConcept {
     /**
      * The long description of the ICD-10-CM code in the ontology.
@@ -528,7 +536,7 @@ declare namespace ComprehendMedical {
      */
     Category?: ICD10CMEntityCategory;
     /**
-     * Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type DX_NAME.
+     * Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type DX_NAME and TIME_EXPRESSION.
      */
     Type?: ICD10CMEntityType;
     /**
@@ -558,7 +566,8 @@ declare namespace ComprehendMedical {
   }
   export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string;
   export type ICD10CMEntityList = ICD10CMEntity[];
-  export type ICD10CMEntityType = "DX_NAME"|string;
+  export type ICD10CMEntityType = "DX_NAME"|"TIME_EXPRESSION"|string;
+  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|string;
   export interface ICD10CMTrait {
     /**
      * Provides a name or contextual description about the trait.

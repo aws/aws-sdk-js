@@ -593,6 +593,14 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
+   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   */
+  modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
+  /**
+   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   */
+  modifyAquaConfiguration(callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
+  /**
    * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
@@ -878,6 +886,18 @@ declare namespace Redshift {
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
   export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
+  export interface AquaConfiguration {
+    /**
+     * The value indicates the status of AQUA on the cluster. Possible values include the following.   enabled - AQUA is enabled.   disabled - AQUA is not enabled.    applying - AQUA status is being applied.   
+     */
+    AquaStatus?: AquaStatus;
+    /**
+     * The value represents how the cluster is configured to use AQUA. Possible values include the following.   enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
+  }
+  export type AquaConfigurationStatus = "enabled"|"disabled"|"auto"|string;
+  export type AquaStatus = "enabled"|"disabled"|"applying"|string;
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
@@ -1199,6 +1219,10 @@ declare namespace Redshift {
      * The total storage capacity of the cluster in megabytes. 
      */
     TotalStorageCapacityInMegaBytes?: LongOptional;
+    /**
+     * The AQUA (Advanced Query Accelerator) configuration of the cluster.
+     */
+    AquaConfiguration?: AquaConfiguration;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1639,6 +1663,10 @@ declare namespace Redshift {
      * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
      */
     AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -3271,6 +3299,22 @@ declare namespace Redshift {
     UpdateTargets?: EligibleTracksToUpdateList;
   }
   export type Mode = "standard"|"high-performance"|string;
+  export interface ModifyAquaInputMessage {
+    /**
+     * The identifier of the cluster to be modified.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The new value of AQUA configuration status. Possible values include the following.   enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
+  }
+  export interface ModifyAquaOutputMessage {
+    /**
+     * The updated AQUA configuration of the cluster. 
+     */
+    AquaConfiguration?: AquaConfiguration;
+  }
   export interface ModifyClusterDbRevisionMessage {
     /**
      * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
@@ -4175,6 +4219,10 @@ declare namespace Redshift {
      * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
      */
     AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
