@@ -68,6 +68,11 @@
     "./lib/core.js": "./dist/aws-sdk-core-react-native.js",
     "xml2js": "./dist/xml2js.js"
   },
+  "exports": {
+    ".": "./lib/aws.js",
+    "./*": "./*.js",
+    "./clients/*": "./clients/*.js"
+  },
   "directories": {
     "lib": "lib"
   },
