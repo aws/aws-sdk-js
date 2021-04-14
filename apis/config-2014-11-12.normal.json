@@ -265,6 +265,9 @@
         },
         {
           "shape": "InsufficientPermissionsException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
         }
       ],
       "documentation": "<p>Deletes the remediation configuration.</p>"
@@ -427,7 +430,7 @@
           "shape": "NoSuchConfigurationAggregatorException"
         }
       ],
-      "documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.</p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
+      "documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
     },
     "DescribeAggregationAuthorizations": {
       "name": "DescribeAggregationAuthorizations",
@@ -955,6 +958,9 @@
         },
         {
           "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
         }
       ],
       "documentation": "<p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.</p>"
@@ -1066,7 +1072,7 @@
           "shape": "NoSuchConfigurationAggregatorException"
         }
       ],
-      "documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.</p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>"
+      "documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.</p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>"
     },
     "GetAggregateDiscoveredResourceCounts": {
       "name": "GetAggregateDiscoveredResourceCounts",
@@ -2189,7 +2195,7 @@
           "documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
         }
       },
-      "documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p> <p>A conformance pack is compliant if all of the rules in that conformance packs are compliant. It is noncompliant if any of the rules are not compliant.</p> <note> <p>If a conformance pack has rules that return INSUFFICIENT_DATA, the conformance pack returns INSUFFICIENT_DATA only if all the rules within that conformance pack return INSUFFICIENT_DATA. If some of the rules in a conformance pack are compliant and others return INSUFFICIENT_DATA, the conformance pack shows compliant.</p> </note>"
+      "documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p> <p>A conformance pack is compliant if all of the rules in a conformance packs are compliant. It is noncompliant if any of the rules are not compliant. The compliance status of a conformance pack is INSUFFICIENT_DATA only if all rules within a conformance pack cannot be evaluated due to insufficient data. If some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows compliant.</p>"
     },
     "AggregateComplianceByConformancePackList": {
       "type": "list",
@@ -2237,7 +2243,7 @@
           "documentation": "<p>Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.</p>"
         }
       },
-      "documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack. Also provides the total count of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data. </p>"
+      "documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack. Also provides the compliance status of the conformance pack and the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p> <p>A conformance pack is compliant if all of the rules in a conformance packs are compliant. It is noncompliant if any of the rules are not compliant. The compliance status of a conformance pack is INSUFFICIENT_DATA only if all rules within a conformance pack cannot be evaluated due to insufficient data. If some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows compliant.</p>"
     },
     "AggregateConformancePackComplianceCount": {
       "type": "structure",
@@ -4016,7 +4022,7 @@
         },
         "Limit": {
           "shape": "Limit",
-          "documentation": "<p>The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
+          "documentation": "<p>The maximum number of conformance packs compliance details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
         },
         "NextToken": {
           "shape": "NextToken",

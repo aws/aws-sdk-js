@@ -164,11 +164,11 @@ declare class ConfigService extends Service {
    */
   describeAggregateComplianceByConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse, AWSError>;
   /**
-   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConformancePacks(params: ConfigService.Types.DescribeAggregateComplianceByConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
   /**
-   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class ConfigService extends Service {
    */
   getAggregateConfigRuleComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateConformancePackComplianceSummary(params: ConfigService.Types.GetAggregateConformancePackComplianceSummaryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
   /**
@@ -1850,7 +1850,7 @@ declare namespace ConfigService {
      */
     Filters?: AggregateConformancePackComplianceFilters;
     /**
-     * The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
+     * The maximum number of conformance packs compliance details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
      */
     Limit?: Limit;
     /**

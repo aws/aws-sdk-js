@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.886.0-->
+<!--LATEST=2.887.0-->
 <!--ENTRYINSERT-->
+
+## 2.887.0
+* feature: CodeStarconnections: This release adds tagging support for CodeStar Connections Host resources
+* feature: ConfigService: Add exception for DeleteRemediationConfiguration and DescribeRemediationExecutionStatus
+* feature: MediaConnect: For flows that use Listener protocols, you can now easily locate an output's outbound IP address for a private internet. Additionally, MediaConnect now supports the Waiters feature that makes it easier to poll for the status of a flow until it reaches its desired state.
 
 ## 2.886.0
 * feature: ComprehendMedical: The InferICD10CM API now returns TIME_EXPRESSION entities that refer to medical conditions.
