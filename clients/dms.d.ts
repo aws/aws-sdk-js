@@ -173,6 +173,14 @@ declare class DMS extends Service {
    */
   describeConnections(callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
   /**
+   * Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
+   */
+  describeEndpointSettings(params: DMS.Types.DescribeEndpointSettingsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointSettingsResponse) => void): Request<DMS.Types.DescribeEndpointSettingsResponse, AWSError>;
+  /**
+   * Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
+   */
+  describeEndpointSettings(callback?: (err: AWSError, data: DMS.Types.DescribeEndpointSettingsResponse) => void): Request<DMS.Types.DescribeEndpointSettingsResponse, AWSError>;
+  /**
    * Returns information about the type of endpoints available.
    */
   describeEndpointTypes(params: DMS.Types.DescribeEndpointTypesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointTypesResponse) => void): Request<DMS.Types.DescribeEndpointTypesResponse, AWSError>;
@@ -1170,6 +1178,30 @@ declare namespace DMS {
      */
     Connections?: ConnectionList;
   }
+  export interface DescribeEndpointSettingsMessage {
+    /**
+     * The databse engine used for your source or target endpoint.
+     */
+    EngineName: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeEndpointSettingsResponse {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * Descriptions of the endpoint settings available for your source or target database engine.
+     */
+    EndpointSettings?: EndpointSettingsList;
+  }
   export interface DescribeEndpointTypesMessage {
     /**
      * Filters applied to the endpoint types. Valid filter names: engine-name | endpoint-type
@@ -1821,6 +1853,43 @@ declare namespace DMS {
     DocDbSettings?: DocDbSettings;
   }
   export type EndpointList = Endpoint[];
+  export interface EndpointSetting {
+    /**
+     * The name that you want to give the endpoint settings.
+     */
+    Name?: String;
+    /**
+     * The type of endpoint. Valid values are source and target.
+     */
+    Type?: EndpointSettingTypeValue;
+    /**
+     * Enumerated values to use for this endpoint.
+     */
+    EnumValues?: EndpointSettingEnumValues;
+    /**
+     * A value that marks this endpoint setting as sensitive.
+     */
+    Sensitive?: BooleanOptional;
+    /**
+     * The unit of measure for this endpoint setting.
+     */
+    Units?: String;
+    /**
+     * The relevance or validity of an endpoint setting for an engine name and its endpoint type.
+     */
+    Applicability?: String;
+    /**
+     * The minimum value of an endpoint setting that is of type int.
+     */
+    IntValueMin?: IntegerOptional;
+    /**
+     * The maximum value of an endpoint setting that is of type int.
+     */
+    IntValueMax?: IntegerOptional;
+  }
+  export type EndpointSettingEnumValues = String[];
+  export type EndpointSettingTypeValue = "string"|"boolean"|"integer"|"enum"|string;
+  export type EndpointSettingsList = EndpointSetting[];
   export interface Event {
     /**
      *  The identifier of an event source.
@@ -1958,7 +2027,7 @@ declare namespace DMS {
     /**
      * The contents of a .pem file, which contains an X.509 certificate.
      */
-    CertificatePem?: String;
+    CertificatePem?: SecretString;
     /**
      * The location of an imported Oracle Wallet certificate for use with SSL.
      */
@@ -1978,9 +2047,10 @@ declare namespace DMS {
   export type IndividualAssessmentNameList = String[];
   export type Integer = number;
   export type IntegerOptional = number;
+  export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
   export interface KafkaSettings {
     /**
-     * The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker in the form  broker-hostname-or-ip:port . For example, "ec2-12-345-678-901.compute-1.amazonaws.com:2345".
+     * A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form  broker-hostname-or-ip:port . For example, "ec2-12-345-678-901.compute-1.amazonaws.com:2345". For more information and examples of specifying a list of broker locations, see Using Apache Kafka as a target for AWS Database Migration Service in the AWS Data Migration Service User Guide. 
      */
     Broker?: String;
     /**
@@ -2019,6 +2089,34 @@ declare namespace DMS {
      * Include NULL and empty columns for records migrated to the endpoint. The default is false.
      */
     IncludeNullAndEmpty?: BooleanOptional;
+    /**
+     * Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires SaslUsername and SaslPassword.
+     */
+    SecurityProtocol?: KafkaSecurityProtocol;
+    /**
+     * The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.
+     */
+    SslClientCertificateArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.
+     */
+    SslClientKeyArn?: String;
+    /**
+     *  The password for the client private key used to securely connect to a Kafka target endpoint.
+     */
+    SslClientKeyPassword?: SecretString;
+    /**
+     *  The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.
+     */
+    SslCaCertificateArn?: String;
+    /**
+     *  The secure username you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
+     */
+    SaslUsername?: String;
+    /**
+     * The secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
+     */
+    SaslPassword?: SecretString;
   }
   export type KeyList = String[];
   export interface KinesisSettings {
@@ -2095,6 +2193,10 @@ declare namespace DMS {
      */
     Password?: SecretString;
     /**
+     * Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.
+     */
+    QuerySingleAlwaysOnNode?: BooleanOptional;
+    /**
      * When this attribute is set to Y, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to Y enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.
      */
     ReadBackupOnly?: BooleanOptional;
@@ -2114,6 +2216,10 @@ declare namespace DMS {
      * Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.
      */
     UseBcpFullLoad?: BooleanOptional;
+    /**
+     * When this attribute is set to Y, DMS processes third-party transaction log backups if they are created in native format.
+     */
+    UseThirdPartyBackupDevice?: BooleanOptional;
     /**
      * The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the SQL Server endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerSecretId. Or you can specify clear-text values for UserName, Password, ServerName, and Port. You can't specify both. For more information on creating this SecretsManagerSecret and the SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it, see Using secrets to access AWS Database Migration Service resources in the AWS Database Migration Service User Guide. 
      */
@@ -2363,7 +2469,7 @@ declare namespace DMS {
      */
     MigrationType?: MigrationTypeValue;
     /**
-     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with file://. When working with the DMS API, provide the JSON as the parameter value, for example: --table-mappings file://mappingfile.json 
+     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with file://. For example, --table-mappings file://mappingfile.json. When working with the DMS API, provide the JSON as the parameter value. 
      */
     TableMappings?: String;
     /**
@@ -2472,6 +2578,10 @@ declare namespace DMS {
      * Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.
      */
     AfterConnectScript?: String;
+    /**
+     * Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false.
+     */
+    CleanSourceMetadataOnMismatch?: BooleanOptional;
     /**
      * Database name for the endpoint.
      */
@@ -2669,6 +2779,10 @@ declare namespace DMS {
      * Fully qualified domain name of the endpoint.
      */
     ServerName?: String;
+    /**
+     * Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible. Or you can create your own custom function that mimics the operation of SDOGEOJSON and set SpatialDataOptionToGeoJsonFunctionName to call it instead. 
+     */
+    SpatialDataOptionToGeoJsonFunctionName?: String;
     /**
      * Endpoint connection user name.
      */
@@ -3433,7 +3547,7 @@ declare namespace DMS {
   }
   export interface S3Settings {
     /**
-     *  The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an 3S bucket.
+     *  The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an S3 bucket.
      */
     ServiceAccessRoleArn?: String;
     /**

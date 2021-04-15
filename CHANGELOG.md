@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.887.0-->
+<!--LATEST=2.888.0-->
 <!--ENTRYINSERT-->
+
+## 2.888.0
+* feature: DMS: AWS DMS added support of TLS for Kafka endpoint. Added Describe endpoint setting API for DMS endpoints.
 
 ## 2.887.0
 * feature: CodeStarconnections: This release adds tagging support for CodeStar Connections Host resources
