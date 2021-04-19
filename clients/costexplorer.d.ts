@@ -1053,7 +1053,7 @@ declare namespace CostExplorer {
     /**
      * Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
      * Filters AWS costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
      */
@@ -1097,7 +1097,7 @@ declare namespace CostExplorer {
     /**
      * Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, MONTHLY, DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
      * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter.
      */
@@ -2582,7 +2582,7 @@ declare namespace CostExplorer {
   export type SubscriberStatus = "CONFIRMED"|"DECLINED"|string;
   export type SubscriberType = "EMAIL"|"SNS"|string;
   export type Subscribers = Subscriber[];
-  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|string;
+  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagValues {

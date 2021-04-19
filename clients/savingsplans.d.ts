@@ -586,7 +586,7 @@ declare namespace SavingsPlans {
   export type SavingsPlanOperationList = SavingsPlanOperation[];
   export type SavingsPlanPaymentOption = "All Upfront"|"Partial Upfront"|"No Upfront"|string;
   export type SavingsPlanPaymentOptionList = SavingsPlanPaymentOption[];
-  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|string;
+  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|"SageMaker"|string;
   export type SavingsPlanProductTypeList = SavingsPlanProductType[];
   export interface SavingsPlanRate {
     /**
@@ -651,7 +651,7 @@ declare namespace SavingsPlans {
   }
   export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AWSLambda"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|"AmazonSageMaker"|string;
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
   export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
   export type SavingsPlanRateUsageType = string;
@@ -660,7 +660,7 @@ declare namespace SavingsPlans {
   export type SavingsPlanServiceCodeList = SavingsPlanServiceCode[];
   export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string;
   export type SavingsPlanStateList = SavingsPlanState[];
-  export type SavingsPlanType = "Compute"|"EC2Instance"|string;
+  export type SavingsPlanType = "Compute"|"EC2Instance"|"SageMaker"|string;
   export type SavingsPlanTypeList = SavingsPlanType[];
   export type SavingsPlanUsageType = string;
   export type SavingsPlanUsageTypeList = SavingsPlanUsageType[];

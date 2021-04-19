@@ -2019,6 +2019,7 @@
       "type": "structure",
       "required": [
         "TimePeriod",
+        "Granularity",
         "Metrics"
       ],
       "members": {
@@ -2073,6 +2074,7 @@
       "type": "structure",
       "required": [
         "TimePeriod",
+        "Granularity",
         "Filter"
       ],
       "members": {
@@ -4254,7 +4256,8 @@
       "type": "string",
       "enum": [
         "COMPUTE_SP",
-        "EC2_INSTANCE_SP"
+        "EC2_INSTANCE_SP",
+        "SAGEMAKER_SP"
       ]
     },
     "TagKey": {

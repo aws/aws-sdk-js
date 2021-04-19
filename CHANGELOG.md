@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.888.0-->
+<!--LATEST=2.889.0-->
 <!--ENTRYINSERT-->
+
+## 2.889.0
+* feature: CostExplorer: Adding support for Sagemaker savings plans in GetSavingsPlansPurchaseRecommendation API
+* feature: SavingsPlans: Added support for Amazon SageMaker in Machine Learning Savings Plans
 
 ## 2.888.0
 * feature: DMS: AWS DMS added support of TLS for Kafka endpoint. Added Describe endpoint setting API for DMS endpoints.
