@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.889.0-->
+<!--LATEST=2.890.0-->
 <!--ENTRYINSERT-->
+
+## 2.890.0
+* feature: Detective: Added parameters to track the data volume in bytes for a member account. Deprecated the existing parameters that tracked the volume as a percentage of the allowed volume for a behavior graph. Changes reflected in MemberDetails object.
+* feature: GroundStation: Support new S3 Recording Config allowing customers to write downlink data directly to S3.
+* feature: Kendra: Amazon Kendra now enables users to override index-level boosting configurations for each query.
+* feature: Redshift: Add operations: AddPartner, DescribePartners, DeletePartner, and UpdatePartnerStatus to support tracking integration status with data partners.
 
 ## 2.889.0
 * feature: CostExplorer: Adding support for Sagemaker savings plans in GetSavingsPlansPurchaseRecommendation API

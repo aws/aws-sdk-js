@@ -256,6 +256,7 @@ declare namespace GroundStation {
   }
   export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
   export type Boolean = boolean;
+  export type BucketArn = string;
   export interface CancelContactRequest {
     /**
      * UUID of a contact.
@@ -263,13 +264,17 @@ declare namespace GroundStation {
     contactId: String;
   }
   export type ConfigArn = string;
-  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|string;
+  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording"|string;
   export interface ConfigDetails {
     /**
      * Details for antenna demod decode Config in a contact.
      */
     antennaDemodDecodeDetails?: AntennaDemodDecodeDetails;
     endpointDetails?: EndpointDetails;
+    /**
+     * Details for an S3 recording Config in a contact.
+     */
+    s3RecordingDetails?: S3RecordingDetails;
   }
   export interface ConfigIdResponse {
     /**
@@ -321,6 +326,10 @@ declare namespace GroundStation {
      * Information about the dataflow endpoint Config.
      */
     dataflowEndpointConfig?: DataflowEndpointConfig;
+    /**
+     * Information about an S3 recording Config.
+     */
+    s3RecordingConfig?: S3RecordingConfig;
     /**
      * Object that determines whether tracking should be used during a contact executed with this Config in the mission profile. 
      */
@@ -465,7 +474,7 @@ declare namespace GroundStation {
     /**
      * Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
      */
-    mtu?: DataflowEndpointmtuInteger;
+    mtu?: DataflowEndpointMtuInteger;
     /**
      * Name of a dataflow endpoint.
      */
@@ -503,7 +512,7 @@ declare namespace GroundStation {
      */
     dataflowEndpointGroupId?: String;
   }
-  export type DataflowEndpointmtuInteger = number;
+  export type DataflowEndpointMtuInteger = number;
   export type DataflowList = DataflowDetail[];
   export interface DecodeConfig {
     /**
@@ -1073,6 +1082,31 @@ declare namespace GroundStation {
     tags?: TagsMap;
   }
   export type RoleArn = string;
+  export type S3KeyPrefix = string;
+  export interface S3RecordingConfig {
+    /**
+     * ARN of the bucket to record to.
+     */
+    bucketArn: BucketArn;
+    /**
+     * S3 Key prefix to prefice data files.
+     */
+    prefix?: S3KeyPrefix;
+    /**
+     * ARN of the role Ground Station assumes to write data to the bucket.
+     */
+    roleArn: RoleArn;
+  }
+  export interface S3RecordingDetails {
+    /**
+     * ARN of the bucket used.
+     */
+    bucketArn?: BucketArn;
+    /**
+     * Template of the S3 key used.
+     */
+    keyTemplate?: String;
+  }
   export type SafeName = string;
   export type SatelliteList = SatelliteListItem[];
   export interface SatelliteListItem {

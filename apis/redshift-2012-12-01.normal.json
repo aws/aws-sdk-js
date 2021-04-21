@@ -49,6 +49,32 @@
       ],
       "documentation": "<p>Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. </p>"
     },
+    "AddPartner": {
+      "name": "AddPartner",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PartnerIntegrationInputMessage"
+      },
+      "output": {
+        "shape": "PartnerIntegrationOutputMessage",
+        "resultWrapper": "AddPartnerResult"
+      },
+      "errors": [
+        {
+          "shape": "PartnerNotFoundFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedPartnerIntegrationFault"
+        }
+      ],
+      "documentation": "<p>Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.</p>"
+    },
     "AuthorizeClusterSecurityGroupIngress": {
       "name": "AuthorizeClusterSecurityGroupIngress",
       "http": {
@@ -999,6 +1025,32 @@
       ],
       "documentation": "<p>Deletes the specified Amazon Redshift HSM configuration.</p>"
     },
+    "DeletePartner": {
+      "name": "DeletePartner",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PartnerIntegrationInputMessage"
+      },
+      "output": {
+        "shape": "PartnerIntegrationOutputMessage",
+        "resultWrapper": "DeletePartnerResult"
+      },
+      "errors": [
+        {
+          "shape": "PartnerNotFoundFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedPartnerIntegrationFault"
+        }
+      ],
+      "documentation": "<p>Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.</p>"
+    },
     "DeleteScheduledAction": {
       "name": "DeleteScheduledAction",
       "http": {
@@ -1534,6 +1586,29 @@
         "resultWrapper": "DescribeOrderableClusterOptionsResult"
       },
       "documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+    },
+    "DescribePartners": {
+      "name": "DescribePartners",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribePartnersInputMessage"
+      },
+      "output": {
+        "shape": "DescribePartnersOutputMessage",
+        "resultWrapper": "DescribePartnersResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedPartnerIntegrationFault"
+        }
+      ],
+      "documentation": "<p>Returns information about the partner integrations defined for a cluster.</p>"
     },
     "DescribeReservedNodeOfferings": {
       "name": "DescribeReservedNodeOfferings",
@@ -2824,6 +2899,32 @@
         }
       ],
       "documentation": "<p>Rotates the encryption keys for a cluster.</p>"
+    },
+    "UpdatePartnerStatus": {
+      "name": "UpdatePartnerStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdatePartnerStatusInputMessage"
+      },
+      "output": {
+        "shape": "PartnerIntegrationOutputMessage",
+        "resultWrapper": "UpdatePartnerStatusResult"
+      },
+      "errors": [
+        {
+          "shape": "PartnerNotFoundFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedPartnerIntegrationFault"
+        }
+      ],
+      "documentation": "<p>Updates the status of a partner integration.</p>"
     }
   },
   "shapes": {
@@ -5067,11 +5168,11 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.</p>"
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeEndpointAccess</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.</p>"
         }
       }
     },
@@ -5092,11 +5193,11 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is included in the response so that the remaining results can be retrieved.</p>"
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.</p>"
         }
       }
     },
@@ -5293,6 +5394,40 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribePartnersInputMessage": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClusterIdentifier"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "PartnerIntegrationAccountId",
+          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "PartnerIntegrationClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the cluster whose partner integration is being described.</p>"
+        },
+        "DatabaseName": {
+          "shape": "PartnerIntegrationDatabaseName",
+          "documentation": "<p>The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.</p>"
+        },
+        "PartnerName": {
+          "shape": "PartnerIntegrationPartnerName",
+          "documentation": "<p>The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.</p>"
+        }
+      }
+    },
+    "DescribePartnersOutputMessage": {
+      "type": "structure",
+      "members": {
+        "PartnerIntegrationInfoList": {
+          "shape": "PartnerIntegrationInfoList",
+          "documentation": "<p>A list of partner integrations.</p>"
+        }
+      }
     },
     "DescribeReservedNodeOfferingsMessage": {
       "type": "structure",
@@ -5755,7 +5890,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeEndpointAccess</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.</p>"
         }
       }
     },
@@ -5816,7 +5951,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.</p>"
         }
       }
     },
@@ -7037,6 +7172,118 @@
         "shape": "Parameter",
         "locationName": "Parameter"
       }
+    },
+    "PartnerIntegrationAccountId": {
+      "type": "string",
+      "max": 12,
+      "min": 12,
+      "pattern": "^[0-9]+$"
+    },
+    "PartnerIntegrationClusterIdentifier": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-zA-Z0-9\\-]+$"
+    },
+    "PartnerIntegrationDatabaseName": {
+      "type": "string",
+      "max": 127,
+      "pattern": "^[\\p{L}_][\\p{L}\\p{N}@$#_]+$"
+    },
+    "PartnerIntegrationInfo": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "PartnerIntegrationDatabaseName",
+          "documentation": "<p>The name of the database that receives data from a partner.</p>"
+        },
+        "PartnerName": {
+          "shape": "PartnerIntegrationPartnerName",
+          "documentation": "<p>The name of the partner.</p>"
+        },
+        "Status": {
+          "shape": "PartnerIntegrationStatus",
+          "documentation": "<p>The partner integration status.</p>"
+        },
+        "StatusMessage": {
+          "shape": "PartnerIntegrationStatusMessage",
+          "documentation": "<p>The status message provided by the partner.</p>"
+        },
+        "CreatedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The date (UTC) that the partner integration was created.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The date (UTC) that the partner integration status was last updated by the partner.</p>"
+        }
+      },
+      "documentation": "<p>Describes a partner integration.</p>"
+    },
+    "PartnerIntegrationInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "PartnerIntegrationInfo",
+        "locationName": "PartnerIntegrationInfo"
+      }
+    },
+    "PartnerIntegrationInputMessage": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClusterIdentifier",
+        "DatabaseName",
+        "PartnerName"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "PartnerIntegrationAccountId",
+          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "PartnerIntegrationClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the cluster that receives data from the partner.</p>"
+        },
+        "DatabaseName": {
+          "shape": "PartnerIntegrationDatabaseName",
+          "documentation": "<p>The name of the database that receives data from the partner.</p>"
+        },
+        "PartnerName": {
+          "shape": "PartnerIntegrationPartnerName",
+          "documentation": "<p>The name of the partner that is authorized to send data.</p>"
+        }
+      }
+    },
+    "PartnerIntegrationOutputMessage": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "PartnerIntegrationDatabaseName",
+          "documentation": "<p>The name of the database that receives data from the partner.</p>"
+        },
+        "PartnerName": {
+          "shape": "PartnerIntegrationPartnerName",
+          "documentation": "<p>The name of the partner that is authorized to send data.</p>"
+        }
+      }
+    },
+    "PartnerIntegrationPartnerName": {
+      "type": "string",
+      "max": 255,
+      "pattern": "^[a-zA-Z0-9\\-_]+$"
+    },
+    "PartnerIntegrationStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "RuntimeFailure",
+        "ConnectionFailure"
+      ]
+    },
+    "PartnerIntegrationStatusMessage": {
+      "type": "string",
+      "max": 262144,
+      "pattern": "^[\\x20-\\x7E]+$"
     },
     "PauseClusterMessage": {
       "type": "structure",
@@ -8600,6 +8847,42 @@
         "Marker": {
           "shape": "String",
           "documentation": "<p>The starting point to return a set of response tracklist records. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
+    "UpdatePartnerStatusInputMessage": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClusterIdentifier",
+        "DatabaseName",
+        "PartnerName",
+        "Status"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "PartnerIntegrationAccountId",
+          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "PartnerIntegrationClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the cluster whose partner integration status is being updated.</p>"
+        },
+        "DatabaseName": {
+          "shape": "PartnerIntegrationDatabaseName",
+          "documentation": "<p>The name of the database whose partner integration status is being updated.</p>"
+        },
+        "PartnerName": {
+          "shape": "PartnerIntegrationPartnerName",
+          "documentation": "<p>The name of the partner whose integration status is being updated.</p>"
+        },
+        "Status": {
+          "shape": "PartnerIntegrationStatus",
+          "documentation": "<p>The value of the updated status.</p>"
+        },
+        "StatusMessage": {
+          "shape": "PartnerIntegrationStatusMessage",
+          "documentation": "<p>The status message provided by the partner.</p>"
         }
       }
     },

@@ -2750,6 +2750,31 @@
       "max": 30,
       "min": 1
     },
+    "DocumentRelevanceConfiguration": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Relevance"
+      ],
+      "members": {
+        "Name": {
+          "shape": "DocumentMetadataConfigurationName",
+          "documentation": "<p>The name of the tuning configuration to override document relevance at the index level.</p>"
+        },
+        "Relevance": {
+          "shape": "Relevance"
+        }
+      },
+      "documentation": "<p>Overrides the document relevance properties of a custom index field.</p>"
+    },
+    "DocumentRelevanceOverrideConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentRelevanceConfiguration"
+      },
+      "max": 500,
+      "min": 0
+    },
     "DocumentsMetadataConfiguration": {
       "type": "structure",
       "members": {
@@ -3597,6 +3622,10 @@
         "QueryResultTypeFilter": {
           "shape": "QueryResultType",
           "documentation": "<p>Sets the type of query. Only results for the specified query type are returned.</p>"
+        },
+        "DocumentRelevanceOverrideConfigurations": {
+          "shape": "DocumentRelevanceOverrideConfigurationList",
+          "documentation": "<p>Overrides relevance tuning configurations of fields or attributes set at the index level.</p> <p>If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning.</p> <p>If there is relevance tuning configured at the index level, but you do not use this API to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level.</p> <p>If there is relevance tuning configured for fields at the index level, but you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.</p>"
         },
         "PageNumber": {
           "shape": "Integer",

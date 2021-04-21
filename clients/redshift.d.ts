@@ -21,6 +21,14 @@ declare class Redshift extends Service {
    */
   acceptReservedNodeExchange(callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
   /**
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
@@ -261,6 +269,14 @@ declare class Redshift extends Service {
    */
   deleteHsmConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
    * Deletes a scheduled action. 
    */
   deleteScheduledAction(params: Redshift.Types.DeleteScheduledActionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -468,6 +484,14 @@ declare class Redshift extends Service {
    * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(params: Redshift.Types.DescribePartnersInputMessage, callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
   /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -808,6 +832,14 @@ declare class Redshift extends Service {
    * Rotates the encryption keys for a cluster.
    */
   rotateEncryptionKey(callback?: (err: AWSError, data: Redshift.Types.RotateEncryptionKeyResult) => void): Request<Redshift.Types.RotateEncryptionKeyResult, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(params: Redshift.Types.UpdatePartnerStatusInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -2393,11 +2425,11 @@ declare namespace Redshift {
      */
     VpcId?: String;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
      */
     MaxRecords?: IntegerOptional;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
      */
     Marker?: String;
   }
@@ -2415,11 +2447,11 @@ declare namespace Redshift {
      */
     Grantee?: BooleanOptional;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
      */
     MaxRecords?: IntegerOptional;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
      */
     Marker?: String;
   }
@@ -2578,6 +2610,30 @@ declare namespace Redshift {
      * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeOrderableClusterOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
+  }
+  export interface DescribePartnersInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration is being described.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export interface DescribePartnersOutputMessage {
+    /**
+     * A list of partner integrations.
+     */
+    PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
   }
   export interface DescribeReservedNodeOfferingsMessage {
     /**
@@ -2924,7 +2980,7 @@ declare namespace Redshift {
      */
     EndpointAccessList?: EndpointAccesses;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
      */
     Marker?: String;
   }
@@ -2973,7 +3029,7 @@ declare namespace Redshift {
      */
     EndpointAuthorizationList?: EndpointAuthorizations;
     /**
-     * Reserved for Amazon Redshift internal use.
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
      */
     Marker?: String;
   }
@@ -3790,6 +3846,67 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export type PartnerIntegrationAccountId = string;
+  export type PartnerIntegrationClusterIdentifier = string;
+  export type PartnerIntegrationDatabaseName = string;
+  export interface PartnerIntegrationInfo {
+    /**
+     * The name of the database that receives data from a partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+    /**
+     * The partner integration status.
+     */
+    Status?: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
+    /**
+     * The date (UTC) that the partner integration was created.
+     */
+    CreatedAt?: TStamp;
+    /**
+     * The date (UTC) that the partner integration status was last updated by the partner.
+     */
+    UpdatedAt?: TStamp;
+  }
+  export type PartnerIntegrationInfoList = PartnerIntegrationInfo[];
+  export interface PartnerIntegrationInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster that receives data from the partner.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+  }
+  export interface PartnerIntegrationOutputMessage {
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export type PartnerIntegrationPartnerName = string;
+  export type PartnerIntegrationStatus = "Active"|"Inactive"|"RuntimeFailure"|"ConnectionFailure"|string;
+  export type PartnerIntegrationStatusMessage = string;
   export interface PauseClusterMessage {
     /**
      * The identifier of the cluster to be paused.
@@ -4854,6 +4971,32 @@ declare namespace Redshift {
      * The starting point to return a set of response tracklist records. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
      */
     Marker?: String;
+  }
+  export interface UpdatePartnerStatusInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration status is being updated.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration status is being updated.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner whose integration status is being updated.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+    /**
+     * The value of the updated status.
+     */
+    Status: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
   }
   export interface UpdateTarget {
     /**

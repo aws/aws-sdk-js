@@ -1344,6 +1344,14 @@ declare namespace Kendra {
   }
   export type DocumentMetadataConfigurationList = DocumentMetadataConfiguration[];
   export type DocumentMetadataConfigurationName = string;
+  export interface DocumentRelevanceConfiguration {
+    /**
+     * The name of the tuning configuration to override document relevance at the index level.
+     */
+    Name: DocumentMetadataConfigurationName;
+    Relevance: Relevance;
+  }
+  export type DocumentRelevanceOverrideConfigurationList = DocumentRelevanceConfiguration[];
   export interface DocumentsMetadataConfiguration {
     /**
      * A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to include only the desired metadata files.
@@ -1794,6 +1802,10 @@ declare namespace Kendra {
      * Sets the type of query. Only results for the specified query type are returned.
      */
     QueryResultTypeFilter?: QueryResultType;
+    /**
+     * Overrides relevance tuning configurations of fields or attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured at the index level, but you do not use this API to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level. If there is relevance tuning configured for fields at the index level, but you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
+     */
+    DocumentRelevanceOverrideConfigurations?: DocumentRelevanceOverrideConfigurationList;
     /**
      * Query results are returned in pages the size of the PageSize parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.
      */
