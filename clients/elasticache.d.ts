@@ -687,7 +687,7 @@ declare namespace ElastiCache {
      */
     CacheClusterStatus?: String;
     /**
-     * The number of cache nodes in the cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.
+     * The number of cache nodes in the cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.
      */
     NumCacheNodes?: IntegerOptional;
     /**
@@ -767,6 +767,14 @@ declare namespace ElastiCache {
      * The ARN (Amazon Resource Name) of the cache cluster.
      */
     ARN?: String;
+    /**
+     * A boolean value indicating whether log delivery is enabled for the replication group.
+     */
+    ReplicationGroupLogDeliveryEnabled?: Boolean;
+    /**
+     * Returns the destination, format and type of the logs.
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationList;
   }
   export type CacheClusterIdList = String[];
   export type CacheClusterList = CacheCluster[];
@@ -1080,6 +1088,12 @@ declare namespace ElastiCache {
   }
   export type CacheSubnetGroups = CacheSubnetGroup[];
   export type ChangeType = "immediate"|"requires-reboot"|string;
+  export interface CloudWatchLogsDestinationDetails {
+    /**
+     * The name of the CloudWatch Logs log group.
+     */
+    LogGroup?: String;
+  }
   export type ClusterIdList = String[];
   export interface CompleteMigrationMessage {
     /**
@@ -1159,7 +1173,7 @@ declare namespace ElastiCache {
      */
     PreferredAvailabilityZones?: PreferredAvailabilityZoneList;
     /**
-     * The initial number of cache nodes that the cluster has. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20. If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at http://aws.amazon.com/contact-us/elasticache-node-limit-request/.
+     * The initial number of cache nodes that the cluster has. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40. If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at http://aws.amazon.com/contact-us/elasticache-node-limit-request/.
      */
     NumCacheNodes?: IntegerOptional;
     /**
@@ -1242,6 +1256,10 @@ declare namespace ElastiCache {
      * The outpost ARNs in which the cache cluster is created.
      */
     PreferredOutpostArns?: PreferredOutpostArnList;
+    /**
+     * Specifies the destination, format and type of the logs. 
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
   }
   export interface CreateCacheClusterResult {
     CacheCluster?: CacheCluster;
@@ -1451,6 +1469,10 @@ declare namespace ElastiCache {
      * The list of user groups to associate with the replication group.
      */
     UserGroupIds?: UserGroupIdListInput;
+    /**
+     * Specifies the destination, format and type of the logs.
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
   }
   export interface CreateReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1549,11 +1571,11 @@ declare namespace ElastiCache {
      */
     NodeGroupCount: Integer;
     /**
-     * If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove from the cluster. 
+     * If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. GlobalNodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by GlobalNodeGroupsToRemove from the cluster. 
      */
     GlobalNodeGroupsToRemove?: GlobalNodeGroupIdList;
     /**
-     * If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove from the cluster. 
+     * If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. GlobalNodeGroupsToRetain is a list of NodeGroupIds to retain from the cluster. ElastiCache for Redis will attempt to retain all node groups listed by GlobalNodeGroupsToRetain from the cluster. 
      */
     GlobalNodeGroupsToRetain?: GlobalNodeGroupIdList;
     /**
@@ -2088,6 +2110,17 @@ declare namespace ElastiCache {
      */
     Marker?: String;
   }
+  export interface DestinationDetails {
+    /**
+     * The configuration details of the CloudWatch Logs destination.
+     */
+    CloudWatchLogsDetails?: CloudWatchLogsDestinationDetails;
+    /**
+     * The configuration details of the Kinesis Data Firehose destination.
+     */
+    KinesisFirehoseDetails?: KinesisFirehoseDestinationDetails;
+  }
+  export type DestinationType = "cloudwatch-logs"|"kinesis-firehose"|string;
   export interface DisassociateGlobalReplicationGroupMessage {
     /**
      * The name of the Global datastore
@@ -2355,6 +2388,12 @@ declare namespace ElastiCache {
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
+  export interface KinesisFirehoseDestinationDetails {
+    /**
+     * The name of the Kinesis Data Firehose delivery stream.
+     */
+    DeliveryStream?: String;
+  }
   export interface ListAllowedNodeTypeModificationsMessage {
     /**
      * The name of the cluster you want to scale up to a larger node instanced type. ElastiCache uses the cluster id to identify the current node type of this cluster and from that to create a list of node types you can scale up to.  You must provide a value for either the CacheClusterId or the ReplicationGroupId. 
@@ -2371,13 +2410,66 @@ declare namespace ElastiCache {
      */
     ResourceName: String;
   }
+  export interface LogDeliveryConfiguration {
+    /**
+     * Refers to slow-log.
+     */
+    LogType?: LogType;
+    /**
+     * Returns the destination type, either cloudwatch-logs or kinesis-firehose.
+     */
+    DestinationType?: DestinationType;
+    /**
+     * Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.
+     */
+    DestinationDetails?: DestinationDetails;
+    /**
+     * Returns the log format, either JSON or TEXT.
+     */
+    LogFormat?: LogFormat;
+    /**
+     * Returns the log delivery configuration status. Values are one of enabling | disabling | modifying | active | error 
+     */
+    Status?: LogDeliveryConfigurationStatus;
+    /**
+     * Returns an error message for the log delivery configuration.
+     */
+    Message?: String;
+  }
+  export type LogDeliveryConfigurationList = LogDeliveryConfiguration[];
+  export interface LogDeliveryConfigurationRequest {
+    /**
+     * Refers to slow-log.
+     */
+    LogType?: LogType;
+    /**
+     * Specify either cloudwatch-logs or kinesis-firehose as the destination type.
+     */
+    DestinationType?: DestinationType;
+    /**
+     * Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.
+     */
+    DestinationDetails?: DestinationDetails;
+    /**
+     * Specifies either JSON or TEXT
+     */
+    LogFormat?: LogFormat;
+    /**
+     * Specify if log delivery is enabled. Default true.
+     */
+    Enabled?: BooleanOptional;
+  }
+  export type LogDeliveryConfigurationRequestList = LogDeliveryConfigurationRequest[];
+  export type LogDeliveryConfigurationStatus = "active"|"enabling"|"modifying"|"disabling"|"error"|string;
+  export type LogFormat = "text"|"json"|string;
+  export type LogType = "slow-log"|string;
   export interface ModifyCacheClusterMessage {
     /**
      * The cluster identifier. This value is stored as a lowercase string.
      */
     CacheClusterId: String;
     /**
-     * The number of cache nodes that the cluster should have. If the value for NumCacheNodes is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), more nodes are added. If the value is less than the number of existing cache nodes, nodes are removed. If the value is equal to the number of current cache nodes, any pending add or remove requests are canceled. If you are removing cache nodes, you must use the CacheNodeIdsToRemove parameter to provide the IDs of the specific cache nodes to remove. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.  Adding or removing Memcached cache nodes can be applied immediately or as a pending operation (see ApplyImmediately). A pending operation to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending operations to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending operation to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending operation to add nodes. The customer can modify the previous pending operation to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending operations to modify the number of cache nodes in a cluster, use the ModifyCacheCluster request and set NumCacheNodes equal to the number of cache nodes currently in the cluster. 
+     * The number of cache nodes that the cluster should have. If the value for NumCacheNodes is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), more nodes are added. If the value is less than the number of existing cache nodes, nodes are removed. If the value is equal to the number of current cache nodes, any pending add or remove requests are canceled. If you are removing cache nodes, you must use the CacheNodeIdsToRemove parameter to provide the IDs of the specific cache nodes to remove. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.  Adding or removing Memcached cache nodes can be applied immediately or as a pending operation (see ApplyImmediately). A pending operation to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending operations to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending operation to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending operation to add nodes. The customer can modify the previous pending operation to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending operations to modify the number of cache nodes in a cluster, use the ModifyCacheCluster request and set NumCacheNodes equal to the number of cache nodes currently in the cluster. 
      */
     NumCacheNodes?: IntegerOptional;
     /**
@@ -2389,7 +2481,7 @@ declare namespace ElastiCache {
      */
     AZMode?: AZMode;
     /**
-     * The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when NumCacheNodes in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. This option is only supported on Memcached clusters. Scenarios:    Scenario 1: You have 3 active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and optionally specify two Availability Zones for the two new nodes.    Scenario 2: You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify NumCacheNodes=6 ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.    Scenario 3: You want to cancel all pending operations. Specify NumCacheNodes=3 to cancel all pending operations.   The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting NumCacheNodes to the number of current nodes. If cross-az is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the Availability Zone Considerations section of Cache Node Considerations for Memcached.  Impact of new add/remove requests upon pending requests    Scenario-1   Pending Action: Delete   New Request: Delete   Result: The new delete, pending or immediate, replaces the pending delete.     Scenario-2   Pending Action: Delete   New Request: Create   Result: The new create, pending or immediate, replaces the pending delete.     Scenario-3   Pending Action: Create   New Request: Delete   Result: The new delete, pending or immediate, replaces the pending create.     Scenario-4   Pending Action: Create   New Request: Create   Result: The new create is added to the pending create.   Important: If the new create request is Apply Immediately - Yes, all creates are performed immediately. If the new create request is Apply Immediately - No, all creates are pending.     
+     *  This option is only supported on Memcached clusters.  The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when NumCacheNodes in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. Scenarios:    Scenario 1: You have 3 active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and optionally specify two Availability Zones for the two new nodes.    Scenario 2: You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify NumCacheNodes=6 ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.    Scenario 3: You want to cancel all pending operations. Specify NumCacheNodes=3 to cancel all pending operations.   The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting NumCacheNodes to the number of current nodes. If cross-az is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the Availability Zone Considerations section of Cache Node Considerations for Memcached.  Impact of new add/remove requests upon pending requests    Scenario-1   Pending Action: Delete   New Request: Delete   Result: The new delete, pending or immediate, replaces the pending delete.     Scenario-2   Pending Action: Delete   New Request: Create   Result: The new create, pending or immediate, replaces the pending delete.     Scenario-3   Pending Action: Create   New Request: Delete   Result: The new delete, pending or immediate, replaces the pending create.     Scenario-4   Pending Action: Create   New Request: Create   Result: The new create is added to the pending create.   Important: If the new create request is Apply Immediately - Yes, all creates are performed immediately. If the new create request is Apply Immediately - No, all creates are pending.     
      */
     NewAvailabilityZones?: PreferredAvailabilityZoneList;
     /**
@@ -2448,6 +2540,10 @@ declare namespace ElastiCache {
      * Specifies the strategy to use to update the AUTH token. This parameter must be specified with the auth-token parameter. Possible values:   Rotate   Set    For more information, see Authenticating Users with Redis AUTH 
      */
     AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType;
+    /**
+     * Specifies the destination, format and type of the logs.
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
   }
   export interface ModifyCacheClusterResult {
     CacheCluster?: CacheCluster;
@@ -2609,6 +2705,10 @@ declare namespace ElastiCache {
      * Removes the user groups that can access this replication group.
      */
     RemoveUserGroups?: BooleanOptional;
+    /**
+     * Specifies the destination, format and type of the logs.
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -2914,9 +3014,28 @@ declare namespace ElastiCache {
   export type ParametersList = Parameter[];
   export type PasswordListInput = String[];
   export type PendingAutomaticFailoverStatus = "enabled"|"disabled"|string;
+  export interface PendingLogDeliveryConfiguration {
+    /**
+     * Refers to slow-log.
+     */
+    LogType?: LogType;
+    /**
+     * Returns the destination type, either CloudWatch Logs or Kinesis Data Firehose.
+     */
+    DestinationType?: DestinationType;
+    /**
+     * Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.
+     */
+    DestinationDetails?: DestinationDetails;
+    /**
+     * Returns the log format, either JSON or TEXT
+     */
+    LogFormat?: LogFormat;
+  }
+  export type PendingLogDeliveryConfigurationList = PendingLogDeliveryConfiguration[];
   export interface PendingModifiedValues {
     /**
-     * The new number of cache nodes for the cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.
+     * The new number of cache nodes for the cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.
      */
     NumCacheNodes?: IntegerOptional;
     /**
@@ -2935,6 +3054,10 @@ declare namespace ElastiCache {
      * The auth token status
      */
     AuthTokenStatus?: AuthTokenUpdateStatus;
+    /**
+     * The log delivery configurations being modified 
+     */
+    LogDeliveryConfigurations?: PendingLogDeliveryConfigurationList;
   }
   export type PreferredAvailabilityZoneList = String[];
   export type PreferredOutpostArnList = String[];
@@ -3135,6 +3258,10 @@ declare namespace ElastiCache {
      * The list of user group IDs that have access to the replication group.
      */
     UserGroupIds?: UserGroupIdList;
+    /**
+     * Returns the destination, format and type of the logs. 
+     */
+    LogDeliveryConfigurations?: LogDeliveryConfigurationList;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -3170,6 +3297,10 @@ declare namespace ElastiCache {
      * The user groups being modified.
      */
     UserGroups?: UserGroupsUpdateStatus;
+    /**
+     * The log delivery configurations being modified 
+     */
+    LogDeliveryConfigurations?: PendingLogDeliveryConfigurationList;
   }
   export interface ReservedCacheNode {
     /**
@@ -3451,7 +3582,7 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The number of cache nodes in the source cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.
+     * The number of cache nodes in the source cluster. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.
      */
     NumCacheNodes?: IntegerOptional;
     /**

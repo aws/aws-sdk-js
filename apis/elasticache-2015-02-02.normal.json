@@ -2376,7 +2376,7 @@
         },
         "NumCacheNodes": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of cache nodes in the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
+          "documentation": "<p>The number of cache nodes in the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p>"
         },
         "PreferredAvailabilityZone": {
           "shape": "String",
@@ -2456,6 +2456,14 @@
         "ARN": {
           "shape": "String",
           "documentation": "<p>The ARN (Amazon Resource Name) of the cache cluster.</p>"
+        },
+        "ReplicationGroupLogDeliveryEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A boolean value indicating whether log delivery is enabled for the replication group.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationList",
+          "documentation": "<p>Returns the destination, format and type of the logs.</p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific cluster.</p>",
@@ -2928,6 +2936,16 @@
         "requires-reboot"
       ]
     },
+    "CloudWatchLogsDestinationDetails": {
+      "type": "structure",
+      "members": {
+        "LogGroup": {
+          "shape": "String",
+          "documentation": "<p>The name of the CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>The configuration details of the CloudWatch Logs destination.</p>"
+    },
     "ClusterIdList": {
       "type": "list",
       "member": {
@@ -3051,7 +3069,7 @@
         },
         "NumCacheNodes": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <p>If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
+          "documentation": "<p>The initial number of cache nodes that the cluster has.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <p>If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
         },
         "CacheNodeType": {
           "shape": "String",
@@ -3132,6 +3150,10 @@
         "PreferredOutpostArns": {
           "shape": "PreferredOutpostArnList",
           "documentation": "<p>The outpost ARNs in which the cache cluster is created.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationRequestList",
+          "documentation": "<p>Specifies the destination, format and type of the logs. </p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateCacheCluster operation.</p>"
@@ -3407,6 +3429,10 @@
         "UserGroupIds": {
           "shape": "UserGroupIdListInput",
           "documentation": "<p>The list of user groups to associate with the replication group.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationRequestList",
+          "documentation": "<p>Specifies the destination, format and type of the logs.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>"
@@ -3558,11 +3584,11 @@
         },
         "GlobalNodeGroupsToRemove": {
           "shape": "GlobalNodeGroupIdList",
-          "documentation": "<p>If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove from the cluster. </p>"
+          "documentation": "<p>If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. GlobalNodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by GlobalNodeGroupsToRemove from the cluster. </p>"
         },
         "GlobalNodeGroupsToRetain": {
           "shape": "GlobalNodeGroupIdList",
-          "documentation": "<p>If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster. ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove from the cluster. </p>"
+          "documentation": "<p>If the value of NodeGroupCount is less than the current number of node groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required. GlobalNodeGroupsToRetain is a list of NodeGroupIds to retain from the cluster. ElastiCache for Redis will attempt to retain all node groups listed by GlobalNodeGroupsToRetain from the cluster. </p>"
         },
         "ApplyImmediately": {
           "shape": "Boolean",
@@ -4282,6 +4308,27 @@
         }
       }
     },
+    "DestinationDetails": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogsDetails": {
+          "shape": "CloudWatchLogsDestinationDetails",
+          "documentation": "<p>The configuration details of the CloudWatch Logs destination.</p>"
+        },
+        "KinesisFirehoseDetails": {
+          "shape": "KinesisFirehoseDestinationDetails",
+          "documentation": "<p>The configuration details of the Kinesis Data Firehose destination.</p>"
+        }
+      },
+      "documentation": "<p>Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.</p>"
+    },
+    "DestinationType": {
+      "type": "string",
+      "enum": [
+        "cloudwatch-logs",
+        "kinesis-firehose"
+      ]
+    },
     "DisassociateGlobalReplicationGroupMessage": {
       "type": "structure",
       "required": [
@@ -4714,6 +4761,16 @@
         "shape": "String"
       }
     },
+    "KinesisFirehoseDestinationDetails": {
+      "type": "structure",
+      "members": {
+        "DeliveryStream": {
+          "shape": "String",
+          "documentation": "<p>The name of the Kinesis Data Firehose delivery stream.</p>"
+        }
+      },
+      "documentation": "<p>The configuration details of the Kinesis Data Firehose destination.</p>"
+    },
     "ListAllowedNodeTypeModificationsMessage": {
       "type": "structure",
       "members": {
@@ -4741,6 +4798,99 @@
       },
       "documentation": "<p>The input parameters for the <code>ListTagsForResource</code> operation.</p>"
     },
+    "LogDeliveryConfiguration": {
+      "type": "structure",
+      "members": {
+        "LogType": {
+          "shape": "LogType",
+          "documentation": "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>"
+        },
+        "DestinationType": {
+          "shape": "DestinationType",
+          "documentation": "<p>Returns the destination type, either <code>cloudwatch-logs</code> or <code>kinesis-firehose</code>.</p>"
+        },
+        "DestinationDetails": {
+          "shape": "DestinationDetails",
+          "documentation": "<p>Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.</p>"
+        },
+        "LogFormat": {
+          "shape": "LogFormat",
+          "documentation": "<p>Returns the log format, either JSON or TEXT.</p>"
+        },
+        "Status": {
+          "shape": "LogDeliveryConfigurationStatus",
+          "documentation": "<p>Returns the log delivery configuration status. Values are one of <code>enabling</code> | <code>disabling</code> | <code>modifying</code> | <code>active</code> | <code>error</code> </p>"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>Returns an error message for the log delivery configuration.</p>"
+        }
+      },
+      "documentation": "<p>Returns the destination, format and type of the logs. </p>"
+    },
+    "LogDeliveryConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "LogDeliveryConfiguration",
+        "locationName": "LogDeliveryConfiguration"
+      }
+    },
+    "LogDeliveryConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "LogType": {
+          "shape": "LogType",
+          "documentation": "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>"
+        },
+        "DestinationType": {
+          "shape": "DestinationType",
+          "documentation": "<p>Specify either <code>cloudwatch-logs</code> or <code>kinesis-firehose</code> as the destination type.</p>"
+        },
+        "DestinationDetails": {
+          "shape": "DestinationDetails",
+          "documentation": "<p>Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.</p>"
+        },
+        "LogFormat": {
+          "shape": "LogFormat",
+          "documentation": "<p>Specifies either JSON or TEXT</p>"
+        },
+        "Enabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specify if log delivery is enabled. Default <code>true</code>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the destination, format and type of the logs. </p>"
+    },
+    "LogDeliveryConfigurationRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "LogDeliveryConfigurationRequest",
+        "locationName": "LogDeliveryConfigurationRequest"
+      }
+    },
+    "LogDeliveryConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "active",
+        "enabling",
+        "modifying",
+        "disabling",
+        "error"
+      ]
+    },
+    "LogFormat": {
+      "type": "string",
+      "enum": [
+        "text",
+        "json"
+      ]
+    },
+    "LogType": {
+      "type": "string",
+      "enum": [
+        "slow-log"
+      ]
+    },
     "ModifyCacheClusterMessage": {
       "type": "structure",
       "required": [
@@ -4753,7 +4903,7 @@
         },
         "NumCacheNodes": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of cache nodes that the cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), more nodes are added. If the value is less than the number of existing cache nodes, nodes are removed. If the value is equal to the number of current cache nodes, any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <note> <p>Adding or removing Memcached cache nodes can be applied immediately or as a pending operation (see <code>ApplyImmediately</code>).</p> <p>A pending operation to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending operations to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending operation to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending operation to add nodes. The customer can modify the previous pending operation to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending operations to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <code>NumCacheNodes</code> equal to the number of cache nodes currently in the cluster.</p> </note>"
+          "documentation": "<p>The number of cache nodes that the cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), more nodes are added. If the value is less than the number of existing cache nodes, nodes are removed. If the value is equal to the number of current cache nodes, any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p> <note> <p>Adding or removing Memcached cache nodes can be applied immediately or as a pending operation (see <code>ApplyImmediately</code>).</p> <p>A pending operation to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending operations to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending operation to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending operation to add nodes. The customer can modify the previous pending operation to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending operations to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <code>NumCacheNodes</code> equal to the number of cache nodes currently in the cluster.</p> </note>"
         },
         "CacheNodeIdsToRemove": {
           "shape": "CacheNodeIdsList",
@@ -4765,7 +4915,7 @@
         },
         "NewAvailabilityZones": {
           "shape": "PreferredAvailabilityZoneList",
-          "documentation": "<p>The list of Availability Zones where the new Memcached cache nodes are created.</p> <p>This parameter is only valid when <code>NumCacheNodes</code> in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.</p> <p>This option is only supported on Memcached clusters.</p> <p>Scenarios:</p> <ul> <li> <p> <b>Scenario 1:</b> You have 3 active nodes and wish to add 2 nodes. Specify <code>NumCacheNodes=5</code> (3 + 2) and optionally specify two Availability Zones for the two new nodes.</p> </li> <li> <p> <b>Scenario 2:</b> You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify <code>NumCacheNodes=6</code> ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.</p> </li> <li> <p> <b>Scenario 3:</b> You want to cancel all pending operations. Specify <code>NumCacheNodes=3</code> to cancel all pending operations.</p> </li> </ul> <p>The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting <code>NumCacheNodes</code> to the number of current nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html\">Cache Node Considerations for Memcached</a>.</p> <p> <b>Impact of new add/remove requests upon pending requests</b> </p> <ul> <li> <p>Scenario-1</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-2</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-3</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending create.</p> </li> </ul> </li> <li> <p>Scenario-4</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create is added to the pending create.</p> <important> <p> <b>Important:</b> If the new create request is <b>Apply Immediately - Yes</b>, all creates are performed immediately. If the new create request is <b>Apply Immediately - No</b>, all creates are pending.</p> </important> </li> </ul> </li> </ul>"
+          "documentation": "<note> <p>This option is only supported on Memcached clusters.</p> </note> <p>The list of Availability Zones where the new Memcached cache nodes are created.</p> <p>This parameter is only valid when <code>NumCacheNodes</code> in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request.</p> <p>Scenarios:</p> <ul> <li> <p> <b>Scenario 1:</b> You have 3 active nodes and wish to add 2 nodes. Specify <code>NumCacheNodes=5</code> (3 + 2) and optionally specify two Availability Zones for the two new nodes.</p> </li> <li> <p> <b>Scenario 2:</b> You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify <code>NumCacheNodes=6</code> ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.</p> </li> <li> <p> <b>Scenario 3:</b> You want to cancel all pending operations. Specify <code>NumCacheNodes=3</code> to cancel all pending operations.</p> </li> </ul> <p>The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting <code>NumCacheNodes</code> to the number of current nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html\">Cache Node Considerations for Memcached</a>.</p> <p> <b>Impact of new add/remove requests upon pending requests</b> </p> <ul> <li> <p>Scenario-1</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-2</p> <ul> <li> <p>Pending Action: Delete</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create, pending or immediate, replaces the pending delete.</p> </li> </ul> </li> <li> <p>Scenario-3</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or immediate, replaces the pending create.</p> </li> </ul> </li> <li> <p>Scenario-4</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result: The new create is added to the pending create.</p> <important> <p> <b>Important:</b> If the new create request is <b>Apply Immediately - Yes</b>, all creates are performed immediately. If the new create request is <b>Apply Immediately - No</b>, all creates are pending.</p> </important> </li> </ul> </li> </ul>"
         },
         "CacheSecurityGroupNames": {
           "shape": "CacheSecurityGroupNameList",
@@ -4822,6 +4972,10 @@
         "AuthTokenUpdateStrategy": {
           "shape": "AuthTokenUpdateStrategyType",
           "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationRequestList",
+          "documentation": "<p>Specifies the destination, format and type of the logs.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ModifyCacheCluster</code> operation.</p>"
@@ -5028,6 +5182,10 @@
         "RemoveUserGroups": {
           "shape": "BooleanOptional",
           "documentation": "<p>Removes the user groups that can access this replication group.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationRequestList",
+          "documentation": "<p>Specifies the destination, format and type of the logs.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ModifyReplicationGroups</code> operation.</p>"
@@ -5515,12 +5673,41 @@
         "disabled"
       ]
     },
+    "PendingLogDeliveryConfiguration": {
+      "type": "structure",
+      "members": {
+        "LogType": {
+          "shape": "LogType",
+          "documentation": "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>"
+        },
+        "DestinationType": {
+          "shape": "DestinationType",
+          "documentation": "<p>Returns the destination type, either CloudWatch Logs or Kinesis Data Firehose.</p>"
+        },
+        "DestinationDetails": {
+          "shape": "DestinationDetails",
+          "documentation": "<p>Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.</p>"
+        },
+        "LogFormat": {
+          "shape": "LogFormat",
+          "documentation": "<p>Returns the log format, either JSON or TEXT</p>"
+        }
+      },
+      "documentation": "<p>The log delivery configurations being modified </p>"
+    },
+    "PendingLogDeliveryConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "PendingLogDeliveryConfiguration"
+      },
+      "locationName": "PendingLogDeliveryConfiguration"
+    },
     "PendingModifiedValues": {
       "type": "structure",
       "members": {
         "NumCacheNodes": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The new number of cache nodes for the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
+          "documentation": "<p>The new number of cache nodes for the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p>"
         },
         "CacheNodeIdsToRemove": {
           "shape": "CacheNodeIdsList",
@@ -5537,6 +5724,10 @@
         "AuthTokenStatus": {
           "shape": "AuthTokenUpdateStatus",
           "documentation": "<p>The auth token status</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "PendingLogDeliveryConfigurationList",
+          "documentation": "<p>The log delivery configurations being modified </p>"
         }
       },
       "documentation": "<p>A group of settings that are applied to the cluster in the future, or that are currently being applied.</p>"
@@ -5845,6 +6036,10 @@
         "UserGroupIds": {
           "shape": "UserGroupIdList",
           "documentation": "<p>The list of user group IDs that have access to the replication group.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "LogDeliveryConfigurationList",
+          "documentation": "<p>Returns the destination, format and type of the logs. </p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific Redis replication group.</p>",
@@ -5907,6 +6102,10 @@
         "UserGroups": {
           "shape": "UserGroupsUpdateStatus",
           "documentation": "<p>The user groups being modified.</p>"
+        },
+        "LogDeliveryConfigurations": {
+          "shape": "PendingLogDeliveryConfigurationList",
+          "documentation": "<p>The log delivery configurations being modified </p>"
         }
       },
       "documentation": "<p>The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.</p>"
@@ -6324,7 +6523,7 @@
         },
         "NumCacheNodes": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of cache nodes in the source cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
+          "documentation": "<p>The number of cache nodes in the source cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40.</p>"
         },
         "PreferredAvailabilityZone": {
           "shape": "String",

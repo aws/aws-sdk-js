@@ -12,11 +12,19 @@ declare class SecurityHub extends Service {
   constructor(options?: SecurityHub.Types.ClientConfiguration)
   config: Config & SecurityHub.Types.ClientConfiguration;
   /**
-   * Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.
+   * Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
+   */
+  acceptAdministratorInvitation(params: SecurityHub.Types.AcceptAdministratorInvitationRequest, callback?: (err: AWSError, data: SecurityHub.Types.AcceptAdministratorInvitationResponse) => void): Request<SecurityHub.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
+   * Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
+   */
+  acceptAdministratorInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptAdministratorInvitationResponse) => void): Request<SecurityHub.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
+   * This method is deprecated. Instead, use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
    */
   acceptInvitation(params: SecurityHub.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.
+   * This method is deprecated. Instead, use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
@@ -44,11 +52,11 @@ declare class SecurityHub extends Service {
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
    */
   batchUpdateFindings(params: SecurityHub.Types.BatchUpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
    */
   batchUpdateFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
@@ -68,11 +76,11 @@ declare class SecurityHub extends Service {
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. If you are integrated with Organizations, then the master account is the Security Hub administrator account that is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in a member account, findings are sent to both the member and master accounts.  To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. If you are integrated with Organizations, then the master account is the Security Hub administrator account that is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in a member account, findings are sent to both the member and master accounts.  To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -180,27 +188,35 @@ declare class SecurityHub extends Service {
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisableOrganizationAdminAccountResponse) => void): Request<SecurityHub.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(params: SecurityHub.Types.DisableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disassociates the current Security Hub member account from the associated master account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the master account (the designated Security Hub administrator) can disassociate a member account.
+   * Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
+   */
+  disassociateFromAdministratorAccount(params: SecurityHub.Types.DisassociateFromAdministratorAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromAdministratorAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
+   */
+  disassociateFromAdministratorAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromAdministratorAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
    */
   disassociateFromMasterAccount(params: SecurityHub.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates the current Security Hub member account from the associated master account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the master account (the designated Security Hub administrator) can disassociate a member account.
+   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates the specified member accounts from the associated master account. Can be used to disassociate both accounts that are in an organization and accounts that were invited manually.
+   * Disassociates the specified member accounts from the associated administrator account. Can be used to disassociate both accounts that are managed using Organizations and accounts that were invited manually.
    */
   disassociateMembers(params: SecurityHub.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateMembersResponse) => void): Request<SecurityHub.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates the specified member accounts from the associated master account. Can be used to disassociate both accounts that are in an organization and accounts that were invited manually.
+   * Disassociates the specified member accounts from the associated administrator account. Can be used to disassociate both accounts that are managed using Organizations and accounts that were invited manually.
    */
   disassociateMembers(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateMembersResponse) => void): Request<SecurityHub.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -227,6 +243,14 @@ declare class SecurityHub extends Service {
    * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS AWS Foundations   AWS Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
+  /**
+   * Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
+   */
+  getAdministratorAccount(params: SecurityHub.Types.GetAdministratorAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetAdministratorAccountResponse) => void): Request<SecurityHub.Types.GetAdministratorAccountResponse, AWSError>;
+  /**
+   * Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
+   */
+  getAdministratorAccount(callback?: (err: AWSError, data: SecurityHub.Types.GetAdministratorAccountResponse) => void): Request<SecurityHub.Types.GetAdministratorAccountResponse, AWSError>;
   /**
    * Returns a list of the standards that are currently enabled.
    */
@@ -268,27 +292,27 @@ declare class SecurityHub extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: SecurityHub.Types.GetInvitationsCountResponse) => void): Request<SecurityHub.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Provides the details for the Security Hub master account for the current member account. Can be used by both member accounts that are in an organization and accounts that were invited manually.
+   * This method is deprecated. Instead, use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMasterAccount(params: SecurityHub.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Provides the details for the Security Hub master account for the current member account. Can be used by both member accounts that are in an organization and accounts that were invited manually.
+   * This method is deprecated. Instead, use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Returns the details for the Security Hub member accounts for the specified account IDs. A master account can be either a delegated Security Hub administrator account for an organization or a master account that enabled Security Hub manually. The results include both member accounts that are in an organization and accounts that were invited manually.
+   * Returns the details for the Security Hub member accounts for the specified account IDs. An administrator account can be either the delegated Security Hub administrator account for an organization or an administrator account that enabled Security Hub manually. The results include both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMembers(params: SecurityHub.Types.GetMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Returns the details for the Security Hub member accounts for the specified account IDs. A master account can be either a delegated Security Hub administrator account for an organization or a master account that enabled Security Hub manually. The results include both member accounts that are in an organization and accounts that were invited manually.
+   * Returns the details for the Security Hub member accounts for the specified account IDs. An administrator account can be either the delegated Security Hub administrator account for an organization or an administrator account that enabled Security Hub manually. The results include both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the master account can view the findings generated from the member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the master account can view the findings generated from the member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
@@ -300,19 +324,19 @@ declare class SecurityHub extends Service {
    */
   listEnabledProductsForImport(callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
   /**
-   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that do not belong to an organization. Organization accounts do not receive invitations.
+   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with AWS Organizations do not receive invitations.
    */
   listInvitations(params: SecurityHub.Types.ListInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListInvitationsResponse) => void): Request<SecurityHub.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that do not belong to an organization. Organization accounts do not receive invitations.
+   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with AWS Organizations do not receive invitations.
    */
   listInvitations(callback?: (err: AWSError, data: SecurityHub.Types.ListInvitationsResponse) => void): Request<SecurityHub.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current Security Hub master account. The results include both member accounts that belong to an organization and member accounts that were invited manually.
+   * Lists details about all member accounts for the current Security Hub administrator account. The results include both member accounts that belong to an organization and member accounts that were invited manually.
    */
   listMembers(params: SecurityHub.Types.ListMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListMembersResponse) => void): Request<SecurityHub.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current Security Hub master account. The results include both member accounts that belong to an organization and member accounts that were invited manually.
+   * Lists details about all member accounts for the current Security Hub administrator account. The results include both member accounts that belong to an organization and member accounts that were invited manually.
    */
   listMembers(callback?: (err: AWSError, data: SecurityHub.Types.ListMembersResponse) => void): Request<SecurityHub.Types.ListMembersResponse, AWSError>;
   /**
@@ -397,13 +421,25 @@ declare class SecurityHub extends Service {
   updateStandardsControl(callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
 }
 declare namespace SecurityHub {
+  export interface AcceptAdministratorInvitationRequest {
+    /**
+     * The account ID of the Security Hub administrator account that sent the invitation.
+     */
+    AdministratorId: NonEmptyString;
+    /**
+     * The identifier of the invitation sent from the Security Hub administrator account.
+     */
+    InvitationId: NonEmptyString;
+  }
+  export interface AcceptAdministratorInvitationResponse {
+  }
   export interface AcceptInvitationRequest {
     /**
-     * The account ID of the Security Hub master account that sent the invitation.
+     * The account ID of the Security Hub administrator account that sent the invitation.
      */
     MasterId: NonEmptyString;
     /**
-     * The ID of the invitation sent from the Security Hub master account.
+     * The identifier of the invitation sent from the Security Hub administrator account.
      */
     InvitationId: NonEmptyString;
   }
@@ -5271,7 +5307,7 @@ declare namespace SecurityHub {
   }
   export interface CreateMembersRequest {
     /**
-     * The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and optionally the email address.
+     * The list of accounts to associate with the Security Hub administrator account. For each account, the list includes the account ID and optionally the email address.
      */
     AccountDetails: AccountDetailsList;
   }
@@ -5566,13 +5602,17 @@ declare namespace SecurityHub {
   }
   export interface DisableSecurityHubResponse {
   }
+  export interface DisassociateFromAdministratorAccountRequest {
+  }
+  export interface DisassociateFromAdministratorAccountResponse {
+  }
   export interface DisassociateFromMasterAccountRequest {
   }
   export interface DisassociateFromMasterAccountResponse {
   }
   export interface DisassociateMembersRequest {
     /**
-     * The account IDs of the member accounts to disassociate from the master account.
+     * The account IDs of the member accounts to disassociate from the administrator account.
      */
     AccountIds: AccountIdList;
   }
@@ -5667,6 +5707,11 @@ declare namespace SecurityHub {
      * The latitude of the location.
      */
     Lat?: Double;
+  }
+  export interface GetAdministratorAccountRequest {
+  }
+  export interface GetAdministratorAccountResponse {
+    Administrator?: Invitation;
   }
   export interface GetEnabledStandardsRequest {
     /**
@@ -5768,7 +5813,7 @@ declare namespace SecurityHub {
   }
   export interface GetMasterAccountResponse {
     /**
-     * A list of details about the Security Hub master account for the current member account. 
+     * A list of details about the Security Hub administrator account for the current member account. 
      */
     Master?: Invitation;
   }
@@ -5848,11 +5893,11 @@ declare namespace SecurityHub {
     ResultValues: InsightResultValueList;
   }
   export type Integer = number;
-  export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|string;
+  export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|"UPDATE_FINDINGS_IN_SECURITY_HUB"|string;
   export type IntegrationTypeList = IntegrationType[];
   export interface Invitation {
     /**
-     * The account ID of the Security Hub master account that the invitation was sent from.
+     * The account ID of the Security Hub administrator account that the invitation was sent from.
      */
     AccountId?: AccountId;
     /**
@@ -5864,7 +5909,7 @@ declare namespace SecurityHub {
      */
     InvitedAt?: Timestamp;
     /**
-     * The current status of the association between the member and master accounts.
+     * The current status of the association between the member and administrator accounts.
      */
     MemberStatus?: NonEmptyString;
   }
@@ -5970,7 +6015,7 @@ declare namespace SecurityHub {
   }
   export interface ListMembersRequest {
     /**
-     * Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is TRUE. If OnlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the master is set to ENABLED. If OnlyAssociated is set to FALSE, the response includes all existing member accounts. 
+     * Specifies which member accounts to include in the response based on their relationship status with the administrator account. The default value is TRUE. If OnlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the administrator account is set to ENABLED. If OnlyAssociated is set to FALSE, the response includes all existing member accounts. 
      */
     OnlyAssociated?: Boolean;
     /**
@@ -6083,11 +6128,15 @@ declare namespace SecurityHub {
      */
     Email?: NonEmptyString;
     /**
-     * The AWS account ID of the Security Hub master account associated with this member account.
+     * This is replaced by AdministratorID. The AWS account ID of the Security Hub administrator account associated with this member account.
      */
     MasterId?: NonEmptyString;
     /**
-     * The status of the relationship between the member account and its master account.  The status can have one of the following values:    CREATED - Indicates that the master account added the member account, but has not yet invited the member account.    INVITED - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.    ENABLED - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    REMOVED - Indicates that the master account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the master account.    DELETED - Indicates that the master account deleted the member account.  
+     * The AWS account ID of the Security Hub administrator account associated with this member account.
+     */
+    AdministratorId?: NonEmptyString;
+    /**
+     * The status of the relationship between the member account and its administrator account.  The status can have one of the following values:    CREATED - Indicates that the administrator account added the member account, but has not yet invited the member account.    INVITED - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.    ENABLED - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    REMOVED - Indicates that the administrator account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the administrator account.    DELETED - Indicates that the administrator account deleted the member account.  
      */
     MemberStatus?: NonEmptyString;
     /**
@@ -6430,15 +6479,15 @@ declare namespace SecurityHub {
      */
     Categories?: CategoryList;
     /**
-     * The types of integration that the product supports. Available values are the following.    SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration sends findings to Security Hub.    RECEIVE_FINDINGS_FROM_SECURITY_HUB - Indicates that the integration receives findings from Security Hub.  
+     * The types of integration that the product supports. Available values are the following.    SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to Security Hub.    RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives findings from Security Hub.    UPDATE_FINDINGS_IN_SECURITY_HUB - The integration does not send new findings to Security Hub, but does make updates to the findings that it receives from Security Hub.  
      */
     IntegrationTypes?: IntegrationTypeList;
     /**
-     * The URL for the page that contains more information about the product.
+     * For integrations with AWS services, the AWS Console URL from which to activate the service. For integrations with third-party products, the AWS Marketplace URL from which to subscribe to or purchase the product.
      */
     MarketplaceUrl?: NonEmptyString;
     /**
-     * The URL used to activate the product.
+     * The URL to the service or product documentation about the integration with Security Hub, including how to activate the integration.
      */
     ActivationUrl?: NonEmptyString;
     /**

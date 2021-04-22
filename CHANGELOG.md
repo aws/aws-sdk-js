@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.890.0-->
+<!--LATEST=2.891.0-->
 <!--ENTRYINSERT-->
+
+## 2.891.0
+* feature: ElastiCache: This release introduces log delivery of Redis slow log from Amazon ElastiCache.
+* feature: ForecastService: This release adds EstimatedTimeRemaining minutes field to the DescribeDatasetImportJob, DescribePredictor, DescribeForecast API response which denotes the time remaining to complete the job IN_PROGRESS.
+* feature: SecurityHub: Replaced the term "master" with "administrator". Added new actions to replace AcceptInvitation, GetMasterAccount, and DisassociateFromMasterAccount. In Member, replaced MasterId with AdministratorId.
 
 ## 2.890.0
 * feature: Detective: Added parameters to track the data volume in bytes for a member account. Deprecated the existing parameters that tracked the volume as a percentage of the allowed volume for a behavior graph. Changes reflected in MemberDetails object.

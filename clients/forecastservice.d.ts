@@ -756,6 +756,10 @@ declare namespace ForecastService {
      */
     DataSource?: DataSource;
     /**
+     * The estimated time in minutes for the dataset import job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
+    /**
      * Statistical information about each field in the input data.
      */
     FieldStatistics?: FieldStatistics;
@@ -896,6 +900,10 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
+     * The estimated time in minutes for the forecast job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
+    /**
      * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
      */
     Status?: String;
@@ -1012,6 +1020,10 @@ declare namespace ForecastService {
      * Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.
      */
     PredictorExecutionDetails?: PredictorExecutionDetails;
+    /**
+     * The estimated time in minutes for the predictor training job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
     /**
      * An array of the ARNs of the dataset import jobs used to import training data for the predictor.
      */
@@ -1433,6 +1445,7 @@ declare namespace ForecastService {
      */
     Tags?: Tags;
   }
+  export type Long = number;
   export type MaxResults = number;
   export type Message = string;
   export interface Metrics {

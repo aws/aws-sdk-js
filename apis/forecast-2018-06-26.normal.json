@@ -1554,6 +1554,10 @@
           "shape": "DataSource",
           "documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data.</p> <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>"
         },
+        "EstimatedTimeRemainingInMinutes": {
+          "shape": "Long",
+          "documentation": "<p>The estimated time in minutes for the dataset import job to complete.</p>"
+        },
         "FieldStatistics": {
           "shape": "FieldStatistics",
           "documentation": "<p>Statistical information about each field in the input data.</p>"
@@ -1721,6 +1725,10 @@
           "shape": "Arn",
           "documentation": "<p>The ARN of the dataset group that provided the data used to train the predictor.</p>"
         },
+        "EstimatedTimeRemainingInMinutes": {
+          "shape": "Long",
+          "documentation": "<p>The estimated time in minutes for the forecast job to complete.</p>"
+        },
         "Status": {
           "shape": "String",
           "documentation": "<p>The status of the forecast. States include:</p> <ul> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>CREATE_FAILED</code> </p> </li> <li> <p> <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code> </p> </li> <li> <p> <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>, <code>DELETE_FAILED</code> </p> </li> </ul> <note> <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query or export the forecast.</p> </note>"
@@ -1857,6 +1865,10 @@
         "PredictorExecutionDetails": {
           "shape": "PredictorExecutionDetails",
           "documentation": "<p>Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.</p>"
+        },
+        "EstimatedTimeRemainingInMinutes": {
+          "shape": "Long",
+          "documentation": "<p>The estimated time in minutes for the predictor training job to complete.</p>"
         },
         "DatasetImportJobArns": {
           "shape": "ArnList",
@@ -2538,6 +2550,9 @@
           "documentation": "<p>The tags for the resource.</p>"
         }
       }
+    },
+    "Long": {
+      "type": "long"
     },
     "MaxResults": {
       "type": "integer",
