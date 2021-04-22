@@ -44,11 +44,12 @@ Feature: Working with Objects in S3
     Then the object "byebye" should contain "world"
     Then I delete the object "byebye"
 
-  @unauthenticated
-  Scenario: Unauthenticated requests
-    When I put "world" to the public key "hello"
-    And I make an unauthenticated request to read object "hello"
+  @private
+  Scenario: Private ACL
+    When I put "world" to the private key "hello"
+    Then I get the object "hello"
     Then the object "hello" should contain "world"
+    Then I delete the object "hello"
 
   @blank
   Scenario: Putting nothing to an object
