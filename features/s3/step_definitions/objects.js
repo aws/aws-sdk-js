@@ -246,11 +246,8 @@ module.exports = function () {
     req.send(callback);
   });
 
-  this.When(/^I put "([^"]*)" to the (public|private) key "([^"]*)"$/, function(data, access, key, next) {
-    var acl;
-    if (access === 'public') acl = 'public-read';
-    else if (access === 'private') acl = access;
-    var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: acl};
+  this.When(/^I put "([^"]*)" to the private key "([^"]*)"$/, function(data, key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: 'private'};
     this.request('s3', 'putObject', params, next);
   });
 
@@ -273,15 +270,6 @@ module.exports = function () {
       SSECustomerKey: 'aaaabbbbccccddddaaaabbbbccccdddd'
     };
     this.request('s3', 'getObject', params, next);
-  });
-
-  this.Then(/^I make an unauthenticated request to read object "([^"]*)"$/, function(key, next) {
-    var params = {Bucket: this.sharedBucket, Key: key};
-    this.s3.makeUnauthenticatedRequest('getObject', params, function (err, data) {
-      if (err) return next(err);
-      this.data = data;
-      next();
-    }.bind(this));
   });
 
   this.Given(/^I generate the MD5 checksum of "([^"]*)"$/, function(data, next) {
