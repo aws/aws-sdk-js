@@ -620,7 +620,7 @@ declare namespace SNS {
   }
   export interface OptInPhoneNumberInput {
     /**
-     * The phone number to opt in.
+     * The phone number to opt in. Use E.164 format.
      */
     phoneNumber: PhoneNumber;
   }

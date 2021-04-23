@@ -719,6 +719,11 @@
     "CmafEncryption": {
       "documentation": "A Common Media Application Format (CMAF) encryption configuration.",
       "members": {
+        "ConstantInitializationVector": {
+          "documentation": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+          "locationName": "constantInitializationVector",
+          "shape": "__string"
+        },
         "KeyRotationIntervalSeconds": {
           "documentation": "Time (in seconds) between each encryption key rotation.",
           "locationName": "keyRotationIntervalSeconds",
