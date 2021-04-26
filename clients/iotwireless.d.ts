@@ -1745,6 +1745,7 @@ declare namespace IoTWireless {
   export type MaxEirp = number;
   export type MaxResults = number;
   export type MessageId = string;
+  export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
   export type MinGwDiversity = number;
   export type Model = string;
   export type NextToken = string;
@@ -1951,6 +1952,7 @@ declare namespace IoTWireless {
      * The sequence number.
      */
     Seq?: Seq;
+    MessageType?: MessageType;
   }
   export interface SidewalkUpdateAccount {
     /**

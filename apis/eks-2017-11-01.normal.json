@@ -1003,7 +1003,8 @@
       "enum": [
         "AL2_x86_64",
         "AL2_x86_64_GPU",
-        "AL2_ARM_64"
+        "AL2_ARM_64",
+        "CUSTOM"
       ]
     },
     "Addon": {
@@ -2738,7 +2739,7 @@
       "type": "structure",
       "members": {
         "minSize": {
-          "shape": "Capacity",
+          "shape": "ZeroCapacity",
           "documentation": "<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
         },
         "maxSize": {
@@ -2746,7 +2747,7 @@
           "documentation": "<p>The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html\">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "desiredSize": {
-          "shape": "Capacity",
+          "shape": "ZeroCapacity",
           "documentation": "<p>The current number of nodes that the managed node group should maintain.</p>"
         }
       },
@@ -3273,6 +3274,8 @@
         "MinSize",
         "ReleaseVersion",
         "PublicAccessCidrs",
+        "LaunchTemplateName",
+        "LaunchTemplateVersion",
         "IdentityProviderConfig",
         "EncryptionConfig",
         "AddonVersion",
@@ -3367,6 +3370,11 @@
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"
+    },
+    "ZeroCapacity": {
+      "type": "integer",
+      "box": true,
+      "min": 0
     },
     "configStatus": {
       "type": "string",

@@ -266,7 +266,7 @@
           "shape": "InvalidArgumentException"
         }
       ],
-      "documentation": "<p>Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>"
+      "documentation": "<p>Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <p>You control the amount of time that the URL will be valid using the <code>SessionExpirationDurationInSeconds</code> parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>"
     },
     "CreateApplicationSnapshot": {
       "name": "CreateApplicationSnapshot",
@@ -835,9 +835,43 @@
         },
         {
           "shape": "InvalidApplicationConfigurationException"
+        },
+        {
+          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Updates an existing Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p> <note> <p>You cannot update the <code>RuntimeEnvironment</code> of an existing application. If you need to update an application's <code>RuntimeEnvironment</code>, you must delete the application and create it again.</p> </note>"
+    },
+    "UpdateApplicationMaintenanceConfiguration": {
+      "name": "UpdateApplicationMaintenanceConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateApplicationMaintenanceConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateApplicationMaintenanceConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        }
+      ],
+      "documentation": "<p>Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html\">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p>"
     }
   },
   "shapes": {
@@ -1258,7 +1292,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code>, <code>FLINK-1_6</code>, or <code>FLINK-1_8</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).</p>"
         },
         "ServiceExecutionRole": {
           "shape": "RoleARN",
@@ -1287,9 +1321,56 @@
         "CloudWatchLoggingOptionDescriptions": {
           "shape": "CloudWatchLoggingOptionDescriptions",
           "documentation": "<p>Describes the application Amazon CloudWatch logging options.</p>"
+        },
+        "ApplicationMaintenanceConfigurationDescription": {
+          "shape": "ApplicationMaintenanceConfigurationDescription",
+          "documentation": "<p>Describes the time window for automatic application maintenance.</p>"
         }
       },
       "documentation": "<p>Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.</p>"
+    },
+    "ApplicationMaintenanceConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "ApplicationMaintenanceWindowStartTime",
+        "ApplicationMaintenanceWindowEndTime"
+      ],
+      "members": {
+        "ApplicationMaintenanceWindowStartTime": {
+          "shape": "ApplicationMaintenanceWindowStartTime",
+          "documentation": "<p>The start time for the automatic maintenance window.</p>"
+        },
+        "ApplicationMaintenanceWindowEndTime": {
+          "shape": "ApplicationMaintenanceWindowEndTime",
+          "documentation": "<p>The end time for the automatic maintenance window.</p>"
+        }
+      },
+      "documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+    },
+    "ApplicationMaintenanceConfigurationUpdate": {
+      "type": "structure",
+      "required": [
+        "ApplicationMaintenanceWindowStartTimeUpdate"
+      ],
+      "members": {
+        "ApplicationMaintenanceWindowStartTimeUpdate": {
+          "shape": "ApplicationMaintenanceWindowStartTime",
+          "documentation": "<p>The updated start time for the automatic maintenance window.</p>"
+        }
+      },
+      "documentation": "<p>Describes the updated time window for automatic application maintenance.</p>"
+    },
+    "ApplicationMaintenanceWindowEndTime": {
+      "type": "string",
+      "max": 5,
+      "min": 5,
+      "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]"
+    },
+    "ApplicationMaintenanceWindowStartTime": {
+      "type": "string",
+      "max": 5,
+      "min": 5,
+      "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]"
     },
     "ApplicationName": {
       "type": "string",
@@ -1371,7 +1452,8 @@
         "RUNNING",
         "UPDATING",
         "AUTOSCALING",
-        "FORCE_STOPPING"
+        "FORCE_STOPPING",
+        "MAINTENANCE"
       ]
     },
     "ApplicationSummaries": {
@@ -1408,7 +1490,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code>, <code>FLINK-1_6</code>, or <code>FLINK-1_8</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).</p>"
         }
       },
       "documentation": "<p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
@@ -1466,7 +1548,7 @@
         },
         "CheckpointInterval": {
           "shape": "CheckpointInterval",
-          "documentation": "<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
+          "documentation": "<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
         },
         "MinPauseBetweenCheckpoints": {
           "shape": "MinPauseBetweenCheckpoints",
@@ -1488,7 +1570,7 @@
         },
         "CheckpointInterval": {
           "shape": "CheckpointInterval",
-          "documentation": "<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
+          "documentation": "<p>Describes the interval in milliseconds between checkpoint operations. </p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
         },
         "MinPauseBetweenCheckpoints": {
           "shape": "MinPauseBetweenCheckpoints",
@@ -1510,7 +1592,7 @@
         },
         "CheckpointIntervalUpdate": {
           "shape": "CheckpointInterval",
-          "documentation": "<p>Describes updates to the interval in milliseconds between checkpoint operations.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> vaue of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
+          "documentation": "<p>Describes updates to the interval in milliseconds between checkpoint operations.</p> <note> <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>, the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value using this API or in application code.</p> </note>"
         },
         "MinPauseBetweenCheckpointsUpdate": {
           "shape": "MinPauseBetweenCheckpoints",
@@ -1722,7 +1804,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code>, <code>FLINK-1_6</code>, or <code>FLINK-1_8</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).</p>"
         },
         "ServiceExecutionRole": {
           "shape": "RoleARN",
@@ -3103,7 +3185,7 @@
           "documentation": "<p>Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.</p>"
         }
       },
-      "documentation": "<p>Describes parameters for how a Flink-based Kinesis Data Analytics application application executes multiple tasks simultaneously. For more information about parallelism, see <a href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html\">Parallel Execution</a> in the <a href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.8/\">Apache Flink Documentation</a>.</p>"
+      "documentation": "<p>Describes parameters for how a Flink-based Kinesis Data Analytics application executes multiple tasks simultaneously. For more information about parallelism, see <a href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html\">Parallel Execution</a> in the <a href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.8/\">Apache Flink Documentation</a>.</p>"
     },
     "ParallelismConfigurationDescription": {
       "type": "structure",
@@ -3924,6 +4006,36 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateApplicationMaintenanceConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName",
+        "ApplicationMaintenanceConfigurationUpdate"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application for which you want to update the maintenance time window.</p>"
+        },
+        "ApplicationMaintenanceConfigurationUpdate": {
+          "shape": "ApplicationMaintenanceConfigurationUpdate",
+          "documentation": "<p>Describes the application maintenance configuration update.</p>"
+        }
+      }
+    },
+    "UpdateApplicationMaintenanceConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationARN": {
+          "shape": "ResourceARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application.</p>"
+        },
+        "ApplicationMaintenanceConfigurationDescription": {
+          "shape": "ApplicationMaintenanceConfigurationDescription",
+          "documentation": "<p>The application maintenance configuration description after the update.</p>"
+        }
+      }
     },
     "UpdateApplicationRequest": {
       "type": "structure",

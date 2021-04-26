@@ -378,7 +378,7 @@ declare namespace MediaConvert {
      */
     AiffSettings?: AiffSettings;
     /**
-     * Type of Audio codec.
+     * Choose the audio codec for this output. Note that the option Dolby Digital passthrough (PASSTHROUGH) applies only to Dolby Digital and Dolby Digital Plus audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output
      */
     Codec?: AudioCodec;
     /**
@@ -433,7 +433,7 @@ declare namespace MediaConvert {
      */
     AudioTypeControl?: AudioTypeControl;
     /**
-     * Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings
+     * Settings related to audio encoding. The settings in this group vary depending on the value that you choose for your audio codec.
      */
     CodecSettings?: AudioCodecSettings;
     /**
@@ -602,9 +602,9 @@ declare namespace MediaConvert {
      */
     MaxBitrate?: __integerMin1000Max1152000000;
     /**
-     * Specify the number of B-frames. With AV1, MediaConvert supports only 7 or 15.
+     * Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller file size; choose a smaller number for better video quality.
      */
-    NumberBFramesBetweenReferenceFrames?: __integerMin7Max15;
+    NumberBFramesBetweenReferenceFrames?: __integerMin0Max15;
     /**
      * Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
      */
@@ -784,7 +784,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
-     * Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
+     * Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
      */
     DestinationSettings?: CaptionDestinationSettings;
     /**
@@ -802,7 +802,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
-     * Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
+     * Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
      */
     DestinationSettings?: CaptionDestinationSettings;
     /**
@@ -816,35 +816,35 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDestinationSettings {
     /**
-     * Burn-In Destination Settings.
+     * Settings related to burn-in captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN.
      */
     BurninDestinationSettings?: BurninDestinationSettings;
     /**
-     * Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
+     * Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Note that your choice of video output container constrains your choice of output captions format. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/captions-support-tables.html. If you are using SCTE-20 and you want to create an output that complies with the SCTE-43 spec, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED). To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
      */
     DestinationType?: CaptionDestinationType;
     /**
-     * DVB-Sub Destination Settings
+     * Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to DVB_SUB.
      */
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
     /**
-     * Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.
+     * Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or ancillary) captions. Set up embedded captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/embedded-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to EMBEDDED, EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED.
      */
     EmbeddedDestinationSettings?: EmbeddedDestinationSettings;
     /**
-     * Settings specific to IMSC caption outputs.
+     * Settings related to IMSC captions. IMSC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to IMSC.
      */
     ImscDestinationSettings?: ImscDestinationSettings;
     /**
-     * Settings for SCC caption output.
+     * Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SCC.
      */
     SccDestinationSettings?: SccDestinationSettings;
     /**
-     * Settings for Teletext caption output
+     * Settings related to teletext captions. Set up teletext captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TELETEXT.
      */
     TeletextDestinationSettings?: TeletextDestinationSettings;
     /**
-     * Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).
+     * Settings related to TTML captions. TTML is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TTML.
      */
     TtmlDestinationSettings?: TtmlDestinationSettings;
     /**
@@ -1119,7 +1119,7 @@ All burn-in and DVB-Sub font settings must match.
   export type Commitment = "ONE_YEAR"|string;
   export interface ContainerSettings {
     /**
-     * Settings for MP4 segments in CMAF
+     * These settings relate to the fragmented MP4 container for the segments in your CMAF outputs.
      */
     CmfcSettings?: CmfcSettings;
     /**
@@ -1135,23 +1135,23 @@ All burn-in and DVB-Sub font settings must match.
      */
     M2tsSettings?: M2tsSettings;
     /**
-     * Settings for TS segments in HLS
+     * These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs.
      */
     M3u8Settings?: M3u8Settings;
     /**
-     * Settings for MOV Container.
+     * These settings relate to your QuickTime MOV output container.
      */
     MovSettings?: MovSettings;
     /**
-     * Settings for MP4 container. You can create audio-only AAC outputs with this container.
+     * These settings relate to your MP4 output container. You can create audio only outputs with this container. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only.
      */
     Mp4Settings?: Mp4Settings;
     /**
-     * Settings for MP4 segments in DASH
+     * These settings relate to the fragmented MP4 container for the segments in your DASH outputs.
      */
     MpdSettings?: MpdSettings;
     /**
-     * MXF settings
+     * These settings relate to your MXF output container.
      */
     MxfSettings?: MxfSettings;
   }
@@ -2694,7 +2694,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type ImscStylePassthrough = "ENABLED"|"DISABLED"|string;
   export interface Input {
     /**
-     * Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.
+     * Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group.
      */
     AudioSelectorGroups?: __mapOfAudioSelectorGroup;
     /**
@@ -2770,7 +2770,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
-     * Selector for video.
+     * Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
      */
     VideoSelector?: VideoSelector;
   }
@@ -2810,7 +2810,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type InputScanType = "AUTO"|"PSF"|string;
   export interface InputTemplate {
     /**
-     * Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.
+     * Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group.
      */
     AudioSelectorGroups?: __mapOfAudioSelectorGroup;
     /**
@@ -2874,7 +2874,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
-     * Selector for video.
+     * Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
      */
     VideoSelector?: VideoSelector;
   }
@@ -3048,7 +3048,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     AvailBlanking?: AvailBlanking;
     /**
-     * Settings for Event Signaling And Messaging (ESAM).
+     * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
     Esam?: EsamSettings;
     /**
@@ -3056,7 +3056,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Inputs?: __listOfInput;
     /**
-     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
      */
     MotionImageInserter?: MotionImageInserter;
     /**
@@ -3072,7 +3072,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     OutputGroups?: __listOfOutputGroup;
     /**
-     * Contains settings used to acquire and adjust timecode information from inputs.
+     * These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping.
      */
     TimecodeConfig?: TimecodeConfig;
     /**
@@ -3146,7 +3146,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     AvailBlanking?: AvailBlanking;
     /**
-     * Settings for Event Signaling And Messaging (ESAM).
+     * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
     Esam?: EsamSettings;
     /**
@@ -3154,7 +3154,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Inputs?: __listOfInputTemplate;
     /**
-     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
+     * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
      */
     MotionImageInserter?: MotionImageInserter;
     /**
@@ -3170,7 +3170,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     OutputGroups?: __listOfOutputGroup;
     /**
-     * Contains settings used to acquire and adjust timecode information from inputs.
+     * These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping.
      */
     TimecodeConfig?: TimecodeConfig;
     /**
@@ -3360,11 +3360,11 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     BufferModel?: M2tsBufferModel;
     /**
-     * Inserts DVB Network Information Table (NIT) at the specified table repetition interval.
+     * Use these settings to insert a DVB Network Information Table (NIT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings.
      */
     DvbNitSettings?: DvbNitSettings;
     /**
-     * Inserts DVB Service Description Table (NIT) at the specified table repetition interval.
+     * Use these settings to insert a DVB Service Description Table (SDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings.
      */
     DvbSdtSettings?: DvbSdtSettings;
     /**
@@ -3372,7 +3372,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     DvbSubPids?: __listOf__integerMin32Max8182;
     /**
-     * Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
+     * Use these settings to insert a DVB Time and Date Table (TDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings.
      */
     DvbTdtSettings?: DvbTdtSettings;
     /**
@@ -4115,7 +4115,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Preset?: __stringMin0;
     /**
-     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -4169,23 +4169,23 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface OutputGroupSettings {
     /**
-     * Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output.
+     * Settings related to your CMAF output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to CMAF_GROUP_SETTINGS.
      */
     CmafGroupSettings?: CmafGroupSettings;
     /**
-     * Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS.
+     * Settings related to your DASH output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to DASH_ISO_GROUP_SETTINGS.
      */
     DashIsoGroupSettings?: DashIsoGroupSettings;
     /**
-     * Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS.
+     * Settings related to your File output group. MediaConvert uses this group of settings to generate a single standalone file, rather than a streaming package. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to FILE_GROUP_SETTINGS.
      */
     FileGroupSettings?: FileGroupSettings;
     /**
-     * Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to HLS_GROUP_SETTINGS.
+     * Settings related to your HLS output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to HLS_GROUP_SETTINGS.
      */
     HlsGroupSettings?: HlsGroupSettings;
     /**
-     * Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS.
+     * Settings related to your Microsoft Smooth Streaming output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to MS_SMOOTH_GROUP_SETTINGS.
      */
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
     /**
@@ -4248,7 +4248,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     AudioDescriptions?: __listOfAudioDescription;
     /**
-     * Caption settings for this preset. There can be multiple caption settings in a single output.
+     * This object holds groups of settings related to captions for one output. For each output that has captions, include one instance of CaptionDescriptions.
      */
     CaptionDescriptions?: __listOfCaptionDescriptionPreset;
     /**
@@ -4256,7 +4256,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     ContainerSettings?: ContainerSettings;
     /**
-     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -4817,7 +4817,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Av1Settings?: Av1Settings;
     /**
-     * Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
+     * Required when you choose AVC-Intra for your output video codec. For more information about the AVC-Intra settings, see the relevant specification. For detailed information about SD and HD in AVC-Intra, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
      */
     AvcIntraSettings?: AvcIntraSettings;
     /**
@@ -4931,11 +4931,11 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface VideoPreprocessor {
     /**
-     * Enable the Color corrector (ColorCorrector) feature if necessary. Enable or disable this feature for each output individually. This setting is disabled by default.
+     * Use these settings to convert the color space or to modify properties such as hue and contrast for this output. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/converting-the-color-space.html.
      */
     ColorCorrector?: ColorCorrector;
     /**
-     * Use Deinterlacer (Deinterlacer) to produce smoother motion and a clearer picture.
+     * Use the deinterlacer to produce smoother motion and a clearer picture. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-scan-type.html.
      */
     Deinterlacer?: Deinterlacer;
     /**
@@ -4955,7 +4955,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     PartnerWatermarking?: PartnerWatermarking;
     /**
-     * Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output.
+     * Settings for burning the output timecode and specified prefix into the output.
      */
     TimecodeBurnin?: TimecodeBurnin;
   }
@@ -5144,7 +5144,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface WebvttDestinationSettings {
     /**
-     * If your input captions format is teletext or teletext inside of STL, enable this setting to pass through style, color, and position information to your WebVTT output captions.
+     * Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.
      */
     StylePassthrough?: WebvttStylePassthrough;
   }
@@ -5229,7 +5229,6 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin48000Max48000 = number;
   export type __integerMin6000Max1024000 = number;
   export type __integerMin64000Max640000 = number;
-  export type __integerMin7Max15 = number;
   export type __integerMin8000Max192000 = number;
   export type __integerMin8000Max96000 = number;
   export type __integerMin96Max600 = number;

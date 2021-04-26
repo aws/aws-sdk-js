@@ -68,11 +68,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   createApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.   The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
+   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.  You control the amount of time that the URL will be valid using the SessionExpirationDurationInSeconds parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.  The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
    */
   createApplicationPresignedUrl(params: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse, AWSError>;
   /**
-   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.   The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
+   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.  You control the amount of time that the URL will be valid using the SessionExpirationDurationInSeconds parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.  The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
    */
   createApplicationPresignedUrl(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse, AWSError>;
   /**
@@ -227,6 +227,14 @@ declare class KinesisAnalyticsV2 extends Service {
    * Updates an existing Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   You cannot update the RuntimeEnvironment of an existing application. If you need to update an application's RuntimeEnvironment, you must delete the application and create it again. 
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
+  /**
+   * Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.
+   */
+  updateApplicationMaintenanceConfiguration(params: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
+  /**
+   * Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.
+   */
+  updateApplicationMaintenanceConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
 }
 declare namespace KinesisAnalyticsV2 {
   export interface AddApplicationCloudWatchLoggingOptionRequest {
@@ -532,7 +540,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -563,7 +571,29 @@ declare namespace KinesisAnalyticsV2 {
      * Describes the application Amazon CloudWatch logging options.
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
+    /**
+     * Describes the time window for automatic application maintenance.
+     */
+    ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
   }
+  export interface ApplicationMaintenanceConfigurationDescription {
+    /**
+     * The start time for the automatic maintenance window.
+     */
+    ApplicationMaintenanceWindowStartTime: ApplicationMaintenanceWindowStartTime;
+    /**
+     * The end time for the automatic maintenance window.
+     */
+    ApplicationMaintenanceWindowEndTime: ApplicationMaintenanceWindowEndTime;
+  }
+  export interface ApplicationMaintenanceConfigurationUpdate {
+    /**
+     * The updated start time for the automatic maintenance window.
+     */
+    ApplicationMaintenanceWindowStartTimeUpdate: ApplicationMaintenanceWindowStartTime;
+  }
+  export type ApplicationMaintenanceWindowEndTime = string;
+  export type ApplicationMaintenanceWindowStartTime = string;
   export type ApplicationName = string;
   export interface ApplicationRestoreConfiguration {
     /**
@@ -594,7 +624,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -614,7 +644,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId: ApplicationVersionId;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
      */
     RuntimeEnvironment: RuntimeEnvironment;
   }
@@ -642,7 +672,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
@@ -660,7 +690,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
@@ -678,7 +708,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabledUpdate?: BooleanObject;
     /**
-     * Describes updates to the interval in milliseconds between checkpoint operations.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes updates to the interval in milliseconds between checkpoint operations.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointIntervalUpdate?: CheckpointInterval;
     /**
@@ -800,7 +830,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDescription?: ApplicationDescription;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -2068,6 +2098,26 @@ declare namespace KinesisAnalyticsV2 {
     TagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateApplicationMaintenanceConfigurationRequest {
+    /**
+     * The name of the application for which you want to update the maintenance time window.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * Describes the application maintenance configuration update.
+     */
+    ApplicationMaintenanceConfigurationUpdate: ApplicationMaintenanceConfigurationUpdate;
+  }
+  export interface UpdateApplicationMaintenanceConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationARN?: ResourceARN;
+    /**
+     * The application maintenance configuration description after the update.
+     */
+    ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
   }
   export interface UpdateApplicationRequest {
     /**

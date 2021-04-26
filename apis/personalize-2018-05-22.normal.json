@@ -108,6 +108,38 @@
       "documentation": "<p>Creates an empty dataset and adds it to the specified dataset group. Use <a>CreateDatasetImportJob</a> to import your training data to a dataset.</p> <p>There are three types of datasets:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul> <p>Each dataset type has an associated schema with required field types. Only the <code>Interactions</code> dataset is required in order to train a model (also referred to as creating a solution).</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the dataset, call <a>DescribeDataset</a>.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>CreateDatasetGroup</a> </p> </li> <li> <p> <a>ListDatasets</a> </p> </li> <li> <p> <a>DescribeDataset</a> </p> </li> <li> <p> <a>DeleteDataset</a> </p> </li> </ul>",
       "idempotent": true
     },
+    "CreateDatasetExportJob": {
+      "name": "CreateDatasetExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDatasetExportJobRequest"
+      },
+      "output": {
+        "shape": "CreateDatasetExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        }
+      ],
+      "documentation": "<p> Creates a job that exports data from your dataset to an Amazon S3 bucket. To allow Amazon Personalize to export the training data, you must specify an service-linked AWS Identity and Access Management (IAM) role that gives Amazon Personalize <code>PutObject</code> permissions for your Amazon S3 bucket. For information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/export-permissions.html\">Dataset export job permissions requirements</a> in the Amazon Personalize developer guide. </p> <p> <b>Status</b> </p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p> To get the status of the export job, call <a>DescribeDatasetExportJob</a>, and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed. </p>",
+      "idempotent": true
+    },
     "CreateDatasetGroup": {
       "name": "CreateDatasetGroup",
       "http": {
@@ -162,7 +194,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.</p> <important> <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>"
+      "documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system. For information on granting access to your Amazon S3 bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving Amazon Personalize Access to Amazon S3 Resources</a>. </p> <important> <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>"
     },
     "CreateEventTracker": {
       "name": "CreateEventTracker",
@@ -561,6 +593,29 @@
       "documentation": "<p>Describes the given dataset. For more information on datasets, see <a>CreateDataset</a>.</p>",
       "idempotent": true
     },
+    "DescribeDatasetExportJob": {
+      "name": "DescribeDatasetExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDatasetExportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeDatasetExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describes the dataset export job created by <a>CreateDatasetExportJob</a>, including the export job status.</p>",
+      "idempotent": true
+    },
     "DescribeDatasetGroup": {
       "name": "DescribeDatasetGroup",
       "http": {
@@ -837,6 +892,29 @@
         }
       ],
       "documentation": "<p>Returns a list of campaigns that use the given solution. When a solution is not specified, all the campaigns associated with the account are listed. The response provides the properties for each campaign, including the Amazon Resource Name (ARN). For more information on campaigns, see <a>CreateCampaign</a>.</p>",
+      "idempotent": true
+    },
+    "ListDatasetExportJobs": {
+      "name": "ListDatasetExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListDatasetExportJobsRequest"
+      },
+      "output": {
+        "shape": "ListDatasetExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p>Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see <a>CreateDatasetExportJob</a>. For more information on datasets, see <a>CreateDataset</a>.</p>",
       "idempotent": true
     },
     "ListDatasetGroups": {
@@ -1238,7 +1316,7 @@
       "members": {
         "itemExplorationConfig": {
           "shape": "HyperParameters",
-          "documentation": "<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a>native-recipe-new-item-USER_PERSONALIZATION</a>.</p>"
+          "documentation": "<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>.</p>"
         }
       },
       "documentation": "<p>The configuration details of a batch inference job.</p>"
@@ -1523,7 +1601,7 @@
         },
         "filterArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.</p>"
+          "documentation": "<p>The ARN of the filter to apply to the batch inference job. For more information on using filters, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html\">Filtering Batch Recommendations</a>..</p>"
         },
         "numResults": {
           "shape": "NumBatchResults",
@@ -1539,7 +1617,7 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.</p>"
+          "documentation": "<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.</p>"
         },
         "batchInferenceJobConfig": {
           "shape": "BatchInferenceJobConfig",
@@ -1588,6 +1666,46 @@
         "campaignArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the campaign.</p>"
+        }
+      }
+    },
+    "CreateDatasetExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobName",
+        "datasetArn",
+        "roleArn",
+        "jobOutput"
+      ],
+      "members": {
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name for the dataset export job.</p>"
+        },
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset that contains the data to export.</p>"
+        },
+        "ingestionMode": {
+          "shape": "IngestionMode",
+          "documentation": "<p>The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. </p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.</p>"
+        },
+        "jobOutput": {
+          "shape": "DatasetExportJobOutput",
+          "documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored.</p>"
+        }
+      }
+    },
+    "CreateDatasetExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
         }
       }
     },
@@ -1855,7 +1973,7 @@
       "members": {
         "dataLocation": {
           "shape": "S3Location",
-          "documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/training-data.csv</code> </p>"
+          "documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/folder-name/</code> </p>"
         }
       },
       "documentation": "<p>Describes the data source that contains the data to upload to a dataset.</p>"
@@ -1897,6 +2015,101 @@
         }
       },
       "documentation": "<p>Provides metadata for a dataset.</p>"
+    },
+    "DatasetExportJob": {
+      "type": "structure",
+      "members": {
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the export job.</p>"
+        },
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
+        },
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset to export.</p>"
+        },
+        "ingestionMode": {
+          "shape": "IngestionMode",
+          "documentation": "<p>The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. </p>"
+        },
+        "roleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+        },
+        "jobOutput": {
+          "shape": "DatasetExportJobOutput",
+          "documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored. For example:</p> <p> <code>s3://bucket-name/folder-name/</code> </p>"
+        },
+        "creationDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The creation date and time (in Unix time) of the dataset export job.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) the status of the dataset export job was last updated.</p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If a dataset export job fails, provides the reason why.</p>"
+        }
+      },
+      "documentation": "<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a>CreateDatasetExportJob</a>.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+    },
+    "DatasetExportJobOutput": {
+      "type": "structure",
+      "required": [
+        "s3DataDestination"
+      ],
+      "members": {
+        "s3DataDestination": {
+          "shape": "S3DataConfig"
+        }
+      },
+      "documentation": "<p>The output configuration parameters of a dataset export job.</p>"
+    },
+    "DatasetExportJobSummary": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
+        },
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the dataset export job.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+        },
+        "creationDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) that the dataset export job was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) that the dataset export job status was last updated.</p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If a dataset export job fails, the reason behind the failure.</p>"
+        }
+      },
+      "documentation": "<p>Provides a summary of the properties of a dataset export job. For a complete listing, call the <a>DescribeDatasetExportJob</a> API.</p>"
+    },
+    "DatasetExportJobs": {
+      "type": "list",
+      "member": {
+        "shape": "DatasetExportJobSummary"
+      },
+      "max": 100
     },
     "DatasetGroup": {
       "type": "structure",
@@ -2036,7 +2249,7 @@
         },
         "lastUpdatedDateTime": {
           "shape": "Date",
-          "documentation": "<p>The date and time (in Unix time) that the dataset was last updated.</p>"
+          "documentation": "<p>The date and time (in Unix time) that the dataset import job status was last updated.</p>"
         },
         "failureReason": {
           "shape": "FailureReason",
@@ -2389,6 +2602,27 @@
         "campaign": {
           "shape": "Campaign",
           "documentation": "<p>The properties of the campaign.</p>"
+        }
+      }
+    },
+    "DescribeDatasetExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "datasetExportJobArn"
+      ],
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job to describe.</p>"
+        }
+      }
+    },
+    "DescribeDatasetExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJob": {
+          "shape": "DatasetExportJob",
+          "documentation": "<p>Information about the dataset export job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>"
         }
       }
     },
@@ -2937,6 +3171,14 @@
       },
       "max": 100
     },
+    "IngestionMode": {
+      "type": "string",
+      "enum": [
+        "BULK",
+        "PUT",
+        "ALL"
+      ]
+    },
     "IntegerHyperParameterRange": {
       "type": "structure",
       "members": {
@@ -2999,7 +3241,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token to use to retreive the next page of results. The value is <code>null</code> when there are no more results to return.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>"
         }
       }
     },
@@ -3030,6 +3272,36 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token for getting the next set of campaigns (if they exist).</p>"
+        }
+      }
+    },
+    "ListDatasetExportJobsRequest": {
+      "type": "structure",
+      "members": {
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting the next set of dataset export jobs (if they exist).</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of dataset export jobs to return.</p>"
+        }
+      }
+    },
+    "ListDatasetExportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobs": {
+          "shape": "DatasetExportJobs",
+          "documentation": "<p>The list of dataset export jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of dataset export jobs (if they exist).</p>"
         }
       }
     },
