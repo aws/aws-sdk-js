@@ -1862,7 +1862,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "AssessmentReport": {
       "type": "structure",
@@ -2521,7 +2521,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "ControlResponse": {
       "type": "string",
@@ -3366,7 +3366,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "FrameworkType": {
       "type": "string",
@@ -4677,7 +4677,7 @@
       "type": "structure",
       "members": {
         "id": {
-          "shape": "UUID",
+          "shape": "ControlSetName",
           "documentation": "<p> The unique identifier for the control set. </p>"
         },
         "name": {

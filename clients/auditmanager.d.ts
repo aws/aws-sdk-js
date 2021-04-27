@@ -2398,7 +2398,7 @@ declare namespace AuditManager {
     /**
      *  The unique identifier for the control set. 
      */
-    id?: UUID;
+    id?: ControlSetName;
     /**
      *  The name of the control set. 
      */

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.893.0-->
+<!--LATEST=2.894.0-->
 <!--ENTRYINSERT-->
+
+## 2.894.0
+* feature: AuditManager: This release restricts using backslashes in control, assessment, and framework names. The controlSetName field of the UpdateAssessmentFrameworkControlSet API now allows strings without backslashes.
+* feature: Node.js: Add postinstall script warning end-of-support for Node.js <10.x
 
 ## 2.893.0
 * feature: CodeGuruReviewer: Include KMS Key Details in Repository Association APIs to enable usage of customer managed KMS Keys.

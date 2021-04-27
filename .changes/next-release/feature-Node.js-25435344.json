@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Node.js",
-  "description": "Add postinstall script warning end-of-support for Node.js <10.x"
-}
