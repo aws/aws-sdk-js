@@ -263,6 +263,7 @@ export abstract class ConfigurationServicePlaceholders {
   lookoutmetrics?: AWS.LookoutMetrics.Types.ClientConfiguration;
   mgn?: AWS.Mgn.Types.ClientConfiguration;
   lookoutequipment?: AWS.LookoutEquipment.Types.ClientConfiguration;
+  nimble?: AWS.Nimble.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -528,4 +529,5 @@ export interface ConfigurationServiceApiVersions {
   lookoutmetrics?: AWS.LookoutMetrics.Types.apiVersion;
   mgn?: AWS.Mgn.Types.apiVersion;
   lookoutequipment?: AWS.LookoutEquipment.Types.apiVersion;
+  nimble?: AWS.Nimble.Types.apiVersion;
 }

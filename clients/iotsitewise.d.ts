@@ -277,6 +277,14 @@ declare class IoTSiteWise extends Service {
    */
   getAssetPropertyValueHistory(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse, AWSError>;
   /**
+   * Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   */
+  getInterpolatedAssetPropertyValues(params: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse) => void): Request<IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse, AWSError>;
+  /**
+   * Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   */
+  getInterpolatedAssetPropertyValues(callback?: (err: AWSError, data: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse) => void): Request<IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse, AWSError>;
+  /**
    * Retrieves a paginated list of access policies for an identity (an AWS SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a portal or project).
    */
   listAccessPolicies(params: IoTSiteWise.Types.ListAccessPoliciesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAccessPoliciesResponse) => void): Request<IoTSiteWise.Types.ListAccessPoliciesResponse, AWSError>;
@@ -2056,6 +2064,66 @@ declare namespace IoTSiteWise {
      */
     propertyValue?: AssetPropertyValue;
   }
+  export interface GetInterpolatedAssetPropertyValuesRequest {
+    /**
+     * The ID of the asset.
+     */
+    assetId?: ID;
+    /**
+     * The ID of the asset property.
+     */
+    propertyId?: ID;
+    /**
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+     */
+    startTimeInSeconds: TimeInSeconds;
+    /**
+     * The nanosecond offset converted from startTimeInSeconds.
+     */
+    startTimeOffsetInNanos?: OffsetInNanos;
+    /**
+     * The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+     */
+    endTimeInSeconds: TimeInSeconds;
+    /**
+     * The nanosecond offset converted from endTimeInSeconds.
+     */
+    endTimeOffsetInNanos?: OffsetInNanos;
+    /**
+     * The quality of the asset property value. You can use this parameter as a filter to choose only the asset property values that have a specific quality.
+     */
+    quality: Quality;
+    /**
+     * The time interval in seconds over which to interpolate data. Each interval starts when the previous one ends.
+     */
+    intervalInSeconds: IntervalInSeconds;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per paginated request. If not specified, the default value is 10.
+     */
+    maxResults?: MaxInterpolatedResults;
+    /**
+     * The interpolation type. Valid values: LINEAR_INTERPOLATION 
+     */
+    type: InterpolationType;
+  }
+  export interface GetInterpolatedAssetPropertyValuesResponse {
+    /**
+     * The requested interpolated values.
+     */
+    interpolatedAssetPropertyValues: InterpolatedAssetPropertyValues;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface Greengrass {
     /**
      * The ARN of the Greengrass group. For more information about how to find a group's ARN, see ListGroups and GetGroup in the AWS IoT Greengrass API Reference.
@@ -2131,7 +2199,14 @@ declare namespace IoTSiteWise {
      */
     url: Url;
   }
+  export interface InterpolatedAssetPropertyValue {
+    timestamp: TimeInNanos;
+    value: Variant;
+  }
+  export type InterpolatedAssetPropertyValues = InterpolatedAssetPropertyValue[];
+  export type InterpolationType = string;
   export type Interval = string;
+  export type IntervalInSeconds = number;
   export type KmsKeyId = string;
   export interface ListAccessPoliciesRequest {
     /**
@@ -2414,6 +2489,7 @@ declare namespace IoTSiteWise {
     level: LoggingLevel;
   }
   export type Macro = string;
+  export type MaxInterpolatedResults = number;
   export type MaxResults = number;
   export interface Measurement {
   }

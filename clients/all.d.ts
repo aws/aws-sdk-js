@@ -261,3 +261,4 @@ export import Fis = require('./fis');
 export import LookoutMetrics = require('./lookoutmetrics');
 export import Mgn = require('./mgn');
 export import LookoutEquipment = require('./lookoutequipment');
+export import Nimble = require('./nimble');

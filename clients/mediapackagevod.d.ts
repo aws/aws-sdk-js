@@ -201,6 +201,11 @@ declare namespace MediaPackageVod {
      */
     HlsManifests: __listOfHlsManifest;
     /**
+     * When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+
+     */
+    IncludeEncoderConfigurationInSegments?: __boolean;
+    /**
      * Duration (in seconds) of each fragment. Actual fragments will be
 rounded to the nearest multiple of the source fragment duration.
 
@@ -377,6 +382,11 @@ rounded to the nearest multiple of the source fragment duration.
      */
     DashManifests: __listOfDashManifest;
     Encryption?: DashEncryption;
+    /**
+     * When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+
+     */
+    IncludeEncoderConfigurationInSegments?: __boolean;
     /**
      * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
 Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not

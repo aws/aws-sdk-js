@@ -262,5 +262,6 @@ module.exports = {
   Fis: require('./fis'),
   LookoutMetrics: require('./lookoutmetrics'),
   Mgn: require('./mgn'),
-  LookoutEquipment: require('./lookoutequipment')
+  LookoutEquipment: require('./lookoutequipment'),
+  Nimble: require('./nimble')
 };

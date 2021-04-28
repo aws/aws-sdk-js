@@ -3601,7 +3601,7 @@ declare namespace Connect {
     /**
      * The maximum number of contacts that can be in the queue before it is considered full.
      */
-    MaxContacts: QueueMaxContacts;
+    MaxContacts?: QueueMaxContacts;
   }
   export interface UpdateQueueNameRequest {
     /**

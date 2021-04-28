@@ -1013,6 +1013,9 @@ declare namespace CloudFormation {
      * The names of one or more AWS accounts for which you want to deploy stack set updates.
      */
     Accounts?: AccountList;
+    /**
+     * Returns the value of the AccountsUrl property.
+     */
     AccountsUrl?: AccountsUrl;
     /**
      * The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
@@ -1627,6 +1630,10 @@ declare namespace CloudFormation {
      * The name or unique ID of the stack set from which the stack was created. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     StackSetName?: StackSetNameOrId;
+    /**
+     * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for stack sets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your AWS account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the AWS CloudFormation User Guide.  
+     */
+    CallAs?: CallAs;
   }
   export interface GetTemplateSummaryOutput {
     /**
@@ -3065,6 +3072,9 @@ declare namespace CloudFormation {
   }
   export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
+    /**
+     * The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.
+     */
     RegionConcurrencyType?: RegionConcurrencyType;
     /**
      * The order of the Regions in where you want to perform the stack operation.

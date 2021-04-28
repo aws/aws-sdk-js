@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.894.0-->
+<!--LATEST=2.895.0-->
 <!--ENTRYINSERT-->
+
+## 2.895.0
+* feature: CloudFormation: Add CallAs parameter to GetTemplateSummary to enable use with StackSets delegated administrator integration
+* feature: Connect: Updated max number of tags that can be attached from 200 to 50. MaxContacts is now an optional parameter for the UpdateQueueMaxContact API.
+* feature: IoTSiteWise: AWS IoT SiteWise interpolation API will get interpolated values for an asset property per specified time interval during a period of time.
+* feature: MediaPackageVod: MediaPackage now offers the option to place your Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) encoder metadata in every video segment instead of in the init fragment for DASH and CMAF endpoints.
+* feature: Nimble: Amazon Nimble Studio is a virtual studio service that empowers visual effects, animation, and interactive content teams to create content securely within a scalable, private cloud service.
 
 ## 2.894.0
 * feature: AuditManager: This release restricts using backslashes in control, assessment, and framework names. The controlSetName field of the UpdateAssessmentFrameworkControlSet API now allows strings without backslashes.

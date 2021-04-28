@@ -1011,5 +1011,8 @@
   },
   "lookoutequipment": {
     "name": "LookoutEquipment"
+  },
+  "nimble": {
+    "name": "Nimble"
   }
 }
