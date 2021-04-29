@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Serializer",
+  "description": "XML entity encoding for carriage return, line feed, next line, and line separator characters"
+}
