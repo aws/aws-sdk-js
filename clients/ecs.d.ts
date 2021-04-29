@@ -389,11 +389,11 @@ declare class ECS extends Service {
    */
   updateClusterSettings(callback?: (err: AWSError, data: ECS.Types.UpdateClusterSettingsResponse) => void): Request<ECS.Types.UpdateClusterSettingsResponse, AWSError>;
   /**
-   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  UpdateContainerAgent requires the Amazon ECS-optimized AMI or Amazon Linux with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide.
+   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package which will update the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
    */
   updateContainerAgent(params: ECS.Types.UpdateContainerAgentRequest, callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
   /**
-   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  UpdateContainerAgent requires the Amazon ECS-optimized AMI or Amazon Linux with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide.
+   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package which will update the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
    */
   updateContainerAgent(callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
   /**
@@ -529,6 +529,9 @@ declare namespace ECS {
     managedTerminationProtection?: ManagedTerminationProtection;
   }
   export interface AutoScalingGroupProviderUpdate {
+    /**
+     * The managed scaling settings for the Auto Scaling group capacity provider.
+     */
     managedScaling?: ManagedScaling;
     /**
      * The managed termination protection setting to use for the Auto Scaling group capacity provider. This determines whether the Auto Scaling group has managed termination protection.  When using managed termination protection, managed scaling must also be used otherwise managed termination protection will not work.  When managed termination protection is enabled, Amazon ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks from being terminated during a scale-in action. The Auto Scaling group and each instance in the Auto Scaling group must have instance protection from scale-in actions enabled as well. For more information, see Instance Protection in the AWS Auto Scaling User Guide. When managed termination protection is disabled, your Amazon EC2 instances are not protected from termination when the Auto Scaling group scales in.
@@ -787,7 +790,7 @@ declare namespace ECS {
      */
     memoryReservation?: BoxedInteger;
     /**
-     * The links parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to Legacy container links in the Docker documentation. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to docker run.  This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
+     * The links parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to Legacy container links in the Docker documentation. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to docker run.  This parameter is not supported for Windows containers.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
      */
     links?: StringList;
     /**
@@ -847,7 +850,7 @@ declare namespace ECS {
      */
     hostname?: String;
     /**
-     * The user to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.  When running tasks using the host network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.  You can specify the user using the following formats. If specifying a UID or GID, you must specify it as a positive integer.    user     user:group     uid     uid:gid     user:gid     uid:group     This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * The user to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.  When running tasks using the host network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.  You can specify the user using the following formats. If specifying a UID or GID, you must specify it as a positive integer.    user     user:group     uid     uid:gid     user:gid     uid:group     This parameter is not supported for Windows containers. 
      */
     user?: String;
     /**
@@ -855,7 +858,7 @@ declare namespace ECS {
      */
     workingDirectory?: String;
     /**
-     * When this parameter is true, networking is disabled within the container. This parameter maps to NetworkDisabled in the Create a container section of the Docker Remote API.  This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * When this parameter is true, networking is disabled within the container. This parameter maps to NetworkDisabled in the Create a container section of the Docker Remote API.  This parameter is not supported for Windows containers. 
      */
     disableNetworking?: BoxedBoolean;
     /**
@@ -863,15 +866,15 @@ declare namespace ECS {
      */
     privileged?: BoxedBoolean;
     /**
-     * When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ReadonlyRootfs in the Create a container section of the Docker Remote API and the --read-only option to docker run.  This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ReadonlyRootfs in the Create a container section of the Docker Remote API and the --read-only option to docker run.  This parameter is not supported for Windows containers. 
      */
     readonlyRootFilesystem?: BoxedBoolean;
     /**
-     * A list of DNS servers that are presented to the container. This parameter maps to Dns in the Create a container section of the Docker Remote API and the --dns option to docker run.  This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * A list of DNS servers that are presented to the container. This parameter maps to Dns in the Create a container section of the Docker Remote API and the --dns option to docker run.  This parameter is not supported for Windows containers. 
      */
     dnsServers?: StringList;
     /**
-     * A list of DNS search domains that are presented to the container. This parameter maps to DnsSearch in the Create a container section of the Docker Remote API and the --dns-search option to docker run.  This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * A list of DNS search domains that are presented to the container. This parameter maps to DnsSearch in the Create a container section of the Docker Remote API and the --dns-search option to docker run.  This parameter is not supported for Windows containers. 
      */
     dnsSearchDomains?: StringList;
     /**
@@ -895,7 +898,7 @@ declare namespace ECS {
      */
     dockerLabels?: DockerLabelsMap;
     /**
-     * A list of ulimits to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers or tasks that use the awsvpc network mode. 
+     * A list of ulimits to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating system with the exception of the nofile resource limit parameter which Fargate overrides. The nofile resource limit sets a restriction on the number of open files that a container can use. The default nofile soft limit is 1024 and hard limit is 4096. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers. 
      */
     ulimits?: UlimitList;
     /**
@@ -1142,7 +1145,7 @@ declare namespace ECS {
      */
     loadBalancers?: LoadBalancers;
     /**
-     * The details of the service discovery registries to assign to this service. For more information, see Service discovery.  Service discovery is supported for Fargate tasks if you are using platform version v1.1.0 or later. For more information, see AWS Fargate platform versions. 
+     * The details of the service discovery registry to associate with this service. For more information, see Service discovery.  Each service may be associated with one service registry. Multiple service registries per service isn't supported. 
      */
     serviceRegistries?: ServiceRegistries;
     /**
@@ -1194,7 +1197,7 @@ declare namespace ECS {
      */
     schedulingStrategy?: SchedulingStrategy;
     /**
-     * The deployment controller to use for the service.
+     * The deployment controller to use for the service. If no deployment controller is specified, the default value of ECS is used.
      */
     deploymentController?: DeploymentController;
     /**
@@ -1237,6 +1240,9 @@ declare namespace ECS {
      * The task definition for the tasks in the task set to use.
      */
     taskDefinition: String;
+    /**
+     * An object representing the network configuration for a task set.
+     */
     networkConfiguration?: NetworkConfiguration;
     /**
      * A load balancer object representing the load balancer to use with the task set. The supported load balancer types are either an Application Load Balancer or a Network Load Balancer.
@@ -1258,6 +1264,9 @@ declare namespace ECS {
      * The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.
      */
     platformVersion?: String;
+    /**
+     * A floating-point percentage of the desired number of tasks to place and keep running in the task set.
+     */
     scale?: Scale;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Up to 32 ASCII characters are allowed.
@@ -1269,6 +1278,9 @@ declare namespace ECS {
     tags?: Tags;
   }
   export interface CreateTaskSetResponse {
+    /**
+     * Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an EXTERNAL deployment. A task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.
+     */
     taskSet?: TaskSet;
   }
   export interface DeleteAccountSettingRequest {
@@ -1310,6 +1322,9 @@ declare namespace ECS {
     capacityProvider: String;
   }
   export interface DeleteCapacityProviderResponse {
+    /**
+     * The details of the capacity provider.
+     */
     capacityProvider?: CapacityProvider;
   }
   export interface DeleteClusterRequest {
@@ -1363,6 +1378,9 @@ declare namespace ECS {
     force?: BoxedBoolean;
   }
   export interface DeleteTaskSetResponse {
+    /**
+     * Details about the task set.
+     */
     taskSet?: TaskSet;
   }
   export interface Deployment {
@@ -1773,6 +1791,12 @@ declare namespace ECS {
   export type EnvironmentFileType = "s3"|string;
   export type EnvironmentFiles = EnvironmentFile[];
   export type EnvironmentVariables = KeyValuePair[];
+  export interface EphemeralStorage {
+    /**
+     * The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+     */
+    sizeInGiB: Integer;
+  }
   export interface ExecuteCommandConfiguration {
     /**
      * Specify an AWS Key Management Service key ID to encrypt the data between the local client and the container.
@@ -2035,7 +2059,7 @@ declare namespace ECS {
      */
     value?: String;
     /**
-     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the account settings are listed only for the authenticated user.
+     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the account settings are listed only for the authenticated user.  Federated users assume the account setting of the root user and can't have explicit account settings set for them. 
      */
     principalArn?: String;
     /**
@@ -2539,6 +2563,9 @@ declare namespace ECS {
     value: String;
   }
   export interface PutAccountSettingDefaultResponse {
+    /**
+     * The current setting for a resource.
+     */
     setting?: Setting;
   }
   export interface PutAccountSettingRequest {
@@ -2551,7 +2578,7 @@ declare namespace ECS {
      */
     value: String;
     /**
-     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.
+     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.  Federated users assume the account setting of the root user and can't have explicit account settings set for them. 
      */
     principalArn?: String;
   }
@@ -2592,6 +2619,9 @@ declare namespace ECS {
     defaultCapacityProviderStrategy: CapacityProviderStrategy;
   }
   export interface PutClusterCapacityProvidersResponse {
+    /**
+     * Details about the cluster.
+     */
     cluster?: Cluster;
   }
   export interface RegisterContainerInstanceRequest {
@@ -2691,11 +2721,18 @@ declare namespace ECS {
      * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks run on AWS Fargate. 
      */
     ipcMode?: IpcMode;
+    /**
+     * The configuration details for the App Mesh proxy. For tasks hosted on Amazon EC2 instances, the container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the ecs-init package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized AMI versions in the Amazon Elastic Container Service Developer Guide.
+     */
     proxyConfiguration?: ProxyConfiguration;
     /**
      * The Elastic Inference accelerators to use for the containers in the task.
      */
     inferenceAccelerators?: InferenceAccelerators;
+    /**
+     * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. For more information, see Fargate task storage in the Amazon ECS User Guide for AWS Fargate.  This parameter is only supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later. 
+     */
+    ephemeralStorage?: EphemeralStorage;
   }
   export interface RegisterTaskDefinitionResponse {
     /**
@@ -3412,6 +3449,10 @@ declare namespace ECS {
      * The version counter for the task. Every time a task experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task state with CloudWatch Events, you can compare the version of a task reported by the Amazon ECS API actions with the version reported in CloudWatch Events for the task (inside the detail object) to verify that the version in your event stream is current.
      */
     version?: Long;
+    /**
+     * The ephemeral storage settings for the task.
+     */
+    ephemeralStorage?: EphemeralStorage;
   }
   export interface TaskDefinition {
     /**
@@ -3502,6 +3543,10 @@ declare namespace ECS {
      * The principal that registered the task definition.
      */
     registeredBy?: String;
+    /**
+     * The ephemeral storage settings to use for tasks run with the task definition.
+     */
+    ephemeralStorage?: EphemeralStorage;
   }
   export type TaskDefinitionFamilyStatus = "ACTIVE"|"INACTIVE"|"ALL"|string;
   export type TaskDefinitionField = "TAGS"|string;
@@ -3546,6 +3591,10 @@ declare namespace ECS {
      * The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
      */
     taskRoleArn?: String;
+    /**
+     * The ephemeral storage setting override for the task.  This parameter is only supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later. 
+     */
+    ephemeralStorage?: EphemeralStorage;
   }
   export interface TaskSet {
     /**
@@ -3702,6 +3751,9 @@ declare namespace ECS {
     autoScalingGroupProvider: AutoScalingGroupProviderUpdate;
   }
   export interface UpdateCapacityProviderResponse {
+    /**
+     * Details about the capacity provider.
+     */
     capacityProvider?: CapacityProvider;
   }
   export interface UpdateClusterRequest {
@@ -3719,6 +3771,9 @@ declare namespace ECS {
     configuration?: ClusterConfiguration;
   }
   export interface UpdateClusterResponse {
+    /**
+     * Details about the cluster.
+     */
     cluster?: Cluster;
   }
   export interface UpdateClusterSettingsRequest {
@@ -3732,6 +3787,9 @@ declare namespace ECS {
     settings: ClusterSettings;
   }
   export interface UpdateClusterSettingsResponse {
+    /**
+     * Details about the cluster
+     */
     cluster?: Cluster;
   }
   export interface UpdateContainerAgentRequest {
@@ -3789,6 +3847,9 @@ declare namespace ECS {
     primaryTaskSet: String;
   }
   export interface UpdateServicePrimaryTaskSetResponse {
+    /**
+     * Details about the task set.
+     */
     taskSet?: TaskSet;
   }
   export interface UpdateServiceRequest {
@@ -3816,6 +3877,9 @@ declare namespace ECS {
      * Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
      */
     deploymentConfiguration?: DeploymentConfiguration;
+    /**
+     * An object representing the network configuration for the service.
+     */
     networkConfiguration?: NetworkConfiguration;
     /**
      * An array of task placement constraint objects to update the service to use. If no value is specified, the existing placement constraints for the service will remain unchanged. If this value is specified, it will override any existing placement constraints defined for the service. To remove all existing placement constraints, specify an empty array. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime).
@@ -3861,9 +3925,15 @@ declare namespace ECS {
      * The short name or full Amazon Resource Name (ARN) of the task set to update.
      */
     taskSet: String;
+    /**
+     * A floating-point percentage of the desired number of tasks to place and keep running in the task set.
+     */
     scale: Scale;
   }
   export interface UpdateTaskSetResponse {
+    /**
+     * Details about the task set.
+     */
     taskSet?: TaskSet;
   }
   export interface VersionInfo {

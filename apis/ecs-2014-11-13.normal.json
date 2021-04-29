@@ -1409,7 +1409,7 @@
           "shape": "MissingVersionException"
         }
       ],
-      "documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.</p> <p> <code>UpdateContainerAgent</code> requires the Amazon ECS-optimized AMI or Amazon Linux with the <code>ecs-init</code> service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+      "documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.</p> <note> <p>The <code>UpdateContainerAgent</code> API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the <code>ecs-init</code> package which will update the agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html\">Updating the Amazon ECS container agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </note> <p>The <code>UpdateContainerAgent</code> API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the <code>ecs-init</code> service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually updating the Amazon ECS container agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
     },
     "UpdateContainerInstancesState": {
       "name": "UpdateContainerInstancesState",
@@ -1702,7 +1702,8 @@
       "type": "structure",
       "members": {
         "managedScaling": {
-          "shape": "ManagedScaling"
+          "shape": "ManagedScaling",
+          "documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>"
         },
         "managedTerminationProtection": {
           "shape": "ManagedTerminationProtection",
@@ -2106,7 +2107,7 @@
         },
         "links": {
           "shape": "StringList",
-          "documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is <code>bridge</code>. The <code>name:internalName</code> construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to <a href=\"https://docs.docker.com/network/links/\">Legacy container links</a> in the Docker documentation. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
+          "documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is <code>bridge</code>. The <code>name:internalName</code> construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to <a href=\"https://docs.docker.com/network/links/\">Legacy container links</a> in the Docker documentation. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
         },
         "portMappings": {
           "shape": "PortMappingList",
@@ -2166,7 +2167,7 @@
         },
         "user": {
           "shape": "String",
-          "documentation": "<p>The user to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <important> <p>When running tasks using the <code>host</code> network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.</p> </important> <p>You can specify the <code>user</code> using the following formats. If specifying a UID or GID, you must specify it as a positive integer.</p> <ul> <li> <p> <code>user</code> </p> </li> <li> <p> <code>user:group</code> </p> </li> <li> <p> <code>uid</code> </p> </li> <li> <p> <code>uid:gid</code> </p> </li> <li> <p> <code>user:gid</code> </p> </li> <li> <p> <code>uid:group</code> </p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>The user to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <important> <p>When running tasks using the <code>host</code> network mode, you should not run containers using the root user (UID 0). It is considered best practice to use a non-root user.</p> </important> <p>You can specify the <code>user</code> using the following formats. If specifying a UID or GID, you must specify it as a positive integer.</p> <ul> <li> <p> <code>user</code> </p> </li> <li> <p> <code>user:group</code> </p> </li> <li> <p> <code>uid</code> </p> </li> <li> <p> <code>uid:gid</code> </p> </li> <li> <p> <code>user:gid</code> </p> </li> <li> <p> <code>uid:group</code> </p> </li> </ul> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "workingDirectory": {
           "shape": "String",
@@ -2174,7 +2175,7 @@
         },
         "disableNetworking": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>When this parameter is true, networking is disabled within the container. This parameter maps to <code>NetworkDisabled</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>When this parameter is true, networking is disabled within the container. This parameter maps to <code>NetworkDisabled</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "privileged": {
           "shape": "BoxedBoolean",
@@ -2182,15 +2183,15 @@
         },
         "readonlyRootFilesystem": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>When this parameter is true, the container is given read-only access to its root file system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--read-only</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>When this parameter is true, the container is given read-only access to its root file system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--read-only</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "dnsServers": {
           "shape": "StringList",
-          "documentation": "<p>A list of DNS servers that are presented to the container. This parameter maps to <code>Dns</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>A list of DNS servers that are presented to the container. This parameter maps to <code>Dns</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "dnsSearchDomains": {
           "shape": "StringList",
-          "documentation": "<p>A list of DNS search domains that are presented to the container. This parameter maps to <code>DnsSearch</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns-search</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>A list of DNS search domains that are presented to the container. This parameter maps to <code>DnsSearch</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns-search</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "extraHosts": {
           "shape": "HostEntryList",
@@ -2214,7 +2215,7 @@
         },
         "ulimits": {
           "shape": "UlimitList",
-          "documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code> </p> <note> <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p> </note>"
+          "documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type.</p> <p>Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating system with the exception of the <code>nofile</code> resource limit parameter which Fargate overrides. The <code>nofile</code> resource limit sets a restriction on the number of open files that a container can use. The default <code>nofile</code> soft limit is <code>1024</code> and hard limit is <code>4096</code>.</p> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code> </p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "logConfiguration": {
           "shape": "LogConfiguration",
@@ -2553,7 +2554,7 @@
         },
         "serviceRegistries": {
           "shape": "ServiceRegistries",
-          "documentation": "<p>The details of the service discovery registries to assign to this service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service discovery</a>.</p> <note> <p>Service discovery is supported for Fargate tasks if you are using platform version v1.1.0 or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate platform versions</a>.</p> </note>"
+          "documentation": "<p>The details of the service discovery registry to associate with this service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service discovery</a>.</p> <note> <p>Each service may be associated with one service registry. Multiple service registries per service isn't supported.</p> </note>"
         },
         "desiredCount": {
           "shape": "BoxedInteger",
@@ -2605,7 +2606,7 @@
         },
         "deploymentController": {
           "shape": "DeploymentController",
-          "documentation": "<p>The deployment controller to use for the service.</p>"
+          "documentation": "<p>The deployment controller to use for the service. If no deployment controller is specified, the default value of <code>ECS</code> is used.</p>"
         },
         "tags": {
           "shape": "Tags",
@@ -2659,7 +2660,8 @@
           "documentation": "<p>The task definition for the tasks in the task set to use.</p>"
         },
         "networkConfiguration": {
-          "shape": "NetworkConfiguration"
+          "shape": "NetworkConfiguration",
+          "documentation": "<p>An object representing the network configuration for a task set.</p>"
         },
         "loadBalancers": {
           "shape": "LoadBalancers",
@@ -2682,7 +2684,8 @@
           "documentation": "<p>The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the <code>LATEST</code> platform version is used by default.</p>"
         },
         "scale": {
-          "shape": "Scale"
+          "shape": "Scale",
+          "documentation": "<p>A floating-point percentage of the desired number of tasks to place and keep running in the task set.</p>"
         },
         "clientToken": {
           "shape": "String",
@@ -2698,7 +2701,8 @@
       "type": "structure",
       "members": {
         "taskSet": {
-          "shape": "TaskSet"
+          "shape": "TaskSet",
+          "documentation": "<p>Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an <code>EXTERNAL</code> deployment. A task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.</p>"
         }
       }
     },
@@ -2768,7 +2772,8 @@
       "type": "structure",
       "members": {
         "capacityProvider": {
-          "shape": "CapacityProvider"
+          "shape": "CapacityProvider",
+          "documentation": "<p>The details of the capacity provider.</p>"
         }
       }
     },
@@ -2852,7 +2857,8 @@
       "type": "structure",
       "members": {
         "taskSet": {
-          "shape": "TaskSet"
+          "shape": "TaskSet",
+          "documentation": "<p>Details about the task set.</p>"
         }
       }
     },
@@ -3479,6 +3485,19 @@
         "shape": "KeyValuePair"
       }
     },
+    "EphemeralStorage": {
+      "type": "structure",
+      "required": [
+        "sizeInGiB"
+      ],
+      "members": {
+        "sizeInGiB": {
+          "shape": "Integer",
+          "documentation": "<p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is <code>21</code> GiB and the maximum supported value is <code>200</code> GiB.</p>"
+        }
+      },
+      "documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task storage</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p> <note> <p>This parameter is only supported for tasks hosted on AWS Fargate using platform version <code>1.4.0</code> or later.</p> </note>"
+    },
     "ExecuteCommandConfiguration": {
       "type": "structure",
       "members": {
@@ -3902,7 +3921,7 @@
         },
         "principalArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the account settings are listed only for the authenticated user.</p>"
+          "documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the account settings are listed only for the authenticated user.</p> <note> <p>Federated users assume the account setting of the root user and can't have explicit account settings set for them.</p> </note>"
         },
         "effectiveSettings": {
           "shape": "Boolean",
@@ -4624,7 +4643,7 @@
           "documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and <code>udp</code>. The default is <code>tcp</code>.</p>"
         }
       },
-      "documentation": "<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>. The <code>hostPort</code> can be left blank or it must be the same value as the <code>containerPort</code>.</p> <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>"
+      "documentation": "<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>. The <code>hostPort</code> can be left blank or it must be the same value as the <code>containerPort</code>.</p> <note> <p>You cannot expose the same container port for multiple protocols. An error will be returned if this is attempted</p> </note> <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>"
     },
     "PortMappingList": {
       "type": "list",
@@ -4693,7 +4712,8 @@
       "type": "structure",
       "members": {
         "setting": {
-          "shape": "Setting"
+          "shape": "Setting",
+          "documentation": "<p>The current setting for a resource.</p>"
         }
       }
     },
@@ -4714,7 +4734,7 @@
         },
         "principalArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.</p>"
+          "documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.</p> <note> <p>Federated users assume the account setting of the root user and can't have explicit account settings set for them.</p> </note>"
         }
       }
     },
@@ -4778,7 +4798,8 @@
       "type": "structure",
       "members": {
         "cluster": {
-          "shape": "Cluster"
+          "shape": "Cluster",
+          "documentation": "<p>Details about the cluster.</p>"
         }
       }
     },
@@ -4892,11 +4913,16 @@
           "documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href=\"https://docs.docker.com/engine/security/security/\">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks run on AWS Fargate.</p> </note>"
         },
         "proxyConfiguration": {
-          "shape": "ProxyConfiguration"
+          "shape": "ProxyConfiguration",
+          "documentation": "<p>The configuration details for the App Mesh proxy.</p> <p>For tasks hosted on Amazon EC2 instances, the container instances require at least version <code>1.26.0</code> of the container agent and at least version <code>1.26.0-1</code> of the <code>ecs-init</code> package to enable a proxy configuration. If your container instances are launched from the Amazon ECS-optimized AMI version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html\">Amazon ECS-optimized AMI versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
         "inferenceAccelerators": {
           "shape": "InferenceAccelerators",
           "documentation": "<p>The Elastic Inference accelerators to use for the containers in the task.</p>"
+        },
+        "ephemeralStorage": {
+          "shape": "EphemeralStorage",
+          "documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task storage</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p> <note> <p>This parameter is only supported for tasks hosted on AWS Fargate using platform version <code>1.4.0</code> or later.</p> </note>"
         }
       }
     },
@@ -5885,6 +5911,10 @@
         "version": {
           "shape": "Long",
           "documentation": "<p>The version counter for the task. Every time a task experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task state with CloudWatch Events, you can compare the version of a task reported by the Amazon ECS API actions with the version reported in CloudWatch Events for the task (inside the <code>detail</code> object) to verify that the version in your event stream is current.</p>"
+        },
+        "ephemeralStorage": {
+          "shape": "EphemeralStorage",
+          "documentation": "<p>The ephemeral storage settings for the task.</p>"
         }
       },
       "documentation": "<p>Details on a task in a cluster.</p>"
@@ -5979,6 +6009,10 @@
         "registeredBy": {
           "shape": "String",
           "documentation": "<p>The principal that registered the task definition.</p>"
+        },
+        "ephemeralStorage": {
+          "shape": "EphemeralStorage",
+          "documentation": "<p>The ephemeral storage settings to use for tasks run with the task definition.</p>"
         }
       },
       "documentation": "<p>The details of a task definition which describes the container and volume definitions of an Amazon Elastic Container Service task. You can specify which Docker images to use, the required resources, and other configurations related to launching the task definition through an Amazon ECS service or task.</p>"
@@ -6074,6 +6108,10 @@
         "taskRoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.</p>"
+        },
+        "ephemeralStorage": {
+          "shape": "EphemeralStorage",
+          "documentation": "<p>The ephemeral storage setting override for the task.</p> <note> <p>This parameter is only supported for tasks hosted on AWS Fargate using platform version <code>1.4.0</code> or later.</p> </note>"
         }
       },
       "documentation": "<p>The overrides associated with a task.</p>"
@@ -6267,7 +6305,7 @@
           "documentation": "<p>The hard limit for the ulimit type.</p>"
         }
       },
-      "documentation": "<p>The <code>ulimit</code> settings to pass to the container.</p>"
+      "documentation": "<p>The <code>ulimit</code> settings to pass to the container.</p> <p>Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating system with the exception of the <code>nofile</code> resource limit parameter which Fargate overrides. The <code>nofile</code> resource limit sets a restriction on the number of open files that a container can use. The default <code>nofile</code> soft limit is <code>1024</code> and hard limit is <code>4096</code>.</p>"
     },
     "UlimitList": {
       "type": "list",
@@ -6337,7 +6375,8 @@
       "type": "structure",
       "members": {
         "capacityProvider": {
-          "shape": "CapacityProvider"
+          "shape": "CapacityProvider",
+          "documentation": "<p>Details about the capacity provider.</p>"
         }
       }
     },
@@ -6365,7 +6404,8 @@
       "type": "structure",
       "members": {
         "cluster": {
-          "shape": "Cluster"
+          "shape": "Cluster",
+          "documentation": "<p>Details about the cluster.</p>"
         }
       }
     },
@@ -6390,7 +6430,8 @@
       "type": "structure",
       "members": {
         "cluster": {
-          "shape": "Cluster"
+          "shape": "Cluster",
+          "documentation": "<p>Details about the cluster</p>"
         }
       }
     },
@@ -6479,7 +6520,8 @@
       "type": "structure",
       "members": {
         "taskSet": {
-          "shape": "TaskSet"
+          "shape": "TaskSet",
+          "documentation": "<p>Details about the task set.</p>"
         }
       }
     },
@@ -6514,7 +6556,8 @@
           "documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
         },
         "networkConfiguration": {
-          "shape": "NetworkConfiguration"
+          "shape": "NetworkConfiguration",
+          "documentation": "<p>An object representing the network configuration for the service.</p>"
         },
         "placementConstraints": {
           "shape": "PlacementConstraints",
@@ -6573,7 +6616,8 @@
           "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the task set to update.</p>"
         },
         "scale": {
-          "shape": "Scale"
+          "shape": "Scale",
+          "documentation": "<p>A floating-point percentage of the desired number of tasks to place and keep running in the task set.</p>"
         }
       }
     },
@@ -6581,7 +6625,8 @@
       "type": "structure",
       "members": {
         "taskSet": {
-          "shape": "TaskSet"
+          "shape": "TaskSet",
+          "documentation": "<p>Details about the task set.</p>"
         }
       }
     },

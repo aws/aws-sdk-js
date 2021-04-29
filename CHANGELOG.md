@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.895.0-->
+<!--LATEST=2.896.0-->
 <!--ENTRYINSERT-->
+
+## 2.896.0
+* bugfix: Serializer: XML entity encoding for carriage return, line feed, next line, and line separator characters
+* feature: Chime: Increase AppInstanceUserId length to 64 characters
+* feature: ECS: Add support for EphemeralStorage on TaskDefinition and TaskOverride
+* feature: Macie2: The Amazon Macie API now provides S3 bucket metadata that indicates whether a bucket policy requires server-side encryption of objects when objects are uploaded to the bucket.
 
 ## 2.895.0
 * feature: CloudFormation: Add CallAs parameter to GetTemplateSummary to enable use with StackSets delegated administrator integration

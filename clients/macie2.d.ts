@@ -506,6 +506,7 @@ declare namespace Macie2 {
     status?: AdminStatus;
   }
   export type AdminStatus = "ENABLED"|"DISABLING_IN_PROGRESS"|string;
+  export type AllowsUnencryptedObjectUploads = "TRUE"|"FALSE"|"UNKNOWN"|string;
   export interface ApiCallDetails {
     /**
      * The name of the operation that was invoked most recently and produced the finding.
@@ -642,17 +643,21 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEncryptionType {
     /**
-     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
+     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS) by default.
      */
     kmsManaged?: __long;
     /**
-     * The total number of buckets that use an Amazon S3 managed key to encrypt new objects by default. These buckets use Amazon S3 managed encryption (SSE-S3).
+     * The total number of buckets that use an Amazon S3 managed key to encrypt new objects by default. These buckets use Amazon S3 managed encryption (SSE-S3) by default.
      */
     s3Managed?: __long;
     /**
      * The total number of buckets that don't encrypt new objects by default. Default encryption is disabled for these buckets.
      */
     unencrypted?: __long;
+    /**
+     * The total number of buckets that Amazon Macie doesn't have current encryption metadata for. Macie can't provide current data about the default encryption settings for these buckets.
+     */
+    unknown?: __long;
   }
   export interface BucketCountBySharedAccessType {
     /**
@@ -669,6 +674,20 @@ declare namespace Macie2 {
     notShared?: __long;
     /**
      * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.
+     */
+    unknown?: __long;
+  }
+  export interface BucketCountPolicyAllowsUnencryptedObjectUploads {
+    /**
+     * The total number of buckets that don't have a bucket policy or have a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, the policy doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms.
+     */
+    allowsUnencryptedObjectUploads?: __long;
+    /**
+     * The total number of buckets whose bucket policies require server-side encryption of new objects. PutObject requests for these buckets must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms.
+     */
+    deniesUnencryptedObjectUploads?: __long;
+    /**
+     * The total number of buckets that Amazon Macie wasn't able to evaluate server-side encryption requirements for. Macie can't determine whether the bucket policies for these buckets require server-side encryption of new objects.
      */
     unknown?: __long;
   }
@@ -722,6 +741,10 @@ declare namespace Macie2 {
      * The unique identifier for the AWS account that owns the bucket.
      */
     accountId?: __string;
+    /**
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects.
+     */
+    allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
      * The Amazon Resource Name (ARN) of the bucket.
      */
@@ -829,7 +852,7 @@ declare namespace Macie2 {
      */
     effectivePermission?: EffectivePermission;
     /**
-     * The account-level and bucket-level permissions for the bucket.
+     * The account-level and bucket-level permissions settings for the bucket.
      */
     permissionConfiguration?: BucketPermissionConfiguration;
   }
@@ -998,7 +1021,7 @@ declare namespace Macie2 {
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
@@ -1630,11 +1653,15 @@ declare namespace Macie2 {
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
-     * The total number of buckets, grouped by default server-side encryption type. This object also reports the total number of buckets that don't encrypt new objects by default.
+     * The total number of buckets that use certain types of server-side encryption to encrypt new objects by default. This object also reports the total number of buckets that don't encrypt new objects by default.
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
-     * The total number of buckets that are shared with another AWS account.
+     * The total number of buckets whose bucket policies do and don't require server-side encryption of objects when objects are uploaded to the buckets.
+     */
+    bucketCountByObjectEncryptionRequirement?: BucketCountPolicyAllowsUnencryptedObjectUploads;
+    /**
+     * The total number of buckets that are and aren't shared with another AWS account.
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
@@ -2443,6 +2470,10 @@ declare namespace Macie2 {
      * The total number of objects that aren't encrypted or use client-side encryption.
      */
     unencrypted?: __long;
+    /**
+     * The total number of objects that Amazon Macie doesn't have current encryption metadata for. Macie can't provide current data about the encryption settings for these objects.
+     */
+    unknown?: __long;
   }
   export interface ObjectLevelStatistics {
     /**
@@ -2583,6 +2614,10 @@ declare namespace Macie2 {
   }
   export interface S3Bucket {
     /**
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of objects.
+     */
+    allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
+    /**
      * The Amazon Resource Name (ARN) of the bucket.
      */
     arn?: __string;
@@ -2599,7 +2634,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * The display name and account identifier for the user who owns the bucket.
+     * The display name and AWS account ID for the user who owns the bucket.
      */
     owner?: S3BucketOwner;
     /**
@@ -2903,7 +2938,7 @@ declare namespace Macie2 {
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
