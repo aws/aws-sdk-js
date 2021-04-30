@@ -124,6 +124,14 @@ declare class ForecastService extends Service {
    */
   deletePredictorBacktestExportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Dataset: dataset import jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   */
+  deleteResourceTree(params: ForecastService.Types.DeleteResourceTreeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Dataset: dataset import jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   */
+  deleteResourceTree(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the parameters specified in the CreateDataset request, this operation includes the following dataset properties:    CreationTime     LastModificationTime     Status   
    */
   describeDataset(params: ForecastService.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetResponse) => void): Request<ForecastService.Types.DescribeDatasetResponse, AWSError>;
@@ -680,6 +688,12 @@ declare namespace ForecastService {
      */
     PredictorArn: Arn;
   }
+  export interface DeleteResourceTreeRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the parent resource to delete. All child resources of the parent resource will also be deleted.
+     */
+    ResourceArn: Arn;
+  }
   export interface DescribeDatasetGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the dataset group.
@@ -756,7 +770,7 @@ declare namespace ForecastService {
      */
     DataSource?: DataSource;
     /**
-     * The estimated time in minutes for the dataset import job to complete.
+     * The estimated time remaining in minutes for the dataset import job to complete.
      */
     EstimatedTimeRemainingInMinutes?: Long;
     /**
@@ -900,7 +914,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
-     * The estimated time in minutes for the forecast job to complete.
+     * The estimated time remaining in minutes for the forecast job to complete.
      */
     EstimatedTimeRemainingInMinutes?: Long;
     /**
@@ -1021,7 +1035,7 @@ declare namespace ForecastService {
      */
     PredictorExecutionDetails?: PredictorExecutionDetails;
     /**
-     * The estimated time in minutes for the predictor training job to complete.
+     * The estimated time remaining in minutes for the predictor training job to complete.
      */
     EstimatedTimeRemainingInMinutes?: Long;
     /**

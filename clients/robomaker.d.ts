@@ -2590,7 +2590,7 @@ declare namespace RoboMaker {
     version?: RobotSoftwareSuiteVersionType;
   }
   export type RobotSoftwareSuiteType = "ROS"|"ROS2"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|string;
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
   export type S3Bucket = string;

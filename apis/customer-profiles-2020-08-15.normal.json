@@ -354,6 +354,37 @@
       ],
       "documentation": "<p>Returns an integration for a domain.</p>"
     },
+    "GetMatches": {
+      "name": "GetMatches",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/matches"
+      },
+      "input": {
+        "shape": "GetMatchesRequest"
+      },
+      "output": {
+        "shape": "GetMatchesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul>"
+    },
     "GetProfileObjectType": {
       "name": "GetProfileObjectType",
       "http": {
@@ -627,6 +658,34 @@
       ],
       "documentation": "<p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In Connect Customer Profiles, domains, profile object types, and integrations can be tagged.</p>"
     },
+    "MergeProfiles": {
+      "name": "MergeProfiles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domains/{DomainName}/profiles/objects/merge"
+      },
+      "input": {
+        "shape": "MergeProfilesRequest"
+      },
+      "output": {
+        "shape": "MergeProfilesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Runs an AWS Lambda job that does the following:</p> <ol> <li> <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p> </li> <li> <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>Standard fields are merged as follows:</p> <ol> <li> <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or attributeKeys.</p> </li> <li> <p>When there are conflicting fields:</p> <ol> <li> <p>If no <code>SourceProfileIds</code> entry is specified, the main Profile value is always taken. </p> </li> <li> <p>If a <code>SourceProfileIds</code> entry is specified, the specified profileId is always taken, even if it is a NULL value.</p> </li> </ol> </li> </ol> </li> </ol> <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).</p>"
+    },
     "PutIntegration": {
       "name": "PutIntegration",
       "http": {
@@ -830,7 +889,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>Once a domain is created, the name can’t be changed.</p>"
+      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p>"
     },
     "UpdateProfile": {
       "name": "UpdateProfile",
@@ -959,6 +1018,15 @@
       },
       "documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or billing.</p>"
     },
+    "AttributeSourceIdMap": {
+      "type": "map",
+      "key": {
+        "shape": "string1To255"
+      },
+      "value": {
+        "shape": "uuid"
+      }
+    },
     "Attributes": {
       "type": "map",
       "key": {
@@ -1035,6 +1103,10 @@
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.</p>"
         },
+        "Matching": {
+          "shape": "MatchingRequest",
+          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+        },
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
@@ -1065,6 +1137,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -1098,7 +1174,7 @@
         },
         "AdditionalInformation": {
           "shape": "string1To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "PartyType": {
           "shape": "PartyType",
@@ -1122,15 +1198,15 @@
         },
         "BirthDate": {
           "shape": "string1To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business number.</p>"
+          "documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business number. </p>"
         },
         "MobilePhoneNumber": {
           "shape": "string1To255",
@@ -1146,7 +1222,7 @@
         },
         "EmailAddress": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string1To255",
@@ -1457,6 +1533,96 @@
         "shape": "name"
       }
     },
+    "FieldSourceProfileIds": {
+      "type": "structure",
+      "members": {
+        "AccountNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the account number field to be merged. </p>"
+        },
+        "AdditionalInformation": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the additional information field to be merged.</p>"
+        },
+        "PartyType": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "BusinessName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the business name field to be merged.</p>"
+        },
+        "FirstName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the first name field to be merged.</p>"
+        },
+        "MiddleName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the middle name field to be merged.</p>"
+        },
+        "LastName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the last name field to be merged.</p>"
+        },
+        "BirthDate": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the birthdate field to be merged.</p>"
+        },
+        "Gender": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the gender field to be merged.</p>"
+        },
+        "PhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the phone number field to be merged.</p>"
+        },
+        "MobilePhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the mobile phone number field to be merged.</p>"
+        },
+        "HomePhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the home phone number field to be merged.</p>"
+        },
+        "BusinessPhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the business phone number field to be merged.</p>"
+        },
+        "EmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the email address field to be merged.</p>"
+        },
+        "PersonalEmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the personal email address field to be merged.</p>"
+        },
+        "BusinessEmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "Address": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "ShippingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the shipping address field to be merged.</p>"
+        },
+        "MailingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the mailing address field to be merged.</p>"
+        },
+        "BillingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the billing type field to be merged.</p>"
+        },
+        "Attributes": {
+          "shape": "AttributeSourceIdMap",
+          "documentation": "<p>A unique identifier for the attributes field to be merged.</p>"
+        }
+      },
+      "documentation": "<p>A duplicate customer profile that is to be merged into a main profile. </p>"
+    },
     "FlowDefinition": {
       "type": "structure",
       "required": [
@@ -1520,7 +1686,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>A unique name for the domain.</p>",
+          "documentation": "<p>The unique name of the domain.</p>",
           "location": "uri",
           "locationName": "DomainName"
         }
@@ -1553,6 +1719,10 @@
         "Stats": {
           "shape": "DomainStats",
           "documentation": "<p>Usage-specific statistics about the domain.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -1620,6 +1790,53 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        }
+      }
+    },
+    "GetMatchesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "maxSize100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        }
+      }
+    },
+    "GetMatchesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "MatchGenerationDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp this version of Match Result generated.</p>"
+        },
+        "PotentialMatches": {
+          "shape": "matchesNumber",
+          "documentation": "<p>The number of potential matches found.</p>"
+        },
+        "Matches": {
+          "shape": "MatchesList",
+          "documentation": "<p>The list of matched profiles for this instance.</p>"
         }
       }
     },
@@ -2182,6 +2399,86 @@
       },
       "documentation": "<p>The properties that are applied when Marketo is being used as a source.</p>"
     },
+    "MatchItem": {
+      "type": "structure",
+      "members": {
+        "MatchId": {
+          "shape": "string1To255",
+          "documentation": "<p>The unique identifiers for this group of profiles that match.</p>"
+        },
+        "ProfileIds": {
+          "shape": "ProfileIdList",
+          "documentation": "<p>A list of identifiers for profiles that match.</p>"
+        }
+      },
+      "documentation": "<p>The Match group object.</p>"
+    },
+    "MatchesList": {
+      "type": "list",
+      "member": {
+        "shape": "MatchItem"
+      }
+    },
+    "MatchingRequest": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+        }
+      },
+      "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+    },
+    "MatchingResponse": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+        }
+      },
+      "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+    },
+    "MergeProfilesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "MainProfileId",
+        "ProfileIdsToBeMerged"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MainProfileId": {
+          "shape": "uuid",
+          "documentation": "<p>The identifier of the profile to be taken.</p>"
+        },
+        "ProfileIdsToBeMerged": {
+          "shape": "ProfileIdToBeMergedList",
+          "documentation": "<p>The identifier of the profile to be merged into MainProfileId.</p>"
+        },
+        "FieldSourceProfileIds": {
+          "shape": "FieldSourceProfileIds",
+          "documentation": "<p>The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. </p>"
+        }
+      }
+    },
+    "MergeProfilesResponse": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "message",
+          "documentation": "<p>A message that indicates the merge request is complete.</p>"
+        }
+      }
+    },
     "Object": {
       "type": "string",
       "max": 512,
@@ -2265,7 +2562,7 @@
         },
         "AdditionalInformation": {
           "shape": "string1To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "PartyType": {
           "shape": "PartyType",
@@ -2289,11 +2586,11 @@
         },
         "BirthDate": {
           "shape": "string1To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string1To255",
@@ -2313,7 +2610,7 @@
         },
         "EmailAddress": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string1To255",
@@ -2345,6 +2642,20 @@
         }
       },
       "documentation": "<p>The standard profile of a customer.</p>"
+    },
+    "ProfileIdList": {
+      "type": "list",
+      "member": {
+        "shape": "uuid"
+      }
+    },
+    "ProfileIdToBeMergedList": {
+      "type": "list",
+      "member": {
+        "shape": "uuid"
+      },
+      "max": 20,
+      "min": 1
     },
     "ProfileList": {
       "type": "list",
@@ -3133,7 +3444,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>The unique name for the domain.</p>",
+          "documentation": "<p>The unique name of the domain.</p>",
           "location": "uri",
           "locationName": "DomainName"
         },
@@ -3148,6 +3459,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. If specified as an empty string, it will clear any existing value. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingRequest",
+          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3165,7 +3480,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>The unique name for the domain.</p>"
+          "documentation": "<p>The unique name of the domain.</p>"
         },
         "DefaultExpirationDays": {
           "shape": "expirationDaysInteger",
@@ -3178,6 +3493,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -3212,7 +3531,7 @@
         },
         "AdditionalInformation": {
           "shape": "string0To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "AccountNumber": {
           "shape": "string0To255",
@@ -3240,15 +3559,15 @@
         },
         "BirthDate": {
           "shape": "string0To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string0To255",
-          "documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business number.</p>"
+          "documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business number. </p>"
         },
         "MobilePhoneNumber": {
           "shape": "string0To255",
@@ -3264,7 +3583,7 @@
         },
         "EmailAddress": {
           "shape": "string0To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string0To255",
@@ -3356,6 +3675,10 @@
     "long": {
       "type": "long"
     },
+    "matchesNumber": {
+      "type": "integer",
+      "min": 0
+    },
     "maxSize100": {
       "type": "integer",
       "max": 100,
@@ -3363,6 +3686,9 @@
     },
     "message": {
       "type": "string"
+    },
+    "optionalBoolean": {
+      "type": "boolean"
     },
     "requestValueList": {
       "type": "list",

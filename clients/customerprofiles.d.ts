@@ -100,6 +100,14 @@ declare class CustomerProfiles extends Service {
    */
   getIntegration(callback?: (err: AWSError, data: CustomerProfiles.Types.GetIntegrationResponse) => void): Request<CustomerProfiles.Types.GetIntegrationResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   */
+  getMatches(params: CustomerProfiles.Types.GetMatchesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   */
+  getMatches(callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
+  /**
    * Returns the object types for a specific domain.
    */
   getProfileObjectType(params: CustomerProfiles.Types.GetProfileObjectTypeRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.GetProfileObjectTypeResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class CustomerProfiles extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CustomerProfiles.Types.ListTagsForResourceResponse) => void): Request<CustomerProfiles.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   */
+  mergeProfiles(params: CustomerProfiles.Types.MergeProfilesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   */
+  mergeProfiles(callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
+  /**
    * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain.
    */
   putIntegration(params: CustomerProfiles.Types.PutIntegrationRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.PutIntegrationResponse) => void): Request<CustomerProfiles.Types.PutIntegrationResponse, AWSError>;
@@ -220,11 +236,11 @@ declare class CustomerProfiles extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. Once a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. Once a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -308,6 +324,7 @@ declare namespace CustomerProfiles {
      */
     PostalCode?: string1To255;
   }
+  export type AttributeSourceIdMap = {[key: string]: uuid};
   export type Attributes = {[key: string]: string1To255};
   export type BucketName = string;
   export type BucketPrefix = string;
@@ -352,6 +369,10 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingRequest;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
@@ -373,6 +394,10 @@ declare namespace CustomerProfiles {
      * The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -396,7 +421,7 @@ declare namespace CustomerProfiles {
      */
     AccountNumber?: string1To255;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string1To1000;
     /**
@@ -420,15 +445,15 @@ declare namespace CustomerProfiles {
      */
     LastName?: string1To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string1To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
-     * The customer's phone number, which has not been specified as a mobile, home, or business number.
+     * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
     PhoneNumber?: string1To255;
     /**
@@ -444,7 +469,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string1To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string1To255;
     /**
@@ -616,6 +641,92 @@ declare namespace CustomerProfiles {
   export type FieldContentType = "STRING"|"NUMBER"|"PHONE_NUMBER"|"EMAIL_ADDRESS"|"NAME"|string;
   export type FieldMap = {[key: string]: ObjectTypeField};
   export type FieldNameList = name[];
+  export interface FieldSourceProfileIds {
+    /**
+     * A unique identifier for the account number field to be merged. 
+     */
+    AccountNumber?: uuid;
+    /**
+     * A unique identifier for the additional information field to be merged.
+     */
+    AdditionalInformation?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    PartyType?: uuid;
+    /**
+     * A unique identifier for the business name field to be merged.
+     */
+    BusinessName?: uuid;
+    /**
+     * A unique identifier for the first name field to be merged.
+     */
+    FirstName?: uuid;
+    /**
+     * A unique identifier for the middle name field to be merged.
+     */
+    MiddleName?: uuid;
+    /**
+     * A unique identifier for the last name field to be merged.
+     */
+    LastName?: uuid;
+    /**
+     * A unique identifier for the birthdate field to be merged.
+     */
+    BirthDate?: uuid;
+    /**
+     * A unique identifier for the gender field to be merged.
+     */
+    Gender?: uuid;
+    /**
+     * A unique identifier for the phone number field to be merged.
+     */
+    PhoneNumber?: uuid;
+    /**
+     * A unique identifier for the mobile phone number field to be merged.
+     */
+    MobilePhoneNumber?: uuid;
+    /**
+     * A unique identifier for the home phone number field to be merged.
+     */
+    HomePhoneNumber?: uuid;
+    /**
+     * A unique identifier for the business phone number field to be merged.
+     */
+    BusinessPhoneNumber?: uuid;
+    /**
+     * A unique identifier for the email address field to be merged.
+     */
+    EmailAddress?: uuid;
+    /**
+     * A unique identifier for the personal email address field to be merged.
+     */
+    PersonalEmailAddress?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    BusinessEmailAddress?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    Address?: uuid;
+    /**
+     * A unique identifier for the shipping address field to be merged.
+     */
+    ShippingAddress?: uuid;
+    /**
+     * A unique identifier for the mailing address field to be merged.
+     */
+    MailingAddress?: uuid;
+    /**
+     * A unique identifier for the billing type field to be merged.
+     */
+    BillingAddress?: uuid;
+    /**
+     * A unique identifier for the attributes field to be merged.
+     */
+    Attributes?: AttributeSourceIdMap;
+  }
   export interface FlowDefinition {
     /**
      * A description of the flow you want to create.
@@ -647,7 +758,7 @@ declare namespace CustomerProfiles {
   export type Gender = "MALE"|"FEMALE"|"UNSPECIFIED"|string;
   export interface GetDomainRequest {
     /**
-     * A unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
   }
@@ -672,6 +783,10 @@ declare namespace CustomerProfiles {
      * Usage-specific statistics about the domain.
      */
     Stats?: DomainStats;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -720,6 +835,38 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+  }
+  export interface GetMatchesRequest {
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: maxSize100;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+  }
+  export interface GetMatchesResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The timestamp this version of Match Result generated.
+     */
+    MatchGenerationDate?: timestamp;
+    /**
+     * The number of potential matches found.
+     */
+    PotentialMatches?: matchesNumber;
+    /**
+     * The list of matched profiles for this instance.
+     */
+    Matches?: MatchesList;
   }
   export interface GetProfileObjectTypeRequest {
     /**
@@ -1075,6 +1222,53 @@ declare namespace CustomerProfiles {
      */
     Object: Object;
   }
+  export interface MatchItem {
+    /**
+     * The unique identifiers for this group of profiles that match.
+     */
+    MatchId?: string1To255;
+    /**
+     * A list of identifiers for profiles that match.
+     */
+    ProfileIds?: ProfileIdList;
+  }
+  export type MatchesList = MatchItem[];
+  export interface MatchingRequest {
+    /**
+     * The flag that enables the matching process of duplicate profiles.
+     */
+    Enabled: optionalBoolean;
+  }
+  export interface MatchingResponse {
+    /**
+     * The flag that enables the matching process of duplicate profiles.
+     */
+    Enabled?: optionalBoolean;
+  }
+  export interface MergeProfilesRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The identifier of the profile to be taken.
+     */
+    MainProfileId: uuid;
+    /**
+     * The identifier of the profile to be merged into MainProfileId.
+     */
+    ProfileIdsToBeMerged: ProfileIdToBeMergedList;
+    /**
+     * The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. 
+     */
+    FieldSourceProfileIds?: FieldSourceProfileIds;
+  }
+  export interface MergeProfilesResponse {
+    /**
+     * A message that indicates the merge request is complete.
+     */
+    Message?: message;
+  }
   export type Object = string;
   export interface ObjectTypeField {
     /**
@@ -1113,7 +1307,7 @@ declare namespace CustomerProfiles {
      */
     AccountNumber?: string1To255;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string1To1000;
     /**
@@ -1137,11 +1331,11 @@ declare namespace CustomerProfiles {
      */
     LastName?: string1To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string1To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
@@ -1161,7 +1355,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string1To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string1To255;
     /**
@@ -1193,6 +1387,8 @@ declare namespace CustomerProfiles {
      */
     Attributes?: Attributes;
   }
+  export type ProfileIdList = uuid[];
+  export type ProfileIdToBeMergedList = uuid[];
   export type ProfileList = Profile[];
   export type ProfileObjectList = ListProfileObjectsItem[];
   export type ProfileObjectTypeList = ListProfileObjectTypeItem[];
@@ -1612,7 +1808,7 @@ declare namespace CustomerProfiles {
   export type UpdateAttributes = {[key: string]: string0To255};
   export interface UpdateDomainRequest {
     /**
-     * The unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
     /**
@@ -1628,13 +1824,17 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingRequest;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
   export interface UpdateDomainResponse {
     /**
-     * The unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
     /**
@@ -1649,6 +1849,10 @@ declare namespace CustomerProfiles {
      * The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -1672,7 +1876,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string0To1000;
     /**
@@ -1700,15 +1904,15 @@ declare namespace CustomerProfiles {
      */
     LastName?: string0To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string0To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
-     * The customer's phone number, which has not been specified as a mobile, home, or business number.
+     * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
     PhoneNumber?: string0To255;
     /**
@@ -1724,7 +1928,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string0To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string0To255;
     /**
@@ -1772,8 +1976,10 @@ declare namespace CustomerProfiles {
   export type encryptionKey = string;
   export type expirationDaysInteger = number;
   export type long = number;
+  export type matchesNumber = number;
   export type maxSize100 = number;
   export type message = string;
+  export type optionalBoolean = boolean;
   export type requestValueList = string1To255[];
   export type sqsQueueUrl = string;
   export type string0To1000 = string;
