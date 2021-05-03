@@ -20,11 +20,11 @@ declare class SecurityHub extends Service {
    */
   acceptAdministratorInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptAdministratorInvitationResponse) => void): Request<SecurityHub.Types.AcceptAdministratorInvitationResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
+   * This method is deprecated. Instead, use AcceptAdministratorInvitation. The Security Hub console continues to use AcceptInvitation. It will eventually change to use AcceptAdministratorInvitation. Any IAM policies that specifically control access to this function must continue to use AcceptInvitation. You should also add AcceptAdministratorInvitation to your policies to ensure that the correct permissions are in place after the console begins to use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
    */
   acceptInvitation(params: SecurityHub.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
+   * This method is deprecated. Instead, use AcceptAdministratorInvitation. The Security Hub console continues to use AcceptInvitation. It will eventually change to use AcceptAdministratorInvitation. Any IAM policies that specifically control access to this function must continue to use AcceptInvitation. You should also add AcceptAdministratorInvitation to your policies to ensure that the correct permissions are in place after the console begins to use AcceptAdministratorInvitation. Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from. This operation is only used by member accounts that are not added through Organizations. When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class SecurityHub extends Service {
    */
   disassociateFromAdministratorAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromAdministratorAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
+   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. The Security Hub console continues to use DisassociateFromMasterAccount. It will eventually change to use DisassociateFromAdministratorAccount. Any IAM policies that specifically control access to this function must continue to use DisassociateFromMasterAccount. You should also add DisassociateFromAdministratorAccount to your policies to ensure that the correct permissions are in place after the console begins to use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
    */
   disassociateFromMasterAccount(params: SecurityHub.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
+   * This method is deprecated. Instead, use DisassociateFromAdministratorAccount. The Security Hub console continues to use DisassociateFromMasterAccount. It will eventually change to use DisassociateFromAdministratorAccount. Any IAM policies that specifically control access to this function must continue to use DisassociateFromMasterAccount. You should also add DisassociateFromAdministratorAccount to your policies to ensure that the correct permissions are in place after the console begins to use DisassociateFromAdministratorAccount. Disassociates the current Security Hub member account from the associated administrator account. This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class SecurityHub extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: SecurityHub.Types.GetInvitationsCountResponse) => void): Request<SecurityHub.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
+   * This method is deprecated. Instead, use GetAdministratorAccount. The Security Hub console continues to use GetMasterAccount. It will eventually change to use GetAdministratorAccount. Any IAM policies that specifically control access to this function must continue to use GetMasterAccount. You should also add GetAdministratorAccount to your policies to ensure that the correct permissions are in place after the console begins to use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMasterAccount(params: SecurityHub.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * This method is deprecated. Instead, use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
+   * This method is deprecated. Instead, use GetAdministratorAccount. The Security Hub console continues to use GetMasterAccount. It will eventually change to use GetAdministratorAccount. Any IAM policies that specifically control access to this function must continue to use GetMasterAccount. You should also add GetAdministratorAccount to your policies to ensure that the correct permissions are in place after the console begins to use GetAdministratorAccount. Provides the details for the Security Hub administrator account for the current member account. Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.
    */
   getMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
@@ -1798,6 +1798,82 @@ declare namespace SecurityHub {
      */
     LaunchedAt?: NonEmptyString;
   }
+  export interface AwsEc2NetworkAclAssociation {
+    /**
+     * The identifier of the association between the network ACL and the subnet.
+     */
+    NetworkAclAssociationId?: NonEmptyString;
+    /**
+     * The identifier of the network ACL.
+     */
+    NetworkAclId?: NonEmptyString;
+    /**
+     * The identifier of the subnet that is associated with the network ACL.
+     */
+    SubnetId?: NonEmptyString;
+  }
+  export type AwsEc2NetworkAclAssociationList = AwsEc2NetworkAclAssociation[];
+  export interface AwsEc2NetworkAclDetails {
+    /**
+     * Whether this is the default network ACL for the VPC.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The identifier of the network ACL.
+     */
+    NetworkAclId?: NonEmptyString;
+    /**
+     * The identifier of the AWS account that owns the network ACL.
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     * The identifier of the VPC for the network ACL.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * Associations between the network ACL and subnets.
+     */
+    Associations?: AwsEc2NetworkAclAssociationList;
+    /**
+     * The set of rules in the network ACL.
+     */
+    Entries?: AwsEc2NetworkAclEntryList;
+  }
+  export interface AwsEc2NetworkAclEntry {
+    /**
+     * The IPV4 network range for which to deny or allow access.
+     */
+    CidrBlock?: NonEmptyString;
+    /**
+     * Whether the rule is an egress rule. An egress rule is a rule that applies to traffic that leaves the subnet.
+     */
+    Egress?: Boolean;
+    /**
+     * The Internet Control Message Protocol (ICMP) type and code for which to deny or allow access.
+     */
+    IcmpTypeCode?: IcmpTypeCode;
+    /**
+     * The IPV6 network range for which to deny or allow access.
+     */
+    Ipv6CidrBlock?: NonEmptyString;
+    /**
+     * For TCP or UDP protocols, the range of ports that the rule applies to.
+     */
+    PortRange?: PortRangeFromTo;
+    /**
+     * The protocol that the rule applies to. To deny or allow access to all protocols, use the value -1.
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * Whether the rule is used to allow access or deny access.
+     */
+    RuleAction?: NonEmptyString;
+    /**
+     * The rule number. The rules are processed in order by their number.
+     */
+    RuleNumber?: Integer;
+  }
+  export type AwsEc2NetworkAclEntryList = AwsEc2NetworkAclEntry[];
   export interface AwsEc2NetworkInterfaceAttachment {
     /**
      * Indicates when the attachment initiated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
@@ -1996,6 +2072,60 @@ declare namespace SecurityHub {
     VpcPeeringConnectionId?: NonEmptyString;
   }
   export type AwsEc2SecurityGroupUserIdGroupPairList = AwsEc2SecurityGroupUserIdGroupPair[];
+  export interface AwsEc2SubnetDetails {
+    /**
+     * Whether to assign an IPV6 address to a network interface that is created in this subnet.
+     */
+    AssignIpv6AddressOnCreation?: Boolean;
+    /**
+     * The Availability Zone for the subnet.
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     * The identifier of the Availability Zone for the subnet.
+     */
+    AvailabilityZoneId?: NonEmptyString;
+    /**
+     * The number of available IPV4 addresses in the subnet. Does not include addresses for stopped instances.
+     */
+    AvailableIpAddressCount?: Integer;
+    /**
+     * The IPV4 CIDR block that is assigned to the subnet.
+     */
+    CidrBlock?: NonEmptyString;
+    /**
+     * Whether this subnet is the default subnet for the Availability Zone.
+     */
+    DefaultForAz?: Boolean;
+    /**
+     * Whether instances in this subnet receive a public IP address.
+     */
+    MapPublicIpOnLaunch?: Boolean;
+    /**
+     * The identifier of the AWS account that owns the subnet.
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     * The current state of the subnet.
+     */
+    State?: NonEmptyString;
+    /**
+     * The ARN of the subnet.
+     */
+    SubnetArn?: NonEmptyString;
+    /**
+     * The identifier of the subnet.
+     */
+    SubnetId?: NonEmptyString;
+    /**
+     * The identifier of the VPC that contains the subnet.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * The IPV6 CIDR blocks that are associated with the subnet.
+     */
+    Ipv6CidrBlockAssociationSet?: Ipv6CidrBlockAssociationList;
+  }
   export interface AwsEc2VolumeAttachment {
     /**
      * The datetime when the attachment initiated.
@@ -2062,6 +2192,116 @@ declare namespace SecurityHub {
      * The current state of the VPC.
      */
     State?: NonEmptyString;
+  }
+  export interface AwsElasticBeanstalkEnvironmentDetails {
+    /**
+     * The name of the application that is associated with the environment.
+     */
+    ApplicationName?: NonEmptyString;
+    /**
+     * The URL to the CNAME for this environment.
+     */
+    Cname?: NonEmptyString;
+    /**
+     * The creation date for this environment.
+     */
+    DateCreated?: NonEmptyString;
+    /**
+     * The date when this environment was last modified.
+     */
+    DateUpdated?: NonEmptyString;
+    /**
+     * A description of the environment.
+     */
+    Description?: NonEmptyString;
+    /**
+     * For load-balanced, autoscaling environments, the URL to the load balancer. For single-instance environments, the IP address of the instance.
+     */
+    EndpointUrl?: NonEmptyString;
+    /**
+     * The ARN of the environment.
+     */
+    EnvironmentArn?: NonEmptyString;
+    /**
+     * The identifier of the environment.
+     */
+    EnvironmentId?: NonEmptyString;
+    /**
+     * Links to other environments in the same group.
+     */
+    EnvironmentLinks?: AwsElasticBeanstalkEnvironmentEnvironmentLinks;
+    /**
+     * The name of the environment.
+     */
+    EnvironmentName?: NonEmptyString;
+    /**
+     * The configuration setting for the environment.
+     */
+    OptionSettings?: AwsElasticBeanstalkEnvironmentOptionSettings;
+    /**
+     * The ARN of the platform version for the environment.
+     */
+    PlatformArn?: NonEmptyString;
+    /**
+     * The name of the solution stack that is deployed with the environment.
+     */
+    SolutionStackName?: NonEmptyString;
+    /**
+     * The current operational status of the environment.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The tier of the environment.
+     */
+    Tier?: AwsElasticBeanstalkEnvironmentTier;
+    /**
+     * The application version of the environment.
+     */
+    VersionLabel?: NonEmptyString;
+  }
+  export interface AwsElasticBeanstalkEnvironmentEnvironmentLink {
+    /**
+     * The name of the linked environment.
+     */
+    EnvironmentName?: NonEmptyString;
+    /**
+     * The name of the environment link.
+     */
+    LinkName?: NonEmptyString;
+  }
+  export type AwsElasticBeanstalkEnvironmentEnvironmentLinks = AwsElasticBeanstalkEnvironmentEnvironmentLink[];
+  export interface AwsElasticBeanstalkEnvironmentOptionSetting {
+    /**
+     * The type of resource that the configuration option is associated with.
+     */
+    Namespace?: NonEmptyString;
+    /**
+     * The name of the option.
+     */
+    OptionName?: NonEmptyString;
+    /**
+     * The name of the resource.
+     */
+    ResourceName?: NonEmptyString;
+    /**
+     * The value of the configuration setting.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsElasticBeanstalkEnvironmentOptionSettings = AwsElasticBeanstalkEnvironmentOptionSetting[];
+  export interface AwsElasticBeanstalkEnvironmentTier {
+    /**
+     * The name of the environment tier.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The type of environment tier.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The version of the environment tier.
+     */
+    Version?: NonEmptyString;
   }
   export interface AwsElasticsearchDomainDetails {
     /**
@@ -5833,6 +6073,16 @@ declare namespace SecurityHub {
      */
     UnprocessedAccounts?: ResultList;
   }
+  export interface IcmpTypeCode {
+    /**
+     * The ICMP code for which to deny or allow access. To deny or allow all codes, use the value -1.
+     */
+    Code?: Integer;
+    /**
+     * The ICMP type for which to deny or allow access. To deny or allow all types, use the value -1.
+     */
+    Type?: Integer;
+  }
   export interface ImportFindingsError {
     /**
      * The identifier of the finding that could not be updated.
@@ -6430,6 +6680,16 @@ declare namespace SecurityHub {
      */
     End?: Integer;
   }
+  export interface PortRangeFromTo {
+    /**
+     * The first port in the port range.
+     */
+    From?: Integer;
+    /**
+     * The last port in the port range.
+     */
+    To?: Integer;
+  }
   export type PortRangeList = PortRange[];
   export interface ProcessDetails {
     /**
@@ -6626,9 +6886,21 @@ declare namespace SecurityHub {
      */
     AwsEc2Eip?: AwsEc2EipDetails;
     /**
+     * Details about a subnet in EC2.
+     */
+    AwsEc2Subnet?: AwsEc2SubnetDetails;
+    /**
+     * Details about an EC2 network access control list (ACL).
+     */
+    AwsEc2NetworkAcl?: AwsEc2NetworkAclDetails;
+    /**
      * Details about a load balancer.
      */
     AwsElbv2LoadBalancer?: AwsElbv2LoadBalancerDetails;
+    /**
+     * Details about an Elastic Beanstalk environment.
+     */
+    AwsElasticBeanstalkEnvironment?: AwsElasticBeanstalkEnvironmentDetails;
     /**
      * Details for an Elasticsearch domain.
      */

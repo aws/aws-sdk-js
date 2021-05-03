@@ -1014,5 +1014,12 @@
   },
   "nimble": {
     "name": "Nimble"
+  },
+  "finspace": {
+    "name": "Finspace"
+  },
+  "finspacedata": {
+    "prefix": "finspace-data",
+    "name": "Finspacedata"
   }
 }

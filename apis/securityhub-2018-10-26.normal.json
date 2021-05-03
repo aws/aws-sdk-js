@@ -72,7 +72,7 @@
           "shape": "InvalidAccessException"
         }
       ],
-      "documentation": "<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p> <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from.</p> <p>This operation is only used by member accounts that are not added through Organizations.</p> <p>When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.</p>",
+      "documentation": "<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p> <p>The Security Hub console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p> <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator account that the invitation was sent from.</p> <p>This operation is only used by member accounts that are not added through Organizations.</p> <p>When the member account accepts the invitation, permission is granted to the administrator account to view findings generated in the member account.</p>",
       "deprecated": true,
       "deprecatedMessage": "This API has been deprecated, use AcceptAdministratorInvitation API instead."
     },
@@ -745,7 +745,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p> <p>Disassociates the current Security Hub member account from the associated administrator account.</p> <p>This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.</p>",
+      "documentation": "<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p> <p>The Security Hub console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p> <p>Disassociates the current Security Hub member account from the associated administrator account.</p> <p>This operation is only used by accounts that are not part of an organization. For organization accounts, only the administrator account can disassociate a member account.</p>",
       "deprecated": true,
       "deprecatedMessage": "This API has been deprecated, use DisassociateFromAdministratorAccount API instead."
     },
@@ -1076,7 +1076,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p> <p>Provides the details for the Security Hub administrator account for the current member account.</p> <p>Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.</p>",
+      "documentation": "<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p> <p>The Security Hub console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p> <p>Provides the details for the Security Hub administrator account for the current member account.</p> <p>Can be used by both member accounts that are managed using Organizations and accounts that were invited manually.</p>",
       "deprecated": true,
       "deprecatedMessage": "This API has been deprecated, use GetAdministratorAccount API instead."
     },
@@ -1953,7 +1953,7 @@
           "documentation": "<p>The endpoint configuration of the REST API.</p>"
         }
       },
-      "documentation": "<p>contains information about a REST API in version 1 of Amazon API Gateway.</p>"
+      "documentation": "<p>Contains information about a REST API in version 1 of Amazon API Gateway.</p>"
     },
     "AwsApiGatewayStageDetails": {
       "type": "structure",
@@ -3275,6 +3275,104 @@
       },
       "documentation": "<p>The details of an Amazon EC2 instance.</p>"
     },
+    "AwsEc2NetworkAclAssociation": {
+      "type": "structure",
+      "members": {
+        "NetworkAclAssociationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the association between the network ACL and the subnet.</p>"
+        },
+        "NetworkAclId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the network ACL.</p>"
+        },
+        "SubnetId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the subnet that is associated with the network ACL.</p>"
+        }
+      },
+      "documentation": "<p>An association between the network ACL and a subnet.</p>"
+    },
+    "AwsEc2NetworkAclAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2NetworkAclAssociation"
+      }
+    },
+    "AwsEc2NetworkAclDetails": {
+      "type": "structure",
+      "members": {
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether this is the default network ACL for the VPC.</p>"
+        },
+        "NetworkAclId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the network ACL.</p>"
+        },
+        "OwnerId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS account that owns the network ACL.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the VPC for the network ACL.</p>"
+        },
+        "Associations": {
+          "shape": "AwsEc2NetworkAclAssociationList",
+          "documentation": "<p>Associations between the network ACL and subnets.</p>"
+        },
+        "Entries": {
+          "shape": "AwsEc2NetworkAclEntryList",
+          "documentation": "<p>The set of rules in the network ACL.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about an EC2 network access control list (ACL).</p>"
+    },
+    "AwsEc2NetworkAclEntry": {
+      "type": "structure",
+      "members": {
+        "CidrBlock": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPV4 network range for which to deny or allow access.</p>"
+        },
+        "Egress": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the rule is an egress rule. An egress rule is a rule that applies to traffic that leaves the subnet.</p>"
+        },
+        "IcmpTypeCode": {
+          "shape": "IcmpTypeCode",
+          "documentation": "<p>The Internet Control Message Protocol (ICMP) type and code for which to deny or allow access.</p>"
+        },
+        "Ipv6CidrBlock": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPV6 network range for which to deny or allow access.</p>"
+        },
+        "PortRange": {
+          "shape": "PortRangeFromTo",
+          "documentation": "<p>For TCP or UDP protocols, the range of ports that the rule applies to.</p>"
+        },
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol that the rule applies to. To deny or allow access to all protocols, use the value -1.</p>"
+        },
+        "RuleAction": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether the rule is used to allow access or deny access.</p>"
+        },
+        "RuleNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The rule number. The rules are processed in order by their number.</p>"
+        }
+      },
+      "documentation": "<p>A rule for the network ACL. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol.</p>"
+    },
+    "AwsEc2NetworkAclEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2NetworkAclEntry"
+      }
+    },
     "AwsEc2NetworkInterfaceAttachment": {
       "type": "structure",
       "members": {
@@ -3557,6 +3655,64 @@
         "shape": "AwsEc2SecurityGroupUserIdGroupPair"
       }
     },
+    "AwsEc2SubnetDetails": {
+      "type": "structure",
+      "members": {
+        "AssignIpv6AddressOnCreation": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to assign an IPV6 address to a network interface that is created in this subnet.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Availability Zone for the subnet.</p>"
+        },
+        "AvailabilityZoneId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the Availability Zone for the subnet.</p>"
+        },
+        "AvailableIpAddressCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of available IPV4 addresses in the subnet. Does not include addresses for stopped instances.</p>"
+        },
+        "CidrBlock": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPV4 CIDR block that is assigned to the subnet.</p>"
+        },
+        "DefaultForAz": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether this subnet is the default subnet for the Availability Zone.</p>"
+        },
+        "MapPublicIpOnLaunch": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether instances in this subnet receive a public IP address.</p>"
+        },
+        "OwnerId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS account that owns the subnet.</p>"
+        },
+        "State": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current state of the subnet.</p>"
+        },
+        "SubnetArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the subnet.</p>"
+        },
+        "SubnetId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the subnet.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the VPC that contains the subnet.</p>"
+        },
+        "Ipv6CidrBlockAssociationSet": {
+          "shape": "Ipv6CidrBlockAssociationList",
+          "documentation": "<p>The IPV6 CIDR blocks that are associated with the subnet.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a subnet in EC2.</p>"
+    },
     "AwsEc2VolumeAttachment": {
       "type": "structure",
       "members": {
@@ -3640,6 +3796,142 @@
         }
       },
       "documentation": "<p>Details about an EC2 VPC.</p>"
+    },
+    "AwsElasticBeanstalkEnvironmentDetails": {
+      "type": "structure",
+      "members": {
+        "ApplicationName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the application that is associated with the environment.</p>"
+        },
+        "Cname": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The URL to the CNAME for this environment.</p>"
+        },
+        "DateCreated": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The creation date for this environment.</p>"
+        },
+        "DateUpdated": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The date when this environment was last modified.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the environment.</p>"
+        },
+        "EndpointUrl": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>For load-balanced, autoscaling environments, the URL to the load balancer. For single-instance environments, the IP address of the instance.</p>"
+        },
+        "EnvironmentArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the environment.</p>"
+        },
+        "EnvironmentId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the environment.</p>"
+        },
+        "EnvironmentLinks": {
+          "shape": "AwsElasticBeanstalkEnvironmentEnvironmentLinks",
+          "documentation": "<p>Links to other environments in the same group.</p>"
+        },
+        "EnvironmentName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the environment.</p>"
+        },
+        "OptionSettings": {
+          "shape": "AwsElasticBeanstalkEnvironmentOptionSettings",
+          "documentation": "<p>The configuration setting for the environment.</p>"
+        },
+        "PlatformArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the platform version for the environment.</p>"
+        },
+        "SolutionStackName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the solution stack that is deployed with the environment.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current operational status of the environment.</p>"
+        },
+        "Tier": {
+          "shape": "AwsElasticBeanstalkEnvironmentTier",
+          "documentation": "<p>The tier of the environment.</p>"
+        },
+        "VersionLabel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The application version of the environment.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about an Elastic Beanstalk environment.</p>"
+    },
+    "AwsElasticBeanstalkEnvironmentEnvironmentLink": {
+      "type": "structure",
+      "members": {
+        "EnvironmentName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the linked environment.</p>"
+        },
+        "LinkName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the environment link.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a link to another environment that is in the same group.</p>"
+    },
+    "AwsElasticBeanstalkEnvironmentEnvironmentLinks": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElasticBeanstalkEnvironmentEnvironmentLink"
+      }
+    },
+    "AwsElasticBeanstalkEnvironmentOptionSetting": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of resource that the configuration option is associated with.</p>"
+        },
+        "OptionName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the option.</p>"
+        },
+        "ResourceName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the resource.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the configuration setting.</p>"
+        }
+      },
+      "documentation": "<p>A configuration option setting for the environment.</p>"
+    },
+    "AwsElasticBeanstalkEnvironmentOptionSettings": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElasticBeanstalkEnvironmentOptionSetting"
+      }
+    },
+    "AwsElasticBeanstalkEnvironmentTier": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the environment tier.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of environment tier.</p>"
+        },
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the environment tier.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the tier of the environment.</p>"
     },
     "AwsElasticsearchDomainDetails": {
       "type": "structure",
@@ -8516,6 +8808,20 @@
         }
       }
     },
+    "IcmpTypeCode": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "Integer",
+          "documentation": "<p>The ICMP code for which to deny or allow access. To deny or allow all codes, use the value -1.</p>"
+        },
+        "Type": {
+          "shape": "Integer",
+          "documentation": "<p>The ICMP type for which to deny or allow access. To deny or allow all types, use the value -1.</p>"
+        }
+      },
+      "documentation": "<p>An Internet Control Message Protocol (ICMP) type and code.</p>"
+    },
     "ImportFindingsError": {
       "type": "structure",
       "required": [
@@ -9465,6 +9771,20 @@
       },
       "documentation": "<p>A range of ports.</p>"
     },
+    "PortRangeFromTo": {
+      "type": "structure",
+      "members": {
+        "From": {
+          "shape": "Integer",
+          "documentation": "<p>The first port in the port range.</p>"
+        },
+        "To": {
+          "shape": "Integer",
+          "documentation": "<p>The last port in the port range.</p>"
+        }
+      },
+      "documentation": "<p>A range of ports.</p>"
+    },
     "PortRangeList": {
       "type": "list",
       "member": {
@@ -9753,9 +10073,21 @@
           "shape": "AwsEc2EipDetails",
           "documentation": "<p>Details about an Elastic IP address.</p>"
         },
+        "AwsEc2Subnet": {
+          "shape": "AwsEc2SubnetDetails",
+          "documentation": "<p>Details about a subnet in EC2.</p>"
+        },
+        "AwsEc2NetworkAcl": {
+          "shape": "AwsEc2NetworkAclDetails",
+          "documentation": "<p>Details about an EC2 network access control list (ACL).</p>"
+        },
         "AwsElbv2LoadBalancer": {
           "shape": "AwsElbv2LoadBalancerDetails",
           "documentation": "<p>Details about a load balancer.</p>"
+        },
+        "AwsElasticBeanstalkEnvironment": {
+          "shape": "AwsElasticBeanstalkEnvironmentDetails",
+          "documentation": "<p>Details about an Elastic Beanstalk environment.</p>"
         },
         "AwsElasticsearchDomain": {
           "shape": "AwsElasticsearchDomainDetails",

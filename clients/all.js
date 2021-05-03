@@ -263,5 +263,7 @@ module.exports = {
   LookoutMetrics: require('./lookoutmetrics'),
   Mgn: require('./mgn'),
   LookoutEquipment: require('./lookoutequipment'),
-  Nimble: require('./nimble')
+  Nimble: require('./nimble'),
+  Finspace: require('./finspace'),
+  Finspacedata: require('./finspacedata')
 };

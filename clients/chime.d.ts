@@ -52,6 +52,14 @@ declare class Chime extends Service {
    */
   batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
+   * Adds a specified number of users to a channel. 
+   */
+  batchCreateChannelMembership(params: Chime.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
+  /**
+   * Adds a specified number of users to a channel. 
+   */
+  batchCreateChannelMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
+  /**
    * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(params: Chime.Types.BatchCreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
@@ -284,11 +292,11 @@ declare class Chime extends Service {
    */
   createVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support.  After 90 days, deleted accounts are permanently removed from your Disabled accounts list. 
+   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
    */
   deleteAccount(params: Chime.Types.DeleteAccountRequest, callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
   /**
-   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support.  After 90 days, deleted accounts are permanently removed from your Disabled accounts list. 
+   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
    */
   deleteAccount(callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
   /**
@@ -324,11 +332,11 @@ declare class Chime extends Service {
    */
   deleteAppInstanceUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken . Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteAttendee(params: Chime.Types.DeleteAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken . Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -380,19 +388,19 @@ declare class Chime extends Service {
    */
   deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted, clients connected to the meeting are disconnected, and clients can no longer join the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteMeeting(params: Chime.Types.DeleteMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted, clients connected to the meeting are disconnected, and clients can no longer join the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.  Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently. 
+   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   deletePhoneNumber(params: Chime.Types.DeletePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.  Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently. 
+   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -452,11 +460,11 @@ declare class Chime extends Service {
    */
   deleteVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted. 
+   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.
    */
   deleteVoiceConnectorGroup(params: Chime.Types.DeleteVoiceConnectorGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted. 
+   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.
    */
   deleteVoiceConnectorGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -852,11 +860,11 @@ declare class Chime extends Service {
    */
   inviteUsers(callback?: (err: AWSError, data: Chime.Types.InviteUsersResponse) => void): Request<Chime.Types.InviteUsersResponse, AWSError>;
   /**
-   * Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, toucan filter by the user's email address, which returns one account result.
+   * Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user's email address, which returns one account result.
    */
   listAccounts(params: Chime.Types.ListAccountsRequest, callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
-   * Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, toucan filter by the user's email address, which returns one account result.
+   * Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user's email address, which returns one account result.
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
@@ -948,11 +956,11 @@ declare class Chime extends Service {
    */
   listChannelModerators(callback?: (err: AWSError, data: Chime.Types.ListChannelModeratorsResponse) => void): Request<Chime.Types.ListChannelModeratorsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions     Use privacy = PUBLIC to retrieve all public channels in the account    Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannels(params: Chime.Types.ListChannelsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions     Use privacy = PUBLIC to retrieve all public channels in the account    Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannels(callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
   /**
@@ -1721,6 +1729,21 @@ declare namespace Chime {
   export type AttendeeList = Attendee[];
   export type AttendeeTagKeyList = TagKey[];
   export type AttendeeTagList = Tag[];
+  export interface BatchChannelMemberships {
+    InvitedBy?: Identity;
+    /**
+     * The membership types set for the channel users.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The users successfully added to the request.
+     */
+    Members?: Members;
+    /**
+     * The ARN of the channel to which you're adding users.
+     */
+    ChannelArn?: ChimeArn;
+  }
   export type BatchCreateAttendeeErrorList = CreateAttendeeError[];
   export interface BatchCreateAttendeeRequest {
     /**
@@ -1741,6 +1764,49 @@ declare namespace Chime {
      * If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.
      */
     Errors?: BatchCreateAttendeeErrorList;
+  }
+  export interface BatchCreateChannelMembershipError {
+    /**
+     * The ARN of the member that the service couldn't add.
+     */
+    MemberArn?: ChimeArn;
+    /**
+     * The error code.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message. 
+     */
+    ErrorMessage?: String;
+  }
+  export type BatchCreateChannelMembershipErrors = BatchCreateChannelMembershipError[];
+  export interface BatchCreateChannelMembershipRequest {
+    /**
+     * The ARN of the channel to which you're adding users.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The membership type of a user, DEFAULT or HIDDEN. Default members are always returned as part of ListChannelMemberships. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden members are not returned. This is only supported by moderators.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The ARNs of the members you want to add to the channel.
+     */
+    MemberArns: MemberArns;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call. 
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface BatchCreateChannelMembershipResponse {
+    /**
+     * The list of channel memberships in the response.
+     */
+    BatchChannelMemberships?: BatchChannelMemberships;
+    /**
+     * If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.
+     */
+    Errors?: BatchCreateChannelMembershipErrors;
   }
   export interface BatchCreateRoomMembershipRequest {
     /**
@@ -2621,11 +2687,11 @@ declare namespace Chime {
   }
   export interface CreateSipMediaApplicationCallRequest {
     /**
-     * The phone number that a user calls from.
+     * The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.
      */
     FromPhoneNumber: E164PhoneNumber;
     /**
-     * The phone number that the user dials in order to connect to a meeting.
+     * The phone number that the service should call.
      */
     ToPhoneNumber: E164PhoneNumber;
     /**
@@ -4092,7 +4158,7 @@ declare namespace Chime {
      */
     AppInstanceArn: ChimeArn;
     /**
-     *  The privacy setting. PUBLIC retrieves all the public channels. PRIVATE retrieves private channels. Only an AppInstanceAdmin can retrieve private channels. 
+     * The privacy setting. PUBLIC retrieves all the public channels. PRIVATE retrieves private channels. Only an AppInstanceAdmin can retrieve private channels. 
      */
     Privacy?: ChannelPrivacy;
     /**
@@ -4493,7 +4559,7 @@ declare namespace Chime {
      */
     MediaPlacement?: MediaPlacement;
     /**
-     *  The Region in which you create the meeting. Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
+     * The Region in which you create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
   }
@@ -4532,6 +4598,7 @@ declare namespace Chime {
      */
     AccountId?: NonEmptyString;
   }
+  export type MemberArns = ChimeArn[];
   export interface MemberError {
     /**
      * The member ID.
@@ -4548,6 +4615,7 @@ declare namespace Chime {
   }
   export type MemberErrorList = MemberError[];
   export type MemberType = "User"|"Bot"|"Webhook"|string;
+  export type Members = Identity[];
   export interface MembershipItem {
     /**
      * The member ID.
@@ -5967,7 +6035,7 @@ declare namespace Chime {
      */
     Name: VoiceConnectorGroupName;
     /**
-     *  The VoiceConnectorItems to associate with the group. 
+     * The VoiceConnectorItems to associate with the group.
      */
     VoiceConnectorItems: VoiceConnectorItemList;
   }

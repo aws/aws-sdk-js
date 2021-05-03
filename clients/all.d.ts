@@ -262,3 +262,5 @@ export import LookoutMetrics = require('./lookoutmetrics');
 export import Mgn = require('./mgn');
 export import LookoutEquipment = require('./lookoutequipment');
 export import Nimble = require('./nimble');
+export import Finspace = require('./finspace');
+export import Finspacedata = require('./finspacedata');
