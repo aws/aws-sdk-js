@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CORS",
+  "description": "Set the CORS support flag for Athena  to Athena client"
+}
