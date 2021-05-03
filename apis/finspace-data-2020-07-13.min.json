@@ -5,7 +5,7 @@
     "endpointPrefix": "finspace-api",
     "jsonVersion": "1.1",
     "protocol": "rest-json",
-    "serviceAbbreviation": "FinSpace",
+    "serviceAbbreviation": "FinSpace Data",
     "serviceFullName": "FinSpace Public API",
     "serviceId": "finspace data",
     "signatureVersion": "v4",

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.898.0-->
+<!--LATEST=2.899.0-->
 <!--ENTRYINSERT-->
+
+## 2.899.0
+* feature: Chime: Added new BatchCreateChannelMembership API to support multiple membership creation for channels
+* feature: Finspace: This is the initial SDK release for the management APIs for Amazon FinSpace. Amazon FinSpace is a data management and analytics service for the financial services industry (FSI).
+* feature: Finspacedata: This is the initial SDK release for the data APIs for Amazon FinSpace. Amazon FinSpace is a data management and analytics application for the financial services industry (FSI).
+* feature: SecurityHub: Updated ASFF to add the following new resource details objects: AwsEc2NetworkAcl, AwsEc2Subnet, and AwsElasticBeanstalkEnvironment.
 
 ## 2.898.0
 * feature: Chime: Added new BatchCreateChannelMembership API to support multiple membership creation for channels
