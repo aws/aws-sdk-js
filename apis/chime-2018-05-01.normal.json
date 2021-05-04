@@ -438,7 +438,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code> . For example, you can update either the product type or the calling name. </p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+      "documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "BatchUpdateUser": {
       "name": "BatchUpdateUser",
@@ -1059,7 +1059,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p>"
+      "documentation": "<p>Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p>"
     },
     "CreateProxySession": {
       "name": "CreateProxySession",
@@ -1930,7 +1930,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>"
+      "documentation": "<p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>"
     },
     "DeleteProxySession": {
       "name": "DeleteProxySession",
@@ -4517,7 +4517,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order .</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
+      "documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
       "endpoint": {
         "hostPrefix": "messaging-"
       }
@@ -4964,6 +4964,44 @@
         }
       ],
       "documentation": "<p>Lists the SIP rules under the administrator's AWS account.</p>"
+    },
+    "ListSupportedPhoneNumberCountries": {
+      "name": "ListSupportedPhoneNumberCountries",
+      "http": {
+        "method": "GET",
+        "requestUri": "/phone-number-countries",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSupportedPhoneNumberCountriesRequest"
+      },
+      "output": {
+        "shape": "ListSupportedPhoneNumberCountriesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists supported phone number countries.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -5916,7 +5954,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Searches phone numbers that can be ordered.</p>"
+      "documentation": "<p>Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: <code>AreaCode</code>, <code>City</code>, <code>State</code>, or <code>TollFreePrefix</code>. If you provide <code>City</code>, you must also provide <code>State</code>. Numbers outside the US only support the <code>PhoneNumberType</code> filter, which you must use.</p>"
     },
     "SendChannelMessage": {
       "name": "SendChannelMessage",
@@ -6559,7 +6597,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "UpdatePhoneNumberSettings": {
       "name": "UpdatePhoneNumberSettings",
@@ -9763,7 +9801,7 @@
       "members": {
         "ChannelBan": {
           "shape": "ChannelBan",
-          "documentation": "<p>The the details of the ban.</p>"
+          "documentation": "<p>The details of the ban.</p>"
         }
       }
     },
@@ -11987,6 +12025,29 @@
         }
       }
     },
+    "ListSupportedPhoneNumberCountriesRequest": {
+      "type": "structure",
+      "required": [
+        "ProductType"
+      ],
+      "members": {
+        "ProductType": {
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number product type.</p>",
+          "location": "querystring",
+          "locationName": "product-type"
+        }
+      }
+    },
+    "ListSupportedPhoneNumberCountriesResponse": {
+      "type": "structure",
+      "members": {
+        "PhoneNumberCountries": {
+          "shape": "PhoneNumberCountriesList",
+          "documentation": "<p>The supported phone number countries.</p>"
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -12584,6 +12645,10 @@
           "shape": "E164PhoneNumber",
           "documentation": "<p>The phone number, in E.164 format.</p>"
         },
+        "Country": {
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number country. Format: ISO 3166-1 alpha-2.</p>"
+        },
         "Type": {
           "shape": "PhoneNumberType",
           "documentation": "<p>The phone number type.</p>"
@@ -12691,6 +12756,26 @@
       },
       "documentation": "<p>The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled inbound and outbound calling and text messaging.</p>"
     },
+    "PhoneNumberCountriesList": {
+      "type": "list",
+      "member": {
+        "shape": "PhoneNumberCountry"
+      }
+    },
+    "PhoneNumberCountry": {
+      "type": "structure",
+      "members": {
+        "CountryCode": {
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number country code. Format: ISO 3166-1 alpha-2.</p>"
+        },
+        "SupportedPhoneNumberTypes": {
+          "shape": "PhoneNumberTypeList",
+          "documentation": "<p>The supported phone number types. </p>"
+        }
+      },
+      "documentation": "<p>The phone number country.</p>"
+    },
     "PhoneNumberError": {
       "type": "structure",
       "members": {
@@ -12775,7 +12860,8 @@
       "type": "string",
       "enum": [
         "BusinessCalling",
-        "VoiceConnector"
+        "VoiceConnector",
+        "SipMediaApplicationDialIn"
       ]
     },
     "PhoneNumberStatus": {
@@ -12797,6 +12883,12 @@
         "Local",
         "TollFree"
       ]
+    },
+    "PhoneNumberTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "PhoneNumberType"
+      }
     },
     "Port": {
       "type": "integer",
@@ -13579,33 +13671,39 @@
       "members": {
         "AreaCode": {
           "shape": "String",
-          "documentation": "<p>The area code used to filter results.</p>",
+          "documentation": "<p>The area code used to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "area-code"
         },
         "City": {
           "shape": "String",
-          "documentation": "<p>The city used to filter results.</p>",
+          "documentation": "<p>The city used to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "city"
         },
         "Country": {
-          "shape": "String",
-          "documentation": "<p>The country used to filter results.</p>",
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.</p>",
           "location": "querystring",
           "locationName": "country"
         },
         "State": {
           "shape": "String",
-          "documentation": "<p>The state used to filter results.</p>",
+          "documentation": "<p>The state used to filter results. Required only if you provide <code>City</code>. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "state"
         },
         "TollFreePrefix": {
           "shape": "TollFreePrefix",
-          "documentation": "<p>The toll-free prefix that you use to filter results.</p>",
+          "documentation": "<p>The toll-free prefix that you use to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "toll-free-prefix"
+        },
+        "PhoneNumberType": {
+          "shape": "PhoneNumberType",
+          "documentation": "<p>The phone number type used to filter results. Required for non-US numbers.</p>",
+          "location": "querystring",
+          "locationName": "phone-number-type"
         },
         "MaxResults": {
           "shape": "PhoneNumberMaxResults",
@@ -13615,7 +13713,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -13627,6 +13725,10 @@
         "E164PhoneNumbers": {
           "shape": "E164PhoneNumberList",
           "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of search results.</p>"
         }
       }
     },

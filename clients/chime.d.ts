@@ -92,11 +92,11 @@ declare class Chime extends Service {
    */
   batchUnsuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   *  Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem . For example, you can update either the product type or the calling name.  For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type or the calling name. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   batchUpdatePhoneNumber(params: Chime.Types.BatchUpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
-   *  Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem . For example, you can update either the product type or the calling name.  For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type or the calling name. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   batchUpdatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class Chime extends Service {
    */
   createMeetingWithAttendees(callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
+   * Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.
    */
   createPhoneNumberOrder(params: Chime.Types.CreatePhoneNumberOrderRequest, callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
+   * Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class Chime extends Service {
    */
   deleteMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
+   * Moves the specified phone number into the Deletion queue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   deletePhoneNumber(params: Chime.Types.DeletePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified phone number into the Deletionqueue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
+   * Moves the specified phone number into the Deletion queue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -940,11 +940,11 @@ declare class Chime extends Service {
    */
   listChannelMembershipsForAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order .  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelMessages(params: Chime.Types.ListChannelMessagesRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order .  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelMessages(callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
   /**
@@ -1043,6 +1043,14 @@ declare class Chime extends Service {
    * Lists the SIP rules under the administrator's AWS account.
    */
   listSipRules(callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
+  /**
+   * Lists supported phone number countries.
+   */
+  listSupportedPhoneNumberCountries(params: Chime.Types.ListSupportedPhoneNumberCountriesRequest, callback?: (err: AWSError, data: Chime.Types.ListSupportedPhoneNumberCountriesResponse) => void): Request<Chime.Types.ListSupportedPhoneNumberCountriesResponse, AWSError>;
+  /**
+   * Lists supported phone number countries.
+   */
+  listSupportedPhoneNumberCountries(callback?: (err: AWSError, data: Chime.Types.ListSupportedPhoneNumberCountriesResponse) => void): Request<Chime.Types.ListSupportedPhoneNumberCountriesResponse, AWSError>;
   /**
    * Lists the tags applied to an Amazon Chime SDK meeting resource.
    */
@@ -1236,11 +1244,11 @@ declare class Chime extends Service {
    */
   restorePhoneNumber(callback?: (err: AWSError, data: Chime.Types.RestorePhoneNumberResponse) => void): Request<Chime.Types.RestorePhoneNumberResponse, AWSError>;
   /**
-   * Searches phone numbers that can be ordered.
+   * Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: AreaCode, City, State, or TollFreePrefix. If you provide City, you must also provide State. Numbers outside the US only support the PhoneNumberType filter, which you must use.
    */
   searchAvailablePhoneNumbers(params: Chime.Types.SearchAvailablePhoneNumbersRequest, callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
-   * Searches phone numbers that can be ordered.
+   * Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: AreaCode, City, State, or TollFreePrefix. If you provide City, you must also provide State. Numbers outside the US only support the PhoneNumberType filter, which you must use.
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
@@ -1372,11 +1380,11 @@ declare class Chime extends Service {
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(params: Chime.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -3125,7 +3133,7 @@ declare namespace Chime {
   }
   export interface DescribeChannelBanResponse {
     /**
-     * The the details of the ban.
+     * The details of the ban.
      */
     ChannelBan?: ChannelBan;
   }
@@ -4400,6 +4408,18 @@ declare namespace Chime {
      */
     NextToken?: NextTokenString;
   }
+  export interface ListSupportedPhoneNumberCountriesRequest {
+    /**
+     * The phone number product type.
+     */
+    ProductType: PhoneNumberProductType;
+  }
+  export interface ListSupportedPhoneNumberCountriesResponse {
+    /**
+     * The supported phone number countries.
+     */
+    PhoneNumberCountries?: PhoneNumberCountriesList;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The resource ARN.
@@ -4716,6 +4736,10 @@ declare namespace Chime {
      */
     E164PhoneNumber?: E164PhoneNumber;
     /**
+     * The phone number country. Format: ISO 3166-1 alpha-2.
+     */
+    Country?: Alpha2CountryCode;
+    /**
      * The phone number type.
      */
     Type?: PhoneNumberType;
@@ -4798,6 +4822,17 @@ declare namespace Chime {
      */
     OutboundMMS?: NullableBoolean;
   }
+  export type PhoneNumberCountriesList = PhoneNumberCountry[];
+  export interface PhoneNumberCountry {
+    /**
+     * The phone number country code. Format: ISO 3166-1 alpha-2.
+     */
+    CountryCode?: Alpha2CountryCode;
+    /**
+     * The supported phone number types. 
+     */
+    SupportedPhoneNumberTypes?: PhoneNumberTypeList;
+  }
   export interface PhoneNumberError {
     /**
      * The phone number ID for which the action failed.
@@ -4843,9 +4878,10 @@ declare namespace Chime {
   }
   export type PhoneNumberOrderList = PhoneNumberOrder[];
   export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|string;
-  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|string;
+  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|"SipMediaApplicationDialIn"|string;
   export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
   export type PhoneNumberType = "Local"|"TollFree"|string;
+  export type PhoneNumberTypeList = PhoneNumberType[];
   export type Port = number;
   export type PositiveInteger = number;
   export type ProfileServiceMaxResults = number;
@@ -5299,31 +5335,35 @@ declare namespace Chime {
   }
   export interface SearchAvailablePhoneNumbersRequest {
     /**
-     * The area code used to filter results.
+     * The area code used to filter results. Only applies to the US.
      */
     AreaCode?: String;
     /**
-     * The city used to filter results.
+     * The city used to filter results. Only applies to the US.
      */
     City?: String;
     /**
-     * The country used to filter results.
+     * The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.
      */
-    Country?: String;
+    Country?: Alpha2CountryCode;
     /**
-     * The state used to filter results.
+     * The state used to filter results. Required only if you provide City. Only applies to the US.
      */
     State?: String;
     /**
-     * The toll-free prefix that you use to filter results.
+     * The toll-free prefix that you use to filter results. Only applies to the US.
      */
     TollFreePrefix?: TollFreePrefix;
+    /**
+     * The phone number type used to filter results. Required for non-US numbers.
+     */
+    PhoneNumberType?: PhoneNumberType;
     /**
      * The maximum number of results to return in a single call.
      */
     MaxResults?: PhoneNumberMaxResults;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token used to retrieve the next page of results.
      */
     NextToken?: String;
   }
@@ -5332,6 +5372,10 @@ declare namespace Chime {
      * List of phone numbers, in E.164 format.
      */
     E164PhoneNumbers?: E164PhoneNumberList;
+    /**
+     * The token used to retrieve the next page of search results.
+     */
+    NextToken?: String;
   }
   export interface SendChannelMessageRequest {
     /**

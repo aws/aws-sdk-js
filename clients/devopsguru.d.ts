@@ -60,11 +60,11 @@ declare class DevOpsGuru extends Service {
    */
   describeInsight(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeInsightResponse) => void): Request<DevOpsGuru.Types.DescribeInsightResponse, AWSError>;
   /**
-   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
    */
   describeResourceCollectionHealth(params: DevOpsGuru.Types.DescribeResourceCollectionHealthRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeResourceCollectionHealthResponse, AWSError>;
   /**
-   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
    */
   describeResourceCollectionHealth(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeResourceCollectionHealthResponse, AWSError>;
   /**
@@ -76,11 +76,19 @@ declare class DevOpsGuru extends Service {
    */
   describeServiceIntegration(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeServiceIntegrationResponse) => void): Request<DevOpsGuru.Types.DescribeServiceIntegrationResponse, AWSError>;
   /**
-   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   * Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+   */
+  getCostEstimation(params: DevOpsGuru.Types.GetCostEstimationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.GetCostEstimationResponse) => void): Request<DevOpsGuru.Types.GetCostEstimationResponse, AWSError>;
+  /**
+   * Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+   */
+  getCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.GetCostEstimationResponse) => void): Request<DevOpsGuru.Types.GetCostEstimationResponse, AWSError>;
+  /**
+   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
    */
   getResourceCollection(params: DevOpsGuru.Types.GetResourceCollectionRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.GetResourceCollectionResponse) => void): Request<DevOpsGuru.Types.GetResourceCollectionResponse, AWSError>;
   /**
-   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
    */
   getResourceCollection(callback?: (err: AWSError, data: DevOpsGuru.Types.GetResourceCollectionResponse) => void): Request<DevOpsGuru.Types.GetResourceCollectionResponse, AWSError>;
   /**
@@ -148,11 +156,19 @@ declare class DevOpsGuru extends Service {
    */
   searchInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.SearchInsightsResponse) => void): Request<DevOpsGuru.Types.SearchInsightsResponse, AWSError>;
   /**
-   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. 
+   * Starts the creation of an estimate of the monthly cost to analyze your AWS resources.
+   */
+  startCostEstimation(params: DevOpsGuru.Types.StartCostEstimationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
+  /**
+   * Starts the creation of an estimate of the monthly cost to analyze your AWS resources.
+   */
+  startCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
+  /**
+   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. 
    */
   updateResourceCollection(params: DevOpsGuru.Types.UpdateResourceCollectionRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateResourceCollectionResponse) => void): Request<DevOpsGuru.Types.UpdateResourceCollectionResponse, AWSError>;
   /**
-   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. 
+   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. 
    */
   updateResourceCollection(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateResourceCollectionResponse) => void): Request<DevOpsGuru.Types.UpdateResourceCollectionResponse, AWSError>;
   /**
@@ -198,6 +214,7 @@ declare namespace DevOpsGuru {
     EndTime?: Timestamp;
   }
   export type Channels = NotificationChannel[];
+  export type ClientToken = string;
   export interface CloudFormationCollection {
     /**
      *  An array of CloudFormation stack names. 
@@ -209,6 +226,12 @@ declare namespace DevOpsGuru {
      *  An array of CloudFormation stack names. 
      */
     StackNames?: StackNames;
+  }
+  export interface CloudFormationCostEstimationResourceCollectionFilter {
+    /**
+     * An array of CloudFormation stack names. Its size is fixed at 1 item.
+     */
+    StackNames?: CostEstimationStackNames;
   }
   export interface CloudFormationHealth {
     /**
@@ -266,6 +289,27 @@ declare namespace DevOpsGuru {
   export type CloudWatchMetricsPeriod = number;
   export type CloudWatchMetricsStat = "Sum"|"Average"|"SampleCount"|"Minimum"|"Maximum"|"p99"|"p90"|"p50"|string;
   export type CloudWatchMetricsUnit = string;
+  export type Cost = number;
+  export interface CostEstimationResourceCollectionFilter {
+    /**
+     * An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.
+     */
+    CloudFormation?: CloudFormationCostEstimationResourceCollectionFilter;
+  }
+  export type CostEstimationServiceResourceCount = number;
+  export type CostEstimationServiceResourceState = "ACTIVE"|"INACTIVE"|string;
+  export type CostEstimationStackNames = StackName[];
+  export type CostEstimationStatus = "ONGOING"|"COMPLETED"|string;
+  export interface CostEstimationTimeRange {
+    /**
+     * The start time of the cost estimation.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The end time of the cost estimation.
+     */
+    EndTime?: Timestamp;
+  }
   export interface DescribeAccountHealthRequest {
   }
   export interface DescribeAccountHealthResponse {
@@ -318,11 +362,11 @@ declare namespace DevOpsGuru {
   }
   export interface DescribeAnomalyResponse {
     /**
-     *  An ReactiveAnomaly object that represents the requested anomaly. 
+     *  A ReactiveAnomaly object that represents the requested anomaly. 
      */
     ProactiveAnomaly?: ProactiveAnomaly;
     /**
-     *  An ProactiveAnomaly object that represents the requested anomaly. 
+     *  A ProactiveAnomaly object that represents the requested anomaly. 
      */
     ReactiveAnomaly?: ReactiveAnomaly;
   }
@@ -343,17 +387,17 @@ declare namespace DevOpsGuru {
   }
   export interface DescribeInsightResponse {
     /**
-     *  An ProactiveInsight object that represents the requested insight. 
+     *  A ProactiveInsight object that represents the requested insight. 
      */
     ProactiveInsight?: ProactiveInsight;
     /**
-     *  An ReactiveInsight object that represents the requested insight. 
+     *  A ReactiveInsight object that represents the requested insight. 
      */
     ReactiveInsight?: ReactiveInsight;
   }
   export interface DescribeResourceCollectionHealthRequest {
     /**
-     *  An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+     *  An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
      */
     ResourceCollectionType: ResourceCollectionType;
     /**
@@ -366,6 +410,10 @@ declare namespace DevOpsGuru {
      *  The returned CloudFormationHealthOverview object that contains an InsightHealthOverview object with the requested system health information. 
      */
     CloudFormation: CloudFormationHealths;
+    /**
+     * An array of ServiceHealth objects that describes the health of the AWS services associated with the resources in the collection.
+     */
+    Service?: ServiceHealths;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
@@ -451,6 +499,38 @@ declare namespace DevOpsGuru {
     ToTime: Timestamp;
   }
   export type Events = Event[];
+  export interface GetCostEstimationRequest {
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: UuidNextToken;
+  }
+  export interface GetCostEstimationResponse {
+    /**
+     * The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.
+     */
+    ResourceCollection?: CostEstimationResourceCollectionFilter;
+    /**
+     * The status of creating this cost estimate. If it's still in progress, the status ONGOING is returned. If it is finished, the status COMPLETED is returned.
+     */
+    Status?: CostEstimationStatus;
+    /**
+     * An array of ResourceCost objects that each contains details about the monthly cost estimate to analyze one of your AWS resources.
+     */
+    Costs?: ServiceResourceCosts;
+    /**
+     * The start and end time of the cost estimation.
+     */
+    TimeRange?: CostEstimationTimeRange;
+    /**
+     * The estimated monthly cost to analyze the AWS resources. This value is the sum of the estimated costs to analyze each resource in the Costs object in this response.
+     */
+    TotalCost?: Cost;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: UuidNextToken;
+  }
   export interface GetResourceCollectionRequest {
     /**
      *  The type of AWS resource collections to return. The one valid value is CLOUD_FORMATION for AWS CloudFormation stacks. 
@@ -463,7 +543,7 @@ declare namespace DevOpsGuru {
   }
   export interface GetResourceCollectionResponse {
     /**
-     *  The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+     *  The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. 
      */
     ResourceCollection?: ResourceCollectionFilter;
     /**
@@ -688,6 +768,10 @@ declare namespace DevOpsGuru {
      * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: UuidNextToken;
+    /**
+     * A locale that specifies the language to use for recommendations.
+     */
+    Locale?: Locale;
   }
   export interface ListRecommendationsResponse {
     /**
@@ -699,6 +783,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export type Locale = "DE_DE"|"EN_US"|"EN_GB"|"ES_ES"|"FR_FR"|"IT_IT"|"JA_JP"|"KO_KR"|"PT_BR"|"ZH_CN"|"ZH_TW"|string;
   export type MeanTimeToRecoverInMilliseconds = number;
   export interface NotificationChannel {
     /**
@@ -857,6 +942,10 @@ declare namespace DevOpsGuru {
     InsightTimeRange?: InsightTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of AWS services.
+     */
+    ServiceCollection?: ServiceCollection;
   }
   export type ProactiveInsights = ProactiveInsightSummary[];
   export interface PutFeedbackRequest {
@@ -959,6 +1048,10 @@ declare namespace DevOpsGuru {
     Status?: InsightStatus;
     InsightTimeRange?: InsightTimeRange;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of AWS services.
+     */
+    ServiceCollection?: ServiceCollection;
   }
   export type ReactiveInsights = ReactiveInsightSummary[];
   export interface Recommendation {
@@ -1040,7 +1133,7 @@ declare namespace DevOpsGuru {
      */
     Name?: RecommendationRelatedEventName;
     /**
-     *  A ResourceCollection object that contains arrays of the names of AWS CloudFormation stacks. 
+     *  A ResourceCollection object that contains arrays of the names of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. 
      */
     Resources?: RecommendationRelatedEventResources;
   }
@@ -1071,18 +1164,19 @@ declare namespace DevOpsGuru {
   }
   export interface ResourceCollection {
     /**
-     *  An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. 
+     *  An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks. 
      */
     CloudFormation?: CloudFormationCollection;
   }
   export interface ResourceCollectionFilter {
     /**
-     *  Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see Stacks in the AWS CloudFormation User Guide. 
+     *  Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see Stacks in the AWS CloudFormation User Guide. 
      */
     CloudFormation?: CloudFormationCollectionFilter;
   }
-  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|string;
+  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|string;
   export type ResourceHours = number;
+  export type ResourceType = string;
   export interface SearchInsightsFilters {
     /**
      *  An array of severity values used to search for insights. 
@@ -1093,6 +1187,10 @@ declare namespace DevOpsGuru {
      */
     Statuses?: InsightStatuses;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of AWS services.
+     */
+    ServiceCollection?: ServiceCollection;
   }
   export type SearchInsightsMaxResults = number;
   export interface SearchInsightsRequest {
@@ -1131,12 +1229,64 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export interface ServiceCollection {
+    /**
+     * An array of strings that each specifies the name of an AWS service.
+     */
+    ServiceNames?: ServiceNames;
+  }
+  export interface ServiceHealth {
+    /**
+     * The name of the AWS service.
+     */
+    ServiceName?: ServiceName;
+    /**
+     * Represents the health of an AWS service. This is a ServiceInsightHealth that contains the number of open proactive and reactive insights for this service.
+     */
+    Insight?: ServiceInsightHealth;
+  }
+  export type ServiceHealths = ServiceHealth[];
+  export interface ServiceInsightHealth {
+    /**
+     * The number of open proactive insights in the AWS service
+     */
+    OpenProactiveInsights?: NumOpenProactiveInsights;
+    /**
+     * The number of open reactive insights in the AWS service
+     */
+    OpenReactiveInsights?: NumOpenReactiveInsights;
+  }
   export interface ServiceIntegrationConfig {
     /**
      *  Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. 
      */
     OpsCenter?: OpsCenterIntegration;
   }
+  export type ServiceName = "API_GATEWAY"|"APPLICATION_ELB"|"AUTO_SCALING_GROUP"|"CLOUD_FRONT"|"DYNAMO_DB"|"EC2"|"ECS"|"EKS"|"ELASTIC_BEANSTALK"|"ELASTI_CACHE"|"ELB"|"ES"|"KINESIS"|"LAMBDA"|"NAT_GATEWAY"|"NETWORK_ELB"|"RDS"|"REDSHIFT"|"ROUTE_53"|"S3"|"SAGE_MAKER"|"SNS"|"SQS"|"STEP_FUNCTIONS"|"SWF"|string;
+  export type ServiceNames = ServiceName[];
+  export interface ServiceResourceCost {
+    /**
+     * The type of the AWS resource.
+     */
+    Type?: ResourceType;
+    /**
+     * The state of the resource. The resource is ACTIVE if it produces metrics, events, or logs within an hour, otherwise it is INACTIVE. You pay for the number of active AWS resource hours analyzed for each resource. Inactive resources are not charged. 
+     */
+    State?: CostEstimationServiceResourceState;
+    /**
+     * The number of active resources analyzed for this service to create a monthly cost estimate.
+     */
+    Count?: CostEstimationServiceResourceCount;
+    /**
+     * The price per hour to analyze the resources in the service. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+     */
+    UnitCost?: Cost;
+    /**
+     * The total estimated monthly cost to analyze the active resources for this resource.
+     */
+    Cost?: Cost;
+  }
+  export type ServiceResourceCosts = ServiceResourceCost[];
   export interface SnsChannelConfig {
     /**
      *  The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. 
@@ -1146,6 +1296,18 @@ declare namespace DevOpsGuru {
   export type SsmOpsItemId = string;
   export type StackName = string;
   export type StackNames = StackName[];
+  export interface StartCostEstimationRequest {
+    /**
+     * The collection of AWS resources used to create a monthly DevOps Guru cost estimate.
+     */
+    ResourceCollection: CostEstimationResourceCollectionFilter;
+    /**
+     * The idempotency token used to identify each cost estimate request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartCostEstimationResponse {
+  }
   export interface StartTimeRange {
     /**
      *  The start time of the time range. 
@@ -1160,14 +1322,14 @@ declare namespace DevOpsGuru {
   export type TopicArn = string;
   export interface UpdateCloudFormationCollectionFilter {
     /**
-     *  An array of the name of stacks to update. 
+     *  An array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks. 
      */
     StackNames?: UpdateStackNames;
   }
   export type UpdateResourceCollectionAction = "ADD"|"REMOVE"|string;
   export interface UpdateResourceCollectionFilter {
     /**
-     *  An collection of AWS CloudFormation stacks. 
+     *  An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. 
      */
     CloudFormation?: UpdateCloudFormationCollectionFilter;
   }

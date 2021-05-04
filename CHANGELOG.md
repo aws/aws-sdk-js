@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.899.0-->
+<!--LATEST=2.900.0-->
 <!--ENTRYINSERT-->
+
+## 2.900.0
+* feature: ACMPCA: This release adds the KeyStorageSecurityStandard parameter to the CreateCertificateAuthority API to allow customers to mandate a security standard to which the CA key will be stored within.
+* feature: Chime: This release adds the ability to search for and order international phone numbers for Amazon Chime SIP media applications.
+* feature: DevOpsGuru: Added GetCostEstimation and StartCostEstimation to get the monthly resource usage cost and added ability to view resource health by AWS service name and to search insights be AWS service name.
+* feature: SageMaker: Enable retrying Training and Tuning Jobs that fail with InternalServerError by setting RetryStrategy.
 
 ## 2.899.0
 * feature: Chime: Added new BatchCreateChannelMembership API to support multiple membership creation for channels
