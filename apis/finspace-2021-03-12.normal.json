@@ -695,5 +695,5 @@
       "pattern": "^[A-Za-z0-9._\\-:\\/#\\+]+$"
     }
   },
-  "documentation": "<p>The FinSpace management service provides the APIs for managing FinSpace environments.</p>"
+  "documentation": "<p>The FinSpace management service provides the APIs for managing the FinSpace environments. </p>"
 }

@@ -413,5 +413,5 @@
       "max": 1000
     }
   },
-  "documentation": "<p> The FinSpace APIs let you take actions inside FinSpace. </p>"
+  "documentation": "<p> The FinSpace APIs let you take actions inside the FinSpace environment. </p>"
 }
