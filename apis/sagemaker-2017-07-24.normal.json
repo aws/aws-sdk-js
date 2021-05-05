@@ -48,7 +48,7 @@
       "output": {
         "shape": "AddTagsOutput"
       },
-      "documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints.</p> <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS Tagging Strategies</a>.</p> <note> <p>Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a> </p> </note>"
+      "documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints.</p> <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS Tagging Strategies</a>.</p> <note> <p>Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a> </p> </note> <note> <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API are also added to any Apps that the Domain or User Profile launches after you call this API, but not to Apps that the Domain or User Profile launched before you called this API. To make sure that the tags associated with a Domain or User Profile are also added to all Apps that the Domain or User Profile launches, add the tags when you first create the Domain or User Profile by specifying them in the <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p> </note>"
     },
     "AssociateTrialComponent": {
       "name": "AssociateTrialComponent",
@@ -1472,7 +1472,7 @@
       "output": {
         "shape": "DeleteTagsOutput"
       },
-      "documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p> <p>To list a resource's tags, use the <code>ListTags</code> API. </p> <note> <p>When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API.</p> </note>"
+      "documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p> <p>To list a resource's tags, use the <code>ListTags</code> API. </p> <note> <p>When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API.</p> </note> <note> <p>When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile launched before you called this API.</p> </note>"
     },
     "DeleteTrial": {
       "name": "DeleteTrial",
@@ -4946,6 +4946,9 @@
         "IAM"
       ]
     },
+    "AutoGenerateEndpointName": {
+      "type": "boolean"
+    },
     "AutoMLCandidate": {
       "type": "structure",
       "required": [
@@ -4959,18 +4962,18 @@
       "members": {
         "CandidateName": {
           "shape": "CandidateName",
-          "documentation": "<p>The candidate name.</p>"
+          "documentation": "<p>The name of the candidate.</p>"
         },
         "FinalAutoMLJobObjectiveMetric": {
           "shape": "FinalAutoMLJobObjectiveMetric"
         },
         "ObjectiveStatus": {
           "shape": "ObjectiveStatus",
-          "documentation": "<p>The objective status.</p>"
+          "documentation": "<p>The objective's status.</p>"
         },
         "CandidateSteps": {
           "shape": "CandidateSteps",
-          "documentation": "<p>The candidate's steps.</p>"
+          "documentation": "<p>Information about the candidate's steps.</p>"
         },
         "CandidateStatus": {
           "shape": "CandidateStatus",
@@ -4978,7 +4981,7 @@
         },
         "InferenceContainers": {
           "shape": "AutoMLContainerDefinitions",
-          "documentation": "<p>The inference containers.</p>"
+          "documentation": "<p>Information about the inference container definitions.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -5001,7 +5004,7 @@
           "documentation": "<p>The AutoML candidate's properties.</p>"
         }
       },
-      "documentation": "<p>An Autopilot job returns recommendations, or candidates. Each candidate has futher details about the steps involed, and the status.</p>"
+      "documentation": "<p>An Autopilot job returns recommendations, or candidates. Each candidate has futher details about the steps involved and the status.</p>"
     },
     "AutoMLCandidateStep": {
       "type": "structure",
@@ -5013,18 +5016,18 @@
       "members": {
         "CandidateStepType": {
           "shape": "CandidateStepType",
-          "documentation": "<p>Whether the Candidate is at the transform, training, or processing step.</p>"
+          "documentation": "<p>Whether the candidate is at the transform, training, or processing step.</p>"
         },
         "CandidateStepArn": {
           "shape": "CandidateStepArn",
-          "documentation": "<p>The ARN for the Candidate's step.</p>"
+          "documentation": "<p>The ARN for the candidate's step.</p>"
         },
         "CandidateStepName": {
           "shape": "CandidateStepName",
-          "documentation": "<p>The name for the Candidate's step.</p>"
+          "documentation": "<p>The name for the candidate's step.</p>"
         }
       },
-      "documentation": "<p>Information about the steps for a Candidate, and what step it is working on.</p>"
+      "documentation": "<p>Information about the steps for a candidate and what step it is working on.</p>"
     },
     "AutoMLCandidates": {
       "type": "list",
@@ -5071,7 +5074,7 @@
         },
         "Environment": {
           "shape": "EnvironmentMap",
-          "documentation": "<p>Environment variables to set in the container. For more information, see .</p>"
+          "documentation": "<p>The environment variables to set in the container. For more information, see .</p>"
         }
       },
       "documentation": "<p>A list of container definitions that describe the different containers that make up an AutoML candidate. For more information, see .</p>"
@@ -5119,14 +5122,14 @@
       "members": {
         "CandidateDefinitionNotebookLocation": {
           "shape": "CandidateDefinitionNotebookLocation",
-          "documentation": "<p>The URL to the notebook location.</p>"
+          "documentation": "<p>The URL of the notebook location.</p>"
         },
         "DataExplorationNotebookLocation": {
           "shape": "DataExplorationNotebookLocation",
-          "documentation": "<p>The URL to the notebook location.</p>"
+          "documentation": "<p>The URL of the notebook location.</p>"
         }
       },
-      "documentation": "<p>Artifacts that are generation during a job.</p>"
+      "documentation": "<p>The artifacts that are generated during an AutoML job.</p>"
     },
     "AutoMLJobCompletionCriteria": {
       "type": "structure",
@@ -5155,7 +5158,7 @@
         },
         "SecurityConfig": {
           "shape": "AutoMLSecurityConfig",
-          "documentation": "<p>Security configuration for traffic encryption or Amazon VPC settings.</p>"
+          "documentation": "<p>The security configuration for traffic encryption or Amazon VPC settings.</p>"
         }
       },
       "documentation": "<p>A collection of settings used for an AutoML job.</p>"
@@ -5174,7 +5177,7 @@
       "members": {
         "MetricName": {
           "shape": "AutoMLMetricEnum",
-          "documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data.</p> <p>Here are the options:</p> <ul> <li> <p> <code>MSE</code>: The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive, the better a model is at predicting the actual values the smaller the MSE value. When the data contains outliers, they tend to dominate the MSE which might cause subpar prediction performance.</p> </li> <li> <p> <code>Accuracy</code>: The ratio of the number correctly classified items to the total number (correctly and incorrectly) classified. It is used for binary and multiclass classification. Measures how close the predicted class values are to the actual values. Accuracy values vary between zero and one, one being perfect accuracy and zero perfect inaccuracy.</p> </li> <li> <p> <code>F1</code>: The F1 score is the harmonic mean of the precision and recall. It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class; false when they do not. Precision is the ratio of the true positive predictions to all positive predictions (including the false positives) in a data set and measures the quality of the prediction when it predicts the positive class. Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances and measures how completely a model predicts the actual class members in a data set. The standard F1 score weighs precision and recall equally. But which metric is paramount typically depends on specific aspects of a problem. F1 scores vary between zero and one, one being the best possible performance and zero the worst.</p> </li> <li> <p> <code>AUC</code>: The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms such as logistic regression that return probabilities. A threshold is needed to map the probabilities into classifications. The relevant curve is the receiver operating characteristic curve that plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives but more false negatives. AUC is the area under this receiver operating characteristic curve and so provides an aggregated measure of the model performance across all possible classification thresholds. The AUC score can also be interpreted as the probability that a randomly selected positive data point is more likely to be predicted positive than a randomly selected negative example. AUC scores vary between zero and one, one being perfect accuracy and one half not better than a random classifier. Values less that one half predict worse than a random predictor and such consistently bad predictors can be inverted to obtain better than random predictors.</p> </li> <li> <p> <code>F1macro</code>: The F1macro score applies F1 scoring to multiclass classification. In this context, you have multiple classes to predict. You just calculate the precision and recall for each class as you did for the positive class in binary classification. Then used these values to calculate the F1 score for each class and average them to obtain the F1macro score. F1macro scores vary between zero and one, one being the best possible performance and zero the worst.</p> </li> </ul> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p> <code>MSE</code>: for regression.</p> </li> <li> <p> <code>F1</code>: for binary classification</p> </li> <li> <p> <code>Accuracy</code>: for multiclass classification.</p> </li> </ul>"
+          "documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data.</p> <p>Here are the options:</p> <ul> <li> <p> <code>MSE</code>: The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive: the better a model is at predicting the actual values, the smaller the MSE value. When the data contains outliers, they tend to dominate the MSE, which might cause subpar prediction performance.</p> </li> <li> <p> <code>Accuracy</code>: The ratio of the number of correctly classified items to the total number of (correctly and incorrectly) classified items. It is used for binary and multiclass classification. It measures how close the predicted class values are to the actual values. Accuracy values vary between zero and one: one indicates perfect accuracy and zero indicates perfect inaccuracy.</p> </li> <li> <p> <code>F1</code>: The F1 score is the harmonic mean of the precision and recall. It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class and false when they do not. Precision is the ratio of the true positive predictions to all positive predictions (including the false positives) in a data set and measures the quality of the prediction when it predicts the positive class. Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances and measures how completely a model predicts the actual class members in a data set. The standard F1 score weighs precision and recall equally. But which metric is paramount typically depends on specific aspects of a problem. F1 scores vary between zero and one: one indicates the best possible performance and zero the worst.</p> </li> <li> <p> <code>AUC</code>: The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms such as logistic regression that return probabilities. A threshold is needed to map the probabilities into classifications. The relevant curve is the receiver operating characteristic curve that plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives but more false negatives. AUC is the area under this receiver operating characteristic curve and so provides an aggregated measure of the model performance across all possible classification thresholds. The AUC score can also be interpreted as the probability that a randomly selected positive data point is more likely to be predicted positive than a randomly selected negative example. AUC scores vary between zero and one: a score of one indicates perfect accuracy and a score of one half indicates that the prediction is not better than a random classifier. Values under one half predict less accurately than a random predictor. But such consistently bad predictors can simply be inverted to obtain better than random predictors.</p> </li> <li> <p> <code>F1macro</code>: The F1macro score applies F1 scoring to multiclass classification. In this context, you have multiple classes to predict. You just calculate the precision and recall for each class as you did for the positive class in binary classification. Then, use these values to calculate the F1 score for each class and average them to obtain the F1macro score. F1macro scores vary between zero and one: one indicates the best possible performance and zero the worst.</p> </li> </ul> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p> <code>MSE</code>: for regression.</p> </li> <li> <p> <code>F1</code>: for binary classification</p> </li> <li> <p> <code>Accuracy</code>: for multiclass classification.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Specifies a metric to minimize or maximize as the objective of a job.</p>"
@@ -5201,7 +5204,9 @@
         "CandidateDefinitionsGenerated",
         "GeneratingExplainabilityReport",
         "Completed",
-        "ExplainabilityError"
+        "ExplainabilityError",
+        "DeployingModel",
+        "ModelDeploymentError"
       ]
     },
     "AutoMLJobStatus": {
@@ -5363,7 +5368,7 @@
         },
         "VpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>VPC configuration.</p>"
+          "documentation": "<p>The VPC configuration.</p>"
         }
       },
       "documentation": "<p>Security options.</p>"
@@ -5480,10 +5485,10 @@
       "members": {
         "Explainability": {
           "shape": "ExplainabilityLocation",
-          "documentation": "<p>The S3 prefix to the explainability artifacts generated for the AutoML candidate.</p>"
+          "documentation": "<p>The Amazon S3 prefix to the explainability artifacts generated for the AutoML candidate.</p>"
         }
       },
-      "documentation": "<p>Location of artifacts for an AutoML candidate job.</p>"
+      "documentation": "<p>The location of artifacts for an AutoML candidate job.</p>"
     },
     "CandidateDefinitionNotebookLocation": {
       "type": "string",
@@ -5499,7 +5504,7 @@
       "members": {
         "CandidateArtifactLocations": {
           "shape": "CandidateArtifactLocations",
-          "documentation": "<p>The S3 prefix to the artifacts generated for an AutoML candidate.</p>"
+          "documentation": "<p>The Amazon S3 prefix to the artifacts generated for an AutoML candidate.</p>"
         }
       },
       "documentation": "<p>The properties of an AutoML candidate job.</p>"
@@ -5796,15 +5801,15 @@
     },
     "ClientId": {
       "type": "string",
-      "max": 128,
+      "max": 1024,
       "min": 1,
-      "pattern": "[\\w+-]+"
+      "pattern": "[ -~]+"
     },
     "ClientSecret": {
       "type": "string",
-      "max": 64,
+      "max": 1024,
       "min": 1,
-      "pattern": "[\\w+=/-]+",
+      "pattern": "[ -~]+",
       "sensitive": true
     },
     "ClientToken": {
@@ -6570,23 +6575,23 @@
         },
         "OutputDataConfig": {
           "shape": "AutoMLOutputDataConfig",
-          "documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.</p>"
+          "documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>"
         },
         "ProblemType": {
           "shape": "ProblemType",
-          "documentation": "<p>Defines the type of supervised learning available for the candidates. Options include: BinaryClassification, MulticlassClassification, and Regression. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\"> Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
+          "documentation": "<p>Defines the type of supervised learning available for the candidates. Options include: <code>BinaryClassification</code>, <code>MulticlassClassification</code>, and <code>Regression</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\"> Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
         },
         "AutoMLJobObjective": {
           "shape": "AutoMLJobObjective",
-          "documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job. You provide a <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to minimize or maximize it.</p>"
+          "documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to minimize or maximize it.</p>"
         },
         "AutoMLJobConfig": {
           "shape": "AutoMLJobConfig",
-          "documentation": "<p>Contains CompletionCriteria and SecurityConfig settings for the AutoML job.</p>"
+          "documentation": "<p>Contains <code>CompletionCriteria</code> and <code>SecurityConfig</code> settings for the AutoML job.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that is used to access the data.</p>"
+          "documentation": "<p>The ARN of the role that is used to access the data.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>"
         },
         "GenerateCandidateDefinitionsOnly": {
           "shape": "GenerateCandidateDefinitionsOnly",
@@ -6595,6 +6600,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Each tag consists of a key and an optional value. Tag keys must be unique per resource.</p>"
+        },
+        "ModelDeployConfig": {
+          "shape": "ModelDeployConfig",
+          "documentation": "<p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.</p>"
         }
       }
     },
@@ -7772,7 +7781,7 @@
         },
         "DirectInternetAccess": {
           "shape": "DirectInternetAccess",
-          "documentation": "<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to <code>Disabled</code> this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access\">Notebook Instances Are Internet-Enabled by Default</a>. You can set the value of this parameter to <code>Disabled</code> only if you set a value for the <code>SubnetId</code> parameter.</p>"
+          "documentation": "<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to <code>Disabled</code> this notebook instance is able to access resources only in your VPC, and is not be able to connect to Amazon SageMaker training and endpoint services unless you configure a NAT Gateway in your VPC.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access\">Notebook Instances Are Internet-Enabled by Default</a>. You can set the value of this parameter to <code>Disabled</code> only if you set a value for the <code>SubnetId</code> parameter.</p>"
         },
         "VolumeSizeInGB": {
           "shape": "NotebookInstanceVolumeSizeInGB",
@@ -8619,7 +8628,7 @@
         },
         "JoinSource": {
           "shape": "JoinSource",
-          "documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the transformed data. If you want the batch transform job to join the original input data with the transformed data, set <code>JoinSource</code> to <code>Input</code>. </p> <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be a key-value pair object. If the input is not a key-value pair object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored under the <code>SageMakerInput</code> key and the results are stored in <code>SageMakerOutput</code>.</p> <p>For CSV files, Amazon SageMaker combines the transformed data with the input data at the end of the input data and stores it in the output file. The joined data has the joined input data followed by the transformed data and the output is a CSV file. </p>"
+          "documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values are <code>None</code> and <code>Input</code>. The default value is <code>None</code>, which specifies not to join the input with the transformed data. If you want the batch transform job to join the original input data with the transformed data, set <code>JoinSource</code> to <code>Input</code>. You can specify <code>OutputFilter</code> as an additional filter to select a portion of the joined dataset and store it in the output file.</p> <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined result for JSON must be a key-value pair object. If the input is not a key-value pair object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored under the <code>SageMakerInput</code> key and the results are stored in <code>SageMakerOutput</code>.</p> <p>For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed data with the input by appending each transformed row to the end of the input. The joined data has the original input data followed by the transformed data and the output is a CSV file.</p> <p>For information on how joining in applied, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>"
         }
       },
       "documentation": "<p>The data structure used to specify the data to be used for inference in a batch transform job and to associate the data that is relevant to the prediction results in the output. The input filter provided allows you to exclude input data that is not needed for inference in a batch transform job. The output filter provided allows you to include input data relevant to interpreting the predictions in the output from the job. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html\">Associate Prediction Results with their Corresponding Input Records</a>.</p>"
@@ -9874,19 +9883,19 @@
         },
         "FailureReason": {
           "shape": "AutoMLFailureReason",
-          "documentation": "<p>Returns the job's FailureReason.</p>"
+          "documentation": "<p>Returns the failure reason for an AutoML job, when applicable.</p>"
         },
         "PartialFailureReasons": {
           "shape": "AutoMLPartialFailureReasons",
-          "documentation": "<p>Returns a list of reasons for partial failures within an AutoML job. </p>"
+          "documentation": "<p>Returns a list of reasons for partial failures within an AutoML job.</p>"
         },
         "BestCandidate": {
           "shape": "AutoMLCandidate",
-          "documentation": "<p>Returns the job's BestCandidate.</p>"
+          "documentation": "<p>Returns the job's best <code>AutoMLCandidate</code>.</p>"
         },
         "AutoMLJobStatus": {
           "shape": "AutoMLJobStatus",
-          "documentation": "<p>Returns the status of the AutoML job's AutoMLJobStatus.</p>"
+          "documentation": "<p>Returns the status of the AutoML job.</p>"
         },
         "AutoMLJobSecondaryStatus": {
           "shape": "AutoMLJobSecondaryStatus",
@@ -9894,15 +9903,23 @@
         },
         "GenerateCandidateDefinitionsOnly": {
           "shape": "GenerateCandidateDefinitionsOnly",
-          "documentation": "<p>Returns the job's output from GenerateCandidateDefinitionsOnly.</p>"
+          "documentation": "<p>Indicates whether the output for an AutoML job generates candidate definitions only.</p>"
         },
         "AutoMLJobArtifacts": {
           "shape": "AutoMLJobArtifacts",
-          "documentation": "<p>Returns information on the job's artifacts found in AutoMLJobArtifacts.</p>"
+          "documentation": "<p>Returns information on the job's artifacts found in <code>AutoMLJobArtifacts</code>.</p>"
         },
         "ResolvedAttributes": {
           "shape": "ResolvedAttributes",
-          "documentation": "<p>This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, they are the values you provide.</p>"
+          "documentation": "<p>This contains <code>ProblemType</code>, <code>AutoMLJobObjective</code> and <code>CompletionCriteria</code>. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.</p>"
+        },
+        "ModelDeployConfig": {
+          "shape": "ModelDeployConfig",
+          "documentation": "<p>Indicates whether the model was deployed automatically to an endpoint and the name of that endpoint if deployed automatically.</p>"
+        },
+        "ModelDeployResult": {
+          "shape": "ModelDeployResult",
+          "documentation": "<p>Provides information about endpoint for the model deployment.</p>"
         }
       }
     },
@@ -12103,7 +12120,7 @@
         },
         "SecondaryStatus": {
           "shape": "SecondaryStatus",
-          "documentation": "<p> Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see <code>StatusMessage</code> under <a>SecondaryStatusTransition</a>.</p> <p>Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:</p> <dl> <dt>InProgress</dt> <dd> <ul> <li> <p> <code>Starting</code> - Starting the training job.</p> </li> <li> <p> <code>Downloading</code> - An optional stage for algorithms that support <code>File</code> training input mode. It indicates that data is being downloaded to the ML storage volumes.</p> </li> <li> <p> <code>Training</code> - Training is in progress.</p> </li> <li> <p> <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted. </p> </li> <li> <p> <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.</p> </li> </ul> </dd> <dt>Completed</dt> <dd> <ul> <li> <p> <code>Completed</code> - The training job has completed.</p> </li> </ul> </dd> <dt>Failed</dt> <dd> <ul> <li> <p> <code>Failed</code> - The training job has failed. The reason for the failure is returned in the <code>FailureReason</code> field of <code>DescribeTrainingJobResponse</code>.</p> </li> </ul> </dd> <dt>Stopped</dt> <dd> <ul> <li> <p> <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.</p> </li> <li> <p> <code>MaxWaitTimeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.</p> </li> <li> <p> <code>Stopped</code> - The training job has stopped.</p> </li> </ul> </dd> <dt>Stopping</dt> <dd> <ul> <li> <p> <code>Stopping</code> - Stopping the training job.</p> </li> </ul> </dd> </dl> <important> <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p> </important> <p>We no longer support the following secondary statuses:</p> <ul> <li> <p> <code>LaunchingMLInstances</code> </p> </li> <li> <p> <code>PreparingTrainingStack</code> </p> </li> <li> <p> <code>DownloadingTrainingImage</code> </p> </li> </ul>"
+          "documentation": "<p> Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see <code>StatusMessage</code> under <a>SecondaryStatusTransition</a>.</p> <p>Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:</p> <dl> <dt>InProgress</dt> <dd> <ul> <li> <p> <code>Starting</code> - Starting the training job.</p> </li> <li> <p> <code>Downloading</code> - An optional stage for algorithms that support <code>File</code> training input mode. It indicates that data is being downloaded to the ML storage volumes.</p> </li> <li> <p> <code>Training</code> - Training is in progress.</p> </li> <li> <p> <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted. </p> </li> <li> <p> <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.</p> </li> </ul> </dd> <dt>Completed</dt> <dd> <ul> <li> <p> <code>Completed</code> - The training job has completed.</p> </li> </ul> </dd> <dt>Failed</dt> <dd> <ul> <li> <p> <code>Failed</code> - The training job has failed. The reason for the failure is returned in the <code>FailureReason</code> field of <code>DescribeTrainingJobResponse</code>.</p> </li> </ul> </dd> <dt>Stopped</dt> <dd> <ul> <li> <p> <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.</p> </li> <li> <p> <code>MaxWaitTimeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.</p> </li> <li> <p> <code>Stopped</code> - The training job has stopped.</p> </li> </ul> </dd> <dt>Stopping</dt> <dd> <ul> <li> <p> <code>Stopping</code> - Stopping the training job.</p> </li> </ul> </dd> </dl> <important> <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p> </important> <p>We no longer support the following secondary statuses:</p> <ul> <li> <p> <code>LaunchingMLInstances</code> </p> </li> <li> <p> <code>PreparingTraining</code> </p> </li> <li> <p> <code>DownloadingTrainingImage</code> </p> </li> </ul>"
         },
         "FailureReason": {
           "shape": "FailureReason",
@@ -15579,7 +15596,7 @@
         },
         "WorkRequesterAccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>"
+          "documentation": "<p>The AWS account ID of the account used to start the labeling job.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -16148,11 +16165,11 @@
         },
         "SortOrder": {
           "shape": "AutoMLSortOrder",
-          "documentation": "<p>The sort order for the results. The default is Descending.</p>"
+          "documentation": "<p>The sort order for the results. The default is <code>Descending</code>.</p>"
         },
         "SortBy": {
           "shape": "AutoMLSortBy",
-          "documentation": "<p>The parameter by which to sort the results. The default is AutoMLJobName.</p>"
+          "documentation": "<p>The parameter by which to sort the results. The default is <code>Name</code>.</p>"
         },
         "MaxResults": {
           "shape": "AutoMLMaxResults",
@@ -16226,7 +16243,7 @@
       "members": {
         "Candidates": {
           "shape": "AutoMLCandidates",
-          "documentation": "<p>Summaries about the Candidates.</p>"
+          "documentation": "<p>Summaries about the <code>AutoMLCandidates</code>.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -18861,7 +18878,7 @@
           "documentation": "<p>The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.</p>"
         }
       },
-      "documentation": "<p>Provides information about the location that is configured for storing model artifacts. </p> <p>Model artifacts are the output that results from training a model, and typically consist of trained parameters, a model defintion that desribes how to compute inferences, and other metadata.</p>"
+      "documentation": "<p>Provides information about the location that is configured for storing model artifacts. </p> <p>Model artifacts are the output that results from training a model, and typically consist of trained parameters, a model defintion that describes how to compute inferences, and other metadata.</p>"
     },
     "ModelBiasAppSpecification": {
       "type": "structure",
@@ -18949,6 +18966,30 @@
         }
       },
       "documentation": "<p>Data quality constraints and statistics for a model.</p>"
+    },
+    "ModelDeployConfig": {
+      "type": "structure",
+      "members": {
+        "AutoGenerateEndpointName": {
+          "shape": "AutoGenerateEndpointName",
+          "documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click Autopilot model deployment; set to <code>False</code> otherwise. The default value is <code>True</code>.</p> <note> <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify the <code>EndpointName</code>; otherwise a 400 error is thrown.</p> </note>"
+        },
+        "EndpointName": {
+          "shape": "EndpointName",
+          "documentation": "<p>Specifies the endpoint name to use for a one-click Autopilot model deployment if the endpoint name is not generated automatically.</p> <note> <p>Specify the <code>EndpointName</code> if and only if you set <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error is thrown.</p> </note>"
+        }
+      },
+      "documentation": "<p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.</p>"
+    },
+    "ModelDeployResult": {
+      "type": "structure",
+      "members": {
+        "EndpointName": {
+          "shape": "EndpointName",
+          "documentation": "<p>The name of the endpoint to which the model has been deployed.</p> <note> <p>If model deployment fails, this field is omitted from the response.</p> </note>"
+        }
+      },
+      "documentation": "<p>Provides information about the endpoint of the model deployment.</p>"
     },
     "ModelDigests": {
       "type": "structure",
@@ -20716,7 +20757,7 @@
       "members": {
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>\"alias/ExampleAlias\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or <code>CreateHyperParameterTuningJob</code> requests. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>\"alias/ExampleAlias\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or <code>CreateHyperParameterTuningJob</code> requests. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
         },
         "S3OutputPath": {
           "shape": "S3Uri",
@@ -25112,7 +25153,7 @@
           "documentation": "<p>Fractions of a cent, in tenths.</p>"
         }
       },
-      "documentation": "<p>Represents an amount of money in United States dollars/</p>"
+      "documentation": "<p>Represents an amount of money in United States dollars.</p>"
     },
     "UiConfig": {
       "type": "structure",

@@ -1234,7 +1234,7 @@ declare namespace AuditManager {
     /**
      *  The name of the specified control set. 
      */
-    name?: ControlSetName;
+    name: ControlSetName;
     /**
      *  The list of controls within the control set. This does not contain the control set ID. 
      */
@@ -1611,7 +1611,7 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  Specifies whether the evidence is inclded in the assessment report. 
+     *  Specifies whether the evidence is included in the assessment report. 
      */
     assessmentReportSelection?: String;
   }
@@ -2402,7 +2402,7 @@ declare namespace AuditManager {
     /**
      *  The name of the control set. 
      */
-    name?: ControlSetName;
+    name: ControlSetName;
     /**
      *  The list of controls contained within the control set. 
      */

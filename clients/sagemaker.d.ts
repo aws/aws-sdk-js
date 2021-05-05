@@ -21,11 +21,11 @@ declare class SageMaker extends Service {
    */
   addAssociation(callback?: (err: AWSError, data: SageMaker.Types.AddAssociationResponse) => void): Request<SageMaker.Types.AddAssociationResponse, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see AWS Tagging Strategies.  Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob  
+   * Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see AWS Tagging Strategies.  Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob    Tags that you add to a SageMaker Studio Domain or User Profile by calling this API are also added to any Apps that the Domain or User Profile launches after you call this API, but not to Apps that the Domain or User Profile launched before you called this API. To make sure that the tags associated with a Domain or User Profile are also added to all Apps that the Domain or User Profile launches, add the tags when you first create the Domain or User Profile by specifying them in the Tags parameter of CreateDomain or CreateUserProfile. 
    */
   addTags(params: SageMaker.Types.AddTagsInput, callback?: (err: AWSError, data: SageMaker.Types.AddTagsOutput) => void): Request<SageMaker.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see AWS Tagging Strategies.  Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob  
+   * Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see For more information, see AWS Tagging Strategies.  Tags that you add to a hyperparameter tuning job by calling this API are also added to any training jobs that the hyperparameter tuning job launches after you call this API, but not to training jobs that the hyperparameter tuning job launched before you called this API. To make sure that the tags associated with a hyperparameter tuning job are also added to all training jobs that the hyperparameter tuning job launches, add the tags when you first create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob    Tags that you add to a SageMaker Studio Domain or User Profile by calling this API are also added to any Apps that the Domain or User Profile launches after you call this API, but not to Apps that the Domain or User Profile launched before you called this API. To make sure that the tags associated with a Domain or User Profile are also added to all Apps that the Domain or User Profile launches, add the tags when you first create the Domain or User Profile by specifying them in the Tags parameter of CreateDomain or CreateUserProfile. 
    */
   addTags(callback?: (err: AWSError, data: SageMaker.Types.AddTagsOutput) => void): Request<SageMaker.Types.AddTagsOutput, AWSError>;
   /**
@@ -637,11 +637,11 @@ declare class SageMaker extends Service {
    */
   deleteProject(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API. 
+   * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API.   When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile launched before you called this API. 
    */
   deleteTags(params: SageMaker.Types.DeleteTagsInput, callback?: (err: AWSError, data: SageMaker.Types.DeleteTagsOutput) => void): Request<SageMaker.Types.DeleteTagsOutput, AWSError>;
   /**
-   * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API. 
+   * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API.   When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile launched before you called this API. 
    */
   deleteTags(callback?: (err: AWSError, data: SageMaker.Types.DeleteTagsOutput) => void): Request<SageMaker.Types.DeleteTagsOutput, AWSError>;
   /**
@@ -2368,18 +2368,19 @@ declare namespace SageMaker {
   export type AttributeName = string;
   export type AttributeNames = AttributeName[];
   export type AuthMode = "SSO"|"IAM"|string;
+  export type AutoGenerateEndpointName = boolean;
   export interface AutoMLCandidate {
     /**
-     * The candidate name.
+     * The name of the candidate.
      */
     CandidateName: CandidateName;
     FinalAutoMLJobObjectiveMetric?: FinalAutoMLJobObjectiveMetric;
     /**
-     * The objective status.
+     * The objective's status.
      */
     ObjectiveStatus: ObjectiveStatus;
     /**
-     * The candidate's steps.
+     * Information about the candidate's steps.
      */
     CandidateSteps: CandidateSteps;
     /**
@@ -2387,7 +2388,7 @@ declare namespace SageMaker {
      */
     CandidateStatus: CandidateStatus;
     /**
-     * The inference containers.
+     * Information about the inference container definitions.
      */
     InferenceContainers?: AutoMLContainerDefinitions;
     /**
@@ -2413,15 +2414,15 @@ declare namespace SageMaker {
   }
   export interface AutoMLCandidateStep {
     /**
-     * Whether the Candidate is at the transform, training, or processing step.
+     * Whether the candidate is at the transform, training, or processing step.
      */
     CandidateStepType: CandidateStepType;
     /**
-     * The ARN for the Candidate's step.
+     * The ARN for the candidate's step.
      */
     CandidateStepArn: CandidateStepArn;
     /**
-     * The name for the Candidate's step.
+     * The name for the candidate's step.
      */
     CandidateStepName: CandidateStepName;
   }
@@ -2450,7 +2451,7 @@ declare namespace SageMaker {
      */
     ModelDataUrl: Url;
     /**
-     * Environment variables to set in the container. For more information, see .
+     * The environment variables to set in the container. For more information, see .
      */
     Environment?: EnvironmentMap;
   }
@@ -2466,11 +2467,11 @@ declare namespace SageMaker {
   export type AutoMLJobArn = string;
   export interface AutoMLJobArtifacts {
     /**
-     * The URL to the notebook location.
+     * The URL of the notebook location.
      */
     CandidateDefinitionNotebookLocation?: CandidateDefinitionNotebookLocation;
     /**
-     * The URL to the notebook location.
+     * The URL of the notebook location.
      */
     DataExplorationNotebookLocation?: DataExplorationNotebookLocation;
   }
@@ -2494,19 +2495,19 @@ declare namespace SageMaker {
      */
     CompletionCriteria?: AutoMLJobCompletionCriteria;
     /**
-     * Security configuration for traffic encryption or Amazon VPC settings.
+     * The security configuration for traffic encryption or Amazon VPC settings.
      */
     SecurityConfig?: AutoMLSecurityConfig;
   }
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data. Here are the options:    MSE: The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive, the better a model is at predicting the actual values the smaller the MSE value. When the data contains outliers, they tend to dominate the MSE which might cause subpar prediction performance.    Accuracy: The ratio of the number correctly classified items to the total number (correctly and incorrectly) classified. It is used for binary and multiclass classification. Measures how close the predicted class values are to the actual values. Accuracy values vary between zero and one, one being perfect accuracy and zero perfect inaccuracy.    F1: The F1 score is the harmonic mean of the precision and recall. It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class; false when they do not. Precision is the ratio of the true positive predictions to all positive predictions (including the false positives) in a data set and measures the quality of the prediction when it predicts the positive class. Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances and measures how completely a model predicts the actual class members in a data set. The standard F1 score weighs precision and recall equally. But which metric is paramount typically depends on specific aspects of a problem. F1 scores vary between zero and one, one being the best possible performance and zero the worst.    AUC: The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms such as logistic regression that return probabilities. A threshold is needed to map the probabilities into classifications. The relevant curve is the receiver operating characteristic curve that plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives but more false negatives. AUC is the area under this receiver operating characteristic curve and so provides an aggregated measure of the model performance across all possible classification thresholds. The AUC score can also be interpreted as the probability that a randomly selected positive data point is more likely to be predicted positive than a randomly selected negative example. AUC scores vary between zero and one, one being perfect accuracy and one half not better than a random classifier. Values less that one half predict worse than a random predictor and such consistently bad predictors can be inverted to obtain better than random predictors.    F1macro: The F1macro score applies F1 scoring to multiclass classification. In this context, you have multiple classes to predict. You just calculate the precision and recall for each class as you did for the positive class in binary classification. Then used these values to calculate the F1 score for each class and average them to obtain the F1macro score. F1macro scores vary between zero and one, one being the best possible performance and zero the worst.   If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data. Here are the options:    MSE: The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive: the better a model is at predicting the actual values, the smaller the MSE value. When the data contains outliers, they tend to dominate the MSE, which might cause subpar prediction performance.    Accuracy: The ratio of the number of correctly classified items to the total number of (correctly and incorrectly) classified items. It is used for binary and multiclass classification. It measures how close the predicted class values are to the actual values. Accuracy values vary between zero and one: one indicates perfect accuracy and zero indicates perfect inaccuracy.    F1: The F1 score is the harmonic mean of the precision and recall. It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class and false when they do not. Precision is the ratio of the true positive predictions to all positive predictions (including the false positives) in a data set and measures the quality of the prediction when it predicts the positive class. Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances and measures how completely a model predicts the actual class members in a data set. The standard F1 score weighs precision and recall equally. But which metric is paramount typically depends on specific aspects of a problem. F1 scores vary between zero and one: one indicates the best possible performance and zero the worst.    AUC: The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms such as logistic regression that return probabilities. A threshold is needed to map the probabilities into classifications. The relevant curve is the receiver operating characteristic curve that plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives but more false negatives. AUC is the area under this receiver operating characteristic curve and so provides an aggregated measure of the model performance across all possible classification thresholds. The AUC score can also be interpreted as the probability that a randomly selected positive data point is more likely to be predicted positive than a randomly selected negative example. AUC scores vary between zero and one: a score of one indicates perfect accuracy and a score of one half indicates that the prediction is not better than a random classifier. Values under one half predict less accurately than a random predictor. But such consistently bad predictors can simply be inverted to obtain better than random predictors.    F1macro: The F1macro score applies F1 scoring to multiclass classification. In this context, you have multiple classes to predict. You just calculate the precision and recall for each class as you did for the positive class in binary classification. Then, use these values to calculate the F1 score for each class and average them to obtain the F1macro score. F1macro scores vary between zero and one: one indicates the best possible performance and zero the worst.   If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
      */
     MetricName: AutoMLMetricEnum;
   }
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
-  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export type AutoMLJobSummaries = AutoMLJobSummary[];
   export interface AutoMLJobSummary {
@@ -2588,7 +2589,7 @@ declare namespace SageMaker {
      */
     EnableInterContainerTrafficEncryption?: Boolean;
     /**
-     * VPC configuration.
+     * The VPC configuration.
      */
     VpcConfig?: VpcConfig;
   }
@@ -2635,7 +2636,7 @@ declare namespace SageMaker {
   }
   export interface CandidateArtifactLocations {
     /**
-     * The S3 prefix to the explainability artifacts generated for the AutoML candidate.
+     * The Amazon S3 prefix to the explainability artifacts generated for the AutoML candidate.
      */
     Explainability: ExplainabilityLocation;
   }
@@ -2643,7 +2644,7 @@ declare namespace SageMaker {
   export type CandidateName = string;
   export interface CandidateProperties {
     /**
-     * The S3 prefix to the artifacts generated for an AutoML candidate.
+     * The Amazon S3 prefix to the artifacts generated for an AutoML candidate.
      */
     CandidateArtifactLocations?: CandidateArtifactLocations;
   }
@@ -3188,7 +3189,7 @@ declare namespace SageMaker {
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
-     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.
+     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV. &lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
@@ -3196,7 +3197,7 @@ declare namespace SageMaker {
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it.
+     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -3204,7 +3205,7 @@ declare namespace SageMaker {
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
-     * The ARN of the role that is used to access the data.
+     * The ARN of the role that is used to access the data. &lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;
      */
     RoleArn: RoleArn;
     /**
@@ -3215,6 +3216,10 @@ declare namespace SageMaker {
      * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
      */
     Tags?: TagList;
+    /**
+     * Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.
+     */
+    ModelDeployConfig?: ModelDeployConfig;
   }
   export interface CreateAutoMLJobResponse {
     /**
@@ -4027,7 +4032,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigName?: NotebookInstanceLifecycleConfigName;
     /**
-     * Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to Disabled this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see Notebook Instances Are Internet-Enabled by Default. You can set the value of this parameter to Disabled only if you set a value for the SubnetId parameter.
+     * Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to Disabled this notebook instance is able to access resources only in your VPC, and is not be able to connect to Amazon SageMaker training and endpoint services unless you configure a NAT Gateway in your VPC. For more information, see Notebook Instances Are Internet-Enabled by Default. You can set the value of this parameter to Disabled only if you set a value for the SubnetId parameter.
      */
     DirectInternetAccess?: DirectInternetAccess;
     /**
@@ -4623,7 +4628,7 @@ declare namespace SageMaker {
      */
     OutputFilter?: JsonPath;
     /**
-     * Specifies the source of the data to join with the transformed data. The valid values are None and Input. The default value is None, which specifies not to join the input with the transformed data. If you want the batch transform job to join the original input data with the transformed data, set JoinSource to Input.  For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON object in an attribute called SageMakerOutput. The joined result for JSON must be a key-value pair object. If the input is not a key-value pair object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored under the SageMakerInput key and the results are stored in SageMakerOutput. For CSV files, Amazon SageMaker combines the transformed data with the input data at the end of the input data and stores it in the output file. The joined data has the joined input data followed by the transformed data and the output is a CSV file. 
+     * Specifies the source of the data to join with the transformed data. The valid values are None and Input. The default value is None, which specifies not to join the input with the transformed data. If you want the batch transform job to join the original input data with the transformed data, set JoinSource to Input. You can specify OutputFilter as an additional filter to select a portion of the joined dataset and store it in the output file. For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to the input JSON object in an attribute called SageMakerOutput. The joined result for JSON must be a key-value pair object. If the input is not a key-value pair object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored under the SageMakerInput key and the results are stored in SageMakerOutput. For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed data with the input by appending each transformed row to the end of the input. The joined data has the original input data followed by the transformed data and the output is a CSV file. For information on how joining in applied, see Workflow for Associating Inferences with Input Records.
      */
     JoinSource?: JoinSource;
   }
@@ -5414,19 +5419,19 @@ declare namespace SageMaker {
      */
     LastModifiedTime: Timestamp;
     /**
-     * Returns the job's FailureReason.
+     * Returns the failure reason for an AutoML job, when applicable.
      */
     FailureReason?: AutoMLFailureReason;
     /**
-     * Returns a list of reasons for partial failures within an AutoML job. 
+     * Returns a list of reasons for partial failures within an AutoML job.
      */
     PartialFailureReasons?: AutoMLPartialFailureReasons;
     /**
-     * Returns the job's BestCandidate.
+     * Returns the job's best AutoMLCandidate.
      */
     BestCandidate?: AutoMLCandidate;
     /**
-     * Returns the status of the AutoML job's AutoMLJobStatus.
+     * Returns the status of the AutoML job.
      */
     AutoMLJobStatus: AutoMLJobStatus;
     /**
@@ -5434,7 +5439,7 @@ declare namespace SageMaker {
      */
     AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
     /**
-     * Returns the job's output from GenerateCandidateDefinitionsOnly.
+     * Indicates whether the output for an AutoML job generates candidate definitions only.
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
@@ -5442,9 +5447,17 @@ declare namespace SageMaker {
      */
     AutoMLJobArtifacts?: AutoMLJobArtifacts;
     /**
-     * This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, they are the values you provide.
+     * This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.
      */
     ResolvedAttributes?: ResolvedAttributes;
+    /**
+     * Indicates whether the model was deployed automatically to an endpoint and the name of that endpoint if deployed automatically.
+     */
+    ModelDeployConfig?: ModelDeployConfig;
+    /**
+     * Provides information about endpoint for the model deployment.
+     */
+    ModelDeployResult?: ModelDeployResult;
   }
   export interface DescribeCodeRepositoryInput {
     /**
@@ -7088,7 +7101,7 @@ declare namespace SageMaker {
      */
     TrainingJobStatus: TrainingJobStatus;
     /**
-     *  Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see StatusMessage under SecondaryStatusTransition. Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Interrupted - The job stopped because the managed spot training instances were interrupted.     Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed wait time.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.      Valid values for SecondaryStatus are subject to change.   We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTrainingStack     DownloadingTrainingImage   
+     *  Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see StatusMessage under SecondaryStatusTransition. Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Interrupted - The job stopped because the managed spot training instances were interrupted.     Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed wait time.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.      Valid values for SecondaryStatus are subject to change.   We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTraining     DownloadingTrainingImage   
      */
     SecondaryStatus: SecondaryStatus;
     /**
@@ -9004,7 +9017,7 @@ declare namespace SageMaker {
      */
     JobReferenceCode: JobReferenceCode;
     /**
-     * 
+     * The AWS account ID of the account used to start the labeling job.
      */
     WorkRequesterAccountId: AccountId;
     /**
@@ -9437,7 +9450,7 @@ declare namespace SageMaker {
      */
     SortOrder?: AutoMLSortOrder;
     /**
-     * The parameter by which to sort the results. The default is AutoMLJobName.
+     * The parameter by which to sort the results. The default is Name.
      */
     SortBy?: AutoMLSortBy;
     /**
@@ -9491,7 +9504,7 @@ declare namespace SageMaker {
   }
   export interface ListCandidatesForAutoMLJobResponse {
     /**
-     * Summaries about the Candidates.
+     * Summaries about the AutoMLCandidates.
      */
     Candidates: AutoMLCandidates;
     /**
@@ -11598,6 +11611,22 @@ declare namespace SageMaker {
      * Data quality constraints for a model.
      */
     Constraints?: MetricsSource;
+  }
+  export interface ModelDeployConfig {
+    /**
+     * Set to True to automatically generate an endpoint name for a one-click Autopilot model deployment; set to False otherwise. The default value is True.  If you set AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a 400 error is thrown. 
+     */
+    AutoGenerateEndpointName?: AutoGenerateEndpointName;
+    /**
+     * Specifies the endpoint name to use for a one-click Autopilot model deployment if the endpoint name is not generated automatically.  Specify the EndpointName if and only if you set AutoGenerateEndpointName to False; otherwise a 400 error is thrown. 
+     */
+    EndpointName?: EndpointName;
+  }
+  export interface ModelDeployResult {
+    /**
+     * The name of the endpoint to which the model has been deployed.  If model deployment fails, this field is omitted from the response. 
+     */
+    EndpointName?: EndpointName;
   }
   export interface ModelDigests {
     /**

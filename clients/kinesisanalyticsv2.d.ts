@@ -188,6 +188,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request. This action is not supported for Kinesis Data Analytics for SQL applications.
+   */
+  rollbackApplication(params: KinesisAnalyticsV2.Types.RollbackApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
+  /**
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request. This action is not supported for Kinesis Data Analytics for SQL applications.
+   */
+  rollbackApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
+  /**
    * Starts the specified Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
   startApplication(params: KinesisAnalyticsV2.Types.StartApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
@@ -243,13 +251,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the Kinesis Data Analytics application. You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the Kinesis Data Analytics application. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN). 
      */
     CloudWatchLoggingOption: CloudWatchLoggingOption;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface AddApplicationCloudWatchLoggingOptionResponse {
     /**
@@ -271,7 +283,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the input processing configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the input processing configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -307,7 +319,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current version of your application. You can use the DescribeApplication operation to find the current application version.
+     * The current version of your application. You must provide the ApplicationVersionID or the ConditionalToken.You can use the DescribeApplication operation to find the current application version.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -335,7 +347,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the output configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. 
+     * The version of the application to which you want to add the output configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. 
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -391,13 +403,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the VPC configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the VPC configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Description of the VPC to add to the application.
      */
     VpcConfiguration: VpcConfiguration;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface AddApplicationVpcConfigurationResponse {
     /**
@@ -575,6 +591,18 @@ declare namespace KinesisAnalyticsV2 {
      * Describes the time window for automatic application maintenance.
      */
     ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
+    /**
+     * The previous application version before the latest application update. RollbackApplication reverts the application to this version.
+     */
+    ApplicationVersionUpdatedFrom?: ApplicationVersionId;
+    /**
+     * If you reverted the application using RollbackApplication, the application version when RollbackApplication was called.
+     */
+    ApplicationVersionRolledBackFrom?: ApplicationVersionId;
+    /**
+     * A value you use to implement strong concurrency for application updates.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface ApplicationMaintenanceConfigurationDescription {
     /**
@@ -624,7 +652,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|"ROLLING_BACK"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -799,6 +827,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export type CodeMD5 = string;
   export type CodeSize = number;
+  export type ConditionalToken = string;
   export type ConfigurationType = "DEFAULT"|"CUSTOM"|string;
   export interface CreateApplicationPresignedUrlRequest {
     /**
@@ -874,13 +903,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the application. You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the application. You must provide the ApplicationVersionID or the ConditionalToken. You can retrieve the application version ID using DescribeApplication.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * The CloudWatchLoggingOptionId of the Amazon CloudWatch logging option to delete. You can get the CloudWatchLoggingOptionId by using the DescribeApplication operation. 
      */
     CloudWatchLoggingOptionId: Id;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface DeleteApplicationCloudWatchLoggingOptionResponse {
     /**
@@ -1002,13 +1035,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * The ID of the VPC configuration to delete.
      */
     VpcConfigurationId: Id;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface DeleteApplicationVpcConfigurationResponse {
     /**
@@ -1824,6 +1861,19 @@ declare namespace KinesisAnalyticsV2 {
   export type ReferenceDataSources = ReferenceDataSource[];
   export type ResourceARN = string;
   export type RoleARN = string;
+  export interface RollbackApplicationRequest {
+    /**
+     * The name of the application.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+  }
+  export interface RollbackApplicationResponse {
+    ApplicationDetail: ApplicationDetail;
+  }
   export interface RunConfiguration {
     /**
      * Describes the starting parameters for a Flink-based Kinesis Data Analytics application.
@@ -2125,9 +2175,9 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Describes application configuration updates.
      */
@@ -2144,6 +2194,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
      */
     CloudWatchLoggingOptionUpdates?: CloudWatchLoggingOptionUpdates;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface UpdateApplicationResponse {
     /**

@@ -675,6 +675,40 @@
       ],
       "documentation": "<p>Retrieves the list of key-value tags assigned to the application. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
     },
+    "RollbackApplication": {
+      "name": "RollbackApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RollbackApplicationRequest"
+      },
+      "output": {
+        "shape": "RollbackApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        }
+      ],
+      "documentation": "<p>Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status. </p> <p>You can roll back an application only if it is in the <code>UPDATING</code> or <code>AUTOSCALING</code> status.</p> <p>When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request.</p> <p>This action is not supported for Kinesis Data Analytics for SQL applications.</p>"
+    },
     "StartApplication": {
       "name": "StartApplication",
       "http": {
@@ -879,7 +913,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "CloudWatchLoggingOption"
       ],
       "members": {
@@ -889,11 +922,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version ID of the Kinesis Data Analytics application. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The version ID of the Kinesis Data Analytics application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
         },
         "CloudWatchLoggingOption": {
           "shape": "CloudWatchLoggingOption",
           "documentation": "<p>Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN). </p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.</p>"
         }
       }
     },
@@ -929,7 +966,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>The version of the application to which you want to add the input processing configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
         },
         "InputId": {
           "shape": "Id",
@@ -976,7 +1013,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current version of your application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
+          "documentation": "<p>The current version of your application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
         },
         "Input": {
           "shape": "Input",
@@ -1015,7 +1052,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version of the application to which you want to add the output configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
+          "documentation": "<p>The version of the application to which you want to add the output configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
         },
         "Output": {
           "shape": "Output",
@@ -1083,7 +1120,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "VpcConfiguration"
       ],
       "members": {
@@ -1093,11 +1129,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version of the application to which you want to add the VPC configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>The version of the application to which you want to add the VPC configuration. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
         },
         "VpcConfiguration": {
           "shape": "VpcConfiguration",
           "documentation": "<p>Description of the VPC to add to the application.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.</p>"
         }
       }
     },
@@ -1325,6 +1365,18 @@
         "ApplicationMaintenanceConfigurationDescription": {
           "shape": "ApplicationMaintenanceConfigurationDescription",
           "documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+        },
+        "ApplicationVersionUpdatedFrom": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The previous application version before the latest application update. <a>RollbackApplication</a> reverts the application to this version.</p>"
+        },
+        "ApplicationVersionRolledBackFrom": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>If you reverted the application using <a>RollbackApplication</a>, the application version when <code>RollbackApplication</code> was called.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates.</p>"
         }
       },
       "documentation": "<p>Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.</p>"
@@ -1453,7 +1505,8 @@
         "UPDATING",
         "AUTOSCALING",
         "FORCE_STOPPING",
-        "MAINTENANCE"
+        "MAINTENANCE",
+        "ROLLING_BACK"
       ]
     },
     "ApplicationSummaries": {
@@ -1749,6 +1802,12 @@
       "max": 52428800,
       "min": 0
     },
+    "ConditionalToken": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9-_+/=]+"
+    },
     "ConfigurationType": {
       "type": "string",
       "enum": [
@@ -1861,7 +1920,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "CloudWatchLoggingOptionId"
       ],
       "members": {
@@ -1871,11 +1929,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version ID of the application. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The version ID of the application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
         },
         "CloudWatchLoggingOptionId": {
           "shape": "Id",
           "documentation": "<p>The <code>CloudWatchLoggingOptionId</code> of the Amazon CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a>DescribeApplication</a> operation. </p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.</p>"
         }
       }
     },
@@ -2052,7 +2114,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "VpcConfigurationId"
       ],
       "members": {
@@ -2062,11 +2123,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The current application version ID. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
         },
         "VpcConfigurationId": {
           "shape": "Id",
           "documentation": "<p>The ID of the VPC configuration to delete.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.</p>"
         }
       }
     },
@@ -3514,6 +3579,34 @@
       "min": 1,
       "pattern": "arn:.*"
     },
+    "RollbackApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName",
+        "CurrentApplicationVersionId"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application.</p>"
+        },
+        "CurrentApplicationVersionId": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+        }
+      }
+    },
+    "RollbackApplicationResponse": {
+      "type": "structure",
+      "required": [
+        "ApplicationDetail"
+      ],
+      "members": {
+        "ApplicationDetail": {
+          "shape": "ApplicationDetail"
+        }
+      }
+    },
     "RunConfiguration": {
       "type": "structure",
       "members": {
@@ -4040,8 +4133,7 @@
     "UpdateApplicationRequest": {
       "type": "structure",
       "required": [
-        "ApplicationName",
-        "CurrentApplicationVersionId"
+        "ApplicationName"
       ],
       "members": {
         "ApplicationName": {
@@ -4050,7 +4142,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The current application version ID. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
         },
         "ApplicationConfigurationUpdate": {
           "shape": "ApplicationConfigurationUpdate",
@@ -4067,6 +4159,10 @@
         "CloudWatchLoggingOptionUpdates": {
           "shape": "CloudWatchLoggingOptionUpdates",
           "documentation": "<p>Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use <a>AddApplicationCloudWatchLoggingOption</a>.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>.</p>"
         }
       }
     },
