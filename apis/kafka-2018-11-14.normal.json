@@ -2244,6 +2244,11 @@
           "shape": "__string",
           "locationName": "bootstrapBrokerStringSaslScram",
           "documentation": "\n            <p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>\n         "
+        },
+        "BootstrapBrokerStringSaslIam": {
+          "shape": "__string",
+          "locationName": "bootstrapBrokerStringSaslIam",
+          "documentation": "\n            <p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>\n         "
         }
       }
     },
@@ -2817,6 +2822,11 @@
           "shape": "Scram",
           "locationName": "scram",
           "documentation": "\n            <p>Details for SASL/SCRAM client authentication.</p>\n         "
+        },
+        "Iam": {
+          "shape": "Iam",
+          "locationName": "iam",
+          "documentation": "\n            <p>Indicates whether IAM access control is enabled.</p>\n         "
         }
       },
       "documentation": "\n            <p>Details for client authentication using SASL.</p>\n         "
@@ -2831,6 +2841,17 @@
         }
       },
       "documentation": "\n            <p>Details for SASL/SCRAM client authentication.</p>\n         "
+    },
+    "Iam": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "__boolean",
+          "locationName": "enabled",
+          "documentation": "\n            <p>Indicates whether IAM access control is enabled.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Details for IAM access control.</p>\n         "
     },
     "NodeInfo": {
       "type": "structure",

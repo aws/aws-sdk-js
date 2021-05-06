@@ -44,13 +44,21 @@ declare class Snowball extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
+  /**
+   * Creates a job with long term usage option for a device. The long term usage is a one year or three year long term pricing type for the device. You are billed upfront and AWS give discounts for long term pricing. For detailed information see XXXXXXXX
+   */
+  createLongTermPricing(params: Snowball.Types.CreateLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
+  /**
+   * Creates a job with long term usage option for a device. The long term usage is a one year or three year long term pricing type for the device. You are billed upfront and AWS give discounts for long term pricing. For detailed information see XXXXXXXX
+   */
+  createLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
   /**
    * Creates a shipping label that will be used to return the Snow device to AWS.
    */
@@ -100,19 +108,19 @@ declare class Snowball extends Service {
    */
   describeReturnShippingLabel(callback?: (err: AWSError, data: Snowball.Types.DescribeReturnShippingLabelResult) => void): Request<Snowball.Types.DescribeReturnShippingLabelResult, AWSError>;
   /**
-   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 360 days after the job is created.
    */
   getJobManifest(params: Snowball.Types.GetJobManifestRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
-   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 360 days after the job is created.
    */
   getJobManifest(callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
-   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.
+   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 360 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.
    */
   getJobUnlockCode(params: Snowball.Types.GetJobUnlockCodeRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
-   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.
+   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 360 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snow device through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.
    */
   getJobUnlockCode(callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
@@ -164,6 +172,14 @@ declare class Snowball extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
   /**
+   * Lists all long term pricing types.
+   */
+  listLongTermPricing(params: Snowball.Types.ListLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.ListLongTermPricingResult) => void): Request<Snowball.Types.ListLongTermPricingResult, AWSError>;
+  /**
+   * Lists all long term pricing types.
+   */
+  listLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.ListLongTermPricingResult) => void): Request<Snowball.Types.ListLongTermPricingResult, AWSError>;
+  /**
    * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
    */
   updateCluster(params: Snowball.Types.UpdateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
@@ -187,6 +203,14 @@ declare class Snowball extends Service {
    * Updates the state when a the shipment states changes to a different state.
    */
   updateJobShipmentState(callback?: (err: AWSError, data: Snowball.Types.UpdateJobShipmentStateResult) => void): Request<Snowball.Types.UpdateJobShipmentStateResult, AWSError>;
+  /**
+   * Updates the long term pricing type.
+   */
+  updateLongTermPricing(params: Snowball.Types.UpdateLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateLongTermPricingResult) => void): Request<Snowball.Types.UpdateLongTermPricingResult, AWSError>;
+  /**
+   * Updates the long term pricing type.
+   */
+  updateLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.UpdateLongTermPricingResult) => void): Request<Snowball.Types.UpdateLongTermPricingResult, AWSError>;
 }
 declare namespace Snowball {
   export interface Address {
@@ -371,7 +395,7 @@ declare namespace Snowball {
   }
   export interface CreateClusterRequest {
     /**
-     * The type of job for this cluster. Currently, the only job type supported for clusters is LOCAL_USE.
+     * The type of job for this cluster. Currently, the only job type supported for clusters is LOCAL_USE. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     JobType: JobType;
     /**
@@ -395,9 +419,9 @@ declare namespace Snowball {
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snow Family device to use for this cluster.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type. 
+     * The type of AWS Snow Family device to use for this cluster.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type.  For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
-    SnowballType?: SnowballType;
+    SnowballType: SnowballType;
     /**
      * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:    In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow device are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.     In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow device are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
@@ -447,7 +471,7 @@ declare namespace Snowball {
      */
     RoleARN?: RoleARN;
     /**
-     * If your job is being created in one of the US regions, you have the option of specifying what size Snow device you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.
+     * If your job is being created in one of the US regions, you have the option of specifying what size Snow device you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballCapacityPreference?: SnowballCapacity;
     /**
@@ -463,7 +487,7 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snow Family device to use for this job.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type.  The type of AWS Snow device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
+     * The type of AWS Snow Family device to use for this job.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type.  The type of AWS Snow device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballType?: SnowballType;
     /**
@@ -475,15 +499,39 @@ declare namespace Snowball {
      */
     TaxDocuments?: TaxDocuments;
     /**
-     * Defines the device configuration for an AWS Snowcone job.
+     * Defines the device configuration for an AWS Snowcone job. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     DeviceConfiguration?: DeviceConfiguration;
+    /**
+     * The ID of the long term pricing type for the device.
+     */
+    LongTermPricingId?: LongTermPricingId;
   }
   export interface CreateJobResult {
     /**
      * The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000.
      */
     JobId?: JobId;
+  }
+  export interface CreateLongTermPricingRequest {
+    /**
+     * The type of long term pricing option you want for the device - one year or three year long term pricing.
+     */
+    LongTermPricingType: LongTermPricingType;
+    /**
+     * Specifies whether the current long term pricing type for the device should be renewed.
+     */
+    IsLongTermPricingAutoRenew?: JavaBoolean;
+    /**
+     * The type of AWS Snow Family device to use for the long term pricing job.
+     */
+    SnowballType?: SnowballType;
+  }
+  export interface CreateLongTermPricingResult {
+    /**
+     * The ID of the long term pricing type for the device.
+     */
+    LongTermPricingId?: LongTermPricingId;
   }
   export interface CreateReturnShippingLabelRequest {
     /**
@@ -583,7 +631,7 @@ declare namespace Snowball {
     /**
      * The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000.
      */
-    JobId?: JobId;
+    JobId: JobId;
   }
   export interface DescribeReturnShippingLabelResult {
     /**
@@ -640,7 +688,7 @@ declare namespace Snowball {
   }
   export interface GetJobUnlockCodeResult {
     /**
-     * The UnlockCode value for the specified job. The UnlockCode value can be accessed for up to 90 days after the job has been created.
+     * The UnlockCode value for the specified job. The UnlockCode value can be accessed for up to 360 days after the job has been created.
      */
     UnlockCode?: String;
   }
@@ -675,6 +723,7 @@ declare namespace Snowball {
     GSTIN?: GSTIN;
   }
   export type Integer = number;
+  export type JavaBoolean = boolean;
   export type JobId = string;
   export interface JobListEntry {
     /**
@@ -767,7 +816,7 @@ declare namespace Snowball {
      */
     ShippingDetails?: ShippingDetails;
     /**
-     * The Snow device capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs.
+     * The Snow device capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballCapacityPreference?: SnowballCapacity;
     /**
@@ -795,6 +844,10 @@ declare namespace Snowball {
      */
     TaxDocuments?: TaxDocuments;
     DeviceConfiguration?: DeviceConfiguration;
+    /**
+     * The ID of the long term pricing type for the device.
+     */
+    LongTermPricingId?: LongTermPricingId;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -921,7 +974,73 @@ declare namespace Snowball {
     NextToken?: String;
   }
   export type ListLimit = number;
+  export interface ListLongTermPricingRequest {
+    /**
+     * The maximum number of ListLongTermPricing objects to return.
+     */
+    MaxResults?: ListLimit;
+    /**
+     * Because HTTP requests are stateless, this is the starting point for your next list of ListLongTermPricing to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListLongTermPricingResult {
+    /**
+     * Each LongTermPricingEntry object contains a status, ID, and other information about the LongTermPricing type. 
+     */
+    LongTermPricingEntries?: LongTermPricingEntryList;
+    /**
+     * Because HTTP requests are stateless, this is the starting point for your next list of returned ListLongTermPricing list.
+     */
+    NextToken?: String;
+  }
   export type Long = number;
+  export type LongTermPricingAssociatedJobIdList = JobId[];
+  export type LongTermPricingEntryList = LongTermPricingListEntry[];
+  export type LongTermPricingId = string;
+  export interface LongTermPricingListEntry {
+    /**
+     * The ID of the long term pricing type for the device.
+     */
+    LongTermPricingId?: LongTermPricingId;
+    /**
+     * The end date the long term pricing contract.
+     */
+    LongTermPricingEndDate?: Timestamp;
+    /**
+     * The start date of the long term pricing contract.
+     */
+    LongTermPricingStartDate?: Timestamp;
+    /**
+     * The type of long term pricing that was selected for the device.
+     */
+    LongTermPricingType?: LongTermPricingType;
+    /**
+     * The current active jobs on the device the long term pricing type.
+     */
+    CurrentActiveJob?: JobId;
+    /**
+     * A new device that replaces a device that is ordered with long term pricing.
+     */
+    ReplacementJob?: JobId;
+    /**
+     * If set to true, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.
+     */
+    IsLongTermPricingAutoRenew?: JavaBoolean;
+    /**
+     * The status of the long term pricing type.
+     */
+    LongTermPricingStatus?: String;
+    /**
+     * The type of AWS Snow Family device associated with this long term pricing job.
+     */
+    SnowballType?: SnowballType;
+    /**
+     * The IDs of the jobs that are associated with a long term pricing type.
+     */
+    JobIds?: LongTermPricingAssociatedJobIdList;
+  }
+  export type LongTermPricingType = "OneYear"|"ThreeYear"|string;
   export interface Notification {
     /**
      * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe AWS Simple Notification Service (SNS) API action.
@@ -976,8 +1095,8 @@ declare namespace Snowball {
   }
   export type ShippingLabelStatus = "InProgress"|"TimedOut"|"Succeeded"|"Failed"|string;
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"NoPreference"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"T14"|"NoPreference"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|string;
   export interface SnowconeDeviceConfiguration {
     /**
      * Configures the wireless connection for the AWS Snowcone device.
@@ -1056,7 +1175,7 @@ declare namespace Snowball {
      */
     Description?: String;
     /**
-     * The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB Snowballs are only available in the US regions.
+     * The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB Snowballs are only available in the US regions. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballCapacityPreference?: SnowballCapacity;
     /**
@@ -1077,6 +1196,22 @@ declare namespace Snowball {
     ShipmentState: ShipmentState;
   }
   export interface UpdateJobShipmentStateResult {
+  }
+  export interface UpdateLongTermPricingRequest {
+    /**
+     * The ID of the long term pricing type for the device.
+     */
+    LongTermPricingId: LongTermPricingId;
+    /**
+     * Specifies that a device that is ordered with long term pricing should be replaced with a new device.
+     */
+    ReplacementJob?: JobId;
+    /**
+     * If set to true, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.
+     */
+    IsLongTermPricingAutoRenew?: JavaBoolean;
+  }
+  export interface UpdateLongTermPricingResult {
   }
   export interface WirelessConnection {
     /**

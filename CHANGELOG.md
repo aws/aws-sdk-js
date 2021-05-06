@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.901.0-->
+<!--LATEST=2.902.0-->
 <!--ENTRYINSERT-->
+
+## 2.902.0
+* bugfix: EndpointCache: Only delete endpoint which has expired in EndpointCache
+* feature: Kafka: IAM Access Control for Amazon MSK enables you to create clusters that use IAM to authenticate clients and to allow or deny Apache Kafka actions for those clients.
+* feature: SSM: SSM feature release - ChangeCalendar integration with StateManager.
+* feature: ServiceDiscovery: Bugfix: Improved input validation for RegisterInstance action, InstanceId field
+* feature: Snowball: AWS Snow Family adds APIs for ordering and managing Snow jobs with long term pricing
 
 ## 2.901.0
 * feature: AuditManager: This release updates the CreateAssessmentFrameworkControlSet and UpdateAssessmentFrameworkControlSet API data types. For both of these data types, the control set name is now a required attribute.

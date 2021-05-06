@@ -1293,6 +1293,10 @@ declare namespace SSM {
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
      * The combination of AWS Regions and AWS accounts where you want to run the association.
      */
     TargetLocations?: TargetLocations;
@@ -1520,6 +1524,10 @@ declare namespace SSM {
      * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations for this version only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * The combination of AWS Regions and AWS accounts where you wanted to run the association when this association version was created.
      */
@@ -2400,6 +2408,10 @@ declare namespace SSM {
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
      * Use this action to create an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
@@ -2468,9 +2480,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
      */
@@ -8862,6 +8878,10 @@ declare namespace SSM {
      * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
      */

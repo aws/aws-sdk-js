@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "EndpointCache",
-  "description": "Only delete endpoint which has expired in EndpointCache"
-}
