@@ -252,7 +252,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. </p>"
+      "documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.</p>"
     },
     "DescribeAlert": {
       "name": "DescribeAlert",
@@ -283,7 +283,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Describes an alert.</p>"
+      "documentation": "<p>Describes an alert.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "DescribeAnomalyDetectionExecutions": {
       "name": "DescribeAnomalyDetectionExecutions",
@@ -345,7 +345,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Describes a detector.</p>"
+      "documentation": "<p>Describes a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "DescribeMetricSet": {
       "name": "DescribeMetricSet",
@@ -376,7 +376,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Describes a dataset.</p>"
+      "documentation": "<p>Describes a dataset.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "GetAnomalyGroup": {
       "name": "GetAnomalyGroup",
@@ -500,7 +500,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Lists the alerts attached to a detector.</p>"
+      "documentation": "<p>Lists the alerts attached to a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "ListAnomalyDetectors": {
       "name": "ListAnomalyDetectors",
@@ -531,7 +531,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists the detectors in the current AWS Region.</p>"
+      "documentation": "<p>Lists the detectors in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "ListAnomalyGroupSummaries": {
       "name": "ListAnomalyGroupSummaries",
@@ -624,7 +624,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists the datasets in the current AWS Region.</p>"
+      "documentation": "<p>Lists the datasets in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -1189,7 +1189,7 @@
         },
         "FlowName": {
           "shape": "FlowName",
-          "documentation": "<p>The name of the flow.</p>"
+          "documentation": "<p> name of the flow.</p>"
         }
       },
       "documentation": "<p>Details about an Amazon AppFlow flow datasource.</p>"
@@ -1967,7 +1967,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
+      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
     },
     "LambdaConfiguration": {
       "type": "structure",
@@ -2552,7 +2552,7 @@
       "members": {
         "RoleArn": {
           "shape": "Arn",
-          "documentation": "<p>THe ARN of the IAM role that has access to the target SNS topic.</p>"
+          "documentation": "<p>The ARN of the IAM role that has access to the target SNS topic.</p>"
         },
         "SnsTopicArn": {
           "shape": "Arn",
@@ -2792,7 +2792,7 @@
     "UUID": {
       "type": "string",
       "max": 63,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+      "pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
     },
     "UntagResourceRequest": {
       "type": "structure",

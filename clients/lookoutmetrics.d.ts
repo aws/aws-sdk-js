@@ -60,19 +60,19 @@ declare class LookoutMetrics extends Service {
    */
   deleteAlert(callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAlertResponse) => void): Request<LookoutMetrics.Types.DeleteAlertResponse, AWSError>;
   /**
-   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. 
+   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
    */
   deleteAnomalyDetector(params: LookoutMetrics.Types.DeleteAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeleteAnomalyDetectorResponse, AWSError>;
   /**
-   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. 
+   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
    */
   deleteAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeleteAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes an alert.
+   * Describes an alert. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAlert(params: LookoutMetrics.Types.DescribeAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAlertResponse) => void): Request<LookoutMetrics.Types.DescribeAlertResponse, AWSError>;
   /**
-   * Describes an alert.
+   * Describes an alert. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAlert(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAlertResponse) => void): Request<LookoutMetrics.Types.DescribeAlertResponse, AWSError>;
   /**
@@ -84,19 +84,19 @@ declare class LookoutMetrics extends Service {
    */
   describeAnomalyDetectionExecutions(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectionExecutionsResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectionExecutionsResponse, AWSError>;
   /**
-   * Describes a detector.
+   * Describes a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAnomalyDetector(params: LookoutMetrics.Types.DescribeAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes a detector.
+   * Describes a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes a dataset.
+   * Describes a dataset. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeMetricSet(params: LookoutMetrics.Types.DescribeMetricSetRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
-   * Describes a dataset.
+   * Describes a dataset. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
@@ -124,19 +124,19 @@ declare class LookoutMetrics extends Service {
    */
   getSampleData(callback?: (err: AWSError, data: LookoutMetrics.Types.GetSampleDataResponse) => void): Request<LookoutMetrics.Types.GetSampleDataResponse, AWSError>;
   /**
-   * Lists the alerts attached to a detector.
+   * Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAlerts(params: LookoutMetrics.Types.ListAlertsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAlertsResponse) => void): Request<LookoutMetrics.Types.ListAlertsResponse, AWSError>;
   /**
-   * Lists the alerts attached to a detector.
+   * Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAlerts(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAlertsResponse) => void): Request<LookoutMetrics.Types.ListAlertsResponse, AWSError>;
   /**
-   * Lists the detectors in the current AWS Region.
+   * Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAnomalyDetectors(params: LookoutMetrics.Types.ListAnomalyDetectorsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
   /**
-   * Lists the detectors in the current AWS Region.
+   * Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAnomalyDetectors(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class LookoutMetrics extends Service {
    */
   listAnomalyGroupTimeSeries(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupTimeSeriesResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupTimeSeriesResponse, AWSError>;
   /**
-   * Lists the datasets in the current AWS Region.
+   * Lists the datasets in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listMetricSets(params: LookoutMetrics.Types.ListMetricSetsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListMetricSetsResponse) => void): Request<LookoutMetrics.Types.ListMetricSetsResponse, AWSError>;
   /**
-   * Lists the datasets in the current AWS Region.
+   * Lists the datasets in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listMetricSets(callback?: (err: AWSError, data: LookoutMetrics.Types.ListMetricSetsResponse) => void): Request<LookoutMetrics.Types.ListMetricSetsResponse, AWSError>;
   /**
@@ -458,7 +458,7 @@ declare namespace LookoutMetrics {
      */
     RoleArn: Arn;
     /**
-     * The name of the flow.
+     *  name of the flow.
      */
     FlowName: FlowName;
   }
@@ -1303,7 +1303,7 @@ declare namespace LookoutMetrics {
   }
   export interface SNSConfiguration {
     /**
-     * THe ARN of the IAM role that has access to the target SNS topic.
+     * The ARN of the IAM role that has access to the target SNS topic.
      */
     RoleArn: Arn;
     /**

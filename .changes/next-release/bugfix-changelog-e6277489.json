@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "changelog",
-  "description": "switch replaceAll with replace in change-creator"
-}

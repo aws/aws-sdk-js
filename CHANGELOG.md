@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.902.0-->
+<!--LATEST=2.903.0-->
 <!--ENTRYINSERT-->
+
+## 2.903.0
+* bugfix: changelog: switch replaceAll with replace in change-creator
+* feature: Connect: Adds tagging support for Connect APIs CreateIntegrationAssociation and CreateUseCase.
+* feature: LakeFormation: This release adds Tag Based Access Control to AWS Lake Formation service
+* feature: LookoutMetrics: Enforcing UUID style for parameters that are already in UUID format today. Documentation specifying eventual consistency of lookoutmetrics resources.
 
 ## 2.902.0
 * bugfix: EndpointCache: Only delete endpoint which has expired in EndpointCache
