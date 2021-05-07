@@ -24,7 +24,7 @@ function generateRandomIdentifier() {
  * Ref: https://github.com/aws/aws-sdk-js/issues/3691
  */
 function sanitizeFileName(filename) {
-    return filename.replaceAll(/[^a-zA-Z0-9\\.]/g, '-');
+    return filename.replace(/[^a-zA-Z0-9\\.]/g, '-');
 }
 
 var CHANGES_DIR = path.join(process.cwd(), '.changes');
