@@ -3069,6 +3069,24 @@
       "type": "string",
       "pattern": "[a-fA-F0-9]{16}"
     },
+    "JoinEuiFilters": {
+      "type": "list",
+      "member": {
+        "shape": "JoinEuiRange"
+      },
+      "documentation": "<p>A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.</p>",
+      "max": 3,
+      "min": 0
+    },
+    "JoinEuiRange": {
+      "type": "list",
+      "member": {
+        "shape": "JoinEui"
+      },
+      "documentation": "<p>A pair of join EUI describing a range [BegEui, EndEui], both ends are inclusive.</p>",
+      "max": 2,
+      "min": 2
+    },
     "ListDestinationsRequest": {
       "type": "structure",
       "members": {
@@ -3488,6 +3506,15 @@
         "RfRegion": {
           "shape": "RfRegion",
           "documentation": "<p>The frequency band (RFRegion) value.</p>"
+        },
+        "JoinEuiFilters": {
+          "shape": "JoinEuiFilters"
+        },
+        "NetIdFilters": {
+          "shape": "NetIdFilters"
+        },
+        "SubBands": {
+          "shape": "SubBands"
         }
       },
       "documentation": "<p>LoRaWANGateway object.</p>"
@@ -3747,6 +3774,20 @@
       "type": "string",
       "max": 4096,
       "min": 1
+    },
+    "NetId": {
+      "type": "string",
+      "documentation": "<p>LoRaWAN network ID.</p>",
+      "pattern": "[a-fA-F0-9]{6}"
+    },
+    "NetIdFilters": {
+      "type": "list",
+      "member": {
+        "shape": "NetId"
+      },
+      "documentation": "<p>A list of NetId values that are used by LoRa gateways to filter the uplink frames.</p>",
+      "max": 10,
+      "min": 0
     },
     "NextToken": {
       "type": "string",
@@ -4153,6 +4194,21 @@
       "max": 4096,
       "min": 1
     },
+    "SubBand": {
+      "type": "integer",
+      "documentation": "<p>A subset of supported frequency channels in a certain RFRegion.</p>",
+      "max": 8,
+      "min": 1
+    },
+    "SubBands": {
+      "type": "list",
+      "member": {
+        "shape": "SubBand"
+      },
+      "documentation": "<p>A list of integer indicating which sub bands are supported by LoRa gateway.</p>",
+      "max": 8,
+      "min": 0
+    },
     "Supports32BitFCnt": {
       "type": "boolean"
     },
@@ -4437,6 +4493,12 @@
         "Description": {
           "shape": "Description",
           "documentation": "<p>A new description of the resource.</p>"
+        },
+        "JoinEuiFilters": {
+          "shape": "JoinEuiFilters"
+        },
+        "NetIdFilters": {
+          "shape": "NetIdFilters"
         }
       }
     },

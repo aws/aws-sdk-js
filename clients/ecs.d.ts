@@ -766,7 +766,7 @@ declare namespace ECS {
   export type ContainerCondition = "START"|"COMPLETE"|"SUCCESS"|"HEALTHY"|string;
   export interface ContainerDefinition {
     /**
-     * The name of a container. If you are linking multiple containers together in a task definition, the name of one container can be entered in the links of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This parameter maps to name in the Create a container section of the Docker Remote API and the --name option to docker run. 
+     * The name of a container. If you are linking multiple containers together in a task definition, the name of one container can be entered in the links of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to name in the Create a container section of the Docker Remote API and the --name option to docker run. 
      */
     name?: String;
     /**
@@ -790,7 +790,7 @@ declare namespace ECS {
      */
     memoryReservation?: BoxedInteger;
     /**
-     * The links parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to Legacy container links in the Docker documentation. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to docker run.  This parameter is not supported for Windows containers.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
+     * The links parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. For more information about linking Docker containers, go to Legacy container links in the Docker documentation. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to docker run.  This parameter is not supported for Windows containers.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
      */
     links?: StringList;
     /**
@@ -1097,7 +1097,7 @@ declare namespace ECS {
   }
   export interface CreateClusterRequest {
     /**
-     * The name of your cluster. If you do not specify a name for your cluster, you create a cluster named default. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. 
+     * The name of your cluster. If you do not specify a name for your cluster, you create a cluster named default. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. 
      */
     clusterName?: String;
     /**
@@ -1133,7 +1133,7 @@ declare namespace ECS {
      */
     cluster?: String;
     /**
-     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
+     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
      */
     serviceName: String;
     /**
@@ -1870,7 +1870,7 @@ declare namespace ECS {
      */
     containerName?: String;
     /**
-     * Whether or not the execute command session is running in interactive mode.
+     * Whether or not the execute command session is running in interactive mode. Amazon ECS only supports initiating interactive sessions, so you must specify true for this value.
      */
     interactive?: Boolean;
     /**
@@ -2670,7 +2670,7 @@ declare namespace ECS {
   }
   export interface RegisterTaskDefinitionRequest {
     /**
-     * You must specify a family for a task definition, which allows you to track multiple versions of the same task definition. The family is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed.
+     * You must specify a family for a task definition, which allows you to track multiple versions of the same task definition. The family is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.
      */
     family: String;
     /**
@@ -2901,7 +2901,7 @@ declare namespace ECS {
      */
     serviceArn?: String;
     /**
-     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
+     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
      */
     serviceName?: String;
     /**
@@ -3952,7 +3952,7 @@ declare namespace ECS {
   }
   export interface Volume {
     /**
-     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
+     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
      */
     name?: String;
     /**

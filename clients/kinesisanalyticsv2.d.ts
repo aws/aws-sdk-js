@@ -156,6 +156,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   describeApplicationSnapshot(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
   /**
+   * Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the ListApplicationVersions operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  describeApplicationVersion(params: KinesisAnalyticsV2.Types.DescribeApplicationVersionRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse, AWSError>;
+  /**
+   * Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the ListApplicationVersions operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  describeApplicationVersion(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse, AWSError>;
+  /**
    * Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
   discoverInputSchema(params: KinesisAnalyticsV2.Types.DiscoverInputSchemaRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
@@ -171,6 +179,14 @@ declare class KinesisAnalyticsV2 extends Service {
    * Lists information about the current application snapshots.
    */
   listApplicationSnapshots(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse, AWSError>;
+  /**
+   * Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  listApplicationVersions(params: KinesisAnalyticsV2.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationVersionsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationVersionsResponse, AWSError>;
+  /**
+   * Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  listApplicationVersions(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationVersionsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationVersionsResponse, AWSError>;
   /**
    * Returns a list of Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
@@ -236,11 +252,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.
+   * Updates the maintenance configuration of the Kinesis Data Analytics application.  You can invoke this operation on an application that is in one of the two following states: READY or RUNNING. If you invoke it when the application is in a state other than these two states, it throws a ResourceInUseException. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead. To see the current maintenance configuration of your application, invoke the DescribeApplication operation. For information about application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
    */
   updateApplicationMaintenanceConfiguration(params: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
   /**
-   * Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.
+   * Updates the maintenance configuration of the Kinesis Data Analytics application.  You can invoke this operation on an application that is in one of the two following states: READY or RUNNING. If you invoke it when the application is in a state other than these two states, it throws a ResourceInUseException. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead. To see the current maintenance configuration of your application, invoke the DescribeApplication operation. For information about application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
    */
   updateApplicationMaintenanceConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
 }
@@ -588,7 +604,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
     /**
-     * Describes the time window for automatic application maintenance.
+     * The details of the maintenance configuration for the application.
      */
     ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
     /**
@@ -603,20 +619,24 @@ declare namespace KinesisAnalyticsV2 {
      * A value you use to implement strong concurrency for application updates.
      */
     ConditionalToken?: ConditionalToken;
+    /**
+     * The version to which you want to roll back the application.
+     */
+    ApplicationVersionRolledBackTo?: ApplicationVersionId;
   }
   export interface ApplicationMaintenanceConfigurationDescription {
     /**
-     * The start time for the automatic maintenance window.
+     * The start time for the maintenance window.
      */
     ApplicationMaintenanceWindowStartTime: ApplicationMaintenanceWindowStartTime;
     /**
-     * The end time for the automatic maintenance window.
+     * The end time for the maintenance window.
      */
     ApplicationMaintenanceWindowEndTime: ApplicationMaintenanceWindowEndTime;
   }
   export interface ApplicationMaintenanceConfigurationUpdate {
     /**
-     * The updated start time for the automatic maintenance window.
+     * The updated start time for the maintenance window.
      */
     ApplicationMaintenanceWindowStartTimeUpdate: ApplicationMaintenanceWindowStartTime;
   }
@@ -652,7 +672,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|"ROLLING_BACK"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|"ROLLING_BACK"|"ROLLED_BACK"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -677,6 +697,17 @@ declare namespace KinesisAnalyticsV2 {
     RuntimeEnvironment: RuntimeEnvironment;
   }
   export type ApplicationVersionId = number;
+  export type ApplicationVersionSummaries = ApplicationVersionSummary[];
+  export interface ApplicationVersionSummary {
+    /**
+     * The ID of the application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application.
+     */
+    ApplicationVersionId: ApplicationVersionId;
+    /**
+     * The status of the application.
+     */
+    ApplicationStatus: ApplicationStatus;
+  }
   export type AuthorizedUrl = string;
   export type BooleanObject = boolean;
   export type BucketARN = string;
@@ -1088,6 +1119,19 @@ declare namespace KinesisAnalyticsV2 {
      * An object containing information about the application snapshot.
      */
     SnapshotDetails: SnapshotDetails;
+  }
+  export interface DescribeApplicationVersionRequest {
+    /**
+     * The name of the application for which you want to get the version description.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The ID of the application version for which you want to get the description.
+     */
+    ApplicationVersionId: ApplicationVersionId;
+  }
+  export interface DescribeApplicationVersionResponse {
+    ApplicationVersionDetail?: ApplicationDetail;
   }
   export interface DestinationSchema {
     /**
@@ -1520,6 +1564,31 @@ declare namespace KinesisAnalyticsV2 {
     SnapshotSummaries?: SnapshotSummaries;
     /**
      * The token for the next set of results, or null if there are no additional results.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListApplicationVersionsInputLimit = number;
+  export interface ListApplicationVersionsRequest {
+    /**
+     * The name of the application for which you want to list all versions.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The maximum number of versions to list in this invocation of the operation.
+     */
+    Limit?: ListApplicationVersionsInputLimit;
+    /**
+     * If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListApplicationVersionsResponse {
+    /**
+     * A list of the application versions and the associated configuration summaries. The list includes application versions that were rolled back. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.
+     */
+    ApplicationVersionSummaries?: ApplicationVersionSummaries;
+    /**
+     * The pagination token for the next set of results, or null if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
      */
     NextToken?: NextToken;
   }
@@ -2151,7 +2220,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface UpdateApplicationMaintenanceConfigurationRequest {
     /**
-     * The name of the application for which you want to update the maintenance time window.
+     * The name of the application for which you want to update the maintenance configuration.
      */
     ApplicationName: ApplicationName;
     /**

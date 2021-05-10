@@ -1255,6 +1255,8 @@ declare namespace IoTWireless {
   export type Integer = number;
   export type IotCertificateId = string;
   export type JoinEui = string;
+  export type JoinEuiFilters = JoinEuiRange[];
+  export type JoinEuiRange = JoinEui[];
   export interface ListDestinationsRequest {
     /**
      * The maximum number of results to return in this operation.
@@ -1570,6 +1572,9 @@ declare namespace IoTWireless {
      * The frequency band (RFRegion) value.
      */
     RfRegion?: RfRegion;
+    JoinEuiFilters?: JoinEuiFilters;
+    NetIdFilters?: NetIdFilters;
+    SubBands?: SubBands;
   }
   export interface LoRaWANGatewayCurrentVersion {
     /**
@@ -1748,6 +1753,8 @@ declare namespace IoTWireless {
   export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
   export type MinGwDiversity = number;
   export type Model = string;
+  export type NetId = string;
+  export type NetIdFilters = NetId[];
   export type NextToken = string;
   export type NwkGeoLoc = boolean;
   export type NwkKey = string;
@@ -1962,6 +1969,8 @@ declare namespace IoTWireless {
   }
   export type SigningAlg = "Ed25519"|"P256r1"|string;
   export type Station = string;
+  export type SubBand = number;
+  export type SubBands = SubBand[];
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
@@ -2102,6 +2111,8 @@ declare namespace IoTWireless {
      * A new description of the resource.
      */
     Description?: Description;
+    JoinEuiFilters?: JoinEuiFilters;
+    NetIdFilters?: NetIdFilters;
   }
   export interface UpdateWirelessGatewayResponse {
   }

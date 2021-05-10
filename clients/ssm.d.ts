@@ -21,6 +21,14 @@ declare class SSM extends Service {
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
+   * Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  associateOpsItemRelatedItem(params: SSM.Types.AssociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  associateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
+  /**
    * Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.
    */
   cancelCommand(params: SSM.Types.CancelCommandRequest, callback?: (err: AWSError, data: SSM.Types.CancelCommandResult) => void): Request<SSM.Types.CancelCommandResult, AWSError>;
@@ -477,6 +485,14 @@ declare class SSM extends Service {
    */
   describeSessions(callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
   /**
+   * Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(params: SSM.Types.DisassociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
    * Get detailed information about a particular Automation execution.
    */
   getAutomationExecution(params: SSM.Types.GetAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
@@ -764,6 +780,14 @@ declare class SSM extends Service {
    * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
+  /**
+   * Lists all related-item resources associated with an OpsItem.
+   */
+  listOpsItemRelatedItems(params: SSM.Types.ListOpsItemRelatedItemsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
+  /**
+   * Lists all related-item resources associated with an OpsItem.
+   */
+  listOpsItemRelatedItems(callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
   /**
    * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
    */
@@ -1160,6 +1184,30 @@ declare namespace SSM {
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
+  export interface AssociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem to which you want to associate a resource as a related item.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The type of association that you want to create between an OpsItem and a resource. OpsCenter supports IsParentOf and RelatesTo association types.
+     */
+    AssociationType: OpsItemRelatedItemAssociationType;
+    /**
+     * The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:  AWS::SSMIncidents::IncidentRecord: an Incident Manager incident. Incident Manager is a capability of AWS Systems Manager.  AWS::SSM::Document: a Systems Manager (SSM) document.
+     */
+    ResourceType: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the OpsItem.
+     */
+    ResourceUri: OpsItemRelatedItemAssociationResourceUri;
+  }
+  export interface AssociateOpsItemRelatedItemResponse {
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+  }
   export interface Association {
     /**
      * The name of the Systems Manager document.
@@ -2516,6 +2564,10 @@ declare namespace SSM {
      */
     Name: DocumentName;
     /**
+     * An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. You can update this value at a later time using the UpdateDocument action.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
      * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */
     VersionName?: DocumentVersionName;
@@ -3149,7 +3201,7 @@ declare namespace SSM {
      */
     MaxResults?: MaxResults;
     /**
-     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.
+     * Indicates whether to list step executions in reverse order by start time. The default value is 'false'.
      */
     ReverseOrder?: Boolean;
   }
@@ -3892,6 +3944,18 @@ declare namespace SSM {
     NextToken?: NextToken;
   }
   export type DescriptionInDocument = string;
+  export interface DisassociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The ID of the association for which you want to delete an association between the OpsItem and a related resource.
+     */
+    AssociationId: OpsItemRelatedItemAssociationId;
+  }
+  export interface DisassociateOpsItemRelatedItemResponse {
+  }
   export type DocumentARN = string;
   export type DocumentAuthor = string;
   export type DocumentContent = string;
@@ -3926,6 +3990,10 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The version of the artifact associated with the document.
      */
@@ -4019,6 +4087,7 @@ declare namespace SSM {
      */
     ReviewStatus?: ReviewStatus;
   }
+  export type DocumentDisplayName = string;
   export interface DocumentFilter {
     /**
      * The name of the filter.
@@ -4040,6 +4109,14 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The date the Systems Manager document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The AWS user account that created the document.
      */
@@ -4200,13 +4277,17 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
      * The document name.
      */
     Name?: DocumentName;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The document version.
      */
@@ -4497,6 +4578,14 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The date the Systems Manager document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */
@@ -6089,6 +6178,34 @@ declare namespace SSM {
      */
     Summaries?: OpsItemEventSummaries;
   }
+  export interface ListOpsItemRelatedItemsRequest {
+    /**
+     * The ID of the OpsItem for which you want to list all related-item resources.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * One or more OpsItem filters. Use a filter to return a more specific list of results. 
+     */
+    Filters?: OpsItemRelatedItemsFilters;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: OpsItemRelatedItemsMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: String;
+  }
+  export interface ListOpsItemRelatedItemsResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * A list of related-item resources for the specified OpsItem.
+     */
+    Summaries?: OpsItemRelatedItemSummaries;
+  }
   export type ListOpsMetadataMaxResults = number;
   export interface ListOpsMetadataRequest {
     /**
@@ -6945,6 +7062,63 @@ declare namespace SSM {
   export type OpsItemOperationalData = {[key: string]: OpsItemDataValue};
   export type OpsItemOpsDataKeysList = String[];
   export type OpsItemPriority = number;
+  export type OpsItemRelatedItemAssociationId = string;
+  export type OpsItemRelatedItemAssociationResourceType = string;
+  export type OpsItemRelatedItemAssociationResourceUri = string;
+  export type OpsItemRelatedItemAssociationType = string;
+  export type OpsItemRelatedItemSummaries = OpsItemRelatedItemSummary[];
+  export interface OpsItemRelatedItemSummary {
+    /**
+     * The OpsItem ID.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+    /**
+     * The resource type.
+     */
+    ResourceType?: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The association type.
+     */
+    AssociationType?: OpsItemRelatedItemAssociationType;
+    /**
+     * The Amazon Resource Name (ARN) of the related-item resource.
+     */
+    ResourceUri?: OpsItemRelatedItemAssociationResourceUri;
+    CreatedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was created.
+     */
+    CreatedTime?: DateTime;
+    LastModifiedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was last updated.
+     */
+    LastModifiedTime?: DateTime;
+  }
+  export interface OpsItemRelatedItemsFilter {
+    /**
+     * The name of the filter key. Supported values include ResourceUri, ResourceType, or AssociationId.
+     */
+    Key: OpsItemRelatedItemsFilterKey;
+    /**
+     * The values for the filter.
+     */
+    Values: OpsItemRelatedItemsFilterValues;
+    /**
+     * The operator used by the filter call. The only supported operator is EQUAL.
+     */
+    Operator: OpsItemRelatedItemsFilterOperator;
+  }
+  export type OpsItemRelatedItemsFilterKey = "ResourceType"|"AssociationId"|"ResourceUri"|string;
+  export type OpsItemRelatedItemsFilterOperator = "Equal"|string;
+  export type OpsItemRelatedItemsFilterValue = string;
+  export type OpsItemRelatedItemsFilterValues = OpsItemRelatedItemsFilterValue[];
+  export type OpsItemRelatedItemsFilters = OpsItemRelatedItemsFilter[];
+  export type OpsItemRelatedItemsMaxResults = number;
   export type OpsItemSeverity = string;
   export type OpsItemSource = string;
   export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|"Pending"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"CompletedWithSuccess"|"CompletedWithFailure"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"PendingApproval"|"Approved"|"Rejected"|string;
@@ -8955,9 +9129,13 @@ declare namespace SSM {
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * The name of the document that you want to update.
+     * The name of the Systems Manager document that you want to update.
      */
     Name: DocumentName;
+    /**
+     * The friendly name of the Systems Manager document that you want to update. This value can differ for each version of the document. If you do not specify a value for this parameter in your request, the existing value is applied to the new document version.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */

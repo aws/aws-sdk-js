@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.903.0-->
+<!--LATEST=2.904.0-->
 <!--ENTRYINSERT-->
+
+## 2.904.0
+* feature: ConfigService: Adds paginator to multiple APIs: By default, the paginator allows user to iterate over the results and allows the CLI to return up to 1000 results.
+* feature: EKS: This release updates create-nodegroup and update-nodegroup-config APIs for adding/updating taints on managed nodegroups.
+* feature: IoTWireless: Add three new optional fields to support filtering and configurable sub-band in WirelessGateway APIs. The filtering is for all the RF region supported. The sub-band configuration is only applicable to LoRa gateways of US915 or AU915 RF region.
+* feature: KinesisAnalyticsV2: Amazon Kinesis Analytics now supports ListApplicationVersions and DescribeApplicationVersion API for Apache Flink applications
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for Kantar SNAP File Audio Watermarking with a Kantar Watermarking account, and Display Definition Segment(DDS) segment data controls for DVB-Sub caption outputs.
+* feature: SSM: This release adds new APIs to associate, disassociate and list related items in SSM OpsCenter; and this release adds DisplayName as a version-level attribute for SSM Documents and introduces two new document types: ProblemAnalysis, ProblemAnalysisTemplate.
 
 ## 2.903.0
 * bugfix: changelog: switch replaceAll with replace in change-creator

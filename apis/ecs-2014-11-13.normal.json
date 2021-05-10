@@ -2083,7 +2083,7 @@
       "members": {
         "name": {
           "shape": "String",
-          "documentation": "<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This parameter maps to <code>name</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--name</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. </p>"
+          "documentation": "<p>The name of a container. If you are linking multiple containers together in a task definition, the <code>name</code> of one container can be entered in the <code>links</code> of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to <code>name</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--name</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. </p>"
         },
         "image": {
           "shape": "String",
@@ -2107,7 +2107,7 @@
         },
         "links": {
           "shape": "StringList",
-          "documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is <code>bridge</code>. The <code>name:internalName</code> construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to <a href=\"https://docs.docker.com/network/links/\">Legacy container links</a> in the Docker documentation. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
+          "documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is <code>bridge</code>. The <code>name:internalName</code> construct is analogous to <code>name:alias</code> in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. For more information about linking Docker containers, go to <a href=\"https://docs.docker.com/network/links/\">Legacy container links</a> in the Docker documentation. This parameter maps to <code>Links</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note> <important> <p>Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.</p> </important>"
         },
         "portMappings": {
           "shape": "PortMappingList",
@@ -2497,7 +2497,7 @@
       "members": {
         "clusterName": {
           "shape": "String",
-          "documentation": "<p>The name of your cluster. If you do not specify a name for your cluster, you create a cluster named <code>default</code>. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. </p>"
+          "documentation": "<p>The name of your cluster. If you do not specify a name for your cluster, you create a cluster named <code>default</code>. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. </p>"
         },
         "tags": {
           "shape": "Tags",
@@ -2542,7 +2542,7 @@
         },
         "serviceName": {
           "shape": "String",
-          "documentation": "<p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.</p>"
+          "documentation": "<p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.</p>"
         },
         "taskDefinition": {
           "shape": "String",
@@ -3597,7 +3597,7 @@
         },
         "interactive": {
           "shape": "Boolean",
-          "documentation": "<p>Whether or not the execute command session is running in interactive mode.</p>"
+          "documentation": "<p>Whether or not the execute command session is running in interactive mode. Amazon ECS only supports initiating interactive sessions, so you must specify <code>true</code> for this value.</p>"
         },
         "session": {
           "shape": "Session",
@@ -4862,7 +4862,7 @@
       "members": {
         "family": {
           "shape": "String",
-          "documentation": "<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. The <code>family</code> is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed.</p>"
+          "documentation": "<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. The <code>family</code> is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>"
         },
         "taskRoleArn": {
           "shape": "String",
@@ -5185,7 +5185,7 @@
         },
         "serviceName": {
           "shape": "String",
-          "documentation": "<p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.</p>"
+          "documentation": "<p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.</p>"
         },
         "clusterArn": {
           "shape": "String",
@@ -6653,7 +6653,7 @@
       "members": {
         "name": {
           "shape": "String",
-          "documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
+          "documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
         },
         "host": {
           "shape": "HostVolumeProperties",

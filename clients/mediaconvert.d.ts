@@ -1568,6 +1568,18 @@ All burn-in and DVB-Sub font settings must match.
      */
     BackgroundOpacity?: __integerMin0Max255;
     /**
+     * Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn't write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.
+     */
+    DdsHandling?: DvbddsHandling;
+    /**
+     * Use this setting, along with DDS y-coordinate (ddsYCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the left side of the frame and the left side of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.
+     */
+    DdsXCoordinate?: __integerMin0Max2147483647;
+    /**
+     * Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.
+     */
+    DdsYCoordinate?: __integerMin0Max2147483647;
+    /**
      * Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
     FontColor?: DvbSubtitleFontColor;
@@ -1589,6 +1601,10 @@ All burn-in and DVB-Sub font settings must match.
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
+    /**
+     * Specify the height, in pixels, of this set of DVB-Sub captions. The default value is 576 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.
+     */
+    Height?: __integerMin1Max2147483647;
     /**
      * Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
@@ -1623,6 +1639,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     TeletextSpacing?: DvbSubtitleTeletextSpacing;
     /**
+     * Specify the width, in pixels, of this set of DVB-Sub captions. The default value is 720 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.
+     */
+    Width?: __integerMin1Max2147483647;
+    /**
      * Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
     XPosition?: __integerMin0Max2147483647;
@@ -1650,6 +1670,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     TdtInterval?: __integerMin1000Max30000;
   }
+  export type DvbddsHandling = "NONE"|"SPECIFIED"|"NO_DISPLAY_WINDOW"|string;
   export type Eac3AtmosBitstreamMode = "COMPLETE_MAIN"|string;
   export type Eac3AtmosCodingMode = "CODING_MODE_9_1_6"|string;
   export type Eac3AtmosDialogueIntelligence = "ENABLED"|"DISABLED"|string;
@@ -2807,6 +2828,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE"|string;
   export type InputPsiControl = "IGNORE_PSI"|"USE_PSI"|string;
   export type InputRotate = "DEGREE_0"|"DEGREES_90"|"DEGREES_180"|"DEGREES_270"|"AUTO"|string;
+  export type InputSampleRange = "FOLLOW"|"FULL_RANGE"|"LIMITED_RANGE"|string;
   export type InputScanType = "AUTO"|"PSF"|string;
   export interface InputTemplate {
     /**
@@ -3056,6 +3078,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Inputs?: __listOfInput;
     /**
+     * Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+     */
+    KantarWatermark?: KantarWatermarkSettings;
+    /**
      * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
      */
     MotionImageInserter?: MotionImageInserter;
@@ -3154,6 +3180,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Inputs?: __listOfInputTemplate;
     /**
+     * Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+     */
+    KantarWatermark?: KantarWatermarkSettings;
+    /**
      * Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
      */
     MotionImageInserter?: MotionImageInserter;
@@ -3177,6 +3207,60 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.
      */
     TimedMetadataInsertion?: TimedMetadataInsertion;
+  }
+  export interface KantarWatermarkSettings {
+    /**
+     * Provide an audio channel name from your Kantar audio license.
+     */
+    ChannelName?: __stringMin1Max20;
+    /**
+     * Specify a unique identifier for Kantar to use for this piece of content.
+     */
+    ContentReference?: __stringMin1Max50PatternAZAZ09;
+    /**
+     * Provide the name of the AWS Secrets Manager secret where your Kantar credentials are stored. Note that your MediaConvert service role must provide access to this secret. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html. For instructions on creating a secret, see https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html, in the AWS Secrets Manager User Guide.
+     */
+    CredentialsSecretName?: __stringMin1Max512PatternAZAZ09;
+    /**
+     * Optional. Specify an offset, in whole seconds, from the start of your output and the beginning of the watermarking. When you don't specify an offset, Kantar defaults to zero.
+     */
+    FileOffset?: __doubleMin0;
+    /**
+     * Provide your Kantar license ID number. You should get this number from Kantar.
+     */
+    KantarLicenseId?: __integerMin0Max2147483647;
+    /**
+     * Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar.
+     */
+    KantarServerUrl?: __stringPatternHttpsKantarmediaCom;
+    /**
+     * Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't save these logs. Note that your MediaConvert service role must provide access to this location. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
+     */
+    LogDestination?: __stringPatternS3;
+    /**
+     * You can optionally use this field to specify the first timestamp that Kantar embeds during watermarking. Kantar suggests that you be very cautious when using this Kantar feature, and that you use it only on channels that are managed specifically for use with this feature by your Audience Measurement Operator. For more information about this feature, contact Kantar technical support.
+     */
+    Metadata3?: __stringMin1Max50;
+    /**
+     * Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+     */
+    Metadata4?: __stringMin1Max50;
+    /**
+     * Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+     */
+    Metadata5?: __stringMin1Max50;
+    /**
+     * Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+     */
+    Metadata6?: __stringMin1Max50;
+    /**
+     * Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+     */
+    Metadata7?: __stringMin1Max50;
+    /**
+     * Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.
+     */
+    Metadata8?: __stringMin1Max50;
   }
   export type LanguageCode = "ENG"|"SPA"|"FRA"|"DEU"|"GER"|"ZHO"|"ARA"|"HIN"|"JPN"|"RUS"|"POR"|"ITA"|"URD"|"VIE"|"KOR"|"PAN"|"ABK"|"AAR"|"AFR"|"AKA"|"SQI"|"AMH"|"ARG"|"HYE"|"ASM"|"AVA"|"AVE"|"AYM"|"AZE"|"BAM"|"BAK"|"EUS"|"BEL"|"BEN"|"BIH"|"BIS"|"BOS"|"BRE"|"BUL"|"MYA"|"CAT"|"KHM"|"CHA"|"CHE"|"NYA"|"CHU"|"CHV"|"COR"|"COS"|"CRE"|"HRV"|"CES"|"DAN"|"DIV"|"NLD"|"DZO"|"ENM"|"EPO"|"EST"|"EWE"|"FAO"|"FIJ"|"FIN"|"FRM"|"FUL"|"GLA"|"GLG"|"LUG"|"KAT"|"ELL"|"GRN"|"GUJ"|"HAT"|"HAU"|"HEB"|"HER"|"HMO"|"HUN"|"ISL"|"IDO"|"IBO"|"IND"|"INA"|"ILE"|"IKU"|"IPK"|"GLE"|"JAV"|"KAL"|"KAN"|"KAU"|"KAS"|"KAZ"|"KIK"|"KIN"|"KIR"|"KOM"|"KON"|"KUA"|"KUR"|"LAO"|"LAT"|"LAV"|"LIM"|"LIN"|"LIT"|"LUB"|"LTZ"|"MKD"|"MLG"|"MSA"|"MAL"|"MLT"|"GLV"|"MRI"|"MAR"|"MAH"|"MON"|"NAU"|"NAV"|"NDE"|"NBL"|"NDO"|"NEP"|"SME"|"NOR"|"NOB"|"NNO"|"OCI"|"OJI"|"ORI"|"ORM"|"OSS"|"PLI"|"FAS"|"POL"|"PUS"|"QUE"|"QAA"|"RON"|"ROH"|"RUN"|"SMO"|"SAG"|"SAN"|"SRD"|"SRB"|"SNA"|"III"|"SND"|"SIN"|"SLK"|"SLV"|"SOM"|"SOT"|"SUN"|"SWA"|"SSW"|"SWE"|"TGL"|"TAH"|"TGK"|"TAM"|"TAT"|"TEL"|"THA"|"BOD"|"TIR"|"TON"|"TSO"|"TSN"|"TUR"|"TUK"|"TWI"|"UIG"|"UKR"|"UZB"|"VEN"|"VOL"|"WLN"|"CYM"|"FRY"|"WOL"|"XHO"|"YID"|"YOR"|"ZHA"|"ZUL"|"ORJ"|"QPC"|"TNG"|string;
   export interface ListJobTemplatesRequest {
@@ -3501,6 +3585,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
      */
     AudioPids?: __listOf__integerMin32Max8182;
+    /**
+     * Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.
+     */
+    MaxPcrInterval?: __integerMin0Max500;
     /**
      * If INSERT, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
      */
@@ -4115,7 +4203,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Preset?: __stringMin0;
     /**
-     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -4125,7 +4213,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     InputChannels?: __listOf__integerMinNegative60Max6;
     /**
-     * Use this setting to specify your remix values when they have a decimal component, such as  -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.
+     * Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.
      */
     InputChannelsFineTune?: __listOf__doubleMinNegative60Max6;
   }
@@ -4256,7 +4344,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     ContainerSettings?: ContainerSettings;
     /**
-     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.
+     * VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -4988,6 +5076,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn't pass through rotation metadata.
      */
     Rotate?: InputRotate;
+    /**
+     * Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.
+     */
+    SampleRange?: InputSampleRange;
   }
   export type VideoTimecodeInsertion = "DISABLED"|"PIC_TIMING_SEI"|string;
   export interface VorbisSettings {
@@ -5295,6 +5387,8 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringMin1Max20 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin1Max50 = string;
+  export type __stringMin1Max50PatternAZAZ09 = string;
+  export type __stringMin1Max512PatternAZAZ09 = string;
   export type __stringMin24Max512PatternAZaZ0902 = string;
   export type __stringMin32Max32Pattern09aFAF32 = string;
   export type __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string;
@@ -5314,6 +5408,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string;
   export type __stringPatternDD = string;
   export type __stringPatternHttps = string;
+  export type __stringPatternHttpsKantarmediaCom = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;
   export type __stringPatternS3ASSETMAPXml = string;

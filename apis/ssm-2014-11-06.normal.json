@@ -44,6 +44,37 @@
       ],
       "documentation": "<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters. </p> <p>For more information about using tags with EC2 instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
+    "AssociateOpsItemRelatedItem": {
+      "name": "AssociateOpsItemRelatedItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateOpsItemRelatedItemRequest"
+      },
+      "output": {
+        "shape": "AssociateOpsItemRelatedItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        },
+        {
+          "shape": "OpsItemLimitExceededException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        },
+        {
+          "shape": "OpsItemRelatedItemAlreadyExistsException"
+        }
+      ],
+      "documentation": "<p>Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.</p>"
+    },
     "CancelCommand": {
       "name": "CancelCommand",
       "http": {
@@ -1496,6 +1527,34 @@
       ],
       "documentation": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.</p>"
     },
+    "DisassociateOpsItemRelatedItem": {
+      "name": "DisassociateOpsItemRelatedItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateOpsItemRelatedItemRequest"
+      },
+      "output": {
+        "shape": "DisassociateOpsItemRelatedItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemRelatedItemAssociationNotFoundException"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.</p>"
+    },
     "GetAutomationExecution": {
       "name": "GetAutomationExecution",
       "http": {
@@ -2428,6 +2487,28 @@
         }
       ],
       "documentation": "<p>Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.</p>"
+    },
+    "ListOpsItemRelatedItems": {
+      "name": "ListOpsItemRelatedItems",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListOpsItemRelatedItemsRequest"
+      },
+      "output": {
+        "shape": "ListOpsItemRelatedItemsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Lists all related-item resources associated with an OpsItem.</p>"
     },
     "ListOpsMetadata": {
       "name": "ListOpsMetadata",
@@ -3739,6 +3820,42 @@
       "type": "integer",
       "max": 360,
       "min": 0
+    },
+    "AssociateOpsItemRelatedItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId",
+        "AssociationType",
+        "ResourceType",
+        "ResourceUri"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem to which you want to associate a resource as a related item.</p>"
+        },
+        "AssociationType": {
+          "shape": "OpsItemRelatedItemAssociationType",
+          "documentation": "<p>The type of association that you want to create between an OpsItem and a resource. OpsCenter supports <code>IsParentOf</code> and <code>RelatesTo</code> association types.</p>"
+        },
+        "ResourceType": {
+          "shape": "OpsItemRelatedItemAssociationResourceType",
+          "documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:</p> <p> <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident Manager is a capability of AWS Systems Manager.</p> <p> <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>"
+        },
+        "ResourceUri": {
+          "shape": "OpsItemRelatedItemAssociationResourceUri",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the OpsItem.</p>"
+        }
+      }
+    },
+    "AssociateOpsItemRelatedItemResponse": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The association ID.</p>"
+        }
+      }
     },
     "Association": {
       "type": "structure",
@@ -5886,6 +6003,10 @@
           "shape": "DocumentName",
           "documentation": "<p>A name for the Systems Manager document.</p> <important> <p>You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws-</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>"
         },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. You can update this value at a later time using the <a>UpdateDocument</a> action.</p>"
+        },
         "VersionName": {
           "shape": "DocumentVersionName",
           "documentation": "<p>An optional field specifying the version of the artifact you are creating with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
@@ -6776,7 +6897,7 @@
         },
         "ReverseOrder": {
           "shape": "Boolean",
-          "documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.</p>",
+          "documentation": "<p>Indicates whether to list step executions in reverse order by start time. The default value is 'false'.</p>",
           "box": true
         }
       }
@@ -7765,6 +7886,27 @@
     "DescriptionInDocument": {
       "type": "string"
     },
+    "DisassociateOpsItemRelatedItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId",
+        "AssociationId"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.</p>"
+        },
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem and a related resource.</p>"
+        }
+      }
+    },
+    "DisassociateOpsItemRelatedItemResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DocumentARN": {
       "type": "string",
       "pattern": "^[a-zA-Z0-9_\\-.:/]{3,128}$"
@@ -7812,6 +7954,10 @@
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -7908,6 +8054,11 @@
       },
       "documentation": "<p>Describes a Systems Manager document. </p>"
     },
+    "DocumentDisplayName": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "^[\\w\\.\\-\\:\\/ ]*$"
+    },
     "DocumentFilter": {
       "type": "structure",
       "required": [
@@ -7971,6 +8122,14 @@
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "CreatedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the Systems Manager document was created.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "Owner": {
           "shape": "DocumentOwner",
@@ -8294,7 +8453,9 @@
         "ApplicationConfigurationSchema",
         "DeploymentStrategy",
         "ChangeCalendar",
-        "Automation.ChangeTemplate"
+        "Automation.ChangeTemplate",
+        "ProblemAnalysis",
+        "ProblemAnalysisTemplate"
       ]
     },
     "DocumentVersion": {
@@ -8307,6 +8468,10 @@
         "Name": {
           "shape": "DocumentName",
           "documentation": "<p>The document name.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -8722,6 +8887,14 @@
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "CreatedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the Systems Manager document was created.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -11069,6 +11242,40 @@
         }
       }
     },
+    "ListOpsItemRelatedItemsRequest": {
+      "type": "structure",
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem for which you want to list all related-item resources.</p>"
+        },
+        "Filters": {
+          "shape": "OpsItemRelatedItemsFilters",
+          "documentation": "<p>One or more OpsItem filters. Use a filter to return a more specific list of results. </p>"
+        },
+        "MaxResults": {
+          "shape": "OpsItemRelatedItemsMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "ListOpsItemRelatedItemsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        },
+        "Summaries": {
+          "shape": "OpsItemRelatedItemSummaries",
+          "documentation": "<p>A list of related-item resources for the specified OpsItem.</p>"
+        }
+      }
+    },
     "ListOpsMetadataMaxResults": {
       "type": "integer",
       "max": 50,
@@ -12440,7 +12647,7 @@
     },
     "OpsItemDescription": {
       "type": "string",
-      "max": 1024,
+      "max": 2048,
       "min": 1,
       "pattern": "[\\s\\S]*\\S[\\s\\S]*"
     },
@@ -12540,7 +12747,7 @@
           "documentation": "<p>The date and time the OpsItem event was created.</p>"
         }
       },
-      "documentation": "<p>Summary information about an OpsItem event.</p>"
+      "documentation": "<p>Summary information about an OpsItem event or that associated an OpsItem with a related item.</p>"
     },
     "OpsItemFilter": {
       "type": "structure",
@@ -12673,6 +12880,121 @@
     "OpsItemPriority": {
       "type": "integer",
       "max": 5,
+      "min": 1
+    },
+    "OpsItemRelatedItemAssociationId": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationResourceType": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationResourceUri": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationType": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemSummary"
+      }
+    },
+    "OpsItemRelatedItemSummary": {
+      "type": "structure",
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The OpsItem ID.</p>"
+        },
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The association ID.</p>"
+        },
+        "ResourceType": {
+          "shape": "OpsItemRelatedItemAssociationResourceType",
+          "documentation": "<p>The resource type.</p>"
+        },
+        "AssociationType": {
+          "shape": "OpsItemRelatedItemAssociationType",
+          "documentation": "<p>The association type.</p>"
+        },
+        "ResourceUri": {
+          "shape": "OpsItemRelatedItemAssociationResourceUri",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the related-item resource.</p>"
+        },
+        "CreatedBy": {
+          "shape": "OpsItemIdentity"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time the related-item association was created.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "OpsItemIdentity"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time the related-item association was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Summary information about related-item resources for an OpsItem.</p>"
+    },
+    "OpsItemRelatedItemsFilter": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Values",
+        "Operator"
+      ],
+      "members": {
+        "Key": {
+          "shape": "OpsItemRelatedItemsFilterKey",
+          "documentation": "<p>The name of the filter key. Supported values include <code>ResourceUri</code>, <code>ResourceType</code>, or <code>AssociationId</code>.</p>"
+        },
+        "Values": {
+          "shape": "OpsItemRelatedItemsFilterValues",
+          "documentation": "<p>The values for the filter.</p>"
+        },
+        "Operator": {
+          "shape": "OpsItemRelatedItemsFilterOperator",
+          "documentation": "<p>The operator used by the filter call. The only supported operator is <code>EQUAL</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes a filter for a specific list of related-item resources. </p>"
+    },
+    "OpsItemRelatedItemsFilterKey": {
+      "type": "string",
+      "enum": [
+        "ResourceType",
+        "AssociationId",
+        "ResourceUri"
+      ]
+    },
+    "OpsItemRelatedItemsFilterOperator": {
+      "type": "string",
+      "enum": [
+        "Equal"
+      ]
+    },
+    "OpsItemRelatedItemsFilterValue": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemsFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemsFilterValue"
+      }
+    },
+    "OpsItemRelatedItemsFilters": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemsFilter"
+      }
+    },
+    "OpsItemRelatedItemsMaxResults": {
+      "type": "integer",
+      "max": 50,
       "min": 1
     },
     "OpsItemSeverity": {
@@ -16265,7 +16587,11 @@
         },
         "Name": {
           "shape": "DocumentName",
-          "documentation": "<p>The name of the document that you want to update.</p>"
+          "documentation": "<p>The name of the Systems Manager document that you want to update.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document that you want to update. This value can differ for each version of the document. If you do not specify a value for this parameter in your request, the existing value is applied to the new document version.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -16915,5 +17241,5 @@
       "pattern": "^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation": "<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>"
+  "documentation": "<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p class=\"title\"> <b>Related resources</b> </p> <ul> <li> <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p> </li> <li> <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p> </li> <li> <p>For information about AWS AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AWS AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AWS AppConfig API Reference</a>.</p> </li> <li> <p>For information about AWS Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">AWS Incident Manager User Guide</a> and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">AWS Incident Manager API Reference</a>.</p> </li> </ul>"
 }
