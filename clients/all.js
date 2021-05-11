@@ -265,5 +265,7 @@ module.exports = {
   LookoutEquipment: require('./lookoutequipment'),
   Nimble: require('./nimble'),
   Finspace: require('./finspace'),
-  Finspacedata: require('./finspacedata')
+  Finspacedata: require('./finspacedata'),
+  SSMContacts: require('./ssmcontacts'),
+  SSMIncidents: require('./ssmincidents')
 };

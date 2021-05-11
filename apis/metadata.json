@@ -1021,5 +1021,13 @@
   "finspacedata": {
     "prefix": "finspace-data",
     "name": "Finspacedata"
+  },
+  "ssmcontacts": {
+    "prefix": "ssm-contacts",
+    "name": "SSMContacts"
+  },
+  "ssmincidents": {
+    "prefix": "ssm-incidents",
+    "name": "SSMIncidents"
   }
 }

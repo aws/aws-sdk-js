@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.904.0-->
+<!--LATEST=2.905.0-->
 <!--ENTRYINSERT-->
+
+## 2.905.0
+* bugfix: retry: Retry http request on ECONNRESET error
+* feature: SSMContacts: AWS Systems Manager Incident Manager enables faster resolution of critical application availability and performance issues, management of contacts and post incident analysis
+* feature: SSMIncidents: AWS Systems Manager Incident Manager enables faster resolution of critical application availability and performance issues, management of contacts and post-incident analysis
 
 ## 2.904.0
 * feature: ConfigService: Adds paginator to multiple APIs: By default, the paginator allows user to iterate over the results and allows the CLI to return up to 1000 results.

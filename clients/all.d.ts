@@ -264,3 +264,5 @@ export import LookoutEquipment = require('./lookoutequipment');
 export import Nimble = require('./nimble');
 export import Finspace = require('./finspace');
 export import Finspacedata = require('./finspacedata');
+export import SSMContacts = require('./ssmcontacts');
+export import SSMIncidents = require('./ssmincidents');

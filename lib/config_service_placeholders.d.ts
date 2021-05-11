@@ -266,6 +266,8 @@ export abstract class ConfigurationServicePlaceholders {
   nimble?: AWS.Nimble.Types.ClientConfiguration;
   finspace?: AWS.Finspace.Types.ClientConfiguration;
   finspacedata?: AWS.Finspacedata.Types.ClientConfiguration;
+  ssmcontacts?: AWS.SSMContacts.Types.ClientConfiguration;
+  ssmincidents?: AWS.SSMIncidents.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -534,4 +536,6 @@ export interface ConfigurationServiceApiVersions {
   nimble?: AWS.Nimble.Types.apiVersion;
   finspace?: AWS.Finspace.Types.apiVersion;
   finspacedata?: AWS.Finspacedata.Types.apiVersion;
+  ssmcontacts?: AWS.SSMContacts.Types.apiVersion;
+  ssmincidents?: AWS.SSMIncidents.Types.apiVersion;
 }
