@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "retry",
+  "description": "Retry http request on ECONNRESET error"
+}
