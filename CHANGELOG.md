@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.905.0-->
+<!--LATEST=2.906.0-->
 <!--ENTRYINSERT-->
+
+## 2.906.0
+* feature: EC2: High Memory virtual instances are powered by Intel Sky Lake CPUs and offer up to 12TB of memory.
 
 ## 2.905.0
 * bugfix: retry: Retry http request on ECONNRESET error
