@@ -28,11 +28,11 @@ declare class TranscribeService extends Service {
    */
   createMedicalVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.CreateMedicalVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. 
+   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
    */
   createVocabulary(params: TranscribeService.Types.CreateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. 
+   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class TranscribeService extends Service {
    */
   startMedicalTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.StartMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartMedicalTranscriptionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job to transcribe speech to text. 
+   * Starts an asynchronous job to transcribe speech to text.
    */
   startTranscriptionJob(params: TranscribeService.Types.StartTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job to transcribe speech to text. 
+   * Starts an asynchronous job to transcribe speech to text.
    */
   startTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
   /**
@@ -356,7 +356,7 @@ declare namespace TranscribeService {
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the vocabulary entries.
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see what-is-transcribe.
      */
     LanguageCode: LanguageCode;
     /**
@@ -810,6 +810,7 @@ declare namespace TranscribeService {
   }
   export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|string;
   export type MediaSampleRateHertz = number;
+  export type MedicalContentIdentificationType = "PHI"|string;
   export interface MedicalTranscript {
     /**
      * The S3 object location of the medical transcript. Use this URI to access the medical transcript. This URI points to the S3 bucket you created to store the medical transcript.
@@ -863,6 +864,10 @@ declare namespace TranscribeService {
      */
     Settings?: MedicalTranscriptionSetting;
     /**
+     * Shows the type of content that you've configured Amazon Transcribe Medical to identify in a transcription job. If the value is PHI, you've configured the job to identify personal health information (PHI) in the transcription output.
+     */
+    ContentIdentificationType?: MedicalContentIdentificationType;
+    /**
      * The medical specialty of any clinicians providing a dictation or having a conversation. PRIMARYCARE is the only available setting for this object. This specialty enables you to generate transcriptions for the following medical fields:   Family Medicine  
      */
     Specialty?: Specialty;
@@ -909,6 +914,10 @@ declare namespace TranscribeService {
      * The medical specialty of the transcription job. Primary care is the only valid value.
      */
     Specialty?: Specialty;
+    /**
+     * Shows the type of information you've configured Amazon Transcribe Medical to identify in a transcription job. If the value is PHI, you've configured the transcription job to identify personal health information (PHI).
+     */
+    ContentIdentificationType?: MedicalContentIdentificationType;
     /**
      * The speech of the clinician in the input audio.
      */
@@ -1027,6 +1036,10 @@ declare namespace TranscribeService {
      */
     Settings?: MedicalTranscriptionSetting;
     /**
+     * You can configure Amazon Transcribe Medical to label content in the transcription output. If you specify PHI, Amazon Transcribe Medical labels the personal health information (PHI) that it identifies in the transcription output.
+     */
+    ContentIdentificationType?: MedicalContentIdentificationType;
+    /**
      * The medical specialty of any clinician speaking in the input media.
      */
     Specialty: Specialty;
@@ -1047,7 +1060,7 @@ declare namespace TranscribeService {
      */
     TranscriptionJobName: TranscriptionJobName;
     /**
-     * The language code for the language used in the input media file.
+     * The language code for the language used in the input media file. To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16000 Hz or higher.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -1306,7 +1319,7 @@ declare namespace TranscribeService {
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the vocabulary entries.
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see what-is-transcribe.
      */
     LanguageCode: LanguageCode;
     /**

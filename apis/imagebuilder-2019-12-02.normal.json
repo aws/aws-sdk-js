@@ -241,7 +241,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p> Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration.</p>"
+      "documentation": "<p> Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.</p>"
     },
     "CreateImagePipeline": {
       "name": "CreateImagePipeline",
@@ -1835,7 +1835,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p> Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.</p>"
+      "documentation": "<p> Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.</p> <note> <p>UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed.</p> </note>"
     },
     "UpdateInfrastructureConfiguration": {
       "name": "UpdateInfrastructureConfiguration",
@@ -2718,7 +2718,7 @@
         },
         "parentImage": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.</p>"
+          "documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.</p>"
         },
         "blockDeviceMappings": {
           "shape": "InstanceBlockDeviceMappings",

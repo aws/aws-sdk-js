@@ -7271,7 +7271,7 @@ declare namespace SecurityHub {
      */
     ResourceArn: ResourceArn;
     /**
-     * The tags to add to the resource.
+     * The tags to add to the resource. You can add up to 50 tags at a time. The tag keys can be no longer than 128 characters. The tag values can be no longer than 256 characters.
      */
     Tags: TagMap;
   }
@@ -7315,7 +7315,7 @@ declare namespace SecurityHub {
      */
     ResourceArn: ResourceArn;
     /**
-     * The tag keys associated with the tags to remove from the resource.
+     * The tag keys associated with the tags to remove from the resource. You can remove up to 50 tags at a time.
      */
     TagKeys: TagKeyList;
   }

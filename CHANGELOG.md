@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.906.0-->
+<!--LATEST=2.907.0-->
 <!--ENTRYINSERT-->
+
+## 2.907.0
+* feature: CloudWatchEvents: Update InputTransformer variable limit from 10 to 100 variables.
+* feature: ES: Adds support for cold storage.
+* feature: EventBridge: Update InputTransformer variable limit from 10 to 100 variables.
+* feature: Macie2: This release of the Amazon Macie API adds support for defining run-time, S3 bucket criteria for classification jobs. It also adds resources for querying data about AWS resources that Macie monitors.
+* feature: TranscribeService: Transcribe Medical now supports identification of PHI entities within transcripts
 
 ## 2.906.0
 * feature: EC2: High Memory virtual instances are powered by Intel Sky Lake CPUs and offer up to 12TB of memory.

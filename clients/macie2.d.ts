@@ -388,6 +388,14 @@ declare class Macie2 extends Service {
    */
   putFindingsPublicationConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.PutFindingsPublicationConfigurationResponse, AWSError>;
   /**
+   * Retrieves (queries) statistical data and other information about AWS resources that Amazon Macie monitors and analyzes.
+   */
+  searchResources(params: Macie2.Types.SearchResourcesRequest, callback?: (err: AWSError, data: Macie2.Types.SearchResourcesResponse) => void): Request<Macie2.Types.SearchResourcesResponse, AWSError>;
+  /**
+   * Retrieves (queries) statistical data and other information about AWS resources that Amazon Macie monitors and analyzes.
+   */
+  searchResources(callback?: (err: AWSError, data: Macie2.Types.SearchResourcesResponse) => void): Request<Macie2.Types.SearchResourcesResponse, AWSError>;
+  /**
    * Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
    */
   tagResource(params: Macie2.Types.TagResourceRequest, callback?: (err: AWSError, data: Macie2.Types.TagResourceResponse) => void): Request<Macie2.Types.TagResourceResponse, AWSError>;
@@ -806,7 +814,7 @@ declare namespace Macie2 {
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -1131,6 +1139,22 @@ declare namespace Macie2 {
   }
   export interface CreateSampleFindingsResponse {
   }
+  export interface CriteriaBlockForJob {
+    /**
+     * An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
+     */
+    and?: __listOfCriteriaForJob;
+  }
+  export interface CriteriaForJob {
+    /**
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding buckets from the job.
+     */
+    simpleCriterion?: SimpleCriterionForJob;
+    /**
+     * A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding buckets from the job.
+     */
+    tagCriterion?: TagCriterionForJob;
+  }
   export type Criterion = {[key: string]: CriterionAdditionalProperties};
   export interface CriterionAdditionalProperties {
     /**
@@ -1364,7 +1388,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * The S3 buckets that the job is configured to analyze, and the scope of that analysis.
+     * The S3 buckets that contain the objects to analyze, and the scope of that analysis.
      */
     s3JobDefinition?: S3JobDefinition;
     /**
@@ -1657,11 +1681,11 @@ declare namespace Macie2 {
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
-     * The total number of buckets whose bucket policies do and don't require server-side encryption of objects when objects are uploaded to the buckets.
+     * The total number of buckets whose bucket policies do or don't require server-side encryption of objects when objects are uploaded to the buckets.
      */
     bucketCountByObjectEncryptionRequirement?: BucketCountPolicyAllowsUnencryptedObjectUploads;
     /**
-     * The total number of buckets that are and aren't shared with another AWS account.
+     * The total number of buckets that are or aren't shared with another AWS account.
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
@@ -1685,7 +1709,7 @@ declare namespace Macie2 {
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -2099,19 +2123,19 @@ declare namespace Macie2 {
   export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string;
   export interface JobDetails {
     /**
-     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - One or more jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED. FALSE - No jobs are configured to analyze data in the bucket, or all the jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket. 
+     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket. 
      */
     isDefinedInJob?: IsDefinedInJob;
     /**
-     * Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - One or more recurring jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED. FALSE - No recurring jobs are configured to analyze data in the bucket, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
+     * Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
      */
     isMonitoredByJob?: IsMonitoredByJob;
     /**
-     * The unique identifier for the job that ran most recently (either the latest run of a recurring job or the only run of a one-time job) and is configured to analyze data in the bucket. This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
+     * The unique identifier for the job that ran most recently and is configured to analyze data in the bucket, either the latest run of a recurring job or the only run of a one-time job. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
      */
     lastJobId?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started. This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
+     * The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
      */
     lastJobRunTime?: __timestampIso8601;
   }
@@ -2131,24 +2155,24 @@ declare namespace Macie2 {
   }
   export interface JobScopeTerm {
     /**
-     * A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding objects from the job.
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     * A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding an object from the job.
+     * A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding objects from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
   export interface JobScopingBlock {
     /**
-     * An array of conditions, one for each condition that determines which objects to include or exclude from the job.
+     * An array of conditions, one for each condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
      */
     and?: __listOfJobScopeTerm;
   }
   export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string;
   export interface JobSummary {
     /**
-     * The S3 buckets that the job is configured to analyze.
+     * An array of objects, one for each AWS account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
     /**
@@ -2179,6 +2203,10 @@ declare namespace Macie2 {
      * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
      */
     userPausedDetails?: UserPausedDetails;
+    /**
+     * The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export type JobType = "ONE_TIME"|"SCHEDULED"|string;
   export interface KeyValuePair {
@@ -2408,6 +2436,58 @@ declare namespace Macie2 {
     tags?: TagMap;
   }
   export type MacieStatus = "PAUSED"|"ENABLED"|string;
+  export interface MatchingBucket {
+    /**
+     * The unique identifier for the AWS account that owns the bucket.
+     */
+    accountId?: __string;
+    /**
+     * The name of the bucket.
+     */
+    bucketName?: __string;
+    /**
+     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
+     */
+    classifiableObjectCount?: __long;
+    /**
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     */
+    classifiableSizeInBytes?: __long;
+    /**
+     * Specifies whether any one-time or recurring classification jobs are configured to analyze objects in the bucket, and, if so, the details of the job that ran most recently.
+     */
+    jobDetails?: JobDetails;
+    /**
+     * The total number of objects in the bucket.
+     */
+    objectCount?: __long;
+    /**
+     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
+     */
+    objectCountByEncryptionType?: ObjectCountByEncryptionType;
+    /**
+     * The total storage size, in bytes, of the bucket.If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
+     */
+    sizeInBytes?: __long;
+    /**
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     */
+    sizeInBytesCompressed?: __long;
+    /**
+     * The total number of objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
+     */
+    unclassifiableObjectCount?: ObjectLevelStatistics;
+    /**
+     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
+     */
+    unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
+  }
+  export interface MatchingResource {
+    /**
+     * The details of an S3 bucket that Amazon Macie monitors and analyzes.
+     */
+    matchingBucket?: MatchingBucket;
+  }
   export type MaxResults = number;
   export interface Member {
     /**
@@ -2455,15 +2535,15 @@ declare namespace Macie2 {
   }
   export interface ObjectCountByEncryptionType {
     /**
-     * The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).
+     * The total number of objects that are encrypted with a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).
      */
     customerManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
+     * The total number of objects that are encrypted with an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
      */
     kmsManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
+     * The total number of objects that are encrypted with an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
      */
     s3Managed?: __long;
     /**
@@ -2646,6 +2726,16 @@ declare namespace Macie2 {
      */
     tags?: KeyValuePairList;
   }
+  export interface S3BucketCriteriaForJob {
+    /**
+     * The property- and tag-based conditions that determine which buckets to exclude from the job.
+     */
+    excludes?: CriteriaBlockForJob;
+    /**
+     * The property- and tag-based conditions that determine which buckets to include in the job.
+     */
+    includes?: CriteriaBlockForJob;
+  }
   export interface S3BucketDefinitionForJob {
     /**
      * The unique identifier for the AWS account that owns the buckets.
@@ -2682,13 +2772,17 @@ declare namespace Macie2 {
   }
   export interface S3JobDefinition {
     /**
-     * An array of objects, one for each AWS account that owns buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for the account.
+     * An array of objects, one for each AWS account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
     /**
-     * The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
+     * The property- and tag-based conditions that determine which S3 objects to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which objects to analyze.
      */
     scoping?: Scoping;
+    /**
+     * The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export interface S3Object {
     /**
@@ -2750,6 +2844,107 @@ declare namespace Macie2 {
      * The property- or tag-based conditions that determine which objects to include in the analysis.
      */
     includes?: JobScopingBlock;
+  }
+  export interface SearchResourcesBucketCriteria {
+    /**
+     * The property- and tag-based conditions that determine which buckets to exclude from the results.
+     */
+    excludes?: SearchResourcesCriteriaBlock;
+    /**
+     * The property- and tag-based conditions that determine which buckets to include in the results.
+     */
+    includes?: SearchResourcesCriteriaBlock;
+  }
+  export type SearchResourcesComparator = "EQ"|"NE"|string;
+  export interface SearchResourcesCriteria {
+    /**
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding resources from the results.
+     */
+    simpleCriterion?: SearchResourcesSimpleCriterion;
+    /**
+     * A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding resources from the results.
+     */
+    tagCriterion?: SearchResourcesTagCriterion;
+  }
+  export interface SearchResourcesCriteriaBlock {
+    /**
+     * An array of objects, one for each property- or tag-based condition that includes or excludes resources from the query results. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
+     */
+    and?: __listOfSearchResourcesCriteria;
+  }
+  export interface SearchResourcesRequest {
+    /**
+     * The filter conditions that determine which S3 buckets to include or exclude from the query results.
+     */
+    bucketCriteria?: SearchResourcesBucketCriteria;
+    /**
+     * The maximum number of items to include in each page of the response. The default value is 50.
+     */
+    maxResults?: __integer;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+    /**
+     * The criteria to use to sort the results.
+     */
+    sortCriteria?: SearchResourcesSortCriteria;
+  }
+  export interface SearchResourcesResponse {
+    /**
+     * An array of objects, one for each resource that meets the filter criteria specified in the request.
+     */
+    matchingResources?: __listOfMatchingResource;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
+  export interface SearchResourcesSimpleCriterion {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: SearchResourcesComparator;
+    /**
+     * The property to use in the condition.
+     */
+    key?: SearchResourcesSimpleCriterionKey;
+    /**
+     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the resource. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of an S3 bucket. S3_BUCKET_NAME - A string that represents the name of an S3 bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of an S3 bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.
+     */
+    values?: __listOf__string;
+  }
+  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
+  export type SearchResourcesSortAttributeName = "ACCOUNT_ID"|"RESOURCE_NAME"|"S3_CLASSIFIABLE_OBJECT_COUNT"|"S3_CLASSIFIABLE_SIZE_IN_BYTES"|string;
+  export interface SearchResourcesSortCriteria {
+    /**
+     * The property to sort the results by.
+     */
+    attributeName?: SearchResourcesSortAttributeName;
+    /**
+     * The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.
+     */
+    orderBy?: OrderBy;
+  }
+  export interface SearchResourcesTagCriterion {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: SearchResourcesComparator;
+    /**
+     * The tag keys, tag values, or tag key and value pairs to use in the condition.
+     */
+    tagValues?: __listOfSearchResourcesTagCriterionPair;
+  }
+  export interface SearchResourcesTagCriterionPair {
+    /**
+     * The value for the tag key to use in the condition.
+     */
+    key?: __string;
+    /**
+     * The tag value to use in the condition.
+     */
+    value?: __string;
   }
   export interface SecurityHubConfiguration {
     /**
@@ -2855,6 +3050,21 @@ declare namespace Macie2 {
   }
   export type SeverityDescription = "Low"|"Medium"|"High"|string;
   export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string;
+  export interface SimpleCriterionForJob {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: JobComparator;
+    /**
+     * The property to use in the condition.
+     */
+    key?: SimpleCriterionKeyForJob;
+    /**
+     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the bucket. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of a bucket. S3_BUCKET_NAME - A string that represents the name of a bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of a bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.
+     */
+    values?: __listOf__string;
+  }
+  export type SimpleCriterionKeyForJob = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
   export interface SimpleScopeTerm {
     /**
      * The operator to use in the condition. Valid operators for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS TAG - EQ (equals) or NE (not equals)
@@ -2865,7 +3075,7 @@ declare namespace Macie2 {
      */
     key?: ScopeFilterKey;
     /**
-     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based condition for the job. Macie doesn't support use of wildcard characters in values. Also, string values are case sensitive.
+     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based condition for the job. Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.
      */
     values?: __listOf__string;
   }
@@ -2890,6 +3100,26 @@ declare namespace Macie2 {
     numberOfRuns?: __double;
   }
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|string;
+  export interface TagCriterionForJob {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: JobComparator;
+    /**
+     * The tag keys, tag values, or tag key and value pairs to use in the condition.
+     */
+    tagValues?: __listOfTagCriterionPairForJob;
+  }
+  export interface TagCriterionPairForJob {
+    /**
+     * The value for the tag key to use in the condition.
+     */
+    key?: __string;
+    /**
+     * The tag value to use in the condition.
+     */
+    value?: __string;
+  }
   export type TagMap = {[key: string]: __string};
   export interface TagResourceRequest {
     /**
@@ -3214,6 +3444,7 @@ declare namespace Macie2 {
   export type __listOfAdminAccount = AdminAccount[];
   export type __listOfBatchGetCustomDataIdentifierSummary = BatchGetCustomDataIdentifierSummary[];
   export type __listOfBucketMetadata = BucketMetadata[];
+  export type __listOfCriteriaForJob = CriteriaForJob[];
   export type __listOfCustomDataIdentifierSummary = CustomDataIdentifierSummary[];
   export type __listOfFinding = Finding[];
   export type __listOfFindingType = FindingType[];
@@ -3224,8 +3455,12 @@ declare namespace Macie2 {
   export type __listOfJobSummary = JobSummary[];
   export type __listOfKeyValuePair = KeyValuePair[];
   export type __listOfListJobsFilterTerm = ListJobsFilterTerm[];
+  export type __listOfMatchingResource = MatchingResource[];
   export type __listOfMember = Member[];
   export type __listOfS3BucketDefinitionForJob = S3BucketDefinitionForJob[];
+  export type __listOfSearchResourcesCriteria = SearchResourcesCriteria[];
+  export type __listOfSearchResourcesTagCriterionPair = SearchResourcesTagCriterionPair[];
+  export type __listOfTagCriterionPairForJob = TagCriterionPairForJob[];
   export type __listOfTagValuePair = TagValuePair[];
   export type __listOfUnprocessedAccount = UnprocessedAccount[];
   export type __listOfUsageByAccount = UsageByAccount[];

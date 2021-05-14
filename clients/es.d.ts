@@ -584,6 +584,12 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface ColdStorageOptions {
+    /**
+     * True to enable cold storage for an Elasticsearch domain.
+     */
+    Enabled: Boolean;
+  }
   export type CommitMessage = string;
   export type CompatibleElasticsearchVersionsList = CompatibleVersionsMap[];
   export interface CompatibleVersionsMap {
@@ -1171,6 +1177,10 @@ declare namespace ES {
      * The number of warm nodes in the cluster.
      */
     WarmCount?: IntegerClass;
+    /**
+     * Specifies the ColdStorageOptions configuration for an Elasticsearch domain.
+     */
+    ColdStorageOptions?: ColdStorageOptions;
   }
   export interface ElasticsearchClusterConfigStatus {
     /**

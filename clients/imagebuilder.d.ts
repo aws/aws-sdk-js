@@ -44,11 +44,11 @@ declare class Imagebuilder extends Service {
    */
   createDistributionConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.CreateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.CreateDistributionConfigurationResponse, AWSError>;
   /**
-   *  Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration.
+   *  Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.
    */
   createImage(params: Imagebuilder.Types.CreateImageRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateImageResponse) => void): Request<Imagebuilder.Types.CreateImageResponse, AWSError>;
   /**
-   *  Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration.
+   *  Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.
    */
   createImage(callback?: (err: AWSError, data: Imagebuilder.Types.CreateImageResponse) => void): Request<Imagebuilder.Types.CreateImageResponse, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class Imagebuilder extends Service {
    */
   updateDistributionConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.UpdateDistributionConfigurationResponse, AWSError>;
   /**
-   *  Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.
+   *  Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
    */
   updateImagePipeline(params: Imagebuilder.Types.UpdateImagePipelineRequest, callback?: (err: AWSError, data: Imagebuilder.Types.UpdateImagePipelineResponse) => void): Request<Imagebuilder.Types.UpdateImagePipelineResponse, AWSError>;
   /**
-   *  Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.
+   *  Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
    */
   updateImagePipeline(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateImagePipelineResponse) => void): Request<Imagebuilder.Types.UpdateImagePipelineResponse, AWSError>;
   /**
@@ -1033,7 +1033,7 @@ declare namespace Imagebuilder {
      */
     components: ComponentConfigurationList;
     /**
-     * The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.
+     * The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.
      */
     parentImage: NonEmptyString;
     /**
