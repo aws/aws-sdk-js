@@ -1173,7 +1173,7 @@ declare namespace ElastiCache {
      */
     PreferredAvailabilityZones?: PreferredAvailabilityZoneList;
     /**
-     * The initial number of cache nodes that the cluster has. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40. If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at http://aws.amazon.com/contact-us/elasticache-node-limit-request/.
+     * The initial number of cache nodes that the cluster has. For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 40. If you need more than 40 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at http://aws.amazon.com/contact-us/elasticache-node-limit-request/.
      */
     NumCacheNodes?: IntegerOptional;
     /**
@@ -1466,7 +1466,7 @@ declare namespace ElastiCache {
      */
     KmsKeyId?: String;
     /**
-     * The list of user groups to associate with the replication group.
+     * The user group to associate with the replication group.
      */
     UserGroupIds?: UserGroupIdListInput;
     /**
@@ -2694,11 +2694,11 @@ declare namespace ElastiCache {
      */
     AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType;
     /**
-     * A list of user group IDs.
+     * The user group you are associating with the replication group.
      */
     UserGroupIdsToAdd?: UserGroupIdList;
     /**
-     * A list of users groups to remove, meaning the users in the group no longer can access thereplication group.
+     * The user group to remove, meaning the users in the group no longer can access the replication group.
      */
     UserGroupIdsToRemove?: UserGroupIdList;
     /**

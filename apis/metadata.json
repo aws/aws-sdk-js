@@ -1030,5 +1030,8 @@
   "ssmincidents": {
     "prefix": "ssm-incidents",
     "name": "SSMIncidents"
+  },
+  "applicationcostprofiler": {
+    "name": "ApplicationCostProfiler"
   }
 }

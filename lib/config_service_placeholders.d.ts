@@ -268,6 +268,7 @@ export abstract class ConfigurationServicePlaceholders {
   finspacedata?: AWS.Finspacedata.Types.ClientConfiguration;
   ssmcontacts?: AWS.SSMContacts.Types.ClientConfiguration;
   ssmincidents?: AWS.SSMIncidents.Types.ClientConfiguration;
+  applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -538,4 +539,5 @@ export interface ConfigurationServiceApiVersions {
   finspacedata?: AWS.Finspacedata.Types.apiVersion;
   ssmcontacts?: AWS.SSMContacts.Types.apiVersion;
   ssmincidents?: AWS.SSMIncidents.Types.apiVersion;
+  applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.apiVersion;
 }

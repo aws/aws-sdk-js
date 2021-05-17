@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.907.0-->
+<!--LATEST=2.908.0-->
 <!--ENTRYINSERT-->
+
+## 2.908.0
+* feature: ApplicationCostProfiler: APIs for AWS Application Cost Profiler.
+* feature: CORS: Set the CORS support flag for Athena  to Athena client
+* feature: IotDeviceAdvisor: AWS IoT Core Device Advisor is fully managed test capability for IoT devices. Device manufacturers can use Device Advisor to test their IoT devices for reliable and secure connectivity with AWS IoT.
+* feature: MediaConnect: MediaConnect now supports JPEG XS for AWS Cloud Digital Interface (AWS CDI) uncompressed workflows, allowing you to establish a bridge between your on-premises live video network and the AWS Cloud.
+* feature: Neptune: Neptune support for CopyTagsToSnapshots
 
 ## 2.907.0
 * feature: CloudWatchEvents: Update InputTransformer variable limit from 10 to 100 variables.

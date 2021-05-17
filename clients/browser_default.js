@@ -67,6 +67,7 @@ module.exports = {
   WAF: require('./waf'),
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
+  Athena: require('./athena'),
   Pricing: require('./pricing'),
   CostExplorer: require('./costexplorer'),
   MediaStoreData: require('./mediastoredata'),
