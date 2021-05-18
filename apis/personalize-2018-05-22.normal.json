@@ -3212,6 +3212,11 @@
       "type": "integer",
       "min": -1000000
     },
+    "ItemAttribute": {
+      "type": "string",
+      "max": 150,
+      "min": 1
+    },
     "KmsKeyArn": {
       "type": "string"
     },
@@ -3606,6 +3611,29 @@
     "NumBatchResults": {
       "type": "integer"
     },
+    "ObjectiveSensitivity": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "OFF"
+      ]
+    },
+    "OptimizationObjective": {
+      "type": "structure",
+      "members": {
+        "itemAttribute": {
+          "shape": "ItemAttribute",
+          "documentation": "<p>The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).</p>"
+        },
+        "objectiveSensitivity": {
+          "shape": "ObjectiveSensitivity",
+          "documentation": "<p>Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.</p>"
+        }
+      },
+      "documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
+    },
     "ParameterName": {
       "type": "string",
       "max": 256
@@ -3828,6 +3856,10 @@
         "autoMLConfig": {
           "shape": "AutoMLConfig",
           "documentation": "<p>The <a>AutoMLConfig</a> object containing a list of recipes to search when AutoML is performed.</p>"
+        },
+        "optimizationObjective": {
+          "shape": "OptimizationObjective",
+          "documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
         }
       },
       "documentation": "<p>Describes the configuration properties for the solution.</p>"

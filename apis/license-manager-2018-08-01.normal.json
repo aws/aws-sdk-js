@@ -320,6 +320,46 @@
       ],
       "documentation": "<p>Creates a license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.</p>"
     },
+    "CreateLicenseManagerReportGenerator": {
+      "name": "CreateLicenseManagerReportGenerator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLicenseManagerReportGeneratorRequest"
+      },
+      "output": {
+        "shape": "CreateLicenseManagerReportGeneratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Creates a new report generator.</p>"
+    },
     "CreateLicenseVersion": {
       "name": "CreateLicenseVersion",
       "http": {
@@ -507,6 +547,46 @@
         }
       ],
       "documentation": "<p>Deletes the specified license configuration.</p> <p>You cannot delete a license configuration that is in use.</p>"
+    },
+    "DeleteLicenseManagerReportGenerator": {
+      "name": "DeleteLicenseManagerReportGenerator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteLicenseManagerReportGeneratorRequest"
+      },
+      "output": {
+        "shape": "DeleteLicenseManagerReportGeneratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Delete an existing report generator.</p> <p>This action deletes the report generator, which stops it from generating future reports and cannot be reversed. However, the previous reports from this generator will remain in your S3 bucket.</p>"
     },
     "DeleteToken": {
       "name": "DeleteToken",
@@ -715,6 +795,46 @@
       ],
       "documentation": "<p>Gets detailed information about the specified license configuration.</p>"
     },
+    "GetLicenseManagerReportGenerator": {
+      "name": "GetLicenseManagerReportGenerator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetLicenseManagerReportGeneratorRequest"
+      },
+      "output": {
+        "shape": "GetLicenseManagerReportGeneratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets information on the specified report generator.</p>"
+    },
     "GetLicenseUsage": {
       "name": "GetLicenseUsage",
       "http": {
@@ -912,6 +1032,46 @@
         }
       ],
       "documentation": "<p>Lists the license configurations for your account.</p>"
+    },
+    "ListLicenseManagerReportGenerators": {
+      "name": "ListLicenseManagerReportGenerators",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListLicenseManagerReportGeneratorsRequest"
+      },
+      "output": {
+        "shape": "ListLicenseManagerReportGeneratorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Lists the report generators for your account.</p>"
     },
     "ListLicenseSpecificationsForResource": {
       "name": "ListLicenseSpecificationsForResource",
@@ -1349,6 +1509,46 @@
       ],
       "documentation": "<p>Modifies the attributes of an existing license configuration.</p>"
     },
+    "UpdateLicenseManagerReportGenerator": {
+      "name": "UpdateLicenseManagerReportGenerator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLicenseManagerReportGeneratorRequest"
+      },
+      "output": {
+        "shape": "UpdateLicenseManagerReportGeneratorResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Updates a report generator.</p> <p>After you make changes to a report generator, it will start generating new reports within 60 minutes of being updated.</p>"
+    },
     "UpdateLicenseSpecificationsForResource": {
       "name": "UpdateLicenseSpecificationsForResource",
       "http": {
@@ -1471,7 +1671,7 @@
     "Arn": {
       "type": "string",
       "max": 2048,
-      "pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+      "pattern": "^arn:aws(-(cn|us-gov|iso-b|iso-c|iso-d))?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
     },
     "ArnList": {
       "type": "list",
@@ -1690,6 +1890,11 @@
         "PROVISIONAL"
       ]
     },
+    "ClientRequestToken": {
+      "type": "string",
+      "max": 36,
+      "min": 1
+    },
     "ClientToken": {
       "type": "string",
       "max": 64,
@@ -1888,6 +2093,55 @@
         "LicenseConfigurationArn": {
           "shape": "String",
           "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
+        }
+      }
+    },
+    "CreateLicenseManagerReportGeneratorRequest": {
+      "type": "structure",
+      "required": [
+        "ReportGeneratorName",
+        "Type",
+        "ReportContext",
+        "ReportFrequency",
+        "ClientToken"
+      ],
+      "members": {
+        "ReportGeneratorName": {
+          "shape": "ReportGeneratorName",
+          "documentation": "<p>Name of the report generator.</p>"
+        },
+        "Type": {
+          "shape": "ReportTypeList",
+          "documentation": "<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>"
+        },
+        "ReportContext": {
+          "shape": "ReportContext",
+          "documentation": "<p>Defines the type of license configuration the report generator tracks.</p>"
+        },
+        "ReportFrequency": {
+          "shape": "ReportFrequency",
+          "documentation": "<p>Frequency by which reports are generated. Reports can be generated daily, monthly, or weekly.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>Description of the report generator.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags to add to the report generator.</p>"
+        }
+      }
+    },
+    "CreateLicenseManagerReportGeneratorResponse": {
+      "type": "structure",
+      "members": {
+        "LicenseManagerReportGeneratorArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the new report generator.</p>"
         }
       }
     },
@@ -2164,6 +2418,22 @@
       }
     },
     "DeleteLicenseConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteLicenseManagerReportGeneratorRequest": {
+      "type": "structure",
+      "required": [
+        "LicenseManagerReportGeneratorArn"
+      ],
+      "members": {
+        "LicenseManagerReportGeneratorArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Number (ARN) of the report generator that will be deleted.</p>"
+        }
+      }
+    },
+    "DeleteLicenseManagerReportGeneratorResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2586,6 +2856,27 @@
         }
       }
     },
+    "GetLicenseManagerReportGeneratorRequest": {
+      "type": "structure",
+      "required": [
+        "LicenseManagerReportGeneratorArn"
+      ],
+      "members": {
+        "LicenseManagerReportGeneratorArn": {
+          "shape": "String",
+          "documentation": "<p>mazon Resource Number (ARN) of the report generator to retrieve information on.</p>"
+        }
+      }
+    },
+    "GetLicenseManagerReportGeneratorResponse": {
+      "type": "structure",
+      "members": {
+        "ReportGenerator": {
+          "shape": "ReportGenerator",
+          "documentation": "<p>A report generator that creates periodic reports on your license configurations.</p>"
+        }
+      }
+    },
     "GetLicenseRequest": {
       "type": "structure",
       "required": [
@@ -2657,7 +2948,7 @@
         },
         "LicenseManagerResourceShareArn": {
           "shape": "String",
-          "documentation": "<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager master account will provide member accounts with access to this share.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager management account provides member accounts with access to this share.</p>"
         }
       }
     },
@@ -3260,7 +3551,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseARN</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>PrincipalARN</code> </p> </li> <li> <p> <code>ParentARN</code> </p> </li> </ul>"
+          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranteePrincipalARN</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "String",
@@ -3352,6 +3643,36 @@
         }
       }
     },
+    "ListLicenseManagerReportGeneratorsRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filters to scope the results. The following filters are supported: </p> <ul> <li> <p> <code>LicenseConfigurationArn</code> </p> </li> </ul>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Token for the next set of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxSize100",
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListLicenseManagerReportGeneratorsResponse": {
+      "type": "structure",
+      "members": {
+        "ReportGenerators": {
+          "shape": "ReportGeneratorList",
+          "documentation": "<p>A report generator that creates periodic reports on your license configurations.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Token for the next set of results.</p>"
+        }
+      }
+    },
     "ListLicenseSpecificationsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -3427,7 +3748,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>Beneficiary</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>KeyFingerprint</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>"
+          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>Beneficiary</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "String",
@@ -3461,7 +3782,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseARN</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>"
+          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>LicenseIssuerName</code> </p> </li> <li> <p> <code>LicenseArn</code> </p> </li> <li> <p> <code>GrantStatus</code> </p> </li> <li> <p> <code>GranterAccountId</code> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "String",
@@ -3495,7 +3816,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>KeyFingerprint</code> </p> </li> <li> <p> <code>Issuer</code> </p> </li> </ul>"
+          "documentation": "<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>Fingerprint</code> </p> </li> <li> <p> <code>IssuerName</code> </p> </li> <li> <p> <code>Beneficiary</code> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "String",
@@ -3580,7 +3901,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters to scope the results. The following filter is supported:</p> <ul> <li> <p> <code>licenseArns</code> </p> </li> </ul>"
+          "documentation": "<p>Filters to scope the results. The following filter is supported:</p> <ul> <li> <p> <code>LicenseArns</code> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "String",
@@ -3731,7 +4052,7 @@
         },
         "ProductInformationFilterList": {
           "shape": "ProductInformationFilterList",
-          "documentation": "<p>Product information filters.</p> <p>The following filters and logical operators are supported when the resource type is <code>SSM_MANAGED</code>:</p> <ul> <li> <p> <code>Application Name</code> - The name of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Publisher</code> - The publisher of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Version</code> - The version of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Name</code> - The name of the platform. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Type</code> - The platform type. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>License Included</code> - The type of license included. Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>. Possible values are: <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> </ul> <p>The following filters and logical operators are supported when the resource type is <code>RDS</code>:</p> <ul> <li> <p> <code>Engine Edition</code> - The edition of the database engine. Logical operator is <code>EQUALS</code>. Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p> </li> <li> <p> <code>License Pack</code> - The license pack. Logical operator is <code>EQUALS</code>. Possible values are: <code>data guard</code> | <code>diagnostic pack sqlt</code> | <code>tuning pack sqlt</code> | <code>ols</code> | <code>olap</code>.</p> </li> </ul>"
+          "documentation": "<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p> <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p> <p>The following filters and are supported when the resource type is <code>SSM_MANAGED</code>:</p> <ul> <li> <p> <code>Application Name</code> - The name of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Publisher</code> - The publisher of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Version</code> - The version of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Name</code> - The name of the platform. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Type</code> - The platform type. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Tag:key</code> - The key of a tag attached to an AWS resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>. The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key. </p> </li> <li> <p> <code>AccountId</code> - The 12-digit ID of an AWS account you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>License Included</code> - The type of license included. Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>. Possible values are: <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> </ul> <p>The following filters and logical operators are supported when the resource type is <code>RDS</code>:</p> <ul> <li> <p> <code>Engine Edition</code> - The edition of the database engine. Logical operator is <code>EQUALS</code>. Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p> </li> <li> <p> <code>License Pack</code> - The license pack. Logical operator is <code>EQUALS</code>. Possible values are: <code>data guard</code> | <code>diagnostic pack sqlt</code> | <code>tuning pack sqlt</code> | <code>ols</code> | <code>olap</code>.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes product information for a license configuration.</p>"
@@ -3846,6 +4167,123 @@
         "Monthly"
       ]
     },
+    "ReportContext": {
+      "type": "structure",
+      "required": [
+        "licenseConfigurationArns"
+      ],
+      "members": {
+        "licenseConfigurationArns": {
+          "shape": "ArnList",
+          "documentation": "<p>Amazon Resource Number (ARN) of the license configuration that this generator reports on.</p>"
+        }
+      },
+      "documentation": "<p>Details of the license configuration that this generator reports on.</p>"
+    },
+    "ReportFrequency": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "shape": "Integer",
+          "documentation": "<p>Number of times within the frequency period that a report will be generated. Currently only <code>1</code> is supported.</p>"
+        },
+        "period": {
+          "shape": "ReportFrequencyType",
+          "documentation": "<p>Time period between each report. The period can be daily, weekly, or monthly.</p>"
+        }
+      },
+      "documentation": "<p>Details on how frequently reports are generated.</p>"
+    },
+    "ReportFrequencyType": {
+      "type": "string",
+      "enum": [
+        "DAY",
+        "WEEK",
+        "MONTH"
+      ]
+    },
+    "ReportGenerator": {
+      "type": "structure",
+      "members": {
+        "ReportGeneratorName": {
+          "shape": "String",
+          "documentation": "<p>Name of the report generator.</p>"
+        },
+        "ReportType": {
+          "shape": "ReportTypeList",
+          "documentation": "<p>Type of reports that are generated.</p>"
+        },
+        "ReportContext": {
+          "shape": "ReportContext",
+          "documentation": "<p>License configuration type this generator reports on.</p>"
+        },
+        "ReportFrequency": {
+          "shape": "ReportFrequency",
+          "documentation": "<p>Details on how frequently reports are generated.</p>"
+        },
+        "LicenseManagerReportGeneratorArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Number (ARN) of the report generator.</p>"
+        },
+        "LastRunStatus": {
+          "shape": "String",
+          "documentation": "<p>Status of the last report generation attempt.</p>"
+        },
+        "LastRunFailureReason": {
+          "shape": "String",
+          "documentation": "<p>Failure message for the last report generation attempt.</p>"
+        },
+        "LastReportGenerationTime": {
+          "shape": "String",
+          "documentation": "<p>Time the last report was generated at.</p>"
+        },
+        "ReportCreatorAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID used to create the report generator.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>Description of the report generator.</p>"
+        },
+        "S3Location": {
+          "shape": "S3Location",
+          "documentation": "<p>Details of the S3 bucket that report generator reports are published to.</p>"
+        },
+        "CreateTime": {
+          "shape": "String",
+          "documentation": "<p>Time the report was created.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags associated with the report generator.</p>"
+        }
+      },
+      "documentation": "<p>Describe the details of a report generator.</p>"
+    },
+    "ReportGeneratorList": {
+      "type": "list",
+      "member": {
+        "shape": "ReportGenerator"
+      }
+    },
+    "ReportGeneratorName": {
+      "type": "string",
+      "max": 100,
+      "min": 1
+    },
+    "ReportType": {
+      "type": "string",
+      "enum": [
+        "LicenseConfigurationSummaryReport",
+        "LicenseConfigurationUsageReport"
+      ]
+    },
+    "ReportTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "ReportType"
+      }
+    },
     "ResourceInventory": {
       "type": "structure",
       "members": {
@@ -3891,6 +4329,20 @@
         "RDS",
         "SYSTEMS_MANAGER_MANAGED_INSTANCE"
       ]
+    },
+    "S3Location": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "String",
+          "documentation": "<p>Name of the S3 bucket reports are published to.</p>"
+        },
+        "keyPrefix": {
+          "shape": "String",
+          "documentation": "<p>Prefix of the S3 bucket reports are published to.</p>"
+        }
+      },
+      "documentation": "<p>Details of the S3 bucket that report generator reports are published to.</p>"
     },
     "SignedToken": {
       "type": "string",
@@ -4069,6 +4521,51 @@
       }
     },
     "UpdateLicenseConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateLicenseManagerReportGeneratorRequest": {
+      "type": "structure",
+      "required": [
+        "LicenseManagerReportGeneratorArn",
+        "ReportGeneratorName",
+        "Type",
+        "ReportContext",
+        "ReportFrequency",
+        "ClientToken"
+      ],
+      "members": {
+        "LicenseManagerReportGeneratorArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Number (ARN) of the report generator to update.</p>"
+        },
+        "ReportGeneratorName": {
+          "shape": "ReportGeneratorName",
+          "documentation": "<p>Name of the report generator.</p>"
+        },
+        "Type": {
+          "shape": "ReportTypeList",
+          "documentation": "<p>Type of reports to generate. The following report types an be generated:</p> <ul> <li> <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p> </li> <li> <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p> </li> </ul>"
+        },
+        "ReportContext": {
+          "shape": "ReportContext",
+          "documentation": "<p>?</p>"
+        },
+        "ReportFrequency": {
+          "shape": "ReportFrequency",
+          "documentation": "<p>Frequency by which reports are generated. The following options are avaiable:</p> <p>??? What are the APi value options?</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>Description of the report generator.</p>"
+        }
+      }
+    },
+    "UpdateLicenseManagerReportGeneratorResponse": {
       "type": "structure",
       "members": {}
     },

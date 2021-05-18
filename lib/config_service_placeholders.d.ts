@@ -269,6 +269,7 @@ export abstract class ConfigurationServicePlaceholders {
   ssmcontacts?: AWS.SSMContacts.Types.ClientConfiguration;
   ssmincidents?: AWS.SSMIncidents.Types.ClientConfiguration;
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.ClientConfiguration;
+  apprunner?: AWS.AppRunner.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -540,4 +541,5 @@ export interface ConfigurationServiceApiVersions {
   ssmcontacts?: AWS.SSMContacts.Types.apiVersion;
   ssmincidents?: AWS.SSMIncidents.Types.apiVersion;
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.apiVersion;
+  apprunner?: AWS.AppRunner.Types.apiVersion;
 }

@@ -267,3 +267,4 @@ export import Finspacedata = require('./finspacedata');
 export import SSMContacts = require('./ssmcontacts');
 export import SSMIncidents = require('./ssmincidents');
 export import ApplicationCostProfiler = require('./applicationcostprofiler');
+export import AppRunner = require('./apprunner');

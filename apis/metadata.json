@@ -1033,5 +1033,8 @@
   },
   "applicationcostprofiler": {
     "name": "ApplicationCostProfiler"
+  },
+  "apprunner": {
+    "name": "AppRunner"
   }
 }

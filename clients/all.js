@@ -268,5 +268,6 @@ module.exports = {
   Finspacedata: require('./finspacedata'),
   SSMContacts: require('./ssmcontacts'),
   SSMIncidents: require('./ssmincidents'),
-  ApplicationCostProfiler: require('./applicationcostprofiler')
+  ApplicationCostProfiler: require('./applicationcostprofiler'),
+  AppRunner: require('./apprunner')
 };

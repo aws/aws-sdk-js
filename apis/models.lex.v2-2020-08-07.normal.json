@@ -188,6 +188,41 @@
       ],
       "documentation": "<p>Creates a new version of the bot based on the <code>DRAFT</code> version. If the <code>DRAFT</code> version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version.</p> <p>When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.</p>"
     },
+    "CreateExport": {
+      "name": "CreateExport",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/exports/",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "CreateExportRequest"
+      },
+      "output": {
+        "shape": "CreateExportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot.</p> <p>You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale.</p> <p>For more information about exporting bots, and about the structure of the export archive, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html\"> Importing and exporting bots </a> </p>"
+    },
     "CreateIntent": {
       "name": "CreateIntent",
       "http": {
@@ -292,6 +327,38 @@
         }
       ],
       "documentation": "<p>Creates a custom slot type</p> <p> To create a custom slot type, specify a name for the slot type and a set of enumeration values, the values that a slot of this type can assume. </p>"
+    },
+    "CreateUploadUrl": {
+      "name": "CreateUploadUrl",
+      "http": {
+        "method": "POST",
+        "requestUri": "/createuploadurl/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CreateUploadUrlRequest"
+      },
+      "output": {
+        "shape": "CreateUploadUrlResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. </p>"
     },
     "DeleteBot": {
       "name": "DeleteBot",
@@ -432,6 +499,70 @@
         }
       ],
       "documentation": "<p>Deletes a specific version of a bot. To delete all version of a bot, use the <a>DeleteBot</a> operation.</p>"
+    },
+    "DeleteExport": {
+      "name": "DeleteExport",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/exports/{exportId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteExportRequest"
+      },
+      "output": {
+        "shape": "DeleteExportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Removes a previous export and the associated files stored in an S3 bucket.</p>"
+    },
+    "DeleteImport": {
+      "name": "DeleteImport",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/imports/{importId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteImportRequest"
+      },
+      "output": {
+        "shape": "DeleteImportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Removes a previous import and the associated file stored in an S3 bucket.</p>"
     },
     "DeleteIntent": {
       "name": "DeleteIntent",
@@ -656,6 +787,64 @@
         }
       ],
       "documentation": "<p>Provides metadata about a version of a bot.</p>"
+    },
+    "DescribeExport": {
+      "name": "DescribeExport",
+      "http": {
+        "method": "GET",
+        "requestUri": "/exports/{exportId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeExportRequest"
+      },
+      "output": {
+        "shape": "DescribeExportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets information about a specific export.</p>"
+    },
+    "DescribeImport": {
+      "name": "DescribeImport",
+      "http": {
+        "method": "GET",
+        "requestUri": "/imports/{importId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeImportRequest"
+      },
+      "output": {
+        "shape": "DescribeImportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets information about a specific import.</p>"
     },
     "DescribeIntent": {
       "name": "DescribeIntent",
@@ -927,6 +1116,58 @@
       ],
       "documentation": "<p>Gets a list of built-in slot types that meet the specified criteria.</p>"
     },
+    "ListExports": {
+      "name": "ListExports",
+      "http": {
+        "method": "POST",
+        "requestUri": "/exports/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListExportsRequest"
+      },
+      "output": {
+        "shape": "ListExportsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.</p>"
+    },
+    "ListImports": {
+      "name": "ListImports",
+      "http": {
+        "method": "POST",
+        "requestUri": "/imports/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListImportsRequest"
+      },
+      "output": {
+        "shape": "ListImportsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.</p>"
+    },
     "ListIntents": {
       "name": "ListIntents",
       "http": {
@@ -1042,6 +1283,41 @@
         }
       ],
       "documentation": "<p>Gets a list of tags associated with a resource. Only bots, bot aliases, and bot channels can have tags associated with them.</p>"
+    },
+    "StartImport": {
+      "name": "StartImport",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/imports/",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "StartImportRequest"
+      },
+      "output": {
+        "shape": "StartImportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1205,6 +1481,41 @@
         }
       ],
       "documentation": "<p>Updates the settings that a bot has for a specific locale.</p>"
+    },
+    "UpdateExport": {
+      "name": "UpdateExport",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/exports/{exportId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateExportRequest"
+      },
+      "output": {
+        "shape": "UpdateExportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates the password used to encrypt an export zip archive.</p>"
     },
     "UpdateIntent": {
       "name": "UpdateIntent",
@@ -1475,6 +1786,24 @@
         "shape": "BotAliasSummary"
       }
     },
+    "BotExportSpecification": {
+      "type": "structure",
+      "required": [
+        "botId",
+        "botVersion"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the bot assigned by Amazon Lex.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot that was exported. This will be either <code>DRAFT</code> or the version number.</p>"
+        }
+      },
+      "documentation": "<p>Provided the identity of a the bot that was exported.</p>"
+    },
     "BotFilter": {
       "type": "structure",
       "required": [
@@ -1518,6 +1847,63 @@
       },
       "max": 1,
       "min": 1
+    },
+    "BotImportSpecification": {
+      "type": "structure",
+      "required": [
+        "botName",
+        "roleArn",
+        "dataPrivacy"
+      ],
+      "members": {
+        "botName": {
+          "shape": "Name",
+          "documentation": "<p>The name that Amazon Lex should use for the bot.</p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to build and run the bot.</p>"
+        },
+        "dataPrivacy": {
+          "shape": "DataPrivacy"
+        },
+        "idleSessionTTLInSeconds": {
+          "shape": "SessionTTL",
+          "documentation": "<p>The time, in seconds, that Amazon Lex should keep information about a user's conversation with the bot. </p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.</p>"
+        },
+        "botTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A list of tags to add to the bot. You can only add tags when you import a bot. You can't use the <code>UpdateBot</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.</p>"
+        },
+        "testBotAliasTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A list of tags to add to the test alias for a bot. You can only add tags when you import a bot. You can't use the <code>UpdateAlias</code> operation to update tags. To update tags on the test alias, use the <code>TagResource</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>Provides the bot parameters required for importing a bot.</p>"
+    },
+    "BotLocaleExportSpecification": {
+      "type": "structure",
+      "required": [
+        "botId",
+        "botVersion",
+        "localeId"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the bot to create the locale for.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot to export.</p>"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale to export. The string must match one of the locales in the bot.</p>"
+        }
+      },
+      "documentation": "<p>Provides the bot locale parameters required for exporting a bot locale.</p>"
     },
     "BotLocaleFilter": {
       "type": "structure",
@@ -1590,6 +1976,36 @@
         "shape": "BotLocaleHistoryEvent"
       }
     },
+    "BotLocaleImportSpecification": {
+      "type": "structure",
+      "required": [
+        "botId",
+        "botVersion",
+        "localeId"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the bot to import the locale to.</p>"
+        },
+        "botVersion": {
+          "shape": "DraftBotVersion",
+          "documentation": "<p>The version of the bot to import the locale to. This can only be the <code>DRAFT</code> version of the bot.</p>"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>"
+        },
+        "nluIntentConfidenceThreshold": {
+          "shape": "ConfidenceThreshold",
+          "documentation": "<p>Determines the threshold where Amazon Lex will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot. </p> <p>For example, suppose a bot is configured with the confidence threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the <code>PostText</code> operation would be:</p> <ul> <li> <p> <code>AMAZON.FallbackIntent</code> </p> </li> <li> <p> <code>IntentA</code> </p> </li> <li> <p> <code>IntentB</code> </p> </li> <li> <p> <code>IntentC</code> </p> </li> </ul>"
+        },
+        "voiceSettings": {
+          "shape": "VoiceSettings"
+        }
+      },
+      "documentation": "<p>Provides the bot locale parameters required for importing a bot locale.</p>"
+    },
     "BotLocaleSortAttribute": {
       "type": "string",
       "enum": [
@@ -1623,7 +2039,8 @@
         "ReadyExpressTesting",
         "Failed",
         "Deleting",
-        "NotBuilt"
+        "NotBuilt",
+        "Importing"
       ]
     },
     "BotLocaleSummary": {
@@ -1694,7 +2111,8 @@
         "Inactive",
         "Deleting",
         "Failed",
-        "Versioning"
+        "Versioning",
+        "Importing"
       ]
     },
     "BotSummary": {
@@ -1844,7 +2262,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -2197,7 +2615,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>"
+          "documentation": "<p>The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>"
         },
         "description": {
           "shape": "Description",
@@ -2390,6 +2808,52 @@
         }
       }
     },
+    "CreateExportRequest": {
+      "type": "structure",
+      "required": [
+        "resourceSpecification",
+        "fileFormat"
+      ],
+      "members": {
+        "resourceSpecification": {
+          "shape": "ExportResourceSpecification",
+          "documentation": "<p>Specifies the type of resource to export, either a bot or a bot locale. You can only specify one type of resource to export.</p>"
+        },
+        "fileFormat": {
+          "shape": "ImportExportFileFormat",
+          "documentation": "<p>The file format of the bot or bot locale definition files.</p>"
+        },
+        "filePassword": {
+          "shape": "ImportExportFilePassword",
+          "documentation": "<p>An password to use to encrypt the exported archive. Using a password is optional, but you should encrypt the archive to protect the data in transit between Amazon Lex and your local computer.</p>"
+        }
+      }
+    },
+    "CreateExportResponse": {
+      "type": "structure",
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>An identifier for a specific request to create an export.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ExportResourceSpecification",
+          "documentation": "<p>A description of the type of resource that was exported, either a bot or a bot locale.</p>"
+        },
+        "fileFormat": {
+          "shape": "ImportExportFileFormat",
+          "documentation": "<p>The file format used for the bot or bot locale definition files.</p>"
+        },
+        "exportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>The status of the export. When the status is <code>Completed</code>, you can use the operation to get the pre-signed S3 URL link to your exported bot or bot locale.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the request to export a bot was created.</p>"
+        }
+      }
+    },
     "CreateIntentRequest": {
       "type": "structure",
       "required": [
@@ -2457,7 +2921,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale.</p>",
+          "documentation": "<p>The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -2578,7 +3042,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -2683,7 +3147,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -2731,6 +3195,23 @@
         "creationDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp of the date and time that the slot type was created.</p>"
+        }
+      }
+    },
+    "CreateUploadUrlRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "CreateUploadUrlResponse": {
+      "type": "structure",
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>An identifier for a unique import job. Use it when you call the operation.</p>"
+        },
+        "uploadUrl": {
+          "shape": "PresignedS3Url",
+          "documentation": "<p>A pre-signed S3 write URL. Upload the zip archive file that contains the definition of your bot or bot locale.</p>"
         }
       }
     },
@@ -2831,7 +3312,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -2935,6 +3416,60 @@
         }
       }
     },
+    "DeleteExportRequest": {
+      "type": "structure",
+      "required": [
+        "exportId"
+      ],
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the export to delete.</p>",
+          "location": "uri",
+          "locationName": "exportId"
+        }
+      }
+    },
+    "DeleteExportResponse": {
+      "type": "structure",
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the deleted export.</p>"
+        },
+        "exportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>The current status of the deletion. When the deletion is complete, the export will no longer be returned by the operation and calls to the with the export identifier will fail.</p>"
+        }
+      }
+    },
+    "DeleteImportRequest": {
+      "type": "structure",
+      "required": [
+        "importId"
+      ],
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the import to delete.</p>",
+          "location": "uri",
+          "locationName": "importId"
+        }
+      }
+    },
+    "DeleteImportResponse": {
+      "type": "structure",
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the deleted import.</p>"
+        },
+        "importStatus": {
+          "shape": "ImportStatus",
+          "documentation": "<p>The current status of the deletion. When the deletion is complete, the import will no longer be returned by the operation and calls to the with the import identifier will fail.</p>"
+        }
+      }
+    },
     "DeleteIntentRequest": {
       "type": "structure",
       "required": [
@@ -2964,7 +3499,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -3000,7 +3535,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -3041,7 +3576,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -3148,7 +3683,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>. </p>",
+          "documentation": "<p>The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>. </p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -3340,6 +3875,112 @@
         }
       }
     },
+    "DescribeExportRequest": {
+      "type": "structure",
+      "required": [
+        "exportId"
+      ],
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the export to describe.</p>",
+          "location": "uri",
+          "locationName": "exportId"
+        }
+      }
+    },
+    "DescribeExportResponse": {
+      "type": "structure",
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the described export.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ExportResourceSpecification",
+          "documentation": "<p>The bot, bot ID, and optional locale ID of the exported bot or bot locale.</p>"
+        },
+        "fileFormat": {
+          "shape": "ImportExportFileFormat",
+          "documentation": "<p>The file format used in the files that describe the bot or bot locale.</p>"
+        },
+        "exportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>The status of the export. When the status is <code>Complete</code> the export archive file is available for download.</p>"
+        },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>If the <code>exportStatus</code> is failed, contains one or more reasons why the export could not be completed.</p>"
+        },
+        "downloadUrl": {
+          "shape": "PresignedS3Url",
+          "documentation": "<p>A pre-signed S3 URL that points to the bot or bot locale archive. The URL is only available for 5 minutes after calling the <code>DescribeExport</code> operation.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the export was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last date and time that the export was updated.</p>"
+        }
+      }
+    },
+    "DescribeImportRequest": {
+      "type": "structure",
+      "required": [
+        "importId"
+      ],
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the import to describe.</p>",
+          "location": "uri",
+          "locationName": "importId"
+        }
+      }
+    },
+    "DescribeImportResponse": {
+      "type": "structure",
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the described import.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ImportResourceSpecification",
+          "documentation": "<p>The specifications of the imported bot or bot locale.</p>"
+        },
+        "importedResourceId": {
+          "shape": "ImportedResourceId",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the resource created by the import.</p>"
+        },
+        "importedResourceName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the imported resource.</p>"
+        },
+        "mergeStrategy": {
+          "shape": "MergeStrategy",
+          "documentation": "<p>The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.</p>"
+        },
+        "importStatus": {
+          "shape": "ImportStatus",
+          "documentation": "<p>The status of the import process. When the status is <code>Completed</code> the resource is imported and ready for use.</p>"
+        },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>If the <code>importStatus</code> field is <code>Failed</code>, this provides one or more reasons for the failture.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the import was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the import was last updated.</p>"
+        }
+      }
+    },
     "DescribeIntentRequest": {
       "type": "structure",
       "required": [
@@ -3369,7 +4010,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -3482,7 +4123,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -3576,7 +4217,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -3655,6 +4296,133 @@
       "min": 5,
       "pattern": "^DRAFT$"
     },
+    "ExportFilter": {
+      "type": "structure",
+      "required": [
+        "name",
+        "values",
+        "operator"
+      ],
+      "members": {
+        "name": {
+          "shape": "ExportFilterName",
+          "documentation": "<p>The name of the field to use for filtering.</p>"
+        },
+        "values": {
+          "shape": "FilterValues",
+          "documentation": "<p>The values to use to fileter the response.</p>"
+        },
+        "operator": {
+          "shape": "ExportFilterOperator",
+          "documentation": "<p>The operator to use for the filter. Specify EQ when the <code>ListExports</code> operation should return only resource types that equal the specified value. Specify CO when the <code>ListExports</code> operation should return resource types that contain the specified value.</p>"
+        }
+      },
+      "documentation": "<p>Filtes the response form the operation</p>"
+    },
+    "ExportFilterName": {
+      "type": "string",
+      "enum": [
+        "ExportResourceType"
+      ]
+    },
+    "ExportFilterOperator": {
+      "type": "string",
+      "enum": [
+        "CO",
+        "EQ"
+      ]
+    },
+    "ExportFilters": {
+      "type": "list",
+      "member": {
+        "shape": "ExportFilter"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "ExportResourceSpecification": {
+      "type": "structure",
+      "members": {
+        "botExportSpecification": {
+          "shape": "BotExportSpecification",
+          "documentation": "<p>Parameters for exporting a bot.</p>"
+        },
+        "botLocaleExportSpecification": {
+          "shape": "BotLocaleExportSpecification",
+          "documentation": "<p>Parameters for exporting a bot locale.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the bot or bot locale that you want to export. You can specify the <code>botExportSpecification</code> or the <code>botLocaleExportSpecification</code>, but not both.</p>"
+    },
+    "ExportSortAttribute": {
+      "type": "string",
+      "enum": [
+        "LastUpdatedDateTime"
+      ]
+    },
+    "ExportSortBy": {
+      "type": "structure",
+      "required": [
+        "attribute",
+        "order"
+      ],
+      "members": {
+        "attribute": {
+          "shape": "ExportSortAttribute",
+          "documentation": "<p>The export field to use for sorting.</p>"
+        },
+        "order": {
+          "shape": "SortOrder",
+          "documentation": "<p>The order to sort the list.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about sorting a list of exports.</p>"
+    },
+    "ExportStatus": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Completed",
+        "Failed",
+        "Deleting"
+      ]
+    },
+    "ExportSummary": {
+      "type": "structure",
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the export.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ExportResourceSpecification",
+          "documentation": "<p>Information about the bot or bot locale that was exported.</p>"
+        },
+        "fileFormat": {
+          "shape": "ImportExportFileFormat",
+          "documentation": "<p>The file format used in the export files.</p>"
+        },
+        "exportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>The status of the export. When the status is <code>Completed</code> the export is ready to download.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the export was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the export was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Provides summary information about an export in an export list. </p>"
+    },
+    "ExportSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ExportSummary"
+      }
+    },
     "FailureReason": {
       "type": "string"
     },
@@ -3721,6 +4489,155 @@
         }
       },
       "documentation": "<p>A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. </p> <p>When you use a response card, the response from the user is constrained to the text associated with a button on the card.</p>"
+    },
+    "ImportExportFileFormat": {
+      "type": "string",
+      "enum": [
+        "LexJson"
+      ]
+    },
+    "ImportExportFilePassword": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "sensitive": true
+    },
+    "ImportFilter": {
+      "type": "structure",
+      "required": [
+        "name",
+        "values",
+        "operator"
+      ],
+      "members": {
+        "name": {
+          "shape": "ImportFilterName",
+          "documentation": "<p>The name of the field to use for filtering.</p>"
+        },
+        "values": {
+          "shape": "FilterValues",
+          "documentation": "<p>The values to use to filter the response.</p>"
+        },
+        "operator": {
+          "shape": "ImportFilterOperator",
+          "documentation": "<p>The operator to use for the filter. Specify EQ when the <code>ListImports</code> operation should return only resource types that equal the specified value. Specify CO when the <code>ListImports</code> operation should return resource types that contain the specified value.</p>"
+        }
+      },
+      "documentation": "<p>Filters the response from the operation.</p>"
+    },
+    "ImportFilterName": {
+      "type": "string",
+      "enum": [
+        "ImportResourceType"
+      ]
+    },
+    "ImportFilterOperator": {
+      "type": "string",
+      "enum": [
+        "CO",
+        "EQ"
+      ]
+    },
+    "ImportFilters": {
+      "type": "list",
+      "member": {
+        "shape": "ImportFilter"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "ImportResourceSpecification": {
+      "type": "structure",
+      "members": {
+        "botImportSpecification": {
+          "shape": "BotImportSpecification",
+          "documentation": "<p>Parameters for importing a bot.</p>"
+        },
+        "botLocaleImportSpecification": {
+          "shape": "BotLocaleImportSpecification",
+          "documentation": "<p>Parameters for importing a bot locale.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the bot or bot locale that you want to import. You can sepcifiy the <code>botImportSpecification</code> or the <code>botLocaleImportSpecification</code>, but not both.</p>"
+    },
+    "ImportSortAttribute": {
+      "type": "string",
+      "enum": [
+        "LastUpdatedDateTime"
+      ]
+    },
+    "ImportSortBy": {
+      "type": "structure",
+      "required": [
+        "attribute",
+        "order"
+      ],
+      "members": {
+        "attribute": {
+          "shape": "ImportSortAttribute",
+          "documentation": "<p>The export field to use for sorting.</p>"
+        },
+        "order": {
+          "shape": "SortOrder",
+          "documentation": "<p>The order to sort the list.</p>"
+        }
+      },
+      "documentation": "<p>Provides information for sorting a list of imports.</p>"
+    },
+    "ImportStatus": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Completed",
+        "Failed",
+        "Deleting"
+      ]
+    },
+    "ImportSummary": {
+      "type": "structure",
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the import.</p>"
+        },
+        "importedResourceId": {
+          "shape": "ImportedResourceId",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the imported resource.</p>"
+        },
+        "importedResourceName": {
+          "shape": "Name",
+          "documentation": "<p>The name that you gave the imported resource.</p>"
+        },
+        "importStatus": {
+          "shape": "ImportStatus",
+          "documentation": "<p>The status of the resource. When the status is <code>Completed</code> the resource is ready to build.</p>"
+        },
+        "mergeStrategy": {
+          "shape": "MergeStrategy",
+          "documentation": "<p>The strategy used to merge existing bot or bot locale definitions with the imported definition.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the import was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the import was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Provides summary information about an import in an import list.</p>"
+    },
+    "ImportSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ImportSummary"
+      }
+    },
+    "ImportedResourceId": {
+      "type": "string",
+      "max": 10,
+      "min": 5,
+      "pattern": "^([0-9a-zA-Z_])+$"
     },
     "InputContext": {
       "type": "structure",
@@ -4125,7 +5042,7 @@
       "members": {
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -4168,7 +5085,7 @@
       "members": {
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -4203,6 +5120,106 @@
         }
       }
     },
+    "ListExportsRequest": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the bot.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot to list exports for. </p>"
+        },
+        "sortBy": {
+          "shape": "ExportSortBy",
+          "documentation": "<p>Determines the field that the list of exports is sorted by. You can sort by the <code>LastUpdatedDateTime</code> field in ascending or descending order.</p>"
+        },
+        "filters": {
+          "shape": "ExportFilters",
+          "documentation": "<p>Provides the specification of a filter used to limit the exports in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of exports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the response from the <code>ListExports</code> operation contans more results that specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.</p>"
+        }
+      }
+    },
+    "ListExportsResponse": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier assigned to the bot by Amazon Lex.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot that was exported.</p>"
+        },
+        "exportSummaries": {
+          "shape": "ExportSummaryList",
+          "documentation": "<p>Summary information for the exports that meet the filter criteria specified in the request. The length of the list is specified in the <code>maxResults</code> parameter. If there are more exports available, the <code>nextToken</code> field contains a token to get the next page of results.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that indicates whether there are more results to return in a response to the <code>ListExports</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListExports</code> operation request to get the next page of results.</p>"
+        }
+      }
+    },
+    "ListImportsRequest": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier that Amazon Lex assigned to the bot.</p>"
+        },
+        "botVersion": {
+          "shape": "DraftBotVersion",
+          "documentation": "<p>The version of the bot to list imports for.</p>"
+        },
+        "sortBy": {
+          "shape": "ImportSortBy",
+          "documentation": "<p>Determines the field that the list of imports is sorted by. You can sort by the <code>LastUpdatedDateTime</code> field in ascending or descending order.</p>"
+        },
+        "filters": {
+          "shape": "ImportFilters",
+          "documentation": "<p>Provides the specification of a filter used to limit the bots in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of imports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the response from the <code>ListImports</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.</p>"
+        }
+      }
+    },
+    "ListImportsResponse": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier assigned by Amazon Lex to the bot.</p>"
+        },
+        "botVersion": {
+          "shape": "DraftBotVersion",
+          "documentation": "<p>The version of the bot that was imported. It will always be <code>DRAFT</code>.</p>"
+        },
+        "importSummaries": {
+          "shape": "ImportSummaryList",
+          "documentation": "<p>Summary information for the imports that meet the filter criteria specified in the request. The length of the list is specified in the <code>maxResults</code> parameter. If there are more imports available, the <code>nextToken</code> field contains a token to get the next page of results.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that indicates whether there are more results to return in a response to the <code>ListImports</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListImports</code> operation request to get the next page of results.</p>"
+        }
+      }
+    },
     "ListIntentsRequest": {
       "type": "structure",
       "required": [
@@ -4225,7 +5242,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -4294,7 +5311,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -4364,7 +5381,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -4459,6 +5476,13 @@
       "box": true,
       "max": 1000,
       "min": 1
+    },
+    "MergeStrategy": {
+      "type": "string",
+      "enum": [
+        "Overwrite",
+        "FailOnConflict"
+      ]
     },
     "Message": {
       "type": "structure",
@@ -4597,6 +5621,11 @@
     "PlainTextMessageValue": {
       "type": "string",
       "max": 1000,
+      "min": 1
+    },
+    "PresignedS3Url": {
+      "type": "string",
+      "max": 1024,
       "min": 1
     },
     "PriorityValue": {
@@ -5143,6 +6172,57 @@
         "Descending"
       ]
     },
+    "StartImportRequest": {
+      "type": "structure",
+      "required": [
+        "importId",
+        "resourceSpecification",
+        "mergeStrategy"
+      ],
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier for the import. It is included in the response from the operation.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ImportResourceSpecification",
+          "documentation": "<p>Parameters for creating the bot or bot locale.</p>"
+        },
+        "mergeStrategy": {
+          "shape": "MergeStrategy",
+          "documentation": "<p>The strategy to use when there is a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.</p>"
+        },
+        "filePassword": {
+          "shape": "ImportExportFilePassword",
+          "documentation": "<p>The password used to encrypt the zip archive that contains the bot or bot locale definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.</p>"
+        }
+      }
+    },
+    "StartImportResponse": {
+      "type": "structure",
+      "members": {
+        "importId": {
+          "shape": "Id",
+          "documentation": "<p>A unique identifier for the import.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ImportResourceSpecification",
+          "documentation": "<p>The parameters used when importing the bot or bot locale.</p>"
+        },
+        "mergeStrategy": {
+          "shape": "MergeStrategy",
+          "documentation": "<p>The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.</p>"
+        },
+        "importStatus": {
+          "shape": "ImportStatus",
+          "documentation": "<p>The current status of the import. When the status is <code>Complete</code> the bot or bot alias is ready to use.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the import request was created.</p>"
+        }
+      }
+    },
     "StillWaitingResponseFrequency": {
       "type": "integer",
       "max": 300,
@@ -5422,7 +6502,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -5568,6 +6648,53 @@
         }
       }
     },
+    "UpdateExportRequest": {
+      "type": "structure",
+      "required": [
+        "exportId"
+      ],
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier Amazon Lex assigned to the export.</p>",
+          "location": "uri",
+          "locationName": "exportId"
+        },
+        "filePassword": {
+          "shape": "ImportExportFilePassword",
+          "documentation": "<p>The new password to use to encrypt the export zip archive.</p>"
+        }
+      }
+    },
+    "UpdateExportResponse": {
+      "type": "structure",
+      "members": {
+        "exportId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier Amazon Lex assigned to the export.</p>"
+        },
+        "resourceSpecification": {
+          "shape": "ExportResourceSpecification",
+          "documentation": "<p>A description of the type of resource that was exported, either a bot or a bot locale.</p>"
+        },
+        "fileFormat": {
+          "shape": "ImportExportFileFormat",
+          "documentation": "<p>The file format used for the files that define the resource.</p>"
+        },
+        "exportStatus": {
+          "shape": "ExportStatus",
+          "documentation": "<p>The status of the export. When the status is <code>Completed</code> the export archive is available for download.</p>"
+        },
+        "creationDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the export was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the export was last updated.</p>"
+        }
+      }
+    },
     "UpdateIntentRequest": {
       "type": "structure",
       "required": [
@@ -5646,7 +6773,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }
@@ -5782,7 +6909,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         },
@@ -5898,7 +7025,7 @@
         },
         "localeId": {
           "shape": "LocaleId",
-          "documentation": "<p>The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+          "documentation": "<p>The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
         }

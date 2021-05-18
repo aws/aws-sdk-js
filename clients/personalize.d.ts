@@ -1783,6 +1783,7 @@ declare namespace Personalize {
   export type IntegerHyperParameterRanges = IntegerHyperParameterRange[];
   export type IntegerMaxValue = number;
   export type IntegerMinValue = number;
+  export type ItemAttribute = string;
   export type KmsKeyArn = string;
   export interface ListBatchInferenceJobsRequest {
     /**
@@ -2072,6 +2073,17 @@ declare namespace Personalize {
   export type Name = string;
   export type NextToken = string;
   export type NumBatchResults = number;
+  export type ObjectiveSensitivity = "LOW"|"MEDIUM"|"HIGH"|"OFF"|string;
+  export interface OptimizationObjective {
+    /**
+     * The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).
+     */
+    itemAttribute?: ItemAttribute;
+    /**
+     * Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.
+     */
+    objectiveSensitivity?: ObjectiveSensitivity;
+  }
   export type ParameterName = string;
   export type ParameterValue = string;
   export type PerformAutoML = boolean;
@@ -2228,6 +2240,10 @@ declare namespace Personalize {
      * The AutoMLConfig object containing a list of recipes to search when AutoML is performed.
      */
     autoMLConfig?: AutoMLConfig;
+    /**
+     * Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see Optimizing a solution.
+     */
+    optimizationObjective?: OptimizationObjective;
   }
   export interface SolutionSummary {
     /**
