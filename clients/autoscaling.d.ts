@@ -164,11 +164,11 @@ declare class AutoScaling extends Service {
    */
   describeAdjustmentTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAdjustmentTypesAnswer) => void): Request<AutoScaling.Types.DescribeAdjustmentTypesAnswer, AWSError>;
   /**
-   * Describes one or more Auto Scaling groups.
+   * Describes one or more Auto Scaling groups. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
    */
   describeAutoScalingGroups(params: AutoScaling.Types.AutoScalingGroupNamesType, callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingGroupsType) => void): Request<AutoScaling.Types.AutoScalingGroupsType, AWSError>;
   /**
-   * Describes one or more Auto Scaling groups.
+   * Describes one or more Auto Scaling groups. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
    */
   describeAutoScalingGroups(callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingGroupsType) => void): Request<AutoScaling.Types.AutoScalingGroupsType, AWSError>;
   /**
@@ -352,6 +352,14 @@ declare class AutoScaling extends Service {
    */
   exitStandby(callback?: (err: AWSError, data: AutoScaling.Types.ExitStandbyAnswer) => void): Request<AutoScaling.Types.ExitStandbyAnswer, AWSError>;
   /**
+   * Retrieves the forecast data for a predictive scaling policy. Load forecasts are predictions of the hourly load values using historical load data from CloudWatch and an analysis of historical trends. Capacity forecasts are represented as predicted values for the minimum capacity that is needed on an hourly basis, based on the hourly load forecast. A minimum of 24 hours of data is required to create the initial forecasts. However, having a full 14 days of historical data results in more accurate forecasts. For more information, see Predictive scaling for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getPredictiveScalingForecast(params: AutoScaling.Types.GetPredictiveScalingForecastType, callback?: (err: AWSError, data: AutoScaling.Types.GetPredictiveScalingForecastAnswer) => void): Request<AutoScaling.Types.GetPredictiveScalingForecastAnswer, AWSError>;
+  /**
+   * Retrieves the forecast data for a predictive scaling policy. Load forecasts are predictions of the hourly load values using historical load data from CloudWatch and an analysis of historical trends. Capacity forecasts are represented as predicted values for the minimum capacity that is needed on an hourly basis, based on the hourly load forecast. A minimum of 24 hours of data is required to create the initial forecasts. However, having a full 14 days of historical data results in more accurate forecasts. For more information, see Predictive scaling for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getPredictiveScalingForecast(callback?: (err: AWSError, data: AutoScaling.Types.GetPredictiveScalingForecastAnswer) => void): Request<AutoScaling.Types.GetPredictiveScalingForecastAnswer, AWSError>;
+  /**
    * Creates or updates a lifecycle hook for the specified Auto Scaling group. A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated). This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.    Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.    If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using the RecordLifecycleActionHeartbeat API call.   If you finish before the timeout period ends, complete the lifecycle action using the CompleteLifecycleAction API call.   For more information, see Amazon EC2 Auto Scaling lifecycle hooks in the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails. You can view the lifecycle hooks for an Auto Scaling group using the DescribeLifecycleHooks API call. If you are no longer using a lifecycle hook, you can delete it by calling the DeleteLifecycleHook API.
    */
   putLifecycleHook(params: AutoScaling.Types.PutLifecycleHookType, callback?: (err: AWSError, data: AutoScaling.Types.PutLifecycleHookAnswer) => void): Request<AutoScaling.Types.PutLifecycleHookAnswer, AWSError>;
@@ -368,27 +376,27 @@ declare class AutoScaling extends Service {
    */
   putNotificationConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a scaling policy for an Auto Scaling group. For more information about using scaling policies to scale your Auto Scaling group, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scaling policy for an Auto Scaling group. Scaling policies are used to scale an Auto Scaling group based on configurable metrics. If no policies are defined, the dynamic scaling and predictive scaling features are not used.  For more information about using dynamic scaling, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide. For more information about using predictive scaling, see Predictive scaling for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. You can view the scaling policies for an Auto Scaling group using the DescribePolicies API call. If you are no longer using a scaling policy, you can delete it by calling the DeletePolicy API.
    */
   putScalingPolicy(params: AutoScaling.Types.PutScalingPolicyType, callback?: (err: AWSError, data: AutoScaling.Types.PolicyARNType) => void): Request<AutoScaling.Types.PolicyARNType, AWSError>;
   /**
-   * Creates or updates a scaling policy for an Auto Scaling group. For more information about using scaling policies to scale your Auto Scaling group, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scaling policy for an Auto Scaling group. Scaling policies are used to scale an Auto Scaling group based on configurable metrics. If no policies are defined, the dynamic scaling and predictive scaling features are not used.  For more information about using dynamic scaling, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide. For more information about using predictive scaling, see Predictive scaling for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. You can view the scaling policies for an Auto Scaling group using the DescribePolicies API call. If you are no longer using a scaling policy, you can delete it by calling the DeletePolicy API.
    */
   putScalingPolicy(callback?: (err: AWSError, data: AutoScaling.Types.PolicyARNType) => void): Request<AutoScaling.Types.PolicyARNType, AWSError>;
   /**
-   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide. You can view the scheduled actions for an Auto Scaling group using the DescribeScheduledActions API call. If you are no longer using a scheduled action, you can delete it by calling the DeleteScheduledAction API.
    */
   putScheduledUpdateGroupAction(params: AutoScaling.Types.PutScheduledUpdateGroupActionType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide.
+   * Creates or updates a scheduled scaling action for an Auto Scaling group. For more information, see Scheduled scaling in the Amazon EC2 Auto Scaling User Guide. You can view the scheduled actions for an Auto Scaling group using the DescribeScheduledActions API call. If you are no longer using a scheduled action, you can delete it by calling the DeleteScheduledAction API.
    */
   putScheduledUpdateGroupAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances. You can view the instances in the warm pool using the DescribeWarmPool API call. If you are no longer using a warm pool, you can delete it by calling the DeleteWarmPool API.
+   * Creates or updates a warm pool for the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information and example configurations, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances. You can view the instances in the warm pool using the DescribeWarmPool API call. If you are no longer using a warm pool, you can delete it by calling the DeleteWarmPool API.
    */
   putWarmPool(params: AutoScaling.Types.PutWarmPoolType, callback?: (err: AWSError, data: AutoScaling.Types.PutWarmPoolAnswer) => void): Request<AutoScaling.Types.PutWarmPoolAnswer, AWSError>;
   /**
-   * Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances. You can view the instances in the warm pool using the DescribeWarmPool API call. If you are no longer using a warm pool, you can delete it by calling the DeleteWarmPool API.
+   * Creates or updates a warm pool for the specified Auto Scaling group. A warm pool is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity. For more information and example configurations, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. This operation must be called from the Region in which the Auto Scaling group was created. This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a launch template or launch configuration that requests Spot Instances. You can view the instances in the warm pool using the DescribeWarmPool API call. If you are no longer using a warm pool, you can delete it by calling the DeleteWarmPool API.
    */
   putWarmPool(callback?: (err: AWSError, data: AutoScaling.Types.PutWarmPoolAnswer) => void): Request<AutoScaling.Types.PutWarmPoolAnswer, AWSError>;
   /**
@@ -621,6 +629,10 @@ declare namespace AutoScaling {
      */
     DesiredCapacity: AutoScalingGroupDesiredCapacity;
     /**
+     * The predicted capacity of the group when it has a predictive scaling policy.
+     */
+    PredictedCapacity?: AutoScalingGroupPredictedCapacity;
+    /**
      * The duration of the default cooldown period, in seconds.
      */
     DefaultCooldown: Cooldown;
@@ -723,6 +735,7 @@ declare namespace AutoScaling {
      */
     MaxRecords?: MaxRecords;
   }
+  export type AutoScalingGroupPredictedCapacity = number;
   export type AutoScalingGroupState = string;
   export type AutoScalingGroups = AutoScalingGroup[];
   export interface AutoScalingGroupsType {
@@ -857,6 +870,16 @@ declare namespace AutoScaling {
      * The name of the Auto Scaling group.
      */
     AutoScalingGroupName: XmlStringMaxLen255;
+  }
+  export interface CapacityForecast {
+    /**
+     * The time stamps for the data points, in UTC format.
+     */
+    Timestamps: PredictiveScalingForecastTimestamps;
+    /**
+     * The values of the data points.
+     */
+    Values: PredictiveScalingForecastValues;
   }
   export type CapacityRebalanceEnabled = boolean;
   export type CheckpointDelay = number;
@@ -1153,7 +1176,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: XmlStringMaxLen255;
     /**
-     * Specifies that the warm pool is to be deleted along with all instances associated with the warm pool, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.
+     * Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated. This parameter also deletes any outstanding lifecycle actions associated with the warm pool instances.
      */
     ForceDelete?: ForceDelete;
   }
@@ -1343,7 +1366,7 @@ declare namespace AutoScaling {
      */
     PolicyNames?: PolicyNames;
     /**
-     * One or more policy types. The valid values are SimpleScaling, StepScaling, and TargetTrackingScaling.
+     * One or more policy types. The valid values are SimpleScaling, StepScaling, TargetTrackingScaling, and PredictiveScaling.
      */
     PolicyTypes?: PolicyTypes;
     /**
@@ -1644,6 +1667,38 @@ declare namespace AutoScaling {
   }
   export type Filters = Filter[];
   export type ForceDelete = boolean;
+  export interface GetPredictiveScalingForecastAnswer {
+    /**
+     * The load forecast.
+     */
+    LoadForecast: LoadForecasts;
+    /**
+     * The capacity forecast.
+     */
+    CapacityForecast: CapacityForecast;
+    /**
+     * The time the forecast was made.
+     */
+    UpdateTime: TimestampType;
+  }
+  export interface GetPredictiveScalingForecastType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * The name of the policy.
+     */
+    PolicyName: XmlStringMaxLen255;
+    /**
+     * The inclusive start time of the time range for the forecast data to get. At most, the date and time can be one year before the current date and time.
+     */
+    StartTime: TimestampType;
+    /**
+     * The exclusive end time of the time range for the forecast data to get. The maximum time duration between the start and end time is 30 days.  Although this parameter can accept a date and time that is more than two days in the future, the availability of forecast data has limits. Amazon EC2 Auto Scaling only issues forecasts for periods of two days in advance.
+     */
+    EndTime: TimestampType;
+  }
   export type GlobalTimeout = number;
   export type HealthCheckGracePeriod = number;
   export type HeartbeatTimeout = number;
@@ -1738,7 +1793,7 @@ declare namespace AutoScaling {
      */
     EndTime?: TimestampType;
     /**
-     * The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.
+     * The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.
      */
     PercentageComplete?: IntPercent;
     /**
@@ -1753,7 +1808,7 @@ declare namespace AutoScaling {
   export type InstanceRefreshIds = XmlStringMaxLen255[];
   export interface InstanceRefreshLivePoolProgress {
     /**
-     * The percentage of instances in the Auto Scaling group that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.
+     * The percentage of instances in the Auto Scaling group that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.
      */
     PercentageComplete?: IntPercent;
     /**
@@ -1763,18 +1818,18 @@ declare namespace AutoScaling {
   }
   export interface InstanceRefreshProgressDetails {
     /**
-     * Indicates the progress of an instance fresh on instances that are in the Auto Scaling group.
+     * Indicates the progress of an instance refresh on instances that are in the Auto Scaling group.
      */
     LivePoolProgress?: InstanceRefreshLivePoolProgress;
     /**
-     * Indicates the progress of an instance fresh on instances that are in the warm pool.
+     * Indicates the progress of an instance refresh on instances that are in the warm pool.
      */
     WarmPoolProgress?: InstanceRefreshWarmPoolProgress;
   }
   export type InstanceRefreshStatus = "Pending"|"InProgress"|"Successful"|"Failed"|"Cancelling"|"Cancelled"|string;
   export interface InstanceRefreshWarmPoolProgress {
     /**
-     * The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.
+     * The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.
      */
     PercentageComplete?: IntPercent;
     /**
@@ -2063,6 +2118,21 @@ declare namespace AutoScaling {
     State?: XmlStringMaxLen255;
   }
   export type LoadBalancerTargetGroupStates = LoadBalancerTargetGroupState[];
+  export interface LoadForecast {
+    /**
+     * The time stamps for the data points, in UTC format.
+     */
+    Timestamps: PredictiveScalingForecastTimestamps;
+    /**
+     * The values of the data points.
+     */
+    Values: PredictiveScalingForecastValues;
+    /**
+     * The metric specification for the load forecast.
+     */
+    MetricSpecification: PredictiveScalingMetricSpecification;
+  }
+  export type LoadForecasts = LoadForecast[];
   export type MaxGroupPreparedCapacity = number;
   export type MaxInstanceLifetime = number;
   export type MaxNumberOfAutoScalingGroups = number;
@@ -2162,6 +2232,8 @@ declare namespace AutoScaling {
   export type PolicyIncrement = number;
   export type PolicyNames = ResourceName[];
   export type PolicyTypes = XmlStringMaxLen64[];
+  export type PredefinedLoadMetricType = "ASGTotalCPUUtilization"|"ASGTotalNetworkIn"|"ASGTotalNetworkOut"|"ALBTargetGroupRequestCount"|string;
+  export type PredefinedMetricPairType = "ASGCPUUtilization"|"ASGNetworkIn"|"ASGNetworkOut"|"ALBRequestCount"|string;
   export interface PredefinedMetricSpecification {
     /**
      * The metric type. The following predefined metrics are available:    ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.    ASGAverageNetworkIn - Average number of bytes received on all network interfaces by the Auto Scaling group.    ASGAverageNetworkOut - Average number of bytes sent out on all network interfaces by the Auto Scaling group.    ALBRequestCountPerTarget - Number of requests completed per target in an Application Load Balancer target group.  
@@ -2172,6 +2244,84 @@ declare namespace AutoScaling {
      */
     ResourceLabel?: XmlStringMaxLen1023;
   }
+  export type PredefinedScalingMetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string;
+  export interface PredictiveScalingConfiguration {
+    /**
+     * This structure includes the metrics and target utilization to use for predictive scaling.  This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.
+     */
+    MetricSpecifications: PredictiveScalingMetricSpecifications;
+    /**
+     * The predictive scaling mode. Defaults to ForecastOnly if not specified.
+     */
+    Mode?: PredictiveScalingMode;
+    /**
+     * The amount of time, in seconds, by which the instance launch time can be advanced. For example, the forecast says to add capacity at 10:00 AM, and you choose to pre-launch instances by 5 minutes. In that case, the instances will be launched at 9:55 AM. The intention is to give resources time to be provisioned. It can take a few minutes to launch an EC2 instance. The actual amount of time required depends on several factors, such as the size of the instance and whether there are startup scripts to complete.  The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified. 
+     */
+    SchedulingBufferTime?: PredictiveScalingSchedulingBufferTime;
+    /**
+     * Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity of the Auto Scaling group. Defaults to HonorMaxCapacity if not specified. The following are possible values:    HonorMaxCapacity - Amazon EC2 Auto Scaling cannot scale out capacity higher than the maximum capacity. The maximum capacity is enforced as a hard limit.     IncreaseMaxCapacity - Amazon EC2 Auto Scaling can scale out capacity higher than the maximum capacity when the forecast capacity is close to or exceeds the maximum capacity. The upper limit is determined by the forecasted capacity and the value for MaxCapacityBuffer.  
+     */
+    MaxCapacityBreachBehavior?: PredictiveScalingMaxCapacityBreachBehavior;
+    /**
+     * The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but not exceed forecast capacity.  Required if the MaxCapacityBreachBehavior property is set to IncreaseMaxCapacity, and cannot be used otherwise.
+     */
+    MaxCapacityBuffer?: PredictiveScalingMaxCapacityBuffer;
+  }
+  export type PredictiveScalingForecastTimestamps = TimestampType[];
+  export type PredictiveScalingForecastValues = MetricScale[];
+  export type PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"|"IncreaseMaxCapacity"|string;
+  export type PredictiveScalingMaxCapacityBuffer = number;
+  export interface PredictiveScalingMetricSpecification {
+    /**
+     * Specifies the target utilization.
+     */
+    TargetValue: MetricScale;
+    /**
+     * The metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
+     */
+    PredefinedMetricPairSpecification?: PredictiveScalingPredefinedMetricPair;
+    /**
+     * The scaling metric specification.
+     */
+    PredefinedScalingMetricSpecification?: PredictiveScalingPredefinedScalingMetric;
+    /**
+     * The load metric specification.
+     */
+    PredefinedLoadMetricSpecification?: PredictiveScalingPredefinedLoadMetric;
+  }
+  export type PredictiveScalingMetricSpecifications = PredictiveScalingMetricSpecification[];
+  export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly"|string;
+  export interface PredictiveScalingPredefinedLoadMetric {
+    /**
+     * The metric type.
+     */
+    PredefinedMetricType: PredefinedLoadMetricType;
+    /**
+     * A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label unless the target group is attached to the Auto Scaling group. You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:  app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d. Where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.   To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers API operation. To find the ARN for the target group, use the DescribeTargetGroups API operation.
+     */
+    ResourceLabel?: XmlStringMaxLen1023;
+  }
+  export interface PredictiveScalingPredefinedMetricPair {
+    /**
+     * Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric. For example, if the metric type is ASGCPUUtilization, the Auto Scaling group's total CPU metric is used as the load metric, and the average CPU metric is used for the scaling metric.
+     */
+    PredefinedMetricType: PredefinedMetricPairType;
+    /**
+     * A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label unless the target group is attached to the Auto Scaling group. You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:  app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d. Where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.   To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers API operation. To find the ARN for the target group, use the DescribeTargetGroups API operation.
+     */
+    ResourceLabel?: XmlStringMaxLen1023;
+  }
+  export interface PredictiveScalingPredefinedScalingMetric {
+    /**
+     * The metric type.
+     */
+    PredefinedMetricType: PredefinedScalingMetricType;
+    /**
+     * A label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label unless the target group is attached to the Auto Scaling group. You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:  app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d. Where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.   To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers API operation. To find the ARN for the target group, use the DescribeTargetGroups API operation.
+     */
+    ResourceLabel?: XmlStringMaxLen1023;
+  }
+  export type PredictiveScalingSchedulingBufferTime = number;
   export type ProcessNames = XmlStringMaxLen255[];
   export interface ProcessType {
     /**
@@ -2249,7 +2399,7 @@ declare namespace AutoScaling {
      */
     PolicyName: XmlStringMaxLen255;
     /**
-     * One of the following policy types:     TargetTrackingScaling     StepScaling     SimpleScaling (default)  
+     * One of the following policy types:     TargetTrackingScaling     StepScaling     SimpleScaling (default)    PredictiveScaling   
      */
     PolicyType?: XmlStringMaxLen64;
     /**
@@ -2285,13 +2435,17 @@ declare namespace AutoScaling {
      */
     EstimatedInstanceWarmup?: EstimatedInstanceWarmup;
     /**
-     * A target tracking scaling policy. Includes support for predefined or customized metrics. The following predefined metrics are available:    ASGAverageCPUUtilization     ASGAverageNetworkIn     ASGAverageNetworkOut     ALBRequestCountPerTarget    If you specify ALBRequestCountPerTarget for the metric, you must specify the ResourceLabel parameter with the PredefinedMetricSpecification. For more information, see TargetTrackingConfiguration in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is TargetTrackingScaling.
+     * A target tracking scaling policy. Provides support for predefined or customized metrics. The following predefined metrics are available:    ASGAverageCPUUtilization     ASGAverageNetworkIn     ASGAverageNetworkOut     ALBRequestCountPerTarget    If you specify ALBRequestCountPerTarget for the metric, you must specify the ResourceLabel parameter with the PredefinedMetricSpecification. For more information, see TargetTrackingConfiguration in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is TargetTrackingScaling.
      */
     TargetTrackingConfiguration?: TargetTrackingConfiguration;
     /**
      * Indicates whether the scaling policy is enabled or disabled. The default is enabled. For more information, see Disabling a scaling policy for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
      */
     Enabled?: ScalingPolicyEnabled;
+    /**
+     * A predictive scaling policy. Provides support for only predefined metrics. Predictive scaling works with CPU utilization, network in/out, and the Application Load Balancer request count. For more information, see PredictiveScalingConfiguration in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is PredictiveScaling.
+     */
+    PredictiveScalingConfiguration?: PredictiveScalingConfiguration;
   }
   export interface PutScheduledUpdateGroupActionType {
     /**
@@ -2343,7 +2497,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: XmlStringMaxLen255;
     /**
-     * Specifies the total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group. This is an optional property. Specify it only if the warm pool size should not be determined by the difference between the group's maximum capacity and its desired capacity.   Amazon EC2 Auto Scaling will launch and maintain either the difference between the group's maximum capacity and its desired capacity, if a value for MaxGroupPreparedCapacity is not specified, or the difference between the MaxGroupPreparedCapacity and the desired capacity, if a value for MaxGroupPreparedCapacity is specified.  The size of the warm pool is dynamic. Only when MaxGroupPreparedCapacity and MinSize are set to the same value does the warm pool have an absolute size.  If the desired capacity of the Auto Scaling group is higher than the MaxGroupPreparedCapacity, the capacity of the warm pool is 0. To remove a value that you previously set, include the property but specify -1 for the value. 
+     * Specifies the maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group. This is an optional property. Specify it only if you do not want the warm pool size to be determined by the difference between the group's maximum capacity and its desired capacity.   If a value for MaxGroupPreparedCapacity is not specified, Amazon EC2 Auto Scaling launches and maintains the difference between the group's maximum capacity and its desired capacity. If you specify a value for MaxGroupPreparedCapacity, Amazon EC2 Auto Scaling uses the difference between the MaxGroupPreparedCapacity and the desired capacity instead.  The size of the warm pool is dynamic. Only when MaxGroupPreparedCapacity and MinSize are set to the same value does the warm pool have an absolute size.  If the desired capacity of the Auto Scaling group is higher than the MaxGroupPreparedCapacity, the capacity of the warm pool is 0, unless you specify a value for MinSize. To remove a value that you previously set, include the property but specify -1 for the value. 
      */
     MaxGroupPreparedCapacity?: MaxGroupPreparedCapacity;
     /**
@@ -2351,7 +2505,7 @@ declare namespace AutoScaling {
      */
     MinSize?: WarmPoolMinSize;
     /**
-     * Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped (default) or Running.
+     * Sets the instance state to transition to after the lifecycle actions are complete. Default is Stopped.
      */
     PoolState?: WarmPoolState;
   }
@@ -2412,7 +2566,7 @@ declare namespace AutoScaling {
      */
     PolicyARN?: ResourceName;
     /**
-     * One of the following policy types:     TargetTrackingScaling     StepScaling     SimpleScaling (default)   For more information, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide.
+     * One of the following policy types:     TargetTrackingScaling     StepScaling     SimpleScaling (default)    PredictiveScaling    For more information, see Target tracking scaling policies and Step and simple scaling policies in the Amazon EC2 Auto Scaling User Guide.
      */
     PolicyType?: XmlStringMaxLen64;
     /**
@@ -2459,6 +2613,10 @@ declare namespace AutoScaling {
      * Indicates whether the policy is enabled (true) or disabled (false).
      */
     Enabled?: ScalingPolicyEnabled;
+    /**
+     * A predictive scaling policy.
+     */
+    PredictiveScalingConfiguration?: PredictiveScalingConfiguration;
   }
   export type ScalingPolicyEnabled = boolean;
   export interface ScalingProcessQuery {
@@ -2825,7 +2983,7 @@ declare namespace AutoScaling {
   export type Values = XmlString[];
   export interface WarmPoolConfiguration {
     /**
-     * The total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
+     * The maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
      */
     MaxGroupPreparedCapacity?: MaxGroupPreparedCapacity;
     /**
@@ -2833,7 +2991,7 @@ declare namespace AutoScaling {
      */
     MinSize?: WarmPoolMinSize;
     /**
-     * The instance state to transition to after the lifecycle actions are complete: Stopped or Running.
+     * The instance state to transition to after the lifecycle actions are complete.
      */
     PoolState?: WarmPoolState;
     /**

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.909.0-->
+<!--LATEST=2.910.0-->
 <!--ENTRYINSERT-->
+
+## 2.910.0
+* feature: AutoScaling: With this release, customers can easily use Predictive Scaling as a policy directly through Amazon EC2 Auto Scaling configurations to proactively scale their applications ahead of predicted demand.
+* feature: EKS: Update the EKS AddonActive waiter.
+* feature: IAM: Add pagination to ListUserTags operation
+* feature: KinesisAnalyticsV2: Kinesis Data Analytics now allows rapid iteration on Apache Flink stream processing through the Kinesis Data Analytics Studio feature.
+* feature: Rekognition: Amazon Rekognition Custom Labels adds support for customer managed encryption, using AWS Key Management Service, of image files copied into the service and files written back to the customer.
 
 ## 2.909.0
 * feature: AppRunner: AWS App Runner is a service that provides a fast, simple, and cost-effective way to deploy from source code or a container image directly to a scalable and secure web application in the AWS Cloud.

@@ -4044,7 +4044,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns information about a specific static IP.</p>"
+      "documentation": "<p>Returns information about an Amazon Lightsail static IP.</p>"
     },
     "GetStaticIps": {
       "name": "GetStaticIps",

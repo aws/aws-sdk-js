@@ -908,11 +908,11 @@ declare class Lightsail extends Service {
    */
   getRelationalDatabases(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(params: Lightsail.Types.GetStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**

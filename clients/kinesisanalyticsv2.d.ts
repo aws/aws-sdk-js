@@ -267,7 +267,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the Kinesis Data Analytics application. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the Kinesis Data Analytics application. You must provide the CurrentApplicationVersionId or the ConditionalToken.You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     CurrentApplicationVersionId?: ApplicationVersionId;
     /**
@@ -275,7 +275,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CloudWatchLoggingOption: CloudWatchLoggingOption;
     /**
-     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     ConditionalToken?: ConditionalToken;
   }
@@ -299,7 +299,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the input processing configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the input processing configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -317,7 +317,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationARN?: ResourceARN;
     /**
-     * Provides the current application version.
+     * Provides the current application version. 
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
@@ -363,7 +363,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the output configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. 
+     * The version of the application to which you want to add the output configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. 
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -419,7 +419,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the VPC configuration. You must provide the ApplicationVersionID or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the VPC configuration. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     CurrentApplicationVersionId?: ApplicationVersionId;
     /**
@@ -427,7 +427,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     VpcConfiguration: VpcConfiguration;
     /**
-     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     ConditionalToken?: ConditionalToken;
   }
@@ -437,7 +437,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationARN?: ResourceARN;
     /**
-     * Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application. 
+     * Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application.
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
@@ -491,7 +491,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * The code location and type parameters for a Flink-based Kinesis Data Analytics application.
      */
-    ApplicationCodeConfiguration: ApplicationCodeConfiguration;
+    ApplicationCodeConfiguration?: ApplicationCodeConfiguration;
     /**
      * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
@@ -500,6 +500,10 @@ declare namespace KinesisAnalyticsV2 {
      * The array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurations?: VpcConfigurations;
+    /**
+     * The configuration parameters for a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfiguration?: ZeppelinApplicationConfiguration;
   }
   export interface ApplicationConfigurationDescription {
     /**
@@ -530,6 +534,10 @@ declare namespace KinesisAnalyticsV2 {
      * The array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurationDescriptions?: VpcConfigurationDescriptions;
+    /**
+     * The configuration parameters for a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfigurationDescription?: ZeppelinApplicationConfigurationDescription;
   }
   export interface ApplicationConfigurationUpdate {
     /**
@@ -537,7 +545,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SqlApplicationConfigurationUpdate?: SqlApplicationConfigurationUpdate;
     /**
-     * Describes updates to a Flink-based Kinesis Data Analytics application's code configuration.
+     * Describes updates to an application's code configuration.
      */
     ApplicationCodeConfigurationUpdate?: ApplicationCodeConfigurationUpdate;
     /**
@@ -556,6 +564,10 @@ declare namespace KinesisAnalyticsV2 {
      * Updates to the array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurationUpdates?: VpcConfigurationUpdates;
+    /**
+     * Updates to the configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfigurationUpdate?: ZeppelinApplicationConfigurationUpdate;
   }
   export type ApplicationDescription = string;
   export interface ApplicationDetail {
@@ -596,7 +608,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     LastUpdateTimestamp?: Timestamp;
     /**
-     * Provides details about the application's Java, SQL, or Scala code and starting parameters.
+     * Describes details about the application code and starting parameters for a Kinesis Data Analytics application.
      */
     ApplicationConfigurationDescription?: ApplicationConfigurationDescription;
     /**
@@ -623,6 +635,10 @@ declare namespace KinesisAnalyticsV2 {
      * The version to which you want to roll back the application.
      */
     ApplicationVersionRolledBackTo?: ApplicationVersionId;
+    /**
+     * To create a Kinesis Data Analytics Studio notebook, you must set the mode to INTERACTIVE. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.
+     */
+    ApplicationMode?: ApplicationMode;
   }
   export interface ApplicationMaintenanceConfigurationDescription {
     /**
@@ -642,6 +658,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export type ApplicationMaintenanceWindowEndTime = string;
   export type ApplicationMaintenanceWindowStartTime = string;
+  export type ApplicationMode = "STREAMING"|"INTERACTIVE"|string;
   export type ApplicationName = string;
   export interface ApplicationRestoreConfiguration {
     /**
@@ -668,7 +685,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ApplicationSnapshotConfigurationUpdate {
     /**
-     * Describes updates to whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
+     * Describes updates to whether snapshots are enabled for an application.
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
@@ -692,9 +709,13 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId: ApplicationVersionId;
     /**
-     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
+     * The runtime environment for the application.
      */
     RuntimeEnvironment: RuntimeEnvironment;
+    /**
+     * For a Kinesis Data Analytics for Apache Flink application, the mode is STREAMING. For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE.
+     */
+    ApplicationMode?: ApplicationMode;
   }
   export type ApplicationVersionId = number;
   export type ApplicationVersionSummaries = ApplicationVersionSummary[];
@@ -708,7 +729,9 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationStatus: ApplicationStatus;
   }
+  export type ArtifactType = "UDF"|"DEPENDENCY_JAR"|string;
   export type AuthorizedUrl = string;
+  export type BasePath = string;
   export type BooleanObject = boolean;
   export type BucketARN = string;
   export interface CSVMappingParameters {
@@ -720,6 +743,24 @@ declare namespace KinesisAnalyticsV2 {
      * The column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.
      */
     RecordColumnDelimiter: RecordColumnDelimiter;
+  }
+  export interface CatalogConfiguration {
+    /**
+     * The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfiguration: GlueDataCatalogConfiguration;
+  }
+  export interface CatalogConfigurationDescription {
+    /**
+     * The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfigurationDescription: GlueDataCatalogConfigurationDescription;
+  }
+  export interface CatalogConfigurationUpdate {
+    /**
+     * Updates to the configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfigurationUpdate: GlueDataCatalogConfigurationUpdate;
   }
   export interface CheckpointConfiguration {
     /**
@@ -819,7 +860,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ZipFileContent?: ZipFileContent;
     /**
-     * Information about the Amazon S3 bucket containing the application code.
+     * Information about the Amazon S3 bucket that contains the application code.
      */
     S3ContentLocation?: S3ContentLocation;
   }
@@ -909,6 +950,10 @@ declare namespace KinesisAnalyticsV2 {
      * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
      */
     Tags?: Tags;
+    /**
+     * Use the STREAMING mode to create a Kinesis Data Analytics Studio notebook. To create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
+     */
+    ApplicationMode?: ApplicationMode;
   }
   export interface CreateApplicationResponse {
     /**
@@ -928,13 +973,38 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface CreateApplicationSnapshotResponse {
   }
+  export interface CustomArtifactConfiguration {
+    /**
+     *  UDF stands for user-defined functions. This type of artifact must be in an S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+     */
+    ArtifactType: ArtifactType;
+    S3ContentLocation?: S3ContentLocation;
+    /**
+     * The parameters required to fully specify a Maven reference.
+     */
+    MavenReference?: MavenReference;
+  }
+  export interface CustomArtifactConfigurationDescription {
+    /**
+     *  UDF stands for user-defined functions. This type of artifact must be in an S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+     */
+    ArtifactType?: ArtifactType;
+    S3ContentLocationDescription?: S3ContentLocation;
+    /**
+     * The parameters that are required to specify a Maven dependency.
+     */
+    MavenReferenceDescription?: MavenReference;
+  }
+  export type CustomArtifactsConfigurationDescriptionList = CustomArtifactConfigurationDescription[];
+  export type CustomArtifactsConfigurationList = CustomArtifactConfiguration[];
+  export type DatabaseARN = string;
   export interface DeleteApplicationCloudWatchLoggingOptionRequest {
     /**
      * The application name.
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the application. You must provide the ApplicationVersionID or the ConditionalToken. You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the application. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     CurrentApplicationVersionId?: ApplicationVersionId;
     /**
@@ -942,7 +1012,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CloudWatchLoggingOptionId: Id;
     /**
-     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     ConditionalToken?: ConditionalToken;
   }
@@ -1066,7 +1136,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     CurrentApplicationVersionId?: ApplicationVersionId;
     /**
@@ -1074,7 +1144,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     VpcConfigurationId: Id;
     /**
-     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     ConditionalToken?: ConditionalToken;
   }
@@ -1087,6 +1157,24 @@ declare namespace KinesisAnalyticsV2 {
      * The updated version ID of the application.
      */
     ApplicationVersionId?: ApplicationVersionId;
+  }
+  export interface DeployAsApplicationConfiguration {
+    /**
+     * The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. 
+     */
+    S3ContentLocation: S3ContentBaseLocation;
+  }
+  export interface DeployAsApplicationConfigurationDescription {
+    /**
+     * The location that holds the data required to specify an Amazon Data Analytics application.
+     */
+    S3ContentLocationDescription: S3ContentBaseLocationDescription;
+  }
+  export interface DeployAsApplicationConfigurationUpdate {
+    /**
+     * Updates to the location that holds the data required to specify an Amazon Data Analytics application.
+     */
+    S3ContentLocationUpdate: S3ContentBaseLocationUpdate;
   }
   export interface DescribeApplicationRequest {
     /**
@@ -1249,6 +1337,24 @@ declare namespace KinesisAnalyticsV2 {
      * When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between snapshots to remove stateful parameters, and state data in the snapshot no longer corresponds to valid application data. For more information, see  Allowing Non-Restored State in the Apache Flink documentation.  This value defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true. 
      */
     AllowNonRestoredState?: BooleanObject;
+  }
+  export interface GlueDataCatalogConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARN: DatabaseARN;
+  }
+  export interface GlueDataCatalogConfigurationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARN: DatabaseARN;
+  }
+  export interface GlueDataCatalogConfigurationUpdate {
+    /**
+     * The updated Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARNUpdate?: DatabaseARN;
   }
   export type Id = string;
   export type InAppStreamName = string;
@@ -1638,6 +1744,23 @@ declare namespace KinesisAnalyticsV2 {
      */
     CSVMappingParameters?: CSVMappingParameters;
   }
+  export type MavenArtifactId = string;
+  export type MavenGroupId = string;
+  export interface MavenReference {
+    /**
+     * The group ID of the Maven reference.
+     */
+    GroupId: MavenGroupId;
+    /**
+     * The artifact ID of the Maven reference.
+     */
+    ArtifactId: MavenArtifactId;
+    /**
+     * The version of the Maven reference.
+     */
+    Version: MavenVersion;
+  }
+  export type MavenVersion = string;
   export type MetricsLevel = "APPLICATION"|"TASK"|"OPERATOR"|"PARALLELISM"|string;
   export type MinPauseBetweenCheckpoints = number;
   export interface MonitoringConfiguration {
@@ -1816,7 +1939,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ParallelismPerKPUUpdate?: ParallelismPerKPU;
     /**
-     * Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
+     * Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of a Flink-based Kinesis Data Analytics application in response to increased throughput.
      */
     AutoScalingEnabledUpdate?: BooleanObject;
   }
@@ -1974,7 +2097,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationRestoreConfiguration?: ApplicationRestoreConfiguration;
   }
-  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"FLINK-1_11"|string;
+  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"FLINK-1_11"|"ZEPPELIN-FLINK-1_0"|string;
   export interface S3ApplicationCodeLocationDescription {
     /**
      * The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
@@ -1998,6 +2121,36 @@ declare namespace KinesisAnalyticsV2 {
      * The name of the object that contains the data.
      */
     FileKey: FileKey;
+  }
+  export interface S3ContentBaseLocation {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The base path for the S3 bucket.
+     */
+    BasePath?: BasePath;
+  }
+  export interface S3ContentBaseLocationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The base path for the S3 bucket.
+     */
+    BasePath?: BasePath;
+  }
+  export interface S3ContentBaseLocationUpdate {
+    /**
+     * The updated Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARNUpdate: BucketARN;
+    /**
+     * The updated S3 bucket path.
+     */
+    BasePathUpdate?: BasePath;
   }
   export interface S3ContentLocation {
     /**
@@ -2160,7 +2313,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * Identifies the run configuration (start parameters) of a Kinesis Data Analytics application.
      */
-    RunConfiguration: RunConfiguration;
+    RunConfiguration?: RunConfiguration;
   }
   export interface StartApplicationResponse {
   }
@@ -2244,7 +2397,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You must provide the ApplicationVersionID or the ConditionalToken.You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the CurrentApplicationVersionId or the ConditionalToken.You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     CurrentApplicationVersionId?: ApplicationVersionId;
     /**
@@ -2264,7 +2417,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CloudWatchLoggingOptionUpdates?: CloudWatchLoggingOptionUpdates;
     /**
-     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication.
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
     ConditionalToken?: ConditionalToken;
   }
@@ -2274,7 +2427,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDetail: ApplicationDetail;
   }
-  export type UrlType = "FLINK_DASHBOARD_URL"|string;
+  export type UrlType = "FLINK_DASHBOARD_URL"|"ZEPPELIN_UI_URL"|string;
   export interface VpcConfiguration {
     /**
      * The array of Subnet IDs used by the VPC configuration.
@@ -2321,6 +2474,75 @@ declare namespace KinesisAnalyticsV2 {
   export type VpcConfigurationUpdates = VpcConfigurationUpdate[];
   export type VpcConfigurations = VpcConfiguration[];
   export type VpcId = string;
+  export interface ZeppelinApplicationConfiguration {
+    /**
+     * The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfiguration?: ZeppelinMonitoringConfiguration;
+    /**
+     * The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfiguration?: CatalogConfiguration;
+    /**
+     * The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     */
+    DeployAsApplicationConfiguration?: DeployAsApplicationConfiguration;
+    /**
+     * Custom artifacts are dependency JARs and user-defined functions (UDF).
+     */
+    CustomArtifactsConfiguration?: CustomArtifactsConfigurationList;
+  }
+  export interface ZeppelinApplicationConfigurationDescription {
+    /**
+     * The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfigurationDescription: ZeppelinMonitoringConfigurationDescription;
+    /**
+     * The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfigurationDescription?: CatalogConfigurationDescription;
+    /**
+     * The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     */
+    DeployAsApplicationConfigurationDescription?: DeployAsApplicationConfigurationDescription;
+    /**
+     * Custom artifacts are dependency JARs and user-defined functions (UDF).
+     */
+    CustomArtifactsConfigurationDescription?: CustomArtifactsConfigurationDescriptionList;
+  }
+  export interface ZeppelinApplicationConfigurationUpdate {
+    /**
+     * Updates to the monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfigurationUpdate?: ZeppelinMonitoringConfigurationUpdate;
+    /**
+     * Updates to the configuration of the AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfigurationUpdate?: CatalogConfigurationUpdate;
+    DeployAsApplicationConfigurationUpdate?: DeployAsApplicationConfigurationUpdate;
+    /**
+     * Updates to the customer artifacts. Custom artifacts are dependency JAR files and user-defined functions (UDF).
+     */
+    CustomArtifactsConfigurationUpdate?: CustomArtifactsConfigurationList;
+  }
+  export interface ZeppelinMonitoringConfiguration {
+    /**
+     * The verbosity of the CloudWatch Logs for an application.
+     */
+    LogLevel: LogLevel;
+  }
+  export interface ZeppelinMonitoringConfigurationDescription {
+    /**
+     * Describes the verbosity of the CloudWatch Logs for an application.
+     */
+    LogLevel?: LogLevel;
+  }
+  export interface ZeppelinMonitoringConfigurationUpdate {
+    /**
+     * Updates to the logging level for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.
+     */
+    LogLevelUpdate: LogLevel;
+  }
   export type ZipFileContent = Buffer|Uint8Array|Blob|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
