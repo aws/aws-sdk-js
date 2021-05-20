@@ -10291,9 +10291,20 @@
         "PermissionPolicy": {
           "shape": "RowLevelPermissionPolicy",
           "documentation": "<p>The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> is included for backward compatibility only.</p>"
+        },
+        "FormatVersion": {
+          "shape": "RowLevelPermissionFormatVersion",
+          "documentation": "<p>The user or group rules associated with the dataset that contains permissions for RLS.</p> <p>By default, <code>FormatVersion</code> is <code>VERSION_1</code>. When <code>FormatVersion</code> is <code>VERSION_1</code>, <code>UserName</code> and <code>GroupName</code> are required. When <code>FormatVersion</code> is <code>VERSION_2</code>, <code>UserARN</code> and <code>GroupARN</code> are required, and <code>Namespace</code> must not exist.</p>"
         }
       },
       "documentation": "<p>Information about a dataset that contains permissions for row-level security (RLS). The permissions dataset maps fields to users or groups. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User Guide</i>.</p> <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is not supported for new RLS datasets.</p>"
+    },
+    "RowLevelPermissionFormatVersion": {
+      "type": "string",
+      "enum": [
+        "VERSION_1",
+        "VERSION_2"
+      ]
     },
     "RowLevelPermissionPolicy": {
       "type": "string",

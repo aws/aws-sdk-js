@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.910.0-->
+<!--LATEST=2.911.0-->
 <!--ENTRYINSERT-->
+
+## 2.911.0
+* feature: LexModelsV2: Customers can now use resource-based policies to control access to their Lex V2 bots. This release adds APIs to attach and manage permissions for a bot or a bot alias. For details, see: https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html
+* feature: Personalize: Added new API to stop a solution version creation that is pending or in progress for Amazon Personalize
+* feature: QuickSight: Add ARN based Row Level Security support to CreateDataSet/UpdateDataSet APIs.
 
 ## 2.910.0
 * feature: AutoScaling: With this release, customers can easily use Predictive Scaling as a policy directly through Amazon EC2 Auto Scaling configurations to proactively scale their applications ahead of predicted demand.

@@ -68,6 +68,22 @@ declare class LexModelsV2 extends Service {
    */
   createIntent(callback?: (err: AWSError, data: LexModelsV2.Types.CreateIntentResponse) => void): Request<LexModelsV2.Types.CreateIntentResponse, AWSError>;
   /**
+   * Creates a new resource policy with the specified policy statements.
+   */
+  createResourcePolicy(params: LexModelsV2.Types.CreateResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
+  /**
+   * Creates a new resource policy with the specified policy statements.
+   */
+  createResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
+  /**
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can create a resource policy statement that allows cross-account access.
+   */
+  createResourcePolicyStatement(params: LexModelsV2.Types.CreateResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
+  /**
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can create a resource policy statement that allows cross-account access.
+   */
+  createResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
+  /**
    * Creates a slot in an intent. A slot is a variable needed to fulfill an intent. For example, an OrderPizza intent might need slots for size, crust, and number of pizzas. For each slot, you define one or more utterances that Amazon Lex uses to elicit a response from the user. 
    */
   createSlot(params: LexModelsV2.Types.CreateSlotRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateSlotResponse) => void): Request<LexModelsV2.Types.CreateSlotResponse, AWSError>;
@@ -148,6 +164,22 @@ declare class LexModelsV2 extends Service {
    */
   deleteIntent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicy(params: LexModelsV2.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicyStatement(params: LexModelsV2.Types.DeleteResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
+  /**
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
+  /**
    * Deletes the specified slot from an intent.
    */
   deleteSlot(params: LexModelsV2.Types.DeleteSlotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -219,6 +251,14 @@ declare class LexModelsV2 extends Service {
    * Returns metadata about an intent.
    */
   describeIntent(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeIntentResponse) => void): Request<LexModelsV2.Types.DescribeIntentResponse, AWSError>;
+  /**
+   * Gets the resource policy and policy revision for a bot or bot alias.
+   */
+  describeResourcePolicy(params: LexModelsV2.Types.DescribeResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeResourcePolicyResponse) => void): Request<LexModelsV2.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Gets the resource policy and policy revision for a bot or bot alias.
+   */
+  describeResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeResourcePolicyResponse) => void): Request<LexModelsV2.Types.DescribeResourcePolicyResponse, AWSError>;
   /**
    * Gets metadata information about a slot.
    */
@@ -395,6 +435,14 @@ declare class LexModelsV2 extends Service {
    * Updates the settings for an intent.
    */
   updateIntent(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateIntentResponse) => void): Request<LexModelsV2.Types.UpdateIntentResponse, AWSError>;
+  /**
+   * Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
+   */
+  updateResourcePolicy(params: LexModelsV2.Types.UpdateResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateResourcePolicyResponse) => void): Request<LexModelsV2.Types.UpdateResourcePolicyResponse, AWSError>;
+  /**
+   * Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
+   */
+  updateResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateResourcePolicyResponse) => void): Request<LexModelsV2.Types.UpdateResourcePolicyResponse, AWSError>;
   /**
    * Updates the settings for a slot.
    */
@@ -834,6 +882,11 @@ declare namespace LexModelsV2 {
   export interface CodeHookSpecification {
     lambdaCodeHook: LambdaCodeHook;
   }
+  export type ConditionKey = string;
+  export type ConditionKeyValueMap = {[key: string]: ConditionValue};
+  export type ConditionMap = {[key: string]: ConditionKeyValueMap};
+  export type ConditionOperator = string;
+  export type ConditionValue = string;
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
@@ -1257,6 +1310,66 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export interface CreateResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .  If the policy isn't valid, Amazon Lex returns a validation exception.
+     */
+    policy: Policy;
+  }
+  export interface CreateResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
+  export interface CreateResourcePolicyStatementRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The name of the statement. The ID is the same as the Sid IAM property. The statement name must be unique within the policy. For more information, see IAM JSON policy elements: Sid. 
+     */
+    statementId: Name;
+    /**
+     * Determines whether the statement allows or denies access to the resource.
+     */
+    effect: Effect;
+    /**
+     * An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see AWS JSON policy elements: Principal.
+     */
+    principal: PrincipalList;
+    /**
+     * The Amazon Lex action that this policy either allows or denies. The action must apply to the resource type of the specified ARN. For more information, see  Actions, resources, and condition keys for Amazon Lex V2.
+     */
+    action: OperationList;
+    /**
+     * Specifies a condition when the policy is in effect. If the principal of the policy is a service principal, you must provide two condition blocks, one with a SourceAccount global condition key and one with a SourceArn global condition key. For more information, see IAM JSON policy elements: Condition .
+     */
+    condition?: ConditionMap;
+    /**
+     * The identifier of the revision of the policy to edit. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex overwrites the contents of the policy with the new values.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface CreateResourcePolicyStatementResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
   export interface CreateSlotRequest {
     /**
      * The name of the slot. Slot names must be unique within the bot that contains the slot.
@@ -1599,6 +1712,50 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that has the resource policy attached.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The identifier of the revision to edit. If this ID doesn't match the current revision number, Amazon Lex returns an exception If you don't specify a revision ID, Amazon Lex will delete the current policy.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was deleted from.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyStatementRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The name of the statement (SID) to delete from the policy.
+     */
+    statementId: Name;
+    /**
+     * The identifier of the revision of the policy to delete the statement from. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex removes the current contents of the statement. 
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyStatementResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy statement was removed from.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
   }
   export interface DeleteSlotRequest {
     /**
@@ -2049,6 +2206,26 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
+  export interface DescribeResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+  }
+  export interface DescribeResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The JSON structure that contains the resource policy. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .
+     */
+    policy?: Policy;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
   export interface DescribeSlotRequest {
     /**
      * The unique identifier for the slot.
@@ -2193,6 +2370,7 @@ declare namespace LexModelsV2 {
     enabled: Boolean;
   }
   export type DraftBotVersion = string;
+  export type Effect = "Allow"|"Deny"|string;
   export interface ExportFilter {
     /**
      * The name of the field to use for filtering.
@@ -2976,6 +3154,8 @@ declare namespace LexModelsV2 {
     obfuscationSettingType: ObfuscationSettingType;
   }
   export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string;
+  export type Operation = string;
+  export type OperationList = Operation[];
   export interface OutputContext {
     /**
      * The name of the output context.
@@ -2998,7 +3178,20 @@ declare namespace LexModelsV2 {
     value: PlainTextMessageValue;
   }
   export type PlainTextMessageValue = string;
+  export type Policy = string;
   export type PresignedS3Url = string;
+  export interface Principal {
+    /**
+     * The name of the AWS service that should allowed or denied access to an Amazon Lex action.
+     */
+    service?: ServicePrincipal;
+    /**
+     * The Amazon Resource Name (ARN) of the principal.
+     */
+    arn?: PrincipalArn;
+  }
+  export type PrincipalArn = string;
+  export type PrincipalList = Principal[];
   export type PriorityValue = number;
   export type PromptMaxRetries = number;
   export interface PromptSpecification {
@@ -3028,6 +3221,7 @@ declare namespace LexModelsV2 {
      */
     allowInterrupt?: BoxedBoolean;
   }
+  export type RevisionId = string;
   export type RoleArn = string;
   export type S3BucketArn = string;
   export interface S3BucketLogDestination {
@@ -3070,6 +3264,7 @@ declare namespace LexModelsV2 {
      */
     detectSentiment: Boolean;
   }
+  export type ServicePrincipal = string;
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
   export type SlotConstraint = "Required"|"Optional"|string;
@@ -3746,6 +3941,30 @@ declare namespace LexModelsV2 {
      * A timestamp of the last time that the intent was modified.
      */
     lastUpdatedDateTime?: Timestamp;
+  }
+  export interface UpdateResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .  If the policy isn't valid, Amazon Lex returns a validation exception.
+     */
+    policy: Policy;
+    /**
+     * The identifier of the revision of the policy to update. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex overwrites the contents of the policy with the new values.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface UpdateResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
   }
   export interface UpdateSlotRequest {
     /**

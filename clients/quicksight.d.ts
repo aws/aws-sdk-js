@@ -4907,7 +4907,12 @@ declare namespace QuickSight {
      * The type of permissions to use when interpretting the permissions for RLS. DENY_ACCESS is included for backward compatibility only.
      */
     PermissionPolicy: RowLevelPermissionPolicy;
+    /**
+     * The user or group rules associated with the dataset that contains permissions for RLS. By default, FormatVersion is VERSION_1. When FormatVersion is VERSION_1, UserName and GroupName are required. When FormatVersion is VERSION_2, UserARN and GroupARN are required, and Namespace must not exist.
+     */
+    FormatVersion?: RowLevelPermissionFormatVersion;
   }
+  export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2"|string;
   export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS"|string;
   export type S3Bucket = string;
   export type S3Key = string;
