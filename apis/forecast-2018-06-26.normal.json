@@ -405,7 +405,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Deletes an entire resource tree. This operation will delete the parent resource and its child resources.</p> <p>Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource.</p> <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p> <ul> <li> <p> <b>Dataset Group</b>: predictors, predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Dataset</b>: dataset import jobs</p> </li> <li> <p> <b>Predictor</b>: predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Forecast</b>: forecast export jobs</p> </li> </ul> <note> <p> <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3. </p> </note>",
+      "documentation": "<p>Deletes an entire resource tree. This operation will delete the parent resource and its child resources.</p> <p>Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource.</p> <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p> <ul> <li> <p> <b>Dataset</b>: dataset import jobs</p> </li> <li> <p> <b>Dataset Group</b>: predictors, predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Predictor</b>: predictor backtest export jobs, forecasts, forecast export jobs</p> </li> <li> <p> <b>Forecast</b>: forecast export jobs</p> </li> </ul> <note> <p> <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3. </p> </note>",
       "idempotent": true
     },
     "DescribeDataset": {
@@ -2845,19 +2845,19 @@
       "members": {
         "Count": {
           "shape": "Integer",
-          "documentation": "<p>The number of values in the field.</p>"
+          "documentation": "<p>The number of values in the field. If the response value is -1, refer to <code>CountLong</code>.</p>"
         },
         "CountDistinct": {
           "shape": "Integer",
-          "documentation": "<p>The number of distinct values in the field.</p>"
+          "documentation": "<p>The number of distinct values in the field. If the response value is -1, refer to <code>CountDistinctLong</code>.</p>"
         },
         "CountNull": {
           "shape": "Integer",
-          "documentation": "<p>The number of null values in the field.</p>"
+          "documentation": "<p>The number of null values in the field. If the response value is -1, refer to <code>CountNullLong</code>.</p>"
         },
         "CountNan": {
           "shape": "Integer",
-          "documentation": "<p>The number of NAN (not a number) values in the field.</p>"
+          "documentation": "<p>The number of NAN (not a number) values in the field. If the response value is -1, refer to <code>CountNanLong</code>.</p>"
         },
         "Min": {
           "shape": "String",
@@ -2874,6 +2874,22 @@
         "Stddev": {
           "shape": "Double",
           "documentation": "<p>For a numeric field, the standard deviation.</p>"
+        },
+        "CountLong": {
+          "shape": "Long",
+          "documentation": "<p>The number of values in the field. <code>CountLong</code> is used instead of <code>Count</code> if the value is greater than 2,147,483,647.</p>"
+        },
+        "CountDistinctLong": {
+          "shape": "Long",
+          "documentation": "<p>The number of distinct values in the field. <code>CountDistinctLong</code> is used instead of <code>CountDistinct</code> if the value is greater than 2,147,483,647.</p>"
+        },
+        "CountNullLong": {
+          "shape": "Long",
+          "documentation": "<p>The number of null values in the field. <code>CountNullLong</code> is used instead of <code>CountNull</code> if the value is greater than 2,147,483,647.</p>"
+        },
+        "CountNanLong": {
+          "shape": "Long",
+          "documentation": "<p>The number of NAN (not a number) values in the field. <code>CountNanLong</code> is used instead of <code>CountNan</code> if the value is greater than 2,147,483,647.</p>"
         }
       },
       "documentation": "<p>Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.</p>"

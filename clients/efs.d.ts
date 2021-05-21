@@ -36,11 +36,11 @@ declare class EFS extends Service {
    */
   createMountTarget(callback?: (err: AWSError, data: EFS.Types.MountTargetDescription) => void): Request<EFS.Types.MountTargetDescription, AWSError>;
   /**
-   * Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
+   *  DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.  Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
    */
   createTags(params: EFS.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
+   *  DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.  Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class EFS extends Service {
    */
   deleteMountTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
+   *  DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
   deleteTags(params: EFS.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
+   *  DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -91,6 +91,14 @@ declare class EFS extends Service {
    * Returns the description of a specific Amazon EFS access point if the AccessPointId is provided. If you provide an EFS FileSystemId, it returns descriptions of all access points for that file system. You can provide either an AccessPointId or a FileSystemId in the request, but not both.  This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
    */
   describeAccessPoints(callback?: (err: AWSError, data: EFS.Types.DescribeAccessPointsResponse) => void): Request<EFS.Types.DescribeAccessPointsResponse, AWSError>;
+  /**
+   * 
+   */
+  describeAccountPreferences(params: EFS.Types.DescribeAccountPreferencesRequest, callback?: (err: AWSError, data: EFS.Types.DescribeAccountPreferencesResponse) => void): Request<EFS.Types.DescribeAccountPreferencesResponse, AWSError>;
+  /**
+   * 
+   */
+  describeAccountPreferences(callback?: (err: AWSError, data: EFS.Types.DescribeAccountPreferencesResponse) => void): Request<EFS.Types.DescribeAccountPreferencesResponse, AWSError>;
   /**
    * Returns the backup policy for the specified EFS file system.
    */
@@ -140,11 +148,11 @@ declare class EFS extends Service {
    */
   describeMountTargets(callback?: (err: AWSError, data: EFS.Types.DescribeMountTargetsResponse) => void): Request<EFS.Types.DescribeMountTargetsResponse, AWSError>;
   /**
-   * Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
+   *  DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
    */
   describeTags(params: EFS.Types.DescribeTagsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeTagsResponse) => void): Request<EFS.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
+   *  DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
    */
   describeTags(callback?: (err: AWSError, data: EFS.Types.DescribeTagsResponse) => void): Request<EFS.Types.DescribeTagsResponse, AWSError>;
   /**
@@ -163,6 +171,14 @@ declare class EFS extends Service {
    * Modifies the set of security groups in effect for a mount target. When you create a mount target, Amazon EFS also creates a new network interface. For more information, see CreateMountTarget. This operation replaces the security groups in effect for the network interface associated with a mount target, with the SecurityGroups provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not deleted.  The operation requires permissions for the following actions:    elasticfilesystem:ModifyMountTargetSecurityGroups action on the mount target's file system.     ec2:ModifyNetworkInterfaceAttribute action on the mount target's network interface.   
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  putAccountPreferences(params: EFS.Types.PutAccountPreferencesRequest, callback?: (err: AWSError, data: EFS.Types.PutAccountPreferencesResponse) => void): Request<EFS.Types.PutAccountPreferencesResponse, AWSError>;
+  /**
+   * 
+   */
+  putAccountPreferences(callback?: (err: AWSError, data: EFS.Types.PutAccountPreferencesResponse) => void): Request<EFS.Types.PutAccountPreferencesResponse, AWSError>;
   /**
    * Updates the file system's backup policy. Use this action to start or stop automatic backups of the file system. 
    */
@@ -264,7 +280,7 @@ declare namespace EFS {
   export type Backup = boolean;
   export interface BackupPolicy {
     /**
-     * Describes the status of the file system's backup policy.     ENABLED  - EFS is automatically backing up the file system.&gt;     ENABLING  - EFS is turning on automatic backups for the file system.     DISABLED  - automatic back ups are turned off for the file system.     DISABLING  - EFS is turning off automatic backups for the file system.  
+     * Describes the status of the file system's backup policy.     ENABLED  - EFS is automatically backing up the file system.     ENABLING  - EFS is turning on automatic backups for the file system.     DISABLED  - automatic back ups are turned off for the file system.     DISABLING  - EFS is turning off automatic backups for the file system.  
      */
     Status: Status;
   }
@@ -312,7 +328,7 @@ declare namespace EFS {
      */
     Encrypted?: Encrypted;
     /**
-     * The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.  EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems. 
+     * The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.  EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -439,6 +455,14 @@ declare namespace EFS {
     /**
      * Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
      */
+    NextToken?: Token;
+  }
+  export interface DescribeAccountPreferencesRequest {
+    NextToken?: Token;
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeAccountPreferencesResponse {
+    ResourceIdPreference?: ResourceIdPreference;
     NextToken?: Token;
   }
   export interface DescribeBackupPolicyRequest {
@@ -698,7 +722,7 @@ declare namespace EFS {
      */
     MaxResults?: MaxResults;
     /**
-     * You can use NextToken in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
+     * (Optional) You can use NextToken in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
      */
     NextToken?: Token;
   }
@@ -793,6 +817,12 @@ declare namespace EFS {
     SecondaryGids?: SecondaryGids;
   }
   export type ProvisionedThroughputInMibps = number;
+  export interface PutAccountPreferencesRequest {
+    ResourceIdType: ResourceIdType;
+  }
+  export interface PutAccountPreferencesResponse {
+    ResourceIdPreference?: ResourceIdPreference;
+  }
   export interface PutBackupPolicyRequest {
     /**
      * Specifies which EFS file system to update the backup policy for.
@@ -827,7 +857,14 @@ declare namespace EFS {
      */
     LifecyclePolicies: LifecyclePolicies;
   }
+  export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string;
   export type ResourceId = string;
+  export interface ResourceIdPreference {
+    ResourceIdType?: ResourceIdType;
+    Resources?: Resources;
+  }
+  export type ResourceIdType = "LONG_ID"|"SHORT_ID"|string;
+  export type Resources = Resource[];
   export interface RootDirectory {
     /**
      * Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
@@ -857,11 +894,11 @@ declare namespace EFS {
   export type TagKeys = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The ID specifying the EFS resource that you want to create a tag for. 
+     * The ID specifying the EFS resource that you want to create a tag for.
      */
     ResourceId: ResourceId;
     /**
-     * 
+     * An array of Tag objects to add. Each Tag object is a key-value pair.
      */
     Tags: Tags;
   }

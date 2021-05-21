@@ -124,11 +124,11 @@ declare class ForecastService extends Service {
    */
   deletePredictorBacktestExportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Dataset: dataset import jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset: dataset import jobs    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
    */
   deleteResourceTree(params: ForecastService.Types.DeleteResourceTreeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Dataset: dataset import jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset: dataset import jobs    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
    */
   deleteResourceTree(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1606,19 +1606,19 @@ declare namespace ForecastService {
   export type SchemaAttributes = SchemaAttribute[];
   export interface Statistics {
     /**
-     * The number of values in the field.
+     * The number of values in the field. If the response value is -1, refer to CountLong.
      */
     Count?: Integer;
     /**
-     * The number of distinct values in the field.
+     * The number of distinct values in the field. If the response value is -1, refer to CountDistinctLong.
      */
     CountDistinct?: Integer;
     /**
-     * The number of null values in the field.
+     * The number of null values in the field. If the response value is -1, refer to CountNullLong.
      */
     CountNull?: Integer;
     /**
-     * The number of NAN (not a number) values in the field.
+     * The number of NAN (not a number) values in the field. If the response value is -1, refer to CountNanLong.
      */
     CountNan?: Integer;
     /**
@@ -1637,6 +1637,22 @@ declare namespace ForecastService {
      * For a numeric field, the standard deviation.
      */
     Stddev?: Double;
+    /**
+     * The number of values in the field. CountLong is used instead of Count if the value is greater than 2,147,483,647.
+     */
+    CountLong?: Long;
+    /**
+     * The number of distinct values in the field. CountDistinctLong is used instead of CountDistinct if the value is greater than 2,147,483,647.
+     */
+    CountDistinctLong?: Long;
+    /**
+     * The number of null values in the field. CountNullLong is used instead of CountNull if the value is greater than 2,147,483,647.
+     */
+    CountNullLong?: Long;
+    /**
+     * The number of NAN (not a number) values in the field. CountNanLong is used instead of CountNan if the value is greater than 2,147,483,647.
+     */
+    CountNanLong?: Long;
   }
   export type Status = string;
   export interface StopResourceRequest {

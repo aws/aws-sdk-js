@@ -161,7 +161,7 @@
           "shape": "FileSystemNotFound"
         }
       ],
-      "documentation": "<p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>",
+      "documentation": "<note> <p>DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.</p> </note> <p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the <code>Name</code> tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p> <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code> action.</p>",
       "deprecated": true,
       "deprecatedMessage": "Use TagResource."
     },
@@ -284,7 +284,7 @@
           "shape": "FileSystemNotFound"
         }
       ],
-      "documentation": "<p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>",
+      "documentation": "<note> <p>DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.</p> </note> <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code> action.</p>",
       "deprecated": true,
       "deprecatedMessage": "Use UntagResource."
     },
@@ -316,6 +316,25 @@
         }
       ],
       "documentation": "<p>Returns the description of a specific Amazon EFS access point if the <code>AccessPointId</code> is provided. If you provide an EFS <code>FileSystemId</code>, it returns descriptions of all access points for that file system. You can provide either an <code>AccessPointId</code> or a <code>FileSystemId</code> in the request, but not both. </p> <p>This operation requires permissions for the <code>elasticfilesystem:DescribeAccessPoints</code> action.</p>"
+    },
+    "DescribeAccountPreferences": {
+      "name": "DescribeAccountPreferences",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-02-01/account-preferences",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeAccountPreferencesRequest"
+      },
+      "output": {
+        "shape": "DescribeAccountPreferencesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        }
+      ]
     },
     "DescribeBackupPolicy": {
       "name": "DescribeBackupPolicy",
@@ -512,7 +531,7 @@
           "shape": "FileSystemNotFound"
         }
       ],
-      "documentation": "<p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>",
+      "documentation": "<note> <p>DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.</p> </note> <p>Returns the tags associated with a file system. The order of tags returned in the response of one <code>DescribeTags</code> call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. </p> <p> This operation requires permissions for the <code>elasticfilesystem:DescribeTags</code> action. </p>",
       "deprecated": true,
       "deprecatedMessage": "Use ListTagsForResource."
     },
@@ -576,6 +595,25 @@
         }
       ],
       "documentation": "<p>Modifies the set of security groups in effect for a mount target.</p> <p>When you create a mount target, Amazon EFS also creates a new network interface. For more information, see <a>CreateMountTarget</a>. This operation replaces the security groups in effect for the network interface associated with a mount target, with the <code>SecurityGroups</code> provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not <code>deleted</code>. </p> <p>The operation requires permissions for the following actions:</p> <ul> <li> <p> <code>elasticfilesystem:ModifyMountTargetSecurityGroups</code> action on the mount target's file system. </p> </li> <li> <p> <code>ec2:ModifyNetworkInterfaceAttribute</code> action on the mount target's network interface. </p> </li> </ul>"
+    },
+    "PutAccountPreferences": {
+      "name": "PutAccountPreferences",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2015-02-01/account-preferences",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutAccountPreferencesRequest"
+      },
+      "output": {
+        "shape": "PutAccountPreferencesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        }
+      ]
     },
     "PutBackupPolicy": {
       "name": "PutBackupPolicy",
@@ -846,7 +884,7 @@
       "members": {
         "Status": {
           "shape": "Status",
-          "documentation": "<p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.&gt;</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>"
+          "documentation": "<p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <b> <code>ENABLED</code> </b> - EFS is automatically backing up the file system.</p> </li> <li> <p> <b> <code>ENABLING</code> </b> - EFS is turning on automatic backups for the file system.</p> </li> <li> <p> <b> <code>DISABLED</code> </b> - automatic back ups are turned off for the file system.</p> </li> <li> <p> <b> <code>DISABLING</code> </b> - EFS is turning off automatic backups for the file system.</p> </li> </ul>"
         }
       },
       "documentation": "<p>The backup policy for the file system used to create automatic daily backups. If status has a value of <code>ENABLED</code>, the file system is being automatically backed up. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups\">Automatic backups</a>.</p>"
@@ -920,7 +958,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p> </important>"
+          "documentation": "<p>The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.</p> </important>"
         },
         "ThroughputMode": {
           "shape": "ThroughputMode",
@@ -1136,6 +1174,28 @@
         "NextToken": {
           "shape": "Token",
           "documentation": "<p>Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.</p>"
+        }
+      }
+    },
+    "DescribeAccountPreferencesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        }
+      }
+    },
+    "DescribeAccountPreferencesResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceIdPreference": {
+          "shape": "ResourceIdPreference"
+        },
+        "NextToken": {
+          "shape": "Token"
         }
       }
     },
@@ -1519,7 +1579,7 @@
     "KmsKeyId": {
       "type": "string",
       "max": 2048,
-      "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$"
+      "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|mrk-[0-9a-f]{32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(key/mrk-[0-9a-f]{32})|(alias/[a-zA-Z0-9/_-]+))))$"
     },
     "LifeCycleState": {
       "type": "string",
@@ -1577,7 +1637,7 @@
         },
         "NextToken": {
           "shape": "Token",
-          "documentation": "<p>You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.</p>",
+          "documentation": "<p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         }
@@ -1765,6 +1825,25 @@
       "type": "double",
       "min": 1
     },
+    "PutAccountPreferencesRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdType"
+      ],
+      "members": {
+        "ResourceIdType": {
+          "shape": "ResourceIdType"
+        }
+      }
+    },
+    "PutAccountPreferencesResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceIdPreference": {
+          "shape": "ResourceIdPreference"
+        }
+      }
+    },
     "PutBackupPolicyRequest": {
       "type": "structure",
       "required": [
@@ -1826,10 +1905,44 @@
         }
       }
     },
+    "Resource": {
+      "type": "string",
+      "documentation": "An EFS resource, for example a file system or a mount target.",
+      "enum": [
+        "FILE_SYSTEM",
+        "MOUNT_TARGET"
+      ]
+    },
     "ResourceId": {
       "type": "string",
       "max": 128,
       "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"
+    },
+    "ResourceIdPreference": {
+      "type": "structure",
+      "members": {
+        "ResourceIdType": {
+          "shape": "ResourceIdType"
+        },
+        "Resources": {
+          "shape": "Resources"
+        }
+      }
+    },
+    "ResourceIdType": {
+      "type": "string",
+      "documentation": "A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.",
+      "enum": [
+        "LONG_ID",
+        "SHORT_ID"
+      ]
+    },
+    "Resources": {
+      "type": "list",
+      "member": {
+        "shape": "Resource"
+      },
+      "documentation": "EFS resources to which a preference applies to."
     },
     "RootDirectory": {
       "type": "structure",
@@ -1897,7 +2010,7 @@
           "documentation": "<p>The value of the tag key.</p>"
         }
       },
-      "documentation": "<p>A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code> </p>"
+      "documentation": "<p>A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code>.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -1922,13 +2035,13 @@
       "members": {
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID specifying the EFS resource that you want to create a tag for. </p>",
+          "documentation": "<p>The ID specifying the EFS resource that you want to create a tag for.</p>",
           "location": "uri",
           "locationName": "ResourceId"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p/>"
+          "documentation": "<p>An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value pair.</p>"
         }
       }
     },
@@ -2022,5 +2135,5 @@
       "type": "string"
     }
   },
-  "documentation": "<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">User Guide</a>.</p>"
+  "documentation": "<fullname>Amazon Elastic File System</fullname> <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System User Guide</a>.</p>"
 }

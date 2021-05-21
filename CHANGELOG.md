@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.911.0-->
+<!--LATEST=2.912.0-->
 <!--ENTRYINSERT-->
+
+## 2.912.0
+* feature: EFS: EFS now supports account preferences. Utilizing the new capability, users can customize some aspects of their experience using EFS APIs and the EFS Console. The first preference clients are able to set is whether to start using longer File System and Mount Target IDs before EFS migrates to such IDs.
+* feature: ForecastService: Updated attribute statistics in DescribeDatasetImportJob response to support Long values
 
 ## 2.911.0
 * feature: LexModelsV2: Customers can now use resource-based policies to control access to their Lex V2 bots. This release adds APIs to attach and manage permissions for a bot or a bot alias. For details, see: https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html
