@@ -1625,6 +1625,28 @@
         "shape": "DimensionValuesWithAttributes"
       }
     },
+    "DiskResourceUtilization": {
+      "type": "structure",
+      "members": {
+        "DiskReadOpsPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum number of read operations per second. </p>"
+        },
+        "DiskWriteOpsPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum number of write operations per second. </p>"
+        },
+        "DiskReadBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum read throughput operations per second. </p>"
+        },
+        "DiskWriteBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum write throughput operations per second. </p>"
+        }
+      },
+      "documentation": "<p> The field that contains a list of disk (local storage) metrics associated with the current instance. </p>"
+    },
     "EBSResourceUtilization": {
       "type": "structure",
       "members": {
@@ -1745,6 +1767,14 @@
         "EBSResourceUtilization": {
           "shape": "EBSResourceUtilization",
           "documentation": "<p> The EBS field that contains a list of EBS metrics associated with the current instance. </p>"
+        },
+        "DiskResourceUtilization": {
+          "shape": "DiskResourceUtilization",
+          "documentation": "<p> The field that contains a list of disk (local storage) metrics associated with the current instance. </p>"
+        },
+        "NetworkResourceUtilization": {
+          "shape": "NetworkResourceUtilization",
+          "documentation": "<p> The network field that contains a list of network metrics associated with the current instance. </p>"
         }
       },
       "documentation": "<p> Utilization metrics of the instance. </p>"
@@ -1855,6 +1885,33 @@
       "type": "list",
       "member": {
         "shape": "Expression"
+      }
+    },
+    "FindingReasonCode": {
+      "type": "string",
+      "enum": [
+        "CPU_OVER_PROVISIONED",
+        "CPU_UNDER_PROVISIONED",
+        "MEMORY_OVER_PROVISIONED",
+        "MEMORY_UNDER_PROVISIONED",
+        "EBS_THROUGHPUT_OVER_PROVISIONED",
+        "EBS_THROUGHPUT_UNDER_PROVISIONED",
+        "EBS_IOPS_OVER_PROVISIONED",
+        "EBS_IOPS_UNDER_PROVISIONED",
+        "NETWORK_BANDWIDTH_OVER_PROVISIONED",
+        "NETWORK_BANDWIDTH_UNDER_PROVISIONED",
+        "NETWORK_PPS_OVER_PROVISIONED",
+        "NETWORK_PPS_UNDER_PROVISIONED",
+        "DISK_IOPS_OVER_PROVISIONED",
+        "DISK_IOPS_UNDER_PROVISIONED",
+        "DISK_THROUGHPUT_OVER_PROVISIONED",
+        "DISK_THROUGHPUT_UNDER_PROVISIONED"
+      ]
+    },
+    "FindingReasonCodes": {
+      "type": "list",
+      "member": {
+        "shape": "FindingReasonCode"
       }
     },
     "ForecastResult": {
@@ -3109,6 +3166,28 @@
     "NetRISavings": {
       "type": "string"
     },
+    "NetworkResourceUtilization": {
+      "type": "structure",
+      "members": {
+        "NetworkInBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network ingress throughput utilization measured in Bytes per second. </p>"
+        },
+        "NetworkOutBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network outgress throughput utilization measured in Bytes per second. </p>"
+        },
+        "NetworkPacketsInPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network ingress packets measured in packets per second. </p>"
+        },
+        "NetworkPacketsOutPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network outgress packets measured in packets per second. </p>"
+        }
+      },
+      "documentation": "<p> The network field that contains a list of network metrics associated with the current instance. </p>"
+    },
     "NextPageToken": {
       "type": "string",
       "max": 8192,
@@ -3166,6 +3245,22 @@
         "MEDIUM_UTILIZATION",
         "HEAVY_UTILIZATION"
       ]
+    },
+    "PlatformDifference": {
+      "type": "string",
+      "enum": [
+        "HYPERVISOR",
+        "NETWORK_INTERFACE",
+        "STORAGE_INTERFACE",
+        "INSTANCE_STORE_AVAILABILITY",
+        "VIRTUALIZATION_TYPE"
+      ]
+    },
+    "PlatformDifferences": {
+      "type": "list",
+      "member": {
+        "shape": "PlatformDifference"
+      }
     },
     "PredictionIntervalLevel": {
       "type": "integer",
@@ -3652,6 +3747,10 @@
         "TerminateRecommendationDetail": {
           "shape": "TerminateRecommendationDetail",
           "documentation": "<p>Details for termination recommendations.</p>"
+        },
+        "FindingReasonCodes": {
+          "shape": "FindingReasonCodes",
+          "documentation": "<p> The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). </p>"
         }
       },
       "documentation": "<p>Recommendations to rightsize resources.</p>"
@@ -4322,6 +4421,10 @@
         "ExpectedResourceUtilization": {
           "shape": "ResourceUtilization",
           "documentation": "<p> Expected utilization metrics for target instance type.</p>"
+        },
+        "PlatformDifferences": {
+          "shape": "PlatformDifferences",
+          "documentation": "<p> Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. </p>"
         }
       },
       "documentation": "<p> Details on recommended instance.</p>"

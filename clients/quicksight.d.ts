@@ -4785,6 +4785,18 @@ declare namespace QuickSight {
      * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader). This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
      */
     CustomPermissionsName?: RoleName;
+    /**
+     * The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.    COGNITO: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.    CUSTOM_OIDC: Custom OpenID Connect (OIDC) provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl parameter to provide the custom OIDC provider URL.  
+     */
+    ExternalLoginFederationProviderType?: String;
+    /**
+     * The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC.
+     */
+    CustomFederationProviderUrl?: String;
+    /**
+     * The identity ID for a user in the external login provider.
+     */
+    ExternalLoginId?: String;
   }
   export interface RegisterUserResponse {
     /**
@@ -6463,6 +6475,18 @@ declare namespace QuickSight {
      * A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
      */
     UnapplyCustomPermissions?: Boolean;
+    /**
+     * The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.    COGNITO: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t use the "CustomFederationProviderUrl" parameter which is only needed when the external provider is custom.    CUSTOM_OIDC: Custom OpenID Connect (OIDC) provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl parameter to provide the custom OIDC provider URL.    NONE: This clears all the previously saved external login information for a user. Use  DescribeUser  API to check the external login information.  
+     */
+    ExternalLoginFederationProviderType?: String;
+    /**
+     * The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should only be used when ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC.
+     */
+    CustomFederationProviderUrl?: String;
+    /**
+     * The identity ID for a user in the external login provider.
+     */
+    ExternalLoginId?: String;
   }
   export interface UpdateUserResponse {
     /**
@@ -6533,6 +6557,18 @@ declare namespace QuickSight {
      * The custom permissions profile associated with this user.
      */
     CustomPermissionsName?: RoleName;
+    /**
+     * The type of supported external login provider that provides identity to let the user federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.    COGNITO: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.    CUSTOM_OIDC: Custom OpenID Connect (OIDC) provider.  
+     */
+    ExternalLoginFederationProviderType?: String;
+    /**
+     * The URL of the external login provider.
+     */
+    ExternalLoginFederationProviderUrl?: String;
+    /**
+     * The identity ID for the user in the external login provider.
+     */
+    ExternalLoginId?: String;
   }
   export type UserList = User[];
   export type UserName = string;

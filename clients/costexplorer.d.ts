@@ -744,6 +744,24 @@ declare namespace CostExplorer {
     Attributes?: Attributes;
   }
   export type DimensionValuesWithAttributesList = DimensionValuesWithAttributes[];
+  export interface DiskResourceUtilization {
+    /**
+     *  The maximum number of read operations per second. 
+     */
+    DiskReadOpsPerSecond?: GenericString;
+    /**
+     *  The maximum number of write operations per second. 
+     */
+    DiskWriteOpsPerSecond?: GenericString;
+    /**
+     *  The maximum read throughput operations per second. 
+     */
+    DiskReadBytesPerSecond?: GenericString;
+    /**
+     *  The maximum write throughput operations per second. 
+     */
+    DiskWriteBytesPerSecond?: GenericString;
+  }
   export interface EBSResourceUtilization {
     /**
      *  The maximum number of read operations per second. 
@@ -851,6 +869,14 @@ declare namespace CostExplorer {
      *  The EBS field that contains a list of EBS metrics associated with the current instance. 
      */
     EBSResourceUtilization?: EBSResourceUtilization;
+    /**
+     *  The field that contains a list of disk (local storage) metrics associated with the current instance. 
+     */
+    DiskResourceUtilization?: DiskResourceUtilization;
+    /**
+     *  The network field that contains a list of network metrics associated with the current instance. 
+     */
+    NetworkResourceUtilization?: NetworkResourceUtilization;
   }
   export interface EC2Specification {
     /**
@@ -935,6 +961,8 @@ declare namespace CostExplorer {
     CostCategories?: CostCategoryValues;
   }
   export type Expressions = Expression[];
+  export type FindingReasonCode = "CPU_OVER_PROVISIONED"|"CPU_UNDER_PROVISIONED"|"MEMORY_OVER_PROVISIONED"|"MEMORY_UNDER_PROVISIONED"|"EBS_THROUGHPUT_OVER_PROVISIONED"|"EBS_THROUGHPUT_UNDER_PROVISIONED"|"EBS_IOPS_OVER_PROVISIONED"|"EBS_IOPS_UNDER_PROVISIONED"|"NETWORK_BANDWIDTH_OVER_PROVISIONED"|"NETWORK_BANDWIDTH_UNDER_PROVISIONED"|"NETWORK_PPS_OVER_PROVISIONED"|"NETWORK_PPS_UNDER_PROVISIONED"|"DISK_IOPS_OVER_PROVISIONED"|"DISK_IOPS_UNDER_PROVISIONED"|"DISK_THROUGHPUT_OVER_PROVISIONED"|"DISK_THROUGHPUT_UNDER_PROVISIONED"|string;
+  export type FindingReasonCodes = FindingReasonCode[];
   export interface ForecastResult {
     /**
      * The period of time that the forecast covers.
@@ -1794,6 +1822,24 @@ declare namespace CostExplorer {
   export type MonitorDimension = "SERVICE"|string;
   export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string;
   export type NetRISavings = string;
+  export interface NetworkResourceUtilization {
+    /**
+     *  The network ingress throughput utilization measured in Bytes per second. 
+     */
+    NetworkInBytesPerSecond?: GenericString;
+    /**
+     *  The network outgress throughput utilization measured in Bytes per second. 
+     */
+    NetworkOutBytesPerSecond?: GenericString;
+    /**
+     *  The network ingress packets measured in packets per second. 
+     */
+    NetworkPacketsInPerSecond?: GenericString;
+    /**
+     *  The network outgress packets measured in packets per second. 
+     */
+    NetworkPacketsOutPerSecond?: GenericString;
+  }
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
   export type NullableNonNegativeDouble = number;
@@ -1805,6 +1851,8 @@ declare namespace CostExplorer {
   export type OnDemandNormalizedUnits = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
+  export type PlatformDifference = "HYPERVISOR"|"NETWORK_INTERFACE"|"STORAGE_INTERFACE"|"INSTANCE_STORE_AVAILABILITY"|"VIRTUALIZATION_TYPE"|string;
+  export type PlatformDifferences = PlatformDifference[];
   export type PredictionIntervalLevel = number;
   export interface ProvideAnomalyFeedbackRequest {
     /**
@@ -2177,6 +2225,10 @@ declare namespace CostExplorer {
      * Details for termination recommendations.
      */
     TerminateRecommendationDetail?: TerminateRecommendationDetail;
+    /**
+     *  The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). 
+     */
+    FindingReasonCodes?: FindingReasonCodes;
   }
   export interface RightsizingRecommendationConfiguration {
     /**
@@ -2625,6 +2677,10 @@ declare namespace CostExplorer {
      *  Expected utilization metrics for target instance type.
      */
     ExpectedResourceUtilization?: ResourceUtilization;
+    /**
+     *  Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. 
+     */
+    PlatformDifferences?: PlatformDifferences;
   }
   export type TargetInstancesList = TargetInstance[];
   export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
