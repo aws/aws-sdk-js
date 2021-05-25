@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.913.0-->
+<!--LATEST=2.914.0-->
 <!--ENTRYINSERT-->
+
+## 2.914.0
+* feature: Iot: This release includes support for a new feature: Job templates for AWS IoT Device Management Jobs. The release includes job templates as a new resource and APIs for managing job templates.
+* feature: Transfer: AWS Transfer Family customers can now use AWS Managed Active Directory or AD Connector to authenticate their end users, enabling seamless migration of file transfer workflows that rely on AD authentication, without changing end users' credentials or needing a custom authorizer.
+* feature: WorkSpaces: Adds support for Linux device types in WorkspaceAccessProperties
 
 ## 2.913.0
 * feature: CloudWatchLogs: This release provides dimensions and unit support for metric filters.

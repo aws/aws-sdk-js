@@ -738,7 +738,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>Creates a domain configuration.</p>"
     },
     "CreateDynamicThingGroup": {
       "name": "CreateDynamicThingGroup",
@@ -810,6 +810,40 @@
         }
       ],
       "documentation": "<p>Creates a job.</p>"
+    },
+    "CreateJobTemplate": {
+      "name": "CreateJobTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/job-templates/{jobTemplateId}"
+      },
+      "input": {
+        "shape": "CreateJobTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateJobTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a job template.</p>"
     },
     "CreateKeysAndCertificate": {
       "name": "CreateKeysAndCertificate",
@@ -1666,7 +1700,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Deletes the specified domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>Deletes the specified domain configuration.</p>"
     },
     "DeleteDynamicThingGroup": {
       "name": "DeleteDynamicThingGroup",
@@ -1754,6 +1788,31 @@
         }
       ],
       "documentation": "<p>Deletes a job execution.</p>"
+    },
+    "DeleteJobTemplate": {
+      "name": "DeleteJobTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/job-templates/{jobTemplateId}"
+      },
+      "input": {
+        "shape": "DeleteJobTemplateRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified job template.</p>"
     },
     "DeleteMitigationAction": {
       "name": "DeleteMitigationAction",
@@ -2748,7 +2807,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Gets summary information about a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>Gets summary information about a domain configuration.</p>"
     },
     "DescribeEndpoint": {
       "name": "DescribeEndpoint",
@@ -2889,6 +2948,34 @@
         }
       ],
       "documentation": "<p>Describes a job execution.</p>"
+    },
+    "DescribeJobTemplate": {
+      "name": "DescribeJobTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/job-templates/{jobTemplateId}"
+      },
+      "input": {
+        "shape": "DescribeJobTemplateRequest"
+      },
+      "output": {
+        "shape": "DescribeJobTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Returns information about a job template.</p>"
     },
     "DescribeMitigationAction": {
       "name": "DescribeMitigationAction",
@@ -4375,7 +4462,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p>"
     },
     "ListIndices": {
       "name": "ListIndices",
@@ -4463,6 +4550,31 @@
         }
       ],
       "documentation": "<p>Lists the job executions for the specified thing.</p>"
+    },
+    "ListJobTemplates": {
+      "name": "ListJobTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/job-templates"
+      },
+      "input": {
+        "shape": "ListJobTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListJobTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Returns a list of job templates.</p>"
     },
     "ListJobs": {
       "name": "ListJobs",
@@ -6476,7 +6588,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p>"
     },
     "UpdateDynamicThingGroup": {
       "name": "UpdateDynamicThingGroup",
@@ -7492,7 +7604,7 @@
         },
         "target": {
           "shape": "PolicyTarget",
-          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html\">identity</a> to which the policy is attached.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html\">identity</a> to which the policy is attached. For example, a thing group or a certificate.</p>"
         }
       }
     },
@@ -9610,11 +9722,11 @@
         },
         "documentSource": {
           "shape": "JobDocumentSource",
-          "documentation": "<p>An S3 link to the job document.</p>"
+          "documentation": "<p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>"
         },
         "document": {
           "shape": "JobDocument",
-          "documentation": "<p>The job document.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>"
+          "documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
         },
         "description": {
           "shape": "JobDescription",
@@ -9647,6 +9759,10 @@
         "namespaceId": {
           "shape": "NamespaceId",
           "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>"
+        },
+        "jobTemplateArn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template used to create the job.</p>"
         }
       }
     },
@@ -9664,6 +9780,66 @@
         "description": {
           "shape": "JobDescription",
           "documentation": "<p>The job description.</p>"
+        }
+      }
+    },
+    "CreateJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "jobTemplateId",
+        "description"
+      ],
+      "members": {
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>A unique identifier for the job template. We recommend using a UUID. Alpha-numeric characters, \"-\", and \"_\" are valid for use here.</p>",
+          "location": "uri",
+          "locationName": "jobTemplateId"
+        },
+        "jobArn": {
+          "shape": "JobArn",
+          "documentation": "<p>The ARN of the job to use as the basis for the job template.</p>"
+        },
+        "documentSource": {
+          "shape": "JobDocumentSource",
+          "documentation": "<p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>"
+        },
+        "document": {
+          "shape": "JobDocument",
+          "documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
+        },
+        "description": {
+          "shape": "JobDescription",
+          "documentation": "<p>A description of the job document.</p>"
+        },
+        "presignedUrlConfig": {
+          "shape": "PresignedUrlConfig"
+        },
+        "jobExecutionsRolloutConfig": {
+          "shape": "JobExecutionsRolloutConfig"
+        },
+        "abortConfig": {
+          "shape": "AbortConfig"
+        },
+        "timeoutConfig": {
+          "shape": "TimeoutConfig"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata that can be used to manage the job template.</p>"
+        }
+      }
+    },
+    "CreateJobTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "jobTemplateArn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template.</p>"
+        },
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>The unique identifier of the job template.</p>"
         }
       }
     },
@@ -10778,6 +10954,20 @@
         }
       }
     },
+    "DeleteJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "jobTemplateId"
+      ],
+      "members": {
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>The unique identifier of the job template to delete.</p>",
+          "location": "uri",
+          "locationName": "jobTemplateId"
+        }
+      }
+    },
     "DeleteMitigationActionRequest": {
       "type": "structure",
       "required": [
@@ -11773,6 +11963,61 @@
         }
       }
     },
+    "DescribeJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "jobTemplateId"
+      ],
+      "members": {
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>The unique identifier of the job template.</p>",
+          "location": "uri",
+          "locationName": "jobTemplateId"
+        }
+      }
+    },
+    "DescribeJobTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "jobTemplateArn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template.</p>"
+        },
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>The unique identifier of the job template.</p>"
+        },
+        "description": {
+          "shape": "JobDescription",
+          "documentation": "<p>A description of the job template.</p>"
+        },
+        "documentSource": {
+          "shape": "JobDocumentSource",
+          "documentation": "<p>An S3 link to the job document.</p>"
+        },
+        "document": {
+          "shape": "JobDocument",
+          "documentation": "<p>The job document.</p>"
+        },
+        "createdAt": {
+          "shape": "DateType",
+          "documentation": "<p>The time, in seconds since the epoch, when the job template was created.</p>"
+        },
+        "presignedUrlConfig": {
+          "shape": "PresignedUrlConfig"
+        },
+        "jobExecutionsRolloutConfig": {
+          "shape": "JobExecutionsRolloutConfig"
+        },
+        "abortConfig": {
+          "shape": "AbortConfig"
+        },
+        "timeoutConfig": {
+          "shape": "TimeoutConfig"
+        }
+      }
+    },
     "DescribeMitigationActionRequest": {
       "type": "structure",
       "required": [
@@ -12688,7 +12933,7 @@
           "documentation": "<p>The type of service delivered by the endpoint.</p>"
         }
       },
-      "documentation": "<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+      "documentation": "<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul>"
     },
     "DomainConfigurations": {
       "type": "list",
@@ -13964,6 +14209,10 @@
         "namespaceId": {
           "shape": "NamespaceId",
           "documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>"
+        },
+        "jobTemplateArn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template used to create the job.</p>"
         }
       },
       "documentation": "<p>The <code>Job</code> object contains details about a job.</p>"
@@ -14254,6 +14503,46 @@
         "shape": "TargetArn"
       },
       "min": 1
+    },
+    "JobTemplateArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "^arn:[!-~]+$"
+    },
+    "JobTemplateId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "JobTemplateSummary": {
+      "type": "structure",
+      "members": {
+        "jobTemplateArn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template.</p>"
+        },
+        "jobTemplateId": {
+          "shape": "JobTemplateId",
+          "documentation": "<p>The unique identifier of the job template.</p>"
+        },
+        "description": {
+          "shape": "JobDescription",
+          "documentation": "<p>A description of the job template.</p>"
+        },
+        "createdAt": {
+          "shape": "DateType",
+          "documentation": "<p>The time, in seconds since the epoch, when the job template was created.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about the job template.</p>"
+    },
+    "JobTemplateSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "JobTemplateSummary"
+      }
     },
     "JsonDocument": {
       "type": "string"
@@ -15243,6 +15532,36 @@
         "executionSummaries": {
           "shape": "JobExecutionSummaryForThingList",
           "documentation": "<p>A list of job execution summaries.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListJobTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "LaserMaxResults",
+          "documentation": "<p>The maximum number of results to return in the list.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to return the next set of results in the list.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListJobTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "jobTemplates": {
+          "shape": "JobTemplateSummaryList",
+          "documentation": "<p>A list of objects that contain information about the job templates.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -16662,7 +16981,6 @@
     },
     "MaxJobExecutionsPerMin": {
       "type": "integer",
-      "max": 1000,
       "min": 1
     },
     "MaxResults": {

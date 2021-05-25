@@ -188,11 +188,11 @@ declare class Iot extends Service {
    */
   createDimension(callback?: (err: AWSError, data: Iot.Types.CreateDimensionResponse) => void): Request<Iot.Types.CreateDimensionResponse, AWSError>;
   /**
-   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Creates a domain configuration.
    */
   createDomainConfiguration(params: Iot.Types.CreateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
   /**
-   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Creates a domain configuration.
    */
   createDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
   /**
@@ -211,6 +211,14 @@ declare class Iot extends Service {
    * Creates a job.
    */
   createJob(callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
+  /**
+   * Creates a job template.
+   */
+  createJobTemplate(params: Iot.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.CreateJobTemplateResponse) => void): Request<Iot.Types.CreateJobTemplateResponse, AWSError>;
+  /**
+   * Creates a job template.
+   */
+  createJobTemplate(callback?: (err: AWSError, data: Iot.Types.CreateJobTemplateResponse) => void): Request<Iot.Types.CreateJobTemplateResponse, AWSError>;
   /**
    * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
@@ -412,11 +420,11 @@ declare class Iot extends Service {
    */
   deleteDimension(callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
   /**
-   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Deletes the specified domain configuration.
    */
   deleteDomainConfiguration(params: Iot.Types.DeleteDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
   /**
-   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Deletes the specified domain configuration.
    */
   deleteDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
   /**
@@ -443,6 +451,14 @@ declare class Iot extends Service {
    * Deletes a job execution.
    */
   deleteJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified job template.
+   */
+  deleteJobTemplate(params: Iot.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified job template.
+   */
+  deleteJobTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a defined mitigation action from your AWS account.
    */
@@ -692,11 +708,11 @@ declare class Iot extends Service {
    */
   describeDimension(callback?: (err: AWSError, data: Iot.Types.DescribeDimensionResponse) => void): Request<Iot.Types.DescribeDimensionResponse, AWSError>;
   /**
-   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets summary information about a domain configuration.
    */
   describeDomainConfiguration(params: Iot.Types.DescribeDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
   /**
-   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets summary information about a domain configuration.
    */
   describeDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
   /**
@@ -739,6 +755,14 @@ declare class Iot extends Service {
    * Describes a job execution.
    */
   describeJobExecution(callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
+  /**
+   * Returns information about a job template.
+   */
+  describeJobTemplate(params: Iot.Types.DescribeJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
+  /**
+   * Returns information about a job template.
+   */
+  describeJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
   /**
    * Gets information about a mitigation action.
    */
@@ -1124,11 +1148,11 @@ declare class Iot extends Service {
    */
   listDimensions(callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
   /**
-   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.
    */
   listDomainConfigurations(params: Iot.Types.ListDomainConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
   /**
-   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.
    */
   listDomainConfigurations(callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
   /**
@@ -1155,6 +1179,14 @@ declare class Iot extends Service {
    * Lists the job executions for the specified thing.
    */
   listJobExecutionsForThing(callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForThingResponse) => void): Request<Iot.Types.ListJobExecutionsForThingResponse, AWSError>;
+  /**
+   * Returns a list of job templates.
+   */
+  listJobTemplates(params: Iot.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListJobTemplatesResponse) => void): Request<Iot.Types.ListJobTemplatesResponse, AWSError>;
+  /**
+   * Returns a list of job templates.
+   */
+  listJobTemplates(callback?: (err: AWSError, data: Iot.Types.ListJobTemplatesResponse) => void): Request<Iot.Types.ListJobTemplatesResponse, AWSError>;
   /**
    * Lists jobs.
    */
@@ -1668,11 +1700,11 @@ declare class Iot extends Service {
    */
   updateDimension(callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
-   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.
    */
   updateDomainConfiguration(params: Iot.Types.UpdateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
   /**
-   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.
    */
   updateDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
   /**
@@ -2132,7 +2164,7 @@ declare namespace Iot {
      */
     policyName: PolicyName;
     /**
-     * The identity to which the policy is attached.
+     * The identity to which the policy is attached. For example, a thing group or a certificate.
      */
     target: PolicyTarget;
   }
@@ -3341,11 +3373,11 @@ declare namespace Iot {
      */
     targets: JobTargets;
     /**
-     * An S3 link to the job document.
+     * An S3 link to the job document. Required if you don't specify a value for document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
      */
     documentSource?: JobDocumentSource;
     /**
-     * The job document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
+     * The job document. Required if you don't specify a value for documentSource.
      */
     document?: JobDocument;
     /**
@@ -3380,6 +3412,10 @@ declare namespace Iot {
      * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
      */
     namespaceId?: NamespaceId;
+    /**
+     * The ARN of the job template used to create the job.
+     */
+    jobTemplateArn?: JobTemplateArn;
   }
   export interface CreateJobResponse {
     /**
@@ -3394,6 +3430,46 @@ declare namespace Iot {
      * The job description.
      */
     description?: JobDescription;
+  }
+  export interface CreateJobTemplateRequest {
+    /**
+     * A unique identifier for the job template. We recommend using a UUID. Alpha-numeric characters, "-", and "_" are valid for use here.
+     */
+    jobTemplateId: JobTemplateId;
+    /**
+     * The ARN of the job to use as the basis for the job template.
+     */
+    jobArn?: JobArn;
+    /**
+     * An S3 link to the job document to use in the template. Required if you don't specify a value for document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
+     */
+    documentSource?: JobDocumentSource;
+    /**
+     * The job document. Required if you don't specify a value for documentSource.
+     */
+    document?: JobDocument;
+    /**
+     * A description of the job document.
+     */
+    description: JobDescription;
+    presignedUrlConfig?: PresignedUrlConfig;
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    abortConfig?: AbortConfig;
+    timeoutConfig?: TimeoutConfig;
+    /**
+     * Metadata that can be used to manage the job template.
+     */
+    tags?: TagList;
+  }
+  export interface CreateJobTemplateResponse {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
   }
   export interface CreateKeysAndCertificateRequest {
     /**
@@ -4101,6 +4177,12 @@ declare namespace Iot {
      */
     namespaceId?: NamespaceId;
   }
+  export interface DeleteJobTemplateRequest {
+    /**
+     * The unique identifier of the job template to delete.
+     */
+    jobTemplateId: JobTemplateId;
+  }
   export interface DeleteMitigationActionRequest {
     /**
      * The name of the mitigation action that you want to delete.
@@ -4679,6 +4761,42 @@ declare namespace Iot {
      * Information about the job.
      */
     job?: Job;
+  }
+  export interface DescribeJobTemplateRequest {
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId: JobTemplateId;
+  }
+  export interface DescribeJobTemplateResponse {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
+    /**
+     * A description of the job template.
+     */
+    description?: JobDescription;
+    /**
+     * An S3 link to the job document.
+     */
+    documentSource?: JobDocumentSource;
+    /**
+     * The job document.
+     */
+    document?: JobDocument;
+    /**
+     * The time, in seconds since the epoch, when the job template was created.
+     */
+    createdAt?: DateType;
+    presignedUrlConfig?: PresignedUrlConfig;
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    abortConfig?: AbortConfig;
+    timeoutConfig?: TimeoutConfig;
   }
   export interface DescribeMitigationActionRequest {
     /**
@@ -6011,6 +6129,10 @@ declare namespace Iot {
      * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
      */
     namespaceId?: NamespaceId;
+    /**
+     * The ARN of the job template used to create the job.
+     */
+    jobTemplateArn?: JobTemplateArn;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -6200,6 +6322,27 @@ declare namespace Iot {
   }
   export type JobSummaryList = JobSummary[];
   export type JobTargets = TargetArn[];
+  export type JobTemplateArn = string;
+  export type JobTemplateId = string;
+  export interface JobTemplateSummary {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
+    /**
+     * A description of the job template.
+     */
+    description?: JobDescription;
+    /**
+     * The time, in seconds since the epoch, when the job template was created.
+     */
+    createdAt?: DateType;
+  }
+  export type JobTemplateSummaryList = JobTemplateSummary[];
   export type JsonDocument = string;
   export interface KafkaAction {
     /**
@@ -6836,6 +6979,26 @@ declare namespace Iot {
      * A list of job execution summaries.
      */
     executionSummaries?: JobExecutionSummaryForThingList;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesRequest {
+    /**
+     * The maximum number of results to return in the list.
+     */
+    maxResults?: LaserMaxResults;
+    /**
+     * The token to use to return the next set of results in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesResponse {
+    /**
+     * A list of objects that contain information about the job templates.
+     */
+    jobTemplates?: JobTemplateSummaryList;
     /**
      * The token for the next set of results, or null if there are no additional results.
      */
