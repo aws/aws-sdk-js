@@ -237,21 +237,21 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.  You can optionally add a tag to the security group rule. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC Limits.
    */
-  authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.  You can optionally add a tag to the security group rule. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC Limits.
    */
-  authorizeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  authorizeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes.  [VPC Only] You can optionally add a tag to the security group rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC Limits.
    */
-  authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupIngressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupIngressResult, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes.  [VPC Only] You can optionally add a tag to the security group rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC Limits.
    */
-  authorizeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  authorizeSecurityGroupIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupIngressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupIngressResult, AWSError>;
   /**
    * Bundles an Amazon instance store-backed Windows instance. During bundling, only the root device volume (C:\) is bundled. Data on other instance store volumes is not preserved.  This action is not applicable for Linux/Unix instances or Windows instances that are backed by Amazon EBS. 
    */
@@ -1973,6 +1973,14 @@ declare class EC2 extends Service {
    */
   describeSecurityGroupReferences(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupReferencesResult) => void): Request<EC2.Types.DescribeSecurityGroupReferencesResult, AWSError>;
   /**
+   * Describes one or more of your security group rules.
+   */
+  describeSecurityGroupRules(params: EC2.Types.DescribeSecurityGroupRulesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupRulesResult) => void): Request<EC2.Types.DescribeSecurityGroupRulesResult, AWSError>;
+  /**
+   * Describes one or more of your security group rules.
+   */
+  describeSecurityGroupRules(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupRulesResult) => void): Request<EC2.Types.DescribeSecurityGroupRulesResult, AWSError>;
+  /**
    * Describes the specified security groups or all of your security groups. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 Security Groups in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.
    */
   describeSecurityGroups(params: EC2.Types.DescribeSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupsResult) => void): Request<EC2.Types.DescribeSecurityGroupsResult, AWSError>;
@@ -2973,6 +2981,14 @@ declare class EC2 extends Service {
    */
   modifyReservedInstances(callback?: (err: AWSError, data: EC2.Types.ModifyReservedInstancesResult) => void): Request<EC2.Types.ModifyReservedInstancesResult, AWSError>;
   /**
+   * Modifies the rules of a security group.
+   */
+  modifySecurityGroupRules(params: EC2.Types.ModifySecurityGroupRulesRequest, callback?: (err: AWSError, data: EC2.Types.ModifySecurityGroupRulesResult) => void): Request<EC2.Types.ModifySecurityGroupRulesResult, AWSError>;
+  /**
+   * Modifies the rules of a security group.
+   */
+  modifySecurityGroupRules(callback?: (err: AWSError, data: EC2.Types.ModifySecurityGroupRulesResult) => void): Request<EC2.Types.ModifySecurityGroupRulesResult, AWSError>;
+  /**
    * Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation. Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts. For more information about modifying snapshot permissions, see Sharing snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   modifySnapshotAttribute(params: EC2.Types.ModifySnapshotAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -3445,19 +3461,19 @@ declare class EC2 extends Service {
    */
   revokeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.RevokeClientVpnIngressResult) => void): Request<EC2.Types.RevokeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified egress (outbound) rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic.  You can specify the rules that you want to remove by using one of the following methods:   The security group rule IDs.   The security group rule properties. Each rule consists of the protocol, from port, to port, and the IPv4 or IPv6 CIDR range or referenced security group or prefix list id. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.    Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(params: EC2.Types.RevokeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupEgressResult) => void): Request<EC2.Types.RevokeSecurityGroupEgressResult, AWSError>;
   /**
-   * [VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified egress (outbound) rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic.  You can specify the rules that you want to remove by using one of the following methods:   The security group rule IDs.   The security group rule properties. Each rule consists of the protocol, from port, to port, and the IPv4 or IPv6 CIDR range or referenced security group or prefix list id. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.    Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupEgressResult) => void): Request<EC2.Types.RevokeSecurityGroupEgressResult, AWSError>;
   /**
-   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic , default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  You can specify the rules that you want to remove by using one of the following methods:   [VPC only] The security group rule IDs.   The security group rule properties. Each rule consists of the protocol, from port, to port, and the IPv4 or IPv6 CIDR range or referenced security group or prefix list id. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.    Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(params: EC2.Types.RevokeSecurityGroupIngressRequest, callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupIngressResult) => void): Request<EC2.Types.RevokeSecurityGroupIngressResult, AWSError>;
   /**
-   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic , default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.  You can specify the rules that you want to remove by using one of the following methods:   [VPC only] The security group rule IDs.   The security group rule properties. Each rule consists of the protocol, from port, to port, and the IPv4 or IPv6 CIDR range or referenced security group or prefix list id. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.  AWS recommends that you use DescribeSecurityGroups to verify that the rule has been removed.    Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupIngressResult) => void): Request<EC2.Types.RevokeSecurityGroupIngressResult, AWSError>;
   /**
@@ -3581,19 +3597,19 @@ declare class EC2 extends Service {
    */
   unmonitorInstances(callback?: (err: AWSError, data: EC2.Types.UnmonitorInstancesResult) => void): Request<EC2.Types.UnmonitorInstancesResult, AWSError>;
   /**
-   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can specify the rule that you want to update by using one of the following methods:   The security group rule descriptions.   The IP permissions structure.   You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsEgress(params: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressRequest, callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult, AWSError>;
   /**
-   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can specify the rule that you want to update by using one of the following methods:   The security group rule descriptions.   The IP permissions structure.   You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsEgress(callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult, AWSError>;
   /**
-   * Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can specify the rule that you want to update by using one of the following methods:   [VPC only] The security group rule descriptions.   The IP permissions structure.   You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsIngress(params: EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressRequest, callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult, AWSError>;
   /**
-   * Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can specify the rule that you want to update by using one of the following methods:   [VPC only] The security group rule descriptions.   The IP permissions structure.   You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsIngress(callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult, AWSError>;
   /**
@@ -5009,6 +5025,10 @@ declare namespace EC2 {
      */
     IpPermissions?: IpPermissionList;
     /**
+     * The tags applied to the security group rule.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
      * Not supported. Use a set of IP permissions to specify the CIDR.
      */
     CidrIp?: String;
@@ -5033,6 +5053,16 @@ declare namespace EC2 {
      */
     SourceSecurityGroupOwnerId?: String;
   }
+  export interface AuthorizeSecurityGroupEgressResult {
+    /**
+     * Returns true if the request succeeds; otherwise, returns an error.
+     */
+    Return?: Boolean;
+    /**
+     * Information about the outbound (egress) security group rules that were added.
+     */
+    SecurityGroupRules?: SecurityGroupRuleList;
+  }
   export interface AuthorizeSecurityGroupIngressRequest {
     /**
      * The IPv4 address range, in CIDR format. You can't specify this parameter when specifying a source security group. To specify an IPv6 address range, use a set of IP permissions. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
@@ -5055,7 +5085,7 @@ declare namespace EC2 {
      */
     IpPermissions?: IpPermissionList;
     /**
-     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). To specify icmpv6, use a set of IP permissions. [VPC only] Use -1 to specify all protocols. If you specify -1 or a protocol other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports you specify. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
+     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). To specify icmpv6, use a set of IP permissions. [VPC only] Use -1 to specify all protocols. If you specify -1 or a protocol other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports that you specify. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     IpProtocol?: String;
     /**
@@ -5074,6 +5104,20 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * [VPC Only] The tags applied to the security group rule.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface AuthorizeSecurityGroupIngressResult {
+    /**
+     * Returns true if the request succeeds; otherwise, returns an error.
+     */
+    Return?: Boolean;
+    /**
+     * Information about the inbound (ingress) security group rules that were added.
+     */
+    SecurityGroupRules?: SecurityGroupRuleList;
   }
   export type AutoAcceptSharedAssociationsValue = "enable"|"disable"|string;
   export type AutoAcceptSharedAttachmentsValue = "enable"|"disable"|string;
@@ -11092,7 +11136,7 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The key pair names. Default: Describes all your key pairs.
+     * The key pair names. Default: Describes all of your key pairs.
      */
     KeyNames?: KeyNameStringList;
     /**
@@ -12136,6 +12180,39 @@ declare namespace EC2 {
      */
     SecurityGroupReferenceSet?: SecurityGroupReferences;
   }
+  export type DescribeSecurityGroupRulesMaxResults = number;
+  export interface DescribeSecurityGroupRulesRequest {
+    /**
+     * One or more filters.    group-id - The ID of the security group.     security-group-rule-id - The ID of the security group rule.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.  
+     */
+    Filters?: FilterList;
+    /**
+     * The IDs of the security group rules.
+     */
+    SecurityGroupRuleIds?: SecurityGroupRuleIdList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.
+     */
+    MaxResults?: DescribeSecurityGroupRulesMaxResults;
+  }
+  export interface DescribeSecurityGroupRulesResult {
+    /**
+     * Information about security group rules.
+     */
+    SecurityGroupRules?: SecurityGroupRuleList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: String;
+  }
   export type DescribeSecurityGroupsMaxResults = number;
   export interface DescribeSecurityGroupsRequest {
     /**
@@ -12143,11 +12220,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The IDs of the security groups. Required for security groups in a nondefault VPC. Default: Describes all your security groups.
+     * The IDs of the security groups. Required for security groups in a nondefault VPC. Default: Describes all of your security groups.
      */
     GroupIds?: GroupIdStringList;
     /**
-     * [EC2-Classic and default VPC only] The names of the security groups. You can specify either the security group name or the security group ID. For security groups in a nondefault VPC, use the group-name filter to describe security groups by name. Default: Describes all your security groups.
+     * [EC2-Classic and default VPC only] The names of the security groups. You can specify either the security group name or the security group ID. For security groups in a nondefault VPC, use the group-name filter to describe security groups by name. Default: Describes all of your security groups.
      */
     GroupNames?: GroupNameStringList;
     /**
@@ -16954,7 +17031,7 @@ declare namespace EC2 {
      */
     KeyFingerprint?: String;
     /**
-     * The key pair name you provided.
+     * The key pair name that you provided.
      */
     KeyName?: String;
     /**
@@ -18110,6 +18187,10 @@ declare namespace EC2 {
      * A description for the security group rule that references this IPv4 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     Description?: String;
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
   }
   export type IpRangeList = IpRange[];
   export type IpRanges = String[];
@@ -18166,6 +18247,10 @@ declare namespace EC2 {
      * A description for the security group rule that references this IPv6 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     Description?: String;
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
   }
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
@@ -19994,6 +20079,26 @@ declare namespace EC2 {
      */
     ReservedInstancesModificationId?: String;
   }
+  export interface ModifySecurityGroupRulesRequest {
+    /**
+     * The ID of the security group.
+     */
+    GroupId: SecurityGroupId;
+    /**
+     * Information about the security group properties to update.
+     */
+    SecurityGroupRules: SecurityGroupRuleUpdateList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifySecurityGroupRulesResult {
+    /**
+     * Returns true if the request succeeds; otherwise, returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface ModifySnapshotAttributeRequest {
     /**
      * The snapshot attribute to modify. Only volume creation permissions can be modified.
@@ -21776,6 +21881,10 @@ declare namespace EC2 {
      * The ID of the prefix.
      */
     PrefixListId?: String;
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
   }
   export type PrefixListIdList = PrefixListId[];
   export type PrefixListIdSet = String[];
@@ -22202,6 +22311,28 @@ declare namespace EC2 {
   }
   export type RecurringChargeFrequency = "Hourly"|string;
   export type RecurringChargesList = RecurringCharge[];
+  export interface ReferencedSecurityGroup {
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: String;
+    /**
+     * The status of a VPC peering connection, if applicable.
+     */
+    PeeringStatus?: String;
+    /**
+     * The AWS account ID.
+     */
+    UserId?: String;
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: String;
+    /**
+     * The ID of the VPC peering connection.
+     */
+    VpcPeeringConnectionId?: String;
+  }
   export interface Region {
     /**
      * The Region service endpoint.
@@ -23444,7 +23575,7 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -23654,6 +23785,10 @@ declare namespace EC2 {
      */
     IpPermissions?: IpPermissionList;
     /**
+     * The IDs of the security group rules.
+     */
+    SecurityGroupRuleIds?: SecurityGroupRuleIdList;
+    /**
      * Not supported. Use a set of IP permissions to specify the CIDR.
      */
     CidrIp?: String;
@@ -23729,6 +23864,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The IDs of the security group rules.
+     */
+    SecurityGroupRuleIds?: SecurityGroupRuleIdList;
   }
   export interface RevokeSecurityGroupIngressResult {
     /**
@@ -24615,6 +24754,119 @@ declare namespace EC2 {
     VpcPeeringConnectionId?: String;
   }
   export type SecurityGroupReferences = SecurityGroupReference[];
+  export interface SecurityGroupRule {
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: SecurityGroupId;
+    /**
+     * The ID of the AWS account that owns the security group. 
+     */
+    GroupOwnerId?: String;
+    /**
+     * Indicates whether the security group rule is an outbound rule.
+     */
+    IsEgress?: Boolean;
+    /**
+     * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers).  Use -1 to specify all protocols.
+     */
+    IpProtocol?: String;
+    /**
+     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     */
+    FromPort?: Integer;
+    /**
+     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. 
+     */
+    ToPort?: Integer;
+    /**
+     * The IPv4 CIDR range. 
+     */
+    CidrIpv4?: String;
+    /**
+     * The IPv6 CIDR range. 
+     */
+    CidrIpv6?: String;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: PrefixListResourceId;
+    /**
+     * Describes the security group that is referenced in the rule.
+     */
+    ReferencedGroupInfo?: ReferencedSecurityGroup;
+    /**
+     * The security group rule description.
+     */
+    Description?: String;
+    /**
+     * The tags applied to the security group rule.
+     */
+    Tags?: TagList;
+  }
+  export interface SecurityGroupRuleDescription {
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: String;
+    /**
+     * The description of the security group rule.
+     */
+    Description?: String;
+  }
+  export type SecurityGroupRuleDescriptionList = SecurityGroupRuleDescription[];
+  export type SecurityGroupRuleId = string;
+  export type SecurityGroupRuleIdList = String[];
+  export type SecurityGroupRuleList = SecurityGroupRule[];
+  export interface SecurityGroupRuleRequest {
+    /**
+     * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers).  Use -1 to specify all protocols.
+     */
+    IpProtocol?: String;
+    /**
+     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     */
+    FromPort?: Integer;
+    /**
+     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. 
+     */
+    ToPort?: Integer;
+    /**
+     * The IPv4 CIDR range. To specify a single IPv4 address, use the /32 prefix length. 
+     */
+    CidrIpv4?: String;
+    /**
+     * The IPv6 CIDR range. To specify a single IPv6 address, use the /128 prefix length.
+     */
+    CidrIpv6?: String;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: PrefixListResourceId;
+    /**
+     * The ID of the security group that is referenced in the security group rule.
+     */
+    ReferencedGroupId?: SecurityGroupId;
+    /**
+     * The description of the security group rule.
+     */
+    Description?: String;
+  }
+  export interface SecurityGroupRuleUpdate {
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
+    /**
+     * Information about the security group rule.
+     */
+    SecurityGroupRule?: SecurityGroupRuleRequest;
+  }
+  export type SecurityGroupRuleUpdateList = SecurityGroupRuleUpdate[];
   export type SecurityGroupStringList = SecurityGroupName[];
   export type SelfServicePortal = "enabled"|"disabled"|string;
   export interface SendDiagnosticInterruptRequest {
@@ -27193,9 +27445,13 @@ declare namespace EC2 {
      */
     GroupName?: SecurityGroupName;
     /**
-     * The IP permissions for the security group rule.
+     * The IP permissions for the security group rule. You can either specify this parameter, or the SecurityGroupRuleDescriptions parameter.
      */
-    IpPermissions: IpPermissionList;
+    IpPermissions?: IpPermissionList;
+    /**
+     * The description for the egress security group rules. You can either specify this parameter, or the IpPermissions parameter.
+     */
+    SecurityGroupRuleDescriptions?: SecurityGroupRuleDescriptionList;
   }
   export interface UpdateSecurityGroupRuleDescriptionsEgressResult {
     /**
@@ -27217,9 +27473,13 @@ declare namespace EC2 {
      */
     GroupName?: SecurityGroupName;
     /**
-     * The IP permissions for the security group rule. 
+     * The IP permissions for the security group rule. You can either specify this parameter, or the SecurityGroupRuleDescriptions parameter.
      */
-    IpPermissions: IpPermissionList;
+    IpPermissions?: IpPermissionList;
+    /**
+     * [VPC only] The description for the ingress security group rules. You can either specify this parameter, or the IpPermissions parameter.
+     */
+    SecurityGroupRuleDescriptions?: SecurityGroupRuleDescriptionList;
   }
   export interface UpdateSecurityGroupRuleDescriptionsIngressResult {
     /**
@@ -27285,6 +27545,10 @@ declare namespace EC2 {
      * The ID of the VPC peering connection, if applicable.
      */
     VpcPeeringConnectionId?: String;
+    /**
+     * The ID of the security group rule.
+     */
+    SecurityGroupRuleId?: SecurityGroupRuleId;
   }
   export type UserIdGroupPairList = UserIdGroupPair[];
   export type UserIdGroupPairSet = UserIdGroupPair[];

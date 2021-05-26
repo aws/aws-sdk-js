@@ -213,11 +213,11 @@ declare class ECS extends Service {
    */
   listContainerInstances(callback?: (err: AWSError, data: ECS.Types.ListContainerInstancesResponse) => void): Request<ECS.Types.ListContainerInstancesResponse, AWSError>;
   /**
-   * Lists the services that are running in a specified cluster.
+   * Returns a list of services. You can filter the results by cluster, launch type, and scheduling strategy.
    */
   listServices(params: ECS.Types.ListServicesRequest, callback?: (err: AWSError, data: ECS.Types.ListServicesResponse) => void): Request<ECS.Types.ListServicesResponse, AWSError>;
   /**
-   * Lists the services that are running in a specified cluster.
+   * Returns a list of services. You can filter the results by cluster, launch type, and scheduling strategy.
    */
   listServices(callback?: (err: AWSError, data: ECS.Types.ListServicesResponse) => void): Request<ECS.Types.ListServicesResponse, AWSError>;
   /**
@@ -245,11 +245,11 @@ declare class ECS extends Service {
    */
   listTaskDefinitions(callback?: (err: AWSError, data: ECS.Types.ListTaskDefinitionsResponse) => void): Request<ECS.Types.ListTaskDefinitionsResponse, AWSError>;
   /**
-   * Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the family, containerInstance, and desiredStatus parameters. Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. 
+   * Returns a list of tasks. You can filter the results by cluster, task definition family, container instance, launch type, what IAM principal started the task, or by the desired status of the task. Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour.
    */
   listTasks(params: ECS.Types.ListTasksRequest, callback?: (err: AWSError, data: ECS.Types.ListTasksResponse) => void): Request<ECS.Types.ListTasksResponse, AWSError>;
   /**
-   * Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the family, containerInstance, and desiredStatus parameters. Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. 
+   * Returns a list of tasks. You can filter the results by cluster, task definition family, container instance, launch type, what IAM principal started the task, or by the desired status of the task. Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour.
    */
   listTasks(callback?: (err: AWSError, data: ECS.Types.ListTasksResponse) => void): Request<ECS.Types.ListTasksResponse, AWSError>;
   /**
@@ -690,7 +690,7 @@ declare namespace ECS {
   export type ClusterSettingName = "containerInsights"|string;
   export type ClusterSettings = ClusterSetting[];
   export type Clusters = Cluster[];
-  export type Compatibility = "EC2"|"FARGATE"|string;
+  export type Compatibility = "EC2"|"FARGATE"|"EXTERNAL"|string;
   export type CompatibilityList = Compatibility[];
   export type Connectivity = "CONNECTED"|"DISCONNECTED"|string;
   export interface Container {
@@ -1157,7 +1157,7 @@ declare namespace ECS {
      */
     clientToken?: String;
     /**
-     * The launch type on which to run your service. The accepted values are FARGATE and EC2. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are launched on Amazon EC2 instances registered to your cluster. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
+     * The infrastructure on which to run your service. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type runs your tasks on AWS Fargate On-Demand infrastructure.  Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see AWS Fargate capacity providers in the Amazon ECS User Guide for AWS Fargate.  The EC2 launch type runs your tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs your tasks on your on-premise server or virtual machine (VM) capacity registered to your cluster. A service can use either a launch type or a capacity provider strategy. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
      */
     launchType?: LaunchType;
     /**
@@ -2018,7 +2018,7 @@ declare namespace ECS {
      */
     value?: String;
   }
-  export type LaunchType = "EC2"|"FARGATE"|string;
+  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
   export interface LinuxParameters {
     /**
      * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.  For tasks that use the Fargate launch type, capabilities is supported for all platform versions but the add parameter is only supported if using platform version 1.4.0 or later. 
@@ -2175,7 +2175,7 @@ declare namespace ECS {
   }
   export interface ListServicesRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed.
+     * The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the ListServices results. If you do not specify a cluster, the default cluster is assumed.
      */
     cluster?: String;
     /**
@@ -2187,11 +2187,11 @@ declare namespace ECS {
      */
     maxResults?: BoxedInteger;
     /**
-     * The launch type for the services to list.
+     * The launch type to use when filtering the ListServices results.
      */
     launchType?: LaunchType;
     /**
-     * The scheduling strategy for services to list.
+     * The scheduling strategy to use when filtering the ListServices results.
      */
     schedulingStrategy?: SchedulingStrategy;
   }
@@ -2279,15 +2279,15 @@ declare namespace ECS {
   }
   export interface ListTasksRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks to list. If you do not specify a cluster, the default cluster is assumed.
+     * The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the ListTasks results. If you do not specify a cluster, the default cluster is assumed.
      */
     cluster?: String;
     /**
-     * The container instance ID or full ARN of the container instance with which to filter the ListTasks results. Specifying a containerInstance limits the results to tasks that belong to that container instance.
+     * The container instance ID or full ARN of the container instance to use when filtering the ListTasks results. Specifying a containerInstance limits the results to tasks that belong to that container instance.
      */
     containerInstance?: String;
     /**
-     * The name of the family with which to filter the ListTasks results. Specifying a family limits the results to tasks that belong to that family.
+     * The name of the task definition family to use when filtering the ListTasks results. Specifying a family limits the results to tasks that belong to that family.
      */
     family?: String;
     /**
@@ -2303,15 +2303,15 @@ declare namespace ECS {
      */
     startedBy?: String;
     /**
-     * The name of the service with which to filter the ListTasks results. Specifying a serviceName limits the results to tasks that belong to that service.
+     * The name of the service to use when filtering the ListTasks results. Specifying a serviceName limits the results to tasks that belong to that service.
      */
     serviceName?: String;
     /**
-     * The task desired status with which to filter the ListTasks results. Specifying a desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set the desired status to STOPPED. This can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is RUNNING, which shows tasks that Amazon ECS has set the desired status to RUNNING.  Although you can filter results based on a desired status of PENDING, this does not return any results. Amazon ECS never sets the desired status of a task to that value (only a task's lastStatus may have a value of PENDING). 
+     * The task desired status to use when filtering the ListTasks results. Specifying a desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set the desired status to STOPPED. This can be useful for debugging tasks that are not starting properly or have died or finished. The default status filter is RUNNING, which shows tasks that Amazon ECS has set the desired status to RUNNING.  Although you can filter results based on a desired status of PENDING, this does not return any results. Amazon ECS never sets the desired status of a task to that value (only a task's lastStatus may have a value of PENDING). 
      */
     desiredStatus?: DesiredStatus;
     /**
-     * The launch type for services to list.
+     * The launch type to use when filtering the ListTasks results.
      */
     launchType?: LaunchType;
   }
@@ -2816,7 +2816,7 @@ declare namespace ECS {
      */
     group?: String;
     /**
-     * The launch type on which to run your task. The accepted values are FARGATE and EC2. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE is specified, your tasks are launched on AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must use a capacity provider strategy with the FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are launched on Amazon EC2 instances registered to your cluster. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
+     * The infrastructure on which to run your standalone task. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type runs your tasks on AWS Fargate On-Demand infrastructure.  Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see AWS Fargate capacity providers in the Amazon ECS User Guide for AWS Fargate.  The EC2 launch type runs your tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs your tasks on your on-premise server or virtual machine (VM) capacity registered to your cluster. A task can use either a launch type or a capacity provider strategy. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.
      */
     launchType?: LaunchType;
     /**
@@ -2933,7 +2933,7 @@ declare namespace ECS {
      */
     pendingCount?: Integer;
     /**
-     * The launch type on which your service is running. If no value is specified, it will default to EC2. Valid values include EC2 and FARGATE. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
+     * The infrastructure on which your service is running. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide.
      */
     launchType?: LaunchType;
     /**
@@ -3386,7 +3386,7 @@ declare namespace ECS {
      */
     lastStatus?: String;
     /**
-     * The launch type on which your task is running. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
+     * The infrastructure on which your task is running. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide.
      */
     launchType?: LaunchType;
     /**

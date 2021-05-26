@@ -978,7 +978,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * An optional comment to describe the origin access identity. The comment cannot be longer than 128 characters.
+     * A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
      */
     Comment: string;
   }

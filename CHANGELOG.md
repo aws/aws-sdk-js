@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.914.0-->
+<!--LATEST=2.915.0-->
 <!--ENTRYINSERT-->
+
+## 2.915.0
+* feature: ACMPCA: This release enables customers to store CRLs in S3 buckets with Block Public Access enabled. The release adds the S3ObjectAcl parameter to the CreateCertificateAuthority and UpdateCertificateAuthority APIs to allow customers to choose whether their CRL will be publicly available.
+* feature: EC2: This release adds resource ids and tagging support for VPC security group rules.
+* feature: ECS: The release adds support for registering External instances to your Amazon ECS clusters.
+* feature: MWAA: Adds scheduler count selection for Environments using Airflow version 2.0.2 or later.
+* feature: Outposts: Add ConflictException to DeleteOutpost, CreateOutpost
+* feature: QLDB: Support STANDARD permissions mode in CreateLedger and DescribeLedger. Add UpdateLedgerPermissionsMode to update permissions mode on existing ledgers.
 
 ## 2.914.0
 * feature: Iot: This release includes support for a new feature: Job templates for AWS IoT Device Management Jobs. The release includes job templates as a new resource and APIs for managing job templates.

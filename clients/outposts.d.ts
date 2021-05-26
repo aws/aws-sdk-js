@@ -187,6 +187,7 @@ declare namespace Outposts {
      * The Outpost tags.
      */
     Tags?: TagMap;
+    SiteArn?: SiteArn;
   }
   export type OutpostArn = string;
   export type OutpostDescription = string;
@@ -202,7 +203,9 @@ declare namespace Outposts {
      * The site tags.
      */
     Tags?: TagMap;
+    SiteArn?: SiteArn;
   }
+  export type SiteArn = string;
   export type SiteDescription = string;
   export type SiteId = string;
   export type SiteName = string;

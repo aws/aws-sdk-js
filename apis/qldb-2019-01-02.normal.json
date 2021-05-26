@@ -433,6 +433,28 @@
         }
       ],
       "documentation": "<p>Updates properties on a ledger.</p>"
+    },
+    "UpdateLedgerPermissionsMode": {
+      "name": "UpdateLedgerPermissionsMode",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/ledgers/{name}/permissions-mode"
+      },
+      "input": {
+        "shape": "UpdateLedgerPermissionsModeRequest"
+      },
+      "output": {
+        "shape": "UpdateLedgerPermissionsModeResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates the permissions mode of a ledger.</p>"
     }
   },
   "shapes": {
@@ -491,7 +513,7 @@
         },
         "PermissionsMode": {
           "shape": "PermissionsMode",
-          "documentation": "<p>The permissions mode to assign to the ledger that you want to create.</p>"
+          "documentation": "<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>"
         },
         "DeletionProtection": {
           "shape": "DeletionProtection",
@@ -517,6 +539,10 @@
         "CreationDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>"
+        },
+        "PermissionsMode": {
+          "shape": "PermissionsMode",
+          "documentation": "<p>The permissions mode of the ledger that you created.</p>"
         },
         "DeletionProtection": {
           "shape": "DeletionProtection",
@@ -636,6 +662,10 @@
         "CreationDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>"
+        },
+        "PermissionsMode": {
+          "shape": "PermissionsMode",
+          "documentation": "<p>The permissions mode of the ledger.</p>"
         },
         "DeletionProtection": {
           "shape": "DeletionProtection",
@@ -1177,7 +1207,8 @@
     "PermissionsMode": {
       "type": "string",
       "enum": [
-        "ALLOW_ALL"
+        "ALLOW_ALL",
+        "STANDARD"
       ]
     },
     "S3Bucket": {
@@ -1391,6 +1422,42 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateLedgerPermissionsModeRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "PermissionsMode"
+      ],
+      "members": {
+        "Name": {
+          "shape": "LedgerName",
+          "documentation": "<p>The name of the ledger.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "PermissionsMode": {
+          "shape": "PermissionsMode",
+          "documentation": "<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>"
+        }
+      }
+    },
+    "UpdateLedgerPermissionsModeResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "LedgerName",
+          "documentation": "<p>The name of the ledger.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the ledger.</p>"
+        },
+        "PermissionsMode": {
+          "shape": "PermissionsMode",
+          "documentation": "<p>The current permissions mode of the ledger.</p>"
+        }
+      }
     },
     "UpdateLedgerRequest": {
       "type": "structure",

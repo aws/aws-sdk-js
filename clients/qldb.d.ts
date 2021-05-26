@@ -163,6 +163,14 @@ declare class QLDB extends Service {
    * Updates properties on a ledger.
    */
   updateLedger(callback?: (err: AWSError, data: QLDB.Types.UpdateLedgerResponse) => void): Request<QLDB.Types.UpdateLedgerResponse, AWSError>;
+  /**
+   * Updates the permissions mode of a ledger.
+   */
+  updateLedgerPermissionsMode(params: QLDB.Types.UpdateLedgerPermissionsModeRequest, callback?: (err: AWSError, data: QLDB.Types.UpdateLedgerPermissionsModeResponse) => void): Request<QLDB.Types.UpdateLedgerPermissionsModeResponse, AWSError>;
+  /**
+   * Updates the permissions mode of a ledger.
+   */
+  updateLedgerPermissionsMode(callback?: (err: AWSError, data: QLDB.Types.UpdateLedgerPermissionsModeResponse) => void): Request<QLDB.Types.UpdateLedgerPermissionsModeResponse, AWSError>;
 }
 declare namespace QLDB {
   export type Arn = string;
@@ -193,7 +201,7 @@ declare namespace QLDB {
      */
     Tags?: Tags;
     /**
-     * The permissions mode to assign to the ledger that you want to create.
+     * The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:    ALLOW_ALL: A legacy permissions mode that enables access control with API-level granularity for ledgers. This mode allows users who have SendCommand permissions for this ledger to run all PartiQL commands (hence, ALLOW_ALL) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.    STANDARD: (Recommended) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands. By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to SendCommand API permissions for the ledger.    We strongly recommend using the STANDARD permissions mode to maximize the security of your ledger data. 
      */
     PermissionsMode: PermissionsMode;
     /**
@@ -218,6 +226,10 @@ declare namespace QLDB {
      * The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)
      */
     CreationDateTime?: Timestamp;
+    /**
+     * The permissions mode of the ledger that you created.
+     */
+    PermissionsMode?: PermissionsMode;
     /**
      * The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (true) by default. If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the UpdateLedger operation to set the flag to false. The QLDB console disables deletion protection for you when you use it to delete a ledger.
      */
@@ -285,6 +297,10 @@ declare namespace QLDB {
      * The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)
      */
     CreationDateTime?: Timestamp;
+    /**
+     * The permissions mode of the ledger.
+     */
+    PermissionsMode?: PermissionsMode;
     /**
      * The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (true) by default. If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the UpdateLedger operation to set the flag to false. The QLDB console disables deletion protection for you when you use it to delete a ledger.
      */
@@ -598,7 +614,7 @@ declare namespace QLDB {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type PermissionsMode = "ALLOW_ALL"|string;
+  export type PermissionsMode = "ALLOW_ALL"|"STANDARD"|string;
   export type S3Bucket = string;
   export interface S3EncryptionConfiguration {
     /**
@@ -693,6 +709,30 @@ declare namespace QLDB {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateLedgerPermissionsModeRequest {
+    /**
+     * The name of the ledger.
+     */
+    Name: LedgerName;
+    /**
+     * The permissions mode to assign to the ledger. This parameter can have one of the following values:    ALLOW_ALL: A legacy permissions mode that enables access control with API-level granularity for ledgers. This mode allows users who have SendCommand permissions for this ledger to run all PartiQL commands (hence, ALLOW_ALL) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.    STANDARD: (Recommended) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands. By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to SendCommand API permissions for the ledger.    We strongly recommend using the STANDARD permissions mode to maximize the security of your ledger data. 
+     */
+    PermissionsMode: PermissionsMode;
+  }
+  export interface UpdateLedgerPermissionsModeResponse {
+    /**
+     * The name of the ledger.
+     */
+    Name?: LedgerName;
+    /**
+     * The Amazon Resource Name (ARN) for the ledger.
+     */
+    Arn?: Arn;
+    /**
+     * The current permissions mode of the ledger.
+     */
+    PermissionsMode?: PermissionsMode;
   }
   export interface UpdateLedgerRequest {
     /**
