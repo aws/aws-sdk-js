@@ -12,6 +12,14 @@ declare class IoTEvents extends Service {
   constructor(options?: IoTEvents.Types.ClientConfiguration)
   config: Config & IoTEvents.Types.ClientConfiguration;
   /**
+   * Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see Create an alarm model in the AWS IoT Events Developer Guide.
+   */
+  createAlarmModel(params: IoTEvents.Types.CreateAlarmModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.CreateAlarmModelResponse) => void): Request<IoTEvents.Types.CreateAlarmModelResponse, AWSError>;
+  /**
+   * Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see Create an alarm model in the AWS IoT Events Developer Guide.
+   */
+  createAlarmModel(callback?: (err: AWSError, data: IoTEvents.Types.CreateAlarmModelResponse) => void): Request<IoTEvents.Types.CreateAlarmModelResponse, AWSError>;
+  /**
    * Creates a detector model.
    */
   createDetectorModel(params: IoTEvents.Types.CreateDetectorModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.CreateDetectorModelResponse) => void): Request<IoTEvents.Types.CreateDetectorModelResponse, AWSError>;
@@ -27,6 +35,14 @@ declare class IoTEvents extends Service {
    * Creates an input.
    */
   createInput(callback?: (err: AWSError, data: IoTEvents.Types.CreateInputResponse) => void): Request<IoTEvents.Types.CreateInputResponse, AWSError>;
+  /**
+   * Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.
+   */
+  deleteAlarmModel(params: IoTEvents.Types.DeleteAlarmModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.DeleteAlarmModelResponse) => void): Request<IoTEvents.Types.DeleteAlarmModelResponse, AWSError>;
+  /**
+   * Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.
+   */
+  deleteAlarmModel(callback?: (err: AWSError, data: IoTEvents.Types.DeleteAlarmModelResponse) => void): Request<IoTEvents.Types.DeleteAlarmModelResponse, AWSError>;
   /**
    * Deletes a detector model. Any active instances of the detector model are also deleted.
    */
@@ -44,6 +60,14 @@ declare class IoTEvents extends Service {
    */
   deleteInput(callback?: (err: AWSError, data: IoTEvents.Types.DeleteInputResponse) => void): Request<IoTEvents.Types.DeleteInputResponse, AWSError>;
   /**
+   * Retrieves information about an alarm model. If you don't specify a value for the alarmModelVersion parameter, the latest version is returned.
+   */
+  describeAlarmModel(params: IoTEvents.Types.DescribeAlarmModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeAlarmModelResponse) => void): Request<IoTEvents.Types.DescribeAlarmModelResponse, AWSError>;
+  /**
+   * Retrieves information about an alarm model. If you don't specify a value for the alarmModelVersion parameter, the latest version is returned.
+   */
+  describeAlarmModel(callback?: (err: AWSError, data: IoTEvents.Types.DescribeAlarmModelResponse) => void): Request<IoTEvents.Types.DescribeAlarmModelResponse, AWSError>;
+  /**
    * Describes a detector model. If the version parameter is not specified, information about the latest version is returned.
    */
   describeDetectorModel(params: IoTEvents.Types.DescribeDetectorModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelResponse, AWSError>;
@@ -52,11 +76,11 @@ declare class IoTEvents extends Service {
    */
   describeDetectorModel(callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelResponse, AWSError>;
   /**
-   * Retrieves execution information about a detector model analysis
+   * Retrieves runtime information about a detector model analysis.  After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results. 
    */
   describeDetectorModelAnalysis(params: IoTEvents.Types.DescribeDetectorModelAnalysisRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelAnalysisResponse, AWSError>;
   /**
-   * Retrieves execution information about a detector model analysis
+   * Retrieves runtime information about a detector model analysis.  After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results. 
    */
   describeDetectorModelAnalysis(callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelAnalysisResponse, AWSError>;
   /**
@@ -76,13 +100,29 @@ declare class IoTEvents extends Service {
    */
   describeLoggingOptions(callback?: (err: AWSError, data: IoTEvents.Types.DescribeLoggingOptionsResponse) => void): Request<IoTEvents.Types.DescribeLoggingOptionsResponse, AWSError>;
   /**
-   * Retrieves one or more analysis results of the detector model.
+   * Retrieves one or more analysis results of the detector model.  After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results. 
    */
   getDetectorModelAnalysisResults(params: IoTEvents.Types.GetDetectorModelAnalysisResultsRequest, callback?: (err: AWSError, data: IoTEvents.Types.GetDetectorModelAnalysisResultsResponse) => void): Request<IoTEvents.Types.GetDetectorModelAnalysisResultsResponse, AWSError>;
   /**
-   * Retrieves one or more analysis results of the detector model.
+   * Retrieves one or more analysis results of the detector model.  After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results. 
    */
   getDetectorModelAnalysisResults(callback?: (err: AWSError, data: IoTEvents.Types.GetDetectorModelAnalysisResultsResponse) => void): Request<IoTEvents.Types.GetDetectorModelAnalysisResultsResponse, AWSError>;
+  /**
+   * Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.
+   */
+  listAlarmModelVersions(params: IoTEvents.Types.ListAlarmModelVersionsRequest, callback?: (err: AWSError, data: IoTEvents.Types.ListAlarmModelVersionsResponse) => void): Request<IoTEvents.Types.ListAlarmModelVersionsResponse, AWSError>;
+  /**
+   * Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.
+   */
+  listAlarmModelVersions(callback?: (err: AWSError, data: IoTEvents.Types.ListAlarmModelVersionsResponse) => void): Request<IoTEvents.Types.ListAlarmModelVersionsResponse, AWSError>;
+  /**
+   * Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.
+   */
+  listAlarmModels(params: IoTEvents.Types.ListAlarmModelsRequest, callback?: (err: AWSError, data: IoTEvents.Types.ListAlarmModelsResponse) => void): Request<IoTEvents.Types.ListAlarmModelsResponse, AWSError>;
+  /**
+   * Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.
+   */
+  listAlarmModels(callback?: (err: AWSError, data: IoTEvents.Types.ListAlarmModelsResponse) => void): Request<IoTEvents.Types.ListAlarmModelsResponse, AWSError>;
   /**
    * Lists all the versions of a detector model. Only the metadata associated with each detector model version is returned.
    */
@@ -99,6 +139,14 @@ declare class IoTEvents extends Service {
    * Lists the detector models you have created. Only the metadata associated with each detector model is returned.
    */
   listDetectorModels(callback?: (err: AWSError, data: IoTEvents.Types.ListDetectorModelsResponse) => void): Request<IoTEvents.Types.ListDetectorModelsResponse, AWSError>;
+  /**
+   *  Lists one or more input routings. 
+   */
+  listInputRoutings(params: IoTEvents.Types.ListInputRoutingsRequest, callback?: (err: AWSError, data: IoTEvents.Types.ListInputRoutingsResponse) => void): Request<IoTEvents.Types.ListInputRoutingsResponse, AWSError>;
+  /**
+   *  Lists one or more input routings. 
+   */
+  listInputRoutings(callback?: (err: AWSError, data: IoTEvents.Types.ListInputRoutingsResponse) => void): Request<IoTEvents.Types.ListInputRoutingsResponse, AWSError>;
   /**
    * Lists the inputs you have created.
    */
@@ -124,11 +172,11 @@ declare class IoTEvents extends Service {
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Performs an analysis of your detector model. For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+   * Performs an analysis of your detector model. For more information, see Troubleshooting a detector model in the AWS IoT Events Developer Guide.
    */
   startDetectorModelAnalysis(params: IoTEvents.Types.StartDetectorModelAnalysisRequest, callback?: (err: AWSError, data: IoTEvents.Types.StartDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.StartDetectorModelAnalysisResponse, AWSError>;
   /**
-   * Performs an analysis of your detector model. For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+   * Performs an analysis of your detector model. For more information, see Troubleshooting a detector model in the AWS IoT Events Developer Guide.
    */
   startDetectorModelAnalysis(callback?: (err: AWSError, data: IoTEvents.Types.StartDetectorModelAnalysisResponse) => void): Request<IoTEvents.Types.StartDetectorModelAnalysisResponse, AWSError>;
   /**
@@ -148,6 +196,14 @@ declare class IoTEvents extends Service {
    */
   untagResource(callback?: (err: AWSError, data: IoTEvents.Types.UntagResourceResponse) => void): Request<IoTEvents.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.
+   */
+  updateAlarmModel(params: IoTEvents.Types.UpdateAlarmModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.UpdateAlarmModelResponse) => void): Request<IoTEvents.Types.UpdateAlarmModelResponse, AWSError>;
+  /**
+   * Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.
+   */
+  updateAlarmModel(callback?: (err: AWSError, data: IoTEvents.Types.UpdateAlarmModelResponse) => void): Request<IoTEvents.Types.UpdateAlarmModelResponse, AWSError>;
+  /**
    * Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
    */
   updateDetectorModel(params: IoTEvents.Types.UpdateDetectorModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.UpdateDetectorModelResponse) => void): Request<IoTEvents.Types.UpdateDetectorModelResponse, AWSError>;
@@ -165,6 +221,13 @@ declare class IoTEvents extends Service {
   updateInput(callback?: (err: AWSError, data: IoTEvents.Types.UpdateInputResponse) => void): Request<IoTEvents.Types.UpdateInputResponse, AWSError>;
 }
 declare namespace IoTEvents {
+  export interface AcknowledgeFlow {
+    /**
+     * The value must be TRUE or FALSE. If TRUE, you receive a notification when the alarm state changes. You must choose to acknowledge the notification before the alarm state can return to NORMAL. If FALSE, you won't receive notifications. The alarm automatically changes to the NORMAL state when the input property value returns to the specified range.
+     */
+    enabled: AcknowledgeFlowEnabled;
+  }
+  export type AcknowledgeFlowEnabled = boolean;
   export interface Action {
     /**
      * Sets a variable to a specified value.
@@ -220,16 +283,111 @@ declare namespace IoTEvents {
     iotSiteWise?: IotSiteWiseAction;
   }
   export type Actions = Action[];
+  export interface AlarmAction {
+    sns?: SNSTopicPublishAction;
+    iotTopicPublish?: IotTopicPublishAction;
+    lambda?: LambdaAction;
+    iotEvents?: IotEventsAction;
+    sqs?: SqsAction;
+    firehose?: FirehoseAction;
+    dynamoDB?: DynamoDBAction;
+    dynamoDBv2?: DynamoDBv2Action;
+    iotSiteWise?: IotSiteWiseAction;
+  }
+  export type AlarmActions = AlarmAction[];
+  export interface AlarmCapabilities {
+    /**
+     * Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
+     */
+    initializationConfiguration?: InitializationConfiguration;
+    /**
+     * Specifies whether to get notified for alarm state changes.
+     */
+    acknowledgeFlow?: AcknowledgeFlow;
+  }
+  export interface AlarmEventActions {
+    /**
+     * Specifies one or more supported actions to receive notifications when the alarm state changes.
+     */
+    alarmActions?: AlarmActions;
+  }
+  export type AlarmModelArn = string;
+  export type AlarmModelDescription = string;
+  export type AlarmModelName = string;
+  export type AlarmModelSummaries = AlarmModelSummary[];
+  export interface AlarmModelSummary {
+    /**
+     * The time the alarm model was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The description of the alarm model.
+     */
+    alarmModelDescription?: AlarmModelDescription;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName?: AlarmModelName;
+  }
+  export type AlarmModelVersion = string;
+  export type AlarmModelVersionStatus = "ACTIVE"|"ACTIVATING"|"INACTIVE"|"FAILED"|string;
+  export type AlarmModelVersionSummaries = AlarmModelVersionSummary[];
+  export interface AlarmModelVersionSummary {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName?: AlarmModelName;
+    /**
+     * The ARN of the alarm model. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    alarmModelArn?: AlarmModelArn;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    roleArn?: AmazonResourceName;
+    /**
+     * The time the alarm model was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The time the alarm model was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The status of the alarm model. The status can be one of the following values:    ACTIVE - The alarm model is active and it's ready to evaluate data.    ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.    INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.    FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.  
+     */
+    status?: AlarmModelVersionStatus;
+    /**
+     *  Contains information about the status of the alarm model version. 
+     */
+    statusMessage?: StatusMessage;
+  }
+  export interface AlarmNotification {
+    /**
+     * Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
+     */
+    notificationActions?: NotificationActions;
+  }
+  export interface AlarmRule {
+    /**
+     * A rule that compares an input property value to a threshold value with a comparison operator.
+     */
+    simpleRule?: SimpleRule;
+  }
   export type AmazonResourceName = string;
   export type AnalysisId = string;
   export type AnalysisMessage = string;
   export interface AnalysisResult {
     /**
-     * The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:    supported-actions - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.    service-limits - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.    structure - The detector model must follow a structure that AWS IoT Events supports.     expression-syntax - Your expression must follow the required syntax.    data-type - Data types referenced in the detector model must be compatible.    referenced-data - You must define the data referenced in your detector model before you can use the data.    referenced-resource - Resources that the detector model uses must be available.   For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
+     * The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:    supported-actions - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.    service-limits - Resources or API operations can't exceed service quotas (also known as limits). Update your detector model or request a quota increase.    structure - The detector model must follow a structure that AWS IoT Events supports.     expression-syntax - Your expression must follow the required syntax.    data-type - Data types referenced in the detector model must be compatible.    referenced-data - You must define the data referenced in your detector model before you can use the data.    referenced-resource - Resources that the detector model uses must be available.   For more information, see Running detector model analyses in the AWS IoT Events Developer Guide.
      */
     type?: AnalysisType;
     /**
-     * The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:    INFO - An information result informs you about a significant field in your detector model. This type of result usually doesn't require immediate action.    WARNING - A warning result draws special attention to fields that are potentially damaging to your detector model. We recommend that you review warnings and take necessary actions before you use your detetor model in production environments. Otherwise, the detector model may not fully function as expected.    ERROR - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.  
+     * The severity level of the analysis result. Based on the severity level, analysis results fall into three general categories:    INFO - An information result tells you about a significant field in your detector model. This type of result usually doesn't require immediate action.    WARNING - A warning result draws special attention to fields that might cause issues for your detector model. We recommend that you review warnings and take necessary actions before you use your detector model in production environments. Otherwise, the detector model might not work as expected.    ERROR - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.  
      */
     level?: AnalysisResultLevel;
     /**
@@ -254,6 +412,7 @@ declare namespace IoTEvents {
   export type AnalysisStatus = "RUNNING"|"COMPLETE"|"FAILED"|string;
   export type AnalysisType = string;
   export type AssetId = string;
+  export type AssetModelId = string;
   export type AssetPropertyAlias = string;
   export type AssetPropertyBooleanValue = string;
   export type AssetPropertyDoubleValue = string;
@@ -278,7 +437,7 @@ declare namespace IoTEvents {
     /**
      * The value to send to an asset property.
      */
-    value: AssetPropertyVariant;
+    value?: AssetPropertyVariant;
     /**
      * The timestamp associated with the asset property value. The default is the current event time.
      */
@@ -320,8 +479,73 @@ declare namespace IoTEvents {
      */
     timerName: TimerName;
   }
+  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL"|string;
   export type Condition = string;
   export type ContentExpression = string;
+  export interface CreateAlarmModelRequest {
+    /**
+     * A unique name that helps you identify the alarm model. You can't change this name after you create the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * A description that tells you what the alarm model detects.
+     */
+    alarmModelDescription?: AlarmModelDescription;
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    roleArn: AmazonResourceName;
+    /**
+     * A list of key-value pairs that contain metadata for the alarm model. The tags help you manage the alarm model. For more information, see Tagging your AWS IoT Events resources in the AWS IoT Events Developer Guide. You can create up to 50 tags for one alarm model.
+     */
+    tags?: Tags;
+    /**
+     * An input attribute used as a key to create an alarm. AWS IoT Events routes inputs associated with this key to the alarm.
+     */
+    key?: AttributeJsonPath;
+    /**
+     * A non-negative integer that reflects the severity level of the alarm.
+     */
+    severity?: Severity;
+    /**
+     * Defines when your alarm is invoked.
+     */
+    alarmRule: AlarmRule;
+    /**
+     * Contains information about one or more notification actions.
+     */
+    alarmNotification?: AlarmNotification;
+    /**
+     * Contains information about one or more alarm actions.
+     */
+    alarmEventActions?: AlarmEventActions;
+    /**
+     * Contains the configuration information of alarm state changes.
+     */
+    alarmCapabilities?: AlarmCapabilities;
+  }
+  export interface CreateAlarmModelResponse {
+    /**
+     * The time the alarm model was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The ARN of the alarm model. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    alarmModelArn?: AlarmModelArn;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The time the alarm model was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The status of the alarm model. The status can be one of the following values:    ACTIVE - The alarm model is active and it's ready to evaluate data.    ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.    INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.    FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.  
+     */
+    status?: AlarmModelVersionStatus;
+  }
   export interface CreateDetectorModelRequest {
     /**
      * The name of the detector model.
@@ -382,6 +606,14 @@ declare namespace IoTEvents {
      */
     inputConfiguration?: InputConfiguration;
   }
+  export interface DeleteAlarmModelRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+  }
+  export interface DeleteAlarmModelResponse {
+  }
   export interface DeleteDetectorModelRequest {
     /**
      * The name of the detector model to be deleted.
@@ -399,6 +631,78 @@ declare namespace IoTEvents {
   export interface DeleteInputResponse {
   }
   export type DeliveryStreamName = string;
+  export interface DescribeAlarmModelRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+  }
+  export interface DescribeAlarmModelResponse {
+    /**
+     * The time the alarm model was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The ARN of the alarm model. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    alarmModelArn?: AlarmModelArn;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The time the alarm model was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The status of the alarm model. The status can be one of the following values:    ACTIVE - The alarm model is active and it's ready to evaluate data.    ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.    INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.    FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.  
+     */
+    status?: AlarmModelVersionStatus;
+    /**
+     *  Contains information about the status of the alarm model. 
+     */
+    statusMessage?: StatusMessage;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName?: AlarmModelName;
+    /**
+     * The description of the alarm model.
+     */
+    alarmModelDescription?: AlarmModelDescription;
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    roleArn?: AmazonResourceName;
+    /**
+     * An input attribute used as a key to create an alarm. AWS IoT Events routes inputs associated with this key to the alarm.
+     */
+    key?: AttributeJsonPath;
+    /**
+     * A non-negative integer that reflects the severity level of the alarm.
+     */
+    severity?: Severity;
+    /**
+     * Defines when your alarm is invoked.
+     */
+    alarmRule?: AlarmRule;
+    /**
+     * Contains information about one or more notification actions.
+     */
+    alarmNotification?: AlarmNotification;
+    /**
+     * Contains information about one or more alarm actions.
+     */
+    alarmEventActions?: AlarmEventActions;
+    /**
+     * Contains the configuration information of alarm state changes.
+     */
+    alarmCapabilities?: AlarmCapabilities;
+  }
   export interface DescribeDetectorModelAnalysisRequest {
     /**
      * The ID of the analysis result that you want to retrieve.
@@ -407,7 +711,7 @@ declare namespace IoTEvents {
   }
   export interface DescribeDetectorModelAnalysisResponse {
     /**
-     * The status of the analysis activity. The status can be one of the following values:    RUNNING - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.    COMPLETE - AWS IoT Events finished analyzing your detector model .    FAILED - AWS IoT Events couldn't analyze your detector model. Try again later.  
+     * The status of the analysis activity. The status can be one of the following values:    RUNNING - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.    COMPLETE - AWS IoT Events finished analyzing your detector model.    FAILED - AWS IoT Events couldn't analyze your detector model. Try again later.  
      */
     status?: AnalysisStatus;
   }
@@ -575,6 +879,7 @@ declare namespace IoTEvents {
      */
     evaluationMethod?: EvaluationMethod;
   }
+  export type DisabledOnInitialization = boolean;
   export interface DynamoDBAction {
     /**
      * The data type for the hash key (also called the partition key). You can specify the following values:    'STRING' - The hash key is a string.    'NUMBER' - The hash key is a number.   If you don't specify hashKeyType, the default value is 'STRING'.
@@ -626,6 +931,38 @@ declare namespace IoTEvents {
   export type DynamoKeyValue = string;
   export type DynamoOperation = string;
   export type DynamoTableName = string;
+  export interface EmailConfiguration {
+    /**
+     * The email address that sends emails.  If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must verify the email address that sends emails in Amazon SES. 
+     */
+    from: FromEmail;
+    /**
+     * Contains the subject and message of an email.
+     */
+    content?: EmailContent;
+    /**
+     * Contains the information of one or more recipients who receive the emails.  You must add the users that receive emails to your AWS SSO store. 
+     */
+    recipients: EmailRecipients;
+  }
+  export type EmailConfigurations = EmailConfiguration[];
+  export interface EmailContent {
+    /**
+     * The subject of the email.
+     */
+    subject?: EmailSubject;
+    /**
+     * The message that you want to send. The message can be up to 200 characters.
+     */
+    additionalMessage?: NotificationAdditionalMessage;
+  }
+  export interface EmailRecipients {
+    /**
+     * Specifies one or more recipients who receive the email.
+     */
+    to?: RecipientDetails;
+  }
+  export type EmailSubject = string;
   export type EvaluationMethod = "BATCH"|"SERIAL"|string;
   export interface Event {
     /**
@@ -658,6 +995,7 @@ declare namespace IoTEvents {
     payload?: Payload;
   }
   export type FirehoseSeparator = string;
+  export type FromEmail = string;
   export interface GetDetectorModelAnalysisResultsRequest {
     /**
      * The ID of the analysis result that you want to retrieve.
@@ -681,6 +1019,13 @@ declare namespace IoTEvents {
      * The token that you can use to return the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
+  }
+  export type IdentityStoreId = string;
+  export interface InitializationConfiguration {
+    /**
+     * The value must be TRUE or FALSE. If FALSE, all alarm instances created based on the alarm model are activated. The default value is TRUE.
+     */
+    disabledOnInitialization: DisabledOnInitialization;
   }
   export interface Input {
     /**
@@ -726,7 +1071,18 @@ declare namespace IoTEvents {
     attributes: Attributes;
   }
   export type InputDescription = string;
+  export interface InputIdentifier {
+    /**
+     *  The identifier of the input routed to AWS IoT Events. 
+     */
+    iotEventsInputIdentifier?: IotEventsInputIdentifier;
+    /**
+     *  The identifer of the input routed from AWS IoT SiteWise. 
+     */
+    iotSiteWiseInputIdentifier?: IotSiteWiseInputIdentifier;
+  }
   export type InputName = string;
+  export type InputProperty = string;
   export type InputStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|string;
   export type InputSummaries = InputSummary[];
   export interface InputSummary {
@@ -765,6 +1121,12 @@ declare namespace IoTEvents {
      */
     payload?: Payload;
   }
+  export interface IotEventsInputIdentifier {
+    /**
+     *  The name of the input routed to AWS IoT Events. 
+     */
+    inputName: InputName;
+  }
   export interface IotSiteWiseAction {
     /**
      * A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.
@@ -785,7 +1147,23 @@ declare namespace IoTEvents {
     /**
      * The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. 
      */
-    propertyValue: AssetPropertyValue;
+    propertyValue?: AssetPropertyValue;
+  }
+  export interface IotSiteWiseAssetModelPropertyIdentifier {
+    /**
+     *  The ID of the AWS IoT SiteWise asset model. 
+     */
+    assetModelId: AssetModelId;
+    /**
+     *  The ID of the AWS IoT SiteWise asset property. 
+     */
+    propertyId: AssetPropertyId;
+  }
+  export interface IotSiteWiseInputIdentifier {
+    /**
+     *  The identifier of the AWS IoT SiteWise asset model property. 
+     */
+    iotSiteWiseAssetModelPropertyIdentifier?: IotSiteWiseAssetModelPropertyIdentifier;
   }
   export interface IotTopicPublishAction {
     /**
@@ -807,6 +1185,50 @@ declare namespace IoTEvents {
      * You can configure the action payload when you send a message to a Lambda function.
      */
     payload?: Payload;
+  }
+  export interface ListAlarmModelVersionsRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The token that you can use to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAlarmModelVersionsResponse {
+    /**
+     * A list that summarizes each alarm model version.
+     */
+    alarmModelVersionSummaries?: AlarmModelVersionSummaries;
+    /**
+     * The token that you can use to return the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAlarmModelsRequest {
+    /**
+     * The token that you can use to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAlarmModelsResponse {
+    /**
+     * A list that summarizes each alarm model.
+     */
+    alarmModelSummaries?: AlarmModelSummaries;
+    /**
+     * The token that you can use to return the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListDetectorModelVersionsRequest {
     /**
@@ -849,6 +1271,30 @@ declare namespace IoTEvents {
     detectorModelSummaries?: DetectorModelSummaries;
     /**
      * The token that you can use to return the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListInputRoutingsRequest {
+    /**
+     *  The identifer of the routed input. 
+     */
+    inputIdentifier: InputIdentifier;
+    /**
+     *  The maximum number of results to be returned per request. 
+     */
+    maxResults?: MaxResults;
+    /**
+     *  The token that you can use to return the next set of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListInputRoutingsResponse {
+    /**
+     *  Summary information about the routed resources. 
+     */
+    routedResources?: RoutedResources;
+    /**
+     *  The token that you can use to return the next set of results, or null if there are no more results. 
      */
     nextToken?: NextToken;
   }
@@ -908,6 +1354,25 @@ declare namespace IoTEvents {
   export type MaxAnalysisResults = number;
   export type MaxResults = number;
   export type NextToken = string;
+  export interface NotificationAction {
+    /**
+     * Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the AWS Lambda function provided by AWS IoT Events.
+     */
+    action: NotificationTargetActions;
+    /**
+     * Contains the configuration information of SMS notifications.
+     */
+    smsConfigurations?: SMSConfigurations;
+    /**
+     * Contains the configuration information of email notifications.
+     */
+    emailConfigurations?: EmailConfigurations;
+  }
+  export type NotificationActions = NotificationAction[];
+  export type NotificationAdditionalMessage = string;
+  export interface NotificationTargetActions {
+    lambdaAction?: LambdaAction;
+  }
   export interface OnEnterLifecycle {
     /**
      * Specifies the actions that are performed when the state is entered and the condition is TRUE.
@@ -948,12 +1413,47 @@ declare namespace IoTEvents {
     loggingOptions: LoggingOptions;
   }
   export type QueueUrl = string;
+  export interface RecipientDetail {
+    /**
+     * The AWS Single Sign-On (AWS SSO) authentication information.
+     */
+    ssoIdentity?: SSOIdentity;
+  }
+  export type RecipientDetails = RecipientDetail[];
   export interface ResetTimerAction {
     /**
      * The name of the timer to reset.
      */
     timerName: TimerName;
   }
+  export type ResourceName = string;
+  export interface RoutedResource {
+    /**
+     *  The name of the routed resource. 
+     */
+    name?: ResourceName;
+    /**
+     *  The ARN of the routed resource. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference. 
+     */
+    arn?: AmazonResourceName;
+  }
+  export type RoutedResources = RoutedResource[];
+  export interface SMSConfiguration {
+    /**
+     * The sender ID.
+     */
+    senderId?: SMSSenderId;
+    /**
+     * The message that you want to send. The message can be up to 200 characters.
+     */
+    additionalMessage?: NotificationAdditionalMessage;
+    /**
+     * Specifies one or more recipients who receive the message.  You must add the users that receive SMS messages to your AWS SSO store. 
+     */
+    recipients: RecipientDetails;
+  }
+  export type SMSConfigurations = SMSConfiguration[];
+  export type SMSSenderId = string;
   export interface SNSTopicPublishAction {
     /**
      * The ARN of the Amazon SNS target where the message is sent.
@@ -964,6 +1464,17 @@ declare namespace IoTEvents {
      */
     payload?: Payload;
   }
+  export interface SSOIdentity {
+    /**
+     * The ID of the AWS SSO identity store.
+     */
+    identityStoreId: IdentityStoreId;
+    /**
+     * The user ID.
+     */
+    userId?: SSOReferenceId;
+  }
+  export type SSOReferenceId = string;
   export type Seconds = number;
   export interface SetTimerAction {
     /**
@@ -988,6 +1499,21 @@ declare namespace IoTEvents {
      * The new value of the variable.
      */
     value: VariableValue;
+  }
+  export type Severity = number;
+  export interface SimpleRule {
+    /**
+     * The value on the left side of the comparison operator. You can specify an AWS IoT Events input attribute as an input property.
+     */
+    inputProperty: InputProperty;
+    /**
+     * The comparison operator.
+     */
+    comparisonOperator: ComparisonOperator;
+    /**
+     * The value on the right side of the comparison operator. You can enter a number or specify an AWS IoT Events input attribute.
+     */
+    threshold: Threshold;
   }
   export interface SqsAction {
     /**
@@ -1032,6 +1558,7 @@ declare namespace IoTEvents {
   }
   export type StateName = string;
   export type States = State[];
+  export type StatusMessage = string;
   export interface Tag {
     /**
      * The tag's key.
@@ -1058,6 +1585,7 @@ declare namespace IoTEvents {
   }
   export type TagValue = string;
   export type Tags = Tag[];
+  export type Threshold = string;
   export type TimerName = string;
   export type Timestamp = Date;
   export interface TransitionEvent {
@@ -1090,6 +1618,62 @@ declare namespace IoTEvents {
     tagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAlarmModelRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The description of the alarm model.
+     */
+    alarmModelDescription?: AlarmModelDescription;
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    roleArn: AmazonResourceName;
+    /**
+     * A non-negative integer that reflects the severity level of the alarm.
+     */
+    severity?: Severity;
+    /**
+     * Defines when your alarm is invoked.
+     */
+    alarmRule: AlarmRule;
+    /**
+     * Contains information about one or more notification actions.
+     */
+    alarmNotification?: AlarmNotification;
+    /**
+     * Contains information about one or more alarm actions.
+     */
+    alarmEventActions?: AlarmEventActions;
+    /**
+     * Contains the configuration information of alarm state changes.
+     */
+    alarmCapabilities?: AlarmCapabilities;
+  }
+  export interface UpdateAlarmModelResponse {
+    /**
+     * The time the alarm model was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The ARN of the alarm model. For more information, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    alarmModelArn?: AlarmModelArn;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The time the alarm model was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The status of the alarm model. The status can be one of the following values:    ACTIVE - The alarm model is active and it's ready to evaluate data.    ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.    INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.    FAILED - You couldn't create or update the alarm model. Check your alarm model information and try again.  
+     */
+    status?: AlarmModelVersionStatus;
   }
   export interface UpdateDetectorModelRequest {
     /**

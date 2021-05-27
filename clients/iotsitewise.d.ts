@@ -598,6 +598,16 @@ declare namespace IoTSiteWise {
      */
     standardDeviation?: AggregatedDoubleValue;
   }
+  export interface Alarms {
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.
+     */
+    alarmRoleArn: ARN;
+    /**
+     * The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.
+     */
+    notificationLambdaArn?: ARN;
+  }
   export type AmazonResourceName = string;
   export interface AssetCompositeModel {
     /**
@@ -1296,6 +1306,14 @@ declare namespace IoTSiteWise {
      * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions other than the China Regions.    IAM – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
      */
     portalAuthMode?: AuthMode;
+    /**
+     * The email address that sends alarm notifications.  If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must verify the sender email address in Amazon SES. 
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .
+     */
+    alarms?: Alarms;
   }
   export interface CreatePortalResponse {
     /**
@@ -1817,6 +1835,14 @@ declare namespace IoTSiteWise {
      * The service to use to authenticate users to the portal.
      */
     portalAuthMode?: AuthMode;
+    /**
+     * The email address that sends alarm notifications.
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.
+     */
+    alarms?: Alarms;
   }
   export interface DescribeProjectRequest {
     /**
@@ -2991,6 +3017,14 @@ declare namespace IoTSiteWise {
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */
     clientToken?: ClientToken;
+    /**
+     * The email address that sends alarm notifications.
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .
+     */
+    alarms?: Alarms;
   }
   export interface UpdatePortalResponse {
     /**

@@ -2057,6 +2057,23 @@
       },
       "documentation": "<p>Contains the (pre-calculated) aggregate values for an asset property.</p>"
     },
+    "Alarms": {
+      "type": "structure",
+      "required": [
+        "alarmRoleArn"
+      ],
+      "members": {
+        "alarmRoleArn": {
+          "shape": "ARN",
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.</p>"
+        },
+        "notificationLambdaArn": {
+          "shape": "ARN",
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href=\"https://docs.aws.amazon.com/\">Managing alarm notifications</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
+    },
     "AmazonResourceName": {
       "type": "string",
       "max": 1011,
@@ -3280,6 +3297,14 @@
         "portalAuthMode": {
           "shape": "AuthMode",
           "documentation": "<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can't change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>"
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify the sender email address in Amazon SES</a>.</p> </important>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
         }
       }
     },
@@ -4128,6 +4153,14 @@
         "portalAuthMode": {
           "shape": "AuthMode",
           "documentation": "<p>The service to use to authenticate users to the portal.</p>"
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.</p>"
         }
       }
     },
@@ -6322,6 +6355,14 @@
           "shape": "ClientToken",
           "documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>",
           "idempotencyToken": true
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
         }
       }
     },

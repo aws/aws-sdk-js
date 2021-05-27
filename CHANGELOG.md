@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.916.0-->
+<!--LATEST=2.917.0-->
 <!--ENTRYINSERT-->
+
+## 2.917.0
+* feature: DeviceFarm: Introduces support for using our desktop testing service with applications hosted within your Virtual Private Cloud (VPC).
+* feature: FSx: This release adds LZ4 data compression support to FSx for Lustre to reduce storage consumption of both file system storage and file system backups.
+* feature: IoTEvents: Releasing new APIs for AWS IoT Events Alarms
+* feature: IoTEventsData: Releasing new APIs for AWS IoT Events Alarms
+* feature: IoTSiteWise: IoT SiteWise Monitor Portal API updates to add alarms feature configuration.
+* feature: Kendra: Amazon Kendra now suggests popular queries in order to help guide query typing and help overall accuracy.
 
 ## 2.916.0
 * feature: EC2: This release removes resource ids and tagging support for VPC security group rules.

@@ -11,6 +11,43 @@
     "uid": "iotevents-2018-07-27"
   },
   "operations": {
+    "CreateAlarmModel": {
+      "name": "CreateAlarmModel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarm-models"
+      },
+      "input": {
+        "shape": "CreateAlarmModelRequest"
+      },
+      "output": {
+        "shape": "CreateAlarmModelResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html\">Create an alarm model</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+    },
     "CreateDetectorModel": {
       "name": "CreateDetectorModel",
       "http": {
@@ -79,6 +116,41 @@
         }
       ],
       "documentation": "<p>Creates an input.</p>"
+    },
+    "DeleteAlarmModel": {
+      "name": "DeleteAlarmModel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/alarm-models/{alarmModelName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAlarmModelRequest"
+      },
+      "output": {
+        "shape": "DeleteAlarmModelResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.</p>"
     },
     "DeleteDetectorModel": {
       "name": "DeleteDetectorModel",
@@ -149,6 +221,37 @@
       ],
       "documentation": "<p>Deletes an input.</p>"
     },
+    "DescribeAlarmModel": {
+      "name": "DescribeAlarmModel",
+      "http": {
+        "method": "GET",
+        "requestUri": "/alarm-models/{alarmModelName}"
+      },
+      "input": {
+        "shape": "DescribeAlarmModelRequest"
+      },
+      "output": {
+        "shape": "DescribeAlarmModelResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about an alarm model. If you don't specify a value for the <code>alarmModelVersion</code> parameter, the latest version is returned.</p>"
+    },
     "DescribeDetectorModel": {
       "name": "DescribeDetectorModel",
       "http": {
@@ -209,7 +312,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Retrieves execution information about a detector model analysis</p>"
+      "documentation": "<p>Retrieves runtime information about a detector model analysis.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>"
     },
     "DescribeInput": {
       "name": "DescribeInput",
@@ -305,7 +408,66 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Retrieves one or more analysis results of the detector model.</p>"
+      "documentation": "<p>Retrieves one or more analysis results of the detector model.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>"
+    },
+    "ListAlarmModelVersions": {
+      "name": "ListAlarmModelVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/alarm-models/{alarmModelName}/versions"
+      },
+      "input": {
+        "shape": "ListAlarmModelVersionsRequest"
+      },
+      "output": {
+        "shape": "ListAlarmModelVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.</p>"
+    },
+    "ListAlarmModels": {
+      "name": "ListAlarmModels",
+      "http": {
+        "method": "GET",
+        "requestUri": "/alarm-models"
+      },
+      "input": {
+        "shape": "ListAlarmModelsRequest"
+      },
+      "output": {
+        "shape": "ListAlarmModelsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.</p>"
     },
     "ListDetectorModelVersions": {
       "name": "ListDetectorModelVersions",
@@ -365,6 +527,37 @@
         }
       ],
       "documentation": "<p>Lists the detector models you have created. Only the metadata associated with each detector model is returned.</p>"
+    },
+    "ListInputRoutings": {
+      "name": "ListInputRoutings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/input-routings"
+      },
+      "input": {
+        "shape": "ListInputRoutingsRequest"
+      },
+      "output": {
+        "shape": "ListInputRoutingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Lists one or more input routings. </p>"
     },
     "ListInputs": {
       "name": "ListInputs",
@@ -485,7 +678,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Performs an analysis of your detector model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+      "documentation": "<p>Performs an analysis of your detector model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Troubleshooting a detector model</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -551,6 +744,40 @@
         }
       ],
       "documentation": "<p>Removes the given tags (metadata) from the resource.</p>"
+    },
+    "UpdateAlarmModel": {
+      "name": "UpdateAlarmModel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarm-models/{alarmModelName}"
+      },
+      "input": {
+        "shape": "UpdateAlarmModelRequest"
+      },
+      "output": {
+        "shape": "UpdateAlarmModelResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.</p>"
     },
     "UpdateDetectorModel": {
       "name": "UpdateDetectorModel",
@@ -622,6 +849,23 @@
     }
   },
   "shapes": {
+    "AcknowledgeFlow": {
+      "type": "structure",
+      "required": [
+        "enabled"
+      ],
+      "members": {
+        "enabled": {
+          "shape": "AcknowledgeFlowEnabled",
+          "documentation": "<p>The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code>, you receive a notification when the alarm state changes. You must choose to acknowledge the notification before the alarm state can return to <code>NORMAL</code>. If <code>FALSE</code>, you won't receive notifications. The alarm automatically changes to the <code>NORMAL</code> state when the input property value returns to the specified range.</p>"
+        }
+      },
+      "documentation": "<p>Specifies whether to get notified for alarm state changes.</p>"
+    },
+    "AcknowledgeFlowEnabled": {
+      "type": "boolean",
+      "box": true
+    },
     "Action": {
       "type": "structure",
       "members": {
@@ -686,6 +930,184 @@
         "shape": "Action"
       }
     },
+    "AlarmAction": {
+      "type": "structure",
+      "members": {
+        "sns": {
+          "shape": "SNSTopicPublishAction"
+        },
+        "iotTopicPublish": {
+          "shape": "IotTopicPublishAction"
+        },
+        "lambda": {
+          "shape": "LambdaAction"
+        },
+        "iotEvents": {
+          "shape": "IotEventsAction"
+        },
+        "sqs": {
+          "shape": "SqsAction"
+        },
+        "firehose": {
+          "shape": "FirehoseAction"
+        },
+        "dynamoDB": {
+          "shape": "DynamoDBAction"
+        },
+        "dynamoDBv2": {
+          "shape": "DynamoDBv2Action"
+        },
+        "iotSiteWise": {
+          "shape": "IotSiteWiseAction"
+        }
+      },
+      "documentation": "<p>Specifies one of the following actions to receive notifications when the alarm state changes.</p>"
+    },
+    "AlarmActions": {
+      "type": "list",
+      "member": {
+        "shape": "AlarmAction"
+      }
+    },
+    "AlarmCapabilities": {
+      "type": "structure",
+      "members": {
+        "initializationConfiguration": {
+          "shape": "InitializationConfiguration",
+          "documentation": "<p>Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.</p>"
+        },
+        "acknowledgeFlow": {
+          "shape": "AcknowledgeFlow",
+          "documentation": "<p>Specifies whether to get notified for alarm state changes.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+    },
+    "AlarmEventActions": {
+      "type": "structure",
+      "members": {
+        "alarmActions": {
+          "shape": "AlarmActions",
+          "documentation": "<p>Specifies one or more supported actions to receive notifications when the alarm state changes.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about one or more alarm actions.</p>"
+    },
+    "AlarmModelArn": {
+      "type": "string"
+    },
+    "AlarmModelDescription": {
+      "type": "string",
+      "max": 128
+    },
+    "AlarmModelName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "AlarmModelSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "AlarmModelSummary"
+      }
+    },
+    "AlarmModelSummary": {
+      "type": "structure",
+      "members": {
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+        },
+        "alarmModelDescription": {
+          "shape": "AlarmModelDescription",
+          "documentation": "<p>The description of the alarm model.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        }
+      },
+      "documentation": "<p>Contains a summary of an alarm model.</p>"
+    },
+    "AlarmModelVersion": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "AlarmModelVersionStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "ACTIVATING",
+        "INACTIVE",
+        "FAILED"
+      ]
+    },
+    "AlarmModelVersionSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "AlarmModelVersionSummary"
+      }
+    },
+    "AlarmModelVersionSummary": {
+      "type": "structure",
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "alarmModelArn": {
+          "shape": "AlarmModelArn",
+          "documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "roleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+        },
+        "status": {
+          "shape": "AlarmModelVersionStatus",
+          "documentation": "<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>"
+        },
+        "statusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p> Contains information about the status of the alarm model version. </p>"
+        }
+      },
+      "documentation": "<p>Contains a summary of an alarm model version.</p>"
+    },
+    "AlarmNotification": {
+      "type": "structure",
+      "members": {
+        "notificationActions": {
+          "shape": "NotificationActions",
+          "documentation": "<p>Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about one or more notification actions.</p>"
+    },
+    "AlarmRule": {
+      "type": "structure",
+      "members": {
+        "simpleRule": {
+          "shape": "SimpleRule",
+          "documentation": "<p>A rule that compares an input property value to a threshold value with a comparison operator.</p>"
+        }
+      },
+      "documentation": "<p>Defines when your alarm is invoked.</p>"
+    },
     "AmazonResourceName": {
       "type": "string",
       "max": 2048,
@@ -702,11 +1124,11 @@
       "members": {
         "type": {
           "shape": "AnalysisType",
-          "documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p> <ul> <li> <p> <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p> </li> <li> <p> <code>service-limits</code> - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.</p> </li> <li> <p> <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p> </li> <li> <p> <code>expression-syntax</code> - Your expression must follow the required syntax.</p> </li> <li> <p> <code>data-type</code> - Data types referenced in the detector model must be compatible.</p> </li> <li> <p> <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p> </li> <li> <p> <code>referenced-resource</code> - Resources that the detector model uses must be available.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+          "documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p> <ul> <li> <p> <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p> </li> <li> <p> <code>service-limits</code> - Resources or API operations can't exceed service quotas (also known as limits). Update your detector model or request a quota increase.</p> </li> <li> <p> <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p> </li> <li> <p> <code>expression-syntax</code> - Your expression must follow the required syntax.</p> </li> <li> <p> <code>data-type</code> - Data types referenced in the detector model must be compatible.</p> </li> <li> <p> <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p> </li> <li> <p> <code>referenced-resource</code> - Resources that the detector model uses must be available.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
         },
         "level": {
           "shape": "AnalysisResultLevel",
-          "documentation": "<p>The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:</p> <ul> <li> <p> <code>INFO</code> - An information result informs you about a significant field in your detector model. This type of result usually doesn't require immediate action.</p> </li> <li> <p> <code>WARNING</code> - A warning result draws special attention to fields that are potentially damaging to your detector model. We recommend that you review warnings and take necessary actions before you use your detetor model in production environments. Otherwise, the detector model may not fully function as expected.</p> </li> <li> <p> <code>ERROR</code> - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.</p> </li> </ul>"
+          "documentation": "<p>The severity level of the analysis result. Based on the severity level, analysis results fall into three general categories:</p> <ul> <li> <p> <code>INFO</code> - An information result tells you about a significant field in your detector model. This type of result usually doesn't require immediate action.</p> </li> <li> <p> <code>WARNING</code> - A warning result draws special attention to fields that might cause issues for your detector model. We recommend that you review warnings and take necessary actions before you use your detector model in production environments. Otherwise, the detector model might not work as expected.</p> </li> <li> <p> <code>ERROR</code> - An error result notifies you about a problem found in your detector model. You must fix all errors before you can publish your detector model.</p> </li> </ul>"
         },
         "message": {
           "shape": "AnalysisMessage",
@@ -766,6 +1188,9 @@
     "AssetId": {
       "type": "string"
     },
+    "AssetModelId": {
+      "type": "string"
+    },
     "AssetPropertyAlias": {
       "type": "string"
     },
@@ -815,9 +1240,6 @@
     },
     "AssetPropertyValue": {
       "type": "structure",
-      "required": [
-        "value"
-      ],
       "members": {
         "value": {
           "shape": "AssetPropertyVariant",
@@ -896,6 +1318,17 @@
       },
       "documentation": "<p>Information needed to clear the timer.</p>"
     },
+    "ComparisonOperator": {
+      "type": "string",
+      "enum": [
+        "GREATER",
+        "GREATER_OR_EQUAL",
+        "LESS",
+        "LESS_OR_EQUAL",
+        "EQUAL",
+        "NOT_EQUAL"
+      ]
+    },
     "Condition": {
       "type": "string",
       "max": 512
@@ -903,6 +1336,81 @@
     "ContentExpression": {
       "type": "string",
       "min": 1
+    },
+    "CreateAlarmModelRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName",
+        "roleArn",
+        "alarmRule"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>A unique name that helps you identify the alarm model. You can't change this name after you create the alarm model.</p>"
+        },
+        "alarmModelDescription": {
+          "shape": "AlarmModelDescription",
+          "documentation": "<p>A description that tells you what the alarm model detects.</p>"
+        },
+        "roleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of key-value pairs that contain metadata for the alarm model. The tags help you manage the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html\">Tagging your AWS IoT Events resources</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You can create up to 50 tags for one alarm model.</p>"
+        },
+        "key": {
+          "shape": "AttributeJsonPath",
+          "documentation": "<p>An input attribute used as a key to create an alarm. AWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> associated with this key to the alarm.</p>"
+        },
+        "severity": {
+          "shape": "Severity",
+          "documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+        },
+        "alarmRule": {
+          "shape": "AlarmRule",
+          "documentation": "<p>Defines when your alarm is invoked.</p>"
+        },
+        "alarmNotification": {
+          "shape": "AlarmNotification",
+          "documentation": "<p>Contains information about one or more notification actions.</p>"
+        },
+        "alarmEventActions": {
+          "shape": "AlarmEventActions",
+          "documentation": "<p>Contains information about one or more alarm actions.</p>"
+        },
+        "alarmCapabilities": {
+          "shape": "AlarmCapabilities",
+          "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+        }
+      }
+    },
+    "CreateAlarmModelResponse": {
+      "type": "structure",
+      "members": {
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+        },
+        "alarmModelArn": {
+          "shape": "AlarmModelArn",
+          "documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+        },
+        "status": {
+          "shape": "AlarmModelVersionStatus",
+          "documentation": "<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>"
+        }
+      }
     },
     "CreateDetectorModelRequest": {
       "type": "structure",
@@ -985,6 +1493,24 @@
         }
       }
     },
+    "DeleteAlarmModelRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        }
+      }
+    },
+    "DeleteAlarmModelResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteDetectorModelRequest": {
       "type": "structure",
       "required": [
@@ -1024,6 +1550,91 @@
     "DeliveryStreamName": {
       "type": "string"
     },
+    "DescribeAlarmModelRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>",
+          "location": "querystring",
+          "locationName": "version"
+        }
+      }
+    },
+    "DescribeAlarmModelResponse": {
+      "type": "structure",
+      "members": {
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+        },
+        "alarmModelArn": {
+          "shape": "AlarmModelArn",
+          "documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+        },
+        "status": {
+          "shape": "AlarmModelVersionStatus",
+          "documentation": "<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>"
+        },
+        "statusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p> Contains information about the status of the alarm model. </p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "alarmModelDescription": {
+          "shape": "AlarmModelDescription",
+          "documentation": "<p>The description of the alarm model.</p>"
+        },
+        "roleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "key": {
+          "shape": "AttributeJsonPath",
+          "documentation": "<p>An input attribute used as a key to create an alarm. AWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> associated with this key to the alarm.</p>"
+        },
+        "severity": {
+          "shape": "Severity",
+          "documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+        },
+        "alarmRule": {
+          "shape": "AlarmRule",
+          "documentation": "<p>Defines when your alarm is invoked.</p>"
+        },
+        "alarmNotification": {
+          "shape": "AlarmNotification",
+          "documentation": "<p>Contains information about one or more notification actions.</p>"
+        },
+        "alarmEventActions": {
+          "shape": "AlarmEventActions",
+          "documentation": "<p>Contains information about one or more alarm actions.</p>"
+        },
+        "alarmCapabilities": {
+          "shape": "AlarmCapabilities",
+          "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+        }
+      }
+    },
     "DescribeDetectorModelAnalysisRequest": {
       "type": "structure",
       "required": [
@@ -1043,7 +1654,7 @@
       "members": {
         "status": {
           "shape": "AnalysisStatus",
-          "documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model .</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p> </li> </ul>"
+          "documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model.</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p> </li> </ul>"
         }
       }
     },
@@ -1312,6 +1923,10 @@
       },
       "documentation": "<p>Information about the detector model version.</p>"
     },
+    "DisabledOnInitialization": {
+      "type": "boolean",
+      "box": true
+    },
     "DynamoDBAction": {
       "type": "structure",
       "required": [
@@ -1393,6 +2008,62 @@
     "DynamoTableName": {
       "type": "string"
     },
+    "EmailConfiguration": {
+      "type": "structure",
+      "required": [
+        "from",
+        "recipients"
+      ],
+      "members": {
+        "from": {
+          "shape": "FromEmail",
+          "documentation": "<p>The email address that sends emails.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify the email address that sends emails in Amazon SES</a>.</p> </important>"
+        },
+        "content": {
+          "shape": "EmailContent",
+          "documentation": "<p>Contains the subject and message of an email.</p>"
+        },
+        "recipients": {
+          "shape": "EmailRecipients",
+          "documentation": "<p>Contains the information of one or more recipients who receive the emails.</p> <important> <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive emails to your AWS SSO store</a>.</p> </important>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of email notifications.</p>"
+    },
+    "EmailConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "EmailConfiguration"
+      },
+      "min": 1
+    },
+    "EmailContent": {
+      "type": "structure",
+      "members": {
+        "subject": {
+          "shape": "EmailSubject",
+          "documentation": "<p>The subject of the email.</p>"
+        },
+        "additionalMessage": {
+          "shape": "NotificationAdditionalMessage",
+          "documentation": "<p>The message that you want to send. The message can be up to 200 characters.</p>"
+        }
+      },
+      "documentation": "<p>Contains the subject and message of an email.</p>"
+    },
+    "EmailRecipients": {
+      "type": "structure",
+      "members": {
+        "to": {
+          "shape": "RecipientDetails",
+          "documentation": "<p>Specifies one or more recipients who receive the email.</p>"
+        }
+      },
+      "documentation": "<p>Contains the information of one or more recipients who receive the emails.</p> <important> <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive emails to your AWS SSO store</a>.</p> </important>"
+    },
+    "EmailSubject": {
+      "type": "string"
+    },
     "EvaluationMethod": {
       "type": "string",
       "enum": [
@@ -1456,6 +2127,9 @@
       "type": "string",
       "pattern": "([\\n\\t])|(\\r\\n)|(,)"
     },
+    "FromEmail": {
+      "type": "string"
+    },
     "GetDetectorModelAnalysisResultsRequest": {
       "type": "structure",
       "required": [
@@ -1494,6 +2168,22 @@
           "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
         }
       }
+    },
+    "IdentityStoreId": {
+      "type": "string"
+    },
+    "InitializationConfiguration": {
+      "type": "structure",
+      "required": [
+        "disabledOnInitialization"
+      ],
+      "members": {
+        "disabledOnInitialization": {
+          "shape": "DisabledOnInitialization",
+          "documentation": "<p>The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>FALSE</code>, all alarm instances created based on the alarm model are activated. The default value is <code>TRUE</code>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.</p>"
     },
     "Input": {
       "type": "structure",
@@ -1566,11 +2256,30 @@
       "type": "string",
       "max": 128
     },
+    "InputIdentifier": {
+      "type": "structure",
+      "members": {
+        "iotEventsInputIdentifier": {
+          "shape": "IotEventsInputIdentifier",
+          "documentation": "<p> The identifier of the input routed to AWS IoT Events. </p>"
+        },
+        "iotSiteWiseInputIdentifier": {
+          "shape": "IotSiteWiseInputIdentifier",
+          "documentation": "<p> The identifer of the input routed from AWS IoT SiteWise. </p>"
+        }
+      },
+      "documentation": "<p> The identifer of the input. </p>"
+    },
     "InputName": {
       "type": "string",
       "max": 128,
       "min": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+    },
+    "InputProperty": {
+      "type": "string",
+      "max": 512,
+      "min": 1
     },
     "InputStatus": {
       "type": "string",
@@ -1634,11 +2343,21 @@
       },
       "documentation": "<p>Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.</p>"
     },
-    "IotSiteWiseAction": {
+    "IotEventsInputIdentifier": {
       "type": "structure",
       "required": [
-        "propertyValue"
+        "inputName"
       ],
+      "members": {
+        "inputName": {
+          "shape": "InputName",
+          "documentation": "<p> The name of the input routed to AWS IoT Events. </p>"
+        }
+      },
+      "documentation": "<p> The identifier of the input routed to AWS IoT Events. </p>"
+    },
+    "IotSiteWiseAction": {
+      "type": "structure",
       "members": {
         "entryId": {
           "shape": "AssetPropertyEntryId",
@@ -1662,6 +2381,34 @@
         }
       },
       "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The expressions accept literals, operators, functions, references, and substitutions templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>propertyAlias</code> parameter can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>assetId</code> parameter can be <code>$input.TurbineInput.assetId1</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>propertyAlias</code> parameter uses a substitution template. </p> <p> <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/ ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code> </p> </li> </ul> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+    },
+    "IotSiteWiseAssetModelPropertyIdentifier": {
+      "type": "structure",
+      "required": [
+        "assetModelId",
+        "propertyId"
+      ],
+      "members": {
+        "assetModelId": {
+          "shape": "AssetModelId",
+          "documentation": "<p> The ID of the AWS IoT SiteWise asset model. </p>"
+        },
+        "propertyId": {
+          "shape": "AssetPropertyId",
+          "documentation": "<p> The ID of the AWS IoT SiteWise asset property. </p>"
+        }
+      },
+      "documentation": "<p> The asset model property identifer of the input routed from AWS IoT SiteWise. </p>"
+    },
+    "IotSiteWiseInputIdentifier": {
+      "type": "structure",
+      "members": {
+        "iotSiteWiseAssetModelPropertyIdentifier": {
+          "shape": "IotSiteWiseAssetModelPropertyIdentifier",
+          "documentation": "<p> The identifier of the AWS IoT SiteWise asset model property. </p>"
+        }
+      },
+      "documentation": "<p> The identifer of the input routed from AWS IoT SiteWise. </p>"
     },
     "IotTopicPublishAction": {
       "type": "structure",
@@ -1702,6 +2449,75 @@
         }
       },
       "documentation": "<p>Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.</p>"
+    },
+    "ListAlarmModelVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAlarmModelVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "alarmModelVersionSummaries": {
+          "shape": "AlarmModelVersionSummaries",
+          "documentation": "<p>A list that summarizes each alarm model version.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListAlarmModelsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAlarmModelsResponse": {
+      "type": "structure",
+      "members": {
+        "alarmModelSummaries": {
+          "shape": "AlarmModelSummaries",
+          "documentation": "<p>A list that summarizes each alarm model.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
     },
     "ListDetectorModelVersionsRequest": {
       "type": "structure",
@@ -1769,6 +2585,39 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
+    },
+    "ListInputRoutingsRequest": {
+      "type": "structure",
+      "required": [
+        "inputIdentifier"
+      ],
+      "members": {
+        "inputIdentifier": {
+          "shape": "InputIdentifier",
+          "documentation": "<p> The identifer of the routed input. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p> The maximum number of results to be returned per request. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The token that you can use to return the next set of results. </p>"
+        }
+      }
+    },
+    "ListInputRoutingsResponse": {
+      "type": "structure",
+      "members": {
+        "routedResources": {
+          "shape": "RoutedResources",
+          "documentation": "<p> Summary information about the routed resources. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The token that you can use to return the next set of results, or <code>null</code> if there are no more results. </p>"
         }
       }
     },
@@ -1879,6 +2728,46 @@
     "NextToken": {
       "type": "string"
     },
+    "NotificationAction": {
+      "type": "structure",
+      "required": [
+        "action"
+      ],
+      "members": {
+        "action": {
+          "shape": "NotificationTargetActions",
+          "documentation": "<p>Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>.</p>"
+        },
+        "smsConfigurations": {
+          "shape": "SMSConfigurations",
+          "documentation": "<p>Contains the configuration information of SMS notifications.</p>"
+        },
+        "emailConfigurations": {
+          "shape": "EmailConfigurations",
+          "documentation": "<p>Contains the configuration information of email notifications.</p>"
+        }
+      },
+      "documentation": "<p>Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.</p>"
+    },
+    "NotificationActions": {
+      "type": "list",
+      "member": {
+        "shape": "NotificationAction"
+      },
+      "min": 1
+    },
+    "NotificationAdditionalMessage": {
+      "type": "string"
+    },
+    "NotificationTargetActions": {
+      "type": "structure",
+      "members": {
+        "lambdaAction": {
+          "shape": "LambdaAction"
+        }
+      },
+      "documentation": "<p>Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>.</p>"
+    },
     "OnEnterLifecycle": {
       "type": "structure",
       "members": {
@@ -1953,6 +2842,23 @@
     "QueueUrl": {
       "type": "string"
     },
+    "RecipientDetail": {
+      "type": "structure",
+      "members": {
+        "ssoIdentity": {
+          "shape": "SSOIdentity",
+          "documentation": "<p>The AWS Single Sign-On (AWS SSO) authentication information.</p>"
+        }
+      },
+      "documentation": "<p>The information that identifies the recipient.</p>"
+    },
+    "RecipientDetails": {
+      "type": "list",
+      "member": {
+        "shape": "RecipientDetail"
+      },
+      "min": 1
+    },
     "ResetTimerAction": {
       "type": "structure",
       "required": [
@@ -1965,6 +2871,60 @@
         }
       },
       "documentation": "<p>Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.</p>"
+    },
+    "ResourceName": {
+      "type": "string"
+    },
+    "RoutedResource": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p> The name of the routed resource. </p>"
+        },
+        "arn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p> The ARN of the routed resource. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. </p>"
+        }
+      },
+      "documentation": "<p> Contains information about the routed resource. </p>"
+    },
+    "RoutedResources": {
+      "type": "list",
+      "member": {
+        "shape": "RoutedResource"
+      }
+    },
+    "SMSConfiguration": {
+      "type": "structure",
+      "required": [
+        "recipients"
+      ],
+      "members": {
+        "senderId": {
+          "shape": "SMSSenderId",
+          "documentation": "<p>The sender ID.</p>"
+        },
+        "additionalMessage": {
+          "shape": "NotificationAdditionalMessage",
+          "documentation": "<p>The message that you want to send. The message can be up to 200 characters.</p>"
+        },
+        "recipients": {
+          "shape": "RecipientDetails",
+          "documentation": "<p>Specifies one or more recipients who receive the message.</p> <important> <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive SMS messages to your AWS SSO store</a>.</p> </important>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of SMS notifications.</p>"
+    },
+    "SMSConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "SMSConfiguration"
+      },
+      "min": 1
+    },
+    "SMSSenderId": {
+      "type": "string"
     },
     "SNSTopicPublishAction": {
       "type": "structure",
@@ -1982,6 +2942,26 @@
         }
       },
       "documentation": "<p>Information required to publish the Amazon SNS message.</p>"
+    },
+    "SSOIdentity": {
+      "type": "structure",
+      "required": [
+        "identityStoreId"
+      ],
+      "members": {
+        "identityStoreId": {
+          "shape": "IdentityStoreId",
+          "documentation": "<p>The ID of the AWS SSO identity store.</p>"
+        },
+        "userId": {
+          "shape": "SSOReferenceId",
+          "documentation": "<p>The user ID.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about your identity source in AWS Single Sign-On. For more information, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On User Guide</a>.</p>"
+    },
+    "SSOReferenceId": {
+      "type": "string"
     },
     "Seconds": {
       "type": "integer",
@@ -2028,6 +3008,35 @@
         }
       },
       "documentation": "<p>Information about the variable and its new value.</p>"
+    },
+    "Severity": {
+      "type": "integer",
+      "box": true,
+      "max": 2147483647,
+      "min": 0
+    },
+    "SimpleRule": {
+      "type": "structure",
+      "required": [
+        "inputProperty",
+        "comparisonOperator",
+        "threshold"
+      ],
+      "members": {
+        "inputProperty": {
+          "shape": "InputProperty",
+          "documentation": "<p>The value on the left side of the comparison operator. You can specify an AWS IoT Events input attribute as an input property.</p>"
+        },
+        "comparisonOperator": {
+          "shape": "ComparisonOperator",
+          "documentation": "<p>The comparison operator.</p>"
+        },
+        "threshold": {
+          "shape": "Threshold",
+          "documentation": "<p>The value on the right side of the comparison operator. You can enter a number or specify an AWS IoT Events input attribute.</p>"
+        }
+      },
+      "documentation": "<p>A rule that compares an input property value to a threshold value with a comparison operator.</p>"
     },
     "SqsAction": {
       "type": "structure",
@@ -2107,6 +3116,9 @@
       },
       "min": 1
     },
+    "StatusMessage": {
+      "type": "string"
+    },
     "Tag": {
       "type": "structure",
       "required": [
@@ -2169,6 +3181,11 @@
       "member": {
         "shape": "Tag"
       }
+    },
+    "Threshold": {
+      "type": "string",
+      "max": 512,
+      "min": 1
     },
     "TimerName": {
       "type": "string",
@@ -2235,6 +3252,75 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateAlarmModelRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName",
+        "roleArn",
+        "alarmRule"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        },
+        "alarmModelDescription": {
+          "shape": "AlarmModelDescription",
+          "documentation": "<p>The description of the alarm model.</p>"
+        },
+        "roleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "severity": {
+          "shape": "Severity",
+          "documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+        },
+        "alarmRule": {
+          "shape": "AlarmRule",
+          "documentation": "<p>Defines when your alarm is invoked.</p>"
+        },
+        "alarmNotification": {
+          "shape": "AlarmNotification",
+          "documentation": "<p>Contains information about one or more notification actions.</p>"
+        },
+        "alarmEventActions": {
+          "shape": "AlarmEventActions",
+          "documentation": "<p>Contains information about one or more alarm actions.</p>"
+        },
+        "alarmCapabilities": {
+          "shape": "AlarmCapabilities",
+          "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+        }
+      }
+    },
+    "UpdateAlarmModelResponse": {
+      "type": "structure",
+      "members": {
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+        },
+        "alarmModelArn": {
+          "shape": "AlarmModelArn",
+          "documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+        },
+        "status": {
+          "shape": "AlarmModelVersionStatus",
+          "documentation": "<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>"
+        }
+      }
     },
     "UpdateDetectorModelRequest": {
       "type": "structure",
