@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.915.0-->
+<!--LATEST=2.916.0-->
 <!--ENTRYINSERT-->
+
+## 2.916.0
+* feature: EC2: This release removes resource ids and tagging support for VPC security group rules.
 
 ## 2.915.0
 * feature: ACMPCA: This release enables customers to store CRLs in S3 buckets with Block Public Access enabled. The release adds the S3ObjectAcl parameter to the CreateCertificateAuthority and UpdateCertificateAuthority APIs to allow customers to choose whether their CRL will be publicly available.
