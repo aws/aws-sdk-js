@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.917.0-->
+<!--LATEST=2.918.0-->
 <!--ENTRYINSERT-->
+
+## 2.918.0
+* feature: DataSync: Added SecurityDescriptorCopyFlags option that allows for control of which components of SMB security descriptors are copied from source to destination objects.
+* feature: Location: Adds support for calculation of routes, resource tagging and customer provided KMS keys.
+* feature: LookoutMetrics: Allowing dot(.) character in table name for RDS and Redshift as source connector.
 
 ## 2.917.0
 * feature: DeviceFarm: Introduces support for using our desktop testing service with applications hosted within your Virtual Private Cloud (VPC).
