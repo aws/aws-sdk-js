@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.918.0-->
+<!--LATEST=2.919.0-->
 <!--ENTRYINSERT-->
+
+## 2.919.0
+* feature: EC2: Added idempotency to CreateNetworkInterface using the ClientToken parameter.
+* feature: IoTWireless: Added six new public customer logging APIs to allow customers to set/get/reset log levels at resource type and resource id level. The log level set from the APIs will be used to filter log messages that can be emitted to CloudWatch in customer accounts.
+* feature: Polly: Amazon Polly adds new Canadian French voice - Gabrielle. Gabrielle is available as Neural voice only.
+* feature: SNS: This release adds SMS sandbox in Amazon SNS and the ability to view all configured origination numbers. The SMS sandbox provides a safe environment for sending SMS messages, without risking your reputation as an SMS sender.
+* feature: ServiceDiscovery: Bugfixes - The DiscoverInstances API operation now provides an option to return all instances for health-checked services when there are no healthy instances available.
 
 ## 2.918.0
 * feature: DataSync: Added SecurityDescriptorCopyFlags option that allows for control of which components of SMB security descriptors are copied from source to destination objects.

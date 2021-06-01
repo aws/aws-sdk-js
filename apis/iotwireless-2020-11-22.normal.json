@@ -811,6 +811,38 @@
       ],
       "documentation": "<p>Gets information about a device profile.</p>"
     },
+    "GetLogLevelsByResourceTypes": {
+      "name": "GetLogLevelsByResourceTypes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/log-levels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetLogLevelsByResourceTypesRequest"
+      },
+      "output": {
+        "shape": "GetLogLevelsByResourceTypesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.</p>"
+    },
     "GetPartnerAccount": {
       "name": "GetPartnerAccount",
       "http": {
@@ -838,6 +870,38 @@
         }
       ],
       "documentation": "<p>Gets information about a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, returns all partner accounts.</p>"
+    },
+    "GetResourceLogLevel": {
+      "name": "GetResourceLogLevel",
+      "http": {
+        "method": "GET",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "GetResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.</p>"
     },
     "GetServiceEndpoint": {
       "name": "GetServiceEndpoint",
@@ -1375,6 +1439,102 @@
       ],
       "documentation": "<p>Lists the wireless gateways registered to your AWS account.</p>"
     },
+    "PutResourceLogLevel": {
+      "name": "PutResourceLogLevel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "PutResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.</p>"
+    },
+    "ResetAllResourceLogLevels": {
+      "name": "ResetAllResourceLogLevels",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/log-levels",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "ResetAllResourceLogLevelsRequest"
+      },
+      "output": {
+        "shape": "ResetAllResourceLogLevelsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).</p>"
+    },
+    "ResetResourceLogLevel": {
+      "name": "ResetResourceLogLevel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "ResetResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "ResetResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.</p>"
+    },
     "SendDataToWirelessDevice": {
       "name": "SendDataToWirelessDevice",
       "http": {
@@ -1531,6 +1691,41 @@
         }
       ],
       "documentation": "<p>Updates properties of a destination.</p>"
+    },
+    "UpdateLogLevelsByResourceTypes": {
+      "name": "UpdateLogLevelsByResourceTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/log-levels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateLogLevelsByResourceTypesRequest"
+      },
+      "output": {
+        "shape": "UpdateLogLevelsByResourceTypesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.</p>"
     },
     "UpdatePartnerAccount": {
       "name": "UpdatePartnerAccount",
@@ -2639,6 +2834,24 @@
         }
       }
     },
+    "GetLogLevelsByResourceTypesRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetLogLevelsByResourceTypesResponse": {
+      "type": "structure",
+      "members": {
+        "DefaultLogLevel": {
+          "shape": "LogLevel"
+        },
+        "WirelessGatewayLogOptions": {
+          "shape": "WirelessGatewayLogOptionList"
+        },
+        "WirelessDeviceLogOptions": {
+          "shape": "WirelessDeviceLogOptionList"
+        }
+      }
+    },
     "GetPartnerAccountRequest": {
       "type": "structure",
       "required": [
@@ -2670,6 +2883,34 @@
         "AccountLinked": {
           "shape": "AccountLinked",
           "documentation": "<p>Whether the partner account is linked to the AWS account.</p>"
+        }
+      }
+    },
+    "GetResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "GetResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {
+        "LogLevel": {
+          "shape": "LogLevel"
         }
       }
     },
@@ -3733,6 +3974,15 @@
       },
       "documentation": "<p>LoRaWANUpdateGatewayTaskEntry object.</p>"
     },
+    "LogLevel": {
+      "type": "string",
+      "documentation": "<p>The log level for a log message.</p>",
+      "enum": [
+        "INFO",
+        "ERROR",
+        "DISABLED"
+      ]
+    },
     "MacVersion": {
       "type": "string",
       "max": 64
@@ -3886,6 +4136,34 @@
       "max": 16700000,
       "min": 1000000
     },
+    "PutResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType",
+        "LogLevel"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      }
+    },
+    "PutResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "RaAllowed": {
       "type": "boolean"
     },
@@ -3898,6 +4176,46 @@
     },
     "ReportDevStatusMargin": {
       "type": "boolean"
+    },
+    "ResetAllResourceLogLevelsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResetAllResourceLogLevelsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResetResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "ResetResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResourceIdentifier": {
+      "type": "string",
+      "documentation": "<p>The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.</p>",
+      "max": 256
+    },
+    "ResourceType": {
+      "type": "string"
     },
     "Result": {
       "type": "string",
@@ -4405,6 +4723,24 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateLogLevelsByResourceTypesRequest": {
+      "type": "structure",
+      "members": {
+        "DefaultLogLevel": {
+          "shape": "LogLevel"
+        },
+        "WirelessDeviceLogOptions": {
+          "shape": "WirelessDeviceLogOptionList"
+        },
+        "WirelessGatewayLogOptions": {
+          "shape": "WirelessGatewayLogOptionList"
+        }
+      }
+    },
+    "UpdateLogLevelsByResourceTypesResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdatePartnerAccountRequest": {
       "type": "structure",
       "required": [
@@ -4545,6 +4881,40 @@
     "WirelessDeviceArn": {
       "type": "string"
     },
+    "WirelessDeviceEvent": {
+      "type": "string",
+      "documentation": "<p>The event for a log message, if the log message is tied to a wireless device.</p>",
+      "enum": [
+        "Join",
+        "Rejoin",
+        "Uplink_Data",
+        "Downlink_Data",
+        "Registration"
+      ]
+    },
+    "WirelessDeviceEventLogOption": {
+      "type": "structure",
+      "required": [
+        "Event",
+        "LogLevel"
+      ],
+      "members": {
+        "Event": {
+          "shape": "WirelessDeviceEvent"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>The log option for a wireless device event. Can be used to set log level for a specific wireless device event. For a LoRaWAN device, the possible events for a log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk device, the possible events for a log message are: Registration, Downlink_Data, Uplink_Data.</p>"
+    },
+    "WirelessDeviceEventLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceEventLogOption"
+      },
+      "documentation": "<p>The list of wireless device event log options.</p>"
+    },
     "WirelessDeviceId": {
       "type": "string",
       "max": 256
@@ -4556,6 +4926,33 @@
         "DevEui",
         "ThingName"
       ]
+    },
+    "WirelessDeviceLogOption": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "LogLevel"
+      ],
+      "members": {
+        "Type": {
+          "shape": "WirelessDeviceType",
+          "documentation": "<p>The wireless device type.</p>"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        },
+        "Events": {
+          "shape": "WirelessDeviceEventLogOptionList"
+        }
+      },
+      "documentation": "<p>The log option for wireless devices. Can be used to set log level for a specific type of wireless device.</p>"
+    },
+    "WirelessDeviceLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceLogOption"
+      },
+      "documentation": "<p>The list of wireless device log options.</p>"
     },
     "WirelessDeviceName": {
       "type": "string",
@@ -4615,6 +5012,37 @@
     "WirelessGatewayArn": {
       "type": "string"
     },
+    "WirelessGatewayEvent": {
+      "type": "string",
+      "documentation": "<p>The event for a log message, if the log message is tied to a wireless gateway.</p>",
+      "enum": [
+        "CUPS_Request",
+        "Certificate"
+      ]
+    },
+    "WirelessGatewayEventLogOption": {
+      "type": "structure",
+      "required": [
+        "Event",
+        "LogLevel"
+      ],
+      "members": {
+        "Event": {
+          "shape": "WirelessGatewayEvent"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>The log option for a wireless gateway event. Can be used to set log level for a specific wireless gateway event. For a LoRaWAN gateway, the possible events for a log message are: CUPS_Request, Certificate.</p>"
+    },
+    "WirelessGatewayEventLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayEventLogOption"
+      },
+      "documentation": "<p>The list of wireless gateway event log options.</p>"
+    },
     "WirelessGatewayId": {
       "type": "string",
       "max": 256
@@ -4626,6 +5054,32 @@
         "WirelessGatewayId",
         "ThingName"
       ]
+    },
+    "WirelessGatewayLogOption": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "LogLevel"
+      ],
+      "members": {
+        "Type": {
+          "shape": "WirelessGatewayType"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        },
+        "Events": {
+          "shape": "WirelessGatewayEventLogOptionList"
+        }
+      },
+      "documentation": "<p>The log option for wireless gateways. Can be used to set log level for a specific type of wireless gateway.</p>"
+    },
+    "WirelessGatewayLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayLogOption"
+      },
+      "documentation": "<p>The list of wireless gateway log options.</p>"
     },
     "WirelessGatewayName": {
       "type": "string",
@@ -4708,6 +5162,13 @@
         "SECOND_RETRY",
         "COMPLETED",
         "FAILED"
+      ]
+    },
+    "WirelessGatewayType": {
+      "type": "string",
+      "documentation": "<p>The wireless gateway type.</p>",
+      "enum": [
+        "LoRaWAN"
       ]
     },
     "WirelessMetadata": {

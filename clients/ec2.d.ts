@@ -7342,12 +7342,20 @@ declare namespace EC2 {
      * The tags to apply to the new network interface.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
   }
   export interface CreateNetworkInterfaceResult {
     /**
      * Information about the network interface.
      */
     NetworkInterface?: NetworkInterface;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    ClientToken?: String;
   }
   export interface CreatePlacementGroupRequest {
     /**

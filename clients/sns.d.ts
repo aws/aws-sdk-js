@@ -52,6 +52,14 @@ declare class SNS extends Service {
    */
   createPlatformEndpoint(callback?: (err: AWSError, data: SNS.Types.CreateEndpointResponse) => void): Request<SNS.Types.CreateEndpointResponse, AWSError>;
   /**
+   * Adds a destination phone number to an AWS account in the SMS sandbox and sends a one-time password (OTP) to that phone number. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  createSMSSandboxPhoneNumber(params: SNS.Types.CreateSMSSandboxPhoneNumberInput, callback?: (err: AWSError, data: SNS.Types.CreateSMSSandboxPhoneNumberResult) => void): Request<SNS.Types.CreateSMSSandboxPhoneNumberResult, AWSError>;
+  /**
+   * Adds a destination phone number to an AWS account in the SMS sandbox and sends a one-time password (OTP) to that phone number. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  createSMSSandboxPhoneNumber(callback?: (err: AWSError, data: SNS.Types.CreateSMSSandboxPhoneNumberResult) => void): Request<SNS.Types.CreateSMSSandboxPhoneNumberResult, AWSError>;
+  /**
    * Creates a topic to which notifications can be published. Users can create at most 100,000 standard topics (at most 1,000 FIFO topics). For more information, see https://aws.amazon.com/sns. This action is idempotent, so if the requester already owns a topic with the specified name, that topic's ARN is returned without creating a new topic.
    */
   createTopic(params: SNS.Types.CreateTopicInput, callback?: (err: AWSError, data: SNS.Types.CreateTopicResponse) => void): Request<SNS.Types.CreateTopicResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class SNS extends Service {
    * Deletes a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging). For more information, see Using Amazon SNS Mobile Push Notifications. 
    */
   deletePlatformApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an AWS account's verified or pending phone number from the SMS sandbox. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  deleteSMSSandboxPhoneNumber(params: SNS.Types.DeleteSMSSandboxPhoneNumberInput, callback?: (err: AWSError, data: SNS.Types.DeleteSMSSandboxPhoneNumberResult) => void): Request<SNS.Types.DeleteSMSSandboxPhoneNumberResult, AWSError>;
+  /**
+   * Deletes an AWS account's verified or pending phone number from the SMS sandbox. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  deleteSMSSandboxPhoneNumber(callback?: (err: AWSError, data: SNS.Types.DeleteSMSSandboxPhoneNumberResult) => void): Request<SNS.Types.DeleteSMSSandboxPhoneNumberResult, AWSError>;
   /**
    * Deletes a topic and all its subscriptions. Deleting a topic might prevent some messages previously sent to the topic from being delivered to subscribers. This action is idempotent, so deleting a topic that does not exist does not result in an error.
    */
@@ -108,6 +124,14 @@ declare class SNS extends Service {
    */
   getSMSAttributes(callback?: (err: AWSError, data: SNS.Types.GetSMSAttributesResponse) => void): Request<SNS.Types.GetSMSAttributesResponse, AWSError>;
   /**
+   * Retrieves the SMS sandbox status for the calling AWS account in the target AWS Region. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  getSMSSandboxAccountStatus(params: SNS.Types.GetSMSSandboxAccountStatusInput, callback?: (err: AWSError, data: SNS.Types.GetSMSSandboxAccountStatusResult) => void): Request<SNS.Types.GetSMSSandboxAccountStatusResult, AWSError>;
+  /**
+   * Retrieves the SMS sandbox status for the calling AWS account in the target AWS Region. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  getSMSSandboxAccountStatus(callback?: (err: AWSError, data: SNS.Types.GetSMSSandboxAccountStatusResult) => void): Request<SNS.Types.GetSMSSandboxAccountStatusResult, AWSError>;
+  /**
    * Returns all of the properties of a subscription.
    */
   getSubscriptionAttributes(params: SNS.Types.GetSubscriptionAttributesInput, callback?: (err: AWSError, data: SNS.Types.GetSubscriptionAttributesResponse) => void): Request<SNS.Types.GetSubscriptionAttributesResponse, AWSError>;
@@ -132,6 +156,14 @@ declare class SNS extends Service {
    */
   listEndpointsByPlatformApplication(callback?: (err: AWSError, data: SNS.Types.ListEndpointsByPlatformApplicationResponse) => void): Request<SNS.Types.ListEndpointsByPlatformApplicationResponse, AWSError>;
   /**
+   * Lists the calling AWS account's dedicated origination numbers and their metadata. For more information about origination numbers, see Origination numbers in the Amazon SNS Developer Guide.
+   */
+  listOriginationNumbers(params: SNS.Types.ListOriginationNumbersRequest, callback?: (err: AWSError, data: SNS.Types.ListOriginationNumbersResult) => void): Request<SNS.Types.ListOriginationNumbersResult, AWSError>;
+  /**
+   * Lists the calling AWS account's dedicated origination numbers and their metadata. For more information about origination numbers, see Origination numbers in the Amazon SNS Developer Guide.
+   */
+  listOriginationNumbers(callback?: (err: AWSError, data: SNS.Types.ListOriginationNumbersResult) => void): Request<SNS.Types.ListOriginationNumbersResult, AWSError>;
+  /**
    * Returns a list of phone numbers that are opted out, meaning you cannot send SMS messages to them. The results for ListPhoneNumbersOptedOut are paginated, and each page returns up to 100 phone numbers. If additional phone numbers are available after the first page of results, then a NextToken string will be returned. To receive the next page, you call ListPhoneNumbersOptedOut again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null.
    */
   listPhoneNumbersOptedOut(params: SNS.Types.ListPhoneNumbersOptedOutInput, callback?: (err: AWSError, data: SNS.Types.ListPhoneNumbersOptedOutResponse) => void): Request<SNS.Types.ListPhoneNumbersOptedOutResponse, AWSError>;
@@ -147,6 +179,14 @@ declare class SNS extends Service {
    * Lists the platform application objects for the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging). The results for ListPlatformApplications are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListPlatformApplications using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications.  This action is throttled at 15 transactions per second (TPS).
    */
   listPlatformApplications(callback?: (err: AWSError, data: SNS.Types.ListPlatformApplicationsResponse) => void): Request<SNS.Types.ListPlatformApplicationsResponse, AWSError>;
+  /**
+   * Lists the calling AWS account's current verified and pending destination phone numbers in the SMS sandbox. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  listSMSSandboxPhoneNumbers(params: SNS.Types.ListSMSSandboxPhoneNumbersInput, callback?: (err: AWSError, data: SNS.Types.ListSMSSandboxPhoneNumbersResult) => void): Request<SNS.Types.ListSMSSandboxPhoneNumbersResult, AWSError>;
+  /**
+   * Lists the calling AWS account's current verified and pending destination phone numbers in the SMS sandbox. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  listSMSSandboxPhoneNumbers(callback?: (err: AWSError, data: SNS.Types.ListSMSSandboxPhoneNumbersResult) => void): Request<SNS.Types.ListSMSSandboxPhoneNumbersResult, AWSError>;
   /**
    * Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptions call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
@@ -275,6 +315,14 @@ declare class SNS extends Service {
    * Remove tags from the specified Amazon SNS topic. For an overview, see Amazon SNS Tags in the Amazon SNS Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: SNS.Types.UntagResourceResponse) => void): Request<SNS.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Verifies a destination phone number with a one-time password (OTP) for the calling AWS account. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  verifySMSSandboxPhoneNumber(params: SNS.Types.VerifySMSSandboxPhoneNumberInput, callback?: (err: AWSError, data: SNS.Types.VerifySMSSandboxPhoneNumberResult) => void): Request<SNS.Types.VerifySMSSandboxPhoneNumberResult, AWSError>;
+  /**
+   * Verifies a destination phone number with a one-time password (OTP) for the calling AWS account. When you start using Amazon SNS to send SMS messages, your AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see SMS sandbox in the Amazon SNS Developer Guide.
+   */
+  verifySMSSandboxPhoneNumber(callback?: (err: AWSError, data: SNS.Types.VerifySMSSandboxPhoneNumberResult) => void): Request<SNS.Types.VerifySMSSandboxPhoneNumberResult, AWSError>;
 }
 declare namespace SNS {
   export type ActionsList = action[];
@@ -346,7 +394,7 @@ declare namespace SNS {
      */
     Platform: String;
     /**
-     * For a list of attributes, see SetPlatformApplicationAttributes 
+     * For a list of attributes, see SetPlatformApplicationAttributes.
      */
     Attributes: MapStringToString;
   }
@@ -374,13 +422,25 @@ declare namespace SNS {
      */
     Attributes?: MapStringToString;
   }
+  export interface CreateSMSSandboxPhoneNumberInput {
+    /**
+     * The destination phone number to verify. On verification, Amazon SNS adds this phone number to the list of verified phone numbers that you can send SMS messages to.
+     */
+    PhoneNumber: PhoneNumberString;
+    /**
+     * The language to use for sending the OTP. The default value is en-US.
+     */
+    LanguageCode?: LanguageCodeString;
+  }
+  export interface CreateSMSSandboxPhoneNumberResult {
+  }
   export interface CreateTopicInput {
     /**
      * The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. For a FIFO (first-in-first-out) topic, the name must end with the .fifo suffix. 
      */
     Name: topicName;
     /**
-     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the CreateTopic action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    FifoTopic – Set to true to create a FIFO topic.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.   The following attribute applies only to server-side-encryption:    KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.    The following attributes apply only to FIFO topics:    FifoTopic – When this is set to true, a FIFO topic is created.    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.    By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the MessageDeduplicationId parameter for the Publish action.    
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the CreateTopic action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    FifoTopic – Set to true to create a FIFO topic.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.   The following attribute applies only to server-side encryption:    KmsMasterKeyId – The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.    The following attributes apply only to FIFO topics:    FifoTopic – When this is set to true, a FIFO topic is created.    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.   By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the MessageDeduplicationId parameter for the Publish action.    
      */
     Attributes?: TopicAttributesMap;
     /**
@@ -406,6 +466,14 @@ declare namespace SNS {
      * PlatformApplicationArn of platform application object to delete.
      */
     PlatformApplicationArn: String;
+  }
+  export interface DeleteSMSSandboxPhoneNumberInput {
+    /**
+     * The destination phone number to delete.
+     */
+    PhoneNumber: PhoneNumberString;
+  }
+  export interface DeleteSMSSandboxPhoneNumberResult {
   }
   export interface DeleteTopicInput {
     /**
@@ -459,6 +527,14 @@ declare namespace SNS {
      */
     attributes?: MapStringToString;
   }
+  export interface GetSMSSandboxAccountStatusInput {
+  }
+  export interface GetSMSSandboxAccountStatusResult {
+    /**
+     * Indicates whether the calling account is in the SMS sandbox.
+     */
+    IsInSandbox: boolean;
+  }
   export interface GetSubscriptionAttributesInput {
     /**
      * The ARN of the subscription whose properties you want to get.
@@ -479,10 +555,12 @@ declare namespace SNS {
   }
   export interface GetTopicAttributesResponse {
     /**
-     * A map of the topic's attributes. Attributes in this map include the following:    DeliveryPolicy – The JSON serialization of the topic's delivery policy.    DisplayName – The human-readable name used in the From field for notifications to email and email-json endpoints.    Owner – The AWS account ID of the topic's owner.    Policy – The JSON serialization of the topic's access control policy.    SubscriptionsConfirmed – The number of confirmed subscriptions for the topic.    SubscriptionsDeleted – The number of deleted subscriptions for the topic.    SubscriptionsPending – The number of subscriptions pending confirmation for the topic.    TopicArn – The topic's ARN.    EffectiveDeliveryPolicy – The JSON serialization of the effective delivery policy, taking system defaults into account.   The following attribute applies only to server-side-encryption:    KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.   The following attributes apply only to FIFO topics:    FifoTopic – When this is set to true, a FIFO topic is created.    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.    By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the MessageDeduplicationId parameter for the Publish action.    
+     * A map of the topic's attributes. Attributes in this map include the following:    DeliveryPolicy – The JSON serialization of the topic's delivery policy.    DisplayName – The human-readable name used in the From field for notifications to email and email-json endpoints.    Owner – The AWS account ID of the topic's owner.    Policy – The JSON serialization of the topic's access control policy.    SubscriptionsConfirmed – The number of confirmed subscriptions for the topic.    SubscriptionsDeleted – The number of deleted subscriptions for the topic.    SubscriptionsPending – The number of subscriptions pending confirmation for the topic.    TopicArn – The topic's ARN.    EffectiveDeliveryPolicy – The JSON serialization of the effective delivery policy, taking system defaults into account.   The following attribute applies only to server-side-encryption:    KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.   The following attributes apply only to FIFO topics:    FifoTopic – When this is set to true, a FIFO topic is created.    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.   By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the MessageDeduplicationId parameter for the Publish action.    
      */
     Attributes?: TopicAttributesMap;
   }
+  export type Iso2CountryCode = string;
+  export type LanguageCodeString = "en-US"|"en-GB"|"es-419"|"es-ES"|"de-DE"|"fr-CA"|"fr-FR"|"it-IT"|"ja-JP"|"pt-BR"|"kr-KR"|"zh-CN"|"zh-TW"|string;
   export interface ListEndpointsByPlatformApplicationInput {
     /**
      * PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
@@ -505,6 +583,26 @@ declare namespace SNS {
   }
   export type ListOfEndpoints = Endpoint[];
   export type ListOfPlatformApplications = PlatformApplication[];
+  export interface ListOriginationNumbersRequest {
+    /**
+     * Token that the previous ListOriginationNumbers request returns.
+     */
+    NextToken?: nextToken;
+    /**
+     * The maximum number of origination numbers to return.
+     */
+    MaxResults?: MaxItemsListOriginationNumbers;
+  }
+  export interface ListOriginationNumbersResult {
+    /**
+     * A NextToken string is returned when you call the ListOriginationNumbers operation if additional pages of records are available.
+     */
+    NextToken?: nextToken;
+    /**
+     * A list of the calling account's verified and pending origination numbers.
+     */
+    PhoneNumbers?: PhoneNumberInformationList;
+  }
   export interface ListPhoneNumbersOptedOutInput {
     /**
      * A NextToken string is used when you call the ListPhoneNumbersOptedOut action to retrieve additional records that are available after the first page of results.
@@ -536,6 +634,26 @@ declare namespace SNS {
      * NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
      */
     NextToken?: String;
+  }
+  export interface ListSMSSandboxPhoneNumbersInput {
+    /**
+     * Token that the previous ListSMSSandboxPhoneNumbersInput request returns.
+     */
+    NextToken?: nextToken;
+    /**
+     * The maximum number of phone numbers to return.
+     */
+    MaxResults?: MaxItems;
+  }
+  export interface ListSMSSandboxPhoneNumbersResult {
+    /**
+     * A list of the calling account's pending and verified phone numbers.
+     */
+    PhoneNumbers: SMSSandboxPhoneNumberList;
+    /**
+     * A NextToken string is returned when you call the ListSMSSandboxPhoneNumbersInput operation if additional pages of records are available.
+     */
+    NextToken?: string;
   }
   export type ListString = String[];
   export interface ListSubscriptionsByTopicInput {
@@ -603,6 +721,8 @@ declare namespace SNS {
     NextToken?: nextToken;
   }
   export type MapStringToString = {[key: string]: String};
+  export type MaxItems = number;
+  export type MaxItemsListOriginationNumbers = number;
   export type MessageAttributeMap = {[key: string]: MessageAttributeValue};
   export interface MessageAttributeValue {
     /**
@@ -618,6 +738,9 @@ declare namespace SNS {
      */
     BinaryValue?: Binary;
   }
+  export type NumberCapability = "SMS"|"MMS"|"VOICE"|string;
+  export type NumberCapabilityList = NumberCapability[];
+  export type OTPCode = string;
   export interface OptInPhoneNumberInput {
     /**
      * The phone number to opt in. Use E.164 format.
@@ -627,7 +750,35 @@ declare namespace SNS {
   export interface OptInPhoneNumberResponse {
   }
   export type PhoneNumber = string;
+  export interface PhoneNumberInformation {
+    /**
+     * The date and time when the phone number was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The phone number.
+     */
+    PhoneNumber?: String;
+    /**
+     * The status of the phone number.
+     */
+    Status?: String;
+    /**
+     * The two-character code for the country or region, in ISO 3166-1 alpha-2 format.
+     */
+    Iso2CountryCode?: Iso2CountryCode;
+    /**
+     * The list of supported routes.
+     */
+    RouteType?: RouteType;
+    /**
+     * The capabilities of each phone number.
+     */
+    NumberCapabilities?: NumberCapabilityList;
+  }
+  export type PhoneNumberInformationList = PhoneNumberInformation[];
   export type PhoneNumberList = PhoneNumber[];
+  export type PhoneNumberString = string;
   export interface PlatformApplication {
     /**
      * PlatformApplicationArn for platform application object.
@@ -696,6 +847,19 @@ declare namespace SNS {
      */
     Label: label;
   }
+  export type RouteType = "Transactional"|"Promotional"|"Premium"|string;
+  export interface SMSSandboxPhoneNumber {
+    /**
+     * The destination phone number.
+     */
+    PhoneNumber?: PhoneNumberString;
+    /**
+     * The destination phone number's verification status.
+     */
+    Status?: SMSSandboxPhoneNumberVerificationStatus;
+  }
+  export type SMSSandboxPhoneNumberList = SMSSandboxPhoneNumber[];
+  export type SMSSandboxPhoneNumberVerificationStatus = "Pending"|"Verified"|string;
   export interface SetEndpointAttributesInput {
     /**
      * EndpointArn used for SetEndpointAttributes action.
@@ -744,7 +908,7 @@ declare namespace SNS {
      */
     TopicArn: topicARN;
     /**
-     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the SetTopicAttributes action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.   The following attribute applies only to server-side-encryption:    KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.    The following attribute applies only to FIFO topics:    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.    By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the MessageDeduplicationId parameter for the Publish action.    
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the SetTopicAttributes action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.   The following attribute applies only to server-side-encryption:    KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.    The following attribute applies only to FIFO topics:    ContentBasedDeduplication – Enables content-based deduplication for FIFO topics.   By default, ContentBasedDeduplication is set to false. If you create a FIFO topic and this attribute is false, you must specify a value for the MessageDeduplicationId parameter for the Publish action.    When you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the MessageDeduplicationId parameter for the Publish action.    
      */
     AttributeName: attributeName;
     /**
@@ -831,6 +995,7 @@ declare namespace SNS {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Timestamp = Date;
   export interface Topic {
     /**
      * The topic's ARN.
@@ -856,6 +1021,18 @@ declare namespace SNS {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface VerifySMSSandboxPhoneNumberInput {
+    /**
+     * The destination phone number to verify.
+     */
+    PhoneNumber: PhoneNumberString;
+    /**
+     * The OTP sent to the destination number from the CreateSMSSandBoxPhoneNumber call.
+     */
+    OneTimePassword: OTPCode;
+  }
+  export interface VerifySMSSandboxPhoneNumberResult {
   }
   export type account = string;
   export type action = string;
