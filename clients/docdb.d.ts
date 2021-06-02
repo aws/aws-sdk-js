@@ -101,6 +101,14 @@ declare class DocDB extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
   /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(params: DocDB.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
+  /**
    * Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified cluster are not deleted. 
    */
   deleteDBCluster(params: DocDB.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
@@ -148,6 +156,14 @@ declare class DocDB extends Service {
    * Deletes an Amazon DocumentDB event notification subscription.
    */
   deleteEventSubscription(callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(params: DocDB.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
   /**
    * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
    */
@@ -253,6 +269,14 @@ declare class DocDB extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
   /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(params: DocDB.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
+  /**
    * Returns a list of orderable instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(params: DocDB.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: DocDB.Types.OrderableDBInstanceOptionsMessage) => void): Request<DocDB.Types.OrderableDBInstanceOptionsMessage, AWSError>;
@@ -333,6 +357,14 @@ declare class DocDB extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(params: DocDB.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
@@ -340,6 +372,14 @@ declare class DocDB extends Service {
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(params: DocDB.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
    * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
    */
@@ -603,11 +643,11 @@ declare namespace DocDB {
     /**
      * The name of the master user for the cluster. Constraints:   Must be from 1 to 63 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.   
      */
-    MasterUsername: String;
+    MasterUsername?: String;
     /**
      * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
      */
-    MasterUserPassword: String;
+    MasterUserPassword?: String;
     /**
      * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.    Must be at least 30 minutes.  
      */
@@ -640,6 +680,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -777,6 +821,39 @@ declare namespace DocDB {
   export interface CreateEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * The name of the database engine to be used for this cluster.
+     */
+    Engine?: String;
+    /**
+     * The engine version of the global cluster.
+     */
+    EngineVersion?: String;
+    /**
+     * The deletion protection setting for the new global cluster. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the new global cluster. 
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DBCluster {
     /**
      * Provides the list of Amazon EC2 Availability Zones that instances in the cluster can be created in.
@@ -850,6 +927,14 @@ declare namespace DocDB {
      * Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
      */
     PreferredMaintenanceWindow?: String;
+    /**
+     * Contains the identifier of the source cluster if this cluster is a secondary cluster.
+     */
+    ReplicationSourceIdentifier?: String;
+    /**
+     * Contains one or more identifiers of the secondary clusters that are associated with this cluster.
+     */
+    ReadReplicaIdentifiers?: ReadReplicaIdentifierList;
     /**
      * Provides the list of instances that make up the cluster.
      */
@@ -1357,6 +1442,15 @@ declare namespace DocDB {
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     * The cluster identifier of the global cluster being deleted.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DescribeCertificatesMessage {
     /**
      * The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to MaxRecords certificates is returned. This parameter is not case sensitive. Constraints   Must match an existing CertificateIdentifier.  
@@ -1434,7 +1528,7 @@ declare namespace DocDB {
      */
     DBClusterSnapshotIdentifier?: String;
     /**
-     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.    manual - Return all cluster snapshots that you have manually created for your AWS account.    shared - Return all manual cluster snapshots that have been shared to your AWS account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting the IncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
+     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.    manual - Return all cluster snapshots that you have manually created for your AWS account.    shared - Return all manual cluster snapshots that have been shared to your AWS account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting theIncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
      */
     SnapshotType?: String;
     /**
@@ -1634,6 +1728,24 @@ declare namespace DocDB {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     * The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case-sensitive.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * A filter that specifies one or more global DB clusters to describe. Supported filters: db-cluster-id accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1850,6 +1962,75 @@ declare namespace DocDB {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     * Contains a user-supplied global cluster identifier. This identifier is the unique key that identifies a global cluster. 
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. 
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global cluster.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global cluster.
+     */
+    Status?: String;
+    /**
+     * The Amazon DocumentDB database engine used by the global cluster. 
+     */
+    Engine?: String;
+    /**
+     * Indicates the database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     * The default database name within the new global cluster.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the global cluster.
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     * The deletion protection setting for the new global cluster.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. 
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterIdentifier = string;
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     * The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+     */
+    DBClusterArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     * 
+     */
+    Marker?: String;
+    /**
+     * 
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -1910,7 +2091,7 @@ declare namespace DocDB {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.
+     * The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
      */
     EngineVersion?: String;
     /**
@@ -2030,6 +2211,23 @@ declare namespace DocDB {
   }
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     * The identifier for the global cluster being modified. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global cluster.  
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.   Must contain from 1 to 63 letters, numbers, or hyphens The first character must be a letter Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface OrderableDBInstanceOption {
     /**
@@ -2217,6 +2415,8 @@ declare namespace DocDB {
      */
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
+  export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -2229,6 +2429,19 @@ declare namespace DocDB {
   }
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     * The cluster identifier to detach from the Amazon DocumentDB global cluster. 
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. 
+     */
+    DbClusterIdentifier: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface RemoveSourceIdentifierFromSubscriptionMessage {
     /**

@@ -52,11 +52,11 @@ declare class AutoScaling extends Service {
    */
   batchPutScheduledUpdateGroupAction(callback?: (err: AWSError, data: AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer) => void): Request<AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer, AWSError>;
   /**
-   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes.
    */
   cancelInstanceRefresh(params: AutoScaling.Types.CancelInstanceRefreshType, callback?: (err: AWSError, data: AutoScaling.Types.CancelInstanceRefreshAnswer) => void): Request<AutoScaling.Types.CancelInstanceRefreshAnswer, AWSError>;
   /**
-   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes.
    */
   cancelInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.CancelInstanceRefreshAnswer) => void): Request<AutoScaling.Types.CancelInstanceRefreshAnswer, AWSError>;
   /**
@@ -148,35 +148,35 @@ declare class AutoScaling extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the warm pool for the specified Auto Scaling group.
+   * Deletes the warm pool for the specified Auto Scaling group. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   deleteWarmPool(params: AutoScaling.Types.DeleteWarmPoolType, callback?: (err: AWSError, data: AutoScaling.Types.DeleteWarmPoolAnswer) => void): Request<AutoScaling.Types.DeleteWarmPoolAnswer, AWSError>;
   /**
-   * Deletes the warm pool for the specified Auto Scaling group.
+   * Deletes the warm pool for the specified Auto Scaling group. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   deleteWarmPool(callback?: (err: AWSError, data: AutoScaling.Types.DeleteWarmPoolAnswer) => void): Request<AutoScaling.Types.DeleteWarmPoolAnswer, AWSError>;
   /**
-   * Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account. For information about requesting an increase, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide.
+   * Describes the current Amazon EC2 Auto Scaling resource quotas for your account. For information about requesting an increase, see Amazon EC2 Auto Scaling service quotas in the Amazon EC2 Auto Scaling User Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAccountLimitsAnswer) => void): Request<AutoScaling.Types.DescribeAccountLimitsAnswer, AWSError>;
   /**
-   * Describes the available adjustment types for Amazon EC2 Auto Scaling scaling policies. These settings apply to step scaling policies and simple scaling policies; they do not apply to target tracking scaling policies. The following adjustment types are supported:   ChangeInCapacity   ExactCapacity   PercentChangeInCapacity  
+   * Describes the available adjustment types for step scaling and simple scaling policies. The following adjustment types are supported:    ChangeInCapacity     ExactCapacity     PercentChangeInCapacity   
    */
   describeAdjustmentTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAdjustmentTypesAnswer) => void): Request<AutoScaling.Types.DescribeAdjustmentTypesAnswer, AWSError>;
   /**
-   * Describes one or more Auto Scaling groups. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
+   * Gets information about the Auto Scaling groups in the account and Region. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
    */
   describeAutoScalingGroups(params: AutoScaling.Types.AutoScalingGroupNamesType, callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingGroupsType) => void): Request<AutoScaling.Types.AutoScalingGroupsType, AWSError>;
   /**
-   * Describes one or more Auto Scaling groups. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
+   * Gets information about the Auto Scaling groups in the account and Region. This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool API. 
    */
   describeAutoScalingGroups(callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingGroupsType) => void): Request<AutoScaling.Types.AutoScalingGroupsType, AWSError>;
   /**
-   * Describes one or more Auto Scaling instances.
+   * Gets information about the Auto Scaling instances in the account and Region.
    */
   describeAutoScalingInstances(params: AutoScaling.Types.DescribeAutoScalingInstancesType, callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingInstancesType) => void): Request<AutoScaling.Types.AutoScalingInstancesType, AWSError>;
   /**
-   * Describes one or more Auto Scaling instances.
+   * Gets information about the Auto Scaling instances in the account and Region.
    */
   describeAutoScalingInstances(callback?: (err: AWSError, data: AutoScaling.Types.AutoScalingInstancesType) => void): Request<AutoScaling.Types.AutoScalingInstancesType, AWSError>;
   /**
@@ -184,47 +184,47 @@ declare class AutoScaling extends Service {
    */
   describeAutoScalingNotificationTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAutoScalingNotificationTypesAnswer) => void): Request<AutoScaling.Types.DescribeAutoScalingNotificationTypesAnswer, AWSError>;
   /**
-   * Describes one or more instance refreshes. You can determine the status of a request by looking at the Status parameter. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.    For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Gets information about the instance refreshes for the specified Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes. To help you determine the status of an instance refresh, this operation returns information about the instance refreshes you previously initiated, including their status, end time, the percentage of the instance refresh that is complete, and the number of instances remaining to update before the instance refresh is complete. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.   
    */
   describeInstanceRefreshes(params: AutoScaling.Types.DescribeInstanceRefreshesType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeInstanceRefreshesAnswer) => void): Request<AutoScaling.Types.DescribeInstanceRefreshesAnswer, AWSError>;
   /**
-   * Describes one or more instance refreshes. You can determine the status of a request by looking at the Status parameter. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.    For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Gets information about the instance refreshes for the specified Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes. To help you determine the status of an instance refresh, this operation returns information about the instance refreshes you previously initiated, including their status, end time, the percentage of the instance refresh that is complete, and the number of instances remaining to update before the instance refresh is complete. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.   
    */
   describeInstanceRefreshes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeInstanceRefreshesAnswer) => void): Request<AutoScaling.Types.DescribeInstanceRefreshesAnswer, AWSError>;
   /**
-   * Describes one or more launch configurations.
+   * Gets information about the launch configurations in the account and Region.
    */
   describeLaunchConfigurations(params: AutoScaling.Types.LaunchConfigurationNamesType, callback?: (err: AWSError, data: AutoScaling.Types.LaunchConfigurationsType) => void): Request<AutoScaling.Types.LaunchConfigurationsType, AWSError>;
   /**
-   * Describes one or more launch configurations.
+   * Gets information about the launch configurations in the account and Region.
    */
   describeLaunchConfigurations(callback?: (err: AWSError, data: AutoScaling.Types.LaunchConfigurationsType) => void): Request<AutoScaling.Types.LaunchConfigurationsType, AWSError>;
   /**
-   * Describes the available types of lifecycle hooks. The following hook types are supported:   autoscaling:EC2_INSTANCE_LAUNCHING   autoscaling:EC2_INSTANCE_TERMINATING  
+   * Describes the available types of lifecycle hooks. The following hook types are supported:    autoscaling:EC2_INSTANCE_LAUNCHING     autoscaling:EC2_INSTANCE_TERMINATING   
    */
   describeLifecycleHookTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLifecycleHookTypesAnswer) => void): Request<AutoScaling.Types.DescribeLifecycleHookTypesAnswer, AWSError>;
   /**
-   * Describes the lifecycle hooks for the specified Auto Scaling group.
+   * Gets information about the lifecycle hooks for the specified Auto Scaling group.
    */
   describeLifecycleHooks(params: AutoScaling.Types.DescribeLifecycleHooksType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeLifecycleHooksAnswer) => void): Request<AutoScaling.Types.DescribeLifecycleHooksAnswer, AWSError>;
   /**
-   * Describes the lifecycle hooks for the specified Auto Scaling group.
+   * Gets information about the lifecycle hooks for the specified Auto Scaling group.
    */
   describeLifecycleHooks(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLifecycleHooksAnswer) => void): Request<AutoScaling.Types.DescribeLifecycleHooksAnswer, AWSError>;
   /**
-   * Describes the target groups for the specified Auto Scaling group.
+   * Gets information about the load balancer target groups for the specified Auto Scaling group. To determine the availability of registered instances, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Elastic Load Balancing and Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeLoadBalancerTargetGroups(params: AutoScaling.Types.DescribeLoadBalancerTargetGroupsRequest, callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse, AWSError>;
   /**
-   * Describes the target groups for the specified Auto Scaling group.
+   * Gets information about the load balancer target groups for the specified Auto Scaling group. To determine the availability of registered instances, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Elastic Load Balancing and Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeLoadBalancerTargetGroups(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse, AWSError>;
   /**
-   * Describes the load balancers for the specified Auto Scaling group. This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups API instead.
+   * Gets information about the load balancers for the specified Auto Scaling group. This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups API instead. To determine the availability of registered instances, use the State element in the response. When you attach a load balancer to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the load balancer is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn't enter the InService state.  Load balancers also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your load balancer state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Elastic Load Balancing and Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeLoadBalancers(params: AutoScaling.Types.DescribeLoadBalancersRequest, callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancersResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancersResponse, AWSError>;
   /**
-   * Describes the load balancers for the specified Auto Scaling group. This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups API instead.
+   * Gets information about the load balancers for the specified Auto Scaling group. This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups API instead. To determine the availability of registered instances, use the State element in the response. When you attach a load balancer to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the load balancer is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn't enter the InService state.  Load balancers also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your load balancer state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Elastic Load Balancing and Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeLoadBalancers(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancersResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancersResponse, AWSError>;
   /**
@@ -232,27 +232,27 @@ declare class AutoScaling extends Service {
    */
   describeMetricCollectionTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeMetricCollectionTypesAnswer) => void): Request<AutoScaling.Types.DescribeMetricCollectionTypesAnswer, AWSError>;
   /**
-   * Describes the notification actions associated with the specified Auto Scaling group.
+   * Gets information about the Amazon SNS notifications that are configured for one or more Auto Scaling groups.
    */
   describeNotificationConfigurations(params: AutoScaling.Types.DescribeNotificationConfigurationsType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeNotificationConfigurationsAnswer) => void): Request<AutoScaling.Types.DescribeNotificationConfigurationsAnswer, AWSError>;
   /**
-   * Describes the notification actions associated with the specified Auto Scaling group.
+   * Gets information about the Amazon SNS notifications that are configured for one or more Auto Scaling groups.
    */
   describeNotificationConfigurations(callback?: (err: AWSError, data: AutoScaling.Types.DescribeNotificationConfigurationsAnswer) => void): Request<AutoScaling.Types.DescribeNotificationConfigurationsAnswer, AWSError>;
   /**
-   * Describes the policies for the specified Auto Scaling group.
+   * Gets information about the scaling policies in the account and Region.
    */
   describePolicies(params: AutoScaling.Types.DescribePoliciesType, callback?: (err: AWSError, data: AutoScaling.Types.PoliciesType) => void): Request<AutoScaling.Types.PoliciesType, AWSError>;
   /**
-   * Describes the policies for the specified Auto Scaling group.
+   * Gets information about the scaling policies in the account and Region.
    */
   describePolicies(callback?: (err: AWSError, data: AutoScaling.Types.PoliciesType) => void): Request<AutoScaling.Types.PoliciesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
+   * Gets information about the scaling activities in the account and Region. When scaling events occur, you see a record of the scaling activity in the scaling activities. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. If the scaling event succeeds, the value of the StatusCode element in the response is Successful. If an attempt to launch instances failed, the StatusCode value is Failed or Cancelled and the StatusMessage element in the response indicates the cause of the failure. For help interpreting the StatusMessage, see Troubleshooting Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeScalingActivities(params: AutoScaling.Types.DescribeScalingActivitiesType, callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
-   * Describes one or more scaling activities for the specified Auto Scaling group. To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the Activity tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the Activity history. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
+   * Gets information about the scaling activities in the account and Region. When scaling events occur, you see a record of the scaling activity in the scaling activities. For more information, see Verifying a scaling activity for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. If the scaling event succeeds, the value of the StatusCode element in the response is Successful. If an attempt to launch instances failed, the StatusCode value is Failed or Cancelled and the StatusMessage element in the response indicates the cause of the failure. For help interpreting the StatusMessage, see Troubleshooting Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. 
    */
   describeScalingActivities(callback?: (err: AWSError, data: AutoScaling.Types.ActivitiesType) => void): Request<AutoScaling.Types.ActivitiesType, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class AutoScaling extends Service {
    */
   describeScalingProcessTypes(callback?: (err: AWSError, data: AutoScaling.Types.ProcessesType) => void): Request<AutoScaling.Types.ProcessesType, AWSError>;
   /**
-   * Describes the actions scheduled for your Auto Scaling group that haven't run or that have not reached their end time. To describe the actions that have already run, call the DescribeScalingActivities API.
+   * Gets information about the scheduled actions that haven't run or that have not reached their end time. To describe the scaling activities for scheduled actions that have already run, call the DescribeScalingActivities API.
    */
   describeScheduledActions(params: AutoScaling.Types.DescribeScheduledActionsType, callback?: (err: AWSError, data: AutoScaling.Types.ScheduledActionsType) => void): Request<AutoScaling.Types.ScheduledActionsType, AWSError>;
   /**
-   * Describes the actions scheduled for your Auto Scaling group that haven't run or that have not reached their end time. To describe the actions that have already run, call the DescribeScalingActivities API.
+   * Gets information about the scheduled actions that haven't run or that have not reached their end time. To describe the scaling activities for scheduled actions that have already run, call the DescribeScalingActivities API.
    */
   describeScheduledActions(callback?: (err: AWSError, data: AutoScaling.Types.ScheduledActionsType) => void): Request<AutoScaling.Types.ScheduledActionsType, AWSError>;
   /**
@@ -280,11 +280,11 @@ declare class AutoScaling extends Service {
    */
   describeTerminationPolicyTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeTerminationPolicyTypesAnswer) => void): Request<AutoScaling.Types.DescribeTerminationPolicyTypesAnswer, AWSError>;
   /**
-   * Describes a warm pool and its instances.
+   * Gets information about a warm pool and its instances. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   describeWarmPool(params: AutoScaling.Types.DescribeWarmPoolType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeWarmPoolAnswer) => void): Request<AutoScaling.Types.DescribeWarmPoolAnswer, AWSError>;
   /**
-   * Describes a warm pool and its instances.
+   * Gets information about a warm pool and its instances. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   describeWarmPool(callback?: (err: AWSError, data: AutoScaling.Types.DescribeWarmPoolAnswer) => void): Request<AutoScaling.Types.DescribeWarmPoolAnswer, AWSError>;
   /**
@@ -440,11 +440,11 @@ declare class AutoScaling extends Service {
    */
   setInstanceProtection(callback?: (err: AWSError, data: AutoScaling.Types.SetInstanceProtectionAnswer) => void): Request<AutoScaling.Types.SetInstanceProtectionAnswer, AWSError>;
   /**
-   * Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances. If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh operation in progress, use the CancelInstanceRefresh API.  For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes. If the call succeeds, it creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh operation in progress, use the CancelInstanceRefresh API. 
    */
   startInstanceRefresh(params: AutoScaling.Types.StartInstanceRefreshType, callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
   /**
-   * Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances. If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh operation in progress, use the CancelInstanceRefresh API.  For more information, see Replacing Auto Scaling instances based on an instance refresh in the Amazon EC2 Auto Scaling User Guide.
+   * Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes. If the call succeeds, it creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh operation in progress, use the CancelInstanceRefresh API. 
    */
   startInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
   /**
@@ -697,7 +697,7 @@ declare namespace AutoScaling {
      */
     NewInstancesProtectedFromScaleIn?: InstanceProtected;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf.
      */
     ServiceLinkedRoleARN?: ResourceName;
     /**
@@ -838,6 +838,7 @@ declare namespace AutoScaling {
   export type BlockDeviceEbsDeleteOnTermination = boolean;
   export type BlockDeviceEbsEncrypted = boolean;
   export type BlockDeviceEbsIops = number;
+  export type BlockDeviceEbsThroughput = number;
   export type BlockDeviceEbsVolumeSize = number;
   export type BlockDeviceEbsVolumeType = string;
   export interface BlockDeviceMapping {
@@ -996,7 +997,7 @@ declare namespace AutoScaling {
      */
     Tags?: Tags;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see Service-linked roles in the Amazon EC2 Auto Scaling User Guide.
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see Service-linked roles in the Amazon EC2 Auto Scaling User Guide.
      */
     ServiceLinkedRoleARN?: ResourceName;
     /**
@@ -1182,19 +1183,19 @@ declare namespace AutoScaling {
   }
   export interface DescribeAccountLimitsAnswer {
     /**
-     * The maximum number of groups allowed for your AWS account. The default is 200 groups per AWS Region.
+     * The maximum number of groups allowed for your account. The default is 200 groups per Region.
      */
     MaxNumberOfAutoScalingGroups?: MaxNumberOfAutoScalingGroups;
     /**
-     * The maximum number of launch configurations allowed for your AWS account. The default is 200 launch configurations per AWS Region.
+     * The maximum number of launch configurations allowed for your account. The default is 200 launch configurations per Region.
      */
     MaxNumberOfLaunchConfigurations?: MaxNumberOfLaunchConfigurations;
     /**
-     * The current number of groups for your AWS account.
+     * The current number of groups for your account.
      */
     NumberOfAutoScalingGroups?: NumberOfAutoScalingGroups;
     /**
-     * The current number of launch configurations for your AWS account.
+     * The current number of launch configurations for your account.
      */
     NumberOfLaunchConfigurations?: NumberOfLaunchConfigurations;
   }
@@ -1206,7 +1207,7 @@ declare namespace AutoScaling {
   }
   export interface DescribeAutoScalingInstancesType {
     /**
-     * The IDs of the instances. You can specify up to MaxRecords IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.
+     * The IDs of the instances. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error. Array Members: Maximum number of 50 items.
      */
     InstanceIds?: InstanceIds;
     /**
@@ -1362,7 +1363,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName?: XmlStringMaxLen255;
     /**
-     * The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
+     * The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. If you specify an unknown policy name, it is ignored with no error. Array Members: Maximum number of 50 items.
      */
     PolicyNames?: PolicyNames;
     /**
@@ -1380,7 +1381,7 @@ declare namespace AutoScaling {
   }
   export interface DescribeScalingActivitiesType {
     /**
-     * The activity IDs of the desired scaling activities. You can specify up to 50 IDs. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.
+     * The activity IDs of the desired scaling activities. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group. Array Members: Maximum number of 50 IDs.
      */
     ActivityIds?: ActivityIds;
     /**
@@ -1406,7 +1407,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName?: XmlStringMaxLen255;
     /**
-     * The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.
+     * The names of one or more scheduled actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error. Array Members: Maximum number of 50 actions.
      */
     ScheduledActionNames?: ScheduledActionNames;
     /**
@@ -1535,11 +1536,11 @@ declare namespace AutoScaling {
      */
     SnapshotId?: XmlStringMaxLen255;
     /**
-     * The volume size, in Gibibytes (GiB). This can be a number from 1-1,024 for standard, 4-16,384 for io1, 1-16,384 for gp2, and 500-16,384 for st1 and sc1. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size. You must specify either a VolumeSize or a SnapshotId. If you specify both SnapshotId and VolumeSize, the volume size must be equal or greater than the size of the snapshot.
+     * The volume size, in GiBs. The following are the supported volumes sizes for each volume type:     gp2 and gp3: 1-16,384    io1: 4-16,384    st1 and sc1: 125-16,384    standard: 1-1,024   You must specify either a SnapshotId or a VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must be equal or greater than the size of the snapshot.
      */
     VolumeSize?: BlockDeviceEbsVolumeSize;
     /**
-     * The volume type, which can be standard for Magnetic, io1 for Provisioned IOPS SSD, gp2 for General Purpose SSD, st1 for Throughput Optimized HDD, or sc1 for Cold HDD. For more information, see Amazon EBS Volume Types in the Amazon EC2 User Guide for Linux Instances. Valid Values: standard | io1 | gp2 | st1 | sc1 
+     * The volume type. For more information, see Amazon EBS Volume Types in the Amazon EC2 User Guide for Linux Instances. Valid Values: standard | io1 | gp2 | st1 | sc1 | gp3 
      */
     VolumeType?: BlockDeviceEbsVolumeType;
     /**
@@ -1547,13 +1548,17 @@ declare namespace AutoScaling {
      */
     DeleteOnTermination?: BlockDeviceEbsDeleteOnTermination;
     /**
-     * The number of I/O operations per second (IOPS) to provision for the volume. The maximum ratio of IOPS to volume size (in GiB) is 50:1. For more information, see Amazon EBS Volume Types in the Amazon EC2 User Guide for Linux Instances. Required when the volume type is io1. (Not used with standard, gp2, st1, or sc1 volumes.) 
+     * The number of input/output (I/O) operations per second (IOPS) to provision for the volume. For gp3 and io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.  The following are the supported values for each volume type:     gp3: 3,000-16,000 IOPS    io1: 100-64,000 IOPS   For io1 volumes, we guarantee 64,000 IOPS only for Instances built on the Nitro System. Other instance families guarantee performance up to 32,000 IOPS.   Iops is supported when the volume type is gp3 or io1 and required only when the volume type is io1. (Not used with standard, gp2, st1, or sc1 volumes.) 
      */
     Iops?: BlockDeviceEbsIops;
     /**
      * Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types. If your AMI uses encrypted volumes, you can also only launch it on supported instance types.  If you are creating a volume from a snapshot, you cannot specify an encryption value. Volumes that are created from encrypted snapshots are automatically encrypted, and volumes that are created from unencrypted snapshots are automatically unencrypted. By default, encrypted snapshots use the AWS managed CMK that is used for EBS encryption, but you can specify a custom CMK when you create the snapshot. The ability to encrypt a snapshot during copying also allows you to apply a new CMK to an already-encrypted snapshot. Volumes restored from the resulting copy are only accessible using the new CMK. Enabling encryption by default results in all EBS volumes being encrypted with the AWS managed CMK or a customer managed CMK, whether or not the snapshot was encrypted.  For more information, see Using Encryption with EBS-Backed AMIs in the Amazon EC2 User Guide for Linux Instances and Required CMK key policy for use with encrypted volumes in the Amazon EC2 Auto Scaling User Guide.
      */
     Encrypted?: BlockDeviceEbsEncrypted;
+    /**
+     * The throughput to provision for a gp3 volume. Valid Range: Minimum value of 125. Maximum value of 1000.
+     */
+    Throughput?: BlockDeviceEbsThroughput;
   }
   export type EbsOptimized = boolean;
   export interface EnableMetricsCollectionQuery {
@@ -1958,7 +1963,7 @@ declare namespace AutoScaling {
   export type LaunchConfigurationNames = XmlStringMaxLen255[];
   export interface LaunchConfigurationNamesType {
     /**
-     * The launch configuration names. If you omit this parameter, all launch configurations are described.
+     * The launch configuration names. If you omit this parameter, all launch configurations are described. Array Members: Maximum number of 50 items.
      */
     LaunchConfigurationNames?: LaunchConfigurationNames;
     /**
@@ -2102,7 +2107,7 @@ declare namespace AutoScaling {
      */
     LoadBalancerName?: XmlStringMaxLen255;
     /**
-     * One of the following load balancer states:    Adding - The instances in the group are being registered with the load balancer.    Added - All instances in the group are registered with the load balancer.    InService - At least one instance in the group passed an ELB health check.    Removing - The instances in the group are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.    Removed - All instances in the group are deregistered from the load balancer.  
+     * One of the following load balancer states:    Adding - The Auto Scaling instances are being registered with the load balancer.    Added - All Auto Scaling instances are registered with the load balancer.    InService - At least one Auto Scaling instance passed an ELB health check.    Removing - The Auto Scaling instances are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.    Removed - All Auto Scaling instances are deregistered from the load balancer.  
      */
     State?: XmlStringMaxLen255;
   }
@@ -2819,7 +2824,7 @@ declare namespace AutoScaling {
   export type SuspendedProcesses = SuspendedProcess[];
   export interface Tag {
     /**
-     * The name of the group.
+     * The name of the Auto Scaling group.
      */
     ResourceId?: XmlString;
     /**
@@ -2968,7 +2973,7 @@ declare namespace AutoScaling {
      */
     NewInstancesProtectedFromScaleIn?: InstanceProtected;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. For more information, see Service-linked roles in the Amazon EC2 Auto Scaling User Guide.
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf. For more information, see Service-linked roles in the Amazon EC2 Auto Scaling User Guide.
      */
     ServiceLinkedRoleARN?: ResourceName;
     /**

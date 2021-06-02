@@ -125,11 +125,11 @@ declare class ECS extends Service {
    */
   describeClusters(callback?: (err: AWSError, data: ECS.Types.DescribeClustersResponse) => void): Request<ECS.Types.DescribeClustersResponse, AWSError>;
   /**
-   * Describes Amazon Elastic Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.
+   * Describes one or more container instances. Returns metadata about each container instance requested.
    */
   describeContainerInstances(params: ECS.Types.DescribeContainerInstancesRequest, callback?: (err: AWSError, data: ECS.Types.DescribeContainerInstancesResponse) => void): Request<ECS.Types.DescribeContainerInstancesResponse, AWSError>;
   /**
-   * Describes Amazon Elastic Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.
+   * Describes one or more container instances. Returns metadata about each container instance requested.
    */
   describeContainerInstances(callback?: (err: AWSError, data: ECS.Types.DescribeContainerInstancesResponse) => void): Request<ECS.Types.DescribeContainerInstancesResponse, AWSError>;
   /**
@@ -940,7 +940,7 @@ declare namespace ECS {
      */
     containerInstanceArn?: String;
     /**
-     * The EC2 instance ID of the container instance.
+     * The ID of the container instance. For Amazon EC2 instances, this value is the Amazon EC2 instance ID. For external instances, this value is the AWS Systems Manager managed instance ID.
      */
     ec2InstanceId?: String;
     /**
@@ -1548,7 +1548,7 @@ declare namespace ECS {
      */
     clusters?: StringList;
     /**
-     * Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If STATISTICS is specified, the following additional information, separated by launch type, is included:   runningEC2TasksCount   runningFargateTasksCount   pendingEC2TasksCount   pendingFargateTasksCount   activeEC2ServiceCount   activeFargateServiceCount   drainingEC2ServiceCount   drainingFargateServiceCount   If TAGS is specified, the metadata tags associated with the cluster are included.
+     * Whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If STATISTICS is specified, the task and service count is included, separated by launch type. If TAGS is specified, the metadata tags associated with the cluster are included.
      */
     include?: ClusterFieldList;
   }

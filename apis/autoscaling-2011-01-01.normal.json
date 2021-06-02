@@ -146,7 +146,7 @@
           "shape": "ActiveInstanceRefreshNotFoundFault"
         }
       ],
-      "documentation": "<p>Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances based on an instance refresh</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes.</p>"
     },
     "CompleteLifecycleAction": {
       "name": "CompleteLifecycleAction",
@@ -398,7 +398,7 @@
           "shape": "ResourceInUseFault"
         }
       ],
-      "documentation": "<p>Deletes the warm pool for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Deletes the warm pool for the specified Auto Scaling group.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DescribeAccountLimits": {
       "name": "DescribeAccountLimits",
@@ -415,7 +415,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account.</p> <p>For information about requesting an increase, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Describes the current Amazon EC2 Auto Scaling resource quotas for your account.</p> <p>For information about requesting an increase, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DescribeAdjustmentTypes": {
       "name": "DescribeAdjustmentTypes",
@@ -432,7 +432,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the available adjustment types for Amazon EC2 Auto Scaling scaling policies. These settings apply to step scaling policies and simple scaling policies; they do not apply to target tracking scaling policies.</p> <p>The following adjustment types are supported:</p> <ul> <li> <p>ChangeInCapacity</p> </li> <li> <p>ExactCapacity</p> </li> <li> <p>PercentChangeInCapacity</p> </li> </ul>"
+      "documentation": "<p>Describes the available adjustment types for step scaling and simple scaling policies.</p> <p>The following adjustment types are supported:</p> <ul> <li> <p> <code>ChangeInCapacity</code> </p> </li> <li> <p> <code>ExactCapacity</code> </p> </li> <li> <p> <code>PercentChangeInCapacity</code> </p> </li> </ul>"
     },
     "DescribeAutoScalingGroups": {
       "name": "DescribeAutoScalingGroups",
@@ -455,7 +455,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more Auto Scaling groups.</p> <p>This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the <a>DescribeWarmPool</a> API. </p>"
+      "documentation": "<p>Gets information about the Auto Scaling groups in the account and Region.</p> <p>This operation returns information about instances in Auto Scaling groups. To retrieve information about the instances in a warm pool, you must call the <a>DescribeWarmPool</a> API. </p>"
     },
     "DescribeAutoScalingInstances": {
       "name": "DescribeAutoScalingInstances",
@@ -478,7 +478,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more Auto Scaling instances.</p>"
+      "documentation": "<p>Gets information about the Auto Scaling instances in the account and Region.</p>"
     },
     "DescribeAutoScalingNotificationTypes": {
       "name": "DescribeAutoScalingNotificationTypes",
@@ -518,7 +518,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more instance refreshes.</p> <p>You can determine the status of a request by looking at the <code>Status</code> parameter. The following are the possible statuses: </p> <ul> <li> <p> <code>Pending</code> - The request was created, but the operation has not started.</p> </li> <li> <p> <code>InProgress</code> - The operation is in progress.</p> </li> <li> <p> <code>Successful</code> - The operation completed successfully.</p> </li> <li> <p> <code>Failed</code> - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> </li> <li> <p> <code>Cancelled</code> - The operation is cancelled. </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances based on an instance refresh</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Gets information about the instance refreshes for the specified Auto Scaling group.</p> <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes.</p> <p>To help you determine the status of an instance refresh, this operation returns information about the instance refreshes you previously initiated, including their status, end time, the percentage of the instance refresh that is complete, and the number of instances remaining to update before the instance refresh is complete.</p> <p>The following are the possible statuses: </p> <ul> <li> <p> <code>Pending</code> - The request was created, but the operation has not started.</p> </li> <li> <p> <code>InProgress</code> - The operation is in progress.</p> </li> <li> <p> <code>Successful</code> - The operation completed successfully.</p> </li> <li> <p> <code>Failed</code> - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> </li> <li> <p> <code>Cancelled</code> - The operation is cancelled. </p> </li> </ul>"
     },
     "DescribeLaunchConfigurations": {
       "name": "DescribeLaunchConfigurations",
@@ -541,7 +541,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more launch configurations.</p>"
+      "documentation": "<p>Gets information about the launch configurations in the account and Region.</p>"
     },
     "DescribeLifecycleHookTypes": {
       "name": "DescribeLifecycleHookTypes",
@@ -558,7 +558,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>"
+      "documentation": "<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p> <code>autoscaling:EC2_INSTANCE_LAUNCHING</code> </p> </li> <li> <p> <code>autoscaling:EC2_INSTANCE_TERMINATING</code> </p> </li> </ul>"
     },
     "DescribeLifecycleHooks": {
       "name": "DescribeLifecycleHooks",
@@ -578,7 +578,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the lifecycle hooks for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Gets information about the lifecycle hooks for the specified Auto Scaling group.</p>"
     },
     "DescribeLoadBalancerTargetGroups": {
       "name": "DescribeLoadBalancerTargetGroups",
@@ -598,7 +598,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the target groups for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Gets information about the load balancer target groups for the specified Auto Scaling group.</p> <p>To determine the availability of registered instances, use the <code>State</code> element in the response. When you attach a target group to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the <code>InService</code> state. </p> <p>Target groups also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your target group state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Elastic Load Balancing and Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
     },
     "DescribeLoadBalancers": {
       "name": "DescribeLoadBalancers",
@@ -618,7 +618,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p>"
+      "documentation": "<p>Gets information about the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p> <p>To determine the availability of registered instances, use the <code>State</code> element in the response. When you attach a load balancer to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn't enter the <code>InService</code> state. </p> <p>Load balancers also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your load balancer state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Elastic Load Balancing and Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
     },
     "DescribeMetricCollectionTypes": {
       "name": "DescribeMetricCollectionTypes",
@@ -658,7 +658,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the notification actions associated with the specified Auto Scaling group.</p>"
+      "documentation": "<p>Gets information about the Amazon SNS notifications that are configured for one or more Auto Scaling groups.</p>"
     },
     "DescribePolicies": {
       "name": "DescribePolicies",
@@ -684,7 +684,7 @@
           "shape": "ServiceLinkedRoleFailure"
         }
       ],
-      "documentation": "<p>Describes the policies for the specified Auto Scaling group.</p>"
+      "documentation": "<p>Gets information about the scaling policies in the account and Region.</p>"
     },
     "DescribeScalingActivities": {
       "name": "DescribeScalingActivities",
@@ -707,7 +707,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p> <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the <b>Activity history</b>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html\">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Gets information about the scaling activities in the account and Region.</p> <p>When scaling events occur, you see a record of the scaling activity in the scaling activities. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html\">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If the scaling event succeeds, the value of the <code>StatusCode</code> element in the response is <code>Successful</code>. If an attempt to launch instances failed, the <code>StatusCode</code> value is <code>Failed</code> or <code>Cancelled</code> and the <code>StatusMessage</code> element in the response indicates the cause of the failure. For help interpreting the <code>StatusMessage</code>, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html\">Troubleshooting Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
     },
     "DescribeScalingProcessTypes": {
       "name": "DescribeScalingProcessTypes",
@@ -747,7 +747,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the actions scheduled for your Auto Scaling group that haven't run or that have not reached their end time. To describe the actions that have already run, call the <a>DescribeScalingActivities</a> API.</p>"
+      "documentation": "<p>Gets information about the scheduled actions that haven't run or that have not reached their end time.</p> <p>To describe the scaling activities for scheduled actions that have already run, call the <a>DescribeScalingActivities</a> API.</p>"
     },
     "DescribeTags": {
       "name": "DescribeTags",
@@ -813,7 +813,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes a warm pool and its instances.</p>"
+      "documentation": "<p>Gets information about a warm pool and its instances.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DetachInstances": {
       "name": "DetachInstances",
@@ -1223,7 +1223,7 @@
           "shape": "InstanceRefreshInProgressFault"
         }
       ],
-      "documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an instance refresh operation in progress, use the <a>CancelInstanceRefresh</a> API. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances based on an instance refresh</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes.</p> <p>If the call succeeds, it creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an instance refresh operation in progress, use the <a>CancelInstanceRefresh</a> API. </p>"
     },
     "SuspendProcesses": {
       "name": "SuspendProcesses",
@@ -1559,7 +1559,7 @@
         },
         "HealthCheckType": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
+          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
         },
         "HealthCheckGracePeriod": {
           "shape": "HealthCheckGracePeriod",
@@ -1607,7 +1607,7 @@
         },
         "ServiceLinkedRoleARN": {
           "shape": "ResourceName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf.</p>"
         },
         "MaxInstanceLifetime": {
           "shape": "MaxInstanceLifetime",
@@ -1837,6 +1837,11 @@
       "type": "integer",
       "max": 20000,
       "min": 100
+    },
+    "BlockDeviceEbsThroughput": {
+      "type": "integer",
+      "max": 1000,
+      "min": 125
     },
     "BlockDeviceEbsVolumeSize": {
       "type": "integer",
@@ -2069,7 +2074,7 @@
         },
         "ServiceLinkedRoleARN": {
           "shape": "ResourceName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "MaxInstanceLifetime": {
           "shape": "MaxInstanceLifetime",
@@ -2328,19 +2333,19 @@
       "members": {
         "MaxNumberOfAutoScalingGroups": {
           "shape": "MaxNumberOfAutoScalingGroups",
-          "documentation": "<p>The maximum number of groups allowed for your AWS account. The default is 200 groups per AWS Region.</p>"
+          "documentation": "<p>The maximum number of groups allowed for your account. The default is 200 groups per Region.</p>"
         },
         "MaxNumberOfLaunchConfigurations": {
           "shape": "MaxNumberOfLaunchConfigurations",
-          "documentation": "<p>The maximum number of launch configurations allowed for your AWS account. The default is 200 launch configurations per AWS Region.</p>"
+          "documentation": "<p>The maximum number of launch configurations allowed for your account. The default is 200 launch configurations per Region.</p>"
         },
         "NumberOfAutoScalingGroups": {
           "shape": "NumberOfAutoScalingGroups",
-          "documentation": "<p>The current number of groups for your AWS account.</p>"
+          "documentation": "<p>The current number of groups for your account.</p>"
         },
         "NumberOfLaunchConfigurations": {
           "shape": "NumberOfLaunchConfigurations",
-          "documentation": "<p>The current number of launch configurations for your AWS account.</p>"
+          "documentation": "<p>The current number of launch configurations for your account.</p>"
         }
       }
     },
@@ -2358,7 +2363,7 @@
       "members": {
         "InstanceIds": {
           "shape": "InstanceIds",
-          "documentation": "<p>The IDs of the instances. You can specify up to <code>MaxRecords</code> IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.</p>"
+          "documentation": "<p>The IDs of the instances. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.</p> <p>Array Members: Maximum number of 50 items.</p>"
         },
         "MaxRecords": {
           "shape": "MaxRecords",
@@ -2571,7 +2576,7 @@
         },
         "PolicyNames": {
           "shape": "PolicyNames",
-          "documentation": "<p>The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.</p>"
+          "documentation": "<p>The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. If you specify an unknown policy name, it is ignored with no error.</p> <p>Array Members: Maximum number of 50 items.</p>"
         },
         "PolicyTypes": {
           "shape": "PolicyTypes",
@@ -2592,7 +2597,7 @@
       "members": {
         "ActivityIds": {
           "shape": "ActivityIds",
-          "documentation": "<p>The activity IDs of the desired scaling activities. You can specify up to 50 IDs. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.</p>"
+          "documentation": "<p>The activity IDs of the desired scaling activities. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.</p> <p>Array Members: Maximum number of 50 IDs.</p>"
         },
         "AutoScalingGroupName": {
           "shape": "XmlStringMaxLen255",
@@ -2621,7 +2626,7 @@
         },
         "ScheduledActionNames": {
           "shape": "ScheduledActionNames",
-          "documentation": "<p>The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.</p>"
+          "documentation": "<p>The names of one or more scheduled actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.</p> <p>Array Members: Maximum number of 50 actions.</p>"
         },
         "StartTime": {
           "shape": "TimestampType",
@@ -2804,11 +2809,11 @@
         },
         "VolumeSize": {
           "shape": "BlockDeviceEbsVolumeSize",
-          "documentation": "<p>The volume size, in Gibibytes (GiB).</p> <p>This can be a number from 1-1,024 for <code>standard</code>, 4-16,384 for <code>io1</code>, 1-16,384 for <code>gp2</code>, and 500-16,384 for <code>st1</code> and <code>sc1</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size.</p> <p>You must specify either a <code>VolumeSize</code> or a <code>SnapshotId</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>"
+          "documentation": "<p>The volume size, in GiBs. The following are the supported volumes sizes for each volume type: </p> <ul> <li> <p> <code>gp2</code> and <code>gp3</code>: 1-16,384</p> </li> <li> <p> <code>io1</code>: 4-16,384</p> </li> <li> <p> <code>st1</code> and <code>sc1</code>: 125-16,384</p> </li> <li> <p> <code>standard</code>: 1-1,024</p> </li> </ul> <p>You must specify either a <code>SnapshotId</code> or a <code>VolumeSize</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>"
         },
         "VolumeType": {
           "shape": "BlockDeviceEbsVolumeType",
-          "documentation": "<p>The volume type, which can be <code>standard</code> for Magnetic, <code>io1</code> for Provisioned IOPS SSD, <code>gp2</code> for General Purpose SSD, <code>st1</code> for Throughput Optimized HDD, or <code>sc1</code> for Cold HDD. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> | <code>st1</code> | <code>sc1</code> </p>"
+          "documentation": "<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> | <code>st1</code> | <code>sc1</code> | <code>gp3</code> </p>"
         },
         "DeleteOnTermination": {
           "shape": "BlockDeviceEbsDeleteOnTermination",
@@ -2816,11 +2821,15 @@
         },
         "Iops": {
           "shape": "BlockDeviceEbsIops",
-          "documentation": "<p>The number of I/O operations per second (IOPS) to provision for the volume. The maximum ratio of IOPS to volume size (in GiB) is 50:1. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>Required when the volume type is <code>io1</code>. (Not used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code> volumes.) </p>"
+          "documentation": "<p>The number of input/output (I/O) operations per second (IOPS) to provision for the volume. For <code>gp3</code> and <code>io1</code> volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. </p> <p>The following are the supported values for each volume type: </p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> </ul> <p>For <code>io1</code> volumes, we guarantee 64,000 IOPS only for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a>. Other instance families guarantee performance up to 32,000 IOPS. </p> <p> <code>Iops</code> is supported when the volume type is <code>gp3</code> or <code>io1</code> and required only when the volume type is <code>io1</code>. (Not used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code> volumes.) </p>"
         },
         "Encrypted": {
           "shape": "BlockDeviceEbsEncrypted",
           "documentation": "<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>. If your AMI uses encrypted volumes, you can also only launch it on supported instance types.</p> <note> <p>If you are creating a volume from a snapshot, you cannot specify an encryption value. Volumes that are created from encrypted snapshots are automatically encrypted, and volumes that are created from unencrypted snapshots are automatically unencrypted. By default, encrypted snapshots use the AWS managed CMK that is used for EBS encryption, but you can specify a custom CMK when you create the snapshot. The ability to encrypt a snapshot during copying also allows you to apply a new CMK to an already-encrypted snapshot. Volumes restored from the resulting copy are only accessible using the new CMK.</p> <p>Enabling <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">encryption by default</a> results in all EBS volumes being encrypted with the AWS managed CMK or a customer managed CMK, whether or not the snapshot was encrypted.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Using Encryption with EBS-Backed AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html\">Required CMK key policy for use with encrypted volumes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+        },
+        "Throughput": {
+          "shape": "BlockDeviceEbsThroughput",
+          "documentation": "<p>The throughput to provision for a <code>gp3</code> volume.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>"
         }
       },
       "documentation": "<p>Describes information used to set up an Amazon EBS volume specified in a block device mapping.</p>"
@@ -3441,7 +3450,7 @@
       "members": {
         "LaunchConfigurationNames": {
           "shape": "LaunchConfigurationNames",
-          "documentation": "<p>The launch configuration names. If you omit this parameter, all launch configurations are described.</p>"
+          "documentation": "<p>The launch configuration names. If you omit this parameter, all launch configurations are described.</p> <p>Array Members: Maximum number of 50 items.</p>"
         },
         "NextToken": {
           "shape": "XmlString",
@@ -3683,10 +3692,10 @@
         },
         "State": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>One of the following load balancer states:</p> <ul> <li> <p> <code>Adding</code> - The instances in the group are being registered with the load balancer.</p> </li> <li> <p> <code>Added</code> - All instances in the group are registered with the load balancer.</p> </li> <li> <p> <code>InService</code> - At least one instance in the group passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The instances in the group are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All instances in the group are deregistered from the load balancer.</p> </li> </ul>"
+          "documentation": "<p>One of the following load balancer states:</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the load balancer.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the load balancer.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed an <code>ELB</code> health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the load balancer.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Describes the state of a Classic Load Balancer.</p> <p>If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is <code>InService</code>.</p> <p>If you attach a load balancer to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all instances in the group are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the load balancer, the state transitions to <code>InService</code> after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the <code>Added</code> state.</p>"
+      "documentation": "<p>Describes the state of a Classic Load Balancer.</p>"
     },
     "LoadBalancerStates": {
       "type": "list",
@@ -3703,10 +3712,10 @@
         },
         "State": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>The state of the target group.</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the target group.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the target group.</p> </li> </ul>"
+          "documentation": "<p>The state of the target group.</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the target group.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed an <code>ELB</code> health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the target group.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Describes the state of a target group.</p> <p>If you attach a target group to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. If EC2 health checks are enabled instead, the target group remains in the <code>Added</code> state.</p>"
+      "documentation": "<p>Describes the state of a target group.</p>"
     },
     "LoadBalancerTargetGroupStates": {
       "type": "list",
@@ -4900,7 +4909,7 @@
       "members": {
         "ResourceId": {
           "shape": "XmlString",
-          "documentation": "<p>The name of the group.</p>"
+          "documentation": "<p>The name of the Auto Scaling group.</p>"
         },
         "ResourceType": {
           "shape": "XmlString",
@@ -5085,7 +5094,7 @@
         },
         "HealthCheckType": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
+          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
         },
         "HealthCheckGracePeriod": {
           "shape": "HealthCheckGracePeriod",
@@ -5109,7 +5118,7 @@
         },
         "ServiceLinkedRoleARN": {
           "shape": "ResourceName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other Amazon Web Services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "MaxInstanceLifetime": {
           "shape": "MaxInstanceLifetime",

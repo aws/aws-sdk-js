@@ -3304,7 +3304,7 @@ declare namespace Lightsail {
      */
     isAlias?: boolean;
     /**
-     * The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     AAA     CNAME     MX     NS     SOA     SRV     TXT   
+     * The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     AAAA     CNAME     MX     NS     SOA     SRV     TXT   
      */
     type?: DomainEntryType;
     /**

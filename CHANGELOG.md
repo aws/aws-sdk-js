@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.919.0-->
+<!--LATEST=2.920.0-->
 <!--ENTRYINSERT-->
+
+## 2.920.0
+* feature: AutoScaling: You can now launch EC2 instances with GP3 volumes when using Auto Scaling groups with Launch Configurations
+* feature: Braket: Introduction of a RETIRED status for devices.
+* feature: DocDB: This SDK release adds support for DocDB global clusters.
 
 ## 2.919.0
 * feature: EC2: Added idempotency to CreateNetworkInterface using the ClientToken parameter.

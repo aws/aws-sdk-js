@@ -473,7 +473,7 @@
           "shape": "ClusterNotFoundException"
         }
       ],
-      "documentation": "<p>Describes Amazon Elastic Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.</p>"
+      "documentation": "<p>Describes one or more container instances. Returns metadata about each container instance requested.</p>"
     },
     "DescribeServices": {
       "name": "DescribeServices",
@@ -2280,7 +2280,7 @@
         },
         "ec2InstanceId": {
           "shape": "String",
-          "documentation": "<p>The EC2 instance ID of the container instance.</p>"
+          "documentation": "<p>The ID of the container instance. For Amazon EC2 instances, this value is the Amazon EC2 instance ID. For external instances, this value is the AWS Systems Manager managed instance ID.</p>"
         },
         "capacityProviderName": {
           "shape": "String",
@@ -3097,7 +3097,7 @@
         },
         "include": {
           "shape": "ClusterFieldList",
-          "documentation": "<p>Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included.</p> <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances or tasks within the cluster are included.</p> <p>If <code>SETTINGS</code> is specified, the settings for the cluster are included.</p> <p>If <code>STATISTICS</code> is specified, the following additional information, separated by launch type, is included:</p> <ul> <li> <p>runningEC2TasksCount</p> </li> <li> <p>runningFargateTasksCount</p> </li> <li> <p>pendingEC2TasksCount</p> </li> <li> <p>pendingFargateTasksCount</p> </li> <li> <p>activeEC2ServiceCount</p> </li> <li> <p>activeFargateServiceCount</p> </li> <li> <p>drainingEC2ServiceCount</p> </li> <li> <p>drainingFargateServiceCount</p> </li> </ul> <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are included.</p>"
+          "documentation": "<p>Whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included.</p> <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances or tasks within the cluster are included.</p> <p>If <code>SETTINGS</code> is specified, the settings for the cluster are included.</p> <p>If <code>STATISTICS</code> is specified, the task and service count is included, separated by launch type.</p> <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are included.</p>"
         }
       }
     },
