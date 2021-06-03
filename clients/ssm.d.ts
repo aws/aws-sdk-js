@@ -2142,6 +2142,9 @@ declare namespace SSM {
      * The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
      */
     StandardErrorUrl?: Url;
+    /**
+     * Plugins processed by the command.
+     */
     CommandPlugins?: CommandPluginList;
     /**
      * The IAM service role that Run Command uses to act on your behalf when sending notifications about command status changes on a per instance basis.
@@ -5260,7 +5263,7 @@ declare namespace SSM {
   }
   export interface GetServiceSettingRequest {
     /**
-     * The ID of the service setting to get. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier.
+     * The ID of the service setting to get. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
@@ -8062,7 +8065,7 @@ declare namespace SSM {
   }
   export interface ResetServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
@@ -8226,7 +8229,7 @@ declare namespace SSM {
   export type ResourceDataSyncS3Region = string;
   export interface ResourceDataSyncSource {
     /**
-     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or SingleAccountMultiRegions.
      */
     SourceType: ResourceDataSyncSourceType;
     /**
@@ -9653,11 +9656,11 @@ declare namespace SSM {
   }
   export interface UpdateServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
     /**
-     * The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be one of the following.   Standard   Advanced   Intelligent-Tiering   For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier setting IDs, the setting value can be true or false. For the /ssm/automation/customer-script-log-destination setting ID, the setting value can be CloudWatch. For the /ssm/automation/customer-script-log-group-name setting ID, the setting value can be the name of a CloudWatch Logs log group.
+     * The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be one of the following.   Standard   Advanced   Intelligent-Tiering   For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier setting IDs, the setting value can be true or false. For the /ssm/automation/customer-script-log-destination setting ID, the setting value can be CloudWatch. For the /ssm/automation/customer-script-log-group-name setting ID, the setting value can be the name of a CloudWatch Logs log group. For the /ssm/documents/console/public-sharing-permission setting ID, the setting value can be Enable or Disable.
      */
     SettingValue: ServiceSettingValue;
   }

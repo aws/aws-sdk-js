@@ -891,6 +891,12 @@
         "geolocation"
       ]
     },
+    "AutoMLOverrideStrategy": {
+      "type": "string",
+      "enum": [
+        "LatencyOptimized"
+      ]
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -1219,6 +1225,10 @@
         "PerformAutoML": {
           "shape": "Boolean",
           "documentation": "<p>Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates the algorithms it provides and chooses the best algorithm and configuration for your training dataset.</p> <p>The default value is <code>false</code>. In this case, you are required to specify an algorithm.</p> <p>Set <code>PerformAutoML</code> to <code>true</code> to have Amazon Forecast perform AutoML. This is a good option if you aren't sure which algorithm is suitable for your training data. In this case, <code>PerformHPO</code> must be false.</p>"
+        },
+        "AutoMLOverrideStrategy": {
+          "shape": "AutoMLOverrideStrategy",
+          "documentation": "<p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy. To apply an AutoML strategy that minimizes training time, use <code>LatencyOptimized</code>.</p> <p>This parameter is only valid for predictors trained using AutoML.</p>"
         },
         "PerformHPO": {
           "shape": "Boolean",
@@ -1869,6 +1879,10 @@
           "shape": "Boolean",
           "documentation": "<p>Whether the predictor is set to perform AutoML.</p>"
         },
+        "AutoMLOverrideStrategy": {
+          "shape": "AutoMLOverrideStrategy",
+          "documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code> is specified, the AutoML strategy optimizes predictor accuracy.</p> <p>This parameter is only valid for predictors trained using AutoML.</p>"
+        },
         "PerformHPO": {
           "shape": "Boolean",
           "documentation": "<p>Whether the predictor is set to perform hyperparameter optimization (HPO).</p>"
@@ -2290,6 +2304,10 @@
         "PredictorEvaluationResults": {
           "shape": "PredictorEvaluationResults",
           "documentation": "<p>An array of results from evaluating the predictor.</p>"
+        },
+        "AutoMLOverrideStrategy": {
+          "shape": "AutoMLOverrideStrategy",
+          "documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code> is specified, the AutoML strategy optimizes predictor accuracy.</p> <p>This parameter is only valid for predictors trained using AutoML.</p>"
         }
       }
     },

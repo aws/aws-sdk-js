@@ -296,6 +296,7 @@ declare namespace ForecastService {
   export type Arn = string;
   export type ArnList = Arn[];
   export type AttributeType = "string"|"integer"|"float"|"timestamp"|"geolocation"|string;
+  export type AutoMLOverrideStrategy = "LatencyOptimized"|string;
   export type Boolean = boolean;
   export interface CategoricalParameterRange {
     /**
@@ -517,6 +518,10 @@ declare namespace ForecastService {
      * Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates the algorithms it provides and chooses the best algorithm and configuration for your training dataset. The default value is false. In this case, you are required to specify an algorithm. Set PerformAutoML to true to have Amazon Forecast perform AutoML. This is a good option if you aren't sure which algorithm is suitable for your training data. In this case, PerformHPO must be false.
      */
     PerformAutoML?: Boolean;
+    /**
+     * Used to overide the default AutoML strategy, which is to optimize predictor accuracy. To apply an AutoML strategy that minimizes training time, use LatencyOptimized. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
     /**
      * Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job. The default value is false. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm. To override the default values, set PerformHPO to true and, optionally, supply the HyperParameterTuningJobConfig object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and PerformAutoML must be false. The following algorithms support HPO:   DeepAR+   CNN-QR  
      */
@@ -1003,6 +1008,10 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
+     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
+    /**
      * Whether the predictor is set to perform hyperparameter optimization (HPO).
      */
     PerformHPO?: Boolean;
@@ -1249,6 +1258,10 @@ declare namespace ForecastService {
      * An array of results from evaluating the predictor.
      */
     PredictorEvaluationResults?: PredictorEvaluationResults;
+    /**
+     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
   }
   export interface HyperParameterTuningJobConfig {
     /**

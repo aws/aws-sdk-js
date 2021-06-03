@@ -5307,7 +5307,8 @@
           "documentation": "<p>The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.</p>"
         },
         "CommandPlugins": {
-          "shape": "CommandPluginList"
+          "shape": "CommandPluginList",
+          "documentation": "<p>Plugins processed by the command.</p>"
         },
         "ServiceRole": {
           "shape": "ServiceRole",
@@ -6021,7 +6022,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -8017,7 +8018,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -8161,7 +8162,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -8200,7 +8201,7 @@
           "documentation": "<p>The value for the filter key.</p>"
         }
       },
-      "documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>You can also use AWS-provided keys, some of which have specific allowed values. These keys and their associated values are as follows:</p> <dl> <dt>DocumentType</dt> <dd> <ul> <li> <p>ApplicationConfiguration</p> </li> <li> <p>ApplicationConfigurationSchema</p> </li> <li> <p>Automation</p> </li> <li> <p>ChangeCalendar</p> </li> <li> <p>Command</p> </li> <li> <p>DeploymentStrategy</p> </li> <li> <p>Package</p> </li> <li> <p>Policy</p> </li> <li> <p>Session</p> </li> </ul> </dd> <dt>Owner</dt> <dd> <p>Note that only one <code>Owner</code> can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <ul> <li> <p>Amazon</p> </li> <li> <p>Private</p> </li> <li> <p>Public</p> </li> <li> <p>Self</p> </li> <li> <p>ThirdParty</p> </li> </ul> </dd> <dt>PlatformTypes</dt> <dd> <ul> <li> <p>Linux</p> </li> <li> <p>Windows</p> </li> </ul> </dd> </dl> <p> <code>Name</code> is another AWS-provided key. If you use <code>Name</code> as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>You can also use the <code>TargetType</code> AWS-provided key. For a list of valid resource type values that can be used with this key, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:tagName,Values=valueName</code>.</p> <p>For example, if you created a key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>"
+      "documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>You can also use AWS-provided keys, some of which have specific allowed values. These keys and their associated values are as follows:</p> <dl> <dt>DocumentType</dt> <dd> <ul> <li> <p>ApplicationConfiguration</p> </li> <li> <p>ApplicationConfigurationSchema</p> </li> <li> <p>Automation</p> </li> <li> <p>ChangeCalendar</p> </li> <li> <p>Command</p> </li> <li> <p>DeploymentStrategy</p> </li> <li> <p>Package</p> </li> <li> <p>Policy</p> </li> <li> <p>Session</p> </li> </ul> </dd> <dt>Owner</dt> <dd> <p>Note that only one <code>Owner</code> can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <ul> <li> <p>Amazon</p> </li> <li> <p>Private</p> </li> <li> <p>Public</p> </li> <li> <p>Self</p> </li> <li> <p>ThirdParty</p> </li> </ul> </dd> <dt>PlatformTypes</dt> <dd> <ul> <li> <p>Linux</p> </li> <li> <p>Windows</p> </li> </ul> </dd> </dl> <p> <code>Name</code> is another AWS-provided key. If you use <code>Name</code> as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>You can also use the <code>TargetType</code> AWS-provided key. For a list of valid resource type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:tagName,Values=valueName</code>.</p> <p>For example, if you created a key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>"
     },
     "DocumentKeyValuesFilterKey": {
       "type": "string",
@@ -9742,7 +9743,7 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The ID of the service setting to get. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>.</p>"
+          "documentation": "<p>The ID of the service setting to get. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The request body of the GetServiceSetting API action.</p>"
@@ -9975,7 +9976,7 @@
         },
         "IamRole": {
           "shape": "IamRole",
-          "documentation": "<p>The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
+          "documentation": "<p>The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
         },
         "RegistrationDate": {
           "shape": "DateTime",
@@ -9988,7 +9989,7 @@
         },
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the <code>DefaultInstanceName</code> property using the <a>CreateActivation</a> command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a hybrid environment (Linux)</a> and <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a hybrid environment (Windows)</a>. To retrieve the Name tag of an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
+          "documentation": "<p>The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the <code>DefaultInstanceName</code> property using the <a>CreateActivation</a> command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a hybrid environment (Windows)</a>. To retrieve the Name tag of an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
         },
         "IPAddress": {
           "shape": "IPAddress",
@@ -14496,7 +14497,7 @@
         },
         "DataType": {
           "shape": "ParameterDataType",
-          "documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       }
     },
@@ -14776,7 +14777,7 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The request body of the ResetServiceSetting API action.</p>"
@@ -15056,7 +15057,7 @@
       "members": {
         "SourceType": {
           "shape": "ResourceDataSyncSourceType",
-          "documentation": "<p>The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>singleAccountMultiRegions</code>.</p>"
+          "documentation": "<p>The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>SingleAccountMultiRegions</code>.</p>"
         },
         "AwsOrganizationsSource": {
           "shape": "ResourceDataSyncAwsOrganizationsSource",
@@ -17208,11 +17209,11 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         },
         "SettingValue": {
           "shape": "ServiceSettingValue",
-          "documentation": "<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be CloudWatch.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of a CloudWatch Logs log group.</p>"
+          "documentation": "<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be CloudWatch.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of a CloudWatch Logs log group.</p> <p>For the <code>/ssm/documents/console/public-sharing-permission</code> setting ID, the setting value can be Enable or Disable.</p>"
         }
       },
       "documentation": "<p>The request body of the UpdateServiceSetting API action.</p>"

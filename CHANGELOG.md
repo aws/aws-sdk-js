@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.920.0-->
+<!--LATEST=2.921.0-->
 <!--ENTRYINSERT-->
+
+## 2.921.0
+* feature: ForecastService: Added optional field AutoMLOverrideStrategy to CreatePredictor API that allows users to customize AutoML strategy. If provided in CreatePredictor request, this field is visible in DescribePredictor and GetAccuracyMetrics responses.
+* feature: S3: S3 Inventory now supports Bucket Key Status
+* feature: S3Control: Amazon S3 Batch Operations now supports S3 Bucket Keys.
 
 ## 2.920.0
 * feature: AutoScaling: You can now launch EC2 instances with GP3 volumes when using Auto Scaling groups with Launch Configurations

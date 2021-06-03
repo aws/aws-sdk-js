@@ -669,7 +669,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>"
+      "documentation": "<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>"
     },
     "DisassociateResolverRule": {
       "name": "DisassociateResolverRule",
@@ -728,7 +728,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+      "documentation": "<p>Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
     },
     "GetFirewallDomainList": {
       "name": "GetFirewallDomainList",
@@ -843,7 +843,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+      "documentation": "<p>Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
     },
     "GetResolverDnssecConfig": {
       "name": "GetResolverDnssecConfig",
@@ -1587,7 +1587,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+      "documentation": "<p>Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
     },
     "PutResolverQueryLogConfigPolicy": {
       "name": "PutResolverQueryLogConfigPolicy",
@@ -1748,7 +1748,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+      "documentation": "<p>Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
     },
     "UpdateFirewallDomains": {
       "name": "UpdateFirewallDomains",
@@ -1989,7 +1989,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
           "idempotencyToken": true
         },
         "FirewallRuleGroupId": {
@@ -2002,7 +2002,7 @@
         },
         "Priority": {
           "shape": "Priority",
-          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>"
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You can change the priority setting for a rule group association after you create it.</p> <p>The allowed values for <code>Priority</code> are between 100 and 9900.</p>"
         },
         "Name": {
           "shape": "Name",
@@ -2025,7 +2025,7 @@
       "members": {
         "FirewallRuleGroupAssociation": {
           "shape": "FirewallRuleGroupAssociation",
-          "documentation": "<p>The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.</p>"
+          "documentation": "<p>The association that you just created. The association has an ID that you can use to identify it in other requests, like update and delete.</p>"
         }
       }
     },
@@ -2150,7 +2150,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
           "idempotencyToken": true
         },
         "Name": {
@@ -2182,7 +2182,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>",
           "idempotencyToken": true
         },
         "Name": {
@@ -2218,7 +2218,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
           "idempotencyToken": true
         },
         "FirewallRuleGroupId": {
@@ -2235,11 +2235,11 @@
         },
         "Action": {
           "shape": "Action",
-          "documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and log to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> </li> </ul>"
+          "documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and logs to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> </li> </ul>"
         },
         "BlockResponse": {
           "shape": "BlockResponse",
-          "documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule aciton setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>",
+          "documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule action setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>",
           "box": true
         },
         "BlockOverrideDomain": {
@@ -2283,7 +2283,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
         },
         "Name": {
           "shape": "Name",
@@ -2328,7 +2328,7 @@
       "members": {
         "Name": {
           "shape": "ResolverQueryLogConfigName",
-          "documentation": "<p>The name that you want to give the query logging configuration</p>"
+          "documentation": "<p>The name that you want to give the query logging configuration.</p>"
         },
         "DestinationArn": {
           "shape": "DestinationArn",
@@ -2336,7 +2336,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
           "idempotencyToken": true
         },
         "Tags": {
@@ -2365,7 +2365,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
         },
         "Name": {
           "shape": "Name",
@@ -2381,7 +2381,7 @@
         },
         "TargetIps": {
           "shape": "TargetList",
-          "documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a comma.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>",
+          "documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>",
           "box": true
         },
         "ResolverEndpointId": {
@@ -2696,7 +2696,7 @@
       "members": {
         "Id": {
           "shape": "ResourceId",
-          "documentation": "<p>The Id of the firewall configuration.</p>"
+          "documentation": "<p>The ID of the firewall configuration.</p>"
         },
         "ResourceId": {
           "shape": "ResourceId",
@@ -2711,7 +2711,7 @@
           "documentation": "<p>Determines how DNS Firewall operates during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>"
         }
       },
-      "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+      "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
     },
     "FirewallConfigList": {
       "type": "list",
@@ -2758,7 +2758,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -2769,7 +2769,7 @@
           "documentation": "<p>The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). </p>"
         }
       },
-      "documentation": "<p>High level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>"
+      "documentation": "<p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>"
     },
     "FirewallDomainListMetadata": {
       "type": "structure",
@@ -2788,7 +2788,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
         },
         "ManagedOwnerName": {
           "shape": "ServicePrinciple",
@@ -2926,7 +2926,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
         },
         "ShareStatus": {
           "shape": "ShareStatus",
@@ -2988,7 +2988,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -2999,7 +2999,7 @@
           "documentation": "<p>The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
         }
       },
-      "documentation": "<p>An association between a firewall rul group and a VPC, which enables DNS filtering for the VPC. </p>"
+      "documentation": "<p>An association between a firewall rule group and a VPC, which enables DNS filtering for the VPC. </p>"
     },
     "FirewallRuleGroupAssociationStatus": {
       "type": "string",
@@ -3036,7 +3036,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
         },
         "ShareStatus": {
           "shape": "ShareStatus",
@@ -3077,7 +3077,7 @@
       "members": {
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the Amazon virtual private cloud (VPC) that the configuration is for.</p>"
+          "documentation": "<p>The ID of the VPC from Amazon VPC that the configuration is for.</p>"
         }
       }
     },
@@ -3086,7 +3086,7 @@
       "members": {
         "FirewallConfig": {
           "shape": "FirewallConfig",
-          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from AmazonVPC. </p>"
         }
       }
     },
@@ -3149,7 +3149,7 @@
       "members": {
         "FirewallRuleGroupPolicy": {
           "shape": "FirewallRuleGroupPolicy",
-          "documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+          "documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
         }
       }
     },
@@ -3360,7 +3360,7 @@
         },
         "DomainFileUrl": {
           "shape": "DomainListFileUrl",
-          "documentation": "<p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>"
+          "documentation": "<p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>"
         }
       }
     },
@@ -3529,7 +3529,7 @@
         },
         "FirewallConfigs": {
           "shape": "FirewallConfigList",
-          "documentation": "<p>The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). </p>"
+          "documentation": "<p>The configurations for the firewall behavior provided by DNS Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC). </p>"
         }
       }
     },
@@ -3557,7 +3557,7 @@
         },
         "FirewallDomainLists": {
           "shape": "FirewallDomainListMetadataList",
-          "documentation": "<p>A list of the domain lists that you have defined. </p> <p>This might be a parital list of the domain lists that you've defined. For information, see <code>MaxResults</code>. </p>"
+          "documentation": "<p>A list of the domain lists that you have defined. </p> <p>This might be a partial list of the domain lists that you've defined. For information, see <code>MaxResults</code>. </p>"
         }
       }
     },
@@ -3592,7 +3592,7 @@
         },
         "Domains": {
           "shape": "FirewallDomains",
-          "documentation": "<p>A list of the domains in the firewall domain list. </p> <p>This might be a parital list of the domains that you've defined in the domain list. For information, see <code>MaxResults</code>. </p>"
+          "documentation": "<p>A list of the domains in the firewall domain list. </p> <p>This might be a partial list of the domains that you've defined in the domain list. For information, see <code>MaxResults</code>. </p>"
         }
       }
     },
@@ -3611,7 +3611,7 @@
         },
         "Priority": {
           "shape": "Priority",
-          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p>",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p>",
           "box": true
         },
         "Status": {
@@ -3713,7 +3713,7 @@
         },
         "FirewallRules": {
           "shape": "FirewallRules",
-          "documentation": "<p>A list of the rules that you have defined. </p> <p>This might be a parital list of the firewall rules that you've defined. For information, see <code>MaxResults</code>. </p>"
+          "documentation": "<p>A list of the rules that you have defined. </p> <p>This might be a partial list of the firewall rules that you've defined. For information, see <code>MaxResults</code>. </p>"
         }
       }
     },
@@ -4184,7 +4184,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.</p>"
+          "documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.</p>"
         },
         "Arn": {
           "shape": "Arn",
@@ -4290,7 +4290,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.</p>"
+          "documentation": "<p>A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.</p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -4395,7 +4395,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of executing the operation twice. </p>"
+          "documentation": "<p>A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of running the operation twice. </p>"
         },
         "Arn": {
           "shape": "Arn",
@@ -4435,7 +4435,7 @@
         },
         "ShareStatus": {
           "shape": "ShareStatus",
-          "documentation": "<p>Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.</p>"
+          "documentation": "<p>Whether the rule is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.</p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -4710,7 +4710,7 @@
       "members": {
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the Amazon virtual private cloud (VPC) that the configuration is for.</p>"
+          "documentation": "<p>The ID of the VPC that the configuration is for.</p>"
         },
         "FirewallFailOpen": {
           "shape": "FirewallFailOpenStatus",
@@ -4723,7 +4723,7 @@
       "members": {
         "FirewallConfig": {
           "shape": "FirewallConfig",
-          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC. </p>"
         }
       }
     },
@@ -4754,7 +4754,7 @@
       "members": {
         "Id": {
           "shape": "ResourceId",
-          "documentation": "<p>The Id of the firewall domain list that DNS Firewall just updated.</p>"
+          "documentation": "<p>The ID of the firewall domain list that DNS Firewall just updated.</p>"
         },
         "Name": {
           "shape": "Name",
@@ -4782,7 +4782,7 @@
         },
         "Priority": {
           "shape": "Priority",
-          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>",
           "box": true
         },
         "MutationProtection": {
@@ -4953,5 +4953,5 @@
       ]
     }
   },
-  "documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or ELB load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is regional. In each region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>"
+  "documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or Elastic Load Balancing load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is Regional. In each Region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>"
 }

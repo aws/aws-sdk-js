@@ -156,11 +156,11 @@ declare class Route53Resolver extends Service {
    */
   disassociateResolverEndpointIpAddress(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse, AWSError>;
   /**
-   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
+   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
    */
   disassociateResolverQueryLogConfig(params: Route53Resolver.Types.DisassociateResolverQueryLogConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse, AWSError>;
   /**
-   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
+   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
    */
   disassociateResolverQueryLogConfig(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Route53Resolver extends Service {
    */
   disassociateResolverRule(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverRuleResponse) => void): Request<Route53Resolver.Types.DisassociateResolverRuleResponse, AWSError>;
   /**
-   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). 
    */
   getFirewallConfig(params: Route53Resolver.Types.GetFirewallConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallConfigResponse) => void): Request<Route53Resolver.Types.GetFirewallConfigResponse, AWSError>;
   /**
-   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   * Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). 
    */
   getFirewallConfig(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallConfigResponse) => void): Request<Route53Resolver.Types.GetFirewallConfigResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Route53Resolver extends Service {
    */
   getFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse, AWSError>;
   /**
-   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
    */
   getFirewallRuleGroupPolicy(params: Route53Resolver.Types.GetFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
    */
   getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class Route53Resolver extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Route53Resolver.Types.ListTagsForResourceResponse) => void): Request<Route53Resolver.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
    */
   putFirewallRuleGroupPolicy(params: Route53Resolver.Types.PutFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
    */
   putFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class Route53Resolver extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Route53Resolver.Types.UntagResourceResponse) => void): Request<Route53Resolver.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). 
    */
   updateFirewallConfig(params: Route53Resolver.Types.UpdateFirewallConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallConfigResponse) => void): Request<Route53Resolver.Types.UpdateFirewallConfigResponse, AWSError>;
   /**
-   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+   * Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). 
    */
   updateFirewallConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallConfigResponse) => void): Request<Route53Resolver.Types.UpdateFirewallConfigResponse, AWSError>;
   /**
@@ -498,7 +498,7 @@ declare namespace Route53Resolver {
   export type Arn = string;
   export interface AssociateFirewallRuleGroupRequest {
     /**
-     * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -510,7 +510,7 @@ declare namespace Route53Resolver {
      */
     VpcId: ResourceId;
     /**
-     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.
+     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You can change the priority setting for a rule group association after you create it. The allowed values for Priority are between 100 and 9900.
      */
     Priority: Priority;
     /**
@@ -528,7 +528,7 @@ declare namespace Route53Resolver {
   }
   export interface AssociateFirewallRuleGroupResponse {
     /**
-     * The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.
+     * The association that you just created. The association has an ID that you can use to identify it in other requests, like update and delete.
      */
     FirewallRuleGroupAssociation?: FirewallRuleGroupAssociation;
   }
@@ -592,7 +592,7 @@ declare namespace Route53Resolver {
   export type Count = number;
   export interface CreateFirewallDomainListRequest {
     /**
-     * A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -612,7 +612,7 @@ declare namespace Route53Resolver {
   }
   export interface CreateFirewallRuleGroupRequest {
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -632,7 +632,7 @@ declare namespace Route53Resolver {
   }
   export interface CreateFirewallRuleRequest {
     /**
-     * A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -648,11 +648,11 @@ declare namespace Route53Resolver {
      */
     Priority: Priority;
     /**
-     * The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request and send metrics and log to Cloud Watch.    BLOCK - Disallow the request. This option requires additional details in the rule's BlockResponse.   
+     * The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:    ALLOW - Permit the request to go through.    ALERT - Permit the request and send metrics and logs to Cloud Watch.    BLOCK - Disallow the request. This option requires additional details in the rule's BlockResponse.   
      */
     Action: Action;
     /**
-     * The way that you want DNS Firewall to block the request, used with the rule aciton setting BLOCK.     NODATA - Respond indicating that the query was successful, but no response is available for it.    NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.    OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.    This setting is required if the rule action setting is BLOCK.
+     * The way that you want DNS Firewall to block the request, used with the rule action setting BLOCK.     NODATA - Respond indicating that the query was successful, but no response is available for it.    NXDOMAIN - Respond indicating that the domain name that's in the query doesn't exist.    OVERRIDE - Provide a custom override in the response. This option requires custom handling details in the rule's BlockOverride* settings.    This setting is required if the rule action setting is BLOCK.
      */
     BlockResponse?: BlockResponse;
     /**
@@ -680,7 +680,7 @@ declare namespace Route53Resolver {
   }
   export interface CreateResolverEndpointRequest {
     /**
-     * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -712,7 +712,7 @@ declare namespace Route53Resolver {
   }
   export interface CreateResolverQueryLogConfigRequest {
     /**
-     * The name that you want to give the query logging configuration
+     * The name that you want to give the query logging configuration.
      */
     Name: ResolverQueryLogConfigName;
     /**
@@ -720,7 +720,7 @@ declare namespace Route53Resolver {
      */
     DestinationArn: DestinationArn;
     /**
-     * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -736,7 +736,7 @@ declare namespace Route53Resolver {
   }
   export interface CreateResolverRuleRequest {
     /**
-     * A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
      */
     CreatorRequestId: CreatorRequestId;
     /**
@@ -752,7 +752,7 @@ declare namespace Route53Resolver {
      */
     DomainName: DomainName;
     /**
-     * The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a comma.  TargetIps is available only when the value of Rule type is FORWARD.
+     * The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.  TargetIps is available only when the value of Rule type is FORWARD.
      */
     TargetIps?: TargetList;
     /**
@@ -926,7 +926,7 @@ declare namespace Route53Resolver {
   export type Filters = Filter[];
   export interface FirewallConfig {
     /**
-     * The Id of the firewall configuration.
+     * The ID of the firewall configuration.
      */
     Id?: ResourceId;
     /**
@@ -974,7 +974,7 @@ declare namespace Route53Resolver {
      */
     ManagedOwnerName?: ServicePrinciple;
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1000,7 +1000,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1094,7 +1094,7 @@ declare namespace Route53Resolver {
      */
     OwnerId?: AccountId;
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1152,7 +1152,7 @@ declare namespace Route53Resolver {
      */
     StatusMessage?: StatusMessage;
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1184,7 +1184,7 @@ declare namespace Route53Resolver {
      */
     OwnerId?: AccountId;
     /**
-     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. 
+     * A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1198,13 +1198,13 @@ declare namespace Route53Resolver {
   export type FirewallRules = FirewallRule[];
   export interface GetFirewallConfigRequest {
     /**
-     * The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+     * The ID of the VPC from Amazon VPC that the configuration is for.
      */
     ResourceId: ResourceId;
   }
   export interface GetFirewallConfigResponse {
     /**
-     * Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+     * Configuration of the firewall behavior provided by DNS Firewall for a single VPC from AmazonVPC. 
      */
     FirewallConfig?: FirewallConfig;
   }
@@ -1240,7 +1240,7 @@ declare namespace Route53Resolver {
   }
   export interface GetFirewallRuleGroupPolicyResponse {
     /**
-     * The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). 
+     * The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
      */
     FirewallRuleGroupPolicy?: FirewallRuleGroupPolicy;
   }
@@ -1362,7 +1362,7 @@ declare namespace Route53Resolver {
      */
     Operation: FirewallDomainImportOperation;
     /**
-     * The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import. The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.
+     * The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import. The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.
      */
     DomainFileUrl: DomainListFileUrl;
   }
@@ -1461,7 +1461,7 @@ declare namespace Route53Resolver {
      */
     NextToken?: NextToken;
     /**
-     * The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). 
+     * The configurations for the firewall behavior provided by DNS Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC). 
      */
     FirewallConfigs?: FirewallConfigList;
   }
@@ -1481,7 +1481,7 @@ declare namespace Route53Resolver {
      */
     NextToken?: NextToken;
     /**
-     * A list of the domain lists that you have defined.  This might be a parital list of the domain lists that you've defined. For information, see MaxResults. 
+     * A list of the domain lists that you have defined.  This might be a partial list of the domain lists that you've defined. For information, see MaxResults. 
      */
     FirewallDomainLists?: FirewallDomainListMetadataList;
   }
@@ -1505,7 +1505,7 @@ declare namespace Route53Resolver {
      */
     NextToken?: NextToken;
     /**
-     * A list of the domains in the firewall domain list.  This might be a parital list of the domains that you've defined in the domain list. For information, see MaxResults. 
+     * A list of the domains in the firewall domain list.  This might be a partial list of the domains that you've defined in the domain list. For information, see MaxResults. 
      */
     Domains?: FirewallDomains;
   }
@@ -1519,7 +1519,7 @@ declare namespace Route53Resolver {
      */
     VpcId?: ResourceId;
     /**
-     * The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. 
+     * The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. 
      */
     Priority?: Priority;
     /**
@@ -1593,7 +1593,7 @@ declare namespace Route53Resolver {
      */
     NextToken?: NextToken;
     /**
-     * A list of the rules that you have defined.  This might be a parital list of the firewall rules that you've defined. For information, see MaxResults. 
+     * A list of the rules that you have defined.  This might be a partial list of the firewall rules that you've defined. For information, see MaxResults. 
      */
     FirewallRules?: FirewallRules;
   }
@@ -1917,7 +1917,7 @@ declare namespace Route53Resolver {
      */
     Id?: ResourceId;
     /**
-     * A unique string that identifies the request that created the Resolver endpoint. The CreatorRequestId allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request that created the Resolver endpoint. The CreatorRequestId allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -1998,7 +1998,7 @@ declare namespace Route53Resolver {
      */
     DestinationArn?: DestinationArn;
     /**
-     * A unique string that identifies the request that created the query logging configuration. The CreatorRequestId allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request that created the query logging configuration. The CreatorRequestId allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -2050,7 +2050,7 @@ declare namespace Route53Resolver {
      */
     Id?: ResourceId;
     /**
-     * A unique string that you specified when you created the Resolver rule. CreatorRequestId identifies the request and allows failed requests to be retried without the risk of executing the operation twice. 
+     * A unique string that you specified when you created the Resolver rule. CreatorRequestId identifies the request and allows failed requests to be retried without the risk of running the operation twice. 
      */
     CreatorRequestId?: CreatorRequestId;
     /**
@@ -2090,7 +2090,7 @@ declare namespace Route53Resolver {
      */
     OwnerId?: AccountId;
     /**
-     * Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.
+     * Whether the rule is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.
      */
     ShareStatus?: ShareStatus;
     /**
@@ -2209,7 +2209,7 @@ declare namespace Route53Resolver {
   }
   export interface UpdateFirewallConfigRequest {
     /**
-     * The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+     * The ID of the VPC that the configuration is for.
      */
     ResourceId: ResourceId;
     /**
@@ -2219,7 +2219,7 @@ declare namespace Route53Resolver {
   }
   export interface UpdateFirewallConfigResponse {
     /**
-     * Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). 
+     * Configuration of the firewall behavior provided by DNS Firewall for a single VPC. 
      */
     FirewallConfig?: FirewallConfig;
   }
@@ -2239,7 +2239,7 @@ declare namespace Route53Resolver {
   }
   export interface UpdateFirewallDomainsResponse {
     /**
-     * The Id of the firewall domain list that DNS Firewall just updated.
+     * The ID of the firewall domain list that DNS Firewall just updated.
      */
     Id?: ResourceId;
     /**
@@ -2261,7 +2261,7 @@ declare namespace Route53Resolver {
      */
     FirewallRuleGroupAssociationId: ResourceId;
     /**
-     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.
+     * The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting.  You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.
      */
     Priority?: Priority;
     /**
