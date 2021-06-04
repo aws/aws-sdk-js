@@ -1556,7 +1556,7 @@ declare namespace AutoScaling {
      */
     Encrypted?: BlockDeviceEbsEncrypted;
     /**
-     * The throughput to provision for a gp3 volume. Valid Range: Minimum value of 125. Maximum value of 1000.
+     * The throughput (MiBps) to provision for a gp3 volume.
      */
     Throughput?: BlockDeviceEbsThroughput;
   }

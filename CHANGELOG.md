@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.921.0-->
+<!--LATEST=2.922.0-->
 <!--ENTRYINSERT-->
+
+## 2.922.0
+* feature: MediaLive: Add support for automatically setting the H.264 adaptive quantization and GOP B-frame fields.
+* feature: PI: The new GetDimensionKeyDetails action retrieves the attributes of the specified dimension group for a DB instance or data source.
 
 ## 2.921.0
 * feature: ForecastService: Added optional field AutoMLOverrideStrategy to CreatePredictor API that allows users to customize AutoML strategy. If provided in CreatePredictor request, this field is visible in DescribePredictor and GetAccuracyMetrics responses.
