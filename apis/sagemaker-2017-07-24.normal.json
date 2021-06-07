@@ -3357,6 +3357,50 @@
       },
       "documentation": "<p>Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of <code>SearchRecord</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p>"
     },
+    "SendPipelineExecutionStepFailure": {
+      "name": "SendPipelineExecutionStepFailure",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SendPipelineExecutionStepFailureRequest"
+      },
+      "output": {
+        "shape": "SendPipelineExecutionStepFailureResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Notifies the pipeline that the execution of a callback step failed, along with a message describing why. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).</p>"
+    },
+    "SendPipelineExecutionStepSuccess": {
+      "name": "SendPipelineExecutionStepSuccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SendPipelineExecutionStepSuccessRequest"
+      },
+      "output": {
+        "shape": "SendPipelineExecutionStepSuccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Notifies the pipeline that the execution of a callback step succeeded and provides a list of the step's output parameters. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).</p>"
+    },
     "StartMonitoringSchedule": {
       "name": "StartMonitoringSchedule",
       "http": {
@@ -5140,11 +5184,11 @@
         },
         "MaxRuntimePerTrainingJobInSeconds": {
           "shape": "MaxRuntimePerTrainingJobInSeconds",
-          "documentation": "<p>The maximum time, in seconds, a job is allowed to run.</p>"
+          "documentation": "<p>The maximum time, in seconds, a training job is allowed to run as part of an AutoML job.</p>"
         },
         "MaxAutoMLJobRuntimeInSeconds": {
           "shape": "MaxAutoMLJobRuntimeInSeconds",
-          "documentation": "<p>The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete. It must be equal to or greater than <code>MaxRuntimePerTrainingJobInSeconds</code>.</p>"
+          "documentation": "<p>The maximum runtime, in seconds, an AutoML job has to complete.</p>"
         }
       },
       "documentation": "<p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>"
@@ -5476,6 +5520,30 @@
         }
       },
       "documentation": "<p>Details on the cache hit of a pipeline execution step.</p>"
+    },
+    "CallbackStepMetadata": {
+      "type": "structure",
+      "members": {
+        "CallbackToken": {
+          "shape": "CallbackToken",
+          "documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>"
+        },
+        "SqsQueueUrl": {
+          "shape": "String256",
+          "documentation": "<p>The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the callback step.</p>"
+        },
+        "OutputParameters": {
+          "shape": "OutputParameterList",
+          "documentation": "<p>A list of the output parameters of the callback step.</p>"
+        }
+      },
+      "documentation": "<p>Metadata about a callback step.</p>"
+    },
+    "CallbackToken": {
+      "type": "string",
+      "max": 10,
+      "min": 10,
+      "pattern": "^[a-zA-Z0-9]+$"
     },
     "CandidateArtifactLocations": {
       "type": "structure",
@@ -6575,7 +6643,7 @@
         },
         "OutputDataConfig": {
           "shape": "AutoMLOutputDataConfig",
-          "documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>"
+          "documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.</p>"
         },
         "ProblemType": {
           "shape": "ProblemType",
@@ -6591,7 +6659,7 @@
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that is used to access the data.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>"
+          "documentation": "<p>The ARN of the role that is used to access the data.</p>"
         },
         "GenerateCandidateDefinitionsOnly": {
           "shape": "GenerateCandidateDefinitionsOnly",
@@ -9244,7 +9312,7 @@
       "members": {
         "ModelPackageName": {
           "shape": "VersionedArnOrName",
-          "documentation": "<p>The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>"
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>"
         }
       }
     },
@@ -11372,7 +11440,7 @@
       "members": {
         "ModelPackageName": {
           "shape": "VersionedArnOrName",
-          "documentation": "<p>The name of the model package to describe.</p>"
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>"
         }
       }
     },
@@ -11791,6 +11859,13 @@
         "PipelineExecutionDescription": {
           "shape": "PipelineExecutionDescription",
           "documentation": "<p>The description of the pipeline execution.</p>"
+        },
+        "PipelineExperimentConfig": {
+          "shape": "PipelineExperimentConfig"
+        },
+        "FailureReason": {
+          "shape": "PipelineExecutionFailureReason",
+          "documentation": "<p>If the execution failed, a message describing why.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -15447,7 +15522,7 @@
       "members": {
         "Name": {
           "shape": "KernelName",
-          "documentation": "<p>The name of the kernel.</p>"
+          "documentation": "<p>The name of the Jupyter kernel in the image. This value is case sensitive.</p>"
         },
         "DisplayName": {
           "shape": "KernelDisplayName",
@@ -18972,7 +19047,7 @@
       "members": {
         "AutoGenerateEndpointName": {
           "shape": "AutoGenerateEndpointName",
-          "documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click Autopilot model deployment; set to <code>False</code> otherwise. The default value is <code>True</code>.</p> <note> <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify the <code>EndpointName</code>; otherwise a 400 error is thrown.</p> </note>"
+          "documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click Autopilot model deployment; set to <code>False</code> otherwise. The default value is <code>False</code>.</p> <note> <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify the <code>EndpointName</code>; otherwise a 400 error is thrown.</p> </note>"
         },
         "EndpointName": {
           "shape": "EndpointName",
@@ -20766,6 +20841,32 @@
       },
       "documentation": "<p>Provides information about how to store model training results (model artifacts).</p>"
     },
+    "OutputParameter": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Value"
+      ],
+      "members": {
+        "Name": {
+          "shape": "String256",
+          "documentation": "<p>The name of the output parameter.</p>"
+        },
+        "Value": {
+          "shape": "String1024",
+          "documentation": "<p>The value of the output parameter.</p>"
+        }
+      },
+      "documentation": "<p>An output parameter of a pipeline step.</p>"
+    },
+    "OutputParameterList": {
+      "type": "list",
+      "member": {
+        "shape": "OutputParameter"
+      },
+      "max": 50,
+      "min": 0
+    },
     "PaginationToken": {
       "type": "string",
       "max": 8192,
@@ -20995,6 +21096,13 @@
           "shape": "PipelineExecutionDescription",
           "documentation": "<p>The description of the pipeline execution.</p>"
         },
+        "PipelineExperimentConfig": {
+          "shape": "PipelineExperimentConfig"
+        },
+        "FailureReason": {
+          "shape": "PipelineExecutionFailureReason",
+          "documentation": "<p>If the execution failed, a message describing why.</p>"
+        },
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The creation time of the pipeline execution.</p>"
@@ -21025,6 +21133,11 @@
       "type": "string",
       "max": 3072,
       "min": 0,
+      "pattern": ".*"
+    },
+    "PipelineExecutionFailureReason": {
+      "type": "string",
+      "max": 1300,
       "pattern": ".*"
     },
     "PipelineExecutionName": {
@@ -21072,7 +21185,7 @@
         },
         "Metadata": {
           "shape": "PipelineExecutionStepMetadata",
-          "documentation": "<p>The metadata for the step execution.</p>"
+          "documentation": "<p>Metadata for the step execution.</p>"
         }
       },
       "documentation": "<p>An execution of a step in a pipeline.</p>"
@@ -21111,6 +21224,9 @@
         "Condition": {
           "shape": "ConditionStepMetadata",
           "documentation": "<p>If this is a Condition step metadata object, details on the condition.</p>"
+        },
+        "Callback": {
+          "shape": "CallbackStepMetadata"
         }
       },
       "documentation": "<p>Metadata for a step execution.</p>"
@@ -21148,6 +21264,20 @@
       },
       "max": 100,
       "min": 0
+    },
+    "PipelineExperimentConfig": {
+      "type": "structure",
+      "members": {
+        "ExperimentName": {
+          "shape": "ExperimentEntityName",
+          "documentation": "<p>The name of the experiment.</p>"
+        },
+        "TrialName": {
+          "shape": "ExperimentEntityName",
+          "documentation": "<p>The name of the trial.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the names of the experiment and trial created by a pipeline.</p>"
     },
     "PipelineName": {
       "type": "string",
@@ -21775,7 +21905,7 @@
           "documentation": "<p>Specifies configuration for a core dump from the model container when the process crashes.</p>"
         }
       },
-      "documentation": "<p>Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. </p>"
+      "documentation": "<p>Identifies a model that you want to host and the resources chosen to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. </p>"
     },
     "ProductionVariantAcceleratorType": {
       "type": "string",
@@ -23005,6 +23135,66 @@
     "Seed": {
       "type": "long"
     },
+    "SendPipelineExecutionStepFailureRequest": {
+      "type": "structure",
+      "required": [
+        "CallbackToken"
+      ],
+      "members": {
+        "CallbackToken": {
+          "shape": "CallbackToken",
+          "documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>"
+        },
+        "FailureReason": {
+          "shape": "String256",
+          "documentation": "<p>A message describing why the step failed.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "SendPipelineExecutionStepFailureResponse": {
+      "type": "structure",
+      "members": {
+        "PipelineExecutionArn": {
+          "shape": "PipelineExecutionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+        }
+      }
+    },
+    "SendPipelineExecutionStepSuccessRequest": {
+      "type": "structure",
+      "required": [
+        "CallbackToken"
+      ],
+      "members": {
+        "CallbackToken": {
+          "shape": "CallbackToken",
+          "documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>"
+        },
+        "OutputParameters": {
+          "shape": "OutputParameterList",
+          "documentation": "<p>A list of the output parameters of the callback step.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "SendPipelineExecutionStepSuccessResponse": {
+      "type": "structure",
+      "members": {
+        "PipelineExecutionArn": {
+          "shape": "PipelineExecutionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+        }
+      }
+    },
     "ServiceCatalogEntityId": {
       "type": "string",
       "max": 100,
@@ -23599,14 +23789,14 @@
       "members": {
         "Key": {
           "shape": "TagKey",
-          "documentation": "<p>The tag key.</p>"
+          "documentation": "<p>The tag key. Tag keys must be unique per resource.</p>"
         },
         "Value": {
           "shape": "TagValue",
           "documentation": "<p>The tag value.</p>"
         }
       },
-      "documentation": "<p>Describes a tag. </p>"
+      "documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata for Amazon SageMaker AWS resources.</p> <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. For more information on adding tags to Amazon SageMaker resources, see <a>AddTags</a>.</p> <p>For more information on adding metadata to your AWS resources with tagging, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>. For advice on best practices for managing AWS resources with tagging, see <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging Best Practices: Implement an Effective AWS Resource Tagging Strategy</a>.</p>"
     },
     "TagKey": {
       "type": "string",

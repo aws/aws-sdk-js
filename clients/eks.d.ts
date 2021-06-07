@@ -727,6 +727,7 @@ declare namespace EKS {
      * An object representing a node group's launch template specification. If specified, then do not specify instanceTypes, diskSize, or remoteAccess and make sure that the launch template meets the requirements in launchTemplateSpecification.
      */
     launchTemplate?: LaunchTemplateSpecification;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * The capacity type for your node group.
      */
@@ -1354,6 +1355,7 @@ declare namespace EKS {
      * The health status of the node group. If there are issues with your node group's health, they are listed here.
      */
     health?: NodegroupHealth;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * If a launch template was used to create the node group, then this is the launch template that was used.
      */
@@ -1395,6 +1397,11 @@ declare namespace EKS {
     desiredSize?: ZeroCapacity;
   }
   export type NodegroupStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|"DEGRADED"|string;
+  export interface NodegroupUpdateConfig {
+    maxUnavailable?: NonZeroInteger;
+    maxUnavailablePercentage?: PercentCapacity;
+  }
+  export type NonZeroInteger = number;
   export interface OIDC {
     /**
      * The issuer URL for the OIDC identity provider.
@@ -1485,6 +1492,7 @@ declare namespace EKS {
      */
     requiredClaims?: requiredClaimsMap;
   }
+  export type PercentCapacity = number;
   export interface Provider {
     /**
      * Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see Allowing Users in Other Accounts to Use a KMS key in the AWS Key Management Service Developer Guide.
@@ -1673,6 +1681,7 @@ declare namespace EKS {
      * The scaling configuration details for the Auto Scaling group after the update.
      */
     scalingConfig?: NodegroupScalingConfig;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
@@ -1724,7 +1733,7 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|string;
   export type UpdateParams = UpdateParam[];
   export type UpdateStatus = "InProgress"|"Failed"|"Cancelled"|"Successful"|string;
   export interface UpdateTaintsPayload {

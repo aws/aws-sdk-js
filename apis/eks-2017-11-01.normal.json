@@ -1611,6 +1611,9 @@
           "shape": "LaunchTemplateSpecification",
           "documentation": "<p>An object representing a node group's launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.</p>"
         },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
+        },
         "capacityType": {
           "shape": "CapacityTypes",
           "documentation": "<p>The capacity type for your node group.</p>"
@@ -2685,6 +2688,9 @@
           "shape": "NodegroupHealth",
           "documentation": "<p>The health status of the node group. If there are issues with your node group's health, they are listed here.</p>"
         },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
+        },
         "launchTemplate": {
           "shape": "LaunchTemplateSpecification",
           "documentation": "<p>If a launch template was used to create the node group, then this is the launch template that was used.</p>"
@@ -2772,6 +2778,22 @@
         "DELETE_FAILED",
         "DEGRADED"
       ]
+    },
+    "NodegroupUpdateConfig": {
+      "type": "structure",
+      "members": {
+        "maxUnavailable": {
+          "shape": "NonZeroInteger"
+        },
+        "maxUnavailablePercentage": {
+          "shape": "PercentCapacity"
+        }
+      }
+    },
+    "NonZeroInteger": {
+      "type": "integer",
+      "box": true,
+      "min": 1
     },
     "OIDC": {
       "type": "structure",
@@ -2879,6 +2901,12 @@
         }
       },
       "documentation": "<p>An object representing an OpenID Connect (OIDC) configuration. Before associating an OIDC identity provider to your cluster, review the considerations in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html\">Authenticating users for your cluster from an OpenID Connect identity provider</a> in the <i>Amazon EKS User Guide</i>.</p>"
+    },
+    "PercentCapacity": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
     },
     "Provider": {
       "type": "structure",
@@ -3218,6 +3246,9 @@
           "shape": "NodegroupScalingConfig",
           "documentation": "<p>The scaling configuration details for the Auto Scaling group after the update.</p>"
         },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
+        },
         "clientRequestToken": {
           "shape": "String",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
@@ -3320,7 +3351,9 @@
         "EncryptionConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
-        "ResolveConflicts"
+        "ResolveConflicts",
+        "MaxUnavailable",
+        "MaxUnavailablePercentage"
       ]
     },
     "UpdateParams": {

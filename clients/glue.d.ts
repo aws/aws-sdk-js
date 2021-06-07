@@ -2169,7 +2169,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Include and Exclude Patterns.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -6664,6 +6664,10 @@ declare namespace Glue {
      * The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).
      */
     ConnectionName?: ConnectionName;
+    /**
+     * Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
+     */
+    SampleSize?: NullableInteger;
   }
   export type S3TargetList = S3Target[];
   export type ScalaCode = string;

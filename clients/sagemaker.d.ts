@@ -1573,6 +1573,22 @@ declare class SageMaker extends Service {
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
+   * Notifies the pipeline that the execution of a callback step failed, along with a message describing why. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).
+   */
+  sendPipelineExecutionStepFailure(params: SageMaker.Types.SendPipelineExecutionStepFailureRequest, callback?: (err: AWSError, data: SageMaker.Types.SendPipelineExecutionStepFailureResponse) => void): Request<SageMaker.Types.SendPipelineExecutionStepFailureResponse, AWSError>;
+  /**
+   * Notifies the pipeline that the execution of a callback step failed, along with a message describing why. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).
+   */
+  sendPipelineExecutionStepFailure(callback?: (err: AWSError, data: SageMaker.Types.SendPipelineExecutionStepFailureResponse) => void): Request<SageMaker.Types.SendPipelineExecutionStepFailureResponse, AWSError>;
+  /**
+   * Notifies the pipeline that the execution of a callback step succeeded and provides a list of the step's output parameters. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).
+   */
+  sendPipelineExecutionStepSuccess(params: SageMaker.Types.SendPipelineExecutionStepSuccessRequest, callback?: (err: AWSError, data: SageMaker.Types.SendPipelineExecutionStepSuccessResponse) => void): Request<SageMaker.Types.SendPipelineExecutionStepSuccessResponse, AWSError>;
+  /**
+   * Notifies the pipeline that the execution of a callback step succeeded and provides a list of the step's output parameters. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).
+   */
+  sendPipelineExecutionStepSuccess(callback?: (err: AWSError, data: SageMaker.Types.SendPipelineExecutionStepSuccessResponse) => void): Request<SageMaker.Types.SendPipelineExecutionStepSuccessResponse, AWSError>;
+  /**
    * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -2481,11 +2497,11 @@ declare namespace SageMaker {
      */
     MaxCandidates?: MaxCandidates;
     /**
-     * The maximum time, in seconds, a job is allowed to run.
+     * The maximum time, in seconds, a training job is allowed to run as part of an AutoML job.
      */
     MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
     /**
-     * The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete. It must be equal to or greater than MaxRuntimePerTrainingJobInSeconds.
+     * The maximum runtime, in seconds, an AutoML job has to complete.
      */
     MaxAutoMLJobRuntimeInSeconds?: MaxAutoMLJobRuntimeInSeconds;
   }
@@ -2634,6 +2650,21 @@ declare namespace SageMaker {
      */
     SourcePipelineExecutionArn?: PipelineExecutionArn;
   }
+  export interface CallbackStepMetadata {
+    /**
+     * The pipeline generated token from the Amazon SQS queue.
+     */
+    CallbackToken?: CallbackToken;
+    /**
+     * The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the callback step.
+     */
+    SqsQueueUrl?: String256;
+    /**
+     * A list of the output parameters of the callback step.
+     */
+    OutputParameters?: OutputParameterList;
+  }
+  export type CallbackToken = string;
   export interface CandidateArtifactLocations {
     /**
      * The Amazon S3 prefix to the explainability artifacts generated for the AutoML candidate.
@@ -3189,7 +3220,7 @@ declare namespace SageMaker {
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
-     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV. &lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;
+     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
@@ -3205,7 +3236,7 @@ declare namespace SageMaker {
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
-     * The ARN of the role that is used to access the data. &lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;
+     * The ARN of the role that is used to access the data.
      */
     RoleArn: RoleArn;
     /**
@@ -4986,7 +5017,7 @@ declare namespace SageMaker {
   }
   export interface DeleteModelPackageInput {
     /**
-     * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+     * The name or Amazon Resource Name (ARN) of the model package to delete. When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
     ModelPackageName: VersionedArnOrName;
   }
@@ -6532,7 +6563,7 @@ declare namespace SageMaker {
   }
   export interface DescribeModelPackageInput {
     /**
-     * The name of the model package to describe.
+     * The name or Amazon Resource Name (ARN) of the model package to describe. When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
     ModelPackageName: VersionedArnOrName;
   }
@@ -6859,6 +6890,11 @@ declare namespace SageMaker {
      * The description of the pipeline execution.
      */
     PipelineExecutionDescription?: PipelineExecutionDescription;
+    PipelineExperimentConfig?: PipelineExperimentConfig;
+    /**
+     * If the execution failed, a message describing why.
+     */
+    FailureReason?: PipelineExecutionFailureReason;
     /**
      * The time when the pipeline execution was created.
      */
@@ -8927,7 +8963,7 @@ declare namespace SageMaker {
   export type KernelName = string;
   export interface KernelSpec {
     /**
-     * The name of the kernel.
+     * The name of the Jupyter kernel in the image. This value is case sensitive.
      */
     Name: KernelName;
     /**
@@ -11614,7 +11650,7 @@ declare namespace SageMaker {
   }
   export interface ModelDeployConfig {
     /**
-     * Set to True to automatically generate an endpoint name for a one-click Autopilot model deployment; set to False otherwise. The default value is True.  If you set AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a 400 error is thrown. 
+     * Set to True to automatically generate an endpoint name for a one-click Autopilot model deployment; set to False otherwise. The default value is False.  If you set AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a 400 error is thrown. 
      */
     AutoGenerateEndpointName?: AutoGenerateEndpointName;
     /**
@@ -12609,6 +12645,17 @@ declare namespace SageMaker {
      */
     S3OutputPath: S3Uri;
   }
+  export interface OutputParameter {
+    /**
+     * The name of the output parameter.
+     */
+    Name: String256;
+    /**
+     * The value of the output parameter.
+     */
+    Value: String1024;
+  }
+  export type OutputParameterList = OutputParameter[];
   export type PaginationToken = string;
   export interface Parameter {
     /**
@@ -12740,6 +12787,11 @@ declare namespace SageMaker {
      * The description of the pipeline execution.
      */
     PipelineExecutionDescription?: PipelineExecutionDescription;
+    PipelineExperimentConfig?: PipelineExperimentConfig;
+    /**
+     * If the execution failed, a message describing why.
+     */
+    FailureReason?: PipelineExecutionFailureReason;
     /**
      * The creation time of the pipeline execution.
      */
@@ -12757,6 +12809,7 @@ declare namespace SageMaker {
   }
   export type PipelineExecutionArn = string;
   export type PipelineExecutionDescription = string;
+  export type PipelineExecutionFailureReason = string;
   export type PipelineExecutionName = string;
   export type PipelineExecutionStatus = "Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded"|string;
   export interface PipelineExecutionStep {
@@ -12785,7 +12838,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The metadata for the step execution.
+     * Metadata for the step execution.
      */
     Metadata?: PipelineExecutionStepMetadata;
   }
@@ -12815,6 +12868,7 @@ declare namespace SageMaker {
      * If this is a Condition step metadata object, details on the condition.
      */
     Condition?: ConditionStepMetadata;
+    Callback?: CallbackStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**
@@ -12839,6 +12893,16 @@ declare namespace SageMaker {
     PipelineExecutionDisplayName?: PipelineExecutionName;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
+  export interface PipelineExperimentConfig {
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentEntityName;
+  }
   export type PipelineName = string;
   export type PipelineParameterName = string;
   export type PipelineStatus = "Active"|string;
@@ -13703,6 +13767,46 @@ declare namespace SageMaker {
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type Seed = number;
+  export interface SendPipelineExecutionStepFailureRequest {
+    /**
+     * The pipeline generated token from the Amazon SQS queue.
+     */
+    CallbackToken: CallbackToken;
+    /**
+     * A message describing why the step failed.
+     */
+    FailureReason?: String256;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken?: IdempotencyToken;
+  }
+  export interface SendPipelineExecutionStepFailureResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
+  export interface SendPipelineExecutionStepSuccessRequest {
+    /**
+     * The pipeline generated token from the Amazon SQS queue.
+     */
+    CallbackToken: CallbackToken;
+    /**
+     * A list of the output parameters of the callback step.
+     */
+    OutputParameters?: OutputParameterList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     */
+    ClientRequestToken?: IdempotencyToken;
+  }
+  export interface SendPipelineExecutionStepSuccessResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
   export type ServiceCatalogEntityId = string;
   export interface ServiceCatalogProvisionedProductDetails {
     /**
@@ -13964,7 +14068,7 @@ declare namespace SageMaker {
   export type TableName = string;
   export interface Tag {
     /**
-     * The tag key.
+     * The tag key. Tag keys must be unique per resource.
      */
     Key: TagKey;
     /**

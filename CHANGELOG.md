@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.922.0-->
+<!--LATEST=2.923.0-->
 <!--ENTRYINSERT-->
+
+## 2.923.0
+* feature: EKS: Added updateConfig option that allows customers to control upgrade velocity in Managed Node Group.
+* feature: Glue: Add SampleSize variable to S3Target to enable s3-sampling feature through API.
+* feature: Personalize: Update regex validation in kmsKeyArn and s3 path API parameters for AWS Personalize APIs
+* feature: SageMaker: AWS SageMaker - Releasing new APIs related to Callback steps in model building pipelines. Adds experiment integration to model building pipelines.
 
 ## 2.922.0
 * feature: MediaLive: Add support for automatically setting the H.264 adaptive quantization and GOP B-frame fields.

@@ -3241,7 +3241,8 @@
       "min": 1
     },
     "KmsKeyArn": {
-      "type": "string"
+      "type": "string",
+      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
     },
     "ListBatchInferenceJobsRequest": {
       "type": "structure",
@@ -3790,7 +3791,8 @@
     },
     "S3Location": {
       "type": "string",
-      "max": 256
+      "max": 256,
+      "pattern": "(s3|http|https)://.+"
     },
     "Schemas": {
       "type": "list",
