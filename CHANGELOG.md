@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.923.0-->
+<!--LATEST=2.924.0-->
 <!--ENTRYINSERT-->
+
+## 2.924.0
+* feature: FSx: This release adds support for auditing end-user access to files, folders, and file shares using Windows event logs, enabling customers to meet their security and compliance needs.
+* feature: Macie2: This release of the Amazon Macie API introduces stricter validation of S3 object criteria for classification jobs.
+* feature: ServiceCatalog: increase max pagesize for List/Search apis
 
 ## 2.923.0
 * feature: EKS: Added updateConfig option that allows customers to control upgrade velocity in Managed Node Group.

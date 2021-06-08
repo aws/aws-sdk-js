@@ -2165,7 +2165,7 @@ declare namespace Macie2 {
   }
   export interface JobScopingBlock {
     /**
-     * An array of conditions, one for each condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
+     * An array of conditions, one for each property- or tag-based condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
      */
     and?: __listOfJobScopeTerm;
   }
@@ -2450,7 +2450,7 @@ declare namespace Macie2 {
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
      */
     classifiableSizeInBytes?: __long;
     /**
@@ -2466,11 +2466,11 @@ declare namespace Macie2 {
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
-     * The total storage size, in bytes, of the bucket.If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
+     * The total storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
      */
     sizeInBytes?: __long;
     /**
-     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -2579,11 +2579,11 @@ declare namespace Macie2 {
      */
     lineRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file. This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
+     *  Reserved for future use.
      */
     offsetRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data. This value is null for all other types of files.
      */
     pages?: Pages;
     /**
@@ -2594,11 +2594,11 @@ declare namespace Macie2 {
   export type OrderBy = "ASC"|"DESC"|string;
   export interface Page {
     /**
-     * The line that contains the data, and the position of the data on that line.
+     *  Reserved for future use.
      */
     lineRange?: Range;
     /**
-     * The position of the data on the page, relative to the beginning of the page.
+     *  Reserved for future use.
      */
     offsetRange?: Range;
     /**
@@ -2643,11 +2643,11 @@ declare namespace Macie2 {
   }
   export interface Range {
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.
+     * The number of lines from the beginning of the file to the end of the sensitive data. 
      */
     end?: __long;
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.
+     * The number of lines from the beginning of the file to the beginning of the sensitive data. 
      */
     start?: __long;
     /**
@@ -2834,14 +2834,14 @@ declare namespace Macie2 {
      */
     versionId?: __string;
   }
-  export type ScopeFilterKey = "BUCKET_CREATION_DATE"|"OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"TAG"|"OBJECT_KEY"|string;
+  export type ScopeFilterKey = "OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"OBJECT_KEY"|string;
   export interface Scoping {
     /**
-     * The property- or tag-based conditions that determine which objects to exclude from the analysis.
+     * The property- and tag-based conditions that determine which objects to exclude from the analysis.
      */
     excludes?: JobScopingBlock;
     /**
-     * The property- or tag-based conditions that determine which objects to include in the analysis.
+     * The property- and tag-based conditions that determine which objects to include in the analysis.
      */
     includes?: JobScopingBlock;
   }
@@ -3067,7 +3067,7 @@ declare namespace Macie2 {
   export type SimpleCriterionKeyForJob = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
   export interface SimpleScopeTerm {
     /**
-     * The operator to use in the condition. Valid operators for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS TAG - EQ (equals) or NE (not equals)
+     * The operator to use in the condition. Valid values for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS
      */
     comparator?: JobComparator;
     /**
@@ -3075,7 +3075,7 @@ declare namespace Macie2 {
      */
     key?: ScopeFilterKey;
     /**
-     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based condition for the job. Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.
+     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses OR logic to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.
      */
     values?: __listOf__string;
   }
@@ -3135,15 +3135,15 @@ declare namespace Macie2 {
   }
   export interface TagScopeTerm {
     /**
-     * The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).
+     * The operator to use in the condition. Valid values are EQ (equals) or NE (not equals).
      */
     comparator?: JobComparator;
     /**
-     * The tag key to use in the condition.
+     * The object property to use in the condition. The only valid value is TAG.
      */
     key?: __string;
     /**
-     * The tag keys or tag key and value pairs to use in the condition.
+     * The tag keys or tag key and value pairs to use in the condition. To specify only tag keys in a condition, specify the keys in this array and set the value for each associated tag value to an empty string.
      */
     tagValues?: __listOfTagValuePair;
     /**
@@ -3256,6 +3256,10 @@ declare namespace Macie2 {
      * The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
      */
     position?: __integer;
+    /**
+     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: __string;
   }
   export interface UpdateFindingsFilterResponse {
     /**

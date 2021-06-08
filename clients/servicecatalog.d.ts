@@ -2155,7 +2155,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
     /**
      * The type of shared portfolios to list. The default is to list imported portfolios.    AWS_ORGANIZATIONS - List portfolios shared by the management account of your organization    AWS_SERVICECATALOG - List default portfolios    IMPORTED - List imported portfolios  
      */
@@ -2339,7 +2339,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfoliosForProductOutput {
     /**
@@ -2363,7 +2363,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfoliosOutput {
     /**
@@ -3705,7 +3705,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
     /**
      * The sort field. If no value is specified, the results are not sorted.
      */
