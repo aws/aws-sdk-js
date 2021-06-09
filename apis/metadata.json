@@ -1036,5 +1036,8 @@
   },
   "apprunner": {
     "name": "AppRunner"
+  },
+  "proton": {
+    "name": "Proton"
   }
 }

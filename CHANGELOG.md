@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.924.0-->
+<!--LATEST=2.925.0-->
 <!--ENTRYINSERT-->
+
+## 2.925.0
+* feature: Kendra: AWS Kendra now supports checking document status.
+* feature: PersonalizeEvents: Support for unstructured text inputs in the items dataset to to automatically extract key information from product/content description as an input when creating solution versions.
+* feature: Proton: This is the initial SDK release for AWS Proton
 
 ## 2.924.0
 * feature: FSx: This release adds support for auditing end-user access to files, folders, and file shares using Windows event logs, enabling customers to meet their security and compliance needs.

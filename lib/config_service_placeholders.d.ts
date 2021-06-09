@@ -270,6 +270,7 @@ export abstract class ConfigurationServicePlaceholders {
   ssmincidents?: AWS.SSMIncidents.Types.ClientConfiguration;
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.ClientConfiguration;
   apprunner?: AWS.AppRunner.Types.ClientConfiguration;
+  proton?: AWS.Proton.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -542,4 +543,5 @@ export interface ConfigurationServiceApiVersions {
   ssmincidents?: AWS.SSMIncidents.Types.apiVersion;
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.apiVersion;
   apprunner?: AWS.AppRunner.Types.apiVersion;
+  proton?: AWS.Proton.Types.apiVersion;
 }

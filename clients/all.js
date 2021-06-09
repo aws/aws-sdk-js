@@ -269,5 +269,6 @@ module.exports = {
   SSMContacts: require('./ssmcontacts'),
   SSMIncidents: require('./ssmincidents'),
   ApplicationCostProfiler: require('./applicationcostprofiler'),
-  AppRunner: require('./apprunner')
+  AppRunner: require('./apprunner'),
+  Proton: require('./proton')
 };

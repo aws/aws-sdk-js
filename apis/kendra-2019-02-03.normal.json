@@ -48,6 +48,40 @@
       ],
       "documentation": "<p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>"
     },
+    "BatchGetDocumentStatus": {
+      "name": "BatchGetDocumentStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetDocumentStatusRequest"
+      },
+      "output": {
+        "shape": "BatchGetDocumentStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Returns the indexing status for one or more documents submitted with the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\"> BatchPutDocument</a> operation.</p> <p>When you use the <code>BatchPutDocument</code> operation, documents are indexed asynchronously. You can use the <code>BatchGetDocumentStatus</code> operation to get the current status of a list of documents so that you can determine if they have been successfully indexed.</p> <p>You can also use the <code>BatchGetDocumentStatus</code> operation to check the status of the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html\"> BatchDeleteDocument</a> operation. When a document is deleted from the index, Amazon Kendra returns <code>NOT_FOUND</code> as the status.</p>"
+    },
     "BatchPutDocument": {
       "name": "BatchPutDocument",
       "http": {
@@ -1430,6 +1464,60 @@
       "type": "list",
       "member": {
         "shape": "BatchDeleteDocumentResponseFailedDocument"
+      }
+    },
+    "BatchGetDocumentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "DocumentInfoList"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index to add documents to. The index ID is returned by the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html\"> CreateIndex </a> operation.</p>"
+        },
+        "DocumentInfoList": {
+          "shape": "DocumentInfoList",
+          "documentation": "<p>A list of <code>DocumentInfo</code> objects that identify the documents for which to get the status. You identify the documents by their document ID and optional attributes.</p>"
+        }
+      }
+    },
+    "BatchGetDocumentStatusResponse": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "BatchGetDocumentStatusResponseErrors",
+          "documentation": "<p>A list of documents that Amazon Kendra couldn't get the status for. The list includes the ID of the document and the reason that the status couldn't be found.</p>"
+        },
+        "DocumentStatusList": {
+          "shape": "DocumentStatusList",
+          "documentation": "<p>The status of documents. The status indicates if the document is waiting to be indexed, is in the process of indexing, has completed indexing, or failed indexing. If a document failed indexing, the status provides the reason why.</p>"
+        }
+      }
+    },
+    "BatchGetDocumentStatusResponseError": {
+      "type": "structure",
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document whose status could not be retrieved.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>Indicates the source of the error.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>States that the API could not get the status of a document. This could be because the request is not valid or there is a system error.</p>"
+        }
+      },
+      "documentation": "<p>Provides a response when the status of a document could not be retrieved.</p>"
+    },
+    "BatchGetDocumentStatusResponseErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetDocumentStatusResponseError"
       }
     },
     "BatchPutDocumentRequest": {
@@ -3144,7 +3232,7 @@
         },
         "DateValue": {
           "shape": "Timestamp",
-          "documentation": "<p>A date expressed as an ISO 8601 string.</p>"
+          "documentation": "<p>A date expressed as an ISO 8601 string.</p> <p>It is important for the time zone to be included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.</p>"
         }
       },
       "documentation": "<p>The value of a custom document attribute. You can only provide one value for a custom attribute.</p>"
@@ -3187,6 +3275,31 @@
       "type": "list",
       "member": {
         "shape": "DocumentId"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DocumentInfo": {
+      "type": "structure",
+      "required": [
+        "DocumentId"
+      ],
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document.</p>"
+        },
+        "Attributes": {
+          "shape": "DocumentAttributeList",
+          "documentation": "<p>Attributes that identify a specific version of a document to check.</p> <p>The only valid attributes are:</p> <ul> <li> <p>version</p> </li> <li> <p>datasourceId</p> </li> <li> <p>jobExecutionId</p> </li> </ul> <p>The attributes follow these rules:</p> <ul> <li> <p> <code>dataSourceId</code> and <code>jobExecutionId</code> must be used together.</p> </li> <li> <p> <code>version</code> is ignored if <code>dataSourceId</code> and <code>jobExecutionId</code> are not provided.</p> </li> <li> <p>If <code>dataSourceId</code> and <code>jobExecutionId</code> are provided, but <code>version</code> is not, the version defaults to \"0\".</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Identifies a document for which to retrieve status information</p>"
+    },
+    "DocumentInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentInfo"
       },
       "max": 10,
       "min": 1
@@ -3265,6 +3378,23 @@
       },
       "max": 500,
       "min": 0
+    },
+    "DocumentStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_FOUND",
+        "PROCESSING",
+        "INDEXED",
+        "UPDATED",
+        "FAILED",
+        "UPDATE_FAILED"
+      ]
+    },
+    "DocumentStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "Status"
+      }
     },
     "DocumentsMetadataConfiguration": {
       "type": "structure",
@@ -5114,6 +5244,28 @@
           "documentation": "<p>Identifies a particular synchronization job.</p>"
         }
       }
+    },
+    "Status": {
+      "type": "structure",
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document.</p>"
+        },
+        "DocumentStatus": {
+          "shape": "DocumentStatus",
+          "documentation": "<p>The current status of a document.</p> <p>If the document was submitted for deletion, the status is <code>NOT_FOUND</code> after the document is deleted.</p>"
+        },
+        "FailureCode": {
+          "shape": "String",
+          "documentation": "<p>Indicates the source of the error.</p>"
+        },
+        "FailureReason": {
+          "shape": "String",
+          "documentation": "<p>Provides detailed information about why the document couldn't be indexed. Use this information to correct the error before you resubmit the document for indexing.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the status of documents submitted for indexing.</p>"
     },
     "StopDataSourceSyncJobRequest": {
       "type": "structure",

@@ -20,6 +20,14 @@ declare class Kendra extends Service {
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
+   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument operation. When you use the BatchPutDocument operation, documents are indexed asynchronously. You can use the BatchGetDocumentStatus operation to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus operation to check the status of the  BatchDeleteDocument operation. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
+   */
+  batchGetDocumentStatus(params: Kendra.Types.BatchGetDocumentStatusRequest, callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
+  /**
+   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument operation. When you use the BatchPutDocument operation, documents are indexed asynchronously. You can use the BatchGetDocumentStatus operation to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus operation to check the status of the  BatchDeleteDocument operation. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
+   */
+  batchGetDocumentStatus(callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
+  /**
    * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.
    */
   batchPutDocument(params: Kendra.Types.BatchPutDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
@@ -427,6 +435,41 @@ declare namespace Kendra {
     ErrorMessage?: ErrorMessage;
   }
   export type BatchDeleteDocumentResponseFailedDocuments = BatchDeleteDocumentResponseFailedDocument[];
+  export interface BatchGetDocumentStatusRequest {
+    /**
+     * The identifier of the index to add documents to. The index ID is returned by the  CreateIndex  operation.
+     */
+    IndexId: IndexId;
+    /**
+     * A list of DocumentInfo objects that identify the documents for which to get the status. You identify the documents by their document ID and optional attributes.
+     */
+    DocumentInfoList: DocumentInfoList;
+  }
+  export interface BatchGetDocumentStatusResponse {
+    /**
+     * A list of documents that Amazon Kendra couldn't get the status for. The list includes the ID of the document and the reason that the status couldn't be found.
+     */
+    Errors?: BatchGetDocumentStatusResponseErrors;
+    /**
+     * The status of documents. The status indicates if the document is waiting to be indexed, is in the process of indexing, has completed indexing, or failed indexing. If a document failed indexing, the status provides the reason why.
+     */
+    DocumentStatusList?: DocumentStatusList;
+  }
+  export interface BatchGetDocumentStatusResponseError {
+    /**
+     * The unique identifier of the document whose status could not be retrieved.
+     */
+    DocumentId?: DocumentId;
+    /**
+     * Indicates the source of the error.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * States that the API could not get the status of a document. This could be because the request is not valid or there is a system error.
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export type BatchGetDocumentStatusResponseErrors = BatchGetDocumentStatusResponseError[];
   export interface BatchPutDocumentRequest {
     /**
      * The identifier of the index to add the documents to. You need to create the index first using the CreateIndex operation.
@@ -1532,7 +1575,7 @@ declare namespace Kendra {
      */
     LongValue?: Long;
     /**
-     * A date expressed as an ISO 8601 string.
+     * A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
      */
     DateValue?: Timestamp;
   }
@@ -1550,6 +1593,17 @@ declare namespace Kendra {
   export type DocumentAttributeValueType = "STRING_VALUE"|"STRING_LIST_VALUE"|"LONG_VALUE"|"DATE_VALUE"|string;
   export type DocumentId = string;
   export type DocumentIdList = DocumentId[];
+  export interface DocumentInfo {
+    /**
+     * The unique identifier of the document.
+     */
+    DocumentId: DocumentId;
+    /**
+     * Attributes that identify a specific version of a document to check. The only valid attributes are:   version   datasourceId   jobExecutionId   The attributes follow these rules:    dataSourceId and jobExecutionId must be used together.    version is ignored if dataSourceId and jobExecutionId are not provided.   If dataSourceId and jobExecutionId are provided, but version is not, the version defaults to "0".  
+     */
+    Attributes?: DocumentAttributeList;
+  }
+  export type DocumentInfoList = DocumentInfo[];
   export type DocumentList = Document[];
   export type DocumentMetadataBoolean = boolean;
   export interface DocumentMetadataConfiguration {
@@ -1580,6 +1634,8 @@ declare namespace Kendra {
     Relevance: Relevance;
   }
   export type DocumentRelevanceOverrideConfigurationList = DocumentRelevanceConfiguration[];
+  export type DocumentStatus = "NOT_FOUND"|"PROCESSING"|"INDEXED"|"UPDATED"|"FAILED"|"UPDATE_FAILED"|string;
+  export type DocumentStatusList = Status[];
   export interface DocumentsMetadataConfiguration {
     /**
      * A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to include only the desired metadata files.
@@ -2611,6 +2667,24 @@ declare namespace Kendra {
      * Identifies a particular synchronization job.
      */
     ExecutionId?: String;
+  }
+  export interface Status {
+    /**
+     * The unique identifier of the document.
+     */
+    DocumentId?: DocumentId;
+    /**
+     * The current status of a document. If the document was submitted for deletion, the status is NOT_FOUND after the document is deleted.
+     */
+    DocumentStatus?: DocumentStatus;
+    /**
+     * Indicates the source of the error.
+     */
+    FailureCode?: String;
+    /**
+     * Provides detailed information about why the document couldn't be indexed. Use this information to correct the error before you resubmit the document for indexing.
+     */
+    FailureReason?: String;
   }
   export interface StopDataSourceSyncJobRequest {
     /**
