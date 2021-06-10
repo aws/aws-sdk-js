@@ -2034,6 +2034,9 @@
           "shape": "ClusterNotFoundFault"
         },
         {
+          "shape": "InvalidClusterStateFault"
+        },
+        {
           "shape": "UnsupportedOperationFault"
         }
       ],

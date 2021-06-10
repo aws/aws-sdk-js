@@ -438,7 +438,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+      "documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "BatchUpdateUser": {
       "name": "BatchUpdateUser",
@@ -476,7 +476,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action. </p>"
+      "documentation": "<p>Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.</p>"
     },
     "CreateAccount": {
       "name": "CreateAccount",
@@ -1059,7 +1059,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p>"
+      "documentation": "<p>Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p>"
     },
     "CreateProxySession": {
       "name": "CreateProxySession",
@@ -6243,7 +6243,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.</p>"
+      "documentation": "<p>Updates account details for the specified Amazon Chime account. Currently, only account name and default license updates are supported for this action.</p>"
     },
     "UpdateAccountSettings": {
       "name": "UpdateAccountSettings",
@@ -7511,7 +7511,7 @@
         },
         "ErrorMessage": {
           "shape": "String",
-          "documentation": "<p>The error message. </p>"
+          "documentation": "<p>The error message.</p>"
         }
       },
       "documentation": "<p>A list of failed member ARNs, error codes, and error messages.</p>"
@@ -14300,6 +14300,10 @@
         "Name": {
           "shape": "AccountName",
           "documentation": "<p>The new name for the specified Amazon Chime account.</p>"
+        },
+        "DefaultLicense": {
+          "shape": "License",
+          "documentation": "<p>The default license applied when you add users to an Amazon Chime account.</p>"
         }
       }
     },

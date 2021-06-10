@@ -902,7 +902,7 @@
       "output": {
         "shape": "CreateNatGatewayResult"
       },
-      "documentation": "<p>Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway.</p> <p>With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet.</p> <p>With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateNetworkAcl": {
       "name": "CreateNetworkAcl",
@@ -1679,7 +1679,7 @@
       "output": {
         "shape": "DeleteNatGatewayResult"
       },
-      "documentation": "<p>Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.</p>"
+      "documentation": "<p>Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.</p>"
     },
     "DeleteNetworkAcl": {
       "name": "DeleteNetworkAcl",
@@ -10124,6 +10124,13 @@
         "Topic"
       ]
     },
+    "ConnectivityType": {
+      "type": "string",
+      "enum": [
+        "private",
+        "public"
+      ]
+    },
     "ContainerFormat": {
       "type": "string",
       "enum": [
@@ -11497,10 +11504,13 @@
     "CreateNatGatewayRequest": {
       "type": "structure",
       "required": [
-        "SubnetId",
-        "AllocationId"
+        "SubnetId"
       ],
       "members": {
+        "AllocationId": {
+          "shape": "AllocationId",
+          "documentation": "<p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>"
+        },
         "ClientToken": {
           "shape": "String",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>",
@@ -11519,9 +11529,9 @@
           "documentation": "<p>The tags to assign to the NAT gateway.</p>",
           "locationName": "TagSpecification"
         },
-        "AllocationId": {
-          "shape": "AllocationId",
-          "documentation": "<p>The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>"
+        "ConnectivityType": {
+          "shape": "ConnectivityType",
+          "documentation": "<p>Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.</p>"
         }
       }
     },
@@ -32948,6 +32958,11 @@
           "shape": "TagList",
           "documentation": "<p>The tags for the NAT gateway.</p>",
           "locationName": "tagSet"
+        },
+        "ConnectivityType": {
+          "shape": "ConnectivityType",
+          "documentation": "<p>Indicates whether the NAT gateway supports public or private connectivity.</p>",
+          "locationName": "connectivityType"
         }
       },
       "documentation": "<p>Describes a NAT gateway.</p>"
@@ -32957,7 +32972,7 @@
       "members": {
         "AllocationId": {
           "shape": "String",
-          "documentation": "<p>The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
+          "documentation": "<p>[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
           "locationName": "allocationId"
         },
         "NetworkInterfaceId": {
@@ -32967,12 +32982,12 @@
         },
         "PrivateIp": {
           "shape": "String",
-          "documentation": "<p>The private IP address associated with the Elastic IP address.</p>",
+          "documentation": "<p>The private IP address associated with the NAT gateway.</p>",
           "locationName": "privateIp"
         },
         "PublicIp": {
           "shape": "String",
-          "documentation": "<p>The Elastic IP address associated with the NAT gateway.</p>",
+          "documentation": "<p>[Public NAT gateway only] The Elastic IP address associated with the NAT gateway.</p>",
           "locationName": "publicIp"
         }
       },

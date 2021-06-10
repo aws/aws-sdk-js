@@ -525,11 +525,11 @@ declare class EC2 extends Service {
    */
   createManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.CreateManagedPrefixListResult) => void): Request<EC2.Types.CreateManagedPrefixListResult, AWSError>;
   /**
-   * Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
+   * Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway. With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet. With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
    */
   createNatGateway(params: EC2.Types.CreateNatGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateNatGatewayResult) => void): Request<EC2.Types.CreateNatGatewayResult, AWSError>;
   /**
-   * Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
+   * Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway. With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet. With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
    */
   createNatGateway(callback?: (err: AWSError, data: EC2.Types.CreateNatGatewayResult) => void): Request<EC2.Types.CreateNatGatewayResult, AWSError>;
   /**
@@ -981,11 +981,11 @@ declare class EC2 extends Service {
    */
   deleteManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.DeleteManagedPrefixListResult) => void): Request<EC2.Types.DeleteManagedPrefixListResult, AWSError>;
   /**
-   * Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
+   * Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
    */
   deleteNatGateway(params: EC2.Types.DeleteNatGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNatGatewayResult) => void): Request<EC2.Types.DeleteNatGatewayResult, AWSError>;
   /**
-   * Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
+   * Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
    */
   deleteNatGateway(callback?: (err: AWSError, data: EC2.Types.DeleteNatGatewayResult) => void): Request<EC2.Types.DeleteNatGatewayResult, AWSError>;
   /**
@@ -6162,6 +6162,7 @@ declare namespace EC2 {
   export type ConnectionNotificationSet = ConnectionNotification[];
   export type ConnectionNotificationState = "Enabled"|"Disabled"|string;
   export type ConnectionNotificationType = "Topic"|string;
+  export type ConnectivityType = "private"|"public"|string;
   export type ContainerFormat = "ova"|string;
   export type ConversionIdStringList = ConversionTaskId[];
   export interface ConversionTask {
@@ -7133,6 +7134,10 @@ declare namespace EC2 {
   }
   export interface CreateNatGatewayRequest {
     /**
+     * [Public NAT gateways only] The allocation ID of an Elastic IP address to associate with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
+     */
+    AllocationId?: AllocationId;
+    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
      */
     ClientToken?: String;
@@ -7149,9 +7154,9 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
     /**
-     * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
+     * Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
      */
-    AllocationId: AllocationId;
+    ConnectivityType?: ConnectivityType;
   }
   export interface CreateNatGatewayResult {
     /**
@@ -20858,10 +20863,14 @@ declare namespace EC2 {
      * The tags for the NAT gateway.
      */
     Tags?: TagList;
+    /**
+     * Indicates whether the NAT gateway supports public or private connectivity.
+     */
+    ConnectivityType?: ConnectivityType;
   }
   export interface NatGatewayAddress {
     /**
-     * The allocation ID of the Elastic IP address that's associated with the NAT gateway.
+     * [Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway.
      */
     AllocationId?: String;
     /**
@@ -20869,11 +20878,11 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * The private IP address associated with the Elastic IP address.
+     * The private IP address associated with the NAT gateway.
      */
     PrivateIp?: String;
     /**
-     * The Elastic IP address associated with the NAT gateway.
+     * [Public NAT gateway only] The Elastic IP address associated with the NAT gateway.
      */
     PublicIp?: String;
   }

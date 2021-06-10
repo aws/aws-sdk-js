@@ -951,6 +951,9 @@ declare namespace Appflow {
      *  The properties required to query Amazon Connect Customer Profiles. 
      */
     CustomerProfiles?: CustomerProfilesDestinationProperties;
+    /**
+     * The properties required to query Zendesk.
+     */
     Zendesk?: ZendeskDestinationProperties;
   }
   export type DestinationField = string;
@@ -1396,7 +1399,7 @@ declare namespace Appflow {
   export type Object = string;
   export type ObjectTypeName = string;
   export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
-  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
+  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|string;
   export type Password = string;
   export interface PrefixConfig {
     /**
@@ -1917,7 +1920,7 @@ declare namespace Appflow {
     taskProperties?: TaskPropertiesMap;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
-  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
   export type Tasks = Task[];
   export type Timezone = string;
   export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
@@ -2097,6 +2100,9 @@ declare namespace Appflow {
     instanceUrl: InstanceUrl;
   }
   export interface ZendeskDestinationProperties {
+    /**
+     * The object specified in the Zendesk flow destination.
+     */
     object: Object;
     idFieldNames?: IdFieldNameList;
     errorHandlingConfig?: ErrorHandlingConfig;

@@ -3402,6 +3402,10 @@ declare namespace SageMaker {
      * Creates tags for the specified fleet.
      */
     Tags?: TagList;
+    /**
+     * Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}". For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".
+     */
+    EnableIotRoleAlias?: EnableIotRoleAlias;
   }
   export interface CreateDomainRequest {
     /**
@@ -5902,6 +5906,10 @@ declare namespace SageMaker {
      * The signature document of files in the model artifact.
      */
     ModelSignature?: String;
+    /**
+     * The output of a SageMaker Edge Manager deployable resource.
+     */
+    PresetDeploymentOutput?: EdgePresetDeploymentOutput;
   }
   export interface DescribeEndpointConfigInput {
     /**
@@ -7768,6 +7776,14 @@ declare namespace SageMaker {
      * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The deployment type SageMaker Edge Manager will create. Currently only supports AWS IoT Greengrass Version 2 components.
+     */
+    PresetDeploymentType?: EdgePresetDeploymentType;
+    /**
+     * The configuration used to create deployment artifacts. Specify configuration options with a JSON string. The available configuration options for each type are:    ComponentName (optional) - Name of the GreenGrass V2 component. If not specified, the default name generated consists of "SagemakerEdgeManager" and the name of your SageMaker Edge Manager packaging job.    ComponentDescription (optional) - Description of the component.    ComponentVersion (optional) - The version of the component.  AWS IoT Greengrass uses semantic versions for components. Semantic versions follow a major.minor.patch number system. For example, version 1.0.0 represents the first major release for a component. For more information, see the semantic version specification.     PlatformOS (optional) - The name of the operating system for the platform. Supported platforms include Windows and Linux.    PlatformArchitecture (optional) - The processor architecture for the platform.  Supported architectures Windows include: Windows32_x86, Windows64_x64. Supported architectures for Linux include: Linux x86_64, Linux ARMV8.  
+     */
+    PresetDeploymentConfig?: String;
   }
   export type EdgePackagingJobArn = string;
   export type EdgePackagingJobStatus = "STARTING"|"INPROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED"|string;
@@ -7806,9 +7822,31 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
   }
+  export type EdgePresetDeploymentArtifact = string;
+  export interface EdgePresetDeploymentOutput {
+    /**
+     * The deployment type created by SageMaker Edge Manager. Currently only supports AWS IoT Greengrass Version 2 components.
+     */
+    Type: EdgePresetDeploymentType;
+    /**
+     * The Amazon Resource Name (ARN) of the generated deployable resource.
+     */
+    Artifact?: EdgePresetDeploymentArtifact;
+    /**
+     * The status of the deployable resource.
+     */
+    Status?: EdgePresetDeploymentStatus;
+    /**
+     * Returns a message describing the status of the deployed resource.
+     */
+    StatusMessage?: String;
+  }
+  export type EdgePresetDeploymentStatus = "COMPLETED"|"FAILED"|string;
+  export type EdgePresetDeploymentType = "GreengrassV2Component"|string;
   export type EdgeVersion = string;
   export type EfsUid = string;
   export type EnableCapture = boolean;
+  export type EnableIotRoleAlias = boolean;
   export interface EnableSagemakerServicecatalogPortfolioInput {
   }
   export interface EnableSagemakerServicecatalogPortfolioOutput {
@@ -15101,6 +15139,10 @@ declare namespace SageMaker {
      * Output configuration for storing sample data collected by the fleet.
      */
     OutputConfig: EdgeOutputConfig;
+    /**
+     * Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}". For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".
+     */
+    EnableIotRoleAlias?: EnableIotRoleAlias;
   }
   export interface UpdateDevicesRequest {
     /**

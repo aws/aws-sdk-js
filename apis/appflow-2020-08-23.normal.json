@@ -1699,7 +1699,8 @@
           "documentation": "<p> The properties required to query Amazon Connect Customer Profiles. </p>"
         },
         "Zendesk": {
-          "shape": "ZendeskDestinationProperties"
+          "shape": "ZendeskDestinationProperties",
+          "documentation": "<p>The properties required to query Zendesk.</p>"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -2611,7 +2612,8 @@
         "TRUNCATE_LENGTH",
         "MATH_OPERATION_FIELDS_ORDER",
         "CONCAT_FORMAT",
-        "SUBFIELD_CATEGORY_MAP"
+        "SUBFIELD_CATEGORY_MAP",
+        "EXCLUDE_SOURCE_FIELDS_LIST"
       ]
     },
     "Password": {
@@ -3641,6 +3643,7 @@
         "Arithmetic",
         "Filter",
         "Map",
+        "Map_all",
         "Mask",
         "Merge",
         "Truncate",
@@ -4074,7 +4077,8 @@
       ],
       "members": {
         "object": {
-          "shape": "Object"
+          "shape": "Object",
+          "documentation": "<p>The object specified in the Zendesk flow destination.</p>"
         },
         "idFieldNames": {
           "shape": "IdFieldNameList"
@@ -4085,7 +4089,8 @@
         "writeOperationType": {
           "shape": "WriteOperationType"
         }
-      }
+      },
+      "documentation": "<p>The properties that are applied when Zendesk is used as a destination.</p>"
     },
     "ZendeskMetadata": {
       "type": "structure",
