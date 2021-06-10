@@ -4,8 +4,8 @@
 [![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
 
-[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
-[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
+[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=main)](https://travis-ci.org/aws/aws-sdk-js)
+[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/main/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
 ## Version 3.x Now Available
@@ -13,7 +13,7 @@ The [version 3.x](https://github.com/aws/aws-sdk-js-v3) of the AWS SDK for JavaS
 For more information see the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 
-For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
+For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/main/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
 ## Table of Contents:
 * [Getting Started](#Getting-Started)
@@ -91,7 +91,7 @@ Before you can begin using these TypeScript definitions with your project, you n
     ```
 
  * If you are targeting at es5 or older ECMA standards, your `tsconfig.json` has to include `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
- See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/master/ts/tsconfig.json) for an example.
+ See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/main/ts/tsconfig.json) for an example.
 
 ### In the Browser
 To use the TypeScript definition files with the global `AWS` object in a front-end project, add the following line to the top of your JavaScript file:
@@ -161,10 +161,10 @@ If you have a support plan with [AWS Support](https://aws.amazon.com/premiumsupp
 
 Please make sure to check out our resources too before opening an issue:
 * Our [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) and [API reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
-* Our [Changelog](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md) for recent changes.
+* Our [Changelog](https://github.com/aws/aws-sdk-js/blob/main/CHANGELOG.md) for recent changes.
 * Our [code examples](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-code-samples.html).
 
-Please see [SERVICES.md](https://github.com/aws/aws-sdk-js/blob/master/SERVICES.md) for a list of supported services.
+Please see [SERVICES.md](https://github.com/aws/aws-sdk-js/blob/main/SERVICES.md) for a list of supported services.
 
 # Maintenance and support for SDK major versions
 For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
@@ -174,7 +174,7 @@ For information about maintenance and support for SDK major versions and their u
 
 
 # Contributing
-We welcome community contributions and pull requests. See [CONTRIBUTING.md](https://github.com/aws/aws-sdk-js/blob/master/CONTRIBUTING.md) for information on how to set up a development environment and submit code.
+We welcome community contributions and pull requests. See [CONTRIBUTING.md](https://github.com/aws/aws-sdk-js/blob/main/CONTRIBUTING.md) for information on how to set up a development environment and submit code.
 
 ## License
 
