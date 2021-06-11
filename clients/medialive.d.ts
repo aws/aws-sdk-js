@@ -2470,7 +2470,13 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
+  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface DvbSubSourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: DvbSubOcrLanguage;
     /**
      * When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
      */
@@ -3510,6 +3516,10 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      * The number of seconds between retries when an attempt to read a manifest or segment fails.
      */
     RetryInterval?: __integerMin0;
+    /**
+     * Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
+     */
+    Scte35Source?: HlsScte35SourceType;
   }
   export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
   export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
@@ -3567,6 +3577,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     CannedAcl?: S3CannedAcl;
   }
+  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string;
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
@@ -5547,7 +5558,7 @@ Valid values: 1, 2, 4, 6, 8
     VideoQuality?: ReservationVideoQuality;
   }
   export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
-  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
   export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
@@ -5701,7 +5712,13 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface Scte27DestinationSettings {
   }
+  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface Scte27SourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: Scte27OcrLanguage;
     /**
      * The pid field is used in conjunction with the caption selector languageCode field as follows:
   - Specify PID and Language: Extracts captions from that PID; the language is "informational".

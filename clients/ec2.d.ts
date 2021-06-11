@@ -1621,11 +1621,11 @@ declare class EC2 extends Service {
    */
   describeImageAttribute(callback?: (err: AWSError, data: EC2.Types.ImageAttribute) => void): Request<EC2.Types.ImageAttribute, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image results in an error indicating that the AMI ID cannot be found.
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
    */
   describeImages(params: EC2.Types.DescribeImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image results in an error indicating that the AMI ID cannot be found.
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
    */
   describeImages(callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
@@ -2357,6 +2357,14 @@ declare class EC2 extends Service {
    */
   disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
   /**
+   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   */
+  disableImageDeprecation(params: EC2.Types.DisableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
+  /**
+   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   */
+  disableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
+  /**
    * Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   disableSerialConsoleAccess(params: EC2.Types.DisableSerialConsoleAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
@@ -2484,6 +2492,14 @@ declare class EC2 extends Service {
    * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
   enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
+  /**
+   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   */
+  enableImageDeprecation(params: EC2.Types.EnableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
+  /**
+   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   */
+  enableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
   /**
    * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
@@ -10769,6 +10785,10 @@ declare namespace EC2 {
      */
     Owners?: OwnerStringList;
     /**
+     * If true, all deprecated AMIs are included in the response. If false, no deprecated AMIs are included in the response. If no value is specified, the default value is false.  If you are the AMI owner, all deprecated AMIs appear in the response regardless of the value (true or false) that you set for this parameter. 
+     */
+    IncludeDeprecated?: Boolean;
+    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
@@ -13673,6 +13693,22 @@ declare namespace EC2 {
      */
     Unsuccessful?: DisableFastSnapshotRestoreErrorSet;
   }
+  export interface DisableImageDeprecationRequest {
+    /**
+     * The ID of the AMI.
+     */
+    ImageId: ImageId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableImageDeprecationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface DisableSerialConsoleAccessRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -14367,6 +14403,26 @@ declare namespace EC2 {
      * Information about the snapshots for which fast snapshot restores could not be enabled.
      */
     Unsuccessful?: EnableFastSnapshotRestoreErrorSet;
+  }
+  export interface EnableImageDeprecationRequest {
+    /**
+     * The ID of the AMI.
+     */
+    ImageId: ImageId;
+    /**
+     * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. You can’t specify a date in the past. The upper limit for DeprecateAt is 10 years from now.
+     */
+    DeprecateAt: MillisecondDateTime;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableImageDeprecationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface EnableSerialConsoleAccessRequest {
     /**
@@ -16532,6 +16588,10 @@ declare namespace EC2 {
      * The boot mode of the image. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
      */
     BootMode?: BootModeValues;
+    /**
+     * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.
+     */
+    DeprecationTime?: String;
   }
   export interface ImageAttribute {
     /**

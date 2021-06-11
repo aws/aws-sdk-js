@@ -650,11 +650,20 @@ declare namespace MediaConnect {
   export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
   export interface FailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Search window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
+  export type FailoverMode = "MERGE"|"FAILOVER"|string;
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -1489,6 +1498,12 @@ declare namespace MediaConnect {
      */
     WhitelistCidr?: __string;
   }
+  export interface SourcePriority {
+    /**
+     * The name of the source you choose as the primary source for this flow.
+     */
+    PrimarySource?: __string;
+  }
   export type SourceType = "OWNED"|"ENTITLED"|string;
   export interface StartFlowRequest {
     /**
@@ -1623,9 +1638,17 @@ declare namespace MediaConnect {
   }
   export interface UpdateFailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Recovery window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
   export interface UpdateFlowEntitlementRequest {

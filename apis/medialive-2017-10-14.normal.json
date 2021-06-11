@@ -6016,9 +6016,26 @@
         "SCALED"
       ]
     },
+    "DvbSubOcrLanguage": {
+      "type": "string",
+      "documentation": "Dvb Sub Ocr Language",
+      "enum": [
+        "DEU",
+        "ENG",
+        "FRA",
+        "NLD",
+        "POR",
+        "SPA"
+      ]
+    },
     "DvbSubSourceSettings": {
       "type": "structure",
       "members": {
+        "OcrLanguage": {
+          "shape": "DvbSubOcrLanguage",
+          "locationName": "ocrLanguage",
+          "documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text."
+        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid",
@@ -7957,6 +7974,11 @@
           "shape": "__integerMin0",
           "locationName": "retryInterval",
           "documentation": "The number of seconds between retries when an attempt to read a manifest or segment fails."
+        },
+        "Scte35Source": {
+          "shape": "HlsScte35SourceType",
+          "locationName": "scte35Source",
+          "documentation": "Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected."
         }
       },
       "documentation": "Hls Input Settings"
@@ -8103,6 +8125,14 @@
         }
       },
       "documentation": "Hls S3 Settings"
+    },
+    "HlsScte35SourceType": {
+      "type": "string",
+      "documentation": "Hls Scte35 Source Type",
+      "enum": [
+        "MANIFEST",
+        "SEGMENTS"
+      ]
     },
     "HlsSegmentationMode": {
       "type": "string",
@@ -11763,10 +11793,12 @@
     },
     "ReservationSpecialFeature": {
       "type": "string",
-      "documentation": "Special features, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'",
+      "documentation": "Special features, 'ADVANCED_AUDIO' 'AUDIO_NORMALIZATION' 'MGHD' or 'MGUHD'",
       "enum": [
         "ADVANCED_AUDIO",
-        "AUDIO_NORMALIZATION"
+        "AUDIO_NORMALIZATION",
+        "MGHD",
+        "MGUHD"
       ]
     },
     "ReservationState": {
@@ -12052,9 +12084,26 @@
       "members": {},
       "documentation": "Scte27 Destination Settings"
     },
+    "Scte27OcrLanguage": {
+      "type": "string",
+      "documentation": "Scte27 Ocr Language",
+      "enum": [
+        "DEU",
+        "ENG",
+        "FRA",
+        "NLD",
+        "POR",
+        "SPA"
+      ]
+    },
     "Scte27SourceSettings": {
       "type": "structure",
       "members": {
+        "OcrLanguage": {
+          "shape": "Scte27OcrLanguage",
+          "locationName": "ocrLanguage",
+          "documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text."
+        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid",

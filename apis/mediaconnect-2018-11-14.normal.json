@@ -1879,10 +1879,20 @@
     "FailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Search window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
@@ -1890,6 +1900,13 @@
         }
       },
       "documentation": "The settings for source failover"
+    },
+    "FailoverMode": {
+      "type": "string",
+      "enum": [
+        "MERGE",
+        "FAILOVER"
+      ]
     },
     "Flow": {
       "type": "structure",
@@ -3313,6 +3330,17 @@
         "Name"
       ]
     },
+    "SourcePriority": {
+      "type": "structure",
+      "members": {
+        "PrimarySource": {
+          "shape": "__string",
+          "locationName": "primarySource",
+          "documentation": "The name of the source you choose as the primary source for this flow."
+        }
+      },
+      "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
+    },
     "SourceType": {
       "type": "string",
       "enum": [
@@ -3561,10 +3589,20 @@
     "UpdateFailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Recovery window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
