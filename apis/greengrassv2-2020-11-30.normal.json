@@ -12,6 +12,70 @@
     "uid": "greengrassv2-2020-11-30"
   },
   "operations": {
+    "BatchAssociateClientDeviceWithCoreDevice": {
+      "name": "BatchAssociateClientDeviceWithCoreDevice",
+      "http": {
+        "method": "POST",
+        "requestUri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchAssociateClientDeviceWithCoreDeviceRequest"
+      },
+      "output": {
+        "shape": "BatchAssociateClientDeviceWithCoreDeviceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud discovery</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with local IoT devices</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> </note>"
+    },
+    "BatchDisassociateClientDeviceFromCoreDevice": {
+      "name": "BatchDisassociateClientDeviceFromCoreDevice",
+      "http": {
+        "method": "POST",
+        "requestUri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchDisassociateClientDeviceFromCoreDeviceRequest"
+      },
+      "output": {
+        "shape": "BatchDisassociateClientDeviceFromCoreDeviceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.</p>"
+    },
     "CancelDeployment": {
       "name": "CancelDeployment",
       "http": {
@@ -332,6 +396,38 @@
       ],
       "documentation": "<p>Gets a deployment. Deployments define the components that run on AWS IoT Greengrass core devices.</p>"
     },
+    "ListClientDevicesAssociatedWithCoreDevice": {
+      "name": "ListClientDevicesAssociatedWithCoreDevice",
+      "http": {
+        "method": "GET",
+        "requestUri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListClientDevicesAssociatedWithCoreDeviceRequest"
+      },
+      "output": {
+        "shape": "ListClientDevicesAssociatedWithCoreDeviceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves a paginated list of client devices that are associated with a core device.</p>"
+    },
     "ListComponentVersions": {
       "name": "ListComponentVersions",
       "http": {
@@ -361,7 +457,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Retrieves a paginated list of all versions for a component.</p>"
+      "documentation": "<p>Retrieves a paginated list of all versions for a component. Greater versions are listed first.</p>"
     },
     "ListComponents": {
       "name": "ListComponents",
@@ -620,6 +716,129 @@
     }
   },
   "shapes": {
+    "AssociateClientDeviceWithCoreDeviceEntry": {
+      "type": "structure",
+      "required": [
+        "thingName"
+      ],
+      "members": {
+        "thingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the AWS IoT thing that represents the client device to associate.</p>"
+        }
+      },
+      "documentation": "<p>Contains a request to associate a client device with a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.</p>"
+    },
+    "AssociateClientDeviceWithCoreDeviceEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "AssociateClientDeviceWithCoreDeviceEntry"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "AssociateClientDeviceWithCoreDeviceErrorEntry": {
+      "type": "structure",
+      "members": {
+        "thingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the AWS IoT thing whose associate request failed.</p>"
+        },
+        "code": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The error code for the request.</p>"
+        },
+        "message": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A message that provides additional information about the error.</p>"
+        }
+      },
+      "documentation": "<p>Contains an error that occurs from a request to associate a client device with a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.</p>"
+    },
+    "AssociateClientDeviceWithCoreDeviceErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "AssociateClientDeviceWithCoreDeviceErrorEntry"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "AssociatedClientDevice": {
+      "type": "structure",
+      "members": {
+        "thingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the AWS IoT thing that represents the associated client device.</p>"
+        },
+        "associationTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the client device was associated, expressed in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a client device that is associated to a core device for cloud discovery.</p>"
+    },
+    "AssociatedClientDeviceList": {
+      "type": "list",
+      "member": {
+        "shape": "AssociatedClientDevice"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "BatchAssociateClientDeviceWithCoreDeviceRequest": {
+      "type": "structure",
+      "required": [
+        "coreDeviceThingName"
+      ],
+      "members": {
+        "entries": {
+          "shape": "AssociateClientDeviceWithCoreDeviceEntryList",
+          "documentation": "<p>The list of client devices to associate.</p>"
+        },
+        "coreDeviceThingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+          "location": "uri",
+          "locationName": "coreDeviceThingName"
+        }
+      }
+    },
+    "BatchAssociateClientDeviceWithCoreDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "AssociateClientDeviceWithCoreDeviceErrorList",
+          "documentation": "<p>The list of any errors for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to associate.</p>"
+        }
+      }
+    },
+    "BatchDisassociateClientDeviceFromCoreDeviceRequest": {
+      "type": "structure",
+      "required": [
+        "coreDeviceThingName"
+      ],
+      "members": {
+        "entries": {
+          "shape": "DisassociateClientDeviceFromCoreDeviceEntryList",
+          "documentation": "<p>The list of client devices to disassociate.</p>"
+        },
+        "coreDeviceThingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+          "location": "uri",
+          "locationName": "coreDeviceThingName"
+        }
+      }
+    },
+    "BatchDisassociateClientDeviceFromCoreDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "DisassociateClientDeviceFromCoreDeviceErrorList",
+          "documentation": "<p>The list of errors (if any) for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to disassociate.</p>"
+        }
+      }
+    },
     "CancelDeploymentRequest": {
       "type": "structure",
       "required": [
@@ -1304,6 +1523,53 @@
     "DescriptionString": {
       "type": "string"
     },
+    "DisassociateClientDeviceFromCoreDeviceEntry": {
+      "type": "structure",
+      "required": [
+        "thingName"
+      ],
+      "members": {
+        "thingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the AWS IoT thing that represents the client device to disassociate.</p>"
+        }
+      },
+      "documentation": "<p>Contains a request to disassociate a client device from a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.</p>"
+    },
+    "DisassociateClientDeviceFromCoreDeviceEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "DisassociateClientDeviceFromCoreDeviceEntry"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "DisassociateClientDeviceFromCoreDeviceErrorEntry": {
+      "type": "structure",
+      "members": {
+        "thingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the AWS IoT thing whose disassociate request failed.</p>"
+        },
+        "code": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The error code for the request.</p>"
+        },
+        "message": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A message that provides additional information about the error.</p>"
+        }
+      },
+      "documentation": "<p>Contains an error that occurs from a request to disassociate a client device from a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.</p>"
+    },
+    "DisassociateClientDeviceFromCoreDeviceErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "DisassociateClientDeviceFromCoreDeviceErrorEntry"
+      },
+      "max": 100,
+      "min": 1
+    },
     "EffectiveDeployment": {
       "type": "structure",
       "required": [
@@ -1792,6 +2058,11 @@
       },
       "documentation": "<p>Contains information about the timeout configuration for a job.</p>"
     },
+    "IoTThingName": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
     "IsLatestForTarget": {
       "type": "boolean"
     },
@@ -2064,6 +2335,48 @@
       "type": "string",
       "max": 1000,
       "min": 1
+    },
+    "ListClientDevicesAssociatedWithCoreDeviceRequest": {
+      "type": "structure",
+      "required": [
+        "coreDeviceThingName"
+      ],
+      "members": {
+        "coreDeviceThingName": {
+          "shape": "IoTThingName",
+          "documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+          "location": "uri",
+          "locationName": "coreDeviceThingName"
+        },
+        "maxResults": {
+          "shape": "DefaultMaxResults",
+          "documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>The token to be used for the next set of paginated results.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListClientDevicesAssociatedWithCoreDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "associatedClientDevices": {
+          "shape": "AssociatedClientDeviceList",
+          "documentation": "<p>A list that describes the client devices that are associated with the core device.</p>"
+        },
+        "nextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>",
+          "box": true
+        }
+      }
     },
     "ListComponentVersionsRequest": {
       "type": "structure",

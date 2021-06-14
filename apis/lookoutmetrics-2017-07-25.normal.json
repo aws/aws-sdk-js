@@ -1011,6 +1011,7 @@
         "DELETING",
         "FAILED",
         "INACTIVE",
+        "LEARNING",
         "BACK_TEST_ACTIVATING",
         "BACK_TEST_ACTIVE",
         "BACK_TEST_COMPLETE"
@@ -1368,7 +1369,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>",
+          "documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "TimestampColumn": {
@@ -1645,7 +1646,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>The offset for the dataset.</p>",
+          "documentation": "<p>The offset in seconds. Only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "MetricList": {
@@ -2872,7 +2873,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>",
+          "documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "TimestampColumn": {

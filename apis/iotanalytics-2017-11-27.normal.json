@@ -208,7 +208,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a data store, which is a repository for messages.</p>"
+      "documentation": "<p>Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with <code>ParquetConfiguration</code>.</p>"
     },
     "CreatePipeline": {
       "name": "CreatePipeline",
@@ -1269,7 +1269,7 @@
       "members": {
         "s3Paths": {
           "shape": "S3PathChannelMessages",
-          "documentation": "<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.</p>"
+          "documentation": "<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.</p> <p>You must use the full path for the key.</p> <p>Example path: <code>channel/mychannel/__dt=2020-02-29 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz</code> </p>"
         }
       },
       "documentation": "<p>Specifies one or more sets of channel messages.</p>"
@@ -1583,6 +1583,10 @@
         "fileFormatConfiguration": {
           "shape": "FileFormatConfiguration",
           "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+        },
+        "datastorePartitions": {
+          "shape": "DatastorePartitions",
+          "documentation": "<p> Contains information about the partitions in a data store. </p>"
         }
       }
     },
@@ -2072,6 +2076,10 @@
         "fileFormatConfiguration": {
           "shape": "FileFormatConfiguration",
           "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+        },
+        "datastorePartitions": {
+          "shape": "DatastorePartitions",
+          "documentation": "<p> Contains information about the partitions in a data store. </p>"
         }
       },
       "documentation": "<p>Information about a data store.</p>"
@@ -2102,6 +2110,30 @@
       "max": 128,
       "min": 1,
       "pattern": "^[a-zA-Z0-9_]+$"
+    },
+    "DatastorePartition": {
+      "type": "structure",
+      "members": {
+        "attributePartition": {
+          "shape": "Partition",
+          "documentation": "<p> A partition defined by an <code>attributeName</code>. </p>"
+        },
+        "timestampPartition": {
+          "shape": "TimestampPartition",
+          "documentation": "<p> A partition defined by an <code>attributeName</code> and a timestamp format. </p>"
+        }
+      },
+      "documentation": "<p> A single partition in a data store. </p>"
+    },
+    "DatastorePartitions": {
+      "type": "structure",
+      "members": {
+        "partitions": {
+          "shape": "Partitions",
+          "documentation": "<p> A list of partitions in a data store. </p>"
+        }
+      },
+      "documentation": "<p> Contains information about partitions in a data store. </p>"
     },
     "DatastoreStatistics": {
       "type": "structure",
@@ -2185,6 +2217,10 @@
         "fileFormatType": {
           "shape": "FileFormatType",
           "documentation": "<p>The file format of the data in the data store.</p>"
+        },
+        "datastorePartitions": {
+          "shape": "DatastorePartitions",
+          "documentation": "<p> Contains information about the partitions in a data store. </p>"
         }
       },
       "documentation": "<p>A summary of information about a data store.</p>"
@@ -3036,7 +3072,8 @@
     "MessageId": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "\\p{ASCII}*"
     },
     "MessagePayload": {
       "type": "blob"
@@ -3087,6 +3124,33 @@
         }
       },
       "documentation": "<p>Contains the configuration information of the Parquet format.</p>"
+    },
+    "Partition": {
+      "type": "structure",
+      "required": [
+        "attributeName"
+      ],
+      "members": {
+        "attributeName": {
+          "shape": "PartitionAttributeName",
+          "documentation": "<p> The attribute name of the partition. </p>"
+        }
+      },
+      "documentation": "<p> A single partition. </p>"
+    },
+    "PartitionAttributeName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_]+$"
+    },
+    "Partitions": {
+      "type": "list",
+      "member": {
+        "shape": "DatastorePartition"
+      },
+      "max": 25,
+      "min": 0
     },
     "Pipeline": {
       "type": "structure",
@@ -3485,7 +3549,7 @@
       "members": {
         "columns": {
           "shape": "Columns",
-          "documentation": "<p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types</p>"
+          "documentation": "<p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types.</p>"
         }
       },
       "documentation": "<p>Information needed to define a schema.</p>"
@@ -3675,6 +3739,29 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TimestampFormat": {
+      "type": "string",
+      "max": 50,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9\\s\\[\\]_,.'/:-]*$"
+    },
+    "TimestampPartition": {
+      "type": "structure",
+      "required": [
+        "attributeName"
+      ],
+      "members": {
+        "attributeName": {
+          "shape": "PartitionAttributeName",
+          "documentation": "<p> The attribute name of the partition defined by a timestamp. </p>"
+        },
+        "timestampFormat": {
+          "shape": "TimestampFormat",
+          "documentation": "<p> The timestamp format of a partition defined by a timestamp. </p>"
+        }
+      },
+      "documentation": "<p> A partition defined by a timestamp. </p>"
     },
     "TriggeringDataset": {
       "type": "structure",

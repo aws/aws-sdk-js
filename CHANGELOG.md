@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.927.0-->
+<!--LATEST=2.928.0-->
 <!--ENTRYINSERT-->
+
+## 2.928.0
+* feature: GreengrassV2: We have verified the APIs being released here and are ready to release
+* feature: IoTAnalytics: Adds support for data store partitions.
+* feature: LookoutMetrics: Added "LEARNING" status for anomaly detector and updated description for "Offset" parameter in MetricSet APIs.
 
 ## 2.927.0
 * feature: EC2: Amazon EC2 adds new AMI property to flag outdated AMIs

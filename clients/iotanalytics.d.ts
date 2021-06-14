@@ -52,11 +52,11 @@ declare class IoTAnalytics extends Service {
    */
   createDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates a data store, which is a repository for messages.
+   * Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with ParquetConfiguration.
    */
   createDatastore(params: IoTAnalytics.Types.CreateDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
-   * Creates a data store, which is a repository for messages.
+   * Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with ParquetConfiguration.
    */
   createDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
@@ -400,7 +400,7 @@ declare namespace IoTAnalytics {
   export type ChannelArn = string;
   export interface ChannelMessages {
     /**
-     * Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
+     * Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages. You must use the full path for the key. Example path: channel/mychannel/__dt=2020-02-29 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz 
      */
     s3Paths?: S3PathChannelMessages;
   }
@@ -608,6 +608,10 @@ declare namespace IoTAnalytics {
      * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
      */
     fileFormatConfiguration?: FileFormatConfiguration;
+    /**
+     *  Contains information about the partitions in a data store. 
+     */
+    datastorePartitions?: DatastorePartitions;
   }
   export interface CreateDatastoreResponse {
     /**
@@ -928,6 +932,10 @@ declare namespace IoTAnalytics {
      * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
      */
     fileFormatConfiguration?: FileFormatConfiguration;
+    /**
+     *  Contains information about the partitions in a data store. 
+     */
+    datastorePartitions?: DatastorePartitions;
   }
   export interface DatastoreActivity {
     /**
@@ -941,6 +949,22 @@ declare namespace IoTAnalytics {
   }
   export type DatastoreArn = string;
   export type DatastoreName = string;
+  export interface DatastorePartition {
+    /**
+     *  A partition defined by an attributeName. 
+     */
+    attributePartition?: Partition;
+    /**
+     *  A partition defined by an attributeName and a timestamp format. 
+     */
+    timestampPartition?: TimestampPartition;
+  }
+  export interface DatastorePartitions {
+    /**
+     *  A list of partitions in a data store. 
+     */
+    partitions?: Partitions;
+  }
   export interface DatastoreStatistics {
     /**
      * The estimated size of the data store.
@@ -998,6 +1022,10 @@ declare namespace IoTAnalytics {
      * The file format of the data in the data store.
      */
     fileFormatType?: FileFormatType;
+    /**
+     *  Contains information about the partitions in a data store. 
+     */
+    datastorePartitions?: DatastorePartitions;
   }
   export interface DeleteChannelRequest {
     /**
@@ -1486,6 +1514,14 @@ declare namespace IoTAnalytics {
      */
     schemaDefinition?: SchemaDefinition;
   }
+  export interface Partition {
+    /**
+     *  The attribute name of the partition. 
+     */
+    attributeName: PartitionAttributeName;
+  }
+  export type PartitionAttributeName = string;
+  export type Partitions = DatastorePartition[];
   export interface Pipeline {
     /**
      * The name of the pipeline.
@@ -1719,7 +1755,7 @@ declare namespace IoTAnalytics {
   export type ScheduleExpression = string;
   export interface SchemaDefinition {
     /**
-     * Specifies one or more columns that store your data. Each schema can have up to 100 columns. Each column can have up to 100 nested types
+     * Specifies one or more columns that store your data. Each schema can have up to 100 columns. Each column can have up to 100 nested types.
      */
     columns?: Columns;
   }
@@ -1812,6 +1848,17 @@ declare namespace IoTAnalytics {
   export type TagValue = string;
   export type TimeExpression = string;
   export type Timestamp = Date;
+  export type TimestampFormat = string;
+  export interface TimestampPartition {
+    /**
+     *  The attribute name of the partition defined by a timestamp. 
+     */
+    attributeName: PartitionAttributeName;
+    /**
+     *  The timestamp format of a partition defined by a timestamp. 
+     */
+    timestampFormat?: TimestampFormat;
+  }
   export interface TriggeringDataset {
     /**
      * The name of the dataset whose content generation triggers the new dataset content generation.

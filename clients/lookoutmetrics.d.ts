@@ -333,7 +333,7 @@ declare namespace LookoutMetrics {
   }
   export type AnomalyDetectorDescription = string;
   export type AnomalyDetectorName = string;
-  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
+  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
   export interface AnomalyDetectorSummary {
     /**
      * The ARN of the detector.
@@ -565,7 +565,7 @@ declare namespace LookoutMetrics {
      */
     MetricList: MetricList;
     /**
-     * After an interval ends, the amount of time that the detector waits before importing data.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**
@@ -762,7 +762,7 @@ declare namespace LookoutMetrics {
      */
     LastModificationTime?: Timestamp;
     /**
-     * The offset for the dataset.
+     * The offset in seconds. Only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**
@@ -1445,7 +1445,7 @@ declare namespace LookoutMetrics {
      */
     MetricList?: MetricList;
     /**
-     * After an interval ends, the amount of time that the detector waits before importing data.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**
