@@ -660,7 +660,7 @@ describe('AWS.Request', function() {
             expect(err.stack).to.not.match(/AcceptorStateMachine/gi);
             expect(err.stack).to.match(/theOriginalFunc/gi);
             done();
-          })
+          });
         }
 
         theOriginalFunc();
