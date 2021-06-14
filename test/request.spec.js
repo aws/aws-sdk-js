@@ -83,6 +83,31 @@ describe('AWS.Request', function() {
       req.send();
       expect(req.response.error.message).to.equal('XHR error');
     });
+
+    it('propagates stack trace of original caller to error object', function() {
+      var err;
+      var actualError;
+      helpers.mockHttpResponse(200, {}, '');
+      err = null;
+      actualError = null;
+
+      function theOriginalFunc() {
+        var req;
+        req = service.makeRequest('mockMethod');
+        req.on('extractData', function() {
+          actualError = new Error('error');
+          throw actualError;
+        });
+        return req.send(function(e) {
+          return err = e;
+        });
+      }
+
+      expect(theOriginalFunc).not.to['throw']('error');
+
+      expect(err.stack).to.not.equal(actualError.stack);
+      expect(err.stack).to.match(/theOriginalFunc/gi);
+    });
   });
 
   describe('isPageable', function() {
@@ -507,6 +532,7 @@ describe('AWS.Request', function() {
       return service.mockMethod().eachItem(function(err, data) {
         if (err) {
           delete err.retryDelay;
+          delete err.stack;
         }
         resps.push([err, data]);
         if (err === null && data === null) {
@@ -610,6 +636,34 @@ describe('AWS.Request', function() {
           expect(data.$response.httpResponse.statusCode).to.equal(200);
           expect(JSON.stringify(data)).to.be.ok;
         });
+      });
+
+      it('propagates stack trace of original caller to error object', function(done) {
+        var err;
+        var actualError;
+        AWS.config.setPromisesDependency();
+        helpers.mockHttpResponse(200, {}, '');
+        err = null;
+        actualError = null;
+
+        function theOriginalFunc() {
+          var req;
+          req = service.makeRequest('mockMethod');
+          req.on('extractData', function() {
+            actualError = new Error('error');
+            throw actualError;
+          });
+          return req.promise().catch(function(e) {
+            return err = e;
+          }).finally(() => {
+            expect(err.stack).to.not.equal(actualError.stack);
+            expect(err.stack).to.not.match(/AcceptorStateMachine/gi);
+            expect(err.stack).to.match(/theOriginalFunc/gi);
+            done();
+          })
+        }
+
+        theOriginalFunc();
       });
     }
 
