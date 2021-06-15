@@ -76,11 +76,11 @@ declare class LexModelsV2 extends Service {
    */
   createResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
   /**
-   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can create a resource policy statement that allows cross-account access.
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
    */
   createResourcePolicyStatement(params: LexModelsV2.Types.CreateResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
   /**
-   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can create a resource policy statement that allows cross-account access.
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
    */
   createResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
   /**
@@ -420,11 +420,11 @@ declare class LexModelsV2 extends Service {
    */
   updateBotLocale(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateBotLocaleResponse) => void): Request<LexModelsV2.Types.UpdateBotLocaleResponse, AWSError>;
   /**
-   * Updates the password used to encrypt an export zip archive.
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
    */
   updateExport(params: LexModelsV2.Types.UpdateExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
   /**
-   * Updates the password used to encrypt an export zip archive.
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
    */
   updateExport(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
   /**
@@ -1407,6 +1407,10 @@ declare namespace LexModelsV2 {
      * The identifier of the intent that contains the slot.
      */
     intentId: Id;
+    /**
+     * Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException.  If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface CreateSlotResponse {
     /**
@@ -1453,6 +1457,10 @@ declare namespace LexModelsV2 {
      * The timestamp of the date and time that the slot was created.
      */
     creationDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot returns multiple values in one response.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface CreateSlotTypeRequest {
     /**
@@ -2297,6 +2305,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot accepts multiple values in a single utterance. If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface DescribeSlotTypeRequest {
     /**
@@ -3144,6 +3156,12 @@ declare namespace LexModelsV2 {
   }
   export type MessageGroupsList = MessageGroup[];
   export type MessageVariationsList = Message[];
+  export interface MultipleValuesSetting {
+    /**
+     * Indicates whether a slot can return multiple values. When true, the slot may return more than one value in a response. When false, the slot returns only a single value. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the allowMutlipleValues is not set, the default value is false.
+     */
+    allowMultipleValues?: Boolean;
+  }
   export type Name = string;
   export type NextToken = string;
   export type NumericalBotVersion = string;
@@ -4007,6 +4025,10 @@ declare namespace LexModelsV2 {
      * The identifier of the intent that contains the slot.
      */
     intentId: Id;
+    /**
+     * Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface UpdateSlotResponse {
     /**
@@ -4057,6 +4079,10 @@ declare namespace LexModelsV2 {
      * The timestamp of the date and time that the slot was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot accepts multiple values in one response.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface UpdateSlotTypeRequest {
     /**

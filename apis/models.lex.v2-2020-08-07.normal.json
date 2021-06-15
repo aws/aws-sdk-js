@@ -329,7 +329,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created.</p> <p>You can create a resource policy statement that allows cross-account access.</p>"
+      "documentation": "<p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created.</p> <p>You can't create a resource policy statement that allows cross-account access.</p>"
     },
     "CreateSlot": {
       "name": "CreateSlot",
@@ -1672,7 +1672,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the password used to encrypt an export zip archive.</p>"
+      "documentation": "<p>Updates the password used to protect an export zip archive.</p> <p>The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.</p>"
     },
     "UpdateIntent": {
       "name": "UpdateIntent",
@@ -3368,6 +3368,10 @@
           "documentation": "<p>The identifier of the intent that contains the slot.</p>",
           "location": "uri",
           "locationName": "intentId"
+        },
+        "multipleValuesSetting": {
+          "shape": "MultipleValuesSetting",
+          "documentation": "<p>Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>. </p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
         }
       }
     },
@@ -3417,6 +3421,10 @@
         "creationDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>The timestamp of the date and time that the slot was created.</p>"
+        },
+        "multipleValuesSetting": {
+          "shape": "MultipleValuesSetting",
+          "documentation": "<p>Indicates whether the slot returns multiple values in one response.</p>"
         }
       }
     },
@@ -4606,6 +4614,10 @@
         "lastUpdatedDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp of the date and time that the slot was last updated.</p>"
+        },
+        "multipleValuesSetting": {
+          "shape": "MultipleValuesSetting",
+          "documentation": "<p>Indicates whether the slot accepts multiple values in a single utterance.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
         }
       }
     },
@@ -5966,6 +5978,16 @@
       },
       "max": 2,
       "min": 0
+    },
+    "MultipleValuesSetting": {
+      "type": "structure",
+      "members": {
+        "allowMultipleValues": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether a slot can return multiple values. When <code>true</code>, the slot may return more than one value in a response. When <code>false</code>, the slot returns only a single value.</p> <p>Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>allowMutlipleValues</code> is not set, the default value is <code>false</code>.</p>"
+        }
+      },
+      "documentation": "<p>Indicates whether a slot can return multiple values.</p>"
     },
     "Name": {
       "type": "string",
@@ -7438,6 +7460,10 @@
           "documentation": "<p>The identifier of the intent that contains the slot.</p>",
           "location": "uri",
           "locationName": "intentId"
+        },
+        "multipleValuesSetting": {
+          "shape": "MultipleValuesSetting",
+          "documentation": "<p>Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
         }
       }
     },
@@ -7491,6 +7517,10 @@
         "lastUpdatedDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>The timestamp of the date and time that the slot was last updated.</p>"
+        },
+        "multipleValuesSetting": {
+          "shape": "MultipleValuesSetting",
+          "documentation": "<p>Indicates whether the slot accepts multiple values in one response.</p>"
         }
       }
     },

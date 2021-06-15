@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.928.0-->
+<!--LATEST=2.929.0-->
 <!--ENTRYINSERT-->
+
+## 2.929.0
+* feature: Connect: This release adds new sets of APIs: AssociateBot, DisassociateBot, and ListBots. You can use it to programmatically add an Amazon Lex bot or Amazon Lex V2 bot on the specified Amazon Connect instance
+* feature: EC2: EC2 M5n, M5dn, R5n, R5dn metal instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency
+* feature: LexModelsV2: This release adds support for Multi Valued slots in Amazon Lex V2 APIs for model building
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: RedshiftData: Redshift Data API service now supports SQL parameterization.
 
 ## 2.928.0
 * feature: GreengrassV2: We have verified the APIs being released here and are ready to release
