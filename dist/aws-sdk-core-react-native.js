@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.929.0',
+	  VERSION: '2.930.0',
 
 	  /**
 	   * @api private
@@ -3625,6 +3625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      (operation.endpointdiscovery.required ? 'REQUIRED' : 'OPTIONAL') :
 	    'NULL'
 	  );
+	  property(this, 'httpChecksumRequired', operation.httpChecksumRequired, false);
 
 	  memoizedProperty(this, 'input', function() {
 	    if (!operation.input) {
@@ -6621,6 +6622,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var rules = req.service.api.operations[req.operation].input;
 	      var validation = req.service.config.paramValidation;
 	      new AWS.ParamValidator(validation).validate(rules, req.params);
+	    });
+
+	    add('COMPUTE_CHECKSUM', 'afterBuild', function COMPUTE_CHECKSUM(req) {
+	      if (!req.service.api.operations) {
+	        return;
+	      }
+	      var operation = req.service.api.operations[req.operation];
+	      if (!operation) {
+	        return;
+	      }
+	      var body = req.httpRequest.body;
+	      var isNonStreamingPayload = body && (AWS.util.Buffer.isBuffer(body) || typeof body === 'string');
+	      var headers = req.httpRequest.headers;
+	      if (
+	        operation.httpChecksumRequired &&
+	        req.service.config.computeChecksums &&
+	        isNonStreamingPayload &&
+	        req.service.getSignerClass(req) === AWS.Signers.V4 &&
+	        !headers['Content-MD5']
+	      ) {
+	        var md5 = AWS.util.crypto.md5(body, 'base64');
+	        headers['Content-MD5'] = md5;
+	      }
 	    });
 
 	    addAsync('COMPUTE_SHA256', 'afterBuild', function COMPUTE_SHA256(req, done) {

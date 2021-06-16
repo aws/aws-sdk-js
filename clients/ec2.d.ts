@@ -61,19 +61,19 @@ declare class EC2 extends Service {
    */
   acceptVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
-   * Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS. It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+   * Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through Amazon Web Services. It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
    */
   advertiseByoipCidr(params: EC2.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
   /**
-   * Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS. It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
+   * Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP). You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through Amazon Web Services. It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of BGP propagation delays. To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
    */
   advertiseByoipCidr(callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
+   * Allocates an Elastic IP address to your account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
+   * Allocates an Elastic IP address to your account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -180,6 +180,14 @@ declare class EC2 extends Service {
    * Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
    */
   associateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
+   */
+  associateTrunkInterface(params: EC2.Types.AssociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
+  /**
+   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
+   */
+  associateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
   /**
    * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). The IPv6 CIDR block size is fixed at /56. You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see VPC and Subnet Sizing in the Amazon Virtual Private Cloud User Guide.
    */
@@ -565,11 +573,11 @@ declare class EC2 extends Service {
    */
   createNetworkInterface(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfaceResult) => void): Request<EC2.Types.CreateNetworkInterfaceResult, AWSError>;
   /**
-   * Grants an AWS-authorized account permission to attach the specified network interface to an instance in their account. You can grant permission to a single AWS account only, and only one account at a time.
+   * Grants an Amazon Web Services-authorized account permission to attach the specified network interface to an instance in their account. You can grant permission to a single account only, and only one account at a time.
    */
   createNetworkInterfacePermission(params: EC2.Types.CreateNetworkInterfacePermissionRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfacePermissionResult) => void): Request<EC2.Types.CreateNetworkInterfacePermissionResult, AWSError>;
   /**
-   * Grants an AWS-authorized account permission to attach the specified network interface to an instance in their account. You can grant permission to a single AWS account only, and only one account at a time.
+   * Grants an Amazon Web Services-authorized account permission to attach the specified network interface to an instance in their account. You can grant permission to a single account only, and only one account at a time.
    */
   createNetworkInterfacePermission(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfacePermissionResult) => void): Request<EC2.Types.CreateNetworkInterfacePermissionResult, AWSError>;
   /**
@@ -1285,11 +1293,11 @@ declare class EC2 extends Service {
    */
   deleteVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
+   * Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
    */
   deprovisionByoipCidr(params: EC2.Types.DeprovisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
   /**
-   * Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
+   * Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
   /**
@@ -1789,11 +1797,11 @@ declare class EC2 extends Service {
    */
   describeLocalGateways(callback?: (err: AWSError, data: EC2.Types.DescribeLocalGatewaysResult) => void): Request<EC2.Types.DescribeLocalGatewaysResult, AWSError>;
   /**
-   * Describes your managed prefix lists and any AWS-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
+   * Describes your managed prefix lists and any Amazon Web Services-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
    */
   describeManagedPrefixLists(params: EC2.Types.DescribeManagedPrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
   /**
-   * Describes your managed prefix lists and any AWS-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
+   * Describes your managed prefix lists and any Amazon Web Services-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
    */
   describeManagedPrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
   /**
@@ -1869,11 +1877,11 @@ declare class EC2 extends Service {
    */
   describePlacementGroups(callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
+   * Describes available Amazon Web Services services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
    */
   describePrefixLists(params: EC2.Types.DescribePrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
+   * Describes available Amazon Web Services services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
    */
   describePrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
@@ -2164,6 +2172,14 @@ declare class EC2 extends Service {
    * Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.
    */
   describeTransitGateways(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewaysResult) => void): Request<EC2.Types.DescribeTransitGatewaysResult, AWSError>;
+  /**
+   * Describes one or more network interface trunk associations.
+   */
+  describeTrunkInterfaceAssociations(params: EC2.Types.DescribeTrunkInterfaceAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
+  /**
+   * Describes one or more network interface trunk associations.
+   */
+  describeTrunkInterfaceAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
    * Describes the specified attribute of the specified volume. You can specify only one attribute at a time. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -2468,6 +2484,14 @@ declare class EC2 extends Service {
    * Disassociates a resource attachment from a transit gateway route table.
    */
   disassociateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Removes an association between a branch network interface with a trunk network interface.
+   */
+  disassociateTrunkInterface(params: EC2.Types.DisassociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
+  /**
+   * Removes an association between a branch network interface with a trunk network interface.
+   */
+  disassociateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
   /**
    * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
@@ -3181,11 +3205,11 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
-   * Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
+   * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(params: EC2.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
   /**
-   * Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
+   * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
   /**
@@ -3293,11 +3317,11 @@ declare class EC2 extends Service {
    */
   rejectVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.RejectVpcPeeringConnectionResult) => void): Request<EC2.Types.RejectVpcPeeringConnectionResult, AWSError>;
   /**
-   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
+   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(params: EC2.Types.ReleaseAddressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
+   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3613,11 +3637,11 @@ declare class EC2 extends Service {
    */
   updateSecurityGroupRuleDescriptionsIngress(callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsIngressResult, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.
    */
   withdrawByoipCidr(params: EC2.Types.WithdrawByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.WithdrawByoipCidrResult) => void): Request<EC2.Types.WithdrawByoipCidrResult, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.
    */
   withdrawByoipCidr(callback?: (err: AWSError, data: EC2.Types.WithdrawByoipCidrResult) => void): Request<EC2.Types.WithdrawByoipCidrResult, AWSError>;
   /**
@@ -4064,7 +4088,7 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * The ID of the AWS account that owns the network interface.
+     * The ID of the account that owns the network interface.
      */
     NetworkInterfaceOwnerId?: String;
     /**
@@ -4171,7 +4195,7 @@ declare namespace EC2 {
      */
     PublicIp?: String;
     /**
-     * [EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
+     * [EC2-VPC] The ID that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
      */
     AllocationId?: String;
     /**
@@ -4724,6 +4748,42 @@ declare namespace EC2 {
      * The ID of the association.
      */
     Association?: TransitGatewayAssociation;
+  }
+  export interface AssociateTrunkInterfaceRequest {
+    /**
+     * The ID of the branch network interface.
+     */
+    BranchInterfaceId: NetworkInterfaceId;
+    /**
+     * The ID of the trunk network interface.
+     */
+    TrunkInterfaceId: NetworkInterfaceId;
+    /**
+     * The ID of the VLAN. This applies to the VLAN protocol.
+     */
+    VlanId?: Integer;
+    /**
+     * The application key. This applies to the GRE protocol.
+     */
+    GreKey?: Integer;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateTrunkInterfaceResult {
+    /**
+     * Information about the association between the trunk network interface and branch network interface.
+     */
+    InterfaceAssociation?: TrunkInterfaceAssociation;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
   }
   export interface AssociateVpcCidrBlockRequest {
     /**
@@ -7296,11 +7356,11 @@ declare namespace EC2 {
      */
     NetworkInterfaceId: NetworkInterfaceId;
     /**
-     * The AWS account ID.
+     * The account ID.
      */
     AwsAccountId?: String;
     /**
-     * The AWS service. Currently not supported.
+     * The Amazon Web Service. Currently not supported.
      */
     AwsService?: String;
     /**
@@ -7352,7 +7412,7 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. To create a trunk network interface, specify efa. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
      */
     InterfaceType?: NetworkInterfaceCreationType;
     /**
@@ -9681,7 +9741,7 @@ declare namespace EC2 {
   }
   export interface DescribeAddressesRequest {
     /**
-     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where AWS advertises IP addresses.     network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address, or the carrier IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where Amazon Web Services advertises IP addresses.     network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address, or the carrier IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -11670,7 +11730,7 @@ declare namespace EC2 {
      */
     NetworkInterfacePermissionIds?: NetworkInterfacePermissionIdList;
     /**
-     * One or more filters.    network-interface-permission.network-interface-permission-id - The ID of the permission.    network-interface-permission.network-interface-id - The ID of the network interface.    network-interface-permission.aws-account-id - The AWS account ID.    network-interface-permission.aws-service - The AWS service.    network-interface-permission.permission - The type of permission (INSTANCE-ATTACH | EIP-ASSOCIATE).  
+     * One or more filters.    network-interface-permission.network-interface-permission-id - The ID of the permission.    network-interface-permission.network-interface-id - The ID of the network interface.    network-interface-permission.aws-account-id - The account ID.    network-interface-permission.aws-service - The Amazon Web Service.    network-interface-permission.permission - The type of permission (INSTANCE-ATTACH | EIP-ASSOCIATE).  
      */
     Filters?: FilterList;
     /**
@@ -11695,7 +11755,7 @@ declare namespace EC2 {
   export type DescribeNetworkInterfacesMaxResults = number;
   export interface DescribeNetworkInterfacesRequest {
     /**
-     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or AWS account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
     /**
@@ -12952,6 +13012,39 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeTrunkInterfaceAssociationsMaxResults = number;
+  export interface DescribeTrunkInterfaceAssociationsRequest {
+    /**
+     * The IDs of the associations.
+     */
+    AssociationIds?: TrunkInterfaceAssociationIdList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    gre-key - The ID of a trunk interface association.    interface-protocol - The interface protocol. Valid values are VLAN and GRE.  
+     */
+    Filters?: FilterList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeTrunkInterfaceAssociationsMaxResults;
+  }
+  export interface DescribeTrunkInterfaceAssociationsResult {
+    /**
+     * Information about the trunk associations.
+     */
+    InterfaceAssociations?: TrunkInterfaceAssociationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeVolumeAttributeRequest {
     /**
      * The attribute of the volume. This parameter is required.
@@ -13922,6 +14015,30 @@ declare namespace EC2 {
      * Information about the association.
      */
     Association?: TransitGatewayAssociation;
+  }
+  export interface DisassociateTrunkInterfaceRequest {
+    /**
+     * The ID ofthe association
+     */
+    AssociationId: TrunkInterfaceAssociationId;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateTrunkInterfaceResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
   }
   export interface DisassociateVpcCidrBlockRequest {
     /**
@@ -17665,7 +17782,7 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * The ID of the AWS account that created the network interface.
+     * The ID of the account that created the network interface.
      */
     OwnerId?: String;
     /**
@@ -17697,7 +17814,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * Describes the type of network interface. Valid values: interface | efa 
+     * Describes the type of network interface. Valid values: interface | efa | trunk 
      */
     InterfaceType?: String;
   }
@@ -17796,11 +17913,11 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * Indicates whether to assign a carrier IP address to the network interface. You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.
+     * Indicates whether to assign a carrier IP address to the network interface. You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
-     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter. Valid values: interface | efa 
+     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. Valid values: interface | efa 
      */
     InterfaceType?: String;
     /**
@@ -18109,6 +18226,7 @@ declare namespace EC2 {
     AthenaIntegrations?: AthenaIntegrationsSet;
   }
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
+  export type InterfaceProtocolType = "VLAN"|"GRE"|string;
   export interface InternetGateway {
     /**
      * Any VPCs attached to the internet gateway.
@@ -21242,7 +21360,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * The AWS account ID of the owner of the network interface.
+     * The account ID of the owner of the network interface.
      */
     OwnerId?: String;
     /**
@@ -21258,11 +21376,11 @@ declare namespace EC2 {
      */
     PrivateIpAddresses?: NetworkInterfacePrivateIpAddressList;
     /**
-     * The alias or AWS account ID of the principal or service that created the network interface.
+     * The alias or account ID of the principal or service that created the network interface.
      */
     RequesterId?: String;
     /**
-     * Indicates whether the network interface is being managed by AWS.
+     * Indicates whether the network interface is being managed by Amazon Web Services.
      */
     RequesterManaged?: Boolean;
     /**
@@ -21342,7 +21460,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
     /**
-     * The AWS account ID of the owner of the instance.
+     * The account ID of the owner of the instance.
      */
     InstanceOwnerId?: String;
     /**
@@ -21362,7 +21480,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfaceAttachmentId = string;
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
-  export type NetworkInterfaceCreationType = "efa"|string;
+  export type NetworkInterfaceCreationType = "efa"|"branch"|"trunk"|string;
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIdList = NetworkInterfaceId[];
   export interface NetworkInterfaceIpv6Address {
@@ -21383,11 +21501,11 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * The AWS account ID.
+     * The account ID.
      */
     AwsAccountId?: String;
     /**
-     * The AWS service.
+     * The Amazon Web Service.
      */
     AwsService?: String;
     /**
@@ -21433,7 +21551,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
-  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|string;
+  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|string;
   export type NetworkPerformance = string;
   export interface NewDhcpConfiguration {
     Key?: String;
@@ -21810,7 +21928,7 @@ declare namespace EC2 {
   export type PortRangeList = PortRange[];
   export interface PrefixList {
     /**
-     * The IP address range of the AWS service.
+     * The IP address range of the Amazon Web Service.
      */
     Cidrs?: ValueStringList;
     /**
@@ -22082,7 +22200,7 @@ declare namespace EC2 {
      */
     TotalAvailableAddressCount?: Integer;
     /**
-     * The name of the location from which the address pool is advertised. A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises public IP addresses.
+     * The name of the location from which the address pool is advertised. A network border group is a unique set of Availability Zones or Local Zones from where Amazon Web Services advertises public IP addresses.
      */
     NetworkBorderGroup?: String;
     /**
@@ -27085,6 +27203,39 @@ declare namespace EC2 {
     ApplianceModeSupport?: ApplianceModeSupportValue;
   }
   export type TransportProtocol = "tcp"|"udp"|string;
+  export interface TrunkInterfaceAssociation {
+    /**
+     * The ID of the association.
+     */
+    AssociationId?: TrunkInterfaceAssociationId;
+    /**
+     * The ID of the branch network interface.
+     */
+    BranchInterfaceId?: String;
+    /**
+     * The ID of the trunk network interface.
+     */
+    TrunkInterfaceId?: String;
+    /**
+     * The interface protocol. Valid values are VLAN and GRE.
+     */
+    InterfaceProtocol?: InterfaceProtocolType;
+    /**
+     * The ID of the VLAN when you use the VLAN protocol.
+     */
+    VlanId?: Integer;
+    /**
+     * The application key when you use the GRE protocol.
+     */
+    GreKey?: Integer;
+    /**
+     *  The tags.
+     */
+    Tags?: TagList;
+  }
+  export type TrunkInterfaceAssociationId = string;
+  export type TrunkInterfaceAssociationIdList = TrunkInterfaceAssociationId[];
+  export type TrunkInterfaceAssociationList = TrunkInterfaceAssociation[];
   export type TunnelInsideIpVersion = "ipv4"|"ipv6"|string;
   export interface TunnelOption {
     /**

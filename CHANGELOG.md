@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.929.0-->
+<!--LATEST=2.930.0-->
 <!--ENTRYINSERT-->
+
+## 2.930.0
+* feature: EC2: This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+* feature: KMS: Adds support for multi-Region keys
+* feature: MediaTailor: Adds AWS Secrets Manager Access Token Authentication for Source Locations
+* feature: Model: Add support for httpChecksumRequired trait. SDK will insert Content-MD5 header value for operations with this trait. To disable the behavior, users can unset computeChecksums config
+* feature: RDS: This release enables fast cloning in Aurora Serverless. You can now clone between Aurora Serverless clusters and Aurora Provisioned clusters.
 
 ## 2.929.0
 * feature: Connect: This release adds new sets of APIs: AssociateBot, DisassociateBot, and ListBots. You can use it to programmatically add an Amazon Lex bot or Amazon Lex V2 bot on the specified Amazon Connect instance

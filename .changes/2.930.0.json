@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature."
+    },
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "Adds support for multi-Region keys"
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "Adds AWS Secrets Manager Access Token Authentication for Source Locations"
+    },
+    {
+        "type": "feature",
+        "category": "Model",
+        "description": "Add support for httpChecksumRequired trait. SDK will insert Content-MD5 header value for operations with this trait. To disable the behavior, users can unset computeChecksums config"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release enables fast cloning in Aurora Serverless. You can now clone between Aurora Serverless clusters and Aurora Provisioned clusters."
+    }
+]

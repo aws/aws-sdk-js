@@ -108,7 +108,7 @@
       "output": {
         "shape": "AdvertiseByoipCidrResult"
       },
-      "documentation": "<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
+      "documentation": "<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through Amazon Web Services.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
     },
     "AllocateAddress": {
       "name": "AllocateAddress",
@@ -122,7 +122,7 @@
       "output": {
         "shape": "AllocateAddressResult"
       },
-      "documentation": "<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account.</p> <p>You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). </p>"
+      "documentation": "<p>Allocates an Elastic IP address to your account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different account.</p> <p>You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). </p>"
     },
     "AllocateHosts": {
       "name": "AllocateHosts",
@@ -302,6 +302,20 @@
         "shape": "AssociateTransitGatewayRouteTableResult"
       },
       "documentation": "<p>Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.</p>"
+    },
+    "AssociateTrunkInterface": {
+      "name": "AssociateTrunkInterface",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateTrunkInterfaceRequest"
+      },
+      "output": {
+        "shape": "AssociateTrunkInterfaceResult"
+      },
+      "documentation": "<p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\"> Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AssociateVpcCidrBlock": {
       "name": "AssociateVpcCidrBlock",
@@ -969,7 +983,7 @@
       "output": {
         "shape": "CreateNetworkInterfacePermissionResult"
       },
-      "documentation": "<p>Grants an AWS-authorized account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single AWS account only, and only one account at a time.</p>"
+      "documentation": "<p>Grants an Amazon Web Services-authorized account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single account only, and only one account at a time.</p>"
     },
     "CreatePlacementGroup": {
       "name": "CreatePlacementGroup",
@@ -2163,7 +2177,7 @@
       "output": {
         "shape": "DeprovisionByoipCidrResult"
       },
-      "documentation": "<p>Releases the specified address range that you provisioned for use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>"
+      "documentation": "<p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>"
     },
     "DeregisterImage": {
       "name": "DeregisterImage",
@@ -3042,7 +3056,7 @@
       "output": {
         "shape": "DescribeManagedPrefixListsResult"
       },
-      "documentation": "<p>Describes your managed prefix lists and any AWS-managed prefix lists.</p> <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>"
+      "documentation": "<p>Describes your managed prefix lists and any Amazon Web Services-managed prefix lists.</p> <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>"
     },
     "DescribeMovingAddresses": {
       "name": "DescribeMovingAddresses",
@@ -3182,7 +3196,7 @@
       "output": {
         "shape": "DescribePrefixListsResult"
       },
-      "documentation": "<p>Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service.</p> <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>"
+      "documentation": "<p>Describes available Amazon Web Services services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service.</p> <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>"
     },
     "DescribePrincipalIdFormat": {
       "name": "DescribePrincipalIdFormat",
@@ -3687,6 +3701,20 @@
         "shape": "DescribeTransitGatewaysResult"
       },
       "documentation": "<p>Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.</p>"
+    },
+    "DescribeTrunkInterfaceAssociations": {
+      "name": "DescribeTrunkInterfaceAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTrunkInterfaceAssociationsRequest"
+      },
+      "output": {
+        "shape": "DescribeTrunkInterfaceAssociationsResult"
+      },
+      "documentation": "<p>Describes one or more network interface trunk associations.</p>"
     },
     "DescribeVolumeAttribute": {
       "name": "DescribeVolumeAttribute",
@@ -4201,6 +4229,20 @@
         "shape": "DisassociateTransitGatewayRouteTableResult"
       },
       "documentation": "<p>Disassociates a resource attachment from a transit gateway route table.</p>"
+    },
+    "DisassociateTrunkInterface": {
+      "name": "DisassociateTrunkInterface",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateTrunkInterfaceRequest"
+      },
+      "output": {
+        "shape": "DisassociateTrunkInterfaceResult"
+      },
+      "documentation": "<p>Removes an association between a branch network interface with a trunk network interface.</p>"
     },
     "DisassociateVpcCidrBlock": {
       "name": "DisassociateVpcCidrBlock",
@@ -5427,7 +5469,7 @@
       "output": {
         "shape": "ProvisionByoipCidrResult"
       },
-      "documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
+      "documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
     },
     "PurchaseHostReservation": {
       "name": "PurchaseHostReservation",
@@ -5617,7 +5659,7 @@
       "input": {
         "shape": "ReleaseAddressRequest"
       },
-      "documentation": "<p>Releases the specified Elastic IP address.</p> <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use <a>DisassociateAddress</a>.</p> <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p> <p>After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an <code>AuthFailure</code> error if the address is already allocated to another AWS account.</p> <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see <a>AllocateAddress</a>.</p>"
+      "documentation": "<p>Releases the specified Elastic IP address.</p> <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use <a>DisassociateAddress</a>.</p> <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p> <p>After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an <code>AuthFailure</code> error if the address is already allocated to another account.</p> <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see <a>AllocateAddress</a>.</p>"
     },
     "ReleaseHosts": {
       "name": "ReleaseHosts",
@@ -6150,7 +6192,7 @@
       "output": {
         "shape": "WithdrawByoipCidrResult"
       },
-      "documentation": "<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>"
+      "documentation": "<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.</p>"
     }
   },
   "shapes": {
@@ -6484,7 +6526,7 @@
         },
         "NetworkInterfaceOwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that owns the network interface.</p>",
+          "documentation": "<p>The ID of the account that owns the network interface.</p>",
           "locationName": "networkInterfaceOwnerId"
         },
         "PrivateIpAddress": {
@@ -6654,7 +6696,7 @@
         },
         "AllocationId": {
           "shape": "String",
-          "documentation": "<p>[EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.</p>",
+          "documentation": "<p>[EC2-VPC] The ID that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.</p>",
           "locationName": "allocationId"
         },
         "PublicIpv4Pool": {
@@ -7552,6 +7594,55 @@
           "shape": "TransitGatewayAssociation",
           "documentation": "<p>The ID of the association.</p>",
           "locationName": "association"
+        }
+      }
+    },
+    "AssociateTrunkInterfaceRequest": {
+      "type": "structure",
+      "required": [
+        "BranchInterfaceId",
+        "TrunkInterfaceId"
+      ],
+      "members": {
+        "BranchInterfaceId": {
+          "shape": "NetworkInterfaceId",
+          "documentation": "<p>The ID of the branch network interface.</p>"
+        },
+        "TrunkInterfaceId": {
+          "shape": "NetworkInterfaceId",
+          "documentation": "<p>The ID of the trunk network interface.</p>"
+        },
+        "VlanId": {
+          "shape": "Integer",
+          "documentation": "<p>The ID of the VLAN. This applies to the VLAN protocol.</p>"
+        },
+        "GreKey": {
+          "shape": "Integer",
+          "documentation": "<p>The application key. This applies to the GRE protocol.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "AssociateTrunkInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "InterfaceAssociation": {
+          "shape": "TrunkInterfaceAssociation",
+          "documentation": "<p>Information about the association between the trunk network interface and branch network interface.</p>",
+          "locationName": "interfaceAssociation"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
         }
       }
     },
@@ -8559,7 +8650,7 @@
           "locationName": "state"
         }
       },
-      "documentation": "<p>Information about an address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p>"
+      "documentation": "<p>Information about an address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP).</p>"
     },
     "ByoipCidrSet": {
       "type": "list",
@@ -9279,7 +9370,7 @@
           "documentation": "<p>The signed authorization message for the prefix and account.</p>"
         }
       },
-      "documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip\">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific account using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip\">Configuring your BYOIP address range</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CidrBlock": {
       "type": "structure",
@@ -11745,11 +11836,11 @@
         },
         "AwsAccountId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>"
+          "documentation": "<p>The account ID.</p>"
         },
         "AwsService": {
           "shape": "String",
-          "documentation": "<p>The AWS service. Currently not supported.</p>"
+          "documentation": "<p>The Amazon Web Service. Currently not supported.</p>"
         },
         "Permission": {
           "shape": "InterfacePermissionType",
@@ -11821,7 +11912,7 @@
         },
         "InterfaceType": {
           "shape": "NetworkInterfaceCreationType",
-          "documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\"> Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\"> Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. To create a trunk network interface, specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\"> Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "SubnetId": {
           "shape": "SubnetId",
@@ -15382,7 +15473,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>allocation-id</code> - [EC2-VPC] The allocation ID for the address.</p> </li> <li> <p> <code>association-id</code> - [EC2-VPC] The association ID for the address.</p> </li> <li> <p> <code>domain</code> - Indicates whether the address is for use in EC2-Classic (<code>standard</code>) or in a VPC (<code>vpc</code>).</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance the address is associated with, if any.</p> </li> <li> <p> <code>network-border-group</code> - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where AWS advertises IP addresses. </p> </li> <li> <p> <code>network-interface-id</code> - [EC2-VPC] The ID of the network interface that the address is associated with, if any.</p> </li> <li> <p> <code>network-interface-owner-id</code> - The AWS account ID of the owner.</p> </li> <li> <p> <code>private-ip-address</code> - [EC2-VPC] The private IP address associated with the Elastic IP address.</p> </li> <li> <p> <code>public-ip</code> - The Elastic IP address, or the carrier IP address.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>allocation-id</code> - [EC2-VPC] The allocation ID for the address.</p> </li> <li> <p> <code>association-id</code> - [EC2-VPC] The association ID for the address.</p> </li> <li> <p> <code>domain</code> - Indicates whether the address is for use in EC2-Classic (<code>standard</code>) or in a VPC (<code>vpc</code>).</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance the address is associated with, if any.</p> </li> <li> <p> <code>network-border-group</code> - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where Amazon Web Services advertises IP addresses. </p> </li> <li> <p> <code>network-interface-id</code> - [EC2-VPC] The ID of the network interface that the address is associated with, if any.</p> </li> <li> <p> <code>network-interface-owner-id</code> - The account ID of the owner.</p> </li> <li> <p> <code>private-ip-address</code> - [EC2-VPC] The private IP address associated with the Elastic IP address.</p> </li> <li> <p> <code>public-ip</code> - The Elastic IP address, or the carrier IP address.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "PublicIps": {
@@ -18184,7 +18275,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>network-interface-permission.network-interface-permission-id</code> - The ID of the permission.</p> </li> <li> <p> <code>network-interface-permission.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface-permission.aws-account-id</code> - The AWS account ID.</p> </li> <li> <p> <code>network-interface-permission.aws-service</code> - The AWS service.</p> </li> <li> <p> <code>network-interface-permission.permission</code> - The type of permission (<code>INSTANCE-ATTACH</code> | <code>EIP-ASSOCIATE</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>network-interface-permission.network-interface-permission-id</code> - The ID of the permission.</p> </li> <li> <p> <code>network-interface-permission.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface-permission.aws-account-id</code> - The account ID.</p> </li> <li> <p> <code>network-interface-permission.aws-service</code> - The Amazon Web Service.</p> </li> <li> <p> <code>network-interface-permission.permission</code> - The type of permission (<code>INSTANCE-ATTACH</code> | <code>EIP-ASSOCIATE</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "NextToken": {
@@ -18224,7 +18315,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The alias or AWS account ID of the principal or service that created the network interface.</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The alias or account ID of the principal or service that created the network interface.</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>",
           "locationName": "filter"
         },
         "DryRun": {
@@ -19981,6 +20072,53 @@
         }
       }
     },
+    "DescribeTrunkInterfaceAssociationsMaxResults": {
+      "type": "integer",
+      "max": 255,
+      "min": 5
+    },
+    "DescribeTrunkInterfaceAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "AssociationIds": {
+          "shape": "TrunkInterfaceAssociationIdList",
+          "documentation": "<p>The IDs of the associations.</p>",
+          "locationName": "AssociationId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>gre-key</code> - The ID of a trunk interface association.</p> </li> <li> <p> <code>interface-protocol</code> - The interface protocol. Valid values are <code>VLAN</code> and <code>GRE</code>.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeTrunkInterfaceAssociationsMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        }
+      }
+    },
+    "DescribeTrunkInterfaceAssociationsResult": {
+      "type": "structure",
+      "members": {
+        "InterfaceAssociations": {
+          "shape": "TrunkInterfaceAssociationList",
+          "documentation": "<p>Information about the trunk associations.</p>",
+          "locationName": "interfaceAssociationSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeVolumeAttributeRequest": {
       "type": "structure",
       "required": [
@@ -21461,6 +21599,42 @@
           "shape": "TransitGatewayAssociation",
           "documentation": "<p>Information about the association.</p>",
           "locationName": "association"
+        }
+      }
+    },
+    "DisassociateTrunkInterfaceRequest": {
+      "type": "structure",
+      "required": [
+        "AssociationId"
+      ],
+      "members": {
+        "AssociationId": {
+          "shape": "TrunkInterfaceAssociationId",
+          "documentation": "<p>The ID ofthe association</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DisassociateTrunkInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
         }
       }
     },
@@ -27563,7 +27737,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that created the network interface.</p>",
+          "documentation": "<p>The ID of the account that created the network interface.</p>",
           "locationName": "ownerId"
         },
         "PrivateDnsName": {
@@ -27603,7 +27777,7 @@
         },
         "InterfaceType": {
           "shape": "String",
-          "documentation": "<p>Describes the type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>",
+          "documentation": "<p>Describes the type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>",
           "locationName": "interfaceType"
         }
       },
@@ -27745,11 +27919,11 @@
         },
         "AssociateCarrierIpAddress": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether to assign a carrier IP address to the network interface.</p> <p>You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.</p>"
+          "documentation": "<p>Indicates whether to assign a carrier IP address to the network interface.</p> <p>You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.</p>"
         },
         "InterfaceType": {
           "shape": "String",
-          "documentation": "<p>The type of network interface.</p> <p>To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
+          "documentation": "<p>The type of network interface.</p> <p>To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
         },
         "NetworkCardIndex": {
           "shape": "Integer",
@@ -28676,6 +28850,13 @@
       "enum": [
         "INSTANCE-ATTACH",
         "EIP-ASSOCIATE"
+      ]
+    },
+    "InterfaceProtocolType": {
+      "type": "string",
+      "enum": [
+        "VLAN",
+        "GRE"
       ]
     },
     "InternetGateway": {
@@ -33580,7 +33761,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the network interface.</p>",
+          "documentation": "<p>The account ID of the owner of the network interface.</p>",
           "locationName": "ownerId"
         },
         "PrivateDnsName": {
@@ -33600,12 +33781,12 @@
         },
         "RequesterId": {
           "shape": "String",
-          "documentation": "<p>The alias or AWS account ID of the principal or service that created the network interface.</p>",
+          "documentation": "<p>The alias or account ID of the principal or service that created the network interface.</p>",
           "locationName": "requesterId"
         },
         "RequesterManaged": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the network interface is being managed by AWS.</p>",
+          "documentation": "<p>Indicates whether the network interface is being managed by Amazon Web Services.</p>",
           "locationName": "requesterManaged"
         },
         "SourceDestCheck": {
@@ -33712,7 +33893,7 @@
         },
         "InstanceOwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the instance.</p>",
+          "documentation": "<p>The account ID of the owner of the instance.</p>",
           "locationName": "instanceOwnerId"
         },
         "Status": {
@@ -33754,7 +33935,9 @@
     "NetworkInterfaceCreationType": {
       "type": "string",
       "enum": [
-        "efa"
+        "efa",
+        "branch",
+        "trunk"
       ]
     },
     "NetworkInterfaceId": {
@@ -33807,12 +33990,12 @@
         },
         "AwsAccountId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>",
+          "documentation": "<p>The account ID.</p>",
           "locationName": "awsAccountId"
         },
         "AwsService": {
           "shape": "String",
-          "documentation": "<p>The AWS service.</p>",
+          "documentation": "<p>The Amazon Web Service.</p>",
           "locationName": "awsService"
         },
         "Permission": {
@@ -33917,7 +34100,8 @@
       "enum": [
         "interface",
         "natGateway",
-        "efa"
+        "efa",
+        "trunk"
       ]
     },
     "NetworkPerformance": {
@@ -34695,7 +34879,7 @@
       "members": {
         "Cidrs": {
           "shape": "ValueStringList",
-          "documentation": "<p>The IP address range of the AWS service.</p>",
+          "documentation": "<p>The IP address range of the Amazon Web Service.</p>",
           "locationName": "cidrSet"
         },
         "PrefixListId": {
@@ -34709,7 +34893,7 @@
           "locationName": "prefixListName"
         }
       },
-      "documentation": "<p>Describes prefixes for AWS services.</p>"
+      "documentation": "<p>Describes prefixes for Amazon Web Services services.</p>"
     },
     "PrefixListAssociation": {
       "type": "structure",
@@ -35253,7 +35437,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p>The name of the location from which the address pool is advertised. A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises public IP addresses.</p>",
+          "documentation": "<p>The name of the location from which the address pool is advertised. A network border group is a unique set of Availability Zones or Local Zones from where Amazon Web Services advertises public IP addresses.</p>",
           "locationName": "networkBorderGroup"
         },
         "Tags": {
@@ -43355,6 +43539,64 @@
         "tcp",
         "udp"
       ]
+    },
+    "TrunkInterfaceAssociation": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "TrunkInterfaceAssociationId",
+          "documentation": "<p>The ID of the association.</p>",
+          "locationName": "associationId"
+        },
+        "BranchInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the branch network interface.</p>",
+          "locationName": "branchInterfaceId"
+        },
+        "TrunkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the trunk network interface.</p>",
+          "locationName": "trunkInterfaceId"
+        },
+        "InterfaceProtocol": {
+          "shape": "InterfaceProtocolType",
+          "documentation": "<p>The interface protocol. Valid values are <code>VLAN</code> and <code>GRE</code>.</p>",
+          "locationName": "interfaceProtocol"
+        },
+        "VlanId": {
+          "shape": "Integer",
+          "documentation": "<p>The ID of the VLAN when you use the VLAN protocol.</p>",
+          "locationName": "vlanId"
+        },
+        "GreKey": {
+          "shape": "Integer",
+          "documentation": "<p>The application key when you use the GRE protocol.</p>",
+          "locationName": "greKey"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p> The tags.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Information about an association between a branch network interface with a trunk network interface.</p>"
+    },
+    "TrunkInterfaceAssociationId": {
+      "type": "string"
+    },
+    "TrunkInterfaceAssociationIdList": {
+      "type": "list",
+      "member": {
+        "shape": "TrunkInterfaceAssociationId",
+        "locationName": "item"
+      }
+    },
+    "TrunkInterfaceAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "TrunkInterfaceAssociation",
+        "locationName": "item"
+      }
     },
     "TunnelInsideIpVersion": {
       "type": "string",
