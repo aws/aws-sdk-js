@@ -987,7 +987,8 @@
     "name": "IoTWireless"
   },
   "location": {
-    "name": "Location"
+    "name": "Location",
+    "cors": true
   },
   "wellarchitected": {
     "name": "WellArchitected"
