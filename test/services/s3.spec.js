@@ -2532,19 +2532,6 @@ describe('AWS.S3', function() {
     });
   });
 
-  AWS.util.each(AWS.S3.prototype.computableChecksumOperations, function(operation) {
-    describe(operation, function() {
-      it('forces Content-MD5 header parameter', function() {
-        var req = s3[operation]({
-          Bucket: 'bucket',
-          ContentMD5: '000'
-        }).build();
-        var hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
-        expect(req.httpRequest.headers['Content-MD5']).to.equal(hash);
-      });
-    });
-  });
-
   describe('willComputeChecksums', function() {
     var willCompute = function(operation, opts) {
       var compute = opts.computeChecksums;
@@ -2568,86 +2555,6 @@ describe('AWS.S3', function() {
         expect(checksum).to.equal(realChecksum);
       }
     };
-
-    it('computes checksums if the operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: true
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: true
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: true
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: true
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: true
-      });
-    });
-
-    it('computes checksums if computeChecksums is off and operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: false
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: false
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: false
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: false
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: false
-      });
-    });
-
-    it('does not compute checksums if computeChecksums is off', function() {
-      willCompute('putObject', {
-        computeChecksums: false,
-        hash: null
-      });
-    });
-
-    it('does not compute checksums if computeChecksums is on and ContentMD5 is provided', function() {
-      willCompute('putBucketAcl', {
-        computeChecksums: true,
-        hash: '000'
-      });
-    });
-
-    it('computes checksums if computeChecksums is on and ContentMD5 is not provided', function() {
-      willCompute('putBucketAcl', {
-        computeChecksums: true
-      });
-    });
 
     if (AWS.util.isNode()) {
       it('does not compute checksums for Stream objects', function() {

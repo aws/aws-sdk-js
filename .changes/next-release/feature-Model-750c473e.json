@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Model",
+  "description": "Add support for httpChecksumRequired trait. SDK will insert Content-MD5 header value for operations with this trait. To disable the behavior, users can unset computeChecksums config"
+}
