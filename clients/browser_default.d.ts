@@ -85,4 +85,5 @@ export import PersonalizeRuntime = require('./personalizeruntime');
 export import ForecastService = require('./forecastservice');
 export import ForecastQueryService = require('./forecastqueryservice');
 export import KinesisVideoSignalingChannels = require('./kinesisvideosignalingchannels');
+export import Location = require('./location');
 export import LexRuntimeV2 = require('./lexruntimev2');

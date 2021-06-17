@@ -3837,7 +3837,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code> . </p>"
+      "documentation": "<p> Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.</p>"
     },
     "GetVoiceConnectorLoggingConfiguration": {
       "name": "GetVoiceConnectorLoggingConfiguration",
@@ -4707,7 +4707,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . </p>"
+      "documentation": "<p> Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
     "ListPhoneNumberOrders": {
       "name": "ListPhoneNumberOrders",
@@ -5380,7 +5380,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i> . </p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . </p>"
+      "documentation": "<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
     "PutSipMediaApplicationLoggingConfiguration": {
       "name": "PutSipMediaApplicationLoggingConfiguration",
@@ -6785,6 +6785,47 @@
         }
       ],
       "documentation": "<p>Updates the details of the specified SIP media application.</p>"
+    },
+    "UpdateSipMediaApplicationCall": {
+      "name": "UpdateSipMediaApplicationCall",
+      "http": {
+        "method": "POST",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateSipMediaApplicationCallRequest"
+      },
+      "output": {
+        "shape": "UpdateSipMediaApplicationCallResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.</p>"
     },
     "UpdateSipRule": {
       "name": "UpdateSipRule",
@@ -13666,6 +13707,17 @@
       },
       "documentation": "<p>The retention settings that determine how long to retain chat-room messages for an Amazon Chime Enterprise account.</p>"
     },
+    "SMAUpdateCallArgumentsMap": {
+      "type": "map",
+      "key": {
+        "shape": "SensitiveString"
+      },
+      "value": {
+        "shape": "SensitiveString"
+      },
+      "max": 20,
+      "min": 0
+    },
     "SearchAvailablePhoneNumbersRequest": {
       "type": "structure",
       "members": {
@@ -14755,6 +14807,40 @@
         "Room": {
           "shape": "Room",
           "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
+    "UpdateSipMediaApplicationCallRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId",
+        "TransactionId",
+        "Arguments"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application handling the call.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        },
+        "TransactionId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the call transaction.</p>",
+          "location": "uri",
+          "locationName": "transactionId"
+        },
+        "Arguments": {
+          "shape": "SMAUpdateCallArgumentsMap",
+          "documentation": "<p>Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>"
+        }
+      }
+    },
+    "UpdateSipMediaApplicationCallResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationCall": {
+          "shape": "SipMediaApplicationCall"
         }
       }
     },

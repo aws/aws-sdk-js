@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.930.0-->
+<!--LATEST=2.931.0-->
 <!--ENTRYINSERT-->
+
+## 2.931.0
+* feature: Chime: This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication.
+* feature: Kendra: Amazon Kendra now supports the indexing of web documents for search through the web crawler.
+* feature: Location: Enable CORS
+* feature: RDS: This release enables Database Activity Streams for RDS Oracle
+* feature: SageMaker: Enable ml.g4dn instance types for SageMaker Batch Transform and SageMaker Processing
 
 ## 2.930.0
 * feature: EC2: This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.

@@ -403,6 +403,27 @@ declare namespace Kendra {
     LessThanOrEquals?: DocumentAttribute;
   }
   export type AttributeFilterList = AttributeFilter[];
+  export interface AuthenticationConfiguration {
+    /**
+     * The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host.
+     */
+    BasicAuthentication?: BasicAuthenticationConfigurationList;
+  }
+  export interface BasicAuthenticationConfiguration {
+    /**
+     * The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+     */
+    Host: Host;
+    /**
+     * The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+     */
+    Port: Port;
+    /**
+     * Your secret ARN, which you can create in AWS Secrets Manager  You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+     */
+    Credentials: SecretArn;
+  }
+  export type BasicAuthenticationConfigurationList = BasicAuthenticationConfiguration[];
   export interface BatchDeleteDocumentRequest {
     /**
      * The identifier of the index that contains the documents to delete.
@@ -509,11 +530,11 @@ declare namespace Kendra {
   export type Boolean = boolean;
   export interface CapacityUnitsConfiguration {
     /**
-     * The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.
+     * The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.
      */
     StorageCapacityUnits: StorageCapacityUnit;
     /**
-     * The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.
+     * The amount of extra query capacity for an index and GetQuerySuggestions capacity. A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.  GetQuerySuggestions capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the GetQuerySuggestions capacity is 5 calls per second.
      */
     QueryCapacityUnits: QueryCapacityUnit;
   }
@@ -736,6 +757,7 @@ declare namespace Kendra {
     SecretArn: SecretArn;
   }
   export type ContentType = "PDF"|"HTML"|"MS_WORD"|"PLAIN_TEXT"|"PPT"|string;
+  export type CrawlDepth = number;
   export interface CreateDataSourceRequest {
     /**
      * A unique name for the data source. A data source name can't be changed without deleting and recreating the data source.
@@ -969,6 +991,7 @@ declare namespace Kendra {
      * Provides configuration for data sources that connect to Google Drive. 
      */
     GoogleDriveConfiguration?: GoogleDriveConfiguration;
+    WebCrawlerConfiguration?: WebCrawlerConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1088,7 +1111,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1783,6 +1806,7 @@ declare namespace Kendra {
   }
   export type HighlightList = Highlight[];
   export type HighlightType = "STANDARD"|"THESAURUS_SYNONYM"|string;
+  export type Host = string;
   export type Importance = number;
   export interface IndexConfigurationSummary {
     /**
@@ -2038,12 +2062,15 @@ declare namespace Kendra {
     ThesaurusSummaryItems?: ThesaurusSummaryItems;
   }
   export type Long = number;
+  export type MaxContentSizePerPageInMegaBytes = number;
+  export type MaxLinksPerPage = number;
   export type MaxResultsIntegerForListDataSourceSyncJobsRequest = number;
   export type MaxResultsIntegerForListDataSourcesRequest = number;
   export type MaxResultsIntegerForListFaqsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
   export type MaxResultsIntegerForListQuerySuggestionsBlockLists = number;
   export type MaxResultsIntegerForListThesauriRequest = number;
+  export type MaxUrlsPerMinuteCrawlRate = number;
   export type MetricValue = string;
   export type MimeType = string;
   export type MinimumNumberOfQueryingUsers = number;
@@ -2094,6 +2121,7 @@ declare namespace Kendra {
     OneDriveUserS3Path?: S3Path;
   }
   export type Order = "ASCENDING"|"DESCENDING"|string;
+  export type Port = number;
   export interface Principal {
     /**
      * The name of the user or group.
@@ -2111,6 +2139,20 @@ declare namespace Kendra {
   export type PrincipalList = Principal[];
   export type PrincipalName = string;
   export type PrincipalType = "USER"|"GROUP"|string;
+  export interface ProxyConfiguration {
+    /**
+     * The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+     */
+    Host: Host;
+    /**
+     * The port number of the website host you want to connect to via a web proxy server.  For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+     */
+    Port: Port;
+    /**
+     * Your secret ARN, which you can create in AWS Secrets Manager  The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
+     */
+    Credentials?: SecretArn;
+  }
   export type QueryCapacityUnit = number;
   export type QueryId = string;
   export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
@@ -2497,6 +2539,18 @@ declare namespace Kendra {
   }
   export type SecretArn = string;
   export type SecurityGroupIdList = VpcSecurityGroupId[];
+  export type SeedUrl = string;
+  export interface SeedUrlConfiguration {
+    /**
+     * The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs.
+     */
+    SeedUrls: SeedUrlList;
+    /**
+     * You can choose one of the following modes:    HOST_ONLY – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.    SUBDOMAINS – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.    EVERYTHING – crawl the website host names with subdomains and other domains that the webpages link to.   The default mode is set to HOST_ONLY.
+     */
+    WebCrawlerMode?: WebCrawlerMode;
+  }
+  export type SeedUrlList = SeedUrl[];
   export interface ServerSideEncryptionConfiguration {
     /**
      * The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
@@ -2635,6 +2689,14 @@ declare namespace Kendra {
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
   export type SharedDriveId = string;
+  export type SiteMap = string;
+  export interface SiteMapsConfiguration {
+    /**
+     * The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of three sitemap URLs.
+     */
+    SiteMaps: SiteMapsList;
+  }
+  export type SiteMapsList = SiteMap[];
   export type SortOrder = "DESC"|"ASC"|string;
   export interface SortingConfiguration {
     /**
@@ -2993,6 +3055,16 @@ declare namespace Kendra {
     SourceS3Path?: S3Path;
   }
   export type Url = string;
+  export interface Urls {
+    /**
+     * Provides the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs.
+     */
+    SeedUrlConfiguration?: SeedUrlConfiguration;
+    /**
+     * Provides the configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.
+     */
+    SiteMapsConfiguration?: SiteMapsConfiguration;
+  }
   export type UserAccount = string;
   export interface UserContext {
     /**
@@ -3017,6 +3089,45 @@ declare namespace Kendra {
   export type ValueImportanceMapKey = string;
   export type VisitorId = string;
   export type VpcSecurityGroupId = string;
+  export interface WebCrawlerConfiguration {
+    /**
+     * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index. 
+     */
+    Urls: Urls;
+    /**
+     * Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2.
+     */
+    CrawlDepth?: CrawlDepth;
+    /**
+     * The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage. As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance. The default maximum links per page is 100.
+     */
+    MaxLinksPerPage?: MaxLinksPerPage;
+    /**
+     * The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB.
+     */
+    MaxContentSizePerPageInMegaBytes?: MaxContentSizePerPageInMegaBytes;
+    /**
+     * The maximum number of URLs crawled per website host per minute. A minimum of one URL is required. The default maximum number of URLs crawled per website host per minute is 300.
+     */
+    MaxUrlsPerMinuteCrawlRate?: MaxUrlsPerMinuteCrawlRate;
+    /**
+     * The regular expression pattern to include certain URLs to crawl. If there is a regular expression pattern to exclude certain URLs that conflicts with the include pattern, the exclude pattern takes precedence.
+     */
+    UrlInclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * The regular expression pattern to exclude certain URLs to crawl. If there is a regular expression pattern to include certain URLs that conflicts with the exclude pattern, the exclude pattern takes precedence.
+     */
+    UrlExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Provides configuration information required to connect to your internal websites via a web proxy. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in AWS Secrets Manager.
+     */
+    ProxyConfiguration?: ProxyConfiguration;
+    /**
+     * Provides configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. You use a secret in AWS Secrets Manager to store your authentication credentials.
+     */
+    AuthenticationConfiguration?: AuthenticationConfiguration;
+  }
+  export type WebCrawlerMode = "HOST_ONLY"|"SUBDOMAINS"|"EVERYTHING"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

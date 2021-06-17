@@ -1413,6 +1413,47 @@
         "shape": "AttributeFilter"
       }
     },
+    "AuthenticationConfiguration": {
+      "type": "structure",
+      "members": {
+        "BasicAuthentication": {
+          "shape": "BasicAuthenticationConfigurationList",
+          "documentation": "<p>The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials.</p> <p>The list includes the name and port number of the website host.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information to connect to websites that require user authentication.</p>"
+    },
+    "BasicAuthenticationConfiguration": {
+      "type": "structure",
+      "required": [
+        "Host",
+        "Port",
+        "Credentials"
+      ],
+      "members": {
+        "Host": {
+          "shape": "Host",
+          "documentation": "<p>The name of the website host you want to connect to using authentication credentials.</p> <p>For example, the host name of https://a.example.com/page1.html is \"a.example.com\".</p>"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port number of the website host you want to connect to using authentication credentials.</p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>"
+        },
+        "Credentials": {
+          "shape": "SecretArn",
+          "documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> </p> <p>You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information to connect to websites that require basic user authentication.</p>"
+    },
+    "BasicAuthenticationConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "BasicAuthenticationConfiguration"
+      },
+      "max": 10,
+      "min": 0
+    },
     "BatchDeleteDocumentRequest": {
       "type": "structure",
       "required": [
@@ -1589,14 +1630,14 @@
       "members": {
         "StorageCapacityUnits": {
           "shape": "StorageCapacityUnit",
-          "documentation": "<p>The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.</p>"
+          "documentation": "<p>The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.</p>"
         },
         "QueryCapacityUnits": {
           "shape": "QueryCapacityUnit",
-          "documentation": "<p>The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.</p>"
+          "documentation": "<p>The amount of extra query capacity for an index and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>"
         }
       },
-      "documentation": "<p>Specifies capacity units configured for your index. You can add and remove capacity units to tune an index to your requirements.</p>"
+      "documentation": "<p>Specifies capacity units configured for your enterprise edition index. You can add and remove capacity units to tune an index to your requirements.</p>"
     },
     "ChangeDetectingColumns": {
       "type": "list",
@@ -2024,6 +2065,11 @@
         "PPT"
       ]
     },
+    "CrawlDepth": {
+      "type": "integer",
+      "max": 10,
+      "min": 0
+    },
     "CreateDataSourceRequest": {
       "type": "structure",
       "required": [
@@ -2323,6 +2369,9 @@
         "GoogleDriveConfiguration": {
           "shape": "GoogleDriveConfiguration",
           "documentation": "<p>Provides configuration for data sources that connect to Google Drive. </p>"
+        },
+        "WebCrawlerConfiguration": {
+          "shape": "WebCrawlerConfiguration"
         }
       },
       "documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
@@ -2556,7 +2605,8 @@
         "SERVICENOW",
         "CUSTOM",
         "CONFLUENCE",
-        "GOOGLEDRIVE"
+        "GOOGLEDRIVE",
+        "WEBCRAWLER"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -3690,6 +3740,12 @@
         "THESAURUS_SYNONYM"
       ]
     },
+    "Host": {
+      "type": "string",
+      "max": 253,
+      "min": 1,
+      "pattern": "([^\\s]*)"
+    },
     "Importance": {
       "type": "integer",
       "max": 10,
@@ -4107,6 +4163,16 @@
     "Long": {
       "type": "long"
     },
+    "MaxContentSizePerPageInMegaBytes": {
+      "type": "float",
+      "max": 50,
+      "min": 0.000001
+    },
+    "MaxLinksPerPage": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "MaxResultsIntegerForListDataSourceSyncJobsRequest": {
       "type": "integer",
       "max": 10,
@@ -4135,6 +4201,11 @@
     "MaxResultsIntegerForListThesauriRequest": {
       "type": "integer",
       "max": 100,
+      "min": 1
+    },
+    "MaxUrlsPerMinuteCrawlRate": {
+      "type": "integer",
+      "max": 300,
       "min": 1
     },
     "MetricValue": {
@@ -4246,6 +4317,11 @@
         "DESCENDING"
       ]
     },
+    "Port": {
+      "type": "integer",
+      "max": 65535,
+      "min": 1
+    },
     "Principal": {
       "type": "structure",
       "required": [
@@ -4287,6 +4363,28 @@
         "USER",
         "GROUP"
       ]
+    },
+    "ProxyConfiguration": {
+      "type": "structure",
+      "required": [
+        "Host",
+        "Port"
+      ],
+      "members": {
+        "Host": {
+          "shape": "Host",
+          "documentation": "<p>The name of the website host you want to connect to via a web proxy server.</p> <p>For example, the host name of https://a.example.com/page1.html is \"a.example.com\".</p>"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port number of the website host you want to connect to via a web proxy server. </p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>"
+        },
+        "Credentials": {
+          "shape": "SecretArn",
+          "documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> </p> <p>The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information for a web proxy to connect to website hosts.</p>"
     },
     "QueryCapacityUnit": {
       "type": "integer",
@@ -4969,6 +5067,37 @@
       "max": 10,
       "min": 1
     },
+    "SeedUrl": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(https?):\\/\\/([^\\s]*)"
+    },
+    "SeedUrlConfiguration": {
+      "type": "structure",
+      "required": [
+        "SeedUrls"
+      ],
+      "members": {
+        "SeedUrls": {
+          "shape": "SeedUrlList",
+          "documentation": "<p>The list of seed or starting point URLs of the websites you want to crawl.</p> <p>The list can include a maximum of 100 seed URLs.</p>"
+        },
+        "WebCrawlerMode": {
+          "shape": "WebCrawlerMode",
+          "documentation": "<p>You can choose one of the following modes:</p> <ul> <li> <p> <code>HOST_ONLY</code> – crawl only the website host names. For example, if the seed URL is \"abc.example.com\", then only URLs with host name \"abc.example.com\" are crawled.</p> </li> <li> <p> <code>SUBDOMAINS</code> – crawl the website host names with subdomains. For example, if the seed URL is \"abc.example.com\", then \"a.abc.example.com\" and \"b.abc.example.com\" are also crawled.</p> </li> <li> <p> <code>EVERYTHING</code> – crawl the website host names with subdomains and other domains that the webpages link to.</p> </li> </ul> <p>The default mode is set to <code>HOST_ONLY</code>.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+    },
+    "SeedUrlList": {
+      "type": "list",
+      "member": {
+        "shape": "SeedUrl"
+      },
+      "max": 100,
+      "min": 0
+    },
     "ServerSideEncryptionConfiguration": {
       "type": "structure",
       "members": {
@@ -5183,6 +5312,33 @@
       "max": 256,
       "min": 1,
       "pattern": "^\\P{C}*$"
+    },
+    "SiteMap": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(https?):\\/\\/([^\\s]*)"
+    },
+    "SiteMapsConfiguration": {
+      "type": "structure",
+      "required": [
+        "SiteMaps"
+      ],
+      "members": {
+        "SiteMaps": {
+          "shape": "SiteMapsList",
+          "documentation": "<p>The list of sitemap URLs of the websites you want to crawl.</p> <p>The list can include a maximum of three sitemap URLs.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+    },
+    "SiteMapsList": {
+      "type": "list",
+      "member": {
+        "shape": "SiteMap"
+      },
+      "max": 3,
+      "min": 0
     },
     "SortOrder": {
       "type": "string",
@@ -5790,6 +5946,20 @@
       "min": 1,
       "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
     },
+    "Urls": {
+      "type": "structure",
+      "members": {
+        "SeedUrlConfiguration": {
+          "shape": "SeedUrlConfiguration",
+          "documentation": "<p>Provides the configuration of the seed or starting point URLs of the websites you want to crawl.</p> <p>You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to.</p> <p>You can list up to 100 seed URLs.</p>"
+        },
+        "SiteMapsConfiguration": {
+          "shape": "SiteMapsConfiguration",
+          "documentation": "<p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p> <p>Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+    },
     "UserAccount": {
       "type": "string",
       "max": 256,
@@ -5865,6 +6035,59 @@
       "max": 200,
       "min": 1,
       "pattern": "[-0-9a-zA-Z]+"
+    },
+    "WebCrawlerConfiguration": {
+      "type": "structure",
+      "required": [
+        "Urls"
+      ],
+      "members": {
+        "Urls": {
+          "shape": "Urls",
+          "documentation": "<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+        },
+        "CrawlDepth": {
+          "shape": "CrawlDepth",
+          "documentation": "<p>Specifies the number of levels in a website that you want to crawl.</p> <p>The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1.</p> <p>The default crawl depth is set to 2.</p>"
+        },
+        "MaxLinksPerPage": {
+          "shape": "MaxLinksPerPage",
+          "documentation": "<p>The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage.</p> <p>As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance.</p> <p>The default maximum links per page is 100.</p>"
+        },
+        "MaxContentSizePerPageInMegaBytes": {
+          "shape": "MaxContentSizePerPageInMegaBytes",
+          "documentation": "<p>The maximum size (in MB) of a webpage or attachment to crawl.</p> <p>Files larger than this size (in MB) are skipped/not crawled.</p> <p>The default maximum size of a webpage or attachment is set to 50 MB.</p>"
+        },
+        "MaxUrlsPerMinuteCrawlRate": {
+          "shape": "MaxUrlsPerMinuteCrawlRate",
+          "documentation": "<p>The maximum number of URLs crawled per website host per minute.</p> <p>A minimum of one URL is required.</p> <p>The default maximum number of URLs crawled per website host per minute is 300.</p>"
+        },
+        "UrlInclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>The regular expression pattern to include certain URLs to crawl.</p> <p>If there is a regular expression pattern to exclude certain URLs that conflicts with the include pattern, the exclude pattern takes precedence.</p>"
+        },
+        "UrlExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>The regular expression pattern to exclude certain URLs to crawl.</p> <p>If there is a regular expression pattern to include certain URLs that conflicts with the exclude pattern, the exclude pattern takes precedence.</p>"
+        },
+        "ProxyConfiguration": {
+          "shape": "ProxyConfiguration",
+          "documentation": "<p>Provides configuration information required to connect to your internal websites via a web proxy.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the standard port for HTTPS.</p> <p>Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>.</p>"
+        },
+        "AuthenticationConfiguration": {
+          "shape": "AuthenticationConfiguration",
+          "documentation": "<p>Provides configuration information required to connect to websites using authentication.</p> <p>You can connect to websites using basic authentication of user name and password.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> to store your authentication credentials.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information required for Amazon Kendra web crawler.</p>"
+    },
+    "WebCrawlerMode": {
+      "type": "string",
+      "enum": [
+        "HOST_ONLY",
+        "SUBDOMAINS",
+        "EVERYTHING"
+      ]
     }
   },
   "documentation": "<p>Amazon Kendra is a service for indexing large document sets.</p>"
